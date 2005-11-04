@@ -1,0 +1,26 @@
+HKCR
+{
+	ReportAsistent.ElementGraph.1 = s 'ElementGraph Class'
+	{
+		CLSID = s '{286AE5CF-B993-4B21-A82D-E1A376176EE1}'
+	}
+	ReportAsistent.ElementGraph = s 'ElementGraph Class'
+	{
+		CLSID = s '{286AE5CF-B993-4B21-A82D-E1A376176EE1}'
+		CurVer = s 'ReportAsistent.ElementGraph.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {286AE5CF-B993-4B21-A82D-E1A376176EE1} = s 'ElementGraph Class'
+		{
+			ProgID = s 'ReportAsistent.ElementGraph.1'
+			VersionIndependentProgID = s 'ReportAsistent.ElementGraph'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			'TypeLib' = s '{43476C69-1127-4317-8065-32DD02CE7AD3}'
+		}
+	}
+}

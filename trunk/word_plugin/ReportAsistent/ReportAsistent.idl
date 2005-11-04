@@ -1,0 +1,80 @@
+// ReportAsistent.idl : IDL source for ReportAsistent.dll
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (ReportAsistent.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+[
+	uuid(43476C69-1127-4317-8065-32DD02CE7AD3),
+	version(1.0),
+	helpstring("ReportAsistent 1.0 Type Library")
+]
+library REPORTASISTENTLib
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+	importlib("C:\Program Files\Microsoft Office\Office\GRAPH9.OLB");
+
+	typedef enum {elTable, elGraph, elText, elParagraph, elNothing} ElementTypeEnum;
+
+	[
+		object,
+		uuid(F5EBE35B-1ABC-4F40-81AE-0D5D692BFDCC),
+		dual,
+		helpstring("IInsertElement Interface"),
+		pointer_default(unique)
+	]
+	interface IInsertElement : IDispatch
+	{
+		[propget, id(1), helpstring("property elementType")] HRESULT elementType([out, retval] ElementTypeEnum *pVal);
+	};
+	[
+		uuid(399FF362-6189-48A0-90A3-DC4AE0AF0E41),
+		helpstring("InsertElement Class")
+	]
+	coclass InsertElement
+	{
+		[default] interface IInsertElement;
+	};
+	[
+		object,
+		uuid(528746CB-465B-4DC2-9758-54EF90E93253),
+		dual,
+		helpstring("IMainObject Interface"),
+		pointer_default(unique)
+	]
+	interface IMainObject : IDispatch
+	{
+		[propget, id(1), helpstring("property GetNextInsertElement")] HRESULT GetNextInsertElement([out, retval] InsertElement* *pVal);
+	};
+	[
+		object,
+		uuid(F6EE1307-8A05-4191-B301-BBA75309C5F9),
+		dual,
+		helpstring("IElementGraph Interface"),
+		pointer_default(unique)
+	]
+	interface IElementGraph : IInsertElement
+	{
+	};
+
+
+	[
+		uuid(6775171E-053A-4C35-842D-EED56C4B3531),
+		helpstring("MainObject Class")
+	]
+	coclass MainObject
+	{
+		[default] interface IMainObject;
+	};
+	[
+		uuid(286AE5CF-B993-4B21-A82D-E1A376176EE1),
+		helpstring("ElementGraph Class")
+	]
+	coclass ElementGraph
+	{
+		[default] interface IElementGraph;
+	};
+};

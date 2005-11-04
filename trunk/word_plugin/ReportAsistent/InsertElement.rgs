@@ -1,0 +1,26 @@
+HKCR
+{
+	ReportAsistent.InsertElement.1 = s 'InsertElement Class'
+	{
+		CLSID = s '{399FF362-6189-48A0-90A3-DC4AE0AF0E41}'
+	}
+	ReportAsistent.InsertElement = s 'InsertElement Class'
+	{
+		CLSID = s '{399FF362-6189-48A0-90A3-DC4AE0AF0E41}'
+		CurVer = s 'ReportAsistent.InsertElement.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {399FF362-6189-48A0-90A3-DC4AE0AF0E41} = s 'InsertElement Class'
+		{
+			ProgID = s 'ReportAsistent.InsertElement.1'
+			VersionIndependentProgID = s 'ReportAsistent.InsertElement'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			'TypeLib' = s '{43476C69-1127-4317-8065-32DD02CE7AD3}'
+		}
+	}
+}
