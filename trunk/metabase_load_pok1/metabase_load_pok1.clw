@@ -7,14 +7,14 @@ LastTemplate=CRecordset
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "metabase_load_pok1.h"
 
-ClassCount=5
+ClassCount=3
 Class1=CMetabase_load_pok1App
 Class2=CMetabase_load_pok1Dlg
 
 ResourceCount=3
 Resource2=IDD_METABASE_LOAD_POK1_DIALOG
 Resource1=IDR_MAINFRAME
-Class5=CtiHypothesis_Recordset
+Class3=CtiHypothesis_Recordset
 Resource3=IDD_METABASE_LOAD_POK1_DIALOG (English (U.S.))
 
 [CLS:CMetabase_load_pok1App]
@@ -57,6 +57,7 @@ ImplementationFile=tiHypothesis_Recordset.cpp
 BaseClass=CRecordset
 Filter=N
 VirtualFilter=r
+LastObject=CtiHypothesis_Recordset
 
 [DB:CtiHypothesis_Recordset]
 DB=1
