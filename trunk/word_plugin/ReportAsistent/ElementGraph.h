@@ -31,6 +31,7 @@ END_COM_MAP()
 
 // IElementGraph
 public:
+	STDMETHOD(get_graphType)(/*[out, retval]*/ enum XlChartType *pVal);
 	STDMETHOD(get_Cells_dy)(/*[out, retval]*/ long *pVal);
 	STDMETHOD(get_Cells_dx)(/*[out, retval]*/ long *pVal);
 	STDMETHOD(get_Cells)(long x, long y, /*[out, retval]*/ VARIANT *pVal);

@@ -64,7 +64,7 @@ STDMETHODIMP CElementGraph::get_Cells_dx(long *pVal)
 {
 	AFX_MANAGE_STATE(AfxGetStaticModuleState())
 
-	* pVal = 5;
+	* pVal = 10;
 
 	return S_OK;
 }
@@ -74,6 +74,15 @@ STDMETHODIMP CElementGraph::get_Cells_dy(long *pVal)
 	AFX_MANAGE_STATE(AfxGetStaticModuleState())
 
 	* pVal = 2;
+
+	return S_OK;
+}
+
+STDMETHODIMP CElementGraph::get_graphType(enum XlChartType *pVal)
+{
+	AFX_MANAGE_STATE(AfxGetStaticModuleState())
+
+	* pVal =  xlPie;
 
 	return S_OK;
 }
