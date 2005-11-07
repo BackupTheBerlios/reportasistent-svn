@@ -58,6 +58,9 @@ library REPORTASISTENTLib
 	]
 	interface IElementGraph : IInsertElement
 	{
+		[propget, id(2), helpstring("property Cells")] HRESULT Cells(long x, long y, [out, retval] VARIANT *pVal);
+		[propget, id(3), helpstring("property Cells_dx")] HRESULT Cells_dx([out, retval] long *pVal);
+		[propget, id(4), helpstring("property Cells_dy")] HRESULT Cells_dy([out, retval] long *pVal);
 	};
 
 
