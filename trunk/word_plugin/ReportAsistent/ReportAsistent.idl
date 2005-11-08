@@ -17,7 +17,7 @@ library REPORTASISTENTLib
 	importlib("stdole2.tlb");
 	importlib("C:\Program Files\Microsoft Office\Office\GRAPH9.OLB");
 
-	typedef enum {elTable, elGraph, elText, /*elParagraph, - bude uvnitr text*/ elCompound, elNothing} ElementTypeEnum;
+	typedef enum {elTable, elGraph, elText, /*elParagraph, - bude uvnitr elText*/ elCompound, elNothing} ElementTypeEnum;
 
 	[
 		object,
