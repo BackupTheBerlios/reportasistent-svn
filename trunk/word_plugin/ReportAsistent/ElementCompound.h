@@ -15,6 +15,7 @@ class ATL_NO_VTABLE CElementCompound :
 {
 public:
 	CElementCompound()
+		: test_call_cnt(0)
 	{
 	}
 
@@ -31,6 +32,8 @@ END_COM_MAP()
 
 // IElementCompound
 public:
+	STDMETHOD(get_continueInserting)(/*[out, retval]*/ BOOL *pVal);
+	STDMETHOD(get_GetNextInsertElement)(/*[out, retval]*/ InsertElement * *pVal);
 // IInsertElement
 	STDMETHOD(get_elementType)(ElementTypeEnum * pVal)
 	{
@@ -40,6 +43,8 @@ public:
 			
 		return S_OK;
 	}
+private:
+	int test_call_cnt;
 };
 
 #endif //__ELEMENTCOMPOUND_H_

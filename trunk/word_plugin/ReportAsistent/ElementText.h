@@ -31,6 +31,9 @@ END_COM_MAP()
 
 // IElementText
 public:
+	static IElementText * Create(LPCTSTR s);
+	void Init(LPCTSTR s);
+	STDMETHOD(get_Text)(/*[out, retval]*/ BSTR *pVal);
 // IInsertElement
 	STDMETHOD(get_elementType)(ElementTypeEnum * pVal)
 	{
@@ -40,6 +43,8 @@ public:
 			
 		return S_OK;
 	}
+protected:
+	CString m_text;
 };
 
 #endif //__ELEMENTTEXT_H_

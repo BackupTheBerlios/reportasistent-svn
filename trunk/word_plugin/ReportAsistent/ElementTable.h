@@ -31,6 +31,9 @@ END_COM_MAP()
 
 // IElementTable
 public:
+	STDMETHOD(get_Cells)(long x, long y, /*[out, retval]*/ TableCell * *pVal);
+	STDMETHOD(get_Cells_dy)(/*[out, retval]*/ long *pVal);
+	STDMETHOD(get_Cells_dx)(/*[out, retval]*/ long *pVal);
 // IInsertElement
 	STDMETHOD(get_elementType)(ElementTypeEnum * pVal)
 	{

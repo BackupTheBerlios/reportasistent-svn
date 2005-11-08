@@ -72,6 +72,7 @@ library REPORTASISTENTLib
 	]
 	interface ITableCell : IDispatch
 	{
+		[propget, id(1), helpstring("property Content")] HRESULT Content([out, retval] InsertElement * *pVal);
 	};
 	[
 		uuid(08C96A1F-578C-4687-8E17-BF4B1DA124B7),
@@ -90,6 +91,9 @@ library REPORTASISTENTLib
 	]
 	interface IElementTable : IInsertElement
 	{
+		[propget, id(2), helpstring("property Cells_dx")] HRESULT Cells_dx([out, retval] long *pVal);
+		[propget, id(3), helpstring("property Cells_dy")] HRESULT Cells_dy([out, retval] long *pVal);
+		[propget, id(4), helpstring("property Cells")] HRESULT Cells(long x, long y, [out, retval] TableCell * *pVal);
 	};
 	[
 		object,
@@ -100,6 +104,7 @@ library REPORTASISTENTLib
 	]
 	interface IElementText : IInsertElement
 	{
+		[propget, id(2), helpstring("property Text")] HRESULT Text([out, retval] BSTR *pVal);
 	};
 	[
 		object,
@@ -110,6 +115,8 @@ library REPORTASISTENTLib
 	]
 	interface IElementCompound : IInsertElement
 	{
+		[propget, id(2), helpstring("property GetNextInsertElement")] HRESULT GetNextInsertElement([out, retval] InsertElement * *pVal);
+		[propget, id(3), helpstring("property continueInserting")] HRESULT continueInserting([out, retval] BOOL *pVal);
 	};
 
 

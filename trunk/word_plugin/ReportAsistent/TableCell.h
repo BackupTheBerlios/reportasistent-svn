@@ -14,6 +14,7 @@ class ATL_NO_VTABLE CTableCell :
 {
 public:
 	CTableCell()
+		: m_Content(NULL)
 	{
 	}
 
@@ -28,6 +29,10 @@ END_COM_MAP()
 
 // ITableCell
 public:
+	void Init(InsertElement * iContent);
+	STDMETHOD(get_Content)(/*[out, retval]*/ InsertElement * *pVal);
+protected:
+	InsertElement * m_Content;
 };
 
 #endif //__TABLECELL_H_
