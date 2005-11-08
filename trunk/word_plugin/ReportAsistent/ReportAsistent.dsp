@@ -276,6 +276,10 @@ SOURCE="$(InputPath)"
 # PROP Default_Filter "cpp;c;cxx;rc;def;r;odl;idl;hpj;bat"
 # Begin Source File
 
+SOURCE=.\ElementCompound.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\ElementGraph.cpp
 # End Source File
 # Begin Source File
@@ -316,10 +320,18 @@ SOURCE=.\ReportAsistent.rc
 SOURCE=.\StdAfx.cpp
 # ADD CPP /Yc"stdafx.h"
 # End Source File
+# Begin Source File
+
+SOURCE=.\TableCell.cpp
+# End Source File
 # End Group
 # Begin Group "Header Files"
 
 # PROP Default_Filter "h;hpp;hxx;hm;inl"
+# Begin Source File
+
+SOURCE=.\ElementCompound.h
+# End Source File
 # Begin Source File
 
 SOURCE=.\ElementGraph.h
@@ -348,10 +360,18 @@ SOURCE=.\Resource.h
 
 SOURCE=.\StdAfx.h
 # End Source File
+# Begin Source File
+
+SOURCE=.\TableCell.h
+# End Source File
 # End Group
 # Begin Group "Resource Files"
 
 # PROP Default_Filter "ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe"
+# Begin Source File
+
+SOURCE=.\ElementCompound.rgs
+# End Source File
 # Begin Source File
 
 SOURCE=.\ElementGraph.rgs
@@ -371,6 +391,10 @@ SOURCE=.\InsertElement.rgs
 # Begin Source File
 
 SOURCE=.\MainObject.rgs
+# End Source File
+# Begin Source File
+
+SOURCE=.\TableCell.rgs
 # End Source File
 # End Group
 # End Target
