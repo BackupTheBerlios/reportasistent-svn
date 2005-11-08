@@ -29,6 +29,10 @@ LANGUAGE LANG_CZECH, SUBLANG_DEFAULT
 IDR_MAINOBJECT          REGISTRY DISCARDABLE    "MainObject.rgs"
 IDR_INSERTELEMENT       REGISTRY DISCARDABLE    "InsertElement.rgs"
 IDR_ELEMENTGRAPH        REGISTRY DISCARDABLE    "ElementGraph.rgs"
+IDR_ELEMENTTABLE        REGISTRY DISCARDABLE    "ElementTable.rgs"
+IDR_ELEMENTTEXT         REGISTRY DISCARDABLE    "ElementText.rgs"
+IDR_ELEMENTCOMPOUND     REGISTRY DISCARDABLE    "ElementCompound.rgs"
+IDR_TABLECELL           REGISTRY DISCARDABLE    "TableCell.rgs"
 #endif    // Czech resources
 /////////////////////////////////////////////////////////////////////////////
 

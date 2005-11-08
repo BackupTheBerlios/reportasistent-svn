@@ -10,6 +10,7 @@
 STDMETHODIMP CMainObject::get_GetNextInsertElement(InsertElement **pVal)
 {
 	AFX_MANAGE_STATE(AfxGetStaticModuleState())
+	if (pVal == NULL) return E_POINTER;
 
 	CComPtr <IInsertElement> cp;
 

@@ -280,6 +280,14 @@ SOURCE=.\ElementGraph.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\ElementTable.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\ElementText.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\InsertElement.cpp
 # End Source File
 # Begin Source File
@@ -318,6 +326,14 @@ SOURCE=.\ElementGraph.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\ElementTable.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\ElementText.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\InsertElement.h
 # End Source File
 # Begin Source File
@@ -339,6 +355,14 @@ SOURCE=.\StdAfx.h
 # Begin Source File
 
 SOURCE=.\ElementGraph.rgs
+# End Source File
+# Begin Source File
+
+SOURCE=.\ElementTable.rgs
+# End Source File
+# Begin Source File
+
+SOURCE=.\ElementText.rgs
 # End Source File
 # Begin Source File
 

@@ -10,6 +10,8 @@
 STDMETHODIMP CElementGraph::get_Cells(long x, long y, VARIANT *pVal)
 {
 	AFX_MANAGE_STATE(AfxGetStaticModuleState())
+	if (pVal == NULL) return E_POINTER;
+
 
 	long dx=0, dy=0;
 
@@ -63,6 +65,7 @@ STDMETHODIMP CElementGraph::get_Cells(long x, long y, VARIANT *pVal)
 STDMETHODIMP CElementGraph::get_Cells_dx(long *pVal)
 {
 	AFX_MANAGE_STATE(AfxGetStaticModuleState())
+	if (pVal == NULL) return E_POINTER;
 
 	* pVal = 10;
 
@@ -72,6 +75,7 @@ STDMETHODIMP CElementGraph::get_Cells_dx(long *pVal)
 STDMETHODIMP CElementGraph::get_Cells_dy(long *pVal)
 {
 	AFX_MANAGE_STATE(AfxGetStaticModuleState())
+	if (pVal == NULL) return E_POINTER;
 
 	* pVal = 2;
 
@@ -81,6 +85,7 @@ STDMETHODIMP CElementGraph::get_Cells_dy(long *pVal)
 STDMETHODIMP CElementGraph::get_graphType(enum XlChartType *pVal)
 {
 	AFX_MANAGE_STATE(AfxGetStaticModuleState())
+	if (pVal == NULL) return E_POINTER;
 
 	* pVal =  xlPie;
 

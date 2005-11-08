@@ -17,7 +17,7 @@ library REPORTASISTENTLib
 	importlib("stdole2.tlb");
 	importlib("C:\Program Files\Microsoft Office\Office\GRAPH9.OLB");
 
-	typedef enum {elTable, elGraph, elText, elParagraph, elNothing} ElementTypeEnum;
+	typedef enum {elTable, elGraph, elText, /*elParagraph, - bude uvnitr text*/ elCompound, elNothing} ElementTypeEnum;
 
 	[
 		object,
@@ -63,6 +63,54 @@ library REPORTASISTENTLib
 		[propget, id(4), helpstring("property Cells_dy")] HRESULT Cells_dy([out, retval] long *pVal);
 		[propget, id(5), helpstring("property graphType")] HRESULT graphType([out, retval] enum XlChartType *pVal);
 	};
+	[
+		object,
+		uuid(D30237AD-74C9-4550-B1BB-AFE8B3954CD2),
+		dual,
+		helpstring("ITableCell Interface"),
+		pointer_default(unique)
+	]
+	interface ITableCell : IDispatch
+	{
+	};
+	[
+		uuid(08C96A1F-578C-4687-8E17-BF4B1DA124B7),
+		helpstring("TableCell Class")
+	]
+	coclass TableCell
+	{
+		[default] interface ITableCell;
+	};
+	[
+		object,
+		uuid(F722E34C-CC0B-4F9E-A5DD-C24BCB9476BC),
+		dual,
+		helpstring("IElementTable Interface"),
+		pointer_default(unique)
+	]
+	interface IElementTable : IInsertElement
+	{
+	};
+	[
+		object,
+		uuid(9AFC803C-9447-468A-86D8-2B7F68DDFB4F),
+		dual,
+		helpstring("IElementText Interface"),
+		pointer_default(unique)
+	]
+	interface IElementText : IInsertElement
+	{
+	};
+	[
+		object,
+		uuid(C299196A-1F94-4205-BE86-D7DD70B4EC7E),
+		dual,
+		helpstring("IElementCompound Interface"),
+		pointer_default(unique)
+	]
+	interface IElementCompound : IInsertElement
+	{
+	};
 
 
 	[
@@ -80,5 +128,29 @@ library REPORTASISTENTLib
 	coclass ElementGraph
 	{
 		[default] interface IElementGraph;
+	};
+	[
+		uuid(62B1DDCB-BF46-4608-BA97-587BA31D9111),
+		helpstring("ElementTable Class")
+	]
+	coclass ElementTable
+	{
+		[default] interface IElementTable;
+	};
+	[
+		uuid(15D3EE0E-5C5C-4C0B-8FF3-F3574DA11738),
+		helpstring("ElementText Class")
+	]
+	coclass ElementText
+	{
+		[default] interface IElementText;
+	};
+	[
+		uuid(9E41D594-1F37-414D-94BB-D4F58975F8B1),
+		helpstring("ElementCompound Class")
+	]
+	coclass ElementCompound
+	{
+		[default] interface IElementCompound;
 	};
 };

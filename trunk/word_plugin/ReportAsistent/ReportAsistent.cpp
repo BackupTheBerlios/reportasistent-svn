@@ -14,6 +14,10 @@
 #include "MainObject.h"
 #include "InsertElement.h"
 #include "ElementGraph.h"
+#include "ElementTable.h"
+#include "ElementText.h"
+#include "ElementCompound.h"
+#include "TableCell.h"
 
 
 CComModule _Module;
@@ -22,6 +26,10 @@ BEGIN_OBJECT_MAP(ObjectMap)
 OBJECT_ENTRY(CLSID_MainObject, CMainObject)
 OBJECT_ENTRY(CLSID_InsertElement, CInsertElement)
 OBJECT_ENTRY(CLSID_ElementGraph, CElementGraph)
+OBJECT_ENTRY(CLSID_ElementTable, CElementTable)
+OBJECT_ENTRY(CLSID_ElementText, CElementText)
+OBJECT_ENTRY(CLSID_ElementCompound, CElementCompound)
+OBJECT_ENTRY(CLSID_TableCell, CTableCell)
 END_OBJECT_MAP()
 
 class CReportAsistentApp : public CWinApp
