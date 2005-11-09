@@ -31,3 +31,13 @@ IElementText * CElementText::Create(LPCTSTR s)
 
 	return cp.Detach();
 }
+
+STDMETHODIMP CElementText::get_NewParagraph(BOOL *pVal)
+{
+	AFX_MANAGE_STATE(AfxGetStaticModuleState())
+	if (pVal == NULL) return E_POINTER;
+
+	*pVal = (m_text.GetLength()+1) % 2;
+
+	return S_OK;
+}

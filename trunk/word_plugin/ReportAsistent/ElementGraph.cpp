@@ -87,6 +87,8 @@ STDMETHODIMP CElementGraph::get_graphType(enum XlChartType *pVal)
 	AFX_MANAGE_STATE(AfxGetStaticModuleState())
 	if (pVal == NULL) return E_POINTER;
 
+	RGB(0,0,0);
+
 	* pVal =  xlPie;
 
 	return S_OK;

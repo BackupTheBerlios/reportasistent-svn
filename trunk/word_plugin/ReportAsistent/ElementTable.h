@@ -31,6 +31,8 @@ END_COM_MAP()
 
 // IElementTable
 public:
+	STDMETHOD(get_RowAlignment)(/*[out, retval]*/ enum WdRowAlignment *pVal);
+	STDMETHOD(get_AutoFitBehavior)(/*[out, retval]*/ enum WdAutoFitBehavior *pVal);
 	STDMETHOD(get_Cells)(long x, long y, /*[out, retval]*/ TableCell * *pVal);
 	STDMETHOD(get_Cells_dy)(/*[out, retval]*/ long *pVal);
 	STDMETHOD(get_Cells_dx)(/*[out, retval]*/ long *pVal);

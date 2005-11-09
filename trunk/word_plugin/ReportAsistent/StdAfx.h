@@ -24,7 +24,12 @@
 extern CComModule _Module;
 #include <atlcom.h>
 
-#import "C:\Program Files\Microsoft Office\Office\GRAPH9.OLB" raw_interfaces_only, raw_native_types, no_namespace, named_guids 
+#import "C:\Program Files\Microsoft Office\Office\MSWORD9.OLB"\
+	raw_interfaces_only, raw_native_types, no_namespace, named_guids, exclude("Tasks")
+
+#import "C:\Program Files\Microsoft Office\Office\GRAPH9.OLB" raw_interfaces_only, raw_native_types, \
+	no_namespace, named_guids, exclude("Font", "_Global", "Application", "Range", "AutoCorrect", "Border", "Global")
+
 //{{AFX_INSERT_LOCATION}}
 // Microsoft Visual C++ will insert additional declarations immediately before the previous line.
 

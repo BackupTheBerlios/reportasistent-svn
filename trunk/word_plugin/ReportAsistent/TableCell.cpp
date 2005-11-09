@@ -21,3 +21,13 @@ void CTableCell::Init(InsertElement *iContent)
 {
 	m_Content = iContent;
 }
+
+STDMETHODIMP CTableCell::get_BackgroundPatternColor(enum WdColor *pVal)
+{
+	AFX_MANAGE_STATE(AfxGetStaticModuleState())
+	if (pVal == NULL) return E_POINTER;
+
+	* pVal = (enum WdColor) RGB(156 + rand()%100, 156 + rand()%100, 255);
+
+	return S_OK;
+}

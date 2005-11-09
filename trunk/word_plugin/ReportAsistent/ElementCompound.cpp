@@ -48,7 +48,7 @@ STDMETHODIMP CElementCompound::get_continueInserting(BOOL *pVal)
 	AFX_MANAGE_STATE(AfxGetStaticModuleState())
 	if (pVal == NULL) return E_POINTER;
 
-	*pVal = test_call_cnt < 7;
+	*pVal = test_call_cnt < 13;
 
 	return S_OK;
 }

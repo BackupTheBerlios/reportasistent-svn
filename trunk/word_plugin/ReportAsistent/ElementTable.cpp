@@ -64,3 +64,23 @@ STDMETHODIMP CElementTable::get_Cells(long x, long y, TableCell **pVal)
 
 	return S_OK;
 }
+
+STDMETHODIMP CElementTable::get_AutoFitBehavior(enum WdAutoFitBehavior *pVal)
+{
+	AFX_MANAGE_STATE(AfxGetStaticModuleState())
+	if (pVal == NULL) return E_POINTER;
+
+	*pVal = wdAutoFitContent;
+
+	return S_OK;
+}
+
+STDMETHODIMP CElementTable::get_RowAlignment(enum WdRowAlignment *pVal)
+{
+	AFX_MANAGE_STATE(AfxGetStaticModuleState())
+	if (pVal == NULL) return E_POINTER;
+
+	*pVal = wdAlignRowCenter;
+
+	return S_OK;
+}

@@ -15,6 +15,7 @@ library REPORTASISTENTLib
 {
 	importlib("stdole32.tlb");
 	importlib("stdole2.tlb");
+	importlib("C:\Program Files\Microsoft Office\Office\MSWORD9.OLB");
 	importlib("C:\Program Files\Microsoft Office\Office\GRAPH9.OLB");
 
 	typedef enum {elTable, elGraph, elText, /*elParagraph, - bude uvnitr elText*/ elCompound, elNothing} ElementTypeEnum;
@@ -73,6 +74,7 @@ library REPORTASISTENTLib
 	interface ITableCell : IDispatch
 	{
 		[propget, id(1), helpstring("property Content")] HRESULT Content([out, retval] InsertElement * *pVal);
+		[propget, id(2), helpstring("property BackgroundPatternColor")] HRESULT BackgroundPatternColor([out, retval] enum WdColor *pVal);
 	};
 	[
 		uuid(08C96A1F-578C-4687-8E17-BF4B1DA124B7),
@@ -94,6 +96,8 @@ library REPORTASISTENTLib
 		[propget, id(2), helpstring("property Cells_dx")] HRESULT Cells_dx([out, retval] long *pVal);
 		[propget, id(3), helpstring("property Cells_dy")] HRESULT Cells_dy([out, retval] long *pVal);
 		[propget, id(4), helpstring("property Cells")] HRESULT Cells(long x, long y, [out, retval] TableCell * *pVal);
+		[propget, id(5), helpstring("property AutoFitBehavior")] HRESULT AutoFitBehavior([out, retval] enum WdAutoFitBehavior *pVal);
+		[propget, id(6), helpstring("property RowAlignment")] HRESULT RowAlignment([out, retval] enum WdRowAlignment *pVal);
 	};
 	[
 		object,
@@ -105,6 +109,7 @@ library REPORTASISTENTLib
 	interface IElementText : IInsertElement
 	{
 		[propget, id(2), helpstring("property Text")] HRESULT Text([out, retval] BSTR *pVal);
+		[propget, id(3), helpstring("property NewParagraph")] HRESULT NewParagraph([out, retval] BOOL *pVal);
 	};
 	[
 		object,

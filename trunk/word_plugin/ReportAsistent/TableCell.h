@@ -29,6 +29,7 @@ END_COM_MAP()
 
 // ITableCell
 public:
+	STDMETHOD(get_BackgroundPatternColor)(/*[out, retval]*/ enum WdColor *pVal);
 	void Init(InsertElement * iContent);
 	STDMETHOD(get_Content)(/*[out, retval]*/ InsertElement * *pVal);
 protected:

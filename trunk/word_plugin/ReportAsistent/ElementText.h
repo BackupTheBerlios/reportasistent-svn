@@ -31,6 +31,7 @@ END_COM_MAP()
 
 // IElementText
 public:
+	STDMETHOD(get_NewParagraph)(/*[out, retval]*/ BOOL *pVal);
 	static IElementText * Create(LPCTSTR s);
 	void Init(LPCTSTR s);
 	STDMETHOD(get_Text)(/*[out, retval]*/ BSTR *pVal);
