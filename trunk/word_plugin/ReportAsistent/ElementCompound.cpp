@@ -22,6 +22,13 @@ STDMETHODIMP CElementCompound::get_GetNextInsertElement(InsertElement **pVal)
 		return S_OK;
 	}
 
+	if (test_call_cnt == 5)
+	{
+		cp.CoCreateInstance(CLSID_ElementGraph);
+		*pVal = (InsertElement *) cp.Detach();
+		return S_OK;
+	}
+
 	cp.CoCreateInstance(CLSID_ElementText);
 
 	*pVal = (InsertElement *) cp.Detach();
@@ -41,7 +48,7 @@ STDMETHODIMP CElementCompound::get_continueInserting(BOOL *pVal)
 	AFX_MANAGE_STATE(AfxGetStaticModuleState())
 	if (pVal == NULL) return E_POINTER;
 
-	*pVal = test_call_cnt < 5;
+	*pVal = test_call_cnt < 7;
 
 	return S_OK;
 }
