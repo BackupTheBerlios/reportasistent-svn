@@ -110,6 +110,7 @@ library REPORTASISTENTLib
 	{
 		[propget, id(2), helpstring("property Text")] HRESULT Text([out, retval] BSTR *pVal);
 		[propget, id(3), helpstring("property NewParagraph")] HRESULT NewParagraph([out, retval] BOOL *pVal);
+		[propget, id(4), helpstring("property Style")] HRESULT Style([out, retval] VARIANT *pVal);
 	};
 	[
 		object,
