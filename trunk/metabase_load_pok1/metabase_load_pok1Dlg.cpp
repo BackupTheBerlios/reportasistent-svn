@@ -274,7 +274,7 @@ BOOL CMetabase_load_pok1Dlg::NactiMetabazi()
 //	db.Open(NULL, FALSE, TRUE, _T("ODBC;DSN=" + s), TRUE)
 
 //	tohle funguje bez open dialogu
-	db.Open(NULL, FALSE, TRUE, _T("ODBC;DSN=" + s + ";DBQ=D:\\lm\\LMEmpty.mdb;"), TRUE)
+	db.Open(NULL, FALSE, TRUE, _T("ODBC;DSN=" + s + ";DBQ=C:\\skola\\sw projekt\\LMEmpty.mdb;"), TRUE)
 
 	)
 	{
