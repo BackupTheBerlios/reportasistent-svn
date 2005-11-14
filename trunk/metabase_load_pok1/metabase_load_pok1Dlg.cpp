@@ -105,7 +105,6 @@ void CMetabase_load_pok1Dlg::OnLoadButton()
 		
 		GetDlgItemText(IDC_RESULT_EDIT, s);
 
-		#define EDIT_NEWLINE "\r\n"
 		SetDlgItemText(IDC_RESULT_EDIT, s + EDIT_NEWLINE "--- OK metabse loaded ---" EDIT_NEWLINE);
 	}
 }
