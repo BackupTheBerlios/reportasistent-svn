@@ -56,6 +56,7 @@ STDMETHODIMP CElementText::get_Style(VARIANT *pVal)
 	else
 	{
 		CComVariant plna("RA_cerveny");
+//		CComVariant plna("Nadpis 1");
 		plna.Detach(pVal);
 	}
 
