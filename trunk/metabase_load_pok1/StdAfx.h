@@ -2,6 +2,7 @@
 //  or project specific include files that are used frequently, but
 //      are changed infrequently
 //
+//cau Dedo:)
 
 
 #if !defined(AFX_STDAFX_H__70C66A6D_B88A_4351_BBF7_2A1BEC77FD0D__INCLUDED_)
