@@ -38,100 +38,105 @@ CtiHypothesis_Recordset::CtiHypothesis_Recordset(CDatabase* pdb)
 }
 
 
-CString CtiHypothesis_Recordset::GetDefaultConnect()
-{
-	SQLHANDLE h;
-	SQLRETURN r;
-
-	
-	SQLAllocHandle(SQL_HANDLE_ENV, SQL_NULL_HANDLE, & h);
-	//dulezite nastavuje verzi na ODBC3, jinak to nefunguje, verzi nutno vzdy nastavit
-	SQLSetEnvAttr(h, SQL_ATTR_ODBC_VERSION, (SQLPOINTER) SQL_OV_ODBC3, NULL);
-	
-	SQLCHAR		desc[1000];
-	SQLCHAR		attr[1000];
-	SQLSMALLINT desc_len = sizeof desc;
-	SQLSMALLINT attr_len = sizeof attr;
-
-	SQLINTEGER nerr;
-
-	CString nas_driver;
-	CString nas_source;
-
-	CEdit * e = (CEdit *) theApp.m_pMainWnd->GetDlgItem(IDC_RESULT_EDIT);
-
-
-	
-//--------------------------------------------------------
-//drivers
-	r = SQLDrivers(h, SQL_FETCH_FIRST, desc, sizeof desc, & desc_len, attr, sizeof attr, & attr_len);
-
-// vhodne pro odchytavani chyb
-//	SQLGetDiagRec(SQL_HANDLE_ENV, h, 1, desc, & nerr, attr, sizeof attr, & attr_len);
-
-
-	while ((r != SQL_NO_DATA) && (r != SQL_ERROR) && (r != SQL_INVALID_HANDLE))
-	{
-
-		CString s;
-		e->GetWindowText(s);
-
-		s += EDIT_NEWLINE;
-		s += "-------------- dalsi driver -----------" EDIT_NEWLINE;
-		s += desc;
-		s += EDIT_NEWLINE;
-
-		SQLCHAR * pc;
-		
-		for (pc = attr; (*pc != 0) && (pc - attr <= sizeof attr); pc = (SQLCHAR *) strchr((LPCTSTR) pc, 0)+1)
-		{
-			if (strstr((LPCTSTR) pc, "FileExtns="))
-			{
-				if (strstr((LPCTSTR) pc, ".mdb")) nas_driver = desc;
-			}
-			
-			s += pc;
-			s += EDIT_NEWLINE;
-		}
-		
-		e->SetWindowText(s);
-
-
-		r = SQLDrivers(h, SQL_FETCH_NEXT, desc, sizeof desc, & desc_len, attr, sizeof attr, & attr_len);
-	}
-
-//--------------------------------------------------------
-//datasources
-	r = SQLDataSources(h, SQL_FETCH_FIRST, desc, sizeof desc, & desc_len, attr, sizeof attr, & attr_len);
-	
-	while ((r != SQL_NO_DATA) && (r != SQL_ERROR) && (r != SQL_INVALID_HANDLE))
-	{
-
-		if (0 == strcmp((LPCTSTR) attr, nas_driver)) nas_source = desc;
-
-		CString s;
-		e->GetWindowText(s);
-
-		s += EDIT_NEWLINE;
-		s += "-------------- dalsi datasource -----------" EDIT_NEWLINE;
-		s += desc;
-		s += EDIT_NEWLINE;
-		s += attr;
-		s += EDIT_NEWLINE;
-
-		e->SetWindowText(s);
-
-		r = SQLDataSources(h, SQL_FETCH_NEXT, desc, sizeof desc, & desc_len, attr, sizeof attr, & attr_len);
-	}
-
-
-
-	SQLFreeHandle(SQL_HANDLE_ENV, h);
-
-
-//	return _T("ODBC;DSN=Databáze MS Access");
-	return _T(CString("ODBC;DSN=") + nas_source);
-}
+//DEL CString CtiHypothesis_Recordset::GetDefaultConnect()
+//DEL {
+//DEL 	SQLHANDLE h;
+//DEL 	SQLRETURN r;
+//DEL 
+//DEL 	
+//DEL 	SQLAllocHandle(SQL_HANDLE_ENV, SQL_NULL_HANDLE, & h);
+//DEL 	//dulezite nastavuje verzi na ODBC3, jinak to nefunguje, verzi nutno vzdy nastavit
+//DEL 	SQLSetEnvAttr(h, SQL_ATTR_ODBC_VERSION, (SQLPOINTER) SQL_OV_ODBC3, NULL);
+//DEL 	
+//DEL 	SQLCHAR		desc[1000];
+//DEL 	SQLCHAR		attr[1000];
+//DEL 	SQLSMALLINT desc_len = sizeof desc;
+//DEL 	SQLSMALLINT attr_len = sizeof attr;
+//DEL 
+//DEL 	SQLINTEGER nerr;
+//DEL 
+//DEL 	CString nas_driver;
+//DEL 	CString nas_source;
+//DEL 
+//DEL 	CEdit * e = (CEdit *) theApp.m_pMainWnd->GetDlgItem(IDC_RESULT_EDIT);
+//DEL 
+//DEL 
+//DEL 	
+//DEL //--------------------------------------------------------
+//DEL //drivers
+//DEL 	r = SQLDrivers(h, SQL_FETCH_FIRST, desc, sizeof desc, & desc_len, attr, sizeof attr, & attr_len);
+//DEL 
+//DEL // vhodne pro odchytavani chyb
+//DEL //	SQLGetDiagRec(SQL_HANDLE_ENV, h, 1, desc, & nerr, attr, sizeof attr, & attr_len);
+//DEL 
+//DEL 
+//DEL 	while ((r != SQL_NO_DATA) && (r != SQL_ERROR) && (r != SQL_INVALID_HANDLE))
+//DEL 	{
+//DEL 
+//DEL 		CString s;
+//DEL 		e->GetWindowText(s);
+//DEL 
+//DEL 		s += EDIT_NEWLINE;
+//DEL 		s += "-------------- dalsi driver -----------" EDIT_NEWLINE;
+//DEL 		s += desc;
+//DEL 		s += EDIT_NEWLINE;
+//DEL 
+//DEL 		SQLCHAR * pc;
+//DEL 		
+//DEL 		for (pc = attr; (*pc != 0) && (pc - attr <= sizeof attr); pc = (SQLCHAR *) strchr((LPCTSTR) pc, 0)+1)
+//DEL 		{
+//DEL 			if (strstr((LPCTSTR) pc, "FileExtns="))
+//DEL 			{
+//DEL 				if (strstr((LPCTSTR) pc, ".mdb"))
+//DEL 				{
+//DEL 					if (0 != strcmp("Microsoft Access Driver (*.mdb)", nas_driver))
+//DEL 						nas_driver = desc;
+//DEL 				}
+//DEL 			}
+//DEL 			
+//DEL 			s += pc;
+//DEL 			s += EDIT_NEWLINE;
+//DEL 		}
+//DEL 		
+//DEL 		e->SetWindowText(s);
+//DEL 
+//DEL 
+//DEL 		r = SQLDrivers(h, SQL_FETCH_NEXT, desc, sizeof desc, & desc_len, attr, sizeof attr, & attr_len);
+//DEL 	}
+//DEL 
+//DEL //--------------------------------------------------------
+//DEL //datasources
+//DEL 	r = SQLDataSources(h, SQL_FETCH_FIRST, desc, sizeof desc, & desc_len, attr, sizeof attr, & attr_len);
+//DEL 	
+//DEL 	while ((r != SQL_NO_DATA) && (r != SQL_ERROR) && (r != SQL_INVALID_HANDLE))
+//DEL 	{
+//DEL 
+//DEL 		if (0 == strcmp((LPCTSTR) attr, nas_driver)) nas_source = desc;
+//DEL 
+//DEL 		CString s;
+//DEL 		e->GetWindowText(s);
+//DEL 
+//DEL 		s += EDIT_NEWLINE;
+//DEL 		s += "-------------- dalsi datasource -----------" EDIT_NEWLINE;
+//DEL 		s += desc;
+//DEL 		s += EDIT_NEWLINE;
+//DEL 		s += attr;
+//DEL 		s += EDIT_NEWLINE;
+//DEL 
+//DEL 		e->SetWindowText(s);
+//DEL 
+//DEL 		r = SQLDataSources(h, SQL_FETCH_NEXT, desc, sizeof desc, & desc_len, attr, sizeof attr, & attr_len);
+//DEL 	}
+//DEL 
+//DEL 
+//DEL 
+//DEL 	SQLFreeHandle(SQL_HANDLE_ENV, h);
+//DEL 
+//DEL 
+//DEL //	return _T("ODBC;DSN=Databáze MS Access");
+//DEL 	return _T(CString("ODBC;DSN=") + nas_source + ";DBQ=D:\\lm\\LMEmpty.mdb;");
+//DEL //	return _T(CString("ODBC;DATABASE=D:\\LMEmpty.mdb"));
+//DEL }
 
 CString CtiHypothesis_Recordset::GetDefaultSQL()
 {
