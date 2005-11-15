@@ -271,12 +271,10 @@ BOOL CMetabase_load_pok1Dlg::NactiMetabazi()
 
 //nekolik verzi connect stringu
 //	db.Open(NULL, FALSE, TRUE, _T("ODBC;DSN=Databáze MS Access"), TRUE)
-//	db.Open(NULL, FALSE, TRUE, _T("ODBC;DSN=" + s), TRUE)
+//	db.Open(NULL, FALSE, TRUE, _T("ODBC;DSN=" + s), TRUE))
 
 //	tohle funguje bez open dialogu
-	db.Open(NULL, FALSE, TRUE, _T("ODBC;DSN=" + s + ";DBQ=C:\\skola\\sw projekt\\LMEmpty.mdb;"), TRUE)
-
-	)
+	db.Open(NULL, FALSE, TRUE, _T("ODBC;DSN=" + s + ";DBQ=C:\\skola\\sw projekt\\STULONG.mdb;"), TRUE))
 	{
 		if (rs.Open())
 		{
