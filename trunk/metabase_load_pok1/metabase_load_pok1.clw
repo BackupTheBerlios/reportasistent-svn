@@ -11,11 +11,12 @@ ClassCount=3
 Class1=CMetabase_load_pok1App
 Class2=CMetabase_load_pok1Dlg
 
-ResourceCount=3
+ResourceCount=4
 Resource2=IDD_METABASE_LOAD_POK1_DIALOG
 Resource1=IDR_MAINFRAME
 Class3=CtiHypothesis_Recordset
 Resource3=IDD_METABASE_LOAD_POK1_DIALOG (English (U.S.))
+Resource4=25002 (English (U.S.))
 
 [CLS:CMetabase_load_pok1App]
 Type=0
@@ -71,4 +72,17 @@ Column5=[FreqC], 4, 4
 Column6=[FreqD], 4, 4
 Column7=[Weight], 8, 8
 Column8=[Ord], 4, 4
+
+[DLG:25002 (English (U.S.))]
+Type=1
+Class=?
+ControlCount=8
+Control1=65535,button,1342177287
+Control2=65535,static,1342308352
+Control3=40960,listbox,1352728993
+Control4=1012,button,1342242816
+Control5=40964,button,1342242816
+Control6=1013,button,1342242816
+Control7=2,button,1342242816
+Control8=40962,button,1342242817
 

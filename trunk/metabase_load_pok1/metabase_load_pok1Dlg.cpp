@@ -177,7 +177,7 @@ public:
 		return TRUE;
 	}
 
-	BOOL EnumODBCDataSources(CString & ret)
+	BOOL EnumODBCDataSources(CString & ret, SQLSMALLINT DataSources_enum_type = SQL_FETCH_FIRST /* SQL_FETCH_FIRST_USER, SQL_FETCH_FIRST_SYSTEM */)
 	{
 		SQLRETURN r;
 		ret.Empty();
@@ -189,7 +189,7 @@ public:
 		SQLSMALLINT desc_len = sizeof desc;
 		SQLSMALLINT attr_len = sizeof attr;
 
-		r = SQLDataSources(h, SQL_FETCH_FIRST, desc, sizeof desc, & desc_len, attr, sizeof attr, & attr_len);
+		r = SQLDataSources(h, DataSources_enum_type, desc, sizeof desc, & desc_len, attr, sizeof attr, & attr_len);
 
 		while ((r != SQL_NO_DATA) && (r != SQL_ERROR) && (r != SQL_INVALID_HANDLE))
 		{
@@ -259,8 +259,16 @@ BOOL CMetabase_load_pok1Dlg::NactiMetabazi()
 	//enumarece
 	pom.EnumODBCDrivers(s);
 	buf = s;	
-	pom.EnumODBCDataSources(s);
+	
+	buf +=  EDIT_NEWLINE "-------- USER DATASOURCES ------";
+	pom.EnumODBCDataSources(s, SQL_FETCH_FIRST_USER);
 	buf += s;	
+
+	// tady budou LM metabaze
+	buf +=  EDIT_NEWLINE "-------- SYSTEM DATASOURCES ------";
+	pom.EnumODBCDataSources(s, SQL_FETCH_FIRST_SYSTEM);
+	buf += s;	
+
 	SetDlgItemText(IDC_RESULT_EDIT, buf);
 
 
@@ -274,7 +282,28 @@ BOOL CMetabase_load_pok1Dlg::NactiMetabazi()
 //	db.Open(NULL, FALSE, TRUE, _T("ODBC;DSN=" + s), TRUE))
 
 //	tohle funguje bez open dialogu
-	db.Open(NULL, FALSE, TRUE, _T("ODBC;DSN=" + s + ";DBQ=C:\\skola\\sw projekt\\STULONG.mdb;"), TRUE))
+//	db.Open(NULL, FALSE, TRUE, _T("ODBC;DSN=" + s + ";DBQ=C:\\skola\\sw projekt\\STULONG.mdb;"), TRUE))
+
+/*
+
+  honza:
+  
+	Cauves, tak jsem se v tom zase hrabal.
+	Totiz pri testovani, AR2NL jsem si uvedomil, ze LM Admin vytvari novy ODBC DataSource.
+	Tyto jsou k enumerovani jako SYSTEM datasources (pom.EnumODBCDataSources(s, SQL_FETCH_FIRST_SYSTEM))
+
+	A tak vznikl nasledujici connection string, ktery primo otevira metabazi definovanou v LM Admin.
+
+	
+	Nekdo by casem mohl vytvorit podobny dialog, jaky pouzivaji vsechny LM moduly pri jejich spusteni.
+	(dialog "LISp-Miner working database" - tipnul jsem ho do resourcu jako 25002 :)
+
+*/
+
+	
+		db.Open(NULL, FALSE, TRUE, _T("ODBC;DSN=LM LMEntry.mdb Metabase"), TRUE)
+	
+	)
 	{
 		if (rs.Open())
 		{
