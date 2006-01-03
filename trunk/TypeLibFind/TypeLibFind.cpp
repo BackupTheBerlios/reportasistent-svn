@@ -13,15 +13,9 @@ extern "C" DllExport int WINAPI FindEnumValInTypeLib(LPCSTR _strObjProgId, LPCST
 {
 	int retval = -1;
 
+	LPTSTR strObjProgId = NULL;
+	LPTSTR strEnumValueName = NULL;
 
-	LPTSTR strObjProgId = new TCHAR[strlen(_strObjProgId)+1];
-	LPTSTR strEnumValueName = new TCHAR[strlen(_strEnumValueName)+1];
-
-	//konvertuj vstupni retezce na UNICODE
-	MultiByteToWideChar(CP_THREAD_ACP, MB_USEGLYPHCHARS, _strObjProgId,		-1, strObjProgId,	  strlen(_strObjProgId)+1);
-	MultiByteToWideChar(CP_THREAD_ACP, MB_USEGLYPHCHARS, _strEnumValueName, -1, strEnumValueName, strlen(_strEnumValueName)+1);
-
-	
 	CLSID		idObjProg;
 	CLSID		idLib;
 	
@@ -47,6 +41,19 @@ extern "C" DllExport int WINAPI FindEnumValInTypeLib(LPCSTR _strObjProgId, LPCST
 	VARDESC * pVarDesc = NULL;
 	
 	HRESULT hr;
+
+
+	if ((_strObjProgId == NULL) || (_strEnumValueName == NULL)) goto clean_up;
+
+	strObjProgId = new TCHAR[strlen(_strObjProgId)+1];
+	strEnumValueName = new TCHAR[strlen(_strEnumValueName)+1];
+
+	//konvertuj vstupni retezce na UNICODE
+	MultiByteToWideChar(CP_THREAD_ACP, MB_USEGLYPHCHARS, _strObjProgId,		-1, strObjProgId,	  strlen(_strObjProgId)+1);
+	MultiByteToWideChar(CP_THREAD_ACP, MB_USEGLYPHCHARS, _strEnumValueName, -1, strEnumValueName, strlen(_strEnumValueName)+1);
+
+//	ladici vypis
+//	MessageBox(NULL, strObjProgId, strEnumValueName, 0);
 
 	
 	//ziskej CSID z ProgID
@@ -93,9 +100,6 @@ extern "C" DllExport int WINAPI FindEnumValInTypeLib(LPCSTR _strObjProgId, LPCST
 	//uloz navratovou hodnotu
 	retval = pVarDesc->lpvarValue->lVal;
 	
-//	ladici vypis
-//	MessageBox(NULL, strObjProgId, strEnumValueName, 0);
-
 clean_up:		
 	delete [] strObjProgId;
 	delete [] strEnumValueName;
