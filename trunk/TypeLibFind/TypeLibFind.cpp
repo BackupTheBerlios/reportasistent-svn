@@ -84,7 +84,7 @@ extern "C" DllExport int WINAPI FindEnumValInTypeLib(LPCSTR _strObjProgId, LPCST
 
 	//vyhledej strEnumValueName v TypeLib-u
 	hr = ptLib->FindName(strEnumValueName, 0, & ptInfo, & rgMemId, & pcFound);
-	if (hr != S_OK) goto clean_up;
+	if ((hr != S_OK) || (pcFound == 0)) goto clean_up;
 
 	//zjisti hodnotu pro strEnumValueName
 	hr = ptInfo->GetVarDesc(rgMemId & 0x0000FFFF, & pVarDesc);
