@@ -40,9 +40,12 @@ Private Sub IVBSAXContentHandler_startElement(strNamespaceURI As String, strLoca
     
     For i = 0 To (oAttributes.Length - 1)
         mstrOutput = mstrOutput & " " & _
-        oAttributes.getLocalName(i) & "=""" & oAttributes.getValue(i) _
-        & """>"
+        oAttributes.getLocalName(i) & "=""" & oAttributes.getValue(i) & """"
     Next
+    
+    mstrOutput = mstrOutput & ">"
+            
+
 
     
     Select Case strLocalName

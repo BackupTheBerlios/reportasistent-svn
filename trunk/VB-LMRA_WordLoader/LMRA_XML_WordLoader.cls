@@ -10,7 +10,7 @@ Attribute VB_Name = "LMRA_XML_WordLoader"
 Attribute VB_GlobalNameSpace = True
 Attribute VB_Creatable = True
 Attribute VB_PredeclaredId = False
-Attribute VB_Exposed = False
+Attribute VB_Exposed = True
 
 Public Function LoadFromFile(ByVal strFileName As String) As String
     Dim reader As New SAXXMLReader30             'Reads the XML document

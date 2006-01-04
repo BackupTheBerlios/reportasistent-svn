@@ -1,4 +1,4 @@
-Type=Exe
+Type=OleExe
 Reference=*\G{00020430-0000-0000-C000-000000000046}#2.0#0#C:\WINNT\System32\stdole2.tlb#OLE Automation
 Reference=*\G{420B2830-E718-11CF-893D-00A0C9054228}#1.0#0#C:\WINNT\system32\scrrun.dll#Microsoft Scripting Runtime
 Reference=*\G{00020802-0000-0000-C000-000000000046}#1.3#0#C:\Program Files\Microsoft Office\Office\GRAPH9.OLB#Microsoft Graph 9.0 Object Library
@@ -11,9 +11,10 @@ Class=WordLoader; WordLoader.cls
 Module=MainModule; Main.bas
 Class=LMRA_XML_WordLoader; LMRA_XML_WordLoader.cls
 IconForm="Form1"
-Startup="Form1"
+Startup="Sub Main"
 HelpFile=""
-Title="projekt"
+Title="LMRA_WordLoader"
+ExeName32="LMRA_WordLoader.exe"
 Command32=""
 Name="LMRA_WordLoader"
 HelpContextID="0"
@@ -35,11 +36,12 @@ OverflowCheck=0
 FlPointCheck=0
 FDIVCheck=0
 UnroundedFP=0
-StartMode=0
+StartMode=1
 Unattended=0
 Retained=0
 ThreadPerObject=0
 MaxNumberOfThreads=1
+DebugStartupOption=0
 
 [MS Transaction Server]
 AutoRefresh=1
