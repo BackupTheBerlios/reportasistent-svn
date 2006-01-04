@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="windows-1250" ?>
+
+<report
+	title =	"EVROPSKÝ REGION PRAHA 2004"
+	subtitle =	"Analytická otázka číslo 3 (MFF 2004/2005)"
+	author =	"Jan Dědek"
+>
+
+<chapter title = "Životní hodnoty, Modernizace a elity, Způsob vnímání transformačního procesu">
+	<paragraph style="Normální">
+		<text value="Výsledky v analytické zprávě odpovídají "/>
+		<text style="Silné"
+			value="Reprezentativnímu výběrovému souboru"/>
+		<text value=" respondentů. Na kompletní data jsem též analyzoval a výsledky byly podobné,
+většinou vycházely o méně silné vztahy - pravděpodobně díky chybějícím informacím."/>
+	</paragraph>
+</chapter>
+
+	
+	<chapter title = "Muži ve věku 61-70 let s Vysokou školou považují politiku zadůležitou.">
+		<paragraph><text value="A:	29"/></paragraph>
+		<paragraph><text value="B:	14"/></paragraph>
+		<paragraph><text value="C:	628"/></paragraph>
+		<paragraph><text value="D:	2627"/></paragraph>
+		<paragraph><text value="confidence a/(a+b):	0,674"/></paragraph>
+		<paragraph><text value="above average a(a+b+c+d) / (a+b)(a+c):	3,385"/></paragraph>
+		<paragraph>
+			
+			<table rows="4" cols="4" borderwidth="1">
+					<tr>
+						<td/>
+						<td><text value="antecedent"/></td>
+						<td><text value="not antecedent"/></td>
+						<td><text value="součet"/></td>						
+					</tr>
+					<tr>
+						<td><text value="succedent"/></td>
+						<td bgcolor="#FFE0E0"><text value="29"/></td>
+						<td bgcolor="#FFF0F0"><text value="14"/></td>
+						<td bgcolor="#FFD0D0"><text value="43"/></td>
+
+					</tr>
+					<tr>
+						<td><text value="not succedent"/></td>
+						<td bgcolor="#FF8080"><text value="628"/></td>
+						<td bgcolor="#FF4040"><text value="2627"/></td>
+						<td bgcolor="#FF0000"><text value="3255"/></td>
+					</tr>
+					<tr>
+						<td><text value="součet"/></td>						
+						<td bgcolor="#FF7070"><text value="657"/></td>
+						<td bgcolor="#FF3030"><text value="2641"/></td>
+						<td><text value="3298"/></td>
+					</tr>
+			</table>
+
+			<graph title="4FT table 2nd-try" showlegend="true" charttype="xl3DColumn" height="0,4">
+				<categories>
+					<category title="succedent"/>
+					<category title="not succedent"/>
+				</categories>
+				<chart title="antecend">
+					<value value="29"/>
+					<value value="14"/>
+				</chart>			
+				<chart title="not antecend">
+					<value value="628"/>
+					<value value="2627"/>
+				</chart>			
+			</graph>
+		</paragraph>
+	</chapter>
+
+</report>

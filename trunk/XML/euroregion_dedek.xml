@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="windows-1250" ?>
+
+<report
+	title =	"EVROPSKÝ REGION PRAHA 2004"
+	subtitle =	"Analytická otázka číslo 3 (MFF 2004/2005)"
+	author =	"Jan Dědek"
+>
+
+<chapter title = "Životní hodnoty, Modernizace a elity, Způsob vnímání transformačního procesu">
+	<paragraph style="Normální">
+		<text value="Výsledky v analytické zprávě odpovídají "/>
+		<text style="Silné"
+			value="Reprezentativnímu výběrovému souboru"/>
+		<text value=" respondentů. Na kompletní data jsem též analyzoval a výsledky byly podobné,
+většinou vycházely o méně silné vztahy - pravděpodobně díky chybějícím informacím."/>
+	</paragraph>
+</chapter>
+
+<chapter title = "Zkoumané atributy">
+	<paragraph>
+		 <text value="V této kapitole popíšu, kterými atributy jsem se zabýval."/>
+	</paragraph>
+	
+	<chapter title = "Odvozený atribut „Způsob vnímání transformačního procesu“">
+		<paragraph>
+			<text value="Vznikl z atributů:"/>
+			<table cols="2" rows="4" borderwidth="1">
+				<tr>
+					<td><text value="znak"/></td>	<td><text value="Popis"/></td>
+				</tr>
+				<tr>
+					<td><text value="z5"/></td>
+					<td><text value="Bude se podle Vašeho názoru v nejbližších letech v naší zemi životní úroveň většiny obyvatel zlepšovat?"/></td>
+				</tr>
+				<tr>
+					<td><text value="z6"/></td>
+					<td><text value="Může se u nás v blízké budoucnosti prohlubovat problém chudoby?"/></td>
+				</tr>
+				<tr>
+					<td><text value="z7"/></td>
+					<td><text value="Je současná ekonomická situace pro Vaši domácnost výhodná?"/></td>
+				</tr>
+			</table>
+		</paragraph>
+
+		<paragraph>
+			<text value="Hodnoty:"/>
+			<table rows="7" cols="6" borderwidth="1">
+				<tr>
+					<td rowspan="2"><text value="Typ"/></td>
+					<td colspan="3"><text value="Hodnota atributu"/></td>
+					<td rowspan="2"><text value="Věcný význam - název typu"/></td>
+					<td rowspan="2"><text value="Zjištěná relativní četnost&#10;pro 2672 respondentů"/></td>
+				</tr>
+				<tr>
+					<td/><!-- prazdne sloupce pro zjednoduseni ???span atributu -->
+					<td><text value="z5"/></td>	<td><text value="z6"/></td>	<td><text value="z7"/></td>
+					<td/><!-- prazdne sloupce pro zjednoduseni ???span atributu -->
+					<td/><!-- prazdne sloupce pro zjednoduseni ???span atributu -->
+				</tr>
+				<tr>
+					<td><text value="1"/></td>
+					<td><text value="1"/></td>
+					<td><text value="1"/></td>
+					<td><text value="1"/></td>
+					<td><text value="angažovaný liberál"/></td>
+					<td><text value="12,3 %"/></td>
+				</tr>
+				<tr>
+					<td><text value="2"/></td>
+					<td><text value="1"/></td>
+					<td><text value="1"/></td>
+					<td><text value="2"/></td>
+					<td><text value="realistický optimista"/></td>
+					<td><text value="9,7 %"/></td>
+				</tr>
+				<tr>
+					<td><text value="3"/></td>
+					<td><text value="1"/></td>
+					<td><text value="2"/></td>
+					<td><text value="1"/></td>
+					<td><text value="člověk této doby"/></td>
+					<td><text value="24,9 %"/></td>
+				</tr>
+				<tr>
+					<td><text value="6"/></td>
+					<td><text value="2"/></td>
+					<td><text value="1"/></td>
+					<td><text value="2"/></td>
+					<td><text value="posel špatných zpráv"/></td>
+					<td><text value="26,8 %"/></td>
+				</tr>
+				<tr>
+					<td><text value="7"/></td>
+					<td><text value="1"/></td>
+					<td><text value="2"/></td>
+					<td><text value="2"/></td>
+					<td><text value="vizionář"/></td>
+					<td><text value="10,2 %"/></td>
+				</tr>
+			</table>
+		</paragraph>
+		<chapter title = "Četnosti jednotlivých typů:">
+			<paragraph>
+				<table rows="23" cols="7" borderwidth="1">
+					<tr>
+						<td/>
+						<td><text value="angažovaný liberál"/></td>
+						<td><text value="realistický optimista"/></td>
+						<td><text value="člověk této doby"/></td>
+						<td><text value="posel špatných zpráv"/></td>
+						<td><text value="vizionář"/></td>
+						<td><text value="ostatní"/></td>						
+					</tr>
+
+<tr><td><text value="	Praha 1	"/></td> <td bgcolor="#FFCDCD">*<text value="	20	"/></td> <td bgcolor="#FFE6E6">*<text value="	10	"/></td> <td bgcolor="#FFCDCD">*<text value="	20	"/></td> <td bgcolor="#FFEDED">*<text value="	7	"/></td> <td bgcolor="#FFDCDC">*<text value="	14	"/></td> <td bgcolor="#FFD2D2">*<text value="	18	"/></td></tr>
+<tr><td><text value="	Praha 2	"/></td> <td bgcolor="#FFD4D4">*<text value="	17	"/></td> <td bgcolor="#FFD2D2">*<text value="	18	"/></td> <td bgcolor="#FFA9A9">*<text value="	34	"/></td> <td bgcolor="#FFDCDC">*<text value="	14	"/></td> <td bgcolor="#FFB6B6">*<text value="	29	"/></td> <td bgcolor="#FFD7D7">*<text value="	16	"/></td></tr>
+<tr><td><text value="	Praha 3	"/></td> <td bgcolor="#FFBBBB">*<text value="	27	"/></td> <td bgcolor="#FFDCDC">*<text value="	14	"/></td> <td bgcolor="#FFC7C7">*<text value="	22	"/></td> <td bgcolor="#FFCACA">*<text value="	21	"/></td> <td bgcolor="#FF6868">*<text value="	60	"/></td> <td bgcolor="#FFB3B3">*<text value="	30	"/></td></tr>
+<tr><td><text value="	Praha 4	"/></td> <td bgcolor="#FFB1B1">*<text value="	31	"/></td> <td bgcolor="#FFB8B8">*<text value="	28	"/></td> <td bgcolor="#FF0000">*<text value="	101	"/></td> <td bgcolor="#FFBBBB">*<text value="	27	"/></td> <td bgcolor="#FF4747">*<text value="	73	"/></td> <td bgcolor="#FF8181">*<text value="	50	"/></td></tr>
+<tr><td><text value="	Praha 5	"/></td> <td bgcolor="#FFDCDC">*<text value="	14	"/></td> <td bgcolor="#FFCFCF">*<text value="	19	"/></td> <td bgcolor="#FFA2A2">*<text value="	37	"/></td> <td bgcolor="#FFD9D9">*<text value="	15	"/></td> <td bgcolor="#FF7979">*<text value="	53	"/></td> <td bgcolor="#FFA7A7">*<text value="	35	"/></td></tr>
+<tr><td><text value="	Praha 6	"/></td> <td bgcolor="#FFBDBD">*<text value="	26	"/></td> <td bgcolor="#FFC2C2">*<text value="	24	"/></td> <td bgcolor="#FF6262">*<text value="	62	"/></td> <td bgcolor="#FFCDCD">*<text value="	20	"/></td> <td bgcolor="#FF6F6F">*<text value="	57	"/></td> <td bgcolor="#FFA2A2">*<text value="	37	"/></td></tr>
+<tr><td><text value="	Praha 7	"/></td> <td bgcolor="#FFF2F2">*<text value="	5	"/></td> <td bgcolor="#FFD7D7">*<text value="	16	"/></td> <td bgcolor="#FFAEAE">*<text value="	32	"/></td> <td bgcolor="#FFCFCF">*<text value="	19	"/></td> <td bgcolor="#FFC7C7">*<text value="	22	"/></td> <td bgcolor="#FFE1E1">*<text value="	12	"/></td></tr>
+<tr><td><text value="	Praha 8	"/></td> <td bgcolor="#FF7C7C">*<text value="	52	"/></td> <td bgcolor="#FFCFCF">*<text value="	19	"/></td> <td bgcolor="#FF5656">*<text value="	67	"/></td> <td bgcolor="#FFDCDC">*<text value="	14	"/></td> <td bgcolor="#FF6868">*<text value="	60	"/></td> <td bgcolor="#FF8181">*<text value="	50	"/></td></tr>
+<tr><td><text value="	Praha 9	"/></td> <td bgcolor="#FFE3E3">*<text value="	11	"/></td> <td bgcolor="#FFF0F0">*<text value="	6	"/></td> <td bgcolor="#FFACAC">*<text value="	33	"/></td> <td bgcolor="#FFD7D7">*<text value="	16	"/></td> <td bgcolor="#FFB3B3">*<text value="	30	"/></td> <td bgcolor="#FFE8E8">*<text value="	9	"/></td></tr>
+<tr><td><text value="	Praha 10	"/></td> <td bgcolor="#FFAEAE">*<text value="	32	"/></td> <td bgcolor="#FFACAC">*<text value="	33	"/></td> <td bgcolor="#FF5151">*<text value="	69	"/></td> <td bgcolor="#FFAEAE">*<text value="	32	"/></td> <td bgcolor="#FF3F3F">*<text value="	76	"/></td> <td bgcolor="#FFACAC">*<text value="	33	"/></td></tr>
+<tr><td><text value="	Praha 11	"/></td> <td bgcolor="#FFAEAE">*<text value="	32	"/></td> <td bgcolor="#FFC2C2">*<text value="	24	"/></td> <td bgcolor="#FF9292">*<text value="	43	"/></td> <td bgcolor="#FFC0C0">*<text value="	25	"/></td> <td bgcolor="#FF7474">*<text value="	55	"/></td> <td bgcolor="#FFA4A4">*<text value="	36	"/></td></tr>
+<tr><td><text value="	Praha 12	"/></td> <td bgcolor="#FFCFCF">*<text value="	19	"/></td> <td bgcolor="#FFD7D7">*<text value="	16	"/></td> <td bgcolor="#FFA2A2">*<text value="	37	"/></td> <td bgcolor="#FFC2C2">*<text value="	24	"/></td> <td bgcolor="#FF7E7E">*<text value="	51	"/></td> <td bgcolor="#FFC5C5">*<text value="	23	"/></td></tr>
+<tr><td><text value="	Praha 13	"/></td> <td bgcolor="#FFF7F7">*<text value="	3	"/></td> <td bgcolor="#FFF5F5">*<text value="	4	"/></td> <td bgcolor="#FF9292">*<text value="	43	"/></td> <td bgcolor="#FFD7D7">*<text value="	16	"/></td> <td bgcolor="#FFB6B6">*<text value="	29	"/></td> <td bgcolor="#FFBBBB">*<text value="	27	"/></td></tr>
+<tr><td><text value="	Praha 14	"/></td> <td bgcolor="#FFD9D9">*<text value="	15	"/></td> <td bgcolor="#FFF2F2">*<text value="	5	"/></td> <td bgcolor="#FFD2D2">*<text value="	18	"/></td> <td bgcolor="#FFEDED">*<text value="	7	"/></td> <td bgcolor="#FFA2A2">*<text value="	37	"/></td> <td bgcolor="#FFDEDE">*<text value="	13	"/></td></tr>
+<tr><td><text value="	Praha 15	"/></td> <td bgcolor="#FFDCDC">*<text value="	14	"/></td> <td bgcolor="#FFE3E3">*<text value="	11	"/></td> <td bgcolor="#FFE6E6">*<text value="	10	"/></td> <td bgcolor="#FFEBEB">*<text value="	8	"/></td> <td bgcolor="#FFBBBB">*<text value="	27	"/></td> <td bgcolor="#FFD7D7">*<text value="	16	"/></td></tr>
+<tr><td><text value="	Praha 16- Radotín	"/></td> <td bgcolor="#FFE3E3">*<text value="	11	"/></td> <td bgcolor="#FFD7D7">*<text value="	16	"/></td> <td bgcolor="#FF7979">*<text value="	53	"/></td> <td bgcolor="#FFE6E6">*<text value="	10	"/></td> <td bgcolor="#FFB6B6">*<text value="	29	"/></td> <td bgcolor="#FFC0C0">*<text value="	25	"/></td></tr>
+<tr><td><text value="	Praha 17- Řepy	"/></td> <td bgcolor="#FFC5C5">*<text value="	23	"/></td> <td bgcolor="#FFD2D2">*<text value="	18	"/></td> <td bgcolor="#FF9292">*<text value="	43	"/></td> <td bgcolor="#FFCACA">*<text value="	21	"/></td> <td bgcolor="#FF7474">*<text value="	55	"/></td> <td bgcolor="#FFA4A4">*<text value="	36	"/></td></tr>
+<tr><td><text value="	Praha 18- Letňany	"/></td> <td bgcolor="#FFD9D9">*<text value="	15	"/></td> <td bgcolor="#FFDEDE">*<text value="	13	"/></td> <td bgcolor="#FFCACA">*<text value="	21	"/></td> <td bgcolor="#FFD4D4">*<text value="	17	"/></td> <td bgcolor="#FFCFCF">*<text value="	19	"/></td> <td bgcolor="#FFC5C5">*<text value="	23	"/></td></tr>
+<tr><td><text value="	Praha 19- Kbely	"/></td> <td bgcolor="#FFEBEB">*<text value="	8	"/></td> <td bgcolor="#FFD2D2">*<text value="	18	"/></td> <td bgcolor="#FFCFCF">*<text value="	19	"/></td> <td bgcolor="#FFD9D9">*<text value="	15	"/></td> <td bgcolor="#FFB3B3">*<text value="	30	"/></td> <td bgcolor="#FFD9D9">*<text value="	15	"/></td></tr>
+<tr><td><text value="	Praha 20- H. Počernice	"/></td> <td bgcolor="#FFEBEB">*<text value="	8	"/></td> <td bgcolor="#FFD9D9">*<text value="	15	"/></td> <td bgcolor="#FFDCDC">*<text value="	14	"/></td> <td bgcolor="#FFDEDE">*<text value="	13	"/></td> <td bgcolor="#FFC0C0">*<text value="	25	"/></td> <td bgcolor="#FFCACA">*<text value="	21	"/></td></tr>
+<tr><td><text value="	Praha 21- Újezd	"/></td> <td bgcolor="#FFF2F2">*<text value="	5	"/></td> <td bgcolor="#FFF2F2">*<text value="	5	"/></td> <td bgcolor="#FFCACA">*<text value="	21	"/></td> <td bgcolor="#FFFCFC">*<text value="	1	"/></td> <td bgcolor="#FFBBBB">*<text value="	27	"/></td> <td bgcolor="#FFBBBB">*<text value="	27	"/></td></tr>
+<tr><td><text value="	Praha 22- Uhříněves	"/></td> <td bgcolor="#FFF7F7">*<text value="	3	"/></td> <td bgcolor="#FFEBEB">*<text value="	8	"/></td> <td bgcolor="#FFDEDE">*<text value="	13	"/></td> <td bgcolor="#FFDEDE">*<text value="	13	"/></td> <td bgcolor="#FFD9D9">*<text value="	15	"/></td> <td bgcolor="#FFDEDE">*<text value="	13	"/></td></tr>
+
+
+				</table>
+			</paragraph>
+		</chapter>
+
+	</chapter>
+
+	<chapter title = "Jak s věkem klesá počet lidí této doby:">
+		<paragraph>
+			<graph title="Člověk této doby X věk" showlegend="false" charttype="xlColumnClustered">
+				<categories>
+					<category title="15-24"/>
+					<category title="25-34"/>
+					<category title="35-44"/>
+					<category title="45-54"/>
+					<category title="55-64"/>
+					<category title="65-74"/>
+					<category title="75-84"/>
+					<category title="85-94"/>
+				</categories>
+
+				<chart title="graf1">
+					<value value="100%"/>
+					<value value="88%"/>
+					<value value="93%"/>
+					<value value="72%"/>
+					<value value="74%"/>
+					<value value="46%"/>
+					<value value="40%"/>
+					<value value="63%"/>
+				</chart>
+			</graph>
+			<text value="&#10;Hodnoty jsou normalizované vzhledem k počtu zástupců v jednotlivých kategoriích.
+Poslední kategorie je pravděpodobně zkreslená díky malému počtu zástupců."/>
+		</paragraph>
+	</chapter>
+
+</chapter>
+
+<chapter title = "Analytické výsledky">
+	<chapter title = "Důležitost práce v závislosti na věku dotázaných">
+		<paragraph>
+			<graph showlegend="false" charttype="xl3DColumnClustered" height="0,60">
+				<categories>
+					<category title="15-24"/>
+					<category title="25-34"/>
+					<category title="35-44"/>
+					<category title="45-54"/>
+					<category title="55-64"/>
+					<category title="65-74"/>
+					<category title="75-84"/>
+					<category title="85-94"/>
+				</categories>
+
+				<chart title="graf2">
+					<value value="71%"/>
+					<value value="94%"/>
+					<value value="100%"/>
+					<value value="96%"/>
+					<value value="82%"/>
+					<value value="34%"/>
+					<value value="39%"/>
+					<value value="71%"/>
+				</chart>
+			</graph>
+			<text value="&#10;bodové hodnocení:
+&#10;velmi důležitá +4, dost důležitá +3, nepříliš důležitá -3, vůbec nedůležitá -4
+&#10;Hodnoty jsou normalizované vzhledem k počtu zástupců v jednotlivých kategoriích."/>
+		</paragraph>
+	</chapter>
+	
+	<chapter title = "Muži ve věku 61-70 let s Vysokou školou považují politiku zadůležitou.">
+		<paragraph><text value="A:	29"/></paragraph>
+		<paragraph><text value="B:	14"/></paragraph>
+		<paragraph><text value="C:	628"/></paragraph>
+		<paragraph><text value="D:	2627"/></paragraph>
+		<paragraph><text value="confidence a/(a+b):	0,674"/></paragraph>
+		<paragraph><text value="above average a(a+b+c+d) / (a+b)(a+c):	3,385"/></paragraph>
+		<paragraph>
+			<graph title="confidence: 0,674" showlegend="false" charttype="xlPie" width="0,20" height="0,20">
+				<chart>
+					<value value="0,674"/>
+					<value value="0,326"/>
+				</chart>			
+			</graph>
+			
+			<table rows="4" cols="4" borderwidth="1">
+					<tr>
+						<td/>
+						<td><text value="antecedent"/></td>
+						<td><text value="not antecedent"/></td>
+						<td><text value="součet"/></td>						
+					</tr>
+					<tr>
+						<td><text value="succedent"/></td>
+						<td bgcolor="#FFE0E0"><text value="29"/></td>
+						<td bgcolor="#FFF0F0"><text value="14"/></td>
+						<td bgcolor="#FFD0D0"><text value="43"/></td>
+
+					</tr>
+					<tr>
+						<td><text value="not succedent"/></td>
+						<td bgcolor="#FF8080"><text value="628"/></td>
+						<td bgcolor="#FF4040"><text value="2627"/></td>
+						<td bgcolor="#FF0000"><text value="3255"/></td>
+					</tr>
+					<tr>
+						<td><text value="součet"/></td>						
+						<td bgcolor="#FF7070"><text value="657"/></td>
+						<td bgcolor="#FF3030"><text value="2641"/></td>
+						<td><text value="3298"/></td>
+					</tr>
+			</table>
+
+			<graph title="4FT table" showlegend="true" charttype="xlColumnStacked" width="0,75" height="1,4">
+				<categories>
+					<category title="succedent"/>
+					<category title="not succedent"/>
+				</categories>
+				<chart title="antecend">
+					<value value="29"/>
+					<value value="14"/>
+				</chart>			
+				<chart title="not antecend">
+					<value value="628"/>
+					<value value="2627"/>
+				</chart>			
+			</graph>
+
+			<graph title="4FT table 2nd-try" showlegend="true" charttype="xl3DColumn" height="0,4">
+				<categories>
+					<category title="succedent"/>
+					<category title="not succedent"/>
+				</categories>
+				<chart title="antecend">
+					<value value="29"/>
+					<value value="14"/>
+				</chart>			
+				<chart title="not antecend">
+					<value value="628"/>
+					<value value="2627"/>
+				</chart>			
+			</graph>
+		</paragraph>
+	</chapter>
+
+</chapter>
+
+
+</report>
