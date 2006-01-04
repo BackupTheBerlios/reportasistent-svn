@@ -38,6 +38,7 @@ BEGIN_MESSAGE_MAP(CMetabase_load_pok1Dlg, CDialog)
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
 	ON_BN_CLICKED(IDC_LOAD_BUTTON, OnLoadButton)
+	ON_BN_CLICKED(IDC_XML_BUTTON, OnXmlButton)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -53,7 +54,10 @@ BOOL CMetabase_load_pok1Dlg::OnInitDialog()
 	SetIcon(m_hIcon, TRUE);			// Set big icon
 	SetIcon(m_hIcon, FALSE);		// Set small icon
 	
+	
 	// TODO: Add extra initialization here
+	SetDlgItemText(IDC_XML_PATH_EDIT, "..\\xml\\redukovany.xml");
+
 	
 	return TRUE;  // return TRUE  unless you set the focus to a control
 }
@@ -342,4 +346,15 @@ BOOL CMetabase_load_pok1Dlg::NactiMetabazi()
 
 	return FALSE;
 
+}
+
+void LoadXLMFileToWord(LPCTSTR FilePath);
+
+
+void CMetabase_load_pok1Dlg::OnXmlButton() 
+{
+	CString s;
+	GetDlgItemText(IDC_XML_PATH_EDIT, s);
+	
+	LoadXLMFileToWord(s);
 }

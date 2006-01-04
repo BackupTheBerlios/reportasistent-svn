@@ -45,11 +45,13 @@ Class=CMetabase_load_pok1Dlg
 [DLG:IDD_METABASE_LOAD_POK1_DIALOG (English (U.S.))]
 Type=1
 Class=CMetabase_load_pok1Dlg
-ControlCount=4
+ControlCount=6
 Control1=IDOK,button,1342242817
 Control2=IDCANCEL,button,1342242816
 Control3=IDC_LOAD_BUTTON,button,1342251008
 Control4=IDC_RESULT_EDIT,edit,1353777348
+Control5=IDC_XML_BUTTON,button,1342242816
+Control6=IDC_XML_PATH_EDIT,edit,1350631552
 
 [CLS:CtiHypothesis_Recordset]
 Type=0
