@@ -34,6 +34,19 @@
 #endif // _AFX_NO_AFXCMN_SUPPORT
 
 
+
+//potreba pro WordLoader z VisualBasicu
+#import "..\VB-LMRA_WordLoader\LMRA_WordLoader.exe" named_guids
+// vlozi namespace LMRA_WordLoader;
+
+
+
+//potreba pro MSXML
+#import <msxml3.dll>
+//vlozi namespace MSXML2;
+
+
+
 //{{AFX_INSERT_LOCATION}}
 // Microsoft Visual C++ will insert additional declarations immediately before the previous line.
 

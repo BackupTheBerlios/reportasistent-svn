@@ -29,7 +29,7 @@ void CMetabase_load_pok1Dlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CMetabase_load_pok1Dlg)
-		// NOTE: the ClassWizard will add DDX and DDV calls here
+	DDX_Control(pDX, IDC_TREE1, m_XMLTree1);
 	//}}AFX_DATA_MAP
 }
 
@@ -39,6 +39,7 @@ BEGIN_MESSAGE_MAP(CMetabase_load_pok1Dlg, CDialog)
 	ON_WM_QUERYDRAGICON()
 	ON_BN_CLICKED(IDC_LOAD_BUTTON, OnLoadButton)
 	ON_BN_CLICKED(IDC_XML_BUTTON, OnXmlButton)
+	ON_BN_CLICKED(IDC_GENERXML_BUTTON, OnGenerxmlButton)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -283,7 +284,7 @@ BOOL CMetabase_load_pok1Dlg::NactiMetabazi()
 
 //nekolik verzi connect stringu
 //	db.Open(NULL, FALSE, TRUE, _T("ODBC;DSN=Databáze MS Access"), TRUE)
-//	db.Open(NULL, FALSE, TRUE, _T("ODBC;DSN=" + s), TRUE))
+	db.Open(NULL, FALSE, TRUE, _T("ODBC;DSN=" + s), TRUE)
 
 //	tohle funguje bez open dialogu
 //	db.Open(NULL, FALSE, TRUE, _T("ODBC;DSN=" + s + ";DBQ=C:\\skola\\sw projekt\\STULONG.mdb;"), TRUE))
@@ -302,10 +303,11 @@ BOOL CMetabase_load_pok1Dlg::NactiMetabazi()
 	Nekdo by casem mohl vytvorit podobny dialog, jaky pouzivaji vsechny LM moduly pri jejich spusteni.
 	(dialog "LISp-Miner working database" - tipnul jsem ho do resourcu jako 25002 :)
 
-*/
 
 	
+		//tvrdy odkaz na datasource generovany z LM-Admin:
 		db.Open(NULL, FALSE, TRUE, _T("ODBC;DSN=LM LMEntry.mdb Metabase"), TRUE)
+*/
 	
 	)
 	{
@@ -349,12 +351,22 @@ BOOL CMetabase_load_pok1Dlg::NactiMetabazi()
 }
 
 void LoadXLMFileToWord(LPCTSTR FilePath);
+BOOL LoadXMLDOM(LPCTSTR FilePath, CTreeCtrl * treeCtrl);
 
 
 void CMetabase_load_pok1Dlg::OnXmlButton() 
 {
 	CString s;
 	GetDlgItemText(IDC_XML_PATH_EDIT, s);
+
+	m_XMLTree1.LoadFromFile(s);
 	
-	LoadXLMFileToWord(s);
+//	LoadXMLDOM(s, (CTreeCtrl *) GetDlgItem(IDC_TREE1));
+
+//	LoadXLMFileToWord(s);
+}
+
+void CMetabase_load_pok1Dlg::OnGenerxmlButton() 
+{
+	m_XMLTree1.GenerSelectedSubtree();
 }

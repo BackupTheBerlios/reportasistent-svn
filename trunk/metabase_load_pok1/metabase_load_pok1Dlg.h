@@ -8,6 +8,8 @@
 #pragma once
 #endif // _MSC_VER > 1000
 
+#include "XMLTree.h"
+
 /////////////////////////////////////////////////////////////////////////////
 // CMetabase_load_pok1Dlg dialog
 
@@ -21,7 +23,7 @@ public:
 // Dialog Data
 	//{{AFX_DATA(CMetabase_load_pok1Dlg)
 	enum { IDD = IDD_METABASE_LOAD_POK1_DIALOG };
-		// NOTE: the ClassWizard will add data members here
+	CXMLTree	m_XMLTree1;
 	//}}AFX_DATA
 
 	// ClassWizard generated virtual function overrides
@@ -41,6 +43,7 @@ protected:
 	afx_msg HCURSOR OnQueryDragIcon();
 	afx_msg void OnLoadButton();
 	afx_msg void OnXmlButton();
+	afx_msg void OnGenerxmlButton();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };

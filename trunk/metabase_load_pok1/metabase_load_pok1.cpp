@@ -54,6 +54,13 @@ BOOL CMetabase_load_pok1App::InitInstance()
 	Enable3dControlsStatic();	// Call this when linking to MFC statically
 #endif
 
+	
+	
+	//pridal honza
+	CoInitialize(NULL);
+
+	
+	
 	CMetabase_load_pok1Dlg dlg;
 	m_pMainWnd = &dlg;
 	int nResponse = dlg.DoModal();

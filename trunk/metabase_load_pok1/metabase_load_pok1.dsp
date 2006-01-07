@@ -113,6 +113,10 @@ SOURCE=.\tiHypothesis_Recordset.cpp
 
 SOURCE=.\XML_load.cpp
 # End Source File
+# Begin Source File
+
+SOURCE=.\XMLTree.cpp
+# End Source File
 # End Group
 # Begin Group "Header Files"
 
@@ -136,6 +140,10 @@ SOURCE=.\StdAfx.h
 # Begin Source File
 
 SOURCE=.\tiHypothesis_Recordset.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\XMLTree.h
 # End Source File
 # End Group
 # Begin Group "Resource Files"

@@ -8,7 +8,7 @@ Option Explicit ' Force explicit variable declaration.
 'hlavni funkce spoustena z ActiveX exe-souboru
 Public Static Sub Main()
     Dim f1 As New Form1
-    f1.Caption = "start z lib"
+    'f1.Caption = "start z lib"
     f1.Show
 End Sub
 
