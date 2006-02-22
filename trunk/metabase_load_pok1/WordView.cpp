@@ -70,6 +70,9 @@ void CWordView::OnPaint()
 			rect.bottom = size.cy + 10;
 	}
 
+
+	//	rect.IntersectRect(rect,& r); 
+	dc.IntersectClipRect(& r);
 	m_pItem->Draw(& dc, & rect);
 
 	// Do not call CStatic::OnPaint() for painting messages

@@ -409,5 +409,5 @@ void CMetabase_load_pok1Dlg::OnGenerxmlButton()
 
 */	
 	
-	m_XMLTree1.GenerSelectedSubtree();
+	m_XMLTree1.GenerSelectedSubtree(m_WordView.GetWordObject());
 }

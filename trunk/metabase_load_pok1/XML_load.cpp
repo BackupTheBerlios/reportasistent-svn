@@ -119,7 +119,7 @@ void LoadXLMFileToWord(LPCTSTR FilePath)
 }
 
 //nacte Word z XML-soubru
-void LoadXLMFromString(BSTR * strXMLSource)
+void LoadXLMFromString(_bstr_t strXMLSource, LPOLEOBJECT doc)
 {
 	_LMRA_XML_WordLoader * pWL = NULL;
 
@@ -152,7 +152,10 @@ void LoadXLMFromString(BSTR * strXMLSource)
 			try 
 			{
 //				pWL->LoadFromFile(full_path);
-				pWL->LoadFromString(strXMLSource);
+				IDispatch * d = NULL;
+				doc->QueryInterface(& d);
+				pWL->LoadFromStringToDoc( strXMLSource, & d);
+				d->Release();
 			}
 			catch (...)
 			{

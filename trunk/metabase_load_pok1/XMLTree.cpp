@@ -93,11 +93,11 @@ void CXMLTree::InsetXMLNode(MSXML2::IXMLDOMNodePtr iNode, HTREEITEM hParentItem)
 
 
 
-void LoadXLMFromString(BSTR * strXMLSource);
+void LoadXLMFromString(_bstr_t strXMLSource, LPOLEOBJECT doc);
 
 
 
-BOOL CXMLTree::GenerSelectedSubtree()
+BOOL CXMLTree::GenerSelectedSubtree(LPOLEOBJECT doc)
 {
 	HTREEITEM i = GetSelectedItem();
 
@@ -111,9 +111,9 @@ BOOL CXMLTree::GenerSelectedSubtree()
 
 	MessageBox(np->xml);
 
-	BSTR bs = np->xml;
+//	BSTR bs = np->xml;
 	
-	LoadXLMFromString(& bs);
+	LoadXLMFromString(np->xml, doc);
 
 	
 

@@ -29,7 +29,7 @@ public:
 
 // Implementation
 public:
-	BOOL GenerSelectedSubtree();
+	BOOL GenerSelectedSubtree(LPOLEOBJECT doc);
 	BOOL LoadFromFile(CString FileName);
 	virtual ~CXMLTree();
 

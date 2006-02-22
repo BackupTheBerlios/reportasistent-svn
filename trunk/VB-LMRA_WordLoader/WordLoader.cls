@@ -31,6 +31,17 @@ Private Sub Class_Initialize()
     mintHeadinglevel = 1
 End Sub
 
+Public Sub SetDocument(doc As Word.Document)
+    Set mWordApp = doc.Application
+    
+    mWordApp.Visible = True
+    
+    doc.Select
+    mWordApp.Selection.Delete
+    
+    
+End Sub
+
 
 Public Sub NewDocument()
     Dim d As Word.Document
