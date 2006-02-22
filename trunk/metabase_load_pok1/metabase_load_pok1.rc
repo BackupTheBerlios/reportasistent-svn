@@ -102,7 +102,8 @@ BEGIN
                     TVS_HASLINES | TVS_LINESATROOT | TVS_SHOWSELALWAYS | 
                     WS_BORDER | WS_TABSTOP,309,7,136,221
     PUSHBUTTON      "Gener subtree!",IDC_GENERXML_BUTTON,310,256,65,17
-    PUSHBUTTON      "Button1",IDC_WORD_VIEW,7,7,291,221
+    PUSHBUTTON      "Sem prijde Word preview\n\nprikazem Gener sub tree se vygenerovany Word zobrazi sem",
+                    IDC_WORD_VIEW,7,7,291,221,BS_MULTILINE
 END
 
 25002 DIALOG FIXED IMPURE  0, 0, 234, 157
