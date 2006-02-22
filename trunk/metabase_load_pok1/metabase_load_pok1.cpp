@@ -59,6 +59,8 @@ BOOL CMetabase_load_pok1App::InitInstance()
 	//pridal honza
 	CoInitialize(NULL);
 
+	//AfxOleInit();
+
 	
 	
 	CMetabase_load_pok1Dlg dlg;

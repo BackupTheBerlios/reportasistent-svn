@@ -111,6 +111,10 @@ SOURCE=.\tiHypothesis_Recordset.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\WordView.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\XML_load.cpp
 # End Source File
 # Begin Source File
@@ -140,6 +144,10 @@ SOURCE=.\StdAfx.h
 # Begin Source File
 
 SOURCE=.\tiHypothesis_Recordset.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\WordView.h
 # End Source File
 # Begin Source File
 

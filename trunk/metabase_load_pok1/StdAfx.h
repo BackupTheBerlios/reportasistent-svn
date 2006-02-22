@@ -33,6 +33,8 @@
 #include <afxcmn.h>			// MFC support for Windows Common Controls
 #endif // _AFX_NO_AFXCMN_SUPPORT
 
+#include <afxole.h>
+
 
 
 //potreba pro WordLoader z VisualBasicu

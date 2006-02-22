@@ -3,11 +3,11 @@
 [General Info]
 Version=1
 LastClass=CMetabase_load_pok1Dlg
-LastTemplate=CTreeCtrl
+LastTemplate=CStatic
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "metabase_load_pok1.h"
 
-ClassCount=4
+ClassCount=5
 Class1=CMetabase_load_pok1App
 Class2=CMetabase_load_pok1Dlg
 
@@ -17,6 +17,7 @@ Resource1=IDR_MAINFRAME
 Class3=CtiHypothesis_Recordset
 Resource3=IDD_METABASE_LOAD_POK1_DIALOG (English (U.S.))
 Class4=CXMLTree
+Class5=CWordView
 Resource4=25002 (English (U.S.))
 
 [CLS:CMetabase_load_pok1App]
@@ -32,7 +33,7 @@ ImplementationFile=metabase_load_pok1Dlg.cpp
 Filter=D
 BaseClass=CDialog
 VirtualFilter=dWC
-LastObject=IDC_TREE1
+LastObject=IDC_WORD_VIEW
 
 
 
@@ -47,13 +48,14 @@ Class=CMetabase_load_pok1Dlg
 [DLG:IDD_METABASE_LOAD_POK1_DIALOG (English (U.S.))]
 Type=1
 Class=CMetabase_load_pok1Dlg
-ControlCount=6
+ControlCount=7
 Control1=IDC_LOAD_BUTTON,button,1342251008
 Control2=IDC_RESULT_EDIT,edit,1353777348
 Control3=IDC_XML_BUTTON,button,1342242816
 Control4=IDC_XML_PATH_EDIT,edit,1350631552
 Control5=IDC_TREE1,SysTreeView32,1350631463
 Control6=IDC_GENERXML_BUTTON,button,1342242816
+Control7=IDC_WORD_VIEW,static,1342177287
 
 [CLS:CtiHypothesis_Recordset]
 Type=0
@@ -97,4 +99,12 @@ ImplementationFile=XMLTree.cpp
 BaseClass=CTreeCtrl
 Filter=W
 VirtualFilter=GWC
+
+[CLS:CWordView]
+Type=0
+HeaderFile=WordView.h
+ImplementationFile=WordView.cpp
+BaseClass=CStatic
+Filter=W
+VirtualFilter=WC
 

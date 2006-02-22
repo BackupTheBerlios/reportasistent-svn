@@ -9,6 +9,7 @@
 #endif // _MSC_VER > 1000
 
 #include "XMLTree.h"
+#include "WordView.h"
 
 /////////////////////////////////////////////////////////////////////////////
 // CMetabase_load_pok1Dlg dialog
@@ -23,6 +24,7 @@ public:
 // Dialog Data
 	//{{AFX_DATA(CMetabase_load_pok1Dlg)
 	enum { IDD = IDD_METABASE_LOAD_POK1_DIALOG };
+	CWordView	m_WordView;
 	CXMLTree	m_XMLTree1;
 	//}}AFX_DATA
 

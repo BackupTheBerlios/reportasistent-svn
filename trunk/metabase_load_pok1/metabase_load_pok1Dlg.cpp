@@ -29,6 +29,7 @@ void CMetabase_load_pok1Dlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CMetabase_load_pok1Dlg)
+	DDX_Control(pDX, IDC_WORD_VIEW, m_WordView);
 	DDX_Control(pDX, IDC_TREE1, m_XMLTree1);
 	//}}AFX_DATA_MAP
 }
@@ -366,7 +367,47 @@ void CMetabase_load_pok1Dlg::OnXmlButton()
 //	LoadXLMFileToWord(s);
 }
 
+
+
+
+/*
+namespace Wordik
+{
+	#import "C:\Program Files\Microsoft Office\Office\MSWORD9.OLB"\
+	raw_interfaces_only, raw_native_types, no_namespace, named_guids, exclude("Tasks")
+
+}
+*/
+
 void CMetabase_load_pok1Dlg::OnGenerxmlButton() 
 {
+/*
+
+		LPOLEOBJECT o = m_WordView.GetWordObject();
+
+	
+		Wordik::_Document * obj = NULL;
+		HRESULT hr = o->QueryInterface(Wordik::IID__Document, (void **) & obj);
+
+		obj->Select();
+
+		Wordik::_Application * app = NULL;
+		obj->get_Application(& app);
+
+		Wordik::Selection * sel = NULL;
+		app->get_Selection(& sel);
+
+//		sel->EndKey(NULL, NULL, NULL);
+		static CString s("Ahoj");
+		s += " dalsi";
+		BSTR bs = s.AllocSysString();
+		sel->TypeText(bs);
+		SysFreeString(bs);
+		sel->Release();
+		app->Release();
+		obj->Release();
+
+*/	
+	
 	m_XMLTree1.GenerSelectedSubtree();
 }
