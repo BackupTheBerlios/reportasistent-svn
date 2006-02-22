@@ -19,7 +19,6 @@ CMetabase_load_pok1Dlg::CMetabase_load_pok1Dlg(CWnd* pParent /*=NULL*/)
 	: CDialog(CMetabase_load_pok1Dlg::IDD, pParent)
 {
 	//{{AFX_DATA_INIT(CMetabase_load_pok1Dlg)
-		// NOTE: the ClassWizard will add member initialization here
 	//}}AFX_DATA_INIT
 	// Note that LoadIcon does not require a subsequent DestroyIcon in Win32
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);

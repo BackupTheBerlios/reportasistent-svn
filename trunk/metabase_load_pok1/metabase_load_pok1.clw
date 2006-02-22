@@ -3,7 +3,7 @@
 [General Info]
 Version=1
 LastClass=CMetabase_load_pok1Dlg
-LastTemplate=CStatic
+LastTemplate=CEdit
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "metabase_load_pok1.h"
 
@@ -55,7 +55,7 @@ Control3=IDC_XML_BUTTON,button,1342242816
 Control4=IDC_XML_PATH_EDIT,edit,1350631552
 Control5=IDC_TREE1,SysTreeView32,1350631463
 Control6=IDC_GENERXML_BUTTON,button,1342242816
-Control7=IDC_WORD_VIEW,static,1342177287
+Control7=IDC_WORD_VIEW,button,1342242816
 
 [CLS:CtiHypothesis_Recordset]
 Type=0
@@ -104,7 +104,6 @@ VirtualFilter=GWC
 Type=0
 HeaderFile=WordView.h
 ImplementationFile=WordView.cpp
-BaseClass=CStatic
+BaseClass=CButton
 Filter=W
-VirtualFilter=WC
 

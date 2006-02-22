@@ -31,7 +31,7 @@ public:
 /////////////////////////////////////////////////////////////////////////////
 // CWordView window
 
-class CWordView : public CStatic
+class CWordView : public CButton
 {
 // Construction
 public:
@@ -60,8 +60,13 @@ public:
 
 	// Generated message map functions
 protected:
+	CPoint m_ptMove;
+	CPoint m_ptStartDrag;
 	//{{AFX_MSG(CWordView)
 	afx_msg void OnPaint();
+	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
+	afx_msg void OnLButtonUp(UINT nFlags, CPoint point);
+	afx_msg void OnMouseMove(UINT nFlags, CPoint point);
 	//}}AFX_MSG
 
 	DECLARE_MESSAGE_MAP()
