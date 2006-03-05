@@ -6,6 +6,8 @@
 
 #include "CSkeletonDoc.h"
 #include "SkeletonView.h"
+#include "ElementText.h"
+
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -21,6 +23,8 @@ IMPLEMENT_DYNCREATE(CSkeletonView, CTreeView)
 BEGIN_MESSAGE_MAP(CSkeletonView, CTreeView)
 	//{{AFX_MSG_MAP(CSkeletonView)
 	ON_NOTIFY_REFLECT(TVN_DELETEITEM, OnDeleteitem)
+	ON_WM_LBUTTONDBLCLK()
+	ON_NOTIFY_REFLECT(NM_CLICK, OnClick)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -57,13 +61,21 @@ void CSkeletonView::OnDraw(CDC* pDC)
 
 void CSkeletonView::OnInitialUpdate()
 {
-	CTreeView::OnInitialUpdate();
+	
 
+	CTreeView::OnInitialUpdate();
+	
+	//Deda: Naplneni TreeCtrl
 	GetDocument()->FillTreeControl(GetTreeCtrl());
 
+	//Iva: Uprava stylu TreeCtrl
+	long        lStyleOld;
 
-	// TODO: You may populate your TreeView with items by directly accessing
-	//  its tree control through a call to GetTreeCtrl().
+	lStyleOld = GetWindowLong(m_hWnd, GWL_STYLE);
+	lStyleOld |= TVS_EDITLABELS|TVS_HASBUTTONS |TVS_HASLINES|TVS_LINESATROOT|TVS_SHOWSELALWAYS;
+
+	SetWindowLong(m_hWnd, GWL_STYLE, lStyleOld);
+
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -101,6 +113,33 @@ void CSkeletonView::OnDeleteitem(NMHDR* pNMHDR, LRESULT* pResult)
 
 	if (np != NULL) np->Release();
 
+	
+	*pResult = 0;
+}
+
+//Iva:
+void CSkeletonView::OnLButtonDblClk(UINT nFlags, CPoint point) 
+{
+	//zjistim, ktera polozka TreeCtrl je "Selected"
+	HTREEITEM hTreeSelItem;
+	hTreeSelItem = GetTreeCtrl().GetSelectedItem( );
+
+	//Prozatimni reseni:
+	// Ma-li vybrana polozka popisku "text", zobrazim dialog CElementText
+		//Pozdeji budu rozlisovat typy prvku TreeCtrl
+	 if ("text"== GetTreeCtrl().GetItemText(hTreeSelItem) )
+	 {
+		 	//Vytvorim instanci dialogu pro Prvek Text
+		CElementText dlgText;
+		//A dialog zobrazim
+		dlgText.DoModal();
+	 }
+
+}
+
+void CSkeletonView::OnClick(NMHDR* pNMHDR, LRESULT* pResult) 
+{
+	// TODO: Add your control notification handler code here
 	
 	*pResult = 0;
 }

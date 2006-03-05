@@ -47,6 +47,8 @@ protected:
 protected:
 	//{{AFX_MSG(CSkeletonView)
 	afx_msg void OnDeleteitem(NMHDR* pNMHDR, LRESULT* pResult);
+	afx_msg void OnLButtonDblClk(UINT nFlags, CPoint point);
+	afx_msg void OnClick(NMHDR* pNMHDR, LRESULT* pResult);
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };

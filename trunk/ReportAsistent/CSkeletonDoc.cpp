@@ -142,24 +142,34 @@ void CSkeletonDoc::FillTreeControl(CTreeCtrl  & tree_control)
 	InsetNodeToTreeCtrl(m_XMLDOMDoc, TVI_ROOT, tree_control);
 }
 
-void CSkeletonDoc::InsetNodeToTreeCtrl(MSXML2::IXMLDOMNodePtr iNode, HTREEITEM hParentItem, CTreeCtrl  & tree_control)
+void CSkeletonDoc::InsetNodeToTreeCtrl(MSXML2::IXMLDOMNodePtr iNode, 
+									   HTREEITEM hParentItem, 
+									   CTreeCtrl  & tree_control)
 {
 	MSXML2::IXMLDOMNodeListPtr iChildren = iNode->childNodes;
 
 
 	MSXML2::IXMLDOMNodePtr iChild = NULL;
+	
+	MSXML2::IXMLDOMNodePtr Atrib = NULL;
+
+	
 
 	while ((iChild = iChildren->nextNode()) != NULL)
 	{
+		//Iva: Misto pouziti nodeName bych chtela pouzit attribute title/value, 
+			//ale nedari se mi to z IXMLDOMNode vykuchat.
 		CString s((BSTR) iChild->nodeName);
+		//CString s((BSTR) iChild->nodeTypeString);
+		
 
-		HTREEITEM i = tree_control.InsertItem(s, hParentItem);
+		HTREEITEM hTreeItem = tree_control.InsertItem(s, hParentItem);
 		iChild.AddRef();
-		tree_control.SetItemData(i, (DWORD) (MSXML2::IXMLDOMNode *) iChild);
+		tree_control.SetItemData(hTreeItem, (DWORD) (MSXML2::IXMLDOMNode *) iChild);
 	
 
 		//rekurze
-		InsetNodeToTreeCtrl(iChild, i, tree_control);
+		InsetNodeToTreeCtrl(iChild, hTreeItem, tree_control);
 	}
 
 }
