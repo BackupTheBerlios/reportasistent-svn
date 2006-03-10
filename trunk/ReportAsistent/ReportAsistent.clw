@@ -19,9 +19,9 @@ Resource1=IDD_ABOUTBOX
 Resource2=IDR_MAINFRAME
 Class5=CAboutDlg
 Resource3=IDD_ABOUTBOX (English (U.S.))
-Resource4=IDR_MAINFRAME (English (U.S.))
+Resource4=IDD_DIALOGTEXT (English (U.S.))
 Class6=CElementText
-Resource5=IDD_DIALOGTEXT
+Resource5=IDR_MAINFRAME (English (U.S.))
 
 [CLS:CReportAsistentApp]
 Type=0
@@ -182,14 +182,6 @@ Class=?
 ControlCount=1
 Control1=IDC_STATIC,static,1342308352
 
-[DLG:IDD_DIALOGTEXT]
-Type=1
-Class=CElementText
-ControlCount=3
-Control1=IDOK,button,1342242817
-Control2=IDCANCEL,button,1342242816
-Control3=IDC_EDIT1,edit,1350631552
-
 [CLS:CElementText]
 Type=0
 HeaderFile=ElementText.h
@@ -197,4 +189,12 @@ ImplementationFile=ElementText.cpp
 BaseClass=CDialog
 Filter=D
 LastObject=CElementText
+
+[DLG:IDD_DIALOGTEXT (English (U.S.))]
+Type=1
+Class=CElementText
+ControlCount=3
+Control1=IDOK,button,1342242817
+Control2=IDCANCEL,button,1342242816
+Control3=IDC_EDIT1,edit,1350631552
 

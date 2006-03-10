@@ -9,6 +9,8 @@
 #pragma once
 #endif // _MSC_VER > 1000
 
+//Iva: Delka nazvu prvku typu text v TreeCtrl
+#define LENGTH_TREE_ITEM_NAME 6
 
 class CSkeletonDoc : public CDocument
 {
@@ -50,8 +52,10 @@ protected:
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 private:
-	static void InsetNodeToTreeCtrl(MSXML2::IXMLDOMNodePtr iNode, HTREEITEM hParentItem, CTreeCtrl  & tree_control);
-	MSXML2::IXMLDOMDocumentPtr m_XMLDOMDoc;
+	static void InsetNodeToTreeCtrl(MSXML2::IXMLDOMElementPtr pElement, 
+									HTREEITEM hParentItem, 
+									CTreeCtrl  & tree_control);
+	MSXML2::IXMLDOMDocumentPtr pXMLDom;
 };
 
 /////////////////////////////////////////////////////////////////////////////

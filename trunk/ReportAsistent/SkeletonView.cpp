@@ -24,7 +24,6 @@ BEGIN_MESSAGE_MAP(CSkeletonView, CTreeView)
 	//{{AFX_MSG_MAP(CSkeletonView)
 	ON_NOTIFY_REFLECT(TVN_DELETEITEM, OnDeleteitem)
 	ON_WM_LBUTTONDBLCLK()
-	ON_NOTIFY_REFLECT(NM_CLICK, OnClick)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -134,12 +133,7 @@ void CSkeletonView::OnLButtonDblClk(UINT nFlags, CPoint point)
 		//A dialog zobrazim
 		dlgText.DoModal();
 	 }
+	 else CTreeCtrl:OnLButtonDblClk( nFlags,  point);
 
 }
 
-void CSkeletonView::OnClick(NMHDR* pNMHDR, LRESULT* pResult) 
-{
-	// TODO: Add your control notification handler code here
-	
-	*pResult = 0;
-}

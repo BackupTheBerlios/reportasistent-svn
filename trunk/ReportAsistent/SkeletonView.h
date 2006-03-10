@@ -9,6 +9,8 @@
 #pragma once
 #endif // _MSC_VER > 1000
 
+//Iva: Delka nazvu prvku typu text v TreeCtrl
+#define LENGTH_TREE_ITEM_NAME 10
 
 class CSkeletonView : public CTreeView
 {
@@ -33,8 +35,13 @@ public:
 	virtual void OnInitialUpdate(); // called first time after construct
 	//}}AFX_VIRTUAL
 
+
 // Implementation
 public:
+	CImageList* m_pimagelist;
+	HTREEITEM m_hitemDrop;
+	HTREEITEM m_hitemDrag;
+
 	virtual ~CSkeletonView();
 #ifdef _DEBUG
 	virtual void AssertValid() const;
@@ -48,7 +55,6 @@ protected:
 	//{{AFX_MSG(CSkeletonView)
 	afx_msg void OnDeleteitem(NMHDR* pNMHDR, LRESULT* pResult);
 	afx_msg void OnLButtonDblClk(UINT nFlags, CPoint point);
-	afx_msg void OnClick(NMHDR* pNMHDR, LRESULT* pResult);
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };

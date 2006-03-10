@@ -66,8 +66,8 @@ LINK32=link.exe
 # PROP Output_Dir "Debug"
 # PROP Intermediate_Dir "Debug"
 # PROP Target_Dir ""
-# ADD BASE CPP /nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /Yu"stdafx.h" /FD /GZ  /c
-# ADD CPP /nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /FR /Yu"stdafx.h" /FD /GZ   /c
+# ADD BASE CPP /nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /Yu"stdafx.h" /FD /GZ /c
+# ADD CPP /nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /FR /Yu"stdafx.h" /FD /GZ /c
 # ADD BASE MTL /nologo /D "_DEBUG" /mktyplib203 /win32
 # ADD MTL /nologo /D "_DEBUG" /mktyplib203 /win32
 # ADD BASE RSC /l 0x405 /d "_DEBUG" /d "_AFXDLL"
@@ -91,6 +91,10 @@ LINK32=link.exe
 # Begin Source File
 
 SOURCE=.\CSkeletonDoc.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\ElementText.cpp
 # End Source File
 # Begin Source File
 
@@ -123,6 +127,10 @@ SOURCE=.\CSkeletonDoc.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\ElementText.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\MainFrm.h
 # End Source File
 # Begin Source File
@@ -147,7 +155,23 @@ SOURCE=.\StdAfx.h
 # PROP Default_Filter "ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe"
 # Begin Source File
 
+SOURCE=.\res\bmtreebi.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\Chapter.bmp
+# End Source File
+# Begin Source File
+
 SOURCE=.\res\CSkeletonDoc.ico
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\Paragraph.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\Report.bmp
 # End Source File
 # Begin Source File
 
@@ -156,6 +180,14 @@ SOURCE=.\res\ReportAsistent.ico
 # Begin Source File
 
 SOURCE=.\res\ReportAsistent.rc2
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\Table.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\Text.bmp
 # End Source File
 # Begin Source File
 

@@ -47,9 +47,9 @@ BOOL CSkeletonDoc::OnNewDocument()
 
 	HRESULT hr;
 
-	m_XMLDOMDoc.Release();
+	pXMLDom.Release();
 
-	hr= m_XMLDOMDoc.CreateInstance(_T("Msxml2.DOMDocument"));
+	hr= pXMLDom.CreateInstance(_T("Msxml2.DOMDocument"));
 	if (FAILED(hr)) 
 	{
 		//mozna prepsat pomoci string table?
@@ -57,7 +57,7 @@ BOOL CSkeletonDoc::OnNewDocument()
 		return FALSE;
 	}
 
-	m_XMLDOMDoc->async = VARIANT_FALSE; // default - true,
+	pXMLDom->async = VARIANT_FALSE; // default - true,
 
 
 	return TRUE;
@@ -105,7 +105,7 @@ BOOL CSkeletonDoc::OnOpenDocument(LPCTSTR lpszPathName)
 	
 	HRESULT hr;
 
-	hr= m_XMLDOMDoc.CreateInstance(_T("Msxml2.DOMDocument"));
+	hr= pXMLDom.CreateInstance(_T("Msxml2.DOMDocument"));
 	if (FAILED(hr)) 
 	{
 		//mozna prepsat pomoci string table?
@@ -113,13 +113,13 @@ BOOL CSkeletonDoc::OnOpenDocument(LPCTSTR lpszPathName)
 		return FALSE;
 	}
 
-	m_XMLDOMDoc->async = VARIANT_FALSE; // default - true,
+	pXMLDom->async = VARIANT_FALSE; // default - true,
 
-	if(m_XMLDOMDoc->load((LPCTSTR) lpszPathName) != VARIANT_TRUE)
+	if(pXMLDom->load((LPCTSTR) lpszPathName) != VARIANT_TRUE)
 	{
 
 		CString s;
-		CString errstr( (BSTR) m_XMLDOMDoc->parseError->Getreason());
+		CString errstr( (BSTR) pXMLDom->parseError->Getreason());
 
 		//mozna prepsat pomoci string table?
 		s.Format("\nError in XML file reading.\n%s", lpszPathName);
@@ -137,39 +137,88 @@ BOOL CSkeletonDoc::OnOpenDocument(LPCTSTR lpszPathName)
 
 void CSkeletonDoc::FillTreeControl(CTreeCtrl  & tree_control)
 {
+	MSXML2::IXMLDOMElementPtr pTopElement;
+
 	tree_control.DeleteAllItems();
 
-	InsetNodeToTreeCtrl(m_XMLDOMDoc, TVI_ROOT, tree_control);
+	// ukazu pTopElement na koren XMLDOM stromu  
+	pTopElement = pXMLDom->GetdocumentElement();
+	if (pTopElement == NULL)
+	{
+      AfxGetMainWnd()->MessageBox("Invalid top document node.","Invalid top document node.", MB_ICONERROR);
+	  //(LPCSTR)pXMLDom->parseError->Getreason()); - popis chyby, TODO: nejlepe do logu chyb
+	}
+	//a naplnim TreeCtrl
+	else
+	{
+		InsetNodeToTreeCtrl(pTopElement, TVI_ROOT, tree_control);
+	}
+
+	
 }
 
-void CSkeletonDoc::InsetNodeToTreeCtrl(MSXML2::IXMLDOMNodePtr iNode, 
+void CSkeletonDoc::InsetNodeToTreeCtrl(MSXML2::IXMLDOMElementPtr pElement, 
 									   HTREEITEM hParentItem, 
 									   CTreeCtrl  & tree_control)
 {
-	MSXML2::IXMLDOMNodeListPtr iChildren = iNode->childNodes;
+	//ukazatel na potomky pElementu
+	MSXML2::IXMLDOMNodeListPtr pChildren = pElement->childNodes;
+	MSXML2::IXMLDOMNodePtr pChild = NULL;
+	CString csElementType; //typ prvku XMLstromu: text/chapter/report/...
+	char sTextValue [256]; //text ktery se stane jmenem polozky v CtrlTree
+	HTREEITEM hTreeItem=NULL;
 
-
-	MSXML2::IXMLDOMNodePtr iChild = NULL;
 	
-	MSXML2::IXMLDOMNodePtr Atrib = NULL;
-
-	
-
-	while ((iChild = iChildren->nextNode()) != NULL)
-	{
-		//Iva: Misto pouziti nodeName bych chtela pouzit attribute title/value, 
-			//ale nedari se mi to z IXMLDOMNode vykuchat.
-		CString s((BSTR) iChild->nodeName);
-		//CString s((BSTR) iChild->nodeTypeString);
 		
+		csElementType=(LPCTSTR)(pElement->baseName);
 
-		HTREEITEM hTreeItem = tree_control.InsertItem(s, hParentItem);
-		iChild.AddRef();
-		tree_control.SetItemData(hTreeItem, (DWORD) (MSXML2::IXMLDOMNode *) iChild);
-	
+		
+		//naplnim TV_ITEM.pszText(=jmeno polozky v CtrlTree)..pro typ prvku TEXT
+		if (0==strcmp("text",csElementType))
+		{
+			_variant_t & Value = pElement->getAttribute("value");
+
+			if (Value.vt == VT_NULL) 
+				sprintf(sTextValue,"Text - empty");
+			else
+			{
+				sprintf(sTextValue,"%.*s",LENGTH_TREE_ITEM_NAME,(LPCTSTR) (_bstr_t) Value);
+			}
+
+			hTreeItem = tree_control.InsertItem(sTextValue,hParentItem);
+		}
+		else 
+			//naplnim TV_ITEM.pszText ..pro typ prvku CHAPTER
+			if (0==strcmp("chapter",csElementType))
+			{
+				_variant_t & Value = pElement->getAttribute("title");
+
+				if (Value.vt == VT_NULL) 
+					sprintf(sTextValue,"Title - missing");
+				else
+				{
+					sprintf(sTextValue,"%.*s",LENGTH_TREE_ITEM_NAME,(LPCTSTR) (_bstr_t) Value);
+				}
+
+				hTreeItem = tree_control.InsertItem(sTextValue,hParentItem);
+			}
+			//naplnim TV_ITEM.pszText ..pro ostatni typy prvku
+			else
+			hTreeItem = tree_control.InsertItem((LPCTSTR) (_bstr_t) csElementType,hParentItem);
+
+
+		pElement.AddRef();
+
+		//ukazu TV_ITEM.lParam na odpovidajici uzel XML stromu
+		tree_control.SetItemData(hTreeItem, (DWORD) (MSXML2::IXMLDOMNode *) pChild);
+
+
+
+	while ((pChild = pChildren->nextNode()) != NULL)
+	{
 
 		//rekurze
-		InsetNodeToTreeCtrl(iChild, hTreeItem, tree_control);
+		InsetNodeToTreeCtrl(pChild, hTreeItem, tree_control);
 	}
 
 }
