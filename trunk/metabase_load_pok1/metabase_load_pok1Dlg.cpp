@@ -24,12 +24,19 @@ CMetabase_load_pok1Dlg::CMetabase_load_pok1Dlg(CWnd* pParent /*=NULL*/)
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 }
 
+
+#ifdef USE_WORD	
+	DDX_Control(pDX, IDC_WORD_VIEW, m_WordView);
+	DDX_Control(pDX, IDC_TREE1, m_XMLTree1);
+#endif
+//	dat mezi 	//{{AFX_DATA_MAP(CMetabase_load_pok1Dlg)
+
+
+
 void CMetabase_load_pok1Dlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CMetabase_load_pok1Dlg)
-	DDX_Control(pDX, IDC_WORD_VIEW, m_WordView);
-	DDX_Control(pDX, IDC_TREE1, m_XMLTree1);
 	//}}AFX_DATA_MAP
 }
 
@@ -359,7 +366,10 @@ void CMetabase_load_pok1Dlg::OnXmlButton()
 	CString s;
 	GetDlgItemText(IDC_XML_PATH_EDIT, s);
 
+#ifdef USE_WORD
+
 	m_XMLTree1.LoadFromFile(s);
+#endif
 	
 //	LoadXMLDOM(s, (CTreeCtrl *) GetDlgItem(IDC_TREE1));
 
@@ -408,5 +418,7 @@ void CMetabase_load_pok1Dlg::OnGenerxmlButton()
 
 */	
 	
+#ifdef USE_WORD
 	m_XMLTree1.GenerSelectedSubtree(m_WordView.GetWordObject());
+#endif
 }

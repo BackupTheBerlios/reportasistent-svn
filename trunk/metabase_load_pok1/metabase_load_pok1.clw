@@ -11,14 +11,15 @@ ClassCount=5
 Class1=CMetabase_load_pok1App
 Class2=CMetabase_load_pok1Dlg
 
-ResourceCount=4
+ResourceCount=5
 Resource2=IDD_METABASE_LOAD_POK1_DIALOG
 Resource1=IDR_MAINFRAME
 Class3=CtiHypothesis_Recordset
-Resource3=IDD_METABASE_LOAD_POK1_DIALOG (English (U.S.))
+Resource3=25002 (English (U.S.))
 Class4=CXMLTree
 Class5=CWordView
-Resource4=25002 (English (U.S.))
+Resource4=ZALOHA_IDD_METABASE_LOAD_POK1_DIALOG1 (English (U.S.))
+Resource5=IDD_METABASE_LOAD_POK1_DIALOG (English (U.S.))
 
 [CLS:CMetabase_load_pok1App]
 Type=0
@@ -33,7 +34,7 @@ ImplementationFile=metabase_load_pok1Dlg.cpp
 Filter=D
 BaseClass=CDialog
 VirtualFilter=dWC
-LastObject=IDC_WORD_VIEW
+LastObject=CMetabase_load_pok1Dlg
 
 
 
@@ -48,14 +49,9 @@ Class=CMetabase_load_pok1Dlg
 [DLG:IDD_METABASE_LOAD_POK1_DIALOG (English (U.S.))]
 Type=1
 Class=CMetabase_load_pok1Dlg
-ControlCount=7
+ControlCount=2
 Control1=IDC_LOAD_BUTTON,button,1342251008
 Control2=IDC_RESULT_EDIT,edit,1353777348
-Control3=IDC_XML_BUTTON,button,1342242816
-Control4=IDC_XML_PATH_EDIT,edit,1350631552
-Control5=IDC_TREE1,SysTreeView32,1350631463
-Control6=IDC_GENERXML_BUTTON,button,1342242816
-Control7=IDC_WORD_VIEW,button,1342251008
 
 [CLS:CtiHypothesis_Recordset]
 Type=0
@@ -106,4 +102,16 @@ HeaderFile=WordView.h
 ImplementationFile=WordView.cpp
 BaseClass=CButton
 Filter=W
+
+[DLG:ZALOHA_IDD_METABASE_LOAD_POK1_DIALOG1 (English (U.S.))]
+Type=1
+Class=?
+ControlCount=7
+Control1=IDC_LOAD_BUTTON,button,1342251008
+Control2=IDC_RESULT_EDIT,edit,1353777348
+Control3=IDC_XML_BUTTON,button,1342242816
+Control4=IDC_XML_PATH_EDIT,edit,1350631552
+Control5=IDC_TREE1,SysTreeView32,1350631463
+Control6=IDC_GENERXML_BUTTON,button,1342242816
+Control7=IDC_WORD_VIEW,button,1342251008
 

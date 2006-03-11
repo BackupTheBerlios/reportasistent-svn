@@ -11,6 +11,7 @@
 #define IDC_TREE1                       1004
 #define IDC_GENERXML_BUTTON             1005
 #define IDC_WORD_VIEW                   1008
+#define ZALOHA_IDD_METABASE_LOAD_POK1_DIALOG1 25003
 
 // Next default values for new objects
 // 

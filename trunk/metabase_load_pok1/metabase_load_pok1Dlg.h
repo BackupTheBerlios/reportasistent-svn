@@ -11,6 +11,7 @@
 #include "XMLTree.h"
 #include "WordView.h"
 
+
 /////////////////////////////////////////////////////////////////////////////
 // CMetabase_load_pok1Dlg dialog
 
@@ -21,11 +22,19 @@ public:
 	BOOL NactiMetabazi();
 	CMetabase_load_pok1Dlg(CWnd* pParent = NULL);	// standard constructor
 
+
+
+#ifdef USE_WORD	
+	CWordView	m_WordView;
+	CXMLTree	m_XMLTree1;
+#endif
+//dat mezi   //}}AFX_DATA
+
+
+	
 // Dialog Data
 	//{{AFX_DATA(CMetabase_load_pok1Dlg)
 	enum { IDD = IDD_METABASE_LOAD_POK1_DIALOG };
-	CWordView	m_WordView;
-	CXMLTree	m_XMLTree1;
 	//}}AFX_DATA
 
 	// ClassWizard generated virtual function overrides
