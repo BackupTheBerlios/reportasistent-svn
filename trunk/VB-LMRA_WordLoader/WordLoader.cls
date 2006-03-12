@@ -305,7 +305,15 @@ Public Sub LoadInclude(oAttributes As MSXML2.IVBSAXAttributes)
     Dim open_doc As Word.Document
     
     Set cur_doc = mWordApp.ActiveDocument
-    mWordApp.ChangeFileOpenDirectory FileSystem.CurDir
+    
+'!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+'!!!!!!!!!!nastavuje pocatek relativnicj cest!!!!!!!!
+'!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    mWordApp.ChangeFileOpenDirectory App.Path
+'!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+'!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    
+    
     Set open_doc = mWordApp.Documents.Open( _
         FileName:=oAttributes.getValueFromName("", "file"), _
         ConfirmConversions:=False, _

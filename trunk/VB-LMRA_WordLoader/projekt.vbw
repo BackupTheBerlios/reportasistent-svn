@@ -1,6 +1,6 @@
 Form1 = 133, 74, 680, 534, C, 37, 11, 584, 471, C
 ContentHandlerImpl = 80, 65, 627, 525, C
 ErrorHandlerImpl = 44, 44, 591, 504, C
-WordLoader = 110, 110, 724, 571, 
+WordLoader = 21, 15, 635, 476, Z
 MainModule = 22, 12, 636, 473, C
 LMRA_XML_WordLoader = 39, 20, 566, 461, C
