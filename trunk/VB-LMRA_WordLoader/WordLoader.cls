@@ -19,6 +19,8 @@ Private Declare Function FindEnumValInTypeLib Lib "TypeLibFind.dll" Alias "_Find
 Dim mintHeadinglevel As Integer
 Dim mintGraphCharts As Integer
 Dim mintLastGraphCell As Integer
+Dim mboolTextInserting As Boolean
+
 
 
 Dim mWordApp As Word.Application
@@ -29,6 +31,7 @@ Dim mTable As Word.Table
 
 Private Sub Class_Initialize()
     mintHeadinglevel = 1
+    mboolTextInserting = False
 End Sub
 
 Public Sub SetDocument(doc As Word.Document)
@@ -66,6 +69,15 @@ Private Sub AddParagraph(Optional style)
     If Not IsMissing(style) Then mWordApp.Selection.style = style
 End Sub
 
+Private Sub SetTextStyle(style)
+        mWordApp.Selection.style = style
+End Sub
+
+Private Sub ReSetTextStyle()
+        SetTextStyle wdStyleDefaultParagraphFont
+End Sub
+
+
 Private Sub AddText(text As String, Optional style)
     
 '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -75,7 +87,7 @@ Private Sub AddText(text As String, Optional style)
 '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    text = Replace(text, vbLf, Chr(11))
+'    text = Replace(text, vbLf, Chr(11))
 '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -254,15 +266,28 @@ Public Sub LoadTable(oAttributes As MSXML2.IVBSAXAttributes)
     
 End Sub
 
+Public Sub EndText()
+    mboolTextInserting = False
+    ReSetTextStyle
+End Sub
+
+Public Sub TypeText(text As String)
+    If mboolTextInserting Then
+        AddText text
+    End If
+End Sub
+
 Public Sub LoadText(oAttributes As MSXML2.IVBSAXAttributes)
     On Error GoTo no_style
-    AddText oAttributes.getValueFromName("", "value"), _
-        oAttributes.getValueFromName("", "style")
+    SetTextStyle oAttributes.getValueFromName("", "style")
     
     Exit Sub
 
 no_style:
-    AddText oAttributes.getValueFromName("", "value")
+    'AddText oAttributes.getValueFromName("", "value")
+    
+    mboolTextInserting = True
+
 End Sub
 
 Public Sub LoadParagraph(oAttributes As MSXML2.IVBSAXAttributes)
@@ -273,6 +298,28 @@ Public Sub LoadParagraph(oAttributes As MSXML2.IVBSAXAttributes)
 
 no_style:
     AddParagraph
+End Sub
+
+Public Sub LoadInclude(oAttributes As MSXML2.IVBSAXAttributes)
+    Dim cur_doc As Word.Document
+    Dim open_doc As Word.Document
+    
+    Set cur_doc = mWordApp.ActiveDocument
+    mWordApp.ChangeFileOpenDirectory FileSystem.CurDir
+    Set open_doc = mWordApp.Documents.Open( _
+        FileName:=oAttributes.getValueFromName("", "file"), _
+        ConfirmConversions:=False, _
+        ReadOnly:=True, _
+        AddToRecentFiles:=False)
+        
+               
+    open_doc.Select
+    mWordApp.Selection.Copy
+    open_doc.Close SaveChanges:=False
+        
+    mWordApp.Selection.Paste
+    mWordApp.Selection.Select
+            
 End Sub
 
 

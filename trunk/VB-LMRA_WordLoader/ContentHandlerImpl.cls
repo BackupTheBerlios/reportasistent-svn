@@ -53,6 +53,8 @@ Private Sub IVBSAXContentHandler_startElement(strNamespaceURI As String, strLoca
             wl.LoadReport oAttributes
         Case "chapter"
             wl.LoadChapter oAttributes
+        Case "include"
+            wl.LoadInclude oAttributes
         Case "paragraph"
             wl.LoadParagraph oAttributes
         Case "text"
@@ -92,12 +94,23 @@ Private Sub IVBSAXContentHandler_endElement(strNamespaceURI As String, strLocalN
             wl.EndTableColumn
         Case "graph"
             wl.EndGraph
+        Case "text"
+            wl.EndText
+        
+        Case "tab"
+            wl.TypeText vbTab
+        Case "br"
+            wl.TypeText Chr(11)
+            
+                
+
             
     End Select
 
 End Sub
 
 Private Sub IVBSAXContentHandler_characters(strChars As String)
+    wl.TypeText strChars
     strChars = Replace(strChars, vbLf, vbNewLine)
     mstrOutput = mstrOutput & strChars
 End Sub

@@ -48,7 +48,7 @@ Begin VB.Form Form1
       Height          =   375
       Left            =   360
       TabIndex        =   0
-      Text            =   "..\xml\redukovany.xml"
+      Text            =   "..\xml\out.xml"
       Top             =   240
       Width           =   3615
    End
