@@ -102,6 +102,14 @@ SOURCE=.\metabase_load_pok1Dlg.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\SockTest.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\SQL_Pomocnik.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\StdAfx.cpp
 # ADD CPP /Yc"stdafx.h"
 # End Source File
@@ -136,6 +144,14 @@ SOURCE=.\metabase_load_pok1Dlg.h
 # Begin Source File
 
 SOURCE=.\Resource.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\SockInterface.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\SQL_Pomocnik.h
 # End Source File
 # Begin Source File
 

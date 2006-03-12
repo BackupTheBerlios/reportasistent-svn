@@ -21,6 +21,7 @@ class CMetabase_load_pok1Dlg : public CDialog
 public:
 	BOOL NactiMetabazi();
 	CMetabase_load_pok1Dlg(CWnd* pParent = NULL);	// standard constructor
+	BOOL NactiMetabazi2();
 
 
 
@@ -59,7 +60,6 @@ protected:
 	DECLARE_MESSAGE_MAP()
 };
 
-#define EDIT_NEWLINE "\r\n"
 
 
 //{{AFX_INSERT_LOCATION}}
