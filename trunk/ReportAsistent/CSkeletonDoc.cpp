@@ -260,3 +260,10 @@ void CSkeletonDoc::InsetNodeToTreeCtrl(MSXML2::IXMLDOMElementPtr pElement,
 	}
 
 }
+
+BOOL CSkeletonDoc::OnSaveDocument(LPCTSTR lpszPathName) 
+{
+	pXMLDom->save(lpszPathName);
+	
+	return CDocument::OnSaveDocument(lpszPathName);
+}
