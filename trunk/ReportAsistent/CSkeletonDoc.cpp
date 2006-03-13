@@ -161,6 +161,10 @@ void CSkeletonDoc::InsetNodeToTreeCtrl(MSXML2::IXMLDOMElementPtr pElement,
 									   HTREEITEM hParentItem, 
 									   CTreeCtrl  & tree_control)
 {
+	//pridal honza
+	if (pElement == NULL) return;
+	
+	
 	
 	MSXML2::IXMLDOMNodeListPtr pChildren = pElement->childNodes;//ukazatel na potomky pElementu
 	MSXML2::IXMLDOMNodePtr pChild = NULL;
@@ -185,9 +189,15 @@ void CSkeletonDoc::InsetNodeToTreeCtrl(MSXML2::IXMLDOMElementPtr pElement,
 					//<text value="Vysledky."/> 
 			if (0==strcmp("text",csElementType))
 			{
+
+/*		prepsal honza
 				_variant_t & Value = pElement->getAttribute("value");
 
 				if (Value.vt == VT_NULL) 
+*/
+
+				_bstr_t & Value = pElement->text;
+				if ((BSTR) Value == NULL) 					
 					sprintf(sTextValue,"Text - empty");
 				else
 				{
