@@ -11,6 +11,27 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = True
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = True
+Dim mstrLastId As String
+Dim mstrLastError As String
+
+Public Property Get strLastProcessedId() As String
+    strLastProcessedId = mstrLastId
+End Property
+
+Public Property Let strLastProcessedId(P As String)
+   mstrLastId = P
+End Property
+
+Public Property Get strLastError() As String
+    strLastError = mstrLastError
+End Property
+
+Public Property Let strLastError(P As String)
+   mstrLastError = P
+End Property
+
+
+
 Public Function LoadFromStringToDoc(ByVal strXMLSource As String, out_doc As Object)
     Dim reader As New SAXXMLReader30             'Reads the XML document
     Dim contentHandler As New ContentHandlerImpl 'Receives parsing events
@@ -19,6 +40,9 @@ Public Function LoadFromStringToDoc(ByVal strXMLSource As String, out_doc As Obj
     
         
     Set contentHandler.word_loader = word_loader
+    Set contentHandler.LMRA_loader = Me
+    Set errorHandler.LMRA_loader = Me
+    
     contentHandler.strOutput = ""
         
 '    Dim dtdHandler As New DTDHandlerImpl
@@ -49,6 +73,9 @@ Public Function LoadFromString(ByVal strXMLSource As String)
     Dim word_loader As New WordLoader
     
     Set contentHandler.word_loader = word_loader
+    Set contentHandler.LMRA_loader = Me
+    Set errorHandler.LMRA_loader = Me
+
     contentHandler.strOutput = ""
         
 '    Dim dtdHandler As New DTDHandlerImpl
@@ -80,8 +107,10 @@ Public Function LoadFromFile(ByVal strFileName As String) As String
     Dim word_loader As New WordLoader
     
     Set contentHandler.word_loader = word_loader
+    Set contentHandler.LMRA_loader = Me
+    Set errorHandler.LMRA_loader = Me
     contentHandler.strOutput = ""
-        
+            
 '    Dim dtdHandler As New DTDHandlerImpl
 '    txtOutput.text = ""
     Set reader.contentHandler = contentHandler   'They work together

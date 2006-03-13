@@ -89,6 +89,9 @@ Private Sub cmdXMLStringProcess_Click()
     On Error Resume Next
     txtOutput.text = obj.LoadFromString(txtXMLString)
     
+    txtOutput.text = txtOutput.text & vbNewLine & obj.strLastError & vbNewLine & obj.strLastProcessedId
+    
+    
     If Not Err.Number = 0 Then
         MsgBox "Error in XML string processing." & vbNewLine & txtFilePath.text & vbNewLine & Err.Description
     End If

@@ -18,6 +18,13 @@ Implements IVBSAXContentHandler
 
 Dim wl As WordLoader
 Dim mstrOutput As String
+Dim mLMRA As LMRA_XML_WordLoader
+
+
+Public Property Set LMRA_loader(P As LMRA_XML_WordLoader)
+   Set mLMRA = P
+End Property
+
 
 Public Property Let strOutput(P As String)
     mstrOutput = P
@@ -33,8 +40,15 @@ End Property
 
 
 
+
+
+
 Private Sub IVBSAXContentHandler_startElement(strNamespaceURI As String, strLocalName As String, strQName As String, ByVal oAttributes As MSXML2.IVBSAXAttributes)
     Dim i As Integer
+    
+    On Error Resume Next
+    mLMRA.strLastProcessedId = oAttributes.getValueFromName("", "id")
+    On Error GoTo 0
     
     mstrOutput = mstrOutput & "<" & strLocalName
     

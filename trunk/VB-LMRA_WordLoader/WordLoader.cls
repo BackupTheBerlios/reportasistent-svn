@@ -103,6 +103,7 @@ Private Sub AddText(text As String, Optional style)
 End Sub
 
 Private Sub FirstTitle(text As String)
+'nedela se novy odstavec
     mWordApp.Selection.style = wdStyleTitle
     AddText text
 End Sub
@@ -439,12 +440,18 @@ Public Sub LoadReport(oAttributes As MSXML2.IVBSAXAttributes)
     
 '    AddParagraph wdStyleHeading1
     
+    'prametry jsou nepovinne
+    On Error Resume Next
+    
     FirstTitle oAttributes.getValueFromName("", "title")
     mintHeadinglevel = 2
     AddTitle oAttributes.getValueFromName("", "subtitle")
     AddTitle oAttributes.getValueFromName("", "author")
     mintHeadinglevel = 1
  
+    
+    On Error GoTo 0
+    
 '    For i = 0 To (oAttributes.length - 1)
 '        frmMain.rtfOutput.Text = frmMain.rtfOutput.Text & " " & _
 '        oAttributes.getLocalName(i) & "=""" & oAttributes.getValue(i) _
