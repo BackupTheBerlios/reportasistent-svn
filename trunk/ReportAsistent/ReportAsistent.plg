@@ -1,0 +1,44 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: ReportAsistent - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\DOCUME~1\VLADIS~1\LOCALS~1\Temp\RSP91.tmp" with contents
+[
+/nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /FR"Debug/" /Fp"Debug/ReportAsistent.pch" /Yu"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"D:\Iva\Softwarak\ZkusebniPRg\Veci z SVN\ReportAsistent\SkeletonView.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\VLADIS~1\LOCALS~1\Temp\RSP91.tmp" 
+Creating temporary file "C:\DOCUME~1\VLADIS~1\LOCALS~1\Temp\RSP92.tmp" with contents
+[
+/nologo /subsystem:windows /incremental:yes /pdb:"Debug/ReportAsistent.pdb" /debug /machine:I386 /out:"Debug/ReportAsistent.exe" /pdbtype:sept 
+".\Debug\CSkeletonDoc.obj"
+".\Debug\ElementText.obj"
+".\Debug\MainFrm.obj"
+".\Debug\ReportAsistent.obj"
+".\Debug\SkeletonView.obj"
+".\Debug\StdAfx.obj"
+".\Debug\ReportAsistent.res"
+]
+Creating command line "link.exe @C:\DOCUME~1\VLADIS~1\LOCALS~1\Temp\RSP92.tmp"
+<h3>Output Window</h3>
+Compiling...
+SkeletonView.cpp
+d:\iva\softwarak\zkusebniprg\veci z svn\reportasistent\skeletonview.h(13) : warning C4005: 'LENGTH_TREE_ITEM_NAME' : macro redefinition
+        d:\iva\softwarak\zkusebniprg\veci z svn\reportasistent\cskeletondoc.h(13) : see previous definition of 'LENGTH_TREE_ITEM_NAME'
+D:\Iva\Softwarak\ZkusebniPRg\Veci z SVN\ReportAsistent\SkeletonView.cpp(136) : warning C4102: 'CTreeCtrl' : unreferenced label
+Linking...
+Creating command line "bscmake.exe /nologo /o"Debug/ReportAsistent.bsc"  ".\Debug\StdAfx.sbr" ".\Debug\CSkeletonDoc.sbr" ".\Debug\ElementText.sbr" ".\Debug\MainFrm.sbr" ".\Debug\ReportAsistent.sbr" ".\Debug\SkeletonView.sbr""
+Creating browse info file...
+<h3>Output Window</h3>
+
+
+
+<h3>Results</h3>
+ReportAsistent.exe - 0 error(s), 2 warning(s)
+</pre>
+</body>
+</html>
