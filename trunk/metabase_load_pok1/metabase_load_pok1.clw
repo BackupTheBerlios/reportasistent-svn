@@ -15,10 +15,10 @@ ResourceCount=5
 Resource2=IDD_METABASE_LOAD_POK1_DIALOG
 Resource1=IDR_MAINFRAME
 Class3=CtiHypothesis_Recordset
-Resource3=25002 (English (U.S.))
+Resource3=IDD_METABASE_LOAD_POK1_DIALOG (English (U.S.))
 Class4=CXMLTree
 Class5=CWordView
-Resource4=IDD_METABASE_LOAD_POK1_DIALOG (English (U.S.))
+Resource4=25002 (English (U.S.))
 Resource5=ZALOHA_IDD_METABASE_LOAD_POK1_DIALOG1 (English (U.S.))
 
 [CLS:CMetabase_load_pok1App]

@@ -67,6 +67,11 @@ hSource_t NewSource(PersistID_t * pPID)
 	}
 
 	* pPID = db->GetConnect().AllocSysString();
+//	* pPID = db->GetDatabaseName().AllocSysString();
+
+//	AfxMessageBox(db->OpenEx, 0, 0);
+
+	
 	return db;
 }
 
