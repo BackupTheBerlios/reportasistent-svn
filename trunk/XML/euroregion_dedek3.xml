@@ -12,7 +12,7 @@
 <!ATTLIST chapter title CDATA #REQUIRED >
 <!ATTLIST chapter id ID #REQUIRED >
 
-<!ELEMENT active_element ANY>
+<!ELEMENT active_element ( params, filter, output )>
 <!ATTLIST active_element type CDATA #REQUIRED >
 <!ATTLIST active_element source CDATA #REQUIRED >
 <!ATTLIST active_element id ID #REQUIRED >
