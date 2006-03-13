@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="windows-1250" ?>
 
-<!-- mouchy:
-report: atributy by nemely byt required - nutno prepsat ve VB
--->
-
 <!DOCTYPE report [
 
 <!ELEMENT report ( chapter | include )* >
-<!ATTLIST report title CDATA #REQUIRED >
-<!ATTLIST report subtitle CDATA #REQUIRED >
-<!ATTLIST report author CDATA #REQUIRED >
+<!ATTLIST report title CDATA #IMPLIED >
+<!ATTLIST report subtitle CDATA #IMPLIED >
+<!ATTLIST report author CDATA #IMPLIED >
 <!ATTLIST report id ID #REQUIRED >
 
 <!ELEMENT chapter ( (paragraph | include)*, chapter* ) > <!--nejprve texty, pak vnorene kapitoly -->
@@ -34,7 +30,8 @@ report: atributy by nemely byt required - nutno prepsat ve VB
 
 <!ELEMENT graph ( categories? , chart+ ) >
 <!ATTLIST graph title CDATA #IMPLIED >
-<!ATTLIST graph charttype CDATA #REQUIRED >
+<!ATTLIST graph charttype CDATA #REQUIRED >	<!-- napr: xlLine, xlPie, xlBarStacked -->
+	<!-- kompletni seznam pro OfficeXP k nalezeni na http://msdn.microsoft.com/library/en-us/vbagr10/html/grprocharttype.asp -->
 <!ATTLIST graph showlegend (true | false) "false" >
 <!ATTLIST graph height CDATA #IMPLIED >	<!-- nasobek sirky strnaky -->
 <!ATTLIST graph width CDATA #IMPLIED >	<!-- nasobek sirky strnaky -->	
