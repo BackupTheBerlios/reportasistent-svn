@@ -9,8 +9,6 @@
 #pragma once
 #endif // _MSC_VER > 1000
 
-//Iva: Delka nazvu prvku typu text v TreeCtrl
-#define LENGTH_TREE_ITEM_NAME 10
 
 class CSkeletonView : public CTreeView
 {

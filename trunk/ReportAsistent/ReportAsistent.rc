@@ -83,7 +83,7 @@ FONT 8, "MS Sans Serif"
 BEGIN
     DEFPUSHBUTTON   "OK",IDOK,15,95,50,14
     PUSHBUTTON      "Cancel",IDCANCEL,75,95,50,14
-    EDITTEXT        IDC_EDIT1,5,5,130,85,ES_AUTOHSCROLL
+    EDITTEXT        IDC_DIALTEXT_EDIT,5,5,130,85,ES_AUTOHSCROLL
 END
 
 IDD_ABOUTBOX DIALOG DISCARDABLE  0, 0, 235, 55
@@ -154,6 +154,7 @@ IDB_PARAGRAPHICO        BITMAP  DISCARDABLE     "res\\Paragraph.bmp"
 IDB_REPORTICO           BITMAP  DISCARDABLE     "res\\Report.bmp"
 IDB_TABLEICO            BITMAP  DISCARDABLE     "res\\Table.bmp"
 IDB_TEXTICO             BITMAP  DISCARDABLE     "res\\Text.bmp"
+IDB_UNKNOWNICO          BITMAP  DISCARDABLE     "res\\unknowni.bmp"
 
 /////////////////////////////////////////////////////////////////////////////
 //

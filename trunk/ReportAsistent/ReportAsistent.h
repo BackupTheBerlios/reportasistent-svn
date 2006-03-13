@@ -14,6 +14,18 @@
 
 #include "resource.h"       // main symbols
 
+//Iva: konstanty
+//pocet obrazku pro ikony v TreeCtrl
+#if !defined NUM_PICTURES_TREECTRL
+#define NUM_PICTURES_TREECTRL 6
+#endif
+
+// Delka nazvu prvku typu text v TreeCtrl
+#if !defined LENGTH_TREE_ITEM_NAME
+#define LENGTH_TREE_ITEM_NAME 10
+#endif
+
+
 /////////////////////////////////////////////////////////////////////////////
 // CReportAsistentApp:
 // See ReportAsistent.cpp for the implementation of this class

@@ -161,8 +161,8 @@ void CSkeletonDoc::InsetNodeToTreeCtrl(MSXML2::IXMLDOMElementPtr pElement,
 									   HTREEITEM hParentItem, 
 									   CTreeCtrl  & tree_control)
 {
-	//ukazatel na potomky pElementu
-	MSXML2::IXMLDOMNodeListPtr pChildren = pElement->childNodes;
+	
+	MSXML2::IXMLDOMNodeListPtr pChildren = pElement->childNodes;//ukazatel na potomky pElementu
 	MSXML2::IXMLDOMNodePtr pChild = NULL;
 	CString csElementType; //typ prvku XMLstromu: text/chapter/report/...
 	char sTextValue [256]; //text ktery se stane jmenem polozky v CtrlTree
@@ -172,39 +172,67 @@ void CSkeletonDoc::InsetNodeToTreeCtrl(MSXML2::IXMLDOMElementPtr pElement,
 		
 		csElementType=(LPCTSTR)(pElement->baseName);
 
-		
-		//naplnim TV_ITEM.pszText(=jmeno polozky v CtrlTree)..pro typ prvku TEXT
-		if (0==strcmp("text",csElementType))
+		//pridam prvek do TreeCtrl..pro typ prvku REPORT
+		if (0==strcmp("report",csElementType))
 		{
-			_variant_t & Value = pElement->getAttribute("value");
-
-			if (Value.vt == VT_NULL) 
-				sprintf(sTextValue,"Text - empty");
-			else
-			{
-				sprintf(sTextValue,"%.*s",LENGTH_TREE_ITEM_NAME,(LPCTSTR) (_bstr_t) Value);
-			}
-
-			hTreeItem = tree_control.InsertItem(sTextValue,hParentItem);
+			hTreeItem = tree_control.InsertItem((LPCTSTR) (_bstr_t) csElementType,//text prvku TreeCtrl
+													IDB_REPORTICO-IDB_BMTREEFIRST-1,//nImage
+													IDB_REPORTICO-IDB_BMTREEFIRST-1,//nSelectedImage
+													hParentItem);
 		}
-		else 
-			//naplnim TV_ITEM.pszText ..pro typ prvku CHAPTER
-			if (0==strcmp("chapter",csElementType))
+		else
+			//pridam prvek do TreeCtrl..pro typ prvku TEXT:
+					//<text value="Vysledky."/> 
+			if (0==strcmp("text",csElementType))
 			{
-				_variant_t & Value = pElement->getAttribute("title");
+				_variant_t & Value = pElement->getAttribute("value");
 
 				if (Value.vt == VT_NULL) 
-					sprintf(sTextValue,"Title - missing");
+					sprintf(sTextValue,"Text - empty");
 				else
 				{
-					sprintf(sTextValue,"%.*s",LENGTH_TREE_ITEM_NAME,(LPCTSTR) (_bstr_t) Value);
+					sprintf(sTextValue,"%.*s...",LENGTH_TREE_ITEM_NAME-3,(LPCTSTR) (_bstr_t) Value);
 				}
 
-				hTreeItem = tree_control.InsertItem(sTextValue,hParentItem);
+				hTreeItem = tree_control.InsertItem(sTextValue,//text prvku TreeCtrl
+													IDB_TEXTICO-IDB_BMTREEFIRST-1,//nImage
+													IDB_TEXTICO-IDB_BMTREEFIRST-1,//nSelectedImage
+													hParentItem);
 			}
-			//naplnim TV_ITEM.pszText ..pro ostatni typy prvku
-			else
-			hTreeItem = tree_control.InsertItem((LPCTSTR) (_bstr_t) csElementType,hParentItem);
+			else 
+				//pridam prvek do TreeCtrl ..pro typ prvku CHAPTER:
+					//<chapter title = "Muzi">
+				if (0==strcmp("chapter",csElementType))
+				{
+					_variant_t & Value = pElement->getAttribute("title");
+
+					if (Value.vt == VT_NULL) 
+						sprintf(sTextValue,"Title - missing");
+					else
+					{
+						sprintf(sTextValue,"%.*s...",LENGTH_TREE_ITEM_NAME-3,(LPCTSTR) (_bstr_t) Value);
+					}
+
+					hTreeItem = tree_control.InsertItem(sTextValue,//text prvku TreeCtrl
+														IDB_CHAPTERICO-IDB_BMTREEFIRST-1,//nImage
+														IDB_CHAPTERICO-IDB_BMTREEFIRST-1,//nSelectedImage
+														hParentItem);
+				}
+				//pridam prvek do TreeCtrl ..pro typ prvku PARAGRAPH
+				else
+					if (0==strcmp("paragraph",csElementType))
+					{
+						hTreeItem = tree_control.InsertItem((LPCTSTR) (_bstr_t) csElementType,//text prvku TreeCtrl
+														IDB_PARAGRAPHICO-IDB_BMTREEFIRST-1,//nImage
+														IDB_PARAGRAPHICO-IDB_BMTREEFIRST-1,//nSelectedImage
+														hParentItem);
+					}
+					//pridam prvek do TreeCtrl..pro jiny typ prvku nez vyse uvedeny
+					else
+						hTreeItem = tree_control.InsertItem((LPCTSTR) (_bstr_t) csElementType,//text prvku TreeCtrl
+														IDB_UNKNOWNICO-IDB_BMTREEFIRST-1,//nImage
+														IDB_UNKNOWNICO-IDB_BMTREEFIRST-1,//nSelectedImage
+													hParentItem);
 
 
 		pElement.AddRef();

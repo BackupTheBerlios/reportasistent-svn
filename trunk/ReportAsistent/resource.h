@@ -6,17 +6,17 @@
 #define IDR_MAINFRAME                   128
 #define IDR_REPORTTYPE                  129
 #define IDD_DIALOGTEXT                  130
-
-#define IDB_BMTREEFIRST                 131
+#define IDB_BMTREEFIRST                 134
 #define IDB_CHAPTERICO                  135
 #define IDB_PARAGRAPHICO                136
-#define IDB_REPORTICO                   138
-#define IDB_TABLEICO                    139
-#define IDB_TEXTICO                     140
-#define IDB_BMTREELAST                  170
-
+#define IDB_REPORTICO                   137
+#define IDB_TABLEICO                    138
+#define IDB_TEXTICO                     139
+#define IDB_UNKNOWNICO                  140
+#define IDB_BMTREELAST                  141
 #define IDC_TREE1                       1000
 #define IDC_EDIT1                       1001
+#define IDC_DIALTEXT_EDIT               1001
 #define ID_MMGENREP                     32771
 #define ID_MMSOURCES                    32772
 #define ID_MMNEWTEXT                    32774
@@ -29,7 +29,7 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
-#define _APS_NEXT_RESOURCE_VALUE        141
+#define _APS_NEXT_RESOURCE_VALUE        143
 #define _APS_NEXT_COMMAND_VALUE         32780
 #define _APS_NEXT_CONTROL_VALUE         1002
 #define _APS_NEXT_SYMED_VALUE           101

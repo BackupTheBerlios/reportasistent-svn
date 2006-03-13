@@ -23,9 +23,10 @@
 
 
 
-//potreba pro MSXML
+//Deda: potreba pro MSXML
 #import <msxml3.dll>
 //vlozi namespace MSXML2;
+
 
 
 //{{AFX_INSERT_LOCATION}}

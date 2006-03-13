@@ -189,6 +189,7 @@ ImplementationFile=ElementText.cpp
 BaseClass=CDialog
 Filter=D
 LastObject=CElementText
+VirtualFilter=dWC
 
 [DLG:IDD_DIALOGTEXT (English (U.S.))]
 Type=1
@@ -196,5 +197,5 @@ Class=CElementText
 ControlCount=3
 Control1=IDOK,button,1342242817
 Control2=IDCANCEL,button,1342242816
-Control3=IDC_EDIT1,edit,1350631552
+Control3=IDC_DIALTEXT_EDIT,edit,1350631552
 
