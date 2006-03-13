@@ -70,9 +70,12 @@ BOOL CSkeletonDoc::OnNewDocument()
 
 void CSkeletonDoc::Serialize(CArchive& ar)
 {
+	
+	
 	if (ar.IsStoring())
 	{
-		// TODO: add storing code here
+		//honza: sem by se program nemel dostat  
+		ASSERT(FALSE);
 	}
 	else
 	{
@@ -261,9 +264,10 @@ void CSkeletonDoc::InsetNodeToTreeCtrl(MSXML2::IXMLDOMElementPtr pElement,
 
 }
 
+//pridal honza
 BOOL CSkeletonDoc::OnSaveDocument(LPCTSTR lpszPathName) 
 {
 	pXMLDom->save(lpszPathName);
 	
-	return CDocument::OnSaveDocument(lpszPathName);
+	return TRUE;	//CDocument::OnSaveDocument(lpszPathName); - nepouzivat prepise nam soubor vyse
 }
