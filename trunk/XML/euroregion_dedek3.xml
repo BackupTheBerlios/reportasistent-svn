@@ -8,10 +8,28 @@
 <!ATTLIST report author CDATA #IMPLIED >
 <!ATTLIST report id ID #REQUIRED >
 
-<!ELEMENT chapter ( (paragraph | include)*, chapter* ) > <!--nejprve texty, pak vnorene kapitoly -->
+<!ELEMENT chapter ( (paragraph | include | active_element)*, chapter* ) > <!--nejprve texty, pak vnorene kapitoly -->
 <!ATTLIST chapter title CDATA #REQUIRED >
 <!ATTLIST chapter id ID #REQUIRED >
 
+<!ELEMENT active_element ANY>
+<!ATTLIST active_element type CDATA #REQUIRED >
+<!ATTLIST active_element source CDATA #REQUIRED >
+<!ATTLIST active_element id ID #REQUIRED >
+
+<!ELEMENT params EMPTY >
+
+<!ELEMENT filter (selection+) >
+<!ATTLIST filter type CDATA #REQUIRED>
+	
+<!ELEMENT selection EMPTY >
+<!ATTLIST selection id CDATA #REQUIRED>	<!-- odkaz na data ze zasuvky nikoli ID prvku - mozna prejmenovat --> 
+
+<!ELEMENT output (transformation+) >
+
+<!ELEMENT transformation EMPTY >
+<!ATTLIST transformation file CDATA #REQUIRED>
+	
 <!ELEMENT include EMPTY >
 <!ATTLIST include file CDATA #REQUIRED >
 <!ATTLIST include id ID #REQUIRED >
@@ -73,6 +91,23 @@
 
 
 <report title="EVROPSKÝ REGION PRAHA 2004" subtitle="Analytická otázka èíslo 3 (MFF 2004/2005)" author="Jan Dìdek" id="report1">
+
+	
+<chapter title="tady je nas prvni aktivni prvek" id="ch_aktivni1">
+	<active_element type="hyp_4ft" source="honzova_metabaze" id="hyp_4ft1">
+		<params/>
+	
+		<filter type="simple">
+			<selection id="hyp1"/>
+			<selection id="hyp3"/>
+		</filter>
+	
+		<output>
+			<transformation file="../4ft_generuj1.xsl"/>
+			<transformation file="../4ft_generuj1.xsl"/>
+		</output>
+	</active_element>
+</chapter>
 
 <chapter title="Životní hodnoty, Modernizace a elity, Zpùsob vnímání transformaèního procesu" id="chapter3">
 	<paragraph style="Normální" id="paragraph5">
