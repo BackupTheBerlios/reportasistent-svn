@@ -5,6 +5,7 @@
 #include "ReportAsistent.h"
 
 #include "CSkeletonDoc.h"
+//#include "SkeletonManager.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -27,7 +28,7 @@ END_MESSAGE_MAP()
 /////////////////////////////////////////////////////////////////////////////
 // CSkeletonDoc construction/destruction
 
-CSkeletonDoc::CSkeletonDoc()
+CSkeletonDoc::CSkeletonDoc() : m_SkeletonManager(pXMLDom)
 {
 	// TODO: add one-time construction code here
 

@@ -73,9 +73,11 @@ BEGIN
     PUSHBUTTON      "Cancel",IDCANCEL,433,225,50,14
     CONTROL         "List1",IDC_FILTER_LIST,"SysListView32",LVS_REPORT | 
                     LVS_SHOWSELALWAYS | LVS_SORTASCENDING | WS_BORDER | 
-                    WS_TABSTOP,7,46,476,175
-    LTEXT           "honza:\n\ttohle je pracovni verze filter dialogu, konecna podoba muze byt uplne jina\n\tpredevsim sloupce v seznamu muzou mit jine poradi, nektere se nemuseji vubec zobrazovat\n\tkdokoliv to chcete vylepsit muzete - osobne bych privital, kdyz bych se ktomu uz nemusel vracet",
-                    IDC_STATIC,7,7,476,37
+                    WS_TABSTOP,7,42,476,179
+    LTEXT           "honza:\n\ttohle je pracovni verze filter dialogu, konecna podoba muze byt uplne jina\n\tpredevsim sloupce v seznamu muzou mit jine poradi, nektere se nemuseji vubec zobrazovat\n\tkdokoliv to chcete vylepsit muzete",
+                    IDC_STATIC,7,7,476,33
+    LTEXT           "- osobne bych privital, kdyz bych se ktomu uz nemusel vracet",
+                    IDC_STATIC,145,31,294,9
 END
 
 

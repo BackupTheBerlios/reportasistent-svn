@@ -14,12 +14,13 @@
 class CSkeletonManager  
 {
 public:
+	CSkeletonManager(IXMLDOMDocumentPtr & skeleton);
+
 	void Generate();
 	void EditElenemt(LPARAM item_data);
 	void AddElement();
 	void DeleteItemData(LPARAM data);
 	void FillTreeCtrl(CTreeCtrl & tree_ctrl);
-	CSkeletonManager();
 	virtual ~CSkeletonManager();
 	static _bstr_t GetPluginOutput(CDataSorcesManager::public_source_id_t source, CDataSorcesManager::ap_id_t ap);
 

@@ -2,7 +2,7 @@
 
 [General Info]
 Version=1
-LastClass=CSimpleFilterDialog
+LastClass=CSkeletonDoc
 LastTemplate=CDialog
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "ReportAsistent.h"
@@ -18,10 +18,10 @@ ResourceCount=6
 Resource1=IDD_ABOUTBOX
 Resource2=IDR_MAINFRAME
 Class5=CAboutDlg
-Resource3=IDD_ABOUTBOX (English (U.S.))
-Resource4=IDD_DIALOGTEXT (English (U.S.))
+Resource3=IDD_DIALOGTEXT (English (U.S.))
+Resource4=IDD_SIMPLE_FILTER_DIALOG
 Class6=CElementText
-Resource5=IDD_SIMPLE_FILTER_DIALOG
+Resource5=IDD_ABOUTBOX (English (U.S.))
 Class7=CSimpleFilterDialog
 Resource6=IDR_MAINFRAME (English (U.S.))
 
@@ -56,7 +56,7 @@ Type=0
 HeaderFile=MainFrm.h
 ImplementationFile=MainFrm.cpp
 Filter=T
-LastObject=CMainFrame
+LastObject=ID_MMNEW4FTHYP
 
 
 
@@ -204,11 +204,12 @@ Control3=IDC_DIALTEXT_EDIT,edit,1350631552
 [DLG:IDD_SIMPLE_FILTER_DIALOG]
 Type=1
 Class=CSimpleFilterDialog
-ControlCount=4
+ControlCount=5
 Control1=IDOK,button,1342242817
 Control2=IDCANCEL,button,1342242816
 Control3=IDC_FILTER_LIST,SysListView32,1350631449
 Control4=IDC_STATIC,static,1342308352
+Control5=IDC_STATIC,static,1342308352
 
 [CLS:CSimpleFilterDialog]
 Type=0

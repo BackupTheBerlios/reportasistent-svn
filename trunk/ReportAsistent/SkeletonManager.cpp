@@ -18,22 +18,22 @@ static char THIS_FILE[]=__FILE__;
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
 
-CSkeletonManager::CSkeletonManager()
+CSkeletonManager::CSkeletonManager(IXMLDOMDocumentPtr & skeleton) :	m_skeleton(skeleton)
 {
-
+/*
 	m_skeleton.CreateInstance(_T("Msxml2.DOMDocument"));
 	m_skeleton->async = VARIANT_FALSE; // default - true,
 
 	m_skeleton->load((LPCTSTR) _T("..\\skeleton.xml"));
 //	m_skeleton->load((LPCTSTR) _T("../euroregion_dedek3.xml"));
 //	m_skeleton->load((LPCTSTR) _T("../out.xml"));
-	
+*/	
 
 }
 
 CSkeletonManager::~CSkeletonManager()
 {
-	m_skeleton.Release();
+	//m_skeleton.Release();
 }
 
 void CSkeletonManager::FillTreeCtrl(CTreeCtrl &tree_ctrl)
@@ -117,11 +117,11 @@ void CSkeletonManager::EditElenemt(LPARAM item_data)
 
 
 
-void CSkeletonManager::ConfigureFilter(IXMLDOMElementPtr & ft_hyp_node)
+void CSkeletonManager::ConfigureFilter(IXMLDOMElementPtr & active_element)
 {
-	CSimpleFilterDialog dlg(ft_hyp_node, 
-		GetPluginOutput((_bstr_t) ft_hyp_node->getAttribute("source"),
-						(_bstr_t) ft_hyp_node->getAttribute("type")),
+	CSimpleFilterDialog dlg(active_element, 
+		GetPluginOutput((_bstr_t) active_element->getAttribute("source"),
+						(_bstr_t) active_element->getAttribute("type")),
 		AfxGetMainWnd());
 
 	int nResponse = dlg.DoModal();

@@ -5,6 +5,7 @@
 #if !defined(AFX_CSKELETONDOC_H__AF6E6924_ED51_4710_9D19_8B36BB8CCF94__INCLUDED_)
 #define AFX_CSKELETONDOC_H__AF6E6924_ED51_4710_9D19_8B36BB8CCF94__INCLUDED_
 
+#include "SkeletonManager.h"	// Added by ClassView
 #if _MSC_VER > 1000
 #pragma once
 #endif // _MSC_VER > 1000
@@ -34,6 +35,7 @@ public:
 
 // Implementation
 public:
+	CSkeletonManager m_SkeletonManager;
 	void FillTreeControl(CTreeCtrl & tree_control);
 	virtual ~CSkeletonDoc();
 #ifdef _DEBUG
