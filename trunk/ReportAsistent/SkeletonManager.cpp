@@ -94,6 +94,7 @@ void CSkeletonManager::DeleteItemData(LPARAM data)
 	if (np != NULL) np->Release();
 }
 
+//docasne
 void CSkeletonManager::AddElement()
 {
 	IXMLDOMDocumentPtr element_example;
@@ -109,27 +110,33 @@ void CSkeletonManager::AddElement()
 
 }
 
+//docasne
 void CSkeletonManager::EditElenemt(LPARAM item_data)
 {
 	if (item_data == NULL) return;
 
-	IXMLDOMNode * np = (IXMLDOMNode *) item_data;
+	//ziskej element
+	IXMLDOMElementPtr selected_element = ElementFromItemData(item_data);
+	//ziskej manager
+	CElementManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
+	//ziskej typ elementu
+	CElementManager::elId selected_elementId = m.IdentifyElement(selected_element);
 
 	
-	CString s = (BSTR) np->baseName;
-	if (s == "active_element")
-	{
-		ConfigureFilter((IXMLDOMElementPtr) np);
-	}
-	else if (s == "text")
-	{
-		AfxMessageBox(np->text, 0, 0);
 
-		np->text = "novy text sdjk asjdh </br>ui efkj  ksdfjsk fjjf konec";
+	
+	//jedna se o aktivni prvek?
+	if (m.IsElementActive(selected_elementId))
+	{
+		ConfigureFilter(selected_element);
+	}	//jedna se o prvek text?
+	else if (selected_elementId == ELID_TEXT)
+	{
+		AfxMessageBox(selected_element->text);
 	}
 	else
-	{
-		AfxMessageBox(np->xml, 0, 0);
+	{	//ostatni prvky
+		AfxMessageBox(selected_element->xml);
 	}
 
 
@@ -139,22 +146,14 @@ void CSkeletonManager::EditElenemt(LPARAM item_data)
 
 void CSkeletonManager::ConfigureFilter(IXMLDOMElementPtr & active_element)
 {
+	//sem prijdou i jiny fitry
+	
 	CSimpleFilterDialog dlg(active_element, 
 		GetPluginOutput((_bstr_t) active_element->getAttribute("source"),
 						(_bstr_t) active_element->getAttribute("type")),
 		AfxGetMainWnd());
 
-	int nResponse = dlg.DoModal();
-	
-	if (nResponse == IDOK)
-	{
-//		MessageBox(NULL, dlg.m_result_id, "ggg", MB_OK);
-	}
-	else if (nResponse == IDCANCEL)
-	{
-//		MessageBox(NULL, "cancel", "ggg", MB_OK);
-	}
-
+	int nResponse = dlg.DoModal();	
 }
 
 _bstr_t CSkeletonManager::GetPluginOutput(CDataSorcesManager::public_source_id_t source, CDataSorcesManager::ap_id_t ap)
@@ -168,7 +167,7 @@ _bstr_t CSkeletonManager::GetPluginOutput(CDataSorcesManager::public_source_id_t
 	dom.CreateInstance(_T("Msxml2.DOMDocument"));
 	dom->async = VARIANT_FALSE; // default - true,
 	
-	dom->load((LPCTSTR) _T("..\\4ft_hyp.xml"));
+	dom->load((LPCTSTR) _T("../XML/4ft_hyp.xml"));
 
 	return dom->xml;
 }
@@ -287,7 +286,7 @@ IXMLDOMElementPtr CSkeletonManager::InsertNewElement(CElementManager::elId eleme
 		catch (_com_error &e)
 		{
 			//AfxMessageBox(e.ErrorMessage());
-			//AfxMessageBox(e.Description());
+			AfxMessageBox(e.Description());
 		}
 
 	}
@@ -324,3 +323,9 @@ CString CSkeletonManager::CreateNewID(CElementManager::elId element_type)
 
 	return id;
 }
+
+void CSkeletonManager::EditActiveElement(IXMLDOMElementPtr &element)
+{
+
+}
+ 

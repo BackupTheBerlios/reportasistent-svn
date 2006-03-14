@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="windows-1250" ?>
+<!DOCTYPE active_list[
+  <!ELEMENT active_list (hyp_4ft*, category*, ti_cedent*)>
+  <!ELEMENT category EMPTY>
+  <!ATTLIST category id ID #REQUIRED
+                     db_name CDATA #REQUIRED
+                     matrix_name CDATA #REQUIRED
+                     attr_name CDATA #REQUIRED
+                     ctgr_name CDATA #REQUIRED
+                     ctgr_type CDATA #REQUIRED
+                     ctgr_def CDATA #REQUIRED
+                     ctgr_freq CDATA #REQUIRED>
+  <!ELEMENT ti_cedent (ti_literal*)>
+  <!ATTLIST ti_cedent id ID #REQUIRED
+                      type CDATA #REQUIRED>  <!--antecedent, succedent, condition -->
+  <!ELEMENT ti_literal EMPTY>
+  <!ATTLIST ti_literal id ID #REQUIRED
+                       quant CDATA #REQUIRED   
+                       value CDATA #REQUIRED>  
+                       <!--quant: name of the quantity used in hypothese, e. g. diastolic pressure  -->
+                       <!--value: value of the quantity used in hypothese, e. g. <50;60) -->
+  <!ELEMENT hyp_4ft EMPTY>
+  <!ATTLIST hyp_4ft id ID #REQUIRED
+                    db_name CDATA #REQUIRED
+                    matrix_name CDATA #REQUIRED
+                    task_name CDATA #REQUIRED
+                    a CDATA #REQUIRED
+                    b CDATA #REQUIRED
+                    c CDATA #REQUIRED
+                    d CDATA #REQUIRED
+                    conf CDATA #REQUIRED
+                    d_conf CDATA #REQUIRED
+                    e_conf CDATA #REQUIRED
+                    support CDATA #REQUIRED
+                    completeness CDATA #REQUIRED
+                    avg_diff CDATA #REQUIRED
+                    low_bnd_imp CDATA #REQUIRED
+                    up_bnd_imp CDATA #REQUIRED
+                    low_bnd_dbl_imp CDATA #REQUIRED
+                    up_bnd_dbl_imp CDATA #REQUIRED
+                    low_bnd_eq CDATA #REQUIRED
+                    up_bnd_eq CDATA #REQUIRED
+                    fisher CDATA #REQUIRED
+                    chi_sq CDATA #REQUIRED
+                    antecedent IDREF #REQUIRED
+                    succedent IDREF #REQUIRED
+                    condition IDREF #REQUIRED>   <!--antecedent,succedent,condition: references to ti_cedent -->
+]>
+
+
+<active_list>
+
+
+	<hyp_4ft
+		id="hyp1"
+		db_name="databaze"
+		matrix_name="matice"
+		task_name="task1"
+		a="25"
+		b="16"
+		c="48"
+		d="999"
+		conf="0,95"
+		d_conf="0,65"
+		e_conf="0,45"
+		support="55"
+		completeness="0"
+		avg_diff="0,1"
+		low_bnd_imp="0"
+		up_bnd_imp="0"
+		low_bnd_dbl_imp="0"
+		up_bnd_dbl_imp="0"
+		low_bnd_eq="0"
+		up_bnd_eq="0"
+		fisher="0"
+		chi_sq="0"
+		antecedent="antecedent1"
+		succedent="succedentcedent1"
+		condition="condition1"
+	/>
+
+	<hyp_4ft
+		id="hyp2"
+		db_name="databaze"
+		matrix_name="matice"
+		task_name="task1"
+		a="24"
+		b="18"
+		c="98"
+		d="9"
+		conf="0,75"
+		d_conf="0,45"
+		e_conf="0,25"
+		support="25"
+		completeness="0"
+		avg_diff="0,9"
+		low_bnd_imp="0"
+		up_bnd_imp="0"
+		low_bnd_dbl_imp="0"
+		up_bnd_dbl_imp="0"
+		low_bnd_eq="0"
+		up_bnd_eq="0"
+		fisher="0"
+		chi_sq="0"
+		antecedent="antecedent1"
+		succedent="succedentcedent1"
+		condition="condition1"
+	/>
+
+	<hyp_4ft
+		id="hyp3"
+		db_name="databaze"
+		matrix_name="matice"
+		task_name="task1"
+		a="1"
+		b="2"
+		c="3"
+		d="4"
+		conf="0,1"
+		d_conf="0,2"
+		e_conf="0,3"
+		support="4"
+		completeness="0"
+		avg_diff="0,6"
+		low_bnd_imp="0"
+		up_bnd_imp="0"
+		low_bnd_dbl_imp="0"
+		up_bnd_dbl_imp="0"
+		low_bnd_eq="0"
+		up_bnd_eq="0"
+		fisher="0"
+		chi_sq="0"
+		antecedent="antecedent1"
+		succedent="succedentcedent1"
+		condition="condition1"
+	/>
+
+	<ti_cedent id="antecedent1" type="antecedent">
+		<ti_literal id="l1" quant="BMI" value="normalní" />
+		<ti_literal id="l4" quant="tlak" value="vysoký" />
+		<ti_literal id="l5" quant="věk" value="45-50" />
+	</ti_cedent>
+
+	<ti_cedent id="succedentcedent1" type="succedentcedent">
+		<ti_literal id="l2" quant="kouření" value="kuřák" />
+		<ti_literal id="l6" quant="pohlaví" value="muž" />
+	</ti_cedent>
+
+	<ti_cedent id="condition1" type="condition">
+		<ti_literal id="l3" quant="skupina" value="riziková" />
+	</ti_cedent>
+
+</active_list>

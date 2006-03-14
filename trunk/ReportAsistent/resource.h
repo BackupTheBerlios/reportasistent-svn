@@ -25,7 +25,9 @@
 #define ID_MMNEWPARAGRAPH               32775
 #define ID_MMNEW4FTHYP                  32776
 #define ID_MM                           32778
+#define ID_ELEMENT_EDIT                 32780
 #define IDS_INSERT_NEW_ELEMENT_WRONG_LOCATION 61204
+#define IDS_SIMPLE_FILTER_EMPTY_SELECTION 61205
 
 // Next default values for new objects
 // 
@@ -33,7 +35,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
 #define _APS_NEXT_RESOURCE_VALUE        144
-#define _APS_NEXT_COMMAND_VALUE         32780
+#define _APS_NEXT_COMMAND_VALUE         32781
 #define _APS_NEXT_CONTROL_VALUE         1002
 #define _APS_NEXT_SYMED_VALUE           101
 #endif

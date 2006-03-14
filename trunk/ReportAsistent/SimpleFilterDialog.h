@@ -54,8 +54,8 @@ protected:
 	DECLARE_MESSAGE_MAP()
 private:
 	IXMLDOMElementPtr & m_active_element;
-	MSXML2::IXMLDOMDocument2Ptr m_filter_dom;	//data pouzita na naplneni list veiw
-	MSXML2::IXMLDOMElementPtr m_filter_node;
+//	MSXML2::IXMLDOMDocument2Ptr m_filter_dom;	
+	MSXML2::IXMLDOMElementPtr m_filter_DOM;	//data pouzita na naplneni list veiw
 };
 
 //{{AFX_INSERT_LOCATION}}

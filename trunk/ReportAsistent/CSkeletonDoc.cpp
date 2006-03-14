@@ -22,6 +22,7 @@ IMPLEMENT_DYNCREATE(CSkeletonDoc, CDocument)
 BEGIN_MESSAGE_MAP(CSkeletonDoc, CDocument)
 	//{{AFX_MSG_MAP(CSkeletonDoc)
 	ON_COMMAND(ID_MMNEW4FTHYP, OnMmnew4fthyp)
+	ON_COMMAND(ID_ELEMENT_EDIT, OnElementEdit)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -294,6 +295,9 @@ void CSkeletonDoc::OnMmnew4fthyp()
 	IXMLDOMElementPtr new_element = 
 		m_SkeletonManager.InsertNewElement("hyp_4ft", selected_element);
 
+	
+	m_SkeletonManager.EditActiveElement(new_element); 
+
 
 
 	UpdateAllViews(NULL);
@@ -307,4 +311,12 @@ CSkeletonView * CSkeletonDoc::GetFirstView()
 {
 	POSITION pos = GetFirstViewPosition();
 	return (CSkeletonView *) GetNextView( pos );
+}
+
+void CSkeletonDoc::OnElementEdit() 
+{
+	CTreeCtrl & tree = GetFirstView()->GetTreeCtrl();
+	
+	m_SkeletonManager.EditElenemt(tree.GetItemData(tree.GetSelectedItem()));
+
 }

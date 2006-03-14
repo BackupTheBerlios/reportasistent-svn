@@ -289,6 +289,7 @@ BEGIN
     VK_INSERT,      ID_MMNEW4FTHYP,         VIRTKEY, NOINVERT
     VK_INSERT,      ID_EDIT_COPY,           VIRTKEY, CONTROL, NOINVERT
     VK_INSERT,      ID_EDIT_PASTE,          VIRTKEY, SHIFT, NOINVERT
+    VK_RETURN,      ID_ELEMENT_EDIT,        VIRTKEY, NOINVERT
     "X",            ID_EDIT_CUT,            VIRTKEY, CONTROL, NOINVERT
     "Z",            ID_EDIT_UNDO,           VIRTKEY, CONTROL, NOINVERT
 END
@@ -447,6 +448,8 @@ BEGIN
     AFX_IDS_SCTASKLIST      "Activate Task List"
     IDS_INSERT_NEW_ELEMENT_WRONG_LOCATION 
                             "Sorac ale sem to dat neuzes :-)\n\ntenhle text se predelava ve string table - id: IDS_INSERT_NEW_ELEMENT_WRONG_LOCATION"
+    IDS_SIMPLE_FILTER_EMPTY_SELECTION 
+                            "Sorry, you have to select some items to make filter valid."
 END
 
 STRINGTABLE DISCARDABLE 

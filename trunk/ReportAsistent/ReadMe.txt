@@ -4,8 +4,11 @@ ve tride App je promenna m_pGeneralManager pro instance globalnich manageru
 pro pouziti techto manageru:
 ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager
 
+CGeneralManager * m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager;
+
 
 v akceleratoru je pracovni zkaratka insert 4ft
+v akceleratoru je pracovni zkaratka edit element
 
 
 

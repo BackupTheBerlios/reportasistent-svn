@@ -55,6 +55,7 @@ protected:
 	CSkeletonView * GetFirstView();
 	//{{AFX_MSG(CSkeletonDoc)
 	afx_msg void OnMmnew4fthyp();
+	afx_msg void OnElementEdit();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 private:

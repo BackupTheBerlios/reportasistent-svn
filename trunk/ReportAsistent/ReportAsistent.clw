@@ -168,9 +168,10 @@ Command9=ID_PREV_PANE
 Command10=ID_MMNEW4FTHYP
 Command11=ID_EDIT_COPY
 Command12=ID_EDIT_PASTE
-Command13=ID_EDIT_CUT
-Command14=ID_EDIT_UNDO
-CommandCount=14
+Command13=ID_ELEMENT_EDIT
+Command14=ID_EDIT_CUT
+Command15=ID_EDIT_UNDO
+CommandCount=15
 
 [DLG:IDD_ABOUTBOX (English (U.S.))]
 Type=1

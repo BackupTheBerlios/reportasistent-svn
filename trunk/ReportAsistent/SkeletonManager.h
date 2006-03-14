@@ -15,6 +15,7 @@
 class CSkeletonManager  
 {
 public:
+	void EditActiveElement(IXMLDOMElementPtr & element);
 	CString CreateNewID(CElementManager::elId element_type);
 	IXMLDOMElementPtr InsertNewElement(LPCTSTR element_name, IXMLDOMElementPtr & parent_element);
 	IXMLDOMElementPtr InsertNewElement(CElementManager::elId elementID, IXMLDOMElementPtr & parent_element);
