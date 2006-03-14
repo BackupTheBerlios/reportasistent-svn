@@ -1,3 +1,23 @@
+honzovy poznamky:
+v akceleratoru je pracovni zkaratka insert 4ft
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ========================================================================
        MICROSOFT FOUNDATION CLASS LIBRARY : ReportAsistent
 ========================================================================

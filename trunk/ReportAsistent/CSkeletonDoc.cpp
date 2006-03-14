@@ -5,7 +5,8 @@
 #include "ReportAsistent.h"
 
 #include "CSkeletonDoc.h"
-//#include "SkeletonManager.h"
+//#include "SkeletonManager.h" - uz je v headeru
+#include "SkeletonView.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -20,8 +21,7 @@ IMPLEMENT_DYNCREATE(CSkeletonDoc, CDocument)
 
 BEGIN_MESSAGE_MAP(CSkeletonDoc, CDocument)
 	//{{AFX_MSG_MAP(CSkeletonDoc)
-		// NOTE - the ClassWizard will add and remove mapping macros here.
-		//    DO NOT EDIT what you see in these blocks of generated code!
+	ON_COMMAND(ID_MMNEW4FTHYP, OnMmnew4fthyp)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -271,4 +271,28 @@ BOOL CSkeletonDoc::OnSaveDocument(LPCTSTR lpszPathName)
 	pXMLDom->save(lpszPathName);
 	
 	return TRUE;	//CDocument::OnSaveDocument(lpszPathName); - nepouzivat prepise nam soubor vyse
+}
+
+//pridal honza - reakce na insert 4ft command
+void CSkeletonDoc::OnMmnew4fthyp() 
+{
+
+//dodelat volani m_SkeletonManager.AddElement(kam, typ);
+
+/*	
+	CTreeCtrl & tree = GetFirstView()->GetTreeCtrl();
+	
+	if (tree.GetSelectedItem() != NULL)
+		m_SkeletonManager.EditElenemt(tree.GetItemData(m_tree1.GetSelectedItem()));	
+
+	m_skeleton_manager.FillTreeCtrl(m_tree1);	
+*/	
+	
+}
+
+//pridal honza - vrati prvni view ve kterem je zobrazovan tento dokument
+CSkeletonView * CSkeletonDoc::GetFirstView()
+{
+	POSITION pos = GetFirstViewPosition();
+	return (CSkeletonView *) GetNextView( pos );
 }

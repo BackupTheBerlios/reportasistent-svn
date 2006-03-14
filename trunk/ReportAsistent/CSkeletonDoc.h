@@ -6,6 +6,11 @@
 #define AFX_CSKELETONDOC_H__AF6E6924_ED51_4710_9D19_8B36BB8CCF94__INCLUDED_
 
 #include "SkeletonManager.h"	// Added by ClassView
+//#include "SkeletonView.h"		// nepridavat znamena cyklicky include -honza
+class CSkeletonView;
+
+
+
 #if _MSC_VER > 1000
 #pragma once
 #endif // _MSC_VER > 1000
@@ -47,9 +52,9 @@ protected:
 
 // Generated message map functions
 protected:
+	CSkeletonView * GetFirstView();
 	//{{AFX_MSG(CSkeletonDoc)
-		// NOTE - the ClassWizard will add and remove member functions here.
-		//    DO NOT EDIT what you see in these blocks of generated code !
+	afx_msg void OnMmnew4fthyp();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 private:

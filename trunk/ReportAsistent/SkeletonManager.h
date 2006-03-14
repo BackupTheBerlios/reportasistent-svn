@@ -25,7 +25,7 @@ public:
 	static _bstr_t GetPluginOutput(CDataSorcesManager::public_source_id_t source, CDataSorcesManager::ap_id_t ap);
 
 private:
-	MSXML2::IXMLDOMDocumentPtr m_skeleton;
+	MSXML2::IXMLDOMDocumentPtr & m_skeleton;
 
 	static void CSkeletonManager::RecurentTreeFill(CTreeCtrl &tree_ctrl, MSXML2::IXMLDOMNodePtr & iNode, HTREEITEM hParentItem);
 

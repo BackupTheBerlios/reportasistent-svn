@@ -98,6 +98,10 @@ SOURCE=.\CSkeletonDoc.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\ElementManager.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\ElementText.cpp
 # End Source File
 # Begin Source File
@@ -144,6 +148,10 @@ SOURCE=.\CSkeletonDoc.h
 # Begin Source File
 
 SOURCE=.\DataSourceManager.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\ElementManager.h
 # End Source File
 # Begin Source File
 
@@ -220,6 +228,10 @@ SOURCE=.\res\Text.bmp
 # Begin Source File
 
 SOURCE=.\res\Toolbar.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\unknowni.bmp
 # End Source File
 # End Group
 # Begin Source File
