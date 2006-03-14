@@ -255,7 +255,7 @@ void CSkeletonDoc::InsetNodeToTreeCtrl(MSXML2::IXMLDOMElementPtr pElement,
 		//ukazu TV_ITEM.lParam na odpovidajici uzel XML stromu
 
 		
-		tree_control.SetItemData(hTreeItem, m_SkeletonManager.CreateItemData(pElement));
+		tree_control.SetItemData(hTreeItem, CSkeletonManager::CreateItemData(pElement));
 
 
 
@@ -272,6 +272,8 @@ void CSkeletonDoc::InsetNodeToTreeCtrl(MSXML2::IXMLDOMElementPtr pElement,
 BOOL CSkeletonDoc::OnSaveDocument(LPCTSTR lpszPathName) 
 {
 	pXMLDom->save(lpszPathName);
+
+	SetModifiedFlag(FALSE);
 	
 	return TRUE;	//CDocument::OnSaveDocument(lpszPathName); - nepouzivat prepise nam soubor vyse
 }
@@ -280,7 +282,8 @@ BOOL CSkeletonDoc::OnSaveDocument(LPCTSTR lpszPathName)
 void CSkeletonDoc::OnMmnew4fthyp() 
 {
 	CTreeCtrl & tree = GetFirstView()->GetTreeCtrl();		
-	IXMLDOMElementPtr selected_element = m_SkeletonManager.ElementFromItemData(tree.GetItemData( tree.GetSelectedItem()));			
+	HTREEITEM item = tree.GetSelectedItem();
+	IXMLDOMElementPtr selected_element = m_SkeletonManager.ElementFromItemData(tree.GetItemData( item ));			
 	
 	//zobrazi zpravu s typem vybraneho elementu - ladici, mozno smazat
 	/****/
@@ -295,12 +298,14 @@ void CSkeletonDoc::OnMmnew4fthyp()
 	IXMLDOMElementPtr new_element = 
 		m_SkeletonManager.InsertNewElement("hyp_4ft", selected_element);
 
-	
-	m_SkeletonManager.EditActiveElement(new_element); 
+	//pridani se zdarilo
+	if (new_element != NULL)
+	{
+		m_SkeletonManager.EditActiveElement(new_element); 
 
-
-
-	UpdateAllViews(NULL);
+		SetModifiedFlag();		
+		UpdateAllViews(NULL, (LPARAM) (IXMLDOMElement *) new_element);
+	}	
 
 }
 

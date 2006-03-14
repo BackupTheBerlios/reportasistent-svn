@@ -128,7 +128,7 @@ void CSkeletonManager::EditElenemt(LPARAM item_data)
 	//jedna se o aktivni prvek?
 	if (m.IsElementActive(selected_elementId))
 	{
-		ConfigureFilter(selected_element);
+		EditActiveElement(selected_element);
 	}	//jedna se o prvek text?
 	else if (selected_elementId == ELID_TEXT)
 	{
@@ -324,8 +324,10 @@ CString CSkeletonManager::CreateNewID(CElementManager::elId element_type)
 	return id;
 }
 
+
+//honza: az budou lepsi dialogy, jejich volani prijde sem
 void CSkeletonManager::EditActiveElement(IXMLDOMElementPtr &element)
 {
-
+	ConfigureFilter(element);
 }
  

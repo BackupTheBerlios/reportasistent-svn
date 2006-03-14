@@ -5,6 +5,7 @@
 #include "stdafx.h"
 #include "ReportAsistent.h"
 #include "ElementManager.h"
+#include "CSkeletonDoc.h"
 
 #ifdef _DEBUG
 #undef THIS_FILE
@@ -134,15 +135,10 @@ IXMLDOMElementPtr CElementManager::CreateEmptyExampleElement(CElementManager::el
 	CSkeletonDoc * doc = ((CReportAsistentApp *) AfxGetApp())->FirstDocumentInFirstTemplate();
 	
 	
-	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
-	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
-	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
-	//predelat pres skeleton manager	
-	ret->setAttribute("id", "ahoj");
-	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
-	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
-	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
-	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+	//nastav unikatni id parametr
+	ret->setAttribute("id", (LPCTSTR) doc->m_SkeletonManager.CreateNewID(id));
+
+
 
 	element_example.Release();
 

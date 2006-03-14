@@ -20,7 +20,7 @@ public:
 	IXMLDOMElementPtr InsertNewElement(LPCTSTR element_name, IXMLDOMElementPtr & parent_element);
 	IXMLDOMElementPtr InsertNewElement(CElementManager::elId elementID, IXMLDOMElementPtr & parent_element);
 	IXMLDOMElement * ElementFromItemData(LPARAM item_data);
-	LPARAM CreateItemData(IXMLDOMElementPtr &);
+	static LPARAM CreateItemData(IXMLDOMElementPtr &);
 	CSkeletonManager(IXMLDOMDocumentPtr & skeleton);
 
 	void Generate();

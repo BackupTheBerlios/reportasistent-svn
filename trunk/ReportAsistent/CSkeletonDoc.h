@@ -58,10 +58,11 @@ protected:
 	afx_msg void OnElementEdit();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
-private:
-	void InsetNodeToTreeCtrl(MSXML2::IXMLDOMElementPtr pElement, 
+public:
+	static void InsetNodeToTreeCtrl(MSXML2::IXMLDOMElementPtr pElement, 
 									HTREEITEM hParentItem, 
 									CTreeCtrl  & tree_control);
+private:
 	MSXML2::IXMLDOMDocumentPtr pXMLDom;
 };
 

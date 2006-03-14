@@ -162,9 +162,16 @@ void CSkeletonView::OnLButtonDblClk(UINT nFlags, CPoint point)
 }
 
 
-//pridal honza docastne - potreba napsat vkladani noveho prvku do view
-//a pak tohle zrusit
+//pridal honza - zaradi novy element v lHint jako posledniho potomka selected item
 void CSkeletonView::OnUpdate(CView* pSender, LPARAM lHint, CObject* pHint) 
 {
-	GetDocument()->FillTreeControl(GetTreeCtrl());
+	if (lHint != NULL)
+	{
+		CTreeCtrl & tree = GetTreeCtrl();
+
+		IXMLDOMElement * new_element = (IXMLDOMElement *) lHint;
+
+
+		GetDocument()->InsetNodeToTreeCtrl((IXMLDOMElementPtr) new_element, tree.GetSelectedItem(), tree);
+	}
 }
