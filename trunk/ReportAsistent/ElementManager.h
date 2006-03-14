@@ -9,11 +9,42 @@
 #pragma once
 #endif // _MSC_VER > 1000
 
+
+
+
+
+//honza:
+//trida urcena ke sprave vsech moznych typu prvku kostry
+
+
+
+
+
+
+#define ELID_UNKNOWN		0
+#define ELID_REPORT			1
+#define ELID_CHAPTER		2
+#define ELID_PARAGRAPH		3
+#define ELID_TEXT			4
+#define ELID_INCLUDE		5
+//#define ELID_HYP4FT		6  !!! nebude existovat 
+							//aktivni prvky se vytvareji dynamicky, jdou doinstalovat
+
 class CElementManager  
 {
+private:
+	static LPCTSTR el_names[];
+
 public:
+
+	typedef int elId;
+
+	LPCTSTR ElementName(elId elementID);	//vrati jemno elementu s id elementID
+	elId IdentifyElement(IXMLDOMElementPtr & element);	//identifikuje element - vrati id
+	elId LastElementId();	//vrati posledni id ~ pocet znamych elementu
+
 	CElementManager();
-	virtual ~CElementManager();
+	~CElementManager();
 
 };
 

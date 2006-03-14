@@ -58,7 +58,7 @@ protected:
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 private:
-	static void InsetNodeToTreeCtrl(MSXML2::IXMLDOMElementPtr pElement, 
+	void InsetNodeToTreeCtrl(MSXML2::IXMLDOMElementPtr pElement, 
 									HTREEITEM hParentItem, 
 									CTreeCtrl  & tree_control);
 	MSXML2::IXMLDOMDocumentPtr pXMLDom;

@@ -252,7 +252,9 @@ void CSkeletonDoc::InsetNodeToTreeCtrl(MSXML2::IXMLDOMElementPtr pElement,
 		pElement.AddRef();
 
 		//ukazu TV_ITEM.lParam na odpovidajici uzel XML stromu
-		tree_control.SetItemData(hTreeItem, (DWORD) (MSXML2::IXMLDOMNode *) pChild);
+
+		
+		tree_control.SetItemData(hTreeItem, m_SkeletonManager.CreateItemData(pElement));
 
 
 
@@ -276,6 +278,47 @@ BOOL CSkeletonDoc::OnSaveDocument(LPCTSTR lpszPathName)
 //pridal honza - reakce na insert 4ft command
 void CSkeletonDoc::OnMmnew4fthyp() 
 {
+	CTreeCtrl & tree = GetFirstView()->GetTreeCtrl();
+
+//	IXMLDOMNode * n = (MSXML2::IXMLDOMNode *) tree.GetItemData( tree.GetSelectedItem());
+
+	
+	
+	
+	
+	
+	
+	/*tohle pretypovani se musi predelat pres skeleton manager!!!!!*/
+	
+	
+	IXMLDOMElementPtr el = (MSXML2::IXMLDOMElement *) tree.GetItemData( tree.GetSelectedItem());
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	CGeneralManager * m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager;
+
+	CElementManager::elId id = m->ElementManager.IdentifyElement(el);
+
+	AfxMessageBox(m->ElementManager.ElementName(id));
+
+
+
+/*
+	CElementManager::elId id =
+
+		((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager.ElementManager.IdentifyElement(el);
+*/
 
 //dodelat volani m_SkeletonManager.AddElement(kam, typ);
 

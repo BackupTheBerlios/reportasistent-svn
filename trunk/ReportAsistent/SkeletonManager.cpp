@@ -68,9 +68,20 @@ void CSkeletonManager::RecurentTreeFill(CTreeCtrl &tree_ctrl, MSXML2::IXMLDOMNod
 	}
 }
 
+
+LPARAM CSkeletonManager::CreateItemData(IXMLDOMElementPtr & element)
+{
+	IXMLDOMElement * np = element;
+
+	np->AddRef();
+
+	return (LPARAM) np;
+}
+
+
 void CSkeletonManager::DeleteItemData(LPARAM data)
 {
-	IXMLDOMNode * np = (IXMLDOMNode *) data;
+	IXMLDOMElement * np = (IXMLDOMElement *) data;
 
 	if (np != NULL) np->Release();
 }
@@ -358,3 +369,4 @@ void LoadXLMFromString(_bstr_t strXMLSource, LPOLEOBJECT doc)
 }
 
   */
+

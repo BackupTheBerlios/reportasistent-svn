@@ -14,6 +14,7 @@
 class CSkeletonManager  
 {
 public:
+	LPARAM CreateItemData(IXMLDOMElementPtr &);
 	CSkeletonManager(IXMLDOMDocumentPtr & skeleton);
 
 	void Generate();

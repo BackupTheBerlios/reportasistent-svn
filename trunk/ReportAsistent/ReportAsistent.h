@@ -26,6 +26,19 @@
 #endif
 
 
+
+#include "ElementManager.h"
+
+//honza: sem vkaldejte vsechny globalni managery
+//konstruuje se v inti instance a nici v Exit instance
+struct CGeneralManager
+{
+public:
+	CElementManager ElementManager;
+
+};
+
+
 /////////////////////////////////////////////////////////////////////////////
 // CReportAsistentApp:
 // See ReportAsistent.cpp for the implementation of this class
@@ -34,6 +47,7 @@
 class CReportAsistentApp : public CWinApp
 {
 public:
+	CGeneralManager * m_pGeneralManager;
 	CReportAsistentApp();
 
 // Overrides
@@ -41,6 +55,7 @@ public:
 	//{{AFX_VIRTUAL(CReportAsistentApp)
 	public:
 	virtual BOOL InitInstance();
+	virtual int ExitInstance();
 	//}}AFX_VIRTUAL
 
 // Implementation

@@ -18,10 +18,10 @@ ResourceCount=6
 Resource1=IDD_ABOUTBOX
 Resource2=IDR_MAINFRAME
 Class5=CAboutDlg
-Resource3=IDD_ABOUTBOX (English (U.S.))
-Resource4=IDD_DIALOGTEXT (English (U.S.))
+Resource3=IDD_SIMPLE_FILTER_DIALOG
+Resource4=IDD_ABOUTBOX (English (U.S.))
 Class6=CElementText
-Resource5=IDD_SIMPLE_FILTER_DIALOG
+Resource5=IDD_DIALOGTEXT (English (U.S.))
 Class7=CSimpleFilterDialog
 Resource6=IDR_MAINFRAME (English (U.S.))
 

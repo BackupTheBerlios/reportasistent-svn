@@ -122,17 +122,16 @@ CSkeletonDoc* CSkeletonView::GetDocument() // non-debug version is inline
 /////////////////////////////////////////////////////////////////////////////
 // CSkeletonView message handlers
 
+//honza treba delaokovat item data
 void CSkeletonView::OnDeleteitem(NMHDR* pNMHDR, LRESULT* pResult) 
 {
 	NM_TREEVIEW* pNMTreeView = (NM_TREEVIEW*)pNMHDR;
 	
 	
 	
-	//uvolni referenci alokovanou pro ItemData
-	MSXML2::IXMLDOMNode * np = (MSXML2::IXMLDOMNode *) pNMTreeView->itemOld.lParam;
-
-	if (np != NULL) np->Release();
-
+	GetDocument()->m_SkeletonManager.DeleteItemData(pNMTreeView->itemOld.lParam);
+	
+	
 	
 	*pResult = 0;
 }

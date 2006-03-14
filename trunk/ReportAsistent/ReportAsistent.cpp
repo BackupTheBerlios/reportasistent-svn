@@ -100,6 +100,10 @@ BOOL CReportAsistentApp::InitInstance()
 	// Enable drag/drop open
 	m_pMainWnd->DragAcceptFiles();
 
+	
+	//pridal honza
+	m_pGeneralManager = new CGeneralManager();
+
 	return TRUE;
 }
 
@@ -165,4 +169,15 @@ void CReportAsistentApp::OnMMNewText()
 {
 	//Pridam do TreeCtrl Novou Item a do XML stromu taky.
 	
+}
+
+int CReportAsistentApp::ExitInstance() 
+{
+	// TODO: Add your specialized code here and/or call the base class
+
+	//pridal honza
+	delete m_pGeneralManager;
+
+	
+	return CWinApp::ExitInstance();
 }
