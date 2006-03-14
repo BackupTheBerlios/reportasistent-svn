@@ -6,6 +6,8 @@
 //#include "filter_dlg.h"
 #include "simplefilterdialog.h"
 #include "SkeletonManager.h"
+#include "ReportAsistent.h"
+#include "ElementManager.h"
 #include "APTransform.h"
 
 
@@ -29,6 +31,12 @@ CSkeletonManager::CSkeletonManager(IXMLDOMDocumentPtr & skeleton) :	m_skeleton(s
 //	m_skeleton->load((LPCTSTR) _T("../euroregion_dedek3.xml"));
 //	m_skeleton->load((LPCTSTR) _T("../out.xml"));
 */	
+
+
+	//inicializuje generator nahodnych cisel - kvuli generovani novych ID - docasne
+	srand( (unsigned)time( NULL ) );
+
+
 
 }
 
@@ -244,129 +252,75 @@ void CSkeletonManager::TransformActiveElement(IXMLDOMElementPtr & element)
 /***/
 }
 	
-	
-	/*
-void CSkeletonManager::TransformActiveElement(IXMLDOMElementPtr node_ft)
+
+//honza: kvuli bezpecnosti a modifikovatelnosti a cistote kodu :)
+//mozna planuju v item datat uchovavat id misto IXMLDOMElement *
+IXMLDOMElement * CSkeletonManager::ElementFromItemData(LPARAM item_data)
 {
-	//nacteni ransformace
-	
-	IXMLDOMDocumentPtr output_transform;
-	
-	output_transform.CreateInstance(_T("Msxml2.DOMDocument"));
-	output_transform->async = VARIANT_FALSE; // default - true,
-//	output_transform->preserveWhiteSpace = VARIANT_TRUE;
-	
-
-	//predelat pro vic transformaci
-	IXMLDOMElementPtr el_transform = node_ft->selectSingleNode("output/transformation");
-	output_transform->load( el_transform->getAttribute("file"));
-
-
-	
-	//nacteni pluginoutput
-	
-	IXMLDOMDocumentPtr plug_out;
-	plug_out.CreateInstance(_T("Msxml2.DOMDocument"));
-	plug_out->async = VARIANT_FALSE; // default - true,
-//	plug_out->preserveWhiteSpace = VARIANT_TRUE;
-	
-	plug_out->loadXML(GetPluginOutput(
-		(_bstr_t) node_ft->getAttribute("source"),
-		(_bstr_t) node_ft->getAttribute("type")));
-
-
-
-	//provedeni transformace
-	
-	IXMLDOMDocumentPtr transofmed_node;
-	transofmed_node.CreateInstance(_T("Msxml2.DOMDocument"));
-	transofmed_node->async = VARIANT_FALSE; // default - true,
-//	transofmed_node->preserveWhiteSpace = VARIANT_TRUE;
-
-	
-//	AfxMessageBox(plug_out->selectSingleNode("/active_list/hyp_4ft")->xml, 0, 0);
-	//pracovni: transformuje se jen prvni hypoteza	
-	transofmed_node->loadXML(
-		plug_out->selectSingleNode("/active_list/hyp_4ft")->transformNode(output_transform));
-
-
-	AfxMessageBox(transofmed_node->xml, 0, 0);
-
-	//ulozeni transformace na misto puvodniho uzlu
-
-//	node_ft->parentNode->insertBefore(transofmed_node->documentElement, node_ft);
-//	node_ft->parentNode->removeChild(node_ft);
-	node_ft->parentNode->replaceChild(transofmed_node->documentElement, node_ft);
-
-
-
-	output_transform.Release();
-	plug_out.Release();
-	transofmed_node.Release();
-
+	return (MSXML2::IXMLDOMElement *) item_data;
 }
-	*/
 
-
-
-
-
-
-
-
-
-
-
-/*
-void LoadXLMFromString(_bstr_t strXMLSource, LPOLEOBJECT doc)
+//pokusi se vlozit novy element jako child parent_element uzlu, novy element vrati
+IXMLDOMElementPtr CSkeletonManager::InsertNewElement(CElementManager::elId elementID, IXMLDOMElementPtr & parent_element)
 {
-	_LMRA_XML_WordLoader * pWL = NULL;
+	CGeneralManager * m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager;
 
-	IUnknown * pU = NULL;
 	
-	
-	HRESULT hr = REGDB_E_CLASSNOTREG;
-	hr = CoCreateInstance(CLSID_LMRA_XML_WordLoader, NULL, CLSCTX_LOCAL_SERVER, IID_IUnknown, (void **) & pU);
-	if (hr == REGDB_E_CLASSNOTREG)
-		MessageBox(NULL, "LMRA_WordLoader.exe neni registorvany - spustte LMRA_WordLoader.exe", "chyba", MB_ICONERROR);
-	
-	if (pU != NULL)
+	IXMLDOMElementPtr new_example = m->ElementManager.CreateEmptyExampleElement(elementID);
+
+	if (m->ElementManager.CanAppendChildHere(new_example, parent_element))
 	{
-		pU->QueryInterface(IID__LMRA_XML_WordLoader, (void **) & pWL);
-
-		pU->Release();
-
+		//ladici
+		//AfxMessageBox(new_example->xml);	
+		//AfxMessageBox(parent_element->xml);	
 		
-		if (pWL != NULL) 
+		
+		//a tohle je sranda nejvetsi :-) hazi to chyby jak na bezicim pasu
+		//kontroluje to tozi DTD dokumentu tak bacha, nejde vsecko vsude vlozit
+		//az bude funkcni CanAppendChildHere tak by uz chyby nemely nastat
+		try
 		{
-//			BSTR bs;
-//			TCHAR full_path[500];
-			
-//			GetFullPathName(FilePath, 500, full_path, NULL);			
+			parent_element->appendChild(new_example);
+			return new_example;
 
-//			CString s(cd);
-			
-			
-			//docasne!!!!!!!!!!!!! - opravit
-			try 
-			{
-//				pWL->LoadFromFile(full_path);
-				IDispatch * d = NULL;
-				doc->QueryInterface(& d);
-				pWL->LoadFromStringToDoc( strXMLSource, & d);
-				d->Release();
-			}
-			catch (...)
-			{
-				MessageBox(NULL, "XML string nejde prevest.", "chyba", MB_ICONERROR);
-			}
-			
-			pWL->Release();
 		}
-	}
+		catch (_com_error &e)
+		{
+			//AfxMessageBox(e.ErrorMessage());
+			//AfxMessageBox(e.Description());
+		}
 
+	}
+		
+	
+	AfxMessageBox(IDS_INSERT_NEW_ELEMENT_WRONG_LOCATION);	
+	
+	new_example.Release();
+	
+	return NULL;
+}
+
+//jen prelozi volani na metodu vyse
+IXMLDOMElementPtr CSkeletonManager::InsertNewElement(LPCTSTR element_name, IXMLDOMElementPtr & parent_element)
+{
+
+	CGeneralManager * m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager;
+
+	return InsertNewElement(m->ElementManager.ElementIdFromName(element_name), parent_element);
 
 }
 
-  */
+//vytvori novy id string pro eletment typu element_type
+CString CSkeletonManager::CreateNewID(CElementManager::elId element_type)
+{
+	
+	LPCTSTR el_name = //priradi nazev elementu z ElementManageru
+		((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager.ElementName(element_type);
 
+	CString id;
+
+	id.Format("%s%d", el_name, rand());
+
+
+	return id;
+}

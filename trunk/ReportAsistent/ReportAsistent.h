@@ -43,10 +43,12 @@ public:
 // CReportAsistentApp:
 // See ReportAsistent.cpp for the implementation of this class
 //
+class CSkeletonDoc;
 
 class CReportAsistentApp : public CWinApp
 {
 public:
+	CSkeletonDoc * FirstDocumentInFirstTemplate();
 	CGeneralManager * m_pGeneralManager;
 	CReportAsistentApp();
 

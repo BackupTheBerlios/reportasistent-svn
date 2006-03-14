@@ -25,6 +25,7 @@
 #define ID_MMNEWPARAGRAPH               32775
 #define ID_MMNEW4FTHYP                  32776
 #define ID_MM                           32778
+#define IDS_INSERT_NEW_ELEMENT_WRONG_LOCATION 61204
 
 // Next default values for new objects
 // 

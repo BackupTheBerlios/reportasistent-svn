@@ -32,12 +32,18 @@
 
 class CElementManager  
 {
+public:
+	typedef int elId;
+
 private:
 	static LPCTSTR el_names[];
 
 public:
+	BOOL CanAppendChildHere(IXMLDOMElementPtr & child, IXMLDOMElementPtr & parent);
+	BOOL IsElementActive(elId elementId);
+	IXMLDOMElementPtr CreateEmptyExampleElement(CElementManager::elId id);
+	elId ElementIdFromName(LPCTSTR el_name);
 
-	typedef int elId;
 
 	LPCTSTR ElementName(elId elementID);	//vrati jemno elementu s id elementID
 	elId IdentifyElement(IXMLDOMElementPtr & element);	//identifikuje element - vrati id

@@ -161,3 +161,10 @@ void CSkeletonView::OnLButtonDblClk(UINT nFlags, CPoint point)
 
 }
 
+
+//pridal honza docastne - potreba napsat vkladani noveho prvku do view
+//a pak tohle zrusit
+void CSkeletonView::OnUpdate(CView* pSender, LPARAM lHint, CObject* pHint) 
+{
+	GetDocument()->FillTreeControl(GetTreeCtrl());
+}

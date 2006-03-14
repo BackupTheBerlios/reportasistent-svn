@@ -278,60 +278,29 @@ BOOL CSkeletonDoc::OnSaveDocument(LPCTSTR lpszPathName)
 //pridal honza - reakce na insert 4ft command
 void CSkeletonDoc::OnMmnew4fthyp() 
 {
-	CTreeCtrl & tree = GetFirstView()->GetTreeCtrl();
-
-//	IXMLDOMNode * n = (MSXML2::IXMLDOMNode *) tree.GetItemData( tree.GetSelectedItem());
-
+	CTreeCtrl & tree = GetFirstView()->GetTreeCtrl();		
+	IXMLDOMElementPtr selected_element = m_SkeletonManager.ElementFromItemData(tree.GetItemData( tree.GetSelectedItem()));			
 	
-	
-	
-	
-	
-	
-	/*tohle pretypovani se musi predelat pres skeleton manager!!!!!*/
-	
-	
-	IXMLDOMElementPtr el = (MSXML2::IXMLDOMElement *) tree.GetItemData( tree.GetSelectedItem());
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	//zobrazi zpravu s typem vybraneho elementu - ladici, mozno smazat
+	/****/
 	CGeneralManager * m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager;
-
-	CElementManager::elId id = m->ElementManager.IdentifyElement(el);
-
+	CElementManager::elId id = m->ElementManager.IdentifyElement(selected_element);
 	AfxMessageBox(m->ElementManager.ElementName(id));
+	/***/
 
 
-
-/*
-	CElementManager::elId id =
-
-		((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager.ElementManager.IdentifyElement(el);
-*/
-
-//dodelat volani m_SkeletonManager.AddElement(kam, typ);
-
-/*	
-	CTreeCtrl & tree = GetFirstView()->GetTreeCtrl();
 	
-	if (tree.GetSelectedItem() != NULL)
-		m_SkeletonManager.EditElenemt(tree.GetItemData(m_tree1.GetSelectedItem()));	
-
-	m_skeleton_manager.FillTreeCtrl(m_tree1);	
-*/	
 	
+	IXMLDOMElementPtr new_element = 
+		m_SkeletonManager.InsertNewElement("hyp_4ft", selected_element);
+
+
+
+	UpdateAllViews(NULL);
+
 }
+
+
 
 //pridal honza - vrati prvni view ve kterem je zobrazovan tento dokument
 CSkeletonView * CSkeletonDoc::GetFirstView()

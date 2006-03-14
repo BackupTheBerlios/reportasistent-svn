@@ -181,3 +181,15 @@ int CReportAsistentApp::ExitInstance()
 	
 	return CWinApp::ExitInstance();
 }
+
+
+//honza: vrati prvni dokument v prvni DocTemlate - proste nas dokument :)
+CSkeletonDoc * CReportAsistentApp::FirstDocumentInFirstTemplate()
+{
+	POSITION pos = GetFirstDocTemplatePosition();
+	CDocTemplate * t = GetNextDocTemplate(pos);
+
+	pos = t->GetFirstDocPosition();
+	return (CSkeletonDoc *) t->GetNextDoc(pos);
+
+}

@@ -81,3 +81,92 @@ CElementManager::~CElementManager()
 {
 
 }
+
+CElementManager::elId CElementManager::ElementIdFromName(LPCTSTR el_name)
+{
+	CString name = el_name;
+	
+	for (int a=0; a <= LastElementId(); a++)
+	{
+		if (name == ElementName(a)) return a;
+	}
+
+	return ELID_UNKNOWN;
+}
+
+IXMLDOMElementPtr CElementManager::CreateEmptyExampleElement(CElementManager::elId id)
+{
+	IXMLDOMDocumentPtr element_example;
+	element_example.CreateInstance(_T("Msxml2.DOMDocument"));	
+	element_example->async = VARIANT_FALSE; // default - true,
+
+	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+	//predelat pres directory manager
+	element_example->load((LPCTSTR) _T("../XML/euroregion_dedek3.xml"));
+	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+
+	CString select;
+
+	if (IsElementActive(id))
+	{
+		//priklad: select = "//active_element[@type = 'hyp_4ft']"
+		select = "//active_element[@type = '";
+		select += ElementName(id);
+		select += "']";
+	}
+	else
+	{
+		//priklad: select = "//text"
+		select = "//";
+		select += ElementName(id);
+	}
+	
+	
+	IXMLDOMElementPtr ret = element_example->selectSingleNode((LPCTSTR) select);
+	
+	
+	
+	CSkeletonDoc * doc = ((CReportAsistentApp *) AfxGetApp())->FirstDocumentInFirstTemplate();
+	
+	
+	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+	//predelat pres skeleton manager	
+	ret->setAttribute("id", "ahoj");
+	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+
+	element_example.Release();
+
+/*	
+	m_skeleton->documentElement->appendChild(element_example->selectSingleNode("//active_element[@type = 'hyp_4ft']"));
+
+	element_example.Release();
+*/
+	return ret;
+}
+
+BOOL CElementManager::IsElementActive(elId elementId)
+{
+	return elementId > ELID_INCLUDE;
+}
+
+
+//rozhodne, jestli element child muze byt pridan pod element parent
+BOOL CElementManager::CanAppendChildHere(IXMLDOMElementPtr &child, IXMLDOMElementPtr &parent)
+{
+	//jen dosacna verze:
+
+	//lze pridavat je do chapter, ale cokoliv
+	if (IdentifyElement(parent) == ELID_CHAPTER) return TRUE;
+	else return FALSE;
+
+}

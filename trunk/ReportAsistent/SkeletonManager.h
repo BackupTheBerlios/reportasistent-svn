@@ -10,10 +10,15 @@
 #endif // _MSC_VER > 1000
 
 #include "DataSourceManager.h"
+#include "ElementManager.h"
 
 class CSkeletonManager  
 {
 public:
+	CString CreateNewID(CElementManager::elId element_type);
+	IXMLDOMElementPtr InsertNewElement(LPCTSTR element_name, IXMLDOMElementPtr & parent_element);
+	IXMLDOMElementPtr InsertNewElement(CElementManager::elId elementID, IXMLDOMElementPtr & parent_element);
+	IXMLDOMElement * ElementFromItemData(LPARAM item_data);
 	LPARAM CreateItemData(IXMLDOMElementPtr &);
 	CSkeletonManager(IXMLDOMDocumentPtr & skeleton);
 
