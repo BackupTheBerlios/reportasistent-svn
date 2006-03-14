@@ -14,7 +14,9 @@
 #define IDB_TEXTICO                     139
 #define IDB_UNKNOWNICO                  140
 #define IDB_BMTREELAST                  141
+#define IDD_SIMPLE_FILTER_DIALOG        143
 #define IDC_TREE1                       1000
+#define IDC_FILTER_LIST                 1000
 #define IDC_EDIT1                       1001
 #define IDC_DIALTEXT_EDIT               1001
 #define ID_MMGENREP                     32771
@@ -29,7 +31,7 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
-#define _APS_NEXT_RESOURCE_VALUE        143
+#define _APS_NEXT_RESOURCE_VALUE        144
 #define _APS_NEXT_COMMAND_VALUE         32780
 #define _APS_NEXT_CONTROL_VALUE         1002
 #define _APS_NEXT_SYMED_VALUE           101

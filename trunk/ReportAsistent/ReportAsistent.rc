@@ -58,6 +58,45 @@ END
 
 #endif    // APSTUDIO_INVOKED
 
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_SIMPLE_FILTER_DIALOG DIALOG DISCARDABLE  0, 0, 490, 246
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Very Very Simple Filter"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,374,225,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,433,225,50,14
+    CONTROL         "List1",IDC_FILTER_LIST,"SysListView32",LVS_REPORT | 
+                    LVS_SHOWSELALWAYS | LVS_SORTASCENDING | WS_BORDER | 
+                    WS_TABSTOP,7,46,476,175
+    LTEXT           "honza:\n\ttohle je pracovni verze filter dialogu, konecna podoba muze byt uplne jina\n\tpredevsim sloupce v seznamu muzou mit jine poradi, nektere se nemuseji vubec zobrazovat\n\tkdokoliv to chcete vylepsit muzete - osobne bych privital, kdyz bych se ktomu uz nemusel vracet",
+                    IDC_STATIC,7,7,476,37
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_SIMPLE_FILTER_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 483
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 239
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
 #endif    // Czech resources
 /////////////////////////////////////////////////////////////////////////////
 

@@ -2,33 +2,35 @@
 
 [General Info]
 Version=1
-LastClass=CReportAsistentApp
+LastClass=CSimpleFilterDialog
 LastTemplate=CDialog
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "ReportAsistent.h"
 LastPage=0
 
-ClassCount=6
+ClassCount=7
 Class1=CReportAsistentApp
 Class2=CSkeletonDoc
 Class3=CSkeletonView
 Class4=CMainFrame
 
-ResourceCount=5
+ResourceCount=6
 Resource1=IDD_ABOUTBOX
 Resource2=IDR_MAINFRAME
 Class5=CAboutDlg
-Resource3=IDD_DIALOGTEXT (English (U.S.))
-Resource4=IDD_ABOUTBOX (English (U.S.))
+Resource3=IDD_ABOUTBOX (English (U.S.))
+Resource4=IDD_DIALOGTEXT (English (U.S.))
 Class6=CElementText
-Resource5=IDR_MAINFRAME (English (U.S.))
+Resource5=IDD_SIMPLE_FILTER_DIALOG
+Class7=CSimpleFilterDialog
+Resource6=IDR_MAINFRAME (English (U.S.))
 
 [CLS:CReportAsistentApp]
 Type=0
 HeaderFile=ReportAsistent.h
 ImplementationFile=ReportAsistent.cpp
 Filter=N
-LastObject=ID_MMNEWTEXT
+LastObject=CReportAsistentApp
 BaseClass=CWinApp
 VirtualFilter=AC
 
@@ -198,4 +200,22 @@ ControlCount=3
 Control1=IDOK,button,1342242817
 Control2=IDCANCEL,button,1342242816
 Control3=IDC_DIALTEXT_EDIT,edit,1350631552
+
+[DLG:IDD_SIMPLE_FILTER_DIALOG]
+Type=1
+Class=CSimpleFilterDialog
+ControlCount=4
+Control1=IDOK,button,1342242817
+Control2=IDCANCEL,button,1342242816
+Control3=IDC_FILTER_LIST,SysListView32,1350631449
+Control4=IDC_STATIC,static,1342308352
+
+[CLS:CSimpleFilterDialog]
+Type=0
+HeaderFile=SimpleFilterDialog.h
+ImplementationFile=SimpleFilterDialog.cpp
+BaseClass=CDialog
+Filter=D
+LastObject=IDC_FILTER_LIST
+VirtualFilter=dWC
 

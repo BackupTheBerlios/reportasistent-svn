@@ -25,6 +25,7 @@
 
 //Deda: potreba pro MSXML
 #import <msxml3.dll>
+using namespace MSXML2;
 //vlozi namespace MSXML2;
 
 

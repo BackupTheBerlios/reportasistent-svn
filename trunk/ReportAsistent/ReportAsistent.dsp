@@ -90,6 +90,14 @@ LINK32=link.exe
 # PROP Default_Filter "cpp;c;cxx;rc;def;r;odl;idl;hpj;bat"
 # Begin Source File
 
+SOURCE=.\APTransform.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\APTransform.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\CSkeletonDoc.cpp
 # End Source File
 # Begin Source File
@@ -110,6 +118,14 @@ SOURCE=.\ReportAsistent.rc
 # End Source File
 # Begin Source File
 
+SOURCE=.\SimpleFilterDialog.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\SkeletonManager.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\SkeletonView.cpp
 # End Source File
 # Begin Source File
@@ -127,6 +143,10 @@ SOURCE=.\CSkeletonDoc.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\DataSourceManager.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\ElementText.h
 # End Source File
 # Begin Source File
@@ -140,6 +160,14 @@ SOURCE=.\ReportAsistent.h
 # Begin Source File
 
 SOURCE=.\Resource.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\SimpleFilterDialog.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\SkeletonManager.h
 # End Source File
 # Begin Source File
 
