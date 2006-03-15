@@ -1,10 +1,16 @@
-#include <wtypes.h>
+// DataSourceManager.h: interface for the CDataSourceManager class.
+//
+//////////////////////////////////////////////////////////////////////
 
+#if !defined(AFX_DATASOURCEMANAGER_H__976787EC_9D7F_4080_B685_F88419DA19FB__INCLUDED_)
+#define AFX_DATASOURCEMANAGER_H__976787EC_9D7F_4080_B685_F88419DA19FB__INCLUDED_
 
-//je to udelany jako indexovany pole, ale poradi se muze behem zivota menit
-//to jsem si kdysi neco dal na index 10 neznamena, ze to tam bude navzdy
-//ale poradi se meni asi jen funkci RemoveSource
-class CDataSorcesManager
+#if _MSC_VER > 1000
+#pragma once
+#endif // _MSC_VER > 1000
+
+//honza: pracovni prijde nahradit tridou kodyho
+class CDataSourceManager
 {
 public:
 
@@ -17,7 +23,7 @@ public:
 
 	//retezec pouzivany v kostre u AP jako identifikator zdroje
 	//mozna bude vhodnejsi jiny string - ?char *, _bstr_t, CString? uvidime..
-	typedef BSTR public_source_id_t;
+	typedef LPCTSTR public_source_id_t;
 
 	//identifikuje zasuvku
 	//odkaz na plugin managera
@@ -71,3 +77,4 @@ public:
 	BSTR CallPerformProc(int source_index, BSTR element_id); //vrati XML string
 };
 
+#endif // !defined(AFX_DATASOURCEMANAGER_H__976787EC_9D7F_4080_B685_F88419DA19FB__INCLUDED_)

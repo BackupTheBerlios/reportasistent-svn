@@ -148,15 +148,16 @@ void CSkeletonManager::ConfigureFilter(IXMLDOMElementPtr & active_element)
 {
 	//sem prijdou i jiny fitry
 	
-	CSimpleFilterDialog dlg(active_element, 
+	//dialog prepise active_element podle uzivatelovy volby
+	CSimpleFilterDialog dlg(active_element, /*
 		GetPluginOutput((_bstr_t) active_element->getAttribute("source"),
-						(_bstr_t) active_element->getAttribute("type")),
+						(_bstr_t) active_element->getAttribute("type")),*/
 		AfxGetMainWnd());
 
 	int nResponse = dlg.DoModal();	
 }
 
-_bstr_t CSkeletonManager::GetPluginOutput(CDataSorcesManager::public_source_id_t source, CDataSorcesManager::ap_id_t ap)
+_bstr_t CSkeletonManager::GetPluginOutput(CDataSourceManager::public_source_id_t source, CDataSourceManager::ap_id_t ap)
 {
 
 	CString ft = (BSTR) ap;
@@ -168,6 +169,10 @@ _bstr_t CSkeletonManager::GetPluginOutput(CDataSorcesManager::public_source_id_t
 	dom->async = VARIANT_FALSE; // default - true,
 	
 	dom->load((LPCTSTR) _T("../XML/4ft_hyp.xml"));
+
+	IXMLDOMElementPtr el_hyp = dom->selectSingleNode("/active_list/hyp_4ft");
+
+	el_hyp->setAttribute("db_name", source);
 
 	return dom->xml;
 }

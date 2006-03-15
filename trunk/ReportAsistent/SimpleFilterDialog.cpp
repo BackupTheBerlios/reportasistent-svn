@@ -4,6 +4,7 @@
 #include "stdafx.h"
 #include "ReportAsistent.h"
 #include "SimpleFilterDialog.h"
+#include "SkeletonManager.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -15,7 +16,7 @@ static char THIS_FILE[] = __FILE__;
 // CSimpleFilterDialog dialog
 
 
-CSimpleFilterDialog::CSimpleFilterDialog(IXMLDOMElementPtr & active_element, BSTR plugin_output, CWnd* pParent)
+CSimpleFilterDialog::CSimpleFilterDialog(IXMLDOMElementPtr & active_element, CWnd* pParent)
 	: CDialog(CSimpleFilterDialog::IDD, pParent), m_active_element(active_element)
 {
 	//{{AFX_DATA_INIT(CSimpleFilterDialog)
@@ -26,38 +27,22 @@ CSimpleFilterDialog::CSimpleFilterDialog(IXMLDOMElementPtr & active_element, BST
 
 
 	//necte tranformaci, ktera pripravi data pro vytvoreni dialogu
-	IXMLDOMDocumentPtr filter_transform;
-	filter_transform.CreateInstance(_T("Msxml2.DOMDocument"));
-	filter_transform->async = VARIANT_FALSE; // default - true,
+	m_filter_transform.CreateInstance(_T("Msxml2.DOMDocument"));
+	m_filter_transform->async = VARIANT_FALSE; // default - true,
 	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!111
 	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!111
 	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!111
 	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!111
 	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!111
 	//predelat pres directory manager,ruzne pro ruzne typy prvku
-	filter_transform->load(_T("../XML/4ft_hyp2filterdlg.xsl"));
+	m_filter_transform->load(_T("../XML/4ft_hyp2filterdlg.xsl"));
 	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!111
 	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!111
 	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!111
 	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!111	
-	
-	
-	//nacte data z plugin output
-	IXMLDOMDocumentPtr filter_doc;
-	filter_doc.CreateInstance(_T("Msxml2.DOMDocument"));
-	filter_doc->async = VARIANT_FALSE; // default - true,	
-	filter_doc->loadXML(plugin_output);
 
-	//transformuje data z plugin output a vysledek nacte do m_filter_dom	
-	filter_doc->loadXML(
-		filter_doc->transformNode(filter_transform));
-	
-	
-	//pridat AddRef ?
-	m_filter_DOM = filter_doc->documentElement;
 
-	filter_transform.Release();
-	filter_doc.Release();
+//	filter_transform.Release();
 
 }
 
@@ -66,6 +51,7 @@ void CSimpleFilterDialog::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CSimpleFilterDialog)
+	DDX_Control(pDX, IDC_DATA_SOURCE_COMBO, m_SourcesCombo);
 	DDX_Control(pDX, IDC_FILTER_LIST, m_FilterList);
 	//}}AFX_DATA_MAP
 }
@@ -83,9 +69,125 @@ END_MESSAGE_MAP()
 BOOL CSimpleFilterDialog::OnInitDialog() 
 {
 	CDialog::OnInitDialog();
+
+	 CDataSourceManager & dm = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->DataSourceManager;
+	 CElementManager & em = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
+
+	 for (int a=0; a< dm.getSourcesCount(); a++)
+	 {
+//		 if (em.ElementSupportedBySource)
+	 }
+
+
+
 	
+	
+	return TRUE;  // return TRUE unless you set the focus to a control
+	              // EXCEPTION: OCX Property Pages should return FALSE
+}
+
+void CSimpleFilterDialog::OnOK() 
+{
+	POSITION pos = m_FilterList.GetFirstSelectedItemPosition(); 
+
+	if (pos == NULL)
+	{
+		AfxMessageBox(IDS_SIMPLE_FILTER_EMPTY_SELECTION);
+		return;
+	}
+
+	//okopiruje vzorovy element selection
+	IXMLDOMNodePtr select_node = m_active_element->selectSingleNode("filter[@type='simple']/selection")->cloneNode(VARIANT_FALSE);
+	
+	//vymaze vsechny selection
+	IXMLDOMNodeListPtr list = m_active_element->selectNodes("filter[@type='simple']/selection");
+	IXMLDOMSelection * sel;
+	list.QueryInterface(__uuidof(IXMLDOMSelection), &sel);
+	sel->removeAll();
+	sel->Release();
+
+	IXMLDOMNodePtr filter = m_active_element->selectSingleNode("filter[@type='simple']");
+	
+	while (pos)
+	{
+		int nItem = m_FilterList.GetNextSelectedItem(pos);
+
+		IXMLDOMElementPtr el = select_node->cloneNode(VARIANT_FALSE);
+
+		el->setAttribute("id", (LPCTSTR) * (CString *) m_FilterList.GetItemData(nItem));
+		filter->appendChild(el);
+	}
+
+	select_node.Release();
+	
+
+	CDialog::OnOK();
+}
+
+
+
+
+
+void CSimpleFilterDialog::OnDeleteitemFilterList(NMHDR* pNMHDR, LRESULT* pResult) 
+{
+	NM_LISTVIEW* pNMListView = (NM_LISTVIEW*)pNMHDR;
+	// TODO: Add your control notification handler code here
+	
+	//honza: nutno po sobe uklidit - tohle jsem tam nasypal v init dialog
+	delete (CString *) pNMListView->lParam;
+
+	*pResult = 0;
+}
+
+BOOL CSimpleFilterDialog::LoadSource(CDataSourceManager::public_source_id_t sId)
+{
+	
+	//nacte data z plugin output
+	IXMLDOMDocumentPtr filter_doc;
+	filter_doc.CreateInstance(_T("Msxml2.DOMDocument"));
+	filter_doc->async = VARIANT_FALSE; // default - true,	
+	filter_doc->loadXML(
+		CSkeletonManager::GetPluginOutput(sId,
+				(_bstr_t) m_active_element->getAttribute("type")));
+
+	//transformuje data z plugin output a vysledek nacte do m_filter_dom	
+	filter_doc->loadXML(
+		filter_doc->transformNode(m_filter_transform));
+	
+	
+	//pridat AddRef ?
+	if (filter_doc->documentElement != NULL)
+	{
+		m_filter_DOM = filter_doc->documentElement;
+		filter_doc.Release();
+		return TRUE;
+	}
+
+	filter_doc.Release();
+	return FALSE;	
+}
+
+CSimpleFilterDialog::~CSimpleFilterDialog()
+{
+	m_filter_DOM.Release();
+	m_filter_transform.Release();
+}
+
+void CSimpleFilterDialog::UpDateDialog()
+{
 	int a,b;
 
+	m_FilterList.DeleteAllItems();
+
+	
+	// Delete all of the columns.
+	int nColumnCount = m_FilterList.GetHeaderCtrl()->GetItemCount();
+	for (int i=0;i < nColumnCount;i++)
+	{
+		m_FilterList.DeleteColumn(0);
+	}
+	
+	
 	IXMLDOMNodeListPtr attr_list = m_filter_DOM->selectNodes("/dialog_data/attributes/attribute");
 
 	
@@ -140,60 +242,5 @@ BOOL CSimpleFilterDialog::OnInitDialog()
 			m_FilterList.SetItemState(b, LVIS_SELECTED, LVIS_SELECTED);
 
 	}
-	
-	return TRUE;  // return TRUE unless you set the focus to a control
-	              // EXCEPTION: OCX Property Pages should return FALSE
-}
 
-void CSimpleFilterDialog::OnOK() 
-{
-	POSITION pos = m_FilterList.GetFirstSelectedItemPosition(); 
-
-	if (pos == NULL)
-	{
-		AfxMessageBox(IDS_SIMPLE_FILTER_EMPTY_SELECTION);
-		return;
-	}
-
-	//okopiruje vzorovy element selection
-	IXMLDOMNodePtr select_node = m_active_element->selectSingleNode("filter[@type='simple']/selection")->cloneNode(VARIANT_FALSE);
-	
-	//vymaze vsechny selection
-	IXMLDOMNodeListPtr list = m_active_element->selectNodes("filter[@type='simple']/selection");
-	IXMLDOMSelection * sel;
-	list.QueryInterface(__uuidof(IXMLDOMSelection), &sel);
-	sel->removeAll();
-	sel->Release();
-
-	IXMLDOMNodePtr filter = m_active_element->selectSingleNode("filter[@type='simple']");
-	
-	while (pos)
-	{
-		int nItem = m_FilterList.GetNextSelectedItem(pos);
-
-		IXMLDOMElementPtr el = select_node->cloneNode(VARIANT_FALSE);
-
-		el->setAttribute("id", (LPCTSTR) * (CString *) m_FilterList.GetItemData(nItem));
-		filter->appendChild(el);
-	}
-
-	select_node.Release();
-	
-
-	CDialog::OnOK();
-}
-
-
-
-
-
-void CSimpleFilterDialog::OnDeleteitemFilterList(NMHDR* pNMHDR, LRESULT* pResult) 
-{
-	NM_LISTVIEW* pNMListView = (NM_LISTVIEW*)pNMHDR;
-	// TODO: Add your control notification handler code here
-	
-	//honza nutno po sobe uklidit - thle jsem tam nasypal v init dialog
-	delete (CString *) pNMListView->lParam;
-
-	*pResult = 0;
 }

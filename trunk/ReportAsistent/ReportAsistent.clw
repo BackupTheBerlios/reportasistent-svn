@@ -2,7 +2,7 @@
 
 [General Info]
 Version=1
-LastClass=CGenerateDialog
+LastClass=CSimpleFilterDialog
 LastTemplate=CDialog
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "ReportAsistent.h"
@@ -18,12 +18,12 @@ ResourceCount=7
 Resource1=IDD_ABOUTBOX
 Resource2=IDR_MAINFRAME
 Class5=CAboutDlg
-Resource3=IDD_ABOUTBOX (English (U.S.))
+Resource3=IDD_SIMPLE_FILTER_DIALOG
 Resource4=IDD_GENERATE_DIALOG (English (U.S.))
 Class6=CElementText
-Resource5=IDD_DIALOGTEXT (English (U.S.))
+Resource5=IDD_ABOUTBOX (English (U.S.))
 Class7=CSimpleFilterDialog
-Resource6=IDD_SIMPLE_FILTER_DIALOG
+Resource6=IDD_DIALOGTEXT (English (U.S.))
 Class8=CGenerateDialog
 Resource7=IDR_MAINFRAME (English (U.S.))
 
@@ -210,12 +210,14 @@ Control3=IDC_DIALTEXT_EDIT,edit,1350631552
 [DLG:IDD_SIMPLE_FILTER_DIALOG]
 Type=1
 Class=CSimpleFilterDialog
-ControlCount=5
+ControlCount=7
 Control1=IDOK,button,1342242817
 Control2=IDCANCEL,button,1342242816
 Control3=IDC_FILTER_LIST,SysListView32,1350631449
 Control4=IDC_STATIC,static,1342308352
 Control5=IDC_STATIC,static,1342308352
+Control6=IDC_STATIC,static,1342308352
+Control7=IDC_DATA_SOURCE_COMBO,combobox,1344340227
 
 [CLS:CSimpleFilterDialog]
 Type=0
@@ -223,7 +225,7 @@ HeaderFile=SimpleFilterDialog.h
 ImplementationFile=SimpleFilterDialog.cpp
 BaseClass=CDialog
 Filter=D
-LastObject=IDC_FILTER_LIST
+LastObject=IDC_DATA_SOURCE_COMBO
 VirtualFilter=dWC
 
 [DLG:IDD_GENERATE_DIALOG (English (U.S.))]

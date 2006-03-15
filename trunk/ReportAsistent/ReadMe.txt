@@ -1,5 +1,10 @@
 honzovy poznamky:
 
+
+dodelat:
+pokud je plugin output prazdny simple filter a mozna i generovani spadne
+
+
 ve tride App je promenna m_pGeneralManager pro instance globalnich manageru
 pro pouziti techto manageru:
 ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager

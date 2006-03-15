@@ -189,3 +189,21 @@ BOOL CElementManager::CanAppendChildHere(IXMLDOMElementPtr &child, IXMLDOMElemen
 
 	return 	err->errorCode == S_OK;	
 }
+
+
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+//honza: velmi pracovni - prijde prepsat podle CDataSourceManageru a plugin manageru
+//ma vratit TRUE pokud zdroj podporuje tento typ aktivniho prvku
+BOOL CElementManager::ElementSupportedBySource(elId element_id, int source_index)
+{
+	//zdroje podporuji jen aktivni prvky
+	if (! IsElementActive(element_id)) return FALSE;
+	
+	return TRUE;
+}

@@ -28,6 +28,7 @@
 
 
 #include "ElementManager.h"
+#include "DataSourceManager.h"
 
 //honza: sem vkaldejte vsechny globalni managery
 //konstruuje se v inti instance a nici v Exit instance
@@ -35,7 +36,7 @@ struct CGeneralManager
 {
 public:
 	CElementManager ElementManager;
-
+	CDataSourceManager DataSourceManager;
 };
 
 

@@ -39,6 +39,7 @@ private:
 	static LPCTSTR el_names[];
 
 public:
+	BOOL ElementSupportedBySource(elId element_id, int source_index);
 	BOOL CanAppendChildHere(IXMLDOMElementPtr & child, IXMLDOMElementPtr & parent);
 	BOOL IsElementActive(elId elementId);
 	IXMLDOMElementPtr CreateEmptyExampleElement(CElementManager::elId id);

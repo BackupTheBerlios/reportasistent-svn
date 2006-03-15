@@ -98,6 +98,10 @@ SOURCE=.\CSkeletonDoc.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\DataSourceManager.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\ElementManager.cpp
 # End Source File
 # Begin Source File

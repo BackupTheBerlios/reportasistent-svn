@@ -12,6 +12,7 @@
 //
 
 #include "resource.h"
+#include "DataSourceManager.h"
 
 /////////////////////////////////////////////////////////////////////////////
 // CSimpleFilterDialog dialog
@@ -26,11 +27,13 @@ class CSimpleFilterDialog : public CDialog
 {
 // Construction
 public:
-	CSimpleFilterDialog(IXMLDOMElementPtr & active_element, BSTR plugin_output, CWnd* pParent);	// nestandard constructor :-)
+	CSimpleFilterDialog(IXMLDOMElementPtr & active_element, CWnd* pParent);	// nestandard constructor :-)
+	~CSimpleFilterDialog();
 
 // Dialog Data
 	//{{AFX_DATA(CSimpleFilterDialog)
 	enum { IDD = IDD_SIMPLE_FILTER_DIALOG };
+	CComboBox	m_SourcesCombo;
 	CListCtrl	m_FilterList;
 	//}}AFX_DATA
 
@@ -44,6 +47,8 @@ public:
 
 // Implementation
 protected:
+	void UpDateDialog();
+	BOOL LoadSource(CDataSourceManager::public_source_id_t sId);
 
 	// Generated message map functions
 	//{{AFX_MSG(CSimpleFilterDialog)
@@ -56,6 +61,8 @@ private:
 	IXMLDOMElementPtr & m_active_element;
 //	MSXML2::IXMLDOMDocument2Ptr m_filter_dom;	
 	MSXML2::IXMLDOMElementPtr m_filter_DOM;	//data pouzita na naplneni list veiw
+	IXMLDOMDocumentPtr m_filter_transform;
+
 };
 
 //{{AFX_INSERT_LOCATION}}
