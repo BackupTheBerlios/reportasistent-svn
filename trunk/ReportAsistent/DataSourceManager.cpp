@@ -18,31 +18,40 @@ static char THIS_FILE[]=__FILE__;
 
 
 //honza: pracovni prijde nahradit tridou kodyho
-CDataSourceManager::public_source_id_t zdroje [] =
+public_source_id_t zdroje [] =
 {
 	"meatabaze1", "super_matabaze", "nic_moc_metabaze"
 };
 
+CDataSourcesManager::CDataSourcesManager()
+{
+}
+	
+CDataSourcesManager::~CDataSourcesManager()
+{
+}
+
+
 //honza: pracovni prijde nahradit tridou kodyho
-int CDataSourceManager::getSourcesCount()
+int CDataSourcesManager::getSourcesCount()
 {
 	return 3;
 }
 
 //honza: pracovni prijde nahradit tridou kodyho
-CDataSourceManager::public_source_id_t CDataSourceManager::getSourcePublicID(int source_index)
+public_source_id_t CDataSourcesManager::getSourcePublicID(int source_index)
 {
 	if ((source_index  >= 0) && (source_index < getSourcesCount()))
 	{
 		return zdroje[source_index];
 	}
 
-	return NULL;
+	return "";
 }
 
 
 //honza: tohle je univerzalni nemusi se nahrazovat
-int CDataSourceManager::FindSourceByPublicID(CDataSourceManager::public_source_id_t id) //vrati index odpovidajiciho zdroje
+int CDataSourcesManager::FindSourceByPublicID(public_source_id_t id) //vrati index odpovidajiciho zdroje
 {
 	CString sid = id;
 	for (int a=0; a<getSourcesCount(); a++)

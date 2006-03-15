@@ -36,7 +36,7 @@ struct CGeneralManager
 {
 public:
 	CElementManager ElementManager;
-	CDataSourceManager DataSourceManager;
+	CDataSourcesManager DataSourcesManager;
 };
 
 

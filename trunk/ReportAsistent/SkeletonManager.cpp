@@ -157,10 +157,10 @@ void CSkeletonManager::ConfigureFilter(IXMLDOMElementPtr & active_element)
 	int nResponse = dlg.DoModal();	
 }
 
-_bstr_t CSkeletonManager::GetPluginOutput(CDataSourceManager::public_source_id_t source, CDataSourceManager::ap_id_t ap)
+_bstr_t CSkeletonManager::GetPluginOutput(public_source_id_t source, LPCTSTR ap_name)
 {
 
-	CString ft = (BSTR) ap;
+	CString ft = ap_name;
 
 	if (ft != "hyp_4ft") return (BSTR) NULL;
 
@@ -172,7 +172,7 @@ _bstr_t CSkeletonManager::GetPluginOutput(CDataSourceManager::public_source_id_t
 
 	IXMLDOMElementPtr el_hyp = dom->selectSingleNode("/active_list/hyp_4ft");
 
-	el_hyp->setAttribute("db_name", source);
+	el_hyp->setAttribute("db_name", (LPCTSTR) source);
 
 	return dom->xml;
 }

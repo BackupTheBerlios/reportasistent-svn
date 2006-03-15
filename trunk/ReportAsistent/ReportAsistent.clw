@@ -14,18 +14,19 @@ Class2=CSkeletonDoc
 Class3=CSkeletonView
 Class4=CMainFrame
 
-ResourceCount=7
+ResourceCount=8
 Resource1=IDD_ABOUTBOX
 Resource2=IDR_MAINFRAME
 Class5=CAboutDlg
-Resource3=IDD_ABOUTBOX (English (U.S.))
-Resource4=IDD_GENERATE_DIALOG (English (U.S.))
+Resource3=IDD_GENERATE_DIALOG (English (U.S.))
+Resource4=IDD_SIMPLE_FILTER_DIALOG
 Class6=CElementText
-Resource5=IDD_DIALOGTEXT (English (U.S.))
+Resource5=IDD_ABOUTBOX (English (U.S.))
 Class7=CSimpleFilterDialog
-Resource6=IDD_SIMPLE_FILTER_DIALOG
+Resource6=IDD_SOURCES_DIALOG
 Class8=CGenerateDialog
-Resource7=IDR_MAINFRAME (English (U.S.))
+Resource7=IDD_DIALOGTEXT (English (U.S.))
+Resource8=IDR_MAINFRAME (English (U.S.))
 
 [CLS:CReportAsistentApp]
 Type=0
@@ -232,7 +233,7 @@ VirtualFilter=dWC
 Type=1
 Class=CGenerateDialog
 ControlCount=1
-Control1=IDC_GENERATE_BUTTON,button,1342251008
+Control1=IDC_GENERATE_BUTTON,button,1342251009
 
 [CLS:CGenerateDialog]
 Type=0
@@ -242,4 +243,18 @@ BaseClass=CDialog
 Filter=D
 LastObject=CGenerateDialog
 VirtualFilter=dWC
+
+[DLG:IDD_SOURCES_DIALOG]
+Type=1
+Class=?
+ControlCount=9
+Control1=IDC_STATIC,static,1342308352
+Control2=IDC_STATIC,static,1342308352
+Control3=IDC_COMBO1,combobox,1344340227
+Control4=IDC_STATIC,button,1342177287
+Control5=IDC_BUTTON1,button,1342242816
+Control6=IDC_LIST2,SysListView32,1350631429
+Control7=IDC_BUTTON2,button,1342242816
+Control8=IDC_BUTTON3,button,1342242816
+Control9=IDC_BUTTON4,button,1342242816
 

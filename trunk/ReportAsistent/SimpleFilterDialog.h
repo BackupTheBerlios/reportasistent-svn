@@ -48,7 +48,7 @@ public:
 // Implementation
 protected:
 	void UpDateDialog();
-	BOOL LoadSource(CDataSourceManager::public_source_id_t sId);
+	BOOL LoadSource(public_source_id_t sId);
 
 	// Generated message map functions
 	//{{AFX_MSG(CSimpleFilterDialog)

@@ -30,7 +30,7 @@ CAPTransform::CAPTransform(IXMLDOMElementPtr & node, CSkeletonManager & skel)
 	m_plug_out->async = VARIANT_FALSE; // default - true,
 	
 	m_plug_out->loadXML(m_skel_manager.GetPluginOutput(
-		(_bstr_t) m_active_element->getAttribute("source"),
+		(public_source_id_t) (BSTR) (_bstr_t) m_active_element->getAttribute("source"),
 		(_bstr_t) m_active_element->getAttribute("type")));
 
 }

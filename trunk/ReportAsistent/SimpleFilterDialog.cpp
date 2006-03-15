@@ -71,7 +71,7 @@ BOOL CSimpleFilterDialog::OnInitDialog()
 {
 	CDialog::OnInitDialog();
 
-	CDataSourceManager & dm = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->DataSourceManager;
+	CDataSourcesManager & dm = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->DataSourcesManager;
 	CElementManager & em = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
 
 	for (int a=0; a< dm.getSourcesCount(); a++)
@@ -151,7 +151,7 @@ void CSimpleFilterDialog::OnDeleteitemFilterList(NMHDR* pNMHDR, LRESULT* pResult
 	*pResult = 0;
 }
 
-BOOL CSimpleFilterDialog::LoadSource(CDataSourceManager::public_source_id_t sId)
+BOOL CSimpleFilterDialog::LoadSource(public_source_id_t sId)
 {
 	
 	//nacte data z plugin output

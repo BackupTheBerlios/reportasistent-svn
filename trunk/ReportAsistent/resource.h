@@ -16,12 +16,19 @@
 #define IDB_BMTREELAST                  141
 #define IDD_SIMPLE_FILTER_DIALOG        143
 #define IDD_GENERATE_DIALOG             144
+#define IDD_SOURCES_DIALOG              145
 #define IDC_TREE1                       1000
 #define IDC_FILTER_LIST                 1000
 #define IDC_EDIT1                       1001
 #define IDC_DIALTEXT_EDIT               1001
 #define IDC_GENERATE_BUTTON             1002
 #define IDC_DATA_SOURCE_COMBO           1003
+#define IDC_COMBO1                      1004
+#define IDC_BUTTON1                     1006
+#define IDC_LIST2                       1007
+#define IDC_BUTTON2                     1008
+#define IDC_BUTTON3                     1009
+#define IDC_BUTTON4                     1010
 #define ID_MMGENREP                     32771
 #define ID_MMSOURCES                    32772
 #define ID_MMNEWTEXT                    32774
@@ -37,9 +44,9 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
-#define _APS_NEXT_RESOURCE_VALUE        145
+#define _APS_NEXT_RESOURCE_VALUE        146
 #define _APS_NEXT_COMMAND_VALUE         32781
-#define _APS_NEXT_CONTROL_VALUE         1004
+#define _APS_NEXT_CONTROL_VALUE         1009
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

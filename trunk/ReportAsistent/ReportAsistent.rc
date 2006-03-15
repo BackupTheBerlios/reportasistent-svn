@@ -83,6 +83,25 @@ BEGIN
                     CBS_SORT | WS_VSCROLL | WS_TABSTOP
 END
 
+IDD_SOURCES_DIALOG DIALOG DISCARDABLE  0, 0, 342, 226
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Data Sources"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "honza: zkrasleni/predelani tohohle dialogu kymkoliv se tez nebranim - jen pracovni verze",
+                    IDC_STATIC,7,7,328,8
+    LTEXT           "Plugin:",IDC_STATIC,42,50,22,8
+    COMBOBOX        IDC_COMBO1,92,49,179,92,CBS_DROPDOWNLIST | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "Add new source",IDC_STATIC,21,31,284,65
+    PUSHBUTTON      "&Add new..",IDC_BUTTON1,31,76,50,14
+    CONTROL         "List2",IDC_LIST2,"SysListView32",LVS_REPORT | 
+                    LVS_SINGLESEL | WS_BORDER | WS_TABSTOP,79,121,238,83
+    PUSHBUTTON      "&Connect",IDC_BUTTON2,15,126,58,15
+    PUSHBUTTON      "&Disconnect",IDC_BUTTON3,16,145,58,15
+    PUSHBUTTON      "&Remove",IDC_BUTTON4,15,165,58,15
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -98,6 +117,14 @@ BEGIN
         RIGHTMARGIN, 483
         TOPMARGIN, 7
         BOTTOMMARGIN, 239
+    END
+
+    IDD_SOURCES_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 335
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 219
     END
 END
 #endif    // APSTUDIO_INVOKED
@@ -155,7 +182,7 @@ EXSTYLE WS_EX_TOOLWINDOW
 CAPTION "Generate Report"
 FONT 8, "MS Sans Serif"
 BEGIN
-    PUSHBUTTON      "Generate the report !",IDC_GENERATE_BUTTON,23,17,101,26,
+    DEFPUSHBUTTON   "Generate the report !",IDC_GENERATE_BUTTON,23,17,101,26,
                     BS_MULTILINE
 END
 

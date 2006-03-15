@@ -22,7 +22,7 @@
 <xsl:text>
 </xsl:text>				
 
-		<chapter title="Vygenerovaná 4FT hypotéza ({@id})">
+		<chapter title="Vygenerovaná 4FT hypotéza ({@id} - {@db_name})">
 	
 
 			<xsl:apply-templates select="id(@antecedent)"/>

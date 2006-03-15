@@ -46,7 +46,7 @@ public:
 	void DeleteItemData(LPARAM data);
 	void FillTreeCtrl(CTreeCtrl & tree_ctrl);
 	virtual ~CSkeletonManager();
-	static _bstr_t GetPluginOutput(CDataSourceManager::public_source_id_t source, CDataSourceManager::ap_id_t ap);
+	static _bstr_t GetPluginOutput(public_source_id_t source, LPCTSTR ap_name);
 
 private:
 	MSXML2::IXMLDOMDocumentPtr & m_skeleton;
