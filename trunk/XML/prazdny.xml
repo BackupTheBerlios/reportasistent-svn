@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="windows-1250"?>
+<!DOCTYPE report [
+
+<!ELEMENT report ( chapter | include )* >
+<!ATTLIST report title CDATA #IMPLIED >
+<!ATTLIST report subtitle CDATA #IMPLIED >
+<!ATTLIST report author CDATA #IMPLIED >
+<!ATTLIST report id ID #REQUIRED >
+
+<!ELEMENT chapter ( (paragraph | include | active_element)*, chapter* ) > <!--nejprve texty, pak vnorene kapitoly -->
+<!ATTLIST chapter title CDATA #REQUIRED >
+<!ATTLIST chapter id ID #REQUIRED >
+
+<!ELEMENT active_element ( params, filter, output )>
+<!ATTLIST active_element type CDATA #REQUIRED >
+<!ATTLIST active_element source CDATA #REQUIRED >
+<!ATTLIST active_element id ID #REQUIRED >
+
+<!ELEMENT params EMPTY >
+
+<!ELEMENT filter (selection+) >
+<!ATTLIST filter type CDATA #REQUIRED>
+	
+<!ELEMENT selection EMPTY >
+<!ATTLIST selection id CDATA #REQUIRED>	<!-- odkaz na data ze zasuvky nikoli ID prvku - mozna prejmenovat --> 
+
+<!ELEMENT output (transformation+) >
+
+<!ELEMENT transformation EMPTY >
+<!ATTLIST transformation file CDATA #REQUIRED>
+	
+<!ELEMENT include EMPTY >
+<!ATTLIST include file CDATA #REQUIRED >
+<!ATTLIST include id ID #REQUIRED >
+
+<!ELEMENT paragraph ( graph | table | text )* >
+<!ATTLIST paragraph style CDATA #IMPLIED >
+<!ATTLIST paragraph id ID #REQUIRED >
+
+<!ELEMENT text ( #PCDATA | br | tab )* >
+<!ATTLIST text style CDATA #IMPLIED >
+<!ATTLIST text id ID #REQUIRED >
+
+<!ELEMENT tab EMPTY > <!-- do textu vlozi tabulator -->
+
+<!ELEMENT br EMPTY > <!-- do textu vlozi prechod na novy radek - nikoliv konec odstavce -->
+
+<!ELEMENT graph ( categories? , chart+ ) >
+<!ATTLIST graph title CDATA #IMPLIED >
+<!ATTLIST graph charttype CDATA #REQUIRED >	<!-- napr: xlLine, xlPie, xlBarStacked -->
+	<!-- kompletni seznam pro OfficeXP k nalezeni na http://msdn.microsoft.com/library/en-us/vbagr10/html/grprocharttype.asp -->
+<!ATTLIST graph showlegend (true | false) "false" >
+<!ATTLIST graph height CDATA #IMPLIED >	<!-- nasobek sirky strnaky -->
+<!ATTLIST graph width CDATA #IMPLIED >	<!-- nasobek sirky strnaky -->	
+<!ATTLIST graph id ID #REQUIRED >
+
+
+<!ELEMENT categories ( category+ ) >
+<!ATTLIST categories id ID #REQUIRED >
+
+<!ELEMENT category EMPTY >
+<!ATTLIST category title CDATA #REQUIRED >
+<!ATTLIST category id ID #REQUIRED >
+
+<!ELEMENT chart ( value+ ) >
+<!ATTLIST chart title CDATA #IMPLIED >
+<!ATTLIST chart id ID #REQUIRED >
+
+<!ELEMENT value EMPTY >
+<!ATTLIST value value CDATA #REQUIRED >	<!-- cislo nebo cislo s procentama -->
+<!ATTLIST value id ID #REQUIRED >
+
+<!ELEMENT table ( tr+ ) >
+<!ATTLIST table cols CDATA #REQUIRED >
+<!ATTLIST table rows CDATA #REQUIRED >
+<!ATTLIST table borderwidth CDATA "0" >	<!-- default borderwidth=0 -->
+<!ATTLIST table id ID #REQUIRED >
+
+<!ELEMENT tr ( td+ ) >
+<!ATTLIST tr id ID #REQUIRED >
+
+<!ELEMENT td ( text? ) >
+<!ATTLIST td colspan CDATA #IMPLIED >
+<!ATTLIST td rowspan CDATA #IMPLIED >
+<!ATTLIST td bgcolor CDATA #IMPLIED >	<!-- pouze kody #RRGGBB pojmenovane barvy nejsou podporovany -->
+<!ATTLIST td id ID #REQUIRED >
+
+
+]>
+<report title="Nadpis" subtitle="podnadpis" author="jmeno autora" id="report1">
+	<chapter title="nadpis kapitoly" id="ch_aktivni1">
+		<paragraph style="Normální" id="paragraph1">
+			<text id="text7">Nějaký text</text>
+		</paragraph>
+		<active_element type="hyp_4ft" source="honzova_metabaze" id="hyp_4ft1">
+			<params/>
+			<filter type="simple">
+				<selection id="hyp10"/>
+				<selection id="hyp33"/>
+			</filter>
+			<output>
+				<transformation file="../XML/4ft_generuj1.xsl"/>
+				<transformation file="../XML/4ft_generuj1.xsl"/>
+			</output>
+		</active_element>
+	</chapter>
+	<include file="../XML/include_doc.doc" id="include1"/>
+</report>

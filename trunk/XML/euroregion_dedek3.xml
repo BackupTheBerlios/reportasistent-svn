@@ -103,8 +103,8 @@
 		</filter>
 	
 		<output>
-			<transformation file="../4ft_generuj1.xsl"/>
-			<transformation file="../4ft_generuj1.xsl"/>
+			<transformation file="../XML/4ft_generuj1.xsl"/>
+			<transformation file="../XML/4ft_generuj1.xsl"/>
 		</output>
 	</active_element>
 </chapter>

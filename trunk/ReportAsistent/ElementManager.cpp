@@ -105,7 +105,7 @@ IXMLDOMElementPtr CElementManager::CreateEmptyExampleElement(CElementManager::el
 	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
 	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
 	//predelat pres directory manager
-	element_example->load((LPCTSTR) _T("../XML/euroregion_dedek3.xml"));
+	element_example->load((LPCTSTR) _T("../XML/prazdny.xml"));
 	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
 	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
 	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
@@ -159,10 +159,33 @@ BOOL CElementManager::IsElementActive(elId elementId)
 //rozhodne, jestli element child muze byt pridan pod element parent
 BOOL CElementManager::CanAppendChildHere(IXMLDOMElementPtr &child, IXMLDOMElementPtr &parent)
 {
-	//jen dosacna verze:
+	IXMLDOMNodePtr new_child_appended;
+	
+	IXMLDOMParseErrorPtr err;
+	
+	//zkusi ho pridat a kdyz to projde tak ho zase vynda :-)
+	try
+	{
+		new_child_appended = parent->appendChild(child);
+		IXMLDOMDocument2 * doc2 = NULL; 
+		parent->ownerDocument.QueryInterface(__uuidof(IXMLDOMDocument2), &doc2);
 
-	//lze pridavat je do chapter, ale cokoliv
-	if (IdentifyElement(parent) == ELID_CHAPTER) return TRUE;
-	else return FALSE;
+		err = doc2->validate();
+		
+		doc2->Release();
 
+	}
+	catch (...)
+	{
+		return FALSE;
+	}
+
+	parent->removeChild(new_child_appended);
+
+	
+	//ladici
+	int a = err->errorCode;
+	if (a != S_OK) AfxMessageBox(err->reason);
+
+	return 	err->errorCode == S_OK;	
 }

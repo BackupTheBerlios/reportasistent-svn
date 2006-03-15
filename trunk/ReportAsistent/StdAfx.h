@@ -28,6 +28,12 @@
 using namespace MSXML2;
 //vlozi namespace MSXML2;
 
+//potreba pro WordLoader z VisualBasicu
+#import "../VB-LMRA_WordLoader/LMRA_WordLoader.exe" named_guids
+using namespace LMRA_WordLoader;
+// vlozi namespace LMRA_WordLoader;
+
+
 
 
 //{{AFX_INSERT_LOCATION}}

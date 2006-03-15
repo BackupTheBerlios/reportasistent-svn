@@ -13,6 +13,8 @@
 #pragma warning( disable : 4786 )
 
 
+//honza:
+//trida slouzici k vygenerovani jednoho aktivniho prvku
 class CAPTransform  
 {
 private:

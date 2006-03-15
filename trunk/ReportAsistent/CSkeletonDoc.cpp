@@ -7,12 +7,14 @@
 #include "CSkeletonDoc.h"
 //#include "SkeletonManager.h" - uz je v headeru
 #include "SkeletonView.h"
+#include "GenerateDialog.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #undef THIS_FILE
 static char THIS_FILE[] = __FILE__;
 #endif
+
 
 /////////////////////////////////////////////////////////////////////////////
 // CSkeletonDoc
@@ -23,6 +25,7 @@ BEGIN_MESSAGE_MAP(CSkeletonDoc, CDocument)
 	//{{AFX_MSG_MAP(CSkeletonDoc)
 	ON_COMMAND(ID_MMNEW4FTHYP, OnMmnew4fthyp)
 	ON_COMMAND(ID_ELEMENT_EDIT, OnElementEdit)
+	ON_COMMAND(ID_MMGENREP, OnMmgenrep)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -49,7 +52,7 @@ BOOL CSkeletonDoc::OnNewDocument()
 
 	HRESULT hr;
 
-	pXMLDom.Release();
+	if (pXMLDom != NULL) pXMLDom.Release();
 
 	hr= pXMLDom.CreateInstance(_T("Msxml2.DOMDocument"));
 	if (FAILED(hr)) 
@@ -60,6 +63,17 @@ BOOL CSkeletonDoc::OnNewDocument()
 	}
 
 	pXMLDom->async = VARIANT_FALSE; // default - true,
+
+	
+	
+	//vytvor prazny report
+	CGeneralManager * m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager;
+
+	//by bylo fajn, ale pak tam neni DTD
+	//pXMLDom->appendChild(m->ElementManager.CreateEmptyExampleElement(ELID_REPORT));
+
+	//docasne reseni:
+	pXMLDom->load("../XML/prazdny.xml");
 
 
 	return TRUE;
@@ -76,7 +90,7 @@ void CSkeletonDoc::Serialize(CArchive& ar)
 	
 	if (ar.IsStoring())
 	{
-		//honza: sem by se program nemel dostat  
+		//honza: sem by se program nemel dostat - jinak prepisuje soubor po ulozeni
 		ASSERT(FALSE);
 	}
 	else
@@ -324,4 +338,18 @@ void CSkeletonDoc::OnElementEdit()
 	
 	m_SkeletonManager.EditElenemt(tree.GetItemData(tree.GetSelectedItem()));
 
+}
+
+void CSkeletonDoc::OnMmgenrep() 
+{
+	CGenerateDialog dlg(m_SkeletonManager, AfxGetMainWnd());
+	
+	//pozor vlastni kod generovani je ve CSkeletonManager::Generate()
+	dlg.DoModal();
+
+
+//zobrazi vysledek transformaci v kostre
+#ifdef DONT_CLONE_REPORT_BEFORE_GENERATE
+	UpdateAllViews(NULL);
+#endif
 }

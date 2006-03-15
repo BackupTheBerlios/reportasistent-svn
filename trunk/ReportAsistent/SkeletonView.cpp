@@ -92,10 +92,6 @@ void CSkeletonView::OnInitialUpdate()
 	}
 	GetTreeCtrl().SetImageList(pImageList, TVSIL_NORMAL);
 	
-
-//Deda: Naplneni TreeCtrl
-	GetDocument()->FillTreeControl(GetTreeCtrl());
-
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -173,5 +169,10 @@ void CSkeletonView::OnUpdate(CView* pSender, LPARAM lHint, CObject* pHint)
 
 
 		GetDocument()->InsetNodeToTreeCtrl((IXMLDOMElementPtr) new_element, tree.GetSelectedItem(), tree);
+	} else
+	{
+		//Deda: Naplneni TreeCtrl
+		GetDocument()->FillTreeControl(GetTreeCtrl());
+
 	}
 }

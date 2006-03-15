@@ -56,6 +56,7 @@ protected:
 	//{{AFX_MSG(CSkeletonDoc)
 	afx_msg void OnMmnew4fthyp();
 	afx_msg void OnElementEdit();
+	afx_msg void OnMmgenrep();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 public:

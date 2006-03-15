@@ -106,6 +106,10 @@ SOURCE=.\ElementText.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\GenerateDialog.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\MainFrm.cpp
 # End Source File
 # Begin Source File
@@ -156,6 +160,10 @@ SOURCE=.\ElementManager.h
 # Begin Source File
 
 SOURCE=.\ElementText.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\GenerateDialog.h
 # End Source File
 # Begin Source File
 

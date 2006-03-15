@@ -174,24 +174,49 @@ _bstr_t CSkeletonManager::GetPluginOutput(CDataSorcesManager::public_source_id_t
 
 void CSkeletonManager::Generate()
 {
-/*	
-	//pridat klonovani
+	IXMLDOMElementPtr doc_element;
 	
-	GenerTransform1(m_skeleton->documentElement);
 
-	m_skeleton->save("../out.xml");
+#ifdef DONT_CLONE_REPORT_BEFORE_GENERATE
+	doc_element = m_skeleton->documentElement;
+#else
+	//klonuje cely dokumnet
+	doc_element = m_skeleton->documentElement->cloneNode(VARIANT_TRUE);
+#endif
+	
+	//provede transformace
+	GenerTransform1(doc_element);
+
+	
+
+//	doc_element->save("../out.xml");
 
 
 	
-	
-	
+/*****///generovani do Wordu	
+
 	LMRA_WordLoader::_LMRA_XML_WordLoaderPtr word;
 	word.CreateInstance(CLSID_LMRA_XML_WordLoader);
-	
-	word->LoadFromString(m_skeleton->xml);
+
+	try
+	{	
+		word->LoadFromString(doc_element->xml);
+	}
+	catch (_com_error & e)
+	{
+		CString err = "Chyba pri generovani.\n\nposledni zpracovavane id:   ";
+		err += word->GetstrLastProcessedId();
+		err += "\n\n";
+		err += word->GetstrLastError();
+		err += "\n";
+		err += e.Description();
+		err += "\n";
+		err += e.ErrorMessage();
+		AfxMessageBox(err);
+	}
 
 	word.Release();
-*/
+/******/
 }
 
 
@@ -209,10 +234,10 @@ void CSkeletonManager::Transform1Node(IXMLDOMElementPtr & element)
 {
 	if (element == NULL) return;
 
+	CElementManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
 
-	CString ft_name = "active_element";
 
-	if (((BSTR) element->baseName != 0) && (ft_name == element->baseName))
+	if (m.IsElementActive(m.IdentifyElement(element)))
 	{
 		TransformActiveElement(element);
 	}
@@ -239,12 +264,13 @@ void CSkeletonManager::TransformActiveElement(IXMLDOMElementPtr & element)
 	tr.DoAllTransnformations();
 
 
+//honza: ladici - lze pouzit pro generovani preview
 /***
 	IXMLDOMElementPtr klon = element->cloneNode(VARIANT_TRUE);
 
 	CAPTransform tr(klon, * this);
 
-	AfxMessageBox(tr.DoAllTransnformations()->xml, 0, 0);
+	AfxMessageBox(tr.DoAllTransnformations()->xml);
 
 	klon.Release();
 

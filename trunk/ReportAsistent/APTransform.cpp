@@ -24,7 +24,7 @@ static char THIS_FILE[]=__FILE__;
 CAPTransform::CAPTransform(IXMLDOMElementPtr & node, CSkeletonManager & skel)
 	:m_active_element(node), m_skel_manager(skel)
 {
-	//nacteni pluginoutput
+	//pouze nacteni pluginoutput
 	
 	m_plug_out.CreateInstance(_T("Msxml2.DOMDocument"));
 	m_plug_out->async = VARIANT_FALSE; // default - true,
@@ -44,12 +44,15 @@ CAPTransform::~CAPTransform()
 
 IXMLDOMDocumentFragmentPtr CAPTransform::DoAllTransnformations()
 {
+	//document fragment kam se budou ukladat jednotlive transformace
 	IXMLDOMDocumentFragmentPtr parent_frag =
 		m_active_element->ownerDocument->createDocumentFragment();
 	
+	//provede tranformace na kazdou polozku vybranou v simple filter
 	ProcessSimpleFlter( (IXMLDOMNodePtr) parent_frag );
 
 
+	//pokud ma aktivni prvek rodice, nahradime ho vysledkem transformaci
 	if (m_active_element->parentNode != NULL)
 	{
 		m_active_element->parentNode->replaceChild(parent_frag, m_active_element);
@@ -75,8 +78,23 @@ void CAPTransform::ProcessSimpleFlter(IXMLDOMNodePtr & destination_parent)
 		//napriklad: select = "id('hyp1')"
 
 
-		ProcessAllTransformations(
-			m_plug_out->selectSingleNode((LPCTSTR) select), destination_parent);
+		
+		IXMLDOMNodePtr node_to_transform = m_plug_out->selectSingleNode((LPCTSTR) select);
+		
+		if (node_to_transform == NULL)
+		{
+			CString errs = "Warovani: Volba v simple filtru je neplatna.\n\nSelect string:\n";
+			errs += select;
+			AfxMessageBox(errs);
+		}
+		else
+		{
+			ProcessAllTransformations(node_to_transform, destination_parent);
+		}
+			
+
+
+		
 
 	}
 }
@@ -117,7 +135,7 @@ void CAPTransform::ProcessSingleTransformation(IXMLDOMNodePtr & target,
 	transofmed_node.CreateInstance(_T("Msxml2.DOMDocument"));
 	transofmed_node->async = VARIANT_FALSE; // default - true,
 
-
+	
 	//provedeni transformace
 	transofmed_node->loadXML(target->transformNode(transformation_doc));
 

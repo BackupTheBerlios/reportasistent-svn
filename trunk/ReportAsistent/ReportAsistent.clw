@@ -2,28 +2,30 @@
 
 [General Info]
 Version=1
-LastClass=CMainFrame
+LastClass=CGenerateDialog
 LastTemplate=CDialog
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "ReportAsistent.h"
 LastPage=0
 
-ClassCount=7
+ClassCount=8
 Class1=CReportAsistentApp
 Class2=CSkeletonDoc
 Class3=CSkeletonView
 Class4=CMainFrame
 
-ResourceCount=6
+ResourceCount=7
 Resource1=IDD_ABOUTBOX
 Resource2=IDR_MAINFRAME
 Class5=CAboutDlg
 Resource3=IDD_ABOUTBOX (English (U.S.))
-Resource4=IDD_DIALOGTEXT (English (U.S.))
+Resource4=IDD_GENERATE_DIALOG (English (U.S.))
 Class6=CElementText
-Resource5=IDD_SIMPLE_FILTER_DIALOG
+Resource5=IDD_DIALOGTEXT (English (U.S.))
 Class7=CSimpleFilterDialog
-Resource6=IDR_MAINFRAME (English (U.S.))
+Resource6=IDD_SIMPLE_FILTER_DIALOG
+Class8=CGenerateDialog
+Resource7=IDR_MAINFRAME (English (U.S.))
 
 [CLS:CReportAsistentApp]
 Type=0
@@ -56,7 +58,7 @@ Type=0
 HeaderFile=MainFrm.h
 ImplementationFile=MainFrm.cpp
 Filter=T
-LastObject=ID_MMNEW4FTHYP
+LastObject=CMainFrame
 BaseClass=CFrameWnd
 VirtualFilter=fWC
 
@@ -222,5 +224,20 @@ ImplementationFile=SimpleFilterDialog.cpp
 BaseClass=CDialog
 Filter=D
 LastObject=IDC_FILTER_LIST
+VirtualFilter=dWC
+
+[DLG:IDD_GENERATE_DIALOG (English (U.S.))]
+Type=1
+Class=CGenerateDialog
+ControlCount=1
+Control1=IDC_GENERATE_BUTTON,button,1342251008
+
+[CLS:CGenerateDialog]
+Type=0
+HeaderFile=GenerateDialog.h
+ImplementationFile=GenerateDialog.cpp
+BaseClass=CDialog
+Filter=D
+LastObject=CGenerateDialog
 VirtualFilter=dWC
 
