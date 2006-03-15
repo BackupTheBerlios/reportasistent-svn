@@ -79,7 +79,7 @@ BEGIN
     LTEXT           "- osobne bych privital, kdyz bych se ktomu uz nemusel vracet",
                     IDC_STATIC,145,31,294,9
     LTEXT           "Data source:",IDC_STATIC,58,210,42,8
-    COMBOBOX        IDC_DATA_SOURCE_COMBO,56,220,208,30,CBS_DROPDOWNLIST | 
+    COMBOBOX        IDC_DATA_SOURCE_COMBO,56,220,208,72,CBS_DROPDOWNLIST | 
                     CBS_SORT | WS_VSCROLL | WS_TABSTOP
 END
 

@@ -55,6 +55,7 @@ protected:
 	virtual BOOL OnInitDialog();
 	virtual void OnOK();
 	afx_msg void OnDeleteitemFilterList(NMHDR* pNMHDR, LRESULT* pResult);
+	afx_msg void OnSelchangeDataSourceCombo();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 private:

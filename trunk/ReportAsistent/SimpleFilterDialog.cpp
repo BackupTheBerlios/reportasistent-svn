@@ -60,6 +60,7 @@ void CSimpleFilterDialog::DoDataExchange(CDataExchange* pDX)
 BEGIN_MESSAGE_MAP(CSimpleFilterDialog, CDialog)
 	//{{AFX_MSG_MAP(CSimpleFilterDialog)
 	ON_NOTIFY(LVN_DELETEITEM, IDC_FILTER_LIST, OnDeleteitemFilterList)
+	ON_CBN_SELCHANGE(IDC_DATA_SOURCE_COMBO, OnSelchangeDataSourceCombo)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -70,18 +71,25 @@ BOOL CSimpleFilterDialog::OnInitDialog()
 {
 	CDialog::OnInitDialog();
 
-	 CDataSourceManager & dm = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->DataSourceManager;
-	 CElementManager & em = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
+	CDataSourceManager & dm = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->DataSourceManager;
+	CElementManager & em = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
 
-	 for (int a=0; a< dm.getSourcesCount(); a++)
-	 {
-//		 if (em.ElementSupportedBySource)
-	 }
+	for (int a=0; a< dm.getSourcesCount(); a++)
+	{
+		if (em.ElementSupportedBySource(em.IdentifyElement(m_active_element), a))
+		{
+			m_SourcesCombo.AddString(dm.getSourcePublicID(a));
+		}
+	}
 
 
 
-	
-	
+	int sel = m_SourcesCombo.SelectString(-1, (_bstr_t) m_active_element->getAttribute("source"));
+	if (sel == CB_ERR) m_SourcesCombo.SelectString(-1, dm.getSourcePublicID(0));
+
+	OnSelchangeDataSourceCombo();
+	  
+
 	return TRUE;  // return TRUE unless you set the focus to a control
 	              // EXCEPTION: OCX Property Pages should return FALSE
 }
@@ -96,6 +104,10 @@ void CSimpleFilterDialog::OnOK()
 		return;
 	}
 
+	CString source;
+	m_SourcesCombo.GetWindowText(source);
+	m_active_element->setAttribute("source", (LPCTSTR) source);
+	
 	//okopiruje vzorovy element selection
 	IXMLDOMNodePtr select_node = m_active_element->selectSingleNode("filter[@type='simple']/selection")->cloneNode(VARIANT_FALSE);
 	
@@ -169,8 +181,8 @@ BOOL CSimpleFilterDialog::LoadSource(CDataSourceManager::public_source_id_t sId)
 
 CSimpleFilterDialog::~CSimpleFilterDialog()
 {
-	m_filter_DOM.Release();
-	m_filter_transform.Release();
+	if (m_filter_DOM != NULL) m_filter_DOM.Release();
+	if (m_filter_transform != NULL) m_filter_transform.Release();
 }
 
 void CSimpleFilterDialog::UpDateDialog()
@@ -241,6 +253,22 @@ void CSimpleFilterDialog::UpDateDialog()
 		if (select != NULL)
 			m_FilterList.SetItemState(b, LVIS_SELECTED, LVIS_SELECTED);
 
+	}
+
+}
+
+void CSimpleFilterDialog::OnSelchangeDataSourceCombo() 
+{	
+	CString text;
+	m_SourcesCombo.GetWindowText(text);
+
+	if (LoadSource(text))
+	{
+		UpDateDialog();
+	}
+	else
+	{
+		AfxMessageBox("sds");
 	}
 
 }
