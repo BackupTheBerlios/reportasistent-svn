@@ -183,9 +183,10 @@ BOOL CElementManager::CanAppendChildHere(IXMLDOMElementPtr &child, IXMLDOMElemen
 	parent->removeChild(new_child_appended);
 
 	
-	//ladici
+	/*****///honza: ladici klidne zakomentujete
 	int a = err->errorCode;
 	if (a != S_OK) AfxMessageBox(err->reason);
+	/*****/
 
 	return 	err->errorCode == S_OK;	
 }

@@ -299,7 +299,8 @@ void CSkeletonDoc::OnMmnew4fthyp()
 	HTREEITEM item = tree.GetSelectedItem();
 	IXMLDOMElementPtr selected_element = m_SkeletonManager.ElementFromItemData(tree.GetItemData( item ));			
 	
-	//zobrazi zpravu s typem vybraneho elementu - ladici, mozno smazat
+	//zobrazi zpravu s typem vybraneho elementu
+	//honza: ladici klidne zakomentujte
 	/****/
 	CGeneralManager * m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager;
 	CElementManager::elId id = m->ElementManager.IdentifyElement(selected_element);
