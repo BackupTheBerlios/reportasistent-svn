@@ -138,6 +138,10 @@ SOURCE=.\SkeletonView.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\SourcesDialog.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\StdAfx.cpp
 # ADD CPP /Yc"stdafx.h"
 # End Source File
@@ -192,6 +196,10 @@ SOURCE=.\SkeletonManager.h
 # Begin Source File
 
 SOURCE=.\SkeletonView.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\SourcesDialog.h
 # End Source File
 # Begin Source File
 

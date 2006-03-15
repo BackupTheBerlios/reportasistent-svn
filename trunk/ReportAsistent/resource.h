@@ -23,12 +23,12 @@
 #define IDC_DIALTEXT_EDIT               1001
 #define IDC_GENERATE_BUTTON             1002
 #define IDC_DATA_SOURCE_COMBO           1003
-#define IDC_COMBO1                      1004
-#define IDC_BUTTON1                     1006
-#define IDC_LIST2                       1007
-#define IDC_BUTTON2                     1008
-#define IDC_BUTTON3                     1009
-#define IDC_BUTTON4                     1010
+#define IDC_PLUGINS_COMBO               1004
+#define IDC_ADD_SOURCE_BUTTON           1006
+#define IDC_SOURCES_LIST                1007
+#define IDC_CONNECT_BUTTON              1008
+#define IDC_DISCONNECT_BUTTON           1009
+#define IDC_RENAME_BUTTON               1010
 #define ID_MMGENREP                     32771
 #define ID_MMSOURCES                    32772
 #define ID_MMNEWTEXT                    32774
@@ -38,6 +38,7 @@
 #define ID_ELEMENT_EDIT                 32780
 #define IDS_INSERT_NEW_ELEMENT_WRONG_LOCATION 61204
 #define IDS_SIMPLE_FILTER_EMPTY_SELECTION 61205
+#define IDS_SIMPLE_FILTER_FAILED_SOURCE_LOAD 61206
 
 // Next default values for new objects
 // 

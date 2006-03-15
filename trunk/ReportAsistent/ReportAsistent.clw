@@ -2,13 +2,13 @@
 
 [General Info]
 Version=1
-LastClass=CSimpleFilterDialog
+LastClass=CSourcesDialog
 LastTemplate=CDialog
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "ReportAsistent.h"
 LastPage=0
 
-ClassCount=8
+ClassCount=9
 Class1=CReportAsistentApp
 Class2=CSkeletonDoc
 Class3=CSkeletonView
@@ -18,14 +18,15 @@ ResourceCount=8
 Resource1=IDD_ABOUTBOX
 Resource2=IDR_MAINFRAME
 Class5=CAboutDlg
-Resource3=IDD_GENERATE_DIALOG (English (U.S.))
-Resource4=IDD_SIMPLE_FILTER_DIALOG
+Resource3=IDD_SOURCES_DIALOG
+Resource4=IDD_GENERATE_DIALOG (English (U.S.))
 Class6=CElementText
-Resource5=IDD_ABOUTBOX (English (U.S.))
+Resource5=IDD_DIALOGTEXT (English (U.S.))
 Class7=CSimpleFilterDialog
-Resource6=IDD_SOURCES_DIALOG
+Resource6=IDD_SIMPLE_FILTER_DIALOG
 Class8=CGenerateDialog
-Resource7=IDD_DIALOGTEXT (English (U.S.))
+Resource7=IDD_ABOUTBOX (English (U.S.))
+Class9=CSourcesDialog
 Resource8=IDR_MAINFRAME (English (U.S.))
 
 [CLS:CReportAsistentApp]
@@ -226,7 +227,7 @@ HeaderFile=SimpleFilterDialog.h
 ImplementationFile=SimpleFilterDialog.cpp
 BaseClass=CDialog
 Filter=D
-LastObject=IDC_DATA_SOURCE_COMBO
+LastObject=CSimpleFilterDialog
 VirtualFilter=dWC
 
 [DLG:IDD_GENERATE_DIALOG (English (U.S.))]
@@ -246,15 +247,24 @@ VirtualFilter=dWC
 
 [DLG:IDD_SOURCES_DIALOG]
 Type=1
-Class=?
+Class=CSourcesDialog
 ControlCount=9
 Control1=IDC_STATIC,static,1342308352
 Control2=IDC_STATIC,static,1342308352
-Control3=IDC_COMBO1,combobox,1344340227
+Control3=IDC_PLUGINS_COMBO,combobox,1344340227
 Control4=IDC_STATIC,button,1342177287
-Control5=IDC_BUTTON1,button,1342242816
-Control6=IDC_LIST2,SysListView32,1350631429
-Control7=IDC_BUTTON2,button,1342242816
-Control8=IDC_BUTTON3,button,1342242816
-Control9=IDC_BUTTON4,button,1342242816
+Control5=IDC_ADD_SOURCE_BUTTON,button,1342242816
+Control6=IDC_SOURCES_LIST,SysListView32,1350631429
+Control7=IDC_CONNECT_BUTTON,button,1342242816
+Control8=IDC_DISCONNECT_BUTTON,button,1342242816
+Control9=IDC_RENAME_BUTTON,button,1342242816
+
+[CLS:CSourcesDialog]
+Type=0
+HeaderFile=SourcesDialog.h
+ImplementationFile=SourcesDialog.cpp
+BaseClass=CDialog
+Filter=D
+LastObject=IDC_SOURCES_LIST
+VirtualFilter=dWC
 

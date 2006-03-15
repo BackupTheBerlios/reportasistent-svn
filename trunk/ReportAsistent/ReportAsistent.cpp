@@ -7,7 +7,7 @@
 #include "MainFrm.h"
 #include "CSkeletonDoc.h"
 #include "SkeletonView.h"
-
+#include "SourcesDialog.h"
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #undef THIS_FILE
@@ -21,6 +21,7 @@ BEGIN_MESSAGE_MAP(CReportAsistentApp, CWinApp)
 	//{{AFX_MSG_MAP(CReportAsistentApp)
 	ON_COMMAND(ID_APP_ABOUT, OnAppAbout)
 	ON_COMMAND(ID_MMNEWTEXT, OnMMNewText)
+	ON_COMMAND(ID_MMSOURCES, OnMmsources)
 	//}}AFX_MSG_MAP
 	// Standard file based document commands
 	ON_COMMAND(ID_FILE_NEW, CWinApp::OnFileNew)
@@ -192,4 +193,13 @@ CSkeletonDoc * CReportAsistentApp::FirstDocumentInFirstTemplate()
 	pos = t->GetFirstDocPosition();
 	return (CSkeletonDoc *) t->GetNextDoc(pos);
 
+}
+
+//honza
+void CReportAsistentApp::OnMmsources() 
+{
+	CSourcesDialog dlg(AfxGetMainWnd());
+
+	dlg.DoModal();
+	
 }

@@ -268,7 +268,7 @@ void CSimpleFilterDialog::OnSelchangeDataSourceCombo()
 	}
 	else
 	{
-		AfxMessageBox("sds");
+		AfxMessageBox(IDS_SIMPLE_FILTER_FAILED_SOURCE_LOAD);
 	}
 
 }

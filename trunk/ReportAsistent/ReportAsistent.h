@@ -65,6 +65,7 @@ public:
 	//{{AFX_MSG(CReportAsistentApp)
 	afx_msg void OnAppAbout();
 	afx_msg void OnMMNewText();
+	afx_msg void OnMmsources();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };
