@@ -13,11 +13,11 @@
 
 // ================= INCLUDE ==================================
 #include <afxtempl.h>
-#include "../LMPlugin/SockInterface.h"
+#include "../SZZ/SockInterface.h"
 
 
 
-// ================= MAKRA ===================================
+/// ================= MAKRA ===================================
 
 // --- cesty k adresarum
 
@@ -112,13 +112,9 @@ class CDataSourcesManager
 public:
 
 //  DATA
-//	CArray<CPluginRec,CPluginRec> PlugsTab;		// tabulka zasuvek
-	int getPlugsCount();			// pocet pripojenych zasuvek (prvku PlugsTab)
-	int getValidPlugsCount();		// pocet pripojenych platnych zasuvek
-
-//	CArray<CSourceRec,CSourceRec> SourcesTab;	// tabulka zdroju
-	int getSourcesCount();
-	int getValidSourcesCount();
+	CArray<CPluginRec,CPluginRec> PlugsTab;		// tabulka zasuvek
+	CArray<CSourceRec,CSourceRec> SourcesTab;	// tabulka zdroju
+	
 
 // METODY
 	// konstruktor a destruktor
@@ -132,7 +128,29 @@ public:
 	BOOL initSourcesTab();
 	// ulozi tabulku zdroju do konfiguracniho XML souboru
 	BOOL saveSourcesTab();
+
+
+
+	// --- pristupove metody do tabulky zasuvek (PlugsTab)
 	
+	// pocet pripojenych zasuvek (prvku PlugsTab) / pocet pripojenych platnych zasuvek
+	int getPlugsCount();			
+	int getValidPlugsCount();
+
+	// vrati PluginName zasuvky na dane pozici
+	plugin_id_t getPluginID(int plugin_index);
+
+	//  vrati index v PlugsTab, kdr je zasuvka s PluginName name nebo -1 (nenalezeno)
+	int FindPluginByPluginName(plugin_id_t name);
+
+
+
+	// --- pristupove a konfiguracni metody do tabulky zdroju (SourcesTab)
+
+	// vrati pocet zdroju (prvku v tabulce SourcesTab)
+	int getSourcesCount();
+	int getValidSourcesCount();
+
 	// vrati PublicID prvku na pozici source_index v tabulce zdroju
 	public_source_id_t getSourcePublicID(int source_index);
 
@@ -146,23 +164,25 @@ public:
 	source_handle_t getSourceHandle(int source_index);	
 	
 
-  
-
-
-	BOOL setSourcePublicID(int source_index, public_source_id_t source_id); //prejmenovani zdroje
+	// prejmenovani zdroje
+	BOOL setSourcePublicID(int source_index, public_source_id_t source_id); 
 	
+	// je zdroj pripojen?
 	BOOL isSourceConnected(int source_index);
 	
-	int ConnectNewSource(plugin_id_t plugin);	//pres zasuvku pripoji novy zdroj
-												//vrati index noveho zdroje
+	//pres zasuvku pripoji novy zdroj
+	int ConnectNewSource(plugin_id_t plugin);	//vrati index noveho zdroje, (-1 = chyba)
+												
+	//vyhodi zdroj z tabulky zdroju
+	BOOL RemoveSource(int source_index);	
 
-	BOOL RemoveSource(int source_index);	//vyhodi zdroj z tabulky zdroju
-
-	BOOL ConnectSource(int source_index);
 	//pripoji jiz znamy zdroj pres zname persistnet_id na indexu source_index
+	BOOL ConnectSource(int source_index);
 	
+	// uzavre zdroj
 	BOOL CloseSource(int source_index);
 
+	// najde zdroj podle PublicID a vrati jeho index v tabulce
 	int FindSourceByPublicID(public_source_id_t id); //vrati index odpovidajiciho zdroje
 
 
@@ -171,6 +191,7 @@ public:
 	//cast jejich source manageru pretahnout
 	//predbezne:
 	int AddSource(plugin_id_t plugin, persistent_id_t persistent_id, public_source_id_t public_id);
+	// vrati index pridaneho prvku v tabulce zdroju
 
 
 	//metody na ulozeni a nacteni SorcesManageru - potencialne ukladat primo do kostry..
@@ -184,80 +205,14 @@ public:
 */	
 	//a tady nebo v plugin mamageru budou funkce pro zavaloni perform na danem zdroji
 	//predbezne:
-	BSTR CallPerformProc(int source_index, BSTR element_id); //vrati XML string
+	BSTR CallPerformProc(int source_index, LPCTSTR element_id); //vrati XML string
 
-};
-
-
-
-/*
-//honza: pracovni prijde nahradit tridou kodyho
-class CDataSourceManager
-{
-public:
-
-	//handle na otevreny zdroj v zasuvce
-	typedef unsigned int source_handle_t;
-
-	//perzistentni retezec (obshuje napr connection string, cestu k souboru)
-	//mozna bude vhodnejsi jiny string - ?char *, _bstr_t, CString? uvidime..
-	typedef BSTR persistent_id_t;
-
-	//retezec pouzivany v kostre u AP jako identifikator zdroje
-	//mozna bude vhodnejsi jiny string - ?char *, _bstr_t, CString? uvidime..
-	typedef LPCTSTR public_source_id_t;
-
-	//identifikuje zasuvku
-	//odkaz na plugin managera
-	//mozna bude lesi pouzit retezec jmeno dll knihovny - lze jednoznacne ulozit do XML
-	typedef unsigned int plugin_id_t;
-
-	//identifikator typu aktivniho prvku
-	typedef _bstr_t ap_id_t;
-
-	
-	int getSourcesCount();
-	
-	public_source_id_t getSourcePublicID(int source_index);
-	persistent_id_t getSourcePersistentID(int source_index);
-	source_handle_t getSourceHandle(int source_index);	
-	plugin_id_t getSourcePlugin(int source_index);
-
-	BOOL setSourcePublicID(int source_index, public_source_id_t source_id); //prejmenovani zdroje
-	
-	BOOL isSourceConnected(int source_index);
-	
-	int ConnectNewSource(plugin_id_t plugin);	//pres zasuvku pripoji novy zdroj
-												//vrati index noveho zdroje
-
-	BOOL RemoveSource(int source_index);	//vyhodi zdroj z tabulky zdroju
-
-	BOOL ConnectSource(int source_index);
-	//pripoji jiz znamy zdroj pres zname persistnet_id na indexu source_index
-	
-	BOOL CloseSource(int source_index);
-
-	int FindSourceByPublicID(public_source_id_t id); //vrati index odpovidajiciho zdroje
-
-
-	//dal tady budou muset byt metody na reseni sirotku a pretahovani AP z koster,
-	//ktere treba nebyly vytvoreny pomoci tohoto SourcesManageru - tedy se sem bude muset nejak
-	//cast jejich source manageru pretahnout
-	//predbezne:
-	int AddSource(plugin_id_t plugin, persistent_id_t persistent_id, public_source_id_t public_id);
-
-
-	//metody na ulozeni a nacteni SorcesManageru - potencialne ukladat primo do kostry..
-	//ty se pouziji v konstruktoru/destruktoru
-	//predbezne:
-	BOOL LoadFromXML(BSTR xml_string);
-	BSTR SaveToXML(); //vrati XML string
-
-	
-	//a tady nebo v plugin mamageru budou funkce pro zavaloni perform na danem zdroji
-	//predbezne:
-	BSTR CallPerformProc(int source_index, BSTR element_id); //vrati XML string
-};
+/* kody - pro Dedu
+  // alternativa
+	BOOL CallPerformProc(int source_index, char* element_id, BSTR* Result);
 */
+};
+
+
 
 #endif // !defined(AFX_DATASOURCEMANAGER_H__976787EC_9D7F_4080_B685_F88419DA19FB__INCLUDED_)

@@ -159,7 +159,10 @@ void CSkeletonManager::ConfigureFilter(IXMLDOMElementPtr & active_element)
 
 _bstr_t CSkeletonManager::GetPluginOutput(public_source_id_t source, LPCTSTR ap_name)
 {
+	CDataSourcesManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->DataSourcesManager;
 
+	return m.CallPerformProc(m.FindSourceByPublicID(source), ap_name);
+/*
 	CString ft = ap_name;
 
 	if (ft != "hyp_4ft") return (BSTR) NULL;
@@ -175,6 +178,7 @@ _bstr_t CSkeletonManager::GetPluginOutput(public_source_id_t source, LPCTSTR ap_
 	el_hyp->setAttribute("db_name", (LPCTSTR) source);
 
 	return dom->xml;
+*/
 }
 
 void CSkeletonManager::Generate()

@@ -1,7 +1,10 @@
+// verze 1.0	14.3.2006	J. Kodym
+
 #ifndef _SOCK_INTERFACE
 #define _SOCK_INTERFACE
 
 #include <wtypes.h>
+
 
 /*
 struktura CSockInterface
@@ -95,5 +98,6 @@ struct CSockInterface {
 	hOpenSource_t hOpenSource;
 	hCloseSource_t hCloseSource;	 
 };
+
 
 #endif  // _SOCK_INTERFACE
