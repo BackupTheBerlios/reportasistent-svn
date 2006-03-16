@@ -1,0 +1,33 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: SZZ - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\DOCUME~1\Honza\LOCALS~1\Temp\RSPB09.tmp" with contents
+[
+/nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_CONSOLE" /D "_MBCS" /D "_AFXDLL" /FR"Debug/" /Fp"Debug/SZZ.pch" /YX /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"D:\Projekt\Vyvoj\SZZ\DataSourceManager.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\Honza\LOCALS~1\Temp\RSPB09.tmp" 
+Creating command line "link.exe /nologo /subsystem:console /incremental:yes /pdb:"Debug/SZZ.pdb" /debug /machine:I386 /out:"Debug/SZZ.exe" /pdbtype:sept  .\Debug\DataSourceManager.obj "
+<h3>Output Window</h3>
+Compiling...
+DataSourceManager.cpp
+Linking...
+msvcrtd.lib(crtexe.obj) : error LNK2001: unresolved external symbol _main
+Debug/SZZ.exe : fatal error LNK1120: 1 unresolved externals
+Error executing link.exe.
+Creating command line "bscmake.exe /nologo /o"Debug/SZZ.bsc"  .\Debug\DataSourceManager.sbr"
+Creating browse info file...
+<h3>Output Window</h3>
+
+
+
+<h3>Results</h3>
+SZZ.exe - 2 error(s), 0 warning(s)
+</pre>
+</body>
+</html>
