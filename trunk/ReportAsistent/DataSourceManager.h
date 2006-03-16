@@ -13,7 +13,7 @@
 
 // ================= INCLUDE ==================================
 #include <afxtempl.h>
-#include "../SZZ/SockInterface.h"
+#include "../LMPlugin/SockInterface.h"
 
 
 
