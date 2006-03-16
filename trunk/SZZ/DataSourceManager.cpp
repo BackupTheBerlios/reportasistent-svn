@@ -4,7 +4,7 @@
 #include "DataSourceManager.h"
 
 
-
+/////////////////////////////////////////////////////////////////
 // implementace metod
 
 /////////////////////////////////////////////////////////////////
@@ -79,7 +79,7 @@ CDataSourcesManager::~CDataSourcesManager()
 
 
 
-// ---- sprava zasuvek
+// ---- sprava zasuvek ----------------------
 
 // initPlugsTab
 int CDataSourcesManager::initPlugsTab()
@@ -129,7 +129,7 @@ int CDataSourcesManager::initPlugsTab()
 
 
 
-// ---- sprava zdroju
+// ---- sprava zdroju ----------------------
 
 // InitSourcesTab
 BOOL CDataSourcesManager::initSourcesTab()
@@ -222,7 +222,7 @@ BOOL CDataSourcesManager::initSourcesTab()
 
 
 
-// --- pristupove metody do tabulky zasuvek (PlugsTab)
+// --- pristupove metody do tabulky zasuvek (PlugsTab) ----------------------
 
 // getValidPlugsCount
 int CDataSourcesManager::getValidPlugsCount()
@@ -272,7 +272,7 @@ int CDataSourcesManager::FindPluginByPluginName(plugin_id_t name)
 }
 
 
-// --- pristupove a konfiguracni metody do tabulky zdroju (SourcesTab)
+// --- pristupove a konfiguracni metody do tabulky zdroju (SourcesTab) ----------------------
 
 
 // getSourcesCount
@@ -517,7 +517,7 @@ int CDataSourcesManager::AddSource(plugin_id_t plugin, persistent_id_t persisten
 
 
 
-// --- volani funkce Perform
+// --- volani funkce Perform ----------------------
 
 // CallPerformProc
 // Kody - upravil jsem typ u parametru  element_id z BSTR na char*, tak to chce jadro
@@ -637,5 +637,5 @@ int main(int argc, char** argv)
 	void* pt = SM.getSourceHandle(-1);
 	return 0;
 }
-
 */
+
