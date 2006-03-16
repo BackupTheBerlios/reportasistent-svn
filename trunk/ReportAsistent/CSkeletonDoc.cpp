@@ -309,7 +309,7 @@ void CSkeletonDoc::OnMmnew4fthyp()
 
 
 	
-	
+	 
 	IXMLDOMElementPtr new_element = 
 		m_SkeletonManager.InsertNewElement("hyp_4ft", selected_element);
 

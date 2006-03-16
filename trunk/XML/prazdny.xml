@@ -104,5 +104,7 @@
 			</output>
 		</active_element>
 	</chapter>
+	<!--
 	<include file="../XML/include_doc.doc" id="include1"/>
+	-->
 </report>
