@@ -380,6 +380,29 @@ BOOL CDataSourcesManager::isSourceConnected(int source_index)
 }
 
 
+BOOL CDataSourcesManager::isSourceValid(int source_index)
+{
+	if(SourcesTab.GetUpperBound() >= source_index  &&  source_index>=0)
+	{
+		return SourcesTab[source_index].Valid();
+	}
+
+	return FALSE;
+}
+
+BOOL CDataSourcesManager::isPluginValid(int plugin_index)
+{
+	if(PlugsTab.GetUpperBound() >= plugin_index  &&  plugin_index>=0)
+	{
+		return PlugsTab[plugin_index].Valid();
+	}
+
+	return FALSE;
+
+}
+
+
+
 // ConnectNewSource
 int CDataSourcesManager::ConnectNewSource(plugin_id_t plugin)   //pres zasuvku pripoji novy zdroj
 {
@@ -410,6 +433,11 @@ int CDataSourcesManager::ConnectNewSource(plugin_id_t plugin)   //pres zasuvku p
 	SourcesTab[j].SourceHandle = NewSourceHandler;
 	SourcesTab[j].PluginID = PlugsTab[i].PluginName;
 	SourcesTab[j].PluginIndex = i;
+	
+	//pridal dedek
+	CString public_id;
+	public_id.Format("new_%s_source_%d", (LPCTSTR) PlugsTab[i].PluginName, getSourcesCount());
+	SourcesTab[j].PublicID = public_id;
 	
 	SysFreeString(NewSourcePerzistID);
 	return j;	
@@ -560,8 +588,10 @@ BSTR CDataSourcesManager::CallPerformProc(int source_index, LPCTSTR element_id) 
 	int j = SourcesTab[SI].PluginIndex;  // nalezeni indexu zasuvky
 
 	if((j != -1) && (PlugsTab[j].Valid()) && (SourcesTab[SI].SourceHandle != NULL)) // zasuvka je platna a zdroj otevreny
+	{
 		// zavolani  fce Perform zasuvky
 		BOOL PerfRes = PlugsTab[j].SockInterface->hPerform(SourcesTab[SI].SourceHandle, element_id, &Result);
+	}
 
 	return Result;
 }

@@ -27,8 +27,11 @@
 #define IDC_ADD_SOURCE_BUTTON           1006
 #define IDC_SOURCES_LIST                1007
 #define IDC_CONNECT_BUTTON              1008
+#define IDC_OPEN_BUTTON                 1008
 #define IDC_DISCONNECT_BUTTON           1009
-#define IDC_RENAME_BUTTON               1010
+#define IDC_CLOSE_BUTTON                1009
+#define IDC_REMOVE_BUTTON               1010
+#define IDC_RENAME_BUTTON               1011
 #define ID_MMGENREP                     32771
 #define ID_MMSOURCES                    32772
 #define ID_MMNEWTEXT                    32774

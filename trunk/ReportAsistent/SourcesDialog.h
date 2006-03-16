@@ -18,11 +18,13 @@ private:
 	static LPCTSTR header_captions [];
 // Construction
 public:
+	void UpDateList();
 	CSourcesDialog(CWnd* pParent = NULL);   // standard constructor
 
 // Dialog Data
 	//{{AFX_DATA(CSourcesDialog)
 	enum { IDD = IDD_SOURCES_DIALOG };
+	CComboBox	m_PluginCombo;
 	CListCtrl	m_SourcesList;
 	//}}AFX_DATA
 
@@ -40,6 +42,12 @@ protected:
 	// Generated message map functions
 	//{{AFX_MSG(CSourcesDialog)
 	virtual BOOL OnInitDialog();
+	afx_msg void OnAddSourceButton();
+	afx_msg void OnOpenButton();
+	afx_msg void OnCloseButton();
+	afx_msg void OnRemoveButton();
+	afx_msg void OnRenameButton();
+	afx_msg void OnEndlabeleditSourcesList(NMHDR* pNMHDR, LRESULT* pResult);
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };

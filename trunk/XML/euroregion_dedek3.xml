@@ -390,7 +390,7 @@ Hodnoty jsou normalizované vzhledem k poètu zástupcù v jednotlivých kategoriích.
 	</chapter>
 
 </chapter>
-
+<!--
 <include file="../XML/include_doc.doc" id="include1"/>
-
+-->
 </report>

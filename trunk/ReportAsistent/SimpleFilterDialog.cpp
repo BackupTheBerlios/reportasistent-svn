@@ -158,9 +158,17 @@ BOOL CSimpleFilterDialog::LoadSource(public_source_id_t sId)
 	IXMLDOMDocumentPtr filter_doc;
 	filter_doc.CreateInstance(_T("Msxml2.DOMDocument"));
 	filter_doc->async = VARIANT_FALSE; // default - true,	
-	filter_doc->loadXML(
-		CSkeletonManager::GetPluginOutput(sId,
-				(_bstr_t) m_active_element->getAttribute("type")));
+
+	_bstr_t s_out = 
+		CSkeletonManager::GetPluginOutput(sId, (_bstr_t) m_active_element->getAttribute("type"));
+
+	if (NULL == (BSTR) s_out) 
+	{
+		filter_doc.Release();
+		return FALSE;	
+	}
+
+	filter_doc->loadXML(s_out);
 
 	//transformuje data z plugin output a vysledek nacte do m_filter_dom	
 	filter_doc->loadXML(

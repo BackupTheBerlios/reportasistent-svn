@@ -3,17 +3,38 @@ honzovy poznamky:
 
 dodelat:
 pokud je plugin output prazdny simple filter a mozna i generovani spadne
+hotovo snad :)
 
+
+
+			m_pGeneralManager
 
 ve tride App je promenna m_pGeneralManager pro instance globalnich manageru
 pro pouziti techto manageru:
+
 ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager
 
 CGeneralManager * m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager;
+	CDataSourcesManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->DataSourcesManager;
 
 
-v akceleratoru je pracovni zkaratka insert 4ft
-v akceleratoru je pracovni zkaratka edit element
+
+
+
+
+INSERT    v akceleratoru je pracovni zkratka insert 4ft
+
+
+
+ENTER      v akceleratoru je pracovni zkaratka edit element
+
+
+
+zrovna tady zkousim debugovat tu dll
+krasne to funguje, das LMplugin jako active project a do ty dll si nasazis breakpointy kam te napadne
+pak F5 a ono se to na nich zastavuje parada :-)
+
+
 
 
 

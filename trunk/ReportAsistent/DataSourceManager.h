@@ -109,11 +109,15 @@ public:
 //ale poradi se meni asi jen funkci RemoveSource
 class CDataSourcesManager
 {
-public:
-
+private:
 //  DATA
 	CArray<CPluginRec,CPluginRec> PlugsTab;		// tabulka zasuvek
 	CArray<CSourceRec,CSourceRec> SourcesTab;	// tabulka zdroju
+
+public:
+	BOOL isPluginValid(int plugin_index);
+	BOOL isSourceValid(int source_index);
+
 	
 
 // METODY

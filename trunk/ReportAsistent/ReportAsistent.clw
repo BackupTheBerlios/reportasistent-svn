@@ -18,10 +18,10 @@ ResourceCount=8
 Resource1=IDD_ABOUTBOX
 Resource2=IDR_MAINFRAME
 Class5=CAboutDlg
-Resource3=IDD_DIALOGTEXT (English (U.S.))
+Resource3=IDD_ABOUTBOX (English (U.S.))
 Resource4=IDD_GENERATE_DIALOG (English (U.S.))
 Class6=CElementText
-Resource5=IDD_ABOUTBOX (English (U.S.))
+Resource5=IDD_DIALOGTEXT (English (U.S.))
 Class7=CSimpleFilterDialog
 Resource6=IDD_SIMPLE_FILTER_DIALOG
 Class8=CGenerateDialog
@@ -248,16 +248,17 @@ VirtualFilter=dWC
 [DLG:IDD_SOURCES_DIALOG]
 Type=1
 Class=CSourcesDialog
-ControlCount=9
+ControlCount=10
 Control1=IDC_STATIC,static,1342308352
 Control2=IDC_STATIC,static,1342308352
 Control3=IDC_PLUGINS_COMBO,combobox,1344340227
 Control4=IDC_STATIC,button,1342177287
 Control5=IDC_ADD_SOURCE_BUTTON,button,1342242816
-Control6=IDC_SOURCES_LIST,SysListView32,1350631429
-Control7=IDC_CONNECT_BUTTON,button,1342242816
-Control8=IDC_DISCONNECT_BUTTON,button,1342242816
-Control9=IDC_RENAME_BUTTON,button,1342242816
+Control6=IDC_SOURCES_LIST,SysListView32,1350631941
+Control7=IDC_OPEN_BUTTON,button,1342242816
+Control8=IDC_CLOSE_BUTTON,button,1342242816
+Control9=IDC_REMOVE_BUTTON,button,1342242816
+Control10=IDC_RENAME_BUTTON,button,1342242816
 
 [CLS:CSourcesDialog]
 Type=0
@@ -265,6 +266,6 @@ HeaderFile=SourcesDialog.h
 ImplementationFile=SourcesDialog.cpp
 BaseClass=CDialog
 Filter=D
-LastObject=IDC_SOURCES_LIST
+LastObject=IDC_PLUGINS_COMBO
 VirtualFilter=dWC
 

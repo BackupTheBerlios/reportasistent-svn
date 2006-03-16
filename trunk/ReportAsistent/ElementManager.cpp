@@ -203,8 +203,12 @@ BOOL CElementManager::CanAppendChildHere(IXMLDOMElementPtr &child, IXMLDOMElemen
 //ma vratit TRUE pokud zdroj podporuje tento typ aktivniho prvku
 BOOL CElementManager::ElementSupportedBySource(elId element_id, int source_index)
 {
+	CDataSourcesManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->DataSourcesManager;
+
 	//zdroje podporuji jen aktivni prvky
 	if (! IsElementActive(element_id)) return FALSE;
+
+	if (! m.isSourceValid(source_index)) return FALSE;
 	
 	return TRUE;
 }

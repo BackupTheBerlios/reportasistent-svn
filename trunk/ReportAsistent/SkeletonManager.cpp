@@ -161,7 +161,13 @@ _bstr_t CSkeletonManager::GetPluginOutput(public_source_id_t source, LPCTSTR ap_
 {
 	CDataSourcesManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->DataSourcesManager;
 
-	return m.CallPerformProc(m.FindSourceByPublicID(source), ap_name);
+	int src_index = m.FindSourceByPublicID(source);
+	if (! m.isSourceConnected(src_index)) 
+	{
+		if (! m.ConnectSource(src_index)) return "";
+	}
+
+	return m.CallPerformProc(src_index, ap_name);
 /*
 	CString ft = ap_name;
 

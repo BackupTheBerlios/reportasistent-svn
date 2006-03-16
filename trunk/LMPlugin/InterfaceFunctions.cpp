@@ -127,12 +127,24 @@ hSource_t fNewSourceLM(PersistID_t * pPerzistID)
 
 	if (! pom.FindAccesDatasource(s)) return NULL;
 
+
+	//dedek: potreba pokud si chceme udrzet aktualni adresar
+	char buf[1001];
+	GetCurrentDirectory(1000, buf);
+
+
 	db = new CDatabase();
 	if (!db->Open(NULL, FALSE, TRUE, _T("ODBC;DSN=" + s), TRUE))
 	{
+		//dedek
+		SetCurrentDirectory(buf);
+		
 		delete db;
 		return NULL;
 	}
+
+	//dedek
+	SetCurrentDirectory(buf);
 
 	* pPerzistID = db->GetConnect().AllocSysString();
 	return db;
