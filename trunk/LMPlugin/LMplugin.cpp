@@ -24,7 +24,7 @@ CLMSock::CLMSock()
 	APCount = _LM_AP_COUNT;
 	
 	// naplneni tabulky APTable   !!!! prozatimni  TODO
-	APTable[0].AP_ID = "4fthyp";
+	APTable[0].AP_ID = "hyp_4ft";	//na hyp_4ft prepsal deda
 	APTable[0].pFn = & fLM4fthyp;
 
 	

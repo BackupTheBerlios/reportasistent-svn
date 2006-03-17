@@ -10,7 +10,6 @@
 
 // ---------- performLM 
 
-/* dalsi testovaci verze nize
 BOOL performLM(hSource_t hSource, const char* APName, BSTR* Result)
 {
 	/*
@@ -57,8 +56,6 @@ BOOL performLM(hSource_t hSource, const char* APName, BSTR* Result)
 	
 	*/
 	
-	/*
-	
 	CString CStrResult; // mezivysledek CString
 	pFn_t pFn = LMSock.getFnAddress(APName);	// ukazatel na funkci, ktera vyridi pozadavek
 	if (pFn == NULL) // chyba - neexistuje funkce vyrizujici tento AP
@@ -67,39 +64,11 @@ BOOL performLM(hSource_t hSource, const char* APName, BSTR* Result)
 	*Result =  CStrResult.AllocSysString();
 	return TRUE;
 }
+/****/
+
+/*
+
 */
-
-//Deda: potreba pro MSXML - potreba pro muj testovci vystup jinak (az bude lesi vystup) mozno smazat
-#import <msxml3.dll>
-using namespace MSXML2;
-//vlozi namespace MSXML2;
-
-
-//dedek: testovaci vystup neni to moc usetreny tak bacha :)
-BOOL performLM(hSource_t hSource, const char* AP, BSTR* result)
-{
-	CDatabase * db = (CDatabase *) hSource;
-
-	CString ft = AP;
-
-	if (ft != "hyp_4ft") return FALSE;
-
-	IXMLDOMDocumentPtr dom;
-	dom.CreateInstance(_T("Msxml2.DOMDocument"));
-	dom->async = VARIANT_FALSE; // default - true,
-	
-	dom->load((LPCTSTR) _T("../XML/4ft_hyp.xml"));
-
-	IXMLDOMElementPtr el_hyp = dom->selectSingleNode("/active_list/hyp_4ft");
-
-	el_hyp->setAttribute("db_name", (LPCTSTR) db->GetDatabaseName());
-
-	* result = dom->xml;
-
-	return TRUE;
-}
-
-
 
 
 // ---------- getAPListLM
