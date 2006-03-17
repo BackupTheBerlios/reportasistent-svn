@@ -87,7 +87,9 @@ CDataSourcesManager::CDataSourcesManager()
 
 // destruktor
 CDataSourcesManager::~CDataSourcesManager()
-{}
+{
+	saveSourcesTab();
+}
 
 
 
@@ -234,6 +236,63 @@ BOOL CDataSourcesManager::initSourcesTab()
 }
 
 
+//dedek:
+BOOL CDataSourcesManager::saveSourcesTab()
+{
+	BOOL ret = TRUE;
+	
+	IXMLDOMDocumentPtr pXMLDom;
+    pXMLDom.CreateInstance(__uuidof(DOMDocument30));
+
+	
+	IXMLDOMElementPtr root_el;	// korenovy element
+	root_el = pXMLDom->createElement("SOURCES_LIST");
+	pXMLDom->appendChild(root_el);
+
+
+	IXMLDOMElementPtr source_el;	// source element
+	source_el = pXMLDom->createElement("SOURCE");
+
+	
+	//atributy
+	IXMLDOMAttributePtr attr;
+	
+	attr = pXMLDom->createAttribute("PUBLIC_ID");
+	source_el->setAttributeNode(attr);
+	attr.Release();
+
+	attr = pXMLDom->createAttribute("PERZISTENT_ID");
+	source_el->setAttributeNode(attr);
+	attr.Release();
+
+	attr = pXMLDom->createAttribute("PLUGIN_ID");
+	source_el->setAttributeNode(attr);
+	attr.Release();
+
+
+
+	for (int a=0; a<getSourcesCount(); a++)
+	{
+		IXMLDOMElementPtr e = source_el->cloneNode(VARIANT_TRUE);
+
+		e->setAttribute("PUBLIC_ID", (LPCTSTR) getSourcePublicID(a));
+		e->setAttribute("PERZISTENT_ID", (LPCTSTR) getSourcePersistentID(a));
+		e->setAttribute("PLUGIN_ID", (LPCTSTR) getSourcePlugin(a));
+
+		root_el->appendChild(e);
+
+		e.Release();
+
+	}
+
+	source_el.Release();
+
+
+	ret = S_OK == pXMLDom->save("Config\\sources.xml");
+	root_el.Release();
+
+	return ret;
+}
 
 // --- pristupove metody do tabulky zasuvek (PlugsTab) ----------------------
 
