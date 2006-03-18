@@ -42,7 +42,7 @@
                     up_bnd_eq CDATA #REQUIRED \
                     fisher CDATA #REQUIRED \
                     chi_sq CDATA #REQUIRED \
-                    antecedent IDREF #REQUIRED \
-                    succedent IDREF #REQUIRED \
-                    condition IDREF #REQUIRED>   <!--antecedent,succedent,condition: references to ti_cedent --> \
+                    antecedent IDREF #IMPLIED \
+                    succedent IDREF #IMPLIED \
+                    condition IDREF #IMPLIED>   <!--antecedent,succedent,condition: references to ti_cedent --> \
 ]> "

@@ -180,6 +180,7 @@ CString fLM4fthyp(void * hSource)
 		buf = buf + list.GetAt (i)->xml_convert ();
 	}
 	buf += " </active_list>";
+	//AfxMessageBox(buf.Right(1000));
 
 	return buf;
 }
