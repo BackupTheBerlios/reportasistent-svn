@@ -95,7 +95,15 @@ SOURCE=.\functions.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\Hyp_4ft_Recordset.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\InterfaceFunctions.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\LM_Metabase.cpp
 # End Source File
 # Begin Source File
 
@@ -115,11 +123,23 @@ SOURCE=.\SQL_Pomocnik.cpp
 # PROP Default_Filter "h;hpp;hxx;hm;inl"
 # Begin Source File
 
+SOURCE=.\DTD.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\functions.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\Hyp_4ft_Recordset.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\InterfaceFunctions.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\LM_Metabase.h
 # End Source File
 # Begin Source File
 

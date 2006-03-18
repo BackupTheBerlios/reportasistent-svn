@@ -1,6 +1,1 @@
-<?xml version="1.0" encoding="windows-1252"?>
-<SOURCES_LIST>
-  <SOURCE PUBLIC_ID="prvni zdroj" PERZISTENT_ID="ODBC: file1.mdb" PLUGIN_ID="LMplugin.dll"/>
-  <SOURCE PUBLIC_ID="druhy zdroj" PERZISTENT_ID="" PLUGIN_ID="FEplugin.dll"/>
-  <SOURCE PUBLIC_ID="treti zdroj" PERZISTENT_ID="ODBC: file3.mdb" PLUGIN_ID="LMplugin.mdb"/>
-</SOURCES_LIST>
+<SOURCES_LIST><SOURCE PUBLIC_ID="prvni zdroj" PERZISTENT_ID="ODBC: file1.mdb" PLUGIN_ID="LMplugin.dll"/><SOURCE PUBLIC_ID="druhy zdroj" PERZISTENT_ID="" PLUGIN_ID="FEplugin.dll"/><SOURCE PUBLIC_ID="treti zdroj" PERZISTENT_ID="ODBC: file3.mdb" PLUGIN_ID="LMplugin.mdb"/><SOURCE PUBLIC_ID="ctvrty zdroj" PERZISTENT_ID="ODBC;DSN=MS Access Database;DBQ=C:\skola\temp project\LispMiner\LMEntry.mdb;DefaultDir=C:\skola\temp project\LispMiner;DriverId=25;FIL=MS Access;MaxBufferSize=2048;PageTimeout=5;" PLUGIN_ID="LMplugin.dll"/></SOURCES_LIST>
