@@ -123,10 +123,6 @@ SOURCE=.\SQL_Pomocnik.cpp
 # PROP Default_Filter "h;hpp;hxx;hm;inl"
 # Begin Source File
 
-SOURCE=.\DTD.h
-# End Source File
-# Begin Source File
-
 SOURCE=.\functions.h
 # End Source File
 # Begin Source File

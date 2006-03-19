@@ -1,7 +1,6 @@
 // implementace funkci pro vyrizeni pozadavku na AP v zasuvce pro LM
 // functions.h
 #include "functions.h"
-#include "DTD.H"
 #include "Hyp_4ft_Recordset.h"
 #include "LM_Metabase.h"
 
@@ -171,10 +170,11 @@ CString fLM4fthyp(void * hSource)
 	else return "";
 	
 	//creation of xml string
-
-	buf += DTD;
-	buf += DTD1;
-	buf += DTD2;
+	//load DTD
+	FILE * x = fopen ("../XML/dtd.dtd", "r");
+	fscanf (x, "%s", buf);
+	fclose (x);
+	//create xml data
 	buf += " <active_list> ";
 	for (int i = 0; i < list.GetSize (); i++)
 	{
