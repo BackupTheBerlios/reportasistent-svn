@@ -94,6 +94,7 @@ CString fLM4fthyp(void * hSource)
 			c_id = rs.m_CategoryID;
 			q_name = rs.m_QuantityID;
 			q_value = rs.m_Qvalue;
+			q_value.Replace ("<", "&lt;");
 			if (h_id != h_id_tst)
 			{
 				pthyp = new (Hyp_4ft_Meta);
@@ -180,7 +181,11 @@ CString fLM4fthyp(void * hSource)
 		buf = buf + list.GetAt (i)->xml_convert ();
 	}
 	buf += " </active_list>";
-	//AfxMessageBox(buf.Right(1000));
+	
+	//just for test - creates a xml file with all hypotheses
+	FILE * f = fopen ("test.xml", "w");
+	fprintf (f, "%s", buf);
+	fclose (f);
 
 	return buf;
 }
