@@ -171,11 +171,15 @@ CString fLM4fthyp(void * hSource)
 	
 	//creation of xml string
 	//load DTD
-	FILE * x = fopen ("../XML/dtd.dtd", "r");
-	fscanf (x, "%s", buf);
+/*	FILE * x = fopen ("../XML/dtd.dtd", "r");
+	CString buf1;
+	while (fscanf (x, "%s", buf1) != EOF)
+	{
+		buf = buf + (const char *) buf1 + " ";
+	}
 	fclose (x);
-	//create xml data
-	buf += " <active_list> ";
+*/	//create xml data
+	buf = buf + " <active_list> ";
 	for (int i = 0; i < list.GetSize (); i++)
 	{
 		buf = buf + list.GetAt (i)->xml_convert ();
