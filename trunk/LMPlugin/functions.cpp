@@ -73,12 +73,15 @@ CString fLM4fthyp(void * hSource)
 	long l_id;
 	long c_id;
 	long h_id_tst = 0;//test variable - values from previous iteration
+
+	bool neg_lit;
+	CString neg_lit_smbl;
 	
 	CString ced_name;
 	CString q_name;
 	CString q_value;
 
-	LPCTSTR q = "SELECT tiHypothesis.HypothesisID, taTask.MatrixID, tmMatrix.Name, taTask.TaskID, taTask.Name, tiHypothesis.FreqA, tiHypothesis.FreqB, tiHypothesis.FreqC, tiHypothesis.FreqD, tiLiteralI.LiteralIID, tsCedentType.Name, tmCategory.CategoryID, tmQuantity.Name, tmCategory.Name FROM tsCedentType, tiHypothesis, taTask, tmMatrix, tiLiteralI, tiCoefficient, tmCategory, tmQuantity WHERE tiCoefficient.TaskID=taTask.TaskID AND taTask.MatrixID=tmMatrix.MatrixID AND tiHypothesis.HypothesisID=tiLiteralI.HypothesisID AND tiLiteralI.LiteralIID=tiCoefficient.LiteralIID AND tiCoefficient.CategoryID=tmCategory.CategoryID AND tmCategory.QuantityID=tmQuantity.QuantityID AND tsCedentType.CedentTypeID=tiLiteralI.CedentTypeID ORDER BY tiHypothesis.HypothesisID, tiLiteralI.CedentTypeID";
+	LPCTSTR q = "SELECT tiHypothesis.HypothesisID, taTask.MatrixID, tmMatrix.Name, taTask.TaskID, taTask.Name, tiHypothesis.FreqA, tiHypothesis.FreqB, tiHypothesis.FreqC, tiHypothesis.FreqD, tiLiteralI.LiteralIID, tiLiteralI.Negation, tsCedentType.Name, tmCategory.CategoryID, tmQuantity.Name, tmCategory.Name FROM tsCedentType, tiHypothesis, taTask, tmMatrix, tiLiteralI, tiCoefficient, tmCategory, tmQuantity WHERE tiCoefficient.TaskID=taTask.TaskID AND taTask.MatrixID=tmMatrix.MatrixID AND tiHypothesis.HypothesisID=tiLiteralI.HypothesisID AND tiLiteralI.LiteralIID=tiCoefficient.LiteralIID AND tiCoefficient.CategoryID=tmCategory.CategoryID AND tmCategory.QuantityID=tmQuantity.QuantityID AND tsCedentType.CedentTypeID=tiLiteralI.CedentTypeID ORDER BY tiHypothesis.HypothesisID, tiLiteralI.CedentTypeID";
 	//load data from metabase
 	if (rs.Open(AFX_DB_USE_DEFAULT_TYPE, q))
 	{
@@ -89,6 +92,7 @@ CString fLM4fthyp(void * hSource)
 			m_id = rs.m_MatrixID;
 			t_id = rs.m_TaskID;
 			l_id = rs.m_LiteralID;
+			neg_lit = rs.m_Negation;
 			ced_name = rs.m_CedentTypeName;
 			c_id = rs.m_CategoryID;
 			q_name = rs.m_QuantityID;
@@ -136,7 +140,8 @@ CString fLM4fthyp(void * hSource)
 				pthyp->flag_a = TRUE;
 				id_hlp.Format ("%d", l_id);
 				x.id = "tiLit" + id_hlp;
-				x.quant = q_name;
+				if (neg_lit) neg_lit_smbl = "¬"; else neg_lit_smbl = "";
+				x.quant = neg_lit_smbl + q_name;
 				x.value = q_value;
 				pthyp->antecedent.Add (x);
 			}
@@ -146,7 +151,8 @@ CString fLM4fthyp(void * hSource)
 				pthyp->flag_s = TRUE;
 				id_hlp.Format ("%d", l_id);
 				x.id = "tiLit" + id_hlp;
-				x.quant = q_name;
+				if (neg_lit) neg_lit_smbl = "¬"; else neg_lit_smbl = "";
+				x.quant = neg_lit_smbl + q_name;
 				x.value = q_value;
 				pthyp->succedent.Add (x);
 			}
@@ -156,7 +162,8 @@ CString fLM4fthyp(void * hSource)
 				pthyp->flag_c = TRUE;
 				id_hlp.Format ("%d", l_id);
 				x.id = "tiLit" + id_hlp;
-				x.quant = q_name;
+				if (neg_lit) neg_lit_smbl = "¬"; else neg_lit_smbl = "";
+				x.quant = neg_lit_smbl + q_name;
 				x.value = q_value;
 				pthyp->condition.Add (x);
 			}
@@ -171,14 +178,14 @@ CString fLM4fthyp(void * hSource)
 	
 	//creation of xml string
 	//load DTD
-/*	FILE * x = fopen ("../XML/dtd.dtd", "r");
+	FILE * x = fopen ("../XML/dtd.dtd", "r");
 	CString buf1;
 	while (fscanf (x, "%s", buf1) != EOF)
 	{
 		buf = buf + (const char *) buf1 + " ";
 	}
 	fclose (x);
-*/	//create xml data
+	//create xml data
 	buf = buf + " <active_list> ";
 	for (int i = 0; i < list.GetSize (); i++)
 	{

@@ -29,11 +29,12 @@ Hyp_4ft_Recordset::Hyp_4ft_Recordset(CDatabase* pdb)
 	m_FreqC = 0;
 	m_FreqD = 0;
 	m_LiteralID = 0;
+	m_Negation = FALSE;
 	m_CedentTypeName = "";
 	m_CategoryID = 0;
 	m_QuantityID = "";
 	m_Qvalue = "";
-	m_nFields = 14;
+	m_nFields = 15;
 	//}}AFX_FIELD_INIT
 	m_nDefaultType = snapshot;
 }
@@ -63,6 +64,7 @@ void Hyp_4ft_Recordset::DoFieldExchange(CFieldExchange* pFX)
 	RFX_Long(pFX, _T("[FreqC]"), m_FreqC);
 	RFX_Long(pFX, _T("[FreqD]"), m_FreqD);
 	RFX_Long(pFX, _T("[LiteralIID]"), m_LiteralID);
+	RFX_Bool(pFX, _T("[tiLiteralI.Negation]"), m_Negation);
 	RFX_Text(pFX, _T("[tsCedentType.Name]"), m_CedentTypeName);
 	RFX_Long(pFX, _T("[tmCategory.CategoryID]"), m_CategoryID);
 	RFX_Text(pFX, _T("[tmCategory.QuantityID]"), m_QuantityID);

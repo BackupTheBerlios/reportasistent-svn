@@ -18,14 +18,14 @@ ResourceCount=8
 Resource1=IDD_ABOUTBOX
 Resource2=IDR_MAINFRAME
 Class5=CAboutDlg
-Resource3=IDD_ABOUTBOX (English (U.S.))
+Resource3=IDD_DIALOGTEXT (English (U.S.))
 Resource4=IDD_GENERATE_DIALOG (English (U.S.))
 Class6=CElementText
-Resource5=IDD_DIALOGTEXT (English (U.S.))
+Resource5=IDD_SOURCES_DIALOG
 Class7=CSimpleFilterDialog
-Resource6=IDD_SIMPLE_FILTER_DIALOG
+Resource6=IDD_ABOUTBOX (English (U.S.))
 Class8=CGenerateDialog
-Resource7=IDD_SOURCES_DIALOG
+Resource7=IDD_SIMPLE_FILTER_DIALOG
 Class9=CSourcesDialog
 Resource8=IDR_MAINFRAME (English (U.S.))
 
@@ -266,6 +266,6 @@ HeaderFile=SourcesDialog.h
 ImplementationFile=SourcesDialog.cpp
 BaseClass=CDialog
 Filter=D
-LastObject=IDC_PLUGINS_COMBO
+LastObject=CSourcesDialog
 VirtualFilter=dWC
 

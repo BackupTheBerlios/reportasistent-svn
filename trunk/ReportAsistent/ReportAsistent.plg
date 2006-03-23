@@ -6,95 +6,11 @@
 --------------------Configuration: ReportAsistent - Win32 Debug--------------------
 </h3>
 <h3>Command Lines</h3>
-Creating command line "rc.exe /l 0x405 /fo"Debug/ReportAsistent.res" /d "_DEBUG" /d "_AFXDLL" "c:\skola\sw projekt\dev\ReportAsistent\ReportAsistent.rc"" 
-Creating temporary file "C:\DOCUME~1\MARTIN~1.CHR\LOCALS~1\Temp\RSP21.tmp" with contents
-[
-/nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /FR"Debug/" /Fp"Debug/ReportAsistent.pch" /Yu"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
-"c:\skola\sw projekt\dev\ReportAsistent\APTransform.cpp"
-"c:\skola\sw projekt\dev\ReportAsistent\CSkeletonDoc.cpp"
-"c:\skola\sw projekt\dev\ReportAsistent\DataSourceManager.cpp"
-"c:\skola\sw projekt\dev\ReportAsistent\ElementManager.cpp"
-"c:\skola\sw projekt\dev\ReportAsistent\ElementText.cpp"
-"c:\skola\sw projekt\dev\ReportAsistent\GenerateDialog.cpp"
-"c:\skola\sw projekt\dev\ReportAsistent\MainFrm.cpp"
-"c:\skola\sw projekt\dev\ReportAsistent\ReportAsistent.cpp"
-"c:\skola\sw projekt\dev\ReportAsistent\SimpleFilterDialog.cpp"
-"c:\skola\sw projekt\dev\ReportAsistent\SkeletonManager.cpp"
-"c:\skola\sw projekt\dev\ReportAsistent\SkeletonView.cpp"
-"c:\skola\sw projekt\dev\ReportAsistent\SourcesDialog.cpp"
-]
-Creating command line "cl.exe @C:\DOCUME~1\MARTIN~1.CHR\LOCALS~1\Temp\RSP21.tmp" 
-Creating temporary file "C:\DOCUME~1\MARTIN~1.CHR\LOCALS~1\Temp\RSP22.tmp" with contents
-[
-/nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /FR"Debug/" /Fp"Debug/ReportAsistent.pch" /Yc"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
-"c:\skola\sw projekt\dev\ReportAsistent\StdAfx.cpp"
-]
-Creating command line "cl.exe @C:\DOCUME~1\MARTIN~1.CHR\LOCALS~1\Temp\RSP22.tmp" 
-Creating temporary file "C:\DOCUME~1\MARTIN~1.CHR\LOCALS~1\Temp\RSP23.tmp" with contents
-[
-/nologo /subsystem:windows /incremental:yes /pdb:"Debug/ReportAsistent.pdb" /debug /machine:I386 /out:"Debug/ReportAsistent.exe" /pdbtype:sept 
-".\Debug\APTransform.obj"
-".\Debug\CSkeletonDoc.obj"
-".\Debug\DataSourceManager.obj"
-".\Debug\ElementManager.obj"
-".\Debug\ElementText.obj"
-".\Debug\GenerateDialog.obj"
-".\Debug\MainFrm.obj"
-".\Debug\ReportAsistent.obj"
-".\Debug\SimpleFilterDialog.obj"
-".\Debug\SkeletonManager.obj"
-".\Debug\SkeletonView.obj"
-".\Debug\SourcesDialog.obj"
-".\Debug\StdAfx.obj"
-".\Debug\ReportAsistent.res"
-"\skola\sw projekt\dev\LMPlugin\Debug\LMplugin.lib"
-]
-Creating command line "link.exe @C:\DOCUME~1\MARTIN~1.CHR\LOCALS~1\Temp\RSP23.tmp"
-<h3>Output Window</h3>
-Compiling resources...
-Compiling...
-StdAfx.cpp
-Compiling...
-APTransform.cpp
-c:\program files\microsoft visual studio\vc98\include\comip.h(77) : warning C4786: '?_QueryInterface@?$_com_ptr_t@V?$_com_IIID@UIXMLDOMNode@MSXML2@@$1?_GUID_2933bf80_7b36_11d2_b20e_00c04f983e60@@3U__s_GUID@@A@@@@AAEJABV?$_com_ptr_t@V?$_com_IIID@UIXMLDOMDocumentFragment@MSXML2@@$1?_GUID_3efaa413_272f_11d2_836f_0000f87a7782@@3U__s_GUID@@A@@@@@Z' : identifier was truncated to '255' characters in the browser information
-        c:\skola\sw projekt\dev\ReportAsistent\APTransform.cpp(52) : see reference to function template instantiation '__thiscall _com_ptr_t<class _com_IIID<struct MSXML2::IXMLDOMNode,&struct __s_GUID _GUID_2933bf80_7b36_11d2_b20e_00c04f983e60> >::_com_ptr_t<class _com_IIID<struct MSXML2::IXMLDOMNode,&struct __s_GUID _GUID_2933bf80_7b36_11d2_b20e_00c04f983e60> >(const class _com_ptr_t<class _com_IIID<struct MSXML2::IXMLDOMDocumentFragment,&struct __s_GUID _GUID_3efaa413_272f_11d2_836f_0000f87a7782> > &)' being compiled
-CSkeletonDoc.cpp
-DataSourceManager.cpp
-ElementManager.cpp
-ElementText.cpp
-GenerateDialog.cpp
-MainFrm.cpp
-ReportAsistent.cpp
-SimpleFilterDialog.cpp
-SkeletonManager.cpp
-SkeletonView.cpp
-SourcesDialog.cpp
-Generating Code...
-Linking...
-Creating temporary file "C:\DOCUME~1\MARTIN~1.CHR\LOCALS~1\Temp\RSP25.tmp" with contents
-[
-/nologo /o"Debug/ReportAsistent.bsc" 
-".\Debug\StdAfx.sbr"
-".\Debug\APTransform.sbr"
-".\Debug\CSkeletonDoc.sbr"
-".\Debug\DataSourceManager.sbr"
-".\Debug\ElementManager.sbr"
-".\Debug\ElementText.sbr"
-".\Debug\GenerateDialog.sbr"
-".\Debug\MainFrm.sbr"
-".\Debug\ReportAsistent.sbr"
-".\Debug\SimpleFilterDialog.sbr"
-".\Debug\SkeletonManager.sbr"
-".\Debug\SkeletonView.sbr"
-".\Debug\SourcesDialog.sbr"]
-Creating command line "bscmake.exe @C:\DOCUME~1\MARTIN~1.CHR\LOCALS~1\Temp\RSP25.tmp"
-Creating browse info file...
-<h3>Output Window</h3>
 
 
 
 <h3>Results</h3>
-ReportAsistent.exe - 0 error(s), 1 warning(s)
+ReportAsistent.exe - 0 error(s), 0 warning(s)
 </pre>
 </body>
 </html>
