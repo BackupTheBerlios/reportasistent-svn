@@ -169,6 +169,12 @@ BOOL CSimpleFilterDialog::LoadSource(public_source_id_t sId)
 	}
 
 	filter_doc->loadXML(s_out);
+	if (filter_doc->parseError->errorCode != S_OK)
+	{
+		AfxMessageBox(filter_doc->parseError->reason);
+		filter_doc.Release();
+		return FALSE;	
+	}
 
 	//transformuje data z plugin output a vysledek nacte do m_filter_dom	
 	filter_doc->loadXML(
@@ -223,6 +229,8 @@ void CSimpleFilterDialog::UpDateDialog()
 	//naplnime list hodnotama
 	IXMLDOMNodeListPtr value_list = m_filter_DOM->selectNodes("/dialog_data/values/value");
 
+	int item = 0;
+
 	for (b=0; b<value_list->length; b++)
 	{
 		IXMLDOMElementPtr value = value_list->item[b];
@@ -235,20 +243,20 @@ void CSimpleFilterDialog::UpDateDialog()
 
 			if (a == 0)
 			{
-				m_FilterList.InsertItem(b, (_bstr_t) value->getAttribute(
+				item = m_FilterList.InsertItem(b, (_bstr_t) value->getAttribute(
 					(_bstr_t) attr->getAttribute("name")));
 
 			}
 			else
 			{	
-				m_FilterList.SetItemText(b, a, (_bstr_t) value->getAttribute(
+				m_FilterList.SetItemText(item, a, (_bstr_t) value->getAttribute(
 					(_bstr_t) attr->getAttribute("name")));
 			}
 
 		}
 
 		_bstr_t id = value->getAttribute("id");
-		m_FilterList.SetItemData(b, (DWORD) new CString((BSTR) id));
+		m_FilterList.SetItemData(item, (DWORD) new CString((BSTR) id));
 
 		//selsected polozky
 
@@ -259,7 +267,7 @@ void CSimpleFilterDialog::UpDateDialog()
 		IXMLDOMNodePtr select = m_active_element->selectSingleNode((LPCTSTR) patern);
 
 		if (select != NULL)
-			m_FilterList.SetItemState(b, LVIS_SELECTED, LVIS_SELECTED);
+			m_FilterList.SetItemState(item, LVIS_SELECTED, LVIS_SELECTED);
 
 	}
 
