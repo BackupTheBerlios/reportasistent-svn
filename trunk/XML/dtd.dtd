@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="windows-1250" ?>
 <!DOCTYPE active_list[
-  <!ELEMENT active_list (hyp_4ft*, category*, ti_cedent*)>
+  <!ELEMENT active_list ((hyp_4ft*, category*, ti_cedent*)*)>
   <!ELEMENT category EMPTY>
   <!ATTLIST category id ID #REQUIRED
                      db_name CDATA #REQUIRED
