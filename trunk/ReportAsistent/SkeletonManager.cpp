@@ -45,13 +45,16 @@ CSkeletonManager::~CSkeletonManager()
 	//m_skeleton.Release();
 }
 
+/*
 void CSkeletonManager::FillTreeCtrl(CTreeCtrl &tree_ctrl)
 {
 	tree_ctrl.DeleteAllItems();
 
 	RecurentTreeFill(tree_ctrl, (IXMLDOMNodePtr) m_skeleton, TVI_ROOT);	
 }
+*/
 
+/*
 void CSkeletonManager::RecurentTreeFill(CTreeCtrl &tree_ctrl, MSXML2::IXMLDOMNodePtr & iNode, HTREEITEM hParentItem)
 {
 	IXMLDOMNodeListPtr iChildren = iNode->childNodes;
@@ -75,7 +78,7 @@ void CSkeletonManager::RecurentTreeFill(CTreeCtrl &tree_ctrl, MSXML2::IXMLDOMNod
 		RecurentTreeFill(tree_ctrl, iChild, i);
 	}
 }
-
+*/
 
 LPARAM CSkeletonManager::CreateItemData(IXMLDOMElementPtr & element)
 {
@@ -95,6 +98,7 @@ void CSkeletonManager::DeleteItemData(LPARAM data)
 }
 
 //docasne
+/*
 void CSkeletonManager::AddElement()
 {
 	IXMLDOMDocumentPtr element_example;
@@ -109,6 +113,7 @@ void CSkeletonManager::AddElement()
 	element_example.Release();
 
 }
+*/
 
 //docasne
 void CSkeletonManager::EditElement(LPARAM item_data)
