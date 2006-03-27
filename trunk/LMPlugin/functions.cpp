@@ -140,6 +140,8 @@ CString fLM4fthyp(void * hSource)
 				pthyp->flag_a = TRUE;
 				id_hlp.Format ("%d", l_id);
 				x.id = "tiLit" + id_hlp;
+				id_hlp.Format ("%d", c_id);
+				x.id = x.id + id_hlp;
 				if (neg_lit) neg_lit_smbl = "¬"; else neg_lit_smbl = "";
 				x.quant = neg_lit_smbl + q_name;
 				x.value = q_value;
@@ -151,6 +153,8 @@ CString fLM4fthyp(void * hSource)
 				pthyp->flag_s = TRUE;
 				id_hlp.Format ("%d", l_id);
 				x.id = "tiLit" + id_hlp;
+				id_hlp.Format ("%d", c_id);
+				x.id = x.id + id_hlp;
 				if (neg_lit) neg_lit_smbl = "¬"; else neg_lit_smbl = "";
 				x.quant = neg_lit_smbl + q_name;
 				x.value = q_value;
@@ -162,6 +166,8 @@ CString fLM4fthyp(void * hSource)
 				pthyp->flag_c = TRUE;
 				id_hlp.Format ("%d", l_id);
 				x.id = "tiLit" + id_hlp;
+				id_hlp.Format ("%d", c_id);
+				x.id = x.id + id_hlp;
 				if (neg_lit) neg_lit_smbl = "¬"; else neg_lit_smbl = "";
 				x.quant = neg_lit_smbl + q_name;
 				x.value = q_value;
@@ -193,7 +199,7 @@ CString fLM4fthyp(void * hSource)
 	}
 	buf += " </active_list>";
 	
-	//just for test - creates a xml file with all hypotheses
+	//just for test - creates a xml file with all hypothesis
 	FILE * f = fopen ("test.xml", "w");
 	fprintf (f, "%s", buf);
 	fclose (f);

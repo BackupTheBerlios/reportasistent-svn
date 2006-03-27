@@ -67,49 +67,42 @@ CString Hyp_4ft_Meta::xml_convert ()
 	xml_string = xml_string + " chi_sq=\"";
 	hlp.Format ("%f", chi_sq);
 	xml_string = xml_string + hlp + "\" ";
-	if (flag_a) xml_string = xml_string + " antecedent=\"" + ant_id + "\" ";
-	if (flag_s) xml_string = xml_string + " succedent=\"" + suc_id + "\" ";
-	if (flag_c) xml_string = xml_string + " condition=\"" + con_id + "\"";
+	xml_string = xml_string + " antecedent=\"" + ant_id + "\" ";
+	xml_string = xml_string + " succedent=\"" + suc_id + "\" ";
+	xml_string = xml_string + " condition=\"" + con_id + "\"";
 	xml_string += "/>  ";
 	//end of hyp_4ft element
 
 	//beginning of ti_cedent elements
 	//Antecedent
-	if (antecedent.GetSize () != 0)
+	xml_string = xml_string + "<ti_cedent  id=\"" + ant_id + "\"  type=\"Antecedent\"> ";
+	for (int i = 0; i < antecedent.GetSize (); i++)
 	{
-		xml_string = xml_string + "<ti_cedent  id=\"" + ant_id + "\"  type=\"Antecedent\"> ";
-		for (int i = 0; i < antecedent.GetSize (); i++)
-		{
-			xml_string = xml_string + "<ti_literal  id=\"" + antecedent.GetAt (i).id +
-				"\"  quant=\"" + antecedent.GetAt (i).quant +
-				"\"  value=\"" + antecedent.GetAt (i).value + "\"/> ";
-		}
-		xml_string = xml_string + "</ti_cedent> ";
+		xml_string = xml_string + "<ti_literal  id=\"" + antecedent.GetAt (i).id +
+			"\"  quant=\"" + antecedent.GetAt (i).quant +
+			"\"  value=\"" + antecedent.GetAt (i).value + "\"/> ";
 	}
-	//Succedent
-	if (succedent.GetSize () != 0)
-	{
-		xml_string = xml_string + "<ti_cedent  id=\"" + suc_id + "\"  type=\"Succedent\"> ";
-		for (int i = 0; i < succedent.GetSize (); i++)
-		{
-			xml_string = xml_string + "<ti_literal  id=\"" + succedent.GetAt (i).id +
-				"\"  quant=\"" + succedent.GetAt (i).quant +
-				"\"  value=\"" + succedent.GetAt (i).value + "\"/> ";
-		}
-		xml_string = xml_string + "</ti_cedent> ";
-	}
-	//Condition
-	if (condition.GetSize () != 0)
-	{
-		xml_string = xml_string + "<ti_cedent  id=\"" + con_id + "\"  type=\"Condition\"> ";
-		for (int i = 0; i < condition.GetSize (); i++)
-		{
-			xml_string = xml_string + "<ti_literal  id=\"" + condition.GetAt (i).id +
-				"\"  quant=\"" + condition.GetAt (i).quant +
-				"\"  value=\"" + condition.GetAt (i).value + "\"/> ";
-		}
-		xml_string = xml_string + "</ti_cedent> ";
-	}
+	xml_string = xml_string + "</ti_cedent> ";
 	
+	//Succedent
+	xml_string = xml_string + "<ti_cedent  id=\"" + suc_id + "\"  type=\"Succedent\"> ";
+	for (i = 0; i < succedent.GetSize (); i++)
+	{
+		xml_string = xml_string + "<ti_literal  id=\"" + succedent.GetAt (i).id +
+			"\"  quant=\"" + succedent.GetAt (i).quant +
+			"\"  value=\"" + succedent.GetAt (i).value + "\"/> ";
+	}
+	xml_string = xml_string + "</ti_cedent> ";
+	
+	//Condition
+	xml_string = xml_string + "<ti_cedent  id=\"" + con_id + "\"  type=\"Condition\"> ";
+	for (i = 0; i < condition.GetSize (); i++)
+	{
+		xml_string = xml_string + "<ti_literal  id=\"" + condition.GetAt (i).id +
+			"\"  quant=\"" + condition.GetAt (i).quant +
+			"\"  value=\"" + condition.GetAt (i).value + "\"/> ";
+	}
+	xml_string = xml_string + "</ti_cedent> ";
+		
 	return xml_string;
 }
