@@ -33,25 +33,25 @@ class CSkeletonManager
 {
 public:
 	void EditActiveElement(IXMLDOMElementPtr & element);
-	CString CreateNewID(CElementManager::elId element_type);
+	CString CreateNewID(CElementManager::elId_t element_type);
 	IXMLDOMElementPtr InsertNewElement(LPCTSTR element_name, IXMLDOMElementPtr & parent_element);
-	IXMLDOMElementPtr InsertNewElement(CElementManager::elId elementID, IXMLDOMElementPtr & parent_element);
+	IXMLDOMElementPtr InsertNewElement(CElementManager::elId_t elementID, IXMLDOMElementPtr & parent_element);
 	IXMLDOMElement * ElementFromItemData(LPARAM item_data);
 	static LPARAM CreateItemData(IXMLDOMElementPtr &);
 	CSkeletonManager(IXMLDOMDocumentPtr & skeleton);
 
 	void Generate();
-	void EditElenemt(LPARAM item_data);
-	void AddElement();
+	void EditElement(LPARAM item_data);
+//	void AddElement();
 	void DeleteItemData(LPARAM data);
-	void FillTreeCtrl(CTreeCtrl & tree_ctrl);
+//	void FillTreeCtrl(CTreeCtrl & tree_ctrl);
 	virtual ~CSkeletonManager();
 	static _bstr_t GetPluginOutput(public_source_id_t source, LPCTSTR ap_name);
 
 private:
 	MSXML2::IXMLDOMDocumentPtr & m_skeleton;
 
-	static void CSkeletonManager::RecurentTreeFill(CTreeCtrl &tree_ctrl, MSXML2::IXMLDOMNodePtr & iNode, HTREEITEM hParentItem);
+//	static void CSkeletonManager::RecurentTreeFill(CTreeCtrl &tree_ctrl, MSXML2::IXMLDOMNodePtr & iNode, HTREEITEM hParentItem);
 
 
 protected:

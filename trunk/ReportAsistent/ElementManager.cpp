@@ -31,21 +31,21 @@ LPCTSTR CElementManager::el_names[] =
 
 #define LENGTH(array) (sizeof(array) / sizeof(* array))
 
-CElementManager::elId CElementManager::LastElementId()
+CElementManager::elId_t CElementManager::LastElementId()
 {
 	return LENGTH(el_names) -1;
 }
 
 
-LPCTSTR CElementManager::ElementName(elId elementID)
+LPCTSTR CElementManager::getElementName(elId_t elementID)
 {
-	if (elementID >= LENGTH(el_names)) elementID = ELID_UNKNOWN;
+	if (elementID >= LENGTH(el_names)) elementID = elId_t_UNKNOWN;
 
 	return el_names[elementID];
 }
 
 
-CElementManager::elId CElementManager::IdentifyElement(IXMLDOMElementPtr & element)
+CElementManager::elId_t CElementManager::IdentifyElement(IXMLDOMElementPtr & element)
 {
 	CString baseName = (BSTR) element->baseName;
 
@@ -53,7 +53,7 @@ CElementManager::elId CElementManager::IdentifyElement(IXMLDOMElementPtr & eleme
 	//zkusime poravnat jmeno tagu s nami znamymi jmeny
 	for (int a=0; a <= LastElementId(); a++)
 	{
-		if (baseName == ElementName(a)) return a;
+		if (baseName == getElementName(a)) return a;
 	}
 	
 	
@@ -64,11 +64,11 @@ CElementManager::elId CElementManager::IdentifyElement(IXMLDOMElementPtr & eleme
 
 		for (int a=0; a <= LastElementId(); a++)
 		{
-			if (type_name == ElementName(a)) return a;
+			if (type_name == getElementName(a)) return a;
 		}
 	}
 
-	return ELID_UNKNOWN;
+	return elId_t_UNKNOWN;
 }
 
 
@@ -83,19 +83,19 @@ CElementManager::~CElementManager()
 
 }
 
-CElementManager::elId CElementManager::ElementIdFromName(LPCTSTR el_name)
+CElementManager::elId_t CElementManager::ElementIdFromName(LPCTSTR el_name)
 {
 	CString name = el_name;
 	
 	for (int a=0; a <= LastElementId(); a++)
 	{
-		if (name == ElementName(a)) return a;
+		if (name == getElementName(a)) return a;
 	}
 
-	return ELID_UNKNOWN;
+	return elId_t_UNKNOWN;
 }
 
-IXMLDOMElementPtr CElementManager::CreateEmptyExampleElement(CElementManager::elId id)
+IXMLDOMElementPtr CElementManager::CreateEmptyElement(CElementManager::elId_t id)
 {
 	IXMLDOMDocumentPtr element_example;
 	element_example.CreateInstance(_T("Msxml2.DOMDocument"));	
@@ -117,14 +117,14 @@ IXMLDOMElementPtr CElementManager::CreateEmptyExampleElement(CElementManager::el
 	{
 		//priklad: select = "//active_element[@type = 'hyp_4ft']"
 		select = "//active_element[@type = '";
-		select += ElementName(id);
+		select += getElementName(id);
 		select += "']";
 	}
 	else
 	{
 		//priklad: select = "//text"
 		select = "//";
-		select += ElementName(id);
+		select += getElementName(id);
 	}
 	
 	
@@ -150,9 +150,9 @@ IXMLDOMElementPtr CElementManager::CreateEmptyExampleElement(CElementManager::el
 	return ret;
 }
 
-BOOL CElementManager::IsElementActive(elId elementId)
+BOOL CElementManager::IsElementActive(elId_t elementId)
 {
-	return elementId > ELID_INCLUDE;
+	return elementId > elId_t_INCLUDE;
 }
 
 
@@ -201,7 +201,7 @@ BOOL CElementManager::CanAppendChildHere(IXMLDOMElementPtr &child, IXMLDOMElemen
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
 //honza: velmi pracovni - prijde prepsat podle CDataSourceManageru a plugin manageru
 //ma vratit TRUE pokud zdroj podporuje tento typ aktivniho prvku
-BOOL CElementManager::ElementSupportedBySource(elId element_id, int source_index)
+BOOL CElementManager::ElementSupportedBySource(elId_t element_id, int source_index)
 {
 	CDataSourcesManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->DataSourcesManager;
 

@@ -111,7 +111,7 @@ void CSkeletonManager::AddElement()
 }
 
 //docasne
-void CSkeletonManager::EditElenemt(LPARAM item_data)
+void CSkeletonManager::EditElement(LPARAM item_data)
 {
 	if (item_data == NULL) return;
 
@@ -120,7 +120,7 @@ void CSkeletonManager::EditElenemt(LPARAM item_data)
 	//ziskej manager
 	CElementManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
 	//ziskej typ elementu
-	CElementManager::elId selected_elementId = m.IdentifyElement(selected_element);
+	CElementManager::elId_t selected_elementId = m.IdentifyElement(selected_element);
 
 	
 
@@ -130,7 +130,7 @@ void CSkeletonManager::EditElenemt(LPARAM item_data)
 	{
 		EditActiveElement(selected_element);
 	}	//jedna se o prvek text?
-	else if (selected_elementId == ELID_TEXT)
+	else if (selected_elementId == elId_t_TEXT)
 	{
 		AfxMessageBox(selected_element->text);
 	}
@@ -301,12 +301,12 @@ IXMLDOMElement * CSkeletonManager::ElementFromItemData(LPARAM item_data)
 }
 
 //pokusi se vlozit novy element jako child parent_element uzlu, novy element vrati
-IXMLDOMElementPtr CSkeletonManager::InsertNewElement(CElementManager::elId elementID, IXMLDOMElementPtr & parent_element)
+IXMLDOMElementPtr CSkeletonManager::InsertNewElement(CElementManager::elId_t elementID, IXMLDOMElementPtr & parent_element)
 {
 	CGeneralManager * m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager;
 
 	
-	IXMLDOMElementPtr new_example = m->ElementManager.CreateEmptyExampleElement(elementID);
+	IXMLDOMElementPtr new_example = m->ElementManager.CreateEmptyElement(elementID);
 
 	if (m->ElementManager.CanAppendChildHere(new_example, parent_element))
 	{
@@ -351,11 +351,11 @@ IXMLDOMElementPtr CSkeletonManager::InsertNewElement(LPCTSTR element_name, IXMLD
 }
 
 //vytvori novy id string pro eletment typu element_type
-CString CSkeletonManager::CreateNewID(CElementManager::elId element_type)
+CString CSkeletonManager::CreateNewID(CElementManager::elId_t element_type)
 {
 	
 	LPCTSTR el_name = //priradi nazev elementu z ElementManageru
-		((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager.ElementName(element_type);
+		((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager.getElementName(element_type);
 
 	CString id;
 

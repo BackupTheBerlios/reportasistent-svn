@@ -8,16 +8,16 @@
 //
 
 /////////////////////////////////////////////////////////////////////////////
-// CElementText dialog
+// CElementTextDialog dialog
 
-class CElementText : public CDialog
+class CElementTextDialog : public CDialog
 {
 // Construction
 public:
-	CElementText(CWnd* pParent = NULL);   // standard constructor
+	CElementTextDialog(CWnd* pParent = NULL);   // standard constructor
 
 // Dialog Data
-	//{{AFX_DATA(CElementText)
+	//{{AFX_DATA(CElementTextDialog)
 	enum { IDD = IDD_DIALOGTEXT };
 		// NOTE: the ClassWizard will add data members here
 	//}}AFX_DATA
@@ -25,7 +25,7 @@ public:
 
 // Overrides
 	// ClassWizard generated virtual function overrides
-	//{{AFX_VIRTUAL(CElementText)
+	//{{AFX_VIRTUAL(CElementTextDialog)
 	protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
 	//}}AFX_VIRTUAL
@@ -34,7 +34,7 @@ public:
 protected:
 
 	// Generated message map functions
-	//{{AFX_MSG(CElementText)
+	//{{AFX_MSG(CElementTextDialog)
 	virtual BOOL OnInitDialog();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()

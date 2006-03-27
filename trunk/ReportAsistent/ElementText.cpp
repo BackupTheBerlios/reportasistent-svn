@@ -13,36 +13,36 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 /////////////////////////////////////////////////////////////////////////////
-// CElementText dialog
+// CElementTextDialog dialog
 
 
-CElementText::CElementText(CWnd* pParent /*=NULL*/)
-	: CDialog(CElementText::IDD, pParent)
+CElementTextDialog::CElementTextDialog(CWnd* pParent /*=NULL*/)
+	: CDialog(CElementTextDialog::IDD, pParent)
 {
-	//{{AFX_DATA_INIT(CElementText)
+	//{{AFX_DATA_INIT(CElementTextDialog)
 		// NOTE: the ClassWizard will add member initialization here
 	//}}AFX_DATA_INIT
 }
 
 
-void CElementText::DoDataExchange(CDataExchange* pDX)
+void CElementTextDialog::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
-	//{{AFX_DATA_MAP(CElementText)
+	//{{AFX_DATA_MAP(CElementTextDialog)
 		// NOTE: the ClassWizard will add DDX and DDV calls here
 	//}}AFX_DATA_MAP
 }
 
 
-BEGIN_MESSAGE_MAP(CElementText, CDialog)
-	//{{AFX_MSG_MAP(CElementText)
+BEGIN_MESSAGE_MAP(CElementTextDialog, CDialog)
+	//{{AFX_MSG_MAP(CElementTextDialog)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
-// CElementText message handlers
+// CElementTextDialog message handlers
 
-BOOL CElementText::OnInitDialog() 
+BOOL CElementTextDialog::OnInitDialog() 
 {
 	CDialog::OnInitDialog();
 

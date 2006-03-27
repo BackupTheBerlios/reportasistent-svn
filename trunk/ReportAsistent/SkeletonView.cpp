@@ -149,7 +149,7 @@ void CSkeletonView::OnLButtonDblClk(UINT nFlags, CPoint point)
 		 if (nImg== (IDB_TEXTICO-IDB_BMTREEFIRST-1))
 		 {
 		 	//Vytvorim instanci dialogu pro Prvek Text
-			CElementText dlgText;
+			CElementTextDialog dlgText;
 			//A dialog zobrazim
 			dlgText.DoModal();
 		 }

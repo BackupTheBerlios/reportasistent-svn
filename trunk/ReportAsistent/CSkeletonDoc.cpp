@@ -70,7 +70,7 @@ BOOL CSkeletonDoc::OnNewDocument()
 	CGeneralManager * m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager;
 
 	//by bylo fajn, ale pak tam neni DTD
-	//pXMLDom->appendChild(m->ElementManager.CreateEmptyExampleElement(ELID_REPORT));
+	//pXMLDom->appendChild(m->ElementManager.CreateEmptyElement(elId_t_REPORT));
 
 	//docasne reseni:
 	pXMLDom->load("../XML/prazdny.xml");
@@ -303,8 +303,8 @@ void CSkeletonDoc::OnMmnew4fthyp()
 	//honza: ladici klidne zakomentujte
 	/****/
 	CGeneralManager * m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager;
-	CElementManager::elId id = m->ElementManager.IdentifyElement(selected_element);
-	AfxMessageBox(m->ElementManager.ElementName(id));
+	CElementManager::elId_t id = m->ElementManager.IdentifyElement(selected_element);
+	AfxMessageBox(m->ElementManager.getElementName(id));
 	/***/
 
 
@@ -337,7 +337,7 @@ void CSkeletonDoc::OnElementEdit()
 {
 	CTreeCtrl & tree = GetFirstView()->GetTreeCtrl();
 	
-	m_SkeletonManager.EditElenemt(tree.GetItemData(tree.GetSelectedItem()));
+	m_SkeletonManager.EditElement(tree.GetItemData(tree.GetSelectedItem()));
 
 }
 

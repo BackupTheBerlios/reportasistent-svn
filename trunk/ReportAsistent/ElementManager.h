@@ -21,34 +21,36 @@
 
 
 
-#define ELID_UNKNOWN		0
-#define ELID_REPORT			1
-#define ELID_CHAPTER		2
-#define ELID_PARAGRAPH		3
-#define ELID_TEXT			4
-#define ELID_INCLUDE		5
-//#define ELID_HYP4FT		6  !!! nebude existovat 
+#define elId_t_UNKNOWN		0
+#define elId_t_REPORT			1
+#define elId_t_CHAPTER		2
+#define elId_t_PARAGRAPH		3
+#define elId_t_TEXT			4
+#define elId_t_INCLUDE		5
+//#define elId_t_HYP4FT		6  !!! nebude existovat 
 							//aktivni prvky se vytvareji dynamicky, jdou doinstalovat
 
 class CElementManager  
 {
 public:
-	typedef int elId;
+	//elId_t je index typu elementu v poli el-names 
+	typedef int elId_t;
 
 private:
-	static LPCTSTR el_names[];
+	//seznam typu prvku dostupnych v aplikaci :statickych(= v XML stromu jmeno tagu) i aktivnich(= v XML stromu hodnota atributu "type" prislusneho tagu).
+	static LPCTSTR el_names[]; 
 
 public:
-	BOOL ElementSupportedBySource(elId element_id, int source_index);
+	BOOL ElementSupportedBySource(elId_t element_id, int source_index);
 	BOOL CanAppendChildHere(IXMLDOMElementPtr & child, IXMLDOMElementPtr & parent);
-	BOOL IsElementActive(elId elementId);
-	IXMLDOMElementPtr CreateEmptyExampleElement(CElementManager::elId id);
-	elId ElementIdFromName(LPCTSTR el_name);
+	BOOL IsElementActive(elId_t elementId);
+	IXMLDOMElementPtr CreateEmptyElement(CElementManager::elId_t id);
+	elId_t ElementIdFromName(LPCTSTR el_name);
 
 
-	LPCTSTR ElementName(elId elementID);	//vrati jemno elementu s id elementID
-	elId IdentifyElement(IXMLDOMElementPtr & element);	//identifikuje element - vrati id
-	elId LastElementId();	//vrati posledni id ~ pocet znamych elementu
+	LPCTSTR getElementName(elId_t elementID);	//vrati jemno elementu s id elementID
+	elId_t IdentifyElement(IXMLDOMElementPtr & element);	//identifikuje element - vrati id
+	elId_t LastElementId();	//vrati posledni id ~ pocet znamych elementu
 
 	CElementManager();
 	~CElementManager();
