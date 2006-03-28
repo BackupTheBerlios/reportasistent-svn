@@ -136,7 +136,7 @@ IXMLDOMElementPtr CElementManager::CreateEmptyElement(CElementManager::elId_t id
 	
 	
 	//nastav unikatni id parametr
-	ret->setAttribute("id", (LPCTSTR) doc->m_SkeletonManager.CreateNewID(id));
+	ret->setAttribute("id", (LPCTSTR) doc->CreateNewID(id));
 
 
 

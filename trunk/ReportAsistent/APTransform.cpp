@@ -3,8 +3,11 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "stdafx.h"
-#include "SkeletonManager.h"
+#include "ReportAsistent.h"
+//#include "SkeletonManager.h"
+#include "CSkeletonDoc.h"
 #include "APTransform.h"
+
 
 #ifdef _DEBUG
 #undef THIS_FILE
@@ -21,15 +24,19 @@ static char THIS_FILE[]=__FILE__;
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
 
-CAPTransform::CAPTransform(IXMLDOMElementPtr & node, CSkeletonManager & skel)
-	:m_active_element(node), m_skel_manager(skel)
+CAPTransform::CAPTransform(IXMLDOMElementPtr & node/*, CSkeletonDoc & skel*/)
+	:m_active_element(node)/*, m_skel_document(skel)*/
 {
 	//pouze nacteni pluginoutput
 	
 	m_plug_out.CreateInstance(_T("Msxml2.DOMDocument"));
 	m_plug_out->async = VARIANT_FALSE; // default - true,
 	
-	m_plug_out->loadXML(m_skel_manager.GetPluginOutput(
+
+	CDataSourcesManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->DataSourcesManager;
+
+	
+	m_plug_out->loadXML(m.GetPluginOutput(
 		(public_source_id_t) (BSTR) (_bstr_t) m_active_element->getAttribute("source"),
 		(_bstr_t) m_active_element->getAttribute("type")));
 

@@ -6,7 +6,6 @@
 #define IDR_MAINFRAME                   128
 #define IDR_REPORTTYPE                  129
 #define IDD_DIALOGTEXT                  130
-
 #define IDB_BMTREEFIRST                 134
 #define IDB_CHAPTERICO                  135
 #define IDB_PARAGRAPHICO                136
@@ -16,7 +15,6 @@
 #define IDB_UNKNOWNICO                  140
 #define IDB_4FTHYPOTEZAICO              141
 #define IDB_BMTREELAST                  142
-
 #define IDD_SIMPLE_FILTER_DIALOG        143
 #define IDD_GENERATE_DIALOG             144
 #define IDD_SOURCES_DIALOG              145
@@ -45,6 +43,7 @@
 #define IDS_INSERT_NEW_ELEMENT_WRONG_LOCATION 61204
 #define IDS_SIMPLE_FILTER_EMPTY_SELECTION 61205
 #define IDS_SIMPLE_FILTER_FAILED_SOURCE_LOAD 61206
+#define IDS_WB_WORD_LOADER_NOT_REGISTRED 61207
 
 // Next default values for new objects
 // 

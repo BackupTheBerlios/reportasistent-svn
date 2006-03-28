@@ -655,6 +655,19 @@ BSTR CDataSourcesManager::CallPerformProc(int source_index, LPCTSTR element_id) 
 	return Result;
 }
 
+//dedek
+BSTR CDataSourcesManager::GetPluginOutput(public_source_id_t source, LPCTSTR ap_name)
+{
+	int src_index = FindSourceByPublicID(source);
+	if (! isSourceConnected(src_index)) 
+	{
+		if (! ConnectSource(src_index)) return NULL;
+	}
+
+	return CallPerformProc(src_index, ap_name);
+}
+
+
 
 /*
 //alternativa:

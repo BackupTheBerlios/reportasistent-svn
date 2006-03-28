@@ -5,7 +5,7 @@
 #if !defined(AFX_CSKELETONDOC_H__AF6E6924_ED51_4710_9D19_8B36BB8CCF94__INCLUDED_)
 #define AFX_CSKELETONDOC_H__AF6E6924_ED51_4710_9D19_8B36BB8CCF94__INCLUDED_
 
-#include "SkeletonManager.h"	// Added by ClassView
+//#include "SkeletonManager.h"	// Added by ClassView
 //#include "SkeletonView.h"		// nepridavat znamena cyklicky include -honza
 class CSkeletonView;
 
@@ -40,7 +40,8 @@ public:
 
 // Implementation
 public:
-	CSkeletonManager m_SkeletonManager;
+//	CSkeletonManager m_SkeletonManager;
+
 	void FillTreeControl(CTreeCtrl & tree_control);
 	virtual ~CSkeletonDoc();
 #ifdef _DEBUG
@@ -52,6 +53,7 @@ protected:
 
 // Generated message map functions
 protected:
+	IXMLDOMElement * ElementFromItemData(LPARAM item_data);
 	CSkeletonView * GetFirstView();
 	//{{AFX_MSG(CSkeletonDoc)
 	afx_msg void OnMmnew4fthyp();
@@ -64,7 +66,29 @@ public:
 									HTREEITEM hParentItem, 
 									CTreeCtrl  & tree_control);
 private:
-	MSXML2::IXMLDOMDocumentPtr pXMLDom;
+	MSXML2::IXMLDOMDocumentPtr m_pXMLDom;
+
+protected:
+	static LPARAM CreateItemData(IXMLDOMElementPtr & element);
+	void ConfigureFilter(IXMLDOMElementPtr & active_element);
+	void EditElement(LPARAM item_data);
+	void EditActiveElement(IXMLDOMElementPtr &element);
+	IXMLDOMElementPtr InsertNewElement(CElementManager::elId_t elementID, IXMLDOMElementPtr & parent_element);
+	IXMLDOMElementPtr InsertNewElement(LPCTSTR element_name, IXMLDOMElementPtr & parent_element);
+	
+	void GenerTransform1(IXMLDOMElementPtr & doc);
+	void Transform1Element(IXMLDOMElementPtr & element); //rekurzivni
+	void TransformActiveElement(IXMLDOMElementPtr & element);
+
+	
+public:
+	void Generate();
+	CString CreateNewID(CElementManager::elId_t element_type);
+	static void DeleteItemData(LPARAM data);
+
+
+
+
 };
 
 /////////////////////////////////////////////////////////////////////////////

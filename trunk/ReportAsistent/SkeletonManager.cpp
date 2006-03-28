@@ -1,4 +1,4 @@
-// SkeletonManager.cpp: implementation of the CSkeletonManager class.
+// SkeletonManager.cpp: implementation of the CSkeletonManager2 class.
 //
 //////////////////////////////////////////////////////////////////////
 
@@ -21,7 +21,7 @@ static char THIS_FILE[]=__FILE__;
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
 
-CSkeletonManager::CSkeletonManager(IXMLDOMDocumentPtr & skeleton) :	m_skeleton(skeleton)
+CSkeletonManager2::CSkeletonManager2(IXMLDOMDocumentPtr & skeleton) :	m_skeleton(skeleton)
 {
 /*
 	m_skeleton.CreateInstance(_T("Msxml2.DOMDocument"));
@@ -40,13 +40,13 @@ CSkeletonManager::CSkeletonManager(IXMLDOMDocumentPtr & skeleton) :	m_skeleton(s
 
 }
 
-CSkeletonManager::~CSkeletonManager()
+CSkeletonManager2::~CSkeletonManager2()
 {
 	//m_skeleton.Release();
 }
 
 /*
-void CSkeletonManager::FillTreeCtrl(CTreeCtrl &tree_ctrl)
+void CSkeletonManager2::FillTreeCtrl(CTreeCtrl &tree_ctrl)
 {
 	tree_ctrl.DeleteAllItems();
 
@@ -55,7 +55,7 @@ void CSkeletonManager::FillTreeCtrl(CTreeCtrl &tree_ctrl)
 */
 
 /*
-void CSkeletonManager::RecurentTreeFill(CTreeCtrl &tree_ctrl, MSXML2::IXMLDOMNodePtr & iNode, HTREEITEM hParentItem)
+void CSkeletonManager2::RecurentTreeFill(CTreeCtrl &tree_ctrl, MSXML2::IXMLDOMNodePtr & iNode, HTREEITEM hParentItem)
 {
 	IXMLDOMNodeListPtr iChildren = iNode->childNodes;
 
@@ -80,7 +80,7 @@ void CSkeletonManager::RecurentTreeFill(CTreeCtrl &tree_ctrl, MSXML2::IXMLDOMNod
 }
 */
 
-LPARAM CSkeletonManager::CreateItemData(IXMLDOMElementPtr & element)
+LPARAM CSkeletonManager2::CreateItemData(IXMLDOMElementPtr & element)
 {
 	IXMLDOMElement * np = element;
 
@@ -90,7 +90,7 @@ LPARAM CSkeletonManager::CreateItemData(IXMLDOMElementPtr & element)
 }
 
 
-void CSkeletonManager::DeleteItemData(LPARAM data)
+void CSkeletonManager2::DeleteItemData(LPARAM data)
 {
 	IXMLDOMElement * np = (IXMLDOMElement *) data;
 
@@ -99,7 +99,7 @@ void CSkeletonManager::DeleteItemData(LPARAM data)
 
 //docasne
 /*
-void CSkeletonManager::AddElement()
+void CSkeletonManager2::AddElement()
 {
 	IXMLDOMDocumentPtr element_example;
 	element_example.CreateInstance(_T("Msxml2.DOMDocument"));	
@@ -116,7 +116,7 @@ void CSkeletonManager::AddElement()
 */
 
 //docasne
-void CSkeletonManager::EditElement(LPARAM item_data)
+void CSkeletonManager2::EditElement(LPARAM item_data)
 {
 	if (item_data == NULL) return;
 
@@ -149,7 +149,7 @@ void CSkeletonManager::EditElement(LPARAM item_data)
 
 
 
-void CSkeletonManager::ConfigureFilter(IXMLDOMElementPtr & active_element)
+void CSkeletonManager2::ConfigureFilter(IXMLDOMElementPtr & active_element)
 {
 	//sem prijdou i jiny fitry
 	
@@ -162,7 +162,7 @@ void CSkeletonManager::ConfigureFilter(IXMLDOMElementPtr & active_element)
 	int nResponse = dlg.DoModal();	
 }
 
-_bstr_t CSkeletonManager::GetPluginOutput(public_source_id_t source, LPCTSTR ap_name)
+_bstr_t CSkeletonManager2::GetPluginOutput(public_source_id_t source, LPCTSTR ap_name)
 {
 	CDataSourcesManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->DataSourcesManager;
 
@@ -192,7 +192,7 @@ _bstr_t CSkeletonManager::GetPluginOutput(public_source_id_t source, LPCTSTR ap_
 */
 }
 
-void CSkeletonManager::Generate()
+void CSkeletonManager2::Generate()
 {
 	IXMLDOMElementPtr doc_element;
 	
@@ -242,7 +242,7 @@ void CSkeletonManager::Generate()
 
 
 //tahle metoda asi prijde zrusit
-void CSkeletonManager::GenerTransform1(IXMLDOMElementPtr & doc)
+void CSkeletonManager2::GenerTransform1(IXMLDOMElementPtr & doc)
 {
 	Transform1Node(doc);
 }
@@ -250,7 +250,7 @@ void CSkeletonManager::GenerTransform1(IXMLDOMElementPtr & doc)
 
 
 //rekurzivni
-void CSkeletonManager::Transform1Node(IXMLDOMElementPtr & element)
+void CSkeletonManager2::Transform1Node(IXMLDOMElementPtr & element)
 {
 	if (element == NULL) return;
 
@@ -277,10 +277,10 @@ void CSkeletonManager::Transform1Node(IXMLDOMElementPtr & element)
 	
 }
 
-void CSkeletonManager::TransformActiveElement(IXMLDOMElementPtr & element)
+void CSkeletonManager2::TransformActiveElement(IXMLDOMElementPtr & element)
 {
 
-	CAPTransform tr(element, * this);
+/*	CAPTransform tr(element, * this);
 	tr.DoAllTransnformations();
 
 
@@ -300,13 +300,14 @@ void CSkeletonManager::TransformActiveElement(IXMLDOMElementPtr & element)
 
 //honza: kvuli bezpecnosti a modifikovatelnosti a cistote kodu :)
 //mozna planuju v item datat uchovavat id misto IXMLDOMElement *
-IXMLDOMElement * CSkeletonManager::ElementFromItemData(LPARAM item_data)
+//preneseno do skel doc
+IXMLDOMElement * CSkeletonManager2::ElementFromItemData(LPARAM item_data)
 {
 	return (MSXML2::IXMLDOMElement *) item_data;
 }
 
 //pokusi se vlozit novy element jako child parent_element uzlu, novy element vrati
-IXMLDOMElementPtr CSkeletonManager::InsertNewElement(CElementManager::elId_t elementID, IXMLDOMElementPtr & parent_element)
+IXMLDOMElementPtr CSkeletonManager2::InsertNewElement(CElementManager::elId_t elementID, IXMLDOMElementPtr & parent_element)
 {
 	CGeneralManager * m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager;
 
@@ -346,7 +347,7 @@ IXMLDOMElementPtr CSkeletonManager::InsertNewElement(CElementManager::elId_t ele
 }
 
 //jen prelozi volani na metodu vyse
-IXMLDOMElementPtr CSkeletonManager::InsertNewElement(LPCTSTR element_name, IXMLDOMElementPtr & parent_element)
+IXMLDOMElementPtr CSkeletonManager2::InsertNewElement(LPCTSTR element_name, IXMLDOMElementPtr & parent_element)
 {
 
 	CGeneralManager * m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager;
@@ -356,7 +357,7 @@ IXMLDOMElementPtr CSkeletonManager::InsertNewElement(LPCTSTR element_name, IXMLD
 }
 
 //vytvori novy id string pro eletment typu element_type
-CString CSkeletonManager::CreateNewID(CElementManager::elId_t element_type)
+CString CSkeletonManager2::CreateNewID(CElementManager::elId_t element_type)
 {
 	
 	LPCTSTR el_name = //priradi nazev elementu z ElementManageru
@@ -372,7 +373,7 @@ CString CSkeletonManager::CreateNewID(CElementManager::elId_t element_type)
 
 
 //honza: az budou lepsi dialogy, jejich volani prijde sem
-void CSkeletonManager::EditActiveElement(IXMLDOMElementPtr &element)
+void CSkeletonManager2::EditActiveElement(IXMLDOMElementPtr &element)
 {
 	ConfigureFilter(element);
 }

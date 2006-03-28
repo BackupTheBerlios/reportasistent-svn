@@ -4,6 +4,7 @@
 #include "stdafx.h"
 #include "ReportAsistent.h"
 #include "GenerateDialog.h"
+#include "CSkeletonDoc.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -15,8 +16,8 @@ static char THIS_FILE[] = __FILE__;
 // CGenerateDialog dialog
 
 
-CGenerateDialog::CGenerateDialog(CSkeletonManager & SkeletonManagerToGenerate, CWnd* pParent /*=NULL*/)
-	: CDialog(CGenerateDialog::IDD, pParent), m_SkeletonManager(SkeletonManagerToGenerate)
+CGenerateDialog::CGenerateDialog(CSkeletonDoc & DocumentToGenerate, CWnd* pParent /*=NULL*/)
+	: CDialog(CGenerateDialog::IDD, pParent), m_SkeletonDocument(DocumentToGenerate)
 {
 	//{{AFX_DATA_INIT(CGenerateDialog)
 		// NOTE: the ClassWizard will add member initialization here
@@ -44,7 +45,7 @@ END_MESSAGE_MAP()
 
 void CGenerateDialog::OnGenerateButton() 
 {
-	m_SkeletonManager.Generate();
+	m_SkeletonDocument.Generate();
 	
 	EndDialog(IDOK);
 }

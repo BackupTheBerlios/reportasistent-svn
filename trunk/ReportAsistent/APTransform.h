@@ -18,7 +18,7 @@
 class CAPTransform  
 {
 private:
-	CSkeletonManager & m_skel_manager;
+//	CSkeletonDoc & m_skel_document;
 	IXMLDOMElementPtr & m_active_element;
 	IXMLDOMDocumentPtr m_plug_out;
 
@@ -32,7 +32,7 @@ protected:
 public:
 	IXMLDOMDocumentFragmentPtr DoAllTransnformations();
 	
-	CAPTransform(IXMLDOMElementPtr & node, CSkeletonManager & skel);
+	CAPTransform(IXMLDOMElementPtr & node/*, CSkeletonDoc & skel*/);
 	~CAPTransform();	
 };
 

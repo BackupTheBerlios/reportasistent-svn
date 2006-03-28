@@ -7,7 +7,7 @@
 // GenerateDialog.h : header file
 //
 
-#include "SkeletonManager.h"
+//#include "SkeletonManager.h"
 
 /////////////////////////////////////////////////////////////////////////////
 // CGenerateDialog dialog
@@ -16,7 +16,7 @@ class CGenerateDialog : public CDialog
 {
 // Construction
 public:
-	CGenerateDialog(CSkeletonManager & SkeletonManagerToGenerate, CWnd* pParent = NULL);   // standard constructor
+	CGenerateDialog(CSkeletonDoc & DocumentToGenerate, CWnd* pParent = NULL);   // standard constructor
 
 // Dialog Data
 	//{{AFX_DATA(CGenerateDialog)
@@ -41,7 +41,7 @@ protected:
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 private:
-	CSkeletonManager & m_SkeletonManager;
+	CSkeletonDoc & m_SkeletonDocument;
 };
 
 //{{AFX_INSERT_LOCATION}}

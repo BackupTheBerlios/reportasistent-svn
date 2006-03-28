@@ -125,7 +125,7 @@ void CSkeletonView::OnDeleteitem(NMHDR* pNMHDR, LRESULT* pResult)
 	
 	
 	
-	GetDocument()->m_SkeletonManager.DeleteItemData(pNMTreeView->itemOld.lParam);
+	GetDocument()->DeleteItemData(pNMTreeView->itemOld.lParam);
 	
 	
 	

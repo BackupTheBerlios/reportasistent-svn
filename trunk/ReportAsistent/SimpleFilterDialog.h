@@ -12,7 +12,7 @@
 //
 
 #include "resource.h"
-#include "DataSourceManager.h"
+//#include "DataSourceManager.h"
 
 /////////////////////////////////////////////////////////////////////////////
 // CSimpleFilterDialog dialog

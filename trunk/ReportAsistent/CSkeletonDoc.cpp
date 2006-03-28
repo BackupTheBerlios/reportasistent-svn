@@ -8,6 +8,8 @@
 //#include "SkeletonManager.h" - uz je v headeru
 #include "SkeletonView.h"
 #include "GenerateDialog.h"
+#include "simplefilterdialog.h"
+#include "APTransform.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -32,9 +34,10 @@ END_MESSAGE_MAP()
 /////////////////////////////////////////////////////////////////////////////
 // CSkeletonDoc construction/destruction
 
-CSkeletonDoc::CSkeletonDoc() : m_SkeletonManager(pXMLDom)
+CSkeletonDoc::CSkeletonDoc() /*: m_SkeletonManager(pXMLDom)*/
 {
 	// TODO: add one-time construction code here
+	srand( (unsigned)time( NULL ) );
 
 }
 
@@ -52,9 +55,9 @@ BOOL CSkeletonDoc::OnNewDocument()
 
 	HRESULT hr;
 
-	if (pXMLDom != NULL) pXMLDom.Release();
+	if (m_pXMLDom != NULL) m_pXMLDom.Release();
 
-	hr= pXMLDom.CreateInstance(_T("Msxml2.DOMDocument"));
+	hr= m_pXMLDom.CreateInstance(_T("Msxml2.DOMDocument"));
 	if (FAILED(hr)) 
 	{
 		//mozna prepsat pomoci string table?
@@ -62,7 +65,7 @@ BOOL CSkeletonDoc::OnNewDocument()
 		return FALSE;
 	}
 
-	pXMLDom->async = VARIANT_FALSE; // default - true,
+	m_pXMLDom->async = VARIANT_FALSE; // default - true,
 
 	
 	
@@ -73,7 +76,7 @@ BOOL CSkeletonDoc::OnNewDocument()
 	//pXMLDom->appendChild(m->ElementManager.CreateEmptyElement(elId_t_REPORT));
 
 	//docasne reseni:
-	pXMLDom->load("../XML/prazdny.xml");
+	m_pXMLDom->load("../XML/prazdny.xml");
 
 
 	return TRUE;
@@ -124,7 +127,7 @@ BOOL CSkeletonDoc::OnOpenDocument(LPCTSTR lpszPathName)
 	
 	HRESULT hr;
 
-	hr= pXMLDom.CreateInstance(_T("Msxml2.DOMDocument"));
+	hr= m_pXMLDom.CreateInstance(_T("Msxml2.DOMDocument"));
 	if (FAILED(hr)) 
 	{
 		//mozna prepsat pomoci string table?
@@ -132,13 +135,13 @@ BOOL CSkeletonDoc::OnOpenDocument(LPCTSTR lpszPathName)
 		return FALSE;
 	}
 
-	pXMLDom->async = VARIANT_FALSE; // default - true,
+	m_pXMLDom->async = VARIANT_FALSE; // default - true,
 
-	if(pXMLDom->load((LPCTSTR) lpszPathName) != VARIANT_TRUE)
+	if(m_pXMLDom->load((LPCTSTR) lpszPathName) != VARIANT_TRUE)
 	{
 
 		CString s;
-		CString errstr( (BSTR) pXMLDom->parseError->Getreason());
+		CString errstr( (BSTR) m_pXMLDom->parseError->Getreason());
 
 		//mozna prepsat pomoci string table?
 		s.Format("\nError in XML file reading.\n%s", lpszPathName);
@@ -161,7 +164,7 @@ void CSkeletonDoc::FillTreeControl(CTreeCtrl  & tree_control)
 	tree_control.DeleteAllItems();
 
 	// ukazu pTopElement na koren XMLDOM stromu  
-	pTopElement = pXMLDom->GetdocumentElement();
+	pTopElement = m_pXMLDom->GetdocumentElement();
 	if (pTopElement == NULL)
 	{
       AfxGetMainWnd()->MessageBox("Invalid top document node.","Invalid top document node.", MB_ICONERROR);
@@ -317,7 +320,7 @@ void CSkeletonDoc::InsetNodeToTreeCtrl(MSXML2::IXMLDOMElementPtr pElement,
 		//ukazu TV_ITEM.lParam na odpovidajici uzel XML stromu
 
 		
-		tree_control.SetItemData(hTreeItem, CSkeletonManager::CreateItemData(pElement));
+		tree_control.SetItemData(hTreeItem, CreateItemData(pElement));
 
 
 
@@ -333,7 +336,7 @@ void CSkeletonDoc::InsetNodeToTreeCtrl(MSXML2::IXMLDOMElementPtr pElement,
 //pridal honza
 BOOL CSkeletonDoc::OnSaveDocument(LPCTSTR lpszPathName) 
 {
-	pXMLDom->save(lpszPathName);
+	m_pXMLDom->save(lpszPathName);
 
 	SetModifiedFlag(FALSE);
 	
@@ -345,7 +348,7 @@ void CSkeletonDoc::OnMmnew4fthyp()
 {
 	CTreeCtrl & tree = GetFirstView()->GetTreeCtrl();		
 	HTREEITEM item = tree.GetSelectedItem();
-	IXMLDOMElementPtr selected_element = m_SkeletonManager.ElementFromItemData(tree.GetItemData( item ));			
+	IXMLDOMElementPtr selected_element = ElementFromItemData(tree.GetItemData( item ));			
 	
 	//zobrazi zpravu s typem vybraneho elementu
 	//honza: ladici klidne zakomentujte
@@ -358,13 +361,12 @@ void CSkeletonDoc::OnMmnew4fthyp()
 
 	
 	 
-	IXMLDOMElementPtr new_element = 
-		m_SkeletonManager.InsertNewElement("hyp_4ft", selected_element);
+	IXMLDOMElementPtr new_element = InsertNewElement("hyp_4ft", selected_element);
 
 	//pridani se zdarilo
 	if (new_element != NULL)
 	{
-		m_SkeletonManager.EditActiveElement(new_element); 
+		EditActiveElement(new_element); 
 
 		SetModifiedFlag();		
 		UpdateAllViews(NULL, (LPARAM) (IXMLDOMElement *) new_element);
@@ -385,13 +387,13 @@ void CSkeletonDoc::OnElementEdit()
 {
 	CTreeCtrl & tree = GetFirstView()->GetTreeCtrl();
 	
-	m_SkeletonManager.EditElement(tree.GetItemData(tree.GetSelectedItem()));
+	EditElement(tree.GetItemData(tree.GetSelectedItem()));
 
 }
 
 void CSkeletonDoc::OnMmgenrep() 
 {
-	CGenerateDialog dlg(m_SkeletonManager, AfxGetMainWnd());
+	CGenerateDialog dlg(* this, AfxGetMainWnd());
 	
 	//pozor vlastni kod generovani je ve CSkeletonManager::Generate()
 	dlg.DoModal();
@@ -401,4 +403,263 @@ void CSkeletonDoc::OnMmgenrep()
 #ifdef DONT_CLONE_REPORT_BEFORE_GENERATE
 	UpdateAllViews(NULL);
 #endif
+}
+
+IXMLDOMElement * CSkeletonDoc::ElementFromItemData(LPARAM item_data)
+{
+		return (MSXML2::IXMLDOMElement *) item_data;
+}
+
+
+//pokusi se vlozit novy element jako child parent_element uzlu, novy element vrati
+IXMLDOMElementPtr CSkeletonDoc::InsertNewElement(CElementManager::elId_t elementID, IXMLDOMElementPtr & parent_element)
+{
+	CGeneralManager * m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager;
+
+	
+	IXMLDOMElementPtr new_example = m->ElementManager.CreateEmptyElement(elementID);
+
+	if (m->ElementManager.CanAppendChildHere(new_example, parent_element))
+	{
+		//ladici
+		//AfxMessageBox(new_example->xml);	
+		//AfxMessageBox(parent_element->xml);	
+		
+		
+		//a tohle je sranda nejvetsi :-) hazi to chyby jak na bezicim pasu
+		//kontroluje to tozi DTD dokumentu tak bacha, nejde vsecko vsude vlozit
+		//az bude funkcni CanAppendChildHere tak by uz chyby nemely nastat
+		try
+		{
+			parent_element->appendChild(new_example);
+			return new_example;
+
+		}
+		catch (_com_error &e)
+		{
+			//AfxMessageBox(e.ErrorMessage());
+			AfxMessageBox(e.Description());
+		}
+
+	}
+		
+	
+	AfxMessageBox(IDS_INSERT_NEW_ELEMENT_WRONG_LOCATION);	
+	
+	new_example.Release();
+	
+	return NULL;
+}
+
+//jen prelozi volani na metodu vyse
+IXMLDOMElementPtr CSkeletonDoc::InsertNewElement(LPCTSTR element_name, IXMLDOMElementPtr & parent_element)
+{
+
+	CGeneralManager * m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager;
+
+	return InsertNewElement(m->ElementManager.ElementIdFromName(element_name), parent_element);
+
+}
+
+//vytvori novy id string pro eletment typu element_type
+CString CSkeletonDoc::CreateNewID(CElementManager::elId_t element_type)
+{
+	
+	LPCTSTR el_name = //priradi nazev elementu z ElementManageru
+		((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager.getElementName(element_type);
+
+	CString id;
+
+	id.Format("%s%d", el_name, rand());
+
+
+	return id;
+}
+
+void CSkeletonDoc::EditActiveElement(IXMLDOMElementPtr &element)
+{
+		ConfigureFilter(element);
+}
+
+
+//dedek: docasne - sem rijde volani spravnych edit dialogu
+void CSkeletonDoc::EditElement(LPARAM item_data)
+{
+	if (item_data == NULL) return;
+
+	//ziskej element
+	IXMLDOMElementPtr selected_element = ElementFromItemData(item_data);
+	//ziskej manager
+	CElementManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
+	//ziskej typ elementu
+	CElementManager::elId_t selected_elementId = m.IdentifyElement(selected_element);
+
+	
+
+	
+	//jedna se o aktivni prvek?
+	if (m.IsElementActive(selected_elementId))
+	{
+		EditActiveElement(selected_element);
+	}	//jedna se o prvek text?
+	else if (selected_elementId == elId_t_TEXT)
+	{
+		AfxMessageBox(selected_element->text);
+	}
+	else
+	{	//ostatni prvky
+		AfxMessageBox(selected_element->xml);
+	}
+
+}
+
+void CSkeletonDoc::ConfigureFilter(IXMLDOMElementPtr &active_element)
+{
+	//sem prijdou i jiny fitry
+	
+	//dialog prepise active_element podle uzivatelovy volby
+	CSimpleFilterDialog dlg(active_element, /*
+		GetPluginOutput((_bstr_t) active_element->getAttribute("source"),
+						(_bstr_t) active_element->getAttribute("type")),*/
+		AfxGetMainWnd());
+
+	int nResponse = dlg.DoModal();	
+
+}
+
+void CSkeletonDoc::DeleteItemData(LPARAM data)
+{
+	IXMLDOMElement * np = (IXMLDOMElement *) data;
+
+	if (np != NULL) np->Release();
+
+}
+
+LPARAM CSkeletonDoc::CreateItemData(IXMLDOMElementPtr & element)
+{
+	IXMLDOMElement * np = element;
+
+	np->AddRef();
+
+	return (LPARAM) np;
+}
+
+
+
+
+
+
+
+
+void CSkeletonDoc::Generate()
+{
+	IXMLDOMElementPtr doc_element;
+	
+
+#ifdef DONT_CLONE_REPORT_BEFORE_GENERATE
+	doc_element = m_skeleton->documentElement;
+#else
+	//klonuje cely dokumnet
+	doc_element = m_pXMLDom->documentElement->cloneNode(VARIANT_TRUE);
+#endif
+	
+	//provede transformace
+	GenerTransform1(doc_element);
+
+	
+
+//	doc_element->save("../out.xml");
+
+
+	
+/*****///generovani do Wordu	
+
+	HRESULT hr;
+	
+	LMRA_WordLoader::_LMRA_XML_WordLoaderPtr word;
+	hr = word.CreateInstance(CLSID_LMRA_XML_WordLoader);
+
+	if (hr == REGDB_E_CLASSNOTREG)
+	{
+		AfxMessageBox(IDS_WB_WORD_LOADER_NOT_REGISTRED);
+		return;
+	}
+
+	try
+	{	
+		word->LoadFromString(doc_element->xml);
+	}
+	catch (_com_error & e)
+	{
+		CString err = "Chyba pri generovani.\n\nposledni zpracovavane id:   ";
+		err += word->GetstrLastProcessedId();
+		err += "\n\n";
+		err += word->GetstrLastError();
+		err += "\n";
+		err += e.Description();
+		err += "\n";
+		err += e.ErrorMessage();
+		AfxMessageBox(err);
+	}
+
+	word.Release();
+/******/
+
+}
+
+
+//tahle metoda asi prijde zrusit
+void CSkeletonDoc::GenerTransform1(IXMLDOMElementPtr & doc)
+{
+	Transform1Element(doc);
+}
+
+
+
+//rekurzivni
+void CSkeletonDoc::Transform1Element(IXMLDOMElementPtr & element)
+{
+	if (element == NULL) return;
+
+	CElementManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
+
+
+	if (m.IsElementActive(m.IdentifyElement(element)))
+	{
+		TransformActiveElement(element);
+	}
+	else
+	{
+		IXMLDOMNodeListPtr iChildren = element->childNodes;
+
+		IXMLDOMElementPtr iChild = NULL;
+
+		while ((iChild = iChildren->nextNode()) != NULL)
+		{
+			
+			//rekurze
+			Transform1Element(iChild);
+		}
+	}
+	
+}
+
+void CSkeletonDoc::TransformActiveElement(IXMLDOMElementPtr & element)
+{
+
+	CAPTransform tr(element);
+	tr.DoAllTransnformations();
+
+
+//honza: ladici - lze pouzit pro generovani preview
+/***
+	IXMLDOMElementPtr klon = element->cloneNode(VARIANT_TRUE);
+
+	CAPTransform tr(klon, * this);
+
+	AfxMessageBox(tr.DoAllTransnformations()->xml);
+
+	klon.Release();
+
+/***/
 }

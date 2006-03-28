@@ -210,6 +210,8 @@ public:
 	//a tady nebo v plugin mamageru budou funkce pro zavaloni perform na danem zdroji
 	//predbezne:
 	BSTR CallPerformProc(int source_index, LPCTSTR element_id); //vrati XML string
+	BSTR GetPluginOutput(public_source_id_t source, LPCTSTR ap_name); //zavola CallPerformProc
+
 
 /* kody - pro Dedu
   // alternativa

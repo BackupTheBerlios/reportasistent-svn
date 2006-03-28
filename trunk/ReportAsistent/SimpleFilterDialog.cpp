@@ -4,7 +4,7 @@
 #include "stdafx.h"
 #include "ReportAsistent.h"
 #include "SimpleFilterDialog.h"
-#include "SkeletonManager.h"
+//#include "SkeletonManager.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -157,10 +157,14 @@ BOOL CSimpleFilterDialog::LoadSource(public_source_id_t sId)
 	//nacte data z plugin output
 	IXMLDOMDocumentPtr filter_doc;
 	filter_doc.CreateInstance(_T("Msxml2.DOMDocument"));
-	filter_doc->async = VARIANT_FALSE; // default - true,	
+	filter_doc->async = VARIANT_FALSE; // default - true,
 
-	_bstr_t s_out = 
-		CSkeletonManager::GetPluginOutput(sId, (_bstr_t) m_active_element->getAttribute("type"));
+
+	
+	CDataSourcesManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->DataSourcesManager;
+
+
+	BSTR s_out = m.GetPluginOutput(sId, (_bstr_t) m_active_element->getAttribute("type"));
 
 	if (NULL == (BSTR) s_out) 
 	{
