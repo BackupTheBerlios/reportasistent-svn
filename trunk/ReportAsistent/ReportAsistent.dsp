@@ -130,10 +130,6 @@ SOURCE=.\SimpleFilterDialog.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\SkeletonManager.cpp
-# End Source File
-# Begin Source File
-
 SOURCE=.\SkeletonView.cpp
 # End Source File
 # Begin Source File
@@ -156,10 +152,6 @@ SOURCE=.\APTransform.h
 # Begin Source File
 
 SOURCE=.\CSkeletonDoc.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\DataSourceManager.h
 # End Source File
 # Begin Source File
 
