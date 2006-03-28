@@ -246,6 +246,7 @@ IDB_REPORTICO           BITMAP  DISCARDABLE     "res\\Report.bmp"
 IDB_TABLEICO            BITMAP  DISCARDABLE     "res\\Table.bmp"
 IDB_TEXTICO             BITMAP  DISCARDABLE     "res\\Text.bmp"
 IDB_UNKNOWNICO          BITMAP  DISCARDABLE     "res\\unknowni.bmp"
+IDB_4FTHYPOTEZAICO      BITMAP  DISCARDABLE     "res\\4ftHypoteza.bmp"
 
 /////////////////////////////////////////////////////////////////////////////
 //

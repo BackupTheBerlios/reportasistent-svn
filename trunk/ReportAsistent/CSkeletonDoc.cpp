@@ -190,6 +190,8 @@ void CSkeletonDoc::InsetNodeToTreeCtrl(MSXML2::IXMLDOMElementPtr pElement,
 	CString csElementType; //typ prvku XMLstromu: text/chapter/report/...
 	char sTextValue [256]; //text ktery se stane jmenem polozky v CtrlTree
 	HTREEITEM hTreeItem=NULL;
+	BOOL bChildrenYes=TRUE; //urcuje, mohu-li potomky tohoto prvku vlozit do kostry 
+							//..napr. chapter - ano, 4fthypoteza- ne.
 
 	
 		
@@ -256,9 +258,55 @@ void CSkeletonDoc::InsetNodeToTreeCtrl(MSXML2::IXMLDOMElementPtr pElement,
 														IDB_PARAGRAPHICO-IDB_BMTREEFIRST-1,//nSelectedImage
 														hParentItem);
 					}
-					//pridam prvek do TreeCtrl..pro jiny typ prvku nez vyse uvedeny
 					else
-						hTreeItem = tree_control.InsertItem((LPCTSTR) (_bstr_t) csElementType,//text prvku TreeCtrl
+				//pridam prvek do TreeCtrl ..pro typ prvku ACTIVE_ELEMENT
+						if (0==strcmp("active_element",csElementType))
+						{
+							_variant_t & vtTypeActElm = pElement->getAttribute("type");
+							if (0==strcmp("hyp_4ft",(LPCTSTR) (_bstr_t) vtTypeActElm))
+							//pridam prvek do TreeCtrl ..pro typ prvku 4FT-HYPOTEZA
+								/*<active_element type="hyp_4ft" source="honzova_metabaze" id="hyp_4ft1">
+									<params/>
+								
+									<filter type="simple">
+										<selection id="hyp1"/>
+										<selection id="hyp3"/>
+									</filter>
+								
+									<output>
+										<transformation file="../4ft_generuj1.xsl"/>
+										<transformation file="../4ft_generuj1.xsl"/>
+									</output>
+								</active_element>*/
+							{
+								_variant_t & vtId = pElement->getAttribute("id");
+
+								if (vtId.vt == VT_NULL) 
+									sprintf(sTextValue,"Id - missing");
+								else
+								{
+									sprintf(sTextValue,"%s",(LPCTSTR) (_bstr_t) vtId);
+								}
+
+								hTreeItem = tree_control.InsertItem(sTextValue,//text prvku TreeCtrl
+																	IDB_4FTHYPOTEZAICO-IDB_BMTREEFIRST-1,//nImage
+																	IDB_4FTHYPOTEZAICO-IDB_BMTREEFIRST-1,//nSelectedImage
+																	hParentItem);
+								bChildrenYes=FALSE; // potomci nemaji byt prvky kostry, protoze jsou to zalezitosti pro dialog 4fthypotezy.
+
+							}
+							else
+							//pridam aktivni prvek do TreeCtrl..pro jiny typ prvku nez vyse uvedeny
+							hTreeItem = tree_control.InsertItem((LPCTSTR) (_bstr_t) csElementType,//text prvku TreeCtrl
+														IDB_UNKNOWNICO-IDB_BMTREEFIRST-1,//nImage
+														IDB_UNKNOWNICO-IDB_BMTREEFIRST-1,//nSelectedImage
+													hParentItem);
+
+
+						}
+						//pridam prvek do TreeCtrl..pro jiny typ prvku nez vyse uvedeny
+						else
+							hTreeItem = tree_control.InsertItem((LPCTSTR) (_bstr_t) csElementType,//text prvku TreeCtrl
 														IDB_UNKNOWNICO-IDB_BMTREEFIRST-1,//nImage
 														IDB_UNKNOWNICO-IDB_BMTREEFIRST-1,//nSelectedImage
 													hParentItem);
@@ -273,7 +321,7 @@ void CSkeletonDoc::InsetNodeToTreeCtrl(MSXML2::IXMLDOMElementPtr pElement,
 
 
 
-	while ((pChild = pChildren->nextNode()) != NULL)
+	while (bChildrenYes && (pChild = pChildren->nextNode()) != NULL)
 	{
 
 		//rekurze

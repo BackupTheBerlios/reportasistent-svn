@@ -211,6 +211,10 @@ SOURCE=.\StdAfx.h
 # PROP Default_Filter "ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe"
 # Begin Source File
 
+SOURCE=.\res\4ftHypoteza.bmp
+# End Source File
+# Begin Source File
+
 SOURCE=.\res\bmtreebi.bmp
 # End Source File
 # Begin Source File
