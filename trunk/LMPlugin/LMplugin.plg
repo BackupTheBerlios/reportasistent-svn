@@ -6,12 +6,12 @@
 --------------------Configuration: LMplugin - Win32 Debug--------------------
 </h3>
 <h3>Command Lines</h3>
-Creating temporary file "C:\DOCUME~1\MARTIN~1.CHR\LOCALS~1\Temp\RSP1F.tmp" with contents
+Creating temporary file "C:\DOCUME~1\MARTIN~1.CHR\LOCALS~1\Temp\RSP22.tmp" with contents
 [
 /nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /D "_USRDLL" /D "LMPLUGIN_EXPORTS" /D "_WINDLL" /D "_AFXDLL" /FR"Debug/" /Fp"Debug/LMplugin.pch" /YX /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
 "c:\skola\sw projekt\dev\LMPlugin\LM_Metabase.cpp"
 ]
-Creating command line "cl.exe @C:\DOCUME~1\MARTIN~1.CHR\LOCALS~1\Temp\RSP1F.tmp" 
+Creating command line "cl.exe @C:\DOCUME~1\MARTIN~1.CHR\LOCALS~1\Temp\RSP22.tmp" 
 <h3>Output Window</h3>
 Compiling...
 LM_Metabase.cpp

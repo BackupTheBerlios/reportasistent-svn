@@ -2,13 +2,14 @@
 
 #include "LM_Metabase.h"
 #include "Hyp_4ft_Recordset.h"
-#include "DTD.h"
+#include "locale.h"
 
 
 CString Hyp_4ft_Meta::xml_convert ()
 {
 	CString xml_string;
 	CString hlp;
+	lconv * loc = localeconv ();
 	//beginning of the hyp_4ft element
 	xml_string = " <hyp_4ft id=\"" + id + "\" db_name=\"" + db_name + "\" ";
 	xml_string = xml_string + "matrix_name=\"" + matrix_name + "\" ";
@@ -27,6 +28,7 @@ CString Hyp_4ft_Meta::xml_convert ()
 	xml_string = xml_string + hlp + "\" ";
 	xml_string = xml_string + " conf=\"";
 	hlp.Format ("%f", conf);
+	hlp.Replace (".", loc->decimal_point);
 	xml_string = xml_string + hlp + "\" ";
 	xml_string = xml_string + " d_conf=\"";
 	hlp.Format ("%f", d_conf);
