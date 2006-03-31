@@ -2,7 +2,7 @@
 
 [General Info]
 Version=1
-LastClass=CSourcesDialog
+LastClass=CElementTextDialog
 LastTemplate=CDialog
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "ReportAsistent.h"
@@ -20,7 +20,7 @@ Resource2=IDR_MAINFRAME
 Class5=CAboutDlg
 Resource3=IDD_SIMPLE_FILTER_DIALOG
 Resource4=IDD_GENERATE_DIALOG (English (U.S.))
-Class6=CElementText
+Class6=CElementTextDialog
 Resource5=IDD_SOURCES_DIALOG
 Class7=CSimpleFilterDialog
 Resource6=IDD_ABOUTBOX (English (U.S.))
@@ -192,18 +192,9 @@ Class=?
 ControlCount=1
 Control1=IDC_STATIC,static,1342308352
 
-[CLS:CElementText]
-Type=0
-HeaderFile=ElementText.h
-ImplementationFile=ElementText.cpp
-BaseClass=CDialog
-Filter=D
-LastObject=CElementText
-VirtualFilter=dWC
-
 [DLG:IDD_DIALOGTEXT (English (U.S.))]
 Type=1
-Class=CElementText
+Class=CElementTextDialog
 ControlCount=3
 Control1=IDOK,button,1342242817
 Control2=IDCANCEL,button,1342242816
@@ -269,4 +260,13 @@ BaseClass=CDialog
 Filter=D
 LastObject=CSourcesDialog
 VirtualFilter=dWC
+
+[CLS:CElementTextDialog]
+Type=0
+HeaderFile=elementtextdialog.h
+ImplementationFile=elementtextdialog.cpp
+BaseClass=CDialog
+Filter=D
+VirtualFilter=dWC
+LastObject=IDC_DIALTEXT_EDIT
 

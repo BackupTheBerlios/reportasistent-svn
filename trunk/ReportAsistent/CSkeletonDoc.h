@@ -71,7 +71,7 @@ private:
 protected:
 	static LPARAM CreateItemData(IXMLDOMElementPtr & element);
 	void ConfigureFilter(IXMLDOMElementPtr & active_element);
-	void EditElement(LPARAM item_data);
+	void EditElement(IXMLDOMElementPtr selected_element);
 	void EditActiveElement(IXMLDOMElementPtr &element);
 	IXMLDOMElementPtr InsertNewElement(CElementManager::elId_t elementID, IXMLDOMElementPtr & parent_element);
 	IXMLDOMElementPtr InsertNewElement(LPCTSTR element_name, IXMLDOMElementPtr & parent_element);

@@ -6,7 +6,7 @@
 
 #include "CSkeletonDoc.h"
 #include "SkeletonView.h"
-#include "ElementText.h"
+#include "ElementTextDialog.h"
 
 
 #ifdef _DEBUG
@@ -148,10 +148,8 @@ void CSkeletonView::OnLButtonDblClk(UINT nFlags, CPoint point)
 		 //Je-li to prvek typu TEXT
 		 if (nImg== (IDB_TEXTICO-IDB_BMTREEFIRST-1))
 		 {
-		 	//Vytvorim instanci dialogu pro Prvek Text
-			CElementTextDialog dlgText;
-			//A dialog zobrazim
-			dlgText.DoModal();
+			//Poslu zpravu ID_ELEMENT_EDIT sve aplikaci, coz je zprava akceleratoru na Enter
+			 AfxGetApp()->GetMainWnd()->SendMessage(WM_COMMAND, ID_ELEMENT_EDIT, 0);
 		 }
 	 }
 

@@ -106,7 +106,7 @@ SOURCE=.\ElementManager.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\ElementText.cpp
+SOURCE=.\ElementTextDialog.cpp
 # End Source File
 # Begin Source File
 
@@ -163,7 +163,7 @@ SOURCE=.\ElementManager.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\ElementText.h
+SOURCE=.\ElementTextDialog.h
 # End Source File
 # Begin Source File
 

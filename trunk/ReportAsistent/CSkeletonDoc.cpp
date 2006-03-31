@@ -10,6 +10,7 @@
 #include "GenerateDialog.h"
 #include "simplefilterdialog.h"
 #include "APTransform.h"
+#include "ElementTextDialog.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -387,7 +388,7 @@ void CSkeletonDoc::OnElementEdit()
 {
 	CTreeCtrl & tree = GetFirstView()->GetTreeCtrl();
 	
-	EditElement(tree.GetItemData(tree.GetSelectedItem()));
+	EditElement(ElementFromItemData(tree.GetItemData(tree.GetSelectedItem())));
 
 }
 
@@ -482,29 +483,47 @@ void CSkeletonDoc::EditActiveElement(IXMLDOMElementPtr &element)
 }
 
 
-//dedek: docasne - sem rijde volani spravnych edit dialogu
-void CSkeletonDoc::EditElement(LPARAM item_data)
+//dedek: docasne - sem prijde volani spravnych edit dialogu
+void CSkeletonDoc::EditElement(IXMLDOMElementPtr selected_element)
 {
-	if (item_data == NULL) return;
+
+	if (selected_element == NULL) return;
 
 	//ziskej element
-	IXMLDOMElementPtr selected_element = ElementFromItemData(item_data);
+	//IXMLDOMElementPtr selected_element = ElementFromItemData(item_data);
 	//ziskej manager
-	CElementManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
+	CElementManager & OElementManager = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
 	//ziskej typ elementu
-	CElementManager::elId_t selected_elementId = m.IdentifyElement(selected_element);
+	CElementManager::elId_t selected_elementTypeId = OElementManager.IdentifyElement(selected_element);
 
 	
 
 	
 	//jedna se o aktivni prvek?
-	if (m.IsElementActive(selected_elementId))
+	if (OElementManager.IsElementActive(selected_elementTypeId))
 	{
 		EditActiveElement(selected_element);
-	}	//jedna se o prvek text?
-	else if (selected_elementId == elId_t_TEXT)
+	}	
+	// Iva: jedna se o prvek text?
+	else if (selected_elementTypeId == elId_t_TEXT)
 	{
-		AfxMessageBox(selected_element->text);
+		
+		//Stara verze byla: zobrazeni textu do message boxu
+		//AfxMessageBox(selected_element->text);
+
+		//Nova verze:
+		//Vytvorim instanci dialogu pro Prvek Text
+			CElementTextDialog OElementTextDialog;
+
+			//Inicializuji promenne dialogu		
+			OElementTextDialog.m_DialTextEditValue = (LPCTSTR) selected_element->text;
+
+			//A dialog zobrazim
+			OElementTextDialog.DoModal();
+
+			//Zmeny z dialogu soupnu do XMLDom stromu
+			LPCTSTR sText= OElementTextDialog.m_DialTextEditValue; 
+			selected_element->text=sText;
 	}
 	else
 	{	//ostatni prvky
