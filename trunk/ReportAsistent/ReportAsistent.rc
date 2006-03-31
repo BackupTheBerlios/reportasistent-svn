@@ -105,6 +105,15 @@ BEGIN
     PUSHBUTTON      "Set &default",IDC_SET_DEFAULT_BUTTON,14,188,58,15
 END
 
+IDD_TRANSFORMATIONS_DIALOG DIALOG DISCARDABLE  0, 0, 330, 231
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Dialog"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,273,7,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,273,24,50,14
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -128,6 +137,14 @@ BEGIN
         RIGHTMARGIN, 412
         TOPMARGIN, 7
         BOTTOMMARGIN, 219
+    END
+
+    IDD_TRANSFORMATIONS_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 323
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 224
     END
 END
 #endif    // APSTUDIO_INVOKED
@@ -189,6 +206,16 @@ BEGIN
                     BS_MULTILINE
 END
 
+IDD_ECTIVE_ELEMENT_DIALOG DIALOG DISCARDABLE  0, 0, 410, 255
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Dialog"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,353,7,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,353,24,50,14
+    CONTROL         "Tab1",IDC_TAB1,"SysTabControl32",0x0,55,40,158,113
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -220,6 +247,14 @@ BEGIN
         RIGHTMARGIN, 140
         TOPMARGIN, 7
         BOTTOMMARGIN, 53
+    END
+
+    IDD_ECTIVE_ELEMENT_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 403
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 248
     END
 END
 #endif    // APSTUDIO_INVOKED

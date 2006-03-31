@@ -2,32 +2,36 @@
 
 [General Info]
 Version=1
-LastClass=CElementTextDialog
+LastClass=CTransformationsDialog
 LastTemplate=CDialog
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "ReportAsistent.h"
 LastPage=0
 
-ClassCount=9
+ClassCount=11
 Class1=CReportAsistentApp
 Class2=CSkeletonDoc
 Class3=CSkeletonView
 Class4=CMainFrame
 
-ResourceCount=8
+ResourceCount=10
 Resource1=IDD_ABOUTBOX
 Resource2=IDR_MAINFRAME
 Class5=CAboutDlg
-Resource3=IDD_SIMPLE_FILTER_DIALOG
-Resource4=IDD_GENERATE_DIALOG (English (U.S.))
+Resource3=IDD_ABOUTBOX (English (U.S.))
+Resource4=IDD_ECTIVE_ELEMENT_DIALOG (English (U.S.))
 Class6=CElementTextDialog
-Resource5=IDD_SOURCES_DIALOG
+Resource5=IDD_SIMPLE_FILTER_DIALOG
 Class7=CSimpleFilterDialog
-Resource6=IDD_ABOUTBOX (English (U.S.))
+Resource6=IDD_DIALOGTEXT (English (U.S.))
 Class8=CGenerateDialog
-Resource7=IDD_DIALOGTEXT (English (U.S.))
+Resource7=IDD_GENERATE_DIALOG (English (U.S.))
 Class9=CSourcesDialog
-Resource8=IDR_MAINFRAME (English (U.S.))
+Resource8=IDD_SOURCES_DIALOG
+Class10=CActiveElementDialog
+Resource9=IDD_TRANSFORMATIONS_DIALOG
+Class11=CTransformationsDialog
+Resource10=IDR_MAINFRAME (English (U.S.))
 
 [CLS:CReportAsistentApp]
 Type=0
@@ -268,5 +272,37 @@ ImplementationFile=elementtextdialog.cpp
 BaseClass=CDialog
 Filter=D
 VirtualFilter=dWC
-LastObject=IDC_DIALTEXT_EDIT
+LastObject=CElementTextDialog
+
+[DLG:IDD_ECTIVE_ELEMENT_DIALOG (English (U.S.))]
+Type=1
+Class=CActiveElementDialog
+ControlCount=3
+Control1=IDOK,button,1342242817
+Control2=IDCANCEL,button,1342242816
+Control3=IDC_TAB1,SysTabControl32,1342177280
+
+[CLS:CActiveElementDialog]
+Type=0
+HeaderFile=ActiveElementDialog.h
+ImplementationFile=ActiveElementDialog.cpp
+BaseClass=CDialog
+Filter=D
+LastObject=CActiveElementDialog
+VirtualFilter=dWC
+
+[DLG:IDD_TRANSFORMATIONS_DIALOG]
+Type=1
+Class=CTransformationsDialog
+ControlCount=2
+Control1=IDOK,button,1342242817
+Control2=IDCANCEL,button,1342242816
+
+[CLS:CTransformationsDialog]
+Type=0
+HeaderFile=TransformationsDialog.h
+ImplementationFile=TransformationsDialog.cpp
+BaseClass=CDialog
+Filter=D
+LastObject=IDCANCEL
 

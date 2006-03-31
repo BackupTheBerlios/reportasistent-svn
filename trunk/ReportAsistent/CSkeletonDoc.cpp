@@ -11,6 +11,7 @@
 #include "simplefilterdialog.h"
 #include "APTransform.h"
 #include "ElementTextDialog.h"
+#include "ActiveElementDialog.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -479,7 +480,13 @@ CString CSkeletonDoc::CreateNewID(CElementManager::elId_t element_type)
 
 void CSkeletonDoc::EditActiveElement(IXMLDOMElementPtr &element)
 {
-		ConfigureFilter(element);
+	CActiveElementDialog dlg(element, AfxGetMainWnd());
+
+
+	dlg.DoModal();	
+
+
+//		ConfigureFilter(element);
 }
 
 

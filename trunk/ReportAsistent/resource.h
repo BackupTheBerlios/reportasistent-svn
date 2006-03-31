@@ -18,6 +18,8 @@
 #define IDD_SIMPLE_FILTER_DIALOG        143
 #define IDD_GENERATE_DIALOG             144
 #define IDD_SOURCES_DIALOG              145
+#define IDD_ECTIVE_ELEMENT_DIALOG       147
+#define IDD_TRANSFORMATIONS_DIALOG      148
 #define IDC_TREE1                       1000
 #define IDC_FILTER_LIST                 1000
 #define IDC_EDIT1                       1001
@@ -31,6 +33,7 @@
 #define IDC_OPEN_BUTTON                 1008
 #define IDC_DISCONNECT_BUTTON           1009
 #define IDC_CLOSE_BUTTON                1009
+#define IDC_TAB1                        1009
 #define IDC_REMOVE_BUTTON               1010
 #define IDC_RENAME_BUTTON               1011
 #define IDC_SET_DEFAULT_BUTTON          1012
@@ -51,9 +54,9 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
-#define _APS_NEXT_RESOURCE_VALUE        147
+#define _APS_NEXT_RESOURCE_VALUE        149
 #define _APS_NEXT_COMMAND_VALUE         32781
-#define _APS_NEXT_CONTROL_VALUE         1009
+#define _APS_NEXT_CONTROL_VALUE         1010
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif
