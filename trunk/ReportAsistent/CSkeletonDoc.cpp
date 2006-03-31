@@ -358,7 +358,7 @@ void CSkeletonDoc::OnMmnew4fthyp()
 	
 	//zobrazi zpravu s typem vybraneho elementu
 	//honza: ladici klidne zakomentujte
-	/****/
+	/****
 	CGeneralManager * m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager;
 	CElementManager::elId_t id = m->ElementManager.IdentifyElement(selected_element);
 	AfxMessageBox(m->ElementManager.getElementName(id));
@@ -711,7 +711,7 @@ void CSkeletonDoc::OnMmnewtext()
 
 	//zobrazi zpravu s typem vybraneho elementu
 	//honza: ladici klidne zakomentujte
-	/****/
+	/****
 	CGeneralManager * m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager;
 	CElementManager::elId_t id = m->ElementManager.IdentifyElement(selected_element);
 	AfxMessageBox(m->ElementManager.getElementName(id));
@@ -745,7 +745,7 @@ void CSkeletonDoc::OnMmnewparagraph()
 
 	//zobrazi zpravu s typem vybraneho elementu
 	//honza: ladici klidne zakomentujte
-	/****/
+	/****
 	CGeneralManager * m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager;
 	CElementManager::elId_t id = m->ElementManager.IdentifyElement(selected_element);
 	AfxMessageBox(m->ElementManager.getElementName(id));
@@ -778,7 +778,7 @@ void CSkeletonDoc::OnMmnewchapter()
 
 	//zobrazi zpravu s typem vybraneho elementu
 	//honza: ladici klidne zakomentujte
-	/****/
+	/****
 	CGeneralManager * m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager;
 	CElementManager::elId_t id = m->ElementManager.IdentifyElement(selected_element);
 	AfxMessageBox(m->ElementManager.getElementName(id));

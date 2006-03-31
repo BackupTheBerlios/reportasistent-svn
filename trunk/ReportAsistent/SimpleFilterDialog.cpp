@@ -94,52 +94,6 @@ BOOL CSimpleFilterDialog::OnInitDialog()
 	              // EXCEPTION: OCX Property Pages should return FALSE
 }
 
-void CSimpleFilterDialog::OnOK() 
-{
-	POSITION pos = m_FilterList.GetFirstSelectedItemPosition(); 
-
-	if (pos == NULL)
-	{
-		AfxMessageBox(IDS_SIMPLE_FILTER_EMPTY_SELECTION);
-		return;
-	}
-
-	CString source;
-	m_SourcesCombo.GetWindowText(source);
-	m_active_element->setAttribute("source", (LPCTSTR) source);
-	
-	//okopiruje vzorovy element selection
-	IXMLDOMNodePtr select_node = m_active_element->selectSingleNode("filter[@type='simple']/selection")->cloneNode(VARIANT_FALSE);
-	
-	//vymaze vsechny selection
-	IXMLDOMNodeListPtr list = m_active_element->selectNodes("filter[@type='simple']/selection");
-	IXMLDOMSelection * sel;
-	list.QueryInterface(__uuidof(IXMLDOMSelection), &sel);
-	sel->removeAll();
-	sel->Release();
-
-	IXMLDOMNodePtr filter = m_active_element->selectSingleNode("filter[@type='simple']");
-	
-	while (pos)
-	{
-		int nItem = m_FilterList.GetNextSelectedItem(pos);
-
-		IXMLDOMElementPtr el = select_node->cloneNode(VARIANT_FALSE);
-
-		el->setAttribute("id", (LPCTSTR) * (CString *) m_FilterList.GetItemData(nItem));
-		filter->appendChild(el);
-	}
-
-	select_node.Release();
-	
-
-	CDialog::OnOK();
-}
-
-
-
-
-
 void CSimpleFilterDialog::OnDeleteitemFilterList(NMHDR* pNMHDR, LRESULT* pResult) 
 {
 	NM_LISTVIEW* pNMListView = (NM_LISTVIEW*)pNMHDR;
@@ -291,4 +245,62 @@ void CSimpleFilterDialog::OnSelchangeDataSourceCombo()
 		AfxMessageBox(IDS_SIMPLE_FILTER_FAILED_SOURCE_LOAD);
 	}
 
+}
+
+void CSimpleFilterDialog::OnCancel() 
+{
+	GetParent()->SendMessage(WM_COMMAND, IDC_SWITCH_BUTTON | (BN_CLICKED << 16), (LPARAM) m_hWnd);
+	
+	//CDialog::OnCancel();
+}
+
+
+void CSimpleFilterDialog::OnOK() 
+{
+	GetParent()->SendMessage(WM_COMMAND, IDC_SWITCH_BUTTON | (BN_CLICKED << 16), (LPARAM) m_hWnd);
+
+//	CDialog::OnOK();
+}
+
+
+
+BOOL CSimpleFilterDialog::SaveAll()
+{
+	POSITION pos = m_FilterList.GetFirstSelectedItemPosition(); 
+
+	if (pos == NULL)
+	{
+		AfxMessageBox(IDS_SIMPLE_FILTER_EMPTY_SELECTION);
+		return FALSE;
+	}
+
+	CString source;
+	m_SourcesCombo.GetWindowText(source);
+	m_active_element->setAttribute("source", (LPCTSTR) source);
+	
+	//okopiruje vzorovy element selection
+	IXMLDOMNodePtr select_node = m_active_element->selectSingleNode("filter[@type='simple']/selection")->cloneNode(VARIANT_FALSE);
+	
+	//vymaze vsechny selection
+	IXMLDOMNodeListPtr list = m_active_element->selectNodes("filter[@type='simple']/selection");
+	IXMLDOMSelection * sel;
+	list.QueryInterface(__uuidof(IXMLDOMSelection), &sel);
+	sel->removeAll();
+	sel->Release();
+
+	IXMLDOMNodePtr filter = m_active_element->selectSingleNode("filter[@type='simple']");
+	
+	while (pos)
+	{
+		int nItem = m_FilterList.GetNextSelectedItem(pos);
+
+		IXMLDOMElementPtr el = select_node->cloneNode(VARIANT_FALSE);
+
+		el->setAttribute("id", (LPCTSTR) * (CString *) m_FilterList.GetItemData(nItem));
+		filter->appendChild(el);
+	}
+
+	select_node.Release();
+
+	return TRUE;
 }

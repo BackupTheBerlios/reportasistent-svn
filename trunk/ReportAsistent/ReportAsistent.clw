@@ -2,7 +2,7 @@
 
 [General Info]
 Version=1
-LastClass=CSkeletonDoc
+LastClass=CActiveElementDialog
 LastTemplate=CDialog
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "ReportAsistent.h"
@@ -18,18 +18,18 @@ ResourceCount=10
 Resource1=IDD_ABOUTBOX
 Resource2=IDR_MAINFRAME
 Class5=CAboutDlg
-Resource3=IDD_SOURCES_DIALOG
-Resource4=IDD_GENERATE_DIALOG (English (U.S.))
+Resource3=IDD_ACTIVE_ELEMENT_DIALOG (English (U.S.))
+Resource4=IDD_SIMPLE_FILTER_DIALOG (English (U.S.))
 Class6=CElementTextDialog
-Resource5=IDD_TRANSFORMATIONS_DIALOG
+Resource5=IDD_DIALOGTEXT (English (U.S.))
 Class7=CSimpleFilterDialog
-Resource6=IDD_SIMPLE_FILTER_DIALOG
+Resource6=IDD_TRANSFORMATIONS_DIALOG (English (U.S.))
 Class8=CGenerateDialog
-Resource7=IDD_ECTIVE_ELEMENT_DIALOG (English (U.S.))
+Resource7=IDD_ABOUTBOX (English (U.S.))
 Class9=CSourcesDialog
-Resource8=IDD_DIALOGTEXT (English (U.S.))
+Resource8=IDD_GENERATE_DIALOG (English (U.S.))
 Class10=CActiveElementDialog
-Resource9=IDD_ABOUTBOX (English (U.S.))
+Resource9=IDD_SOURCES_DIALOG
 Class11=CTransformationsDialog
 Resource10=IDR_MAINFRAME (English (U.S.))
 
@@ -208,24 +208,12 @@ Control1=IDOK,button,1342242817
 Control2=IDCANCEL,button,1342242816
 Control3=IDC_DIALTEXT_EDIT,edit,1350631552
 
-[DLG:IDD_SIMPLE_FILTER_DIALOG]
-Type=1
-Class=CSimpleFilterDialog
-ControlCount=7
-Control1=IDOK,button,1342242817
-Control2=IDCANCEL,button,1342242816
-Control3=IDC_FILTER_LIST,SysListView32,1350631449
-Control4=IDC_STATIC,static,1342308352
-Control5=IDC_STATIC,static,1342308352
-Control6=IDC_STATIC,static,1342308352
-Control7=IDC_DATA_SOURCE_COMBO,combobox,1344340227
-
 [CLS:CSimpleFilterDialog]
 Type=0
 HeaderFile=SimpleFilterDialog.h
 ImplementationFile=SimpleFilterDialog.cpp
 BaseClass=CDialog
-Filter=D
+Filter=N
 LastObject=CSimpleFilterDialog
 VirtualFilter=dWC
 
@@ -278,14 +266,6 @@ Filter=D
 VirtualFilter=dWC
 LastObject=CElementTextDialog
 
-[DLG:IDD_ECTIVE_ELEMENT_DIALOG (English (U.S.))]
-Type=1
-Class=CActiveElementDialog
-ControlCount=3
-Control1=IDOK,button,1342242817
-Control2=IDCANCEL,button,1342242816
-Control3=IDC_TAB1,SysTabControl32,1342177280
-
 [CLS:CActiveElementDialog]
 Type=0
 HeaderFile=ActiveElementDialog.h
@@ -295,13 +275,6 @@ Filter=D
 LastObject=CActiveElementDialog
 VirtualFilter=dWC
 
-[DLG:IDD_TRANSFORMATIONS_DIALOG]
-Type=1
-Class=CTransformationsDialog
-ControlCount=2
-Control1=IDOK,button,1342242817
-Control2=IDCANCEL,button,1342242816
-
 [CLS:CTransformationsDialog]
 Type=0
 HeaderFile=TransformationsDialog.h
@@ -310,4 +283,32 @@ BaseClass=CDialog
 Filter=D
 LastObject=CTransformationsDialog
 VirtualFilter=dWC
+
+[DLG:IDD_TRANSFORMATIONS_DIALOG (English (U.S.))]
+Type=1
+Class=CTransformationsDialog
+ControlCount=3
+Control1=IDC_STATIC,static,1342177284
+Control2=IDC_STATIC,static,1342177284
+Control3=IDCANCEL,button,1342242816
+
+[DLG:IDD_SIMPLE_FILTER_DIALOG (English (U.S.))]
+Type=1
+Class=CSimpleFilterDialog
+ControlCount=5
+Control1=IDC_FILTER_LIST,SysListView32,1350631449
+Control2=IDC_STATIC,static,1342308352
+Control3=IDC_STATIC,static,1342308352
+Control4=IDC_STATIC,static,1342308352
+Control5=IDC_DATA_SOURCE_COMBO,combobox,1344340227
+
+[DLG:IDD_ACTIVE_ELEMENT_DIALOG (English (U.S.))]
+Type=1
+Class=CActiveElementDialog
+ControlCount=5
+Control1=IDOK,button,1342242817
+Control2=IDCANCEL,button,1342242816
+Control3=IDC_APPLY_BUTTON,button,1342242816
+Control4=IDC_TAB1,SysTabControl32,1342177280
+Control5=IDC_SWITCH_BUTTON,button,1342242816
 

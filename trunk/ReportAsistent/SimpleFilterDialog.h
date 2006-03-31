@@ -27,7 +27,8 @@ class CSimpleFilterDialog : public CDialog
 {
 // Construction
 public:
-	CSimpleFilterDialog(IXMLDOMElementPtr & active_element, CWnd* pParent);	// nestandard constructor :-)
+	BOOL SaveAll();
+	CSimpleFilterDialog(IXMLDOMElementPtr & active_element, CWnd* pParent = NULL);	// nestandard constructor :-)
 	~CSimpleFilterDialog();
 
 // Dialog Data
@@ -56,6 +57,7 @@ protected:
 	virtual void OnOK();
 	afx_msg void OnDeleteitemFilterList(NMHDR* pNMHDR, LRESULT* pResult);
 	afx_msg void OnSelchangeDataSourceCombo();
+	virtual void OnCancel();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 private:
