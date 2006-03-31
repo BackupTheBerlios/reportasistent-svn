@@ -155,6 +155,10 @@ SOURCE=.\CSkeletonDoc.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\DataSourceManager.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\ElementManager.h
 # End Source File
 # Begin Source File

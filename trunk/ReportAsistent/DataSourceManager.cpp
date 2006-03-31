@@ -165,7 +165,7 @@ BOOL CDataSourcesManager::initSourcesTab()
 	HRESULT hr;
      //COM init
     //CoInitialize(NULL);
-	//dedek: uz je zavolani
+	//dedek: uz je zavolano
 	
       //Vytvori COM objekt (resp. instanci objektu)
     hr = pXMLDom.CreateInstance(__uuidof(DOMDocument30));
@@ -208,6 +208,16 @@ BOOL CDataSourcesManager::initSourcesTab()
 					}
 				}
 			}
+
+
+			//dedek: nacteni default source
+
+			IXMLDOMElementPtr el_default_source = pNode->selectSingleNode("DEFAULT_SOURCE");
+			if (el_default_source)
+				setDefaultSource((public_source_id_t) (LPCTSTR) (_bstr_t) el_default_source->getAttribute("PUBLIC_ID"));
+
+
+
 		}
 	}
 
@@ -288,6 +298,24 @@ BOOL CDataSourcesManager::saveSourcesTab()
 	source_el.Release();
 
 
+
+	//default zdroj:
+	IXMLDOMElementPtr default_source;
+	default_source = pXMLDom->createElement("DEFAULT_SOURCE");
+
+
+	IXMLDOMAttributePtr src_attr;	
+	src_attr = pXMLDom->createAttribute("PUBLIC_ID");
+	src_attr->value = (LPCTSTR) getDefaultSource();
+	default_source->setAttributeNode(src_attr);
+	src_attr.Release();
+
+	root_el->appendChild(default_source);
+
+	default_source.Release();
+
+
+
 	ret = S_OK == pXMLDom->save("Config\\sources.xml");
 	root_el.Release();
 
@@ -366,8 +394,6 @@ int CDataSourcesManager::getValidSourcesCount()
 	
 	return Count;
 }
-
-
 
 // getSourcePublicID
 public_source_id_t CDataSourcesManager::getSourcePublicID(int source_index)
@@ -766,3 +792,34 @@ int main(int argc, char** argv)
 }
 */
 
+
+//dedek:
+public_source_id_t CDataSourcesManager::getDefaultSource()
+{
+	int src_index = FindSourceByPublicID(default_source);
+	
+	
+	
+	if (src_index != -1) return default_source;
+
+
+	
+	
+	if (getSourcesCount() == 0) return "";
+
+
+
+	
+	
+	default_source = getSourcePublicID(0);
+	return default_source;
+
+
+
+}
+
+//dedek:
+void CDataSourcesManager::setDefaultSource(public_source_id_t source)
+{
+	default_source = source;
+}

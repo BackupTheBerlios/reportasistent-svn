@@ -18,14 +18,14 @@ ResourceCount=8
 Resource1=IDD_ABOUTBOX
 Resource2=IDR_MAINFRAME
 Class5=CAboutDlg
-Resource3=IDD_DIALOGTEXT (English (U.S.))
+Resource3=IDD_SIMPLE_FILTER_DIALOG
 Resource4=IDD_GENERATE_DIALOG (English (U.S.))
 Class6=CElementText
 Resource5=IDD_SOURCES_DIALOG
 Class7=CSimpleFilterDialog
 Resource6=IDD_ABOUTBOX (English (U.S.))
 Class8=CGenerateDialog
-Resource7=IDD_SIMPLE_FILTER_DIALOG
+Resource7=IDD_DIALOGTEXT (English (U.S.))
 Class9=CSourcesDialog
 Resource8=IDR_MAINFRAME (English (U.S.))
 
@@ -248,7 +248,7 @@ VirtualFilter=dWC
 [DLG:IDD_SOURCES_DIALOG]
 Type=1
 Class=CSourcesDialog
-ControlCount=10
+ControlCount=11
 Control1=IDC_STATIC,static,1342308352
 Control2=IDC_STATIC,static,1342308352
 Control3=IDC_PLUGINS_COMBO,combobox,1344340227
@@ -259,6 +259,7 @@ Control7=IDC_OPEN_BUTTON,button,1342242816
 Control8=IDC_CLOSE_BUTTON,button,1342242816
 Control9=IDC_REMOVE_BUTTON,button,1342242816
 Control10=IDC_RENAME_BUTTON,button,1342242816
+Control11=IDC_SET_DEFAULT_BUTTON,button,1342242816
 
 [CLS:CSourcesDialog]
 Type=0

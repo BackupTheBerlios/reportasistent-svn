@@ -33,6 +33,7 @@
 #define IDC_CLOSE_BUTTON                1009
 #define IDC_REMOVE_BUTTON               1010
 #define IDC_RENAME_BUTTON               1011
+#define IDC_SET_DEFAULT_BUTTON          1012
 #define ID_MMGENREP                     32771
 #define ID_MMSOURCES                    32772
 #define ID_MMNEWTEXT                    32774

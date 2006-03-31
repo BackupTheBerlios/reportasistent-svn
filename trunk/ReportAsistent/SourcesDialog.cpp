@@ -42,6 +42,7 @@ BEGIN_MESSAGE_MAP(CSourcesDialog, CDialog)
 	ON_BN_CLICKED(IDC_REMOVE_BUTTON, OnRemoveButton)
 	ON_BN_CLICKED(IDC_RENAME_BUTTON, OnRenameButton)
 	ON_NOTIFY(LVN_ENDLABELEDIT, IDC_SOURCES_LIST, OnEndlabeleditSourcesList)
+	ON_BN_CLICKED(IDC_SET_DEFAULT_BUTTON, OnSetDefaultButton)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -50,13 +51,14 @@ END_MESSAGE_MAP()
 
 LPCTSTR CSourcesDialog::header_captions [] =
 {
-	"name", "state", "plugin", "persist_ID"
+	"name", "state", "plugin", "default source", "persist_ID"
 };
 
-#define SRCL_NAME		0
-#define SRCL_STATE		1
-#define SRCL_PLUGIN		2
-#define SRCL_PERSISTID	3
+#define SRCL_NAME			0
+#define SRCL_STATE			1
+#define SRCL_PLUGIN			2
+#define SRCL_DEFAULT_SRC	3
+#define SRCL_PERSISTID		4
 
 #define LENGTH(array) (sizeof(array) / sizeof(* array))
 
@@ -69,7 +71,7 @@ BOOL CSourcesDialog::OnInitDialog()
 
 	for (a=0; a<LENGTH(header_captions); a++)
 	{
-		m_SourcesList.InsertColumn(a, header_captions[a], LVCFMT_LEFT, 75);
+		m_SourcesList.InsertColumn(a, header_captions[a], LVCFMT_LEFT, 100);
 	}
 
 	CDataSourcesManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->DataSourcesManager;
@@ -122,6 +124,10 @@ void CSourcesDialog::UpDateList()
 		
 		m_SourcesList.SetItemText(a, SRCL_PLUGIN, m.getSourcePlugin(a));
 		m_SourcesList.SetItemText(a, SRCL_PERSISTID, m.getSourcePersistentID(a));
+
+		if (m.FindSourceByPublicID(m.getDefaultSource()) == a)
+			m_SourcesList.SetItemText(a, SRCL_DEFAULT_SRC, "default source");
+
 
 		CString state;
 
@@ -234,7 +240,7 @@ void CSourcesDialog::OnRemoveButton()
 
 void CSourcesDialog::OnRenameButton() 
 {
-	//nalezeni selecte source
+	//nalezeni selected source
 	POSITION pos = m_SourcesList.GetFirstSelectedItemPosition();
 	if (pos == NULL) return;
 	int nItem = m_SourcesList.GetNextSelectedItem(pos);
@@ -261,4 +267,18 @@ void CSourcesDialog::OnEndlabeleditSourcesList(NMHDR* pNMHDR, LRESULT* pResult)
 	}
 
 	
+}
+
+void CSourcesDialog::OnSetDefaultButton() 
+{
+	//nalezeni selected source
+	POSITION pos = m_SourcesList.GetFirstSelectedItemPosition();
+	if (pos == NULL) return;
+	int nItem = m_SourcesList.GetNextSelectedItem(pos);
+
+	CDataSourcesManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->DataSourcesManager;
+	
+	m.setDefaultSource(m_SourcesList.GetItemText(nItem, 0));
+
+	UpDateList();	
 }

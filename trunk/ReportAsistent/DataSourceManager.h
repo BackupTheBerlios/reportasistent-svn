@@ -110,11 +110,14 @@ public:
 class CDataSourcesManager
 {
 private:
+	public_source_id_t default_source;
 //  DATA
 	CArray<CPluginRec,CPluginRec> PlugsTab;		// tabulka zasuvek
 	CArray<CSourceRec,CSourceRec> SourcesTab;	// tabulka zdroju
 
 public:
+	void setDefaultSource(public_source_id_t source);
+	public_source_id_t getDefaultSource();
 	BOOL isPluginValid(int plugin_index);
 	BOOL isSourceValid(int source_index);
 

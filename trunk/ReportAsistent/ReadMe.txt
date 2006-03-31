@@ -37,7 +37,11 @@ pak F5 a ono se to na nich zastavuje parada :-)
 
 
 
+dedek TODO:
+default source - hotovo
+reletivni adresace metabaze v perzist ID
 
+ElementManager - vracet zakladni DOM dokumenty
 
 
 

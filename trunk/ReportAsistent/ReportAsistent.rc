@@ -83,13 +83,13 @@ BEGIN
                     CBS_SORT | WS_VSCROLL | WS_TABSTOP
 END
 
-IDD_SOURCES_DIALOG DIALOG DISCARDABLE  0, 0, 342, 226
+IDD_SOURCES_DIALOG DIALOG DISCARDABLE  0, 0, 419, 226
 STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Data Sources"
 FONT 8, "MS Sans Serif"
 BEGIN
     LTEXT           "honza: zkrasleni/predelani tohohle dialogu kymkoliv se vubec nebranim - jen pracovni verze",
-                    IDC_STATIC,7,7,328,8
+                    IDC_STATIC,7,7,405,8
     LTEXT           "Plugin:",IDC_STATIC,42,42,22,8
     COMBOBOX        IDC_PLUGINS_COMBO,92,41,179,92,CBS_DROPDOWNLIST | 
                     CBS_SORT | WS_VSCROLL | WS_TABSTOP
@@ -97,11 +97,12 @@ BEGIN
     PUSHBUTTON      "&Add new source..",IDC_ADD_SOURCE_BUTTON,69,63,92,14
     CONTROL         "List2",IDC_SOURCES_LIST,"SysListView32",LVS_REPORT | 
                     LVS_SINGLESEL | LVS_EDITLABELS | WS_BORDER | WS_TABSTOP,
-                    79,101,238,104
+                    79,101,312,104
     PUSHBUTTON      "&Open",IDC_OPEN_BUTTON,13,111,58,15
     PUSHBUTTON      "&Close",IDC_CLOSE_BUTTON,14,130,58,15
     PUSHBUTTON      "&Remove",IDC_REMOVE_BUTTON,13,150,58,15
     PUSHBUTTON      "Re&name",IDC_RENAME_BUTTON,14,170,58,15
+    PUSHBUTTON      "Set &default",IDC_SET_DEFAULT_BUTTON,14,188,58,15
 END
 
 
@@ -124,7 +125,7 @@ BEGIN
     IDD_SOURCES_DIALOG, DIALOG
     BEGIN
         LEFTMARGIN, 7
-        RIGHTMARGIN, 335
+        RIGHTMARGIN, 412
         TOPMARGIN, 7
         BOTTOMMARGIN, 219
     END

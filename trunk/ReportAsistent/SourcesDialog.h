@@ -48,6 +48,7 @@ protected:
 	afx_msg void OnRemoveButton();
 	afx_msg void OnRenameButton();
 	afx_msg void OnEndlabeleditSourcesList(NMHDR* pNMHDR, LRESULT* pResult);
+	afx_msg void OnSetDefaultButton();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };
