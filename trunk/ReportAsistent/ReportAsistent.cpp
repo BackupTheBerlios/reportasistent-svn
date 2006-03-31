@@ -20,7 +20,6 @@ static char THIS_FILE[] = __FILE__;
 BEGIN_MESSAGE_MAP(CReportAsistentApp, CWinApp)
 	//{{AFX_MSG_MAP(CReportAsistentApp)
 	ON_COMMAND(ID_APP_ABOUT, OnAppAbout)
-	ON_COMMAND(ID_MMNEWTEXT, OnMMNewText)
 	ON_COMMAND(ID_MMSOURCES, OnMmsources)
 	//}}AFX_MSG_MAP
 	// Standard file based document commands
@@ -166,11 +165,11 @@ void CReportAsistentApp::OnAppAbout()
 // CReportAsistentApp message handlers
 
 //Iva
-void CReportAsistentApp::OnMMNewText() 
-{
-	//Pridam do TreeCtrl Novou Item a do XML stromu taky.
-	
-}
+//DEL void CReportAsistentApp::OnMMNewText() 
+//DEL {
+//DEL 	//Pridam do TreeCtrl Novou Item a do XML stromu taky.
+//DEL 	
+//DEL }
 
 int CReportAsistentApp::ExitInstance() 
 {

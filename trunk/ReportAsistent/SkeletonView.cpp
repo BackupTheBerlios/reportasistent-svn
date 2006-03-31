@@ -135,23 +135,16 @@ void CSkeletonView::OnDeleteitem(NMHDR* pNMHDR, LRESULT* pResult)
 //Iva:
 void CSkeletonView::OnLButtonDblClk(UINT nFlags, CPoint point) 
 {
-	int nImg;
-	int nImgSel;
+
 
 	//zjistim, ktera polozka TreeCtrl je "Selected"
 	HTREEITEM hTreeSelItem;
 	hTreeSelItem = GetTreeCtrl().GetSelectedItem( );
 
-	//Podle ikony polozky zjistim, o ktery typ polozky jde:
-	 if (0!=GetTreeCtrl().GetItemImage(hTreeSelItem,nImg,nImgSel) )
-	 {
-		 //Je-li to prvek typu TEXT
-		 if (nImg== (IDB_TEXTICO-IDB_BMTREEFIRST-1))
-		 {
-			//Poslu zpravu ID_ELEMENT_EDIT sve aplikaci, coz je zprava akceleratoru na Enter
-			 AfxGetApp()->GetMainWnd()->SendMessage(WM_COMMAND, ID_ELEMENT_EDIT, 0);
-		 }
-	 }
+	
+	//Poslu zpravu ID_ELEMENT_EDIT sve aplikaci, coz je zprava akceleratoru na Enter
+	 AfxGetApp()->GetMainWnd()->SendMessage(WM_COMMAND, ID_ELEMENT_EDIT, 0);
+	
 
 }
 

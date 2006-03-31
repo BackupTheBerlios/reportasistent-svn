@@ -6,8 +6,7 @@
 --------------------Configuration: ReportAsistent - Win32 Debug--------------------
 </h3>
 <h3>Command Lines</h3>
-Creating command line "rc.exe /l 0x405 /fo"Debug/ReportAsistent.res" /d "_DEBUG" /d "_AFXDLL" "D:\lmra\ReportAsistent\ReportAsistent.rc"" 
-Creating temporary file "C:\DOCUME~1\student\LOCALS~1\Temp\RSP172.tmp" with contents
+Creating temporary file "C:\DOCUME~1\student\LOCALS~1\Temp\RSP256.tmp" with contents
 [
 /nologo /subsystem:windows /incremental:yes /pdb:"Debug/ReportAsistent.pdb" /debug /machine:I386 /out:"Debug/ReportAsistent.exe" /pdbtype:sept 
 .\Debug\ActiveElementDialog.obj
@@ -27,9 +26,8 @@ Creating temporary file "C:\DOCUME~1\student\LOCALS~1\Temp\RSP172.tmp" with cont
 .\Debug\ReportAsistent.res
 \lmra\LMPlugin\Debug\LMplugin.lib
 ]
-Creating command line "link.exe @C:\DOCUME~1\student\LOCALS~1\Temp\RSP172.tmp"
+Creating command line "link.exe @C:\DOCUME~1\student\LOCALS~1\Temp\RSP256.tmp"
 <h3>Output Window</h3>
-Compiling resources...
 Linking...
 
 

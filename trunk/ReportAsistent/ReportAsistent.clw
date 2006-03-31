@@ -2,7 +2,7 @@
 
 [General Info]
 Version=1
-LastClass=CTransformationsDialog
+LastClass=CSkeletonDoc
 LastTemplate=CDialog
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "ReportAsistent.h"
@@ -18,18 +18,18 @@ ResourceCount=10
 Resource1=IDD_ABOUTBOX
 Resource2=IDR_MAINFRAME
 Class5=CAboutDlg
-Resource3=IDD_ABOUTBOX (English (U.S.))
-Resource4=IDD_ECTIVE_ELEMENT_DIALOG (English (U.S.))
+Resource3=IDD_SOURCES_DIALOG
+Resource4=IDD_GENERATE_DIALOG (English (U.S.))
 Class6=CElementTextDialog
-Resource5=IDD_SIMPLE_FILTER_DIALOG
+Resource5=IDD_TRANSFORMATIONS_DIALOG
 Class7=CSimpleFilterDialog
-Resource6=IDD_DIALOGTEXT (English (U.S.))
+Resource6=IDD_SIMPLE_FILTER_DIALOG
 Class8=CGenerateDialog
-Resource7=IDD_GENERATE_DIALOG (English (U.S.))
+Resource7=IDD_ECTIVE_ELEMENT_DIALOG (English (U.S.))
 Class9=CSourcesDialog
-Resource8=IDD_SOURCES_DIALOG
+Resource8=IDD_DIALOGTEXT (English (U.S.))
 Class10=CActiveElementDialog
-Resource9=IDD_TRANSFORMATIONS_DIALOG
+Resource9=IDD_ABOUTBOX (English (U.S.))
 Class11=CTransformationsDialog
 Resource10=IDR_MAINFRAME (English (U.S.))
 
@@ -49,6 +49,7 @@ ImplementationFile=CSkeletonDoc.cpp
 Filter=N
 BaseClass=CDocument
 VirtualFilter=DC
+LastObject=CSkeletonDoc
 
 [CLS:CSkeletonView]
 Type=0
@@ -152,15 +153,16 @@ Command8=ID_EDIT_UNDO
 Command9=ID_EDIT_CUT
 Command10=ID_EDIT_COPY
 Command11=ID_EDIT_PASTE
-Command12=ID_MMNEWTEXT
-Command13=ID_MMNEWPARAGRAPH
-Command14=ID_MMNEWCHAPTER
-Command15=ID_MMNEW4FTHYP
-Command16=ID_VIEW_TOOLBAR
-Command17=ID_VIEW_STATUS_BAR
-Command18=ID_MMSOURCES
-Command19=ID_APP_ABOUT
-CommandCount=19
+Command12=ID_MMDELETE
+Command13=ID_MMNEWTEXT
+Command14=ID_MMNEWPARAGRAPH
+Command15=ID_MMNEWCHAPTER
+Command16=ID_MMNEW4FTHYP
+Command17=ID_VIEW_TOOLBAR
+Command18=ID_VIEW_STATUS_BAR
+Command19=ID_MMSOURCES
+Command20=ID_APP_ABOUT
+CommandCount=20
 
 [ACL:IDR_MAINFRAME (English (U.S.))]
 Type=1
@@ -171,16 +173,17 @@ Command3=ID_FILE_OPEN
 Command4=ID_FILE_SAVE
 Command5=ID_EDIT_PASTE
 Command6=ID_EDIT_UNDO
-Command7=ID_EDIT_CUT
-Command8=ID_NEXT_PANE
-Command9=ID_PREV_PANE
-Command10=ID_MMNEW4FTHYP
-Command11=ID_EDIT_COPY
-Command12=ID_EDIT_PASTE
-Command13=ID_ELEMENT_EDIT
-Command14=ID_EDIT_CUT
-Command15=ID_EDIT_UNDO
-CommandCount=15
+Command7=ID_MMDELETE
+Command8=ID_EDIT_CUT
+Command9=ID_NEXT_PANE
+Command10=ID_PREV_PANE
+Command11=ID_MMNEW4FTHYP
+Command12=ID_EDIT_COPY
+Command13=ID_EDIT_PASTE
+Command14=ID_ELEMENT_EDIT
+Command15=ID_EDIT_CUT
+Command16=ID_EDIT_UNDO
+CommandCount=16
 
 [DLG:IDD_ABOUTBOX (English (U.S.))]
 Type=1
@@ -305,5 +308,6 @@ HeaderFile=TransformationsDialog.h
 ImplementationFile=TransformationsDialog.cpp
 BaseClass=CDialog
 Filter=D
-LastObject=IDCANCEL
+LastObject=CTransformationsDialog
+VirtualFilter=dWC
 

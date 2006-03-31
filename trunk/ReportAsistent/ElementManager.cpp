@@ -105,7 +105,7 @@ IXMLDOMElementPtr CElementManager::CreateEmptyElement(CElementManager::elId_t id
 	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
 	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
 	//predelat pres directory manager
-	element_example->load((LPCTSTR) _T("../XML/prazdny.xml"));
+	element_example->load((LPCTSTR) _T("../XML/prazdny2.xml"));
 	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
 	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
 	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
@@ -129,7 +129,12 @@ IXMLDOMElementPtr CElementManager::CreateEmptyElement(CElementManager::elId_t id
 	
 	
 	IXMLDOMElementPtr ret = element_example->selectSingleNode((LPCTSTR) select);
-	
+	if (ret == NULL) 
+	{
+		AfxMessageBox("Nezdarilo se najit odpovidajici xml prvek v souboru praznych prvku.");
+		element_example.Release();
+		return NULL;
+	}
 	
 	
 	CSkeletonDoc * doc = ((CReportAsistentApp *) AfxGetApp())->FirstDocumentInFirstTemplate();
@@ -175,8 +180,10 @@ BOOL CElementManager::CanAppendChildHere(IXMLDOMElementPtr &child, IXMLDOMElemen
 		doc2->Release();
 
 	}
-	catch (...)
+	catch (_com_error e)
 	{
+		AfxMessageBox(child->xml);
+		AfxMessageBox(e.Description());
 		return FALSE;
 	}
 

@@ -55,6 +55,7 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 		TRACE0("Failed to create toolbar\n");
 		return -1;      // fail to create
 	}
+
 	if (!m_wndDlgBar.Create(this, IDR_MAINFRAME, 
 		CBRS_ALIGN_TOP, AFX_IDW_DIALOGBAR))
 	{
@@ -77,6 +78,13 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 		TRACE0("Failed to create status bar\n");
 		return -1;      // fail to create
 	}
+
+	//Iva: Dynamicky pridam seznam aktivnich prvku ke vlozeni do kostry
+	
+	//CMenu * hMainMenu = AfxGetApp()->GetMainWnd()->GetMenu();
+	//hMainMenu->InsertMenu(-1,MF_BYPOSITION,
+
+	//:Iva
 
 	// TODO: Remove this if you don't want tool tips
 	m_wndToolBar.SetBarStyle(m_wndToolBar.GetBarStyle() |

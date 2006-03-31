@@ -35,9 +35,10 @@ void CTransformationsDialog::DoDataExchange(CDataExchange* pDX)
 
 BEGIN_MESSAGE_MAP(CTransformationsDialog, CDialog)
 	//{{AFX_MSG_MAP(CTransformationsDialog)
-		// NOTE: the ClassWizard will add message map macros here
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
 // CTransformationsDialog message handlers
+
+

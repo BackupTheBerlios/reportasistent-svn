@@ -30,6 +30,10 @@ BEGIN_MESSAGE_MAP(CSkeletonDoc, CDocument)
 	ON_COMMAND(ID_MMNEW4FTHYP, OnMmnew4fthyp)
 	ON_COMMAND(ID_ELEMENT_EDIT, OnElementEdit)
 	ON_COMMAND(ID_MMGENREP, OnMmgenrep)
+	ON_COMMAND(ID_MMNEWTEXT, OnMmnewtext)
+	ON_COMMAND(ID_MMNEWPARAGRAPH, OnMmnewparagraph)
+	ON_COMMAND(ID_MMNEWCHAPTER, OnMmnewchapter)
+	ON_COMMAND(ID_MMDELETE, OnMmdelete)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -389,7 +393,13 @@ void CSkeletonDoc::OnElementEdit()
 {
 	CTreeCtrl & tree = GetFirstView()->GetTreeCtrl();
 	
-	EditElement(ElementFromItemData(tree.GetItemData(tree.GetSelectedItem())));
+	
+	IXMLDOMElementPtr edited_element = ElementFromItemData(tree.GetItemData(tree.GetSelectedItem()));
+
+	EditElement(edited_element);
+
+	SetModifiedFlag();		
+	UpdateAllViews(NULL, 0);
 
 }
 
@@ -457,9 +467,9 @@ IXMLDOMElementPtr CSkeletonDoc::InsertNewElement(CElementManager::elId_t element
 IXMLDOMElementPtr CSkeletonDoc::InsertNewElement(LPCTSTR element_name, IXMLDOMElementPtr & parent_element)
 {
 
-	CGeneralManager * m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager;
+	CGeneralManager * pCGeneralManager = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager;
 
-	return InsertNewElement(m->ElementManager.ElementIdFromName(element_name), parent_element);
+	return InsertNewElement(pCGeneralManager->ElementManager.ElementIdFromName(element_name), parent_element);
 
 }
 
@@ -688,4 +698,129 @@ void CSkeletonDoc::TransformActiveElement(IXMLDOMElementPtr & element)
 	klon.Release();
 
 /***/
+}
+
+void CSkeletonDoc::OnMmnewtext() 
+{
+	CTreeCtrl & hTreeCtrl = GetFirstView()->GetTreeCtrl();
+	
+	HTREEITEM hSelTreeItem = hTreeCtrl.GetSelectedItem();
+
+	IXMLDOMElementPtr selected_element = ElementFromItemData(hTreeCtrl.GetItemData( hSelTreeItem ));	
+	
+
+	//zobrazi zpravu s typem vybraneho elementu
+	//honza: ladici klidne zakomentujte
+	/****/
+	CGeneralManager * m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager;
+	CElementManager::elId_t id = m->ElementManager.IdentifyElement(selected_element);
+	AfxMessageBox(m->ElementManager.getElementName(id));
+	/***/
+
+
+	
+	 
+	IXMLDOMElementPtr new_element = InsertNewElement("text", selected_element);
+
+	//pridani se zdarilo
+	if (new_element != NULL)
+	{
+		EditElement(new_element); 
+
+		SetModifiedFlag();		
+		UpdateAllViews(NULL, (LPARAM) (IXMLDOMElement *) new_element);
+	}	
+
+	
+}
+
+void CSkeletonDoc::OnMmnewparagraph() 
+{
+	CTreeCtrl & hTreeCtrl = GetFirstView()->GetTreeCtrl();
+	
+	HTREEITEM hSelTreeItem = hTreeCtrl.GetSelectedItem();
+
+	IXMLDOMElementPtr selected_element = ElementFromItemData(hTreeCtrl.GetItemData( hSelTreeItem ));	
+	
+
+	//zobrazi zpravu s typem vybraneho elementu
+	//honza: ladici klidne zakomentujte
+	/****/
+	CGeneralManager * m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager;
+	CElementManager::elId_t id = m->ElementManager.IdentifyElement(selected_element);
+	AfxMessageBox(m->ElementManager.getElementName(id));
+	/***/
+
+
+	
+	 
+	IXMLDOMElementPtr new_element = InsertNewElement("paragraph", selected_element);
+
+	//pridani se zdarilo
+	if (new_element != NULL)
+	{
+		EditElement(new_element); 
+
+		SetModifiedFlag();		
+		UpdateAllViews(NULL, (LPARAM) (IXMLDOMElement *) new_element);
+	}	
+	
+}
+
+void CSkeletonDoc::OnMmnewchapter() 
+{
+	CTreeCtrl & hTreeCtrl = GetFirstView()->GetTreeCtrl();
+	
+	HTREEITEM hSelTreeItem = hTreeCtrl.GetSelectedItem();
+
+	IXMLDOMElementPtr selected_element = ElementFromItemData(hTreeCtrl.GetItemData( hSelTreeItem ));	
+	
+
+	//zobrazi zpravu s typem vybraneho elementu
+	//honza: ladici klidne zakomentujte
+	/****/
+	CGeneralManager * m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager;
+	CElementManager::elId_t id = m->ElementManager.IdentifyElement(selected_element);
+	AfxMessageBox(m->ElementManager.getElementName(id));
+	/***/
+
+
+	
+	 
+	IXMLDOMElementPtr new_element = InsertNewElement("chapter", selected_element);
+
+	//pridani se zdarilo
+	if (new_element != NULL)
+	{
+		EditElement(new_element); 
+
+		SetModifiedFlag();		
+		UpdateAllViews(NULL, (LPARAM) (IXMLDOMElement *) new_element);
+	}	
+	
+	
+}
+
+void CSkeletonDoc::OnMmdelete() 
+{
+	CTreeCtrl & hTreeCtrl = GetFirstView()->GetTreeCtrl();
+	
+	HTREEITEM hSelTreeItem = hTreeCtrl.GetSelectedItem();
+
+	IXMLDOMElementPtr selected_element = ElementFromItemData(hTreeCtrl.GetItemData( hSelTreeItem ));
+	
+	IXMLDOMElementPtr parent_element= selected_element->parentNode;
+
+
+	parent_element->removeChild(selected_element);
+
+	if (0 == hTreeCtrl.DeleteItem(hSelTreeItem))
+	{
+		AfxMessageBox("Smazani prvku z TreeCtrl se nepovedlo.",0,0);
+		return;
+	}
+	
+
+	SetModifiedFlag();		
+	UpdateAllViews(NULL);
 }

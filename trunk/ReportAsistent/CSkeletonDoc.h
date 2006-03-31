@@ -59,6 +59,10 @@ protected:
 	afx_msg void OnMmnew4fthyp();
 	afx_msg void OnElementEdit();
 	afx_msg void OnMmgenrep();
+	afx_msg void OnMmnewtext();
+	afx_msg void OnMmnewparagraph();
+	afx_msg void OnMmnewchapter();
+	afx_msg void OnMmdelete();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 public:
