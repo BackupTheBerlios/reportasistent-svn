@@ -87,12 +87,13 @@ BSTR getAPListLM()
 
 hSource_t fNewSourceLM(PersistID_t * pPerzistID)
 {
+	 * pPerzistID = NULL;
+
 	CDatabase * db;
 	SQL_Pomocnik pom;
 
 	CString s;
 
-	 * pPerzistID = NULL;
 
 	if (! pom.FindAccesDatasource(s)) return NULL;
 
@@ -115,7 +116,12 @@ hSource_t fNewSourceLM(PersistID_t * pPerzistID)
 	//dedek
 	SetCurrentDirectory(buf);
 
-	* pPerzistID = db->GetConnect().AllocSysString();
+	CString new_pid =  db->GetDatabaseName();
+
+	new_pid += ".mdb";
+
+	
+	* pPerzistID = new_pid.AllocSysString();
 	return db;
 }
 
@@ -124,11 +130,22 @@ hSource_t fNewSourceLM(PersistID_t * pPerzistID)
 
 hSource_t fOpenSourceLM(PersistID_t PerzistID)
 {
-	CString connn_str = PerzistID;
+	SQL_Pomocnik pom;
+	CString s;
+	if (! pom.FindAccesDatasource(s)) return NULL;
+
+	//	db.Open(NULL, FALSE, TRUE, _T("ODBC;DSN=" + s + ";DBQ=C:\\skola\\sw projekt\\STULONG.mdb;"), TRUE))
+	CString connn_str;
+	connn_str = "ODBC;DSN=";
+	connn_str += s;
+	connn_str += ";DBQ=";
+	connn_str += PerzistID; //obsahuje cestu k souboru
+	connn_str += ";";
 
 	CDatabase * db;
 	
 	db = new CDatabase();
+
 
 
 	if (!db->Open(NULL, FALSE, TRUE, connn_str, TRUE))

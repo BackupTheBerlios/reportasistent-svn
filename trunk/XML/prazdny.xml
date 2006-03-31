@@ -92,7 +92,7 @@
 		<paragraph style="Normální" id="paragraph1">
 			<text id="text7">Nìjaký text</text>
 		</paragraph>
-		<active_element type="hyp_4ft" source="honzova_metabaze" id="hyp_4ft1">
+		<active_element type="hyp_4ft" source="" id="hyp_4ft1">
 			<params/>
 			<filter type="simple">
 				<selection id="hyp10"/>
