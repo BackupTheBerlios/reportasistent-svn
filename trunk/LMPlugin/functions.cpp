@@ -74,7 +74,7 @@ CString fLM4fthyp(void * hSource)
 	long c_id;
 	long h_id_tst = 0;//test variable - values from previous iteration
 
-	bool neg_lit;
+	BOOL neg_lit;
 	CString neg_lit_smbl;
 	
 	CString ced_name;
@@ -200,10 +200,10 @@ CString fLM4fthyp(void * hSource)
 	buf += " </active_list>";
 	
 	//just for test - creates a xml file with all hypothesis
-	FILE * f = fopen ("test.xml", "w");
+/*	FILE * f = fopen ("test.xml", "w");
 	fprintf (f, "%s", buf);
 	fclose (f);
-
+*/
 	return buf;
 }
 

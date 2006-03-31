@@ -28,7 +28,7 @@ public:
 	long m_FreqC;
 	long m_FreqD;
 	long m_LiteralID;
-	int m_Negation;
+	BOOL m_Negation;
 	CString m_CedentTypeName;
 	long m_CategoryID;
 	CString m_QuantityID;
