@@ -10,7 +10,7 @@
                      ctgr_type CDATA #REQUIRED
                      ctgr_freq CDATA #REQUIRED>
   <!ELEMENT ctgr_def EMPTY>
-  <!ATTLIST ctgr_def definition CDADTA #REQUIRED>
+  <!ATTLIST ctgr_def definition CDATA #REQUIRED>
   <!ELEMENT ti_cedent (ti_literal*)>
   <!ATTLIST ti_cedent id ID #REQUIRED
                       type CDATA #REQUIRED>  <!--antecedent, succedent, condition -->
