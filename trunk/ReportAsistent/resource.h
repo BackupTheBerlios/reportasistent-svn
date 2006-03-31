@@ -44,6 +44,7 @@
 #define ID_MMNEW4FTHYP                  32776
 #define ID_MM                           32778
 #define ID_ELEMENT_EDIT                 32780
+#define ID_MMNEWCHAPTER                 32781
 #define IDS_INSERT_NEW_ELEMENT_WRONG_LOCATION 61204
 #define IDS_SIMPLE_FILTER_EMPTY_SELECTION 61205
 #define IDS_SIMPLE_FILTER_FAILED_SOURCE_LOAD 61206
@@ -55,7 +56,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
 #define _APS_NEXT_RESOURCE_VALUE        149
-#define _APS_NEXT_COMMAND_VALUE         32781
+#define _APS_NEXT_COMMAND_VALUE         32782
 #define _APS_NEXT_CONTROL_VALUE         1010
 #define _APS_NEXT_SYMED_VALUE           101
 #endif

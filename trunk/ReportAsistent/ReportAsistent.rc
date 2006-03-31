@@ -338,6 +338,8 @@ BEGIN
         BEGIN
             MENUITEM "Text",                        ID_MMNEWTEXT
             MENUITEM "Paragraph",                   ID_MMNEWPARAGRAPH
+            MENUITEM "Chapter",                     ID_MMNEWCHAPTER
+            MENUITEM SEPARATOR
             MENUITEM "4ft Hypothesis",              ID_MMNEW4FTHYP
         END
     END

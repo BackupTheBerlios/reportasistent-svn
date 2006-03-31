@@ -159,6 +159,8 @@ void CSkeletonView::OnLButtonDblClk(UINT nFlags, CPoint point)
 //pridal honza - zaradi novy element v lHint jako posledniho potomka selected item
 void CSkeletonView::OnUpdate(CView* pSender, LPARAM lHint, CObject* pHint) 
 {
+	//duvod proc je zde toto: pri pouhem FillTreeCtrl by se strom zobrazil do nerozbalene podoby
+	//a na misto kam bylo pridano by bylo nutne znovu se prolistovat
 	if (lHint != NULL)
 	{
 		CTreeCtrl & tree = GetTreeCtrl();
