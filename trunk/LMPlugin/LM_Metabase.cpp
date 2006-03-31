@@ -2,14 +2,13 @@
 
 #include "LM_Metabase.h"
 #include "Hyp_4ft_Recordset.h"
-#include "locale.h"
+#include "comdef.h"
 
 
 CString Hyp_4ft_Meta::xml_convert ()
 {
 	CString xml_string;
 	CString hlp;
-	lconv * loc = localeconv ();
 	//beginning of the hyp_4ft element
 	xml_string = " <hyp_4ft id=\"" + id + "\" db_name=\"" + db_name + "\" ";
 	xml_string = xml_string + "matrix_name=\"" + matrix_name + "\" ";
@@ -26,49 +25,20 @@ CString Hyp_4ft_Meta::xml_convert ()
 	xml_string = xml_string + " d=\"";
 	hlp.Format ("%d", d);
 	xml_string = xml_string + hlp + "\" ";
-	xml_string = xml_string + " conf=\"";
-	hlp.Format ("%f", conf);
-	hlp.Replace (".", loc->decimal_point);
-	xml_string = xml_string + hlp + "\" ";
-	xml_string = xml_string + " d_conf=\"";
-	hlp.Format ("%f", d_conf);
-	xml_string = xml_string + hlp + "\" ";
-	xml_string = xml_string + " e_conf=\"";
-	hlp.Format ("%f", e_conf);
-	xml_string = xml_string + hlp + "\" ";
-	xml_string = xml_string + " support=\"";
-	hlp.Format ("%f", support);
-	xml_string = xml_string + hlp + "\" ";
-	xml_string = xml_string + " completeness=\"";
-	hlp.Format ("%f", completeness);
-	xml_string = xml_string + hlp + "\" ";
-	xml_string = xml_string + " avg_diff=\"";
-	hlp.Format ("%f", avg_diff);
-	xml_string = xml_string + hlp + "\" ";
-	xml_string = xml_string + " low_bnd_imp=\"";
-	hlp.Format ("%f", low_bnd_imp);
-	xml_string = xml_string + hlp + "\" ";
-	xml_string = xml_string + " up_bnd_imp=\"";
-	hlp.Format ("%f", up_bnd_imp);
-	xml_string = xml_string + hlp + "\" ";
-	xml_string = xml_string + " low_bnd_dbl_imp=\"";
-	hlp.Format ("%f", low_bnd_dbl_imp);
-	xml_string = xml_string + hlp + "\" ";
-	xml_string = xml_string + " up_bnd_dbl_imp=\"";
-	hlp.Format ("%f", up_bnd_dbl_imp);
-	xml_string = xml_string + hlp + "\" ";
-	xml_string = xml_string + " low_bnd_eq=\"";
-	hlp.Format ("%f", low_bnd_eq);
-	xml_string = xml_string + hlp + "\" ";
-	xml_string = xml_string + " up_bnd_eq=\"";
-	hlp.Format ("%f", up_bnd_eq);
-	xml_string = xml_string + hlp + "\" ";
-	xml_string = xml_string + " fisher=\"";
-	hlp.Format ("%f", fisher);
-	xml_string = xml_string + hlp + "\" ";
-	xml_string = xml_string + " chi_sq=\"";
-	hlp.Format ("%f", chi_sq);
-	xml_string = xml_string + hlp + "\" ";
+	xml_string = xml_string + " conf=\"" + (LPCTSTR) (_bstr_t) conf + "\" ";
+	xml_string = xml_string + " d_conf=\"" + (LPCTSTR) (_bstr_t) d_conf + "\" ";
+	xml_string = xml_string + " e_conf=\"" + (LPCTSTR) (_bstr_t) e_conf + "\" ";
+	xml_string = xml_string + " support=\"" + (LPCTSTR) (_bstr_t) support + "\" ";
+	xml_string = xml_string + " completeness=\"" + (LPCTSTR) (_bstr_t) completeness + "\" ";
+	xml_string = xml_string + " avg_diff=\"" + (LPCTSTR) (_bstr_t) avg_diff + "\" ";
+	xml_string = xml_string + " low_bnd_imp=\"" + (LPCTSTR) (_bstr_t) low_bnd_imp + "\" ";
+	xml_string = xml_string + " up_bnd_imp=\"" + (LPCTSTR) (_bstr_t) up_bnd_imp + "\" ";
+	xml_string = xml_string + " low_bnd_dbl_imp=\"" + (LPCTSTR) (_bstr_t) low_bnd_dbl_imp + "\" ";
+	xml_string = xml_string + " up_bnd_dbl_imp=\"" + (LPCTSTR) (_bstr_t) up_bnd_dbl_imp + "\" ";
+	xml_string = xml_string + " low_bnd_eq=\"" + (LPCTSTR) (_bstr_t) low_bnd_eq + "\" ";
+	xml_string = xml_string + " up_bnd_eq=\"" + (LPCTSTR) (_bstr_t) up_bnd_eq + "\" ";
+	xml_string = xml_string + " fisher=\"" + (LPCTSTR) (_bstr_t) fisher + "\" ";
+	xml_string = xml_string + " chi_sq=\"" + (LPCTSTR) (_bstr_t) chi_sq + "\" ";
 	xml_string = xml_string + " antecedent=\"" + ant_id + "\" ";
 	xml_string = xml_string + " succedent=\"" + suc_id + "\" ";
 	xml_string = xml_string + " condition=\"" + con_id + "\"";
