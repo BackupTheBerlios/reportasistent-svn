@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="windows-1250" ?>
 <!DOCTYPE active_list[
   <!ELEMENT active_list ((hyp_4ft*, category*, ti_cedent*)*)>
-  <!ELEMENT category EMPTY>
+  <!ELEMENT category (ctgr_def*)>
   <!ATTLIST category id ID #REQUIRED
                      db_name CDATA #REQUIRED
                      matrix_name CDATA #REQUIRED
                      attr_name CDATA #REQUIRED
                      ctgr_name CDATA #REQUIRED
                      ctgr_type CDATA #REQUIRED
-                     ctgr_def CDATA #REQUIRED
                      ctgr_freq CDATA #REQUIRED>
+  <!ELEMENT ctgr_def EMPTY>
+  <!ATTLIST ctgr_def definition CDADTA #REQUIRED>
   <!ELEMENT ti_cedent (ti_literal*)>
   <!ATTLIST ti_cedent id ID #REQUIRED
                       type CDATA #REQUIRED>  <!--antecedent, succedent, condition -->
