@@ -6,20 +6,20 @@
 --------------------Configuration: LMplugin - Win32 Debug--------------------
 </h3>
 <h3>Command Lines</h3>
-Creating temporary file "C:\DOCUME~1\MARTIN~1.CHR\LOCALS~1\Temp\RSP94.tmp" with contents
+Creating temporary file "C:\DOCUME~1\MARTIN~1.CHR\LOCALS~1\Temp\RSP23.tmp" with contents
 [
 /nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /D "_USRDLL" /D "LMPLUGIN_EXPORTS" /D "_WINDLL" /D "_AFXDLL" /FR"Debug/" /Fp"Debug/LMplugin.pch" /YX /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
-"C:\skola\sw projekt\dev\LMPlugin\Category_Recordset.cpp"
+"c:\skola\sw projekt\dev\LMPlugin\functions.cpp"
 ]
-Creating command line "cl.exe @C:\DOCUME~1\MARTIN~1.CHR\LOCALS~1\Temp\RSP94.tmp" 
+Creating command line "cl.exe @C:\DOCUME~1\MARTIN~1.CHR\LOCALS~1\Temp\RSP23.tmp" 
 <h3>Output Window</h3>
 Compiling...
-Category_Recordset.cpp
+functions.cpp
 
 
 
 <h3>Results</h3>
-Category_Recordset.obj - 0 error(s), 0 warning(s)
+functions.obj - 0 error(s), 0 warning(s)
 </pre>
 </body>
 </html>

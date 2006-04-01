@@ -2,7 +2,25 @@
 #include "afx.h"
 #include "afxtempl.h"
 //4ft_hypothese
-CString fLM4fthyp(void* hSource);
+//CString fLM4fthyp(void* hSource);
+
+typedef CArray <CString, CString> TCatDefArray;
+
+class Category_Meta
+{
+public:
+	CString			id;
+    CString			db_name;
+    CString			matrix_name;
+    CString			attr_name;
+    CString			ctgr_name;
+    CString			ctgr_type;
+    CString			ctgr_freq;
+	TCatDefArray	ctgr_def;
+	long			def_length;
+};
+
+typedef CArray <Category_Meta *, Category_Meta *> TCategory_Meta_Array;
 
 struct Hyp_tiLiteral
 {

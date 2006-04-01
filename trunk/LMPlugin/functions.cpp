@@ -2,22 +2,8 @@
 // functions.h
 #include "functions.h"
 #include "Hyp_4ft_Recordset.h"
+#include "Category_Recordset.h"
 #include "LM_Metabase.h"
-
-
-// --- AP Kategorie
-
-CString fLMCategory(void* hSource)
-{
-	// prozatimni zkusebni - TODO
-	return CString("<seznam><kategorie name=\"prvni kategorie\"/><kategorie name=\"druha kategorie\"/></seznam>");
-}
-
-
-
-
-
-
 
 
 //dedek: docasne
@@ -56,6 +42,43 @@ BOOL dedek_performLM(void * hSource, const char* AP, BSTR* result)
 
 /****/
 
+// --- AP Kategorie
+
+CString fLMCategory(void* hSource)
+{
+	CString buf = "";
+	CString hlp;
+	CString db_name = ((CDatabase *) hSource)->GetDatabaseName ();
+
+	long cat_id;
+
+	TCategory_Meta_Array list;
+	Category_Meta * ptcat;
+
+	Category_Recordset rs ((CDatabase *) hSource);
+	LPCTSTR q = "SELECT tmCategory.CategoryID, tmMatrix.Name, tmAttribute.Name, tmCategory.Name, tsCategorySubType.Name FROM tmCategory, tmQuantity, tmAttribute, tmMatrix, tsCategorySubType WHERE tmCategory.QuantityID=tmQuantity.QuantityID AND tmQuantity.AttributeID=tmAttribute.AttributeID AND tmAttribute.MatrixID=tmMatrix.MatrixID AND tmCategory.CategorySubTypeID=tsCategorySubtype.CategorySubTypeID";
+	
+	if (rs.Open(AFX_DB_USE_DEFAULT_TYPE, q))
+	{
+		//iteration on query results
+		while (!rs.IsEOF())
+		{
+			ptcat = new (Category_Meta);
+			ptcat->attr_name = rs.m_Name;
+			ptcat->ctgr_name = rs.m_Name2;
+			ptcat->ctgr_type = rs.m_Name5;
+			ptcat->db_name = db_name;
+			ptcat->matrix_name = rs.m_Name3;
+			cat_id = rs.m_CategoryID;
+			hlp.Format ("%d", cat_id);
+			ptcat->id = "cat" + hlp;
+			list.Add (ptcat);
+			rs.MoveNext();
+		}
+		rs.Close();
+	}
+	return buf;
+}
 
 
 // --- AP 4ft-hypoteza
