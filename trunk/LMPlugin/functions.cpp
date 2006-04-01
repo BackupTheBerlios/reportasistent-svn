@@ -56,7 +56,7 @@ CString fLMCategory(void* hSource)
 	Category_Meta * ptcat;
 
 	Category_Recordset rs ((CDatabase *) hSource);
-	LPCTSTR q = "SELECT tmCategory.CategoryID, tmMatrix.Name, tmAttribute.Name, tmCategory.Name, tsCategorySubType.Name FROM tmCategory, tmQuantity, tmAttribute, tmMatrix, tsCategorySubType WHERE tmCategory.QuantityID=tmQuantity.QuantityID AND tmQuantity.AttributeID=tmAttribute.AttributeID AND tmAttribute.MatrixID=tmMatrix.MatrixID AND tmCategory.CategorySubTypeID=tsCategorySubtype.CategorySubTypeID";
+	LPCTSTR q = "SELECT tmMatrix.Name, tmAttribute.Name, tmCategory.Name, tmCategory.CategoryID, tsCategorySubType.Name FROM tmCategory, tmQuantity, tmAttribute, tmMatrix, tsCategorySubType WHERE tmCategory.QuantityID=tmQuantity.QuantityID AND tmQuantity.AttributeID=tmAttribute.AttributeID AND tmAttribute.MatrixID=tmMatrix.MatrixID AND tmCategory.CategorySubTypeID=tsCategorySubType.CategorySubTypeID ORDER BY tmCategory.CategoryID";
 	
 	if (rs.Open(AFX_DB_USE_DEFAULT_TYPE, q))
 	{
@@ -64,19 +64,22 @@ CString fLMCategory(void* hSource)
 		while (!rs.IsEOF())
 		{
 			ptcat = new (Category_Meta);
-			ptcat->attr_name = rs.m_Name;
-			ptcat->ctgr_name = rs.m_Name2;
-			ptcat->ctgr_type = rs.m_Name5;
+			ptcat->attr_name = rs.m_Attr_Name;
+			ptcat->ctgr_name = rs.m_Ctgr_Name;
+			ptcat->ctgr_type = rs.m_Ctgr_tp_Name;
 			ptcat->db_name = db_name;
-			ptcat->matrix_name = rs.m_Name3;
+			ptcat->matrix_name = rs.m_Matrix_Name;
 			cat_id = rs.m_CategoryID;
 			hlp.Format ("%d", cat_id);
 			ptcat->id = "cat" + hlp;
 			list.Add (ptcat);
+			hlp.Format("%s %s %s %s %d \n", rs.m_Attr_Name, rs.m_Ctgr_Name, rs.m_Ctgr_tp_Name, rs.m_Matrix_Name, rs.m_CategoryID);
+			buf += hlp;
 			rs.MoveNext();
 		}
 		rs.Close();
 	}
+	else return "";
 	return buf;
 }
 
@@ -103,7 +106,6 @@ CString fLM4fthyp(void * hSource)
 	CString ced_name;
 	CString q_name;
 	CString q_value;
-
 	LPCTSTR q = "SELECT tiHypothesis.HypothesisID, taTask.MatrixID, tmMatrix.Name, taTask.TaskID, taTask.Name, tiHypothesis.FreqA, tiHypothesis.FreqB, tiHypothesis.FreqC, tiHypothesis.FreqD, tiLiteralI.LiteralIID, tiLiteralI.Negation, tsCedentType.Name, tmCategory.CategoryID, tmQuantity.Name, tmCategory.Name FROM tsCedentType, tiHypothesis, taTask, tmMatrix, tiLiteralI, tiCoefficient, tmCategory, tmQuantity WHERE tiCoefficient.TaskID=taTask.TaskID AND taTask.MatrixID=tmMatrix.MatrixID AND tiHypothesis.HypothesisID=tiLiteralI.HypothesisID AND tiLiteralI.LiteralIID=tiCoefficient.LiteralIID AND tiCoefficient.CategoryID=tmCategory.CategoryID AND tmCategory.QuantityID=tmQuantity.QuantityID AND tsCedentType.CedentTypeID=tiLiteralI.CedentTypeID ORDER BY tiHypothesis.HypothesisID, tiLiteralI.CedentTypeID";
 	//load data from metabase
 	if (rs.Open(AFX_DB_USE_DEFAULT_TYPE, q))
@@ -221,12 +223,13 @@ CString fLM4fthyp(void * hSource)
 		buf = buf + list.GetAt (i)->xml_convert ();
 	}
 	buf += " </active_list>";
-	
+// for call and test only
+//    buf = fLMCategory(hSource);
 	//just for test - creates a xml file with all hypothesis
-/*	FILE * f = fopen ("test.xml", "w");
+	FILE * f = fopen ("test.xml", "w");
 	fprintf (f, "%s", buf);
 	fclose (f);
-*/
+
 	return buf;
 }
 

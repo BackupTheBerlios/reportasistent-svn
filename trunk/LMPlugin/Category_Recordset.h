@@ -18,9 +18,9 @@ public:
 
 // Field/Param Data
 	//{{AFX_FIELD(Category_Recordset, CRecordset)
-	long	m_AttributeID;
-	CString	m_Name;
-	long	m_MatrixID;
+//	long	m_AttributeID;
+	CString	m_Attr_Name;
+/*	long	m_MatrixID;
 	long	m_AttributeSubTypeID;
 	long	m_ValueSubTypeID;
 	BOOL	m_Derived;
@@ -36,9 +36,9 @@ public:
 	double	m_ValueVariability;
 	CString	m_Notice;
 	long	m_wSavedCountUsed;
-	long	m_CategoryID;
-	CString	m_Name2;
-	long	m_QuantityID;
+*/	long	m_CategoryID;
+	CString	m_Ctgr_Name;
+/*	long	m_QuantityID;
 	long	m_CategorySubTypeID;
 	long	m_BoolTypeID;
 	BOOL	m_XCategory;
@@ -47,8 +47,8 @@ public:
 	CString	m_Notice2;
 	long	m_wSavedCountUsed2;
 	long	m_MatrixID2;
-	CString	m_Name3;
-	BOOL	m_Initialised;
+*/	CString	m_Matrix_Name;
+/*	BOOL	m_Initialised;
 	long	m_RecordCount;
 	CString	m_Notice3;
 	long	m_wSavedCountUsed3;
@@ -64,11 +64,11 @@ public:
 	long	m_UserID;
 	CString	m_Notice4;
 	long	m_CategorySubTypeID2;
-	CString	m_Name5;
-	CString	m_ShortName2;
+*/	CString	m_Ctgr_tp_Name;
+/*	CString	m_ShortName2;
 	long	m_Ord2;
 	CString	m_Notice5;
-	//}}AFX_FIELD
+*/	//}}AFX_FIELD
 
 
 // Overrides
