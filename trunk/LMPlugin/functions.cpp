@@ -58,6 +58,7 @@ CString fLMCategory(void* hSource)
 	Category_Recordset rs ((CDatabase *) hSource);
 	LPCTSTR q = "SELECT tmMatrix.Name, tmAttribute.Name, tmCategory.Name, tmCategory.CategoryID, tsCategorySubType.Name FROM tmCategory, tmQuantity, tmAttribute, tmMatrix, tsCategorySubType WHERE tmCategory.QuantityID=tmQuantity.QuantityID AND tmQuantity.AttributeID=tmAttribute.AttributeID AND tmAttribute.MatrixID=tmMatrix.MatrixID AND tmCategory.CategorySubTypeID=tsCategorySubType.CategorySubTypeID ORDER BY tmCategory.CategoryID";
 	
+//	if (rs.Open ())
 	if (rs.Open(AFX_DB_USE_DEFAULT_TYPE, q))
 	{
 		//iteration on query results
@@ -223,13 +224,11 @@ CString fLM4fthyp(void * hSource)
 		buf = buf + list.GetAt (i)->xml_convert ();
 	}
 	buf += " </active_list>";
-// for call and test only
-//    buf = fLMCategory(hSource);
 	//just for test - creates a xml file with all hypothesis
-	FILE * f = fopen ("test.xml", "w");
+/*	FILE * f = fopen ("test.xml", "w");
 	fprintf (f, "%s", buf);
 	fclose (f);
-
+*/
 	return buf;
 }
 
