@@ -21,9 +21,9 @@ UINT CElementManager::static_elements_bitmap_id[]=
 {
 	IDB_UNKNOWNICO                 ,
 	IDB_REPORTICO                  ,
-	IDB_CHAPTERICO                 ,
-	IDB_PARAGRAPHICO               ,
 	IDB_TEXTICO                    ,
+	IDB_PARAGRAPHICO               ,
+	IDB_CHAPTERICO                 ,
 	IDB_UNKNOWNICO //az bude ikona pro include tak dat sem                   
 };
 
