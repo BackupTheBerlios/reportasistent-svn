@@ -18,18 +18,18 @@ ResourceCount=10
 Resource1=IDD_ABOUTBOX
 Resource2=IDR_MAINFRAME
 Class5=CAboutDlg
-Resource3=IDD_ACTIVE_ELEMENT_DIALOG (English (U.S.))
-Resource4=IDD_SOURCES_DIALOG
+Resource3=IDD_GENERATE_DIALOG (English (U.S.))
+Resource4=IDD_ABOUTBOX (English (U.S.))
 Class6=CElementTextDialog
-Resource5=IDD_TRANSFORMATIONS_DIALOG (English (U.S.))
+Resource5=IDD_SIMPLE_FILTER_DIALOG (English (U.S.))
 Class7=CSimpleFilterDialog
-Resource6=IDD_SIMPLE_FILTER_DIALOG (English (U.S.))
+Resource6=IDD_SOURCES_DIALOG
 Class8=CGenerateDialog
-Resource7=IDD_DIALOGTEXT (English (U.S.))
+Resource7=IDD_TRANSFORMATIONS_DIALOG (English (U.S.))
 Class9=CSourcesDialog
-Resource8=IDD_GENERATE_DIALOG (English (U.S.))
+Resource8=IDD_ACTIVE_ELEMENT_DIALOG (English (U.S.))
 Class10=CActiveElementDialog
-Resource9=IDD_ABOUTBOX (English (U.S.))
+Resource9=IDD_DIALOGTEXT (English (U.S.))
 Class11=CTransformationsDialog
 Class12=Tcategory_Recordset
 Resource10=IDR_MAINFRAME (English (U.S.))
@@ -315,12 +315,12 @@ Control5=IDC_SWITCH_BUTTON,button,1342242816
 
 [CLS:Tcategory_Recordset]
 Type=0
-HeaderFile=Tcategory_Recordset.h
-ImplementationFile=Tcategory_Recordset.cpp
+HeaderFile=\skola\sw projekt\dev\lmplugin\tcategory_recordset.h
+ImplementationFile=\skola\sw projekt\dev\lmplugin\tcategory_recordset.cpp
 BaseClass=CRecordset
+LastObject=Tcategory_Recordset
 Filter=N
 VirtualFilter=r
-LastObject=Tcategory_Recordset
 
 [DB:Tcategory_Recordset]
 DB=1
