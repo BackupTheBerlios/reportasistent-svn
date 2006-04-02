@@ -103,6 +103,17 @@
 				<transformation file="../XML/4ft_generuj1.xsl"/>
 			</output>
 		</active_element>
+		<active_element type="category" source="" id="category1">
+			<params/>
+			<filter type="simple">
+				<selection id="hyp10"/>
+				<selection id="hyp33"/>
+			</filter>
+			<output>
+				<transformation file="../XML/4ft_generuj1.xsl"/>
+				<transformation file="../XML/4ft_generuj1.xsl"/>
+			</output>
+		</active_element>
 	</chapter>
 	<!--
 	<include file="../XML/include_doc.doc" id="include1"/>

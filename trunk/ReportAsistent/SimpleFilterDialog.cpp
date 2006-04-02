@@ -122,6 +122,7 @@ BOOL CSimpleFilterDialog::LoadSource(public_source_id_t sId)
 
 	if (NULL == (BSTR) s_out) 
 	{
+		AfxMessageBox(IDS_SIMPLE_FILTER_FAILED_SOURCE_LOAD);
 		filter_doc.Release();
 		return FALSE;	
 	}
