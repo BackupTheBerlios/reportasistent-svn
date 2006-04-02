@@ -25,9 +25,9 @@
 
 #define ELID_UNKNOWN		0
 #define ELID_REPORT			1
-#define ELID_CHAPTER		2
+#define ELID_TEXT			2
 #define ELID_PARAGRAPH		3
-#define ELID_TEXT			4
+#define ELID_CHAPTER		4
 #define ELID_INCLUDE		5
 //#define elId_t_HYP4FT		6  !!! nebude existovat 
 							//aktivni prvky se vytvareji dynamicky, jdou doinstalovat

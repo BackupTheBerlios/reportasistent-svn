@@ -330,6 +330,9 @@ CString CElementManager::CreateElementCaption(IXMLDOMElementPtr &pElement)
 	_bstr_t value;
 	CString ret;
 
+//	AfxMessageBox(pElement->xml);
+//	AfxMessageBox(getElementName(element_id));
+
 	
 	switch (element_id)
 	{
