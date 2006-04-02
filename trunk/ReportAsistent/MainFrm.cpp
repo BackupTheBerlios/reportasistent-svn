@@ -98,29 +98,25 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 								ID_MMNEWSTATICFIRST + I,
 								OElementManager.getElementName(I+OElementManager.getFirstStaticElementID()) //nazev
 								);	
-
-/*		int pom = hNewMenu->EnableMenuItem(ID_MMNEWSTATICFIRST + I,MF_ENABLED|MF_BYCOMMAND);
-		if (pom ==MF_ENABLED) pom=-1;
-		if (pom ==MF_DISABLED) pom=-2;
-		if (pom ==MF_GRAYED) pom=-3;
-		hNewMenu->GetMenuString(ID_MMNEWSTATICFIRST + I,Textik,19,MF_BYCOMMAND);
-		AfxMessageBox(Textik,0,0);
-		hNewMenu->EnableMenuItem(ID_MMNEWSTATICFIRST + I,MF_ENABLED|MF_BYCOMMAND);
-*/
 	}
 
 
 	//Vlozim do menu delici caru:
-//	hNewMenu->InsertMenu(	-1, //pridej na konec seznamu
-//								MF_SEPARATOR,
-//								0,
-//								""
-//							);
+	hNewMenu->InsertMenu(	-1, //pridej na konec seznamu
+								MF_SEPARATOR,
+								0,
+								""
+							);
 
 	//Vlozim do menu aktivni prvky:
-	//for(I=ID_MMACTIVEFIRST;I<=ID_MMNEWACTIVELAST;I++)
-	//	hMainMenu->InsertMenu(-1,MF_BYPOSITION,I,/*nazev*/,/*bitmap*/)
-	
+	for(I=0;I<=(OElementManager.getLastElementID() - OElementManager.getFirstActiveElementID());I++)
+	{
+		hNewMenu->InsertMenu(	-1, //pridej na konec seznamu
+								MF_BYPOSITION,
+								ID_MMNEWACTIVEFIRST + I,
+								OElementManager.getElementName(I+OElementManager.getFirstActiveElementID()) //nazev
+								);	
+	}
 	//pokud by se zmeny neprovedly, je treba volat: CWnd::DrawMenuBar()
 	//:Iva
 
