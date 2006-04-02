@@ -79,11 +79,49 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 		return -1;      // fail to create
 	}
 
-	//Iva: Dynamicky pridam seznam aktivnich prvku ke vlozeni do kostry
-	
-	//CMenu * hMainMenu = AfxGetApp()->GetMainWnd()->GetMenu();
-	//hMainMenu->InsertMenu(-1,MF_BYPOSITION,
+	//Iva: Dynamicky pridam do menu seznam prvku ke vlozeni do kostry
+	CMenu * hMainMenu = AfxGetApp()->GetMainWnd()->GetMenu();
+	CMenu * hNewMenu = hMainMenu->GetSubMenu(1/*Edit*/)->GetSubMenu(7/*New*/);
+	char Textik [20]="";
+	/*	hNewMenu->GetMenuString(0,Textik,19,MF_BYPOSITION);
+		AfxMessageBox(Textik,0,0);*/
 
+	CElementManager & OElementManager = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
+
+	int pom=OElementManager.getFirstActiveElementID();
+	int I;
+	//Vlozim do menu staticke prvky:
+	for(I=0;I<=(OElementManager.getFirstActiveElementID() - OElementManager.getFirstStaticElementID()-1);I++)
+	{
+		hNewMenu->InsertMenu(	-1, //pridej na konec seznamu
+								MF_BYPOSITION,
+								ID_MMNEWSTATICFIRST + I,
+								OElementManager.getElementName(I+OElementManager.getFirstStaticElementID()) //nazev
+								);	
+
+/*		int pom = hNewMenu->EnableMenuItem(ID_MMNEWSTATICFIRST + I,MF_ENABLED|MF_BYCOMMAND);
+		if (pom ==MF_ENABLED) pom=-1;
+		if (pom ==MF_DISABLED) pom=-2;
+		if (pom ==MF_GRAYED) pom=-3;
+		hNewMenu->GetMenuString(ID_MMNEWSTATICFIRST + I,Textik,19,MF_BYCOMMAND);
+		AfxMessageBox(Textik,0,0);
+		hNewMenu->EnableMenuItem(ID_MMNEWSTATICFIRST + I,MF_ENABLED|MF_BYCOMMAND);
+*/
+	}
+
+
+	//Vlozim do menu delici caru:
+//	hNewMenu->InsertMenu(	-1, //pridej na konec seznamu
+//								MF_SEPARATOR,
+//								0,
+//								""
+//							);
+
+	//Vlozim do menu aktivni prvky:
+	//for(I=ID_MMACTIVEFIRST;I<=ID_MMNEWACTIVELAST;I++)
+	//	hMainMenu->InsertMenu(-1,MF_BYPOSITION,I,/*nazev*/,/*bitmap*/)
+	
+	//pokud by se zmeny neprovedly, je treba volat: CWnd::DrawMenuBar()
 	//:Iva
 
 	// TODO: Remove this if you don't want tool tips
@@ -99,7 +137,6 @@ BOOL CMainFrame::PreCreateWindow(CREATESTRUCT& cs)
 		return FALSE;
 	// TODO: Modify the Window class or styles here by modifying
 	//  the CREATESTRUCT cs
-
 	return TRUE;
 }
 

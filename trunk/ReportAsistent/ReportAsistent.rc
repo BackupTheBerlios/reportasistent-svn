@@ -294,7 +294,6 @@ BEGIN
     BUTTON      ID_FILE_OPEN
     BUTTON      ID_FILE_SAVE
     SEPARATOR
-    BUTTON      ID_MM
     BUTTON      ID_EDIT_CUT
     BUTTON      ID_EDIT_COPY
     BUTTON      ID_EDIT_PASTE
@@ -336,7 +335,7 @@ BEGIN
         MENUITEM SEPARATOR
         POPUP "Insert &New"
         BEGIN
-            MENUITEM "Text",                        ID_MMNEWTEXT
+            MENUITEM "TextOld",                     ID_MMNEWTEXT
             MENUITEM "Paragraph",                   ID_MMNEWPARAGRAPH
             MENUITEM "Chapter",                     ID_MMNEWCHAPTER
             MENUITEM SEPARATOR
@@ -542,6 +541,7 @@ BEGIN
                             "Sorry, you have to select some items to make filter valid."
     IDS_SIMPLE_FILTER_FAILED_SOURCE_LOAD 
                             "Sorry, but the selected source didn't return valid data for this active elemenet."
+    IDS_WRONG_TYPEELEMENTID "Chybny typ prvku - jeho ID je mimo povoleny rozsah."
     IDS_WB_WORD_LOADER_NOT_REGISTRED 
                             "Sorry, Report Asistent instaklation si probably corrupt.\nFailed to load LMRA_WordLoader."
 END

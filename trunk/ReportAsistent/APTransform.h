@@ -7,7 +7,7 @@
 
 #if _MSC_VER > 1000
 #pragma once
-#endif // _MSC_VER > 1000
+#endif // _MSC_VER >  1000
 
 //zrusi varovani o prilis dlouhem identifikatoru
 #pragma warning( disable : 4786 )

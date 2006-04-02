@@ -63,7 +63,9 @@ protected:
 	afx_msg void OnMmnewparagraph();
 	afx_msg void OnMmnewchapter();
 	afx_msg void OnMmdelete();
-	//}}AFX_MSG
+	//}} AFX_MSG
+	afx_msg void OnMmnewelement(UINT nMessageID);
+
 	DECLARE_MESSAGE_MAP()
 public:
 	static void InsetNodeToTreeCtrl(MSXML2::IXMLDOMElementPtr pElement, 

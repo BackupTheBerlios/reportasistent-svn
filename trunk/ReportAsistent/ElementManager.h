@@ -39,6 +39,8 @@ public:
 	typedef int elId_t;
 
 private:
+	static elId_t FirstActiveElementID;
+	static elId_t FirstStaticElementID;
 	//seznam typu prvku dostupnych v aplikaci :statickych(= v XML stromu jmeno tagu) i aktivnich(= v XML stromu hodnota atributu "type" prislusneho tagu).
 	static UINT static_elements_bitmap_id[];
 	static LPCTSTR static_elements_names[]; 
@@ -46,6 +48,8 @@ private:
 
 
 public:
+	elId_t getFirstActiveElementID();
+	elId_t getFirstStaticElementID();
 	CString CreateElementCaption(IXMLDOMElementPtr & element);
 	BOOL FillImageList(CImageList & img_list);
 	BOOL LoadElementIcon(elId_t element_id, CBitmap & icon);

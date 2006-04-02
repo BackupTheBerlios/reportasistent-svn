@@ -39,7 +39,7 @@ Type=0
 HeaderFile=ReportAsistent.h
 ImplementationFile=ReportAsistent.cpp
 Filter=N
-LastObject=CReportAsistentApp
+LastObject=ID_APP_ABOUT
 BaseClass=CWinApp
 VirtualFilter=AC
 
@@ -132,13 +132,12 @@ Class=?
 Command1=ID_FILE_NEW
 Command2=ID_FILE_OPEN
 Command3=ID_FILE_SAVE
-Command4=ID_MM
-Command5=ID_EDIT_CUT
-Command6=ID_EDIT_COPY
-Command7=ID_EDIT_PASTE
-Command8=ID_MMSOURCES
-Command9=ID_APP_ABOUT
-CommandCount=9
+Command4=ID_EDIT_CUT
+Command5=ID_EDIT_COPY
+Command6=ID_EDIT_PASTE
+Command7=ID_MMSOURCES
+Command8=ID_APP_ABOUT
+CommandCount=8
 
 [MNU:IDR_MAINFRAME (English (U.S.))]
 Type=1

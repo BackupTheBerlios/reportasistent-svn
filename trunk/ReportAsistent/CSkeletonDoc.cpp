@@ -35,6 +35,8 @@ BEGIN_MESSAGE_MAP(CSkeletonDoc, CDocument)
 	ON_COMMAND(ID_MMNEWCHAPTER, OnMmnewchapter)
 	ON_COMMAND(ID_MMDELETE, OnMmdelete)
 	//}}AFX_MSG_MAP
+	ON_COMMAND_RANGE(ID_MMNEWSTATICFIRST, ID_MMNEWSTATICLAST, OnMmnewelement)
+	ON_COMMAND_RANGE(ID_MMNEWACTIVEFIRST, ID_MMNEWACTIVELAST, OnMmnewelement)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -879,4 +881,67 @@ void CSkeletonDoc::OnMmdelete()
 
 	SetModifiedFlag();		
 	UpdateAllViews(NULL);
+}
+
+void CSkeletonDoc::OnMmnewelement(UINT nMessageID) 
+{
+	CTreeCtrl & hTreeCtrl = GetFirstView()->GetTreeCtrl();
+	
+	HTREEITEM hSelTreeItem = hTreeCtrl.GetSelectedItem();
+
+	IXMLDOMElementPtr selected_element = ElementFromItemData(hTreeCtrl.GetItemData( hSelTreeItem ));	
+	
+	CElementManager & OElementManager = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
+
+	IXMLDOMElementPtr new_element = NULL;
+
+	//zobrazi zpravu s typem vybraneho elementu
+	//honza: ladici klidne zakomentujte
+	/****
+	CElementManager::elId_t id = OElementManager.IdentifyElement(selected_element);
+	AfxMessageBox(OElementManager->getElementName(id));
+	/***/
+
+	if (nMessageID < ID_MMNEWSTATICFIRST)
+	{	//CHYBA!!
+		AfxMessageBox(IDS_WRONG_TYPEELEMENTID,0,0);
+	}
+		
+
+	if ((nMessageID >= ID_MMNEWSTATICFIRST) && (nMessageID <= ID_MMNEWSTATICLAST))
+	{
+		new_element = InsertNewElement(
+			OElementManager.getElementName(nMessageID - ID_MMNEWSTATICFIRST+ OElementManager.getFirstStaticElementID()),
+			selected_element);
+		if (new_element != NULL) //tj. pridani se zdarilo
+		{
+			EditElement(new_element); 
+			
+			SetModifiedFlag();		
+			UpdateAllViews(NULL, (LPARAM) (IXMLDOMElement *) new_element);
+		}
+	}
+	if (nMessageID >= ID_MMNEWACTIVEFIRST)
+	{
+		new_element = InsertNewElement(
+			OElementManager.getElementName(nMessageID - ID_MMNEWACTIVEFIRST+ OElementManager.getFirstActiveElementID()),
+			selected_element);
+		if (new_element != NULL) //tj. pridani se zdarilo
+		{
+			EditActiveElement(new_element); 
+			
+			SetModifiedFlag();		
+			UpdateAllViews(NULL, (LPARAM) (IXMLDOMElement *) new_element);
+		}
+
+	}
+
+	if (nMessageID >= ID_MMNEWACTIVELAST)
+	{	//CHYBA!!
+		AfxMessageBox(IDS_WRONG_TYPEELEMENTID,0,0);
+	}
+
+	
+		
+	
 }

@@ -4,7 +4,7 @@
 
 #include "stdafx.h"
 #include "ReportAsistent.h"
-//#include "SkeletonManager.h"
+//#include  "SkeletonManager.h"
 #include "CSkeletonDoc.h"
 #include "APTransform.h"
 

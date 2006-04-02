@@ -29,19 +29,27 @@ UINT CElementManager::static_elements_bitmap_id[]=
 
 LPCTSTR CElementManager::static_elements_names[] = 
 {
-	"unknown",
-	"report",
-	"chapter",
-	"paragraph",
+	"unknown", //v menu->pridej novy prvek: NENI
+	"report", //v menu->pridej novy prvek: NENI
+	//STATICKE
 	"text",
-	"include"
+	"paragraph",
+	"chapter", 
+	//OSTATNI
+
 //	"hyp_4ft"
+	"include"
 };
+
+CElementManager::elId_t CElementManager::FirstStaticElementID = 2;
+
+CElementManager::elId_t CElementManager::FirstActiveElementID = 5;
 
 #define LENGTH(array) (sizeof(array) / sizeof(* array))
 
 CElementManager::elId_t CElementManager::getLastElementId()
 {
+	int pom = active_elements.GetUpperBound();
 	return LENGTH(static_elements_names) + active_elements.GetUpperBound();
 }
 
@@ -274,6 +282,16 @@ CAElInfo * CElementManager::getActiveElementInfo(elId_t id)
 
 	return active_elements[id - LENGTH(static_elements_names)];
 
+}
+
+CElementManager::elId_t CElementManager::getFirstStaticElementID()
+{
+	return FirstStaticElementID;
+}
+
+CElementManager::elId_t CElementManager::getFirstActiveElementID()
+{
+	return FirstActiveElementID;
 }
 
 BOOL CElementManager::LoadElementIcon(elId_t element_id, CBitmap &icon)

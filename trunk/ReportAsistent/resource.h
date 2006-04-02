@@ -40,26 +40,31 @@
 #define IDC_RENAME_BUTTON               1011
 #define IDC_SET_DEFAULT_BUTTON          1012
 #define IDC_SWITCH_BUTTON               1015
+
 #define ID_MMGENREP                     32771
 #define ID_MMSOURCES                    32772
 #define ID_MMNEWTEXT                    32774
 #define ID_MMNEWPARAGRAPH               32775
 #define ID_MMNEW4FTHYP                  32776
-#define ID_MM                           32778
 #define ID_ELEMENT_EDIT                 32780
 #define ID_MMNEWCHAPTER                 32781
 #define ID_MMDELETE                     32782
+#define ID_MMNEWSTATICFIRST             39001
+#define ID_MMNEWSTATICLAST              39009
+#define ID_MMNEWACTIVEFIRST             39010
+#define ID_MMNEWACTIVELAST              39100
 #define IDS_INSERT_NEW_ELEMENT_WRONG_LOCATION 61204
 #define IDS_SIMPLE_FILTER_EMPTY_SELECTION 61205
 #define IDS_SIMPLE_FILTER_FAILED_SOURCE_LOAD 61206
 #define IDS_WB_WORD_LOADER_NOT_REGISTRED 61207
+#define IDS_WRONG_TYPEELEMENTID         61208
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
-#define _APS_NEXT_RESOURCE_VALUE        149
+#define _APS_NEXT_RESOURCE_VALUE        150
 #define _APS_NEXT_COMMAND_VALUE         32783
 #define _APS_NEXT_CONTROL_VALUE         1016
 #define _APS_NEXT_SYMED_VALUE           101
