@@ -121,6 +121,10 @@ SOURCE=.\LMplugin.def
 
 SOURCE=.\SQL_Pomocnik.cpp
 # End Source File
+# Begin Source File
+
+SOURCE=.\Tcategory_Recordset.cpp
+# End Source File
 # End Group
 # Begin Group "Header Files"
 
@@ -163,7 +167,7 @@ SOURCE=.\SQL_Pomocnik.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\tiHypothesis_Recordset.h
+SOURCE=.\Tcategory_Recordset.h
 # End Source File
 # End Group
 # Begin Group "Resource Files"

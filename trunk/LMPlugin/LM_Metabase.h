@@ -15,6 +15,7 @@ public:
     CString			attr_name;
     CString			ctgr_name;
     CString			ctgr_type;
+	CString			ctgr_bool_type;
     CString			ctgr_freq;
 	TCatDefArray	ctgr_def;
 	long			def_length;

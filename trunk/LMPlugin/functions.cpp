@@ -2,7 +2,7 @@
 // functions.h
 #include "functions.h"
 #include "Hyp_4ft_Recordset.h"
-#include "Category_Recordset.h"
+#include "Tcategory_Recordset.h"
 #include "LM_Metabase.h"
 
 
@@ -55,9 +55,19 @@ CString fLMCategory(void* hSource)
 	TCategory_Meta_Array list;
 	Category_Meta * ptcat;
 
-	Category_Recordset rs ((CDatabase *) hSource);
-	LPCTSTR q = "SELECT tmMatrix.Name, tmAttribute.Name, tmCategory.Name, tmCategory.CategoryID, tsCategorySubType.Name FROM tmCategory, tmQuantity, tmAttribute, tmMatrix, tsCategorySubType WHERE tmCategory.QuantityID=tmQuantity.QuantityID AND tmQuantity.AttributeID=tmAttribute.AttributeID AND tmAttribute.MatrixID=tmMatrix.MatrixID AND tmCategory.CategorySubTypeID=tsCategorySubType.CategorySubTypeID ORDER BY tmCategory.CategoryID";
-	
+	Tcategory_Recordset rs ((CDatabase *) hSource);
+	LPCTSTR q =
+		"SELECT tmCategory.CategoryID, tmCategory.Name, tmAttribute.Name, tmMatrix.Name, \
+			tsCategorySubType.Name, tsBoolType.Name \
+		FROM tmCategory, tmQuantity, tmAttribute, tmMatrix, \
+			tsCategorySubType, tsBoolType \
+		WHERE tmCategory.QuantityID=tmQuantity.QuantityID \
+			AND tmQuantity.AttributeID=tmAttribute.AttributeID \
+			AND tmAttribute.MatrixID=tmMatrix.MatrixID \
+			AND tmCategory.CategorySubTypeID=tsCategorySubType.CategorySubTypeID \
+			AND tmCategory.BoolTypeID = tsBoolType.BoolTypeID \
+		ORDER BY tmCategory.CategoryID";
+
 //	if (rs.Open ())
 	if (rs.Open(AFX_DB_USE_DEFAULT_TYPE, q))
 	{
@@ -65,16 +75,17 @@ CString fLMCategory(void* hSource)
 		while (!rs.IsEOF())
 		{
 			ptcat = new (Category_Meta);
-			ptcat->attr_name = rs.m_Attr_Name;
-			ptcat->ctgr_name = rs.m_Ctgr_Name;
-			ptcat->ctgr_type = rs.m_Ctgr_tp_Name;
+			ptcat->attr_name = rs.m_Name;
+			ptcat->ctgr_name = rs.m_Name2;
+			ptcat->ctgr_type = rs.m_Name6;
 			ptcat->db_name = db_name;
-			ptcat->matrix_name = rs.m_Matrix_Name;
+			ptcat->matrix_name = rs.m_Name3;
 			cat_id = rs.m_CategoryID;
 			hlp.Format ("%d", cat_id);
 			ptcat->id = "cat" + hlp;
+			ptcat->ctgr_bool_type = rs.m_Name5;
 			list.Add (ptcat);
-			hlp.Format("%s %s %s %s %d \n", rs.m_Attr_Name, rs.m_Ctgr_Name, rs.m_Ctgr_tp_Name, rs.m_Matrix_Name, rs.m_CategoryID);
+			hlp.Format("%s %s %s %s %d \n", rs.m_Name, rs.m_Name2, rs.m_Name6, rs.m_Name3, rs.m_CategoryID);
 			buf += hlp;
 			rs.MoveNext();
 		}
