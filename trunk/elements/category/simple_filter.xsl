@@ -11,7 +11,7 @@
 &lt;dialog_data&gt;
 		</xsl:text>				
 
-		<xsl:apply-templates select="hyp_4ft[position()=1]" mode="attributes"/>
+		<xsl:apply-templates select="category[position()=1]" mode="attributes"/>
 
 
 
@@ -21,7 +21,7 @@
 	&lt;values&gt;</xsl:text>				
 	
 
-		<xsl:apply-templates select="hyp_4ft" mode="values"/>
+		<xsl:apply-templates select="category" mode="values"/>
 
 		<xsl:text disable-output-escaping="yes">
 	&lt;/values&gt;

@@ -27,15 +27,15 @@ CSimpleFilterDialog::CSimpleFilterDialog(IXMLDOMElementPtr & active_element, CWn
 
 
 	//necte tranformaci, ktera pripravi data pro vytvoreni dialogu
-	m_filter_transform.CreateInstance(_T("Msxml2.DOMDocument"));
-	m_filter_transform->async = VARIANT_FALSE; // default - true,
+//	m_filter_transform.CreateInstance(_T("Msxml2.DOMDocument"));
+//	m_filter_transform->async = VARIANT_FALSE; // default - true,
 	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!111
 	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!111
 	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!111
 	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!111
 	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!111
 	//predelat pres directory manager,ruzne pro ruzne typy prvku
-	m_filter_transform->load(_T("../XML/4ft_hyp2filterdlg.xsl"));
+//	m_filter_transform->load(_T("../XML/4ft_hyp2filterdlg.xsl"));
 	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!111
 	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!111
 	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!111
@@ -108,18 +108,20 @@ void CSimpleFilterDialog::OnDeleteitemFilterList(NMHDR* pNMHDR, LRESULT* pResult
 BOOL CSimpleFilterDialog::LoadSource(public_source_id_t sId)
 {
 	
-	//nacte data z plugin output
+	//inicializace
 	IXMLDOMDocumentPtr filter_doc;
 	filter_doc.CreateInstance(_T("Msxml2.DOMDocument"));
 	filter_doc->async = VARIANT_FALSE; // default - true,
 
+	CGeneralManager * m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager;
 
-	
-	CDataSourcesManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->DataSourcesManager;
+	CAElInfo * element_info = m->ElementManager.getActiveElementInfo(
+								m->ElementManager.IdentifyElement(m_active_element));
 
 
-	BSTR s_out = m.GetPluginOutput(sId, (_bstr_t) m_active_element->getAttribute("type"));
 
+	//nacte data z plugin output
+	BSTR s_out = m->DataSourcesManager.GetPluginOutput(sId, (_bstr_t) element_info->getElementName());
 	if (NULL == (BSTR) s_out) 
 	{
 		AfxMessageBox(IDS_SIMPLE_FILTER_FAILED_SOURCE_LOAD);
@@ -127,6 +129,7 @@ BOOL CSimpleFilterDialog::LoadSource(public_source_id_t sId)
 		return FALSE;	
 	}
 
+	//vytvoreni XML DOM z nacteneho XML stringu
 	filter_doc->loadXML(s_out);
 	if (filter_doc->parseError->errorCode != S_OK)
 	{
@@ -135,9 +138,10 @@ BOOL CSimpleFilterDialog::LoadSource(public_source_id_t sId)
 		return FALSE;	
 	}
 
+	
 	//transformuje data z plugin output a vysledek nacte do m_filter_dom	
 	filter_doc->loadXML(
-		filter_doc->transformNode(m_filter_transform));
+		filter_doc->transformNode(element_info->getSimpleFilterTransformation()));
 	
 	
 	//pridat AddRef ?
@@ -155,7 +159,7 @@ BOOL CSimpleFilterDialog::LoadSource(public_source_id_t sId)
 CSimpleFilterDialog::~CSimpleFilterDialog()
 {
 	if (m_filter_DOM != NULL) m_filter_DOM.Release();
-	if (m_filter_transform != NULL) m_filter_transform.Release();
+//	if (m_filter_transform != NULL) m_filter_transform.Release();
 }
 
 void CSimpleFilterDialog::UpDateDialog()

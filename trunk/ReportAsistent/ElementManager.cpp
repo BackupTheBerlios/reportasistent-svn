@@ -39,7 +39,7 @@ CElementManager::elId_t CElementManager::getLastElementId()
 
 LPCTSTR CElementManager::getElementName(elId_t elementID)
 {
-	if (elementID >= getLastElementId()) elementID = elId_t_UNKNOWN;
+	if (elementID > getLastElementId()) elementID = elId_t_UNKNOWN;
 
 	if (! isElementActive(elementID)) return static_elements_names[elementID];
 

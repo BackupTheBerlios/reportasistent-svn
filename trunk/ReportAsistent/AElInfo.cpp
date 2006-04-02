@@ -18,12 +18,17 @@ static char THIS_FILE[]=__FILE__;
 
 CAElInfo::CAElInfo()
 {
+	pSimpleFilterDOM.CreateInstance("Msxml2.DOMDocument");
+	pSimpleFilterDOM->async = VARIANT_FALSE;
 
+	pElementDefinitionDOM.CreateInstance("Msxml2.DOMDocument");
+	pElementDefinitionDOM->async = VARIANT_FALSE;
 }
 
 CAElInfo::~CAElInfo()
 {
-
+	pSimpleFilterDOM.Release();
+	pElementDefinitionDOM.Release();
 }
 
 LPCTSTR CAElInfo::getElementName()
@@ -33,29 +38,41 @@ LPCTSTR CAElInfo::getElementName()
 
 BOOL CAElInfo::LoadFromDir(LPCTSTR dir_path)
 {
-	IXMLDOMDocumentPtr dom;
-	dom.CreateInstance(_T("Msxml2.DOMDocument"));
-
 	CString path = dir_path;
-	path += "\\element.xml";
+	
+	//nacteni pElementDefinitionDOM
+	pElementDefinitionDOM->load((LPCTSTR) (path + "\\element.xml"));
+	if (pElementDefinitionDOM == NULL) return FALSE;
 
-	dom->load((LPCTSTR) path);
-	if (dom == NULL) return FALSE;
+	
+	//nacteni pSimpleFilterDOM
+	pSimpleFilterDOM->load((LPCTSTR) (path + "\\simple_filter.xsl"));
+	if (pSimpleFilterDOM == NULL) return FALSE;
 
 
-	IXMLDOMElementPtr element = dom->selectSingleNode("//active_element");
+	
+	
+/**/
+	IXMLDOMElementPtr element = pElementDefinitionDOM->selectSingleNode("//active_element");
 	if (element == NULL)
 	{
-		dom.Release();
 		return FALSE;
 	}
 
 	el_name = (LPCTSTR) (_bstr_t) element->getAttribute("type");
-
-	dom.Release();
 	element.Release();
+/**/
+//zdratka za predchozi:
+//	el_name = (LPCTSTR) (pElementDefinitionDOM->selectSingleNode("//active_element/@type")->text);
+//	nefunguje nevim proc :(
+
 
 
 	return TRUE;
 
+}
+
+IXMLDOMNode * CAElInfo::getSimpleFilterTransformation()
+{
+	return pSimpleFilterDOM;
 }

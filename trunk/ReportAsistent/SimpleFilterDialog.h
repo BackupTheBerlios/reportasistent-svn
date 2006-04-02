@@ -64,7 +64,7 @@ private:
 	IXMLDOMElementPtr & m_active_element;
 //	MSXML2::IXMLDOMDocument2Ptr m_filter_dom;	
 	MSXML2::IXMLDOMElementPtr m_filter_DOM;	//data pouzita na naplneni list veiw
-	IXMLDOMDocumentPtr m_filter_transform;
+//	IXMLDOMDocumentPtr m_filter_transform;
 
 };
 
