@@ -10,6 +10,8 @@
 #endif // _MSC_VER > 1000
 
 
+#include <afxtempl.h>
+#include "AElInfo.h"
 
 
 
@@ -22,9 +24,9 @@
 
 
 #define elId_t_UNKNOWN		0
-#define elId_t_REPORT			1
+#define elId_t_REPORT		1
 #define elId_t_CHAPTER		2
-#define elId_t_PARAGRAPH		3
+#define elId_t_PARAGRAPH	3
 #define elId_t_TEXT			4
 #define elId_t_INCLUDE		5
 //#define elId_t_HYP4FT		6  !!! nebude existovat 
@@ -38,23 +40,28 @@ public:
 
 private:
 	//seznam typu prvku dostupnych v aplikaci :statickych(= v XML stromu jmeno tagu) i aktivnich(= v XML stromu hodnota atributu "type" prislusneho tagu).
-	static LPCTSTR el_names[]; 
+	static LPCTSTR static_elements_names[]; 
+	CArray<CAElInfo *,CAElInfo *> active_elements;
+
 
 public:
+	CAElInfo * getActiveElementInfo(elId_t id);
 	BOOL ElementSupportedBySource(elId_t element_id, int source_index);
 	BOOL CanAppendChildHere(IXMLDOMElementPtr & child, IXMLDOMElementPtr & parent);
-	BOOL IsElementActive(elId_t elementId);
+	BOOL isElementActive(elId_t elementId);
 	IXMLDOMElementPtr CreateEmptyElement(CElementManager::elId_t id);
 	elId_t ElementIdFromName(LPCTSTR el_name);
 
 
 	LPCTSTR getElementName(elId_t elementID);	//vrati jemno elementu s id elementID
 	elId_t IdentifyElement(IXMLDOMElementPtr & element);	//identifikuje element - vrati id
-	elId_t LastElementId();	//vrati posledni id ~ pocet znamych elementu
+	elId_t getLastElementId();	//vrati posledni id ~ pocet znamych elementu
 
 	CElementManager();
 	~CElementManager();
 
+protected:
+	void LoadActiveElements(LPCTSTR elements_directory_path);
 };
 
 #endif // !defined(AFX_ELEMENTMANAGER_H__6942C897_7B81_4C40_AA9D_0877F1FFF55A__INCLUDED_)

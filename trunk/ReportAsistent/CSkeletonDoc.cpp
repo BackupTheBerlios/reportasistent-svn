@@ -517,7 +517,7 @@ void CSkeletonDoc::EditElement(IXMLDOMElementPtr selected_element)
 
 	
 	//jedna se o aktivni prvek?
-	if (OElementManager.IsElementActive(selected_elementTypeId))
+	if (OElementManager.isElementActive(selected_elementTypeId))
 	{
 		EditActiveElement(selected_element);
 	}	
@@ -660,7 +660,7 @@ void CSkeletonDoc::Transform1Element(IXMLDOMElementPtr & element)
 	CElementManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
 
 
-	if (m.IsElementActive(m.IdentifyElement(element)))
+	if (m.isElementActive(m.IdentifyElement(element)))
 	{
 		TransformActiveElement(element);
 	}

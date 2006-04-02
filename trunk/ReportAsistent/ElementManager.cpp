@@ -18,30 +18,32 @@ static char THIS_FILE[]=__FILE__;
 //////////////////////////////////////////////////////////////////////
 
 
-LPCTSTR CElementManager::el_names[] = 
+LPCTSTR CElementManager::static_elements_names[] = 
 {
 	"unknown",
 	"report",
 	"chapter",
 	"paragraph",
 	"text",
-	"include",
-	"hyp_4ft"
+	"include"
+//	"hyp_4ft"
 };
 
 #define LENGTH(array) (sizeof(array) / sizeof(* array))
 
-CElementManager::elId_t CElementManager::LastElementId()
+CElementManager::elId_t CElementManager::getLastElementId()
 {
-	return LENGTH(el_names) -1;
+	return LENGTH(static_elements_names) + active_elements.GetUpperBound();
 }
 
 
 LPCTSTR CElementManager::getElementName(elId_t elementID)
 {
-	if (elementID >= LENGTH(el_names)) elementID = elId_t_UNKNOWN;
+	if (elementID >= getLastElementId()) elementID = elId_t_UNKNOWN;
 
-	return el_names[elementID];
+	if (! isElementActive(elementID)) return static_elements_names[elementID];
+
+	return getActiveElementInfo(elementID)->getElementName();
 }
 
 
@@ -51,7 +53,7 @@ CElementManager::elId_t CElementManager::IdentifyElement(IXMLDOMElementPtr & ele
 
 
 	//zkusime poravnat jmeno tagu s nami znamymi jmeny
-	for (int a=0; a <= LastElementId(); a++)
+	for (int a=0; a <= getLastElementId(); a++)
 	{
 		if (baseName == getElementName(a)) return a;
 	}
@@ -62,7 +64,7 @@ CElementManager::elId_t CElementManager::IdentifyElement(IXMLDOMElementPtr & ele
 	{
 		CString type_name = (BSTR) (_bstr_t) element->getAttribute("type");
 
-		for (int a=0; a <= LastElementId(); a++)
+		for (int a=0; a <= getLastElementId(); a++)
 		{
 			if (type_name == getElementName(a)) return a;
 		}
@@ -76,10 +78,16 @@ CElementManager::elId_t CElementManager::IdentifyElement(IXMLDOMElementPtr & ele
 CElementManager::CElementManager()
 {
 
+	LoadActiveElements("..\\elements");
+
 }
 
 CElementManager::~CElementManager()
 {
+	for (int a=0; a<active_elements.GetSize(); a++)
+	{
+		delete active_elements[a];
+	}
 
 }
 
@@ -87,7 +95,7 @@ CElementManager::elId_t CElementManager::ElementIdFromName(LPCTSTR el_name)
 {
 	CString name = el_name;
 	
-	for (int a=0; a <= LastElementId(); a++)
+	for (int a=0; a <= getLastElementId(); a++)
 	{
 		if (name == getElementName(a)) return a;
 	}
@@ -113,7 +121,7 @@ IXMLDOMElementPtr CElementManager::CreateEmptyElement(CElementManager::elId_t id
 
 	CString select;
 
-	if (IsElementActive(id))
+	if (isElementActive(id))
 	{
 		//priklad: select = "//active_element[@type = 'hyp_4ft']"
 		select = "//active_element[@type = '";
@@ -155,9 +163,9 @@ IXMLDOMElementPtr CElementManager::CreateEmptyElement(CElementManager::elId_t id
 	return ret;
 }
 
-BOOL CElementManager::IsElementActive(elId_t elementId)
+BOOL CElementManager::isElementActive(elId_t elementId)
 {
-	return elementId > elId_t_INCLUDE;
+	return (elementId >= LENGTH(static_elements_names)) && (elementId <= getLastElementId());
 }
 
 
@@ -213,9 +221,48 @@ BOOL CElementManager::ElementSupportedBySource(elId_t element_id, int source_ind
 	CDataSourcesManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->DataSourcesManager;
 
 	//zdroje podporuji jen aktivni prvky
-	if (! IsElementActive(element_id)) return FALSE;
+	if (! isElementActive(element_id)) return FALSE;
 
 	if (! m.isSourceValid(source_index)) return FALSE;
 	
 	return TRUE;
+}
+
+void CElementManager::LoadActiveElements(LPCTSTR elements_directory_path)
+{
+	CFileFind finder;
+
+	CString path = elements_directory_path;
+
+	path += "\\*.*";
+
+	BOOL bWorking = finder.FindFile(path);
+	while (bWorking)
+	{
+		 bWorking = finder.FindNextFile();
+
+		 if (finder.IsDirectory() && (! finder.IsDots()))
+		 {
+			 CAElInfo * element_info = new CAElInfo();
+
+			 if (element_info->LoadFromDir(finder.GetFilePath()))
+			 {
+				 active_elements.Add(element_info);
+			 }
+			 else
+			 {
+				 delete element_info;
+			 }
+		 }
+	}
+
+	finder.Close();
+}
+
+CAElInfo * CElementManager::getActiveElementInfo(elId_t id)
+{
+	if (! isElementActive(id)) return NULL;
+
+	return active_elements[id - LENGTH(static_elements_names)];
+
 }
