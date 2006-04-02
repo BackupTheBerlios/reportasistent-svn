@@ -38,41 +38,44 @@ LPCTSTR CAElInfo::getElementName()
 
 BOOL CAElInfo::LoadFromDir(LPCTSTR dir_path)
 {
-	CString path = dir_path;
+	src_dir_path = dir_path;
 	
 	//nacteni pElementDefinitionDOM
-	pElementDefinitionDOM->load((LPCTSTR) (path + "\\element.xml"));
-	if (pElementDefinitionDOM == NULL) return FALSE;
+	pElementDefinitionDOM->load((LPCTSTR) (src_dir_path + "\\element.xml"));
+	if (pElementDefinitionDOM->parseError->errorCode  != S_OK) return FALSE;
 
 	
 	//nacteni pSimpleFilterDOM
-	pSimpleFilterDOM->load((LPCTSTR) (path + "\\simple_filter.xsl"));
-	if (pSimpleFilterDOM == NULL) return FALSE;
+	pSimpleFilterDOM->load((LPCTSTR) (src_dir_path + "\\simple_filter.xsl"));
+	if (pSimpleFilterDOM->parseError->errorCode  != S_OK) return FALSE;
 
 
 	
-	
-/**/
-	IXMLDOMElementPtr element = pElementDefinitionDOM->selectSingleNode("//active_element");
-	if (element == NULL)
+	//nacti jmeno elementu
+	IXMLDOMNodePtr type_attr_node = pElementDefinitionDOM->selectSingleNode("//active_element/@type");
+	if (type_attr_node == NULL)
 	{
 		return FALSE;
 	}
 
-	el_name = (LPCTSTR) (_bstr_t) element->getAttribute("type");
-	element.Release();
-/**/
-//zdratka za predchozi:
-//	el_name = (LPCTSTR) (pElementDefinitionDOM->selectSingleNode("//active_element/@type")->text);
-//	nefunguje nevim proc :(
-
-
+	el_name = (LPCTSTR) type_attr_node->text;
+	type_attr_node.Release();
 
 	return TRUE;
 
 }
 
-IXMLDOMNode * CAElInfo::getSimpleFilterTransformation()
+IXMLDOMNodePtr CAElInfo::getSimpleFilterTransformation()
 {
 	return pSimpleFilterDOM;
+}
+
+BOOL CAElInfo::LoadElementIcon(CBitmap &icon)
+{
+	HBITMAP hb = (HBITMAP) LoadImage(NULL, src_dir_path + "\\icon.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+
+	if (hb == NULL) return FALSE;
+
+	icon.Attach(hb);
+	return TRUE;
 }

@@ -17,6 +17,15 @@ static char THIS_FILE[]=__FILE__;
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
 
+UINT CElementManager::static_elements_bitmap_id[]=
+{
+	IDB_UNKNOWNICO                 ,
+	IDB_REPORTICO                  ,
+	IDB_CHAPTERICO                 ,
+	IDB_PARAGRAPHICO               ,
+	IDB_TEXTICO                    ,
+	IDB_UNKNOWNICO //az bude ikona pro include tak dat sem                   
+};
 
 LPCTSTR CElementManager::static_elements_names[] = 
 {
@@ -39,7 +48,7 @@ CElementManager::elId_t CElementManager::getLastElementId()
 
 LPCTSTR CElementManager::getElementName(elId_t elementID)
 {
-	if (elementID > getLastElementId()) elementID = elId_t_UNKNOWN;
+	if (elementID > getLastElementId()) elementID = ELID_UNKNOWN;
 
 	if (! isElementActive(elementID)) return static_elements_names[elementID];
 
@@ -70,7 +79,7 @@ CElementManager::elId_t CElementManager::IdentifyElement(IXMLDOMElementPtr & ele
 		}
 	}
 
-	return elId_t_UNKNOWN;
+	return ELID_UNKNOWN;
 }
 
 
@@ -100,7 +109,7 @@ CElementManager::elId_t CElementManager::ElementIdFromName(LPCTSTR el_name)
 		if (name == getElementName(a)) return a;
 	}
 
-	return elId_t_UNKNOWN;
+	return ELID_UNKNOWN;
 }
 
 IXMLDOMElementPtr CElementManager::CreateEmptyElement(CElementManager::elId_t id)
@@ -198,7 +207,7 @@ BOOL CElementManager::CanAppendChildHere(IXMLDOMElementPtr &child, IXMLDOMElemen
 	parent->removeChild(new_child_appended);
 
 	
-	/*****///honza: ladici klidne zakomentujete
+	/*****/    //honza: ladici klidne zakomentujete
 	int a = err->errorCode;
 	if (a != S_OK) AfxMessageBox(err->reason);
 	/*****/
@@ -265,4 +274,92 @@ CAElInfo * CElementManager::getActiveElementInfo(elId_t id)
 
 	return active_elements[id - LENGTH(static_elements_names)];
 
+}
+
+BOOL CElementManager::LoadElementIcon(elId_t element_id, CBitmap &icon)
+{
+	ASSERT(element_id >= 0);
+	ASSERT(element_id <= getLastElementId());
+	
+	if (! isElementActive(element_id))
+	{
+		icon.LoadBitmap(static_elements_bitmap_id[element_id]);
+		return TRUE;
+	}
+
+	return getActiveElementInfo(element_id)->LoadElementIcon(icon);
+}
+
+BOOL CElementManager::FillImageList(CImageList &img_list)
+{
+	for (int a=0; a<=getLastElementId(); a++)
+	{
+		CBitmap bmp;
+		if (! LoadElementIcon(a, bmp)) return FALSE;
+		img_list.Add(& bmp, 0xFFFFFF);
+		bmp.DeleteObject();
+	}
+
+	return TRUE;
+
+}
+
+CString CElementManager::CreateElementCaption(IXMLDOMElementPtr &pElement)
+{
+	ASSERT(pElement != NULL);
+
+	elId_t element_id = IdentifyElement(pElement);
+	_bstr_t value;
+	CString ret;
+
+	
+	switch (element_id)
+	{
+	
+	case  ELID_REPORT:
+		value = pElement->selectSingleNode("@title")->text;
+		if ((BSTR) value == L"") return getElementName(element_id);
+		else
+		{
+			ret.Format("Report: %.*s...", LENGTH_TREE_ITEM_NAME-3, (LPCTSTR) value);
+			return ret;
+		}
+
+	case  ELID_CHAPTER:
+		value = pElement->selectSingleNode("@title")->text;
+		if ((BSTR) value == L"") return "Text - empty";
+		else
+		{
+			ret.Format("%.*s...", LENGTH_TREE_ITEM_NAME-3, (LPCTSTR) value);
+			return ret;
+		}
+	
+	
+	case  ELID_TEXT:
+		if ((BSTR) pElement->text == L"") return "Text - empty";
+		else
+		{
+			ret.Format("%.*s...", LENGTH_TREE_ITEM_NAME-3, (LPCTSTR) pElement->text);			 
+			return ret;
+		}
+
+	case  ELID_PARAGRAPH:
+	case  ELID_INCLUDE:
+	case  ELID_UNKNOWN:
+	default:
+		if (isElementActive(element_id))
+		{
+//			ret.Format("%s: %s", (LPCTSTR) getElementName(element_id), (LPCTSTR) pElement->selectSingleNode("@id")->text);
+			return(LPCTSTR) pElement->selectSingleNode("@id")->text;
+		}
+		else
+		{
+			return (LPCTSTR) pElement->baseName;
+		}
+	}
+
+	
+	//dedek: sem by se program nemel dostat
+	ASSERT(FALSE);
+	return "";
 }

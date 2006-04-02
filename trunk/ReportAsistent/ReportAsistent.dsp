@@ -110,6 +110,10 @@ SOURCE=.\DataSourceManager.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\DirectoriesManager.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\ElementManager.cpp
 # End Source File
 # Begin Source File
@@ -176,6 +180,10 @@ SOURCE=.\CSkeletonDoc.h
 # Begin Source File
 
 SOURCE=.\DataSourceManager.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\DirectoriesManager.h
 # End Source File
 # Begin Source File
 

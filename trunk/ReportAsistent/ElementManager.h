@@ -23,12 +23,12 @@
 
 
 
-#define elId_t_UNKNOWN		0
-#define elId_t_REPORT		1
-#define elId_t_CHAPTER		2
-#define elId_t_PARAGRAPH	3
-#define elId_t_TEXT			4
-#define elId_t_INCLUDE		5
+#define ELID_UNKNOWN		0
+#define ELID_REPORT			1
+#define ELID_CHAPTER		2
+#define ELID_PARAGRAPH		3
+#define ELID_TEXT			4
+#define ELID_INCLUDE		5
 //#define elId_t_HYP4FT		6  !!! nebude existovat 
 							//aktivni prvky se vytvareji dynamicky, jdou doinstalovat
 
@@ -40,11 +40,15 @@ public:
 
 private:
 	//seznam typu prvku dostupnych v aplikaci :statickych(= v XML stromu jmeno tagu) i aktivnich(= v XML stromu hodnota atributu "type" prislusneho tagu).
+	static UINT static_elements_bitmap_id[];
 	static LPCTSTR static_elements_names[]; 
 	CArray<CAElInfo *,CAElInfo *> active_elements;
 
 
 public:
+	CString CreateElementCaption(IXMLDOMElementPtr & element);
+	BOOL FillImageList(CImageList & img_list);
+	BOOL LoadElementIcon(elId_t element_id, CBitmap & icon);
 	CAElInfo * getActiveElementInfo(elId_t id);
 	BOOL ElementSupportedBySource(elId_t element_id, int source_index);
 	BOOL CanAppendChildHere(IXMLDOMElementPtr & child, IXMLDOMElementPtr & parent);

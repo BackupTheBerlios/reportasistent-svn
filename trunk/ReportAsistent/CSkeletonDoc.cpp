@@ -185,10 +185,45 @@ void CSkeletonDoc::FillTreeControl(CTreeCtrl  & tree_control)
 	
 }
 
+
 void CSkeletonDoc::InsetNodeToTreeCtrl(MSXML2::IXMLDOMElementPtr pElement, 
 									   HTREEITEM hParentItem, 
 									   CTreeCtrl  & tree_control)
 {
+//dedek: nova verze
+/****/	
+	if (pElement == NULL) return;
+
+	HTREEITEM hTreeItem=NULL;
+	CElementManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
+
+	CElementManager::elId_t el_id = m.IdentifyElement(pElement);
+	
+	hTreeItem = tree_control.InsertItem(m.CreateElementCaption(pElement), el_id, el_id, hParentItem);
+
+	tree_control.SetItemData(hTreeItem, CreateItemData(pElement));
+
+	
+	//u aktivnich elementu nebude videt vnitrek
+	if (m.isElementActive(el_id)) return;
+	
+	
+	//rekurnetne projede deti;
+	IXMLDOMNodeListPtr pChildren = pElement->childNodes;//ukazatel na potomky pElementu
+	IXMLDOMNodePtr pChild = NULL;
+	while ((pChild = pChildren->nextNode()) != NULL)
+	{
+
+		InsetNodeToTreeCtrl(pChild, hTreeItem, tree_control);
+	}
+
+	tree_control.Expand(hTreeItem, TVE_EXPAND);
+
+
+/******
+dedek: stara verze	
+	
+	
 	//pridal honza
 	if (pElement == NULL) return;
 	
@@ -220,11 +255,11 @@ void CSkeletonDoc::InsetNodeToTreeCtrl(MSXML2::IXMLDOMElementPtr pElement,
 			if (0==strcmp("text",csElementType))
 			{
 
-/*		prepsal honza
+/**		prepsal honza
 				_variant_t & Value = pElement->getAttribute("value");
 
 				if (Value.vt == VT_NULL) 
-*/
+/****
 
 				_bstr_t & Value = pElement->text;
 				if ((BSTR) Value == NULL) 					
@@ -274,7 +309,7 @@ void CSkeletonDoc::InsetNodeToTreeCtrl(MSXML2::IXMLDOMElementPtr pElement,
 							_variant_t & vtTypeActElm = pElement->getAttribute("type");
 							if (0==strcmp("hyp_4ft",(LPCTSTR) (_bstr_t) vtTypeActElm))
 							//pridam prvek do TreeCtrl ..pro typ prvku 4FT-HYPOTEZA
-								/*<active_element type="hyp_4ft" source="honzova_metabaze" id="hyp_4ft1">
+								/****<active_element type="hyp_4ft" source="honzova_metabaze" id="hyp_4ft1">
 									<params/>
 								
 									<filter type="simple">
@@ -286,7 +321,7 @@ void CSkeletonDoc::InsetNodeToTreeCtrl(MSXML2::IXMLDOMElementPtr pElement,
 										<transformation file="../4ft_generuj1.xsl"/>
 										<transformation file="../4ft_generuj1.xsl"/>
 									</output>
-								</active_element>*/
+								</active_element>/*****
 							{
 								_variant_t & vtId = pElement->getAttribute("id");
 
@@ -329,13 +364,14 @@ void CSkeletonDoc::InsetNodeToTreeCtrl(MSXML2::IXMLDOMElementPtr pElement,
 		tree_control.SetItemData(hTreeItem, CreateItemData(pElement));
 
 
-
 	while (bChildrenYes && (pChild = pChildren->nextNode()) != NULL)
 	{
 
 		//rekurze
 		InsetNodeToTreeCtrl(pChild, hTreeItem, tree_control);
 	}
+
+  /*****/
 
 }
 
@@ -522,7 +558,7 @@ void CSkeletonDoc::EditElement(IXMLDOMElementPtr selected_element)
 		EditActiveElement(selected_element);
 	}	
 	// Iva: jedna se o prvek text?
-	else if (selected_elementTypeId == elId_t_TEXT)
+	else if (selected_elementTypeId == ELID_TEXT)
 	{
 		
 		//Stara verze byla: zobrazeni textu do message boxu

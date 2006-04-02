@@ -22,19 +22,21 @@
 
 // Delka nazvu prvku typu text v TreeCtrl
 #if !defined LENGTH_TREE_ITEM_NAME
-#define LENGTH_TREE_ITEM_NAME 10
+#define LENGTH_TREE_ITEM_NAME 15	//dedek: prepsal z 10 na 15
 #endif
 
 
 
 #include "ElementManager.h"
 #include "DataSourceManager.h"
+#include "DirectoriesManager.h"	// Added by ClassView
 
 //honza: sem vkaldejte vsechny globalni managery
 //konstruuje se v inti instance a nici v Exit instance
 struct CGeneralManager
 {
 public:
+	CDirectoriesManager DirectoriesManager;
 	CElementManager ElementManager;
 	CDataSourcesManager DataSourcesManager;
 };

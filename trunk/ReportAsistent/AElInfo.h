@@ -12,13 +12,15 @@
 class CAElInfo  
 {
 public:
-	IXMLDOMNode * getSimpleFilterTransformation();
+	BOOL LoadElementIcon(CBitmap &icon);
+	IXMLDOMNodePtr getSimpleFilterTransformation();
 	BOOL LoadFromDir(LPCTSTR dir_path);
 	LPCTSTR getElementName();
 	CAElInfo();
 	virtual ~CAElInfo();
 
 private:
+	CString src_dir_path;
 	IXMLDOMDocumentPtr pSimpleFilterDOM;
 	IXMLDOMDocumentPtr pElementDefinitionDOM;
 	CString el_name;

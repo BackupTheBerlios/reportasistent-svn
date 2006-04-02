@@ -71,6 +71,7 @@ void CSkeletonView::OnInitialUpdate()
 
 	SetWindowLong(m_hWnd, GWL_STYLE, lStyleOld);
 
+
 //Iva: Natahnu obrazky pro TreeCtrl
 	CImageList          *pImageList;
 
@@ -79,6 +80,9 @@ void CSkeletonView::OnInitialUpdate()
 						ILC_MASK, 
 						NUM_PICTURES_TREECTRL, //pocatecni pocet obrazku v ImageListu..viz Stdafx.h
 						10);//o kolik obrazku se ImageList muze zvetsit.. ??
+
+	
+/*****   //dedek: zakomentoval pro ladeni
 
 	int			nIDPic; // ID obrazku v resourcich
 	CBitmap     oBitmap;// objekt obrazek po natazeni z resourcu
@@ -90,8 +94,16 @@ void CSkeletonView::OnInitialUpdate()
 		pImageList->Add(&oBitmap, (COLORREF)0xFFFFFF);
 		oBitmap.DeleteObject();
 	}
+/*****/
+
+	//dedek: nova verze
+	CElementManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
+	m.FillImageList(* pImageList);
+
+
 	GetTreeCtrl().SetImageList(pImageList, TVSIL_NORMAL);
-	
+
+
 }
 
 /////////////////////////////////////////////////////////////////////////////

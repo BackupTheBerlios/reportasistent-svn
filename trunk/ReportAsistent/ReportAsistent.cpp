@@ -62,6 +62,10 @@ BOOL CReportAsistentApp::InitInstance()
 		//pridal honza
 	CoInitialize(NULL);
 
+		//pridal honza
+	m_pGeneralManager = new CGeneralManager();
+
+
 
 	// Change the registry key under which our settings are stored.
 	// TODO: You should modify this string to be something appropriate
@@ -101,8 +105,6 @@ BOOL CReportAsistentApp::InitInstance()
 	m_pMainWnd->DragAcceptFiles();
 
 	
-	//pridal honza
-	m_pGeneralManager = new CGeneralManager();
 
 	return TRUE;
 }
