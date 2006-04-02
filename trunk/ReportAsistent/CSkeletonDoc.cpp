@@ -683,7 +683,7 @@ void CSkeletonDoc::Transform1Element(IXMLDOMElementPtr & element)
 void CSkeletonDoc::TransformActiveElement(IXMLDOMElementPtr & element)
 {
 
-	CAPTransform tr(element);
+	CAElTransform tr(element);
 	tr.DoAllTransnformations();
 
 

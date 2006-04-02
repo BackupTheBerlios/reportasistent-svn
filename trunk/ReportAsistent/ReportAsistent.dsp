@@ -94,6 +94,10 @@ SOURCE=.\ActiveElementDialog.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\AElInfo.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\APTransform.cpp
 # End Source File
 # Begin Source File
@@ -156,6 +160,10 @@ SOURCE=.\TransformationsDialog.cpp
 # Begin Source File
 
 SOURCE=.\ActiveElementDialog.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\AElInfo.h
 # End Source File
 # Begin Source File
 

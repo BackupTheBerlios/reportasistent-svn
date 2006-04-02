@@ -24,7 +24,7 @@ static char THIS_FILE[]=__FILE__;
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
 
-CAPTransform::CAPTransform(IXMLDOMElementPtr & node/*, CSkeletonDoc & skel*/)
+CAElTransform::CAElTransform(IXMLDOMElementPtr & node/*, CSkeletonDoc & skel*/)
 	:m_active_element(node)/*, m_skel_document(skel)*/
 {
 	//pouze nacteni pluginoutput
@@ -44,12 +44,12 @@ CAPTransform::CAPTransform(IXMLDOMElementPtr & node/*, CSkeletonDoc & skel*/)
 
 
 
-CAPTransform::~CAPTransform()
+CAElTransform::~CAElTransform()
 {
 	m_plug_out.Release();
 }
 
-IXMLDOMDocumentFragmentPtr CAPTransform::DoAllTransnformations()
+IXMLDOMDocumentFragmentPtr CAElTransform::DoAllTransnformations()
 {
 	//document fragment kam se budou ukladat jednotlive transformace
 	IXMLDOMDocumentFragmentPtr parent_frag =
@@ -70,7 +70,7 @@ IXMLDOMDocumentFragmentPtr CAPTransform::DoAllTransnformations()
 
 
 //projde vsechny vybrane prvky ve filtru a pro kazdy provede vsechny transformace
-void CAPTransform::ProcessSimpleFlter(IXMLDOMNodePtr & destination_parent)
+void CAElTransform::ProcessSimpleFlter(IXMLDOMNodePtr & destination_parent)
 {
 	IXMLDOMNodeListPtr selected_items;
 	selected_items = m_active_element->selectNodes("filter[@type='simple']/selection");
@@ -109,7 +109,7 @@ void CAPTransform::ProcessSimpleFlter(IXMLDOMNodePtr & destination_parent)
 
 //projde vsechny transformace, aplikuje je na target uzel v m_plugin_output
 //a vysledek upozi do destination_parent 
-void CAPTransform::ProcessAllTransformations(IXMLDOMNodePtr & target, IXMLDOMNodePtr & destination_parent)
+void CAElTransform::ProcessAllTransformations(IXMLDOMNodePtr & target, IXMLDOMNodePtr & destination_parent)
 {
 	IXMLDOMNodeListPtr tranformations; 
 	tranformations = m_active_element->selectNodes("output/transformation");
@@ -124,7 +124,7 @@ void CAPTransform::ProcessAllTransformations(IXMLDOMNodePtr & target, IXMLDOMNod
 
 //transformuje target uzel v m_plugin_output podle transormace definovane v tr_definition_element
 //a vysledek upozi do destination_parent
-void CAPTransform::ProcessSingleTransformation(IXMLDOMNodePtr & target,
+void CAElTransform::ProcessSingleTransformation(IXMLDOMNodePtr & target,
 	IXMLDOMNodePtr & destination_parent, IXMLDOMElementPtr & tr_definition_element)
 {
 	//nacteni ransformace

@@ -15,7 +15,7 @@
 
 //honza:
 //trida slouzici k vygenerovani jednoho aktivniho prvku
-class CAPTransform  
+class CAElTransform  
 {
 private:
 //	CSkeletonDoc & m_skel_document;
@@ -32,8 +32,8 @@ protected:
 public:
 	IXMLDOMDocumentFragmentPtr DoAllTransnformations();
 	
-	CAPTransform(IXMLDOMElementPtr & node/*, CSkeletonDoc & skel*/);
-	~CAPTransform();	
+	CAElTransform(IXMLDOMElementPtr & node/*, CSkeletonDoc & skel*/);
+	~CAElTransform();	
 };
 
 

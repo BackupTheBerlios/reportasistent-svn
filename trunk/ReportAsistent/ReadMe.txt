@@ -46,6 +46,10 @@ ElementManager - vracet zakladni DOM dokumenty
 
 
 
+Pro Ivu:
+v RA: myslim ze by to chtelo trochu vylepsit vkladani/editaci prvku - kdyz uzivatel zmacken Cancel, tak aby se tan prvek nevlozil/nenastavila se modification flag
+
+
 
 
 
