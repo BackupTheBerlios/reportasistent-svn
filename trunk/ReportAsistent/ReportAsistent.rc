@@ -542,6 +542,8 @@ BEGIN
                             "Sorry, you have to select some items to make filter valid."
     IDS_SIMPLE_FILTER_FAILED_SOURCE_LOAD 
                             "Sorry, but the selected source didn't return valid data for this active elemenet."
+    IDS_WB_WORD_LOADER_NOT_REGISTRED 
+                            "Sorry, Report Asistent instaklation si probably corrupt.\nFailed to load LMRA_WordLoader."
 END
 
 STRINGTABLE DISCARDABLE 

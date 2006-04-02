@@ -28,7 +28,7 @@ CLMSock::CLMSock()
 	APTable[0].pFn = & fLM4fthyp;
 
 	
-	APTable[1].AP_ID = "Category";
+	APTable[1].AP_ID = "category";
 	APTable[1].pFn = & fLMCategory;
 }
 

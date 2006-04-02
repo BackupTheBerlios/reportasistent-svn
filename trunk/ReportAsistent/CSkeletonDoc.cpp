@@ -615,10 +615,30 @@ void CSkeletonDoc::Generate()
 	LMRA_WordLoader::_LMRA_XML_WordLoaderPtr word;
 	hr = word.CreateInstance(CLSID_LMRA_XML_WordLoader);
 
-	if (hr == REGDB_E_CLASSNOTREG)
+	if (S_OK != hr)
 	{
 		AfxMessageBox(IDS_WB_WORD_LOADER_NOT_REGISTRED);
-		return;
+
+		STARTUPINFO si;
+		ZeroMemory(& si, sizeof si);
+		
+		PROCESS_INFORMATION pi;
+		ZeroMemory(& pi, sizeof pi);
+
+		BOOL ret = CreateProcess("..\\VB-LMRA_WordLoader\\LMRA_WordLoader.exe", NULL, NULL, NULL, FALSE, NORMAL_PRIORITY_CLASS, NULL, NULL, & si, & pi);
+		if (! ret) 
+		{
+			return;
+		}
+	
+//dedek: chtelo by to jestetu aplikaci ukoncit :)
+//		PostThreadMessage(pi.dwThreadId, WM_DESTROY, 0, 0);
+
+		
+		CloseHandle(pi.hProcess);
+		
+		hr = word.CreateInstance(CLSID_LMRA_XML_WordLoader);
+		if (S_OK != hr) return;
 	}
 
 	try

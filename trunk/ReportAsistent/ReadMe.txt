@@ -39,7 +39,8 @@ pak F5 a ono se to na nich zastavuje parada :-)
 
 dedek TODO:
 default source - hotovo
-reletivni adresace metabaze v perzist ID
+reletivni adresace metabaze v perzist ID - predelano - uklada se tam absolutni cesta .mdb souboru metabaze, 
+ale funguje i s relativni cestou viz zdroj "testovaci metabaze"
 
 ElementManager - vracet zakladni DOM dokumenty
 
@@ -50,7 +51,8 @@ Pro Ivu:
 v RA: myslim ze by to chtelo trochu vylepsit vkladani/editaci prvku - kdyz uzivatel zmacken Cancel, tak aby se tan prvek nevlozil/nenastavila se modification flag
 
 
-
+Pro Martina:
+DBName - nemelo by tam byt jmeno alayzovane databaze? ..ted je tam jmeno metabaze
 
 
 
