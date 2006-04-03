@@ -21,7 +21,8 @@ public:
 // Dialog Data
 	//{{AFX_DATA(CTransformationsDialog)
 	enum { IDD = IDD_TRANSFORMATIONS_DIALOG };
-		// NOTE: the ClassWizard will add data members here
+	CListBox	m_SupportedList;
+	CListBox	m_SelectedList;
 	//}}AFX_DATA
 
 
@@ -37,12 +38,17 @@ protected:
 
 	// Generated message map functions
 	//{{AFX_MSG(CTransformationsDialog)
-		// NOTE: the ClassWizard will add member functions here
 	virtual BOOL OnInitDialog();
 	virtual void OnOK();
 	virtual void OnCancel();
+	afx_msg void OnAddButton();
+	afx_msg void OnRemoveButton();
+	afx_msg void OnMoveUpButton();
+	afx_msg void OnMoveDownButton();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
+private:
+	IXMLDOMElementPtr & m_active_element;
 };
 
 //{{AFX_INSERT_LOCATION}}

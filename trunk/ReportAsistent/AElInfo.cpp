@@ -29,6 +29,13 @@ CAElInfo::~CAElInfo()
 {
 	pSimpleFilterDOM.Release();
 	pElementDefinitionDOM.Release();
+
+	for (int a=0; a<getTranformationsCount(); a++)
+	{
+		m_transformations[a]->doc.Release();
+		
+		delete m_transformations[a];
+	}
 }
 
 LPCTSTR CAElInfo::getElementName()
@@ -61,6 +68,10 @@ BOOL CAElInfo::LoadFromDir(LPCTSTR dir_path)
 	el_name = (LPCTSTR) type_attr_node->text;
 	type_attr_node.Release();
 
+	
+	//nacti transformace
+	LoadTransformations((CString) dir_path + "\\transformations");
+
 	return TRUE;
 
 }
@@ -87,4 +98,75 @@ IXMLDOMElementPtr CAElInfo::CreateEmptyElement()
 	
 	return pElementDefinitionDOM->documentElement->cloneNode(VARIANT_TRUE);
 
+}
+
+
+
+void CAElInfo::LoadTransformations(LPCTSTR dir_path)
+{
+	CFileFind finder;
+
+	
+
+	BOOL bWorking = finder.FindFile((CString) dir_path + "\\*.*");
+	while (bWorking)
+	{
+		 bWorking = finder.FindNextFile();
+
+		 if (finder.IsDirectory() && (! finder.IsDots()))
+		 {
+			 s_transformation * tr = new s_transformation;
+			 
+			 tr->name = finder.GetFileName();
+
+			 tr->doc.CreateInstance(_T("Msxml2.DOMDocument"));
+			 tr->doc->async = VARIANT_FALSE;
+
+			 tr->doc->load((LPCTSTR) (finder.GetFilePath() + "\\transform.xsl"));
+
+			 if (tr->doc->parseError->errorCode == S_OK)
+			 {
+				 m_transformations.Add(tr);
+			 }
+			 else
+			 {
+				 delete tr;
+			 }
+				 	
+		 }
+	}
+
+	finder.Close();
+}
+
+int CAElInfo::getTranformationsCount()
+{
+	return m_transformations.GetSize();
+}
+
+CString CAElInfo::getTranformationName(int tr_index)
+{
+	ASSERT(tr_index >= 0);
+	ASSERT(tr_index < getTranformationsCount());
+
+	return m_transformations[tr_index]->name;
+}
+
+
+IXMLDOMNodePtr CAElInfo::getTranformationNode(int tr_index)
+{
+	ASSERT(tr_index >= 0);
+	ASSERT(tr_index < getTranformationsCount());
+
+	return m_transformations[tr_index]->doc;
+}
+
+int CAElInfo::FindTransformationByName(LPCTSTR tr_name)
+{
+	for (int a = 0; a < getTranformationsCount(); a++)
+	{
+		if (getTranformationName(a) == tr_name) return a;
+	}
+
+	return -1;
 }

@@ -40,6 +40,11 @@
 #define IDC_RENAME_BUTTON               1011
 #define IDC_SET_DEFAULT_BUTTON          1012
 #define IDC_SWITCH_BUTTON               1015
+#define IDC_SUPPORTED_TRANSF_LIST       1016
+#define IDC_SELECTED_TRANSFS_LIST       1017
+#define IDC_ADD_BUTTON                  1018
+#define IDC_MOVE_UP_BUTTON              1020
+#define IDC_MOVE_DOWN_BUTTON            1021
 #define ID_MMGENREP                     32771
 #define ID_MMSOURCES                    32772
 #define ID_ELEMENT_EDIT                 32780
@@ -61,7 +66,7 @@
 #define _APS_3D_CONTROLS                     1
 #define _APS_NEXT_RESOURCE_VALUE        150
 #define _APS_NEXT_COMMAND_VALUE         32784
-#define _APS_NEXT_CONTROL_VALUE         1016
+#define _APS_NEXT_CONTROL_VALUE         1021
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

@@ -82,6 +82,12 @@ BOOL CSkeletonDoc::OnNewDocument()
 	//docasne reseni:
 	CDirectoriesManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->DirectoriesManager;
 	m_pXMLDom->load((LPCTSTR) (m.getXMLFilesDirectory() + "/prazdny.xml"));
+	if (m_pXMLDom->parseError->errorCode != S_OK)
+	{
+			AfxMessageBox(m_pXMLDom->parseError->reason);
+			return FALSE;
+	}
+
 
 
 	return TRUE;

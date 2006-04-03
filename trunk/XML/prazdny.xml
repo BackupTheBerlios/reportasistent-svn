@@ -24,10 +24,10 @@
 <!ELEMENT selection EMPTY >
 <!ATTLIST selection id CDATA #REQUIRED>	<!-- odkaz na data ze zasuvky nikoli ID prvku - mozna prejmenovat --> 
 
-<!ELEMENT output (transformation+) >
+<!ELEMENT output (transformation*) >
 
 <!ELEMENT transformation EMPTY >
-<!ATTLIST transformation file CDATA #REQUIRED>
+<!ATTLIST transformation name CDATA #REQUIRED>
 	
 <!ELEMENT include EMPTY >
 <!ATTLIST include file CDATA #REQUIRED >
@@ -99,8 +99,8 @@
 				<selection id="hyp33"/>
 			</filter>
 			<output>
-				<transformation file="../XML/4ft_generuj1.xsl"/>
-				<transformation file="../XML/4ft_generuj1.xsl"/>
+				<transformation name="../XML/4ft_generuj1.xsl"/>
+				<transformation name="../XML/4ft_generuj1.xsl"/>
 			</output>
 		</active_element>
 		<active_element type="category" source="" id="category1">
@@ -110,8 +110,8 @@
 				<selection id="hyp33"/>
 			</filter>
 			<output>
-				<transformation file="../XML/4ft_generuj1.xsl"/>
-				<transformation file="../XML/4ft_generuj1.xsl"/>
+				<transformation name="../XML/4ft_generuj1.xsl"/>
+				<transformation name="../XML/4ft_generuj1.xsl"/>
 			</output>
 		</active_element>
 	</chapter>

@@ -16,7 +16,7 @@ static char THIS_FILE[] = __FILE__;
 
 
 CTransformationsDialog::CTransformationsDialog(IXMLDOMElementPtr & active_element, CWnd* pParent /*=NULL*/)
-	: CDialog(CTransformationsDialog::IDD, pParent)
+	: CDialog(CTransformationsDialog::IDD, pParent), m_active_element(active_element)
 {
 	//{{AFX_DATA_INIT(CTransformationsDialog)
 		// NOTE: the ClassWizard will add member initialization here
@@ -28,14 +28,18 @@ void CTransformationsDialog::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CTransformationsDialog)
-		// NOTE: the ClassWizard will add DDX and DDV calls here
+	DDX_Control(pDX, IDC_SUPPORTED_TRANSF_LIST, m_SupportedList);
+	DDX_Control(pDX, IDC_SELECTED_TRANSFS_LIST, m_SelectedList);
 	//}}AFX_DATA_MAP
 }
 
 
 BEGIN_MESSAGE_MAP(CTransformationsDialog, CDialog)
 	//{{AFX_MSG_MAP(CTransformationsDialog)
-		// NOTE: the ClassWizard will add message map macros here
+	ON_BN_CLICKED(IDC_ADD_BUTTON, OnAddButton)
+	ON_BN_CLICKED(IDC_REMOVE_BUTTON, OnRemoveButton)
+	ON_BN_CLICKED(IDC_MOVE_UP_BUTTON, OnMoveUpButton)
+	ON_BN_CLICKED(IDC_MOVE_DOWN_BUTTON, OnMoveDownButton)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -45,6 +49,39 @@ END_MESSAGE_MAP()
 BOOL CTransformationsDialog::OnInitDialog() 
 {
 	CDialog::OnInitDialog();
+
+	int a;
+
+	
+	ASSERT(m_active_element != NULL);
+
+	CElementManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
+	
+	ASSERT(m.isElementActive(m.IdentifyElement(m_active_element)));
+	
+
+
+	CAElInfo * info = m.getActiveElementInfo(m.IdentifyElement(m_active_element));
+
+	
+	//nacti podporovane transformace
+	for (a = 0; a < info->getTranformationsCount(); a++)
+	{
+		int index = m_SupportedList.AddString(info->getTranformationName(a));
+		m_SupportedList.SetItemData(index, a);
+	}
+
+
+	//nacti transformace vybrane v prvku
+	IXMLDOMNodeListPtr selected_transfs = m_active_element->selectNodes("/output/transformation/@name");
+
+	for (a = 0; a < selected_transfs->length; a++)
+	{
+		int index = m_SupportedList.AddString(info->getTranformationName(a));
+		m_SupportedList.SetItemData(index, a);
+	}
+
+
 		
 	return TRUE;  // return TRUE unless you set the focus to a control
 	              // EXCEPTION: OCX Property Pages should return FALSE
@@ -67,4 +104,64 @@ void CTransformationsDialog::OnCancel()
 BOOL CTransformationsDialog::SaveAll()
 {
 	return TRUE;
+}
+
+void CTransformationsDialog::OnAddButton() 
+{
+	if (m_SupportedList.GetCurSel() == LB_ERR) return;
+	
+
+	CString selected_text;
+
+	m_SupportedList.GetText(m_SupportedList.GetCurSel(), selected_text);
+	
+	m_SelectedList.AddString(selected_text);
+	
+}
+
+void CTransformationsDialog::OnRemoveButton() 
+{
+	if (m_SelectedList.GetCurSel() == LB_ERR) return;
+
+	m_SelectedList.DeleteString(m_SelectedList.GetCurSel());
+
+}
+
+void CTransformationsDialog::OnMoveUpButton() 
+{
+	if (m_SelectedList.GetCurSel() == LB_ERR) return;
+
+	int selected_index = m_SelectedList.GetCurSel();
+	
+	CString selected_text;
+
+	if (selected_index <= 0) return;
+
+	m_SelectedList.GetText(selected_index, selected_text);
+		
+	m_SelectedList.DeleteString(selected_index);
+
+	m_SelectedList.InsertString(--selected_index, selected_text);
+
+	m_SelectedList.SelectString(--selected_index, selected_text);
+}
+
+void CTransformationsDialog::OnMoveDownButton() 
+{
+	if (m_SelectedList.GetCurSel() == LB_ERR) return;
+
+	int selected_index = m_SelectedList.GetCurSel();
+	
+	CString selected_text;
+
+	if (selected_index >= m_SelectedList.GetCount()-1) return;
+
+	m_SelectedList.GetText(selected_index, selected_text);
+		
+	m_SelectedList.DeleteString(selected_index);
+
+	m_SelectedList.InsertString(++selected_index, selected_text);
+
+	m_SelectedList.SelectString(++selected_index, selected_text);
+	
 }
