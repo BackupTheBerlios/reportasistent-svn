@@ -79,3 +79,12 @@ BOOL CAElInfo::LoadElementIcon(CBitmap &icon)
 	icon.Attach(hb);
 	return TRUE;
 }
+
+IXMLDOMElementPtr CAElInfo::CreateEmptyElement()
+{
+	ASSERT(pElementDefinitionDOM != NULL);
+	ASSERT(pElementDefinitionDOM->documentElement != NULL);
+	
+	return pElementDefinitionDOM->documentElement->cloneNode(VARIANT_TRUE);
+
+}

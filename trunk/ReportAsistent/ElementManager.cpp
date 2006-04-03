@@ -122,6 +122,20 @@ CElementManager::elId_t CElementManager::ElementIdFromName(LPCTSTR el_name)
 
 IXMLDOMElementPtr CElementManager::CreateEmptyElement(CElementManager::elId_t id)
 {
+	CSkeletonDoc * doc = ((CReportAsistentApp *) AfxGetApp())->FirstDocumentInFirstTemplate();
+
+	if (isElementActive(id))
+	{
+		IXMLDOMElementPtr ret = getActiveElementInfo(id)->CreateEmptyElement();
+		//nastav unikatni id parametr
+		ret->setAttribute("id", (LPCTSTR) doc->CreateNewID(id));
+
+		return ret;
+
+	}
+	
+	
+	
 	IXMLDOMDocumentPtr element_example;
 	element_example.CreateInstance(_T("Msxml2.DOMDocument"));	
 	element_example->async = VARIANT_FALSE; // default - true,
@@ -138,14 +152,14 @@ IXMLDOMElementPtr CElementManager::CreateEmptyElement(CElementManager::elId_t id
 
 	CString select;
 
-	if (isElementActive(id))
+/*	if (isElementActive(id))
 	{
 		//priklad: select = "//active_element[@type = 'hyp_4ft']"
 		select = "//active_element[@type = '";
 		select += getElementName(id);
 		select += "']";
 	}
-	else
+	else */
 	{
 		//priklad: select = "//text"
 		select = "//";
@@ -160,9 +174,6 @@ IXMLDOMElementPtr CElementManager::CreateEmptyElement(CElementManager::elId_t id
 		element_example.Release();
 		return NULL;
 	}
-	
-	
-	CSkeletonDoc * doc = ((CReportAsistentApp *) AfxGetApp())->FirstDocumentInFirstTemplate();
 	
 	
 	//nastav unikatni id parametr
@@ -182,7 +193,7 @@ IXMLDOMElementPtr CElementManager::CreateEmptyElement(CElementManager::elId_t id
 
 BOOL CElementManager::isElementActive(elId_t elementId)
 {
-	return (elementId >= LENGTH(static_elements_names)) && (elementId <= getLastElementId());
+	return (elementId >= getFirstActiveElementID()) && (elementId <= getLastElementId());
 }
 
 
@@ -280,7 +291,7 @@ CAElInfo * CElementManager::getActiveElementInfo(elId_t id)
 {
 	if (! isElementActive(id)) return NULL;
 
-	return active_elements[id - LENGTH(static_elements_names)];
+	return active_elements[id - getFirstActiveElementID()];
 
 }
 

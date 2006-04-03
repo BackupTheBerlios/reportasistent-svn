@@ -12,6 +12,7 @@
 class CAElInfo  
 {
 public:
+	IXMLDOMElementPtr CreateEmptyElement();
 	BOOL LoadElementIcon(CBitmap &icon);
 	IXMLDOMNodePtr getSimpleFilterTransformation();
 	BOOL LoadFromDir(LPCTSTR dir_path);
