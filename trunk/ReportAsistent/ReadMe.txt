@@ -17,6 +17,7 @@ pro pouziti techto manageru:
 
 CGeneralManager * m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager;
 	CDataSourcesManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->DataSourcesManager;
+	CDirectoriesManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->DirectoriesManager;
 
 
 
@@ -43,6 +44,9 @@ reletivni adresace metabaze v perzist ID - predelano - uklada se tam absolutni c
 ale funguje i s relativni cestou viz zdroj "testovaci metabaze"
 
 ElementManager - vracet zakladni DOM dokumenty
+
+DacourcesManager - 	pridat funci co zjisti podporovane prvky
+PlugsTab[0].SockInterface->hGetAPList
 
 
 

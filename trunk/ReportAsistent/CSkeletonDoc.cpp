@@ -74,13 +74,14 @@ BOOL CSkeletonDoc::OnNewDocument()
 	
 	
 	//vytvor prazny report
-	CGeneralManager * m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager;
+//	CGeneralManager * m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager;
 
 	//by bylo fajn, ale pak tam neni DTD
 	//pXMLDom->appendChild(m->ElementManager.CreateEmptyElement(elId_t_REPORT));
 
 	//docasne reseni:
-	m_pXMLDom->load("../XML/prazdny.xml");
+	CDirectoriesManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->DirectoriesManager;
+	m_pXMLDom->load((LPCTSTR) (m.getXMLFilesDirectory() + "/prazdny.xml"));
 
 
 	return TRUE;
@@ -630,7 +631,10 @@ void CSkeletonDoc::Generate()
 		PROCESS_INFORMATION pi;
 		ZeroMemory(& pi, sizeof pi);
 
-		BOOL ret = CreateProcess("..\\VB-LMRA_WordLoader\\LMRA_WordLoader.exe", NULL, NULL, NULL, FALSE, NORMAL_PRIORITY_CLASS, NULL, NULL, & si, & pi);
+
+		CDirectoriesManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->DirectoriesManager;
+
+		BOOL ret = CreateProcess(m.getLMRA_WB_WordLoaderPath(), NULL, NULL, NULL, FALSE, NORMAL_PRIORITY_CLASS, NULL, NULL, & si, & pi);
 		if (! ret) 
 		{
 			return;

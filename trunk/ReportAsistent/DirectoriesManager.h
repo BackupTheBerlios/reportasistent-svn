@@ -12,10 +12,17 @@
 class CDirectoriesManager  
 {
 public:
+	CString getLMRA_WB_WordLoaderPath();
+	CString getXMLFilesDirectory();
+	CString getElementsDirectory();
+	CString getSourcesConfigFilePath();
+	CString getPluginsDirectory();
 	CDirectoriesManager();
 	
 	~CDirectoriesManager();
 
+private:
+	CString application_root_path;
 };
 
 #endif // !defined(AFX_DIRECTORIESMANAGER_H__230CE075_CAD7_4653_B7B5_39D4A6DC3DDD__INCLUDED_)

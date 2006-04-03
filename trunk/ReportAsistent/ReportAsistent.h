@@ -39,6 +39,11 @@ public:
 	CDirectoriesManager DirectoriesManager;
 	CElementManager ElementManager;
 	CDataSourcesManager DataSourcesManager;
+
+	CGeneralManager() : 
+		DataSourcesManager(DirectoriesManager),
+		ElementManager(DirectoriesManager)
+			{};
 };
 
 

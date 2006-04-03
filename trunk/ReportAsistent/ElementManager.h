@@ -12,7 +12,7 @@
 
 #include <afxtempl.h>
 #include "AElInfo.h"
-
+#include "DirectoriesManager.h"
 
 
 //honza:
@@ -65,7 +65,7 @@ public:
 	elId_t IdentifyElement(IXMLDOMElementPtr & element);	//identifikuje element - vrati id
 	elId_t getLastElementId();	//vrati posledni id ~ pocet znamych elementu
 
-	CElementManager();
+	CElementManager(CDirectoriesManager & m);
 	~CElementManager();
 
 protected:

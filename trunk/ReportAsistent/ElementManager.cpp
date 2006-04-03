@@ -92,11 +92,10 @@ CElementManager::elId_t CElementManager::IdentifyElement(IXMLDOMElementPtr & ele
 
 
 
-CElementManager::CElementManager()
+CElementManager::CElementManager(CDirectoriesManager & m)
 {
 
-	LoadActiveElements("..\\elements");
-
+	LoadActiveElements(m.getElementsDirectory());
 }
 
 CElementManager::~CElementManager()
@@ -144,11 +143,16 @@ IXMLDOMElementPtr CElementManager::CreateEmptyElement(CElementManager::elId_t id
 	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
 	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
 	//predelat pres directory manager
-	element_example->load((LPCTSTR) _T("../XML/prazdny2.xml"));
+	//element_example->load((LPCTSTR) _T("../XML/prazdny2.xml"));
+	//dedek predelano nize
 	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
 	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
 	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
 	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+
+	CDirectoriesManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->DirectoriesManager;
+	element_example->load((LPCTSTR) (m.getXMLFilesDirectory() + "/prazdny2.xml"));
+
 
 	CString select;
 

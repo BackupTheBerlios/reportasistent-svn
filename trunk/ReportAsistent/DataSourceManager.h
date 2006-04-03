@@ -14,7 +14,7 @@
 // ================= INCLUDE ==================================
 #include <afxtempl.h>
 #include "../LMPlugin/SockInterface.h"
-
+#include "DirectoriesManager.h"
 
 
 /// ================= MAKRA ===================================
@@ -125,14 +125,14 @@ public:
 
 // METODY
 	// konstruktor a destruktor
-	CDataSourcesManager();
+	CDataSourcesManager(CDirectoriesManager & m);
 	~CDataSourcesManager();
 
 	// inicializuje tabulku zasuvek, vrati pocet zasuvek
-	int initPlugsTab();
+	int initPlugsTab(LPCTSTR plugins_dir_path);
 
 	// inicializuje tabulku zdroju z konfiguracniho XML souboru
-	BOOL initSourcesTab();
+	BOOL initSourcesTab(LPCTSTR config_file_path);
 	// ulozi tabulku zdroju do konfiguracniho XML souboru
 	BOOL saveSourcesTab();
 

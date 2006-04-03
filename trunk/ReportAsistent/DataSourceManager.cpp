@@ -78,11 +78,11 @@ BOOL CSourceRec::Valid()
 // ----------- CDataSourcesManager -----
 
 // konstruktor
-CDataSourcesManager::CDataSourcesManager()
+CDataSourcesManager::CDataSourcesManager(CDirectoriesManager & m)
 {
 	// inicializace tabulky zasuvek a tabulky zdroju
-	initPlugsTab();
-	initSourcesTab();
+	initPlugsTab(m.getPluginsDirectory());
+	initSourcesTab(m.getSourcesConfigFilePath());
 }
 
 // destruktor
@@ -96,7 +96,7 @@ CDataSourcesManager::~CDataSourcesManager()
 // ---- sprava zasuvek ----------------------
 
 // initPlugsTab
-int CDataSourcesManager::initPlugsTab()
+int CDataSourcesManager::initPlugsTab(LPCTSTR plugins_dir_path)
 {
 	int i   = 0;
     BOOL Found;
@@ -104,8 +104,10 @@ int CDataSourcesManager::initPlugsTab()
 	
 	// nalezeni vsech zasuvek a vyplneni jejich nazvu do pole PlugsTab
 
-	CString Path = _PLUGIN_DIR_PATH;
-	Path +=  "*.dll";
+	//CString Path = _PLUGIN_DIR_PATH;
+	//dedek:
+	CString Path = plugins_dir_path;
+	Path +=  "\\*.dll";
 	Found = FList.FindFile(Path);
 	
 	while (Found)
@@ -146,11 +148,12 @@ int CDataSourcesManager::initPlugsTab()
 // ---- sprava zdroju ----------------------
 
 // InitSourcesTab
-BOOL CDataSourcesManager::initSourcesTab()
+BOOL CDataSourcesManager::initSourcesTab(LPCTSTR config_file_path)
 {
 	CString FName;	// jmeno (cesta) ke konfig. souboru
-	FName = _CONF_DIR_PATH;
-	FName += _CONF_FILE_SOURCES;
+//	FName = _CONF_DIR_PATH;
+//	FName += _CONF_FILE_SOURCES;
+	FName = config_file_path;
 	BSTR FileName = FName.AllocSysString();
 
    // nacteni konfiguracniho souboru zdroju
@@ -175,7 +178,7 @@ BOOL CDataSourcesManager::initSourcesTab()
    
        //nacti DOM ze souboru
     //if ( pXMLDom->load((_bstr_t)FileName) != VARIANT_TRUE)
-	if ( pXMLDom->load("Config\\sources.xml") == VARIANT_TRUE)
+	if ( pXMLDom->load((LPCTSTR) FName) == VARIANT_TRUE)
     {
 		pNode = pXMLDom->GetdocumentElement();
 		if (pNode != NULL)
@@ -316,7 +319,9 @@ BOOL CDataSourcesManager::saveSourcesTab()
 
 
 
-	ret = S_OK == pXMLDom->save("Config\\sources.xml");
+	CDirectoriesManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->DirectoriesManager;
+
+	ret = S_OK == pXMLDom->save((LPCTSTR) m.getSourcesConfigFilePath());
 	root_el.Release();
 
 	return ret;
