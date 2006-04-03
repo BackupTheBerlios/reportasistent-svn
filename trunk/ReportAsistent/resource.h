@@ -42,11 +42,7 @@
 #define IDC_SWITCH_BUTTON               1015
 #define ID_MMGENREP                     32771
 #define ID_MMSOURCES                    32772
-#define ID_MMNEWTEXT                    32774
-#define ID_MMNEWPARAGRAPH               32775
-#define ID_MMNEW4FTHYP                  32776
 #define ID_ELEMENT_EDIT                 32780
-#define ID_MMNEWCHAPTER                 32781
 #define ID_MMDELETE                     32782
 #define ID_MMNEWSTATICFIRST             39001
 #define ID_MMNEWSTATICLAST              39009

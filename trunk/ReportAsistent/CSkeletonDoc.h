@@ -56,12 +56,8 @@ protected:
 	IXMLDOMElement * ElementFromItemData(LPARAM item_data);
 	CSkeletonView * GetFirstView();
 	//{{AFX_MSG(CSkeletonDoc)
-	afx_msg void OnMmnew4fthyp();
 	afx_msg void OnElementEdit();
 	afx_msg void OnMmgenrep();
-	afx_msg void OnMmnewtext();
-	afx_msg void OnMmnewparagraph();
-	afx_msg void OnMmnewchapter();
 	afx_msg void OnMmdelete();
 	//}} AFX_MSG
 	afx_msg void OnMmnewelement(UINT nMessageID);

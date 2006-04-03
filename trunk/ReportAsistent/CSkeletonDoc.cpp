@@ -27,12 +27,8 @@ IMPLEMENT_DYNCREATE(CSkeletonDoc, CDocument)
 
 BEGIN_MESSAGE_MAP(CSkeletonDoc, CDocument)
 	//{{AFX_MSG_MAP(CSkeletonDoc)
-	ON_COMMAND(ID_MMNEW4FTHYP, OnMmnew4fthyp)
 	ON_COMMAND(ID_ELEMENT_EDIT, OnElementEdit)
 	ON_COMMAND(ID_MMGENREP, OnMmgenrep)
-	ON_COMMAND(ID_MMNEWTEXT, OnMmnewtext)
-	ON_COMMAND(ID_MMNEWPARAGRAPH, OnMmnewparagraph)
-	ON_COMMAND(ID_MMNEWCHAPTER, OnMmnewchapter)
 	ON_COMMAND(ID_MMDELETE, OnMmdelete)
 	//}}AFX_MSG_MAP
 	ON_COMMAND_RANGE(ID_MMNEWSTATICFIRST, ID_MMNEWSTATICLAST, OnMmnewelement)
@@ -387,36 +383,7 @@ BOOL CSkeletonDoc::OnSaveDocument(LPCTSTR lpszPathName)
 	return TRUE;	//CDocument::OnSaveDocument(lpszPathName); - nepouzivat prepise nam soubor vyse
 }
 
-//pridal honza - reakce na insert 4ft command
-void CSkeletonDoc::OnMmnew4fthyp() 
-{
-	CTreeCtrl & tree = GetFirstView()->GetTreeCtrl();		
-	HTREEITEM item = tree.GetSelectedItem();
-	IXMLDOMElementPtr selected_element = ElementFromItemData(tree.GetItemData( item ));			
-	
-	//zobrazi zpravu s typem vybraneho elementu
-	//honza: ladici klidne zakomentujte
-	/****
-	CGeneralManager * m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager;
-	CElementManager::elId_t id = m->ElementManager.IdentifyElement(selected_element);
-	AfxMessageBox(m->ElementManager.getElementName(id));
-	/***/
 
-
-	
-	 
-	IXMLDOMElementPtr new_element = InsertNewElement("hyp_4ft", selected_element);
-
-	//pridani se zdarilo
-	if (new_element != NULL)
-	{
-		EditActiveElement(new_element); 
-
-		SetModifiedFlag();		
-		UpdateAllViews(NULL, (LPARAM) (IXMLDOMElement *) new_element);
-	}	
-
-}
 
 
 
@@ -756,107 +723,6 @@ void CSkeletonDoc::TransformActiveElement(IXMLDOMElementPtr & element)
 	klon.Release();
 
 /***/
-}
-
-void CSkeletonDoc::OnMmnewtext() 
-{
-	CTreeCtrl & hTreeCtrl = GetFirstView()->GetTreeCtrl();
-	
-	HTREEITEM hSelTreeItem = hTreeCtrl.GetSelectedItem();
-
-	IXMLDOMElementPtr selected_element = ElementFromItemData(hTreeCtrl.GetItemData( hSelTreeItem ));	
-	
-
-	//zobrazi zpravu s typem vybraneho elementu
-	//honza: ladici klidne zakomentujte
-	/****
-	CGeneralManager * m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager;
-	CElementManager::elId_t id = m->ElementManager.IdentifyElement(selected_element);
-	AfxMessageBox(m->ElementManager.getElementName(id));
-	/***/
-
-
-	
-	 
-	IXMLDOMElementPtr new_element = InsertNewElement("text", selected_element);
-
-	//pridani se zdarilo
-	if (new_element != NULL)
-	{
-		EditElement(new_element); 
-
-		SetModifiedFlag();		
-		UpdateAllViews(NULL, (LPARAM) (IXMLDOMElement *) new_element);
-	}	
-
-	
-}
-
-void CSkeletonDoc::OnMmnewparagraph() 
-{
-	CTreeCtrl & hTreeCtrl = GetFirstView()->GetTreeCtrl();
-	
-	HTREEITEM hSelTreeItem = hTreeCtrl.GetSelectedItem();
-
-	IXMLDOMElementPtr selected_element = ElementFromItemData(hTreeCtrl.GetItemData( hSelTreeItem ));	
-	
-
-	//zobrazi zpravu s typem vybraneho elementu
-	//honza: ladici klidne zakomentujte
-	/****
-	CGeneralManager * m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager;
-	CElementManager::elId_t id = m->ElementManager.IdentifyElement(selected_element);
-	AfxMessageBox(m->ElementManager.getElementName(id));
-	/***/
-
-
-	
-	 
-	IXMLDOMElementPtr new_element = InsertNewElement("paragraph", selected_element);
-
-	//pridani se zdarilo
-	if (new_element != NULL)
-	{
-		EditElement(new_element); 
-
-		SetModifiedFlag();		
-		UpdateAllViews(NULL, (LPARAM) (IXMLDOMElement *) new_element);
-	}	
-	
-}
-
-void CSkeletonDoc::OnMmnewchapter() 
-{
-	CTreeCtrl & hTreeCtrl = GetFirstView()->GetTreeCtrl();
-	
-	HTREEITEM hSelTreeItem = hTreeCtrl.GetSelectedItem();
-
-	IXMLDOMElementPtr selected_element = ElementFromItemData(hTreeCtrl.GetItemData( hSelTreeItem ));	
-	
-
-	//zobrazi zpravu s typem vybraneho elementu
-	//honza: ladici klidne zakomentujte
-	/****
-	CGeneralManager * m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager;
-	CElementManager::elId_t id = m->ElementManager.IdentifyElement(selected_element);
-	AfxMessageBox(m->ElementManager.getElementName(id));
-	/***/
-
-
-	
-	 
-	IXMLDOMElementPtr new_element = InsertNewElement("chapter", selected_element);
-
-	//pridani se zdarilo
-	if (new_element != NULL)
-	{
-		EditElement(new_element); 
-
-		SetModifiedFlag();		
-		UpdateAllViews(NULL, (LPARAM) (IXMLDOMElement *) new_element);
-	}	
-	
-	
 }
 
 void CSkeletonDoc::OnMmdelete() 

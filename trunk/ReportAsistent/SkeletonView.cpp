@@ -25,6 +25,7 @@ BEGIN_MESSAGE_MAP(CSkeletonView, CTreeView)
 	ON_NOTIFY_REFLECT(TVN_DELETEITEM, OnDeleteitem)
 	ON_WM_LBUTTONDBLCLK()
 	ON_WM_CONTEXTMENU()
+	ON_WM_RBUTTONDOWN()
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -194,7 +195,8 @@ void CSkeletonView::OnContextMenu(CWnd* pWnd, CPoint pointWnd)
 
 
 	HTREEITEM hTreeCtrlItem = rTreeCtrl.HitTest( point, NULL); //zjistim nad jakym prvkem TreeCtrl je prave mys
-
+	
+	rTreeCtrl.Select(hTreeCtrlItem,TVGN_CARET);
 	if (hTreeCtrlItem == NULL) return; //neni-li mys nad zadnym prvkem TreeCtrl
 
 	CElementManager::elId_t idTypeEl =
@@ -257,4 +259,12 @@ void CSkeletonView::OnContextMenu(CWnd* pWnd, CPoint pointWnd)
 
 	return;
 	
+}
+
+void CSkeletonView::OnRButtonDown(UINT nFlags, CPoint point) 
+{
+	ClientToScreen(&point);
+	OnContextMenu(this,point);
+	
+	CTreeView::OnRButtonDown(nFlags, point);
 }
