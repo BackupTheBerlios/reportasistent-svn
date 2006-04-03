@@ -1,5 +1,7 @@
 #include <afx.h>
 #include <afxdb.h>
+#include <Shlwapi.h>
+
 #include "SockInterface.h"
 //#include "tiHypothesis_Recordset.h"
 #include "SQL_pomocnik.h"
@@ -134,12 +136,25 @@ hSource_t fOpenSourceLM(PersistID_t PerzistID)
 	CString s;
 	if (! pom.FindAccesDatasource(s)) return NULL;
 
+	CString file_path = PerzistID;
+
+	if (PathIsRelative(file_path))
+	{
+		TCHAR module_path[MAX_PATH];
+		GetModuleFileName(NULL, module_path, MAX_PATH);
+		PathFindFileName(module_path)[-1] = 0;
+		PathFindFileName(module_path)[0] = 0;
+		file_path = module_path;
+		file_path += PerzistID;		
+	}
+
+
 	//	db.Open(NULL, FALSE, TRUE, _T("ODBC;DSN=" + s + ";DBQ=C:\\skola\\sw projekt\\STULONG.mdb;"), TRUE))
 	CString connn_str;
 	connn_str = "ODBC;DSN=";
 	connn_str += s;
 	connn_str += ";DBQ=";
-	connn_str += PerzistID; //obsahuje cestu k souboru
+	connn_str += file_path; //obsahuje cestu k souboru
 	connn_str += ";";
 
 	CDatabase * db;

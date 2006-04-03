@@ -42,6 +42,7 @@ dedek TODO:
 default source - hotovo
 reletivni adresace metabaze v perzist ID - predelano - uklada se tam absolutni cesta .mdb souboru metabaze, 
 ale funguje i s relativni cestou viz zdroj "testovaci metabaze"
+ - relativni cesta s v open predelava na absolutni viz fOpenSourceLM
 
 ElementManager - vracet zakladni DOM dokumenty
 
