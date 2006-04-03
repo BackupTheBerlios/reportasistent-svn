@@ -190,7 +190,7 @@ void CSkeletonView::OnContextMenu(CWnd* pWnd, CPoint point)
 	CTreeCtrl& rTreeCtrl = GetTreeCtrl( ) ;
 	CElementManager & OElementManager = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
 
-	AfxGetMainWnd()->ScreenToClient(&point); //prevod okennich souradnic na klientske
+	ScreenToClient(&point); //prevod okennich souradnic okna CSkeletonView na klientske
 
 
 	HTREEITEM hTreeCtrlItem = rTreeCtrl.HitTest( point, NULL); //zjistim nad jakym prvkem TreeCtrl je prave mys
