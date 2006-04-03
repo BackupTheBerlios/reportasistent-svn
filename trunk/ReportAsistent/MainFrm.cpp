@@ -109,7 +109,7 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 							);
 
 	//Vlozim do menu aktivni prvky:
-	for(I=0;I<=(OElementManager.getLastElementID() - OElementManager.getFirstActiveElementID());I++)
+	for(I=0;I<=(OElementManager.getLastElementId() - OElementManager.getFirstActiveElementID());I++)
 	{
 		hNewMenu->InsertMenu(	-1, //pridej na konec seznamu
 								MF_BYPOSITION,

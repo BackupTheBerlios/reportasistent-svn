@@ -291,7 +291,10 @@ CElementManager::elId_t CElementManager::getFirstStaticElementID()
 
 CElementManager::elId_t CElementManager::getFirstActiveElementID()
 {
-	return FirstActiveElementID;
+	//dedek: predelano takhle je to dobre
+	//return FirstActiveElementID;
+
+	return LENGTH(static_elements_names);
 }
 
 BOOL CElementManager::LoadElementIcon(elId_t element_id, CBitmap &icon)
