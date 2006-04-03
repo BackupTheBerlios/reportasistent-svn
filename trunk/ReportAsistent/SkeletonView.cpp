@@ -184,12 +184,12 @@ void CSkeletonView::OnUpdate(CView* pSender, LPARAM lHint, CObject* pHint)
 }
 
 
-void CSkeletonView::OnContextMenu(CWnd* pWnd, CPoint point) 
+void CSkeletonView::OnContextMenu(CWnd* pWnd, CPoint pointWnd) 
 {
 
 	CTreeCtrl& rTreeCtrl = GetTreeCtrl( ) ;
 	CElementManager & OElementManager = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
-
+	CPoint point = pointWnd;
 	ScreenToClient(&point); //prevod okennich souradnic okna CSkeletonView na klientske
 
 
@@ -209,11 +209,19 @@ void CSkeletonView::OnContextMenu(CWnd* pWnd, CPoint point)
 	if (idTypeEl==OElementManager.ElementIdFromName("unknown"))
 		return; //TODO: patricne menu
 
+
 	//Typ prvku: "report"
 	if (idTypeEl==OElementManager.ElementIdFromName("report"))
 	{
-		AfxMessageBox("report",0,0);
-		return;//TODO: patricne menu
+		//AfxMessageBox("report",0,0);
+
+		//TODO: patricne menu - zatim pracovne mainmenu->edit
+		CMenu * hMainMenu = AfxGetApp()->GetMainWnd()->GetMenu();
+		CMenu * hEditMenu = hMainMenu->GetSubMenu(1/*Edit*/);
+
+		hEditMenu->TrackPopupMenu(TPM_LEFTALIGN|TPM_RIGHTBUTTON,pointWnd.x,pointWnd.y,AfxGetMainWnd());
+
+		return;
 	}
 
 	//Typ prvku: staticky
@@ -221,16 +229,28 @@ void CSkeletonView::OnContextMenu(CWnd* pWnd, CPoint point)
 		&&
 		idTypeEl<OElementManager.getFirstActiveElementID())
 	{
-		AfxMessageBox("static",0,0);
+		//AfxMessageBox("static",0,0);		
 
-		return;//TODO: patricne menu
+		//TODO: patricne menu - zatim pracovne mainmenu->edit
+		CMenu * hMainMenu = AfxGetApp()->GetMainWnd()->GetMenu();
+		CMenu * hEditMenu = hMainMenu->GetSubMenu(1/*Edit*/);
+
+		hEditMenu->TrackPopupMenu(TPM_LEFTALIGN|TPM_RIGHTBUTTON,pointWnd.x,pointWnd.y,AfxGetMainWnd());
+
+		return;
 	}
-	//Typ prvku: staticky
+	//Typ prvku: aktivni
 	if (idTypeEl>=OElementManager.getFirstActiveElementID()
 		&&
 		idTypeEl<OElementManager.getLastElementId())
 	{
-		AfxMessageBox("active",0,0);
+		//AfxMessageBox("active",0,0);
+
+		//TODO: patricne menu - zatim pracovne mainmenu->edit
+		CMenu * hMainMenu = AfxGetApp()->GetMainWnd()->GetMenu();
+		CMenu * hEditMenu = hMainMenu->GetSubMenu(1/*Edit*/);
+
+		hEditMenu->TrackPopupMenu(TPM_LEFTALIGN|TPM_RIGHTBUTTON,pointWnd.x,pointWnd.y,AfxGetMainWnd());
 
 		return;//TODO: patricne menu
 	}
