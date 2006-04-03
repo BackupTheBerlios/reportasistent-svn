@@ -54,6 +54,7 @@ protected:
 	//{{AFX_MSG(CSkeletonView)
 	afx_msg void OnDeleteitem(NMHDR* pNMHDR, LRESULT* pResult);
 	afx_msg void OnLButtonDblClk(UINT nFlags, CPoint point);
+	afx_msg void OnContextMenu(CWnd* pWnd, CPoint point);
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };

@@ -88,10 +88,11 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 
 	CElementManager & OElementManager = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
 
-	int pom=OElementManager.getFirstActiveElementID();
 	int I;
 	//Vlozim do menu staticke prvky:
-	for(I=0;I<=(OElementManager.getFirstActiveElementID() - OElementManager.getFirstStaticElementID()-1);I++)
+	 
+	for(I=1; //Vkladam az od druheho prvku, prvni - "text" uz je pridan v resourcich 
+		I<=(OElementManager.getFirstActiveElementID() - OElementManager.getFirstStaticElementID()-1);I++)
 	{
 		hNewMenu->InsertMenu(	-1, //pridej na konec seznamu
 								MF_BYPOSITION,

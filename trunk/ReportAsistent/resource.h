@@ -40,7 +40,6 @@
 #define IDC_RENAME_BUTTON               1011
 #define IDC_SET_DEFAULT_BUTTON          1012
 #define IDC_SWITCH_BUTTON               1015
-
 #define ID_MMGENREP                     32771
 #define ID_MMSOURCES                    32772
 #define ID_MMNEWTEXT                    32774
@@ -65,7 +64,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
 #define _APS_NEXT_RESOURCE_VALUE        150
-#define _APS_NEXT_COMMAND_VALUE         32783
+#define _APS_NEXT_COMMAND_VALUE         32784
 #define _APS_NEXT_CONTROL_VALUE         1016
 #define _APS_NEXT_SYMED_VALUE           101
 #endif

@@ -24,6 +24,7 @@ BEGIN_MESSAGE_MAP(CSkeletonView, CTreeView)
 	//{{AFX_MSG_MAP(CSkeletonView)
 	ON_NOTIFY_REFLECT(TVN_DELETEITEM, OnDeleteitem)
 	ON_WM_LBUTTONDBLCLK()
+	ON_WM_CONTEXTMENU()
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -180,4 +181,60 @@ void CSkeletonView::OnUpdate(CView* pSender, LPARAM lHint, CObject* pHint)
 		GetDocument()->FillTreeControl(GetTreeCtrl());
 
 	}
+}
+
+
+void CSkeletonView::OnContextMenu(CWnd* pWnd, CPoint point) 
+{
+
+	CTreeCtrl& rTreeCtrl = GetTreeCtrl( ) ;
+	CElementManager & OElementManager = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
+
+	AfxGetMainWnd()->ScreenToClient(&point); //prevod okennich souradnic na klientske
+
+
+	HTREEITEM hTreeCtrlItem = rTreeCtrl.HitTest( point, NULL); //zjistim nad jakym prvkem TreeCtrl je prave mys
+
+	if (hTreeCtrlItem == NULL) return; //neni-li mys nad zadnym prvkem TreeCtrl
+
+	CElementManager::elId_t idTypeEl =
+	 OElementManager.IdentifyElement 
+		(
+		 (IXMLDOMElementPtr)(IXMLDOMElement *) rTreeCtrl.GetItemData( hTreeCtrlItem)
+		);
+	
+	if (idTypeEl==ELID_UNKNOWN) return;
+	
+	//Typ prvku: "unknown"
+	if (idTypeEl==OElementManager.ElementIdFromName("unknown"))
+		return; //TODO: patricne menu
+
+	//Typ prvku: "report"
+	if (idTypeEl==OElementManager.ElementIdFromName("report"))
+	{
+		AfxMessageBox("report",0,0);
+		return;//TODO: patricne menu
+	}
+
+	//Typ prvku: staticky
+	if (idTypeEl>=OElementManager.getFirstStaticElementID()
+		&&
+		idTypeEl<OElementManager.getFirstActiveElementID())
+	{
+		AfxMessageBox("static",0,0);
+
+		return;//TODO: patricne menu
+	}
+	//Typ prvku: staticky
+	if (idTypeEl>=OElementManager.getFirstActiveElementID()
+		&&
+		idTypeEl<OElementManager.getLastElementId())
+	{
+		AfxMessageBox("active",0,0);
+
+		return;//TODO: patricne menu
+	}
+
+	return;
+	
 }

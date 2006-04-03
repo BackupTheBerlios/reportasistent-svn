@@ -335,11 +335,7 @@ BEGIN
         MENUITEM SEPARATOR
         POPUP "Insert &New"
         BEGIN
-            MENUITEM "TextOld",                     ID_MMNEWTEXT
-            MENUITEM "Paragraph",                   ID_MMNEWPARAGRAPH
-            MENUITEM "Chapter",                     ID_MMNEWCHAPTER
-            MENUITEM SEPARATOR
-            MENUITEM "4ft Hypothesis",              ID_MMNEW4FTHYP
+            MENUITEM "text",                        ID_MMNEWSTATICFIRST
         END
     END
     POPUP "&View"
@@ -541,9 +537,9 @@ BEGIN
                             "Sorry, you have to select some items to make filter valid."
     IDS_SIMPLE_FILTER_FAILED_SOURCE_LOAD 
                             "Sorry, but the selected source didn't return valid data for this active elemenet."
-    IDS_WRONG_TYPEELEMENTID "Chybny typ prvku - jeho ID je mimo povoleny rozsah."
     IDS_WB_WORD_LOADER_NOT_REGISTRED 
                             "Sorry, Report Asistent instaklation si probably corrupt.\nFailed to load LMRA_WordLoader."
+    IDS_WRONG_TYPEELEMENTID "Chybny typ prvku - jeho ID je mimo povoleny rozsah."
 END
 
 STRINGTABLE DISCARDABLE 

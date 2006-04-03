@@ -69,7 +69,7 @@ CElementManager::elId_t CElementManager::IdentifyElement(IXMLDOMElementPtr & ele
 	CString baseName = (BSTR) element->baseName;
 
 
-	//zkusime poravnat jmeno tagu s nami znamymi jmeny
+	//zkusime porovnat jmeno tagu s nami znamymi jmeny
 	for (int a=0; a <= getLastElementId(); a++)
 	{
 		if (baseName == getElementName(a)) return a;
