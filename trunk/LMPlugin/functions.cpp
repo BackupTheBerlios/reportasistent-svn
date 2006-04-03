@@ -56,6 +56,8 @@ CString fLMCategory(void* hSource)
 	Category_Meta * ptcat;
 
 	Tcategory_Recordset rs ((CDatabase *) hSource);
+
+/***** dedek: predelal jsem ti ten SQL dotaz - nevim jestli je ten muj dobre kazdopadne funguje
 	LPCTSTR q =
 		"SELECT tmCategory.CategoryID, tmCategory.Name, tmAttribute.Name, tmMatrix.Name, \
 			tsCategorySubType.Name, tsBoolType.Name \
@@ -67,6 +69,19 @@ CString fLMCategory(void* hSource)
 			AND tmCategory.CategorySubTypeID=tsCategorySubType.CategorySubTypeID \
 			AND tmCategory.BoolTypeID = tsBoolType.BoolTypeID \
 		ORDER BY tmCategory.CategoryID";
+
+/******/
+
+		LPCTSTR q =	
+		"SELECT * FROM tmAttribute, tmCategory, tmMatrix, tmQuantity, tsBoolType, tsCategorySubType \
+			WHERE tmCategory.QuantityID=tmQuantity.QuantityID \
+			AND tmQuantity.AttributeID=tmAttribute.AttributeID \
+			AND tmAttribute.MatrixID=tmMatrix.MatrixID \
+			AND tmCategory.CategorySubTypeID=tsCategorySubType.CategorySubTypeID \
+			AND tmCategory.BoolTypeID = tsBoolType.BoolTypeID";
+
+/******/   //dedek konec
+
 
 //	if (rs.Open ())
 	if (rs.Open(AFX_DB_USE_DEFAULT_TYPE, q))
@@ -90,6 +105,10 @@ CString fLMCategory(void* hSource)
 			rs.MoveNext();
 		}
 		rs.Close();
+
+		//dedek: ladici, smazat
+		AfxMessageBox(buf);
+		//dedek: konec
 	}
 	else return "";
 	return buf;
