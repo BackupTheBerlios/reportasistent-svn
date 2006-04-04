@@ -17,6 +17,8 @@ class CActiveElementDialog : public CDialog
 // Construction
 public:
 	CActiveElementDialog(IXMLDOMElementPtr & active_element, CWnd* pParent = NULL);   // standard constructor
+private:
+	BOOL m_bApplyPerformed;
 
 
 // Dialog Data
@@ -45,6 +47,7 @@ protected:
 	afx_msg void OnSwitchButton();
 	afx_msg void OnApplyButton();
 	virtual void OnOK();
+	virtual void OnCancel();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };

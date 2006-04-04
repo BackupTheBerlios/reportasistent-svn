@@ -18,6 +18,8 @@ static char THIS_FILE[] = __FILE__;
 CActiveElementDialog::CActiveElementDialog(IXMLDOMElementPtr & active_element, CWnd* pParent /*=NULL*/)
 	: CDialog(CActiveElementDialog::IDD, pParent), m_TransformationsDialog(active_element), m_SimpleFilterDialog(active_element)
 {
+	m_bApplyPerformed = FALSE;
+	
 	//{{AFX_DATA_INIT(CActiveElementDialog)
 		// NOTE: the ClassWizard will add member initialization here
 	//}}AFX_DATA_INIT
@@ -53,6 +55,8 @@ END_MESSAGE_MAP()
 BOOL CActiveElementDialog::OnInitDialog() 
 {
 	CDialog::OnInitDialog();
+
+	m_bApplyPerformed = FALSE;
 
 	m_TabControl.InsertItem(TAB_FILTER, "Filter");
 	m_TabControl.InsertItem(TAB_TRANSF, "Transformations");
@@ -132,8 +136,8 @@ void CActiveElementDialog::OnSwitchButton()
 
 void CActiveElementDialog::OnApplyButton() 
 {
-	m_SimpleFilterDialog.SaveAll();
-	m_TransformationsDialog.SaveAll();	
+	m_bApplyPerformed |= m_SimpleFilterDialog.SaveAll();
+	m_bApplyPerformed |= m_TransformationsDialog.SaveAll();
 }
 
 void CActiveElementDialog::OnOK() 
@@ -142,4 +146,10 @@ void CActiveElementDialog::OnOK()
 	{
 		CDialog::OnOK();
 	}
+}
+
+void CActiveElementDialog::OnCancel() 
+{
+	if (m_bApplyPerformed) CDialog::OnOK();
+	else CDialog::OnCancel();
 }

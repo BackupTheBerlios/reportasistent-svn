@@ -8,17 +8,5 @@
 	
 	<text id="text7">Nìjaký text</text>
 	
-	<active_element type="hyp_4ft" source="" id="hyp_4ft1">
-			<params/>
-			<filter type="simple">
-				<selection id="hyp10"/>
-				<selection id="hyp33"/>
-			</filter>
-			<output>
-				<transformation file="../XML/4ft_generuj1.xsl"/>
-				<transformation file="../XML/4ft_generuj1.xsl"/>
-			</output>
-	</active_element>
-
 	<include file="../XML/include_doc.doc" id="include1"/>
 </report>

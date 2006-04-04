@@ -37,7 +37,7 @@ CAElTransform::CAElTransform(IXMLDOMElementPtr & node/*, CSkeletonDoc & skel*/)
 
 	
 	m_plug_out->loadXML(m.GetPluginOutput(
-		(public_source_id_t) (BSTR) (_bstr_t) m_active_element->getAttribute("source"),
+		(LPCTSTR) (_bstr_t) m_active_element->getAttribute("source"),
 		(_bstr_t) m_active_element->getAttribute("type")));
 
 }
@@ -127,14 +127,23 @@ void CAElTransform::ProcessAllTransformations(IXMLDOMNodePtr & target, IXMLDOMNo
 void CAElTransform::ProcessSingleTransformation(IXMLDOMNodePtr & target,
 	IXMLDOMNodePtr & destination_parent, IXMLDOMElementPtr & tr_definition_element)
 {
+	CElementManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
+
+	
 	//nacteni ransformace
 	
-	IXMLDOMDocumentPtr transformation_doc;	
-	transformation_doc.CreateInstance(_T("Msxml2.DOMDocument"));
+	CAElInfo * el_info = m.getActiveElementInfo(m.IdentifyElement(m_active_element));
+	
+	IXMLDOMNodePtr & transformation_node = el_info->getTranformationNode(
+		el_info->FindTransformationByName((_bstr_t) tr_definition_element->getAttribute("name")));
+			
+
+	
+/*	transformation_doc.CreateInstance(_T("Msxml2.DOMDocument"));
 	transformation_doc->async = VARIANT_FALSE; // default - true,
 	
 	transformation_doc->load( tr_definition_element->getAttribute("file"));
-
+*/
 
 
 	//privit misto pro vystup
@@ -144,7 +153,7 @@ void CAElTransform::ProcessSingleTransformation(IXMLDOMNodePtr & target,
 
 	
 	//provedeni transformace
-	transofmed_node->loadXML(target->transformNode(transformation_doc));
+	transofmed_node->loadXML(target->transformNode(transformation_node));
 
 	
 	//ulozeni vysledku tranformace na sve misto
@@ -153,7 +162,7 @@ void CAElTransform::ProcessSingleTransformation(IXMLDOMNodePtr & target,
 
 
 	transofmed_node.Release();
-	transformation_doc.Release();
+	transformation_node.Release();
 }
 
 

@@ -68,17 +68,16 @@ BOOL CTransformationsDialog::OnInitDialog()
 	for (a = 0; a < info->getTranformationsCount(); a++)
 	{
 		int index = m_SupportedList.AddString(info->getTranformationName(a));
-		m_SupportedList.SetItemData(index, a);
+		//m_SupportedList.SetItemData(index, a);
 	}
 
 
 	//nacti transformace vybrane v prvku
-	IXMLDOMNodeListPtr selected_transfs = m_active_element->selectNodes("/output/transformation/@name");
+	IXMLDOMNodeListPtr selected_transfs = m_active_element->selectNodes("output/transformation/@name");
 
 	for (a = 0; a < selected_transfs->length; a++)
 	{
-		int index = m_SupportedList.AddString(info->getTranformationName(a));
-		m_SupportedList.SetItemData(index, a);
+		m_SelectedList.AddString(selected_transfs->item[a]->text);
 	}
 
 
@@ -103,6 +102,37 @@ void CTransformationsDialog::OnCancel()
 
 BOOL CTransformationsDialog::SaveAll()
 {
+	ASSERT(m_active_element != NULL);
+
+	IXMLDOMNodePtr output_node = m_active_element->selectSingleNode("output");
+
+	//vymaze soucasne transormace
+	IXMLDOMSelectionPtr sel = output_node->selectNodes("*");
+	sel->removeAll();
+	sel.Release();
+
+	//vytvori ukazkovou transformaci
+	IXMLDOMElementPtr transf_elem = m_active_element->ownerDocument->createElement("transformation");
+	IXMLDOMAttributePtr name_attr_elem = m_active_element->ownerDocument->createAttribute("name");
+	transf_elem->setAttributeNode(name_attr_elem);
+	name_attr_elem.Release();
+
+	//ulozi transformace
+	for (int a = 0; a< m_SelectedList.GetCount(); a++)
+	{
+		CString it_text;
+		m_SelectedList.GetText(a, it_text);
+
+		transf_elem->setAttribute("name", (LPCTSTR) it_text);
+
+		output_node->appendChild(transf_elem->cloneNode(VARIANT_FALSE));
+	}
+
+
+	transf_elem.Release();
+	output_node.Release();
+
+	
 	return TRUE;
 }
 
@@ -162,6 +192,6 @@ void CTransformationsDialog::OnMoveDownButton()
 
 	m_SelectedList.InsertString(++selected_index, selected_text);
 
-	m_SelectedList.SelectString(++selected_index, selected_text);
+	m_SelectedList.SelectString(--selected_index, selected_text);
 	
 }

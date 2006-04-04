@@ -18,7 +18,7 @@
 
 <!ELEMENT params EMPTY >
 
-<!ELEMENT filter (selection+) >
+<!ELEMENT filter (selection*) >
 <!ATTLIST filter type CDATA #REQUIRED>
 	
 <!ELEMENT selection EMPTY >
@@ -95,23 +95,17 @@
 		<active_element type="hyp_4ft" source="" id="hyp_4ft1">
 			<params/>
 			<filter type="simple">
-				<selection id="hyp10"/>
-				<selection id="hyp33"/>
 			</filter>
 			<output>
-				<transformation name="../XML/4ft_generuj1.xsl"/>
-				<transformation name="../XML/4ft_generuj1.xsl"/>
+				<transformation name="HeaderAndCedents"/>
 			</output>
 		</active_element>
 		<active_element type="category" source="" id="category1">
 			<params/>
 			<filter type="simple">
-				<selection id="hyp10"/>
-				<selection id="hyp33"/>
 			</filter>
 			<output>
-				<transformation name="../XML/4ft_generuj1.xsl"/>
-				<transformation name="../XML/4ft_generuj1.xsl"/>
+				<transformation name="HeaderAndCedents"/>
 			</output>
 		</active_element>
 	</chapter>

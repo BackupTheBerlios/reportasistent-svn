@@ -273,18 +273,23 @@ BOOL CSimpleFilterDialog::SaveAll()
 {
 	POSITION pos = m_FilterList.GetFirstSelectedItemPosition(); 
 
+//dedek:	umoznime i prazdny fiter
+/*		
 	if (pos == NULL)
 	{
 		AfxMessageBox(IDS_SIMPLE_FILTER_EMPTY_SELECTION);
 		return FALSE;
 	}
-
+*/
 	CString source;
 	m_SourcesCombo.GetWindowText(source);
 	m_active_element->setAttribute("source", (LPCTSTR) source);
 	
 	//okopiruje vzorovy element selection
-	IXMLDOMNodePtr select_node = m_active_element->selectSingleNode("filter[@type='simple']/selection")->cloneNode(VARIANT_FALSE);
+	IXMLDOMElementPtr selection_elem = m_active_element->ownerDocument->createElement("selection");
+	IXMLDOMAttributePtr id_attr = m_active_element->ownerDocument->createAttribute("id");
+	selection_elem->setAttributeNode(id_attr);
+	id_attr.Release();
 	
 	//vymaze vsechny selection
 	IXMLDOMNodeListPtr list = m_active_element->selectNodes("filter[@type='simple']/selection");
@@ -299,13 +304,11 @@ BOOL CSimpleFilterDialog::SaveAll()
 	{
 		int nItem = m_FilterList.GetNextSelectedItem(pos);
 
-		IXMLDOMElementPtr el = select_node->cloneNode(VARIANT_FALSE);
-
-		el->setAttribute("id", (LPCTSTR) * (CString *) m_FilterList.GetItemData(nItem));
-		filter->appendChild(el);
+		selection_elem->setAttribute("id", (LPCTSTR) * (CString *) m_FilterList.GetItemData(nItem));
+		filter->appendChild(selection_elem->cloneNode(VARIANT_FALSE));
 	}
 
-	select_node.Release();
+	selection_elem.Release();
 
 	return TRUE;
 }

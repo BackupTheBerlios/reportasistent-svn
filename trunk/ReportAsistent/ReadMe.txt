@@ -18,6 +18,7 @@ pro pouziti techto manageru:
 CGeneralManager * m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager;
 	CDataSourcesManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->DataSourcesManager;
 	CDirectoriesManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->DirectoriesManager;
+	CElementManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
 
 
 
@@ -39,6 +40,8 @@ pak F5 a ono se to na nich zastavuje parada :-)
 
 
 dedek TODO:
+!! definice a nacitani atributu AP
+
 default source - hotovo
 reletivni adresace metabaze v perzist ID - predelano - uklada se tam absolutni cesta .mdb souboru metabaze, 
 ale funguje i s relativni cestou viz zdroj "testovaci metabaze"
