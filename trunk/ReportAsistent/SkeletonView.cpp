@@ -224,7 +224,9 @@ void CSkeletonView::OnContextMenu(CWnd* pWnd, CPoint pointWnd)
 
 		default:
 		{
-		
+			
+			//dedek: nefungovalo pro prvni AP
+			/***********************
 			//Typ prvku: staticky
 			if (idTypeEl>=OElementManager.getFirstStaticElementID()
 				&&
@@ -234,7 +236,7 @@ void CSkeletonView::OnContextMenu(CWnd* pWnd, CPoint pointWnd)
 
 				//TODO: patricne menu - zatim pracovne mainmenu->edit
 				CMenu * hMainMenu = AfxGetApp()->GetMainWnd()->GetMenu();
-				CMenu * hEditMenu = hMainMenu->GetSubMenu(1/*Edit*/);
+				CMenu * hEditMenu = hMainMenu->GetSubMenu(1); //SubMenu 1 = Edit
 
 				hEditMenu->TrackPopupMenu(TPM_LEFTALIGN|TPM_RIGHTBUTTON,pointWnd.x,pointWnd.y,AfxGetMainWnd());
 
@@ -249,12 +251,45 @@ void CSkeletonView::OnContextMenu(CWnd* pWnd, CPoint pointWnd)
 
 				//TODO: patricne menu - zatim pracovne mainmenu->edit
 				CMenu * hMainMenu = AfxGetApp()->GetMainWnd()->GetMenu();
-				CMenu * hEditMenu = hMainMenu->GetSubMenu(1/*Edit*/);
+				CMenu * hEditMenu = hMainMenu->GetSubMenu(1); //SubMenu 1 = Edit
 
 				hEditMenu->TrackPopupMenu(TPM_LEFTALIGN|TPM_RIGHTBUTTON,pointWnd.x,pointWnd.y,AfxGetMainWnd());
 
 				return;//TODO: patricne menu
 			}
+
+			/***********************/
+			//dedek: nova verze
+
+			
+			if (OElementManager.isElementActive(idTypeEl))
+			{	
+				//aktivni
+
+				//TODO: patricne menu - zatim pracovne mainmenu->edit
+				CMenu * hMainMenu = AfxGetApp()->GetMainWnd()->GetMenu();
+				CMenu * hEditMenu = hMainMenu->GetSubMenu(1); //SubMenu 1 = Edit
+
+				hEditMenu->TrackPopupMenu(TPM_LEFTALIGN|TPM_RIGHTBUTTON,pointWnd.x,pointWnd.y,AfxGetMainWnd());
+
+				return;//TODO: patricne menu
+			}
+			else 
+			{
+				//staticke
+
+				//AfxMessageBox("static",0,0);		
+
+				//TODO: patricne menu - zatim pracovne mainmenu->edit
+				CMenu * hMainMenu = AfxGetApp()->GetMainWnd()->GetMenu();
+				CMenu * hEditMenu = hMainMenu->GetSubMenu(1); //SubMenu 1 = Edit
+
+				hEditMenu->TrackPopupMenu(TPM_LEFTALIGN|TPM_RIGHTBUTTON,pointWnd.x,pointWnd.y,AfxGetMainWnd());
+
+				return;
+			}
+				
+			/***********************/
 		}
 	}
 
