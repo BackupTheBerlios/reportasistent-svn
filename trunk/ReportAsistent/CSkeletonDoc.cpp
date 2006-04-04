@@ -410,9 +410,6 @@ void CSkeletonDoc::OnElementEdit()
 
 	EditElement(edited_element);
 
-	SetModifiedFlag();		
-	UpdateAllViews(NULL, 0);
-
 }
 
 void CSkeletonDoc::OnMmgenrep() 
@@ -537,10 +534,8 @@ void CSkeletonDoc::EditElement(IXMLDOMElementPtr selected_element)
 	else if (selected_elementTypeId == ELID_TEXT)
 	{
 		
-		//Stara verze byla: zobrazeni textu do message boxu
 		//AfxMessageBox(selected_element->text);
 
-		//Nova verze:
 		//Vytvorim instanci dialogu pro Prvek Text
 			CElementTextDialog OElementTextDialog;
 
@@ -548,11 +543,18 @@ void CSkeletonDoc::EditElement(IXMLDOMElementPtr selected_element)
 			OElementTextDialog.m_DialTextEditValue = (LPCTSTR) selected_element->text;
 
 			//A dialog zobrazim
-			OElementTextDialog.DoModal();
+			UINT Res = OElementTextDialog.DoModal();
+			
+			if (Res == IDOK)
+			{
+				//Zmeny z dialogu soupnu do XMLDom stromu
+				LPCTSTR sText= OElementTextDialog.m_DialTextEditValue; 
+				selected_element->text=sText;
+				//Update TreeCtrl
+				SetModifiedFlag();		
+				UpdateAllViews(NULL, 0);
+			}
 
-			//Zmeny z dialogu soupnu do XMLDom stromu
-			LPCTSTR sText= OElementTextDialog.m_DialTextEditValue; 
-			selected_element->text=sText;
 	}
 	else
 	{	//ostatni prvky
@@ -783,7 +785,7 @@ void CSkeletonDoc::OnMmnewelement(UINT nMessageID)
 		AfxMessageBox(IDS_WRONG_TYPEELEMENTID,0,0);
 	}
 		
-
+	//pridavany prvek je STATIC
 	if ((nMessageID >= ID_MMNEWSTATICFIRST) && (nMessageID <= ID_MMNEWSTATICLAST))
 	{
 		new_element = InsertNewElement(
@@ -797,6 +799,7 @@ void CSkeletonDoc::OnMmnewelement(UINT nMessageID)
 			UpdateAllViews(NULL, (LPARAM) (IXMLDOMElement *) new_element);
 		}
 	}
+	//pridavany prvek je ACTIVE
 	if (nMessageID >= ID_MMNEWACTIVEFIRST)
 	{
 		new_element = InsertNewElement(

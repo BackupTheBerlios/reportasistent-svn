@@ -205,56 +205,57 @@ void CSkeletonView::OnContextMenu(CWnd* pWnd, CPoint pointWnd)
 		 (IXMLDOMElementPtr)(IXMLDOMElement *) rTreeCtrl.GetItemData( hTreeCtrlItem)
 		);
 	
-	if (idTypeEl==ELID_UNKNOWN) return;
-	
-	//Typ prvku: "unknown"
-	if (idTypeEl==OElementManager.ElementIdFromName("unknown"))
-		return; //TODO: patricne menu
-
-
-	//Typ prvku: "report"
-	if (idTypeEl==OElementManager.ElementIdFromName("report"))
+	switch (idTypeEl)
 	{
-		//AfxMessageBox("report",0,0);
+		case ELID_UNKNOWN: return;
 
-		//TODO: patricne menu - zatim pracovne mainmenu->edit
-		CMenu * hMainMenu = AfxGetApp()->GetMainWnd()->GetMenu();
-		CMenu * hEditMenu = hMainMenu->GetSubMenu(1/*Edit*/);
+		case ELID_REPORT: 
+		{
+			//AfxMessageBox("report",0,0);
 
-		hEditMenu->TrackPopupMenu(TPM_LEFTALIGN|TPM_RIGHTBUTTON,pointWnd.x,pointWnd.y,AfxGetMainWnd());
+			//TODO: patricne menu - zatim pracovne mainmenu->edit
+			CMenu * hMainMenu = AfxGetApp()->GetMainWnd()->GetMenu();
+			CMenu * hEditMenu = hMainMenu->GetSubMenu(1/*Edit*/);
 
-		return;
-	}
+			hEditMenu->TrackPopupMenu(TPM_LEFTALIGN|TPM_RIGHTBUTTON,pointWnd.x,pointWnd.y,AfxGetMainWnd());
 
-	//Typ prvku: staticky
-	if (idTypeEl>=OElementManager.getFirstStaticElementID()
-		&&
-		idTypeEl<OElementManager.getFirstActiveElementID())
-	{
-		//AfxMessageBox("static",0,0);		
+			return;
+		}
 
-		//TODO: patricne menu - zatim pracovne mainmenu->edit
-		CMenu * hMainMenu = AfxGetApp()->GetMainWnd()->GetMenu();
-		CMenu * hEditMenu = hMainMenu->GetSubMenu(1/*Edit*/);
+		default:
+		{
+		
+			//Typ prvku: staticky
+			if (idTypeEl>=OElementManager.getFirstStaticElementID()
+				&&
+				idTypeEl<OElementManager.getFirstActiveElementID())
+			{
+				//AfxMessageBox("static",0,0);		
 
-		hEditMenu->TrackPopupMenu(TPM_LEFTALIGN|TPM_RIGHTBUTTON,pointWnd.x,pointWnd.y,AfxGetMainWnd());
+				//TODO: patricne menu - zatim pracovne mainmenu->edit
+				CMenu * hMainMenu = AfxGetApp()->GetMainWnd()->GetMenu();
+				CMenu * hEditMenu = hMainMenu->GetSubMenu(1/*Edit*/);
 
-		return;
-	}
-	//Typ prvku: aktivni
-	if (idTypeEl>=OElementManager.getFirstActiveElementID()
-		&&
-		idTypeEl<OElementManager.getLastElementId())
-	{
-		//AfxMessageBox("active",0,0);
+				hEditMenu->TrackPopupMenu(TPM_LEFTALIGN|TPM_RIGHTBUTTON,pointWnd.x,pointWnd.y,AfxGetMainWnd());
 
-		//TODO: patricne menu - zatim pracovne mainmenu->edit
-		CMenu * hMainMenu = AfxGetApp()->GetMainWnd()->GetMenu();
-		CMenu * hEditMenu = hMainMenu->GetSubMenu(1/*Edit*/);
+				return;
+			}
+			//Typ prvku: aktivni
+			if (idTypeEl>=OElementManager.getFirstActiveElementID()
+				&&
+				idTypeEl<OElementManager.getLastElementId())
+			{
+				//AfxMessageBox("active",0,0);
 
-		hEditMenu->TrackPopupMenu(TPM_LEFTALIGN|TPM_RIGHTBUTTON,pointWnd.x,pointWnd.y,AfxGetMainWnd());
+				//TODO: patricne menu - zatim pracovne mainmenu->edit
+				CMenu * hMainMenu = AfxGetApp()->GetMainWnd()->GetMenu();
+				CMenu * hEditMenu = hMainMenu->GetSubMenu(1/*Edit*/);
 
-		return;//TODO: patricne menu
+				hEditMenu->TrackPopupMenu(TPM_LEFTALIGN|TPM_RIGHTBUTTON,pointWnd.x,pointWnd.y,AfxGetMainWnd());
+
+				return;//TODO: patricne menu
+			}
+		}
 	}
 
 	return;
@@ -268,3 +269,32 @@ void CSkeletonView::OnRButtonDown(UINT nFlags, CPoint point)
 	
 	CTreeView::OnRButtonDown(nFlags, point);
 }
+
+// Puvodni zamer: podle vybraneho prvku TreeCtrl disablovat polozky v Menu->Edit->InsertNew
+//Lepsi reseni: pridavani je vzdy mozne a to na nejblizsi nasledujici vhodne misto
+//DEL void CSkeletonView::OnCaptureChanged(CWnd *pWnd) 
+//DEL {
+//DEL 	CElementManager & OElementManager = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
+//DEL 	CTreeCtrl& rTreeCtrl = GetTreeCtrl() ;
+//DEL 
+//DEL 	CMenu * hMainMenu = AfxGetApp()->GetMainWnd()->GetMenu();
+//DEL 	CMenu * hEditMenu = hMainMenu->GetSubMenu(1/*Edit*/)->GetSubMenu(7/*Insert Nes*/);
+//DEL 	
+//DEL 	HTREEITEM hSelTreeCtrlItem = rTreeCtrl.GetSelectedItem();
+//DEL 
+//DEL 	CElementManager::elId_t idTypeEl =
+//DEL 	 OElementManager.IdentifyElement 
+//DEL 		(
+//DEL 		 (IXMLDOMElementPtr)(IXMLDOMElement *) rTreeCtrl.GetItemData( hTreeCtrlItem)
+//DEL 		);
+//DEL 	
+//DEL 	switch (idTypeEl)
+//DEL 	{
+//DEL 		case ELID_UNKNOWN: return;
+//DEL 
+//DEL 		case ELID_REPORT: 
+//DEL 		{
+//DEL 	
+//DEL 	CTreeView::OnCaptureChanged(pWnd);
+//DEL }
+//DEL 
