@@ -13,9 +13,22 @@
 #pragma warning( disable : 4786 )
 
 
+//slouzi jako call back interface pro volani fitrovacich funkci - napr: ProcessSimpleFlter
+class CFilterProcessor
+{
+public:
+	virtual void ProcessFilteredOut(
+		IXMLDOMNodePtr filtered_output_node,	//XML uzel ktery z plugin output prosel fitrem
+		int node_order,							//poradi filtered_output_node uzlu mezi temi ktere prosly
+		LPARAM user1,							//uzivatelsky parametr, ktery byl predan filtrovaci funkci
+		LPARAM user2							//uzivatelsky parametr, ktery byl predan filtrovaci funkci
+		) = 0;
+};
+
+
 //honza:
 //trida slouzici k vygenerovani jednoho aktivniho prvku
-class CAElTransform  
+class CAElTransform: public CFilterProcessor
 {
 private:
 //	CSkeletonDoc & m_skel_document;
@@ -23,6 +36,9 @@ private:
 	IXMLDOMDocumentPtr m_plug_out;
 
 protected:
+	void FillElementAttributes(IXMLDOMNodePtr & output_node);
+	virtual void ProcessFilteredOut(IXMLDOMNodePtr filtered_output_node, int node_order, LPARAM user1, LPARAM user2);
+
 	void ProcessSimpleFlter(IXMLDOMNodePtr & destination_parent);
 	void ProcessAllTransformations(IXMLDOMNodePtr & target, IXMLDOMNodePtr & destination_parent);
 	void ProcessSingleTransformation(IXMLDOMNodePtr & target,
@@ -30,9 +46,12 @@ protected:
 
 
 public:
+	void ProcessSimpleFlter(CFilterProcessor & processor, LPARAM user1 = 0, LPARAM user2 = 0);
+	BOOL FillElementAttributes(int index_of_filtered_out);
 	IXMLDOMDocumentFragmentPtr DoAllTransnformations();
 	
-	CAElTransform(IXMLDOMElementPtr & node/*, CSkeletonDoc & skel*/);
+	CAElTransform(IXMLDOMElementPtr & active_element);
+	CAElTransform(IXMLDOMElementPtr & active_element, IXMLDOMNodePtr & plugin_output);
 	~CAElTransform();	
 };
 

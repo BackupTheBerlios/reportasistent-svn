@@ -11,12 +11,18 @@
 <!ATTLIST chapter title CDATA #REQUIRED >
 <!ATTLIST chapter id ID #REQUIRED >
 
-<!ELEMENT active_element ( params, filter, output )>
+<!ELEMENT active_element ( attributes, filter, output )>
 <!ATTLIST active_element type CDATA #REQUIRED >
 <!ATTLIST active_element source CDATA #REQUIRED >
 <!ATTLIST active_element id ID #REQUIRED >
 
-<!ELEMENT params EMPTY >
+<!ELEMENT attributes (element_attributes) >
+
+<!ELEMENT element_attributes (attribute*) >
+
+<!ELEMENT attribute EMPTY >
+<!ATTLIST attribute name CDATA #REQUIRED>
+<!ATTLIST attribute value CDATA #REQUIRED>
 
 <!ELEMENT filter (selection*) >
 <!ATTLIST filter type CDATA #REQUIRED>
@@ -92,16 +98,49 @@
 		<paragraph style="Normální" id="paragraph1">
 			<text id="text7">Nìjaký text</text>
 		</paragraph>
+		
 		<active_element type="hyp_4ft" source="" id="hyp_4ft1">
-			<params/>
+			<attributes>
+				<element_attributes>
+					<attribute name="id" value="" />
+					<attribute name="db_name" value="" />
+					<attribute name="matrix_name" value="" />
+					<attribute name="task_name" value="" />
+					<attribute name="a" value="" />
+					<attribute name="b" value="" />
+					<attribute name="c" value="" />
+					<attribute name="d" value="" />
+					<attribute name="conf" value="" />
+					<attribute name="d_conf" value="" />
+					<attribute name="e_conf" value="" />
+					<attribute name="support" value="" />
+					<attribute name="completeness" value="" />
+					<attribute name="avg_diff" value="" />
+					<attribute name="low_bnd_imp" value="" />
+					<attribute name="up_bnd_imp" value="" />
+					<attribute name="low_bnd_dbl_imp" value="" />
+					<attribute name="up_bnd_dbl_imp" value="" />
+					<attribute name="low_bnd_eq" value="" />
+					<attribute name="up_bnd_eq" value="" />
+					<attribute name="fisher" value="" />
+					<attribute name="chi_sq" value="" />
+					<attribute name="antecedent" value="" />
+					<attribute name="succedent" value="" />
+					<attribute name="condition" value="" />
+				</element_attributes>
+			</attributes>
 			<filter type="simple">
 			</filter>
 			<output>
 				<transformation name="HeaderAndCedents"/>
 			</output>
 		</active_element>
+		
 		<active_element type="category" source="" id="category1">
-			<params/>
+			<attributes>
+				<element_attributes>
+				</element_attributes>
+			</attributes>
 			<filter type="simple">
 			</filter>
 			<output>

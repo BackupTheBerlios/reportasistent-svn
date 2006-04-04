@@ -42,6 +42,9 @@ pak F5 a ono se to na nich zastavuje parada :-)
 dedek TODO:
 !! definice a nacitani atributu AP
 
+predelat na detekci chyb / navratovou hodnotu uvnitr call backu CAElTransform::ProcessSimpleFlter
+
+
 default source - hotovo
 reletivni adresace metabaze v perzist ID - predelano - uklada se tam absolutni cesta .mdb souboru metabaze, 
 ale funguje i s relativni cestou viz zdroj "testovaci metabaze"

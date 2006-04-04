@@ -4,6 +4,7 @@
 #include "stdafx.h"
 #include "ReportAsistent.h"
 #include "SimpleFilterDialog.h"
+#include "APTransform.h"
 //#include "SkeletonManager.h"
 
 #ifdef _DEBUG
@@ -43,7 +44,16 @@ CSimpleFilterDialog::CSimpleFilterDialog(IXMLDOMElementPtr & active_element, CWn
 
 
 //	filter_transform.Release();
+}
 
+CSimpleFilterDialog::~CSimpleFilterDialog()
+{
+	if (m_filter_DOM != NULL) m_filter_DOM.Release();
+//	if (m_filter_transform != NULL) m_filter_transform.Release();
+
+	//ladici:
+	CAElTransform tr(m_active_element);
+	tr.FillElementAttributes(0);
 }
 
 
@@ -138,10 +148,16 @@ BOOL CSimpleFilterDialog::LoadSource(public_source_id_t sId)
 		return FALSE;	
 	}
 
+	//dadici - kdykoliv smazat nebo zakomentovat
+	filter_doc->save("../XML/plug_out_example.xml");
 	
 	//transformuje data z plugin output a vysledek nacte do m_filter_dom	
 	filter_doc->loadXML(
 		filter_doc->transformNode(element_info->getSimpleFilterTransformation()));
+
+	
+	//dadici - kdykoliv smazat nebo zakomentovat
+	//filter_doc->save("../XML/simple_filter_example.xml");
 	
 	
 	//pridat AddRef ?
@@ -154,12 +170,6 @@ BOOL CSimpleFilterDialog::LoadSource(public_source_id_t sId)
 
 	filter_doc.Release();
 	return FALSE;	
-}
-
-CSimpleFilterDialog::~CSimpleFilterDialog()
-{
-	if (m_filter_DOM != NULL) m_filter_DOM.Release();
-//	if (m_filter_transform != NULL) m_filter_transform.Release();
 }
 
 void CSimpleFilterDialog::UpDateDialog()

@@ -16,6 +16,7 @@ public:
 	IXMLDOMElementPtr CreateEmptyElement();
 	BOOL LoadElementIcon(CBitmap &icon);
 	IXMLDOMNodePtr getSimpleFilterTransformation();
+	IXMLDOMNodePtr getFillElementAttributesTransformation();
 	BOOL LoadFromDir(LPCTSTR dir_path);
 	LPCTSTR getElementName();
 	CAElInfo();
@@ -35,6 +36,7 @@ private:
 
 	CString src_dir_path;
 	IXMLDOMDocumentPtr pSimpleFilterDOM;
+	IXMLDOMDocumentPtr pFillElementAttributesDOM;
 	IXMLDOMDocumentPtr pElementDefinitionDOM;
 	CString el_name;
 

@@ -23,12 +23,17 @@ CAElInfo::CAElInfo()
 
 	pElementDefinitionDOM.CreateInstance("Msxml2.DOMDocument");
 	pElementDefinitionDOM->async = VARIANT_FALSE;
+
+	pFillElementAttributesDOM.CreateInstance("Msxml2.DOMDocument");
+	pFillElementAttributesDOM->async = VARIANT_FALSE;
 }
 
 CAElInfo::~CAElInfo()
 {
-	pSimpleFilterDOM.Release();
-	pElementDefinitionDOM.Release();
+	if (pSimpleFilterDOM != NULL) pSimpleFilterDOM.Release();
+	if (pElementDefinitionDOM != NULL) pElementDefinitionDOM.Release();
+	if (pFillElementAttributesDOM != NULL) 	pFillElementAttributesDOM.Release();
+
 
 	for (int a=0; a<getTranformationsCount(); a++)
 	{
@@ -56,7 +61,12 @@ BOOL CAElInfo::LoadFromDir(LPCTSTR dir_path)
 	pSimpleFilterDOM->load((LPCTSTR) (src_dir_path + "\\simple_filter.xsl"));
 	if (pSimpleFilterDOM->parseError->errorCode  != S_OK) return FALSE;
 
+	
+	//nacteni pFillElementAttributesDOM
+	pFillElementAttributesDOM->load((LPCTSTR) (src_dir_path + "\\fill_element_attributes.xsl"));
+	if (pSimpleFilterDOM->parseError->errorCode  != S_OK) return FALSE;
 
+	
 	
 	//nacti jmeno elementu
 	IXMLDOMNodePtr type_attr_node = pElementDefinitionDOM->selectSingleNode("//active_element/@type");
@@ -74,6 +84,11 @@ BOOL CAElInfo::LoadFromDir(LPCTSTR dir_path)
 
 	return TRUE;
 
+}
+
+IXMLDOMNodePtr CAElInfo::getFillElementAttributesTransformation()
+{
+	return pFillElementAttributesDOM;
 }
 
 IXMLDOMNodePtr CAElInfo::getSimpleFilterTransformation()

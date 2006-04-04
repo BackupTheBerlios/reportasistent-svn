@@ -1,7 +1,35 @@
 <?xml version="1.0" encoding="windows-1250"?>
 
 		<active_element type="hyp_4ft" source="" id="hyp_4ft1">
-			<params/>
+			<attributes>
+				<element_attributes>
+					<attribute name="id" value="" />
+					<attribute name="db_name" value="" />
+					<attribute name="matrix_name" value="" />
+					<attribute name="task_name" value="" />
+					<attribute name="a" value="" />
+					<attribute name="b" value="" />
+					<attribute name="c" value="" />
+					<attribute name="d" value="" />
+					<attribute name="conf" value="" />
+					<attribute name="d_conf" value="" />
+					<attribute name="e_conf" value="" />
+					<attribute name="support" value="" />
+					<attribute name="completeness" value="" />
+					<attribute name="avg_diff" value="" />
+					<attribute name="low_bnd_imp" value="" />
+					<attribute name="up_bnd_imp" value="" />
+					<attribute name="low_bnd_dbl_imp" value="" />
+					<attribute name="up_bnd_dbl_imp" value="" />
+					<attribute name="low_bnd_eq" value="" />
+					<attribute name="up_bnd_eq" value="" />
+					<attribute name="fisher" value="" />
+					<attribute name="chi_sq" value="" />
+					<attribute name="antecedent" value="" />
+					<attribute name="succedent" value="" />
+					<attribute name="condition" value="" />
+				</element_attributes>
+			</attributes>
 			<filter type="simple">
 			</filter>
 			<output>

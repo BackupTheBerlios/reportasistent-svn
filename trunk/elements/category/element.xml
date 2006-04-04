@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="windows-1250"?>
 	
 		<active_element type="category" source="" id="category1">
-			<params/>
+			<attributes>
+				<element_attributes>
+				</element_attributes>
+			</attributes>
 			<filter type="simple">
 			</filter>
 			<output>

@@ -5,121 +5,61 @@
       version="1.0">
           
 	
-	<xsl:template match="/active_list">		
-		<xsl:text disable-output-escaping="yes">
-
-&lt;dialog_data&gt;
-		</xsl:text>				
-
-		<xsl:apply-templates select="hyp_4ft[position()=1]" mode="attributes"/>
-
-
-
-
-
-		<xsl:text disable-output-escaping="yes">
-	&lt;values&gt;</xsl:text>				
-	
-
-		<xsl:apply-templates select="hyp_4ft" mode="values"/>
-
-		<xsl:text disable-output-escaping="yes">
-	&lt;/values&gt;
-		</xsl:text>				
-
-
-
-
-		<xsl:text disable-output-escaping="yes">
-&lt;/dialog_data&gt;
-		</xsl:text>				
-	</xsl:template>
-
-	
-	
-
-
-
-	<!-- vypise atributy -->
-	<xsl:template match="node()" mode="attributes">		
+	<xsl:template match="hyp_4ft">
+				<xsl:text disable-output-escaping="yes">
+				</xsl:text>
+				<element_attributes>
+				
 		
-		<xsl:text disable-output-escaping="yes">
-	&lt;attributes&gt;</xsl:text>				
+		
+				<xsl:apply-templates select="@*"/>
 
-		<xsl:apply-templates select="@*" mode="attributes"/>
 
-		<xsl:text disable-output-escaping="yes">
-	&lt;/attributes&gt;
-		</xsl:text>				
 
+				<xsl:text disable-output-escaping="yes">
+				</xsl:text>
+				</element_attributes>
 	</xsl:template>
+
 	
-
-
+	
 	<!-- vypise vsechny atributy -->
-	<xsl:template match="@*" mode="attributes">
+	<xsl:template match="@*">
 	
-		<xsl:text disable-output-escaping="yes">
-		&lt;attribute name="</xsl:text>
-	
-		<xsl:value-of select="name()"/>
-	
-		<!-- =<xsl:value-of select="."/> -->
-
-		<xsl:text disable-output-escaping="yes">"/&gt;</xsl:text>
-
-    	<xsl:apply-templates select="@*"/>
-	</xsl:template>
-
-
-
-
-
-
-	<!-- vypise hodnoty -->
-	<xsl:template match="node()" mode="values">		
+					<xsl:text disable-output-escaping="yes">
+					</xsl:text>
 		
-
-		<xsl:text disable-output-escaping="yes">
-		&lt;value </xsl:text>
-		<xsl:apply-templates select="@*" mode="values"/>
-		<xsl:text disable-output-escaping="yes">/&gt;</xsl:text>
-
-
-	</xsl:template>
-
-
-
-	<!-- naplni hodnotu -->
-	<xsl:template match="@*" mode="values">
-	
-		<xsl:value-of select="name()"/>
 		
-		<xsl:text disable-output-escaping="yes">="</xsl:text>
-	
-		<xsl:value-of select="."/>
-
-		<xsl:text disable-output-escaping="yes">" </xsl:text>
-
-    	<xsl:apply-templates select="@*"/>
+					<attribute name="{name()}" value="{.}" />
 	</xsl:template>
+	<!-- vypise vsechny atributy -->
 
-	
-	
+
+
 	<!-- naplni hodnotu cedentu-->
-	<xsl:template match="@antecedent | @succedent | @condition" mode="values">
+	<xsl:template match="@antecedent | @succedent | @condition">
 	
-		<xsl:value-of select="name()"/>
+					<!-- zapise: <attribute name="{name()}" value="-->
+
+					<xsl:text disable-output-escaping="yes">
+					&lt;attribute name="</xsl:text>
+
+					<xsl:value-of select="name()"/>
+					
+					<xsl:text disable-output-escaping="yes">" value="</xsl:text>
 		
-		<xsl:text disable-output-escaping="yes">="</xsl:text>
-	
-    	<xsl:apply-templates select="id(.)" mode="values"/>
+		
 
-		<xsl:text disable-output-escaping="yes">" </xsl:text>
+					<!-- zapise hodnotu cedentu -->
+					<xsl:apply-templates select="id(.)" mode="values"/>
 
-    	<xsl:apply-templates select="@*"/>
+
+					<xsl:text disable-output-escaping="yes">" /&gt;</xsl:text>
+
 	</xsl:template>
 	
+
+
 
 	<!-- literaly -> cedent -->
 	<xsl:template match="ti_cedent" mode="values">		
