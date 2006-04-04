@@ -22,6 +22,11 @@ CGeneralManager * m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager;
 
 
 
+<attr_link target="" attr_name="" />
+
+<attr_link_table target="" style="">
+	<link attr_name="" caption=""/>	
+</attr_link_table>
 
 
 

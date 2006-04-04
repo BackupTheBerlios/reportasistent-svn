@@ -7,7 +7,7 @@
 <!ATTLIST report author CDATA #IMPLIED >
 <!ATTLIST report id ID #REQUIRED >
 
-<!ELEMENT chapter ( (paragraph | include | active_element)*, chapter* ) > <!--nejprve texty, pak vnorene kapitoly -->
+<!ELEMENT chapter ( (paragraph | include | active_element | attr_link_table)*, chapter* ) > <!--nejprve texty, pak vnorene kapitoly -->
 <!ATTLIST chapter title CDATA #REQUIRED >
 <!ATTLIST chapter id ID #REQUIRED >
 
@@ -35,11 +35,21 @@
 <!ELEMENT transformation EMPTY >
 <!ATTLIST transformation name CDATA #REQUIRED>
 	
+<!ELEMENT attr_link_table (link*) >
+<!ATTLIST attr_link_table target CDATA #REQUIRED>
+<!ATTLIST attr_link_table style CDATA #REQUIRED>
+<!ATTLIST attr_link_table id ID #REQUIRED >
+
+<!ELEMENT link EMPTY>
+<!ATTLIST link attr_name CDATA #REQUIRED>
+<!ATTLIST link caption CDATA #REQUIRED>
+
+
 <!ELEMENT include EMPTY >
 <!ATTLIST include file CDATA #REQUIRED >
 <!ATTLIST include id ID #REQUIRED >
 
-<!ELEMENT paragraph ( graph | table | text )* >
+<!ELEMENT paragraph ( graph | table | text | attr_link)* >
 <!ATTLIST paragraph style CDATA #IMPLIED >
 <!ATTLIST paragraph id ID #REQUIRED >
 
@@ -50,6 +60,12 @@
 <!ELEMENT tab EMPTY > <!-- do textu vlozi tabulator -->
 
 <!ELEMENT br EMPTY > <!-- do textu vlozi prechod na novy radek - nikoliv konec odstavce -->
+
+<!ELEMENT attr_link EMPTY >
+<!ATTLIST attr_link id ID #REQUIRED >
+<!ATTLIST attr_link target CDATA #REQUIRED >
+<!ATTLIST attr_link attr_name CDATA #REQUIRED >
+
 
 <!ELEMENT graph ( categories? , chart+ ) >
 <!ATTLIST graph title CDATA #IMPLIED >
@@ -97,6 +113,7 @@
 	<chapter title="nadpis kapitoly" id="ch_aktivni1">
 		<paragraph style="Normální" id="paragraph1">
 			<text id="text7">Nìjaký text</text>
+			<attr_link id="attr_link1" target="" attr_name="" />
 		</paragraph>
 		
 		<active_element type="hyp_4ft" source="" id="hyp_4ft1">
@@ -147,6 +164,11 @@
 				<transformation name="HeaderAndCedents"/>
 			</output>
 		</active_element>
+
+		<attr_link_table id="attr_link_table1" target="" style="">
+			<link attr_name="" caption=""/>	
+		</attr_link_table>
+
 	</chapter>
 	<!--
 	<include file="../XML/include_doc.doc" id="include1"/>

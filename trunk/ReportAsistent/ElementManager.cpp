@@ -24,7 +24,9 @@ UINT CElementManager::static_elements_bitmap_id[]=
 	IDB_TEXTICO                    ,
 	IDB_PARAGRAPHICO               ,
 	IDB_CHAPTERICO                 ,
-	IDB_UNKNOWNICO //az bude ikona pro include tak dat sem                   
+	IDB_UNKNOWNICO, //az bude ikona pro include tak dat sem                   
+	IDB_UNKNOWNICO, //az bude ikona pro atr_link tak dat sem                   
+	IDB_UNKNOWNICO //az bude ikona pro atr_link_table tak dat sem                   
 };
 
 LPCTSTR CElementManager::static_elements_names[] = 
@@ -38,7 +40,9 @@ LPCTSTR CElementManager::static_elements_names[] =
 	//OSTATNI
 
 //	"hyp_4ft"
-	"include"
+	"include",
+	"attr_link",
+	"attr_link_table"
 };
 
 CElementManager::elId_t CElementManager::FirstStaticElementID = 2;
@@ -346,6 +350,8 @@ CString CElementManager::CreateElementCaption(IXMLDOMElementPtr &pElement)
 
 	elId_t element_id = IdentifyElement(pElement);
 	_bstr_t value;
+	_bstr_t attr;
+	_bstr_t target;
 	CString ret;
 
 //	AfxMessageBox(pElement->xml);
@@ -357,7 +363,7 @@ CString CElementManager::CreateElementCaption(IXMLDOMElementPtr &pElement)
 	
 	case  ELID_REPORT:
 		value = pElement->selectSingleNode("@title")->text;
-		if ((BSTR) value == L"") return getElementName(element_id);
+		if (value.length() == 0) return getElementName(element_id);
 		else
 		{
 			ret.Format("Report: %.*s...", LENGTH_TREE_ITEM_NAME-3, (LPCTSTR) value);
@@ -366,7 +372,7 @@ CString CElementManager::CreateElementCaption(IXMLDOMElementPtr &pElement)
 
 	case  ELID_CHAPTER:
 		value = pElement->selectSingleNode("@title")->text;
-		if ((BSTR) value == L"") return "Text - empty";
+		if (value.length() == 0) return "Text - empty";
 		else
 		{
 			ret.Format("%.*s...", LENGTH_TREE_ITEM_NAME-3, (LPCTSTR) value);
@@ -375,12 +381,22 @@ CString CElementManager::CreateElementCaption(IXMLDOMElementPtr &pElement)
 	
 	
 	case  ELID_TEXT:
-		if ((BSTR) pElement->text == L"") return "Text - empty";
+		if (pElement->text.length() == 0) return "Text - empty";
 		else
 		{
 			ret.Format("%.*s...", LENGTH_TREE_ITEM_NAME-3, (LPCTSTR) pElement->text);			 
 			return ret;
 		}
+
+	case  ELID_ATTR_LINK:
+			attr = pElement->selectSingleNode("@attr_name")->text;
+			target = pElement->selectSingleNode("@target")->text;
+			
+			if ((attr.length() == 0) || (target.length() == 0)) return "Link: empty";
+			
+			ret.Format("Link: %s of %s", (LPCTSTR) attr, (LPCTSTR) target);			 
+			return ret;
+
 
 	case  ELID_PARAGRAPH:
 	case  ELID_INCLUDE:

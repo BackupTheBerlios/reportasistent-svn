@@ -202,7 +202,9 @@ void CSkeletonView::OnContextMenu(CWnd* pWnd, CPoint pointWnd)
 	CElementManager::elId_t idTypeEl =
 	 OElementManager.IdentifyElement 
 		(
-		 (IXMLDOMElementPtr)(IXMLDOMElement *) rTreeCtrl.GetItemData( hTreeCtrlItem)
+		//dedek: spravne o radek nize
+		//(IXMLDOMElementPtr)(IXMLDOMElement *) rTreeCtrl.GetItemData( hTreeCtrlItem)
+			(IXMLDOMElementPtr) GetDocument()->ElementFromItemData(rTreeCtrl.GetItemData(hTreeCtrlItem))
 		);
 	
 	switch (idTypeEl)
@@ -225,7 +227,7 @@ void CSkeletonView::OnContextMenu(CWnd* pWnd, CPoint pointWnd)
 		default:
 		{
 			
-			//dedek: nefungovalo pro prvni AP
+			//dedek: nefungovalo pro posledni AP chyba nejspis v idTypeEl<OElementManager.getLastElementId())
 			/***********************
 			//Typ prvku: staticky
 			if (idTypeEl>=OElementManager.getFirstStaticElementID()
@@ -265,6 +267,8 @@ void CSkeletonView::OnContextMenu(CWnd* pWnd, CPoint pointWnd)
 			if (OElementManager.isElementActive(idTypeEl))
 			{	
 				//aktivni
+
+				//AfxMessageBox("active",0,0);
 
 				//TODO: patricne menu - zatim pracovne mainmenu->edit
 				CMenu * hMainMenu = AfxGetApp()->GetMainWnd()->GetMenu();

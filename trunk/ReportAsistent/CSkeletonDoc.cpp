@@ -209,8 +209,8 @@ void CSkeletonDoc::InsetNodeToTreeCtrl(MSXML2::IXMLDOMElementPtr pElement,
 	tree_control.SetItemData(hTreeItem, CreateItemData(pElement));
 
 	
-	//u aktivnich elementu nebude videt vnitrek
-	if (m.isElementActive(el_id)) return;
+	//u kterych elementu nebude videt vnitrek
+	if (m.isElementActive(el_id) || (el_id == ELID_ATTR_LINK_TABLE)) return;
 	
 	
 	//rekurnetne projede deti;

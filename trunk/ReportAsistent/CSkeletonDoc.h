@@ -52,8 +52,9 @@ public:
 protected:
 
 // Generated message map functions
-protected:
+public:
 	IXMLDOMElement * ElementFromItemData(LPARAM item_data);
+protected:
 	CSkeletonView * GetFirstView();
 	//{{AFX_MSG(CSkeletonDoc)
 	afx_msg void OnElementEdit();
