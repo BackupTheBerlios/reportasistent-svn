@@ -26,6 +26,8 @@ BEGIN_MESSAGE_MAP(CSkeletonView, CTreeView)
 	ON_WM_LBUTTONDBLCLK()
 	ON_WM_CONTEXTMENU()
 	ON_WM_RBUTTONDOWN()
+	ON_COMMAND(ID_EDIT_COPY, OnEditCopy)
+	ON_COMMAND(ID_EDIT_PASTE, OnEditPaste)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -337,3 +339,44 @@ void CSkeletonView::OnRButtonDown(UINT nFlags, CPoint point)
 //DEL 	CTreeView::OnCaptureChanged(pWnd);
 //DEL }
 //DEL 
+void CSkeletonView::OnEditCopy() 
+{
+	AfxMessageBox("Bude se kopirovat.",0,0);
+	if (0==OpenClipboard()) 
+	{
+		AfxMessageBox("Clipboard pouziva nekdo jiny",0,0);
+		return;
+	}
+
+	CTreeCtrl & rTreeCtrl = GetFirstView()->GetTreeCtrl();
+	IXMLDOMElementPtr SelXMLDomElement = ElementFromItemData(rTreeCtrl.GetItemData(rTreeCtrl.GetSelectedItem()));
+
+	_bstr_t bstrSelElmXML= SelXMLDomElement->xml; length
+
+	HGLOBAL hgSelElmXML = GlobalAlloc(GMEM_MOVEABLE | GMEM_DDESHARE ,    // allocation attributes
+						(DWORD) bstrSelElmXML.length;   // number of bytes to allocate
+						);
+	if (0==hgSelElmXML) 
+	{
+		AfxMsg("Nepodarilo se alokovat dostatek pameti pro XML podstromu",0,0);
+		return;
+	}
+	
+	//TODO: napln hgSelElmXML XMLkem
+
+	HANDLE SetClipboardData(CF_UNICODETEXT, // clipboard format - pripadne:CF_TEXT
+							HANDLE hMem   // data handle
+							);
+
+
+	HGLOBAL GlobalFree(hgSelElmXML);   // handle to the global memory object
+
+	return;
+	
+}
+
+void CSkeletonView::OnEditPaste() 
+{
+	AfxMessageBox("Bude se paste-ovat.",0,0);	
+	
+}
