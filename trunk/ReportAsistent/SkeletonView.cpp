@@ -311,8 +311,9 @@ void CSkeletonView::OnRButtonDown(UINT nFlags, CPoint point)
 	CTreeView::OnRButtonDown(nFlags, point);
 }
 
-// Puvodni zamer: podle vybraneho prvku TreeCtrl disablovat polozky v Menu->Edit->InsertNew
+// Iva: Puvodni zamer: podle vybraneho prvku TreeCtrl disablovat polozky v Menu->Edit->InsertNew
 //Lepsi reseni: pridavani je vzdy mozne a to na nejblizsi nasledujici vhodne misto
+
 //DEL void CSkeletonView::OnCaptureChanged(CWnd *pWnd) 
 //DEL {
 //DEL 	CElementManager & OElementManager = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
@@ -342,34 +343,52 @@ void CSkeletonView::OnRButtonDown(UINT nFlags, CPoint point)
 void CSkeletonView::OnEditCopy() 
 {
 	AfxMessageBox("Bude se kopirovat.",0,0);
+
+
+	CTreeCtrl & rTreeCtrl = GetTreeCtrl();
+	IXMLDOMElementPtr SelXMLDomElement = GetDocument()->ElementFromItemData(rTreeCtrl.GetItemData(rTreeCtrl.GetSelectedItem()));
+	
+//ziskam XML vybraneho prvku TreeCtrl
+	_bstr_t bstrSelElmXML= SelXMLDomElement->xml; 
+
+//Alokuji globalni pamet a XML do ni zkopiruji
+	HGLOBAL hgMemForXML = GlobalAlloc(GMEM_MOVEABLE | GMEM_DDESHARE ,    // allocation attributes
+						(DWORD) (bstrSelElmXML.length() + 1)   // number of bytes to allocate
+						);
+	if (0==hgMemForXML) 
+	{
+		AfxMessageBox("Nepodarilo se alokovat dostatek pameti pro XML podstromu",0,0);
+		return;
+	}
+
+	LPTSTR pMemForXML = (LPTSTR) GlobalLock(hgMemForXML);
+	strcpy(pMemForXML,(LPTSTR) bstrSelElmXML);
+	AfxMessageBox(pMemForXML,0,0);
+	
+
+	GlobalUnlock(hgMemForXML);
+	
+
+//Otevru clipboard a soupnu do nej XML
 	if (0==OpenClipboard()) 
 	{
 		AfxMessageBox("Clipboard pouziva nekdo jiny",0,0);
 		return;
 	}
 
-	CTreeCtrl & rTreeCtrl = GetFirstView()->GetTreeCtrl();
-	IXMLDOMElementPtr SelXMLDomElement = ElementFromItemData(rTreeCtrl.GetItemData(rTreeCtrl.GetSelectedItem()));
-
-	_bstr_t bstrSelElmXML= SelXMLDomElement->xml; length
-
-	HGLOBAL hgSelElmXML = GlobalAlloc(GMEM_MOVEABLE | GMEM_DDESHARE ,    // allocation attributes
-						(DWORD) bstrSelElmXML.length;   // number of bytes to allocate
-						);
-	if (0==hgSelElmXML) 
+	//??Jaky mam dat format??
+	if(0== SetClipboardData(CF_TEXT, // clipboard format - pripadne:CF_TEXT
+							hgMemForXML))   // data handle
 	{
-		AfxMsg("Nepodarilo se alokovat dostatek pameti pro XML podstromu",0,0);
-		return;
+		AfxMessageBox("Umistit data do clipboardu se nepodarilo",0,0);
 	}
-	
-	//TODO: napln hgSelElmXML XMLkem
 
-	HANDLE SetClipboardData(CF_UNICODETEXT, // clipboard format - pripadne:CF_TEXT
-							HANDLE hMem   // data handle
-							);
+//zavru clipboard
+	ASSERT(0!=CloseClipboard());
 
 
-	HGLOBAL GlobalFree(hgSelElmXML);   // handle to the global memory object
+// uvolnim globalni pamet
+	ASSERT(NULL==GlobalFree(hgMemForXML));
 
 	return;
 	
@@ -378,5 +397,54 @@ void CSkeletonView::OnEditCopy()
 void CSkeletonView::OnEditPaste() 
 {
 	AfxMessageBox("Bude se paste-ovat.",0,0);	
-	
+
+	CTreeCtrl & rTreeCtrl = GetTreeCtrl();
+	IXMLDOMElementPtr SelXMLDomElement = GetDocument()->ElementFromItemData(rTreeCtrl.GetItemData(rTreeCtrl.GetSelectedItem()));
+
+//Otevru clipboard a prectu z nej XML
+	if (0==OpenClipboard()) 
+	{
+		AfxMessageBox("Clipboard pouziva nekdo jiny",0,0);
+		return;
+	}
+	LPCTSTR pMemForXML = (LPCTSTR)GetClipboardData(CF_TEXT);
+
+	if (NULL==pMemForXML) 
+	{
+		AfxMessageBox("Precist text z clipboardu se nepodarilo",0,0);
+		return;
+	}
+
+	AfxMessageBox(pMemForXML,0,0);
+
+//zavru clipboard
+	ASSERT(0!=CloseClipboard());
+/*
+//pokudse z clipboardu precist podarilo
+	AfxMessageBox(pMemForXML,0,0);
+	if (0== CanInsertChildHere(SelXMLDomElement))
+	{
+		AfxMessageBox(IDS_INSERT_NEW_ELEMENT_WRONG_LOCATION,0,0);
+		return;
+	}
+
+	//vytvorim novy dokument
+		IXMLDOMDocumentPtr pNewXMLElement;
+		pNewXMLElement.CreateInstance(_T("Msxml2.DOMDocument"));	
+	//XML do nej natahnu
+		VARIANT_BOOL bSuccess;
+		HRESULT hRes = pNewXMLElement->loadXML( (BSTR) pMemForXML, &bSuccess);
+		if (S_OK != hRes)
+		{
+*/
+
+
+	return;
+
+/*
+	UINT EnumClipboardFormats(
+	UINT format   // specifies a known available clipboard format
+	);
+*/
+
 }

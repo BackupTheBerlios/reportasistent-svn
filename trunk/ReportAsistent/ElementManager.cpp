@@ -206,7 +206,7 @@ BOOL CElementManager::isElementActive(elId_t elementId)
 
 
 //rozhodne, jestli element child muze byt pridan pod element parent
-BOOL CElementManager::CanAppendChildHere(IXMLDOMElementPtr &child, IXMLDOMElementPtr &parent)
+BOOL CElementManager::CanInsertChildHere(IXMLDOMElementPtr &child, IXMLDOMElementPtr &parent)
 {
 	IXMLDOMNodePtr new_child_appended;
 	

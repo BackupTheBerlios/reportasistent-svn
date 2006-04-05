@@ -57,7 +57,7 @@ public:
 	BOOL LoadElementIcon(elId_t element_id, CBitmap & icon);
 	CAElInfo * getActiveElementInfo(elId_t id);
 	BOOL ElementSupportedBySource(elId_t element_id, int source_index);
-	BOOL CanAppendChildHere(IXMLDOMElementPtr & child, IXMLDOMElementPtr & parent);
+	BOOL CanInsertChildHere(IXMLDOMElementPtr & child, IXMLDOMElementPtr & parent);
 	BOOL isElementActive(elId_t elementId);
 	IXMLDOMElementPtr CreateEmptyElement(CElementManager::elId_t id);
 	elId_t ElementIdFromName(LPCTSTR el_name);

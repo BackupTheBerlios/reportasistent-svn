@@ -314,7 +314,7 @@ IXMLDOMElementPtr CSkeletonManager2::InsertNewElement(CElementManager::elId_t el
 	
 	IXMLDOMElementPtr new_example = m->ElementManager.CreateEmptyElement(elementID);
 
-	if (m->ElementManager.CanAppendChildHere(new_example, parent_element))
+	if (m->ElementManager.CanInsertChildHere(new_example, parent_element))
 	{
 		//ladici
 		//AfxMessageBox(new_example->xml);	
@@ -323,7 +323,7 @@ IXMLDOMElementPtr CSkeletonManager2::InsertNewElement(CElementManager::elId_t el
 		
 		//a tohle je sranda nejvetsi :-) hazi to chyby jak na bezicim pasu
 		//kontroluje to tozi DTD dokumentu tak bacha, nejde vsecko vsude vlozit
-		//az bude funkcni CanAppendChildHere tak by uz chyby nemely nastat
+		//az bude funkcni CanInsertChildHere tak by uz chyby nemely nastat
 		try
 		{
 			parent_element->appendChild(new_example);
