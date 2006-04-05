@@ -59,6 +59,17 @@ konvence: konkretni implementace funkci v zasuvkach - na konec nazvu fce se prid
 "identifikator zasuvky"
 (tj. fNewSource() se bude v zasuvce pro LM jmenovat fNewSourceLM() atd...)
 
+/////////////////////////////////////////////////////
+//////// initSock()
+
+Kazda zasuvka musi obsahovat funkci 
+
+  CSockInterface* initSock()
+
+ktera vytvori a inicializuje strukturu CSockInterface a vrati jadru ukazatel na ni. 
+Jadro pripojuje zasuvky tak, ze zavola funkci initSock()
+
+
 */
 
 
@@ -98,6 +109,9 @@ struct CSockInterface {
 	hOpenSource_t hOpenSource;
 	hCloseSource_t hCloseSource;	 
 };
+
+
+
 
 
 #endif  // _SOCK_INTERFACE
