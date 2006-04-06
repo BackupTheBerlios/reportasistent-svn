@@ -1,4 +1,0 @@
-LIBRARY   LMPlugin
-DESCRIPTION "Zasuvny modul aplikace LM - Report Asistent, zasuvka pro podporu LispMineru"
-EXPORTS
-   initSock    @1
