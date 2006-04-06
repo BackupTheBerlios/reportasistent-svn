@@ -381,6 +381,10 @@ void CSkeletonView::OnEditCopy()
 							hgMemForXML))   // data handle
 	{
 		AfxMessageBox("Umistit data do clipboardu se nepodarilo",0,0);
+		DWORD dErr = GetLastError();
+		ASSERT(0!=CloseClipboard());
+		return;
+
 	}
 
 //zavru clipboard
@@ -389,6 +393,7 @@ void CSkeletonView::OnEditCopy()
 
 // uvolnim globalni pamet
 	ASSERT(NULL==GlobalFree(hgMemForXML));
+	DWORD dErr = GetLastError();
 
 	return;
 	
@@ -412,6 +417,7 @@ void CSkeletonView::OnEditPaste()
 	if (NULL==pMemForXML) 
 	{
 		AfxMessageBox("Precist text z clipboardu se nepodarilo",0,0);
+		ASSERT(0!=CloseClipboard());
 		return;
 	}
 
@@ -419,25 +425,60 @@ void CSkeletonView::OnEditPaste()
 
 //zavru clipboard
 	ASSERT(0!=CloseClipboard());
-/*
-//pokudse z clipboardu precist podarilo
+
+//pokud se z clipboardu precist podarilo
 	AfxMessageBox(pMemForXML,0,0);
-	if (0== CanInsertChildHere(SelXMLDomElement))
+
+//vytvorim novy IXMLDOMDoc
+	IXMLDOMDocumentPtr pNewXMLDoc;
+	pNewXMLDoc.CreateInstance(_T("Msxml2.DOMDocument"));	
+//XML do nej natahnu
+	BSTR bstrStr = (BSTR)pMemForXML;
+	HRESULT hRes = pNewXMLDoc->loadXML( (BSTR)bstrStr);
+	if (pNewXMLDoc->parseError->errorCode != S_OK)
 	{
-		AfxMessageBox(IDS_INSERT_NEW_ELEMENT_WRONG_LOCATION,0,0);
+		AfxMessageBox(pNewXMLDoc->parseError->reason);
+	}
+	if (S_OK != hRes)
+	{
+		if (hRes==S_FALSE)
+		AfxMessageBox("S_FALSE" ,0,0);
+		pNewXMLDoc.Release();
+		AfxMessageBox("z kopirovaneho XML se nepovedlo vytvorit DomStrom" ,0,0);
 		return;
 	}
+//pripojim ho do existujiciho
+	CElementManager & OElementManager = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
+	IXMLDOMElementPtr pNewXMLElm = pNewXMLDoc->GetdocumentElement();
+	AfxMessageBox(pNewXMLDoc->xml,0,0);
 
-	//vytvorim novy dokument
-		IXMLDOMDocumentPtr pNewXMLElement;
-		pNewXMLElement.CreateInstance(_T("Msxml2.DOMDocument"));	
-	//XML do nej natahnu
-		VARIANT_BOOL bSuccess;
-		HRESULT hRes = pNewXMLElement->loadXML( (BSTR) pMemForXML, &bSuccess);
-		if (S_OK != hRes)
+	if (0== OElementManager.CanInsertChildHere(pNewXMLElm,SelXMLDomElement))
+	{
+		AfxMessageBox(IDS_INSERT_NEW_ELEMENT_WRONG_LOCATION,0,0);
+		pNewXMLDoc.Release();	
+		return;
+	}
+	
+	try
+	{
+		IXMLDOMElementPtr pResElm=SelXMLDomElement->appendChild(pNewXMLElm);
+		if (0!=pResElm)
 		{
-*/
+			GetDocument()->SetModifiedFlag();		
+			GetDocument()->UpdateAllViews(NULL, 0);
+		}
+		return;
 
+
+	}
+	catch (_com_error &e)
+	{
+		//AfxMessageBox(e.ErrorMessage());
+		AfxMessageBox(e.Description());
+	}
+
+
+	AfxMessageBox(IDS_INSERT_NEW_ELEMENT_WRONG_LOCATION);	
 
 	return;
 

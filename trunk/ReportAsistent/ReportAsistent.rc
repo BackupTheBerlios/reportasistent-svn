@@ -537,7 +537,7 @@ BEGIN
     AFX_IDS_SCRESTORE       "Restore the window to normal size"
     AFX_IDS_SCTASKLIST      "Activate Task List"
     IDS_INSERT_NEW_ELEMENT_WRONG_LOCATION 
-                            "Sorac ale sem to dat neuzes :-)\n\ntenhle text se predelava ve string table - id: IDS_INSERT_NEW_ELEMENT_WRONG_LOCATION"
+                            "Sem tato toto dat nemuzes.\n\ntenhle text se predelava ve string table - id: IDS_INSERT_NEW_ELEMENT_WRONG_LOCATION"
     IDS_SIMPLE_FILTER_EMPTY_SELECTION 
                             "Sorry, you have to select some items to make filter valid."
     IDS_SIMPLE_FILTER_FAILED_SOURCE_LOAD 
