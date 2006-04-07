@@ -37,6 +37,7 @@ public:
 
 // Implementation
 public:
+	BOOL m_bDragging;
 	CImageList* m_pimagelist;
 	HTREEITEM m_hitemDrop;
 	HTREEITEM m_hitemDrag;
@@ -58,6 +59,9 @@ protected:
 	afx_msg void OnRButtonDown(UINT nFlags, CPoint point);
 	afx_msg void OnEditCopy();
 	afx_msg void OnEditPaste();
+	afx_msg void OnBegindrag(NMHDR* pNMHDR, LRESULT* pResult);
+	afx_msg void OnMouseMove(UINT nFlags, CPoint point);
+	afx_msg void OnLButtonUp(UINT nFlags, CPoint point);
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };

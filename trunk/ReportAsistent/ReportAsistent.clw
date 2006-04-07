@@ -2,7 +2,7 @@
 
 [General Info]
 Version=1
-LastClass=CTransformationsDialog
+LastClass=CSkeletonView
 LastTemplate=CRecordset
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "ReportAsistent.h"
@@ -18,18 +18,18 @@ ResourceCount=10
 Resource1=IDD_ABOUTBOX
 Resource2=IDR_MAINFRAME
 Class5=CAboutDlg
-Resource3=IDD_DIALOGTEXT (English (U.S.))
-Resource4=IDD_GENERATE_DIALOG (English (U.S.))
+Resource3=IDD_SIMPLE_FILTER_DIALOG (English (U.S.))
+Resource4=IDD_ACTIVE_ELEMENT_DIALOG (English (U.S.))
 Class6=CElementTextDialog
-Resource5=IDD_SOURCES_DIALOG
+Resource5=IDD_DIALOGTEXT (English (U.S.))
 Class7=CSimpleFilterDialog
-Resource6=IDD_ACTIVE_ELEMENT_DIALOG (English (U.S.))
+Resource6=IDD_GENERATE_DIALOG (English (U.S.))
 Class8=CGenerateDialog
-Resource7=IDD_TRANSFORMATIONS_DIALOG (English (U.S.))
+Resource7=IDD_SOURCES_DIALOG
 Class9=CSourcesDialog
-Resource8=IDD_ABOUTBOX (English (U.S.))
+Resource8=IDD_TRANSFORMATIONS_DIALOG (English (U.S.))
 Class10=CActiveElementDialog
-Resource9=IDD_SIMPLE_FILTER_DIALOG (English (U.S.))
+Resource9=IDD_ABOUTBOX (English (U.S.))
 Class11=CTransformationsDialog
 Class12=Tcategory_Recordset
 Resource10=IDR_MAINFRAME (English (U.S.))
@@ -59,6 +59,7 @@ ImplementationFile=SkeletonView.cpp
 Filter=C
 BaseClass=CTreeView
 VirtualFilter=VWC
+LastObject=CSkeletonView
 
 
 [CLS:CMainFrame]

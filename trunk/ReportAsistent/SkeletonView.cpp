@@ -28,6 +28,9 @@ BEGIN_MESSAGE_MAP(CSkeletonView, CTreeView)
 	ON_WM_RBUTTONDOWN()
 	ON_COMMAND(ID_EDIT_COPY, OnEditCopy)
 	ON_COMMAND(ID_EDIT_PASTE, OnEditPaste)
+	ON_NOTIFY_REFLECT(TVN_BEGINDRAG, OnBegindrag)
+	ON_WM_MOUSEMOVE()
+	ON_WM_LBUTTONUP()
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -36,8 +39,8 @@ END_MESSAGE_MAP()
 
 CSkeletonView::CSkeletonView()
 {
-	// TODO: add construction code here
-
+	m_bDragging = FALSE;
+	m_pimagelist = NULL;
 }
 
 CSkeletonView::~CSkeletonView()
@@ -481,4 +484,130 @@ void CSkeletonView::OnEditPaste()
 	);
 */
 
+}
+
+void CSkeletonView::OnBegindrag(NMHDR* pNMHDR, LRESULT* pResult) 
+{
+	//tohle je struktura informaci o teto notification message
+	NM_TREEVIEW* pNMTreeView = (NM_TREEVIEW*)pNMHDR;
+
+	CPoint      ptAction;
+	UINT        nFlags;
+
+	GetCursorPos(&ptAction);
+	ScreenToClient(&ptAction);
+	ASSERT(!m_bDragging);
+	m_bDragging = TRUE;
+	m_hitemDrag = GetTreeCtrl().HitTest(ptAction, &nFlags);
+	m_hitemDrop = NULL;
+
+	ASSERT(m_pimagelist == NULL);
+	m_pimagelist = GetTreeCtrl().CreateDragImage(m_hitemDrag);  // get the image list for dragging
+	m_pimagelist->DragShowNolock(TRUE);
+	m_pimagelist->SetDragCursorImage(0, CPoint(0, 0));
+	m_pimagelist->BeginDrag(0, CPoint(0,0));
+	m_pimagelist->DragMove(ptAction);
+	m_pimagelist->DragEnter(this, ptAction);
+	SetCapture();	
+	*pResult = 0;
+
+	return;
+}
+
+void CSkeletonView::OnMouseMove(UINT nFlags, CPoint point) 
+{
+	HTREEITEM           hitem;
+	UINT                flags;
+
+	if (m_bDragging)
+	{
+		ASSERT(m_pimagelist != NULL);
+		m_pimagelist->DragMove(point);
+		if ((hitem = GetTreeCtrl().HitTest(point, &flags)) != NULL)
+		{
+			m_pimagelist->DragLeave(this);
+			GetTreeCtrl().SelectDropTarget(hitem);
+			m_hitemDrop = hitem;
+			m_pimagelist->DragEnter(this, point);
+		}
+	}
+	
+	CTreeView::OnMouseMove(nFlags, point);
+}
+
+void CSkeletonView::OnLButtonUp(UINT nFlags, CPoint point) 
+{
+	if (m_bDragging)
+	{
+		ASSERT(m_pimagelist != NULL);
+		m_pimagelist->DragLeave(this);
+		m_pimagelist->EndDrag();
+		delete m_pimagelist;
+		m_pimagelist = NULL;
+
+		CElementManager & OElementManager = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
+		IXMLDOMElementPtr pXMLElmDrag= (IXMLDOMElement*)GetTreeCtrl().GetItemData(m_hitemDrag);
+		IXMLDOMElementPtr pXMLElmDrop= (IXMLDOMElement*)GetTreeCtrl().GetItemData(m_hitemDrop);
+		IXMLDOMElementPtr pNewXMLElm=NULL;
+		AfxMessageBox("Drag a taky drop:");
+		AfxMessageBox(pXMLElmDrag->xml);
+		AfxMessageBox(pXMLElmDrop->xml);
+
+		if (m_hitemDrag != m_hitemDrop)
+		{
+		//zkopiruji XML Dragu do noveho uzlu XML stromu
+			//vytvorim novy IXMLDOMDoc
+				IXMLDOMDocumentPtr pNewXMLDoc;
+				pNewXMLDoc.CreateInstance(_T("Msxml2.DOMDocument"));	
+			//XML do nej natahnu
+				HRESULT hRes = pNewXMLDoc->loadXML(pXMLElmDrag->xml);
+				if (pNewXMLDoc->parseError->errorCode != S_OK)
+				{
+					AfxMessageBox(pNewXMLDoc->parseError->reason);
+				}
+			//zmenim id vsech prvku
+				CElementManager & OElementManager = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
+				pNewXMLElm = pNewXMLDoc->GetdocumentElement();
+
+				GetDocument()->ChangeIDsInTree(pNewXMLElm);
+
+			//pripojim ho do existujiciho
+				if (0== OElementManager.CanInsertChildHere(pNewXMLElm,pXMLElmDrop))
+				{
+					AfxMessageBox(IDS_INSERT_NEW_ELEMENT_WRONG_LOCATION,0,0);
+					pNewXMLDoc.Release();
+					MessageBeep(0);
+					
+				}
+				else
+				{
+
+					AfxMessageBox("Novy:");
+					AfxMessageBox(pNewXMLElm->xml);
+				//novy XML uzel vlozim do XML stromu
+					try
+					{
+						IXMLDOMElementPtr pResElm=pXMLElmDrop->appendChild(pNewXMLElm);
+						if (0!=pResElm)
+						{
+							GetDocument()->SetModifiedFlag();		
+							GetDocument()->UpdateAllViews(NULL, 0);
+						}
+
+					}
+					catch (_com_error &e)
+					{
+						//AfxMessageBox(e.ErrorMessage());
+						AfxMessageBox(e.Description());
+					}
+				}
+		}
+		else
+			MessageBeep(0);
+
+		ReleaseCapture();
+		m_bDragging = FALSE;
+		GetTreeCtrl().SelectDropTarget(NULL);
+	}	
+	CTreeView::OnLButtonUp(nFlags, point);
 }
