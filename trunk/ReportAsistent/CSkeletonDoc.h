@@ -60,10 +60,10 @@ protected:
 	afx_msg void OnElementEdit();
 	afx_msg void OnMmgenrep();
 	afx_msg void OnMmdelete();
-	//}} AFX_MSG
+	//}}AFX_MSG
 	afx_msg void OnMmnewelement(UINT nMessageID);
-
 	DECLARE_MESSAGE_MAP()
+
 public:
 	static void InsetNodeToTreeCtrl(MSXML2::IXMLDOMElementPtr pElement, 
 									HTREEITEM hParentItem, 
@@ -85,6 +85,7 @@ protected:
 
 	
 public:
+	void ChangeIDsInTree(IXMLDOMElementPtr pXMLElm);
 	void Generate();
 	CString CreateNewID(CElementManager::elId_t element_type);
 	static void DeleteItemData(LPARAM data);

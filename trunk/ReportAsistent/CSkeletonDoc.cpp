@@ -824,3 +824,28 @@ void CSkeletonDoc::OnMmnewelement(UINT nMessageID)
 		
 	
 }
+
+void CSkeletonDoc::ChangeIDsInTree(IXMLDOMElementPtr pElm)
+{
+	if (pElm == NULL) return;
+
+	CElementManager & OElementManager = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;	
+	IXMLDOMNodeListPtr pChildren = pElm->childNodes;//ukazatel na potomky pElm
+	IXMLDOMNodePtr pChild = NULL;
+
+	
+
+	while ((pChild = pChildren->nextNode()) != NULL)
+	{
+
+		ChangeIDsInTree(pChild);
+	}
+//zjistim soucasnou hodnotu atributu id. Pokud prvek takovy atribut nema, skoncim.
+	_variant_t varAtr = pElm->getAttribute("id");
+	if (VT_NULL == varAtr.vt) return;
+
+//zjistim id typu prvku a zmenim id prvku.
+	CElementManager::elId_t idTypeElm = OElementManager.IdentifyElement(pElm);
+	pElm->setAttribute("id",(LPCTSTR)CreateNewID(idTypeElm));	
+	return;
+}

@@ -423,35 +423,28 @@ void CSkeletonView::OnEditPaste()
 
 	AfxMessageBox(pMemForXML,0,0);
 
-//zavru clipboard
-	ASSERT(0!=CloseClipboard());
-
-//pokud se z clipboardu precist podarilo
-	AfxMessageBox(pMemForXML,0,0);
-
 //vytvorim novy IXMLDOMDoc
 	IXMLDOMDocumentPtr pNewXMLDoc;
 	pNewXMLDoc.CreateInstance(_T("Msxml2.DOMDocument"));	
 //XML do nej natahnu
-	BSTR bstrStr = (BSTR)pMemForXML;
-	HRESULT hRes = pNewXMLDoc->loadXML( (BSTR)bstrStr);
+
+	HRESULT hRes = pNewXMLDoc->loadXML(pMemForXML);//"<text id=\"text111\">moje</text>");
 	if (pNewXMLDoc->parseError->errorCode != S_OK)
 	{
 		AfxMessageBox(pNewXMLDoc->parseError->reason);
 	}
-	if (S_OK != hRes)
-	{
-		if (hRes==S_FALSE)
-		AfxMessageBox("S_FALSE" ,0,0);
-		pNewXMLDoc.Release();
-		AfxMessageBox("z kopirovaneho XML se nepovedlo vytvorit DomStrom" ,0,0);
-		return;
-	}
-//pripojim ho do existujiciho
+
+//zavru clipboard
+	ASSERT(0!=CloseClipboard());
+
+//zmenim id vsech prvku
 	CElementManager & OElementManager = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
 	IXMLDOMElementPtr pNewXMLElm = pNewXMLDoc->GetdocumentElement();
+
+	GetDocument()->ChangeIDsInTree(pNewXMLElm);
 	AfxMessageBox(pNewXMLDoc->xml,0,0);
 
+//pripojim ho do existujiciho
 	if (0== OElementManager.CanInsertChildHere(pNewXMLElm,SelXMLDomElement))
 	{
 		AfxMessageBox(IDS_INSERT_NEW_ELEMENT_WRONG_LOCATION,0,0);

@@ -140,7 +140,7 @@ BOOL CSimpleFilterDialog::LoadSource(public_source_id_t sId)
 	}
 
 	//vytvoreni XML DOM z nacteneho XML stringu
-	filter_doc->loadXML(s_out);
+	HRESULT hRes=filter_doc->loadXML(s_out);
 	if (filter_doc->parseError->errorCode != S_OK)
 	{
 		AfxMessageBox(filter_doc->parseError->reason);
