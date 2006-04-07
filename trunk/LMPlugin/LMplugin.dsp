@@ -124,6 +124,10 @@ SOURCE=.\SQL_Pomocnik.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\TCatDef.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\Tcategory_Recordset.cpp
 # End Source File
 # End Group
@@ -165,6 +169,10 @@ SOURCE=.\SockInterface.h
 # Begin Source File
 
 SOURCE=.\SQL_Pomocnik.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\TCatDef.h
 # End Source File
 # Begin Source File
 

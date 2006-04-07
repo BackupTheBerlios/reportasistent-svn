@@ -3,6 +3,7 @@
 #include "functions.h"
 #include "Hyp_4ft_Recordset.h"
 #include "Tcategory_Recordset.h"
+#include "TCatDef.h"
 #include "LM_Metabase.h"
 
 
@@ -56,34 +57,24 @@ CString fLMCategory(void* hSource)
 	Category_Meta * ptcat;
 
 	Tcategory_Recordset rs ((CDatabase *) hSource);
+	TCatDef rs_def ((CDatabase *) hSource);
 
-/***** dedek: predelal jsem ti ten SQL dotaz - nevim jestli je ten muj dobre kazdopadne funguje
-	LPCTSTR q =
-		"SELECT tmCategory.CategoryID, tmCategory.Name, tmAttribute.Name, tmMatrix.Name, \
-			tsCategorySubType.Name, tsBoolType.Name \
-		FROM tmCategory, tmQuantity, tmAttribute, tmMatrix, \
-			tsCategorySubType, tsBoolType \
-		WHERE tmCategory.QuantityID=tmQuantity.QuantityID \
+	TCatDefArray def;
+
+	CString subqenum;
+	LPCTSTR subqintervall;
+	LPCTSTR subqintervalr;
+
+	LPCTSTR q =	
+		"SELECT * \
+		 FROM	tmAttribute, tmCategory, tmMatrix, tmQuantity, tsBoolType, tsCategorySubType \
+		 WHERE tmCategory.QuantityID=tmQuantity.QuantityID \
 			AND tmQuantity.AttributeID=tmAttribute.AttributeID \
 			AND tmAttribute.MatrixID=tmMatrix.MatrixID \
 			AND tmCategory.CategorySubTypeID=tsCategorySubType.CategorySubTypeID \
 			AND tmCategory.BoolTypeID = tsBoolType.BoolTypeID \
-		ORDER BY tmCategory.CategoryID";
+			ORDER BY tmCategory.CategoryID";
 
-/******/
-
-		LPCTSTR q =	
-		"SELECT * FROM tmAttribute, tmCategory, tmMatrix, tmQuantity, tsBoolType, tsCategorySubType \
-			WHERE tmCategory.QuantityID=tmQuantity.QuantityID \
-			AND tmQuantity.AttributeID=tmAttribute.AttributeID \
-			AND tmAttribute.MatrixID=tmMatrix.MatrixID \
-			AND tmCategory.CategorySubTypeID=tsCategorySubType.CategorySubTypeID \
-			AND tmCategory.BoolTypeID = tsBoolType.BoolTypeID";
-
-/******/   //dedek konec
-
-
-//	if (rs.Open ())
 	if (rs.Open(AFX_DB_USE_DEFAULT_TYPE, q))
 	{
 		//iteration on query results
@@ -99,9 +90,60 @@ CString fLMCategory(void* hSource)
 			hlp.Format ("%d", cat_id);
 			ptcat->id = "cat" + hlp;
 			ptcat->ctgr_bool_type = rs.m_Name5;
+			if (rs.m_Name6 == "Enumeration")
+			{
+				subqenum =
+					"SELECT * \
+					 FROM tmCategory, tmCategoryEnumValue, tmInterval, \
+						tmValue, tsBracketType, tsValueSubType \
+					 WHERE tmCategory.CategoryID=" + hlp +
+					  " AND tmCategory.CategoryID=tmCategoryEnumValue.CategoryID \
+						AND tmCategoryEnumValue.ValueID=tmValue.ValueID \
+						AND tmValue.ValueSubTypeID=tsValueSubType.ValueSubTypeID";
+				if (rs_def.Open(AFX_DB_USE_DEFAULT_TYPE, subqenum))
+				{
+					while (!rs_def.IsEOF ())
+					{
+						if (rs_def.m_TypeName == "Long integer")
+							hlp.Format ("%d", rs_def.m_ValueLong);
+						else if (rs_def.m_TypeName == "Float")
+							hlp.Format ("%f", rs_def.m_ValueFloat);
+						else if (rs_def.m_TypeName == "String")
+							hlp = rs_def.m_ValueString;
+						else if (rs_def.m_TypeName == "Boolean")
+							hlp.Format ("%s", rs_def.m_ValueBool);
+						else if (rs_def.m_TypeName == "Date")
+							hlp.Format ("%s", rs_def);
+						rs_def.MoveNext ();
+					}
+					rs_def.Close ();
+				}
+				else return "";
+			}
+			else if ((rs.m_Name6 == "Interval") || (rs.m_Name6 == "Fuzzy interval"))
+			{
+				subqintervall =
+					"SELECT * \
+					 FROM tmCategory, tmCategoryEnumValue, tmInterval, \
+						tmValue, tsBracketType, tsValueSubType \
+					 WHERE tmCategory.CategoryID=" + hlp +
+					   "AND tmCategory.CategoryID=tmInterval.CategoryID \
+						AND tmInterval.FromValueID=tmValue.ValueID \
+						AND tmValue.ValueSubTypeID=tsValueSubType.ValueSubTypeID \
+						AND tmInterval.LeftBracketTypeID=tsBracketType.BracketTypeID";
+				subqintervalr =
+					"SELECT * \
+					 FROM tmCategory, tmCategoryEnumValue, tmInterval, \
+						tmValue, tsBracketType, tsValueSubType \
+					 WHERE tmCategory.CategoryID=" + hlp +
+					   "AND tmCategory.CategoryID=tmInterval.CategoryID \
+						AND tmInterval.ToValueID=tmValue.ValueID \
+						AND tmValue.ValueSubTypeID=tsValueSubType.ValueSubTypeID \
+						AND tmInterval.RightBracketTypeID=tsBracketType.BracketTypeID";
+			}
+			else return "";
 			list.Add (ptcat);
-			hlp.Format("%s %s %s %s %d \n", rs.m_Name, rs.m_Name2, rs.m_Name6, rs.m_Name3, rs.m_CategoryID);
-			buf += hlp;
+			
 			rs.MoveNext();
 		}
 		rs.Close();

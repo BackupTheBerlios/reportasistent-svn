@@ -2,13 +2,13 @@
 
 [General Info]
 Version=1
-LastClass=CSkeletonView
+LastClass=TCatDef
 LastTemplate=CRecordset
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "ReportAsistent.h"
 LastPage=0
 
-ClassCount=12
+ClassCount=13
 Class1=CReportAsistentApp
 Class2=CSkeletonDoc
 Class3=CSkeletonView
@@ -18,20 +18,21 @@ ResourceCount=10
 Resource1=IDD_ABOUTBOX
 Resource2=IDR_MAINFRAME
 Class5=CAboutDlg
-Resource3=IDD_SIMPLE_FILTER_DIALOG (English (U.S.))
+Resource3=IDD_DIALOGTEXT (English (U.S.))
 Resource4=IDD_ACTIVE_ELEMENT_DIALOG (English (U.S.))
 Class6=CElementTextDialog
-Resource5=IDD_DIALOGTEXT (English (U.S.))
+Resource5=IDD_SOURCES_DIALOG
 Class7=CSimpleFilterDialog
 Resource6=IDD_GENERATE_DIALOG (English (U.S.))
 Class8=CGenerateDialog
-Resource7=IDD_SOURCES_DIALOG
+Resource7=IDD_TRANSFORMATIONS_DIALOG (English (U.S.))
 Class9=CSourcesDialog
-Resource8=IDD_TRANSFORMATIONS_DIALOG (English (U.S.))
+Resource8=IDD_ABOUTBOX (English (U.S.))
 Class10=CActiveElementDialog
-Resource9=IDD_ABOUTBOX (English (U.S.))
+Resource9=IDD_SIMPLE_FILTER_DIALOG (English (U.S.))
 Class11=CTransformationsDialog
 Class12=Tcategory_Recordset
+Class13=TCatDef
 Resource10=IDR_MAINFRAME (English (U.S.))
 
 [CLS:CReportAsistentApp]
@@ -39,7 +40,7 @@ Type=0
 HeaderFile=ReportAsistent.h
 ImplementationFile=ReportAsistent.cpp
 Filter=N
-LastObject=ID_APP_ABOUT
+LastObject=CReportAsistentApp
 BaseClass=CWinApp
 VirtualFilter=AC
 
@@ -381,4 +382,53 @@ Column52=[tsCategorySubType].[Name], 12, 100
 Column53=[tsCategorySubType].[ShortName], 12, 40
 Column54=[tsCategorySubType].[Ord], 4, 4
 Column55=[tsCategorySubType].[Notice], 12, 510
+
+[CLS:TCatDef]
+Type=0
+HeaderFile=TCatDef.h
+ImplementationFile=TCatDef.cpp
+BaseClass=CRecordset
+Filter=N
+VirtualFilter=r
+LastObject=TCatDef
+
+[DB:TCatDef]
+DB=1
+DBType=ODBC
+ColumnCount=35
+Column1=[tmCategory].[CategoryID], 4, 4
+Column2=[tmCategory].[Name], 12, 100
+Column3=[QuantityID], 4, 4
+Column4=[CategorySubTypeID], 4, 4
+Column5=[BoolTypeID], 4, 4
+Column6=[XCategory], -7, 1
+Column7=[IncludeNULL], -7, 1
+Column8=[tmCategory].[Ord], 4, 4
+Column9=[tmCategory].[Notice], 12, 510
+Column10=[wSavedCountUsed], 4, 4
+Column11=[CategoryEnumValueID], 4, 4
+Column12=[tmCategoryEnumValue].[CategoryID], 4, 4
+Column13=[tmCategoryEnumValue].[ValueID], 4, 4
+Column14=[IntervalID], 4, 4
+Column15=[tmInterval].[CategoryID], 4, 4
+Column16=[FromValueID], 4, 4
+Column17=[ToValueID], 4, 4
+Column18=[LeftBracketTypeID], 4, 4
+Column19=[RightBracketTypeID], 4, 4
+Column20=[tmValue].[ValueID], 4, 4
+Column21=[ValueSubTypeID], 4, 4
+Column22=[ValueLong], 4, 4
+Column23=[ValueFloat], 8, 8
+Column24=[ValueString], 12, 510
+Column25=[ValueBool], -7, 1
+Column26=[ValueDate], 11, 16
+Column27=[InfinityTypeID], 4, 4
+Column28=[IsNULL], -7, 1
+Column29=[BracketTypeID], 4, 4
+Column30=[tsBracketType].[Name], 12, 100
+Column31=[ShortName], 12, 40
+Column32=[tsBracketType].[Ord], 4, 4
+Column33=[LeftBracket], 12, 100
+Column34=[RightBracket], 12, 100
+Column35=[tsBracketType].[Notice], 12, 510
 
