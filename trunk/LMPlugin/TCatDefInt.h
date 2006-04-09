@@ -1,43 +1,30 @@
-#if !defined(AFX_TCATDEF_H__9BBBA927_758B_447B_B95F_20EBE78EF590__INCLUDED_)
-#define AFX_TCATDEF_H__9BBBA927_758B_447B_B95F_20EBE78EF590__INCLUDED_
+#if !defined(AFX_TCATDEFINT_H__C5318E11_E71B_4386_B4D7_E1E7822103DD__INCLUDED_)
+#define AFX_TCATDEFINT_H__C5318E11_E71B_4386_B4D7_E1E7822103DD__INCLUDED_
 
 #if _MSC_VER > 1000
 #pragma once
 #endif // _MSC_VER > 1000
-// TCatDef.h : header file
+// TCatDefInt.h : header file
 //
 #include "afxdb.h"
 /////////////////////////////////////////////////////////////////////////////
-// TCatDef recordset
+// TCatDefInt recordset
 
-class TCatDef : public CRecordset
+class TCatDefInt : public CRecordset
 {
 public:
-	TCatDef(CDatabase* pDatabase = NULL);
-	DECLARE_DYNAMIC(TCatDef)
+	TCatDefInt(CDatabase* pDatabase = NULL);
+	DECLARE_DYNAMIC(TCatDefInt)
 
 // Field/Param Data
-	//{{AFX_FIELD(TCatDef, CRecordset)
-	long	m_CategoryID;
-	CString	m_Name;
-	long	m_QuantityID;
-	long	m_CategorySubTypeID;
-	long	m_BoolTypeID;
-	BOOL	m_XCategory;
-	BOOL	m_IncludeNULL;
-	long	m_Ord;
-	CString	m_Notice;
-	long	m_wSavedCountUsed;
-	long	m_CategoryEnumValueID;
-	long	m_CategoryID2;
-	long	m_ValueID;
+	//{{AFX_FIELD(TCatDefInt, CRecordset)
 	long	m_IntervalID;
-	long	m_CategoryID3;
+	long	m_CategoryID;
 	long	m_FromValueID;
 	long	m_ToValueID;
 	long	m_LeftBracketTypeID;
 	long	m_RightBracketTypeID;
-	long	m_ValueID2;
+	long	m_ValueID;
 	long	m_ValueSubTypeID;
 	long	m_ValueLong;
 	double	m_ValueFloat;
@@ -47,20 +34,24 @@ public:
 	long	m_InfinityTypeID;
 	BOOL	m_IsNULL;
 	long	m_BracketTypeID;
-	CString	m_Name2;
+	CString	m_Name;
 	CString	m_ShortName;
-	long	m_Ord2;
+	long	m_Ord;
 	CString	m_LeftBracket;
 	CString	m_RightBracket;
+	CString	m_Notice;
+	long	m_ValueSubTypeID2;
+	CString	m_Name2;
+	CString	m_ShortName2;
+	long	m_Ord2;
 	CString	m_Notice2;
-	long	m_id;
-	CString m_TypeName;
+	BOOL	m_Cardinal;
 	//}}AFX_FIELD
 
 
 // Overrides
 	// ClassWizard generated virtual function overrides
-	//{{AFX_VIRTUAL(TCatDef)
+	//{{AFX_VIRTUAL(TCatDefInt)
 	public:
 	virtual CString GetDefaultSQL();    // Default SQL for Recordset
 	virtual void DoFieldExchange(CFieldExchange* pFX);  // RFX support
@@ -76,4 +67,4 @@ public:
 //{{AFX_INSERT_LOCATION}}
 // Microsoft Visual C++ will insert additional declarations immediately before the previous line.
 
-#endif // !defined(AFX_TCATDEF_H__9BBBA927_758B_447B_B95F_20EBE78EF590__INCLUDED_)
+#endif // !defined(AFX_TCATDEFINT_H__C5318E11_E71B_4386_B4D7_E1E7822103DD__INCLUDED_)

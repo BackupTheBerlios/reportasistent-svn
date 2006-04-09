@@ -92,10 +92,6 @@ LINK32=link.exe
 # PROP Default_Filter "cpp;c;cxx;rc;def;r;odl;idl;hpj;bat"
 # Begin Source File
 
-SOURCE=.\Category_Recordset.cpp
-# End Source File
-# Begin Source File
-
 SOURCE=.\functions.cpp
 # End Source File
 # Begin Source File
@@ -124,7 +120,11 @@ SOURCE=.\SQL_Pomocnik.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\TCatDef.cpp
+SOURCE=.\TCatDefEnum.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\TCatDefInt.cpp
 # End Source File
 # Begin Source File
 
@@ -134,10 +134,6 @@ SOURCE=.\Tcategory_Recordset.cpp
 # Begin Group "Header Files"
 
 # PROP Default_Filter "h;hpp;hxx;hm;inl"
-# Begin Source File
-
-SOURCE=.\Category_Recordset.h
-# End Source File
 # Begin Source File
 
 SOURCE=.\functions.h
@@ -172,7 +168,11 @@ SOURCE=.\SQL_Pomocnik.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\TCatDef.h
+SOURCE=.\TCatDefEnum.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\TCatDefInt.h
 # End Source File
 # Begin Source File
 

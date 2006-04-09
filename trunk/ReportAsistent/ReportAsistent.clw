@@ -2,7 +2,7 @@
 
 [General Info]
 Version=1
-LastClass=TCatDef
+LastClass=TCatDefInt
 LastTemplate=CRecordset
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "ReportAsistent.h"
@@ -18,22 +18,22 @@ ResourceCount=10
 Resource1=IDD_ABOUTBOX
 Resource2=IDR_MAINFRAME
 Class5=CAboutDlg
-Resource3=IDD_DIALOGTEXT (English (U.S.))
+Resource3=IDD_SIMPLE_FILTER_DIALOG (English (U.S.))
 Resource4=IDD_ACTIVE_ELEMENT_DIALOG (English (U.S.))
 Class6=CElementTextDialog
-Resource5=IDD_SOURCES_DIALOG
+Resource5=IDD_DIALOGTEXT (English (U.S.))
 Class7=CSimpleFilterDialog
 Resource6=IDD_GENERATE_DIALOG (English (U.S.))
 Class8=CGenerateDialog
-Resource7=IDD_TRANSFORMATIONS_DIALOG (English (U.S.))
+Resource7=IDD_SOURCES_DIALOG
 Class9=CSourcesDialog
-Resource8=IDD_ABOUTBOX (English (U.S.))
+Resource8=IDD_TRANSFORMATIONS_DIALOG (English (U.S.))
 Class10=CActiveElementDialog
-Resource9=IDD_SIMPLE_FILTER_DIALOG (English (U.S.))
+Resource9=IDD_ABOUTBOX (English (U.S.))
 Class11=CTransformationsDialog
 Class12=Tcategory_Recordset
-Class13=TCatDef
 Resource10=IDR_MAINFRAME (English (U.S.))
+Class13=TCatDefInt
 
 [CLS:CReportAsistentApp]
 Type=0
@@ -383,15 +383,6 @@ Column53=[tsCategorySubType].[ShortName], 12, 40
 Column54=[tsCategorySubType].[Ord], 4, 4
 Column55=[tsCategorySubType].[Notice], 12, 510
 
-[CLS:TCatDef]
-Type=0
-HeaderFile=TCatDef.h
-ImplementationFile=TCatDef.cpp
-BaseClass=CRecordset
-Filter=N
-VirtualFilter=r
-LastObject=TCatDef
-
 [DB:TCatDef]
 DB=1
 DBType=ODBC
@@ -431,4 +422,69 @@ Column32=[tsBracketType].[Ord], 4, 4
 Column33=[LeftBracket], 12, 100
 Column34=[RightBracket], 12, 100
 Column35=[tsBracketType].[Notice], 12, 510
+
+[DB:TCatDefEnum]
+DB=1
+DBType=ODBC
+ColumnCount=18
+Column1=[CategoryEnumValueID], 4, 4
+Column2=[CategoryID], 4, 4
+Column3=[tmCategoryEnumValue].[ValueID], 4, 4
+Column4=[tmValue].[ValueID], 4, 4
+Column5=[tmValue].[ValueSubTypeID], 4, 4
+Column6=[ValueLong], 4, 4
+Column7=[ValueFloat], 8, 8
+Column8=[ValueString], 12, 510
+Column9=[ValueBool], -7, 1
+Column10=[ValueDate], 11, 16
+Column11=[InfinityTypeID], 4, 4
+Column12=[IsNULL], -7, 1
+Column13=[tsValueSubType].[ValueSubTypeID], 4, 4
+Column14=[Name], 12, 100
+Column15=[ShortName], 12, 40
+Column16=[Ord], 4, 4
+Column17=[Notice], 12, 510
+Column18=[Cardinal], -7, 1
+
+[CLS:TCatDefInt]
+Type=0
+HeaderFile=TCatDefInt.h
+ImplementationFile=TCatDefInt.cpp
+BaseClass=CRecordset
+Filter=N
+VirtualFilter=r
+LastObject=TCatDefInt
+
+[DB:TCatDefInt]
+DB=1
+DBType=ODBC
+ColumnCount=28
+Column1=[IntervalID], 4, 4
+Column2=[CategoryID], 4, 4
+Column3=[FromValueID], 4, 4
+Column4=[ToValueID], 4, 4
+Column5=[LeftBracketTypeID], 4, 4
+Column6=[RightBracketTypeID], 4, 4
+Column7=[ValueID], 4, 4
+Column8=[tmValue].[ValueSubTypeID], 4, 4
+Column9=[ValueLong], 4, 4
+Column10=[ValueFloat], 8, 8
+Column11=[ValueString], 12, 510
+Column12=[ValueBool], -7, 1
+Column13=[ValueDate], 11, 16
+Column14=[InfinityTypeID], 4, 4
+Column15=[IsNULL], -7, 1
+Column16=[BracketTypeID], 4, 4
+Column17=[tsBracketType].[Name], 12, 100
+Column18=[tsBracketType].[ShortName], 12, 40
+Column19=[tsBracketType].[Ord], 4, 4
+Column20=[LeftBracket], 12, 100
+Column21=[RightBracket], 12, 100
+Column22=[tsBracketType].[Notice], 12, 510
+Column23=[tsValueSubType].[ValueSubTypeID], 4, 4
+Column24=[tsValueSubType].[Name], 12, 100
+Column25=[tsValueSubType].[ShortName], 12, 40
+Column26=[tsValueSubType].[Ord], 4, 4
+Column27=[tsValueSubType].[Notice], 12, 510
+Column28=[Cardinal], -7, 1
 

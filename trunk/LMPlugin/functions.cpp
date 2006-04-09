@@ -3,7 +3,8 @@
 #include "functions.h"
 #include "Hyp_4ft_Recordset.h"
 #include "Tcategory_Recordset.h"
-#include "TCatDef.h"
+#include "TCatDefEnum.h"
+#include "TCatDefInt.h"
 #include "LM_Metabase.h"
 
 
@@ -49,21 +50,25 @@ CString fLMCategory(void* hSource)
 {
 	CString buf = "";
 	CString hlp;
+	CString hlp1;
 	CString db_name = ((CDatabase *) hSource)->GetDatabaseName ();
 
 	long cat_id;
+	int count = 0;
 
 	TCategory_Meta_Array list;
 	Category_Meta * ptcat;
 
 	Tcategory_Recordset rs ((CDatabase *) hSource);
-	TCatDef rs_def ((CDatabase *) hSource);
+	TCatDefEnum rs_def_enum ((CDatabase *) hSource);
+	TCatDefInt rs_def_int_l ((CDatabase *) hSource);
+	TCatDefInt rs_def_int_r ((CDatabase *) hSource);
 
 	TCatDefArray def;
 
 	CString subqenum;
-	LPCTSTR subqintervall;
-	LPCTSTR subqintervalr;
+	CString subqintervall;
+	CString subqintervalr;
 
 	LPCTSTR q =	
 		"SELECT * \
@@ -94,29 +99,32 @@ CString fLMCategory(void* hSource)
 			{
 				subqenum =
 					"SELECT * \
-					 FROM tmCategory, tmCategoryEnumValue, tmInterval, \
-						tmValue, tsBracketType, tsValueSubType \
-					 WHERE tmCategory.CategoryID=" + hlp +
-					  " AND tmCategory.CategoryID=tmCategoryEnumValue.CategoryID \
-						AND tmCategoryEnumValue.ValueID=tmValue.ValueID \
+					 FROM tmCategoryEnumValue, tmValue, tsValueSubType \
+					 WHERE tmCategoryEnumValue.CategoryID=" + hlp +
+					  " AND tmCategoryEnumValue.ValueID=tmValue.ValueID \
 						AND tmValue.ValueSubTypeID=tsValueSubType.ValueSubTypeID";
-				if (rs_def.Open(AFX_DB_USE_DEFAULT_TYPE, subqenum))
+				if (rs_def_enum.Open(AFX_DB_USE_DEFAULT_TYPE, subqenum))
 				{
-					while (!rs_def.IsEOF ())
+					while (!rs_def_enum.IsEOF ())
 					{
-						if (rs_def.m_TypeName == "Long integer")
-							hlp.Format ("%d", rs_def.m_ValueLong);
-						else if (rs_def.m_TypeName == "Float")
-							hlp.Format ("%f", rs_def.m_ValueFloat);
-						else if (rs_def.m_TypeName == "String")
-							hlp = rs_def.m_ValueString;
-						else if (rs_def.m_TypeName == "Boolean")
-							hlp.Format ("%s", rs_def.m_ValueBool);
-						else if (rs_def.m_TypeName == "Date")
-							hlp.Format ("%s", rs_def);
-						rs_def.MoveNext ();
+						if (rs_def_enum.m_Name == "Long integer")
+							hlp.Format ("%d", rs_def_enum.m_ValueLong);
+						else if (rs_def_enum.m_Name == "Float")
+							hlp = (LPCTSTR) (_bstr_t) rs_def_enum.m_ValueFloat;
+						else if (rs_def_enum.m_Name == "String")
+							hlp = rs_def_enum.m_ValueString;
+						else if (rs_def_enum.m_Name == "Boolean")
+							if (rs_def_enum.m_ValueBool) hlp = "TRUE";
+							else hlp = "FALSE";
+						else if (rs_def_enum.m_Name == "Date")
+							hlp = rs_def_enum.m_ValueDate.Format ("%d/%m/%Y %H:%M:%S");
+						ptcat->ctgr_def.Add (hlp);
+						count++;
+						rs_def_enum.MoveNext ();
 					}
-					rs_def.Close ();
+					ptcat->def_length = count;
+					count = 0;
+					rs_def_enum.Close ();
 				}
 				else return "";
 			}
@@ -124,26 +132,66 @@ CString fLMCategory(void* hSource)
 			{
 				subqintervall =
 					"SELECT * \
-					 FROM tmCategory, tmCategoryEnumValue, tmInterval, \
-						tmValue, tsBracketType, tsValueSubType \
-					 WHERE tmCategory.CategoryID=" + hlp +
-					   "AND tmCategory.CategoryID=tmInterval.CategoryID \
-						AND tmInterval.FromValueID=tmValue.ValueID \
+					 FROM tmInterval, tmValue, tsBracketType, tsValueSubType \
+					 WHERE tmInterval.CategoryID=" + hlp +
+					   " AND tmInterval.FromValueID=tmValue.ValueID \
 						AND tmValue.ValueSubTypeID=tsValueSubType.ValueSubTypeID \
 						AND tmInterval.LeftBracketTypeID=tsBracketType.BracketTypeID";
 				subqintervalr =
 					"SELECT * \
-					 FROM tmCategory, tmCategoryEnumValue, tmInterval, \
-						tmValue, tsBracketType, tsValueSubType \
-					 WHERE tmCategory.CategoryID=" + hlp +
-					   "AND tmCategory.CategoryID=tmInterval.CategoryID \
-						AND tmInterval.ToValueID=tmValue.ValueID \
+					 FROM tmInterval, tmValue, tsBracketType, tsValueSubType \
+					 WHERE tmInterval.CategoryID=" + hlp +
+					   " AND tmInterval.ToValueID=tmValue.ValueID \
 						AND tmValue.ValueSubTypeID=tsValueSubType.ValueSubTypeID \
 						AND tmInterval.RightBracketTypeID=tsBracketType.BracketTypeID";
+				if ((rs_def_int_l.Open(AFX_DB_USE_DEFAULT_TYPE, subqintervall))
+					&&
+					(rs_def_int_r.Open(AFX_DB_USE_DEFAULT_TYPE, subqintervalr)))
+				{
+					while ((!rs_def_int_l.IsEOF ()) && (!rs_def_int_r.IsEOF ()))
+					{
+						hlp1 = rs_def_int_l.m_LeftBracket;
+						if (rs_def_int_l.m_Name2 == "Long integer")
+							hlp.Format ("%d", rs_def_int_l.m_ValueLong);
+						else if (rs_def_int_l.m_Name2 == "Float")
+							hlp = (LPCTSTR) (_bstr_t) rs_def_int_l.m_ValueFloat;
+						else if (rs_def_int_l.m_Name2 == "String")
+							hlp = rs_def_int_l.m_ValueString;
+						else if (rs_def_int_l.m_Name2 == "Boolean")
+							if (rs_def_int_l.m_ValueBool) hlp = "TRUE";
+							else hlp = "FALSE";
+						else if (rs_def_int_l.m_Name2 == "Date")
+							hlp = rs_def_int_l.m_ValueDate.Format ("%d/%m/%Y %H:%M:%S");
+						hlp1 += hlp;
+						hlp1 += ";";
+						if (rs_def_int_r.m_Name2 == "Long integer")
+							hlp.Format ("%d", rs_def_int_r.m_ValueLong);
+						else if (rs_def_int_r.m_Name2 == "Float")
+							hlp = (LPCTSTR) (_bstr_t) rs_def_int_r.m_ValueFloat;
+						else if (rs_def_int_r.m_Name2 == "String")
+							hlp = rs_def_int_r.m_ValueString;
+						else if (rs_def_int_r.m_Name2 == "Boolean")
+							if (rs_def_int_r.m_ValueBool) hlp = "TRUE";
+							else hlp = "FALSE";
+						else if (rs_def_int_r.m_Name2 == "Date")
+							hlp = rs_def_int_r.m_ValueDate.Format ("%d/%m/%Y %H:%M:%S");
+						hlp1 += hlp;
+						hlp1 += rs_def_int_r.m_RightBracket;
+						ptcat->ctgr_def.Add (hlp1);
+						count++;
+						rs_def_int_l.MoveNext ();
+						rs_def_int_r.MoveNext ();
+					}
+					ptcat->def_length = count;
+					count = 0;
+					rs_def_int_l.Close ();
+					rs_def_int_r.Close ();
+				}
+				else return "";
 			}
 			else return "";
+			//dodelat frekvence kategorii!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 			list.Add (ptcat);
-			
 			rs.MoveNext();
 		}
 		rs.Close();
@@ -153,6 +201,28 @@ CString fLMCategory(void* hSource)
 		//dedek: konec
 	}
 	else return "";
+
+	//creation of xml string
+	//load DTD
+	FILE * x = fopen ("../XML/dtd.dtd", "r");
+	CString buf1;
+	while (fscanf (x, "%s", buf1) != EOF)
+	{
+		buf = buf + (const char *) buf1 + " ";
+	}
+	fclose (x);
+	//create xml data
+/*	buf = buf + " <active_list> ";
+	for (int i = 0; i < list.GetSize (); i++)
+	{
+		buf = buf + list.GetAt (i)->xml_convert ();
+	}
+	buf += " </active_list>";
+	//just for test - creates a xml file with all hypothesis
+/*	FILE * f = fopen ("test.xml", "w");
+	fprintf (f, "%s", buf);
+	fclose (f);
+*/
 	return buf;
 }
 
