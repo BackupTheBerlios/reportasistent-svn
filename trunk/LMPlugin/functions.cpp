@@ -5,6 +5,7 @@
 #include "Tcategory_Recordset.h"
 #include "TCatDefEnum.h"
 #include "TCatDefInt.h"
+#include "TCatOrder.h"
 #include "LM_Metabase.h"
 
 
@@ -55,6 +56,9 @@ CString fLMCategory(void* hSource)
 
 	long cat_id;
 	int count = 0;
+	int ord = 0;
+
+//	BOOL end;
 
 	TCategory_Meta_Array list;
 	Category_Meta * ptcat;
@@ -63,12 +67,14 @@ CString fLMCategory(void* hSource)
 	TCatDefEnum rs_def_enum ((CDatabase *) hSource);
 	TCatDefInt rs_def_int_l ((CDatabase *) hSource);
 	TCatDefInt rs_def_int_r ((CDatabase *) hSource);
+	TCatOrder rs_ord ((CDatabase *) hSource);
 
 	TCatDefArray def;
 
 	CString subqenum;
 	CString subqintervall;
 	CString subqintervalr;
+	CString qord;
 
 	LPCTSTR q =	
 		"SELECT * \
@@ -177,6 +183,8 @@ CString fLMCategory(void* hSource)
 							hlp = rs_def_int_r.m_ValueDate.Format ("%d/%m/%Y %H:%M:%S");
 						hlp1 += hlp;
 						hlp1 += rs_def_int_r.m_RightBracket;
+						hlp1.Replace (">", "&gt;");
+						hlp1.Replace ("<", "&lt;");
 						ptcat->ctgr_def.Add (hlp1);
 						count++;
 						rs_def_int_l.MoveNext ();
@@ -190,15 +198,35 @@ CString fLMCategory(void* hSource)
 				else return "";
 			}
 			else return "";
-			//dodelat frekvence kategorii!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+			//find the order of category according to its ID \
+			for category frequency matching
+/*			end = FALSE;
+			ord = 0;
+			qord =
+				"SELECT * \
+				 FROM tmAttribute, tmCategory, tmQuantity \
+				 WHERE tmAttribute.Name=" + rs.m_Name + " \
+					AND tmAttribute.AttributeID=tmQuantity.AttributeID \
+					AND tmQuantity.QuantityID=tmCategory.QuantityID \
+				 ORDER BY tmCategory.CategoryID";
+			if (rs_ord.Open(AFX_DB_USE_DEFAULT_TYPE, qord))
+			{
+				while ((!rs_ord.IsEOF ()) && !end)
+				{
+					if (rs_ord.m_CategoryID == rs.m_CategoryID) end = TRUE;
+					ord++;
+					rs_ord.MoveNext ();
+				}
+				rs_ord.Close ();
+			}
+			else return "";
+*/			//find the frequency of category, if exists
+			//todo
+			ptcat->ctgr_freq = "N/A";
 			list.Add (ptcat);
 			rs.MoveNext();
 		}
 		rs.Close();
-
-		//dedek: ladici, smazat
-		AfxMessageBox(buf);
-		//dedek: konec
 	}
 	else return "";
 
@@ -212,17 +240,20 @@ CString fLMCategory(void* hSource)
 	}
 	fclose (x);
 	//create xml data
-/*	buf = buf + " <active_list> ";
+	buf = buf + " <active_list> ";
 	for (int i = 0; i < list.GetSize (); i++)
 	{
 		buf = buf + list.GetAt (i)->xml_convert ();
 	}
 	buf += " </active_list>";
-	//just for test - creates a xml file with all hypothesis
-/*	FILE * f = fopen ("test.xml", "w");
+	//just for test - creates a xml file with all categories
+	FILE * f = fopen ("test.xml", "w");
 	fprintf (f, "%s", buf);
 	fclose (f);
-*/
+
+
+	AfxMessageBox(buf);
+
 	return buf;
 }
 

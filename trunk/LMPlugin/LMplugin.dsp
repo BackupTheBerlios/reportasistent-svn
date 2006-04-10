@@ -130,6 +130,10 @@ SOURCE=.\TCatDefInt.cpp
 
 SOURCE=.\Tcategory_Recordset.cpp
 # End Source File
+# Begin Source File
+
+SOURCE=.\TCatOrder.cpp
+# End Source File
 # End Group
 # Begin Group "Header Files"
 
@@ -177,6 +181,10 @@ SOURCE=.\TCatDefInt.h
 # Begin Source File
 
 SOURCE=.\Tcategory_Recordset.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\TCatOrder.h
 # End Source File
 # End Group
 # Begin Group "Resource Files"

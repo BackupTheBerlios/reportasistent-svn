@@ -19,6 +19,8 @@ public:
     CString			ctgr_freq;
 	TCatDefArray	ctgr_def;
 	long			def_length;
+
+	CString			xml_convert ();
 };
 
 typedef CArray <Category_Meta *, Category_Meta *> TCategory_Meta_Array;

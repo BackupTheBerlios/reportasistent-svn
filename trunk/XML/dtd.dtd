@@ -9,7 +9,8 @@
                      ctgr_name CDATA #REQUIRED
                      ctgr_type CDATA #REQUIRED
                      ctgr_freq CDATA #REQUIRED
-                     bool_type CDATA #REQUIRED>
+                     bool_type CDATA #REQUIRED
+                     def_length CDATA #REQUIRED>
   <!ELEMENT ctgr_def EMPTY>
   <!ATTLIST ctgr_def definition CDATA #REQUIRED>
   <!ELEMENT ti_cedent (ti_literal*)>
