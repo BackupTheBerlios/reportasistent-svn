@@ -29,7 +29,6 @@ BEGIN_MESSAGE_MAP(CSkeletonDoc, CDocument)
 	//{{AFX_MSG_MAP(CSkeletonDoc)
 	ON_COMMAND(ID_ELEMENT_EDIT, OnElementEdit)
 	ON_COMMAND(ID_MMGENREP, OnMmgenrep)
-	ON_COMMAND(ID_MMDELETE, OnMmdelete)
 	//}}AFX_MSG_MAP
 	ON_COMMAND_RANGE(ID_MMNEWSTATICFIRST, ID_MMNEWSTATICLAST, OnMmnewelement)
 	ON_COMMAND_RANGE(ID_MMNEWACTIVEFIRST, ID_MMNEWACTIVELAST, OnMmnewelement)
@@ -737,29 +736,29 @@ void CSkeletonDoc::TransformActiveElement(IXMLDOMElementPtr & element)
 /***/
 }
 
-void CSkeletonDoc::OnMmdelete() 
-{
-	CTreeCtrl & hTreeCtrl = GetFirstView()->GetTreeCtrl();
-	
-	HTREEITEM hSelTreeItem = hTreeCtrl.GetSelectedItem();
-
-	IXMLDOMElementPtr selected_element = ElementFromItemData(hTreeCtrl.GetItemData( hSelTreeItem ));
-	
-	IXMLDOMElementPtr parent_element= selected_element->parentNode;
-
-
-	parent_element->removeChild(selected_element);
-
-	if (0 == hTreeCtrl.DeleteItem(hSelTreeItem))
-	{
-		AfxMessageBox("Smazani prvku z TreeCtrl se nepovedlo.",0,0);
-		return;
-	}
-	
-
-	SetModifiedFlag();		
-	UpdateAllViews(NULL);
-}
+//DEL void CSkeletonDoc::OnMmdelete() 
+//DEL {
+//DEL 	CTreeCtrl & hTreeCtrl = GetFirstView()->GetTreeCtrl();
+//DEL 	
+//DEL 	HTREEITEM hSelTreeItem = hTreeCtrl.GetSelectedItem();
+//DEL 
+//DEL 	IXMLDOMElementPtr selected_element = ElementFromItemData(hTreeCtrl.GetItemData( hSelTreeItem ));
+//DEL 	
+//DEL 	IXMLDOMElementPtr parent_element= selected_element->parentNode;
+//DEL 
+//DEL 
+//DEL 	parent_element->removeChild(selected_element);
+//DEL 
+//DEL 	if (0 == hTreeCtrl.DeleteItem(hSelTreeItem))
+//DEL 	{
+//DEL 		AfxMessageBox("Smazani prvku z TreeCtrl se nepovedlo.",0,0);
+//DEL 		return;
+//DEL 	}
+//DEL 	
+//DEL 
+//DEL 	SetModifiedFlag();		
+//DEL 	UpdateAllViews(NULL);
+//DEL }
 
 void CSkeletonDoc::OnMmnewelement(UINT nMessageID) 
 {
@@ -848,4 +847,18 @@ void CSkeletonDoc::ChangeIDsInTree(IXMLDOMElementPtr pElm)
 	CElementManager::elId_t idTypeElm = OElementManager.IdentifyElement(pElm);
 	pElm->setAttribute("id",(LPCTSTR)CreateNewID(idTypeElm));	
 	return;
+}
+
+
+
+BOOL CSkeletonDoc::IsDescendantOfElement(IXMLDOMElementPtr pDescendantXMLElm, IXMLDOMElementPtr pAncestorXMLElm)
+{
+	BOOL bDescInAnc=FALSE;
+	IXMLDOMElementPtr pTop=m_pXMLDom->GetdocumentElement();
+
+	while ((pTop!=pDescendantXMLElm)&& !(bDescInAnc= (pDescendantXMLElm==pAncestorXMLElm)))
+		pDescendantXMLElm = pDescendantXMLElm->GetparentNode();
+
+	return (bDescInAnc);
+
 }

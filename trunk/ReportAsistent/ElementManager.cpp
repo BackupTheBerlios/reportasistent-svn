@@ -215,9 +215,6 @@ BOOL CElementManager::CanInsertChildHere(IXMLDOMElementPtr &child, IXMLDOMElemen
 	//zkusi ho pridat a kdyz to projde tak ho zase vynda :-)
 	try
 	{
-		AfxMessageBox(parent->xml);
-		AfxMessageBox(child->xml);
-
 		new_child_appended = parent->appendChild(child);
 		IXMLDOMDocument2 * doc2 = NULL; 
 		parent->ownerDocument.QueryInterface(__uuidof(IXMLDOMDocument2), &doc2);

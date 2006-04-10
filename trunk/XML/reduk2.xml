@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="windows-1250"?>
+<!DOCTYPE report [
+
+<!ELEMENT report ( chapter | include )* >
+<!ATTLIST report title CDATA #IMPLIED >
+<!ATTLIST report subtitle CDATA #IMPLIED >
+<!ATTLIST report author CDATA #IMPLIED >
+<!ATTLIST report id ID #REQUIRED >
+
+<!ELEMENT chapter ( (paragraph | include | active_element | attr_link_table)*, chapter* ) > <!--nejprve texty, pak vnorene kapitoly -->
+<!ATTLIST chapter title CDATA #REQUIRED >
+<!ATTLIST chapter id ID #REQUIRED >
+
+<!ELEMENT active_element ( attributes, filter, output )>
+<!ATTLIST active_element type CDATA #REQUIRED >
+<!ATTLIST active_element source CDATA #REQUIRED >
+<!ATTLIST active_element id ID #REQUIRED >
+
+<!ELEMENT attributes (element_attributes) >
+
+<!ELEMENT element_attributes (attribute*) >
+
+<!ELEMENT attribute EMPTY >
+<!ATTLIST attribute name CDATA #REQUIRED>
+<!ATTLIST attribute value CDATA #REQUIRED>
+
+<!ELEMENT filter (selection*) >
+<!ATTLIST filter type CDATA #REQUIRED>
+	
+<!ELEMENT selection EMPTY >
+<!ATTLIST selection id CDATA #REQUIRED>	<!-- odkaz na data ze zasuvky nikoli ID prvku - mozna prejmenovat --> 
+
+<!ELEMENT output (transformation*) >
+
+<!ELEMENT transformation EMPTY >
+<!ATTLIST transformation name CDATA #REQUIRED>
+	
+<!ELEMENT attr_link_table (link*) >
+<!ATTLIST attr_link_table target CDATA #REQUIRED>
+<!ATTLIST attr_link_table style CDATA #REQUIRED>
+<!ATTLIST attr_link_table id ID #REQUIRED >
+
+<!ELEMENT link EMPTY>
+<!ATTLIST link attr_name CDATA #REQUIRED>
+<!ATTLIST link caption CDATA #REQUIRED>
+
+
+<!ELEMENT include EMPTY >
+<!ATTLIST include file CDATA #REQUIRED >
+<!ATTLIST include id ID #REQUIRED >
+
+<!ELEMENT paragraph ( graph | table | text | attr_link)* >
+<!ATTLIST paragraph style CDATA #IMPLIED >
+<!ATTLIST paragraph id ID #REQUIRED >
+
+<!ELEMENT text ( #PCDATA | br | tab )* >
+<!ATTLIST text style CDATA #IMPLIED >
+<!ATTLIST text id ID #REQUIRED >
+
+<!ELEMENT tab EMPTY > <!-- do textu vlozi tabulator -->
+
+<!ELEMENT br EMPTY > <!-- do textu vlozi prechod na novy radek - nikoliv konec odstavce -->
+
+<!ELEMENT attr_link EMPTY >
+<!ATTLIST attr_link id ID #REQUIRED >
+<!ATTLIST attr_link target CDATA #REQUIRED >
+<!ATTLIST attr_link attr_name CDATA #REQUIRED >
+
+
+<!ELEMENT graph ( categories? , chart+ ) >
+<!ATTLIST graph title CDATA #IMPLIED >
+<!ATTLIST graph charttype CDATA #REQUIRED >	<!-- napr: xlLine, xlPie, xlBarStacked -->
+	<!-- kompletni seznam pro OfficeXP k nalezeni na http://msdn.microsoft.com/library/en-us/vbagr10/html/grprocharttype.asp -->
+<!ATTLIST graph showlegend (true | false) "false" >
+<!ATTLIST graph height CDATA #IMPLIED >	<!-- nasobek sirky strnaky -->
+<!ATTLIST graph width CDATA #IMPLIED >	<!-- nasobek sirky strnaky -->	
+<!ATTLIST graph id ID #REQUIRED >
+
+
+<!ELEMENT categories ( category+ ) >
+<!ATTLIST categories id ID #REQUIRED >
+
+<!ELEMENT category EMPTY >
+<!ATTLIST category title CDATA #REQUIRED >
+<!ATTLIST category id ID #REQUIRED >
+
+<!ELEMENT chart ( value+ ) >
+<!ATTLIST chart title CDATA #IMPLIED >
+<!ATTLIST chart id ID #REQUIRED >
+
+<!ELEMENT value EMPTY >
+<!ATTLIST value value CDATA #REQUIRED >	<!-- cislo nebo cislo s procentama -->
+<!ATTLIST value id ID #REQUIRED >
+
+<!ELEMENT table ( tr+ ) >
+<!ATTLIST table cols CDATA #REQUIRED >
+<!ATTLIST table rows CDATA #REQUIRED >
+<!ATTLIST table borderwidth CDATA "0" >	<!-- default borderwidth=0 -->
+<!ATTLIST table id ID #REQUIRED >
+
+<!ELEMENT tr ( td+ ) >
+<!ATTLIST tr id ID #REQUIRED >
+
+<!ELEMENT td ( text? ) >
+<!ATTLIST td colspan CDATA #IMPLIED >
+<!ATTLIST td rowspan CDATA #IMPLIED >
+<!ATTLIST td bgcolor CDATA #IMPLIED >	<!-- pouze kody #RRGGBB pojmenovane barvy nejsou podporovany -->
+<!ATTLIST td id ID #REQUIRED >
+
+
+]>
+<report title="Nadpis" subtitle="podnadpis" author="jmeno autora" id="report1">
+	<chapter title="nadpis kapitoly" id="ch_aktivni1">
+		<paragraph style="Normální" id="paragraph1">
+			<text id="text7">Nějaký text</text>
+		</paragraph>
+		<active_element type="hyp_4ft" source="" id="hyp_4ft1">
+			<attributes>
+				<element_attributes>
+					<attribute name="id" value=""/>
+					<attribute name="db_name" value=""/>
+					<attribute name="matrix_name" value=""/>
+					<attribute name="task_name" value=""/>
+					<attribute name="a" value=""/>
+					<attribute name="b" value=""/>
+					<attribute name="c" value=""/>
+					<attribute name="d" value=""/>
+					<attribute name="conf" value=""/>
+					<attribute name="d_conf" value=""/>
+					<attribute name="e_conf" value=""/>
+					<attribute name="support" value=""/>
+					<attribute name="completeness" value=""/>
+					<attribute name="avg_diff" value=""/>
+					<attribute name="low_bnd_imp" value=""/>
+					<attribute name="up_bnd_imp" value=""/>
+					<attribute name="low_bnd_dbl_imp" value=""/>
+					<attribute name="up_bnd_dbl_imp" value=""/>
+					<attribute name="low_bnd_eq" value=""/>
+					<attribute name="up_bnd_eq" value=""/>
+					<attribute name="fisher" value=""/>
+					<attribute name="chi_sq" value=""/>
+					<attribute name="antecedent" value=""/>
+					<attribute name="succedent" value=""/>
+					<attribute name="condition" value=""/>
+				</element_attributes>
+			</attributes>
+			<filter type="simple">
+			</filter>
+			<output>
+				<transformation name="HeaderAndCedents"/>
+			</output>
+		</active_element>
+		<active_element type="category" source="" id="category1">
+			<attributes>
+				<element_attributes>
+				</element_attributes>
+			</attributes>
+			<filter type="simple">
+			</filter>
+			<output>
+				<transformation name="HeaderAndCedents"/>
+			</output>
+		</active_element>
+		<attr_link_table id="attr_link_table1" target="" style="">
+			<link attr_name="" caption=""/>
+		</attr_link_table>
+		<paragraph style="Normální" id="paragraph12414"><attr_link id="attr_link1" target="" attr_name=""/>
+		</paragraph>
+	</chapter>
+	<!--
+	<include file="../XML/include_doc.doc" id="include1"/>
+	-->
+	<chapter title="nadpis kapitoly" id="chapter7732"><paragraph style="Normální" id="paragraph6361">
+			<text id="text1839">Co se rádo to se rádo</text>
+		</paragraph></chapter>
+</report>

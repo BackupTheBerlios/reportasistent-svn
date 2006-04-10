@@ -31,6 +31,8 @@ BEGIN_MESSAGE_MAP(CSkeletonView, CTreeView)
 	ON_NOTIFY_REFLECT(TVN_BEGINDRAG, OnBegindrag)
 	ON_WM_MOUSEMOVE()
 	ON_WM_LBUTTONUP()
+	ON_COMMAND(ID_EDIT_CUT, OnEditCut)
+	ON_COMMAND(ID_MMDELETE, OnMmdelete)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -491,18 +493,26 @@ void CSkeletonView::OnBegindrag(NMHDR* pNMHDR, LRESULT* pResult)
 	//tohle je struktura informaci o teto notification message
 	NM_TREEVIEW* pNMTreeView = (NM_TREEVIEW*)pNMHDR;
 
+	CElementManager & OElementManager = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
 	CPoint      ptAction;
 	UINT        nFlags;
+	CTreeCtrl&  rTreeCtrl=GetTreeCtrl(); 
 
 	GetCursorPos(&ptAction);
 	ScreenToClient(&ptAction);
 	ASSERT(!m_bDragging);
-	m_bDragging = TRUE;
-	m_hitemDrag = GetTreeCtrl().HitTest(ptAction, &nFlags);
+	m_hitemDrag = rTreeCtrl.HitTest(ptAction, &nFlags);
+
+	IXMLDOMElementPtr pDragXMLDomElement = GetDocument()->ElementFromItemData(rTreeCtrl.GetItemData(m_hitemDrag));
+	//prvky ktere nelze presouvat:	jen report
+	if (ELID_REPORT==OElementManager.IdentifyElement(pDragXMLDomElement))
+		return;
+
 	m_hitemDrop = NULL;
+	m_bDragging = TRUE;
 
 	ASSERT(m_pimagelist == NULL);
-	m_pimagelist = GetTreeCtrl().CreateDragImage(m_hitemDrag);  // get the image list for dragging
+	m_pimagelist = rTreeCtrl.CreateDragImage(m_hitemDrag);  // get the image list for dragging
 	m_pimagelist->DragShowNolock(TRUE);
 	m_pimagelist->SetDragCursorImage(0, CPoint(0, 0));
 	m_pimagelist->BeginDrag(0, CPoint(0,0));
@@ -545,69 +555,129 @@ void CSkeletonView::OnLButtonUp(UINT nFlags, CPoint point)
 		delete m_pimagelist;
 		m_pimagelist = NULL;
 
+
 		CElementManager & OElementManager = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
 		IXMLDOMElementPtr pXMLElmDrag= (IXMLDOMElement*)GetTreeCtrl().GetItemData(m_hitemDrag);
 		IXMLDOMElementPtr pXMLElmDrop= (IXMLDOMElement*)GetTreeCtrl().GetItemData(m_hitemDrop);
 		IXMLDOMElementPtr pNewXMLElm=NULL;
-		AfxMessageBox("Drag a taky drop:");
-		AfxMessageBox(pXMLElmDrag->xml);
-		AfxMessageBox(pXMLElmDrop->xml);
+		IXMLDOMElementPtr pResElm=NULL;
+		IXMLDOMElementPtr pParentDrag=NULL;
+		IXMLDOMElementPtr pRSiblingDrag=NULL;
+
+		//AfxMessageBox(pXMLElmDrag->xml);
+		//AfxMessageBox(pXMLElmDrop->xml);
 
 		if (m_hitemDrag != m_hitemDrop)
 		{
-		//zkopiruji XML Dragu do noveho uzlu XML stromu
-			//vytvorim novy IXMLDOMDoc
-				IXMLDOMDocumentPtr pNewXMLDoc;
-				pNewXMLDoc.CreateInstance(_T("Msxml2.DOMDocument"));	
-			//XML do nej natahnu
-				HRESULT hRes = pNewXMLDoc->loadXML(pXMLElmDrag->xml);
-				if (pNewXMLDoc->parseError->errorCode != S_OK)
+			//zkontroluji, neni-li Drop potomkem Dragu
+				if (GetDocument()->IsDescendantOfElement(pXMLElmDrop,pXMLElmDrag))
 				{
-					AfxMessageBox(pNewXMLDoc->parseError->reason);
+					AfxMessageBox("Nelze presunout prvek do jeho podstromu");
+					goto end_place;
 				}
-			//zmenim id vsech prvku
-				CElementManager & OElementManager = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
-				pNewXMLElm = pNewXMLDoc->GetdocumentElement();
+	
+			//Odstranim Drag ze stromu do NewElm
+				pParentDrag=pXMLElmDrag->GetparentNode();
+				pRSiblingDrag=pXMLElmDrag->GetnextSibling();
+				try
+				{
+					pNewXMLElm =pParentDrag->removeChild((IXMLDOMElement*)pXMLElmDrag);
+				}						
+				catch (_com_error &e)
+				{
+					AfxMessageBox(e.Description());
+				}
 
-				GetDocument()->ChangeIDsInTree(pNewXMLElm);
+				AfxMessageBox("Odebran drag do:");
 
-			//pripojim ho do existujiciho
+				AfxMessageBox(pNewXMLElm->xml);
+
+			//otestuji, lze-li dat NewElm do Dropu
 				if (0== OElementManager.CanInsertChildHere(pNewXMLElm,pXMLElmDrop))
 				{
-					AfxMessageBox(IDS_INSERT_NEW_ELEMENT_WRONG_LOCATION,0,0);
-					pNewXMLDoc.Release();
-					MessageBeep(0);
-					
-				}
-				else
-				{
-
-					AfxMessageBox("Novy:");
-					AfxMessageBox(pNewXMLElm->xml);
-				//novy XML uzel vlozim do XML stromu
+					//vratim Drag do stromu
 					try
 					{
-						IXMLDOMElementPtr pResElm=pXMLElmDrop->appendChild(pNewXMLElm);
-						if (0!=pResElm)
-						{
-							GetDocument()->SetModifiedFlag();		
-							GetDocument()->UpdateAllViews(NULL, 0);
-						}
-
+						if (NULL==pRSiblingDrag) pParentDrag->appendChild(pNewXMLElm);
+						else
+							pParentDrag->insertBefore(pNewXMLElm,(IXMLDOMElement*) pRSiblingDrag);
 					}
 					catch (_com_error &e)
 					{
-						//AfxMessageBox(e.ErrorMessage());
 						AfxMessageBox(e.Description());
 					}
+					AfxMessageBox(IDS_INSERT_NEW_ELEMENT_WRONG_LOCATION,0,0);
+					MessageBeep(0);
+					goto end_place;					
 				}
+				
+			//NewElm vlozim do Dropu
+				try
+				{
+					pResElm=pXMLElmDrop->appendChild(pNewXMLElm);
+					if (0!=pResElm)
+					{
+						GetDocument()->SetModifiedFlag();		
+						GetDocument()->UpdateAllViews(NULL, 0);
+					}
+					else
+					{
+						MessageBeep(0);
+						goto end_place;
+					}
+
+
+				}
+				catch (_com_error &e)
+				{
+					//AfxMessageBox(e.ErrorMessage());
+					AfxMessageBox(e.Description());
+				}
+								
 		}
 		else
 			MessageBeep(0);
-
+		
+		end_place:
 		ReleaseCapture();
 		m_bDragging = FALSE;
 		GetTreeCtrl().SelectDropTarget(NULL);
 	}	
 	CTreeView::OnLButtonUp(nFlags, point);
+}
+
+void CSkeletonView::OnEditCut() 
+{
+	OnEditCopy();
+	OnMmdelete();
+}
+
+void CSkeletonView::OnMmdelete() 
+{
+
+	
+	HTREEITEM hSelTreeItem = GetTreeCtrl().GetSelectedItem();
+
+	IXMLDOMElementPtr selected_element = GetDocument()->ElementFromItemData(GetTreeCtrl().GetItemData( hSelTreeItem ));
+	
+	IXMLDOMElementPtr parent_element= selected_element->parentNode;
+	
+	CElementManager & OElementManager = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
+	//prvky ktere nelze mazat:	jen report
+	if (ELID_REPORT==OElementManager.IdentifyElement(selected_element))
+		return;
+
+
+	parent_element->removeChild((IXMLDOMElement*)selected_element);
+
+	if (0 == GetTreeCtrl().DeleteItem(hSelTreeItem))
+	{
+		AfxMessageBox("Smazani prvku z TreeCtrl se nepovedlo.",0,0);
+		return;
+	}
+	
+
+	GetDocument()->SetModifiedFlag();		
+	GetDocument()->UpdateAllViews(NULL);
+	
 }

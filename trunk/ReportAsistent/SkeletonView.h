@@ -62,6 +62,8 @@ protected:
 	afx_msg void OnBegindrag(NMHDR* pNMHDR, LRESULT* pResult);
 	afx_msg void OnMouseMove(UINT nFlags, CPoint point);
 	afx_msg void OnLButtonUp(UINT nFlags, CPoint point);
+	afx_msg void OnEditCut();
+	afx_msg void OnMmdelete();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };

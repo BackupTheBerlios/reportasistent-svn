@@ -2,13 +2,13 @@
 
 [General Info]
 Version=1
-LastClass=TCatDefInt
+LastClass=CSkeletonView
 LastTemplate=CRecordset
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "ReportAsistent.h"
 LastPage=0
 
-ClassCount=13
+ClassCount=12
 Class1=CReportAsistentApp
 Class2=CSkeletonDoc
 Class3=CSkeletonView
@@ -18,22 +18,21 @@ ResourceCount=10
 Resource1=IDD_ABOUTBOX
 Resource2=IDR_MAINFRAME
 Class5=CAboutDlg
-Resource3=IDD_SIMPLE_FILTER_DIALOG (English (U.S.))
-Resource4=IDD_ACTIVE_ELEMENT_DIALOG (English (U.S.))
+Resource3=IDD_TRANSFORMATIONS_DIALOG (English (U.S.))
+Resource4=IDD_GENERATE_DIALOG (English (U.S.))
 Class6=CElementTextDialog
-Resource5=IDD_DIALOGTEXT (English (U.S.))
+Resource5=IDD_ABOUTBOX (English (U.S.))
 Class7=CSimpleFilterDialog
-Resource6=IDD_GENERATE_DIALOG (English (U.S.))
+Resource6=IDD_ACTIVE_ELEMENT_DIALOG (English (U.S.))
 Class8=CGenerateDialog
-Resource7=IDD_SOURCES_DIALOG
+Resource7=IDD_SIMPLE_FILTER_DIALOG (English (U.S.))
 Class9=CSourcesDialog
-Resource8=IDD_TRANSFORMATIONS_DIALOG (English (U.S.))
+Resource8=IDD_DIALOGTEXT (English (U.S.))
 Class10=CActiveElementDialog
-Resource9=IDD_ABOUTBOX (English (U.S.))
+Resource9=IDD_SOURCES_DIALOG
 Class11=CTransformationsDialog
 Class12=Tcategory_Recordset
 Resource10=IDR_MAINFRAME (English (U.S.))
-Class13=TCatDefInt
 
 [CLS:CReportAsistentApp]
 Type=0
@@ -445,15 +444,6 @@ Column15=[ShortName], 12, 40
 Column16=[Ord], 4, 4
 Column17=[Notice], 12, 510
 Column18=[Cardinal], -7, 1
-
-[CLS:TCatDefInt]
-Type=0
-HeaderFile=TCatDefInt.h
-ImplementationFile=TCatDefInt.cpp
-BaseClass=CRecordset
-Filter=N
-VirtualFilter=r
-LastObject=TCatDefInt
 
 [DB:TCatDefInt]
 DB=1

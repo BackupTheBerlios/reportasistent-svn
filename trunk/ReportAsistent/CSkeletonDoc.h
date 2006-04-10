@@ -59,7 +59,6 @@ protected:
 	//{{AFX_MSG(CSkeletonDoc)
 	afx_msg void OnElementEdit();
 	afx_msg void OnMmgenrep();
-	afx_msg void OnMmdelete();
 	//}}AFX_MSG
 	afx_msg void OnMmnewelement(UINT nMessageID);
 	DECLARE_MESSAGE_MAP()
@@ -85,6 +84,7 @@ protected:
 
 	
 public:
+	BOOL IsDescendantOfElement(IXMLDOMElementPtr pDescendantXMLElm,IXMLDOMElementPtr pAncestorXMLElm);
 	void ChangeIDsInTree(IXMLDOMElementPtr pXMLElm);
 	void Generate();
 	CString CreateNewID(CElementManager::elId_t element_type);
