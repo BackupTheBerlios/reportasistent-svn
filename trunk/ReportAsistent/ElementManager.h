@@ -50,6 +50,7 @@ private:
 
 
 public:
+	BOOL CanInsertBefore(IXMLDOMElementPtr &pInserted, IXMLDOMElementPtr &pTarget);
 	elId_t getFirstActiveElementID();
 	elId_t getFirstStaticElementID();
 	CString CreateElementCaption(IXMLDOMElementPtr & element);

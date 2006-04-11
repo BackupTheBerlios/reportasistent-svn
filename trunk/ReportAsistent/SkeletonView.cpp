@@ -33,6 +33,7 @@ BEGIN_MESSAGE_MAP(CSkeletonView, CTreeView)
 	ON_WM_LBUTTONUP()
 	ON_COMMAND(ID_EDIT_CUT, OnEditCut)
 	ON_COMMAND(ID_MMDELETE, OnMmdelete)
+	ON_WM_CAPTURECHANGED()
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -316,35 +317,38 @@ void CSkeletonView::OnRButtonDown(UINT nFlags, CPoint point)
 	CTreeView::OnRButtonDown(nFlags, point);
 }
 
-// Iva: Puvodni zamer: podle vybraneho prvku TreeCtrl disablovat polozky v Menu->Edit->InsertNew
-//Lepsi reseni: pridavani je vzdy mozne a to na nejblizsi nasledujici vhodne misto
 
-//DEL void CSkeletonView::OnCaptureChanged(CWnd *pWnd) 
-//DEL {
-//DEL 	CElementManager & OElementManager = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
-//DEL 	CTreeCtrl& rTreeCtrl = GetTreeCtrl() ;
-//DEL 
-//DEL 	CMenu * hMainMenu = AfxGetApp()->GetMainWnd()->GetMenu();
-//DEL 	CMenu * hEditMenu = hMainMenu->GetSubMenu(1/*Edit*/)->GetSubMenu(7/*Insert Nes*/);
-//DEL 	
-//DEL 	HTREEITEM hSelTreeCtrlItem = rTreeCtrl.GetSelectedItem();
-//DEL 
-//DEL 	CElementManager::elId_t idTypeEl =
-//DEL 	 OElementManager.IdentifyElement 
-//DEL 		(
-//DEL 		 (IXMLDOMElementPtr)(IXMLDOMElement *) rTreeCtrl.GetItemData( hTreeCtrlItem)
-//DEL 		);
-//DEL 	
-//DEL 	switch (idTypeEl)
-//DEL 	{
-//DEL 		case ELID_UNKNOWN: return;
-//DEL 
-//DEL 		case ELID_REPORT: 
-//DEL 		{
-//DEL 	
-//DEL 	CTreeView::OnCaptureChanged(pWnd);
-//DEL }
-//DEL 
+// Iva: Puvodni zamer: podle vybraneho prvku TreeCtrl disablovat polozky v Menu->Edit->InsertNew
+//Pozn:Pouziji!
+
+// void CSkeletonView::OnCaptureChanged(CWnd *pWnd) 
+// {
+// 	CElementManager & OElementManager = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
+// 	CTreeCtrl& rTreeCtrl = GetTreeCtrl() ;
+// 
+// 	CMenu * hMainMenu = AfxGetApp()->GetMainWnd()->GetMenu();
+// 	CMenu * hEditMenu = hMainMenu->GetSubMenu(1/*Edit*/)->GetSubMenu(7/*Insert New*/);
+ 	
+// 	HTREEITEM hSelTreeCtrlItem = rTreeCtrl.GetSelectedItem();
+ 
+// 	CElementManager::elId_t idTypeEl =
+// 	 OElementManager.IdentifyElement 
+// 		(
+// 		 (IXMLDOMElementPtr)(IXMLDOMElement *) rTreeCtrl.GetItemData( hTreeCtrlItem)
+// 		);
+ 	
+// 	switch (idTypeEl)
+// 	{
+ //		case ELID_UNKNOWN: break;
+ 
+ //		case ELID_REPORT: 
+ //		{
+//			//disable:
+//			hEditMenu->EnableMenuItem(+ID_MMNEWSTATICFIRST/*ID*/,MF_GRAYED|MF_BYPOSITION)
+ 	
+ //	CTreeView::OnCaptureChanged(pWnd);
+ //}
+ 
 void CSkeletonView::OnEditCopy() 
 {
 	AfxMessageBox("Bude se kopirovat.",0,0);
@@ -449,44 +453,54 @@ void CSkeletonView::OnEditPaste()
 	GetDocument()->ChangeIDsInTree(pNewXMLElm);
 	AfxMessageBox(pNewXMLDoc->xml,0,0);
 
-//pripojim ho do existujiciho
-	if (0== OElementManager.CanInsertChildHere(pNewXMLElm,SelXMLDomElement))
+//zkusim vlozit DOVNITR do existujiciho
+	if (0!= OElementManager.CanInsertChildHere(pNewXMLElm,SelXMLDomElement))
 	{
-		AfxMessageBox(IDS_INSERT_NEW_ELEMENT_WRONG_LOCATION,0,0);
-		pNewXMLDoc.Release();	
-		return;
-	}
-	
-	try
-	{
-		IXMLDOMElementPtr pResElm=SelXMLDomElement->appendChild(pNewXMLElm);
-		if (0!=pResElm)
+		try
 		{
-			GetDocument()->SetModifiedFlag();		
-			GetDocument()->UpdateAllViews(NULL, 0);
+			IXMLDOMElementPtr pResElm=SelXMLDomElement->appendChild(pNewXMLElm);
+			if (0!=pResElm)
+			{
+				GetDocument()->SetModifiedFlag();		
+				GetDocument()->UpdateAllViews(NULL, 0);
+			}
+			pNewXMLDoc.Release();
+			return; //povedlo se prvek vlozit DOVNITR
+
 		}
-		return;
-
-
+		catch (_com_error &e)
+		{
+			AfxMessageBox(e.Description());
+			//AfxMessageBox(IDS_INSERT_NEW_ELEMENT_WRONG_LOCATION);	
+		}
 	}
-	catch (_com_error &e)
+//zkusim vlozit PRED existujici
+	if (0!= OElementManager.CanInsertBefore(pNewXMLElm,SelXMLDomElement))
 	{
-		//AfxMessageBox(e.ErrorMessage());
-		AfxMessageBox(e.Description());
+		try
+		{
+			IXMLDOMNodePtr pParent=SelXMLDomElement->GetparentNode();
+			IXMLDOMElementPtr pResElm=pParent->insertBefore(pNewXMLElm,(IXMLDOMElement*)SelXMLDomElement);
+			if (0!=pResElm)
+			{
+				GetDocument()->SetModifiedFlag();		
+				GetDocument()->UpdateAllViews(NULL, 0);
+			}
+			pNewXMLDoc.Release();
+			return; //povedlo se prvek vlozit PRED
+
+		}
+		catch (_com_error &e)
+		{
+			AfxMessageBox(e.Description());
+		}
 	}
 
-
-	AfxMessageBox(IDS_INSERT_NEW_ELEMENT_WRONG_LOCATION);	
-
+	AfxMessageBox(IDS_INSERT_NEW_ELEMENT_WRONG_LOCATION,0,0);
+	pNewXMLDoc.Release();	
 	return;
-
-/*
-	UINT EnumClipboardFormats(
-	UINT format   // specifies a known available clipboard format
-	);
-*/
-
 }
+
 
 void CSkeletonView::OnBegindrag(NMHDR* pNMHDR, LRESULT* pResult) 
 {
@@ -562,6 +576,7 @@ void CSkeletonView::OnLButtonUp(UINT nFlags, CPoint point)
 		IXMLDOMElementPtr pNewXMLElm=NULL;
 		IXMLDOMElementPtr pResElm=NULL;
 		IXMLDOMElementPtr pParentDrag=NULL;
+		IXMLDOMElementPtr pParentDrop=NULL;
 		IXMLDOMElementPtr pRSiblingDrag=NULL;
 
 		//AfxMessageBox(pXMLElmDrag->xml);
@@ -591,52 +606,65 @@ void CSkeletonView::OnLButtonUp(UINT nFlags, CPoint point)
 				AfxMessageBox("Odebran drag do:");
 
 				AfxMessageBox(pNewXMLElm->xml);
-
-			//otestuji, lze-li dat NewElm do Dropu
-				if (0== OElementManager.CanInsertChildHere(pNewXMLElm,pXMLElmDrop))
+			
+			//otestuji, lze-li dat NewElm PRED Drop
+				if (0!= OElementManager.CanInsertBefore(pNewXMLElm,pXMLElmDrop))
 				{
-					//vratim Drag do stromu
 					try
 					{
-						if (NULL==pRSiblingDrag) pParentDrag->appendChild(pNewXMLElm);
-						else
-							pParentDrag->insertBefore(pNewXMLElm,(IXMLDOMElement*) pRSiblingDrag);
+						pParentDrop=pXMLElmDrop->GetparentNode();
+						pResElm=pParentDrop->insertBefore(pNewXMLElm,(IXMLDOMElement*)pXMLElmDrop);
+						if (0!=pResElm)
+						{
+							GetDocument()->SetModifiedFlag();		
+							GetDocument()->UpdateAllViews(NULL, 0);
+							goto end_place;	 //povedlo se prvek vlozit PRED
+						}
+
 					}
 					catch (_com_error &e)
 					{
 						AfxMessageBox(e.Description());
 					}
-					AfxMessageBox(IDS_INSERT_NEW_ELEMENT_WRONG_LOCATION,0,0);
-					MessageBeep(0);
-					goto end_place;					
 				}
-				
-			//NewElm vlozim do Dropu
+
+
+			//otestuji, lze-li dat NewElm DOVNITR do Dropu
+				if (0!= OElementManager.CanInsertChildHere(pNewXMLElm,pXMLElmDrop))
+				{				
+					try
+					{
+						pResElm=pXMLElmDrop->appendChild(pNewXMLElm);
+						if (0!=pResElm)
+						{
+							GetDocument()->SetModifiedFlag();		
+							GetDocument()->UpdateAllViews(NULL, 0);
+							goto end_place; //povedlo se dat prvek DOVNITR 
+						}
+					}
+					catch (_com_error &e)
+					{
+						AfxMessageBox(e.Description());
+					}
+				}
+
+			//vratim Drag do stromu
 				try
 				{
-					pResElm=pXMLElmDrop->appendChild(pNewXMLElm);
-					if (0!=pResElm)
-					{
-						GetDocument()->SetModifiedFlag();		
-						GetDocument()->UpdateAllViews(NULL, 0);
-					}
+					if (NULL==pRSiblingDrag) pParentDrag->appendChild(pNewXMLElm);
 					else
-					{
-						MessageBeep(0);
-						goto end_place;
-					}
-
-
+						pParentDrag->insertBefore(pNewXMLElm,(IXMLDOMElement*) pRSiblingDrag);
 				}
 				catch (_com_error &e)
 				{
-					//AfxMessageBox(e.ErrorMessage());
 					AfxMessageBox(e.Description());
 				}
-								
+				AfxMessageBox(IDS_INSERT_NEW_ELEMENT_WRONG_LOCATION,0,0);
+				
+											
 		}
-		else
-			MessageBeep(0);
+		//sem se dostanu jen pri neuspechu:
+		MessageBeep(0);
 		
 		end_place:
 		ReleaseCapture();
@@ -680,4 +708,11 @@ void CSkeletonView::OnMmdelete()
 	GetDocument()->SetModifiedFlag();		
 	GetDocument()->UpdateAllViews(NULL);
 	
+}
+
+void CSkeletonView::OnCaptureChanged(CWnd *pWnd) 
+{
+	// TODO: Add your message handler code here
+	
+	CTreeView::OnCaptureChanged(pWnd);
 }

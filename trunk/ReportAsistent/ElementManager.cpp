@@ -418,3 +418,39 @@ CString CElementManager::CreateElementCaption(IXMLDOMElementPtr &pElement)
 	ASSERT(FALSE);
 	return "";
 }
+
+BOOL CElementManager::CanInsertBefore(IXMLDOMElementPtr &pToInsert, IXMLDOMElementPtr &pTarget)
+{
+	IXMLDOMNodePtr pInserted;
+	IXMLDOMElementPtr pParent=pTarget->GetparentNode();
+	IXMLDOMParseErrorPtr err;
+	
+	//zkusi ho pridat a kdyz to projde tak ho zase vynda :-)
+	try
+	{
+		pInserted = pParent->insertBefore(pToInsert,(IXMLDOMElement*)pTarget);
+		IXMLDOMDocument2 * doc2 = NULL; 
+		pParent->ownerDocument.QueryInterface(__uuidof(IXMLDOMDocument2), &doc2);
+
+		err = doc2->validate();
+		
+		doc2->Release();
+
+	}
+	catch (_com_error e)
+	{
+		//AfxMessageBox(child->xml);
+		AfxMessageBox(e.Description());
+		return FALSE;
+	}
+
+	pParent->removeChild(pInserted);
+
+	
+	/*****/    //honza: ladici klidne zakomentujete
+	int a = err->errorCode;
+	if (a != S_OK) AfxMessageBox(err->reason);
+	/*****/
+
+	return 	err->errorCode == S_OK;	
+}
