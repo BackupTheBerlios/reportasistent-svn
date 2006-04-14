@@ -108,6 +108,14 @@ SOURCE=.\AttributeLinkDialog.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\AttributeLinkDialogBase.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\AttributeLinkTableDialog.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\CSkeletonDoc.cpp
 # End Source File
 # Begin Source File
@@ -182,6 +190,14 @@ SOURCE=.\APTransform.h
 # Begin Source File
 
 SOURCE=.\AttributeLinkDialog.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\AttributeLinkDialogBase.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\AttributeLinkTableDialog.h
 # End Source File
 # Begin Source File
 

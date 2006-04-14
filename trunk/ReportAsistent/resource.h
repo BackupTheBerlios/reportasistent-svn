@@ -23,6 +23,7 @@
 #define IDD_TRANSFORMATIONS_DIALOG      148
 #define IDB_TRANSFORMATIONS_LOGO        150
 #define IDD_ATTRIBUTE_LINK_DIALOG       151
+#define IDD_ATTRIBUTE_LINK_TABLE_DIALOG 152
 #define IDC_TREE1                       1000
 #define IDC_FILTER_LIST                 1000
 #define IDC_EDIT1                       1001
@@ -50,6 +51,8 @@
 #define IDC_TARGET_COMBO                1021
 #define IDC_ATTRIBUTES_LIST             1022
 #define IDC_REFRESH_BUTTON              1023
+#define IDC_LIST1                       1024
+#define IDC_MOVE_DOWN_BUTTON2           1025
 #define ID_MMGENREP                     32771
 #define ID_MMSOURCES                    32772
 #define ID_ELEMENT_EDIT                 32780
@@ -72,7 +75,7 @@
 #define _APS_3D_CONTROLS                     1
 #define _APS_NEXT_RESOURCE_VALUE        153
 #define _APS_NEXT_COMMAND_VALUE         32784
-#define _APS_NEXT_CONTROL_VALUE         1024
+#define _APS_NEXT_CONTROL_VALUE         1026
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

@@ -13,6 +13,7 @@
 #include "ElementTextDialog.h"
 #include "ActiveElementDialog.h"
 #include "AttributeLinkDialog.h"
+#include "AttributeLinkTableDialog.h"
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #undef THIS_FILE
@@ -530,7 +531,7 @@ void CSkeletonDoc::EditElement(IXMLDOMElementPtr selected_element)
 		EditActiveElement(selected_element);
 	}	
 	// Iva: jedna se o prvek text?
-	else if (selected_elementTypeId == ELID_TEXT)
+	else /* sem by top sai chtelo dat switch misto if*/if (selected_elementTypeId == ELID_TEXT)
 	{
 		
 		//AfxMessageBox(selected_element->text);
@@ -561,6 +562,16 @@ void CSkeletonDoc::EditElement(IXMLDOMElementPtr selected_element)
 	else if (selected_elementTypeId == ELID_ATTR_LINK)
 	{
 		CAttributeLinkDialog dlg(selected_element, AfxGetMainWnd());
+
+		if (dlg.DoModal() == IDOK)
+		{
+				SetModifiedFlag();		
+				UpdateAllViews(NULL, 0);
+		}
+	}
+	else if (selected_elementTypeId == ELID_ATTR_LINK_TABLE)
+	{
+		CAttributeLinkTableDialog dlg(selected_element, AfxGetMainWnd());
 
 		if (dlg.DoModal() == IDOK)
 		{

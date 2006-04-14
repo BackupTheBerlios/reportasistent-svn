@@ -1,13 +1,7 @@
 honzovy poznamky:
 
 
-dodelat:
-pokud je plugin output prazdny simple filter a mozna i generovani spadne
-hotovo snad :)
 
-
-
-			m_pGeneralManager
 
 ve tride App je promenna m_pGeneralManager pro instance globalnich manageru
 
@@ -22,7 +16,8 @@ CGeneralManager * m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager;
 
 
 
-<attr_link target="" attr_name="" />
+
+
 
 <attr_link_table target="" style="">
 	<link attr_name="" caption=""/>	
@@ -30,35 +25,15 @@ CGeneralManager * m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager;
 
 
 
-INSERT    v akceleratoru je pracovni zkratka insert 4ft
-
-
-
-ENTER      v akceleratoru je pracovni zkaratka edit element
-
-
-
-zrovna tady zkousim debugovat tu dll
-krasne to funguje, das LMplugin jako active project a do ty dll si nasazis breakpointy kam te napadne
-pak F5 a ono se to na nich zastavuje parada :-)
-
 
 
 dedek TODO:
-!! definice a nacitani atributu AP
 
-predelat na detekci chyb / navratovou hodnotu uvnitr call backu CAElTransform::ProcessSimpleFlter
-- hotovo
+attr_link_table
 
+generovani attr_link_* atributu
 
-default source - hotovo
 pouzivat default source!
-
-reletivni adresace metabaze v perzist ID - predelano - uklada se tam absolutni cesta .mdb souboru metabaze, 
-ale funguje i s relativni cestou viz zdroj "testovaci metabaze"
- - relativni cesta s v open predelava na absolutni viz fOpenSourceLM
-
-ElementManager - vracet zakladni DOM dokumenty
 
 DacourcesManager - 	pridat funci co zjisti podporovane prvky
 PlugsTab[0].SockInterface->hGetAPList
@@ -67,8 +42,14 @@ PlugsTab[0].SockInterface->hGetAPList
 
 
 
+hotovo:
+predelat na detekci chyb / navratovou hodnotu uvnitr call backu CAElTransform::ProcessSimpleFlter
 
+zavedeni default source
 
+reletivni adresace metabaze v perzist ID - predelano - uklada se tam absolutni cesta .mdb souboru metabaze, 
+ale funguje i s relativni cestou viz zdroj "testovaci metabaze"
+ - relativni cesta s v open predelava na absolutni viz fOpenSourceLM
 
 
 
@@ -81,6 +62,8 @@ vsimla sis rozdilu, kdyz editujes/pridavas aktivni prvak a kdyz staticky?
 -zustane zabalene to co bylo zabalane pred editaci, pridanim
 
 v RA: myslim ze by to chtelo trochu vylepsit vkladani/editaci prvku - kdyz uzivatel zmacken Cancel, tak aby se tan prvek nevlozil/nenastavila se modification flag
+
+
 
 
 

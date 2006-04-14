@@ -18,7 +18,7 @@ static char THIS_FILE[] = __FILE__;
 
 
 CAttributeLinkDialog::CAttributeLinkDialog(IXMLDOMElementPtr & edited_element, CWnd* pParent /*=NULL*/)
-	: CDialog(CAttributeLinkDialog::IDD, pParent), m_edited_element(edited_element)
+	: CDialog(CAttributeLinkDialog::IDD, pParent), CAttributeLinkDialogBase(edited_element)
 {
 	//{{AFX_DATA_INIT(CAttributeLinkDialog)
 		// NOTE: the ClassWizard will add member initialization here
@@ -51,18 +51,10 @@ BOOL CAttributeLinkDialog::OnInitDialog()
 	CDialog::OnInitDialog();
 	
 	// TODO: Add extra initialization here
-	FillTargets();
-	if (CB_ERR == m_TargetCombo.SelectString(-1, (_bstr_t) m_edited_element->getAttribute("target")))
-	{
-		CString s;
-		m_TargetCombo.GetLBText(0, s);
-		m_TargetCombo.SelectString(-1, s);
-	}
+	InitBaseDialog(m_AttributesList, m_TargetCombo);
 
-	InitAttributesList();
-	FillAttributesList();
-
-
+	
+	
 	//najdi vybranou polozku
 	LVFINDINFO info;
 	ZeroMemory(& info, sizeof info);
@@ -75,64 +67,19 @@ BOOL CAttributeLinkDialog::OnInitDialog()
 
 	//vyber vybranou
 	m_AttributesList.SetItemState(item, LVIS_SELECTED, LVIS_SELECTED);
-	
 
+	
 	
 	return TRUE;  // return TRUE unless you set the focus to a control
 	              // EXCEPTION: OCX Property Pages should return FALSE
 }
 
-void CAttributeLinkDialog::FillTargets()
-{
-	
-	IXMLDOMNodeListPtr el_list = m_edited_element->ownerDocument->selectNodes("//active_element/@id");
-
-	for (int a=0; a < el_list->length; a++)
-	{
-		m_TargetCombo.AddString(el_list->item[a]->text);
-	}
-
-	el_list.Release();
-}
-
-void CAttributeLinkDialog::InitAttributesList()
-{
-	CRect r;
-	m_AttributesList.GetWindowRect(& r);
-	m_AttributesList.InsertColumn(0, "name", LVCFMT_LEFT, r.Width()/2);
-	m_AttributesList.InsertColumn(1, "value", LVCFMT_LEFT, r.Width()/2 -10);
-}
-
-void CAttributeLinkDialog::FillAttributesList()
-{
-	m_AttributesList.DeleteAllItems();
-	
-	CString s;
-	m_TargetCombo.GetWindowText(s);
-
-	CString query;
-	query.Format("id(\"%s\")/attributes/element_attributes/attribute", (LPCTSTR) s);
-
-	IXMLDOMSelectionPtr sel = m_edited_element->ownerDocument->selectNodes((LPCTSTR) query);
-
-	for (int a=0; a < sel->length; a++)
-	{
-		IXMLDOMElementPtr el = sel->item[a];
-
-		int item = m_AttributesList.InsertItem(a, (_bstr_t) el->getAttribute("name"));
-
-		m_AttributesList.SetItemText(item, 1, (_bstr_t) el->getAttribute("value"));
-
-		el.Release();
-
-	}
-
-	sel.Release();
-}
 
 void CAttributeLinkDialog::OnSelchangeTargetCombo() 
 {
-	FillAttributesList();	
+	CString target_id;
+	m_TargetCombo.GetWindowText(target_id);
+	FillAttributesList(m_AttributesList, target_id);
 }
 
 void CAttributeLinkDialog::OnOK() 
@@ -150,7 +97,7 @@ void CAttributeLinkDialog::OnOK()
 	if (pos != NULL)
 	{
 		int nItem = m_AttributesList.GetNextSelectedItem(pos);
-		s = m_AttributesList.GetItemText(nItem, 0);
+		s = m_AttributesList.GetItemText(nItem, ATTRLIST_CL_NAME);
 	}
 	m_edited_element->setAttribute("attr_name", (LPCTSTR) s);
 	
@@ -162,17 +109,6 @@ void CAttributeLinkDialog::OnRefreshButton()
 	
 	CString s;
 	m_TargetCombo.GetWindowText(s);
-	CString query;
-	query.Format("id(\"%s\")", (LPCTSTR) s);
-	
-	IXMLDOMElementPtr el = m_edited_element->ownerDocument->selectSingleNode((LPCTSTR) query);
-	CAElTransform tr(el);
 
-	if (! tr.FillElementAttributes(0))
-		AfxMessageBox(IDS_REFRESH_EL_ATTRIBUTES_FAILED);
-	
-	el.Release();
-
-
-	FillAttributesList();
+	OnRefresh(m_AttributesList, s);
 }

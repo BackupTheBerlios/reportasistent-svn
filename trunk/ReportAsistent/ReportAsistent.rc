@@ -103,6 +103,31 @@ BEGIN
     PUSHBUTTON      "&Refresh",IDC_REFRESH_BUTTON,241,80,50,14
 END
 
+IDD_ATTRIBUTE_LINK_TABLE_DIALOG DIALOG DISCARDABLE  0, 0, 539, 252
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Dialog"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,482,7,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,482,24,50,14
+    COMBOBOX        IDC_TARGET_COMBO,65,46,118,123,CBS_DROPDOWNLIST | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Target element:",IDC_STATIC,75,28,50,8
+    CONTROL         "List1",IDC_ATTRIBUTES_LIST,"SysListView32",LVS_REPORT | 
+                    LVS_SINGLESEL | LVS_SHOWSELALWAYS | WS_BORDER | 
+                    WS_TABSTOP,38,100,261,94
+    LTEXT           "Element attributes:",IDC_STATIC,41,83,59,8
+    PUSHBUTTON      "&Refresh",IDC_REFRESH_BUTTON,241,80,50,14
+    CONTROL         "List1",IDC_LIST1,"SysListView32",LVS_REPORT | 
+                    LVS_SINGLESEL | LVS_EDITLABELS | WS_BORDER | WS_TABSTOP,
+                    375,99,97,110
+    PUSHBUTTON      ">>",IDC_ADD_BUTTON,317,120,38,14
+    PUSHBUTTON      "<<",IDC_REMOVE_BUTTON,317,140,38,14
+    LTEXT           "Selected attributes",IDC_STATIC,379,82,60,8
+    PUSHBUTTON      "move up",IDC_MOVE_UP_BUTTON,479,117,45,14
+    PUSHBUTTON      "move down",IDC_MOVE_DOWN_BUTTON2,479,137,45,14
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -126,6 +151,14 @@ BEGIN
         RIGHTMARGIN, 345
         TOPMARGIN, 7
         BOTTOMMARGIN, 211
+    END
+
+    IDD_ATTRIBUTE_LINK_TABLE_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 532
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 245
     END
 END
 #endif    // APSTUDIO_INVOKED
