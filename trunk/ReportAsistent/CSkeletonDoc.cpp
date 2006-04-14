@@ -795,7 +795,9 @@ void CSkeletonDoc::OnMmnewelement(UINT nMessageID)
 			EditElement(new_element); 
 			
 			SetModifiedFlag();		
-			UpdateAllViews(NULL, (LPARAM) (IXMLDOMElement *) new_element);
+			
+			//dedek: v medode EditElement se tez vola UpdateAllViews, tedy jesm tohle zakomentoval
+			//UpdateAllViews(NULL, (LPARAM) (IXMLDOMElement *) new_element);
 		}
 	}
 	//pridavany prvek je ACTIVE

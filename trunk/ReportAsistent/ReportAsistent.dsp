@@ -285,6 +285,10 @@ SOURCE=.\res\Toolbar.bmp
 # End Source File
 # Begin Source File
 
+SOURCE=.\res\transformations_logo.bmp
+# End Source File
+# Begin Source File
+
 SOURCE=.\res\unknowni.bmp
 # End Source File
 # End Group

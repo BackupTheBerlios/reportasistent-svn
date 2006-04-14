@@ -64,6 +64,10 @@ PlugsTab[0].SockInterface->hGetAPList
 
 
 Pro Ivu:
+vsimla sis rozdilu, kdyz editujes/pridavas aktivni prvak a kdyz staticky?
+-u aktivnich se nezlikviduje cely strom :-)
+-zustane zabalene to co bylo zabalane pred editaci, pridanim
+
 v RA: myslim ze by to chtelo trochu vylepsit vkladani/editaci prvku - kdyz uzivatel zmacken Cancel, tak aby se tan prvek nevlozil/nenastavila se modification flag
 
 
