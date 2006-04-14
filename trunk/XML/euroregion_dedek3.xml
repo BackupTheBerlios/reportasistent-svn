@@ -92,7 +92,7 @@
 
 <report title="EVROPSKÝ REGION PRAHA 2004" subtitle="Analytická otázka èíslo 3 (MFF 2004/2005)" author="Jan Dìdek" id="report1">
 
-	
+<!--	
 <chapter title="tady je nas prvni aktivni prvek" id="ch_aktivni1">
 	<active_element type="hyp_4ft" source="honzova_metabaze" id="hyp_4ft1">
 		<params/>
@@ -108,7 +108,7 @@
 		</output>
 	</active_element>
 </chapter>
-
+-->
 <chapter title="Životní hodnoty, Modernizace a elity, Zpùsob vnímání transformaèního procesu" id="chapter3">
 	<paragraph style="Normální" id="paragraph5">
 		<text id="text7">Výsledky v analytické zprávì odpovídají </text>
