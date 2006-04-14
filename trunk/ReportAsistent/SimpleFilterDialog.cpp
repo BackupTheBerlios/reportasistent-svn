@@ -52,8 +52,8 @@ CSimpleFilterDialog::~CSimpleFilterDialog()
 //	if (m_filter_transform != NULL) m_filter_transform.Release();
 
 	//ladici:
-	CAElTransform tr(m_active_element);
-	tr.FillElementAttributes(0);
+//	CAElTransform tr(m_active_element);
+//	tr.FillElementAttributes(0);
 }
 
 
@@ -150,6 +150,12 @@ BOOL CSimpleFilterDialog::LoadSource(public_source_id_t sId)
 
 	//dadici - kdykoliv smazat nebo zakomentovat
 	filter_doc->save("../XML/plug_out_example.xml");
+
+
+	//ulozi element atributy
+	CAElTransform tr(m_active_element, (IXMLDOMNodePtr) filter_doc);
+	tr.FillElementAttributes(0);
+
 	
 	//transformuje data z plugin output a vysledek nacte do m_filter_dom	
 	filter_doc->loadXML(
@@ -157,8 +163,8 @@ BOOL CSimpleFilterDialog::LoadSource(public_source_id_t sId)
 
 	
 	//dadici - kdykoliv smazat nebo zakomentovat
-	//filter_doc->save("../XML/simple_filter_example.xml");
-	
+	filter_doc->save("../XML/simple_filter_example.xml");
+
 	
 	//pridat AddRef ?
 	if (filter_doc->documentElement != NULL)

@@ -50,7 +50,7 @@ CAElTransform::CAElTransform(IXMLDOMElementPtr & active_element)
 		(_bstr_t) m_active_element->getAttribute("type")));
 
 }
-
+ 
 
 
 CAElTransform::~CAElTransform()
