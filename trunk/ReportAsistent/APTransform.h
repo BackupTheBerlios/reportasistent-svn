@@ -17,7 +17,8 @@
 class CFilterProcessor
 {
 public:
-	virtual void ProcessFilteredOut(
+	//vrati TRUE pokud funkce uspela
+	virtual BOOL ProcessFilteredOut(
 		IXMLDOMNodePtr filtered_output_node,	//XML uzel ktery z plugin output prosel fitrem
 		int node_order,							//poradi filtered_output_node uzlu mezi temi ktere prosly
 		LPARAM user1,							//uzivatelsky parametr, ktery byl predan filtrovaci funkci
@@ -37,7 +38,7 @@ private:
 
 protected:
 	void FillElementAttributes(IXMLDOMNodePtr & output_node);
-	virtual void ProcessFilteredOut(IXMLDOMNodePtr filtered_output_node, int node_order, LPARAM user1, LPARAM user2);
+	virtual BOOL ProcessFilteredOut(IXMLDOMNodePtr filtered_output_node, int node_order, LPARAM user1, LPARAM user2);
 
 	void ProcessSimpleFlter(IXMLDOMNodePtr & destination_parent);
 	void ProcessAllTransformations(IXMLDOMNodePtr & target, IXMLDOMNodePtr & destination_parent);
@@ -46,7 +47,7 @@ protected:
 
 
 public:
-	void ProcessSimpleFlter(CFilterProcessor & processor, LPARAM user1 = 0, LPARAM user2 = 0);
+	BOOL ProcessSimpleFlter(CFilterProcessor & processor, LPARAM user1 = 0, LPARAM user2 = 0);
 	BOOL FillElementAttributes(int index_of_filtered_out);
 	IXMLDOMDocumentFragmentPtr DoAllTransnformations();
 	

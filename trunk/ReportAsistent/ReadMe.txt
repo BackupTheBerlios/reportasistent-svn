@@ -48,9 +48,12 @@ dedek TODO:
 !! definice a nacitani atributu AP
 
 predelat na detekci chyb / navratovou hodnotu uvnitr call backu CAElTransform::ProcessSimpleFlter
+- hotovo
 
 
 default source - hotovo
+pouzivat default source!
+
 reletivni adresace metabaze v perzist ID - predelano - uklada se tam absolutni cesta .mdb souboru metabaze, 
 ale funguje i s relativni cestou viz zdroj "testovaci metabaze"
  - relativni cesta s v open predelava na absolutni viz fOpenSourceLM
@@ -63,12 +66,25 @@ PlugsTab[0].SockInterface->hGetAPList
 
 
 
+
+
+
+
+
+
+
+
+
 Pro Ivu:
 vsimla sis rozdilu, kdyz editujes/pridavas aktivni prvak a kdyz staticky?
 -u aktivnich se nezlikviduje cely strom :-)
 -zustane zabalene to co bylo zabalane pred editaci, pridanim
 
 v RA: myslim ze by to chtelo trochu vylepsit vkladani/editaci prvku - kdyz uzivatel zmacken Cancel, tak aby se tan prvek nevlozil/nenastavila se modification flag
+
+
+
+
 
 
 Pro Martina:

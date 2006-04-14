@@ -12,7 +12,7 @@
 #include "APTransform.h"
 #include "ElementTextDialog.h"
 #include "ActiveElementDialog.h"
-
+#include "AttributeLinkDialog.h"
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #undef THIS_FILE
@@ -536,7 +536,9 @@ void CSkeletonDoc::EditElement(IXMLDOMElementPtr selected_element)
 		//AfxMessageBox(selected_element->text);
 
 		//Vytvorim instanci dialogu pro Prvek Text
-			CElementTextDialog OElementTextDialog;
+//			CElementTextDialog OElementTextDialog;
+			//dedek neni to takhle sparvne? :
+			CElementTextDialog OElementTextDialog(AfxGetMainWnd());
 
 			//Inicializuji promenne dialogu		
 			OElementTextDialog.m_DialTextEditValue = (LPCTSTR) selected_element->text;
@@ -554,6 +556,17 @@ void CSkeletonDoc::EditElement(IXMLDOMElementPtr selected_element)
 				UpdateAllViews(NULL, 0);
 			}
 
+	}
+	//dedek
+	else if (selected_elementTypeId == ELID_ATTR_LINK)
+	{
+		CAttributeLinkDialog dlg(selected_element, AfxGetMainWnd());
+
+		if (dlg.DoModal() == IDOK)
+		{
+				SetModifiedFlag();		
+				UpdateAllViews(NULL, 0);
+		}
 	}
 	else
 	{	//ostatni prvky

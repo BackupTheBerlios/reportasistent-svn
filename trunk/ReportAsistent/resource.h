@@ -22,6 +22,7 @@
 #define IDD_ACTIVE_ELEMENT_DIALOG       147
 #define IDD_TRANSFORMATIONS_DIALOG      148
 #define IDB_TRANSFORMATIONS_LOGO        150
+#define IDD_ATTRIBUTE_LINK_DIALOG       151
 #define IDC_TREE1                       1000
 #define IDC_FILTER_LIST                 1000
 #define IDC_EDIT1                       1001
@@ -46,6 +47,9 @@
 #define IDC_ADD_BUTTON                  1018
 #define IDC_MOVE_UP_BUTTON              1020
 #define IDC_MOVE_DOWN_BUTTON            1021
+#define IDC_TARGET_COMBO                1021
+#define IDC_ATTRIBUTES_LIST             1022
+#define IDC_REFRESH_BUTTON              1023
 #define ID_MMGENREP                     32771
 #define ID_MMSOURCES                    32772
 #define ID_ELEMENT_EDIT                 32780
@@ -59,15 +63,16 @@
 #define IDS_SIMPLE_FILTER_FAILED_SOURCE_LOAD 61206
 #define IDS_WB_WORD_LOADER_NOT_REGISTRED 61207
 #define IDS_WRONG_TYPEELEMENTID         61208
+#define IDS_REFRESH_EL_ATTRIBUTES_FAILED 61209
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
-#define _APS_NEXT_RESOURCE_VALUE        151
+#define _APS_NEXT_RESOURCE_VALUE        153
 #define _APS_NEXT_COMMAND_VALUE         32784
-#define _APS_NEXT_CONTROL_VALUE         1021
+#define _APS_NEXT_CONTROL_VALUE         1024
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

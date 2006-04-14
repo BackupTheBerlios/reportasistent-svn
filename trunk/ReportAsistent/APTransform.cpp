@@ -183,10 +183,13 @@ void CAElTransform::ProcessSingleTransformation(IXMLDOMNodePtr & target,
 }
 
 
-void CAElTransform::ProcessSimpleFlter(CFilterProcessor & processor, LPARAM user1, LPARAM user2)
+//varati TRUE pokud processor.ProcessFilteredOut alespon jednou uspela, pokud je filter prazdy vrati FALSE
+BOOL CAElTransform::ProcessSimpleFlter(CFilterProcessor & processor, LPARAM user1, LPARAM user2)
 {
 	IXMLDOMNodeListPtr selected_items;
 	selected_items = m_active_element->selectNodes("filter[@type='simple']/selection");
+
+	BOOL ret = FALSE;
 
 	for (int a=0; a < selected_items->length; a++)
 	{
@@ -212,41 +215,47 @@ void CAElTransform::ProcessSimpleFlter(CFilterProcessor & processor, LPARAM user
 		else
 		{
 			//ProcessAllTransformations(node_to_transform, destination_parent);
-			processor.ProcessFilteredOut(node_to_transform, order++, user1, user2);
+			ret |= processor.ProcessFilteredOut(node_to_transform, order++, user1, user2);
 		}
 	}
+
+	return ret;
 }
 
 
 #define FILTER_FILL_ELEMENT_ATTRIBUTES 54321
 
-void CAElTransform::ProcessFilteredOut(IXMLDOMNodePtr filtered_output_node, int node_order, LPARAM user1, LPARAM user2)
+BOOL CAElTransform::ProcessFilteredOut(IXMLDOMNodePtr filtered_output_node, int node_order, LPARAM user1, LPARAM user2)
 {
 	if (user1 == FILTER_ALL_TRANSFORMATINOS)
 	{
 		ProcessAllTransformations(filtered_output_node,
 			/*destination_parent*/ (IXMLDOMNodePtr) (IXMLDOMNode *) user2);
+
+		return TRUE;
 	}
 	else if (user1 == FILTER_FILL_ELEMENT_ATTRIBUTES)
 	{
 		if (user2 /*index_of_filtered_out*/ == node_order)
 		{
 			FillElementAttributes(filtered_output_node);
+			return TRUE;
 		}
 
 	}
+
+	return FALSE;
 }
 
 
 
 //naplni atributy (<element_attributes>) v m_active_element podle index_of_filtered_out-teho uzlu z filtru
+//vrati TRUE, pokud se atributy podarilo naplnit
 BOOL CAElTransform::FillElementAttributes(int index_of_filtered_out)
 {
 
-	ProcessSimpleFlter(* this, FILTER_FILL_ELEMENT_ATTRIBUTES, index_of_filtered_out);
+	return ProcessSimpleFlter(* this, FILTER_FILL_ELEMENT_ATTRIBUTES, index_of_filtered_out);
 
-	//predelat na detekci chyb uvnitr call backu
-	return TRUE;
 }
 
 

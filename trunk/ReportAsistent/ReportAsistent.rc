@@ -86,6 +86,23 @@ BEGIN
     PUSHBUTTON      "Set &default",IDC_SET_DEFAULT_BUTTON,14,188,58,15
 END
 
+IDD_ATTRIBUTE_LINK_DIALOG DIALOG DISCARDABLE  0, 0, 352, 218
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Dialog"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,295,7,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,295,24,50,14
+    COMBOBOX        IDC_TARGET_COMBO,65,46,118,123,CBS_DROPDOWNLIST | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Target element:",IDC_STATIC,75,28,50,8
+    CONTROL         "List1",IDC_ATTRIBUTES_LIST,"SysListView32",LVS_REPORT | 
+                    LVS_SINGLESEL | LVS_SHOWSELALWAYS | WS_BORDER | 
+                    WS_TABSTOP,38,100,261,94
+    LTEXT           "Element attributes:",IDC_STATIC,41,83,59,8
+    PUSHBUTTON      "&Refresh",IDC_REFRESH_BUTTON,241,80,50,14
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -101,6 +118,14 @@ BEGIN
         RIGHTMARGIN, 412
         TOPMARGIN, 7
         BOTTOMMARGIN, 219
+    END
+
+    IDD_ATTRIBUTE_LINK_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 345
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 211
     END
 END
 #endif    // APSTUDIO_INVOKED
@@ -548,6 +573,8 @@ BEGIN
     IDS_WB_WORD_LOADER_NOT_REGISTRED 
                             "Sorry, Report Asistent instaklation si probably corrupt.\nFailed to load LMRA_WordLoader."
     IDS_WRONG_TYPEELEMENTID "Chybny typ prvku - jeho ID je mimo povoleny rozsah."
+    IDS_REFRESH_EL_ATTRIBUTES_FAILED 
+                            "Active element didn't support any atrributes.\nMaybe it's because of its filter is empty."
 END
 
 STRINGTABLE DISCARDABLE 

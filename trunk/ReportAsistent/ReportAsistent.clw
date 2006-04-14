@@ -2,37 +2,39 @@
 
 [General Info]
 Version=1
-LastClass=CSkeletonView
-LastTemplate=CRecordset
+LastClass=CAttributeLinkDialog
+LastTemplate=CDialog
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "ReportAsistent.h"
 LastPage=0
 
-ClassCount=12
+ClassCount=13
 Class1=CReportAsistentApp
 Class2=CSkeletonDoc
 Class3=CSkeletonView
 Class4=CMainFrame
 
-ResourceCount=10
+ResourceCount=11
 Resource1=IDD_ABOUTBOX
 Resource2=IDR_MAINFRAME
 Class5=CAboutDlg
-Resource3=IDD_DIALOGTEXT (English (U.S.))
-Resource4=IDD_ACTIVE_ELEMENT_DIALOG (English (U.S.))
+Resource3=IDD_SOURCES_DIALOG
+Resource4=IDD_GENERATE_DIALOG (English (U.S.))
 Class6=CElementTextDialog
-Resource5=IDD_TRANSFORMATIONS_DIALOG (English (U.S.))
+Resource5=IDD_ACTIVE_ELEMENT_DIALOG (English (U.S.))
 Class7=CSimpleFilterDialog
-Resource6=IDD_GENERATE_DIALOG (English (U.S.))
+Resource6=IDD_DIALOGTEXT (English (U.S.))
 Class8=CGenerateDialog
-Resource7=IDD_SOURCES_DIALOG
+Resource7=IDD_TRANSFORMATIONS_DIALOG (English (U.S.))
 Class9=CSourcesDialog
-Resource8=IDD_ABOUTBOX (English (U.S.))
+Resource8=IDD_SIMPLE_FILTER_DIALOG (English (U.S.))
 Class10=CActiveElementDialog
-Resource9=IDD_SIMPLE_FILTER_DIALOG (English (U.S.))
+Resource9=IDD_ATTRIBUTE_LINK_DIALOG
 Class11=CTransformationsDialog
 Class12=Tcategory_Recordset
-Resource10=IDR_MAINFRAME (English (U.S.))
+Resource10=IDD_ABOUTBOX (English (U.S.))
+Class13=CAttributeLinkDialog
+Resource11=IDR_MAINFRAME (English (U.S.))
 
 [CLS:CReportAsistentApp]
 Type=0
@@ -478,4 +480,25 @@ Column25=[tsValueSubType].[ShortName], 12, 40
 Column26=[tsValueSubType].[Ord], 4, 4
 Column27=[tsValueSubType].[Notice], 12, 510
 Column28=[Cardinal], -7, 1
+
+[CLS:CAttributeLinkDialog]
+Type=0
+HeaderFile=AttributeLinkDialog.h
+ImplementationFile=AttributeLinkDialog.cpp
+BaseClass=CDialog
+Filter=N
+LastObject=IDC_TARGET_COMBO
+VirtualFilter=dWC
+
+[DLG:IDD_ATTRIBUTE_LINK_DIALOG]
+Type=1
+Class=CAttributeLinkDialog
+ControlCount=7
+Control1=IDOK,button,1342242817
+Control2=IDCANCEL,button,1342242816
+Control3=IDC_TARGET_COMBO,combobox,1344340227
+Control4=IDC_STATIC,static,1342308352
+Control5=IDC_ATTRIBUTES_LIST,SysListView32,1350631437
+Control6=IDC_STATIC,static,1342308352
+Control7=IDC_REFRESH_BUTTON,button,1342242816
 

@@ -104,6 +104,10 @@ SOURCE=.\APTransform.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\AttributeLinkDialog.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\CSkeletonDoc.cpp
 # End Source File
 # Begin Source File
@@ -174,6 +178,10 @@ SOURCE=.\AElInfo.h
 # Begin Source File
 
 SOURCE=.\APTransform.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\AttributeLinkDialog.h
 # End Source File
 # Begin Source File
 
