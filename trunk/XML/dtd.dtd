@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="windows-1250" ?>
 <!DOCTYPE active_list[
-  <!ELEMENT active_list ((hyp_4ft*, category*, ti_cedent*)*)>
+  <!ELEMENT active_list ((hyp_4ft*, category*, ti_cedent*, attribute*)*)>
+  <!ELEMENT attribute (ctgr*, missing_value*)>
+  <!ATTLIST attribute id ID #REQUIRED
+                      db_name CDATA #REQUIRED
+                      matrix_name CDATA #REQUIRED
+                      attr_name CDATA #REQUIRED
+                      creation CDATA #REQUIRED
+                      ctgr_count CDATA #REQUIRED>
+  <!ELEMENT ctgr EMPTY>
+  <!ATTLIST ctgr name CDATA #REQUIRED>
+  <!ELEMENT missing_value EMPTY>
+  <!ATTLIST missing_value name CDATA #REQUIRED>
   <!ELEMENT category (ctgr_def*)>
   <!ATTLIST category id ID #REQUIRED
                      db_name CDATA #REQUIRED

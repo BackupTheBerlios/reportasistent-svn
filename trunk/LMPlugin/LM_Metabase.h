@@ -4,6 +4,27 @@
 //4ft_hypothese
 //CString fLM4fthyp(void* hSource);
 
+typedef CArray <CString, CString> TCtgrArray;
+
+typedef CArray <CString, CString> TMissingTypeArray;
+
+class Attribute_Meta
+{
+public:
+	CString				id;
+	CString				db_name;
+    CString				matrix_name;
+    CString				attr_name;
+    CString				creation;
+    CString				ctgr_count;
+	TCtgrArray			category_list;
+	TMissingTypeArray	missing_type_list;
+
+	CString				xml_convert ();
+};
+
+typedef CArray <Attribute_Meta *, Attribute_Meta *> TAttribute_Meta_Array;
+
 typedef CArray <CString, CString> TCatDefArray;
 
 class Category_Meta

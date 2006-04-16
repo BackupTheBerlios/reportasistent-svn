@@ -120,6 +120,10 @@ SOURCE=.\SQL_Pomocnik.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\TAttribute_Recordset.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\TCatDefEnum.cpp
 # End Source File
 # Begin Source File
@@ -169,6 +173,10 @@ SOURCE=.\SockInterface.h
 # Begin Source File
 
 SOURCE=.\SQL_Pomocnik.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\TAttribute_Recordset.h
 # End Source File
 # Begin Source File
 

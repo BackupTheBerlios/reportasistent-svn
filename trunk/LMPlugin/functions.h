@@ -10,6 +10,9 @@
 
 // ===== FUNKCE ========
 
+// ---AP attribute
+
+CString fLMAttribute(void* hSource);
 
 // --- AP Kategorie
 

@@ -6,6 +6,7 @@
 #include "TCatDefEnum.h"
 #include "TCatDefInt.h"
 #include "TCatOrder.h"
+#include "TAttribute_Recordset.h"
 #include "LM_Metabase.h"
 
 
@@ -44,6 +45,69 @@ BOOL dedek_performLM(void * hSource, const char* AP, BSTR* result)
 }
 
 /****/
+
+// --- AP Kategorie
+
+CString fLMAttribute(void* hSource)
+{
+	CString buf = "";
+	CString hlp;
+	CString db_name = ((CDatabase *) hSource)->GetDatabaseName ();
+
+	TAttribute_Recordset rs ((CDatabase *) hSource);
+
+	Attribute_Meta * ptatt;
+	TAttribute_Meta_Array list;
+//pozor, upravit dotaz!!!!!!!!!!!!!!!!!!
+	LPCTSTR q =
+		"SELECT * \
+		 FROM tmAttribute, tmCategory, tmMatrix, tmQuantity, tsAttributeSubType \
+		 WHERE tmAttribute.MatrixID=tmMatrix.MatrixID \
+			AND tmAttribute.AttributeSubTypeID=tsAttributeSubType.AttributeSubTypeID \
+			AND tmAttribute.AttributeID=tmQuantity.AttributeID \
+			AND tmQuantity.QuantityID=tmCategory.QuantityID";
+	if (rs.Open(AFX_DB_USE_DEFAULT_TYPE, q))
+	{
+		//iteration on query results
+		while (!rs.IsEOF())
+		{
+			ptatt->attr_name = rs.m_Name;
+			ptatt->db_name = db_name;
+			hlp.Format ("%d", rs.m_AttributeID);
+			ptatt->id = "attr" + hlp;
+			
+			rs.MoveNext();
+		}
+		rs.Close();
+	}
+	else return "";
+
+	//creation of xml string
+	//load DTD
+	FILE * x = fopen ("../XML/dtd.dtd", "r");
+	CString buf1;
+	while (fscanf (x, "%s", buf1) != EOF)
+	{
+		buf = buf + (const char *) buf1 + " ";
+	}
+	fclose (x);
+	//create xml data
+	buf = buf + " <active_list> ";
+	for (int i = 0; i < list.GetSize (); i++)
+	{
+		buf = buf + list.GetAt (i)->xml_convert ();
+	}
+	buf += " </active_list>";
+	//just for test - creates a xml file with all categories
+	FILE * f = fopen ("test.xml", "w");
+	fprintf (f, "%s", buf);
+	fclose (f);
+
+
+	AfxMessageBox(buf);
+
+	return buf;
+}
 
 // --- AP Kategorie
 
@@ -198,8 +262,8 @@ CString fLMCategory(void* hSource)
 				else return "";
 			}
 			else return "";
-			//find the order of category according to its ID \
-			for category frequency matching
+			//find the order of category according to its ID
+			//for category frequency matching
 /*			end = FALSE;
 			ord = 0;
 			qord =
