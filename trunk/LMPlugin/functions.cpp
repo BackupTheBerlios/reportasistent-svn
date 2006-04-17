@@ -46,7 +46,7 @@ BOOL dedek_performLM(void * hSource, const char* AP, BSTR* result)
 
 /****/
 
-// --- AP Kategorie
+// --- AP Attribute
 
 CString fLMAttribute(void* hSource)
 {
@@ -109,7 +109,7 @@ CString fLMAttribute(void* hSource)
 	return buf;
 }
 
-// --- AP Kategorie
+// --- AP Category
 
 CString fLMCategory(void* hSource)
 {
@@ -322,7 +322,7 @@ CString fLMCategory(void* hSource)
 }
 
 
-// --- AP 4ft-hypoteza
+// --- AP 4ft-hypotese
 
 CString fLM4fthyp(void * hSource)
 {
