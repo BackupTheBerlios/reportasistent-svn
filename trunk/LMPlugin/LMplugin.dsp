@@ -132,6 +132,10 @@ SOURCE=.\TCatDefInt.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\TCategory_list.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\Tcategory_Recordset.cpp
 # End Source File
 # Begin Source File
@@ -185,6 +189,10 @@ SOURCE=.\TCatDefEnum.h
 # Begin Source File
 
 SOURCE=.\TCatDefInt.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\TCategory_list.h
 # End Source File
 # Begin Source File
 

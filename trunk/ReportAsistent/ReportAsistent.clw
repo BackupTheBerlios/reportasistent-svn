@@ -2,13 +2,13 @@
 
 [General Info]
 Version=1
-LastClass=TAttribute_Recordset
+LastClass=
 LastTemplate=CRecordset
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "ReportAsistent.h"
 LastPage=0
 
-ClassCount=15
+ClassCount=14
 Class1=CReportAsistentApp
 Class2=CSkeletonDoc
 Class3=CSkeletonView
@@ -18,25 +18,24 @@ ResourceCount=12
 Resource1=IDD_ABOUTBOX
 Resource2=IDR_MAINFRAME
 Class5=CAboutDlg
-Resource3=IDD_SIMPLE_FILTER_DIALOG (English (U.S.))
-Resource4=IDD_ATTRIBUTE_LINK_DIALOG
+Resource3=IDD_SOURCES_DIALOG
+Resource4=IDD_DIALOGTEXT (English (U.S.))
 Class6=CElementTextDialog
-Resource5=IDD_GENERATE_DIALOG (English (U.S.))
+Resource5=IDD_ACTIVE_ELEMENT_DIALOG (English (U.S.))
 Class7=CSimpleFilterDialog
-Resource6=IDD_TRANSFORMATIONS_DIALOG (English (U.S.))
+Resource6=IDD_ATTRIBUTE_LINK_DIALOG
 Class8=CGenerateDialog
-Resource7=IDD_SOURCES_DIALOG
+Resource7=IDD_TRANSFORMATIONS_DIALOG (English (U.S.))
 Class9=CSourcesDialog
-Resource8=IDD_ATTRIBUTE_LINK_TABLE_DIALOG
+Resource8=IDD_ABOUTBOX (English (U.S.))
 Class10=CActiveElementDialog
-Resource9=IDD_ABOUTBOX (English (U.S.))
+Resource9=IDD_SIMPLE_FILTER_DIALOG (English (U.S.))
 Class11=CTransformationsDialog
 Class12=Tcategory_Recordset
-Resource10=IDD_ACTIVE_ELEMENT_DIALOG (English (U.S.))
+Resource10=IDD_GENERATE_DIALOG (English (U.S.))
 Class13=CAttributeLinkDialog
-Resource11=IDD_DIALOGTEXT (English (U.S.))
+Resource11=IDD_ATTRIBUTE_LINK_TABLE_DIALOG
 Class14=CAttributeLinkTableDialog
-Class15=TAttribute_Recordset
 Resource12=IDR_MAINFRAME (English (U.S.))
 
 [CLS:CReportAsistentApp]
@@ -587,15 +586,6 @@ Column48=[tsAttributeSubType].[ShortName], 12, 510
 Column49=[tsAttributeSubType].[Ord], 4, 4
 Column50=[tsAttributeSubType].[Notice], 12, 510
 
-[CLS:TAttribute_Recordset]
-Type=0
-HeaderFile=TAttribute_Recordset.h
-ImplementationFile=TAttribute_Recordset.cpp
-BaseClass=CRecordset
-Filter=N
-VirtualFilter=r
-LastObject=TAttribute_Recordset
-
 [DB:TAttribute_Recordset]
 DB=1
 DBType=ODBC
@@ -629,4 +619,48 @@ Column26=[tsAttributeSubType].[Name], 12, 510
 Column27=[ShortName], 12, 510
 Column28=[Ord], 4, 4
 Column29=[tsAttributeSubType].[Notice], 12, 510
+
+[DB:TCategory_list]
+DB=1
+DBType=ODBC
+ColumnCount=39
+Column1=[tmAttribute].[AttributeID], 4, 4
+Column2=[tmAttribute].[Name], 12, 100
+Column3=[MatrixID], 4, 4
+Column4=[AttributeSubTypeID], 4, 4
+Column5=[ValueSubTypeID], 4, 4
+Column6=[Derived], -7, 1
+Column7=[Formula], 12, 510
+Column8=[MCPosition], 4, 4
+Column9=[MCLength], 4, 4
+Column10=[MCDelimiter], 12, 510
+Column11=[PrimaryKeyPosition], 4, 4
+Column12=[ValueMin], 8, 8
+Column13=[ValueMax], 8, 8
+Column14=[ValueAvg], 8, 8
+Column15=[ValueModus], 8, 8
+Column16=[ValueVariability], 8, 8
+Column17=[tmAttribute].[Notice], 12, 510
+Column18=[tmAttribute].[wSavedCountUsed], 4, 4
+Column19=[CategoryID], 4, 4
+Column20=[tmCategory].[Name], 12, 100
+Column21=[tmCategory].[QuantityID], 4, 4
+Column22=[CategorySubTypeID], 4, 4
+Column23=[BoolTypeID], 4, 4
+Column24=[XCategory], -7, 1
+Column25=[IncludeNULL], -7, 1
+Column26=[Ord], 4, 4
+Column27=[tmCategory].[Notice], 12, 510
+Column28=[tmCategory].[wSavedCountUsed], 4, 4
+Column29=[tmQuantity].[QuantityID], 4, 4
+Column30=[tmQuantity].[Name], 12, 100
+Column31=[ShortName], 12, 510
+Column32=[ShowName], -7, 1
+Column33=[tmQuantity].[AttributeID], 4, 4
+Column34=[ItemShift], 4, 4
+Column35=[ParentGroupID], 4, 4
+Column36=[tmQuantity].[wSavedCountUsed], 4, 4
+Column37=[wUpdateVer], 4, 4
+Column38=[UserID], 4, 4
+Column39=[tmQuantity].[Notice], 12, 510
 

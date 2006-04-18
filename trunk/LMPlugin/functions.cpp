@@ -7,6 +7,7 @@
 #include "TCatDefInt.h"
 #include "TCatOrder.h"
 #include "TAttribute_Recordset.h"
+#include "TCategory_list.h"
 #include "LM_Metabase.h"
 
 
@@ -53,29 +54,59 @@ CString fLMAttribute(void* hSource)
 	CString buf = "";
 	CString hlp;
 	CString db_name = ((CDatabase *) hSource)->GetDatabaseName ();
+	CString qcat;
+
+	long count = 0;
 
 	TAttribute_Recordset rs ((CDatabase *) hSource);
+	TCategory_list rscat ((CDatabase *) hSource);
 
 	Attribute_Meta * ptatt;
 	TAttribute_Meta_Array list;
-//pozor, upravit dotaz!!!!!!!!!!!!!!!!!!
+
 	LPCTSTR q =
 		"SELECT * \
-		 FROM tmAttribute, tmCategory, tmMatrix, tmQuantity, tsAttributeSubType \
+		 FROM tmAttribute, tmMatrix, tsAttributeSubType \
 		 WHERE tmAttribute.MatrixID=tmMatrix.MatrixID \
-			AND tmAttribute.AttributeSubTypeID=tsAttributeSubType.AttributeSubTypeID \
-			AND tmAttribute.AttributeID=tmQuantity.AttributeID \
-			AND tmQuantity.QuantityID=tmCategory.QuantityID";
+			AND tmAttribute.AttributeSubTypeID=tsAttributeSubType.AttributeSubTypeID";
 	if (rs.Open(AFX_DB_USE_DEFAULT_TYPE, q))
 	{
 		//iteration on query results
 		while (!rs.IsEOF())
 		{
+			ptatt = new (Attribute_Meta);
 			ptatt->attr_name = rs.m_Name;
 			ptatt->db_name = db_name;
 			hlp.Format ("%d", rs.m_AttributeID);
 			ptatt->id = "attr" + hlp;
-			
+//zkontrolovat typy atributu...!!!			
+			if (rs.m_Formula == "")
+				ptatt->creation = rs.m_Name;
+			else ptatt->creation = rs.m_Formula;
+			hlp.Format ("%d", rs.m_AttributeID);
+			qcat =
+				"SELECT * \
+				 FROM tmAttribute, tmCategory, tmQuantity \
+				 WHERE tmAttribute.AttributeID=" + hlp + " \
+					AND tmAttribute.AttributeID=tmQuantity.AttributeID \
+					AND tmQuantity.QuantityID=tmCategory.QuantityID";
+			if (rscat.Open(AFX_DB_USE_DEFAULT_TYPE, qcat))
+			{
+				while (!rscat.IsEOF ())
+				{
+					count++;
+					ptatt->category_list.Add (rscat.m_Name2);
+					//add missing category
+					if (rscat.m_XCategory)
+						ptatt->missing_type_list.Add (rscat.m_Name2);
+					rscat.MoveNext ();
+				}
+				rscat.Close ();
+				ptatt->ctgr_count.Format ("%d", count);
+				count = 0;
+			}
+			else return "";
+			list.Add (ptatt);
 			rs.MoveNext();
 		}
 		rs.Close();
