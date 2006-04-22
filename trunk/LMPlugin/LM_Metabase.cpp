@@ -7,6 +7,49 @@
 CString Attribute_Meta::xml_convert ()
 {
 	CString xml_string;
+	attr_name.Replace ("&", "&amp;");
+	db_name.Replace ("&", "&amp;");
+	id.Replace ("&", "&amp;");
+	matrix_name.Replace ("&", "&amp;");
+	creation.Replace ("&", "&amp;");
+	for (int i = 0; i < category_list.GetSize (); i++)
+		category_list.GetAt (i).Replace ("&", "&amp;");
+	for (i = 0; i < missing_type_list.GetSize (); i++)
+		missing_type_list.GetAt (i).Replace ("&", "&amp;");
+
+	attr_name.Replace ("<", "&lt;");
+	db_name.Replace ("<", "&lt;");
+	id.Replace ("<", "&lt;");
+	matrix_name.Replace ("<", "&lt;");
+	creation.Replace ("<", "&lt;");
+	for (i = 0; i < category_list.GetSize (); i++)
+		category_list.GetAt (i).Replace ("<", "&lt;");
+	for (i = 0; i < missing_type_list.GetSize (); i++)
+		missing_type_list.GetAt (i).Replace ("<", "&lt;");
+
+	attr_name.Replace (">", "&gt;");
+	db_name.Replace (">", "&gt;");
+	id.Replace (">", "&gt;");
+	matrix_name.Replace (">", "&gt;");
+	creation.Replace (">", "&gt;");
+	for (i = 0; i < category_list.GetSize (); i++)
+		category_list.GetAt (i).Replace (">", "&gt;");
+	for (i = 0; i < missing_type_list.GetSize (); i++)
+		missing_type_list.GetAt (i).Replace (">", "&gt;");
+
+	//beginning of attribute element
+	xml_string = " <attribute id=\"" + id + "\" db_name=\"" + db_name + "\" ";
+	xml_string = xml_string + "matrix_name=\"" + matrix_name + "\" ";
+	xml_string = xml_string + "attr_name=\"" + attr_name + "\" ";
+	xml_string = xml_string + "creation=\"" + creation + "\" ";
+	xml_string = xml_string + "ctgr_count=\"" + ctgr_count + "\" ";
+	for (i = 0; i < category_list.GetSize (); i++)
+		xml_string = xml_string + "<ctgr name=\"" + category_list.GetAt (i) +
+			"\" /> ";
+	for (i = 0; i < missing_type_list.GetSize (); i++)
+		xml_string = xml_string + "<missing_value name=\"" + missing_type_list.GetAt (i) +
+			"\" /> ";
+	xml_string = xml_string + "</attribute>";
 
 	return xml_string;
 }
