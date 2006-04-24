@@ -1,6 +1,35 @@
 <?xml version="1.0" encoding="windows-1250" ?>
 <!DOCTYPE active_list[
-  <!ELEMENT active_list ((hyp_4ft*, category*, ti_cedent*, attribute*)*)>
+  <!ELEMENT active_list ((hyp_4ft*, category*, ti_cedent*, attribute*, bool_cedent*)*)>
+
+
+
+
+
+  <!ELEMENT bool_cedent (sub_bool_cedent*)>
+  <!ATTLIST bool_cedent id ID #REQUIRED
+			db_name CDATA #REQUIRED
+			matrix_name CDATA #REQUIRED
+			task_name CDATA #REQUIRED
+			task_type CDATA #REQUIRED
+			cedent_type CDATA #REQUIRED
+			sub_cedent_cnt CDATA #REQUIRED>
+  <!ELEMENT sub_bool_cedent (literal*)>
+  <!ATTLIST sub_bool_cedent literal_cnt CDATA #REQUIRED>
+  <!ELEMENT literal EMPTY>
+  <!ATTLIST literal underlying_attribute CDATA #REQUIRED
+		    category_cnt CDATA #REQUIRED
+		    missing_type CDATA #REQUIRED
+		    coefficient_type CDATA #REQUIRED
+		    length CDATA #REQUIRED
+		    gace CDATA #REQUIRED
+		    literal_type CDATA #REQUIRED
+		    equivalence_class CDATA #REQUIRED>
+
+
+
+
+
   <!ELEMENT attribute (ctgr*, missing_value*)>
   <!ATTLIST attribute id ID #REQUIRED
                       db_name CDATA #REQUIRED
@@ -12,6 +41,11 @@
   <!ATTLIST ctgr name CDATA #REQUIRED>
   <!ELEMENT missing_value EMPTY>
   <!ATTLIST missing_value name CDATA #REQUIRED>
+
+
+
+
+
   <!ELEMENT category (ctgr_def*)>
   <!ATTLIST category id ID #REQUIRED
                      db_name CDATA #REQUIRED
@@ -24,6 +58,11 @@
                      def_length CDATA #REQUIRED>
   <!ELEMENT ctgr_def EMPTY>
   <!ATTLIST ctgr_def definition CDATA #REQUIRED>
+
+
+
+
+
   <!ELEMENT ti_cedent (ti_literal*)>
   <!ATTLIST ti_cedent id ID #REQUIRED
                       type CDATA #REQUIRED>  <!--antecedent, succedent, condition -->

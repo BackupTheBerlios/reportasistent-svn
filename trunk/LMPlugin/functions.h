@@ -10,16 +10,20 @@
 
 // ===== FUNKCE ========
 
+// ---AP cedent
+
+CString fLMCedent (void* hSource);
+
 // ---AP attribute
 
 CString fLMAttribute(void* hSource);
 
-// --- AP Kategorie
+// --- AP category
 
 CString fLMCategory(void* hSource);
 
 
-// --- AP 4ft-hypoteza
+// --- AP 4ft-hypothesis
 
 CString fLM4fthyp(void* hSource);
 

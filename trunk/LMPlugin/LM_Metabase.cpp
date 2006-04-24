@@ -12,38 +12,26 @@ CString Attribute_Meta::xml_convert ()
 	id.Replace ("&", "&amp;");
 	matrix_name.Replace ("&", "&amp;");
 	creation.Replace ("&", "&amp;");
-	for (int i = 0; i < category_list.GetSize (); i++)
-		category_list.GetAt (i).Replace ("&", "&amp;");
-	for (i = 0; i < missing_type_list.GetSize (); i++)
-		missing_type_list.GetAt (i).Replace ("&", "&amp;");
 
 	attr_name.Replace ("<", "&lt;");
 	db_name.Replace ("<", "&lt;");
 	id.Replace ("<", "&lt;");
 	matrix_name.Replace ("<", "&lt;");
 	creation.Replace ("<", "&lt;");
-	for (i = 0; i < category_list.GetSize (); i++)
-		category_list.GetAt (i).Replace ("<", "&lt;");
-	for (i = 0; i < missing_type_list.GetSize (); i++)
-		missing_type_list.GetAt (i).Replace ("<", "&lt;");
 
 	attr_name.Replace (">", "&gt;");
 	db_name.Replace (">", "&gt;");
 	id.Replace (">", "&gt;");
 	matrix_name.Replace (">", "&gt;");
 	creation.Replace (">", "&gt;");
-	for (i = 0; i < category_list.GetSize (); i++)
-		category_list.GetAt (i).Replace (">", "&gt;");
-	for (i = 0; i < missing_type_list.GetSize (); i++)
-		missing_type_list.GetAt (i).Replace (">", "&gt;");
 
 	//beginning of attribute element
 	xml_string = " <attribute id=\"" + id + "\" db_name=\"" + db_name + "\" ";
 	xml_string = xml_string + "matrix_name=\"" + matrix_name + "\" ";
 	xml_string = xml_string + "attr_name=\"" + attr_name + "\" ";
 	xml_string = xml_string + "creation=\"" + creation + "\" ";
-	xml_string = xml_string + "ctgr_count=\"" + ctgr_count + "\" ";
-	for (i = 0; i < category_list.GetSize (); i++)
+	xml_string = xml_string + "ctgr_count=\"" + ctgr_count + "\"> ";
+	for (int i = 0; i < category_list.GetSize (); i++)
 		xml_string = xml_string + "<ctgr name=\"" + category_list.GetAt (i) +
 			"\" /> ";
 	for (i = 0; i < missing_type_list.GetSize (); i++)
@@ -67,9 +55,7 @@ CString Category_Meta::xml_convert ()
 	db_name.Replace ("&", "&amp;");
 	id.Replace ("&", "&amp;");
 	matrix_name.Replace ("&", "&amp;");
-	for (int i = 0; i < ctgr_def.GetSize (); i++)
-		ctgr_def.GetAt (i).Replace ("&", "&amp;");
-
+	
 	attr_name.Replace ("<", "&lt;");
 	ctgr_bool_type.Replace ("<", "&lt;");
 	ctgr_freq.Replace ("<", "&lt;");
@@ -78,10 +64,7 @@ CString Category_Meta::xml_convert ()
 	db_name.Replace ("<", "&lt;");
 	id.Replace ("<", "&lt;");
 	matrix_name.Replace ("<", "&lt;");
-	//todo in functions.cpp
-	for (i = 0; i < ctgr_def.GetSize (); i++)
-		ctgr_def.GetAt (i).Replace ("<", "&lt;");
-
+	
 	attr_name.Replace (">", "&gt;");
 	ctgr_bool_type.Replace (">", "&gt;");
 	ctgr_freq.Replace (">", "&gt;");
@@ -90,9 +73,7 @@ CString Category_Meta::xml_convert ()
 	db_name.Replace (">", "&gt;");
 	id.Replace (">", "&gt;");
 	matrix_name.Replace (">", "&gt;");
-	for (i = 0; i < ctgr_def.GetSize (); i++)
-		ctgr_def.GetAt (i).Replace (">", "&gt;");
-
+	
 	//beginning of category element
 	xml_string = " <category id=\"" + id + "\" db_name=\"" + db_name + "\" ";
 	xml_string = xml_string + "matrix_name=\"" + matrix_name + "\" ";
@@ -103,7 +84,7 @@ CString Category_Meta::xml_convert ()
 	xml_string = xml_string + "bool_type=\"" + ctgr_bool_type + "\" ";
 	hlp.Format ("%d", def_length);
 	xml_string = xml_string + "def_length=\"" + hlp + "\"> ";
-	for (i = 0; i < ctgr_def.GetSize (); i++)
+	for (int i = 0; i < ctgr_def.GetSize (); i++)
 		xml_string = xml_string + "<ctgr_def definition=\"" + ctgr_def.GetAt (i) + "\" /> ";
 	xml_string = xml_string + "</category>";
 	return xml_string;

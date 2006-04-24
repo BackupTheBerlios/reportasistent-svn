@@ -47,7 +47,17 @@ BOOL dedek_performLM(void * hSource, const char* AP, BSTR* result)
 
 /****/
 
-// --- AP Attribute
+// ---AP cedent
+
+CString fLMCedent (void* hSource)
+{
+	CString buf = "";
+
+	return buf;
+}
+
+
+// --- AP attribute
 
 CString fLMAttribute(void* hSource)
 {
@@ -77,6 +87,7 @@ CString fLMAttribute(void* hSource)
 			ptatt = new (Attribute_Meta);
 			ptatt->attr_name = rs.m_Name;
 			ptatt->db_name = db_name;
+			ptatt->matrix_name = rs.m_Name2;
 			hlp.Format ("%d", rs.m_AttributeID);
 			ptatt->id = "attr" + hlp;
 //zkontrolovat typy atributu...!!!			
@@ -95,10 +106,14 @@ CString fLMAttribute(void* hSource)
 				while (!rscat.IsEOF ())
 				{
 					count++;
-					ptatt->category_list.Add (rscat.m_Name2);
+					hlp = rscat.m_Name2;
+					hlp.Replace ("&", "&amp;");
+					hlp.Replace ("<", "&lt;");
+					hlp.Replace (">", "&gt;");
+					ptatt->category_list.Add (hlp);
 					//add missing category
 					if (rscat.m_XCategory)
-						ptatt->missing_type_list.Add (rscat.m_Name2);
+						ptatt->missing_type_list.Add (hlp);
 					rscat.MoveNext ();
 				}
 				rscat.Close ();
@@ -129,18 +144,18 @@ CString fLMAttribute(void* hSource)
 		buf = buf + list.GetAt (i)->xml_convert ();
 	}
 	buf += " </active_list>";
-	//just for test - creates a xml file with all categories
-	FILE * f = fopen ("test.xml", "w");
+	//just for test - creates a xml file with all attributes
+/*	FILE * f = fopen ("test.xml", "w");
 	fprintf (f, "%s", buf);
 	fclose (f);
 
 
 	AfxMessageBox(buf);
-
+*/
 	return buf;
 }
 
-// --- AP Category
+// --- AP category
 
 CString fLMCategory(void* hSource)
 {
@@ -278,6 +293,7 @@ CString fLMCategory(void* hSource)
 							hlp = rs_def_int_r.m_ValueDate.Format ("%d/%m/%Y %H:%M:%S");
 						hlp1 += hlp;
 						hlp1 += rs_def_int_r.m_RightBracket;
+						hlp1.Replace ("&", "&amp;");
 						hlp1.Replace (">", "&gt;");
 						hlp1.Replace ("<", "&lt;");
 						ptcat->ctgr_def.Add (hlp1);
@@ -342,18 +358,18 @@ CString fLMCategory(void* hSource)
 	}
 	buf += " </active_list>";
 	//just for test - creates a xml file with all categories
-	FILE * f = fopen ("test.xml", "w");
+/*	FILE * f = fopen ("test.xml", "w");
 	fprintf (f, "%s", buf);
 	fclose (f);
 
 
 	AfxMessageBox(buf);
-
+*/
 	return buf;
 }
 
 
-// --- AP 4ft-hypotese
+// --- AP 4ft-hypotesis
 
 CString fLM4fthyp(void * hSource)
 {
