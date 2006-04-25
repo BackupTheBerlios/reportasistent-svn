@@ -9,9 +9,9 @@
 		<xsl:text disable-output-escaping="yes">
 
 &lt;dialog_data&gt;
-		</xsl:text>				
+	</xsl:text>				
 
-		<xsl:apply-templates select="category[position()=1]" mode="attributes"/>
+		<xsl:apply-templates select="node()[position()=1]" mode="attributes"/>
 
 
 
@@ -21,7 +21,7 @@
 	&lt;values&gt;</xsl:text>				
 	
 
-		<xsl:apply-templates select="category" mode="values"/>
+		<xsl:apply-templates select="node()" mode="values"/>
 
 		<xsl:text disable-output-escaping="yes">
 	&lt;/values&gt;
@@ -42,15 +42,24 @@
 
 	<!-- vypise atributy -->
 	<xsl:template match="node()" mode="attributes">		
+
+	<attributes>
 		
-		<xsl:text disable-output-escaping="yes">
-	&lt;attributes&gt;</xsl:text>				
 
 		<xsl:apply-templates select="@*" mode="attributes"/>
 
-		<xsl:text disable-output-escaping="yes">
-	&lt;/attributes&gt;
-		</xsl:text>				
+
+
+<xsl:text disable-output-escaping="yes">
+		</xsl:text>
+		<attribute name="category_definition"/>
+
+
+
+<xsl:text disable-output-escaping="yes">
+	</xsl:text>				
+	</attributes>
+
 
 	</xsl:template>
 	
@@ -68,7 +77,6 @@
 
 		<xsl:text disable-output-escaping="yes">"/&gt;</xsl:text>
 
-    	<xsl:apply-templates select="@*"/>
 	</xsl:template>
 
 
@@ -83,10 +91,28 @@
 		<xsl:text disable-output-escaping="yes">
 		&lt;value </xsl:text>
 		<xsl:apply-templates select="@*" mode="values"/>
+
+		<xsl:text disable-output-escaping="yes">category_definition="</xsl:text>
+		<xsl:apply-templates select="ctgr_def" mode="values"/>
+		<xsl:text disable-output-escaping="yes">"</xsl:text>
+
 		<xsl:text disable-output-escaping="yes">/&gt;</xsl:text>
 
 
 	</xsl:template>
+
+
+
+	<!-- naplni hodnotu pro ctgr_def -->
+	<xsl:template match="ctgr_def" mode="values">
+		<xsl:if test="position()!=1">
+			<xsl:text disable-output-escaping="no">; </xsl:text>
+		</xsl:if>
+
+		<xsl:value-of select="@definition"/>
+	</xsl:template>
+
+
 
 
 
@@ -101,49 +127,9 @@
 
 		<xsl:text disable-output-escaping="yes">" </xsl:text>
 
-    	<xsl:apply-templates select="@*"/>
 	</xsl:template>
 
 	
-	
-	<!-- naplni hodnotu cedentu-->
-	<xsl:template match="@antecedent | @succedent | @condition" mode="values">
-	
-		<xsl:value-of select="name()"/>
-		
-		<xsl:text disable-output-escaping="yes">="</xsl:text>
-	
-    	<xsl:apply-templates select="id(.)" mode="values"/>
-
-		<xsl:text disable-output-escaping="yes">" </xsl:text>
-
-    	<xsl:apply-templates select="@*"/>
-	</xsl:template>
-	
-
-	<!-- literaly -> cedent -->
-	<xsl:template match="ti_cedent" mode="values">		
-    	<xsl:apply-templates select="ti_literal" mode="values"/>
-	</xsl:template>
-	
-
-	<!-- preformatuje literal -->
-	<xsl:template match="ti_literal" mode="values">		
-		
-		<xsl:if test="position()!=1">
-			<xsl:text disable-output-escaping="no"> &amp; </xsl:text>
-		</xsl:if>
-
-		
-		<xsl:value-of select="@quant"/>
-		<xsl:text disable-output-escaping="yes">(</xsl:text>
-		<xsl:value-of select="@value"/>
-		<xsl:text disable-output-escaping="yes">)</xsl:text>
-	</xsl:template>
-	
-
-
-
 
 
 
