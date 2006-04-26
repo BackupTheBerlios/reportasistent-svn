@@ -676,7 +676,7 @@ void CSkeletonDoc::Generate()
 
 		
 		//pockame az spusteny process skonci
-		DWORD wait_ret= WaitForSingleObject(pi.hProcess, 1000);
+		DWORD wait_ret= WaitForSingleObject(pi.hProcess, 5000);
  		CloseHandle(pi.hProcess);
 
 		if (wait_ret != WAIT_OBJECT_0) return;

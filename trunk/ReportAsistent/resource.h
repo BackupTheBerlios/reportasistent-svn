@@ -52,7 +52,9 @@
 #define IDC_ATTRIBUTES_LIST             1022
 #define IDC_REFRESH_BUTTON              1023
 #define IDC_LIST1                       1024
+#define IDC_CAPTIONS_LIST               1024
 #define IDC_MOVE_DOWN_BUTTON2           1025
+#define IDC_EDIT_CAPTION_BUTTON         1026
 #define ID_MMGENREP                     32771
 #define ID_MMSOURCES                    32772
 #define ID_ELEMENT_EDIT                 32780

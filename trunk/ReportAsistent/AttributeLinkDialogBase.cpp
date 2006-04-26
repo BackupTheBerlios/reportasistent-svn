@@ -103,3 +103,11 @@ void CAttributeLinkDialogBase::FillAttributesList(CListCtrl & AttributesList, LP
 }
 
 
+
+void CAttributeLinkDialogBase::SaveTarget(CComboBox &target_combo)
+{
+	CString s;
+	
+	target_combo.GetWindowText(s);
+	m_edited_element->setAttribute("target", (LPCTSTR) s);
+}

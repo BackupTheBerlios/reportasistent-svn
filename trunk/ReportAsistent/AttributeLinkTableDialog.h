@@ -21,6 +21,7 @@ public:
 // Dialog Data
 	//{{AFX_DATA(CAttributeLinkTableDialog)
 	enum { IDD = IDD_ATTRIBUTE_LINK_TABLE_DIALOG };
+	CListCtrl	m_CaptionsList;
 	CComboBox	m_TargetCombo;
 	CListCtrl	m_AttributesList;
 	//}}AFX_DATA
@@ -41,6 +42,13 @@ protected:
 	virtual BOOL OnInitDialog();
 	afx_msg void OnSelchangeTargetCombo();
 	afx_msg void OnRefreshButton();
+	afx_msg void OnAddButton();
+	afx_msg void OnEndlabeleditCaptionsList(NMHDR* pNMHDR, LRESULT* pResult);
+	afx_msg void OnRemoveButton();
+	afx_msg void OnEditCaptionButton();
+	afx_msg void OnMoveUpButton();
+	afx_msg void OnMoveDownButton();
+	virtual void OnOK();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };

@@ -2,7 +2,7 @@
 
 [General Info]
 Version=1
-LastClass=
+LastClass=CAttributeLinkTableDialog
 LastTemplate=CRecordset
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "ReportAsistent.h"
@@ -18,23 +18,23 @@ ResourceCount=12
 Resource1=IDD_ABOUTBOX
 Resource2=IDR_MAINFRAME
 Class5=CAboutDlg
-Resource3=IDD_SOURCES_DIALOG
-Resource4=IDD_DIALOGTEXT (English (U.S.))
+Resource3=IDD_ATTRIBUTE_LINK_TABLE_DIALOG (English (U.S.))
+Resource4=IDD_TRANSFORMATIONS_DIALOG (English (U.S.))
 Class6=CElementTextDialog
-Resource5=IDD_ACTIVE_ELEMENT_DIALOG (English (U.S.))
+Resource5=IDD_GENERATE_DIALOG (English (U.S.))
 Class7=CSimpleFilterDialog
-Resource6=IDD_ATTRIBUTE_LINK_DIALOG
+Resource6=IDD_ATTRIBUTE_LINK_DIALOG (English (U.S.))
 Class8=CGenerateDialog
-Resource7=IDD_TRANSFORMATIONS_DIALOG (English (U.S.))
+Resource7=IDD_SOURCES_DIALOG (English (U.S.))
 Class9=CSourcesDialog
-Resource8=IDD_ABOUTBOX (English (U.S.))
+Resource8=IDD_SIMPLE_FILTER_DIALOG (English (U.S.))
 Class10=CActiveElementDialog
-Resource9=IDD_SIMPLE_FILTER_DIALOG (English (U.S.))
+Resource9=IDD_ABOUTBOX (English (U.S.))
 Class11=CTransformationsDialog
 Class12=Tcategory_Recordset
-Resource10=IDD_GENERATE_DIALOG (English (U.S.))
+Resource10=IDD_ACTIVE_ELEMENT_DIALOG (English (U.S.))
 Class13=CAttributeLinkDialog
-Resource11=IDD_ATTRIBUTE_LINK_TABLE_DIALOG
+Resource11=IDD_DIALOGTEXT (English (U.S.))
 Class14=CAttributeLinkTableDialog
 Resource12=IDR_MAINFRAME (English (U.S.))
 
@@ -231,22 +231,6 @@ BaseClass=CDialog
 Filter=D
 LastObject=CGenerateDialog
 VirtualFilter=dWC
-
-[DLG:IDD_SOURCES_DIALOG]
-Type=1
-Class=CSourcesDialog
-ControlCount=11
-Control1=IDC_STATIC,static,1342308352
-Control2=IDC_STATIC,static,1342308352
-Control3=IDC_PLUGINS_COMBO,combobox,1344340227
-Control4=IDC_STATIC,button,1342177287
-Control5=IDC_ADD_SOURCE_BUTTON,button,1342242816
-Control6=IDC_SOURCES_LIST,SysListView32,1350631941
-Control7=IDC_OPEN_BUTTON,button,1342242816
-Control8=IDC_CLOSE_BUTTON,button,1342242816
-Control9=IDC_REMOVE_BUTTON,button,1342242816
-Control10=IDC_RENAME_BUTTON,button,1342242816
-Control11=IDC_SET_DEFAULT_BUTTON,button,1342242816
 
 [CLS:CSourcesDialog]
 Type=0
@@ -492,36 +476,6 @@ Filter=N
 LastObject=CAttributeLinkDialog
 VirtualFilter=dWC
 
-[DLG:IDD_ATTRIBUTE_LINK_DIALOG]
-Type=1
-Class=CAttributeLinkDialog
-ControlCount=7
-Control1=IDOK,button,1342242817
-Control2=IDCANCEL,button,1342242816
-Control3=IDC_TARGET_COMBO,combobox,1344340227
-Control4=IDC_STATIC,static,1342308352
-Control5=IDC_ATTRIBUTES_LIST,SysListView32,1350631437
-Control6=IDC_STATIC,static,1342308352
-Control7=IDC_REFRESH_BUTTON,button,1342242816
-
-[DLG:IDD_ATTRIBUTE_LINK_TABLE_DIALOG]
-Type=1
-Class=CAttributeLinkTableDialog
-ControlCount=13
-Control1=IDOK,button,1342242817
-Control2=IDCANCEL,button,1342242816
-Control3=IDC_TARGET_COMBO,combobox,1344340227
-Control4=IDC_STATIC,static,1342308352
-Control5=IDC_ATTRIBUTES_LIST,SysListView32,1350631437
-Control6=IDC_STATIC,static,1342308352
-Control7=IDC_REFRESH_BUTTON,button,1342242816
-Control8=IDC_LIST1,SysListView32,1350631941
-Control9=IDC_ADD_BUTTON,button,1342242816
-Control10=IDC_REMOVE_BUTTON,button,1342242816
-Control11=IDC_STATIC,static,1342308352
-Control12=IDC_MOVE_UP_BUTTON,button,1342242816
-Control13=IDC_MOVE_DOWN_BUTTON2,button,1342242816
-
 [CLS:CAttributeLinkTableDialog]
 Type=0
 HeaderFile=AttributeLinkTableDialog.h
@@ -663,4 +617,51 @@ Column36=[tmQuantity].[wSavedCountUsed], 4, 4
 Column37=[wUpdateVer], 4, 4
 Column38=[UserID], 4, 4
 Column39=[tmQuantity].[Notice], 12, 510
+
+[DLG:IDD_ATTRIBUTE_LINK_TABLE_DIALOG (English (U.S.))]
+Type=1
+Class=CAttributeLinkTableDialog
+ControlCount=14
+Control1=IDOK,button,1342242817
+Control2=IDCANCEL,button,1342242816
+Control3=IDC_TARGET_COMBO,combobox,1344340227
+Control4=IDC_STATIC,static,1342308352
+Control5=IDC_ATTRIBUTES_LIST,SysListView32,1350631437
+Control6=IDC_STATIC,static,1342308352
+Control7=IDC_REFRESH_BUTTON,button,1342242816
+Control8=IDC_CAPTIONS_LIST,SysListView32,1350631949
+Control9=IDC_ADD_BUTTON,button,1342242816
+Control10=IDC_REMOVE_BUTTON,button,1342242816
+Control11=IDC_STATIC,static,1342308352
+Control12=IDC_MOVE_UP_BUTTON,button,1342242816
+Control13=IDC_MOVE_DOWN_BUTTON2,button,1342242816
+Control14=IDC_EDIT_CAPTION_BUTTON,button,1342242816
+
+[DLG:IDD_ATTRIBUTE_LINK_DIALOG (English (U.S.))]
+Type=1
+Class=CAttributeLinkDialog
+ControlCount=7
+Control1=IDOK,button,1342242817
+Control2=IDCANCEL,button,1342242816
+Control3=IDC_TARGET_COMBO,combobox,1344340227
+Control4=IDC_STATIC,static,1342308352
+Control5=IDC_ATTRIBUTES_LIST,SysListView32,1350631437
+Control6=IDC_STATIC,static,1342308352
+Control7=IDC_REFRESH_BUTTON,button,1342242816
+
+[DLG:IDD_SOURCES_DIALOG (English (U.S.))]
+Type=1
+Class=CSourcesDialog
+ControlCount=11
+Control1=IDC_STATIC,static,1342308352
+Control2=IDC_STATIC,static,1342308352
+Control3=IDC_PLUGINS_COMBO,combobox,1344340227
+Control4=IDC_STATIC,button,1342177287
+Control5=IDC_ADD_SOURCE_BUTTON,button,1342242816
+Control6=IDC_SOURCES_LIST,SysListView32,1350631941
+Control7=IDC_OPEN_BUTTON,button,1342242816
+Control8=IDC_CLOSE_BUTTON,button,1342242816
+Control9=IDC_REMOVE_BUTTON,button,1342242816
+Control10=IDC_RENAME_BUTTON,button,1342242816
+Control11=IDC_SET_DEFAULT_BUTTON,button,1342242816
 

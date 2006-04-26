@@ -86,11 +86,8 @@ void CAttributeLinkDialog::OnOK()
 {
 	CString s;
 	
-	//target
-	m_TargetCombo.GetWindowText(s);
-	m_edited_element->setAttribute("target", (LPCTSTR) s);
-	s = "";
-
+	
+	SaveTarget(m_TargetCombo);
 	
 	//attr name
 	POSITION pos = m_AttributesList.GetFirstSelectedItemPosition();

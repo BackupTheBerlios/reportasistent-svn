@@ -19,17 +19,12 @@ CGeneralManager * m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager;
 
 
 
-<attr_link_table target="" style="">
-	<link attr_name="" caption=""/>	
-</attr_link_table>
-
-
-
 
 
 dedek TODO:
 
-attr_link_table
+pridat refresh atributu aktivniho prvku na OnOK dialogu aktivniho prvku
+-ted se atributy aktualizuji asi jen pri otevreni dialogu aktivniho prvku
 
 generovani attr_link_* atributu
 
@@ -43,6 +38,8 @@ PlugsTab[0].SockInterface->hGetAPList
 
 
 hotovo:
+attr_link_table
+
 predelat na detekci chyb / navratovou hodnotu uvnitr call backu CAElTransform::ProcessSimpleFlter
 
 zavedeni default source

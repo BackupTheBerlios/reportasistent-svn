@@ -22,6 +22,7 @@ public:
 	CAttributeLinkDialogBase(IXMLDOMElementPtr & edited_element);   // standard constructor
 
 protected:
+	void SaveTarget(CComboBox & target_combo);
 	void OnRefresh(CListCtrl & AttributesList, LPCTSTR target_id);
 	void FillAttributesList(CListCtrl & AttributesList, LPCTSTR target_id);
 	void InitAttributesList(CListCtrl & AttributesList);
