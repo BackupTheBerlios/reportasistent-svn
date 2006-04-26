@@ -656,6 +656,9 @@ void CSkeletonDoc::Generate()
 	{
 		AfxMessageBox(IDS_WB_WORD_LOADER_NOT_REGISTRED);
 
+		
+		
+		//dedek: pokusime se registrovat ActiveX objekt spustenim LMRA_WB_WordLoader s parametrem register
 		STARTUPINFO si;
 		ZeroMemory(& si, sizeof si);
 		
@@ -665,17 +668,21 @@ void CSkeletonDoc::Generate()
 
 		CDirectoriesManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->DirectoriesManager;
 
-		BOOL ret = CreateProcess(m.getLMRA_WB_WordLoaderPath(), NULL, NULL, NULL, FALSE, NORMAL_PRIORITY_CLASS, NULL, NULL, & si, & pi);
+		BOOL ret = CreateProcess(m.getLMRA_WB_WordLoaderPath(), " register", NULL, NULL, FALSE, NORMAL_PRIORITY_CLASS, NULL, NULL, & si, & pi);
 		if (! ret) 
 		{
 			return;
 		}
-	
-//dedek: chtelo by to jestetu aplikaci ukoncit :)
-//		PostThreadMessage(pi.dwThreadId, WM_DESTROY, 0, 0);
 
 		
-		CloseHandle(pi.hProcess);
+		//pockame az spusteny process skonci
+		DWORD wait_ret= WaitForSingleObject(pi.hProcess, 1000);
+ 		CloseHandle(pi.hProcess);
+
+		if (wait_ret != WAIT_OBJECT_0) return;
+	
+
+		
 		
 		hr = word.CreateInstance(CLSID_LMRA_XML_WordLoader);
 		if (S_OK != hr) return;

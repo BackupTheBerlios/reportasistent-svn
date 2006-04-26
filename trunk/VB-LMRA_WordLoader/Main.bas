@@ -7,9 +7,10 @@ Option Explicit ' Force explicit variable declaration.
 
 'hlavni funkce spoustena z ActiveX exe-souboru
 Public Static Sub Main()
-    If App.StartMode = vbSModeStandalone Then
+    
+    If (App.StartMode = vbSModeStandalone) And (Command() <> "register") Then
         Dim f1 As New Form1
-        f1.Caption = "start z lib"
+        f1.Caption = Command
         f1.Show
     End If
 End Sub
