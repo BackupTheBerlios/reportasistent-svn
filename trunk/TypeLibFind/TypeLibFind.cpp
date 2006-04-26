@@ -1,6 +1,6 @@
 
 #define UNICODE
-#define DllExport   __declspec( dllexport )
+//#define DllExport   __declspec( dllexport )
 
 #define WIN32_LEAN_AND_MEAN		// Exclude rarely-used stuff from Windows headers
 
@@ -9,7 +9,8 @@
 #include <wchar.h>
 #include <shlwapi.h>
 
-extern "C" DllExport int WINAPI FindEnumValInTypeLib(LPCSTR _strObjProgId, LPCSTR _strEnumValueName)
+int WINAPI FindEnumValInTypeLib(LPCSTR _strObjProgId, LPCSTR _strEnumValueName)
+//extern "C" DllExport int WINAPI FindEnumValInTypeLib(LPCSTR _strObjProgId, LPCSTR _strEnumValueName)
 {
 	int retval = -1;
 

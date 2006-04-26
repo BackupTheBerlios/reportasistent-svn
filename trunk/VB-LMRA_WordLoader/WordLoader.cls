@@ -13,7 +13,7 @@ Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
 Option Explicit
 
-Private Declare Function FindEnumValInTypeLib Lib "TypeLibFind.dll" Alias "_FindEnumValInTypeLib@8" (ByVal strProhId As String, ByVal strVal As String) As Integer
+Private Declare Function FindEnumValInTypeLib Lib "TypeLibFind.dll" (ByVal strProhId As String, ByVal strVal As String) As Integer
 
 
 Dim mintHeadinglevel As Integer

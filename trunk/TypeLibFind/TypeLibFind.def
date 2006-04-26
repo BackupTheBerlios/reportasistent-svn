@@ -1,0 +1,4 @@
+LIBRARY   TypeLibFind
+DESCRIPTION "Contains functions for looking up for symbols in type-libraries."
+EXPORTS
+   FindEnumValInTypeLib    @1
