@@ -113,7 +113,7 @@ int CDataSourcesManager::initPlugsTab(LPCTSTR plugins_dir_path)
 	while (Found)
 	{
 		Found = FList.FindNextFile();
-		printf("%s\n", FList.GetFileName());
+		//printf("%s\n", FList.GetFileName());
 		PlugsTab.Add(CPluginRec(FList.GetFileName()));
 		i++;
 	}
@@ -124,7 +124,9 @@ int CDataSourcesManager::initPlugsTab(LPCTSTR plugins_dir_path)
 	for(int j=0; j<=PlugsTab.GetUpperBound(); j++)
 	{
 		pInitFn = NULL;	// ukazatel na inicializacni funkci zasuvky	
-		LibName = _PLUGIN_DIR_PATH + PlugsTab[j].PluginName;
+//		LibName = _PLUGIN_DIR_PATH + PlugsTab[j].PluginName;
+//dedek:
+		LibName.Format("%s\\%s", plugins_dir_path ,PlugsTab[j].PluginName);
 		PlugsTab[j].hLib = LoadLibrary(LibName);
 		if(PlugsTab[j].hLib != NULL)
 		{

@@ -24,6 +24,7 @@ public:
 		LPARAM user1,							//uzivatelsky parametr, ktery byl predan filtrovaci funkci
 		LPARAM user2							//uzivatelsky parametr, ktery byl predan filtrovaci funkci
 		) = 0;
+
 };
 
 

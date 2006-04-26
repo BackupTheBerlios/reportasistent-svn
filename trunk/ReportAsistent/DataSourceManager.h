@@ -22,10 +22,12 @@
 // --- cesty k adresarum
 
 // cesta do adresare Plugin k souborum typu .dll
-#define _PLUGIN_DIR_PATH "Plugin\\"
+//#define _PLUGIN_DIR_PATH "Plugin\\"
+//dedek: presunuto do CDirectoriesManager
 
 // cesta do adresare Config ke konfiguracnim souborum (spravce zdroju atd.)
-#define _CONF_DIR_PATH "Config\\"
+//#define _CONF_DIR_PATH "Config\\"
+//dedek: presunuto do CDirectoriesManager
 
 
 // --- jmena konfiguracnich souboru
