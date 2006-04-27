@@ -274,6 +274,9 @@ void CAElTransform::FillElementAttributes(IXMLDOMNodePtr &output_node)
 			m.getActiveElementInfo(
 				m.IdentifyElement(m_active_element))->getFillElementAttributesTransformation()));
 
+	//ladici
+	attributes_DOM->save("../XML/fill_element_attributes_example.xml");
+
 /*********/	
 	
 	//ulozi atributy do m_active_element

@@ -30,7 +30,9 @@ Private Sub IVBSAXErrorHandler_error(ByVal oLocator As MSXML2.IVBSAXLocator, str
 End Sub
 
 Private Sub IVBSAXErrorHandler_fatalError(ByVal oLocator As MSXML2.IVBSAXLocator, strErrorMessage As String, ByVal nErrorCode As Long)
-    mLMRA.strLastError = "fatal error (" & nErrorCode & "): " & strErrorMessage
+    If (nErrorCode <> vbObjectError + 1) Then
+        mLMRA.strLastError = "fatal error (" & nErrorCode & "): " & strErrorMessage
+    End If
     'Form1.txtOutput.text = Form1.txtOutput.text & vbNewLine & "*** fatal error ***" & strErrorMessage
 End Sub
 

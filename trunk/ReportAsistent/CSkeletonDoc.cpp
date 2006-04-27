@@ -643,7 +643,7 @@ void CSkeletonDoc::Generate()
 
 //	doc_element->save("../out.xml");
 
-
+	
 	
 /*****///generovani do Wordu	
 

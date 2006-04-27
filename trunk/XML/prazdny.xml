@@ -169,7 +169,5 @@
 		</attr_link_table>
 
 	</chapter>
-	<!--
 	<include file="../XML/include_doc.doc" id="include1"/>
-	-->
 </report>

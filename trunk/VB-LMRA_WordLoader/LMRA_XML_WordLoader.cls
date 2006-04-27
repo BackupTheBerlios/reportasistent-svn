@@ -75,6 +75,7 @@ Public Function LoadFromString(ByVal strXMLSource As String)
     Set contentHandler.word_loader = word_loader
     Set contentHandler.LMRA_loader = Me
     Set errorHandler.LMRA_loader = Me
+    Set word_loader.LMRA_loader = Me
 
     contentHandler.strOutput = ""
         

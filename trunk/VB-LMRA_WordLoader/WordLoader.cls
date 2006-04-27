@@ -22,12 +22,17 @@ Dim mintLastGraphCell As Integer
 Dim mboolTextInserting As Boolean
 
 
+Dim mLMRA As LMRA_XML_WordLoader
+
 
 Dim mWordApp As Word.Application
 Dim mGraph As Graph.Chart
 Dim mstrGraphProgID As String
 Dim mTable As Word.Table
 
+Public Property Set LMRA_loader(P As LMRA_XML_WordLoader)
+   Set mLMRA = P
+End Property
 
 Private Sub Class_Initialize()
     mintHeadinglevel = 1
@@ -314,13 +319,22 @@ Public Sub LoadInclude(oAttributes As MSXML2.IVBSAXAttributes)
 '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     
+'    ChangeFileOpenDirectory "D:\lmra\XML\"
+'   Documents.Open FileName:="include_doc.doc", ConfirmConversions:=False, _
+'        ReadOnly:=False, AddToRecentFiles:=False, PasswordDocument:="", _
+'        PasswordTemplate:="", Revert:=False, WritePasswordDocument:="", _
+'        WritePasswordTemplate:="", Format:=wdOpenFormatAuto
     
+    On Error GoTo FileError
     Set open_doc = mWordApp.Documents.Open( _
         FileName:=oAttributes.getValueFromName("", "file"), _
         ConfirmConversions:=False, _
         ReadOnly:=True, _
-        AddToRecentFiles:=False)
-        
+        AddToRecentFiles:=False, _
+        PasswordDocument:="", _
+        PasswordTemplate:="", Revert:=False, WritePasswordDocument:="", _
+        WritePasswordTemplate:="", Format:=wdOpenFormatAuto)
+            
                
     open_doc.Select
     mWordApp.Selection.Copy
@@ -328,7 +342,19 @@ Public Sub LoadInclude(oAttributes As MSXML2.IVBSAXAttributes)
         
     mWordApp.Selection.Paste
     mWordApp.Selection.Select
-            
+    
+    Exit Sub
+    
+FileError:
+
+    mLMRA.strLastError = "Error in iclude file loading!" _
+        & vbNewLine & "filename: " & oAttributes.getValueFromName("", "file") & vbNewLine _
+        & "file open directory: " & App.Path & vbNewLine
+    
+   
+    Err.Clear
+    Err.Raise vbObjectError + 1
+                    
 End Sub
 
 
