@@ -171,6 +171,10 @@ SOURCE=.\StdAfx.cpp
 
 SOURCE=.\TransformationsDialog.cpp
 # End Source File
+# Begin Source File
+
+SOURCE=.\WordManager.cpp
+# End Source File
 # End Group
 # Begin Group "Header Files"
 
@@ -258,6 +262,10 @@ SOURCE=.\StdAfx.h
 # Begin Source File
 
 SOURCE=.\TransformationsDialog.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\WordManager.h
 # End Source File
 # End Group
 # Begin Group "Resource Files"

@@ -39,6 +39,7 @@ Private Sub Class_Initialize()
     mboolTextInserting = False
 End Sub
 
+
 Public Sub SetDocument(doc As Word.Document)
     Set mWordApp = doc.Application
     
@@ -170,7 +171,7 @@ Public Sub LoadTableColumn(oAttributes As MSXML2.IVBSAXAttributes)
     Dim r As Integer
     Dim hex_bg As String
     Dim bg_color As Long
-    Dim num As Long
+    Dim Num As Long
     
     
     Dim fc As Word.Cell
@@ -202,12 +203,12 @@ Public Sub LoadTableColumn(oAttributes As MSXML2.IVBSAXAttributes)
     
     hex_bg = oAttributes.getValueFromName("", "bgcolor")
     hex_bg = Replace(hex_bg, "#", "&H")
-    num = hex_bg
+    Num = hex_bg
     
 'vymwena souradnic: RGB -> BGR
-    bg_color = (num And &HFF) * 256 * 256
-    bg_color = bg_color + (num And &H2000FF00 And &H1000FF00)   'finta na VB - potrebujem 32bit AND
-    bg_color = bg_color + (((num And &HFF0000) / 256) / 256)
+    bg_color = (Num And &HFF) * 256 * 256
+    bg_color = bg_color + (Num And &H2000FF00 And &H1000FF00)   'finta na VB - potrebujem 32bit AND
+    bg_color = bg_color + (((Num And &HFF0000) / 256) / 256)
     
     
 '    num = (num & &HFF00) / 256

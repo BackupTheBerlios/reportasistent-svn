@@ -23,6 +23,13 @@ CGeneralManager * m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager;
 
 dedek TODO:
 
+pouzivat CWordManager pri generovani
+
+otestovat destruktor ~CStringTableImpl()
+-jestli se nevola z ~CStringTable() proste kdyz se pouzije nektra z funkci getWordParagraphStyles
+
+pridat attr_link_table mezi vizualizace
+
 pridat refresh atributu aktivniho prvku na OnOK dialogu aktivniho prvku
 -ted se atributy aktualizuji asi jen pri otevreni dialogu aktivniho prvku
 

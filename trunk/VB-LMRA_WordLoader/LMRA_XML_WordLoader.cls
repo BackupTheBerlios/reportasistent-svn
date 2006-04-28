@@ -13,6 +13,7 @@ Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = True
 Dim mstrLastId As String
 Dim mstrLastError As String
+Dim mWordForInfo As Word.Application
 
 Public Property Get strLastProcessedId() As String
     strLastProcessedId = mstrLastId
@@ -30,6 +31,112 @@ Public Property Let strLastError(P As String)
    mstrLastError = P
 End Property
 
+'vraci pole stringu
+Public Function EnumTemplates() As String()
+    If mWordForInfo Is Nothing Then
+        Set mWordForInfo = CreateObject("Word.Application")
+    End If
+    
+    
+    Dim ret() As String
+    
+    ReDim ret(0 To mWordForInfo.Templates.Count - 1)
+    
+    Dim t As Word.Template
+    Dim n As Integer
+    
+    n = 0
+    For Each t In mWordForInfo.Templates
+        ret(n) = t.Name
+        n = n + 1
+    Next t
+    
+    EnumTemplates = ret
+End Function
+
+'vraci pole stringu
+Public Function EnumParagraphStyles(ByVal template_name As String) As String()
+
+    If mWordForInfo Is Nothing Then
+        Set mWordForInfo = CreateObject("Word.Application")
+    End If
+    
+    Dim template_doc As Word.Document
+    Set template_doc = mWordForInfo.Templates(template_name).OpenAsDocument
+    
+    Dim s As Word.style
+    Dim n As Integer
+    
+    'zjistuime, kolik je character stylu
+    n = 0
+    For Each s In template_doc.Styles
+        If s.Type = wdStyleTypeParagraph Then
+            n = n + 1
+        End If
+    Next s
+    
+    
+    Dim ret() As String
+    
+    ReDim ret(0 To n)
+    
+    'ulozime charcter styly do pole
+    n = 0
+    For Each s In template_doc.Styles
+        If s.Type = wdStyleTypeParagraph Then
+            ret(n) = s.NameLocal
+            n = n + 1
+        End If
+    Next s
+    
+ 
+    template_doc.Close
+    
+    EnumParagraphStyles = ret
+
+End Function
+
+'vraci pole stringu
+Public Function EnumCharacterStyles(ByVal template_name As String) As String()
+
+    If mWordForInfo Is Nothing Then
+        Set mWordForInfo = CreateObject("Word.Application")
+    End If
+    
+    Dim template_doc As Word.Document
+    Set template_doc = mWordForInfo.Templates(template_name).OpenAsDocument
+    
+    Dim s As Word.style
+    Dim n As Integer
+    
+    'zjistuime, kolik je character stylu
+    n = 0
+    For Each s In template_doc.Styles
+        If s.Type = wdStyleTypeCharacter Then
+            n = n + 1
+        End If
+    Next s
+    
+    
+    Dim ret() As String
+    
+    ReDim ret(0 To n)
+    
+    'ulozime charcter styly do pole
+    n = 0
+    For Each s In template_doc.Styles
+        If s.Type = wdStyleTypeCharacter Then
+            ret(n) = s.NameLocal
+            n = n + 1
+        End If
+    Next s
+    
+ 
+    template_doc.Close
+    
+    EnumCharacterStyles = ret
+
+End Function
 
 
 Public Function LoadFromStringToDoc(ByVal strXMLSource As String, out_doc As Object)

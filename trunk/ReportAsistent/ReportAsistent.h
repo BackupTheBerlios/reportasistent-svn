@@ -29,6 +29,7 @@
 
 #include "ElementManager.h"
 #include "DataSourceManager.h"
+#include "WordManager.h"
 #include "DirectoriesManager.h"	// Added by ClassView
 
 //honza: sem vkaldejte vsechny globalni managery
@@ -39,6 +40,7 @@ public:
 	CDirectoriesManager DirectoriesManager;
 	CElementManager ElementManager;
 	CDataSourcesManager DataSourcesManager;
+	CWordManager WordManager;
 
 	CGeneralManager() : 
 		DataSourcesManager(DirectoriesManager),
