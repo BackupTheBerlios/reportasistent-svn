@@ -22,7 +22,7 @@
   				<xsl:text disable-output-escaping="yes">
   					&lt;attribute name="missing_values" value="</xsl:text> 
   				<xsl:apply-templates select="missing_value" /> 
-  				<xsl:text disable-output-escaping="yes">"/&gt;</xsl:text>
+  				<xsl:text disable-output-escaping="yes">" /&gt;</xsl:text>
 
 
 
@@ -48,14 +48,14 @@
 
 	<xsl:template match="ctgr">
     <xsl:if test="position()!=1">
-    <xsl:text disable-output-escaping="no">;</xsl:text> 
+    <xsl:text disable-output-escaping="no">; </xsl:text> 
     </xsl:if>
     <xsl:value-of select="@name" /> 
     </xsl:template>
 
     <xsl:template match="missing_value">
     <xsl:if test="position()!=1">
-    <xsl:text disable-output-escaping="no">;</xsl:text> 
+    <xsl:text disable-output-escaping="no">; </xsl:text> 
     </xsl:if>
     <xsl:value-of select="@name" /> 
     </xsl:template>

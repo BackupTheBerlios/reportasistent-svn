@@ -16,7 +16,7 @@
 				<xsl:text disable-output-escaping="yes">
 					&lt;attribute name="category_definition" value="</xsl:text>
 				<xsl:apply-templates select="ctgr_def"/>
-  				<xsl:text disable-output-escaping="yes">"&gt;</xsl:text>
+  				<xsl:text disable-output-escaping="yes">" /&gt;</xsl:text>
 
 
 
@@ -40,7 +40,7 @@
 
 	<xsl:template match="ctgr_def">
 	<xsl:if test="position()!=1">
-  	<xsl:text disable-output-escaping="no">;</xsl:text> 
+  	<xsl:text disable-output-escaping="no">; </xsl:text> 
   	</xsl:if>
   	<xsl:value-of select="@definition" /> 
   	</xsl:template>
