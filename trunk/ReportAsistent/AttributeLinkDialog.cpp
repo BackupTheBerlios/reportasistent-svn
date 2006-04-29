@@ -30,6 +30,7 @@ void CAttributeLinkDialog::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CAttributeLinkDialog)
+	DDX_Control(pDX, IDC_STYLES_COMBO, m_StylesCombo);
 	DDX_Control(pDX, IDC_ATTRIBUTES_LIST, m_AttributesList);
 	DDX_Control(pDX, IDC_TARGET_COMBO, m_TargetCombo);
 	//}}AFX_DATA_MAP
@@ -40,6 +41,7 @@ BEGIN_MESSAGE_MAP(CAttributeLinkDialog, CDialog)
 	//{{AFX_MSG_MAP(CAttributeLinkDialog)
 	ON_CBN_SELCHANGE(IDC_TARGET_COMBO, OnSelchangeTargetCombo)
 	ON_BN_CLICKED(IDC_REFRESH_BUTTON, OnRefreshButton)
+	ON_BN_CLICKED(IDC_STYLES_REFRESH_BUTTON, OnStylesRefreshButton)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -52,6 +54,18 @@ BOOL CAttributeLinkDialog::OnInitDialog()
 	
 	// TODO: Add extra initialization here
 	InitBaseDialog(m_AttributesList, m_TargetCombo);
+
+	
+	
+	FillStylesCombo();
+
+
+	//vyber style v comboboxu
+	_variant_t style = m_edited_element->getAttribute("style");
+	if (style.vt != VT_NULL)
+	{
+		m_StylesCombo.SelectString(-1, (_bstr_t) style);
+	}
 
 	
 	
@@ -97,6 +111,27 @@ void CAttributeLinkDialog::OnOK()
 		s = m_AttributesList.GetItemText(nItem, ATTRLIST_CL_NAME);
 	}
 	m_edited_element->setAttribute("attr_name", (LPCTSTR) s);
+
+	
+	
+	//style
+	
+	//vymaz attribyt style z tagu
+	if (m_edited_element->attributes->getNamedItem("style") != NULL)
+	{
+		m_edited_element->attributes->removeNamedItem("style");
+	}
+
+	CString style_str;
+	m_StylesCombo.GetWindowText(style_str);
+
+	if (style_str.GetLength() != 0)
+	{
+		IXMLDOMAttributePtr s_atr = m_edited_element->ownerDocument->createAttribute("style");
+		s_atr->text = (LPCTSTR) style_str;
+		m_edited_element->setAttributeNode(s_atr);
+		s_atr.Release();
+	}
 	
 	CDialog::OnOK();
 }
@@ -108,4 +143,45 @@ void CAttributeLinkDialog::OnRefreshButton()
 	m_TargetCombo.GetWindowText(s);
 
 	OnRefresh(m_AttributesList, s);
+}
+
+void CAttributeLinkDialog::OnStylesRefreshButton() 
+{
+	CWordManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->WordManager;
+	m.LoadWordStyles();
+
+	FillStylesCombo();	
+}
+
+void CAttributeLinkDialog::FillStylesCombo()
+{
+	CWordManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->WordManager;
+
+	CStringTable & st = m.getWordCharacterStyles();
+
+	CString sel;
+	m_StylesCombo.GetWindowText(sel);
+	
+	//vymaze cele combo
+	for (int i=0; i < m_StylesCombo.GetCount(); i++)
+	{
+		m_StylesCombo.DeleteString(i);
+	}
+
+	//styl - neuveden
+	m_StylesCombo.AddString("");
+
+	for (int a=0; a < st.getCount(); a++)
+	{
+		m_StylesCombo.AddString(st.getItem(a));
+	}
+
+	if (CB_ERR == m_StylesCombo.SelectString(-1, sel))
+	{
+		CString s;
+		m_StylesCombo.GetLBText(0, s);
+		m_StylesCombo.SelectString(-1, s);
+	}
+
+
 }

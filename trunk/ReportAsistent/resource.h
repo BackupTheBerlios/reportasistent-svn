@@ -53,7 +53,9 @@
 #define IDC_REFRESH_BUTTON              1023
 #define IDC_LIST1                       1024
 #define IDC_CAPTIONS_LIST               1024
+#define IDC_STYLES_COMBO                1024
 #define IDC_MOVE_DOWN_BUTTON2           1025
+#define IDC_STYLES_REFRESH_BUTTON       1025
 #define IDC_EDIT_CAPTION_BUTTON         1026
 #define ID_MMGENREP                     32771
 #define ID_MMSOURCES                    32772
@@ -78,7 +80,7 @@
 #define _APS_3D_CONTROLS                     1
 #define _APS_NEXT_RESOURCE_VALUE        153
 #define _APS_NEXT_COMMAND_VALUE         32784
-#define _APS_NEXT_CONTROL_VALUE         1026
+#define _APS_NEXT_CONTROL_VALUE         1027
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

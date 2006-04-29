@@ -24,6 +24,7 @@ public:
 // Dialog Data
 	//{{AFX_DATA(CAttributeLinkDialog)
 	enum { IDD = IDD_ATTRIBUTE_LINK_DIALOG };
+	CComboBox	m_StylesCombo;
 	CListCtrl	m_AttributesList;
 	CComboBox	m_TargetCombo;
 	//}}AFX_DATA
@@ -38,6 +39,7 @@ public:
 
 // Implementation
 protected:
+	void FillStylesCombo();
 
 	// Generated message map functions
 	//{{AFX_MSG(CAttributeLinkDialog)
@@ -45,6 +47,7 @@ protected:
 	afx_msg void OnSelchangeTargetCombo();
 	virtual void OnOK();
 	afx_msg void OnRefreshButton();
+	afx_msg void OnStylesRefreshButton();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };

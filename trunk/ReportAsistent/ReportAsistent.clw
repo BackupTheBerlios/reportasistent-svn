@@ -2,7 +2,7 @@
 
 [General Info]
 Version=1
-LastClass=CAttributeLinkTableDialog
+LastClass=CAttributeLinkDialog
 LastTemplate=CRecordset
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "ReportAsistent.h"
@@ -18,23 +18,23 @@ ResourceCount=12
 Resource1=IDD_ABOUTBOX
 Resource2=IDR_MAINFRAME
 Class5=CAboutDlg
-Resource3=IDD_TRANSFORMATIONS_DIALOG (English (U.S.))
-Resource4=IDD_ABOUTBOX (English (U.S.))
+Resource3=IDD_ATTRIBUTE_LINK_DIALOG (English (U.S.))
+Resource4=IDD_ATTRIBUTE_LINK_TABLE_DIALOG (English (U.S.))
 Class6=CElementTextDialog
-Resource5=IDD_ACTIVE_ELEMENT_DIALOG (English (U.S.))
+Resource5=IDD_GENERATE_DIALOG (English (U.S.))
 Class7=CSimpleFilterDialog
-Resource6=IDD_SIMPLE_FILTER_DIALOG (English (U.S.))
+Resource6=IDD_SOURCES_DIALOG (English (U.S.))
 Class8=CGenerateDialog
-Resource7=IDD_ATTRIBUTE_LINK_TABLE_DIALOG (English (U.S.))
+Resource7=IDD_ABOUTBOX (English (U.S.))
 Class9=CSourcesDialog
-Resource8=IDD_DIALOGTEXT (English (U.S.))
+Resource8=IDD_SIMPLE_FILTER_DIALOG (English (U.S.))
 Class10=CActiveElementDialog
-Resource9=IDD_ATTRIBUTE_LINK_DIALOG (English (U.S.))
+Resource9=IDD_DIALOGTEXT (English (U.S.))
 Class11=CTransformationsDialog
 Class12=Tcategory_Recordset
-Resource10=IDD_GENERATE_DIALOG (English (U.S.))
+Resource10=IDD_ACTIVE_ELEMENT_DIALOG (English (U.S.))
 Class13=CAttributeLinkDialog
-Resource11=IDD_SOURCES_DIALOG (English (U.S.))
+Resource11=IDD_TRANSFORMATIONS_DIALOG (English (U.S.))
 Class14=CAttributeLinkTableDialog
 Resource12=IDR_MAINFRAME (English (U.S.))
 
@@ -473,7 +473,7 @@ HeaderFile=AttributeLinkDialog.h
 ImplementationFile=AttributeLinkDialog.cpp
 BaseClass=CDialog
 Filter=N
-LastObject=CAttributeLinkDialog
+LastObject=IDC_STYLES_COMBO
 VirtualFilter=dWC
 
 [CLS:CAttributeLinkTableDialog]
@@ -640,7 +640,7 @@ Control14=IDC_EDIT_CAPTION_BUTTON,button,1342242816
 [DLG:IDD_ATTRIBUTE_LINK_DIALOG (English (U.S.))]
 Type=1
 Class=CAttributeLinkDialog
-ControlCount=7
+ControlCount=10
 Control1=IDOK,button,1342242817
 Control2=IDCANCEL,button,1342242816
 Control3=IDC_TARGET_COMBO,combobox,1344340227
@@ -648,6 +648,9 @@ Control4=IDC_STATIC,static,1342308352
 Control5=IDC_ATTRIBUTES_LIST,SysListView32,1350631437
 Control6=IDC_STATIC,static,1342308352
 Control7=IDC_REFRESH_BUTTON,button,1342242816
+Control8=IDC_STYLES_COMBO,combobox,1344340227
+Control9=IDC_STATIC,static,1342308352
+Control10=IDC_STYLES_REFRESH_BUTTON,button,1342242816
 
 [DLG:IDD_SOURCES_DIALOG (English (U.S.))]
 Type=1

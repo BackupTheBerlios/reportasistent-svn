@@ -20,6 +20,7 @@ static char THIS_FILE[]=__FILE__;
 void CStringTableImpl::Add(LPCTSTR s)
 {
 	data.Add(new CString(s));
+//	int a = data.GetSize();
 }
 
 int CStringTableImpl::getCount()

@@ -238,3 +238,7 @@ Public Function LoadFromFile(ByVal strFileName As String) As String
     LoadFromFile = contentHandler.strOutput
 
 End Function
+
+Private Sub Class_Terminate()
+    mWordForInfo.Quit
+End Sub

@@ -65,6 +65,7 @@
 <!ATTLIST attr_link id ID #REQUIRED >
 <!ATTLIST attr_link target CDATA #REQUIRED >
 <!ATTLIST attr_link attr_name CDATA #REQUIRED >
+<!ATTLIST attr_link style CDATA #IMPLIED >
 
 
 <!ELEMENT graph ( categories? , chart+ ) >

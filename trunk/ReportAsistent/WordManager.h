@@ -40,11 +40,11 @@ public:
 	virtual ~CWordManager();
 
 	void LoadWordTemplates();
-	void LoadWordStyles(LPCTSTR template_name);
+	void LoadWordStyles(LPCTSTR template_name = "normal.dot");
 	
 	CStringTable & getWordTemplates() { return m_WordTemplates; };
-	CStringTable & getWordParagraphStyles() { return m_WordTemplates; };
-	CStringTable & getWordCharacterStyles() { return m_WordTemplates; };
+	CStringTable & getWordParagraphStyles() { return m_WordParagraphStyles; };
+	CStringTable & getWordCharacterStyles() { return m_WordCharacterStyles; };
 
 private:
 	_LMRA_XML_WordLoaderPtr m_WordLoader;
