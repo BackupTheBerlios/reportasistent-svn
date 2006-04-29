@@ -404,6 +404,10 @@ CSkeletonView * CSkeletonDoc::GetFirstView()
 void CSkeletonDoc::OnElementEdit() 
 {
 	CTreeCtrl & tree = GetFirstView()->GetTreeCtrl();
+
+	//dedek:
+	if (tree.GetSelectedItem() == NULL) return;
+
 	
 	
 	IXMLDOMElementPtr edited_element = ElementFromItemData(tree.GetItemData(tree.GetSelectedItem()));
