@@ -60,32 +60,6 @@ ale funguje i s relativni cestou viz zdroj "testovaci metabaze"
 
 
 
-Pro Ivu:
-vsimla sis rozdilu, kdyz editujes/pridavas aktivni prvak a kdyz staticky?
--u aktivnich se nezlikviduje cely strom :-)
--zustane zabalene to co bylo zabalane pred editaci, pridanim
-
-v RA: myslim ze by to chtelo trochu vylepsit vkladani/editaci prvku - kdyz uzivatel zmacken Cancel, tak aby se tan prvek nevlozil/nenastavila se modification flag
-
-
-
-
-
-
-
-
-Pro Martina:
-DBName - nemelo by tam byt jmeno alayzovane databaze? ..ted je tam jmeno metabaze
-
-
-
-
-
-
-
-
-
-
 
 ========================================================================
        MICROSOFT FOUNDATION CLASS LIBRARY : ReportAsistent

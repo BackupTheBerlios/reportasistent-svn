@@ -178,12 +178,16 @@ void CSkeletonView::OnUpdate(CView* pSender, LPARAM lHint, CObject* pHint)
 	//a na misto kam bylo pridano by bylo nutne znovu se prolistovat
 	if (lHint != NULL)
 	{
+		ASSERT(FALSE);
+		//dedek: zuseno, nepouziva se
+		/*
 		CTreeCtrl & tree = GetTreeCtrl();
 
 		IXMLDOMElement * new_element = (IXMLDOMElement *) lHint;
 
 
-		GetDocument()->InsetNodeToTreeCtrl((IXMLDOMElementPtr) new_element, tree.GetSelectedItem(), tree);
+		GetDocument()->InsertNodeToTreeCtrl((IXMLDOMElementPtr) new_element, tree.GetSelectedItem(), tree);
+		*/
 	} else
 	{
 		//Deda: Naplneni TreeCtrl
@@ -314,7 +318,8 @@ void CSkeletonView::OnRButtonDown(UINT nFlags, CPoint point)
 	ClientToScreen(&point);
 	OnContextMenu(this,point);
 	
-	CTreeView::OnRButtonDown(nFlags, point);
+	//dedek: zakomentovano, kazi modalni dialogy
+	//CTreeView::OnRButtonDown(nFlags, point);
 }
 
 

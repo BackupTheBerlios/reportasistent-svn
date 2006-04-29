@@ -64,17 +64,18 @@ protected:
 	DECLARE_MESSAGE_MAP()
 
 public:
-	static void InsetNodeToTreeCtrl(MSXML2::IXMLDOMElementPtr pElement, 
+	static void InsertNodeToTreeCtrl(MSXML2::IXMLDOMElementPtr pElement, 
 									HTREEITEM hParentItem, 
-									CTreeCtrl  & tree_control);
+									CTreeCtrl  & tree_control, HTREEITEM hInsertAfter = TVI_LAST);
 private:
 	MSXML2::IXMLDOMDocumentPtr m_pXMLDom;
 
 protected:
+	static CElementManager::elId_t ElementIdFromCommandId(UINT command);
 	static LPARAM CreateItemData(IXMLDOMElementPtr & element);
 	void ConfigureFilter(IXMLDOMElementPtr & active_element);
-	void EditElement(IXMLDOMElementPtr selected_element);
-	void EditActiveElement(IXMLDOMElementPtr &element);
+	BOOL EditElement(IXMLDOMElementPtr selected_element);
+	BOOL EditActiveElement(IXMLDOMElementPtr &element);
 	IXMLDOMElementPtr InsertNewElement(CElementManager::elId_t elementID, IXMLDOMElementPtr & parent_element);
 	IXMLDOMElementPtr InsertNewElement(LPCTSTR element_name, IXMLDOMElementPtr & parent_element);
 	

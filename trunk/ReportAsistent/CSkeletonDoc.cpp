@@ -184,16 +184,17 @@ void CSkeletonDoc::FillTreeControl(CTreeCtrl  & tree_control)
 	//a naplnim TreeCtrl
 	else
 	{
-		InsetNodeToTreeCtrl(pTopElement, TVI_ROOT, tree_control);
+		InsertNodeToTreeCtrl(pTopElement, TVI_ROOT, tree_control);
 	}
 
 	
 }
 
 
-void CSkeletonDoc::InsetNodeToTreeCtrl(MSXML2::IXMLDOMElementPtr pElement, 
+void CSkeletonDoc::InsertNodeToTreeCtrl(MSXML2::IXMLDOMElementPtr pElement, 
 									   HTREEITEM hParentItem, 
-									   CTreeCtrl  & tree_control)
+									   CTreeCtrl  & tree_control,
+									   HTREEITEM hInsertAfter) //hInsertAfter = TVI_LAST
 {
 //dedek: nova verze
 /****/	
@@ -204,7 +205,7 @@ void CSkeletonDoc::InsetNodeToTreeCtrl(MSXML2::IXMLDOMElementPtr pElement,
 
 	CElementManager::elId_t el_id = m.IdentifyElement(pElement);
 	
-	hTreeItem = tree_control.InsertItem(m.CreateElementCaption(pElement), el_id, el_id, hParentItem);
+	hTreeItem = tree_control.InsertItem(m.CreateElementCaption(pElement), el_id, el_id, hParentItem, hInsertAfter);
 
 	tree_control.SetItemData(hTreeItem, CreateItemData(pElement));
 
@@ -219,7 +220,7 @@ void CSkeletonDoc::InsetNodeToTreeCtrl(MSXML2::IXMLDOMElementPtr pElement,
 	while ((pChild = pChildren->nextNode()) != NULL)
 	{
 
-		InsetNodeToTreeCtrl(pChild, hTreeItem, tree_control);
+		InsertNodeToTreeCtrl(pChild, hTreeItem, tree_control);
 	}
 
 	tree_control.Expand(hTreeItem, TVE_EXPAND);
@@ -412,7 +413,11 @@ void CSkeletonDoc::OnElementEdit()
 	
 	IXMLDOMElementPtr edited_element = ElementFromItemData(tree.GetItemData(tree.GetSelectedItem()));
 
-	EditElement(edited_element);
+	if (EditElement(edited_element))
+	{
+		SetModifiedFlag();
+		UpdateAllViews(NULL);
+	}
 
 }
 
@@ -437,6 +442,7 @@ IXMLDOMElement * CSkeletonDoc::ElementFromItemData(LPARAM item_data)
 
 
 //pokusi se vlozit novy element jako child parent_element uzlu, novy element vrati
+//nenastuvuje ModifiedFlag, neprekresluje
 IXMLDOMElementPtr CSkeletonDoc::InsertNewElement(CElementManager::elId_t elementID, IXMLDOMElementPtr & parent_element)
 {
 	CGeneralManager * m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager;
@@ -501,23 +507,26 @@ CString CSkeletonDoc::CreateNewID(CElementManager::elId_t element_type)
 	return id;
 }
 
-void CSkeletonDoc::EditActiveElement(IXMLDOMElementPtr &element)
+//dedek: vrati TRUE pokud doslo ke zmene elementu
+//nenastuvuje ModifiedFlag, neprekresluje
+BOOL CSkeletonDoc::EditActiveElement(IXMLDOMElementPtr &element)
 {
 	CActiveElementDialog dlg(element, AfxGetMainWnd());
 
 
-	dlg.DoModal();	
+	return IDOK == dlg.DoModal();
 
 
 //		ConfigureFilter(element);
 }
 
 
-//dedek: docasne - sem prijde volani spravnych edit dialogu
-void CSkeletonDoc::EditElement(IXMLDOMElementPtr selected_element)
+//dedek: vrati TRUE pokud doslo ke zmene elementu
+//nenastuvuje ModifiedFlag, neprekresluje
+BOOL CSkeletonDoc::EditElement(IXMLDOMElementPtr selected_element)
 {
 
-	if (selected_element == NULL) return;
+	if (selected_element == NULL) return FALSE;
 
 	//ziskej element
 	//IXMLDOMElementPtr selected_element = ElementFromItemData(item_data);
@@ -532,17 +541,16 @@ void CSkeletonDoc::EditElement(IXMLDOMElementPtr selected_element)
 	//jedna se o aktivni prvek?
 	if (OElementManager.isElementActive(selected_elementTypeId))
 	{
-		EditActiveElement(selected_element);
-	}	
-	// Iva: jedna se o prvek text?
-	else /* sem by top sai chtelo dat switch misto if*/if (selected_elementTypeId == ELID_TEXT)
-	{
-		
-		//AfxMessageBox(selected_element->text);
+		return EditActiveElement(selected_element);
+	}
 
-		//Vytvorim instanci dialogu pro Prvek Text
-//			CElementTextDialog OElementTextDialog;
-			//dedek neni to takhle sparvne? :
+
+	//dedek:
+	switch(selected_elementTypeId)
+	{
+	case  ELID_TEXT:
+		{
+			//Vytvorim instanci dialogu pro Prvek Text
 			CElementTextDialog OElementTextDialog(AfxGetMainWnd());
 
 			//Inicializuji promenne dialogu		
@@ -550,44 +558,45 @@ void CSkeletonDoc::EditElement(IXMLDOMElementPtr selected_element)
 
 			//A dialog zobrazim
 			UINT Res = OElementTextDialog.DoModal();
-			
+				
 			if (Res == IDOK)
 			{
 				//Zmeny z dialogu soupnu do XMLDom stromu
 				LPCTSTR sText= OElementTextDialog.m_DialTextEditValue; 
 				selected_element->text=sText;
-				//Update TreeCtrl
-				SetModifiedFlag();		
-				UpdateAllViews(NULL, 0);
+				return TRUE;
 			}
-
-	}
-	//dedek
-	else if (selected_elementTypeId == ELID_ATTR_LINK)
-	{
-		CAttributeLinkDialog dlg(selected_element, AfxGetMainWnd());
-
-		if (dlg.DoModal() == IDOK)
-		{
-				SetModifiedFlag();		
-				UpdateAllViews(NULL, 0);
+			else
+			{
+				return FALSE;
+			}
 		}
-	}
-	else if (selected_elementTypeId == ELID_ATTR_LINK_TABLE)
-	{
-		CAttributeLinkTableDialog dlg(selected_element, AfxGetMainWnd());
 
-		if (dlg.DoModal() == IDOK)
+	
+	case ELID_ATTR_LINK:
 		{
-				SetModifiedFlag();		
-				UpdateAllViews(NULL, 0);
+			CAttributeLinkDialog dlg(selected_element, AfxGetMainWnd());
+			return dlg.DoModal() == IDOK;
 		}
-	}
-	else
-	{	//ostatni prvky
+
+	case ELID_ATTR_LINK_TABLE:
+		{
+			CAttributeLinkTableDialog dlg(selected_element, AfxGetMainWnd());
+			return dlg.DoModal() == IDOK;
+		}
+
+	default:
+		//ostatni prvky
 		AfxMessageBox(selected_element->xml);
+		return FALSE;
+
 	}
 
+	
+	
+	//sem by to melo dojit
+	ASSERT(FALSE);
+	return FALSE;	
 }
 
 void CSkeletonDoc::ConfigureFilter(IXMLDOMElementPtr &active_element)
@@ -795,6 +804,60 @@ void CSkeletonDoc::TransformActiveElement(IXMLDOMElementPtr & element)
 //DEL 	UpdateAllViews(NULL);
 //DEL }
 
+
+//dedek:
+CElementManager::elId_t CSkeletonDoc::ElementIdFromCommandId(UINT nMessageID)
+{
+	CElementManager & OElementManager = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
+
+	if ((nMessageID >= ID_MMNEWSTATICFIRST) && (nMessageID <= ID_MMNEWSTATICLAST))
+		return nMessageID - ID_MMNEWSTATICFIRST + OElementManager.getFirstStaticElementID();
+
+	if (nMessageID >= ID_MMNEWACTIVEFIRST)
+		return nMessageID - ID_MMNEWACTIVEFIRST + OElementManager.getFirstActiveElementID();
+
+
+	return ELID_UNKNOWN;
+}
+
+
+//dedek: prislo mi to neprehledny a navic divne funkcni/nefunkcni (nektere elemnty se obevovaly jinde jine zas vubec)
+//stara verze nize
+void CSkeletonDoc::OnMmnewelement(UINT nMessageID) 
+{
+	CTreeCtrl & hTreeCtrl = GetFirstView()->GetTreeCtrl();
+	HTREEITEM hSelTreeItem = hTreeCtrl.GetSelectedItem();
+	if (hSelTreeItem == NULL) return;
+
+	IXMLDOMElementPtr selected_element = ElementFromItemData(hTreeCtrl.GetItemData( hSelTreeItem ));	
+
+	CElementManager::elId_t el_id = ElementIdFromCommandId(nMessageID);
+	if (el_id == ELID_UNKNOWN) return;
+
+	
+	
+	IXMLDOMElementPtr new_element = InsertNewElement(el_id, selected_element);
+	if (new_element != NULL) //tj. pridani se zdarilo
+	{
+		if (EditElement(new_element))
+		{
+			SetModifiedFlag();
+			UpdateAllViews(NULL);
+		}
+		else
+		{
+			//pokud uspene neprobhla editace, element se z kostry smaze
+			new_element->parentNode->removeChild(new_element);
+		}
+
+	}
+
+	
+	new_element.Release();
+	selected_element.Release();
+}
+
+/*
 void CSkeletonDoc::OnMmnewelement(UINT nMessageID) 
 {
 	CTreeCtrl & hTreeCtrl = GetFirstView()->GetTreeCtrl();
@@ -812,7 +875,7 @@ void CSkeletonDoc::OnMmnewelement(UINT nMessageID)
 	/****
 	CElementManager::elId_t id = OElementManager.IdentifyElement(selected_element);
 	AfxMessageBox(OElementManager->getElementName(id));
-	/***/
+	/***//*
 
 	if (nMessageID < ID_MMNEWSTATICFIRST)
 	{	//CHYBA!!
@@ -854,12 +917,9 @@ void CSkeletonDoc::OnMmnewelement(UINT nMessageID)
 	if (nMessageID >= ID_MMNEWACTIVELAST)
 	{	//CHYBA!!
 		AfxMessageBox(IDS_WRONG_TYPEELEMENTID,0,0);
-	}
-
-	
-		
-	
+	}	
 }
+*/
 
 void CSkeletonDoc::ChangeIDsInTree(IXMLDOMElementPtr pElm)
 {
