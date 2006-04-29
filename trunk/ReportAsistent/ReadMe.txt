@@ -24,6 +24,9 @@ CGeneralManager * m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager;
 
 dedek TODO:
 
+opravit ukoncovani wordu uvnitr BV-WL
+-pokud se zavola jen init tak pri ukocovani spadne asi
+
 ?styly textu: combobox editovatelny a nove styly se vytvori v novem do dokumentu?
 -asi ne, je to blbost
 
@@ -43,6 +46,40 @@ pouzivat default source!
 
 DacourcesManager - 	pridat funci co zjisti podporovane prvky
 PlugsTab[0].SockInterface->hGetAPList
+
+
+
+
+
+
+
+
+
+
+
+
+Pro Ivu:
+
+chybka v copy/paste:
+kdyz dam copy na cely odstavec, ktery obsahuje dalsi prvky,
+tak potom nefunguje paste - prvkum uvnitr toho okopirovaneho odstavce se nezmeni id 
+
+
+predelal jsem svou uzasnou nahodnou funkci na generovani ID CSkeletonDoc::CreateNewID
+je tam videt jak snadno se da zjistit, jestli je dane id uz pouzite..
+(koukal jsem ze uz jsi k tomu editovani id neco psala..)
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -41,7 +41,7 @@ END_MESSAGE_MAP()
 CSkeletonDoc::CSkeletonDoc() /*: m_SkeletonManager(pXMLDom)*/
 {
 	// TODO: add one-time construction code here
-	srand( (unsigned)time( NULL ) );
+//	srand( (unsigned)time( NULL ) );
 
 }
 
@@ -501,8 +501,24 @@ CString CSkeletonDoc::CreateNewID(CElementManager::elId_t element_type)
 
 	CString id;
 
-	id.Format("%s%d", el_name, rand());
+	for (int a = 1; a < 0xFFFFFF; a++) //vygeneruje maximalne 0xFFFFFF=16777215 ruznych id :-)
+	{
+		id.Format("%s%d", el_name, a); //napr.: id = "hyp_4ft15"
 
+		
+		//podivame se jestli uz dane id v kostre existuje:
+		//zkusime prvek s takovym id najit moci XPath funkce id()
+		
+		CString query; 
+		query.Format("id(\"%s\")", (LPCTSTR) id); //napr.: query = 'id("hyp_4ft15")'
+
+		IXMLDOMNodePtr select = m_pXMLDom->selectSingleNode((LPCTSTR) query);
+		if (select == NULL) break; //kdyz to zadny uzel nenaslo tak id neni pouzite..
+		else select.Release();
+	}
+
+	//pokud cyklus probehnul 16777215-krat, je to dost podezrele :-)
+	ASSERT(a < 0xFFFFFF);
 
 	return id;
 }
@@ -850,10 +866,10 @@ void CSkeletonDoc::OnMmnewelement(UINT nMessageID)
 			new_element->parentNode->removeChild(new_element);
 		}
 
+		new_element.Release();
 	}
 
 	
-	new_element.Release();
 	selected_element.Release();
 }
 

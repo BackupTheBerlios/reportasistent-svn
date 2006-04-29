@@ -240,5 +240,7 @@ Public Function LoadFromFile(ByVal strFileName As String) As String
 End Function
 
 Private Sub Class_Terminate()
-    mWordForInfo.Quit
+    If Not mWordForInfo Is Nothing Then
+        mWordForInfo.Quit
+    End If
 End Sub
