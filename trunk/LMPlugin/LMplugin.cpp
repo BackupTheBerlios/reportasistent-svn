@@ -30,6 +30,9 @@ CLMSock::CLMSock()
 	
 	APTable[1].AP_ID = "category";
 	APTable[1].pFn = & fLMCategory;
+
+	APTable[2].AP_ID = "attribute";
+	APTable[2].pFn = & fLMAttribute;
 }
 
 

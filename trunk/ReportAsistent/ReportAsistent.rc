@@ -592,6 +592,8 @@ BEGIN
     IDS_WRONG_TYPEELEMENTID "Chybny typ prvku - jeho ID je mimo povoleny rozsah."
     IDS_REFRESH_EL_ATTRIBUTES_FAILED 
                             "Active element didn't support any atrributes.\nMaybe it's because of its filter is empty."
+    IDS_ELEMENT_ATTRIBUTES_FAILED_LOAD 
+                            "Active element id: %1\nFailed to load element attributes.\nParse error: %2"
 END
 
 STRINGTABLE DISCARDABLE 

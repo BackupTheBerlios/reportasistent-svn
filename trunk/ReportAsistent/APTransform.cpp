@@ -274,6 +274,15 @@ void CAElTransform::FillElementAttributes(IXMLDOMNodePtr &output_node)
 			m.getActiveElementInfo(
 				m.IdentifyElement(m_active_element))->getFillElementAttributesTransformation()));
 
+	if (attributes_DOM->parseError->errorCode != S_OK)
+	{
+		CString err_str;
+		AfxFormatString2(err_str, IDS_ELEMENT_ATTRIBUTES_FAILED_LOAD, m_active_element->selectSingleNode("@id")->text, attributes_DOM->parseError->reason);
+		AfxMessageBox(err_str);
+		attributes_DOM.Release();
+		return;
+	}
+
 	//ladici
 	attributes_DOM->save("../XML/fill_element_attributes_example.xml");
 
