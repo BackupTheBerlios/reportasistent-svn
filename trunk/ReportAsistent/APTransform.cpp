@@ -268,11 +268,25 @@ void CAElTransform::FillElementAttributes(IXMLDOMNodePtr &output_node)
 	attributes_DOM.CreateInstance(_T("Msxml2.DOMDocument"));
 	attributes_DOM->async = VARIANT_FALSE;
 
+	
+	
+
+	//ladici:
+	//	_bstr_t bs;
+
+
+
+
 	//provede tranformaci
 	attributes_DOM->loadXML(
+		//ladici
+		//bs = output_node->transformNode(
 		output_node->transformNode(
 			m.getActiveElementInfo(
 				m.IdentifyElement(m_active_element))->getFillElementAttributesTransformation()));
+
+	//ladici
+	//AfxMessageBox(bs);
 
 	if (attributes_DOM->parseError->errorCode != S_OK)
 	{

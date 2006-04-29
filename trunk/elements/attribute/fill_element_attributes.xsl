@@ -17,12 +17,12 @@
 				<xsl:text disable-output-escaping="yes">
 					&lt;attribute name="categories" value="</xsl:text> 
   				<xsl:apply-templates select="ctgr" /> 
-  				<xsl:text disable-output-escaping="yes">"&gt;</xsl:text>
+  				<xsl:text disable-output-escaping="yes">"/&gt;</xsl:text>
   
   				<xsl:text disable-output-escaping="yes">
   					&lt;attribute name="missing_values" value="</xsl:text> 
   				<xsl:apply-templates select="missing_value" /> 
-  				<xsl:text disable-output-escaping="yes">"&gt;</xsl:text>
+  				<xsl:text disable-output-escaping="yes">"/&gt;</xsl:text>
 
 
 
