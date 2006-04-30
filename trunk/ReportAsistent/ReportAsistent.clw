@@ -2,13 +2,13 @@
 
 [General Info]
 Version=1
-LastClass=Bool_Cedent_Recordset
+LastClass=CAboutDlg
 LastTemplate=CRecordset
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "ReportAsistent.h"
 LastPage=0
 
-ClassCount=15
+ClassCount=14
 Class1=CReportAsistentApp
 Class2=CSkeletonDoc
 Class3=CSkeletonView
@@ -18,25 +18,24 @@ ResourceCount=12
 Resource1=IDD_ABOUTBOX
 Resource2=IDR_MAINFRAME
 Class5=CAboutDlg
-Resource3=IDD_DIALOGTEXT (English (U.S.))
-Resource4=IDD_ABOUTBOX (English (U.S.))
+Resource3=IDD_TRANSFORMATIONS_DIALOG (English (U.S.))
+Resource4=IDD_DIALOGTEXT (English (U.S.))
 Class6=CElementTextDialog
-Resource5=IDD_ACTIVE_ELEMENT_DIALOG (English (U.S.))
+Resource5=IDD_GENERATE_DIALOG (English (U.S.))
 Class7=CSimpleFilterDialog
-Resource6=IDD_TRANSFORMATIONS_DIALOG (English (U.S.))
+Resource6=IDD_SIMPLE_FILTER_DIALOG (English (U.S.))
 Class8=CGenerateDialog
-Resource7=IDD_SIMPLE_FILTER_DIALOG (English (U.S.))
+Resource7=IDD_ATTRIBUTE_LINK_TABLE_DIALOG (English (U.S.))
 Class9=CSourcesDialog
-Resource8=IDD_SOURCES_DIALOG (English (U.S.))
+Resource8=IDD_ABOUTBOX (English (U.S.))
 Class10=CActiveElementDialog
-Resource9=IDD_ATTRIBUTE_LINK_TABLE_DIALOG (English (U.S.))
+Resource9=IDD_ATTRIBUTE_LINK_DIALOG (English (U.S.))
 Class11=CTransformationsDialog
 Class12=Tcategory_Recordset
-Resource10=IDD_GENERATE_DIALOG (English (U.S.))
+Resource10=IDD_ACTIVE_ELEMENT_DIALOG (English (U.S.))
 Class13=CAttributeLinkDialog
-Resource11=IDD_ATTRIBUTE_LINK_DIALOG (English (U.S.))
+Resource11=IDD_SOURCES_DIALOG (English (U.S.))
 Class14=CAttributeLinkTableDialog
-Class15=Bool_Cedent_Recordset
 Resource12=IDR_MAINFRAME (English (U.S.))
 
 [CLS:CReportAsistentApp]
@@ -668,15 +667,6 @@ Control8=IDC_CLOSE_BUTTON,button,1342242816
 Control9=IDC_REMOVE_BUTTON,button,1342242816
 Control10=IDC_RENAME_BUTTON,button,1342242816
 Control11=IDC_SET_DEFAULT_BUTTON,button,1342242816
-
-[CLS:Bool_Cedent_Recordset]
-Type=0
-HeaderFile=Bool_Cedent_Recordset.h
-ImplementationFile=Bool_Cedent_Recordset.cpp
-BaseClass=CRecordset
-Filter=N
-VirtualFilter=r
-LastObject=Bool_Cedent_Recordset
 
 [DB:Bool_Cedent_Recordset]
 DB=1
