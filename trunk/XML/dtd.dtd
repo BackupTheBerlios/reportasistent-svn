@@ -15,7 +15,9 @@
 			cedent_type CDATA #REQUIRED
 			sub_cedent_cnt CDATA #REQUIRED>
   <!ELEMENT sub_bool_cedent (literal*)>
-  <!ATTLIST sub_bool_cedent literal_cnt CDATA #REQUIRED>
+  <!ATTLIST sub_bool_cedent name CDATA #REQUIRED
+			    literal_cnt CDATA #REQUIRED
+			    length CDATA #REQUIRED>
   <!ELEMENT literal EMPTY>
   <!ATTLIST literal underlying_attribute CDATA #REQUIRED
 		    category_cnt CDATA #REQUIRED

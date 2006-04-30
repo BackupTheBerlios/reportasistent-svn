@@ -9,6 +9,7 @@
 #include "TAttribute_Recordset.h"
 #include "TCategory_list.h"
 #include "LM_Metabase.h"
+#include "Bool_Cedent_Recordset.h"
 
 
 //dedek: docasne
@@ -47,11 +48,86 @@ BOOL dedek_performLM(void * hSource, const char* AP, BSTR* result)
 
 /****/
 
-// ---AP cedent
+// ---AP bool cedent
 
 CString fLMCedent (void* hSource)
 {
 	CString buf = "";
+	CString hlp;
+	CString hlp1;
+	CString db_name = ((CDatabase *) hSource)->GetDatabaseName ();
+	
+	long sub_cedent_cnt = 0;
+	long literal_cnt = 0;
+	long ct_id;
+	long ct_id_tst = 0;  //test, wheather the new cedent type appears
+	long c_id;
+	long c_id_tst = 0; //test, wheather the new sub cedent appears
+
+	TBool_Cedent_Meta_Array list;
+	Bool_Cedent_Meta * ptboolcdnt;
+
+	Bool_Cedent_Recordset rs ((CDatabase *) hSource);
+
+	Sub_bool_cedent_Meta sub_bool_cedent;
+
+	LPCTSTR q =
+		"SELECT * \
+		 FROM taTask, tdCedentD, tdEquivalenceClass, tdLiteralD, tmAttribute, \
+			tmMatrix, tmQuantity, tsCedentType, tsCoefficientType, tsGaceType, \
+			tsLiteralType, tsTaskSubType \
+		 WHERE tdCedentD.CedentTypeID=tsCedentType.CedentTypeID \
+			AND tdCedentD.TaskID=taTask.TaskID \
+			AND tdCedentD.CedentDID=tdLiteralD.CedentDID \
+			AND tdLiteralD.QuantityID=tmQuantity.QuantityID \
+			AND tdLiteralD.LiteralTypeID=tsLiteralType.LiteralTypeID \
+			AND tdLiteralD.GaceTypeID=tsGaceType.GaceTypeID \
+			AND tdLiteralD.EquivalenceClassID.tdEquivalenceClass.EquivalenceClassID \
+			AND tdLiteralD.CoefficientTypeID=tsCoefficientType.CoefficientTypeID \
+			AND tmQuantity.AttributeID=tmAttribute.AttributeID \
+			AND tmAttribute.MatrixID=tmMatrix.MatrixID \
+		 ORDER BY tdCedentD.TaskID, tdCedentD.CedentTypeID";
+	if (rs.Open(AFX_DB_USE_DEFAULT_TYPE, q))
+	{
+		//iteration on query results
+		while (!rs.IsEOF())
+		{
+			ct_id = rs.m_CedentTypeID;
+			c_id = rs.m_CedentDID;
+			if (ct_id != ct_id_tst) //new cedent
+			{
+				sub_cedent_cnt = 0;
+				literal_cnt = 0;
+				ptboolcdnt = new (Bool_Cedent_Meta);
+				ptboolcdnt->db_name = db_name;
+				hlp.Format ("%d", rs.m_CedentDID);
+				ptboolcdnt->id = "cdnt" + hlp;
+				ptboolcdnt->matrix_name = rs.m_Name5;
+				ptboolcdnt->task_name = rs.m_Name;
+				ptboolcdnt->task_type = rs.m_Name11;
+				ptboolcdnt->cedent_type = rs.m_Name7;
+				list.Add (ptboolcdnt);
+			}
+			if (c_id != c_id_tst) //new sub cedent
+			{
+				sub_cedent_cnt++;
+				sub_bool_cedent.name = rs.m_Name2;
+				hlp.Format ("%d", rs.m_MinLen);
+				hlp1.Format ("%d", rs.m_MaxLen);
+				hlp += " - ";
+				hlp += hlp1;
+				sub_bool_cedent.length = hlp;
+			}
+//todo: pridavat literaly do subcedentu, spravne prirazovat pocet literalu - asi prubezne
+//pridavat pocet cedentu - taky prubezne
+
+			c_id_tst = c_id;
+			ct_id_tst = ct_id;
+			rs.MoveNext();
+		}
+		rs.Close();
+	}
+	else return "";
 
 	return buf;
 }

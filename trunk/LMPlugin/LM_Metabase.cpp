@@ -4,6 +4,13 @@
 #include "Hyp_4ft_Recordset.h"
 #include "comdef.h"
 
+CString Bool_Cedent_Meta::xml_convert ()
+{
+	CString buf = "";
+
+	return buf;
+}
+
 CString Attribute_Meta::xml_convert ()
 {
 	CString xml_string;
