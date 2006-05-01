@@ -97,6 +97,10 @@ SOURCE=.\Bool_Cedent_Recordset.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\Equivalence_Lit_Rs.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\functions.cpp
 # End Source File
 # Begin Source File
@@ -154,6 +158,10 @@ SOURCE=.\TCatOrder.cpp
 # Begin Source File
 
 SOURCE=.\Bool_Cedent_Recordset.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Equivalence_Lit_Rs.h
 # End Source File
 # Begin Source File
 

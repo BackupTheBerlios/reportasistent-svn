@@ -10,6 +10,7 @@
 #include "TCategory_list.h"
 #include "LM_Metabase.h"
 #include "Bool_Cedent_Recordset.h"
+#include "Equivalence_Lit_Rs.h"
 
 
 //dedek: docasne
@@ -63,17 +64,23 @@ CString fLMCedent (void* hSource)
 	long ct_id_tst = 0;  //test, wheather the new cedent type appears
 	long c_id;
 	long c_id_tst = 0; //test, wheather the new sub cedent appears
+	long l_id;
+	long l_id_tst = 0; //test, wheather the new literal appears
+	long c = 0; //counter - help variable
 
 	TBool_Cedent_Meta_Array list;
 	Bool_Cedent_Meta * ptboolcdnt;
 
 	Bool_Cedent_Recordset rs ((CDatabase *) hSource);
+	Equivalence_Lit_Rs rs_eq ((CDatabase *) hSource);
 
 	Sub_bool_cedent_Meta sub_bool_cedent;
+	Literal_Meta lit;
 
+	CString q_eq;
 	LPCTSTR q =
 		"SELECT * \
-		 FROM taTask, tdCedentD, tdEquivalenceClass, tdLiteralD, tmAttribute, \
+		 FROM taTask, tdCedentD, tdLiteralD, tmAttribute, \
 			tmMatrix, tmQuantity, tsCedentType, tsCoefficientType, tsGaceType, \
 			tsLiteralType, tsTaskSubType \
 		 WHERE tdCedentD.CedentTypeID=tsCedentType.CedentTypeID \
@@ -82,18 +89,20 @@ CString fLMCedent (void* hSource)
 			AND tdLiteralD.QuantityID=tmQuantity.QuantityID \
 			AND tdLiteralD.LiteralTypeID=tsLiteralType.LiteralTypeID \
 			AND tdLiteralD.GaceTypeID=tsGaceType.GaceTypeID \
-			AND tdLiteralD.EquivalenceClassID.tdEquivalenceClass.EquivalenceClassID \
 			AND tdLiteralD.CoefficientTypeID=tsCoefficientType.CoefficientTypeID \
 			AND tmQuantity.AttributeID=tmAttribute.AttributeID \
 			AND tmAttribute.MatrixID=tmMatrix.MatrixID \
 		 ORDER BY tdCedentD.TaskID, tdCedentD.CedentTypeID";
+
 	if (rs.Open(AFX_DB_USE_DEFAULT_TYPE, q))
 	{
 		//iteration on query results
 		while (!rs.IsEOF())
 		{
+			c++;
 			ct_id = rs.m_CedentTypeID;
 			c_id = rs.m_CedentDID;
+			l_id = rs.m_LiteralDID;
 			if (ct_id != ct_id_tst) //new cedent
 			{
 				sub_cedent_cnt = 0;
@@ -102,15 +111,16 @@ CString fLMCedent (void* hSource)
 				ptboolcdnt->db_name = db_name;
 				hlp.Format ("%d", rs.m_CedentDID);
 				ptboolcdnt->id = "cdnt" + hlp;
-				ptboolcdnt->matrix_name = rs.m_Name5;
+				ptboolcdnt->matrix_name = rs.m_Name4;
 				ptboolcdnt->task_name = rs.m_Name;
-				ptboolcdnt->task_type = rs.m_Name11;
-				ptboolcdnt->cedent_type = rs.m_Name7;
+				ptboolcdnt->task_type = rs.m_Name10;
+				ptboolcdnt->cedent_type = rs.m_Name6;
 				list.Add (ptboolcdnt);
 			}
 			if (c_id != c_id_tst) //new sub cedent
 			{
 				sub_cedent_cnt++;
+				ptboolcdnt->sub_cedent_cnt.Format ("%d", sub_cedent_cnt);
 				sub_bool_cedent.name = rs.m_Name2;
 				hlp.Format ("%d", rs.m_MinLen);
 				hlp1.Format ("%d", rs.m_MaxLen);
@@ -118,9 +128,43 @@ CString fLMCedent (void* hSource)
 				hlp += hlp1;
 				sub_bool_cedent.length = hlp;
 			}
+			if (l_id != l_id_tst) //new literal
+			{
+				lit.underlying_attribute = rs.m_Name3;
+				lit.coefficient_type = rs.m_Name7;
+				hlp.Format ("%d", rs.m_MinLen2);
+				hlp1.Format ("%d", rs.m_MaxLen2);
+				hlp += " - ";
+				hlp += hlp1;
+				lit.length = hlp;
+				lit.gace = rs.m_Name8;
+				lit.literal_type = rs.m_Name9;
+				hlp.Format ("%d", c_id);
+				q_eq = "SELECT * \
+					FROM tdEquivalenceClass \
+					WHERE CedentDID=" + hlp;
+				if (rs_eq.Open(AFX_DB_USE_DEFAULT_TYPE, q_eq)) //find all equivalence classes
+				{
+					c = 0;
+					hlp = "";
+					//iteration on query results
+					while (!rs_eq.IsEOF())
+					{
+						c++;
+						if (c != 1) hlp += "; ";
+						hlp += rs_eq.m_Name;
+						rs_eq.MoveNext ();
+					}
+					rs_eq.Close ();
+				}
+				else return "";
+				lit.equivalence_class = hlp;
 //todo: pridavat literaly do subcedentu, spravne prirazovat pocet literalu - asi prubezne
 //pridavat pocet cedentu - taky prubezne
-
+//pocet kategorii + one_category literal, missing_type yes/no
+//na konci vse zkontrolavat, zda jsou naplneny vsechny atributy podle DTD
+			}
+			l_id_tst = l_id;
 			c_id_tst = c_id;
 			ct_id_tst = ct_id;
 			rs.MoveNext();
@@ -261,6 +305,8 @@ CString fLMCategory(void* hSource)
 	CString subqintervall;
 	CString subqintervalr;
 	CString qord;
+
+//	fLMCedent (hSource);
 
 	LPCTSTR q =	
 		"SELECT * \

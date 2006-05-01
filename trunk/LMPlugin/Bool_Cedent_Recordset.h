@@ -1,5 +1,5 @@
-#if !defined(AFX_BOOL_CEDENT_RECORDSET_H__6D098568_7F32_4922_A4E0_04384CF91C1E__INCLUDED_)
-#define AFX_BOOL_CEDENT_RECORDSET_H__6D098568_7F32_4922_A4E0_04384CF91C1E__INCLUDED_
+#if !defined(AFX_BOOL_CEDENT_RECORDSET_H__9A726ED7_F7BC_4AD5_8D18_403C5394BF82__INCLUDED_)
+#define AFX_BOOL_CEDENT_RECORDSET_H__9A726ED7_F7BC_4AD5_8D18_403C5394BF82__INCLUDED_
 
 #if _MSC_VER > 1000
 #pragma once
@@ -41,24 +41,20 @@ public:
 	long	m_MinLen;
 	long	m_MaxLen;
 	CString	m_Notice2;
-	long	m_EquivalenceClassID;
-	CString	m_Name3;
-	long	m_CedentDID2;
-	CString	m_Notice3;
 	long	m_LiteralDID;
-	long	m_CedentDID3;
+	long	m_CedentDID2;
 	long	m_QuantityID;
 	long	m_CategoryID;
 	long	m_LiteralTypeID;
 	long	m_GaceTypeID;
-	long	m_EquivalenceClassID2;
+	long	m_EquivalenceClassID;
 	long	m_CoefficientTypeID;
 	long	m_MinLen2;
 	long	m_MaxLen2;
 	long	m_Ord2;
-	CString	m_Notice4;
+	CString	m_Notice3;
 	long	m_AttributeID;
-	CString	m_Name4;
+	CString	m_Name3;
 	long	m_MatrixID2;
 	long	m_AttributeSubTypeID;
 	long	m_ValueSubTypeID;
@@ -73,16 +69,16 @@ public:
 	double	m_ValueAvg;
 	double	m_ValueModus;
 	double	m_ValueVariability;
-	CString	m_Notice5;
+	CString	m_Notice4;
 	long	m_wSavedCountUsed;
 	long	m_MatrixID3;
-	CString	m_Name5;
+	CString	m_Name4;
 	BOOL	m_Initialised;
 	long	m_RecordCount;
-	CString	m_Notice6;
+	CString	m_Notice5;
 	long	m_wSavedCountUsed2;
 	long	m_QuantityID2;
-	CString	m_Name6;
+	CString	m_Name5;
 	CString	m_ShortName;
 	BOOL	m_ShowName;
 	long	m_AttributeID2;
@@ -91,32 +87,32 @@ public:
 	long	m_wSavedCountUsed3;
 	long	m_wUpdateVer;
 	long	m_UserID2;
-	CString	m_Notice7;
+	CString	m_Notice6;
 	long	m_CedentTypeID2;
-	CString	m_Name7;
+	CString	m_Name6;
 	CString	m_ShortName2;
 	long	m_Ord3;
-	CString	m_Notice8;
+	CString	m_Notice7;
 	long	m_CoefficientTypeID2;
-	CString	m_Name8;
+	CString	m_Name7;
 	CString	m_ShortName3;
 	long	m_Ord4;
-	CString	m_Notice9;
+	CString	m_Notice8;
 	long	m_GaceTypeID2;
-	CString	m_Name9;
+	CString	m_Name8;
 	CString	m_ShortName4;
 	long	m_Ord5;
-	CString	m_Notice10;
+	CString	m_Notice9;
 	long	m_LiteralTypeID2;
-	CString	m_Name10;
+	CString	m_Name9;
 	CString	m_ShortName5;
 	long	m_Ord6;
-	CString	m_Notice11;
+	CString	m_Notice10;
 	long	m_TaskSubTypeID2;
-	CString	m_Name11;
+	CString	m_Name10;
 	CString	m_ShortName6;
 	long	m_Ord7;
-	CString	m_Notice12;
+	CString	m_Notice11;
 	//}}AFX_FIELD
 
 
@@ -138,4 +134,4 @@ public:
 //{{AFX_INSERT_LOCATION}}
 // Microsoft Visual C++ will insert additional declarations immediately before the previous line.
 
-#endif // !defined(AFX_BOOL_CEDENT_RECORDSET_H__6D098568_7F32_4922_A4E0_04384CF91C1E__INCLUDED_)
+#endif // !defined(AFX_BOOL_CEDENT_RECORDSET_H__9A726ED7_F7BC_4AD5_8D18_403C5394BF82__INCLUDED_)
