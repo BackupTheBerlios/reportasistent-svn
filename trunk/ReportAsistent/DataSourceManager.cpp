@@ -512,7 +512,7 @@ int CDataSourcesManager::ConnectNewSource(plugin_id_t plugin)   //pres zasuvku p
 	PersistID_t NewSourcePerzistID = NULL;	// vrati zasuvka - perzistentni ID noveho zdroje
 	hSource_t   NewSourceHandler;		// handler na novy zdroj
 		// zavolani funkce zasuvky
-	NewSourceHandler = PlugsTab[0].SockInterface->hNewSource (&NewSourcePerzistID);
+	NewSourceHandler = PlugsTab[i].SockInterface->hNewSource (&NewSourcePerzistID);
 	if(NewSourceHandler == NULL)  // chyba v zasuvce
 	{
 		SysFreeString(NewSourcePerzistID);
