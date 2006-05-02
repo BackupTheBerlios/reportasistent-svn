@@ -149,6 +149,10 @@ SOURCE=.\Tcategory_Recordset.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\TCategory_Scan.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\TCatOrder.cpp
 # End Source File
 # End Group
@@ -214,6 +218,10 @@ SOURCE=.\TCategory_list.h
 # Begin Source File
 
 SOURCE=.\Tcategory_Recordset.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\TCategory_Scan.h
 # End Source File
 # Begin Source File
 

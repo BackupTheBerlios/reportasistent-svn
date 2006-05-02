@@ -11,6 +11,7 @@
 #include "LM_Metabase.h"
 #include "Bool_Cedent_Recordset.h"
 #include "Equivalence_Lit_Rs.h"
+#include "TCategory_Scan.h"
 
 
 //dedek: docasne
@@ -68,16 +69,20 @@ CString fLMCedent (void* hSource)
 	long l_id_tst = 0; //test, wheather the new literal appears
 	long c = 0; //counter - help variable
 
+	BOOL missing_type = FALSE;
+
 	TBool_Cedent_Meta_Array list;
 	Bool_Cedent_Meta * ptboolcdnt;
 
 	Bool_Cedent_Recordset rs ((CDatabase *) hSource);
 	Equivalence_Lit_Rs rs_eq ((CDatabase *) hSource);
+	TCategory_Scan rs_cat ((CDatabase *) hSource);
 
-	Sub_bool_cedent_Meta sub_bool_cedent;
+	Sub_Bool_Cedent_Meta * ptsub_bool_cedent;
 	Literal_Meta lit;
 
 	CString q_eq;
+	CString q_cat;
 	LPCTSTR q =
 		"SELECT * \
 		 FROM taTask, tdCedentD, tdLiteralD, tmAttribute, \
@@ -119,19 +124,45 @@ CString fLMCedent (void* hSource)
 			}
 			if (c_id != c_id_tst) //new sub cedent
 			{
+				ptsub_bool_cedent = new (Sub_Bool_Cedent_Meta);
+				literal_cnt = 0;
 				sub_cedent_cnt++;
 				ptboolcdnt->sub_cedent_cnt.Format ("%d", sub_cedent_cnt);
-				sub_bool_cedent.name = rs.m_Name2;
+				ptsub_bool_cedent->name = rs.m_Name2;
 				hlp.Format ("%d", rs.m_MinLen);
 				hlp1.Format ("%d", rs.m_MaxLen);
 				hlp += " - ";
 				hlp += hlp1;
-				sub_bool_cedent.length = hlp;
+				ptsub_bool_cedent->length = hlp;
+				ptboolcdnt->sub_cedents_list.Add (ptsub_bool_cedent);
 			}
 			if (l_id != l_id_tst) //new literal
 			{
+				literal_cnt++;
+				ptsub_bool_cedent->literal_cnt.Format ("%d", literal_cnt);
 				lit.underlying_attribute = rs.m_Name3;
 				lit.coefficient_type = rs.m_Name7;
+				if (rs.m_ShortName3 == "one")
+				{
+					hlp.Format ("%d", rs.m_CategoryID);
+					//this query returns only one row - primary key in WHERE clause
+					q_cat = "SELECT * \
+							 FROM tmCategory \
+							 WHERE CategoryID=" + hlp;
+					//find one category value
+					if (rs_cat.Open(AFX_DB_USE_DEFAULT_TYPE, q_cat))
+					{
+						//iteration on query results - one row
+						while (!rs_cat.IsEOF())
+						{
+							hlp = rs_cat.m_Name;
+						}
+						rs_cat.Close ();
+					}
+					else return "";
+					hlp = "(" + hlp + ")";
+					lit.coefficient_type += hlp;
+				}
 				hlp.Format ("%d", rs.m_MinLen2);
 				hlp1.Format ("%d", rs.m_MaxLen2);
 				hlp += " - ";
@@ -143,7 +174,8 @@ CString fLMCedent (void* hSource)
 				q_eq = "SELECT * \
 					FROM tdEquivalenceClass \
 					WHERE CedentDID=" + hlp;
-				if (rs_eq.Open(AFX_DB_USE_DEFAULT_TYPE, q_eq)) //find all equivalence classes
+				//find all equivalence classes
+				if (rs_eq.Open(AFX_DB_USE_DEFAULT_TYPE, q_eq))
 				{
 					c = 0;
 					hlp = "";
@@ -159,10 +191,29 @@ CString fLMCedent (void* hSource)
 				}
 				else return "";
 				lit.equivalence_class = hlp;
-//todo: pridavat literaly do subcedentu, spravne prirazovat pocet literalu - asi prubezne
-//pridavat pocet cedentu - taky prubezne
-//pocet kategorii + one_category literal, missing_type yes/no
-//na konci vse zkontrolavat, zda jsou naplneny vsechny atributy podle DTD
+				hlp.Format ("%d", rs.m_QuantityID2);
+				q_cat ="SELECT * \
+						FROM tmCategory \
+						WHERE QuantityID=" + hlp;
+				//find categories and missing values
+				if (rs_cat.Open(AFX_DB_USE_DEFAULT_TYPE, q_cat))
+				{
+					c = 0;
+					missing_type = FALSE;
+					//iteration on query results
+					while (!rs_cat.IsEOF())
+					{
+						c++;
+						if (rs_cat.m_XCategory) missing_type = TRUE;
+						rs_cat.MoveNext ();
+					}
+					rs_cat.Close ();
+				}
+				else return "";
+				lit.category_cnt.Format ("%d", c);
+				if (missing_type) lit.missing_type = "Yes";
+				else lit.missing_type = "No";
+				ptsub_bool_cedent->lit_list.Add (lit);
 			}
 			l_id_tst = l_id;
 			c_id_tst = c_id;

@@ -18,7 +18,7 @@ struct Literal_Meta
 
 typedef CArray <Literal_Meta, Literal_Meta> TLiteral_Meta_Array;
 
-struct Sub_bool_cedent_Meta
+struct Sub_Bool_Cedent_Meta
 {
 	CString				literal_cnt;
 	CString				name;
@@ -26,7 +26,7 @@ struct Sub_bool_cedent_Meta
 	TLiteral_Meta_Array	lit_list;
 };
 
-typedef CArray <Sub_bool_cedent_Meta, Sub_bool_cedent_Meta> TSub_bool_cedent_Meta_Array;
+typedef CArray <Sub_Bool_Cedent_Meta *, Sub_Bool_Cedent_Meta *> TSub_Bool_Cedent_Meta_Array;
 
 class Bool_Cedent_Meta
 {
@@ -38,7 +38,7 @@ public:
 	CString						task_type;
 	CString						cedent_type;
 	CString						sub_cedent_cnt;
-	TSub_bool_cedent_Meta_Array	sub_cedents_list;
+	TSub_Bool_Cedent_Meta_Array	sub_cedents_list;
 	CString						xml_convert ();
 };
 

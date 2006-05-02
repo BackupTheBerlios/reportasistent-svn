@@ -2,13 +2,13 @@
 
 [General Info]
 Version=1
-LastClass=Equivalence_Lit_Rs
+LastClass=
 LastTemplate=CRecordset
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "ReportAsistent.h"
 LastPage=0
 
-ClassCount=15
+ClassCount=14
 Class1=CReportAsistentApp
 Class2=CSkeletonDoc
 Class3=CSkeletonView
@@ -18,26 +18,25 @@ ResourceCount=12
 Resource1=IDD_ABOUTBOX
 Resource2=IDR_MAINFRAME
 Class5=CAboutDlg
-Resource3=IDD_DIALOGTEXT (English (U.S.))
-Resource4=IDD_ABOUTBOX (English (U.S.))
+Resource3=IDD_ABOUTBOX (English (U.S.))
+Resource4=IDD_SOURCES_DIALOG (English (U.S.))
 Class6=CElementTextDialog
-Resource5=IDD_GENERATE_DIALOG (English (U.S.))
+Resource5=IDD_ACTIVE_ELEMENT_DIALOG (English (U.S.))
 Class7=CSimpleFilterDialog
-Resource6=IDD_TRANSFORMATIONS_DIALOG (English (U.S.))
+Resource6=IDD_DIALOGTEXT (English (U.S.))
 Class8=CGenerateDialog
-Resource7=IDD_SIMPLE_FILTER_DIALOG (English (U.S.))
+Resource7=IDD_TRANSFORMATIONS_DIALOG (English (U.S.))
 Class9=CSourcesDialog
-Resource8=IDD_SOURCES_DIALOG (English (U.S.))
+Resource8=IDD_ATTRIBUTE_LINK_DIALOG (English (U.S.))
 Class10=CActiveElementDialog
-Resource9=IDD_ATTRIBUTE_LINK_TABLE_DIALOG (English (U.S.))
+Resource9=IDD_SIMPLE_FILTER_DIALOG (English (U.S.))
 Class11=CTransformationsDialog
 Class12=Tcategory_Recordset
-Resource10=IDD_ACTIVE_ELEMENT_DIALOG (English (U.S.))
+Resource10=IDD_GENERATE_DIALOG (English (U.S.))
 Class13=CAttributeLinkDialog
-Resource11=IDD_ATTRIBUTE_LINK_DIALOG (English (U.S.))
+Resource11=IDD_ATTRIBUTE_LINK_TABLE_DIALOG (English (U.S.))
 Class14=CAttributeLinkTableDialog
 Resource12=IDR_MAINFRAME (English (U.S.))
-Class15=Equivalence_Lit_Rs
 
 [CLS:CReportAsistentApp]
 Type=0
@@ -773,15 +772,6 @@ Column97=[tsTaskSubType].[ShortName], 12, 40
 Column98=[tsTaskSubType].[Ord], 4, 4
 Column99=[tsTaskSubType].[Notice], 12, 510
 
-[CLS:Equivalence_Lit_Rs]
-Type=0
-HeaderFile=Equivalence_Lit_Rs.h
-ImplementationFile=Equivalence_Lit_Rs.cpp
-BaseClass=CRecordset
-Filter=N
-VirtualFilter=r
-LastObject=Equivalence_Lit_Rs
-
 [DB:Equivalence_Lit_Rs]
 DB=1
 DBType=ODBC
@@ -790,4 +780,19 @@ Column1=[EquivalenceClassID], 4, 4
 Column2=[Name], 12, 100
 Column3=[CedentDID], 4, 4
 Column4=[Notice], 12, 510
+
+[DB:TCategory_Scan]
+DB=1
+DBType=ODBC
+ColumnCount=10
+Column1=[CategoryID], 4, 4
+Column2=[Name], 12, 100
+Column3=[QuantityID], 4, 4
+Column4=[CategorySubTypeID], 4, 4
+Column5=[BoolTypeID], 4, 4
+Column6=[XCategory], -7, 1
+Column7=[IncludeNULL], -7, 1
+Column8=[Ord], 4, 4
+Column9=[Notice], 12, 510
+Column10=[wSavedCountUsed], 4, 4
 
