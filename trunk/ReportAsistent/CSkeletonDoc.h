@@ -71,6 +71,9 @@ private:
 	MSXML2::IXMLDOMDocumentPtr m_pXMLDom;
 
 protected:
+	void TransformAttrLinks(IXMLDOMElementPtr & element);
+	void TransformAttrLinkTable(IXMLDOMElementPtr & element);
+	void TransformAttrLink(IXMLDOMElementPtr & element);
 	static CElementManager::elId_t ElementIdFromCommandId(UINT command);
 	static LPARAM CreateItemData(IXMLDOMElementPtr & element);
 	void ConfigureFilter(IXMLDOMElementPtr & active_element);
@@ -80,7 +83,7 @@ protected:
 	IXMLDOMElementPtr InsertNewElement(LPCTSTR element_name, IXMLDOMElementPtr & parent_element);
 	
 	void GenerTransform1(IXMLDOMElementPtr & doc);
-	void Transform1Element(IXMLDOMElementPtr & element); //rekurzivni
+	void TransformActiveElements(IXMLDOMElementPtr & element); //rekurzivni
 	void TransformActiveElement(IXMLDOMElementPtr & element);
 
 	

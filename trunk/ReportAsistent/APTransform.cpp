@@ -67,6 +67,8 @@ IXMLDOMDocumentFragmentPtr CAElTransform::DoAllTransnformations()
 	//provede tranformace na kazdou polozku vybranou v simple filter
 	ProcessSimpleFlter( (IXMLDOMNodePtr) parent_frag );
 
+	FillElementAttributes(0);
+
 
 /*****
 	//pokud ma aktivni prvek rodice, nahradime ho vysledkem transformaci

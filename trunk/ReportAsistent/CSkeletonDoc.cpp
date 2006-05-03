@@ -743,13 +743,17 @@ void CSkeletonDoc::Generate()
 //tahle metoda asi prijde zrusit
 void CSkeletonDoc::GenerTransform1(IXMLDOMElementPtr & doc)
 {
-	Transform1Element(doc);
+	TransformActiveElements(doc);
+	AfxMessageBox(doc->xml);
+	
+	TransformAttrLinks(doc);
+	AfxMessageBox(doc->xml);
 }
 
 
 
 //rekurzivni
-void CSkeletonDoc::Transform1Element(IXMLDOMElementPtr & element)
+void CSkeletonDoc::TransformActiveElements(IXMLDOMElementPtr & element)
 {
 	if (element == NULL) return;
 
@@ -770,7 +774,7 @@ void CSkeletonDoc::Transform1Element(IXMLDOMElementPtr & element)
 		{
 			
 			//rekurze
-			Transform1Element(iChild);
+			TransformActiveElements(iChild);
 		}
 	}
 	
@@ -973,5 +977,78 @@ BOOL CSkeletonDoc::IsDescendantOfElement(IXMLDOMElementPtr pDescendantXMLElm, IX
 		pDescendantXMLElm = pDescendantXMLElm->GetparentNode();
 
 	return (bDescInAnc);
+
+}
+
+void CSkeletonDoc::TransformAttrLink(IXMLDOMElementPtr &element)
+{
+	CElementManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
+
+	IXMLDOMElementPtr txt_elem = m.CreateEmptyElement(ELID_TEXT);
+	
+	//nastav style
+	_variant_t vt_style = element->getAttribute("style");
+	if (vt_style.vt != VT_NULL)
+	{
+		IXMLDOMAttributePtr style_attr = element->ownerDocument->createAttribute("style");
+		style_attr->text = (_bstr_t) vt_style;
+		txt_elem->setAttributeNode(style_attr);
+		style_attr.Release();
+	}
+
+	
+	//ziskej hodnotu attribut
+	CString query;
+	query.Format("id(\"%s\")/attributes/element_attributes/attribute[@name = \"%s\"]/@value",
+		(LPCTSTR) (_bstr_t) element->getAttribute("target"),
+		(LPCTSTR) (_bstr_t) element->getAttribute("attr_name"));
+
+	IXMLDOMNodePtr value_node = element->ownerDocument->selectSingleNode((LPCTSTR) query);
+
+	AfxMessageBox(value_node->xml);
+
+	if (value_node != NULL)
+	{
+		txt_elem->text = value_node->text;
+		value_node.Release();
+	}
+
+	element->parentNode->replaceChild(txt_elem, element);
+}
+
+void CSkeletonDoc::TransformAttrLinkTable(IXMLDOMElementPtr &element)
+{
+
+}
+
+//rekurzivni
+void CSkeletonDoc::TransformAttrLinks(IXMLDOMElementPtr &element)
+{
+	if (element == NULL) return;
+
+	CElementManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
+
+	CElementManager::elId_t el_id = m.IdentifyElement(element);
+
+	switch (el_id)
+	{
+	case ELID_ATTR_LINK:
+		TransformAttrLink(element);
+		break;
+
+	case ELID_ATTR_LINK_TABLE:
+		TransformAttrLinkTable(element);
+		break;
+
+	default:
+		IXMLDOMNodeListPtr iChildren = element->childNodes;
+		IXMLDOMElementPtr iChild = NULL;
+
+		while ((iChild = iChildren->nextNode()) != NULL)
+		{
+			//rekurze
+			TransformAttrLinks(iChild);
+		}
+	}
 
 }
