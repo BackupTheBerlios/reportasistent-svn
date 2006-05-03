@@ -57,6 +57,8 @@
 #define IDC_MOVE_DOWN_BUTTON2           1025
 #define IDC_STYLES_REFRESH_BUTTON       1025
 #define IDC_EDIT_CAPTION_BUTTON         1026
+#define IDC_ADD_ATTR_LINK_TABLE_BUTTON  1027
+#define IDC_CONFIGURE_ATTR_LINK_TABLE_BUTTON 1028
 #define ID_MMGENREP                     32771
 #define ID_MMSOURCES                    32772
 #define ID_ELEMENT_EDIT                 32780
@@ -80,7 +82,7 @@
 #define _APS_3D_CONTROLS                     1
 #define _APS_NEXT_RESOURCE_VALUE        153
 #define _APS_NEXT_COMMAND_VALUE         32784
-#define _APS_NEXT_CONTROL_VALUE         1027
+#define _APS_NEXT_CONTROL_VALUE         1029
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

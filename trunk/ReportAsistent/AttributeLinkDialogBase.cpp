@@ -27,9 +27,12 @@ void CAttributeLinkDialogBase::InitBaseDialog(CListCtrl & AttributesList, CCombo
 	FillTargets(TargetCombo);
 	if (CB_ERR == TargetCombo.SelectString(-1, (_bstr_t) m_edited_element->getAttribute("target")))
 	{
-		CString s;
-		TargetCombo.GetLBText(0, s);
-		TargetCombo.SelectString(-1, s);
+		if (TargetCombo.GetCount() > 0)
+		{		
+			CString s;
+			TargetCombo.GetLBText(0, s);
+			TargetCombo.SelectString(-1, s);
+		}
 	}
 
 	InitAttributesList(AttributesList);
@@ -68,6 +71,12 @@ void CAttributeLinkDialogBase::OnRefresh(CListCtrl & AttributesList, LPCTSTR tar
 	query.Format("id(\"%s\")", target_id);
 	
 	IXMLDOMElementPtr el = m_edited_element->ownerDocument->selectSingleNode((LPCTSTR) query);
+
+	
+	if (el == NULL) return;
+
+
+
 	CAElTransform tr(el);
 
 	if (! tr.FillElementAttributes(0))

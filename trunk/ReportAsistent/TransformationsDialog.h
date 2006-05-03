@@ -45,6 +45,8 @@ protected:
 	afx_msg void OnRemoveButton();
 	afx_msg void OnMoveUpButton();
 	afx_msg void OnMoveDownButton();
+	afx_msg void OnConfigureAttrLinkTableButton();
+	afx_msg void OnAddAttrLinkTableButton();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 private:

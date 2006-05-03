@@ -8,6 +8,5 @@
 			<filter type="simple">
 			</filter>
 			<output>
-				<transformation name="HeaderAndCedents"/>
 			</output>
 		</active_element>

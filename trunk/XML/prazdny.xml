@@ -11,7 +11,7 @@
 <!ATTLIST chapter title CDATA #REQUIRED >
 <!ATTLIST chapter id ID #REQUIRED >
 
-<!ELEMENT active_element ( attributes, filter, output )>
+<!ELEMENT active_element ( attributes, filter, output, attr_link_table? )>
 <!ATTLIST active_element type CDATA #REQUIRED >
 <!ATTLIST active_element source CDATA #REQUIRED >
 <!ATTLIST active_element id ID #REQUIRED >
@@ -33,6 +33,7 @@
 <!ELEMENT output (transformation*) >
 
 <!ELEMENT transformation EMPTY >
+<!ATTLIST transformation type (attr_link_table | simple) #REQUIRED>
 <!ATTLIST transformation name CDATA #REQUIRED>
 	
 <!ELEMENT attr_link_table (link*) >
@@ -150,7 +151,7 @@
 			<filter type="simple">
 			</filter>
 			<output>
-				<transformation name="HeaderAndCedents"/>
+				<transformation type="simple" name="HeaderAndCedents"/>
 			</output>
 		</active_element>
 		
@@ -162,7 +163,6 @@
 			<filter type="simple">
 			</filter>
 			<output>
-				<transformation name="HeaderAndCedents"/>
 			</output>
 		</active_element>
 

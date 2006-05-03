@@ -15,8 +15,9 @@ static char THIS_FILE[] = __FILE__;
 // CAttributeLinkTableDialog dialog
 
 
-CAttributeLinkTableDialog::CAttributeLinkTableDialog(IXMLDOMElementPtr & edited_element, CWnd* pParent /*=NULL*/)
-	: CDialog(CAttributeLinkTableDialog::IDD, pParent), CAttributeLinkDialogBase(edited_element)
+CAttributeLinkTableDialog::CAttributeLinkTableDialog(IXMLDOMElementPtr & edited_element, CWnd* pParent, BOOL show_target)
+	: CDialog(CAttributeLinkTableDialog::IDD, pParent), CAttributeLinkDialogBase(edited_element),
+	m_bShowTarget(show_target)
 {
 	//{{AFX_DATA_INIT(CAttributeLinkTableDialog)
 		// NOTE: the ClassWizard will add member initialization here
@@ -58,6 +59,8 @@ END_MESSAGE_MAP()
 BOOL CAttributeLinkTableDialog::OnInitDialog() 
 {
 	CDialog::OnInitDialog();
+
+	if (! m_bShowTarget) m_TargetCombo.EnableWindow(FALSE);
 	
 	// TODO: Add extra initialization here
 	InitBaseDialog(m_AttributesList, m_TargetCombo);

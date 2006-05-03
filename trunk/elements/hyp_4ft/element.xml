@@ -33,6 +33,6 @@
 			<filter type="simple">
 			</filter>
 			<output>
-				<transformation name="HeaderAndCedents"/>
+				<transformation type="simple" name="HeaderAndCedents"/>
 			</output>
 		</active_element>

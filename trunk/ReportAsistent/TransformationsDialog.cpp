@@ -4,6 +4,7 @@
 #include "stdafx.h"
 #include "ReportAsistent.h"
 #include "TransformationsDialog.h"
+#include "AttributeLinkTableDialog.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -40,6 +41,8 @@ BEGIN_MESSAGE_MAP(CTransformationsDialog, CDialog)
 	ON_BN_CLICKED(IDC_REMOVE_BUTTON, OnRemoveButton)
 	ON_BN_CLICKED(IDC_MOVE_UP_BUTTON, OnMoveUpButton)
 	ON_BN_CLICKED(IDC_MOVE_DOWN_BUTTON, OnMoveDownButton)
+	ON_BN_CLICKED(IDC_CONFIGURE_ATTR_LINK_TABLE_BUTTON, OnConfigureAttrLinkTableButton)
+	ON_BN_CLICKED(IDC_ADD_ATTR_LINK_TABLE_BUTTON, OnAddAttrLinkTableButton)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -100,6 +103,8 @@ void CTransformationsDialog::OnCancel()
 	//CDialog::OnCancel();
 }
 
+#define ATTR_TL_STR		"* attr_link_table *"
+
 BOOL CTransformationsDialog::SaveAll()
 {
 	ASSERT(m_active_element != NULL);
@@ -114,8 +119,12 @@ BOOL CTransformationsDialog::SaveAll()
 	//vytvori ukazkovou transformaci
 	IXMLDOMElementPtr transf_elem = m_active_element->ownerDocument->createElement("transformation");
 	IXMLDOMAttributePtr name_attr_elem = m_active_element->ownerDocument->createAttribute("name");
+	IXMLDOMAttributePtr type_attr_elem = m_active_element->ownerDocument->createAttribute("type");
+	type_attr_elem->text = "simple";
 	transf_elem->setAttributeNode(name_attr_elem);
+	transf_elem->setAttributeNode(type_attr_elem);
 	name_attr_elem.Release();
+	type_attr_elem.Release();
 
 	//ulozi transformace
 	for (int a = 0; a< m_SelectedList.GetCount(); a++)
@@ -125,7 +134,19 @@ BOOL CTransformationsDialog::SaveAll()
 
 		transf_elem->setAttribute("name", (LPCTSTR) it_text);
 
-		output_node->appendChild(transf_elem->cloneNode(VARIANT_FALSE));
+		//jedna se o attr_link_table
+		if (it_text == ATTR_TL_STR)
+		{
+			IXMLDOMElementPtr clone = transf_elem->cloneNode(VARIANT_FALSE);
+			clone->setAttribute("type", "attr_link_table");
+			output_node->appendChild(clone);
+			clone.Release();
+		}
+		else
+		{
+			output_node->appendChild(transf_elem->cloneNode(VARIANT_FALSE));
+		}
+
 	}
 
 
@@ -194,4 +215,36 @@ void CTransformationsDialog::OnMoveDownButton()
 
 	m_SelectedList.SelectString(--selected_index, selected_text);
 	
+}
+
+void CTransformationsDialog::OnConfigureAttrLinkTableButton() 
+{
+	IXMLDOMElementPtr attr_lt = m_active_element->selectSingleNode("attr_link_table");
+	
+	if (attr_lt == NULL)
+	{
+		CElementManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
+		attr_lt = m.CreateEmptyElement(ELID_ATTR_LINK_TABLE);
+
+		m_active_element->appendChild(attr_lt);
+	}
+
+	//nastav id stejne jako m_active_element
+	attr_lt->setAttribute("target", m_active_element->getAttribute("id"));
+
+	
+	CAttributeLinkTableDialog dlg(attr_lt, AfxGetMainWnd(), FALSE);
+
+	dlg.DoModal();
+
+	attr_lt.Release();
+}
+
+void CTransformationsDialog::OnAddAttrLinkTableButton() 
+{
+	
+	if (LB_ERR == m_SelectedList.FindString(-1, ATTR_TL_STR))
+	{
+		m_SelectedList.AddString(ATTR_TL_STR);	
+	}
 }
