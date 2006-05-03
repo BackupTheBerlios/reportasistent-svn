@@ -10,6 +10,10 @@
 #include "SockInterface.h"
 #include "functions.h"
 
+
+
+
+
 // !!! zde definujte pocet AP, ktere tato zasuvka podporuje
 #define _FE_AP_COUNT 2
 

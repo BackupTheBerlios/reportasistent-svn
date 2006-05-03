@@ -17,7 +17,7 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="C:\FerdaDataminer\FrontEnd"
+			OutputDirectory="..\..\ReportAsistent\Plugin"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="2"
 			UseOfMFC="2"
@@ -178,21 +178,9 @@
 			RelativePath="System.XML.dll"
 			AssemblyName="System.Xml, Version=2.0.0.0, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL"
 		/>
-		<AssemblyReference
-			RelativePath="c:\FerdaDataminer\FrontEnd\FerdaBase.dll"
-			AssemblyName="FerdaBase, Version=0.0.0.0, processorArchitecture=MSIL"
-		/>
-		<AssemblyReference
-			RelativePath="c:\FerdaDataminer\FrontEnd\FerdaModulesManager.dll"
-			AssemblyName="FerdaModulesManager, Version=0.0.0.0, processorArchitecture=MSIL"
-		/>
-		<AssemblyReference
-			RelativePath="c:\FerdaDataminer\FrontEnd\FerdaProjectManager.dll"
-			AssemblyName="FerdaProjectManager, Version=0.0.0.0, processorArchitecture=MSIL"
-		/>
-		<AssemblyReference
-			RelativePath="icecs.dll"
-			AssemblyName="icecs, Version=3.0.1.0, PublicKeyToken=1f998c50fec78381, processorArchitecture=MSIL"
+		<ProjectReference
+			ReferencedProjectIdentifier="{6E8FAB8A-B8CB-4117-BF8D-4281169A724B}"
+			RelativePathToProject=".\FEplugin_cs\FEplugin_cs.csproj"
 		/>
 	</References>
 	<Files>

@@ -6,8 +6,8 @@
 #include "functions.h"
 #include "InterfaceFunctions.h"
 
-
-
+using namespace System;
+using namespace FEplugin_cs;
  
 
 // =========== GLOBALNI PROMENNE =================
