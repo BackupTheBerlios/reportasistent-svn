@@ -288,7 +288,7 @@ Public Sub LoadText(oAttributes As MSXML2.IVBSAXAttributes)
     On Error GoTo no_style
     SetTextStyle oAttributes.getValueFromName("", "style")
     
-    Exit Sub
+'    Exit Sub
 
 no_style:
     'AddText oAttributes.getValueFromName("", "value")

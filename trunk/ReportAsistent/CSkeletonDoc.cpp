@@ -45,6 +45,9 @@ CSkeletonDoc::CSkeletonDoc() /*: m_SkeletonManager(pXMLDom)*/
 
 }
 
+
+
+
 CSkeletonDoc::~CSkeletonDoc()
 {
 } 
@@ -603,8 +606,7 @@ BOOL CSkeletonDoc::EditElement(IXMLDOMElementPtr selected_element)
 
 	default:
 		//ostatni prvky
-		AfxMessageBox(selected_element->xml);
-		return FALSE;
+		return IDOK == AfxMessageBox(selected_element->xml, MB_OKCANCEL);		
 
 	}
 
@@ -659,7 +661,7 @@ void CSkeletonDoc::Generate()
 	
 
 #ifdef DONT_CLONE_REPORT_BEFORE_GENERATE
-	doc_element = m_skeleton->documentElement;
+	doc_element = m_pXMLDom->documentElement;
 #else
 	//klonuje cely dokumnet
 	doc_element = m_pXMLDom->documentElement->cloneNode(VARIANT_TRUE);
@@ -738,6 +740,7 @@ void CSkeletonDoc::Generate()
 /******/
 
 }
+
 
 
 //tahle metoda asi prijde zrusit
@@ -1003,9 +1006,8 @@ void CSkeletonDoc::TransformAttrLink(IXMLDOMElementPtr &element)
 		(LPCTSTR) (_bstr_t) element->getAttribute("target"),
 		(LPCTSTR) (_bstr_t) element->getAttribute("attr_name"));
 
-	IXMLDOMNodePtr value_node = element->ownerDocument->selectSingleNode((LPCTSTR) query);
 
-	AfxMessageBox(value_node->xml);
+	IXMLDOMNodePtr value_node = element->ownerDocument->selectSingleNode((LPCTSTR) query);
 
 	if (value_node != NULL)
 	{

@@ -63,6 +63,8 @@ Pro Ivu:
 chybka v copy/paste:
 kdyz dam copy na cely odstavec, ktery obsahuje dalsi prvky,
 tak potom nefunguje paste - prvkum uvnitr toho okopirovaneho odstavce se nezmeni id 
+- problem je v tom, ze kontrola id probiha pouze v ramci zobrazovaneho dokumentu nikoliv v ramci vkladanych dat
+potom se muze stat (stava se) ze to vsem nove vlozenym elementum stejneho typu vyrobi stejne id
 
 
 predelal jsem svou uzasnou nahodnou funkci na generovani ID CSkeletonDoc::CreateNewID

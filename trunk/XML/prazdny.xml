@@ -114,7 +114,7 @@
 <report title="Nadpis" subtitle="podnadpis" author="jmeno autora" id="report1">
 	<chapter title="nadpis kapitoly" id="ch_aktivni1">
 		<paragraph style="Normální" id="paragraph1">
-			<text id="text7">Nìjaký text</text>
+			<text id="text7" style="Silné">Nìjaký text</text>
 			<attr_link id="attr_link1" target="" attr_name="" />
 		</paragraph>
 		

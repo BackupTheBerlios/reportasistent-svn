@@ -304,8 +304,11 @@ void CAElTransform::FillElementAttributes(IXMLDOMNodePtr &output_node)
 
 /*********/	
 	
-	//ulozi atributy do m_active_element
-	IXMLDOMNodePtr attributes_node = m_active_element->selectSingleNode("attributes");
+	//ulozi atributy do elementu se stejnym id jako m_active_element (nutne kvuli klonovani pri generovani)
+	CString query_str;
+	query_str.Format("id(\"%s\")/attributes", (LPCTSTR) (_bstr_t) m_active_element->getAttribute("id"));
+
+	IXMLDOMNodePtr attributes_node = m_active_element->selectSingleNode((LPCTSTR) query_str);
 	attributes_node->replaceChild(
 		attributes_DOM->documentElement,
 		attributes_node->selectSingleNode("element_attributes"));

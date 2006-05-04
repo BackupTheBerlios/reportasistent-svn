@@ -691,6 +691,9 @@ void CSkeletonView::OnMmdelete()
 	
 	HTREEITEM hSelTreeItem = GetTreeCtrl().GetSelectedItem();
 
+	//dedek:
+	if (hSelTreeItem == NULL) return;
+
 	IXMLDOMElementPtr selected_element = GetDocument()->ElementFromItemData(GetTreeCtrl().GetItemData( hSelTreeItem ));
 	
 	IXMLDOMElementPtr parent_element= selected_element->parentNode;

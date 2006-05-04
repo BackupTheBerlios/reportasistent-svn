@@ -124,8 +124,10 @@ Private Sub IVBSAXContentHandler_endElement(strNamespaceURI As String, strLocalN
 End Sub
 
 Private Sub IVBSAXContentHandler_characters(strChars As String)
-    wl.TypeText strChars
     strChars = Replace(strChars, vbLf, vbNewLine)
+    strChars = Replace(strChars, vbNewLine, " ")
+    
+    wl.TypeText strChars
     mstrOutput = mstrOutput & strChars
 End Sub
 
