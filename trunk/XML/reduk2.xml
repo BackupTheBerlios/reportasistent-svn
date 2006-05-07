@@ -110,9 +110,9 @@
 
 ]>
 <report title="Nadpis" subtitle="podnadpis" author="jmeno autora" id="report1">
-	<chapter title="nadpis kapitoly" id="ch_aktivni1">
+	<chapter title="Chapter1" id="ch_aktivni1">
 		<paragraph style="Normální" id="paragraph1">
-			<text id="text7">Nìjaký text</text>
+			<text id="text1">The beginning of all the text.</text>
 		</paragraph>
 		<active_element type="hyp_4ft" source="" id="hyp_4ft1">
 			<attributes>
@@ -170,7 +170,7 @@
 	<!--
 	<include file="../XML/include_doc.doc" id="include1"/>
 	-->
-	<chapter title="nadpis kapitoly" id="chapter7732"><paragraph style="Normální" id="paragraph6361">
-			<text id="text1839">Co se rádo to se rádo</text>
+	<chapter title="Chapter2" id="chapter7732"><paragraph style="Normální" id="paragraph6361">
+			<text id="text1839">The conclusion of all the report.</text>
 		</paragraph></chapter>
 </report>

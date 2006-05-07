@@ -90,6 +90,7 @@ protected:
 
 	
 public:
+	BOOL IsIDInTree(CString Id);
 	BOOL IsDescendantOfElement(IXMLDOMElementPtr pDescendantXMLElm,IXMLDOMElementPtr pAncestorXMLElm);
 	void ChangeIDsInTree(IXMLDOMElementPtr pXMLElm);
 	void Generate();

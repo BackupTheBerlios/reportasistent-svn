@@ -11,6 +11,8 @@
 #include "simplefilterdialog.h"
 #include "APTransform.h"
 #include "ElementTextDialog.h"
+#include "ElementParagraphDialog.h"
+#include "ElementChapterDialog.h"
 #include "ActiveElementDialog.h"
 #include "AttributeLinkDialog.h"
 #include "AttributeLinkTableDialog.h"
@@ -44,9 +46,6 @@ CSkeletonDoc::CSkeletonDoc() /*: m_SkeletonManager(pXMLDom)*/
 //	srand( (unsigned)time( NULL ) );
 
 }
-
-
-
 
 CSkeletonDoc::~CSkeletonDoc()
 {
@@ -495,7 +494,7 @@ IXMLDOMElementPtr CSkeletonDoc::InsertNewElement(LPCTSTR element_name, IXMLDOMEl
 
 }
 
-//vytvori novy id string pro eletment typu element_type
+//vytvori novy id string pro element typu element_type
 CString CSkeletonDoc::CreateNewID(CElementManager::elId_t element_type)
 {
 	
@@ -509,15 +508,7 @@ CString CSkeletonDoc::CreateNewID(CElementManager::elId_t element_type)
 		id.Format("%s%d", el_name, a); //napr.: id = "hyp_4ft15"
 
 		
-		//podivame se jestli uz dane id v kostre existuje:
-		//zkusime prvek s takovym id najit moci XPath funkce id()
-		
-		CString query; 
-		query.Format("id(\"%s\")", (LPCTSTR) id); //napr.: query = 'id("hyp_4ft15")'
-
-		IXMLDOMNodePtr select = m_pXMLDom->selectSingleNode((LPCTSTR) query);
-		if (select == NULL) break; //kdyz to zadny uzel nenaslo tak id neni pouzite..
-		else select.Release();
+		if ( ! IsIDInTree(id)) break;
 	}
 
 	//pokud cyklus probehnul 16777215-krat, je to dost podezrele :-)
@@ -570,28 +561,51 @@ BOOL CSkeletonDoc::EditElement(IXMLDOMElementPtr selected_element)
 	case  ELID_TEXT:
 		{
 			//Vytvorim instanci dialogu pro Prvek Text
-			CElementTextDialog OElementTextDialog(AfxGetMainWnd());
-
-			//Inicializuji promenne dialogu		
-			OElementTextDialog.m_DialTextEditValue = (LPCTSTR) selected_element->text;
-
-			//A dialog zobrazim
-			UINT Res = OElementTextDialog.DoModal();
-				
+			CElementTextDialog OElementTextDialog(selected_element,AfxGetMainWnd());
+			UINT Res= OElementTextDialog.DoModal() ;
 			if (Res == IDOK)
 			{
-				//Zmeny z dialogu soupnu do XMLDom stromu
-				LPCTSTR sText= OElementTextDialog.m_DialTextEditValue; 
-				selected_element->text=sText;
-				return TRUE;
+			//Zmeny z dialogu soupnu do XMLDom stromu
+				//Id:
+				selected_element->setAttribute("id",(LPCTSTR) OElementTextDialog.m_DialTextIDEditValue);		
+				//Title:
+				selected_element->text=(LPCTSTR) OElementTextDialog.m_DialTextEditValue;
 			}
-			else
-			{
-				return FALSE;
-			}
+			return Res;
+
 		}
 
-	
+case  ELID_PARAGRAPH:
+		{
+			//Vytvorim instanci dialogu pro Prvek Chapter
+			CElementParagraphDialog OElementParagraphDialog(selected_element,AfxGetMainWnd());
+			UINT Res= OElementParagraphDialog.DoModal() ;
+			if (Res == IDOK)
+			{
+			//Zmeny z dialogu soupnu do XMLDom stromu
+				//Id:
+				selected_element->setAttribute("id",(LPCTSTR) OElementParagraphDialog.m_DialParagraphIDEditValue);		
+			}
+			return Res;
+
+
+		}
+case  ELID_CHAPTER:
+		{
+			//Vytvorim instanci dialogu pro Prvek Chapter
+			CElementChapterDialog OElementChapterDialog(selected_element,AfxGetMainWnd());
+			UINT Res= OElementChapterDialog.DoModal() ;
+			if (Res == IDOK)
+			{
+			//Zmeny z dialogu soupnu do XMLDom stromu
+				//Id:
+				selected_element->setAttribute("id",(LPCTSTR) OElementChapterDialog.m_DialChapterIDEditValue);		
+				//Title:
+				selected_element->setAttribute("title",(LPCTSTR) OElementChapterDialog.m_DialChapterTitleEditValue);
+			}
+			return Res;
+
+		}
 	case ELID_ATTR_LINK:
 		{
 			CAttributeLinkDialog dlg(selected_element, AfxGetMainWnd());
@@ -606,7 +620,8 @@ BOOL CSkeletonDoc::EditElement(IXMLDOMElementPtr selected_element)
 
 	default:
 		//ostatni prvky
-		return IDOK == AfxMessageBox(selected_element->xml, MB_OKCANCEL);		
+		AfxMessageBox(selected_element->xml);
+		return FALSE;
 
 	}
 
@@ -661,7 +676,7 @@ void CSkeletonDoc::Generate()
 	
 
 #ifdef DONT_CLONE_REPORT_BEFORE_GENERATE
-	doc_element = m_pXMLDom->documentElement;
+	doc_element = m_skeleton->documentElement;
 #else
 	//klonuje cely dokumnet
 	doc_element = m_pXMLDom->documentElement->cloneNode(VARIANT_TRUE);
@@ -742,21 +757,16 @@ void CSkeletonDoc::Generate()
 }
 
 
-
 //tahle metoda asi prijde zrusit
 void CSkeletonDoc::GenerTransform1(IXMLDOMElementPtr & doc)
 {
-	TransformActiveElements(doc);
-	AfxMessageBox(doc->xml);
-	
-	TransformAttrLinks(doc);
-	AfxMessageBox(doc->xml);
+	Transform1Element(doc);
 }
 
 
 
 //rekurzivni
-void CSkeletonDoc::TransformActiveElements(IXMLDOMElementPtr & element)
+void CSkeletonDoc::Transform1Element(IXMLDOMElementPtr & element)
 {
 	if (element == NULL) return;
 
@@ -777,7 +787,7 @@ void CSkeletonDoc::TransformActiveElements(IXMLDOMElementPtr & element)
 		{
 			
 			//rekurze
-			TransformActiveElements(iChild);
+			Transform1Element(iChild);
 		}
 	}
 	
@@ -983,74 +993,19 @@ BOOL CSkeletonDoc::IsDescendantOfElement(IXMLDOMElementPtr pDescendantXMLElm, IX
 
 }
 
-void CSkeletonDoc::TransformAttrLink(IXMLDOMElementPtr &element)
+BOOL CSkeletonDoc::IsIDInTree(CString Id)
 {
-	CElementManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
-
-	IXMLDOMElementPtr txt_elem = m.CreateEmptyElement(ELID_TEXT);
-	
-	//nastav style
-	_variant_t vt_style = element->getAttribute("style");
-	if (vt_style.vt != VT_NULL)
-	{
-		IXMLDOMAttributePtr style_attr = element->ownerDocument->createAttribute("style");
-		style_attr->text = (_bstr_t) vt_style;
-		txt_elem->setAttributeNode(style_attr);
-		style_attr.Release();
-	}
-
-	
-	//ziskej hodnotu attribut
-	CString query;
-	query.Format("id(\"%s\")/attributes/element_attributes/attribute[@name = \"%s\"]/@value",
-		(LPCTSTR) (_bstr_t) element->getAttribute("target"),
-		(LPCTSTR) (_bstr_t) element->getAttribute("attr_name"));
-
-
-	IXMLDOMNodePtr value_node = element->ownerDocument->selectSingleNode((LPCTSTR) query);
-
-	if (value_node != NULL)
-	{
-		txt_elem->text = value_node->text;
-		value_node.Release();
-	}
-
-	element->parentNode->replaceChild(txt_elem, element);
-}
-
-void CSkeletonDoc::TransformAttrLinkTable(IXMLDOMElementPtr &element)
-{
-
-}
-
-//rekurzivni
-void CSkeletonDoc::TransformAttrLinks(IXMLDOMElementPtr &element)
-{
-	if (element == NULL) return;
-
-	CElementManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
-
-	CElementManager::elId_t el_id = m.IdentifyElement(element);
-
-	switch (el_id)
-	{
-	case ELID_ATTR_LINK:
-		TransformAttrLink(element);
-		break;
-
-	case ELID_ATTR_LINK_TABLE:
-		TransformAttrLinkTable(element);
-		break;
-
-	default:
-		IXMLDOMNodeListPtr iChildren = element->childNodes;
-		IXMLDOMElementPtr iChild = NULL;
-
-		while ((iChild = iChildren->nextNode()) != NULL)
+		//podivame se jestli uz dane id v kostre existuje:
+		//zkusime prvek s takovym id najit moci XPath funkce id()
+		
+		CString query; 
+		query.Format("id(\"%s\")", (LPCTSTR) Id); //napr.: query = 'id("hyp_4ft15")'
+		IXMLDOMNodePtr select = m_pXMLDom->selectSingleNode((LPCTSTR) query);
+		if (select == NULL) return FALSE; //kdyz to zadny uzel nenaslo tak id neni pouzite..
+		else //Iva:Id is used in the tree
 		{
-			//rekurze
-			TransformAttrLinks(iChild);
+			select.Release();
+			return TRUE;
 		}
-	}
 
 }

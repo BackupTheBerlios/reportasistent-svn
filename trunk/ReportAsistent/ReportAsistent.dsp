@@ -128,7 +128,15 @@ SOURCE=.\DirectoriesManager.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\ElementChapterDialog.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\ElementManager.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\ElementParagraphDialog.cpp
 # End Source File
 # Begin Source File
 
@@ -217,7 +225,15 @@ SOURCE=.\DirectoriesManager.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\ElementChapterDialog.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\ElementManager.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\ElementParagraphDialog.h
 # End Source File
 # Begin Source File
 
@@ -324,6 +340,10 @@ SOURCE=.\res\transformations_logo.bmp
 SOURCE=.\res\unknowni.bmp
 # End Source File
 # End Group
+# Begin Source File
+
+SOURCE=.\IvaUzitKonstrukce.txt
+# End Source File
 # Begin Source File
 
 SOURCE=.\ReadMe.txt

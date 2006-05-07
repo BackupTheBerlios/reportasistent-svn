@@ -14,12 +14,14 @@ class CElementTextDialog : public CDialog
 {
 // Construction
 public:
-	CElementTextDialog(CWnd* pParent = NULL);   // standard constructor
+	IXMLDOMElementPtr m_SelXMLElm;
+	CElementTextDialog(IXMLDOMElementPtr & SelXMLElm,CWnd* pParent = NULL);   // standard constructor
 
 // Dialog Data
 	//{{AFX_DATA(CElementTextDialog)
 	enum { IDD = IDD_DIALOGTEXT };
 	CString	m_DialTextEditValue;
+	CString	m_DialTextIDEditValue;
 	//}}AFX_DATA
 
 
@@ -32,10 +34,11 @@ public:
 
 // Implementation
 protected:
+	void DDV_NonDuplicateID(CDataExchange *pDX, int nId, CString csIDEditValue);
+	CString m_OldID;
 
 	// Generated message map functions
 	//{{AFX_MSG(CElementTextDialog)
-	virtual BOOL OnInitDialog();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };
