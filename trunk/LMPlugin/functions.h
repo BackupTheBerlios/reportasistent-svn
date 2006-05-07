@@ -10,9 +10,9 @@
 
 // ===== FUNKCE ========
 
-// ---AP cedent
+// ---AP bool cedent
 
-CString fLMCedent (void* hSource);
+CString fLMBoolCedent (void* hSource);
 
 // ---AP attribute
 

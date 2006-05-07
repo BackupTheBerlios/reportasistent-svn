@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="windows-1250"?>
+	
+		<active_element type="bool_cedent" source="" id="bool_cedent1">
+			<attributes>
+				<element_attributes>
+				</element_attributes>
+			</attributes>
+			<filter type="simple">
+			</filter>
+			<output>
+			</output>
+		</active_element>

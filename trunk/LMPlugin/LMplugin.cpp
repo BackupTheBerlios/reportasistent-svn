@@ -33,6 +33,9 @@ CLMSock::CLMSock()
 
 	APTable[2].AP_ID = "attribute";
 	APTable[2].pFn = & fLMAttribute;
+
+	APTable[3].AP_ID = "bool_cedent";
+	APTable[3].pFn = & fLMBoolCedent;
 }
 
 

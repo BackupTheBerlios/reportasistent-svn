@@ -6,14 +6,79 @@
 
 CString Bool_Cedent_Meta::xml_convert ()
 {
-	CString buf = "";
+	CString xml_string;
 
-	return buf;
+	cedent_type.Replace ("&", "&amp;");
+	db_name.Replace ("&", "&amp;");
+	matrix_name.Replace ("&", "&amp;");
+	task_name.Replace ("&", "&amp;");
+	task_type.Replace ("&", "&amp;");
+
+	cedent_type.Replace ("<", "&lt;");
+	db_name.Replace ("<", "&lt;");
+	matrix_name.Replace ("<", "&lt;");
+	task_name.Replace ("<", "&lt;");
+	task_type.Replace ("<", "&lt;");
+
+	cedent_type.Replace (">", "&gt;");
+	db_name.Replace (">", "&gt;");
+	matrix_name.Replace (">", "&gt;");
+	task_name.Replace (">", "&gt;");
+	task_type.Replace (">", "&gt;");
+
+	//beggining of the cedent element
+	xml_string = " <bool_cedent id=\"" + id + "\" db_name=\"" + db_name + "\" ";
+	xml_string = xml_string + "matrix_name=\"" + matrix_name + "\" ";
+	xml_string = xml_string + "task_name=\"" + task_name + "\" ";
+	xml_string = xml_string + "task_type=\"" + task_type + "\" ";
+	xml_string = xml_string + "cedent_type=\"" + cedent_type + "\" ";
+	xml_string = xml_string + "sub_cedent_cnt=\"" + sub_cedent_cnt + "\" >";
+	for (int i = 0; i < sub_cedents_list.GetSize (); i++)
+	{
+		xml_string = xml_string +
+			"<sub_bool_cedent name=\"" + sub_cedents_list.GetAt (i)->name + "\" ";
+		xml_string = xml_string +
+			"literal_cnt=\"" + sub_cedents_list.GetAt (i)->literal_cnt + "\" ";
+		xml_string = xml_string +
+			"length=\"" + sub_cedents_list.GetAt (i)->length + "\" >";
+		for (int j = 0; j < sub_cedents_list.GetAt (i)->lit_list.GetSize (); j++)
+		{
+			xml_string = xml_string +
+				"<literal underlying_attribute=\"" +
+				sub_cedents_list.GetAt (i)->lit_list.GetAt (j).underlying_attribute + "\" ";
+			xml_string = xml_string +
+				"category_cnt=\"" +
+				sub_cedents_list.GetAt (i)->lit_list.GetAt (j).category_cnt + "\" ";
+			xml_string = xml_string +
+				"missing_type=\"" +
+				sub_cedents_list.GetAt (i)->lit_list.GetAt (j).missing_type + "\" ";
+			xml_string = xml_string +
+				"coefficient_type=\"" +
+				sub_cedents_list.GetAt (i)->lit_list.GetAt (j).coefficient_type + "\" ";
+			xml_string = xml_string +
+				"length=\"" +
+				sub_cedents_list.GetAt (i)->lit_list.GetAt (j).length + "\" ";
+			xml_string = xml_string +
+				"gace=\"" +
+				sub_cedents_list.GetAt (i)->lit_list.GetAt (j).gace + "\" ";
+			xml_string = xml_string +
+				"literal_type=\"" +
+				sub_cedents_list.GetAt (i)->lit_list.GetAt (j).literal_type + "\" ";
+			xml_string = xml_string +
+				"equivalence_class=\"" +
+				sub_cedents_list.GetAt (i)->lit_list.GetAt (j).equivalence_class + "\"/> ";
+		}
+		xml_string = xml_string + "</sub_bool_cedent> ";
+	}
+	xml_string = xml_string + "</bool_cedent> ";
+
+	return xml_string;
 }
 
 CString Attribute_Meta::xml_convert ()
 {
 	CString xml_string;
+
 	attr_name.Replace ("&", "&amp;");
 	db_name.Replace ("&", "&amp;");
 	id.Replace ("&", "&amp;");
@@ -32,7 +97,7 @@ CString Attribute_Meta::xml_convert ()
 	matrix_name.Replace (">", "&gt;");
 	creation.Replace (">", "&gt;");
 
-	//beginning of attribute element
+	//beginning of the attribute element
 	xml_string = " <attribute id=\"" + id + "\" db_name=\"" + db_name + "\" ";
 	xml_string = xml_string + "matrix_name=\"" + matrix_name + "\" ";
 	xml_string = xml_string + "attr_name=\"" + attr_name + "\" ";

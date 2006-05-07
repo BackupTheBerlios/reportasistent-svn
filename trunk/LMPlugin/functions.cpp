@@ -52,7 +52,7 @@ BOOL dedek_performLM(void * hSource, const char* AP, BSTR* result)
 
 // ---AP bool cedent
 
-CString fLMCedent (void* hSource)
+CString fLMBoolCedent (void* hSource)
 {
 	CString buf = "";
 	CString hlp;
@@ -97,7 +97,8 @@ CString fLMCedent (void* hSource)
 			AND tdLiteralD.CoefficientTypeID=tsCoefficientType.CoefficientTypeID \
 			AND tmQuantity.AttributeID=tmAttribute.AttributeID \
 			AND tmAttribute.MatrixID=tmMatrix.MatrixID \
-		 ORDER BY tdCedentD.TaskID, tdCedentD.CedentTypeID";
+			AND taTask.TaskSubTypeID=tsTaskSubType.TaskSubTypeID \
+		 ORDER BY tdCedentD.TaskID, tdCedentD.CedentTypeID, tdLiteralD.LiteralDID";
 
 	if (rs.Open(AFX_DB_USE_DEFAULT_TYPE, q))
 	{
@@ -128,7 +129,11 @@ CString fLMCedent (void* hSource)
 				literal_cnt = 0;
 				sub_cedent_cnt++;
 				ptboolcdnt->sub_cedent_cnt.Format ("%d", sub_cedent_cnt);
-				ptsub_bool_cedent->name = rs.m_Name2;
+				hlp = rs.m_Name2;
+				hlp.Replace ("&", "&amp;");
+				hlp.Replace ("<", "&lt;");
+				hlp.Replace (">", "&gt;");
+				ptsub_bool_cedent->name = hlp;
 				hlp.Format ("%d", rs.m_MinLen);
 				hlp1.Format ("%d", rs.m_MaxLen);
 				hlp += " - ";
@@ -140,8 +145,16 @@ CString fLMCedent (void* hSource)
 			{
 				literal_cnt++;
 				ptsub_bool_cedent->literal_cnt.Format ("%d", literal_cnt);
-				lit.underlying_attribute = rs.m_Name3;
-				lit.coefficient_type = rs.m_Name7;
+				hlp = rs.m_Name3;
+				hlp.Replace ("&", "&amp;");
+				hlp.Replace ("<", "&lt;");
+				hlp.Replace (">", "&gt;");
+				lit.underlying_attribute = hlp;
+				hlp = rs.m_Name7;
+				hlp.Replace ("&", "&amp;");
+				hlp.Replace ("<", "&lt;");
+				hlp.Replace (">", "&gt;");
+				lit.coefficient_type = hlp;
 				if (rs.m_ShortName3 == "one")
 				{
 					hlp.Format ("%d", rs.m_CategoryID);
@@ -156,11 +169,15 @@ CString fLMCedent (void* hSource)
 						while (!rs_cat.IsEOF())
 						{
 							hlp = rs_cat.m_Name;
+							rs_cat.MoveNext ();
 						}
 						rs_cat.Close ();
 					}
 					else return "";
 					hlp = "(" + hlp + ")";
+					hlp.Replace ("&", "&amp;");
+					hlp.Replace ("<", "&lt;");
+					hlp.Replace (">", "&gt;");
 					lit.coefficient_type += hlp;
 				}
 				hlp.Format ("%d", rs.m_MinLen2);
@@ -168,17 +185,25 @@ CString fLMCedent (void* hSource)
 				hlp += " - ";
 				hlp += hlp1;
 				lit.length = hlp;
-				lit.gace = rs.m_Name8;
-				lit.literal_type = rs.m_Name9;
+				hlp = rs.m_Name8;
+				hlp.Replace ("&", "&amp;");
+				hlp.Replace ("<", "&lt;");
+				hlp.Replace (">", "&gt;");
+				lit.gace = hlp;
+				hlp = rs.m_Name9;
+				hlp.Replace ("&", "&amp;");
+				hlp.Replace ("<", "&lt;");
+				hlp.Replace (">", "&gt;");
+				lit.literal_type = hlp;
 				hlp.Format ("%d", c_id);
 				q_eq = "SELECT * \
 					FROM tdEquivalenceClass \
 					WHERE CedentDID=" + hlp;
 				//find all equivalence classes
+				hlp = "";
 				if (rs_eq.Open(AFX_DB_USE_DEFAULT_TYPE, q_eq))
 				{
 					c = 0;
-					hlp = "";
 					//iteration on query results
 					while (!rs_eq.IsEOF())
 					{
@@ -190,16 +215,19 @@ CString fLMCedent (void* hSource)
 					rs_eq.Close ();
 				}
 				else return "";
+				hlp.Replace ("&", "&amp;");
+				hlp.Replace ("<", "&lt;");
+				hlp.Replace (">", "&gt;");
 				lit.equivalence_class = hlp;
 				hlp.Format ("%d", rs.m_QuantityID2);
 				q_cat ="SELECT * \
 						FROM tmCategory \
 						WHERE QuantityID=" + hlp;
 				//find categories and missing values
+				missing_type = FALSE;
 				if (rs_cat.Open(AFX_DB_USE_DEFAULT_TYPE, q_cat))
 				{
 					c = 0;
-					missing_type = FALSE;
 					//iteration on query results
 					while (!rs_cat.IsEOF())
 					{
@@ -223,6 +251,31 @@ CString fLMCedent (void* hSource)
 		rs.Close();
 	}
 	else return "";
+
+	//creation of xml string
+	//load DTD
+	FILE * x = fopen ("../XML/dtd.dtd", "r");
+	CString buf1;
+	while (fscanf (x, "%s", buf1) != EOF)
+	{
+		buf = buf + (const char *) buf1 + " ";
+	}
+	fclose (x);
+	//create xml data
+	buf = buf + " <active_list> ";
+	for (int i = 0; i < list.GetSize (); i++)
+	{
+		buf = buf + list.GetAt (i)->xml_convert ();
+	}
+	buf += " </active_list>";
+	//just for test - creates a xml file with all attributes
+/*	FILE * f = fopen ("test.xml", "w");
+	fprintf (f, "%s", buf);
+	fclose (f);
+
+
+	AfxMessageBox(buf);
+*/
 
 	return buf;
 }
