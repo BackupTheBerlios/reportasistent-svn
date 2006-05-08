@@ -12,6 +12,8 @@
 #include "Bool_Cedent_Recordset.h"
 #include "Equivalence_Lit_Rs.h"
 #include "TCategory_Scan.h"
+#include "TEmpty_Cedents_Recordset.h"
+#include "TLit_Scan_Recordset.h"
 
 
 //dedek: docasne
@@ -68,6 +70,8 @@ CString fLMBoolCedent (void* hSource)
 	long l_id;
 	long l_id_tst = 0; //test, wheather the new literal appears
 	long c = 0; //counter - help variable
+	long indx; //help variable
+	long y; //help variable
 
 	BOOL missing_type = FALSE;
 
@@ -77,12 +81,15 @@ CString fLMBoolCedent (void* hSource)
 	Bool_Cedent_Recordset rs ((CDatabase *) hSource);
 	Equivalence_Lit_Rs rs_eq ((CDatabase *) hSource);
 	TCategory_Scan rs_cat ((CDatabase *) hSource);
+	TEmpty_Cedents_Recordset rs_em ((CDatabase *) hSource);
+	TLit_Scan_Recordset rs_lit ((CDatabase *) hSource);
 
 	Sub_Bool_Cedent_Meta * ptsub_bool_cedent;
 	Literal_Meta lit;
 
 	CString q_eq;
 	CString q_cat;
+	CString q_lit;
 	LPCTSTR q =
 		"SELECT * \
 		 FROM taTask, tdCedentD, tdLiteralD, tmAttribute, \
@@ -99,6 +106,13 @@ CString fLMBoolCedent (void* hSource)
 			AND tmAttribute.MatrixID=tmMatrix.MatrixID \
 			AND taTask.TaskSubTypeID=tsTaskSubType.TaskSubTypeID \
 		 ORDER BY tdCedentD.TaskID, tdCedentD.CedentTypeID, tdLiteralD.LiteralDID";
+	LPCTSTR q_em =
+		"SELECT * \
+		 FROM taTask, tdCedentD, tmMatrix, tsCedentType, tsTaskSubType \
+		 WHERE tdCedentD.CedentTypeID=tsCedentType.CedentTypeID \
+		 AND taTask.TaskSubTypeID=tsTaskSubType.TaskSubTypeID \
+		 AND tdCedentD.TaskID=taTask.TaskID \
+		 AND taTask.MatrixID=tmMatrix.MatrixID";
 
 	if (rs.Open(AFX_DB_USE_DEFAULT_TYPE, q))
 	{
@@ -249,6 +263,78 @@ CString fLMBoolCedent (void* hSource)
 			rs.MoveNext();
 		}
 		rs.Close();
+	}
+	else return "";
+	//add empty subcedents
+	if (rs_em.Open(AFX_DB_USE_DEFAULT_TYPE, q_em))
+	{
+		//iteration on query results
+		while (!rs_em.IsEOF())
+		{
+			hlp.Format ("%d", rs_em.m_CedentDID);
+			q_lit = "SELECT * FROM tdLiteralD WHERE CedentDID=" + hlp;
+			c = 0;
+			if (rs_lit.Open (AFX_DB_USE_DEFAULT_TYPE, q_lit))
+			{
+				while (!rs_lit.IsEOF ())
+				{
+					c++;
+					rs_lit.MoveNext ();
+				}
+				rs_lit.Close ();
+			}
+			else return "";
+			if (c == 0) //new empty subcedent
+			{
+				//find cedent for this subcedent, if not exists, create new cedent or subcedent
+				indx = -1;
+				for (y = 0; y < list.GetSize (); y++)
+				{
+					if ((list.GetAt (y)->task_name == rs_em.m_Name)
+						&&
+						(list.GetAt (y)->task_type == rs_em.m_Name5)
+						&&
+						(list.GetAt (y)->cedent_type == rs_em.m_Name4))
+					{
+						indx = y;
+						break;
+					}
+				}
+				ptsub_bool_cedent = new (Sub_Bool_Cedent_Meta);
+				ptsub_bool_cedent->literal_cnt.Format ("%d", 0);
+				ptsub_bool_cedent->name = rs_em.m_Name2;
+				hlp.Format ("%d", rs_em.m_MinLen);
+				hlp1.Format ("%d", rs_em.m_MaxLen);
+				hlp += " - ";
+				hlp += hlp1;
+				ptsub_bool_cedent->length = hlp;
+				ptsub_bool_cedent->lit_list.RemoveAll ();
+				if (indx == -1) //new cedent must be created
+				{
+					ptboolcdnt = new (Bool_Cedent_Meta);
+					sub_cedent_cnt = 1;
+					ptboolcdnt->db_name = db_name;
+					hlp.Format ("%d", rs_em.m_CedentDID);
+					ptboolcdnt->id = "cdnt" + hlp;
+					ptboolcdnt->matrix_name = rs_em.m_Name3;
+					ptboolcdnt->task_name = rs_em.m_Name;
+					ptboolcdnt->task_type = rs_em.m_Name5;
+					ptboolcdnt->cedent_type = rs_em.m_Name4;
+					ptboolcdnt->sub_cedent_cnt.Format ("%d", sub_cedent_cnt);
+					ptboolcdnt->sub_cedents_list.Add (ptsub_bool_cedent);
+					list.Add (ptboolcdnt);
+				}
+				else //add subcedent to existing cedent
+				{
+					list.GetAt (indx)->sub_cedents_list.Add (ptsub_bool_cedent);
+					sub_cedent_cnt = atol (list.GetAt (indx)->sub_cedent_cnt);
+					sub_cedent_cnt++;
+					list.GetAt (indx)->sub_cedent_cnt.Format ("%d", sub_cedent_cnt);
+				}
+			}
+			rs_em.MoveNext ();
+		}
+		rs_em.Close ();
 	}
 	else return "";
 

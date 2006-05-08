@@ -155,6 +155,14 @@ SOURCE=.\TCategory_Scan.cpp
 
 SOURCE=.\TCatOrder.cpp
 # End Source File
+# Begin Source File
+
+SOURCE=.\TEmpty_Cedents_Recordset.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\TLit_Scan_Recordset.cpp
+# End Source File
 # End Group
 # Begin Group "Header Files"
 
@@ -226,6 +234,14 @@ SOURCE=.\TCategory_Scan.h
 # Begin Source File
 
 SOURCE=.\TCatOrder.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\TEmpty_Cedents_Recordset.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\TLit_Scan_Recordset.h
 # End Source File
 # End Group
 # Begin Group "Resource Files"

@@ -2,13 +2,13 @@
 
 [General Info]
 Version=1
-LastClass=CElementParagraphDialog
-LastTemplate=CDialog
+LastClass=CAboutDlg
+LastTemplate=CRecordset
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "ReportAsistent.h"
 LastPage=0
 
-ClassCount=17
+ClassCount=18
 Class1=CReportAsistentApp
 Class2=CSkeletonDoc
 Class3=CSkeletonView
@@ -42,6 +42,7 @@ Resource13=IDD_DIALOG_PARAGRAPH (English (U.S.))
 Class16=CElementChapterDialog
 Class17=CElementDialogBase
 Resource14=IDR_MAINFRAME (English (U.S.))
+Class18=TEmpty_Cedents_Recordset
 
 [CLS:CReportAsistentApp]
 Type=0
@@ -824,4 +825,74 @@ HeaderFile=ElementDialogBase.h
 ImplementationFile=ElementDialogBase.cpp
 BaseClass=CDialog
 Filter=D
+
+[CLS:TEmpty_Cedents_Recordset]
+Type=0
+HeaderFile=TEmpty_Cedents_Recordset.h
+ImplementationFile=TEmpty_Cedents_Recordset.cpp
+BaseClass=CRecordset
+Filter=N
+VirtualFilter=r
+LastObject=TEmpty_Cedents_Recordset
+
+[DB:TEmpty_Cedents_Recordset]
+DB=1
+DBType=ODBC
+ColumnCount=39
+Column1=[taTask].[TaskID], 4, 4
+Column2=[taTask].[Name], 12, 510
+Column3=[taTask].[TaskSubTypeID], 4, 4
+Column4=[TaskGroupID], 4, 4
+Column5=[UserID], 4, 4
+Column6=[taTask].[MatrixID], 4, 4
+Column7=[ParamBASE], 4, 4
+Column8=[ParamBASERelativ], -7, 1
+Column9=[ReadOnly], -7, 1
+Column10=[HypothesisGenerated], -7, 1
+Column11=[GenerationInterrupted], -7, 1
+Column12=[GenerationNrOfTests], 4, 4
+Column13=[GenerationStartTime], 11, 16
+Column14=[GenerationTotalTime], 4, 4
+Column15=[taTask].[Notice], 12, 510
+Column16=[CedentDID], 4, 4
+Column17=[tdCedentD].[TaskID], 4, 4
+Column18=[tdCedentD].[CedentTypeID], 4, 4
+Column19=[tdCedentD].[Name], 12, 510
+Column20=[tdCedentD].[Ord], 4, 4
+Column21=[MinLen], 4, 4
+Column22=[MaxLen], 4, 4
+Column23=[tdCedentD].[Notice], 12, 510
+Column24=[tmMatrix].[MatrixID], 4, 4
+Column25=[tmMatrix].[Name], 12, 100
+Column26=[Initialised], -7, 1
+Column27=[RecordCount], 4, 4
+Column28=[tmMatrix].[Notice], 12, 510
+Column29=[wSavedCountUsed], 4, 4
+Column30=[tsCedentType].[CedentTypeID], 4, 4
+Column31=[tsCedentType].[Name], 12, 100
+Column32=[tsCedentType].[ShortName], 12, 40
+Column33=[tsCedentType].[Ord], 4, 4
+Column34=[tsCedentType].[Notice], 12, 510
+Column35=[tsTaskSubType].[TaskSubTypeID], 4, 4
+Column36=[tsTaskSubType].[Name], 12, 100
+Column37=[tsTaskSubType].[ShortName], 12, 40
+Column38=[tsTaskSubType].[Ord], 4, 4
+Column39=[tsTaskSubType].[Notice], 12, 510
+
+[DB:TLit_Scan_Recordset]
+DB=1
+DBType=ODBC
+ColumnCount=12
+Column1=[LiteralDID], 4, 4
+Column2=[CedentDID], 4, 4
+Column3=[QuantityID], 4, 4
+Column4=[CategoryID], 4, 4
+Column5=[LiteralTypeID], 4, 4
+Column6=[GaceTypeID], 4, 4
+Column7=[EquivalenceClassID], 4, 4
+Column8=[CoefficientTypeID], 4, 4
+Column9=[MinLen], 4, 4
+Column10=[MaxLen], 4, 4
+Column11=[Ord], 4, 4
+Column12=[Notice], 12, 510
 
