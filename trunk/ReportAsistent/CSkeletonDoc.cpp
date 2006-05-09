@@ -571,7 +571,9 @@ BOOL CSkeletonDoc::EditElement(IXMLDOMElementPtr selected_element)
 				//Title:
 				selected_element->text=(LPCTSTR) OElementTextDialog.m_DialTextEditValue;
 			}
-			return Res;
+			//dedek: ma vratit TRUE pokud doslo ke zmene elementu, tedy spravne je to takhle:
+			return Res == IDOK;
+			//return Res;
 
 		}
 
@@ -586,7 +588,8 @@ case  ELID_PARAGRAPH:
 				//Id:
 				selected_element->setAttribute("id",(LPCTSTR) OElementParagraphDialog.m_DialParagraphIDEditValue);		
 			}
-			return Res;
+			return Res == IDOK;
+			//return Res;
 
 
 		}
@@ -603,7 +606,8 @@ case  ELID_CHAPTER:
 				//Title:
 				selected_element->setAttribute("title",(LPCTSTR) OElementChapterDialog.m_DialChapterTitleEditValue);
 			}
-			return Res;
+			return Res == IDOK;
+			//return Res;
 
 		}
 	case ELID_ATTR_LINK:
