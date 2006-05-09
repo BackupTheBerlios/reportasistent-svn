@@ -10,7 +10,7 @@
 class CSkeletonView;
 
 
-#define DONT_CLONE_REPORT_BEFORE_GENERATE
+//#define DONT_CLONE_REPORT_BEFORE_GENERATE
 
 
 #if _MSC_VER > 1000

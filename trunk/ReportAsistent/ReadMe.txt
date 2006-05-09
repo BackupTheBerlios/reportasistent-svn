@@ -60,6 +60,14 @@ PlugsTab[0].SockInterface->hGetAPList
 
 Pro Ivu:
 
+
+
+taky uz to umi Word styly - viz dialog pro attr_link
+
+
+
+
+
 chybka v copy/paste:
 kdyz dam copy na cely odstavec, ktery obsahuje dalsi prvky,
 tak potom nefunguje paste - prvkum uvnitr toho okopirovaneho odstavce se nezmeni id 
