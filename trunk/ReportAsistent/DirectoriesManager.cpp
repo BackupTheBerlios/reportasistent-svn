@@ -66,3 +66,8 @@ CString CDirectoriesManager::getLMRA_WB_WordLoaderPath()
 {	
 	return application_root_path + "\\VB-LMRA_WordLoader\\LMRA_WordLoader.exe";
 }
+
+CString CDirectoriesManager::getAttrLinkTableStylesDirectory()
+{
+	return application_root_path + "\\XML\\attr_link_table_styles";
+}

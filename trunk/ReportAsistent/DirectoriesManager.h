@@ -12,6 +12,7 @@
 class CDirectoriesManager  
 {
 public:
+	CString getAttrLinkTableStylesDirectory();
 	CString getLMRA_WB_WordLoaderPath();
 	CString getXMLFilesDirectory();
 	CString getElementsDirectory();

@@ -13,6 +13,7 @@
 #include <afxtempl.h>
 #include "AElInfo.h"
 #include "DirectoriesManager.h"
+#include "WordManager.h"
 
 
 //honza:
@@ -48,6 +49,9 @@ private:
 	static LPCTSTR static_elements_names[]; 
 	CArray<CAElInfo *,CAElInfo *> active_elements;
 
+	CStringTableImpl attr_link_table_styles;
+	CArray<IXMLDOMDocument *, IXMLDOMDocument *> attr_link_table_doms;
+
 
 public:
 	BOOL CanInsertBefore(IXMLDOMElementPtr &pInserted, IXMLDOMElementPtr &pTarget);
@@ -72,6 +76,7 @@ public:
 	~CElementManager();
 
 protected:
+	void LoadAttrLinkTableStyles(LPCTSTR directory_path);
 	void LoadActiveElements(LPCTSTR elements_directory_path);
 };
 

@@ -98,17 +98,25 @@ CElementManager::elId_t CElementManager::IdentifyElement(IXMLDOMElementPtr & ele
 
 CElementManager::CElementManager(CDirectoriesManager & m)
 {
-
 	LoadActiveElements(m.getElementsDirectory());
+	LoadAttrLinkTableStyles(m.getAttrLinkTableStylesDirectory());
 }
 
 CElementManager::~CElementManager()
 {
-	for (int a=0; a<active_elements.GetSize(); a++)
+	int a;
+	
+	for (a=0; a<active_elements.GetSize(); a++)
 	{
 		delete active_elements[a];
 	}
 
+	for (a=0; a<attr_link_table_doms.GetSize(); a++)
+	{
+		ASSERT(attr_link_table_doms[a] != NULL);
+		
+		attr_link_table_doms[a]->Release();
+	}
 }
 
 CElementManager::elId_t CElementManager::ElementIdFromName(LPCTSTR el_name)
@@ -453,4 +461,40 @@ BOOL CElementManager::CanInsertBefore(IXMLDOMElementPtr &pToInsert, IXMLDOMEleme
 	/*****/
 
 	return 	err->errorCode == S_OK;	
+}
+
+void CElementManager::LoadAttrLinkTableStyles(LPCTSTR directory_path)
+{
+	CFileFind finder;
+
+	CString path = directory_path;
+
+	path += "\\*.xsl";
+
+	BOOL bWorking = finder.FindFile(path);
+	while (bWorking)
+	{
+		 bWorking = finder.FindNextFile();
+
+		 if (! finder.IsDots())
+		 {
+			 IXMLDOMDocumentPtr style_dom;
+			 style_dom.CreateInstance("Msxml2.DOMDocument");
+			 style_dom->async = VARIANT_FALSE;
+
+			 style_dom->load((LPCTSTR) finder.GetFilePath());
+
+			 if (style_dom->parseError->errorCode == S_OK)
+			 {
+				 attr_link_table_styles.Add(finder.GetFileTitle());
+				 attr_link_table_doms.Add(style_dom.Detach());
+			 }
+			 else
+			 {
+				 style_dom.Release();
+			 }
+		 }
+	}
+
+	finder.Close();
 }
