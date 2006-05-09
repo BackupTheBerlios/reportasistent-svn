@@ -1,0 +1,11 @@
+MessageBox
+	AfxMessageBox(""); - 
+
+Zisk handle na aktualni dokument:
+
+	CSkeletonDoc * Doc = ((CReportAsistentApp *) AfxGetApp())->FirstDocumentInFirstTemplate();
+
+Dialogy:
+	Kontrolni promenne se do ovladacich prvku kopiruji po provedeni konstruktoru.
+	Obsahy ovl. prvku se do kontrolnich promennych kopiruji v CDialog::OnOK()
+

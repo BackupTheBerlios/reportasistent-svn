@@ -2,8 +2,8 @@
 
 [General Info]
 Version=1
-LastClass=CAboutDlg
-LastTemplate=CRecordset
+LastClass=CElementParagraphDialog
+LastTemplate=CDialog
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "ReportAsistent.h"
 LastPage=0
@@ -25,9 +25,9 @@ Resource5=IDD_TRANSFORMATIONS_DIALOG (English (U.S.))
 Class7=CSimpleFilterDialog
 Resource6=IDD_DIALOGTEXT (English (U.S.))
 Class8=CGenerateDialog
-Resource7=IDD_ATTRIBUTE_LINK_TABLE_DIALOG (English (U.S.))
+Resource7=IDD_SIMPLE_FILTER_DIALOG (English (U.S.))
 Class9=CSourcesDialog
-Resource8=IDD_ABOUTBOX (English (U.S.))
+Resource8=IDD_ATTRIBUTE_LINK_TABLE_DIALOG (English (U.S.))
 Class10=CActiveElementDialog
 Resource9=IDD_SOURCES_DIALOG (English (U.S.))
 Class11=CTransformationsDialog
