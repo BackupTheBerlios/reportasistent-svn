@@ -783,7 +783,7 @@ CString fLM4fthyp(void * hSource)
 				Hyp_tiLiteral x;
 				pthyp->flag_a = TRUE;
 				id_hlp.Format ("%d", l_id);
-				x.id = "tiLit" + id_hlp;
+				x.id = "tiLit" + id_hlp + pthyp->id;
 				id_hlp.Format ("%d", c_id);
 				x.id = x.id + id_hlp;
 				if (neg_lit) neg_lit_smbl = "¬"; else neg_lit_smbl = "";
@@ -796,7 +796,7 @@ CString fLM4fthyp(void * hSource)
 				Hyp_tiLiteral x;
 				pthyp->flag_s = TRUE;
 				id_hlp.Format ("%d", l_id);
-				x.id = "tiLit" + id_hlp;
+				x.id = "tiLit" + id_hlp + pthyp->id;
 				id_hlp.Format ("%d", c_id);
 				x.id = x.id + id_hlp;
 				if (neg_lit) neg_lit_smbl = "¬"; else neg_lit_smbl = "";
@@ -809,7 +809,7 @@ CString fLM4fthyp(void * hSource)
 				Hyp_tiLiteral x;
 				pthyp->flag_c = TRUE;
 				id_hlp.Format ("%d", l_id);
-				x.id = "tiLit" + id_hlp;
+				x.id = "tiLit" + id_hlp + pthyp->id;
 				id_hlp.Format ("%d", c_id);
 				x.id = x.id + id_hlp;
 				if (neg_lit) neg_lit_smbl = "¬"; else neg_lit_smbl = "";
