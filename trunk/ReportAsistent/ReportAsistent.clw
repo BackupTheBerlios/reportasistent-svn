@@ -2,7 +2,7 @@
 
 [General Info]
 Version=1
-LastClass=CElementParagraphDialog
+LastClass=CAttributeLinkTableDialog
 LastTemplate=CDialog
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "ReportAsistent.h"
@@ -19,20 +19,20 @@ Resource1=IDD_ABOUTBOX
 Resource2=IDR_MAINFRAME
 Class5=CAboutDlg
 Resource3=IDD_GENERATE_DIALOG (English (U.S.))
-Resource4=IDD_ATTRIBUTE_LINK_DIALOG (English (U.S.))
+Resource4=IDD_ABOUTBOX (English (U.S.))
 Class6=CElementTextDialog
-Resource5=IDD_SIMPLE_FILTER_DIALOG (English (U.S.))
+Resource5=IDD_ATTRIBUTE_LINK_TABLE_DIALOG (English (U.S.))
 Class7=CSimpleFilterDialog
 Resource6=IDD_DIALOG_PARAGRAPH (English (U.S.))
 Class8=CGenerateDialog
-Resource7=IDD_ATTRIBUTE_LINK_TABLE_DIALOG (English (U.S.))
+Resource7=IDD_SIMPLE_FILTER_DIALOG (English (U.S.))
 Class9=CSourcesDialog
-Resource8=IDD_ABOUTBOX (English (U.S.))
+Resource8=IDD_TRANSFORMATIONS_DIALOG (English (U.S.))
 Class10=CActiveElementDialog
 Resource9=IDD_ACTIVE_ELEMENT_DIALOG (English (U.S.))
 Class11=CTransformationsDialog
 Class12=Tcategory_Recordset
-Resource10=IDD_DIALOGTEXT (English (U.S.))
+Resource10=IDD_ATTRIBUTE_LINK_DIALOG (English (U.S.))
 Class13=CAttributeLinkDialog
 Resource11=IDD_SOURCES_DIALOG (English (U.S.))
 Class14=CAttributeLinkTableDialog
@@ -41,7 +41,7 @@ Class15=CElementParagraphDialog
 Class16=CElementChapterDialog
 Class17=CElementDialogBase
 Class18=TEmpty_Cedents_Recordset
-Resource13=IDD_TRANSFORMATIONS_DIALOG (English (U.S.))
+Resource13=IDD_DIALOGTEXT (English (U.S.))
 Resource14=IDR_MAINFRAME (English (U.S.))
 
 [CLS:CReportAsistentApp]
@@ -494,7 +494,7 @@ HeaderFile=AttributeLinkTableDialog.h
 ImplementationFile=AttributeLinkTableDialog.cpp
 BaseClass=CDialog
 Filter=D
-LastObject=CAttributeLinkTableDialog
+LastObject=IDC_STYLE_COMBO
 VirtualFilter=dWC
 
 [DB:TAttribute]
@@ -633,7 +633,7 @@ Column39=[tmQuantity].[Notice], 12, 510
 [DLG:IDD_ATTRIBUTE_LINK_TABLE_DIALOG (English (U.S.))]
 Type=1
 Class=CAttributeLinkTableDialog
-ControlCount=14
+ControlCount=16
 Control1=IDOK,button,1342242817
 Control2=IDCANCEL,button,1342242816
 Control3=IDC_TARGET_COMBO,combobox,1344340227
@@ -648,6 +648,8 @@ Control11=IDC_STATIC,static,1342308352
 Control12=IDC_MOVE_UP_BUTTON,button,1342242816
 Control13=IDC_MOVE_DOWN_BUTTON2,button,1342242816
 Control14=IDC_EDIT_CAPTION_BUTTON,button,1342242816
+Control15=IDC_STYLE_COMBO,combobox,1344340227
+Control16=IDC_STATIC,static,1342308352
 
 [DLG:IDD_ATTRIBUTE_LINK_DIALOG (English (U.S.))]
 Type=1

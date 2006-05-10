@@ -74,8 +74,6 @@ private:
 
 protected:
 	void TransformAttrLinks(IXMLDOMElementPtr & element);
-	void TransformAttrLinkTable(IXMLDOMElementPtr & element);
-	void TransformAttrLink(IXMLDOMElementPtr & element);
 	static CElementManager::elId_t ElementIdFromCommandId(UINT command);
 	static LPARAM CreateItemData(IXMLDOMElementPtr & element);
 	void ConfigureFilter(IXMLDOMElementPtr & active_element);
@@ -86,7 +84,6 @@ protected:
 	
 	void GenerTransform1(IXMLDOMElementPtr & doc);
 	void TransformActiveElements(IXMLDOMElementPtr & element); //rekurzivni
-	void TransformActiveElement(IXMLDOMElementPtr & element);
 
 	
 public:

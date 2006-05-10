@@ -245,3 +245,13 @@ void CWordManager::LoadParagraphStyles(LPCTSTR template_name)
 	
 	SafeArrayDestroy(ret_array);
 }
+
+int CStringTable::FindString(LPCTSTR str)
+{
+	for (int a = 0; a < getCount(); a++)
+	{
+		if (((CString) getItem(a)) == str) return a;
+	}
+
+	return -1;
+}

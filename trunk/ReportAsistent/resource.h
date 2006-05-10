@@ -60,11 +60,12 @@
 #define IDC_STYLES_REFRESH_BUTTON       1025
 #define IDC_EDIT_CAPTION_BUTTON         1026
 #define IDC_DIALTEXT_IDEDIT             1027
+#define IDC_STYLE_COMBO                 1027
 #define IDC_DIALPARAGRAPH_IDEDIT        1028
 #define IDC_DIALCHAPTER_IDEDIT          1029
 #define IDC_DIALCHAPTER_TITLEEDIT       1030
-#define IDC_ADD_ATTR_LINK_TABLE_BUTTON	1031
-#define IDC_CONFIGURE_ATTR_LINK_TABLE_BUTTON	1032
+#define IDC_ADD_ATTR_LINK_TABLE_BUTTON  1031
+#define IDC_CONFIGURE_ATTR_LINK_TABLE_BUTTON 1032
 #define ID_MMGENREP                     32771
 #define ID_MMSOURCES                    32772
 #define ID_ELEMENT_EDIT                 32780
@@ -87,10 +88,10 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_3D_CONTROLS                  1
+#define _APS_3D_CONTROLS                     1
 #define _APS_NEXT_RESOURCE_VALUE        155
 #define _APS_NEXT_COMMAND_VALUE         32784
-#define _APS_NEXT_CONTROL_VALUE         1033
+#define _APS_NEXT_CONTROL_VALUE         1034
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

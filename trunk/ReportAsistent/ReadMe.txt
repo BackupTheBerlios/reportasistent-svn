@@ -24,6 +24,10 @@ CGeneralManager * m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager;
 
 dedek TODO:
 
+v void CAElTransform::ProcessAllTransformations(IXMLDOMNodePtr & target, IXMLDOMNodePtr & destination_parent)
+pridat transformaci attr_link_table
+
+
 opravit ukoncovani wordu uvnitr BV-WL
 -pokud se zavola jen init tak pri ukocovani spadne asi
 

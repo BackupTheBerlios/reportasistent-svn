@@ -135,6 +135,8 @@ void CAElTransform::ProcessAllTransformations(IXMLDOMNodePtr & target, IXMLDOMNo
 	
 	for (int a=0; a<tranformations->length; a++)
 	{
+		//sem prijde rozlyseni na attr_link_table
+		
 		ProcessSingleTransformation(target, destination_parent, (IXMLDOMElementPtr) tranformations->item[a]);		
 	}
 

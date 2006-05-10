@@ -29,6 +29,7 @@ void CAttributeLinkTableDialog::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CAttributeLinkTableDialog)
+	DDX_Control(pDX, IDC_STYLE_COMBO, m_StyleCombo);
 	DDX_Control(pDX, IDC_CAPTIONS_LIST, m_CaptionsList);
 	DDX_Control(pDX, IDC_TARGET_COMBO, m_TargetCombo);
 	DDX_Control(pDX, IDC_ATTRIBUTES_LIST, m_AttributesList);
@@ -80,7 +81,8 @@ BOOL CAttributeLinkTableDialog::OnInitDialog()
 	CString target_id;
 	m_TargetCombo.GetWindowText(target_id);
 
-	for (int a=0; a < links->length; a++)
+	int a;
+	for (a=0; a < links->length; a++)
 	{
 		IXMLDOMElementPtr link = links->item[a];
 
@@ -105,6 +107,24 @@ BOOL CAttributeLinkTableDialog::OnInitDialog()
 
 		
 		link.Release();
+	}
+
+
+	//napln style combo
+
+	CElementManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
+	int item = CB_ERR;
+	for (a=0; a < m.getAttrLinkTableStylesCount(); a++)
+	{
+		item = m_StyleCombo.AddString(m.getAttrLinkTableStyleName(a));
+	}
+
+	//vyber style
+	int sel = m_StyleCombo.SelectString(-1, (_bstr_t) m_edited_element->getAttribute("style"));
+	//vyber se nezdaril => kdyz exituje nejaky styl vyber prvni
+	if ((sel == CB_ERR) && (item != CB_ERR))
+	{
+		m_StyleCombo.SelectString(-1, m.getAttrLinkTableStyleName(0));
 	}
 
 	
@@ -277,6 +297,11 @@ void CAttributeLinkTableDialog::OnOK()
 	}
 
 	link_elenet.Release();
+
+	//uloz style
+	CString style_str;
+	m_StyleCombo.GetWindowText(style_str);
+	m_edited_element->setAttribute("style", (LPCTSTR) style_str);
 	
 	CDialog::OnOK();
 }

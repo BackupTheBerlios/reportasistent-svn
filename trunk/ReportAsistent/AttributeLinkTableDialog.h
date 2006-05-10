@@ -22,6 +22,7 @@ public:
 // Dialog Data
 	//{{AFX_DATA(CAttributeLinkTableDialog)
 	enum { IDD = IDD_ATTRIBUTE_LINK_TABLE_DIALOG };
+	CComboBox	m_StyleCombo;
 	CListCtrl	m_CaptionsList;
 	CComboBox	m_TargetCombo;
 	CListCtrl	m_AttributesList;

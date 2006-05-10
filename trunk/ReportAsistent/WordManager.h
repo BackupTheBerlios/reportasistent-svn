@@ -13,6 +13,7 @@
 class CStringTable
 {
 public:
+	int FindString(LPCTSTR str);
 	int virtual getCount() = NULL;
 	LPCTSTR virtual getItem(int index) = NULL;
 };

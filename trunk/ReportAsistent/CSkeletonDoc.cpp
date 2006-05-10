@@ -9,7 +9,6 @@
 #include "SkeletonView.h"
 #include "GenerateDialog.h"
 #include "simplefilterdialog.h"
-#include "APTransform.h"
 #include "ElementTextDialog.h"
 #include "ElementParagraphDialog.h"
 #include "ElementChapterDialog.h"
@@ -782,7 +781,7 @@ void CSkeletonDoc::TransformActiveElements(IXMLDOMElementPtr & element)
 
 	if (m.isElementActive(m.IdentifyElement(element)))
 	{
-		TransformActiveElement(element);
+		m.TransformActiveElement(element);
 	}
 	else
 	{
@@ -800,25 +799,6 @@ void CSkeletonDoc::TransformActiveElements(IXMLDOMElementPtr & element)
 	
 }
 
-void CSkeletonDoc::TransformActiveElement(IXMLDOMElementPtr & element)
-{
-
-	CAElTransform tr(element);
-	tr.DoAllTransnformations();
-
-
-//honza: ladici - lze pouzit pro generovani preview
-/***
-	IXMLDOMElementPtr klon = element->cloneNode(VARIANT_TRUE);
-
-	CAPTransform tr(klon, * this);
-
-	AfxMessageBox(tr.DoAllTransnformations()->xml);
-
-	klon.Release();
-
-/***/
-}
 
 //DEL void CSkeletonDoc::OnMmdelete() 
 //DEL {
@@ -1000,46 +980,6 @@ BOOL CSkeletonDoc::IsDescendantOfElement(IXMLDOMElementPtr pDescendantXMLElm, IX
 
 }
 
-void CSkeletonDoc::TransformAttrLink(IXMLDOMElementPtr &element)
-{
-	CElementManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
-
-	IXMLDOMElementPtr txt_elem = m.CreateEmptyElement(ELID_TEXT);
-	
-	//nastav style
-	_variant_t vt_style = element->getAttribute("style");
-	if (vt_style.vt != VT_NULL)
-	{
-		IXMLDOMAttributePtr style_attr = element->ownerDocument->createAttribute("style");
-		style_attr->text = (_bstr_t) vt_style;
-		txt_elem->setAttributeNode(style_attr);
-		style_attr.Release();
-	}
-
-	
-	//ziskej hodnotu attribut
-	CString query;
-	query.Format("id(\"%s\")/attributes/element_attributes/attribute[@name = \"%s\"]/@value",
-		(LPCTSTR) (_bstr_t) element->getAttribute("target"),
-		(LPCTSTR) (_bstr_t) element->getAttribute("attr_name"));
-
-
-	IXMLDOMNodePtr value_node = element->ownerDocument->selectSingleNode((LPCTSTR) query);
-
-	if (value_node != NULL)
-	{
-		txt_elem->text = value_node->text;
-		value_node.Release();
-	}
-
-	element->parentNode->replaceChild(txt_elem, element);
-}
-
-void CSkeletonDoc::TransformAttrLinkTable(IXMLDOMElementPtr &element)
-{
-
-}
-
 //rekurzivni
 void CSkeletonDoc::TransformAttrLinks(IXMLDOMElementPtr &element)
 {
@@ -1052,11 +992,11 @@ void CSkeletonDoc::TransformAttrLinks(IXMLDOMElementPtr &element)
 	switch (el_id)
 	{
 	case ELID_ATTR_LINK:
-		TransformAttrLink(element);
+		m.TransformAttrLink(element);
 		break;
 
 	case ELID_ATTR_LINK_TABLE:
-		TransformAttrLinkTable(element);
+		m.TransformAttrLinkTable(element);
 		break;
 
 	default:

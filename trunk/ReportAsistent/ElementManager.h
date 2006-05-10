@@ -54,6 +54,10 @@ private:
 
 
 public:
+	IXMLDOMDocument * getAttrLinkTableStyleDomByName(LPCTSTR style_name);
+	IXMLDOMDocument * getAttrLinkTableStyleDom(int index);
+	LPCTSTR getAttrLinkTableStyleName(int index);
+	int getAttrLinkTableStylesCount();
 	BOOL CanInsertBefore(IXMLDOMElementPtr &pInserted, IXMLDOMElementPtr &pTarget);
 	elId_t getFirstActiveElementID();
 	elId_t getFirstStaticElementID();
@@ -66,6 +70,11 @@ public:
 	BOOL isElementActive(elId_t elementId);
 	IXMLDOMElementPtr CreateEmptyElement(CElementManager::elId_t id);
 	elId_t ElementIdFromName(LPCTSTR el_name);
+
+	void TransformActiveElement(IXMLDOMElementPtr & element);
+	void TransformAttrLinkTable(IXMLDOMElementPtr & element);
+	void TransformAttrLink(IXMLDOMElementPtr & element);
+
 
 
 	LPCTSTR getElementName(elId_t elementID);	//vrati jemno elementu s id elementID

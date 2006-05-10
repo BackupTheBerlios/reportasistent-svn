@@ -6,6 +6,8 @@
 #include "ReportAsistent.h"
 #include "ElementManager.h"
 #include "CSkeletonDoc.h"
+#include "APTransform.h"
+
 
 #ifdef _DEBUG
 #undef THIS_FILE
@@ -37,9 +39,6 @@ LPCTSTR CElementManager::static_elements_names[] =
 	"text",
 	"paragraph",
 	"chapter", 
-	//OSTATNI
-
-//	"hyp_4ft"
 	"include",
 	"attr_link",
 	"attr_link_table"
@@ -498,3 +497,107 @@ void CElementManager::LoadAttrLinkTableStyles(LPCTSTR directory_path)
 
 	finder.Close();
 }
+
+int CElementManager::getAttrLinkTableStylesCount()
+{
+	return attr_link_table_styles.getCount();
+}
+
+LPCTSTR CElementManager::getAttrLinkTableStyleName(int index)
+{
+	ASSERT(index >= 0);
+	ASSERT(index < getAttrLinkTableStylesCount());
+
+	return attr_link_table_styles.getItem(index);
+}
+
+IXMLDOMDocument * CElementManager::getAttrLinkTableStyleDom(int index)
+{
+	ASSERT(index >= 0);
+	ASSERT(index < getAttrLinkTableStylesCount());
+	ASSERT(index < attr_link_table_doms.GetSize());
+
+	return attr_link_table_doms.GetAt(index);
+}
+
+IXMLDOMDocument * CElementManager::getAttrLinkTableStyleDomByName(LPCTSTR style_name)
+{
+	int style_index = attr_link_table_styles.FindString(style_name);
+	if (style_index != -1)
+	{
+		return getAttrLinkTableStyleDom(style_index);
+	}
+
+	return NULL;
+}
+
+void CElementManager::TransformActiveElement(IXMLDOMElementPtr & element)
+{
+
+	CAElTransform tr(element);
+	tr.DoAllTransnformations();
+}
+
+
+void CElementManager::TransformAttrLinkTable(IXMLDOMElementPtr &element)
+{
+	IXMLDOMDocumentPtr transformed_table;
+	transformed_table.CreateInstance(_T("Msxml2.DOMDocument"));	
+	transformed_table->async = VARIANT_FALSE;
+	
+	transformed_table->loadXML(
+		element->transformNode(getAttrLinkTableStyleDomByName((_bstr_t) element->getAttribute("style"))));
+
+	//jak s lementy co nemaji rodice - budou takove?
+	ASSERT(element->parentNode != NULL);
+	
+	element->parentNode->replaceChild(transformed_table->documentElement, element);
+	
+	transformed_table.Release();
+
+}
+
+
+void CElementManager::TransformAttrLink(IXMLDOMElementPtr &element)
+{
+
+	IXMLDOMElementPtr txt_elem = CreateEmptyElement(ELID_TEXT);
+	
+	//nastav style
+	_variant_t vt_style = element->getAttribute("style");
+	if (vt_style.vt != VT_NULL)
+	{
+		IXMLDOMAttributePtr style_attr = element->ownerDocument->createAttribute("style");
+		style_attr->text = (_bstr_t) vt_style;
+		txt_elem->setAttributeNode(style_attr);
+		style_attr.Release();
+	}
+
+	
+	//ziskej hodnotu attribut
+	CString query;
+	query.Format("id(\"%s\")/attributes/element_attributes/attribute[@name = \"%s\"]/@value",
+		(LPCTSTR) (_bstr_t) element->getAttribute("target"),
+		(LPCTSTR) (_bstr_t) element->getAttribute("attr_name"));
+
+
+	IXMLDOMNodePtr value_node = element->ownerDocument->selectSingleNode((LPCTSTR) query);
+
+	if (value_node != NULL)
+	{
+		txt_elem->text = value_node->text;
+		value_node.Release();
+	}
+
+	element->parentNode->replaceChild(txt_elem, element);
+}
+
+
+
+
+
+
+
+
+
+
