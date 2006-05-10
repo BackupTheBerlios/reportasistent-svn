@@ -52,12 +52,13 @@
 
 <xsl:text disable-output-escaping="yes">
 		</xsl:text>
-		<attribute name="categories"/>
+		<attribute name="missing_values"/>
+		-->
 <xsl:text disable-output-escaping="yes">
 		</xsl:text>
-		<attribute name="missing_values"/>
+		<attribute name="structure"/>
 
--->
+
 
 <xsl:text disable-output-escaping="yes">
 	</xsl:text>				
@@ -95,14 +96,14 @@
 		&lt;value </xsl:text>
 		<xsl:apply-templates select="@*" mode="values"/>
 
-		<xsl:text disable-output-escaping="yes">categories="</xsl:text>
-		<xsl:apply-templates select="ctgr" mode="values"/>
+		<xsl:text disable-output-escaping="yes">structure="</xsl:text>
+		<xsl:apply-templates select="sub_bool_cedent" mode="values"/>
 		<xsl:text disable-output-escaping="yes">" </xsl:text>
-		
+		<!--
 		<xsl:text disable-output-escaping="yes">missing_values="</xsl:text>
 		<xsl:apply-templates select="missing_value" mode="values"/>
 		<xsl:text disable-output-escaping="yes">"</xsl:text>
-
+        -->
 		<xsl:text disable-output-escaping="yes">/&gt;</xsl:text>
 
 
@@ -111,23 +112,49 @@
 
 
 	<!-- naplni hodnotu pro categories -->
-	<xsl:template match="ctgr" mode="values">
+	<xsl:template match="sub_bool_cedent" mode="values">
 		<xsl:if test="position()!=1">
 			<xsl:text disable-output-escaping="no">; </xsl:text>
 		</xsl:if>
 
+		<xsl:text disable-output-escaping="no">(name: </xsl:text>
 		<xsl:value-of select="@name"/>
+		<xsl:text disable-output-escaping="no">; literal_cnt: </xsl:text>
+		<xsl:value-of select="@literal_cnt"/>
+		<xsl:text disable-output-escaping="no">; length: </xsl:text>
+		<xsl:value-of select="@length"/>
+		<xsl:text disable-output-escaping="no">; literals: {</xsl:text>
+		
+		<xsl:apply-templates select="literal" mode="values"/>
+		<xsl:text disable-output-escaping="no">}</xsl:text>
+		<xsl:text disable-output-escaping="no">)</xsl:text>
 	</xsl:template>
 
 
 
-	<!-- naplni hodnotu pro missing_values -->
-	<xsl:template match="missing_value" mode="values">
+	
+	<xsl:template match="literal" mode="values">
 		<xsl:if test="position()!=1">
 			<xsl:text disable-output-escaping="no">; </xsl:text>
 		</xsl:if>
-
-		<xsl:value-of select="@name"/>
+		
+		<xsl:text disable-output-escaping="no">(underlying attribute: </xsl:text>
+		<xsl:value-of select="@underlying_attribute"/>
+		<xsl:text disable-output-escaping="no">; category_cnt: </xsl:text>
+		<xsl:value-of select="@category_cnt"/>
+		<xsl:text disable-output-escaping="no">; missing type: </xsl:text>
+		<xsl:value-of select="@missing_type"/>
+		<xsl:text disable-output-escaping="no">; coefficient type: </xsl:text>
+		<xsl:value-of select="@coefficient_type"/>
+		<xsl:text disable-output-escaping="no">; length: </xsl:text>
+		<xsl:value-of select="@length"/>
+		<xsl:text disable-output-escaping="no">; gace: </xsl:text>
+		<xsl:value-of select="@gace"/>
+		<xsl:text disable-output-escaping="no">; literal type: </xsl:text>
+		<xsl:value-of select="@literal_type"/>
+		<xsl:text disable-output-escaping="no">; equivalence class: </xsl:text>
+		<xsl:value-of select="@equivalence_class"/>
+		<xsl:text disable-output-escaping="no">)</xsl:text>
 	</xsl:template>
 
 

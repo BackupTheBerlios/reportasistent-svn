@@ -362,7 +362,17 @@ CString fLMBoolCedent (void* hSource)
 
 	AfxMessageBox(buf);
 */
-
+	for (i = 0; i < list.GetSize (); i++)
+	{
+		for (int j = 0; j < list.GetAt (i)->sub_cedents_list.GetSize (); j++)
+		{
+			delete (list.GetAt (i)->sub_cedents_list.GetAt (j));
+		}
+		list.GetAt (i)->sub_cedents_list.RemoveAll ();
+		delete (list.GetAt (i));
+	}
+	list.RemoveAll ();
+	
 	return buf;
 }
 
@@ -462,6 +472,12 @@ CString fLMAttribute(void* hSource)
 
 	AfxMessageBox(buf);
 */
+	for (i = 0; i < list.GetSize (); i++)
+	{
+		delete (list.GetAt (i));
+	}
+	list.RemoveAll ();
+	
 	return buf;
 }
 
@@ -677,6 +693,12 @@ CString fLMCategory(void* hSource)
 
 	AfxMessageBox(buf);
 */
+	for (i = 0; i < list.GetSize (); i++)
+	{
+		delete (list.GetAt (i));
+	}
+	list.RemoveAll ();
+
 	return buf;
 }
 
@@ -825,6 +847,12 @@ CString fLM4fthyp(void * hSource)
 	fprintf (f, "%s", buf);
 	fclose (f);
 */
+	for (i = 0; i < list.GetSize (); i++)
+	{
+		delete (list.GetAt (i));
+	}
+	list.RemoveAll ();
+
 	return buf;
 }
 
