@@ -692,8 +692,14 @@ void CSkeletonDoc::Generate()
 //	doc_element->save("../out.xml");
 
 	
+//generovani do Wordu
+
+	CWordManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->WordManager;
+	m.GenerateXMLString(doc_element->xml);
+
 	
-/*****///generovani do Wordu	
+
+/***** generovani do Wordu	-stara verze
 
 	HRESULT hr;
 	
@@ -988,6 +994,9 @@ void CSkeletonDoc::TransformAttrLinks(IXMLDOMElementPtr &element)
 	CElementManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
 
 	CElementManager::elId_t el_id = m.IdentifyElement(element);
+
+	//linky uvnitr aktivnich elementu se netransformuji
+	if (m.isElementActive(el_id)) return;
 
 	switch (el_id)
 	{

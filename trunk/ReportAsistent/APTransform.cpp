@@ -130,14 +130,43 @@ void CAElTransform::ProcessSimpleFlter(IXMLDOMNodePtr & destination_parent)
 //a vysledek upozi do destination_parent 
 void CAElTransform::ProcessAllTransformations(IXMLDOMNodePtr & target, IXMLDOMNodePtr & destination_parent)
 {
+	CElementManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
+
 	IXMLDOMNodeListPtr tranformations; 
 	tranformations = m_active_element->selectNodes("output/transformation");
 	
 	for (int a=0; a<tranformations->length; a++)
 	{
 		//sem prijde rozlyseni na attr_link_table
+
+		IXMLDOMElementPtr el_transformation = tranformations->item[a];
+
+		CString transformation_type_str = (LPCTSTR) (_bstr_t) el_transformation->getAttribute("type");
+
+		if (transformation_type_str == "simple")
+		{
+			ProcessSingleTransformation(target, destination_parent, el_transformation);		
+		}
+		else
+		{
+			ASSERT(transformation_type_str == "attr_link_table");
+
+			FillElementAttributes(target);
+
+			IXMLDOMDocumentPtr tr_table = m.TransformAttrLinkTableNoReplaceSource(
+					(IXMLDOMElementPtr) m_active_element->selectSingleNode("attr_link_table"));
+
+			if (tr_table != NULL)
+			{
+				destination_parent->appendChild(tr_table->documentElement);
+				tr_table.Release();
+			}
+			
+
+		}
+
+		el_transformation.Release();
 		
-		ProcessSingleTransformation(target, destination_parent, (IXMLDOMElementPtr) tranformations->item[a]);		
 	}
 
 }
@@ -195,9 +224,9 @@ BOOL CAElTransform::ProcessSimpleFlter(CFilterProcessor & processor, LPARAM user
 
 	BOOL ret = FALSE;
 
+	int order = 0;
 	for (int a=0; a < selected_items->length; a++)
 	{
-		int order = 0;
 		
 		IXMLDOMElementPtr item = selected_items->item[a];
 

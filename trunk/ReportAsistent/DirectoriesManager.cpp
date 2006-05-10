@@ -49,7 +49,7 @@ CString CDirectoriesManager::getPluginsDirectory()
 
 CString CDirectoriesManager::getSourcesConfigFilePath()
 {
-	return application_root_path + "\\ReportAsistent\\Config\\sources.xml";
+	return application_root_path + "\\ReportAsistent\\ConfigDir\\sources.xml";
 }
 
 CString CDirectoriesManager::getElementsDirectory()

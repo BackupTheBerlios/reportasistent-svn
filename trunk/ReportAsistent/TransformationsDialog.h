@@ -35,6 +35,7 @@ public:
 
 // Implementation
 protected:
+	void CheckAndRepareAttrLinkTable();
 
 	// Generated message map functions
 	//{{AFX_MSG(CTransformationsDialog)

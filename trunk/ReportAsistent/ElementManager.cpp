@@ -8,6 +8,8 @@
 #include "CSkeletonDoc.h"
 #include "APTransform.h"
 
+#pragma warning( disable : 4786 )
+
 
 #ifdef _DEBUG
 #undef THIS_FILE
@@ -541,20 +543,16 @@ void CElementManager::TransformActiveElement(IXMLDOMElementPtr & element)
 
 void CElementManager::TransformAttrLinkTable(IXMLDOMElementPtr &element)
 {
-	IXMLDOMDocumentPtr transformed_table;
-	transformed_table.CreateInstance(_T("Msxml2.DOMDocument"));	
-	transformed_table->async = VARIANT_FALSE;
-	
-	transformed_table->loadXML(
-		element->transformNode(getAttrLinkTableStyleDomByName((_bstr_t) element->getAttribute("style"))));
+	IXMLDOMDocumentPtr transformed_table = TransformAttrLinkTableNoReplaceSource(element);
 
+	if (transformed_table == NULL) return;
+	
 	//jak s lementy co nemaji rodice - budou takove?
 	ASSERT(element->parentNode != NULL);
 	
 	element->parentNode->replaceChild(transformed_table->documentElement, element);
 	
 	transformed_table.Release();
-
 }
 
 
@@ -592,12 +590,19 @@ void CElementManager::TransformAttrLink(IXMLDOMElementPtr &element)
 	element->parentNode->replaceChild(txt_elem, element);
 }
 
+IXMLDOMDocumentPtr CElementManager::TransformAttrLinkTableNoReplaceSource(IXMLDOMElementPtr &element)
+{
+	CString target_str = (LPCTSTR) (_bstr_t) element->getAttribute("target");
+	CString style_str = (LPCTSTR) (_bstr_t) element->getAttribute("style");
 
+	if ((target_str.GetLength() == 0) || (style_str.GetLength() == 0)) return NULL;
 
+	IXMLDOMDocumentPtr transformed_table;
+	transformed_table.CreateInstance(_T("Msxml2.DOMDocument"));	
+	transformed_table->async = VARIANT_FALSE;
+	
+	transformed_table->loadXML(
+		element->transformNode(getAttrLinkTableStyleDomByName(style_str)));
 
-
-
-
-
-
-
+	return transformed_table;
+}

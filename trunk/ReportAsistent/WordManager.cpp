@@ -159,6 +159,7 @@ BOOL CWordManager::InitWordLoader()
 		BOOL ret = CreateProcess(m.getLMRA_WB_WordLoaderPath(), " register", NULL, NULL, FALSE, NORMAL_PRIORITY_CLASS, NULL, NULL, & si, & pi);
 		if (! ret) 
 		{
+			AfxMessageBox(IDS_WB_WORD_LOADER_NOT_REGISTRED);
 			return FALSE;
 		}
 
@@ -167,11 +168,13 @@ BOOL CWordManager::InitWordLoader()
 		DWORD wait_ret= WaitForSingleObject(pi.hProcess, 5000);
  		CloseHandle(pi.hProcess);
 
-		if (wait_ret != WAIT_OBJECT_0) return FALSE;
+		if (wait_ret != WAIT_OBJECT_0)
+		{
+			AfxMessageBox(IDS_WB_WORD_LOADER_NOT_REGISTRED);
+			return FALSE;
+		}
 	
 
-		
-		
 		hr = m_WordLoader.CreateInstance(CLSID_LMRA_XML_WordLoader);
 		if (S_OK != hr)
 		{
@@ -254,4 +257,14 @@ int CStringTable::FindString(LPCTSTR str)
 	}
 
 	return -1;
+}
+
+void CWordManager::GenerateXMLString(_bstr_t XML_str)
+{
+	if (! isInit()) 
+	{
+		if (! InitWordLoader()) return;
+	}
+
+	m_WordLoader->LoadFromString(XML_str);
 }

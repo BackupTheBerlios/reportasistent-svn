@@ -9,6 +9,7 @@
 #pragma once
 #endif // _MSC_VER > 1000
 
+#pragma warning( disable : 4786 )
 
 #include <afxtempl.h>
 #include "AElInfo.h"
@@ -54,6 +55,7 @@ private:
 
 
 public:
+	IXMLDOMDocumentPtr TransformAttrLinkTableNoReplaceSource(IXMLDOMElementPtr & element);
 	IXMLDOMDocument * getAttrLinkTableStyleDomByName(LPCTSTR style_name);
 	IXMLDOMDocument * getAttrLinkTableStyleDom(int index);
 	LPCTSTR getAttrLinkTableStyleName(int index);

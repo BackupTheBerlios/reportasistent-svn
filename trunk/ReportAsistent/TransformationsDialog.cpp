@@ -109,6 +109,10 @@ BOOL CTransformationsDialog::SaveAll()
 {
 	ASSERT(m_active_element != NULL);
 
+
+	CheckAndRepareAttrLinkTable();
+
+
 	IXMLDOMNodePtr output_node = m_active_element->selectSingleNode("output");
 
 	//vymaze soucasne transormace
@@ -217,7 +221,29 @@ void CTransformationsDialog::OnMoveDownButton()
 	
 }
 
+
 void CTransformationsDialog::OnConfigureAttrLinkTableButton() 
+{
+	CheckAndRepareAttrLinkTable();
+
+	CAttributeLinkTableDialog dlg(
+		(IXMLDOMElementPtr) m_active_element->selectSingleNode("attr_link_table"),
+		this, FALSE);
+
+	dlg.DoModal();
+}
+
+void CTransformationsDialog::OnAddAttrLinkTableButton() 
+{
+	CheckAndRepareAttrLinkTable();
+
+	if (LB_ERR == m_SelectedList.FindString(-1, ATTR_TL_STR))
+	{
+		m_SelectedList.AddString(ATTR_TL_STR);	
+	}
+}
+
+void CTransformationsDialog::CheckAndRepareAttrLinkTable()
 {
 	IXMLDOMElementPtr attr_lt = m_active_element->selectSingleNode("attr_link_table");
 	
@@ -231,20 +257,6 @@ void CTransformationsDialog::OnConfigureAttrLinkTableButton()
 
 	//nastav id stejne jako m_active_element
 	attr_lt->setAttribute("target", m_active_element->getAttribute("id"));
-
 	
-	CAttributeLinkTableDialog dlg(attr_lt, AfxGetMainWnd(), FALSE);
-
-	dlg.DoModal();
-
 	attr_lt.Release();
-}
-
-void CTransformationsDialog::OnAddAttrLinkTableButton() 
-{
-	
-	if (LB_ERR == m_SelectedList.FindString(-1, ATTR_TL_STR))
-	{
-		m_SelectedList.AddString(ATTR_TL_STR);	
-	}
 }

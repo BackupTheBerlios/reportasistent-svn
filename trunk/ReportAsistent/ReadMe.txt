@@ -26,25 +26,31 @@ dedek TODO:
 
 v void CAElTransform::ProcessAllTransformations(IXMLDOMNodePtr & target, IXMLDOMNodePtr & destination_parent)
 pridat transformaci attr_link_table
+-hotovo
 
 
 opravit ukoncovani wordu uvnitr BV-WL
 -pokud se zavola jen init tak pri ukocovani spadne asi
+-hotovo
 
 ?styly textu: combobox editovatelny a nove styly se vytvori v novem do dokumentu?
 -asi ne, je to blbost
 
 pouzivat CWordManager pri generovani
+-hotovo
 
 otestovat destruktor ~CStringTableImpl()
 -jestli se nevola z ~CStringTable() proste kdyz se pouzije nektra z funkci getWordParagraphStyles
+-hotovo nevola se
 
 pridat attr_link_table mezi vizualizace
+-hotovo
 
 pridat refresh atributu aktivniho prvku na OnOK dialogu aktivniho prvku
 -ted se atributy aktualizuji asi jen pri otevreni dialogu aktivniho prvku
 
 generovani attr_link_* atributu
+-hotovo
 
 pouzivat default source!
 

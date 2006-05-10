@@ -37,6 +37,7 @@ public:
 class CWordManager  
 {
 public:
+	void GenerateXMLString(_bstr_t XML_str);
 	BOOL InitWordLoader();
 	CWordManager();
 	virtual ~CWordManager();
