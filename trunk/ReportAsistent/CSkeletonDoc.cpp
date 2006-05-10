@@ -82,7 +82,11 @@ BOOL CSkeletonDoc::OnNewDocument()
 
 	//docasne reseni:
 	CDirectoriesManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->DirectoriesManager;
+#ifdef _DEBUG
 	m_pXMLDom->load((LPCTSTR) (m.getXMLFilesDirectory() + "/prazdny.xml"));
+#else	
+	m_pXMLDom->load((LPCTSTR) (m.getXMLFilesDirectory() + "/reduk2.xml"));
+#endif
 	if (m_pXMLDom->parseError->errorCode != S_OK)
 	{
 			AfxMessageBox(m_pXMLDom->parseError->reason);
@@ -769,10 +773,10 @@ void CSkeletonDoc::Generate()
 void CSkeletonDoc::GenerTransform1(IXMLDOMElementPtr & doc)
 {
 	TransformActiveElements(doc);
-	AfxMessageBox(doc->xml);
+//	AfxMessageBox(doc->xml);
 	
 	TransformAttrLinks(doc);
-	AfxMessageBox(doc->xml);
+//	AfxMessageBox(doc->xml);
 }
 
 

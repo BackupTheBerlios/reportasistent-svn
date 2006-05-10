@@ -24,39 +24,24 @@ CGeneralManager * m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager;
 
 dedek TODO:
 
-v void CAElTransform::ProcessAllTransformations(IXMLDOMNodePtr & target, IXMLDOMNodePtr & destination_parent)
-pridat transformaci attr_link_table
--hotovo
-
-
-opravit ukoncovani wordu uvnitr BV-WL
--pokud se zavola jen init tak pri ukocovani spadne asi
--hotovo
-
 ?styly textu: combobox editovatelny a nove styly se vytvori v novem do dokumentu?
 -asi ne, je to blbost
-
-pouzivat CWordManager pri generovani
--hotovo
-
-otestovat destruktor ~CStringTableImpl()
--jestli se nevola z ~CStringTable() proste kdyz se pouzije nektra z funkci getWordParagraphStyles
--hotovo nevola se
-
-pridat attr_link_table mezi vizualizace
--hotovo
 
 pridat refresh atributu aktivniho prvku na OnOK dialogu aktivniho prvku
 -ted se atributy aktualizuji asi jen pri otevreni dialogu aktivniho prvku
 
-generovani attr_link_* atributu
--hotovo
+chtelo by to nejak upozornovat na to, ze aplikace pracuje, napr. menit kurzor na presipaci hodiny
+-pri nacitani ze zdroje
+-pri nacitani word stylu
+-pri generovani
+-pri ???
 
-pouzivat default source!
+
+
 
 DacourcesManager - 	pridat funci co zjisti podporovane prvky
-PlugsTab[0].SockInterface->hGetAPList
-
+-hotovo
+-nemelo by se prejmenovat APID?
 
 
 
@@ -107,6 +92,34 @@ je tam videt jak snadno se da zjistit, jestli je dane id uz pouzite..
 
 
 hotovo:
+
+pouzivat default source!
+-hotovo
+
+generovani attr_link_* atributu
+-hotovo
+
+pouzivat CWordManager pri generovani
+-hotovo
+
+otestovat destruktor ~CStringTableImpl()
+-jestli se nevola z ~CStringTable() proste kdyz se pouzije nektra z funkci getWordParagraphStyles
+-hotovo nevola se
+
+pridat attr_link_table mezi vizualizace
+-hotovo
+
+
+v void CAElTransform::ProcessAllTransformations(IXMLDOMNodePtr & target, IXMLDOMNodePtr & destination_parent)
+pridat transformaci attr_link_table
+-hotovo
+
+
+opravit ukoncovani wordu uvnitr BV-WL
+-pokud se zavola jen init tak pri ukocovani spadne asi
+-hotovo
+
+
 attr_link_table
 
 predelat na detekci chyb / navratovou hodnotu uvnitr call backu CAElTransform::ProcessSimpleFlter

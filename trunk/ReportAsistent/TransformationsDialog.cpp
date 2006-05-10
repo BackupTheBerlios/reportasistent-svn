@@ -225,6 +225,7 @@ void CTransformationsDialog::OnMoveDownButton()
 void CTransformationsDialog::OnConfigureAttrLinkTableButton() 
 {
 	CheckAndRepareAttrLinkTable();
+	CheckAndRepareAttrLinkTable();
 
 	CAttributeLinkTableDialog dlg(
 		(IXMLDOMElementPtr) m_active_element->selectSingleNode("attr_link_table"),

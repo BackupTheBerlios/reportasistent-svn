@@ -46,8 +46,9 @@ void CAttributeLinkDialogBase::InitBaseDialog(CListCtrl & AttributesList, CCombo
 
 void CAttributeLinkDialogBase::FillTargets(CComboBox & TargetCombo)
 {
-	
+
 	IXMLDOMNodeListPtr el_list = m_edited_element->ownerDocument->selectNodes("//active_element/@id");
+//	IXMLDOMNodeListPtr el_list = m_edited_element->selectNodes("//active_element/@id");
 
 	for (int a=0; a < el_list->length; a++)
 	{
@@ -94,7 +95,7 @@ void CAttributeLinkDialogBase::FillAttributesList(CListCtrl & AttributesList, LP
 	CString query;
 	query.Format("id(\"%s\")/attributes/element_attributes/attribute", target_id);
 
-	IXMLDOMSelectionPtr sel = m_edited_element->ownerDocument->selectNodes((LPCTSTR) query);
+	IXMLDOMSelectionPtr sel = (IXMLDOMSelectionPtr) m_edited_element->ownerDocument->selectNodes((LPCTSTR) query);
 
 	for (int a=0; a < sel->length; a++)
 	{

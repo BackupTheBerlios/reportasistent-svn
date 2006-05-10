@@ -73,25 +73,29 @@ CElementManager::elId_t CElementManager::IdentifyElement(IXMLDOMElementPtr & ele
 {
 	CString baseName = (BSTR) element->baseName;
 
-
-	//zkusime porovnat jmeno tagu s nami znamymi jmeny
-	for (int a=0; a <= getLastElementId(); a++)
-	{
-		if (baseName == getElementName(a)) return a;
-	}
-	
-	
-	//zkusime porovnat parametr type s nami znamymi jmeny
+	//zkusime porovnat parametr type se jmeny aktivnich prvku
 	if (baseName == "active_element")
 	{
 		CString type_name = (BSTR) (_bstr_t) element->getAttribute("type");
 
 		for (int a=0; a <= getLastElementId(); a++)
 		{
+			if (! isElementActive(a)) continue;
+
 			if (type_name == getElementName(a)) return a;
 		}
+
+		return ELID_UNKNOWN;
 	}
 
+	//zkusime porovnat jmeno tagu se jmeny statickych prvku
+	for (int a=0; a <= getLastElementId(); a++)
+	{
+		if (isElementActive(a)) continue;
+		
+		if (baseName == getElementName(a)) return a;
+	}
+	
 	return ELID_UNKNOWN;
 }
 
@@ -252,16 +256,8 @@ BOOL CElementManager::CanInsertChildHere(IXMLDOMElementPtr &child, IXMLDOMElemen
 }
 
 
-//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
-//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
-//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
-//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
-//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
-//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
-//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
-//honza: velmi pracovni - prijde prepsat podle CDataSourceManageru a plugin manageru
-//ma vratit TRUE pokud zdroj podporuje tento typ aktivniho prvku
-BOOL CElementManager::ElementSupportedBySource(elId_t element_id, int source_index)
+//varti TRUE pokud zdroj podporuje tento typ aktivniho prvku
+BOOL CElementManager::isElementSupportedBySource(elId_t element_id, int source_index)
 {
 	CDataSourcesManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->DataSourcesManager;
 
@@ -269,8 +265,8 @@ BOOL CElementManager::ElementSupportedBySource(elId_t element_id, int source_ind
 	if (! isElementActive(element_id)) return FALSE;
 
 	if (! m.isSourceValid(source_index)) return FALSE;
-	
-	return TRUE;
+
+	return m.isElementSupportedByPlugin(m.getSourcePluginIndex(source_index), getElementName(element_id));
 }
 
 void CElementManager::LoadActiveElements(LPCTSTR elements_directory_path)
@@ -585,9 +581,13 @@ void CElementManager::TransformAttrLink(IXMLDOMElementPtr &element)
 	{
 		txt_elem->text = value_node->text;
 		value_node.Release();
+		element->parentNode->replaceChild(txt_elem, element);
+	}
+	else
+	{
+		element->parentNode->removeChild(element);
 	}
 
-	element->parentNode->replaceChild(txt_elem, element);
 }
 
 IXMLDOMDocumentPtr CElementManager::TransformAttrLinkTableNoReplaceSource(IXMLDOMElementPtr &element)

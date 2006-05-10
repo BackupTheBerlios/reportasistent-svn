@@ -118,6 +118,7 @@ private:
 	CArray<CSourceRec,CSourceRec> SourcesTab;	// tabulka zdroju
 
 public:
+	BOOL isElementSupportedByPlugin(int plugin_index, LPCTSTR element_name);
 	void setDefaultSource(public_source_id_t source);
 	public_source_id_t getDefaultSource();
 	BOOL isPluginValid(int plugin_index);
@@ -165,6 +166,9 @@ public:
 
 	// vrati PerzistentID prvku na pozici source_index v tabulce zdroju
 	persistent_id_t getSourcePersistentID(int source_index);
+
+	// vrati Plugin index (do tabulky zasuvek) prvku na pozici source_index v tabulce zdroju
+	int getSourcePluginIndex(int source_index);
 
 	// vrati PluginID prvku na pozici source_index v tabulce zdroju
 	plugin_id_t getSourcePlugin(int source_index);	

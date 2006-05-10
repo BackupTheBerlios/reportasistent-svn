@@ -67,7 +67,7 @@ public:
 	BOOL FillImageList(CImageList & img_list);
 	BOOL LoadElementIcon(elId_t element_id, CBitmap & icon);
 	CAElInfo * getActiveElementInfo(elId_t id);
-	BOOL ElementSupportedBySource(elId_t element_id, int source_index);
+	BOOL isElementSupportedBySource(elId_t element_id, int source_index);
 	BOOL CanInsertChildHere(IXMLDOMElementPtr & child, IXMLDOMElementPtr & parent);
 	BOOL isElementActive(elId_t elementId);
 	IXMLDOMElementPtr CreateEmptyElement(CElementManager::elId_t id);

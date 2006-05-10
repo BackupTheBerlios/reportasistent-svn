@@ -86,7 +86,7 @@ BOOL CSimpleFilterDialog::OnInitDialog()
 
 	for (int a=0; a< dm.getSourcesCount(); a++)
 	{
-		if (em.ElementSupportedBySource(em.IdentifyElement(m_active_element), a))
+		if (em.isElementSupportedBySource(em.IdentifyElement(m_active_element), a))
 		{
 			m_SourcesCombo.AddString(dm.getSourcePublicID(a));
 		}
@@ -95,7 +95,7 @@ BOOL CSimpleFilterDialog::OnInitDialog()
 
 
 	int sel = m_SourcesCombo.SelectString(-1, (_bstr_t) m_active_element->getAttribute("source"));
-	if (sel == CB_ERR) m_SourcesCombo.SelectString(-1, dm.getSourcePublicID(0));
+	if (sel == CB_ERR) m_SourcesCombo.SelectString(-1, dm.getDefaultSource());
 
 	OnSelchangeDataSourceCombo();
 	  
@@ -134,7 +134,6 @@ BOOL CSimpleFilterDialog::LoadSource(public_source_id_t sId)
 	BSTR s_out = m->DataSourcesManager.GetPluginOutput(sId, (_bstr_t) element_info->getElementName());
 	if (NULL == (BSTR) s_out) 
 	{
-		AfxMessageBox(IDS_SIMPLE_FILTER_FAILED_SOURCE_LOAD);
 		filter_doc.Release();
 		return FALSE;	
 	}
@@ -256,6 +255,8 @@ void CSimpleFilterDialog::OnSelchangeDataSourceCombo()
 {	
 	CString text;
 	m_SourcesCombo.GetWindowText(text);
+
+	if (text.GetLength() == 0) return;
 
 	if (LoadSource(text))
 	{

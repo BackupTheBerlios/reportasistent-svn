@@ -434,6 +434,16 @@ plugin_id_t CDataSourcesManager::getSourcePlugin(int source_index)
 	return Ret;
 }
 
+//dedek:
+int CDataSourcesManager::getSourcePluginIndex(int source_index)
+{
+	int Ret = -1;
+	if(SourcesTab.GetUpperBound() >= source_index  &&  source_index>=0)
+		Ret = SourcesTab[source_index].PluginIndex;
+
+	return Ret;
+}
+
 
 // getSourceHandle
 source_handle_t CDataSourcesManager::getSourceHandle(int source_index) 
@@ -829,4 +839,32 @@ public_source_id_t CDataSourcesManager::getDefaultSource()
 void CDataSourcesManager::setDefaultSource(public_source_id_t source)
 {
 	default_source = source;
+}
+
+//dedek:
+BOOL CDataSourcesManager::isElementSupportedByPlugin(int plugin_index, LPCTSTR element_name)
+{
+	ASSERT(plugin_index >= 0);
+	ASSERT(plugin_index < PlugsTab.GetSize());
+	
+	IXMLDOMDocumentPtr ael_list;
+	ael_list.CreateInstance(_T("Msxml2.DOMDocument"));
+	ael_list->async = VARIANT_FALSE; // default - true,
+
+	ael_list->loadXML(
+		PlugsTab[plugin_index].SockInterface->hGetAPList());
+
+	if (ael_list->parseError->errorCode == S_OK)
+	{
+		CString query_str;
+		query_str.Format("/LIST/APID[@NAME = \"%s\"]", element_name);
+
+		if (NULL != ael_list->selectSingleNode((LPCTSTR) query_str)) return TRUE;
+	}
+
+
+	
+
+	ael_list.Release();
+	return FALSE;
 }
