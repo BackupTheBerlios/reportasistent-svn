@@ -48,6 +48,7 @@ CSkeletonDoc::CSkeletonDoc() /*: m_SkeletonManager(pXMLDom)*/
 
 CSkeletonDoc::~CSkeletonDoc()
 {
+	if (m_pXMLDom != NULL) m_pXMLDom.Release();
 } 
 
 BOOL CSkeletonDoc::OnNewDocument()
@@ -58,21 +59,11 @@ BOOL CSkeletonDoc::OnNewDocument()
 	// TODO: add reinitialization code here
 	// (SDI documents will reuse this document)
 
-	HRESULT hr;
-
-	if (m_pXMLDom != NULL) m_pXMLDom.Release();
-
-	hr= m_pXMLDom.CreateInstance(_T("Msxml2.DOMDocument"));
-	if (FAILED(hr)) 
+	if (! InitAndClearXmlDom())
 	{
-		//mozna prepsat pomoci string table?
-		AfxGetMainWnd()->MessageBox("Failed to instantiate an XML DOM.", "error", MB_ICONERROR);
 		return FALSE;
 	}
 
-	m_pXMLDom->async = VARIANT_FALSE; // default - true,
-
-	
 	
 	//vytvor prazny report
 //	CGeneralManager * m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager;
@@ -82,20 +73,20 @@ BOOL CSkeletonDoc::OnNewDocument()
 
 	//docasne reseni:
 	CDirectoriesManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->DirectoriesManager;
+
+	//otevri "prazdny" dokument
+
 #ifdef _DEBUG
-	m_pXMLDom->load((LPCTSTR) (m.getXMLFilesDirectory() + "/prazdny.xml"));
+
+	//	m_pXMLDom->load((LPCTSTR) (m.getXMLFilesDirectory() + "/prazdny.xml"));
+	return OpenSkeletonFile(m.getXMLFilesDirectory() + "/prazdny.xml");
+
 #else	
-	m_pXMLDom->load((LPCTSTR) (m.getXMLFilesDirectory() + "/reduk2.xml"));
+
+	//	m_pXMLDom->load((LPCTSTR) (m.getXMLFilesDirectory() + "/reduk2.xml"));
+	return OpenSkeletonFile(m.getXMLFilesDirectory() + "/reduk2.xml");
+
 #endif
-	if (m_pXMLDom->parseError->errorCode != S_OK)
-	{
-			AfxMessageBox(m_pXMLDom->parseError->reason);
-			return FALSE;
-	}
-
-
-
-	return TRUE;
 }
 
 
@@ -140,6 +131,15 @@ BOOL CSkeletonDoc::OnOpenDocument(LPCTSTR lpszPathName)
 {
 	if (!CDocument::OnOpenDocument(lpszPathName))
 		return FALSE;
+
+	if (! InitAndClearXmlDom())
+	{
+		return FALSE;
+	}
+	
+	return OpenSkeletonFile(lpszPathName);
+
+/*
 	
 	HRESULT hr;
 
@@ -169,8 +169,7 @@ BOOL CSkeletonDoc::OnOpenDocument(LPCTSTR lpszPathName)
 		return FALSE;
 	}
 
-
-	return TRUE;
+*/
 }
 
 void CSkeletonDoc::FillTreeControl(CTreeCtrl  & tree_control)
@@ -876,7 +875,7 @@ void CSkeletonDoc::OnMmnewelement(UINT nMessageID)
 		}
 		else
 		{
-			//pokud uspene neprobhla editace, element se z kostry smaze
+			//pokud editace neprobhla uspene, element se z kostry smaze
 			new_element->parentNode->removeChild(new_element);
 		}
 
@@ -1043,3 +1042,81 @@ BOOL CSkeletonDoc::IsIDInTree(CString Id)
 
 }
 
+
+BOOL CSkeletonDoc::OpenSkeletonFile(LPCTSTR file_name)
+{
+	ASSERT (m_pXMLDom != NULL);
+	ASSERT (m_pXMLDom->documentElement != NULL);
+
+	BOOL ret = FALSE;
+
+	IXMLDOMDocumentPtr open_doc;
+	open_doc.CreateInstance(_T("Msxml2.DOMDocument"));
+	open_doc->async = VARIANT_FALSE;
+
+	if (VARIANT_TRUE == open_doc->load(file_name))
+	{
+		m_pXMLDom->replaceChild(open_doc->documentElement, m_pXMLDom->documentElement);
+
+		IXMLDOMDocument2Ptr validator = m_pXMLDom;
+		IXMLDOMParseErrorPtr err = validator->validate();
+
+		if (err->errorCode == S_OK)
+		{
+			ret = TRUE;
+		}
+		else
+		{
+			CString msg;
+			AfxFormatString2(msg, IDS_OPEN_FILE_FAILED, file_name, err->reason);
+			AfxMessageBox(msg);
+		}
+
+		err.Release();
+		validator.Release();
+
+	}
+	else
+	{
+		CString msg;
+		AfxFormatString2(msg, IDS_OPEN_FILE_FAILED, file_name, open_doc->parseError->reason);
+		AfxMessageBox(msg);
+	}
+
+	open_doc.Release();
+	return ret;
+}
+
+BOOL CSkeletonDoc::InitAndClearXmlDom()
+{
+	HRESULT hr;
+
+	if (m_pXMLDom != NULL) m_pXMLDom.Release();
+
+	hr= m_pXMLDom.CreateInstance(_T("Msxml2.DOMDocument"));
+	if (FAILED(hr)) 
+	{
+//		AfxGetMainWnd()->MessageBox("Failed to instantiate an XML DOM.", "error", MB_ICONERROR);
+		AfxMessageBox(IDS_FAILED_CREATE_XML_DOM_INSTANCE, MB_ICONERROR);
+		return FALSE;
+	}
+
+	m_pXMLDom->async = VARIANT_FALSE; // default - true,
+
+
+	
+	//nacti DTD
+	
+	CDirectoriesManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->DirectoriesManager;
+	
+	m_pXMLDom->load((LPCTSTR) (m.getXMLFilesDirectory() + "/skeleton_DTD.xml"));
+	if (m_pXMLDom->parseError->errorCode != S_OK)
+	{
+		CString msg;
+		AfxFormatString1(msg, IDS_CREATE_NEW_FILE_FAILED, m_pXMLDom->parseError->reason);
+		AfxMessageBox(msg);
+		return FALSE;
+	}
+
+	return TRUE;
+}

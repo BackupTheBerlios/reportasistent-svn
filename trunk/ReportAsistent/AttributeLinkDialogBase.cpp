@@ -20,10 +20,14 @@ static char THIS_FILE[]=__FILE__;
 
 CAttributeLinkDialogBase::CAttributeLinkDialogBase(IXMLDOMElementPtr & edited_element)
 	:m_edited_element(edited_element)
-{}
+{
+	ASSERT(edited_element != NULL);
+}
 
 void CAttributeLinkDialogBase::InitBaseDialog(CListCtrl & AttributesList, CComboBox & TargetCombo)
 {
+	ASSERT(m_edited_element != NULL);
+
 	FillTargets(TargetCombo);
 	if (CB_ERR == TargetCombo.SelectString(-1, (_bstr_t) m_edited_element->getAttribute("target")))
 	{

@@ -19,6 +19,8 @@ CAttributeLinkTableDialog::CAttributeLinkTableDialog(IXMLDOMElementPtr & edited_
 	: CDialog(CAttributeLinkTableDialog::IDD, pParent), CAttributeLinkDialogBase(edited_element),
 	m_bShowTarget(show_target)
 {
+	ASSERT(edited_element != NULL);
+	
 	//{{AFX_DATA_INIT(CAttributeLinkTableDialog)
 		// NOTE: the ClassWizard will add member initialization here
 	//}}AFX_DATA_INIT

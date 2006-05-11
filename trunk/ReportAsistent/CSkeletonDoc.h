@@ -73,6 +73,8 @@ private:
 	MSXML2::IXMLDOMDocumentPtr m_pXMLDom;
 
 protected:
+	BOOL InitAndClearXmlDom();
+	BOOL OpenSkeletonFile(LPCTSTR file_name);
 	void TransformAttrLinks(IXMLDOMElementPtr & element);
 	static CElementManager::elId_t ElementIdFromCommandId(UINT command);
 	static LPARAM CreateItemData(IXMLDOMElementPtr & element);

@@ -1,114 +1,5 @@
 <?xml version="1.0" encoding="windows-1250"?>
-<!DOCTYPE report [
 
-<!ELEMENT report ( chapter | include )* >
-<!ATTLIST report title CDATA #IMPLIED >
-<!ATTLIST report subtitle CDATA #IMPLIED >
-<!ATTLIST report author CDATA #IMPLIED >
-<!ATTLIST report id ID #REQUIRED >
-
-<!ELEMENT chapter ( (paragraph | include | active_element | attr_link_table)*, chapter* ) > <!--nejprve texty, pak vnorene kapitoly -->
-<!ATTLIST chapter title CDATA #REQUIRED >
-<!ATTLIST chapter id ID #REQUIRED >
-
-<!ELEMENT active_element ( attributes, filter, output )>
-<!ATTLIST active_element type CDATA #REQUIRED >
-<!ATTLIST active_element source CDATA #REQUIRED >
-<!ATTLIST active_element id ID #REQUIRED >
-
-<!ELEMENT attributes (element_attributes) >
-
-<!ELEMENT element_attributes (attribute*) >
-
-<!ELEMENT attribute EMPTY >
-<!ATTLIST attribute name CDATA #REQUIRED>
-<!ATTLIST attribute value CDATA #REQUIRED>
-
-<!ELEMENT filter (selection*) >
-<!ATTLIST filter type CDATA #REQUIRED>
-	
-<!ELEMENT selection EMPTY >
-<!ATTLIST selection id CDATA #REQUIRED>	<!-- odkaz na data ze zasuvky nikoli ID prvku - mozna prejmenovat --> 
-
-<!ELEMENT output (transformation*) >
-
-<!ELEMENT transformation EMPTY >
-<!ATTLIST transformation name CDATA #REQUIRED>
-	
-<!ELEMENT attr_link_table (link*) >
-<!ATTLIST attr_link_table target CDATA #REQUIRED>
-<!ATTLIST attr_link_table style CDATA #REQUIRED>
-<!ATTLIST attr_link_table id ID #REQUIRED >
-
-<!ELEMENT link EMPTY>
-<!ATTLIST link attr_name CDATA #REQUIRED>
-<!ATTLIST link caption CDATA #REQUIRED>
-
-
-<!ELEMENT include EMPTY >
-<!ATTLIST include file CDATA #REQUIRED >
-<!ATTLIST include id ID #REQUIRED >
-
-<!ELEMENT paragraph ( graph | table | text | attr_link)* >
-<!ATTLIST paragraph style CDATA #IMPLIED >
-<!ATTLIST paragraph id ID #REQUIRED >
-
-<!ELEMENT text ( #PCDATA | br | tab )* >
-<!ATTLIST text style CDATA #IMPLIED >
-<!ATTLIST text id ID #REQUIRED >
-
-<!ELEMENT tab EMPTY > <!-- do textu vlozi tabulator -->
-
-<!ELEMENT br EMPTY > <!-- do textu vlozi prechod na novy radek - nikoliv konec odstavce -->
-
-<!ELEMENT attr_link EMPTY >
-<!ATTLIST attr_link id ID #REQUIRED >
-<!ATTLIST attr_link target CDATA #REQUIRED >
-<!ATTLIST attr_link attr_name CDATA #REQUIRED >
-
-
-<!ELEMENT graph ( categories? , chart+ ) >
-<!ATTLIST graph title CDATA #IMPLIED >
-<!ATTLIST graph charttype CDATA #REQUIRED >	<!-- napr: xlLine, xlPie, xlBarStacked -->
-	<!-- kompletni seznam pro OfficeXP k nalezeni na http://msdn.microsoft.com/library/en-us/vbagr10/html/grprocharttype.asp -->
-<!ATTLIST graph showlegend (true | false) "false" >
-<!ATTLIST graph height CDATA #IMPLIED >	<!-- nasobek sirky strnaky -->
-<!ATTLIST graph width CDATA #IMPLIED >	<!-- nasobek sirky strnaky -->	
-<!ATTLIST graph id ID #REQUIRED >
-
-
-<!ELEMENT categories ( category+ ) >
-<!ATTLIST categories id ID #REQUIRED >
-
-<!ELEMENT category EMPTY >
-<!ATTLIST category title CDATA #REQUIRED >
-<!ATTLIST category id ID #REQUIRED >
-
-<!ELEMENT chart ( value+ ) >
-<!ATTLIST chart title CDATA #IMPLIED >
-<!ATTLIST chart id ID #REQUIRED >
-
-<!ELEMENT value EMPTY >
-<!ATTLIST value value CDATA #REQUIRED >	<!-- cislo nebo cislo s procentama -->
-<!ATTLIST value id ID #REQUIRED >
-
-<!ELEMENT table ( tr+ ) >
-<!ATTLIST table cols CDATA #REQUIRED >
-<!ATTLIST table rows CDATA #REQUIRED >
-<!ATTLIST table borderwidth CDATA "0" >	<!-- default borderwidth=0 -->
-<!ATTLIST table id ID #REQUIRED >
-
-<!ELEMENT tr ( td+ ) >
-<!ATTLIST tr id ID #REQUIRED >
-
-<!ELEMENT td ( text? ) >
-<!ATTLIST td colspan CDATA #IMPLIED >
-<!ATTLIST td rowspan CDATA #IMPLIED >
-<!ATTLIST td bgcolor CDATA #IMPLIED >	<!-- pouze kody #RRGGBB pojmenovane barvy nejsou podporovany -->
-<!ATTLIST td id ID #REQUIRED >
-
-
-]>
 <report title="Nadpis" subtitle="podnadpis" author="jmeno autora" id="report1">
 	<chapter title="Chapter1" id="ch_aktivni1">
 		<paragraph style="Normální" id="paragraph1">
@@ -147,7 +38,6 @@
 			<filter type="simple">
 			</filter>
 			<output>
-				<transformation name="HeaderAndCedents"/>
 			</output>
 		</active_element>
 		<active_element type="category" source="" id="category1">
@@ -158,7 +48,6 @@
 			<filter type="simple">
 			</filter>
 			<output>
-				<transformation name="HeaderAndCedents"/>
 			</output>
 		</active_element>
 		<attr_link_table id="attr_link_table1" target="" style="">

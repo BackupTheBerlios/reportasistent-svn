@@ -83,6 +83,9 @@
 #define IDS_ELEMENT_ATTRIBUTES_FAILED_LOAD 61210
 #define IDS_DUPLICATE_ELEMENT_ID        61211
 #define IDS_INVALID_ELEMENT_ID          61212
+#define IDS_FAILED_CREATE_XML_DOM_INSTANCE 61213
+#define IDS_CREATE_NEW_FILE_FAILED      61214
+#define IDS_OPEN_FILE_FAILED            61215
 
 // Next default values for new objects
 // 

@@ -225,13 +225,14 @@ void CTransformationsDialog::OnMoveDownButton()
 void CTransformationsDialog::OnConfigureAttrLinkTableButton() 
 {
 	CheckAndRepareAttrLinkTable();
-	CheckAndRepareAttrLinkTable();
 
-	CAttributeLinkTableDialog dlg(
-		(IXMLDOMElementPtr) m_active_element->selectSingleNode("attr_link_table"),
-		this, FALSE);
+	IXMLDOMElementPtr el_alt = m_active_element->selectSingleNode("attr_link_table");
+
+	CAttributeLinkTableDialog dlg(el_alt, this, FALSE);
 
 	dlg.DoModal();
+	
+	el_alt.Release();
 }
 
 void CTransformationsDialog::OnAddAttrLinkTableButton() 

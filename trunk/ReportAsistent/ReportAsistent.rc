@@ -640,7 +640,7 @@ BEGIN
     AFX_IDS_SCRESTORE       "Restore the window to normal size"
     AFX_IDS_SCTASKLIST      "Activate Task List"
     IDS_INSERT_NEW_ELEMENT_WRONG_LOCATION 
-                            "Sem tato toto dat nemuzes.\n\ntenhle text se predelava ve string table - id: IDS_INSERT_NEW_ELEMENT_WRONG_LOCATION"
+                            "This element can not be placed here."
     IDS_SIMPLE_FILTER_EMPTY_SELECTION 
                             "Sorry, you have to select some items to make filter valid."
     IDS_SIMPLE_FILTER_FAILED_SOURCE_LOAD 
@@ -655,6 +655,10 @@ BEGIN
     IDS_DUPLICATE_ELEMENT_ID 
                             "ID wasn't changed. Reason: The inserted ID would  be duplicate in the tree. "
     IDS_INVALID_ELEMENT_ID  "ID wasn't changed. Reason: The inserted ID is invalid. "
+    IDS_FAILED_CREATE_XML_DOM_INSTANCE 
+                            "Failed to instantiate an XML DOM. MSXML library is not installed correctly."
+    IDS_CREATE_NEW_FILE_FAILED "Failed to create new file.\nReason: %1"
+    IDS_OPEN_FILE_FAILED    "Failed to open file %1.\nReason: %2"
 END
 
 STRINGTABLE DISCARDABLE 
