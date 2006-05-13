@@ -580,12 +580,16 @@ BOOL CDataSourcesManager::ConnectSource(int source_index)
 	// kontrola indexu
 	if(SourcesTab.GetUpperBound() < SI  ||  SI<0) 
 		return FALSE;
-	
+		
+
 	// kontrola, zda je zdroj pripojen k validni zasuvce
 	if(SourcesTab[SI].PluginIndex == -1)
 		return FALSE;
 	if(PlugsTab[SourcesTab[SI].PluginIndex].Valid() == FALSE)
 		return FALSE;
+	// kontrola, zda uz zdroj neni pripojen
+	if(isSourceConnected(SI))
+		return TRUE;
 
 	int i = SourcesTab[SI].PluginIndex;	// index zasuvky v tabulce zasuvek
 
