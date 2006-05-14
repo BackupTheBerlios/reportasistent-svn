@@ -25,6 +25,8 @@
   				<xsl:text disable-output-escaping="yes">" /&gt;</xsl:text>
 -->
 
+				<xsl:apply-templates select="sub_bool_cedent" mode="recurent_scan" />
+
 
 				<xsl:text disable-output-escaping="yes">
 				</xsl:text>
@@ -35,32 +37,37 @@
 	
 	<!-- vypise vsechny atributy -->
 	<xsl:template match="@*">
-	
+		<xsl:param name="name_prefix" /> 
+
 					<xsl:text disable-output-escaping="yes">
 					</xsl:text>
 		
 		
-					<attribute name="{name()}" value="{.}" />
+					<attribute name="{$name_prefix}{name()}" value="{.}" />
 	</xsl:template>
 	<!-- vypise vsechny atributy -->
 
 
+	<xsl:template match="node()" mode="recurent_scan">
+		<xsl:param name="name_prefix" /> 
 
-	<xsl:template match="ctgr">
-    <xsl:if test="position()!=1">
-    <xsl:text disable-output-escaping="no">; </xsl:text> 
-    </xsl:if>
-    <xsl:value-of select="@name" /> 
+		<xsl:apply-templates select="@*">
+			<xsl:with-param name="name_prefix">
+  				<xsl:value-of select="$name_prefix" />
+  				<xsl:value-of select="name()" />
+  				<xsl:value-of select="position()" />
+  				<xsl:text>_</xsl:text>
+  			</xsl:with-param>
+		</xsl:apply-templates>
+		
+		<xsl:apply-templates select="*" mode="recurent_scan">
+			<xsl:with-param name="name_prefix">
+  				<xsl:value-of select="$name_prefix" />
+  				<xsl:value-of select="name()" />
+  				<xsl:value-of select="position()" />
+  				<xsl:text>_</xsl:text>
+  			</xsl:with-param>
+		</xsl:apply-templates>
     </xsl:template>
-
-    <xsl:template match="missing_value">
-    <xsl:if test="position()!=1">
-    <xsl:text disable-output-escaping="no">; </xsl:text> 
-    </xsl:if>
-    <xsl:value-of select="@name" /> 
-    </xsl:template>
-
-
-
-
+    
 </xsl:stylesheet>
