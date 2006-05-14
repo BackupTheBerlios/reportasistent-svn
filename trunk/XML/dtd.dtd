@@ -5,6 +5,26 @@
 
 
 
+  <!ELEMENT CF_cedent (sub_CF_cedent*)>
+  <!ATTLIST CF_cedent 	id ID #REQUIRED
+			db_name CDATA #REQUIRED
+			matrix_name CDATA #REQUIRED
+			task_name CDATA #REQUIRED
+			task_type CDATA #REQUIRED
+			cedent_type CDATA #REQUIRED
+			sub_cedent_cnt CDATA #REQUIRED>
+  <!ELEMENT sub_CF_cedent (CF_literal*)>
+  <!ATTLIST sub_CF_cedent name CDATA #REQUIRED
+			  literal_cnt CDATA #REQUIRED
+			  length CDATA #REQUIRED>
+  <!ELEMENT CF_literal EMPTY>
+  <!ATTLIST CF_literal underlying_attribute CDATA #REQUIRED
+		       category_cnt CDATA #REQUIRED
+		       literal_type CDATA #REQUIRED>
+
+
+
+
 
   <!ELEMENT bool_cedent (sub_bool_cedent*)>
   <!ATTLIST bool_cedent id ID #REQUIRED
