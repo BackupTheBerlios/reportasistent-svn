@@ -8,6 +8,9 @@
 #include "InterfaceFunctions.h"
 #include "FEPlugin.h"
 
+using namespace System;
+using namespace System::Windows::Forms;
+using namespace FEplugin_cs;
 
 
 // ---------- performFE 
@@ -38,8 +41,23 @@ BSTR getAPListFE()
 // ---------- fNewSourceFE
 
 hSource_t fNewSourceFE(PersistID_t * pPerzistID)
-{
+{	
+	// dialog pro otevreni souboru -> vybrani souboru (Ferda Project - "*.xfp" ) noveho zdroje
+	System::String^ perzist = FEPom::OpenXfpFile();
+
+	CString s = (CString) perzist;
+	(*pPerzistID) = s.AllocSysString();
+	int index = 0;
+	if (perzist != "")
+	{
+		index = CFEsourcesTab::NewSource(perzist);
+		if(index != -1)
+			return (hSource_t) (index + 1);
+	}
+	MessageBox::Show("Zdroj s PerzistID=" + perzist + " se nepodarilo otevrit", "Zdroj neotevren");
 	return NULL;
+
+
 }
 
 
@@ -47,7 +65,19 @@ hSource_t fNewSourceFE(PersistID_t * pPerzistID)
 
 hSource_t fOpenSourceFE(PersistID_t PerzistID)
 {
+	CString per = PerzistID;
+	System::String^ perzist = gcnew String(per);
+
+	int index = 0;
+	if (perzist != "")
+	{
+		index = CFEsourcesTab::NewSource(perzist);
+		if(index != -1)
+		   return (hSource_t) (index + 1);
+	}
+	MessageBox::Show("Zdroj s PerzistID=" + perzist + " se nepodarilo otevrit", "Zdroj neotevren");
 	return NULL;
+
 }
 
 
@@ -55,6 +85,8 @@ hSource_t fOpenSourceFE(PersistID_t PerzistID)
 
 BOOL fCloseSourceFE(hSource_t hSource)
 {
-	return TRUE;
+	int index = ((int) hSource) - 1;  // index prislusneho CFEsource v CFEsourcesTab
+
+	return CFEsourcesTab::CloseSource(index);
 }
 
