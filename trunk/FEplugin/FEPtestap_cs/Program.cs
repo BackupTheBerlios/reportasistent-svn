@@ -22,6 +22,7 @@ namespace FEPtestap_cs
             try
             {
                 //CFEsource src2 = new CFEsource(@"c:\Documents and Settings\Honza\Dokumenty\Barbora1.xfp");
+                //index1 = CFEsourcesTab.NewSource(@"c:\Documents and Settings\Honza\Dokumenty\FERDA_CABG.xfp");
                 index1 = CFEsourcesTab.NewSource(@"c:\Documents and Settings\Honza\Dokumenty\Barbora1.xfp");
                 //index2 = CFEsourcesTab.NewSource(@"c:\Documents and Settings\Honza\Dokumenty\FERDA_CABG.xfp");
             }
@@ -36,11 +37,13 @@ namespace FEPtestap_cs
             Console.WriteLine("Zdroj " + index1.ToString() + " obsahuje " + ((CFEsource)CFEsourcesTab.Sources[index1]).PM.Archive.Boxes.GetLength(0).ToString() + " krabicek");
          //   Console.WriteLine("Zdroj " + index2.ToString() + " obsahuje " + ((CFEsource)CFEsourcesTab.Sources[index2]).PM.Archive.Boxes.GetLength(0).ToString() + " krabicek");
     
+            // prohrabani se v archivu
+            BoxesHelper.VypisKrabky(0, "LISpMinerTasks.FFTTask");
+            FEAPFunctions.fFE4fthyp(0);
         }
 
         public static string OtevriSoubor()
         {
-            string ret = "";
             OpenFileDialog ofd = new OpenFileDialog();
 
             ofd.InitialDirectory = ".\\";

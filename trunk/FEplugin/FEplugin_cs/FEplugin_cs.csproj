@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CFEsource.cs" />
+    <Compile Include="FEAPFunctions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

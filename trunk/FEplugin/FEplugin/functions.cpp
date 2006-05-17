@@ -28,8 +28,10 @@ CString fFECategory(void* hSource)
 
 CString fFE4fthyp(void * hSource)
 {
-	CString buf = "Toto je seznam vsech 4ft hypotez z Ferdy";
-	return buf;
+	int indexSrc = ((int) hSource) - 1; 
+	System::String^ HypList = FEplugin_cs::FEAPFunctions::fFE4fthyp(indexSrc);
+	CString resultStr = (CString) HypList;
+	return resultStr;
 }
 
 
