@@ -4,6 +4,74 @@
 //4ft_hypothese
 //CString fLM4fthyp(void* hSource);
 
+struct KL_Literal_Meta
+{
+	CString underlying_attribute;
+	CString category_cnt;
+};
+
+typedef CArray <KL_Literal_Meta, KL_Literal_Meta> TKL_Literal_Meta_Array;
+
+struct Sub_KL_Cedent_Meta
+{
+	CString					literal_cnt;
+	CString					name;
+	CString					length;
+	TKL_Literal_Meta_Array	lit_list;
+};
+
+typedef CArray <Sub_KL_Cedent_Meta *, Sub_KL_Cedent_Meta *> TSub_KL_Cedent_Meta_Array;
+
+class KL_Cedent_Meta
+{
+public:
+	CString						id;
+	CString						db_name;
+    CString						matrix_name;
+	CString						task_name;
+	CString						task_type;
+	CString						cedent_type;
+	CString						sub_cedent_cnt;
+	TSub_KL_Cedent_Meta_Array	sub_cedents_list;
+	CString						xml_convert ();
+};
+
+typedef CArray <KL_Cedent_Meta *, KL_Cedent_Meta *> TKL_Cedent_Meta_Array;
+
+struct CF_Literal_Meta
+{
+	CString underlying_attribute;
+	CString category_cnt;
+};
+
+typedef CArray <CF_Literal_Meta, CF_Literal_Meta> TCF_Literal_Meta_Array;
+
+struct Sub_CF_Cedent_Meta
+{
+	CString					literal_cnt;
+	CString					name;
+	CString					length;
+	TCF_Literal_Meta_Array	lit_list;
+};
+
+typedef CArray <Sub_CF_Cedent_Meta *, Sub_CF_Cedent_Meta *> TSub_CF_Cedent_Meta_Array;
+
+class CF_Cedent_Meta
+{
+public:
+	CString						id;
+	CString						db_name;
+    CString						matrix_name;
+	CString						task_name;
+	CString						task_type;
+	CString						cedent_type;
+	CString						sub_cedent_cnt;
+	TSub_CF_Cedent_Meta_Array	sub_cedents_list;
+	CString						xml_convert ();
+};
+
+typedef CArray <CF_Cedent_Meta *, CF_Cedent_Meta *> TCF_Cedent_Meta_Array;
+
 struct Literal_Meta
 {
 	CString underlying_attribute;

@@ -10,6 +10,14 @@
 
 // ===== FUNKCE ========
 
+// ---AP KL cedent
+
+CString fLMKLCedent (void* hSource);
+
+// ---AP CF cedent
+
+CString fLMCFCedent (void* hSource);
+
 // ---AP bool cedent
 
 CString fLMBoolCedent (void* hSource);

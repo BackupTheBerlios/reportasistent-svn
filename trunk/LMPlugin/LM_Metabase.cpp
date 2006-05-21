@@ -4,6 +4,112 @@
 #include "Hyp_4ft_Recordset.h"
 #include "comdef.h"
 
+CString KL_Cedent_Meta::xml_convert ()
+{
+	CString xml_string;
+
+	cedent_type.Replace ("&", "&amp;");
+	db_name.Replace ("&", "&amp;");
+	matrix_name.Replace ("&", "&amp;");
+	task_name.Replace ("&", "&amp;");
+	task_type.Replace ("&", "&amp;");
+
+	cedent_type.Replace ("<", "&lt;");
+	db_name.Replace ("<", "&lt;");
+	matrix_name.Replace ("<", "&lt;");
+	task_name.Replace ("<", "&lt;");
+	task_type.Replace ("<", "&lt;");
+
+	cedent_type.Replace (">", "&gt;");
+	db_name.Replace (">", "&gt;");
+	matrix_name.Replace (">", "&gt;");
+	task_name.Replace (">", "&gt;");
+	task_type.Replace (">", "&gt;");
+
+	//beggining of the cedent element
+	xml_string = " <KL_cedent id=\"" + id + "\" db_name=\"" + db_name + "\" ";
+	xml_string = xml_string + "matrix_name=\"" + matrix_name + "\" ";
+	xml_string = xml_string + "task_name=\"" + task_name + "\" ";
+	xml_string = xml_string + "task_type=\"" + task_type + "\" ";
+	xml_string = xml_string + "cedent_type=\"" + cedent_type + "\" ";
+	xml_string = xml_string + "sub_cedent_cnt=\"" + sub_cedent_cnt + "\" >";
+	for (int i = 0; i < sub_cedents_list.GetSize (); i++)
+	{
+		xml_string = xml_string +
+			"<sub_KL_cedent name=\"" + sub_cedents_list.GetAt (i)->name + "\" ";
+		xml_string = xml_string +
+			"literal_cnt=\"" + sub_cedents_list.GetAt (i)->literal_cnt + "\" ";
+		xml_string = xml_string +
+			"length=\"" + sub_cedents_list.GetAt (i)->length + "\" >";
+		for (int j = 0; j < sub_cedents_list.GetAt (i)->lit_list.GetSize (); j++)
+		{
+			xml_string = xml_string +
+				"<KL_literal underlying_attribute=\"" +
+				sub_cedents_list.GetAt (i)->lit_list.GetAt (j).underlying_attribute + "\" ";
+			xml_string = xml_string +
+				"category_cnt=\"" +
+				sub_cedents_list.GetAt (i)->lit_list.GetAt (j).category_cnt + "\"/> ";
+		}
+		xml_string = xml_string + "</sub_KL_cedent> ";
+	}
+	xml_string = xml_string + "</KL_cedent> ";
+
+	return xml_string;
+}
+
+CString CF_Cedent_Meta::xml_convert ()
+{
+	CString xml_string;
+
+	cedent_type.Replace ("&", "&amp;");
+	db_name.Replace ("&", "&amp;");
+	matrix_name.Replace ("&", "&amp;");
+	task_name.Replace ("&", "&amp;");
+	task_type.Replace ("&", "&amp;");
+
+	cedent_type.Replace ("<", "&lt;");
+	db_name.Replace ("<", "&lt;");
+	matrix_name.Replace ("<", "&lt;");
+	task_name.Replace ("<", "&lt;");
+	task_type.Replace ("<", "&lt;");
+
+	cedent_type.Replace (">", "&gt;");
+	db_name.Replace (">", "&gt;");
+	matrix_name.Replace (">", "&gt;");
+	task_name.Replace (">", "&gt;");
+	task_type.Replace (">", "&gt;");
+
+	//beggining of the cedent element
+	xml_string = " <CF_cedent id=\"" + id + "\" db_name=\"" + db_name + "\" ";
+	xml_string = xml_string + "matrix_name=\"" + matrix_name + "\" ";
+	xml_string = xml_string + "task_name=\"" + task_name + "\" ";
+	xml_string = xml_string + "task_type=\"" + task_type + "\" ";
+	xml_string = xml_string + "cedent_type=\"" + cedent_type + "\" ";
+	xml_string = xml_string + "sub_cedent_cnt=\"" + sub_cedent_cnt + "\" >";
+	for (int i = 0; i < sub_cedents_list.GetSize (); i++)
+	{
+		xml_string = xml_string +
+			"<sub_CF_cedent name=\"" + sub_cedents_list.GetAt (i)->name + "\" ";
+		xml_string = xml_string +
+			"literal_cnt=\"" + sub_cedents_list.GetAt (i)->literal_cnt + "\" ";
+		xml_string = xml_string +
+			"length=\"" + sub_cedents_list.GetAt (i)->length + "\" >";
+		for (int j = 0; j < sub_cedents_list.GetAt (i)->lit_list.GetSize (); j++)
+		{
+			xml_string = xml_string +
+				"<CF_literal underlying_attribute=\"" +
+				sub_cedents_list.GetAt (i)->lit_list.GetAt (j).underlying_attribute + "\" ";
+			xml_string = xml_string +
+				"category_cnt=\"" +
+				sub_cedents_list.GetAt (i)->lit_list.GetAt (j).category_cnt + "\"/> ";
+		}
+		xml_string = xml_string + "</sub_CF_cedent> ";
+	}
+	xml_string = xml_string + "</CF_cedent> ";
+
+	return xml_string;
+}
+
 CString Bool_Cedent_Meta::xml_convert ()
 {
 	CString xml_string;

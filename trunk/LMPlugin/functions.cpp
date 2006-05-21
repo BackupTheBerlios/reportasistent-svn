@@ -14,7 +14,10 @@
 #include "TCategory_Scan.h"
 #include "TEmpty_Cedents_Recordset.h"
 #include "TLit_Scan_Recordset.h"
-
+#include "CF_Cedent_Recordset.h"
+#include "TCFLiteral.h"
+#include "KL_Cedent_Recordset.h"
+#include "TKLLiteral.h"
 
 //dedek: docasne
 /*****/
@@ -51,6 +54,333 @@ BOOL dedek_performLM(void * hSource, const char* AP, BSTR* result)
 }
 
 /****/
+
+// ---AP KL cedent
+
+CString fLMKLCedent (void* hSource)
+{
+	CString buf = "";
+	CString hlp;
+	CString hlp1;
+	CString db_name = ((CDatabase *) hSource)->GetDatabaseName ();
+	CString q_lit;
+	CString q_cat;
+	
+	long sub_cedent_cnt = 0;
+	long literal_cnt = 0;
+	long ct_id;
+	long ct_id_tst = 0;  //test, wheather the new cedent type appears
+	long c_id;
+	long c_id_tst = 0; //test, wheather the new sub cedent appears
+	long c = 0; //counter
+
+
+	KL_Cedent_Recordset rs ((CDatabase *) hSource);
+	TKLLiteral rs_lit ((CDatabase *) hSource);
+	TCategory_Scan rs_cat ((CDatabase *) hSource);
+
+	TKL_Cedent_Meta_Array list;
+	KL_Cedent_Meta * ptklcdnt;
+	Sub_KL_Cedent_Meta * ptsub_kl_cedent;
+
+	KL_Literal_Meta lit;
+
+	LPCTSTR q =
+		"SELECT * \
+		 FROM  taTask, tdKLCedentD, tmMatrix, tsCedentType, tsTaskSubType \
+		 WHERE taTask.TaskID=tdKLCedentD.TaskID \
+			AND taTask.MatrixID=tmMatrix.MatrixID \
+			AND tdKLCedentD.CedentTypeID=tsCedentType.CedentTypeID \
+			AND taTask.TaskSubTypeID=tsTaskSubType.TaskSubTypeID \
+		 ORDER BY taTask.TaskID, tdKLCedentD.CedentTypeID";
+
+	if (rs.Open(AFX_DB_USE_DEFAULT_TYPE, q))
+	{
+		//iteration on query results
+		while (!rs.IsEOF())
+		{
+			ct_id = rs.m_CedentTypeID;
+			c_id = rs.m_KLCedentDID;
+			if (ct_id != ct_id_tst) //new cedent
+			{
+				sub_cedent_cnt = 0;
+				literal_cnt = 0;
+				ptklcdnt = new (KL_Cedent_Meta);
+				ptklcdnt->db_name = db_name;
+				hlp.Format ("%d", rs.m_KLCedentDID);
+				ptklcdnt->id = "KLcdnt" + hlp;
+				ptklcdnt->matrix_name = rs.m_Name3;
+				ptklcdnt->task_name = rs.m_Name;
+				ptklcdnt->task_type = rs.m_Name5;
+				ptklcdnt->cedent_type = rs.m_Name4;
+				list.Add (ptklcdnt);
+			}
+			if (c_id != c_id_tst) //new sub cedent
+			{
+				ptsub_kl_cedent = new (Sub_KL_Cedent_Meta);
+				literal_cnt = 0;
+				sub_cedent_cnt++;
+				ptklcdnt->sub_cedent_cnt.Format ("%d", sub_cedent_cnt);
+				hlp = rs.m_Name2;
+				hlp.Replace ("&", "&amp;");
+				hlp.Replace ("<", "&lt;");
+				hlp.Replace (">", "&gt;");
+				ptsub_kl_cedent->name = hlp;
+				hlp.Format ("%d", rs.m_MinLen);
+				hlp1.Format ("%d", rs.m_MaxLen);
+				hlp += " - ";
+				hlp += hlp1;
+				ptsub_kl_cedent->length = hlp;
+				ptklcdnt->sub_cedents_list.Add (ptsub_kl_cedent);
+				hlp.Format ("%d", c_id);
+				q_lit =
+					"SELECT * \
+					 FROM tdKLLiteralD, tmAttribute, tmQuantity \
+					 WHERE tdKLLiteralD.KLCedentDID=" + hlp +
+					"	AND tmQuantity.QuantityID=tdKLLiteralD.QuantityID \
+						AND tmQuantity.AttributeID=tmAttribute.AttributeID";
+				if (rs_lit.Open(AFX_DB_USE_DEFAULT_TYPE, q_lit))
+				{
+					//iteration on query results
+					while (!rs_lit.IsEOF())
+					{
+						literal_cnt++;
+						ptsub_kl_cedent->literal_cnt.Format ("%d", literal_cnt);
+						lit.underlying_attribute = rs_lit.m_Name;
+						hlp.Format ("%d", rs_lit.m_QuantityID2);
+						q_cat =
+							"SELECT * \
+							 FROM tmCategory \
+							 WHERE tmCategory.QuantityID=" + hlp;
+						if (rs_cat.Open(AFX_DB_USE_DEFAULT_TYPE, q_cat))
+						{
+							c = 0;
+							//iteration on query results
+							while (!rs_cat.IsEOF())
+							{
+								c++;
+								rs_cat.MoveNext ();
+							}
+							rs_cat.Close ();
+						}
+						else return "";
+						lit.category_cnt.Format ("%d", c);
+						ptsub_kl_cedent->lit_list.Add (lit);
+						rs_lit.MoveNext ();
+					}
+					rs_lit.Close ();
+				}
+				else return "";
+			}
+			c_id_tst = c_id;
+			ct_id_tst = ct_id;
+			rs.MoveNext();
+		}
+		rs.Close();
+	}
+	else return "";
+
+	//creation of xml string
+	//load DTD
+	FILE * x = fopen ("../XML/dtd.dtd", "r");
+	CString buf1;
+	while (fscanf (x, "%s", buf1) != EOF)
+	{
+		buf = buf + (const char *) buf1 + " ";
+	}
+	fclose (x);
+	//create xml data
+	buf = buf + " <active_list> ";
+	for (int i = 0; i < list.GetSize (); i++)
+	{
+		buf = buf + list.GetAt (i)->xml_convert ();
+	}
+	buf += " </active_list>";
+/*	//just for test - creates a xml file with all attributes
+	FILE * f = fopen ("test.xml", "w");
+	fprintf (f, "%s", buf);
+	fclose (f);
+
+
+	AfxMessageBox(buf);
+*/
+	for (i = 0; i < list.GetSize (); i++)
+	{
+		for (int j = 0; j < list.GetAt (i)->sub_cedents_list.GetSize (); j++)
+		{
+			delete (list.GetAt (i)->sub_cedents_list.GetAt (j));
+		}
+		list.GetAt (i)->sub_cedents_list.RemoveAll ();
+		delete (list.GetAt (i));
+	}
+	list.RemoveAll ();
+
+	return buf;
+}
+
+// ---AP CF cedent
+
+CString fLMCFCedent (void* hSource)
+{
+	CString buf = "";
+	CString hlp;
+	CString hlp1;
+	CString db_name = ((CDatabase *) hSource)->GetDatabaseName ();
+	CString q_lit;
+	CString q_cat;
+	
+	long sub_cedent_cnt = 0;
+	long literal_cnt = 0;
+	long ct_id;
+	long ct_id_tst = 0;  //test, wheather the new cedent type appears
+	long c_id;
+	long c_id_tst = 0; //test, wheather the new sub cedent appears
+	long c = 0; //counter
+
+
+	CF_Cedent_Recordset rs ((CDatabase *) hSource);
+	TCFLiteral rs_lit ((CDatabase *) hSource);
+	TCategory_Scan rs_cat ((CDatabase *) hSource);
+
+	TCF_Cedent_Meta_Array list;
+	CF_Cedent_Meta * ptcfcdnt;
+	Sub_CF_Cedent_Meta * ptsub_cf_cedent;
+
+	CF_Literal_Meta lit;
+
+	LPCTSTR q =
+		"SELECT * \
+		 FROM  taTask, tdCFCedentD, tmMatrix, tsCedentType, tsTaskSubType \
+		 WHERE taTask.TaskID=tdCFCedentD.TaskID \
+			AND taTask.MatrixID=tmMatrix.MatrixID \
+			AND tdCFCedentD.CedentTypeID=tsCedentType.CedentTypeID \
+			AND taTask.TaskSubTypeID=tsTaskSubType.TaskSubTypeID \
+		 ORDER BY taTask.TaskID, tdCFCedentD.CedentTypeID";
+
+	if (rs.Open(AFX_DB_USE_DEFAULT_TYPE, q))
+	{
+		//iteration on query results
+		while (!rs.IsEOF())
+		{
+			ct_id = rs.m_CedentTypeID;
+			c_id = rs.m_CFCedentDID;
+			if (ct_id != ct_id_tst) //new cedent
+			{
+				sub_cedent_cnt = 0;
+				literal_cnt = 0;
+				ptcfcdnt = new (CF_Cedent_Meta);
+				ptcfcdnt->db_name = db_name;
+				hlp.Format ("%d", rs.m_CFCedentDID);
+				ptcfcdnt->id = "CFcdnt" + hlp;
+				ptcfcdnt->matrix_name = rs.m_Name3;
+				ptcfcdnt->task_name = rs.m_Name;
+				ptcfcdnt->task_type = rs.m_Name5;
+				ptcfcdnt->cedent_type = rs.m_Name4;
+				list.Add (ptcfcdnt);
+			}
+			if (c_id != c_id_tst) //new sub cedent
+			{
+				ptsub_cf_cedent = new (Sub_CF_Cedent_Meta);
+				literal_cnt = 0;
+				sub_cedent_cnt++;
+				ptcfcdnt->sub_cedent_cnt.Format ("%d", sub_cedent_cnt);
+				hlp = rs.m_Name2;
+				hlp.Replace ("&", "&amp;");
+				hlp.Replace ("<", "&lt;");
+				hlp.Replace (">", "&gt;");
+				ptsub_cf_cedent->name = hlp;
+				hlp.Format ("%d", rs.m_MinLen);
+				hlp1.Format ("%d", rs.m_MaxLen);
+				hlp += " - ";
+				hlp += hlp1;
+				ptsub_cf_cedent->length = hlp;
+				ptcfcdnt->sub_cedents_list.Add (ptsub_cf_cedent);
+				hlp.Format ("%d", c_id);
+				q_lit =
+					"SELECT * \
+					 FROM tdCFLiteralD, tmAttribute, tmQuantity \
+					 WHERE tdCFLiteralD.CFCedentDID=" + hlp +
+					"	AND tmQuantity.QuantityID=tdCFLiteralD.QuantityID \
+						AND tmQuantity.AttributeID=tmAttribute.AttributeID";
+				if (rs_lit.Open(AFX_DB_USE_DEFAULT_TYPE, q_lit))
+				{
+					//iteration on query results
+					while (!rs_lit.IsEOF())
+					{
+						literal_cnt++;
+						ptsub_cf_cedent->literal_cnt.Format ("%d", literal_cnt);
+						lit.underlying_attribute = rs_lit.m_Name;
+						hlp.Format ("%d", rs_lit.m_QuantityID2);
+						q_cat =
+							"SELECT * \
+							 FROM tmCategory \
+							 WHERE tmCategory.QuantityID=" + hlp;
+						if (rs_cat.Open(AFX_DB_USE_DEFAULT_TYPE, q_cat))
+						{
+							c = 0;
+							//iteration on query results
+							while (!rs_cat.IsEOF())
+							{
+								c++;
+								rs_cat.MoveNext ();
+							}
+							rs_cat.Close ();
+						}
+						else return "";
+						lit.category_cnt.Format ("%d", c);
+						ptsub_cf_cedent->lit_list.Add (lit);
+						rs_lit.MoveNext ();
+					}
+					rs_lit.Close ();
+				}
+				else return "";
+			}
+			c_id_tst = c_id;
+			ct_id_tst = ct_id;
+			rs.MoveNext();
+		}
+		rs.Close();
+	}
+	else return "";
+
+	//creation of xml string
+	//load DTD
+	FILE * x = fopen ("../XML/dtd.dtd", "r");
+	CString buf1;
+	while (fscanf (x, "%s", buf1) != EOF)
+	{
+		buf = buf + (const char *) buf1 + " ";
+	}
+	fclose (x);
+	//create xml data
+	buf = buf + " <active_list> ";
+	for (int i = 0; i < list.GetSize (); i++)
+	{
+		buf = buf + list.GetAt (i)->xml_convert ();
+	}
+	buf += " </active_list>";
+/*	//just for test - creates a xml file with all attributes
+	FILE * f = fopen ("test.xml", "w");
+	fprintf (f, "%s", buf);
+	fclose (f);
+
+
+	AfxMessageBox(buf);
+*/
+	for (i = 0; i < list.GetSize (); i++)
+	{
+		for (int j = 0; j < list.GetAt (i)->sub_cedents_list.GetSize (); j++)
+		{
+			delete (list.GetAt (i)->sub_cedents_list.GetAt (j));
+		}
+		list.GetAt (i)->sub_cedents_list.RemoveAll ();
+		delete (list.GetAt (i));
+	}
+	list.RemoveAll ();
+
+	return buf;
+}
+
 
 // ---AP bool cedent
 

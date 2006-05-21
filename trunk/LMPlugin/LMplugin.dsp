@@ -97,6 +97,10 @@ SOURCE=.\Bool_Cedent_Recordset.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\CF_Cedent_Recordset.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\Equivalence_Lit_Rs.cpp
 # End Source File
 # Begin Source File
@@ -110,6 +114,10 @@ SOURCE=.\Hyp_4ft_Recordset.cpp
 # Begin Source File
 
 SOURCE=.\InterfaceFunctions.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\KL_Cedent_Recordset.cpp
 # End Source File
 # Begin Source File
 
@@ -157,7 +165,15 @@ SOURCE=.\TCatOrder.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\TCFLiteral.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\TEmpty_Cedents_Recordset.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\TKLLiteral.cpp
 # End Source File
 # Begin Source File
 
@@ -170,6 +186,10 @@ SOURCE=.\TLit_Scan_Recordset.cpp
 # Begin Source File
 
 SOURCE=.\Bool_Cedent_Recordset.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\CF_Cedent_Recordset.h
 # End Source File
 # Begin Source File
 
@@ -186,6 +206,10 @@ SOURCE=.\Hyp_4ft_Recordset.h
 # Begin Source File
 
 SOURCE=.\InterfaceFunctions.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\KL_Cedent_Recordset.h
 # End Source File
 # Begin Source File
 
@@ -237,7 +261,15 @@ SOURCE=.\TCatOrder.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\TCFLiteral.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\TEmpty_Cedents_Recordset.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\TKLLiteral.h
 # End Source File
 # Begin Source File
 

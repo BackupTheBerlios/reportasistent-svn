@@ -1,6 +1,27 @@
 <?xml version="1.0" encoding="windows-1250" ?>
 <!DOCTYPE active_list[
-  <!ELEMENT active_list ((hyp_4ft*, category*, ti_cedent*, attribute*, bool_cedent*)*)>
+  <!ELEMENT active_list ((hyp_4ft*, category*, ti_cedent*, attribute*, bool_cedent*, CF_cedent*, KL_cedent*)*)>
+
+
+
+
+  <!ELEMENT KL_cedent (sub_KL_cedent*)>
+  <!ATTLIST KL_cedent 	id ID #REQUIRED
+			db_name CDATA #REQUIRED
+			matrix_name CDATA #REQUIRED
+			task_name CDATA #REQUIRED
+			task_type CDATA #REQUIRED
+			cedent_type CDATA #REQUIRED
+			sub_cedent_cnt CDATA #REQUIRED>
+  <!ELEMENT sub_KL_cedent (KL_literal*)>
+  <!ATTLIST sub_KL_cedent name CDATA #REQUIRED
+			  literal_cnt CDATA #REQUIRED
+			  length CDATA #REQUIRED>
+  <!ELEMENT KL_literal EMPTY>
+  <!ATTLIST KL_literal underlying_attribute CDATA #REQUIRED
+		       category_cnt CDATA #REQUIRED>
+
+
 
 
 
@@ -19,8 +40,7 @@
 			  length CDATA #REQUIRED>
   <!ELEMENT CF_literal EMPTY>
   <!ATTLIST CF_literal underlying_attribute CDATA #REQUIRED
-		       category_cnt CDATA #REQUIRED
-		       literal_type CDATA #REQUIRED>
+		       category_cnt CDATA #REQUIRED>
 
 
 
