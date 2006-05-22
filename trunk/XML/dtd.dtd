@@ -80,7 +80,8 @@
                       creation CDATA #REQUIRED
                       ctgr_count CDATA #REQUIRED>  <!-- Kody To Chrzi: ??? name of source column -->
   <!ELEMENT ctgr EMPTY>
-  <!ATTLIST ctgr name CDATA #REQUIRED>  <!-- Kody To Chrzi: ??? frequentions of categories? -->
+  <!ATTLIST ctgr name CDATA #REQUIRED
+                 freq CDATA #REQUIRED>
   <!ELEMENT missing_value EMPTY>
   <!ATTLIST missing_value name CDATA #REQUIRED>
 
