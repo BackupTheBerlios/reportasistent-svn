@@ -81,7 +81,7 @@
                       ctgr_count CDATA #REQUIRED>  <!-- Kody To Chrzi: ??? name of source column -->
   <!ELEMENT ctgr EMPTY>
   <!ATTLIST ctgr name CDATA #REQUIRED
-                 freq CDATA #REQUIRED>
+                 freq CDATA #REQUIRED>  <!-- Tady, vole :-) -->
   <!ELEMENT missing_value EMPTY>
   <!ATTLIST missing_value name CDATA #REQUIRED>
 
