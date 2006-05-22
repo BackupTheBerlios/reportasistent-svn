@@ -7,6 +7,8 @@ using Ferda;
 using Ferda.ProjectManager;
 using Ferda.ModulesManager;
 using Ferda.Modules;
+using Ferda.Modules.Helpers;
+using Ferda.Modules.Quantifiers;
 using Ferda.FrontEnd;
 
 namespace FEplugin_cs
@@ -42,6 +44,8 @@ namespace FEplugin_cs
             string db_name = "";    // jmeno analyzovane databaze
             string task_name = "";  // jmeno ulohy - dano uzivatelskym nazvem krabicky FFTTast
 
+            #region Cyklus - zpracovani vsech 4ft-Tasku z pole FFTTaskBoxes
+
             foreach (IBoxModule box in FFTTaskBoxes)
             {
                 try
@@ -71,10 +75,12 @@ namespace FEplugin_cs
                     Rec_ti_cedent rSuc = new Rec_ti_cedent();  // succedent
                     Rec_ti_cedent rCon = new Rec_ti_cedent();  // condition
 
+                    #region Cyklus - zpracovani vsech hypotez jedne krabicky FFTTask
                     // cyklus pres vsechny hypotezy
                     for (int i = 0; i < HypList.GetLength(0); i++)
                     {
-                        // element hyp_4ft
+                        #region element hyp_4ft
+
                         rHyp.id = "hyp4ft" + box.ProjectIdentifier.ToString() + "_" + i.ToString();
                         rHyp.db_name = db_name;
                         rHyp.matrix_name = matrix_name;
@@ -82,17 +88,26 @@ namespace FEplugin_cs
                         rHyp.antecedent = "ant" + rHyp.id;
                         rHyp.succedent = "suc" + rHyp.id;
                         rHyp.condition = "con" + rHyp.id;
-                        rHyp.a = HypList[i].quantifierSetting.firstContingencyTableRows[0][0];
-                        rHyp.b = HypList[i].quantifierSetting.firstContingencyTableRows[0][1];
-                        rHyp.c = HypList[i].quantifierSetting.firstContingencyTableRows[1][0];
-                        rHyp.d = HypList[i].quantifierSetting.firstContingencyTableRows[1][1];
-                        
-                           // TODO - dodelat vypocty, ostatni ciselne polozky (hodnoty kvantifikatoru atd.)
+                        FourFoldContingencyTable FFT = new FourFoldContingencyTable(HypList[i].quantifierSetting.firstContingencyTableRows);
+                        rHyp.a = FFT.A;
+                        rHyp.b = FFT.B;
+                        rHyp.c = FFT.C;
+                        rHyp.d = FFT.D;
+                        // hodnoty kvantifikatoru
+                        rHyp.conf = FourFoldContingencyTable.FoundedImplicationValue(FFT);  // Founded implication (a/a+b)
+                        rHyp.d_conf = FourFoldContingencyTable.DoubleFoundedImplicationValue(FFT); // Double Founded implication (a/a+b+c)
+                        rHyp.e_conf = FourFoldContingencyTable.FoundedEquivalenceValue(FFT);   // Founded Equivalence (a+d)/(a+b+c+d)  ??? BUG ve Ferdovi
+                        rHyp.support = FourFoldContingencyTable.BaseCeilValue(FFT); //???  Support (a/a+b+c+d)
+                        rHyp.avg_diff = FourFoldContingencyTable.AboveAverageImplicationValue(FFT) - 1; // Averafe difference ((a*(a+b+c+d))/((a+b)*(a+c)) -1)
+                            // tyto hodnoty se vypocitavaji (mozna zbytecne?)
+                        rHyp.fisher = FFT.FisherValue();
+                        rHyp.chi_sq = FFT.ChiSquareValue();
 
-                         
+                        #endregion
+                        // TODO - dodelat vypocty, ostatni ciselne polozky (hodnoty nekterych kvantifikatoru atd.)
 
+                        #region element ti_cedent (Antecedent)
 
-                        // element ti_cedent (Antecedent)
                         rAnt.id = "ant" + rHyp.id;
                         rAnt.type = "Antecedent";
                            // literaly
@@ -100,7 +115,7 @@ namespace FEplugin_cs
                         ArrayList ARLit_a = new ArrayList();
                         foreach (BooleanLiteralStruct lit in HypList[i].booleanLiterals)
                         {
-                            if (lit.cedentType.ToString() == "Antecedent")
+                            if (lit.cedentType == CedentEnum.Antecedent)
                             {
                                 Rec_ti_literal l = new Rec_ti_literal();
                                 l.id = "tiLit" + rHyp.id + "_" + litCounter.ToString();
@@ -108,25 +123,23 @@ namespace FEplugin_cs
                                 if(lit.negation)
                                     l.quant = "¬";
                                 l.quant = lit.literalName;
-                                l.value = "(";
                                 foreach (string s in lit.categoriesNames)
                                     l.value += s;
-                                l.value += ")";
                                 ARLit_a.Add(l);
                             }
                         }
                         Rec_ti_literal[] ALit_a = (Rec_ti_literal[])ARLit_a.ToArray(typeof(Rec_ti_literal)); // pole literalu daneho cedentu
-                           
+                        #endregion
 
+                        #region element ti_cedent (Succedent)
 
-                        // element ti_cedent (Succedent)
                         rSuc.id = "suc" + rHyp.id;
                         rSuc.type = "Succedent";
                         // literaly
                         ArrayList ARLit_s = new ArrayList();
                         foreach (BooleanLiteralStruct lit in HypList[i].booleanLiterals)
                         {
-                            if (lit.cedentType.ToString() == "Succedent")
+                            if (lit.cedentType == CedentEnum.Succedent)
                             {
                                 Rec_ti_literal l = new Rec_ti_literal();
                                 l.id = "tiLit" + rHyp.id + "_" + litCounter.ToString();
@@ -140,17 +153,17 @@ namespace FEplugin_cs
                             }
                         }
                         Rec_ti_literal[] ALit_s = (Rec_ti_literal[])ARLit_s.ToArray(typeof(Rec_ti_literal)); // pole literalu daneho cedentu
-                        
+                        #endregion
 
+                        #region element ti_cedent (Condition)
 
-                        // element ti_cedent (Condition)
                         rCon.id = "con" + rHyp.id;
                         rCon.type = "Condition";
                         // literaly
                         ArrayList ARLit_c = new ArrayList();
                         foreach (BooleanLiteralStruct lit in HypList[i].booleanLiterals)
                         {
-                            if (lit.cedentType.ToString() == "Condition")
+                            if (lit.cedentType == CedentEnum.Condition)
                             {
                                 Rec_ti_literal l = new Rec_ti_literal();
                                 l.id = "tiLit" + rHyp.id + "_" + litCounter.ToString();
@@ -158,32 +171,39 @@ namespace FEplugin_cs
                                 if (lit.negation)
                                     l.quant = "¬";
                                 l.quant = lit.literalName;
-                                l.value = "(";
                                 foreach (string s in lit.categoriesNames)
                                     l.value += s;
-                                l.value += ")";
                                 ARLit_s.Add(l);
                             }
                         }
                         Rec_ti_literal[] ALit_c = (Rec_ti_literal[])ARLit_c.ToArray(typeof(Rec_ti_literal)); // pole literalu daneho cedentu
+                        #endregion
 
+                        #region Vypsani jedne hypotezy do XML stringu
 
+                        string oneHypString = "";
                         // vypsani hypotezy do XML
-                        resultString += rHyp.ToXML();
+                        oneHypString += rHyp.ToXML();
                         // vypsani Antecedentu do XML
-                        resultString += rAnt.ToXML(ALit_a);
+                        oneHypString += rAnt.ToXML(ALit_a);
                         // vypsani Succedentu do XML
-                        resultString += rSuc.ToXML(ALit_s);
+                        oneHypString += rSuc.ToXML(ALit_s);
                         // vypsani Condition do XML
-                        resultString += rCon.ToXML(ALit_c);
+                        oneHypString += rCon.ToXML(ALit_c);
 
+                        resultString += oneHypString;
+
+                        #endregion
                     }
+                    #endregion
                 }
                 catch (System.Exception e)
                 {
                     ErrStr += "Box ProjectIdentifier=" + box.ProjectIdentifier.ToString() + ": " + e.Message + "\n";
-                }                
+                }
             }
+            #endregion
+
             // vypsani pripadne chybove hlasky:
             if (!String.IsNullOrEmpty(ErrStr))
                 MessageBox.Show("Pri nacitani hypotez doslo k chybam:\n" + ErrStr, "Chyba", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -203,33 +223,35 @@ namespace FEplugin_cs
 
     public class Rec_hyp_4ft
     {
+        #region DATA
         public string id = "";    // ID 4ft-hypotezy
         public string db_name = "";   // jmeno databaze
         public string matrix_name = ""; // jmeno datove matice
         public string task_name = "";   // jmeno ulohy
-        public int a = 0;
-        public int b = 0;
-        public int c = 0;
-        public int d = 0;
-        public int conf = 0;
-        public int d_conf = 0;
-        public int e_conf = 0;
-        public int support = 0;
-        public int completness = 0;
-        public int avg_diff = 0;
-        public int low_bnd_imp = 0;
-        public int up_bnd_imp = 0;
-        public int low_bnd_dbl_imp = 0;
-        public int up_bnd_dbl_imp = 0;
-        public int low_bnd_eq = 0;
-        public int up_bnd_eq = 0;
-        public int fisher = 0;
-        public int chi_sq = 0;
+        public double a = 0;
+        public double b = 0;
+        public double c = 0;
+        public double d = 0;
+        public double conf = 0;
+        public double d_conf = 0;
+        public double e_conf = 0;
+        public double support = 0;
+        public double completness = 0;
+        public double avg_diff = 0;
+        public double low_bnd_imp = 0;
+        public double up_bnd_imp = 0;
+        public double low_bnd_dbl_imp = 0;
+        public double up_bnd_dbl_imp = 0;
+        public double low_bnd_eq = 0;
+        public double up_bnd_eq = 0;
+        public double fisher = 0;
+        public double chi_sq = 0;
         public string antecedent = "";  // reference
         public string succedent = "";   // reference
         public string condition = "";   // reference
+        #endregion
 
-
+        #region METHODS
         // prevod recordu na XML string
         public string ToXML()
         {
@@ -249,6 +271,7 @@ namespace FEplugin_cs
             return XML;
 
         }
+        #endregion
     }
 
     public class Rec_ti_cedent
