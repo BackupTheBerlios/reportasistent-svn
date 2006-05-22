@@ -78,9 +78,9 @@
                       matrix_name CDATA #REQUIRED
                       attr_name CDATA #REQUIRED
                       creation CDATA #REQUIRED
-                      ctgr_count CDATA #REQUIRED>
+                      ctgr_count CDATA #REQUIRED>  <!-- Kody To Chrzi: ??? name if source column? -->
   <!ELEMENT ctgr EMPTY>
-  <!ATTLIST ctgr name CDATA #REQUIRED>
+  <!ATTLIST ctgr name CDATA #REQUIRED>  <!-- Kody To Chrzi: ??? frequentions of categories? -->
   <!ELEMENT missing_value EMPTY>
   <!ATTLIST missing_value name CDATA #REQUIRED>
 
