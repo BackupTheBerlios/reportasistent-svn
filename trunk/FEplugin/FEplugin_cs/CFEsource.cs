@@ -232,7 +232,20 @@ namespace FEplugin_cs
             IBoxModule[] resultArray = (IBoxModule[]) MyUniqueBoxes.ToArray(typeof(IBoxModule));
             return resultArray;
         }
-        
+  
+        // vrati vsechny bezprostredni predchudce (ve strome) krabicky Box typu ID
+        public static IBoxModule[] ListDirectAncestBoxesWithID(IBoxModule Box, string ID)
+        {
+            ArrayList MyBoxes = new ArrayList();
+            IBoxModule[] Ancestors = Box.ConnectionsFrom().ToArray();
+            foreach (IBoxModule b in Ancestors)
+            {
+                if (b.MadeInCreator.Identifier == ID)
+                    MyBoxes.Add(b);
+            }
+
+            return (MyBoxes.ToArray(typeof(IBoxModule)) as IBoxModule[]);
+        }
         
         public static void VypisKrabky(int zdroj, string ID)
         {

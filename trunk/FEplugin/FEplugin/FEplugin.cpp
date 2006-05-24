@@ -28,9 +28,12 @@ CFESock::CFESock()
 	APTable[0].AP_ID = "hyp_4ft";	//na hyp_4ft prepsal deda
 	APTable[0].pFn = & fFE4fthyp;
 
-	
-	APTable[1].AP_ID = "category";
-	APTable[1].pFn = & fFECategory;
+	APTable[1].AP_ID = "attribute";
+	APTable[1].pFn = & fFEAttribute;
+
+	APTable[2].AP_ID = "category";
+	APTable[2].pFn = & fFECategory;
+
 }
 
 

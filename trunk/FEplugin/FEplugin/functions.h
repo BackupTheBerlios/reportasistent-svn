@@ -20,6 +20,13 @@ CString fFECategory(void* hSource);
 
 CString fFE4fthyp(void* hSource);
 
+// ---AP Atribut
+
+CString fFEAttribute(void* hSource);
+
+
+
+
 
 
 #endif /* _FUNCTIONS*/
