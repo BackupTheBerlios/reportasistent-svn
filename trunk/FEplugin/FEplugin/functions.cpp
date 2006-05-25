@@ -4,7 +4,7 @@
 
 #include "functions.h"
 
-
+using namespace FEplugin_cs;
 
 
 /*
@@ -20,7 +20,7 @@ using namespace MSXML2;
 CString fFECategory(void* hSource)
 {
 	int indexSrc = ((int) hSource) - 1; 
-	System::String^ CatList = FEplugin_cs::FEAPFunctions::fFECategory(indexSrc);
+	System::String^ CatList = FEplugin_cs::AP_FECategory::getList(indexSrc);
 	CString resultStr = (CString) CatList;
 	return resultStr;
 }
@@ -31,7 +31,7 @@ CString fFECategory(void* hSource)
 CString fFE4fthyp(void * hSource)
 {
 	int indexSrc = ((int) hSource) - 1; 
-	System::String^ HypList = FEplugin_cs::FEAPFunctions::fFE4fthyp(indexSrc);
+	System::String^ HypList = FEplugin_cs::AP_FE4fthyp::getList(indexSrc);
 	CString resultStr = (CString) HypList;
 	return resultStr;
 }
@@ -41,7 +41,7 @@ CString fFE4fthyp(void * hSource)
 CString fFEAttribute(void* hSource)
 {
 	int indexSrc = ((int) hSource) - 1;
-	System::String^ AttrList = FEplugin_cs::FEAPFunctions::fFEAttribute(indexSrc);
+	System::String^ AttrList = FEplugin_cs::AP_FEAttribute::getList(indexSrc);
 	CString resultStr = (CString) AttrList;
 	return resultStr;
 }

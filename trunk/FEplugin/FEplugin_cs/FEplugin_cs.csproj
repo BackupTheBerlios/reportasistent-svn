@@ -54,8 +54,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AP_FE4fthyp.cs" />
+    <Compile Include="AP_FECategory.cs" />
     <Compile Include="CFEsource.cs" />
-    <Compile Include="FEAPFunctions.cs" />
+    <Compile Include="AP_FEAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
