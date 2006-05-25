@@ -32,7 +32,6 @@ namespace FEplugin_cs
             // korenovy element
             resultString += "<active_list>";
 
-            string ErrStr = ""; // zaznam o chybach
 
             #region  A) nalezeni vsech krabicek Atributu (DataMiningCommon.Attributes.Attribute)
 

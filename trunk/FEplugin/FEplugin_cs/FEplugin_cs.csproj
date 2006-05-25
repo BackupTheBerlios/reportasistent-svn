@@ -31,18 +31,22 @@
     <Reference Include="FerdaBase, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Ferda\Ferda_checkout\bin\FrontEnd\FerdaBase.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="FerdaHelpers, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Ferda\Ferda_checkout\bin\FrontEnd\FerdaHelpers.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="FerdaModulesManager, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Ferda\Ferda_checkout\bin\FrontEnd\FerdaModulesManager.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="FerdaProjectManager, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Ferda\Ferda_checkout\bin\FrontEnd\FerdaProjectManager.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="icecs, Version=3.0.1.0, Culture=neutral, PublicKeyToken=1f998c50fec78381">
       <SpecificVersion>False</SpecificVersion>
@@ -56,14 +60,17 @@
   <ItemGroup>
     <Compile Include="AP_FE4fthyp.cs" />
     <Compile Include="AP_FECategory.cs" />
+    <Compile Include="BoxesHelper.cs" />
     <Compile Include="CFEsource.cs" />
     <Compile Include="AP_FEAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="XMLHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FrontEndConfig\FrontEndConfig.csproj">
       <Project>{EEB8F0B5-C66B-4E00-9C6D-D0C01B9C9495}</Project>
       <Name>FrontEndConfig</Name>
+      <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

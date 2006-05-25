@@ -34,7 +34,6 @@ namespace FEplugin_cs
 
 
             // zpracovani kazde krabicky - ziskani z ni vsechny kategorie
-            string ErrStr = ""; // zaznam o chybach
 
             #region   nalezeni a zpracovani vsech krabicek Atributu (DataMiningCommon.Attributes.Attribute)
 
@@ -320,6 +319,15 @@ namespace FEplugin_cs
 
         public string ToXML()
         {
+            id = XMLHelper.replaceXMLsign(id);
+            db_name = XMLHelper.replaceXMLsign(db_name);
+            matrix_name = XMLHelper.replaceXMLsign(matrix_name);
+            attr_name = XMLHelper.replaceXMLsign(attr_name);
+            ctgr_name = XMLHelper.replaceXMLsign(ctgr_name);
+            ctgr_type = XMLHelper.replaceXMLsign(ctgr_type);
+            ctgr_freq = XMLHelper.replaceXMLsign(ctgr_freq);
+            bool_type = XMLHelper.replaceXMLsign(bool_type);
+            
             string XML = "";
 
             XML += "<category id=\"" + id + "\" db_name=\"" + db_name + "\" matrix_name=\"" + matrix_name +
@@ -331,6 +339,15 @@ namespace FEplugin_cs
 
         public string ToXML(List<Rec_ctgr_def> Cat_defs)
         {
+            id = XMLHelper.replaceXMLsign(id);
+            db_name = XMLHelper.replaceXMLsign(db_name);
+            matrix_name = XMLHelper.replaceXMLsign(matrix_name);
+            attr_name = XMLHelper.replaceXMLsign(attr_name);
+            ctgr_name = XMLHelper.replaceXMLsign(ctgr_name);
+            ctgr_type = XMLHelper.replaceXMLsign(ctgr_type);
+            ctgr_freq = XMLHelper.replaceXMLsign(ctgr_freq);
+            bool_type = XMLHelper.replaceXMLsign(bool_type);
+
             string XML = "";
 
             XML += "<category id=\"" + id + "\" db_name=\"" + db_name + "\" matrix_name=\"" + matrix_name +
@@ -363,9 +380,7 @@ namespace FEplugin_cs
         public string ToXML()
         {
             // nahrazeni znaku "<", ">" v retezcich (kvuli XML)
-            definition = definition.Replace("&", "&amp;");
-            definition = definition.Replace("<", "&lt;");
-            definition = definition.Replace(">", "&gt;");
+            definition = XMLHelper.replaceXMLsign(definition);
             string XML = "";
             XML += "<ctgr_def definition=\"" + definition + "\"/>";
             return XML;

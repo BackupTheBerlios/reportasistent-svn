@@ -6,6 +6,7 @@
 	ProjectGUID="{361041FE-3355-4A70-8D8D-B6CDF33411C4}"
 	RootNamespace="FEplugin"
 	Keyword="ManagedCProj"
+	AssemblyReferenceSearchPaths="&quot;D:\Projekt\Ferda\Ferda_checkout\bin\FrontEnd&quot;"
 	>
 	<Platforms>
 		<Platform
@@ -180,6 +181,7 @@
 		/>
 		<ProjectReference
 			ReferencedProjectIdentifier="{6E8FAB8A-B8CB-4117-BF8D-4281169A724B}"
+			CopyLocal="false"
 			RelativePathToProject=".\FEplugin_cs\FEplugin_cs.csproj"
 		/>
 		<AssemblyReference

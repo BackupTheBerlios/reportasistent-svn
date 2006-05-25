@@ -15,5 +15,6 @@
     <ApplicationRevision>0</ApplicationRevision>
     <FallbackCulture>en-US</FallbackCulture>
     <VerifyUploadedFiles>false</VerifyUploadedFiles>
+    <ReferencePath>D:\Projekt\Ferda\Ferda_checkout\bin\FrontEnd\</ReferencePath>
   </PropertyGroup>
 </Project>

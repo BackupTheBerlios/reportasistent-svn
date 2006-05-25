@@ -116,7 +116,7 @@ namespace Ferda.FrontEnd
             //getting the name of the exe program (without the suffix)
             assembly = assembly.Substring(0, assembly.IndexOf(','));
             //adding the suffix
-            assembly += ".exe";
+            assembly += ".dll";
             //getting the full location fo the .exe file
             StringBuilder str = new StringBuilder(Assembly.GetExecutingAssembly().Location);
             //replacing the .exe by the name of the config file
