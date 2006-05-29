@@ -20,11 +20,13 @@ CString fFECategory(void* hSource);
 
 CString fFE4fthyp(void* hSource);
 
-// ---AP Atribut
+// --- AP Atribut
 
 CString fFEAttribute(void* hSource);
 
+// --- AP Boolsky cedent
 
+CString fFEBool_cedent(void* hSource);
 
 
 

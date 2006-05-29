@@ -34,6 +34,9 @@ CFESock::CFESock()
 	APTable[2].AP_ID = "category";
 	APTable[2].pFn = & fFECategory;
 
+	APTable[3].AP_ID = "bool_cedent";
+	APTable[3].pFn = & fFEBool_cedent;
+
 }
 
 

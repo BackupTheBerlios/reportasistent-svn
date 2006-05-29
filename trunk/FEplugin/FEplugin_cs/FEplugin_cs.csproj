@@ -59,10 +59,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AP_FE4fthyp.cs" />
+    <Compile Include="AP_FEBool_cedent.cs" />
     <Compile Include="AP_FECategory.cs" />
     <Compile Include="BoxesHelper.cs" />
     <Compile Include="CFEsource.cs" />
     <Compile Include="AP_FEAttribute.cs" />
+    <Compile Include="FE_enums.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="XMLHelper.cs" />
   </ItemGroup>
