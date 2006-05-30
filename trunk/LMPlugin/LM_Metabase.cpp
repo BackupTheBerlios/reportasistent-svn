@@ -210,8 +210,8 @@ CString Attribute_Meta::xml_convert ()
 	xml_string = xml_string + "creation=\"" + creation + "\" ";
 	xml_string = xml_string + "ctgr_count=\"" + ctgr_count + "\"> ";
 	for (int i = 0; i < category_list.GetSize (); i++)
-		xml_string = xml_string + "<ctgr name=\"" + category_list.GetAt (i) +
-			"\" /> ";
+		xml_string = xml_string + "<ctgr name=\"" + category_list.GetAt (i).name +
+			"\" freq=\"" + category_list.GetAt (i).freq + "\" /> ";
 	for (i = 0; i < missing_type_list.GetSize (); i++)
 		xml_string = xml_string + "<missing_value name=\"" + missing_type_list.GetAt (i) +
 			"\" /> ";

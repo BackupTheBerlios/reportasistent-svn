@@ -724,6 +724,8 @@ CString fLMAttribute(void* hSource)
 	Attribute_Meta * ptatt;
 	TAttribute_Meta_Array list;
 
+	TCtgr cat;
+
 	LPCTSTR q =
 		"SELECT * \
 		 FROM tmAttribute, tmMatrix, tsAttributeSubType \
@@ -760,7 +762,9 @@ CString fLMAttribute(void* hSource)
 					hlp.Replace ("&", "&amp;");
 					hlp.Replace ("<", "&lt;");
 					hlp.Replace (">", "&gt;");
-					ptatt->category_list.Add (hlp);
+					cat.name = hlp;
+					cat.freq = "N/A";
+					ptatt->category_list.Add (cat);
 					//add missing category
 					if (rscat.m_XCategory)
 						ptatt->missing_type_list.Add (hlp);

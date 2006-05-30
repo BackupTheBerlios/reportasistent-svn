@@ -52,7 +52,7 @@
 
 <xsl:text disable-output-escaping="yes">
 		</xsl:text>
-		<attribute name="categories"/>
+		<attribute name="categories_frequency"/>
 <xsl:text disable-output-escaping="yes">
 		</xsl:text>
 		<attribute name="missing_values"/>
@@ -95,7 +95,7 @@
 		&lt;value </xsl:text>
 		<xsl:apply-templates select="@*" mode="values"/>
 
-		<xsl:text disable-output-escaping="yes">categories="</xsl:text>
+		<xsl:text disable-output-escaping="yes">categories_frequency="</xsl:text>
 		<xsl:apply-templates select="ctgr" mode="values"/>
 		<xsl:text disable-output-escaping="yes">" </xsl:text>
 		
@@ -117,6 +117,9 @@
 		</xsl:if>
 
 		<xsl:value-of select="@name"/>
+		<xsl:text disable-output-escaping="no"> (</xsl:text>
+		<xsl:value-of select="@freq"/>
+		<xsl:text disable-output-escaping="no">)</xsl:text>
 	</xsl:template>
 
 

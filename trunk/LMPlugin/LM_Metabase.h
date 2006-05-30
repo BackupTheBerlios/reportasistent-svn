@@ -112,7 +112,13 @@ public:
 
 typedef CArray <Bool_Cedent_Meta *, Bool_Cedent_Meta *> TBool_Cedent_Meta_Array;
 
-typedef CArray <CString, CString> TCtgrArray;
+struct TCtgr
+{
+	CString name;
+	CString freq;
+};
+
+typedef CArray <TCtgr, TCtgr> TCtgrArray;
 
 typedef CArray <CString, CString> TMissingTypeArray;
 
