@@ -23,7 +23,7 @@ namespace FEPtestap_cs
             {
                 //CFEsource src2 = new CFEsource(@"c:\Documents and Settings\Honza\Dokumenty\Barbora1.xfp");
                 //index1 = CFEsourcesTab.NewSource(@"c:\Documents and Settings\Honza\Dokumenty\FERDA_CABG.xfp");
-                index1 = CFEsourcesTab.NewSource(@"c:\Documents and Settings\Honza\Dokumenty\Stulong1.xfp");
+                index1 = CFEsourcesTab.NewSource(@"D:\Projekt\Vyvoj\ReportAsistent\FEProjects\Barbora1.xfp");
                 //index2 = CFEsourcesTab.NewSource(@"c:\Documents and Settings\Honza\Dokumenty\FERDA_CABG.xfp");
             }
             catch (System.Exception e)
@@ -39,7 +39,7 @@ namespace FEPtestap_cs
     
             // prohrabani se v archivu
             BoxesHelper.VypisKrabky(0, "LISpMinerTasks.FFTTask");
-            AP_FEAttribute.getList(0);
+            AP_FEBool_cedent.getList(0);
         }
 
         public static string OtevriSoubor()
