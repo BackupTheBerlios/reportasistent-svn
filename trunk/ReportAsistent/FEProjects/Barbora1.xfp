@@ -102,6 +102,88 @@
             <Y>20</Y>
           </Position>
         </PositionSet>
+        <PositionSet>
+          <BoxProjectIdentifier>18</BoxProjectIdentifier>
+          <Position>
+            <X>746</X>
+            <Y>260</Y>
+          </Position>
+        </PositionSet>
+        <PositionSet>
+          <BoxProjectIdentifier>19</BoxProjectIdentifier>
+          <Position>
+            <X>181</X>
+            <Y>391</Y>
+          </Position>
+        </PositionSet>
+        <PositionSet>
+          <BoxProjectIdentifier>20</BoxProjectIdentifier>
+          <Position>
+            <X>195</X>
+            <Y>296</Y>
+          </Position>
+        </PositionSet>
+      </PositionSets>
+    </View>
+    <View>
+      <Name>KL desktop</Name>
+      <PositionSets>
+        <PositionSet>
+          <BoxProjectIdentifier>4</BoxProjectIdentifier>
+          <Position>
+            <X>164</X>
+            <Y>87</Y>
+          </Position>
+        </PositionSet>
+        <PositionSet>
+          <BoxProjectIdentifier>5</BoxProjectIdentifier>
+          <Position>
+            <X>160</X>
+            <Y>177</Y>
+          </Position>
+        </PositionSet>
+        <PositionSet>
+          <BoxProjectIdentifier>11</BoxProjectIdentifier>
+          <Position>
+            <X>221</X>
+            <Y>294</Y>
+          </Position>
+        </PositionSet>
+        <PositionSet>
+          <BoxProjectIdentifier>21</BoxProjectIdentifier>
+          <Position>
+            <X>458</X>
+            <Y>110</Y>
+          </Position>
+        </PositionSet>
+        <PositionSet>
+          <BoxProjectIdentifier>22</BoxProjectIdentifier>
+          <Position>
+            <X>317</X>
+            <Y>90</Y>
+          </Position>
+        </PositionSet>
+        <PositionSet>
+          <BoxProjectIdentifier>23</BoxProjectIdentifier>
+          <Position>
+            <X>316</X>
+            <Y>179</Y>
+          </Position>
+        </PositionSet>
+        <PositionSet>
+          <BoxProjectIdentifier>27</BoxProjectIdentifier>
+          <Position>
+            <X>392</X>
+            <Y>266</Y>
+          </Position>
+        </PositionSet>
+        <PositionSet>
+          <BoxProjectIdentifier>28</BoxProjectIdentifier>
+          <Position>
+            <X>221</X>
+            <Y>396</Y>
+          </Position>
+        </PositionSet>
       </PositionSets>
     </View>
   </Views>
@@ -357,6 +439,10 @@
           <SocketName>LiteralSetting</SocketName>
           <BoxProjectIdentifier>7</BoxProjectIdentifier>
         </Connection>
+        <Connection>
+          <SocketName>LiteralSetting</SocketName>
+          <BoxProjectIdentifier>10</BoxProjectIdentifier>
+        </Connection>
       </Connections>
       <PropertySets>
         <PropertySet>
@@ -371,7 +457,7 @@
           <PropertyName>MinLen</PropertyName>
           <Value xsi:type="LongValueT">
             <Value>
-              <longValue>1</longValue>
+              <longValue>2</longValue>
             </Value>
           </Value>
         </PropertySet>
@@ -490,6 +576,10 @@
           <BoxProjectIdentifier>8</BoxProjectIdentifier>
         </Connection>
         <Connection>
+          <SocketName>AntecedentSetting</SocketName>
+          <BoxProjectIdentifier>11</BoxProjectIdentifier>
+        </Connection>
+        <Connection>
           <SocketName>SuccedentSetting</SocketName>
           <BoxProjectIdentifier>11</BoxProjectIdentifier>
         </Connection>
@@ -504,20 +594,20 @@
           <Value xsi:type="GenerationInfoValueT">
             <Value>
               <generationState>Completed</generationState>
-              <generationNrOfTests>20</generationNrOfTests>
-              <generationNrOfHypotheses>11</generationNrOfHypotheses>
+              <generationNrOfTests>0</generationNrOfTests>
+              <generationNrOfHypotheses>0</generationNrOfHypotheses>
               <generationStartTime xsi:type="DateTimeTI">
-                <day>18</day>
+                <day>28</day>
                 <month>5</month>
                 <year>2006</year>
-                <hour>11</hour>
+                <hour>20</hour>
                 <minute>19</minute>
-                <second>33</second>
+                <second>31</second>
               </generationStartTime>
               <generationTotalTime xsi:type="TimeTI">
                 <hour>0</hour>
                 <minute>0</minute>
-                <second>40</second>
+                <second>7</second>
               </generationTotalTime>
             </Value>
           </Value>
@@ -525,426 +615,7 @@
         <PropertySet>
           <PropertyName>Hypotheses</PropertyName>
           <Value xsi:type="HypothesesValueT">
-            <Value>
-              <HypothesisStruct>
-                <quantifierSetting>
-                  <firstContingencyTableRows>
-                    <ArrayOfInt>
-                      <int>198</int>
-                      <int>1629</int>
-                    </ArrayOfInt>
-                    <ArrayOfInt>
-                      <int>367</int>
-                      <int>3987</int>
-                    </ArrayOfInt>
-                  </firstContingencyTableRows>
-                  <secondContingencyTableRows />
-                  <numericValues />
-                  <allObjectsCount>6181</allObjectsCount>
-                </quantifierSetting>
-                <booleanLiterals>
-                  <BooleanLiteralStruct>
-                    <cedentType>Antecedent</cedentType>
-                    <categoriesNames>
-                      <string>A</string>
-                    </categoriesNames>
-                    <negation>false</negation>
-                    <literalName>status</literalName>
-                    <literalIdentifier>7</literalIdentifier>
-                  </BooleanLiteralStruct>
-                  <BooleanLiteralStruct>
-                    <cedentType>Succedent</cedentType>
-                    <categoriesNames>
-                      <string>&lt;10110;11110)</string>
-                    </categoriesNames>
-                    <negation>false</negation>
-                    <literalName>salary</literalName>
-                    <literalIdentifier>10</literalIdentifier>
-                  </BooleanLiteralStruct>
-                </booleanLiterals>
-                <literals />
-              </HypothesisStruct>
-              <HypothesisStruct>
-                <quantifierSetting>
-                  <firstContingencyTableRows>
-                    <ArrayOfInt>
-                      <int>1026</int>
-                      <int>801</int>
-                    </ArrayOfInt>
-                    <ArrayOfInt>
-                      <int>2562</int>
-                      <int>1792</int>
-                    </ArrayOfInt>
-                  </firstContingencyTableRows>
-                  <secondContingencyTableRows />
-                  <numericValues />
-                  <allObjectsCount>6181</allObjectsCount>
-                </quantifierSetting>
-                <booleanLiterals>
-                  <BooleanLiteralStruct>
-                    <cedentType>Antecedent</cedentType>
-                    <categoriesNames>
-                      <string>A</string>
-                    </categoriesNames>
-                    <negation>false</negation>
-                    <literalName>status</literalName>
-                    <literalIdentifier>7</literalIdentifier>
-                  </BooleanLiteralStruct>
-                  <BooleanLiteralStruct>
-                    <cedentType>Succedent</cedentType>
-                    <categoriesNames>
-                      <string>&lt;8110;9110)</string>
-                    </categoriesNames>
-                    <negation>false</negation>
-                    <literalName>salary</literalName>
-                    <literalIdentifier>10</literalIdentifier>
-                  </BooleanLiteralStruct>
-                </booleanLiterals>
-                <literals />
-              </HypothesisStruct>
-              <HypothesisStruct>
-                <quantifierSetting>
-                  <firstContingencyTableRows>
-                    <ArrayOfInt>
-                      <int>342</int>
-                      <int>1485</int>
-                    </ArrayOfInt>
-                    <ArrayOfInt>
-                      <int>930</int>
-                      <int>3424</int>
-                    </ArrayOfInt>
-                  </firstContingencyTableRows>
-                  <secondContingencyTableRows />
-                  <numericValues />
-                  <allObjectsCount>6181</allObjectsCount>
-                </quantifierSetting>
-                <booleanLiterals>
-                  <BooleanLiteralStruct>
-                    <cedentType>Antecedent</cedentType>
-                    <categoriesNames>
-                      <string>A</string>
-                    </categoriesNames>
-                    <negation>false</negation>
-                    <literalName>status</literalName>
-                    <literalIdentifier>7</literalIdentifier>
-                  </BooleanLiteralStruct>
-                  <BooleanLiteralStruct>
-                    <cedentType>Succedent</cedentType>
-                    <categoriesNames>
-                      <string>&lt;9110;10110)</string>
-                    </categoriesNames>
-                    <negation>false</negation>
-                    <literalName>salary</literalName>
-                    <literalIdentifier>10</literalIdentifier>
-                  </BooleanLiteralStruct>
-                </booleanLiterals>
-                <literals />
-              </HypothesisStruct>
-              <HypothesisStruct>
-                <quantifierSetting>
-                  <firstContingencyTableRows>
-                    <ArrayOfInt>
-                      <int>34</int>
-                      <int>255</int>
-                    </ArrayOfInt>
-                    <ArrayOfInt>
-                      <int>531</int>
-                      <int>5361</int>
-                    </ArrayOfInt>
-                  </firstContingencyTableRows>
-                  <secondContingencyTableRows />
-                  <numericValues />
-                  <allObjectsCount>6181</allObjectsCount>
-                </quantifierSetting>
-                <booleanLiterals>
-                  <BooleanLiteralStruct>
-                    <cedentType>Antecedent</cedentType>
-                    <categoriesNames>
-                      <string>B</string>
-                    </categoriesNames>
-                    <negation>false</negation>
-                    <literalName>status</literalName>
-                    <literalIdentifier>7</literalIdentifier>
-                  </BooleanLiteralStruct>
-                  <BooleanLiteralStruct>
-                    <cedentType>Succedent</cedentType>
-                    <categoriesNames>
-                      <string>&lt;10110;11110)</string>
-                    </categoriesNames>
-                    <negation>false</negation>
-                    <literalName>salary</literalName>
-                    <literalIdentifier>10</literalIdentifier>
-                  </BooleanLiteralStruct>
-                </booleanLiterals>
-                <literals />
-              </HypothesisStruct>
-              <HypothesisStruct>
-                <quantifierSetting>
-                  <firstContingencyTableRows>
-                    <ArrayOfInt>
-                      <int>162</int>
-                      <int>127</int>
-                    </ArrayOfInt>
-                    <ArrayOfInt>
-                      <int>3426</int>
-                      <int>2466</int>
-                    </ArrayOfInt>
-                  </firstContingencyTableRows>
-                  <secondContingencyTableRows />
-                  <numericValues />
-                  <allObjectsCount>6181</allObjectsCount>
-                </quantifierSetting>
-                <booleanLiterals>
-                  <BooleanLiteralStruct>
-                    <cedentType>Antecedent</cedentType>
-                    <categoriesNames>
-                      <string>B</string>
-                    </categoriesNames>
-                    <negation>false</negation>
-                    <literalName>status</literalName>
-                    <literalIdentifier>7</literalIdentifier>
-                  </BooleanLiteralStruct>
-                  <BooleanLiteralStruct>
-                    <cedentType>Succedent</cedentType>
-                    <categoriesNames>
-                      <string>&lt;8110;9110)</string>
-                    </categoriesNames>
-                    <negation>false</negation>
-                    <literalName>salary</literalName>
-                    <literalIdentifier>10</literalIdentifier>
-                  </BooleanLiteralStruct>
-                </booleanLiterals>
-                <literals />
-              </HypothesisStruct>
-              <HypothesisStruct>
-                <quantifierSetting>
-                  <firstContingencyTableRows>
-                    <ArrayOfInt>
-                      <int>66</int>
-                      <int>223</int>
-                    </ArrayOfInt>
-                    <ArrayOfInt>
-                      <int>1206</int>
-                      <int>4686</int>
-                    </ArrayOfInt>
-                  </firstContingencyTableRows>
-                  <secondContingencyTableRows />
-                  <numericValues />
-                  <allObjectsCount>6181</allObjectsCount>
-                </quantifierSetting>
-                <booleanLiterals>
-                  <BooleanLiteralStruct>
-                    <cedentType>Antecedent</cedentType>
-                    <categoriesNames>
-                      <string>B</string>
-                    </categoriesNames>
-                    <negation>false</negation>
-                    <literalName>status</literalName>
-                    <literalIdentifier>7</literalIdentifier>
-                  </BooleanLiteralStruct>
-                  <BooleanLiteralStruct>
-                    <cedentType>Succedent</cedentType>
-                    <categoriesNames>
-                      <string>&lt;9110;10110)</string>
-                    </categoriesNames>
-                    <negation>false</negation>
-                    <literalName>salary</literalName>
-                    <literalIdentifier>10</literalIdentifier>
-                  </BooleanLiteralStruct>
-                </booleanLiterals>
-                <literals />
-              </HypothesisStruct>
-              <HypothesisStruct>
-                <quantifierSetting>
-                  <firstContingencyTableRows>
-                    <ArrayOfInt>
-                      <int>2106</int>
-                      <int>1521</int>
-                    </ArrayOfInt>
-                    <ArrayOfInt>
-                      <int>1482</int>
-                      <int>1072</int>
-                    </ArrayOfInt>
-                  </firstContingencyTableRows>
-                  <secondContingencyTableRows />
-                  <numericValues />
-                  <allObjectsCount>6181</allObjectsCount>
-                </quantifierSetting>
-                <booleanLiterals>
-                  <BooleanLiteralStruct>
-                    <cedentType>Antecedent</cedentType>
-                    <categoriesNames>
-                      <string>C</string>
-                    </categoriesNames>
-                    <negation>false</negation>
-                    <literalName>status</literalName>
-                    <literalIdentifier>7</literalIdentifier>
-                  </BooleanLiteralStruct>
-                  <BooleanLiteralStruct>
-                    <cedentType>Succedent</cedentType>
-                    <categoriesNames>
-                      <string>&lt;8110;9110)</string>
-                    </categoriesNames>
-                    <negation>false</negation>
-                    <literalName>salary</literalName>
-                    <literalIdentifier>10</literalIdentifier>
-                  </BooleanLiteralStruct>
-                </booleanLiterals>
-                <literals />
-              </HypothesisStruct>
-              <HypothesisStruct>
-                <quantifierSetting>
-                  <firstContingencyTableRows>
-                    <ArrayOfInt>
-                      <int>801</int>
-                      <int>2826</int>
-                    </ArrayOfInt>
-                    <ArrayOfInt>
-                      <int>471</int>
-                      <int>2083</int>
-                    </ArrayOfInt>
-                  </firstContingencyTableRows>
-                  <secondContingencyTableRows />
-                  <numericValues />
-                  <allObjectsCount>6181</allObjectsCount>
-                </quantifierSetting>
-                <booleanLiterals>
-                  <BooleanLiteralStruct>
-                    <cedentType>Antecedent</cedentType>
-                    <categoriesNames>
-                      <string>C</string>
-                    </categoriesNames>
-                    <negation>false</negation>
-                    <literalName>status</literalName>
-                    <literalIdentifier>7</literalIdentifier>
-                  </BooleanLiteralStruct>
-                  <BooleanLiteralStruct>
-                    <cedentType>Succedent</cedentType>
-                    <categoriesNames>
-                      <string>&lt;9110;10110)</string>
-                    </categoriesNames>
-                    <negation>false</negation>
-                    <literalName>salary</literalName>
-                    <literalIdentifier>10</literalIdentifier>
-                  </BooleanLiteralStruct>
-                </booleanLiterals>
-                <literals />
-              </HypothesisStruct>
-              <HypothesisStruct>
-                <quantifierSetting>
-                  <firstContingencyTableRows>
-                    <ArrayOfInt>
-                      <int>45</int>
-                      <int>393</int>
-                    </ArrayOfInt>
-                    <ArrayOfInt>
-                      <int>520</int>
-                      <int>5223</int>
-                    </ArrayOfInt>
-                  </firstContingencyTableRows>
-                  <secondContingencyTableRows />
-                  <numericValues />
-                  <allObjectsCount>6181</allObjectsCount>
-                </quantifierSetting>
-                <booleanLiterals>
-                  <BooleanLiteralStruct>
-                    <cedentType>Antecedent</cedentType>
-                    <categoriesNames>
-                      <string>D</string>
-                    </categoriesNames>
-                    <negation>false</negation>
-                    <literalName>status</literalName>
-                    <literalIdentifier>7</literalIdentifier>
-                  </BooleanLiteralStruct>
-                  <BooleanLiteralStruct>
-                    <cedentType>Succedent</cedentType>
-                    <categoriesNames>
-                      <string>&lt;10110;11110)</string>
-                    </categoriesNames>
-                    <negation>false</negation>
-                    <literalName>salary</literalName>
-                    <literalIdentifier>10</literalIdentifier>
-                  </BooleanLiteralStruct>
-                </booleanLiterals>
-                <literals />
-              </HypothesisStruct>
-              <HypothesisStruct>
-                <quantifierSetting>
-                  <firstContingencyTableRows>
-                    <ArrayOfInt>
-                      <int>294</int>
-                      <int>144</int>
-                    </ArrayOfInt>
-                    <ArrayOfInt>
-                      <int>3294</int>
-                      <int>2449</int>
-                    </ArrayOfInt>
-                  </firstContingencyTableRows>
-                  <secondContingencyTableRows />
-                  <numericValues />
-                  <allObjectsCount>6181</allObjectsCount>
-                </quantifierSetting>
-                <booleanLiterals>
-                  <BooleanLiteralStruct>
-                    <cedentType>Antecedent</cedentType>
-                    <categoriesNames>
-                      <string>D</string>
-                    </categoriesNames>
-                    <negation>false</negation>
-                    <literalName>status</literalName>
-                    <literalIdentifier>7</literalIdentifier>
-                  </BooleanLiteralStruct>
-                  <BooleanLiteralStruct>
-                    <cedentType>Succedent</cedentType>
-                    <categoriesNames>
-                      <string>&lt;8110;9110)</string>
-                    </categoriesNames>
-                    <negation>false</negation>
-                    <literalName>salary</literalName>
-                    <literalIdentifier>10</literalIdentifier>
-                  </BooleanLiteralStruct>
-                </booleanLiterals>
-                <literals />
-              </HypothesisStruct>
-              <HypothesisStruct>
-                <quantifierSetting>
-                  <firstContingencyTableRows>
-                    <ArrayOfInt>
-                      <int>63</int>
-                      <int>375</int>
-                    </ArrayOfInt>
-                    <ArrayOfInt>
-                      <int>1209</int>
-                      <int>4534</int>
-                    </ArrayOfInt>
-                  </firstContingencyTableRows>
-                  <secondContingencyTableRows />
-                  <numericValues />
-                  <allObjectsCount>6181</allObjectsCount>
-                </quantifierSetting>
-                <booleanLiterals>
-                  <BooleanLiteralStruct>
-                    <cedentType>Antecedent</cedentType>
-                    <categoriesNames>
-                      <string>D</string>
-                    </categoriesNames>
-                    <negation>false</negation>
-                    <literalName>status</literalName>
-                    <literalIdentifier>7</literalIdentifier>
-                  </BooleanLiteralStruct>
-                  <BooleanLiteralStruct>
-                    <cedentType>Succedent</cedentType>
-                    <categoriesNames>
-                      <string>&lt;9110;10110)</string>
-                    </categoriesNames>
-                    <negation>false</negation>
-                    <literalName>salary</literalName>
-                    <literalIdentifier>10</literalIdentifier>
-                  </BooleanLiteralStruct>
-                </booleanLiterals>
-                <literals />
-              </HypothesisStruct>
-            </Value>
+            <Value />
           </Value>
         </PropertySet>
         <PropertySet>
@@ -1143,6 +814,529 @@
           <Value xsi:type="StringValueT">
             <Value>
               <stringValue>loan_id</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+      </PropertySets>
+    </Box>
+    <Box>
+      <CreatorIdentifier>LISpMinerTasks.SDFFTTask</CreatorIdentifier>
+      <ProjectIdentifier>18</ProjectIdentifier>
+      <Connections>
+        <Connection>
+          <SocketName>AntecedentSetting</SocketName>
+          <BoxProjectIdentifier>11</BoxProjectIdentifier>
+        </Connection>
+        <Connection>
+          <SocketName>SuccedentSetting</SocketName>
+          <BoxProjectIdentifier>8</BoxProjectIdentifier>
+        </Connection>
+        <Connection>
+          <SocketName>SuccedentSetting</SocketName>
+          <BoxProjectIdentifier>11</BoxProjectIdentifier>
+        </Connection>
+      </Connections>
+      <PropertySets>
+        <PropertySet>
+          <PropertyName>FirstSet</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>Cedent1</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>GenerationInfo</PropertyName>
+          <Value xsi:type="GenerationInfoValueT">
+            <Value>
+              <generationState>DidNotStart</generationState>
+              <generationNrOfTests>0</generationNrOfTests>
+              <generationNrOfHypotheses>0</generationNrOfHypotheses>
+              <generationStartTime xsi:type="DateTimeTI">
+                <day>0</day>
+                <month>0</month>
+                <year>0</year>
+                <hour>0</hour>
+                <minute>0</minute>
+                <second>0</second>
+              </generationStartTime>
+              <generationTotalTime xsi:type="TimeTI">
+                <hour>0</hour>
+                <minute>0</minute>
+                <second>0</second>
+              </generationTotalTime>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>Hypotheses</PropertyName>
+          <Value xsi:type="HypothesesValueT">
+            <Value />
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>SecondSet</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>Cedent2</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+      </PropertySets>
+    </Box>
+    <Box>
+      <CreatorIdentifier>LISpMinerTasks.SDFFTTask</CreatorIdentifier>
+      <UserName>SD4ft Task nepouzita</UserName>
+      <ProjectIdentifier>19</ProjectIdentifier>
+      <Connections />
+      <PropertySets>
+        <PropertySet>
+          <PropertyName>FirstSet</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>Cedent1</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>GenerationInfo</PropertyName>
+          <Value xsi:type="GenerationInfoValueT">
+            <Value>
+              <generationState>DidNotStart</generationState>
+              <generationNrOfTests>0</generationNrOfTests>
+              <generationNrOfHypotheses>0</generationNrOfHypotheses>
+              <generationStartTime xsi:type="DateTimeTI">
+                <day>0</day>
+                <month>0</month>
+                <year>0</year>
+                <hour>0</hour>
+                <minute>0</minute>
+                <second>0</second>
+              </generationStartTime>
+              <generationTotalTime xsi:type="TimeTI">
+                <hour>0</hour>
+                <minute>0</minute>
+                <second>0</second>
+              </generationTotalTime>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>Hypotheses</PropertyName>
+          <Value xsi:type="HypothesesValueT">
+            <Value />
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>SecondSet</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>Cedent2</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+      </PropertySets>
+    </Box>
+    <Box>
+      <CreatorIdentifier>LISpMinerTasks.FFTTask</CreatorIdentifier>
+      <UserName>4ft Task nepouzita</UserName>
+      <ProjectIdentifier>20</ProjectIdentifier>
+      <Connections />
+      <PropertySets>
+        <PropertySet>
+          <PropertyName>GenerationInfo</PropertyName>
+          <Value xsi:type="GenerationInfoValueT">
+            <Value>
+              <generationState>DidNotStart</generationState>
+              <generationNrOfTests>0</generationNrOfTests>
+              <generationNrOfHypotheses>0</generationNrOfHypotheses>
+              <generationStartTime xsi:type="DateTimeTI">
+                <day>0</day>
+                <month>0</month>
+                <year>0</year>
+                <hour>0</hour>
+                <minute>0</minute>
+                <second>0</second>
+              </generationStartTime>
+              <generationTotalTime xsi:type="TimeTI">
+                <hour>0</hour>
+                <minute>0</minute>
+                <second>0</second>
+              </generationTotalTime>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>Hypotheses</PropertyName>
+          <Value xsi:type="HypothesesValueT">
+            <Value />
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>IncludeSymetric</PropertyName>
+          <Value xsi:type="BoolValueT">
+            <Value>
+              <boolValue>true</boolValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>MissingsType</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>Deleting</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>Prolong100A</PropertyName>
+          <Value xsi:type="BoolValueT">
+            <Value>
+              <boolValue>false</boolValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>Prolong100S</PropertyName>
+          <Value xsi:type="BoolValueT">
+            <Value>
+              <boolValue>false</boolValue>
+            </Value>
+          </Value>
+        </PropertySet>
+      </PropertySets>
+    </Box>
+    <Box>
+      <CreatorIdentifier>LISpMinerTasks.KLTask</CreatorIdentifier>
+      <ProjectIdentifier>21</ProjectIdentifier>
+      <Connections>
+        <Connection>
+          <SocketName>AntecedentSetting</SocketName>
+          <BoxProjectIdentifier>22</BoxProjectIdentifier>
+        </Connection>
+        <Connection>
+          <SocketName>SuccedentSetting</SocketName>
+          <BoxProjectIdentifier>23</BoxProjectIdentifier>
+        </Connection>
+        <Connection>
+          <SocketName>ConditionSetting</SocketName>
+          <BoxProjectIdentifier>11</BoxProjectIdentifier>
+        </Connection>
+        <Connection>
+          <SocketName>ConditionSetting</SocketName>
+          <BoxProjectIdentifier>28</BoxProjectIdentifier>
+        </Connection>
+        <Connection>
+          <SocketName>KLQuantifier</SocketName>
+          <BoxProjectIdentifier>25</BoxProjectIdentifier>
+        </Connection>
+        <Connection>
+          <SocketName>KLQuantifier</SocketName>
+          <BoxProjectIdentifier>26</BoxProjectIdentifier>
+        </Connection>
+        <Connection>
+          <SocketName>KLQuantifier</SocketName>
+          <BoxProjectIdentifier>27</BoxProjectIdentifier>
+        </Connection>
+      </Connections>
+      <PropertySets>
+        <PropertySet>
+          <PropertyName>GenerationInfo</PropertyName>
+          <Value xsi:type="GenerationInfoValueT">
+            <Value>
+              <generationState>Completed</generationState>
+              <generationNrOfTests>1</generationNrOfTests>
+              <generationNrOfHypotheses>0</generationNrOfHypotheses>
+              <generationStartTime xsi:type="DateTimeTI">
+                <day>30</day>
+                <month>5</month>
+                <year>2006</year>
+                <hour>17</hour>
+                <minute>24</minute>
+                <second>41</second>
+              </generationStartTime>
+              <generationTotalTime xsi:type="TimeTI">
+                <hour>0</hour>
+                <minute>0</minute>
+                <second>6</second>
+              </generationTotalTime>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>Hypotheses</PropertyName>
+          <Value xsi:type="HypothesesValueT">
+            <Value />
+          </Value>
+        </PropertySet>
+      </PropertySets>
+    </Box>
+    <Box>
+      <CreatorIdentifier>DataMiningCommon.CategorialPartialCedentSetting</CreatorIdentifier>
+      <UserName>KL antecedent</UserName>
+      <ProjectIdentifier>22</ProjectIdentifier>
+      <Connections>
+        <Connection>
+          <SocketName>Attribute</SocketName>
+          <BoxProjectIdentifier>4</BoxProjectIdentifier>
+        </Connection>
+      </Connections>
+      <PropertySets>
+        <PropertySet>
+          <PropertyName>MaxLen</PropertyName>
+          <Value xsi:type="LongValueT">
+            <Value>
+              <longValue>1</longValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>MinLen</PropertyName>
+          <Value xsi:type="LongValueT">
+            <Value>
+              <longValue>1</longValue>
+            </Value>
+          </Value>
+        </PropertySet>
+      </PropertySets>
+    </Box>
+    <Box>
+      <CreatorIdentifier>DataMiningCommon.CategorialPartialCedentSetting</CreatorIdentifier>
+      <UserName>KL succedent</UserName>
+      <ProjectIdentifier>23</ProjectIdentifier>
+      <Connections>
+        <Connection>
+          <SocketName>Attribute</SocketName>
+          <BoxProjectIdentifier>5</BoxProjectIdentifier>
+        </Connection>
+      </Connections>
+      <PropertySets>
+        <PropertySet>
+          <PropertyName>MaxLen</PropertyName>
+          <Value xsi:type="LongValueT">
+            <Value>
+              <longValue>1</longValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>MinLen</PropertyName>
+          <Value xsi:type="LongValueT">
+            <Value>
+              <longValue>1</longValue>
+            </Value>
+          </Value>
+        </PropertySet>
+      </PropertySets>
+    </Box>
+    <Box>
+      <CreatorIdentifier>LISpMinerTasks.KLTask.Quantifiers.Functional.ConditionalEntropy</CreatorIdentifier>
+      <ProjectIdentifier>25</ProjectIdentifier>
+      <Connections />
+      <PropertySets>
+        <PropertySet>
+          <PropertyName>ColumnFrom</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>1</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>ColumnTo</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>All</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>Direction</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>ColumnsOnRows</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>Relation</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>GreaterThanOrEqual</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>RowFrom</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>1</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>RowTo</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>All</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>Treshold</PropertyName>
+          <Value xsi:type="DoubleValueT">
+            <Value>
+              <doubleValue>30</doubleValue>
+            </Value>
+          </Value>
+        </PropertySet>
+      </PropertySets>
+    </Box>
+    <Box>
+      <CreatorIdentifier>LISpMinerTasks.KLTask.Quantifiers.Aggregation.AnyValue</CreatorIdentifier>
+      <ProjectIdentifier>26</ProjectIdentifier>
+      <Connections />
+      <PropertySets>
+        <PropertySet>
+          <PropertyName>ColumnFrom</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>1</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>ColumnTo</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>All</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>Relation</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>LessThan</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>RowFrom</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>1</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>RowTo</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>All</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>Treshold</PropertyName>
+          <Value xsi:type="DoubleValueT">
+            <Value>
+              <doubleValue>1</doubleValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>Units</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>AbsoluteNumber</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+      </PropertySets>
+    </Box>
+    <Box>
+      <CreatorIdentifier>LISpMinerTasks.KLTask.Quantifiers.Aggregation.SumOfValues</CreatorIdentifier>
+      <ProjectIdentifier>27</ProjectIdentifier>
+      <Connections />
+      <PropertySets>
+        <PropertySet>
+          <PropertyName>ColumnFrom</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>1</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>ColumnTo</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>All</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>Relation</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>GreaterThanOrEqual</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>RowFrom</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>1</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>RowTo</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>All</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>Treshold</PropertyName>
+          <Value xsi:type="DoubleValueT">
+            <Value>
+              <doubleValue>30</doubleValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>Units</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>AbsoluteNumber</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+      </PropertySets>
+    </Box>
+    <Box>
+      <CreatorIdentifier>DataMiningCommon.BooleanPartialCedentSetting</CreatorIdentifier>
+      <UserName>Spatny dilci cedent</UserName>
+      <ProjectIdentifier>28</ProjectIdentifier>
+      <Connections />
+      <PropertySets>
+        <PropertySet>
+          <PropertyName>MaxLen</PropertyName>
+          <Value xsi:type="LongValueT">
+            <Value>
+              <longValue>1</longValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>MinLen</PropertyName>
+          <Value xsi:type="LongValueT">
+            <Value>
+              <longValue>1</longValue>
             </Value>
           </Value>
         </PropertySet>

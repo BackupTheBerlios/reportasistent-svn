@@ -102,6 +102,46 @@
         </PositionSet>
       </PositionSets>
     </View>
+    <View>
+      <Name>New Desktop3</Name>
+      <PositionSets>
+        <PositionSet>
+          <BoxProjectIdentifier>19</BoxProjectIdentifier>
+          <Position>
+            <X>349</X>
+            <Y>84</Y>
+          </Position>
+        </PositionSet>
+        <PositionSet>
+          <BoxProjectIdentifier>20</BoxProjectIdentifier>
+          <Position>
+            <X>152</X>
+            <Y>72</Y>
+          </Position>
+        </PositionSet>
+        <PositionSet>
+          <BoxProjectIdentifier>22</BoxProjectIdentifier>
+          <Position>
+            <X>159</X>
+            <Y>165</Y>
+          </Position>
+        </PositionSet>
+        <PositionSet>
+          <BoxProjectIdentifier>23</BoxProjectIdentifier>
+          <Position>
+            <X>165</X>
+            <Y>299</Y>
+          </Position>
+        </PositionSet>
+        <PositionSet>
+          <BoxProjectIdentifier>24</BoxProjectIdentifier>
+          <Position>
+            <X>176</X>
+            <Y>433</Y>
+          </Position>
+        </PositionSet>
+      </PositionSets>
+    </View>
   </Views>
   <Boxes>
     <Box>
@@ -646,6 +686,302 @@
           <Value xsi:type="StringValueT">
             <Value>
               <stringValue />
+            </Value>
+          </Value>
+        </PropertySet>
+      </PropertySets>
+    </Box>
+    <Box>
+      <CreatorIdentifier>LISpMinerTasks.FFTTask</CreatorIdentifier>
+      <ProjectIdentifier>19</ProjectIdentifier>
+      <Connections />
+      <PropertySets>
+        <PropertySet>
+          <PropertyName>GenerationInfo</PropertyName>
+          <Value xsi:type="GenerationInfoValueT">
+            <Value>
+              <generationState>DidNotStart</generationState>
+              <generationNrOfTests>0</generationNrOfTests>
+              <generationNrOfHypotheses>0</generationNrOfHypotheses>
+              <generationStartTime xsi:type="DateTimeTI">
+                <day>0</day>
+                <month>0</month>
+                <year>0</year>
+                <hour>0</hour>
+                <minute>0</minute>
+                <second>0</second>
+              </generationStartTime>
+              <generationTotalTime xsi:type="TimeTI">
+                <hour>0</hour>
+                <minute>0</minute>
+                <second>0</second>
+              </generationTotalTime>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>Hypotheses</PropertyName>
+          <Value xsi:type="HypothesesValueT">
+            <Value />
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>IncludeSymetric</PropertyName>
+          <Value xsi:type="BoolValueT">
+            <Value>
+              <boolValue>true</boolValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>MissingsType</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>Deleting</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>Prolong100A</PropertyName>
+          <Value xsi:type="BoolValueT">
+            <Value>
+              <boolValue>false</boolValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>Prolong100S</PropertyName>
+          <Value xsi:type="BoolValueT">
+            <Value>
+              <boolValue>false</boolValue>
+            </Value>
+          </Value>
+        </PropertySet>
+      </PropertySets>
+    </Box>
+    <Box>
+      <CreatorIdentifier>LISpMinerTasks.CFTask</CreatorIdentifier>
+      <ProjectIdentifier>20</ProjectIdentifier>
+      <Connections />
+      <PropertySets>
+        <PropertySet>
+          <PropertyName>GenerationInfo</PropertyName>
+          <Value xsi:type="GenerationInfoValueT">
+            <Value>
+              <generationState>DidNotStart</generationState>
+              <generationNrOfTests>0</generationNrOfTests>
+              <generationNrOfHypotheses>0</generationNrOfHypotheses>
+              <generationStartTime xsi:type="DateTimeTI">
+                <day>0</day>
+                <month>0</month>
+                <year>0</year>
+                <hour>0</hour>
+                <minute>0</minute>
+                <second>0</second>
+              </generationStartTime>
+              <generationTotalTime xsi:type="TimeTI">
+                <hour>0</hour>
+                <minute>0</minute>
+                <second>0</second>
+              </generationTotalTime>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>Hypotheses</PropertyName>
+          <Value xsi:type="HypothesesValueT">
+            <Value />
+          </Value>
+        </PropertySet>
+      </PropertySets>
+    </Box>
+    <Box>
+      <CreatorIdentifier>LISpMinerTasks.KLTask</CreatorIdentifier>
+      <ProjectIdentifier>21</ProjectIdentifier>
+      <Connections />
+      <PropertySets>
+        <PropertySet>
+          <PropertyName>GenerationInfo</PropertyName>
+          <Value xsi:type="GenerationInfoValueT">
+            <Value>
+              <generationState>DidNotStart</generationState>
+              <generationNrOfTests>0</generationNrOfTests>
+              <generationNrOfHypotheses>0</generationNrOfHypotheses>
+              <generationStartTime xsi:type="DateTimeTI">
+                <day>0</day>
+                <month>0</month>
+                <year>0</year>
+                <hour>0</hour>
+                <minute>0</minute>
+                <second>0</second>
+              </generationStartTime>
+              <generationTotalTime xsi:type="TimeTI">
+                <hour>0</hour>
+                <minute>0</minute>
+                <second>0</second>
+              </generationTotalTime>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>Hypotheses</PropertyName>
+          <Value xsi:type="HypothesesValueT">
+            <Value />
+          </Value>
+        </PropertySet>
+      </PropertySets>
+    </Box>
+    <Box>
+      <CreatorIdentifier>LISpMinerTasks.SDFFTTask</CreatorIdentifier>
+      <ProjectIdentifier>22</ProjectIdentifier>
+      <Connections />
+      <PropertySets>
+        <PropertySet>
+          <PropertyName>FirstSet</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>Cedent1</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>GenerationInfo</PropertyName>
+          <Value xsi:type="GenerationInfoValueT">
+            <Value>
+              <generationState>DidNotStart</generationState>
+              <generationNrOfTests>0</generationNrOfTests>
+              <generationNrOfHypotheses>0</generationNrOfHypotheses>
+              <generationStartTime xsi:type="DateTimeTI">
+                <day>0</day>
+                <month>0</month>
+                <year>0</year>
+                <hour>0</hour>
+                <minute>0</minute>
+                <second>0</second>
+              </generationStartTime>
+              <generationTotalTime xsi:type="TimeTI">
+                <hour>0</hour>
+                <minute>0</minute>
+                <second>0</second>
+              </generationTotalTime>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>Hypotheses</PropertyName>
+          <Value xsi:type="HypothesesValueT">
+            <Value />
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>SecondSet</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>Cedent2</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+      </PropertySets>
+    </Box>
+    <Box>
+      <CreatorIdentifier>LISpMinerTasks.SDCFTask</CreatorIdentifier>
+      <ProjectIdentifier>23</ProjectIdentifier>
+      <Connections />
+      <PropertySets>
+        <PropertySet>
+          <PropertyName>FirstSet</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>Cedent1</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>GenerationInfo</PropertyName>
+          <Value xsi:type="GenerationInfoValueT">
+            <Value>
+              <generationState>DidNotStart</generationState>
+              <generationNrOfTests>0</generationNrOfTests>
+              <generationNrOfHypotheses>0</generationNrOfHypotheses>
+              <generationStartTime xsi:type="DateTimeTI">
+                <day>0</day>
+                <month>0</month>
+                <year>0</year>
+                <hour>0</hour>
+                <minute>0</minute>
+                <second>0</second>
+              </generationStartTime>
+              <generationTotalTime xsi:type="TimeTI">
+                <hour>0</hour>
+                <minute>0</minute>
+                <second>0</second>
+              </generationTotalTime>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>Hypotheses</PropertyName>
+          <Value xsi:type="HypothesesValueT">
+            <Value />
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>SecondSet</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>Cedent2</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+      </PropertySets>
+    </Box>
+    <Box>
+      <CreatorIdentifier>LISpMinerTasks.SDKLTask</CreatorIdentifier>
+      <ProjectIdentifier>24</ProjectIdentifier>
+      <Connections />
+      <PropertySets>
+        <PropertySet>
+          <PropertyName>FirstSet</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>Cedent1</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>GenerationInfo</PropertyName>
+          <Value xsi:type="GenerationInfoValueT">
+            <Value>
+              <generationState>DidNotStart</generationState>
+              <generationNrOfTests>0</generationNrOfTests>
+              <generationNrOfHypotheses>0</generationNrOfHypotheses>
+              <generationStartTime xsi:type="DateTimeTI">
+                <day>0</day>
+                <month>0</month>
+                <year>0</year>
+                <hour>0</hour>
+                <minute>0</minute>
+                <second>0</second>
+              </generationStartTime>
+              <generationTotalTime xsi:type="TimeTI">
+                <hour>0</hour>
+                <minute>0</minute>
+                <second>0</second>
+              </generationTotalTime>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>Hypotheses</PropertyName>
+          <Value xsi:type="HypothesesValueT">
+            <Value />
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>SecondSet</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>Cedent2</stringValue>
             </Value>
           </Value>
         </PropertySet>
