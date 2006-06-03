@@ -4,8 +4,6 @@
     <StartIceGridLocaly>true</StartIceGridLocaly>
     <StopIceGridLocaly>false</StopIceGridLocaly>
     <IceGridAsService>true</IceGridAsService>
-    <IceGridWorkingDirectory>D:/Projekt/Ferda/Ferda_checkout/bin/db/</IceGridWorkingDirectory>
-    <IceGridApplicationXmlFilePath>application.xml</IceGridApplicationXmlFilePath>
     <SentenceForWait>[ icegridnode: Server: changed server `0' state to `Inactive' ]</SentenceForWait>
     <ServersToStop />
     <IceBinPath />
