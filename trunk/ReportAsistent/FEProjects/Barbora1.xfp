@@ -186,6 +186,79 @@
         </PositionSet>
       </PositionSets>
     </View>
+    <View>
+      <Name>SDKL desktop</Name>
+      <PositionSets>
+        <PositionSet>
+          <BoxProjectIdentifier>22</BoxProjectIdentifier>
+          <Position>
+            <X>254</X>
+            <Y>116</Y>
+          </Position>
+        </PositionSet>
+        <PositionSet>
+          <BoxProjectIdentifier>23</BoxProjectIdentifier>
+          <Position>
+            <X>248</X>
+            <Y>201</Y>
+          </Position>
+        </PositionSet>
+        <PositionSet>
+          <BoxProjectIdentifier>29</BoxProjectIdentifier>
+          <Position>
+            <X>465</X>
+            <Y>162</Y>
+          </Position>
+        </PositionSet>
+      </PositionSets>
+    </View>
+    <View>
+      <Name>CF desktop</Name>
+      <PositionSets>
+        <PositionSet>
+          <BoxProjectIdentifier>8</BoxProjectIdentifier>
+          <Position>
+            <X>317</X>
+            <Y>187</Y>
+          </Position>
+        </PositionSet>
+        <PositionSet>
+          <BoxProjectIdentifier>11</BoxProjectIdentifier>
+          <Position>
+            <X>323</X>
+            <Y>260</Y>
+          </Position>
+        </PositionSet>
+        <PositionSet>
+          <BoxProjectIdentifier>22</BoxProjectIdentifier>
+          <Position>
+            <X>303</X>
+            <Y>104</Y>
+          </Position>
+        </PositionSet>
+        <PositionSet>
+          <BoxProjectIdentifier>23</BoxProjectIdentifier>
+          <Position>
+            <X>320</X>
+            <Y>434</Y>
+          </Position>
+        </PositionSet>
+        <PositionSet>
+          <BoxProjectIdentifier>30</BoxProjectIdentifier>
+          <Position>
+            <X>463</X>
+            <Y>111</Y>
+          </Position>
+        </PositionSet>
+        <PositionSet>
+          <BoxProjectIdentifier>31</BoxProjectIdentifier>
+          <Position>
+            <X>476</X>
+            <Y>469</Y>
+          </Position>
+        </PositionSet>
+      </PositionSets>
+    </View>
   </Views>
   <Boxes>
     <Box>
@@ -1015,6 +1088,10 @@
           <BoxProjectIdentifier>22</BoxProjectIdentifier>
         </Connection>
         <Connection>
+          <SocketName>AntecedentSetting</SocketName>
+          <BoxProjectIdentifier>23</BoxProjectIdentifier>
+        </Connection>
+        <Connection>
           <SocketName>SuccedentSetting</SocketName>
           <BoxProjectIdentifier>23</BoxProjectIdentifier>
         </Connection>
@@ -1337,6 +1414,181 @@
           <Value xsi:type="LongValueT">
             <Value>
               <longValue>1</longValue>
+            </Value>
+          </Value>
+        </PropertySet>
+      </PropertySets>
+    </Box>
+    <Box>
+      <CreatorIdentifier>LISpMinerTasks.SDKLTask</CreatorIdentifier>
+      <ProjectIdentifier>29</ProjectIdentifier>
+      <Connections>
+        <Connection>
+          <SocketName>AntecedentSetting</SocketName>
+          <BoxProjectIdentifier>22</BoxProjectIdentifier>
+        </Connection>
+        <Connection>
+          <SocketName>SuccedentSetting</SocketName>
+          <BoxProjectIdentifier>22</BoxProjectIdentifier>
+        </Connection>
+        <Connection>
+          <SocketName>SuccedentSetting</SocketName>
+          <BoxProjectIdentifier>23</BoxProjectIdentifier>
+        </Connection>
+      </Connections>
+      <PropertySets>
+        <PropertySet>
+          <PropertyName>FirstSet</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>Cedent1</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>GenerationInfo</PropertyName>
+          <Value xsi:type="GenerationInfoValueT">
+            <Value>
+              <generationState>DidNotStart</generationState>
+              <generationNrOfTests>0</generationNrOfTests>
+              <generationNrOfHypotheses>0</generationNrOfHypotheses>
+              <generationStartTime xsi:type="DateTimeTI">
+                <day>0</day>
+                <month>0</month>
+                <year>0</year>
+                <hour>0</hour>
+                <minute>0</minute>
+                <second>0</second>
+              </generationStartTime>
+              <generationTotalTime xsi:type="TimeTI">
+                <hour>0</hour>
+                <minute>0</minute>
+                <second>0</second>
+              </generationTotalTime>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>Hypotheses</PropertyName>
+          <Value xsi:type="HypothesesValueT">
+            <Value />
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>SecondSet</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>Cedent2</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+      </PropertySets>
+    </Box>
+    <Box>
+      <CreatorIdentifier>LISpMinerTasks.CFTask</CreatorIdentifier>
+      <ProjectIdentifier>30</ProjectIdentifier>
+      <Connections>
+        <Connection>
+          <SocketName>AntecedentSetting</SocketName>
+          <BoxProjectIdentifier>22</BoxProjectIdentifier>
+        </Connection>
+        <Connection>
+          <SocketName>ConditionSetting</SocketName>
+          <BoxProjectIdentifier>8</BoxProjectIdentifier>
+        </Connection>
+        <Connection>
+          <SocketName>ConditionSetting</SocketName>
+          <BoxProjectIdentifier>11</BoxProjectIdentifier>
+        </Connection>
+      </Connections>
+      <PropertySets>
+        <PropertySet>
+          <PropertyName>GenerationInfo</PropertyName>
+          <Value xsi:type="GenerationInfoValueT">
+            <Value>
+              <generationState>DidNotStart</generationState>
+              <generationNrOfTests>0</generationNrOfTests>
+              <generationNrOfHypotheses>0</generationNrOfHypotheses>
+              <generationStartTime xsi:type="DateTimeTI">
+                <day>0</day>
+                <month>0</month>
+                <year>0</year>
+                <hour>0</hour>
+                <minute>0</minute>
+                <second>0</second>
+              </generationStartTime>
+              <generationTotalTime xsi:type="TimeTI">
+                <hour>0</hour>
+                <minute>0</minute>
+                <second>0</second>
+              </generationTotalTime>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>Hypotheses</PropertyName>
+          <Value xsi:type="HypothesesValueT">
+            <Value />
+          </Value>
+        </PropertySet>
+      </PropertySets>
+    </Box>
+    <Box>
+      <CreatorIdentifier>LISpMinerTasks.SDCFTask</CreatorIdentifier>
+      <ProjectIdentifier>31</ProjectIdentifier>
+      <Connections>
+        <Connection>
+          <SocketName>AntecedentSetting</SocketName>
+          <BoxProjectIdentifier>23</BoxProjectIdentifier>
+        </Connection>
+        <Connection>
+          <SocketName>AntecedentSetting</SocketName>
+          <BoxProjectIdentifier>22</BoxProjectIdentifier>
+        </Connection>
+      </Connections>
+      <PropertySets>
+        <PropertySet>
+          <PropertyName>FirstSet</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>Cedent1</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>GenerationInfo</PropertyName>
+          <Value xsi:type="GenerationInfoValueT">
+            <Value>
+              <generationState>DidNotStart</generationState>
+              <generationNrOfTests>0</generationNrOfTests>
+              <generationNrOfHypotheses>0</generationNrOfHypotheses>
+              <generationStartTime xsi:type="DateTimeTI">
+                <day>0</day>
+                <month>0</month>
+                <year>0</year>
+                <hour>0</hour>
+                <minute>0</minute>
+                <second>0</second>
+              </generationStartTime>
+              <generationTotalTime xsi:type="TimeTI">
+                <hour>0</hour>
+                <minute>0</minute>
+                <second>0</second>
+              </generationTotalTime>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>Hypotheses</PropertyName>
+          <Value xsi:type="HypothesesValueT">
+            <Value />
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>SecondSet</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>Cedent2</stringValue>
             </Value>
           </Value>
         </PropertySet>
