@@ -39,7 +39,8 @@ namespace FEPtestap_cs
     
             // prohrabani se v archivu
             BoxesHelper.VypisKrabky(0, "LISpMinerTasks.FFTTask");
-            AP_FEBool_cedent.getList(0);
+            AP_FEKL_cedent.getList(0);
+            AP_FECF_cedent.getList(0);
         }
 
         public static string OtevriSoubor()

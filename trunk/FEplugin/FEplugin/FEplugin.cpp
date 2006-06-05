@@ -37,6 +37,12 @@ CFESock::CFESock()
 	APTable[3].AP_ID = "bool_cedent";
 	APTable[3].pFn = & fFEBool_cedent;
 
+	APTable[4].AP_ID = "KL_cedent";
+	APTable[4].pFn = & fFEKL_cedent;
+
+	APTable[5].AP_ID = "CF_cedent";
+	APTable[5].pFn = & fFECF_cedent;
+
 }
 
 

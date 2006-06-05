@@ -28,6 +28,14 @@ CString fFEAttribute(void* hSource);
 
 CString fFEBool_cedent(void* hSource);
 
+// --- AP KL cedent
+
+CString fFEKL_cedent(void* hSource);
+
+// --- AP CF cedent
+
+CString fFECF_cedent(void* hSource);
+
 
 
 

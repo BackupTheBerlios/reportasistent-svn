@@ -47,13 +47,32 @@ CString fFEAttribute(void* hSource)
 }
 
 
-
 // --- AP Boolsky cedent
 
 CString fFEBool_cedent(void* hSource)
 {
 	int indexSrc = ((int) hSource) - 1;
 	System::String^ AttrList = FEplugin_cs::AP_FEBool_cedent::getList(indexSrc);
+	CString resultStr = (CString) AttrList;
+	return resultStr;
+}
+
+// --- AP KL cedent
+
+CString fFEKL_cedent(void* hSource)
+{
+	int indexSrc = ((int) hSource) - 1;
+	System::String^ AttrList = FEplugin_cs::AP_FEKL_cedent::getList(indexSrc);
+	CString resultStr = (CString) AttrList;
+	return resultStr;
+}
+
+// --- AP CF cedent
+
+CString fFECF_cedent(void* hSource)
+{
+	int indexSrc = ((int) hSource) - 1;
+	System::String^ AttrList = FEplugin_cs::AP_FECF_cedent::getList(indexSrc);
 	CString resultStr = (CString) AttrList;
 	return resultStr;
 }
