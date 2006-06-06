@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="windows-1250"?>
+<visualization>
+
+  <visualization_options active_element="4ft hypothesis" visualization="Graph">
+  
+    <vis_option variable_name="GraphType" title="Graph type">  
+       <vis_option_item id="grt1" value="xl3DColumn" label="3D Column"/>
+       <vis_option_item id="grt2" value="xl3DColumnClustered" label="3D Column - Clustered"/>
+       <vis_option_item id="grt3" value="xl3DColumnStacked" label="3D Column - Stacked (absolute values)"/>
+       <vis_option_item id="grt4" value="xl3DColumnStacked100" label="3D Column - Stacked (percentual values)"/>
+    </vis_option>
+    
+  </visualization_options>
+
+</visualization>
