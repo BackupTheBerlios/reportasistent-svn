@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="windows-1250" ?>
 <!DOCTYPE active_list[
-  <!ELEMENT active_list ((hyp_4ft*, category*, ti_cedent*, attribute*, bool_cedent*, CF_cedent*, KL_cedent*)*)>
+  <!ELEMENT active_list ((hyp_4ft*, category*, ti_cedent*, attribute*, bool_cedent*, CF_cedent*, KL_cedent*, hyp_kl*)*)>
 
 
 
@@ -141,5 +141,29 @@
                     antecedent IDREF #IMPLIED
                     succedent IDREF #IMPLIED
                     condition IDREF #IMPLIED>   <!--antecedent,succedent,condition: references to ti_cedent -->
+
+
+
+
+
+  <!ELEMENT ti_klcedent (ti_literal*)>
+  <!ATTLIST ti_klcedent id ID #REQUIRED
+                        type CDATA #REQUIRED>  <!--row attribute, column attribute, condition -->
+  <!ELEMENT ti_klliteral EMPTY>
+  <!ATTLIST ti_klliteral id ID #REQUIRED
+                         quant CDATA #REQUIRED   
+                         value CDATA #REQUIRED>  
+                         <!--quant: name of the quantity used in hypothese, e. g. diastolic pressure  -->
+                         <!--value: value of the quantity used in hypothese, e. g. <50;60), empty for rows and columns -->
+  <!ELEMENT hyp_kl  EMPTY>
+  <!ATTLIST hyp_kl  id ID #REQUIRED
+                    db_name CDATA #REQUIRED
+                    matrix_name CDATA #REQUIRED
+                    task_name CDATA #REQUIRED
+                    <!--tady asi bude fisher atd., ale vubec netusim,
+                          co vsechno tam ma byt ani jak to pocitat:(-->
+                    row_attribute IDREF #IMPLIED
+                    column_attribute IDREF #IMPLIED
+                    condition IDREF #IMPLIED>
 ]>
 
