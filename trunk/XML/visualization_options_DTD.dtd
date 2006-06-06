@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="windows-1250"?>
+<!DOCTYPE visualization [
+
+<!ELEMENT visualization_options ( vis_option )* > <!--seznam nastavovanych polozek-->
+<!ATTLIST visualization_options active_element CDATA #REQUIRED > <!--typ aktivniho prvku-->
+<!ATTLIST visualization_options visualization CDATA #REQUIRED >  <!--typ vizualizace-->
+
+<!ELEMENT vis_option ( (vis_option_item)* ) > <!--nejprve texty, pak vnorene kapitoly -->
+<!ATTLIST vis_option title CDATA #REQUIRED >  <!--nadpis polozky (popisek u combo boxu)-->
+
+<!ELEMENT vis_option_item EMPTY>
+<!ATTLIST vis_option_item value CDATA #REQUIRED >
+<!ATTLIST vis_option_item label CDATA #REQUIRED >
+<!ATTLIST vis_option_item id ID #REQUIRED >
+
+]>
