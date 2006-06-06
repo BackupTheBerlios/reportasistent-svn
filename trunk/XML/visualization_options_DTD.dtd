@@ -6,6 +6,7 @@
 <!ATTLIST visualization_options visualization CDATA #REQUIRED >  <!--typ vizualizace-->
 
 <!ELEMENT vis_option ( (vis_option_item)* ) > <!--nejprve texty, pak vnorene kapitoly -->
+<!ATTLIST vis_option variable_name CDATA #REQUIRED >  <!--nazev XSL promenne, ktera vzejde z teto polozky-->
 <!ATTLIST vis_option title CDATA #REQUIRED >  <!--nadpis polozky (popisek u combo boxu)-->
 
 <!ELEMENT vis_option_item EMPTY>
