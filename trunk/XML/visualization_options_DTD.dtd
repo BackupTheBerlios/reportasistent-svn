@@ -30,4 +30,12 @@
 <!ATTLIST string_option default_value CDATA #IMPLIED>
 <!--implicitni hodnota-->
 
+
+<!--Defaultni hodnoty nastavovanych promennych-->
+<!ELEMENT visualization_values ((variable)*) >
+
+<!ELEMENT variable EMPTY >
+<!ATTLIST variable name CDATA #REQUIRED >   <!--jmeno promenne -->
+<!ATTLIST variable value CDATA #REQUIRED >  <!--defaultni hodnota promenne-->
+
 ]>
