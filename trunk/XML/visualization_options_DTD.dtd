@@ -1,17 +1,33 @@
 <?xml version="1.0" encoding="windows-1250"?>
 <!DOCTYPE visualization [
 
-<!ELEMENT visualization_options ( vis_option )* > <!--seznam nastavovanych polozek-->
+<!ELEMENT visualization_options (( enum_option | number_option | string_option )*) > <!--seznam nastavovanych polozek-->
 <!ATTLIST visualization_options active_element CDATA #REQUIRED > <!--typ aktivniho prvku-->
-<!ATTLIST visualization_options visualization CDATA #REQUIRED >  <!--typ vizualizace-->
+<!ATTLIST visualization_options visualization_label CDATA #REQUIRED >  <!--typ vizualizace-->
 
-<!ELEMENT vis_option ( (vis_option_item)* ) > <!--nejprve texty, pak vnorene kapitoly -->
-<!ATTLIST vis_option variable_name CDATA #REQUIRED >  <!--nazev XSL promenne, ktera vzejde z teto polozky-->
-<!ATTLIST vis_option title CDATA #REQUIRED >  <!--nadpis polozky (popisek u combo boxu)-->
+<!ELEMENT enum_option ( (enum_item)* ) > <!--vycet (ComboBox)-->
+<!ATTLIST enum_option variable_name CDATA #REQUIRED >  <!--nazev XSL promenne, ktera vzejde z teto polozky-->
+<!ATTLIST enum_option title CDATA #REQUIRED >  <!--nadpis polozky (popisek u combo boxu)-->
 
-<!ELEMENT vis_option_item EMPTY>
-<!ATTLIST vis_option_item value CDATA #REQUIRED >
-<!ATTLIST vis_option_item label CDATA #REQUIRED >
-<!ATTLIST vis_option_item id ID #REQUIRED >
+<!ELEMENT enum_item EMPTY>
+<!ATTLIST enum_item value CDATA #REQUIRED >  <!--hodnota promenne nastaveni polozky-->
+<!ATTLIST enum_item label CDATA #REQUIRED >  <!--popis polozky (v combo boxu)-->
+
+<!ELEMENT number_option EMPTY  >  <!--ciselna hodnota -->
+<!ATTLIST number_option variable_name CDATA #REQUIRED >  <!--nazev XSL promenne, ktera vzejde z teto polozky-->
+<!ATTLIST number_option title CDATA #REQUIRED >  <!--nadpis polozky-->
+<!ATTLIST number_option num_type (integer | float) #REQUIRED>  <!--ciselny typ-->
+<!ATTLIST number_option dec CDATA "1">  <!--pocet desetinnych mist-->
+<!ATTLIST number_option min_value CDATA #IMPLIED >  <!--minimalni hodnota cisla-->
+<!ATTLIST number_option max_value CDATA #IMPLIED >  <!--maximalni hodnota cisla-->
+
+<!ELEMENT string_option EMPTY  >
+<!-- textovy retezec -->
+<!ATTLIST string_option variable_name CDATA #REQUIRED >
+<!--nazev XSL promenne, ktera vzejde z teto polozky-->
+<!ATTLIST string_option title CDATA #REQUIRED >
+<!--nadpis polozky-->
+<!ATTLIST string_option default_value CDATA #IMPLIED>
+<!--implicitni hodnota-->
 
 ]>
