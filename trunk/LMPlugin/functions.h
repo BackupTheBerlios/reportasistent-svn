@@ -8,8 +8,6 @@
 #define WINVER 0x0400
 #endif
 
-#define _CRT_SECURE_NO_DEPRECATE
-
 // ===== INCLUDE =======
 
 #include <afx.h>
