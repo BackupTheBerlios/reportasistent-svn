@@ -10,7 +10,7 @@
 #endif // _MSC_VER > 1000
 
 #ifndef WINVER
-#define WINVER 0x0500
+#define WINVER 0x0400
 #endif
 
 #define EDIT_NEWLINE "\r\n"

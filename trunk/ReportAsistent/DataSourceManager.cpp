@@ -173,7 +173,7 @@ BOOL CDataSourcesManager::initSourcesTab(LPCTSTR config_file_path)
 	//dedek: uz je zavolano
 	
       //Vytvori COM objekt (resp. instanci objektu)
-    hr = pXMLDom.CreateInstance(__uuidof(DOMDocument30));
+    hr = pXMLDom.CreateInstance(_T("Msxml2.DOMDocument"));
     if (FAILED(hr)) 
        return FALSE;
     pXMLDom->async = VARIANT_FALSE;
@@ -257,7 +257,7 @@ BOOL CDataSourcesManager::saveSourcesTab()
 	BOOL ret = TRUE;
 	
 	MSXML2::IXMLDOMDocumentPtr pXMLDom;
-    pXMLDom.CreateInstance(__uuidof(DOMDocument30));
+    pXMLDom.CreateInstance(_T("Msxml2.DOMDocument"));
 
 	
 	MSXML2::IXMLDOMElementPtr root_el;	// korenovy element

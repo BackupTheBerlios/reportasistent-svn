@@ -3,6 +3,40 @@ honzovy poznamky:
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+!!!!!!! uz by to melo jit prelozit ve VS 2005 !!!!!!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ve tride App je promenna m_pGeneralManager pro instance globalnich manageru
 
 pro pouziti techto manageru:
@@ -32,7 +66,7 @@ mazat combobox stylu pri refresh tlacitku (attr_link)
 pridat refresh atributu aktivniho prvku na OnOK dialogu aktivniho prvku
 -ted se atributy aktualizuji asi jen pri otevreni dialogu aktivniho prvku
 
-chtelo by to nejak upozornovat na to, ze aplikace pracuje, napr. menit kurzor na presipaci hodiny
+chtelo by to nejak upozornovat na to, ze aplikace pracuje, napr. menit kurzor na presypaci hodiny
 -pri nacitani ze zdroje
 -pri nacitani word stylu
 -pri generovani

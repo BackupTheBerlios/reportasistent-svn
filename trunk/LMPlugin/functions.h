@@ -5,7 +5,7 @@
 #define _FUNCTIONS
 
 #ifndef WINVER
-#define WINVER 0x0500
+#define WINVER 0x0400
 #endif
 
 #define _CRT_SECURE_NO_DEPRECATE

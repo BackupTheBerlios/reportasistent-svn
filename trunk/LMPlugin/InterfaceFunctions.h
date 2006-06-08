@@ -11,7 +11,7 @@ LM - Report Asistent
 #define _INTERFACE_FUNCTIONS
 
 #ifndef WINVER
-#define WINVER 0x0500
+#define WINVER 0x0400
 #endif
 
 #include <afx.h>

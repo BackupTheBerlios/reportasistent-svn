@@ -7,7 +7,7 @@
 // TCatDefInt.h : header file
 //
 #ifndef WINVER
-#define WINVER 0x0500
+#define WINVER 0x0400
 #endif
 #include "afxdb.h"
 /////////////////////////////////////////////////////////////////////////////
