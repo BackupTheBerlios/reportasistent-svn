@@ -97,6 +97,7 @@ BOOL CSimpleFilterDialog::OnInitDialog()
 	int sel = m_SourcesCombo.SelectString(-1, (_bstr_t) m_active_element->getAttribute("source"));
 	if (sel == CB_ERR) m_SourcesCombo.SelectString(-1, dm.getDefaultSource());
 
+
 	OnSelchangeDataSourceCombo();
 	  
 
@@ -181,17 +182,11 @@ void CSimpleFilterDialog::UpDateDialog()
 {
 	int a,b;
 
-//	m_FilterList.DeleteAllItems();
+	m_FilterList.DeleteAllItems();
 
 	
 	// Delete all of the columns.
 	int nColumnCount = m_FilterList.GetHeaderCtrl()->GetItemCount();
-/****
-    int nColumnCount = 0;
-    CHeaderCtrl * hc = m_FilterList.GetHeaderCtrl();
-    if (hc != NULL)
-	    nColumnCount= hc->GetItemCount();
-/***/
 	for (int i=0;i < nColumnCount;i++)
 	{
 		m_FilterList.DeleteColumn(0);

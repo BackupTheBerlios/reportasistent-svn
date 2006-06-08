@@ -61,6 +61,15 @@ BOOL performLM(hSource_t hSource, const char* APName, BSTR* Result)
 	
 	
 	*/
+
+  /****** dedek test2 *****
+
+  CString s = "<active_list><category id=\"cat1\" db_name=\"d:\\lmra\\ReportAsistent\\LMMetabase\\LMEmpty2\" matrix_name=\"Entry\" attr_name=\"BMI\" ctgr_name=\"podvaha\" ctgr_type=\"Interval\" ctgr_freq=\"N/A\" bool_type=\"No boolean\" def_length=\"1\"><ctgr_def definition=\"&lt;15;20)\"/></category></active_list>";
+
+  *Result = s.AllocSysString();
+  return TRUE;
+
+  /****/
 	
 	CString CStrResult; // mezivysledek CString
 	pFn_t pFn = LMSock.getFnAddress(APName);	// ukazatel na funkci, ktera vyridi pozadavek

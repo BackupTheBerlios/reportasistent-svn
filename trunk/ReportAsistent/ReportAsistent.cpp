@@ -54,7 +54,9 @@ BOOL CReportAsistentApp::InitInstance()
 	//  the specific initialization routines you do not need.
 
 #ifdef _AFXDLL
+#if _MFC_VER < 0x0700
 	Enable3dControls();			// Call this when using MFC in a shared DLL
+#endif
 #else
 	Enable3dControlsStatic();	// Call this when linking to MFC statically
 #endif
