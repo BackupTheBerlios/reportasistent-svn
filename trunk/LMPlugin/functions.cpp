@@ -1169,17 +1169,20 @@ CString fLM4fthyp(void * hSource)
 	
   
   //load DTD
-/***** dedek: pracovni verze ****
+/***** dedek: korektni verze pro VS 2005 ****/
   CString dtd_str;
   CFile f;
   f.Open("../XML/dtd.dtd", CFile::modeRead);
-  f.Read(dtd_str.GetBuffer(f.GetLength()), f.GetLength());
-  dtd_str.ReleaseBuffer();
+  int size = (int) f.GetLength();
+  LPTSTR ps = dtd_str.GetBuffer(size);
+  f.Read(ps, size);
   f.Close();
+  ps[size] = 0; //data nactena ze souboru se jete musi ukoncit nulou aby reprezentovala validni string
+  dtd_str.ReleaseBuffer(); //od teto chvile je ps neplatny a nemelo by se do nej zapisovat
   
   buf += dtd_str;
 
-/** dedek bude predelano nahore */
+/** dedek predelano nahore *
   FILE * x = fopen ("../XML/dtd.dtd", "r");
 	CString buf1;
 	while (fscanf (x, "%s", buf1) != EOF)
