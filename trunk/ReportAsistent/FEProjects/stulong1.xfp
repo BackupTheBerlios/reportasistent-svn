@@ -140,6 +140,13 @@
             <Y>433</Y>
           </Position>
         </PositionSet>
+        <PositionSet>
+          <BoxProjectIdentifier>25</BoxProjectIdentifier>
+          <Position>
+            <X>179</X>
+            <Y>586</Y>
+          </Position>
+        </PositionSet>
       </PositionSets>
     </View>
   </Views>
@@ -247,6 +254,12 @@
                   </Value>
                 </EnumCategory>
                 <EnumCategory>
+                  <Name>Neudano</Name>
+                  <Value>
+                    <string>_DbNull</string>
+                  </Value>
+                </EnumCategory>
+                <EnumCategory>
                   <Name>Sladi_stredne</Name>
                   <Value>
                     <string>10</string>
@@ -276,12 +289,6 @@
                     <string>3</string>
                     <string>4</string>
                     <string>5</string>
-                  </Value>
-                </EnumCategory>
-                <EnumCategory>
-                  <Name>Neudano</Name>
-                  <Value>
-                    <string>_DbNull</string>
                   </Value>
                 </EnumCategory>
                 <EnumCategory>
@@ -983,6 +990,42 @@
             <Value>
               <stringValue>Cedent2</stringValue>
             </Value>
+          </Value>
+        </PropertySet>
+      </PropertySets>
+    </Box>
+    <Box>
+      <CreatorIdentifier>LISpMinerTasks.KLTask</CreatorIdentifier>
+      <ProjectIdentifier>25</ProjectIdentifier>
+      <Connections />
+      <PropertySets>
+        <PropertySet>
+          <PropertyName>GenerationInfo</PropertyName>
+          <Value xsi:type="GenerationInfoValueT">
+            <Value>
+              <generationState>DidNotStart</generationState>
+              <generationNrOfTests>0</generationNrOfTests>
+              <generationNrOfHypotheses>0</generationNrOfHypotheses>
+              <generationStartTime xsi:type="DateTimeTI">
+                <day>0</day>
+                <month>0</month>
+                <year>0</year>
+                <hour>0</hour>
+                <minute>0</minute>
+                <second>0</second>
+              </generationStartTime>
+              <generationTotalTime xsi:type="TimeTI">
+                <hour>0</hour>
+                <minute>0</minute>
+                <second>0</second>
+              </generationTotalTime>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>Hypotheses</PropertyName>
+          <Value xsi:type="HypothesesValueT">
+            <Value />
           </Value>
         </PropertySet>
       </PropertySets>

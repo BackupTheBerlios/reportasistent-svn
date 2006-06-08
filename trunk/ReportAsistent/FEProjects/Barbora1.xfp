@@ -84,7 +84,7 @@
         <PositionSet>
           <BoxProjectIdentifier>12</BoxProjectIdentifier>
           <Position>
-            <X>957</X>
+            <X>956</X>
             <Y>89</Y>
           </Position>
         </PositionSet>
@@ -92,7 +92,7 @@
           <BoxProjectIdentifier>13</BoxProjectIdentifier>
           <Position>
             <X>880</X>
-            <Y>160</Y>
+            <Y>159</Y>
           </Position>
         </PositionSet>
         <PositionSet>
@@ -129,59 +129,73 @@
       <Name>KL desktop</Name>
       <PositionSets>
         <PositionSet>
+          <BoxProjectIdentifier>0</BoxProjectIdentifier>
+          <Position>
+            <X>22</X>
+            <Y>108</Y>
+          </Position>
+        </PositionSet>
+        <PositionSet>
+          <BoxProjectIdentifier>2</BoxProjectIdentifier>
+          <Position>
+            <X>311</X>
+            <Y>159</Y>
+          </Position>
+        </PositionSet>
+        <PositionSet>
+          <BoxProjectIdentifier>3</BoxProjectIdentifier>
+          <Position>
+            <X>255</X>
+            <Y>84</Y>
+          </Position>
+        </PositionSet>
+        <PositionSet>
           <BoxProjectIdentifier>4</BoxProjectIdentifier>
           <Position>
-            <X>164</X>
-            <Y>87</Y>
+            <X>423</X>
+            <Y>69</Y>
           </Position>
         </PositionSet>
         <PositionSet>
           <BoxProjectIdentifier>5</BoxProjectIdentifier>
           <Position>
-            <X>160</X>
-            <Y>177</Y>
+            <X>419</X>
+            <Y>159</Y>
           </Position>
         </PositionSet>
         <PositionSet>
-          <BoxProjectIdentifier>11</BoxProjectIdentifier>
+          <BoxProjectIdentifier>17</BoxProjectIdentifier>
           <Position>
-            <X>221</X>
-            <Y>294</Y>
+            <X>131</X>
+            <Y>98</Y>
           </Position>
         </PositionSet>
         <PositionSet>
           <BoxProjectIdentifier>21</BoxProjectIdentifier>
           <Position>
-            <X>458</X>
-            <Y>110</Y>
+            <X>717</X>
+            <Y>92</Y>
           </Position>
         </PositionSet>
         <PositionSet>
           <BoxProjectIdentifier>22</BoxProjectIdentifier>
           <Position>
-            <X>317</X>
-            <Y>90</Y>
+            <X>576</X>
+            <Y>72</Y>
           </Position>
         </PositionSet>
         <PositionSet>
           <BoxProjectIdentifier>23</BoxProjectIdentifier>
           <Position>
-            <X>316</X>
-            <Y>179</Y>
+            <X>575</X>
+            <Y>161</Y>
           </Position>
         </PositionSet>
         <PositionSet>
-          <BoxProjectIdentifier>27</BoxProjectIdentifier>
+          <BoxProjectIdentifier>32</BoxProjectIdentifier>
           <Position>
-            <X>392</X>
-            <Y>266</Y>
-          </Position>
-        </PositionSet>
-        <PositionSet>
-          <BoxProjectIdentifier>28</BoxProjectIdentifier>
-          <Position>
-            <X>221</X>
-            <Y>396</Y>
+            <X>669</X>
+            <Y>174</Y>
           </Position>
         </PositionSet>
       </PositionSets>
@@ -206,8 +220,8 @@
         <PositionSet>
           <BoxProjectIdentifier>29</BoxProjectIdentifier>
           <Position>
-            <X>465</X>
-            <Y>162</Y>
+            <X>477</X>
+            <Y>140</Y>
           </Position>
         </PositionSet>
       </PositionSets>
@@ -215,6 +229,13 @@
     <View>
       <Name>CF desktop</Name>
       <PositionSets>
+        <PositionSet>
+          <BoxProjectIdentifier>4</BoxProjectIdentifier>
+          <Position>
+            <X>163</X>
+            <Y>104</Y>
+          </Position>
+        </PositionSet>
         <PositionSet>
           <BoxProjectIdentifier>8</BoxProjectIdentifier>
           <Position>
@@ -512,10 +533,6 @@
           <SocketName>LiteralSetting</SocketName>
           <BoxProjectIdentifier>7</BoxProjectIdentifier>
         </Connection>
-        <Connection>
-          <SocketName>LiteralSetting</SocketName>
-          <BoxProjectIdentifier>10</BoxProjectIdentifier>
-        </Connection>
       </Connections>
       <PropertySets>
         <PropertySet>
@@ -530,7 +547,7 @@
           <PropertyName>MinLen</PropertyName>
           <Value xsi:type="LongValueT">
             <Value>
-              <longValue>2</longValue>
+              <longValue>1</longValue>
             </Value>
           </Value>
         </PropertySet>
@@ -596,7 +613,7 @@
           <PropertyName>GaceType</PropertyName>
           <Value xsi:type="StringValueT">
             <Value>
-              <stringValue>Positive</stringValue>
+              <stringValue>Both</stringValue>
             </Value>
           </Value>
         </PropertySet>
@@ -649,10 +666,6 @@
           <BoxProjectIdentifier>8</BoxProjectIdentifier>
         </Connection>
         <Connection>
-          <SocketName>AntecedentSetting</SocketName>
-          <BoxProjectIdentifier>11</BoxProjectIdentifier>
-        </Connection>
-        <Connection>
           <SocketName>SuccedentSetting</SocketName>
           <BoxProjectIdentifier>11</BoxProjectIdentifier>
         </Connection>
@@ -667,20 +680,20 @@
           <Value xsi:type="GenerationInfoValueT">
             <Value>
               <generationState>Completed</generationState>
-              <generationNrOfTests>0</generationNrOfTests>
-              <generationNrOfHypotheses>0</generationNrOfHypotheses>
+              <generationNrOfTests>40</generationNrOfTests>
+              <generationNrOfHypotheses>31</generationNrOfHypotheses>
               <generationStartTime xsi:type="DateTimeTI">
-                <day>28</day>
-                <month>5</month>
+                <day>8</day>
+                <month>6</month>
                 <year>2006</year>
-                <hour>20</hour>
-                <minute>19</minute>
-                <second>31</second>
+                <hour>10</hour>
+                <minute>32</minute>
+                <second>3</second>
               </generationStartTime>
               <generationTotalTime xsi:type="TimeTI">
                 <hour>0</hour>
                 <minute>0</minute>
-                <second>7</second>
+                <second>12</second>
               </generationTotalTime>
             </Value>
           </Value>
@@ -688,7 +701,1186 @@
         <PropertySet>
           <PropertyName>Hypotheses</PropertyName>
           <Value xsi:type="HypothesesValueT">
-            <Value />
+            <Value>
+              <HypothesisStruct>
+                <quantifierSetting>
+                  <firstContingencyTableRows>
+                    <ArrayOfInt>
+                      <int>198</int>
+                      <int>1629</int>
+                    </ArrayOfInt>
+                    <ArrayOfInt>
+                      <int>367</int>
+                      <int>3987</int>
+                    </ArrayOfInt>
+                  </firstContingencyTableRows>
+                  <secondContingencyTableRows />
+                  <numericValues />
+                  <allObjectsCount>6181</allObjectsCount>
+                </quantifierSetting>
+                <booleanLiterals>
+                  <BooleanLiteralStruct>
+                    <cedentType>Antecedent</cedentType>
+                    <categoriesNames>
+                      <string>A</string>
+                    </categoriesNames>
+                    <negation>false</negation>
+                    <literalName>status</literalName>
+                    <literalIdentifier>7</literalIdentifier>
+                  </BooleanLiteralStruct>
+                  <BooleanLiteralStruct>
+                    <cedentType>Succedent</cedentType>
+                    <categoriesNames>
+                      <string>&lt;10110;11110)</string>
+                    </categoriesNames>
+                    <negation>false</negation>
+                    <literalName>salary</literalName>
+                    <literalIdentifier>10</literalIdentifier>
+                  </BooleanLiteralStruct>
+                </booleanLiterals>
+                <literals />
+              </HypothesisStruct>
+              <HypothesisStruct>
+                <quantifierSetting>
+                  <firstContingencyTableRows>
+                    <ArrayOfInt>
+                      <int>1026</int>
+                      <int>801</int>
+                    </ArrayOfInt>
+                    <ArrayOfInt>
+                      <int>2562</int>
+                      <int>1792</int>
+                    </ArrayOfInt>
+                  </firstContingencyTableRows>
+                  <secondContingencyTableRows />
+                  <numericValues />
+                  <allObjectsCount>6181</allObjectsCount>
+                </quantifierSetting>
+                <booleanLiterals>
+                  <BooleanLiteralStruct>
+                    <cedentType>Antecedent</cedentType>
+                    <categoriesNames>
+                      <string>A</string>
+                    </categoriesNames>
+                    <negation>false</negation>
+                    <literalName>status</literalName>
+                    <literalIdentifier>7</literalIdentifier>
+                  </BooleanLiteralStruct>
+                  <BooleanLiteralStruct>
+                    <cedentType>Succedent</cedentType>
+                    <categoriesNames>
+                      <string>&lt;8110;9110)</string>
+                    </categoriesNames>
+                    <negation>false</negation>
+                    <literalName>salary</literalName>
+                    <literalIdentifier>10</literalIdentifier>
+                  </BooleanLiteralStruct>
+                </booleanLiterals>
+                <literals />
+              </HypothesisStruct>
+              <HypothesisStruct>
+                <quantifierSetting>
+                  <firstContingencyTableRows>
+                    <ArrayOfInt>
+                      <int>342</int>
+                      <int>1485</int>
+                    </ArrayOfInt>
+                    <ArrayOfInt>
+                      <int>930</int>
+                      <int>3424</int>
+                    </ArrayOfInt>
+                  </firstContingencyTableRows>
+                  <secondContingencyTableRows />
+                  <numericValues />
+                  <allObjectsCount>6181</allObjectsCount>
+                </quantifierSetting>
+                <booleanLiterals>
+                  <BooleanLiteralStruct>
+                    <cedentType>Antecedent</cedentType>
+                    <categoriesNames>
+                      <string>A</string>
+                    </categoriesNames>
+                    <negation>false</negation>
+                    <literalName>status</literalName>
+                    <literalIdentifier>7</literalIdentifier>
+                  </BooleanLiteralStruct>
+                  <BooleanLiteralStruct>
+                    <cedentType>Succedent</cedentType>
+                    <categoriesNames>
+                      <string>&lt;9110;10110)</string>
+                    </categoriesNames>
+                    <negation>false</negation>
+                    <literalName>salary</literalName>
+                    <literalIdentifier>10</literalIdentifier>
+                  </BooleanLiteralStruct>
+                </booleanLiterals>
+                <literals />
+              </HypothesisStruct>
+              <HypothesisStruct>
+                <quantifierSetting>
+                  <firstContingencyTableRows>
+                    <ArrayOfInt>
+                      <int>1629</int>
+                      <int>198</int>
+                    </ArrayOfInt>
+                    <ArrayOfInt>
+                      <int>3987</int>
+                      <int>367</int>
+                    </ArrayOfInt>
+                  </firstContingencyTableRows>
+                  <secondContingencyTableRows />
+                  <numericValues />
+                  <allObjectsCount>6181</allObjectsCount>
+                </quantifierSetting>
+                <booleanLiterals>
+                  <BooleanLiteralStruct>
+                    <cedentType>Antecedent</cedentType>
+                    <categoriesNames>
+                      <string>A</string>
+                    </categoriesNames>
+                    <negation>false</negation>
+                    <literalName>status</literalName>
+                    <literalIdentifier>7</literalIdentifier>
+                  </BooleanLiteralStruct>
+                  <BooleanLiteralStruct>
+                    <cedentType>Succedent</cedentType>
+                    <categoriesNames>
+                      <string>&lt;10110;11110)</string>
+                    </categoriesNames>
+                    <negation>true</negation>
+                    <literalName>salary</literalName>
+                    <literalIdentifier>10</literalIdentifier>
+                  </BooleanLiteralStruct>
+                </booleanLiterals>
+                <literals />
+              </HypothesisStruct>
+              <HypothesisStruct>
+                <quantifierSetting>
+                  <firstContingencyTableRows>
+                    <ArrayOfInt>
+                      <int>801</int>
+                      <int>1026</int>
+                    </ArrayOfInt>
+                    <ArrayOfInt>
+                      <int>1792</int>
+                      <int>2562</int>
+                    </ArrayOfInt>
+                  </firstContingencyTableRows>
+                  <secondContingencyTableRows />
+                  <numericValues />
+                  <allObjectsCount>6181</allObjectsCount>
+                </quantifierSetting>
+                <booleanLiterals>
+                  <BooleanLiteralStruct>
+                    <cedentType>Antecedent</cedentType>
+                    <categoriesNames>
+                      <string>A</string>
+                    </categoriesNames>
+                    <negation>false</negation>
+                    <literalName>status</literalName>
+                    <literalIdentifier>7</literalIdentifier>
+                  </BooleanLiteralStruct>
+                  <BooleanLiteralStruct>
+                    <cedentType>Succedent</cedentType>
+                    <categoriesNames>
+                      <string>&lt;8110;9110)</string>
+                    </categoriesNames>
+                    <negation>true</negation>
+                    <literalName>salary</literalName>
+                    <literalIdentifier>10</literalIdentifier>
+                  </BooleanLiteralStruct>
+                </booleanLiterals>
+                <literals />
+              </HypothesisStruct>
+              <HypothesisStruct>
+                <quantifierSetting>
+                  <firstContingencyTableRows>
+                    <ArrayOfInt>
+                      <int>1485</int>
+                      <int>342</int>
+                    </ArrayOfInt>
+                    <ArrayOfInt>
+                      <int>3424</int>
+                      <int>930</int>
+                    </ArrayOfInt>
+                  </firstContingencyTableRows>
+                  <secondContingencyTableRows />
+                  <numericValues />
+                  <allObjectsCount>6181</allObjectsCount>
+                </quantifierSetting>
+                <booleanLiterals>
+                  <BooleanLiteralStruct>
+                    <cedentType>Antecedent</cedentType>
+                    <categoriesNames>
+                      <string>A</string>
+                    </categoriesNames>
+                    <negation>false</negation>
+                    <literalName>status</literalName>
+                    <literalIdentifier>7</literalIdentifier>
+                  </BooleanLiteralStruct>
+                  <BooleanLiteralStruct>
+                    <cedentType>Succedent</cedentType>
+                    <categoriesNames>
+                      <string>&lt;9110;10110)</string>
+                    </categoriesNames>
+                    <negation>true</negation>
+                    <literalName>salary</literalName>
+                    <literalIdentifier>10</literalIdentifier>
+                  </BooleanLiteralStruct>
+                </booleanLiterals>
+                <literals />
+              </HypothesisStruct>
+              <HypothesisStruct>
+                <quantifierSetting>
+                  <firstContingencyTableRows>
+                    <ArrayOfInt>
+                      <int>1827</int>
+                      <int>0</int>
+                    </ArrayOfInt>
+                    <ArrayOfInt>
+                      <int>4354</int>
+                      <int>0</int>
+                    </ArrayOfInt>
+                  </firstContingencyTableRows>
+                  <secondContingencyTableRows />
+                  <numericValues />
+                  <allObjectsCount>6181</allObjectsCount>
+                </quantifierSetting>
+                <booleanLiterals>
+                  <BooleanLiteralStruct>
+                    <cedentType>Antecedent</cedentType>
+                    <categoriesNames>
+                      <string>A</string>
+                    </categoriesNames>
+                    <negation>false</negation>
+                    <literalName>status</literalName>
+                    <literalIdentifier>7</literalIdentifier>
+                  </BooleanLiteralStruct>
+                  <BooleanLiteralStruct>
+                    <cedentType>Succedent</cedentType>
+                    <categoriesNames>
+                      <string>&lt;12110;12541)</string>
+                    </categoriesNames>
+                    <negation>true</negation>
+                    <literalName>salary</literalName>
+                    <literalIdentifier>10</literalIdentifier>
+                  </BooleanLiteralStruct>
+                </booleanLiterals>
+                <literals />
+              </HypothesisStruct>
+              <HypothesisStruct>
+                <quantifierSetting>
+                  <firstContingencyTableRows>
+                    <ArrayOfInt>
+                      <int>1827</int>
+                      <int>0</int>
+                    </ArrayOfInt>
+                    <ArrayOfInt>
+                      <int>4309</int>
+                      <int>45</int>
+                    </ArrayOfInt>
+                  </firstContingencyTableRows>
+                  <secondContingencyTableRows />
+                  <numericValues />
+                  <allObjectsCount>6181</allObjectsCount>
+                </quantifierSetting>
+                <booleanLiterals>
+                  <BooleanLiteralStruct>
+                    <cedentType>Antecedent</cedentType>
+                    <categoriesNames>
+                      <string>A</string>
+                    </categoriesNames>
+                    <negation>false</negation>
+                    <literalName>status</literalName>
+                    <literalIdentifier>7</literalIdentifier>
+                  </BooleanLiteralStruct>
+                  <BooleanLiteralStruct>
+                    <cedentType>Succedent</cedentType>
+                    <categoriesNames>
+                      <string>&lt;11110;12110)</string>
+                    </categoriesNames>
+                    <negation>true</negation>
+                    <literalName>salary</literalName>
+                    <literalIdentifier>10</literalIdentifier>
+                  </BooleanLiteralStruct>
+                </booleanLiterals>
+                <literals />
+              </HypothesisStruct>
+              <HypothesisStruct>
+                <quantifierSetting>
+                  <firstContingencyTableRows>
+                    <ArrayOfInt>
+                      <int>34</int>
+                      <int>255</int>
+                    </ArrayOfInt>
+                    <ArrayOfInt>
+                      <int>531</int>
+                      <int>5361</int>
+                    </ArrayOfInt>
+                  </firstContingencyTableRows>
+                  <secondContingencyTableRows />
+                  <numericValues />
+                  <allObjectsCount>6181</allObjectsCount>
+                </quantifierSetting>
+                <booleanLiterals>
+                  <BooleanLiteralStruct>
+                    <cedentType>Antecedent</cedentType>
+                    <categoriesNames>
+                      <string>B</string>
+                    </categoriesNames>
+                    <negation>false</negation>
+                    <literalName>status</literalName>
+                    <literalIdentifier>7</literalIdentifier>
+                  </BooleanLiteralStruct>
+                  <BooleanLiteralStruct>
+                    <cedentType>Succedent</cedentType>
+                    <categoriesNames>
+                      <string>&lt;10110;11110)</string>
+                    </categoriesNames>
+                    <negation>false</negation>
+                    <literalName>salary</literalName>
+                    <literalIdentifier>10</literalIdentifier>
+                  </BooleanLiteralStruct>
+                </booleanLiterals>
+                <literals />
+              </HypothesisStruct>
+              <HypothesisStruct>
+                <quantifierSetting>
+                  <firstContingencyTableRows>
+                    <ArrayOfInt>
+                      <int>162</int>
+                      <int>127</int>
+                    </ArrayOfInt>
+                    <ArrayOfInt>
+                      <int>3426</int>
+                      <int>2466</int>
+                    </ArrayOfInt>
+                  </firstContingencyTableRows>
+                  <secondContingencyTableRows />
+                  <numericValues />
+                  <allObjectsCount>6181</allObjectsCount>
+                </quantifierSetting>
+                <booleanLiterals>
+                  <BooleanLiteralStruct>
+                    <cedentType>Antecedent</cedentType>
+                    <categoriesNames>
+                      <string>B</string>
+                    </categoriesNames>
+                    <negation>false</negation>
+                    <literalName>status</literalName>
+                    <literalIdentifier>7</literalIdentifier>
+                  </BooleanLiteralStruct>
+                  <BooleanLiteralStruct>
+                    <cedentType>Succedent</cedentType>
+                    <categoriesNames>
+                      <string>&lt;8110;9110)</string>
+                    </categoriesNames>
+                    <negation>false</negation>
+                    <literalName>salary</literalName>
+                    <literalIdentifier>10</literalIdentifier>
+                  </BooleanLiteralStruct>
+                </booleanLiterals>
+                <literals />
+              </HypothesisStruct>
+              <HypothesisStruct>
+                <quantifierSetting>
+                  <firstContingencyTableRows>
+                    <ArrayOfInt>
+                      <int>66</int>
+                      <int>223</int>
+                    </ArrayOfInt>
+                    <ArrayOfInt>
+                      <int>1206</int>
+                      <int>4686</int>
+                    </ArrayOfInt>
+                  </firstContingencyTableRows>
+                  <secondContingencyTableRows />
+                  <numericValues />
+                  <allObjectsCount>6181</allObjectsCount>
+                </quantifierSetting>
+                <booleanLiterals>
+                  <BooleanLiteralStruct>
+                    <cedentType>Antecedent</cedentType>
+                    <categoriesNames>
+                      <string>B</string>
+                    </categoriesNames>
+                    <negation>false</negation>
+                    <literalName>status</literalName>
+                    <literalIdentifier>7</literalIdentifier>
+                  </BooleanLiteralStruct>
+                  <BooleanLiteralStruct>
+                    <cedentType>Succedent</cedentType>
+                    <categoriesNames>
+                      <string>&lt;9110;10110)</string>
+                    </categoriesNames>
+                    <negation>false</negation>
+                    <literalName>salary</literalName>
+                    <literalIdentifier>10</literalIdentifier>
+                  </BooleanLiteralStruct>
+                </booleanLiterals>
+                <literals />
+              </HypothesisStruct>
+              <HypothesisStruct>
+                <quantifierSetting>
+                  <firstContingencyTableRows>
+                    <ArrayOfInt>
+                      <int>255</int>
+                      <int>34</int>
+                    </ArrayOfInt>
+                    <ArrayOfInt>
+                      <int>5361</int>
+                      <int>531</int>
+                    </ArrayOfInt>
+                  </firstContingencyTableRows>
+                  <secondContingencyTableRows />
+                  <numericValues />
+                  <allObjectsCount>6181</allObjectsCount>
+                </quantifierSetting>
+                <booleanLiterals>
+                  <BooleanLiteralStruct>
+                    <cedentType>Antecedent</cedentType>
+                    <categoriesNames>
+                      <string>B</string>
+                    </categoriesNames>
+                    <negation>false</negation>
+                    <literalName>status</literalName>
+                    <literalIdentifier>7</literalIdentifier>
+                  </BooleanLiteralStruct>
+                  <BooleanLiteralStruct>
+                    <cedentType>Succedent</cedentType>
+                    <categoriesNames>
+                      <string>&lt;10110;11110)</string>
+                    </categoriesNames>
+                    <negation>true</negation>
+                    <literalName>salary</literalName>
+                    <literalIdentifier>10</literalIdentifier>
+                  </BooleanLiteralStruct>
+                </booleanLiterals>
+                <literals />
+              </HypothesisStruct>
+              <HypothesisStruct>
+                <quantifierSetting>
+                  <firstContingencyTableRows>
+                    <ArrayOfInt>
+                      <int>127</int>
+                      <int>162</int>
+                    </ArrayOfInt>
+                    <ArrayOfInt>
+                      <int>2466</int>
+                      <int>3426</int>
+                    </ArrayOfInt>
+                  </firstContingencyTableRows>
+                  <secondContingencyTableRows />
+                  <numericValues />
+                  <allObjectsCount>6181</allObjectsCount>
+                </quantifierSetting>
+                <booleanLiterals>
+                  <BooleanLiteralStruct>
+                    <cedentType>Antecedent</cedentType>
+                    <categoriesNames>
+                      <string>B</string>
+                    </categoriesNames>
+                    <negation>false</negation>
+                    <literalName>status</literalName>
+                    <literalIdentifier>7</literalIdentifier>
+                  </BooleanLiteralStruct>
+                  <BooleanLiteralStruct>
+                    <cedentType>Succedent</cedentType>
+                    <categoriesNames>
+                      <string>&lt;8110;9110)</string>
+                    </categoriesNames>
+                    <negation>true</negation>
+                    <literalName>salary</literalName>
+                    <literalIdentifier>10</literalIdentifier>
+                  </BooleanLiteralStruct>
+                </booleanLiterals>
+                <literals />
+              </HypothesisStruct>
+              <HypothesisStruct>
+                <quantifierSetting>
+                  <firstContingencyTableRows>
+                    <ArrayOfInt>
+                      <int>223</int>
+                      <int>66</int>
+                    </ArrayOfInt>
+                    <ArrayOfInt>
+                      <int>4686</int>
+                      <int>1206</int>
+                    </ArrayOfInt>
+                  </firstContingencyTableRows>
+                  <secondContingencyTableRows />
+                  <numericValues />
+                  <allObjectsCount>6181</allObjectsCount>
+                </quantifierSetting>
+                <booleanLiterals>
+                  <BooleanLiteralStruct>
+                    <cedentType>Antecedent</cedentType>
+                    <categoriesNames>
+                      <string>B</string>
+                    </categoriesNames>
+                    <negation>false</negation>
+                    <literalName>status</literalName>
+                    <literalIdentifier>7</literalIdentifier>
+                  </BooleanLiteralStruct>
+                  <BooleanLiteralStruct>
+                    <cedentType>Succedent</cedentType>
+                    <categoriesNames>
+                      <string>&lt;9110;10110)</string>
+                    </categoriesNames>
+                    <negation>true</negation>
+                    <literalName>salary</literalName>
+                    <literalIdentifier>10</literalIdentifier>
+                  </BooleanLiteralStruct>
+                </booleanLiterals>
+                <literals />
+              </HypothesisStruct>
+              <HypothesisStruct>
+                <quantifierSetting>
+                  <firstContingencyTableRows>
+                    <ArrayOfInt>
+                      <int>289</int>
+                      <int>0</int>
+                    </ArrayOfInt>
+                    <ArrayOfInt>
+                      <int>5892</int>
+                      <int>0</int>
+                    </ArrayOfInt>
+                  </firstContingencyTableRows>
+                  <secondContingencyTableRows />
+                  <numericValues />
+                  <allObjectsCount>6181</allObjectsCount>
+                </quantifierSetting>
+                <booleanLiterals>
+                  <BooleanLiteralStruct>
+                    <cedentType>Antecedent</cedentType>
+                    <categoriesNames>
+                      <string>B</string>
+                    </categoriesNames>
+                    <negation>false</negation>
+                    <literalName>status</literalName>
+                    <literalIdentifier>7</literalIdentifier>
+                  </BooleanLiteralStruct>
+                  <BooleanLiteralStruct>
+                    <cedentType>Succedent</cedentType>
+                    <categoriesNames>
+                      <string>&lt;12110;12541)</string>
+                    </categoriesNames>
+                    <negation>true</negation>
+                    <literalName>salary</literalName>
+                    <literalIdentifier>10</literalIdentifier>
+                  </BooleanLiteralStruct>
+                </booleanLiterals>
+                <literals />
+              </HypothesisStruct>
+              <HypothesisStruct>
+                <quantifierSetting>
+                  <firstContingencyTableRows>
+                    <ArrayOfInt>
+                      <int>289</int>
+                      <int>0</int>
+                    </ArrayOfInt>
+                    <ArrayOfInt>
+                      <int>5847</int>
+                      <int>45</int>
+                    </ArrayOfInt>
+                  </firstContingencyTableRows>
+                  <secondContingencyTableRows />
+                  <numericValues />
+                  <allObjectsCount>6181</allObjectsCount>
+                </quantifierSetting>
+                <booleanLiterals>
+                  <BooleanLiteralStruct>
+                    <cedentType>Antecedent</cedentType>
+                    <categoriesNames>
+                      <string>B</string>
+                    </categoriesNames>
+                    <negation>false</negation>
+                    <literalName>status</literalName>
+                    <literalIdentifier>7</literalIdentifier>
+                  </BooleanLiteralStruct>
+                  <BooleanLiteralStruct>
+                    <cedentType>Succedent</cedentType>
+                    <categoriesNames>
+                      <string>&lt;11110;12110)</string>
+                    </categoriesNames>
+                    <negation>true</negation>
+                    <literalName>salary</literalName>
+                    <literalIdentifier>10</literalIdentifier>
+                  </BooleanLiteralStruct>
+                </booleanLiterals>
+                <literals />
+              </HypothesisStruct>
+              <HypothesisStruct>
+                <quantifierSetting>
+                  <firstContingencyTableRows>
+                    <ArrayOfInt>
+                      <int>2106</int>
+                      <int>1521</int>
+                    </ArrayOfInt>
+                    <ArrayOfInt>
+                      <int>1482</int>
+                      <int>1072</int>
+                    </ArrayOfInt>
+                  </firstContingencyTableRows>
+                  <secondContingencyTableRows />
+                  <numericValues />
+                  <allObjectsCount>6181</allObjectsCount>
+                </quantifierSetting>
+                <booleanLiterals>
+                  <BooleanLiteralStruct>
+                    <cedentType>Antecedent</cedentType>
+                    <categoriesNames>
+                      <string>C</string>
+                    </categoriesNames>
+                    <negation>false</negation>
+                    <literalName>status</literalName>
+                    <literalIdentifier>7</literalIdentifier>
+                  </BooleanLiteralStruct>
+                  <BooleanLiteralStruct>
+                    <cedentType>Succedent</cedentType>
+                    <categoriesNames>
+                      <string>&lt;8110;9110)</string>
+                    </categoriesNames>
+                    <negation>false</negation>
+                    <literalName>salary</literalName>
+                    <literalIdentifier>10</literalIdentifier>
+                  </BooleanLiteralStruct>
+                </booleanLiterals>
+                <literals />
+              </HypothesisStruct>
+              <HypothesisStruct>
+                <quantifierSetting>
+                  <firstContingencyTableRows>
+                    <ArrayOfInt>
+                      <int>801</int>
+                      <int>2826</int>
+                    </ArrayOfInt>
+                    <ArrayOfInt>
+                      <int>471</int>
+                      <int>2083</int>
+                    </ArrayOfInt>
+                  </firstContingencyTableRows>
+                  <secondContingencyTableRows />
+                  <numericValues />
+                  <allObjectsCount>6181</allObjectsCount>
+                </quantifierSetting>
+                <booleanLiterals>
+                  <BooleanLiteralStruct>
+                    <cedentType>Antecedent</cedentType>
+                    <categoriesNames>
+                      <string>C</string>
+                    </categoriesNames>
+                    <negation>false</negation>
+                    <literalName>status</literalName>
+                    <literalIdentifier>7</literalIdentifier>
+                  </BooleanLiteralStruct>
+                  <BooleanLiteralStruct>
+                    <cedentType>Succedent</cedentType>
+                    <categoriesNames>
+                      <string>&lt;9110;10110)</string>
+                    </categoriesNames>
+                    <negation>false</negation>
+                    <literalName>salary</literalName>
+                    <literalIdentifier>10</literalIdentifier>
+                  </BooleanLiteralStruct>
+                </booleanLiterals>
+                <literals />
+              </HypothesisStruct>
+              <HypothesisStruct>
+                <quantifierSetting>
+                  <firstContingencyTableRows>
+                    <ArrayOfInt>
+                      <int>3339</int>
+                      <int>288</int>
+                    </ArrayOfInt>
+                    <ArrayOfInt>
+                      <int>2277</int>
+                      <int>277</int>
+                    </ArrayOfInt>
+                  </firstContingencyTableRows>
+                  <secondContingencyTableRows />
+                  <numericValues />
+                  <allObjectsCount>6181</allObjectsCount>
+                </quantifierSetting>
+                <booleanLiterals>
+                  <BooleanLiteralStruct>
+                    <cedentType>Antecedent</cedentType>
+                    <categoriesNames>
+                      <string>C</string>
+                    </categoriesNames>
+                    <negation>false</negation>
+                    <literalName>status</literalName>
+                    <literalIdentifier>7</literalIdentifier>
+                  </BooleanLiteralStruct>
+                  <BooleanLiteralStruct>
+                    <cedentType>Succedent</cedentType>
+                    <categoriesNames>
+                      <string>&lt;10110;11110)</string>
+                    </categoriesNames>
+                    <negation>true</negation>
+                    <literalName>salary</literalName>
+                    <literalIdentifier>10</literalIdentifier>
+                  </BooleanLiteralStruct>
+                </booleanLiterals>
+                <literals />
+              </HypothesisStruct>
+              <HypothesisStruct>
+                <quantifierSetting>
+                  <firstContingencyTableRows>
+                    <ArrayOfInt>
+                      <int>1521</int>
+                      <int>2106</int>
+                    </ArrayOfInt>
+                    <ArrayOfInt>
+                      <int>1072</int>
+                      <int>1482</int>
+                    </ArrayOfInt>
+                  </firstContingencyTableRows>
+                  <secondContingencyTableRows />
+                  <numericValues />
+                  <allObjectsCount>6181</allObjectsCount>
+                </quantifierSetting>
+                <booleanLiterals>
+                  <BooleanLiteralStruct>
+                    <cedentType>Antecedent</cedentType>
+                    <categoriesNames>
+                      <string>C</string>
+                    </categoriesNames>
+                    <negation>false</negation>
+                    <literalName>status</literalName>
+                    <literalIdentifier>7</literalIdentifier>
+                  </BooleanLiteralStruct>
+                  <BooleanLiteralStruct>
+                    <cedentType>Succedent</cedentType>
+                    <categoriesNames>
+                      <string>&lt;8110;9110)</string>
+                    </categoriesNames>
+                    <negation>true</negation>
+                    <literalName>salary</literalName>
+                    <literalIdentifier>10</literalIdentifier>
+                  </BooleanLiteralStruct>
+                </booleanLiterals>
+                <literals />
+              </HypothesisStruct>
+              <HypothesisStruct>
+                <quantifierSetting>
+                  <firstContingencyTableRows>
+                    <ArrayOfInt>
+                      <int>2826</int>
+                      <int>801</int>
+                    </ArrayOfInt>
+                    <ArrayOfInt>
+                      <int>2083</int>
+                      <int>471</int>
+                    </ArrayOfInt>
+                  </firstContingencyTableRows>
+                  <secondContingencyTableRows />
+                  <numericValues />
+                  <allObjectsCount>6181</allObjectsCount>
+                </quantifierSetting>
+                <booleanLiterals>
+                  <BooleanLiteralStruct>
+                    <cedentType>Antecedent</cedentType>
+                    <categoriesNames>
+                      <string>C</string>
+                    </categoriesNames>
+                    <negation>false</negation>
+                    <literalName>status</literalName>
+                    <literalIdentifier>7</literalIdentifier>
+                  </BooleanLiteralStruct>
+                  <BooleanLiteralStruct>
+                    <cedentType>Succedent</cedentType>
+                    <categoriesNames>
+                      <string>&lt;9110;10110)</string>
+                    </categoriesNames>
+                    <negation>true</negation>
+                    <literalName>salary</literalName>
+                    <literalIdentifier>10</literalIdentifier>
+                  </BooleanLiteralStruct>
+                </booleanLiterals>
+                <literals />
+              </HypothesisStruct>
+              <HypothesisStruct>
+                <quantifierSetting>
+                  <firstContingencyTableRows>
+                    <ArrayOfInt>
+                      <int>3627</int>
+                      <int>0</int>
+                    </ArrayOfInt>
+                    <ArrayOfInt>
+                      <int>2554</int>
+                      <int>0</int>
+                    </ArrayOfInt>
+                  </firstContingencyTableRows>
+                  <secondContingencyTableRows />
+                  <numericValues />
+                  <allObjectsCount>6181</allObjectsCount>
+                </quantifierSetting>
+                <booleanLiterals>
+                  <BooleanLiteralStruct>
+                    <cedentType>Antecedent</cedentType>
+                    <categoriesNames>
+                      <string>C</string>
+                    </categoriesNames>
+                    <negation>false</negation>
+                    <literalName>status</literalName>
+                    <literalIdentifier>7</literalIdentifier>
+                  </BooleanLiteralStruct>
+                  <BooleanLiteralStruct>
+                    <cedentType>Succedent</cedentType>
+                    <categoriesNames>
+                      <string>&lt;12110;12541)</string>
+                    </categoriesNames>
+                    <negation>true</negation>
+                    <literalName>salary</literalName>
+                    <literalIdentifier>10</literalIdentifier>
+                  </BooleanLiteralStruct>
+                </booleanLiterals>
+                <literals />
+              </HypothesisStruct>
+              <HypothesisStruct>
+                <quantifierSetting>
+                  <firstContingencyTableRows>
+                    <ArrayOfInt>
+                      <int>3591</int>
+                      <int>36</int>
+                    </ArrayOfInt>
+                    <ArrayOfInt>
+                      <int>2545</int>
+                      <int>9</int>
+                    </ArrayOfInt>
+                  </firstContingencyTableRows>
+                  <secondContingencyTableRows />
+                  <numericValues />
+                  <allObjectsCount>6181</allObjectsCount>
+                </quantifierSetting>
+                <booleanLiterals>
+                  <BooleanLiteralStruct>
+                    <cedentType>Antecedent</cedentType>
+                    <categoriesNames>
+                      <string>C</string>
+                    </categoriesNames>
+                    <negation>false</negation>
+                    <literalName>status</literalName>
+                    <literalIdentifier>7</literalIdentifier>
+                  </BooleanLiteralStruct>
+                  <BooleanLiteralStruct>
+                    <cedentType>Succedent</cedentType>
+                    <categoriesNames>
+                      <string>&lt;11110;12110)</string>
+                    </categoriesNames>
+                    <negation>true</negation>
+                    <literalName>salary</literalName>
+                    <literalIdentifier>10</literalIdentifier>
+                  </BooleanLiteralStruct>
+                </booleanLiterals>
+                <literals />
+              </HypothesisStruct>
+              <HypothesisStruct>
+                <quantifierSetting>
+                  <firstContingencyTableRows>
+                    <ArrayOfInt>
+                      <int>45</int>
+                      <int>393</int>
+                    </ArrayOfInt>
+                    <ArrayOfInt>
+                      <int>520</int>
+                      <int>5223</int>
+                    </ArrayOfInt>
+                  </firstContingencyTableRows>
+                  <secondContingencyTableRows />
+                  <numericValues />
+                  <allObjectsCount>6181</allObjectsCount>
+                </quantifierSetting>
+                <booleanLiterals>
+                  <BooleanLiteralStruct>
+                    <cedentType>Antecedent</cedentType>
+                    <categoriesNames>
+                      <string>D</string>
+                    </categoriesNames>
+                    <negation>false</negation>
+                    <literalName>status</literalName>
+                    <literalIdentifier>7</literalIdentifier>
+                  </BooleanLiteralStruct>
+                  <BooleanLiteralStruct>
+                    <cedentType>Succedent</cedentType>
+                    <categoriesNames>
+                      <string>&lt;10110;11110)</string>
+                    </categoriesNames>
+                    <negation>false</negation>
+                    <literalName>salary</literalName>
+                    <literalIdentifier>10</literalIdentifier>
+                  </BooleanLiteralStruct>
+                </booleanLiterals>
+                <literals />
+              </HypothesisStruct>
+              <HypothesisStruct>
+                <quantifierSetting>
+                  <firstContingencyTableRows>
+                    <ArrayOfInt>
+                      <int>294</int>
+                      <int>144</int>
+                    </ArrayOfInt>
+                    <ArrayOfInt>
+                      <int>3294</int>
+                      <int>2449</int>
+                    </ArrayOfInt>
+                  </firstContingencyTableRows>
+                  <secondContingencyTableRows />
+                  <numericValues />
+                  <allObjectsCount>6181</allObjectsCount>
+                </quantifierSetting>
+                <booleanLiterals>
+                  <BooleanLiteralStruct>
+                    <cedentType>Antecedent</cedentType>
+                    <categoriesNames>
+                      <string>D</string>
+                    </categoriesNames>
+                    <negation>false</negation>
+                    <literalName>status</literalName>
+                    <literalIdentifier>7</literalIdentifier>
+                  </BooleanLiteralStruct>
+                  <BooleanLiteralStruct>
+                    <cedentType>Succedent</cedentType>
+                    <categoriesNames>
+                      <string>&lt;8110;9110)</string>
+                    </categoriesNames>
+                    <negation>false</negation>
+                    <literalName>salary</literalName>
+                    <literalIdentifier>10</literalIdentifier>
+                  </BooleanLiteralStruct>
+                </booleanLiterals>
+                <literals />
+              </HypothesisStruct>
+              <HypothesisStruct>
+                <quantifierSetting>
+                  <firstContingencyTableRows>
+                    <ArrayOfInt>
+                      <int>63</int>
+                      <int>375</int>
+                    </ArrayOfInt>
+                    <ArrayOfInt>
+                      <int>1209</int>
+                      <int>4534</int>
+                    </ArrayOfInt>
+                  </firstContingencyTableRows>
+                  <secondContingencyTableRows />
+                  <numericValues />
+                  <allObjectsCount>6181</allObjectsCount>
+                </quantifierSetting>
+                <booleanLiterals>
+                  <BooleanLiteralStruct>
+                    <cedentType>Antecedent</cedentType>
+                    <categoriesNames>
+                      <string>D</string>
+                    </categoriesNames>
+                    <negation>false</negation>
+                    <literalName>status</literalName>
+                    <literalIdentifier>7</literalIdentifier>
+                  </BooleanLiteralStruct>
+                  <BooleanLiteralStruct>
+                    <cedentType>Succedent</cedentType>
+                    <categoriesNames>
+                      <string>&lt;9110;10110)</string>
+                    </categoriesNames>
+                    <negation>false</negation>
+                    <literalName>salary</literalName>
+                    <literalIdentifier>10</literalIdentifier>
+                  </BooleanLiteralStruct>
+                </booleanLiterals>
+                <literals />
+              </HypothesisStruct>
+              <HypothesisStruct>
+                <quantifierSetting>
+                  <firstContingencyTableRows>
+                    <ArrayOfInt>
+                      <int>393</int>
+                      <int>45</int>
+                    </ArrayOfInt>
+                    <ArrayOfInt>
+                      <int>5223</int>
+                      <int>520</int>
+                    </ArrayOfInt>
+                  </firstContingencyTableRows>
+                  <secondContingencyTableRows />
+                  <numericValues />
+                  <allObjectsCount>6181</allObjectsCount>
+                </quantifierSetting>
+                <booleanLiterals>
+                  <BooleanLiteralStruct>
+                    <cedentType>Antecedent</cedentType>
+                    <categoriesNames>
+                      <string>D</string>
+                    </categoriesNames>
+                    <negation>false</negation>
+                    <literalName>status</literalName>
+                    <literalIdentifier>7</literalIdentifier>
+                  </BooleanLiteralStruct>
+                  <BooleanLiteralStruct>
+                    <cedentType>Succedent</cedentType>
+                    <categoriesNames>
+                      <string>&lt;10110;11110)</string>
+                    </categoriesNames>
+                    <negation>true</negation>
+                    <literalName>salary</literalName>
+                    <literalIdentifier>10</literalIdentifier>
+                  </BooleanLiteralStruct>
+                </booleanLiterals>
+                <literals />
+              </HypothesisStruct>
+              <HypothesisStruct>
+                <quantifierSetting>
+                  <firstContingencyTableRows>
+                    <ArrayOfInt>
+                      <int>144</int>
+                      <int>294</int>
+                    </ArrayOfInt>
+                    <ArrayOfInt>
+                      <int>2449</int>
+                      <int>3294</int>
+                    </ArrayOfInt>
+                  </firstContingencyTableRows>
+                  <secondContingencyTableRows />
+                  <numericValues />
+                  <allObjectsCount>6181</allObjectsCount>
+                </quantifierSetting>
+                <booleanLiterals>
+                  <BooleanLiteralStruct>
+                    <cedentType>Antecedent</cedentType>
+                    <categoriesNames>
+                      <string>D</string>
+                    </categoriesNames>
+                    <negation>false</negation>
+                    <literalName>status</literalName>
+                    <literalIdentifier>7</literalIdentifier>
+                  </BooleanLiteralStruct>
+                  <BooleanLiteralStruct>
+                    <cedentType>Succedent</cedentType>
+                    <categoriesNames>
+                      <string>&lt;8110;9110)</string>
+                    </categoriesNames>
+                    <negation>true</negation>
+                    <literalName>salary</literalName>
+                    <literalIdentifier>10</literalIdentifier>
+                  </BooleanLiteralStruct>
+                </booleanLiterals>
+                <literals />
+              </HypothesisStruct>
+              <HypothesisStruct>
+                <quantifierSetting>
+                  <firstContingencyTableRows>
+                    <ArrayOfInt>
+                      <int>375</int>
+                      <int>63</int>
+                    </ArrayOfInt>
+                    <ArrayOfInt>
+                      <int>4534</int>
+                      <int>1209</int>
+                    </ArrayOfInt>
+                  </firstContingencyTableRows>
+                  <secondContingencyTableRows />
+                  <numericValues />
+                  <allObjectsCount>6181</allObjectsCount>
+                </quantifierSetting>
+                <booleanLiterals>
+                  <BooleanLiteralStruct>
+                    <cedentType>Antecedent</cedentType>
+                    <categoriesNames>
+                      <string>D</string>
+                    </categoriesNames>
+                    <negation>false</negation>
+                    <literalName>status</literalName>
+                    <literalIdentifier>7</literalIdentifier>
+                  </BooleanLiteralStruct>
+                  <BooleanLiteralStruct>
+                    <cedentType>Succedent</cedentType>
+                    <categoriesNames>
+                      <string>&lt;9110;10110)</string>
+                    </categoriesNames>
+                    <negation>true</negation>
+                    <literalName>salary</literalName>
+                    <literalIdentifier>10</literalIdentifier>
+                  </BooleanLiteralStruct>
+                </booleanLiterals>
+                <literals />
+              </HypothesisStruct>
+              <HypothesisStruct>
+                <quantifierSetting>
+                  <firstContingencyTableRows>
+                    <ArrayOfInt>
+                      <int>438</int>
+                      <int>0</int>
+                    </ArrayOfInt>
+                    <ArrayOfInt>
+                      <int>5743</int>
+                      <int>0</int>
+                    </ArrayOfInt>
+                  </firstContingencyTableRows>
+                  <secondContingencyTableRows />
+                  <numericValues />
+                  <allObjectsCount>6181</allObjectsCount>
+                </quantifierSetting>
+                <booleanLiterals>
+                  <BooleanLiteralStruct>
+                    <cedentType>Antecedent</cedentType>
+                    <categoriesNames>
+                      <string>D</string>
+                    </categoriesNames>
+                    <negation>false</negation>
+                    <literalName>status</literalName>
+                    <literalIdentifier>7</literalIdentifier>
+                  </BooleanLiteralStruct>
+                  <BooleanLiteralStruct>
+                    <cedentType>Succedent</cedentType>
+                    <categoriesNames>
+                      <string>&lt;12110;12541)</string>
+                    </categoriesNames>
+                    <negation>true</negation>
+                    <literalName>salary</literalName>
+                    <literalIdentifier>10</literalIdentifier>
+                  </BooleanLiteralStruct>
+                </booleanLiterals>
+                <literals />
+              </HypothesisStruct>
+              <HypothesisStruct>
+                <quantifierSetting>
+                  <firstContingencyTableRows>
+                    <ArrayOfInt>
+                      <int>429</int>
+                      <int>9</int>
+                    </ArrayOfInt>
+                    <ArrayOfInt>
+                      <int>5707</int>
+                      <int>36</int>
+                    </ArrayOfInt>
+                  </firstContingencyTableRows>
+                  <secondContingencyTableRows />
+                  <numericValues />
+                  <allObjectsCount>6181</allObjectsCount>
+                </quantifierSetting>
+                <booleanLiterals>
+                  <BooleanLiteralStruct>
+                    <cedentType>Antecedent</cedentType>
+                    <categoriesNames>
+                      <string>D</string>
+                    </categoriesNames>
+                    <negation>false</negation>
+                    <literalName>status</literalName>
+                    <literalIdentifier>7</literalIdentifier>
+                  </BooleanLiteralStruct>
+                  <BooleanLiteralStruct>
+                    <cedentType>Succedent</cedentType>
+                    <categoriesNames>
+                      <string>&lt;11110;12110)</string>
+                    </categoriesNames>
+                    <negation>true</negation>
+                    <literalName>salary</literalName>
+                    <literalIdentifier>10</literalIdentifier>
+                  </BooleanLiteralStruct>
+                </booleanLiterals>
+                <literals />
+              </HypothesisStruct>
+            </Value>
           </Value>
         </PropertySet>
         <PropertySet>
@@ -1088,10 +2280,6 @@
           <BoxProjectIdentifier>22</BoxProjectIdentifier>
         </Connection>
         <Connection>
-          <SocketName>AntecedentSetting</SocketName>
-          <BoxProjectIdentifier>23</BoxProjectIdentifier>
-        </Connection>
-        <Connection>
           <SocketName>SuccedentSetting</SocketName>
           <BoxProjectIdentifier>23</BoxProjectIdentifier>
         </Connection>
@@ -1114,6 +2302,10 @@
         <Connection>
           <SocketName>KLQuantifier</SocketName>
           <BoxProjectIdentifier>27</BoxProjectIdentifier>
+        </Connection>
+        <Connection>
+          <SocketName>KLQuantifier</SocketName>
+          <BoxProjectIdentifier>32</BoxProjectIdentifier>
         </Connection>
       </Connections>
       <PropertySets>
@@ -1492,35 +2684,27 @@
           <SocketName>AntecedentSetting</SocketName>
           <BoxProjectIdentifier>22</BoxProjectIdentifier>
         </Connection>
-        <Connection>
-          <SocketName>ConditionSetting</SocketName>
-          <BoxProjectIdentifier>8</BoxProjectIdentifier>
-        </Connection>
-        <Connection>
-          <SocketName>ConditionSetting</SocketName>
-          <BoxProjectIdentifier>11</BoxProjectIdentifier>
-        </Connection>
       </Connections>
       <PropertySets>
         <PropertySet>
           <PropertyName>GenerationInfo</PropertyName>
           <Value xsi:type="GenerationInfoValueT">
             <Value>
-              <generationState>DidNotStart</generationState>
-              <generationNrOfTests>0</generationNrOfTests>
-              <generationNrOfHypotheses>0</generationNrOfHypotheses>
+              <generationState>Completed</generationState>
+              <generationNrOfTests>1</generationNrOfTests>
+              <generationNrOfHypotheses>1</generationNrOfHypotheses>
               <generationStartTime xsi:type="DateTimeTI">
-                <day>0</day>
-                <month>0</month>
-                <year>0</year>
-                <hour>0</hour>
-                <minute>0</minute>
-                <second>0</second>
+                <day>7</day>
+                <month>6</month>
+                <year>2006</year>
+                <hour>22</hour>
+                <minute>52</minute>
+                <second>55</second>
               </generationStartTime>
               <generationTotalTime xsi:type="TimeTI">
                 <hour>0</hour>
                 <minute>0</minute>
-                <second>0</second>
+                <second>3</second>
               </generationTotalTime>
             </Value>
           </Value>
@@ -1528,7 +2712,40 @@
         <PropertySet>
           <PropertyName>Hypotheses</PropertyName>
           <Value xsi:type="HypothesesValueT">
-            <Value />
+            <Value>
+              <HypothesisStruct>
+                <quantifierSetting>
+                  <firstContingencyTableRows>
+                    <ArrayOfInt>
+                      <int>565</int>
+                      <int>3588</int>
+                      <int>1272</int>
+                      <int>0</int>
+                      <int>45</int>
+                    </ArrayOfInt>
+                  </firstContingencyTableRows>
+                  <secondContingencyTableRows />
+                  <numericValues />
+                  <allObjectsCount>6181</allObjectsCount>
+                </quantifierSetting>
+                <booleanLiterals />
+                <literals>
+                  <LiteralStruct>
+                    <cedentType>Antecedent</cedentType>
+                    <categoriesNames>
+                      <string>&lt;10110;11110)</string>
+                      <string>&lt;8110;9110)</string>
+                      <string>&lt;9110;10110)</string>
+                      <string>&lt;12110;12541)</string>
+                      <string>&lt;11110;12110)</string>
+                    </categoriesNames>
+                    <literalName>salary</literalName>
+                    <categoriesValues>0</categoriesValues>
+                    <literalIdentifier>4</literalIdentifier>
+                  </LiteralStruct>
+                </literals>
+              </HypothesisStruct>
+            </Value>
           </Value>
         </PropertySet>
       </PropertySets>
@@ -1589,6 +2806,69 @@
           <Value xsi:type="StringValueT">
             <Value>
               <stringValue>Cedent2</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+      </PropertySets>
+    </Box>
+    <Box>
+      <CreatorIdentifier>LISpMinerTasks.KLTask.Quantifiers.Aggregation.AverageValue</CreatorIdentifier>
+      <ProjectIdentifier>32</ProjectIdentifier>
+      <Connections />
+      <PropertySets>
+        <PropertySet>
+          <PropertyName>ColumnFrom</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>1</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>ColumnTo</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>All</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>Relation</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>GreaterThanOrEqual</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>RowFrom</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>1</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>RowTo</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>All</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>Treshold</PropertyName>
+          <Value xsi:type="DoubleValueT">
+            <Value>
+              <doubleValue>30</doubleValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>Units</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>AbsoluteNumber</stringValue>
             </Value>
           </Value>
         </PropertySet>
