@@ -1,3 +1,7 @@
+#ifndef WINVER
+#define WINVER 0x0500
+#endif
+
 #include <afx.h>
 #include <afxdb.h>
 #include <Shlwapi.h>

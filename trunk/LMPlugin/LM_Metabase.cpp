@@ -209,7 +209,8 @@ CString Attribute_Meta::xml_convert ()
 	xml_string = xml_string + "attr_name=\"" + attr_name + "\" ";
 	xml_string = xml_string + "creation=\"" + creation + "\" ";
 	xml_string = xml_string + "ctgr_count=\"" + ctgr_count + "\"> ";
-	for (int i = 0; i < category_list.GetSize (); i++)
+	int i;
+    for (i = 0; i < category_list.GetSize (); i++)
 		xml_string = xml_string + "<ctgr name=\"" + category_list.GetAt (i).name +
 			"\" freq=\"" + category_list.GetAt (i).freq + "\" /> ";
 	for (i = 0; i < missing_type_list.GetSize (); i++)
@@ -312,7 +313,8 @@ CString Hyp_4ft_Meta::xml_convert ()
 	//beginning of ti_cedent elements
 	//Antecedent
 	xml_string = xml_string + "<ti_cedent  id=\"" + ant_id + "\"  type=\"Antecedent\"> ";
-	for (int i = 0; i < antecedent.GetSize (); i++)
+	int i;
+    for (i = 0; i < antecedent.GetSize (); i++)
 	{
 		xml_string = xml_string + "<ti_literal  id=\"" + antecedent.GetAt (i).id +
 			"\"  quant=\"" + antecedent.GetAt (i).quant +

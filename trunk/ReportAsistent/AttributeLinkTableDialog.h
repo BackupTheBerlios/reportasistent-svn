@@ -16,7 +16,7 @@ class CAttributeLinkTableDialog : public CDialog, CAttributeLinkDialogBase
 {
 // Construction
 public:
-	CAttributeLinkTableDialog(IXMLDOMElementPtr & edited_element, CWnd* pParent = NULL, BOOL show_target = TRUE);   // standard constructor
+	CAttributeLinkTableDialog(MSXML2::IXMLDOMElementPtr & edited_element, CWnd* pParent = NULL, BOOL show_target = TRUE);   // standard constructor
 	//show_target - mase zobrazovat combo box s target elementem? - kvuli attr_link_table uvnitr active_element
 
 // Dialog Data

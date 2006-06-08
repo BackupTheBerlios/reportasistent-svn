@@ -160,10 +160,10 @@ BOOL CDataSourcesManager::initSourcesTab(LPCTSTR config_file_path)
 
    // nacteni konfiguracniho souboru zdroju
 
-	IXMLDOMDocumentPtr pXMLDom;  // koren XML stromu
-	IXMLDOMElementPtr pNode;	// korenovy element
-	IXMLDOMNodeListPtr pChildren;  // seznam podelementu korenoveho elementu
-	IXMLDOMElementPtr pChild;	//  podelement korenoveho elementu
+	MSXML2::IXMLDOMDocumentPtr pXMLDom;  // koren XML stromu
+	MSXML2::IXMLDOMElementPtr pNode;	// korenovy element
+	MSXML2::IXMLDOMNodeListPtr pChildren;  // seznam podelementu korenoveho elementu
+	MSXML2::IXMLDOMElementPtr pChild;	//  podelement korenoveho elementu
 
     int i = 0;	// indexova promenna
 	_variant_t  Atr_val;	// textova hodnota atributu
@@ -217,7 +217,7 @@ BOOL CDataSourcesManager::initSourcesTab(LPCTSTR config_file_path)
 
 			//dedek: nacteni default source
 
-			IXMLDOMElementPtr el_default_source = pNode->selectSingleNode("DEFAULT_SOURCE");
+			MSXML2::IXMLDOMElementPtr el_default_source = pNode->selectSingleNode("DEFAULT_SOURCE");
 			if (el_default_source)
 				setDefaultSource((public_source_id_t) (LPCTSTR) (_bstr_t) el_default_source->getAttribute("PUBLIC_ID"));
 
@@ -256,21 +256,21 @@ BOOL CDataSourcesManager::saveSourcesTab()
 {
 	BOOL ret = TRUE;
 	
-	IXMLDOMDocumentPtr pXMLDom;
+	MSXML2::IXMLDOMDocumentPtr pXMLDom;
     pXMLDom.CreateInstance(__uuidof(DOMDocument30));
 
 	
-	IXMLDOMElementPtr root_el;	// korenovy element
+	MSXML2::IXMLDOMElementPtr root_el;	// korenovy element
 	root_el = pXMLDom->createElement("SOURCES_LIST");
 	pXMLDom->appendChild(root_el);
 
 
-	IXMLDOMElementPtr source_el;	// source element
+	MSXML2::IXMLDOMElementPtr source_el;	// source element
 	source_el = pXMLDom->createElement("SOURCE");
 
 	
 	//atributy
-	IXMLDOMAttributePtr attr;
+	MSXML2::IXMLDOMAttributePtr attr;
 	
 	attr = pXMLDom->createAttribute("PUBLIC_ID");
 	source_el->setAttributeNode(attr);
@@ -288,7 +288,7 @@ BOOL CDataSourcesManager::saveSourcesTab()
 
 	for (int a=0; a<getSourcesCount(); a++)
 	{
-		IXMLDOMElementPtr e = source_el->cloneNode(VARIANT_TRUE);
+		MSXML2::IXMLDOMElementPtr e = source_el->cloneNode(VARIANT_TRUE);
 
 		e->setAttribute("PUBLIC_ID", (LPCTSTR) getSourcePublicID(a));
 		e->setAttribute("PERZISTENT_ID", (LPCTSTR) getSourcePersistentID(a));
@@ -305,11 +305,11 @@ BOOL CDataSourcesManager::saveSourcesTab()
 
 
 	//default zdroj:
-	IXMLDOMElementPtr default_source;
+	MSXML2::IXMLDOMElementPtr default_source;
 	default_source = pXMLDom->createElement("DEFAULT_SOURCE");
 
 
-	IXMLDOMAttributePtr src_attr;	
+	MSXML2::IXMLDOMAttributePtr src_attr;	
 	src_attr = pXMLDom->createAttribute("PUBLIC_ID");
 	src_attr->value = (LPCTSTR) getDefaultSource();
 	default_source->setAttributeNode(src_attr);
@@ -851,7 +851,7 @@ BOOL CDataSourcesManager::isElementSupportedByPlugin(int plugin_index, LPCTSTR e
 	ASSERT(plugin_index >= 0);
 	ASSERT(plugin_index < PlugsTab.GetSize());
 	
-	IXMLDOMDocumentPtr ael_list;
+	MSXML2::IXMLDOMDocumentPtr ael_list;
 	ael_list.CreateInstance(_T("Msxml2.DOMDocument"));
 	ael_list->async = VARIANT_FALSE; // default - true,
 

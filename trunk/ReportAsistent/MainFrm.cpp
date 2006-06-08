@@ -79,8 +79,8 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 		return -1;      // fail to create
 	}
 
-	//Iva: Dynamicky pridam do menu seznam prvku ke vlozeni do kostry
-	CMenu * hMainMenu = AfxGetApp()->GetMainWnd()->GetMenu();
+    //Iva: Dynamicky pridam do menu seznam prvku ke vlozeni do kostry
+	CMenu * hMainMenu = /*AfxGetApp()->GetMainWnd()->*/GetMenu();
 	CMenu * hNewMenu = hMainMenu->GetSubMenu(1/*Edit*/)->GetSubMenu(7/*New*/);
 	char Textik [20]="";
 	/*	hNewMenu->GetMenuString(0,Textik,19,MF_BYPOSITION);
@@ -121,7 +121,8 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	//pokud by se zmeny neprovedly, je treba volat: CWnd::DrawMenuBar()
 	//:Iva
 
-	// TODO: Remove this if you don't want tool tips
+
+    // TODO: Remove this if you don't want tool tips
 	m_wndToolBar.SetBarStyle(m_wndToolBar.GetBarStyle() |
 		CBRS_TOOLTIPS | CBRS_FLYBY);
 

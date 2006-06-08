@@ -16,7 +16,7 @@ class CActiveElementDialog : public CDialog
 {
 // Construction
 public:
-	CActiveElementDialog(IXMLDOMElementPtr & active_element, CWnd* pParent = NULL);   // standard constructor
+	CActiveElementDialog(MSXML2::IXMLDOMElementPtr & active_element, CWnd* pParent = NULL);   // standard constructor
 private:
 	BOOL m_bApplyPerformed;
 

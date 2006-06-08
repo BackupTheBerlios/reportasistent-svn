@@ -19,7 +19,7 @@ class CFilterProcessor
 public:
 	//vrati TRUE pokud funkce uspela
 	virtual BOOL ProcessFilteredOut(
-		IXMLDOMNodePtr filtered_output_node,	//XML uzel ktery z plugin output prosel fitrem
+		MSXML2::IXMLDOMNodePtr filtered_output_node,	//XML uzel ktery z plugin output prosel fitrem
 		int node_order,							//poradi filtered_output_node uzlu mezi temi ktere prosly
 		LPARAM user1,							//uzivatelsky parametr, ktery byl predan filtrovaci funkci
 		LPARAM user2							//uzivatelsky parametr, ktery byl predan filtrovaci funkci
@@ -34,26 +34,26 @@ class CAElTransform: public CFilterProcessor
 {
 private:
 //	CSkeletonDoc & m_skel_document;
-	IXMLDOMElementPtr & m_active_element;
-	IXMLDOMDocumentPtr m_plug_out;
+	MSXML2::IXMLDOMElementPtr & m_active_element;
+	MSXML2::IXMLDOMDocumentPtr m_plug_out;
 
 protected:
-	void FillElementAttributes(IXMLDOMNodePtr & output_node);
-	virtual BOOL ProcessFilteredOut(IXMLDOMNodePtr filtered_output_node, int node_order, LPARAM user1, LPARAM user2);
+	void FillElementAttributes(MSXML2::IXMLDOMNodePtr & output_node);
+	virtual BOOL ProcessFilteredOut(MSXML2::IXMLDOMNodePtr filtered_output_node, int node_order, LPARAM user1, LPARAM user2);
 
-	void ProcessSimpleFlter(IXMLDOMNodePtr & destination_parent);
-	void ProcessAllTransformations(IXMLDOMNodePtr & target, IXMLDOMNodePtr & destination_parent);
-	void ProcessSingleTransformation(IXMLDOMNodePtr & target,
-			IXMLDOMNodePtr & destination_parent, IXMLDOMElementPtr & tr_definition_element);
+	void ProcessSimpleFlter(MSXML2::IXMLDOMNodePtr & destination_parent);
+	void ProcessAllTransformations(MSXML2::IXMLDOMNodePtr & target, MSXML2::IXMLDOMNodePtr & destination_parent);
+	void ProcessSingleTransformation(MSXML2::IXMLDOMNodePtr & target,
+			MSXML2::IXMLDOMNodePtr & destination_parent, MSXML2::IXMLDOMElementPtr & tr_definition_element);
 
 
 public:
 	BOOL ProcessSimpleFlter(CFilterProcessor & processor, LPARAM user1 = 0, LPARAM user2 = 0);
 	BOOL FillElementAttributes(int index_of_filtered_out);
-	IXMLDOMDocumentFragmentPtr DoAllTransnformations();
+	MSXML2::IXMLDOMDocumentFragmentPtr DoAllTransnformations();
 	
-	CAElTransform(IXMLDOMElementPtr & active_element);
-	CAElTransform(IXMLDOMElementPtr & active_element, IXMLDOMNodePtr & plugin_output);
+	CAElTransform(MSXML2::IXMLDOMElementPtr & active_element);
+	CAElTransform(MSXML2::IXMLDOMElementPtr & active_element, MSXML2::IXMLDOMNodePtr & plugin_output);
 	~CAElTransform();	
 };
 

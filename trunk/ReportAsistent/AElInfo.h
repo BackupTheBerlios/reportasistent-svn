@@ -13,10 +13,10 @@ class CAElInfo
 {
 public:
 	int FindTransformationByName(LPCTSTR tr_name);
-	IXMLDOMElementPtr CreateEmptyElement();
+	MSXML2::IXMLDOMElementPtr CreateEmptyElement();
 	BOOL LoadElementIcon(CBitmap &icon);
-	IXMLDOMNodePtr getSimpleFilterTransformation();
-	IXMLDOMNodePtr getFillElementAttributesTransformation();
+	MSXML2::IXMLDOMNodePtr getSimpleFilterTransformation();
+	MSXML2::IXMLDOMNodePtr getFillElementAttributesTransformation();
 	BOOL LoadFromDir(LPCTSTR dir_path);
 	LPCTSTR getElementName();
 	CAElInfo();
@@ -24,20 +24,20 @@ public:
 
 	int getTranformationsCount();
 	CString getTranformationName(int tr_index);
-	IXMLDOMNodePtr getTranformationNode(int tr_index);
+	MSXML2::IXMLDOMNodePtr getTranformationNode(int tr_index);
 
 
 private:
 	struct s_transformation
 	{
 		CString name;
-		IXMLDOMDocumentPtr doc;
+		MSXML2::IXMLDOMDocumentPtr doc;
 	};
 
 	CString src_dir_path;
-	IXMLDOMDocumentPtr pSimpleFilterDOM;
-	IXMLDOMDocumentPtr pFillElementAttributesDOM;
-	IXMLDOMDocumentPtr pElementDefinitionDOM;
+	MSXML2::IXMLDOMDocumentPtr pSimpleFilterDOM;
+	MSXML2::IXMLDOMDocumentPtr pFillElementAttributesDOM;
+	MSXML2::IXMLDOMDocumentPtr pElementDefinitionDOM;
 	CString el_name;
 
 	void LoadTransformations(LPCTSTR dir_path);

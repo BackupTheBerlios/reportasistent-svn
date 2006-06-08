@@ -219,8 +219,8 @@ void CSkeletonDoc::InsertNodeToTreeCtrl(MSXML2::IXMLDOMElementPtr pElement,
 	
 	
 	//rekurnetne projede deti;
-	IXMLDOMNodeListPtr pChildren = pElement->childNodes;//ukazatel na potomky pElementu
-	IXMLDOMNodePtr pChild = NULL;
+	MSXML2::IXMLDOMNodeListPtr pChildren = pElement->childNodes;//ukazatel na potomky pElementu
+	MSXML2::IXMLDOMNodePtr pChild = NULL;
 	while ((pChild = pChildren->nextNode()) != NULL)
 	{
 
@@ -239,8 +239,8 @@ dedek: stara verze
 	
 	
 	
-	MSXML2::IXMLDOMNodeListPtr pChildren = pElement->childNodes;//ukazatel na potomky pElementu
-	MSXML2::IXMLDOMNodePtr pChild = NULL;
+	MSXML2::MSXML2::IXMLDOMNodeListPtr pChildren = pElement->childNodes;//ukazatel na potomky pElementu
+	MSXML2::MSXML2::IXMLDOMNodePtr pChild = NULL;
 	CString csElementType; //typ prvku XMLstromu: text/chapter/report/...
 	char sTextValue [256]; //text ktery se stane jmenem polozky v CtrlTree
 	HTREEITEM hTreeItem=NULL;
@@ -415,7 +415,7 @@ void CSkeletonDoc::OnElementEdit()
 
 	
 	
-	IXMLDOMElementPtr edited_element = ElementFromItemData(tree.GetItemData(tree.GetSelectedItem()));
+	MSXML2::IXMLDOMElementPtr edited_element = ElementFromItemData(tree.GetItemData(tree.GetSelectedItem()));
 
 	if (EditElement(edited_element))
 	{
@@ -439,7 +439,7 @@ void CSkeletonDoc::OnMmgenrep()
 #endif
 }
 
-IXMLDOMElement * CSkeletonDoc::ElementFromItemData(LPARAM item_data)
+MSXML2::IXMLDOMElement * CSkeletonDoc::ElementFromItemData(LPARAM item_data)
 {
 		return (MSXML2::IXMLDOMElement *) item_data;
 }
@@ -447,12 +447,12 @@ IXMLDOMElement * CSkeletonDoc::ElementFromItemData(LPARAM item_data)
 
 //pokusi se vlozit novy element jako child parent_element uzlu, novy element vrati
 //nenastuvuje ModifiedFlag, neprekresluje
-IXMLDOMElementPtr CSkeletonDoc::InsertNewElement(CElementManager::elId_t elementID, IXMLDOMElementPtr & parent_element)
+MSXML2::IXMLDOMElementPtr CSkeletonDoc::InsertNewElement(CElementManager::elId_t elementID, MSXML2::IXMLDOMElementPtr & parent_element)
 {
 	CGeneralManager * m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager;
 
 	
-	IXMLDOMElementPtr new_example = m->ElementManager.CreateEmptyElement(elementID);
+	MSXML2::IXMLDOMElementPtr new_example = m->ElementManager.CreateEmptyElement(elementID);
 
 	if (m->ElementManager.CanInsertChildHere(new_example, parent_element))
 	{
@@ -487,7 +487,7 @@ IXMLDOMElementPtr CSkeletonDoc::InsertNewElement(CElementManager::elId_t element
 }
 
 //jen prelozi volani na metodu vyse
-IXMLDOMElementPtr CSkeletonDoc::InsertNewElement(LPCTSTR element_name, IXMLDOMElementPtr & parent_element)
+MSXML2::IXMLDOMElementPtr CSkeletonDoc::InsertNewElement(LPCTSTR element_name, MSXML2::IXMLDOMElementPtr & parent_element)
 {
 
 	CGeneralManager * pCGeneralManager = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager;
@@ -505,7 +505,8 @@ CString CSkeletonDoc::CreateNewID(CElementManager::elId_t element_type)
 
 	CString id;
 
-	for (int a = 1; a < 0xFFFFFF; a++) //vygeneruje maximalne 0xFFFFFF=16777215 ruznych id :-)
+	int a;
+    for (a = 1; a < 0xFFFFFF; a++) //vygeneruje maximalne 0xFFFFFF=16777215 ruznych id :-)
 	{
 		id.Format("%s%d", el_name, a); //napr.: id = "hyp_4ft15"
 
@@ -521,7 +522,7 @@ CString CSkeletonDoc::CreateNewID(CElementManager::elId_t element_type)
 
 //dedek: vrati TRUE pokud doslo ke zmene elementu
 //nenastuvuje ModifiedFlag, neprekresluje
-BOOL CSkeletonDoc::EditActiveElement(IXMLDOMElementPtr &element)
+BOOL CSkeletonDoc::EditActiveElement(MSXML2::IXMLDOMElementPtr &element)
 {
 	CActiveElementDialog dlg(element, AfxGetMainWnd());
 
@@ -535,13 +536,13 @@ BOOL CSkeletonDoc::EditActiveElement(IXMLDOMElementPtr &element)
 
 //dedek: vrati TRUE pokud doslo ke zmene elementu
 //nenastuvuje ModifiedFlag, neprekresluje
-BOOL CSkeletonDoc::EditElement(IXMLDOMElementPtr selected_element)
+BOOL CSkeletonDoc::EditElement(MSXML2::IXMLDOMElementPtr selected_element)
 {
 
 	if (selected_element == NULL) return FALSE;
 
 	//ziskej element
-	//IXMLDOMElementPtr selected_element = ElementFromItemData(item_data);
+	//MSXML2::IXMLDOMElementPtr selected_element = ElementFromItemData(item_data);
 	//ziskej manager
 	CElementManager & OElementManager = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
 	//ziskej typ elementu
@@ -637,7 +638,7 @@ case  ELID_CHAPTER:
 	return FALSE;	
 }
 
-void CSkeletonDoc::ConfigureFilter(IXMLDOMElementPtr &active_element)
+void CSkeletonDoc::ConfigureFilter(MSXML2::IXMLDOMElementPtr &active_element)
 {
 	//sem prijdou i jiny fitry
 	
@@ -653,15 +654,15 @@ void CSkeletonDoc::ConfigureFilter(IXMLDOMElementPtr &active_element)
 
 void CSkeletonDoc::DeleteItemData(LPARAM data)
 {
-	IXMLDOMElement * np = (IXMLDOMElement *) data;
+	MSXML2::IXMLDOMElement * np = (MSXML2::IXMLDOMElement *) data;
 
 	if (np != NULL) np->Release();
 
 }
 
-LPARAM CSkeletonDoc::CreateItemData(IXMLDOMElementPtr & element)
+LPARAM CSkeletonDoc::CreateItemData(MSXML2::IXMLDOMElementPtr & element)
 {
-	IXMLDOMElement * np = element;
+	MSXML2::IXMLDOMElement * np = element;
 
 	np->AddRef();
 
@@ -677,7 +678,7 @@ LPARAM CSkeletonDoc::CreateItemData(IXMLDOMElementPtr & element)
 
 void CSkeletonDoc::Generate()
 {
-	IXMLDOMElementPtr doc_element;
+	MSXML2::IXMLDOMElementPtr doc_element;
 	
 
 #ifdef DONT_CLONE_REPORT_BEFORE_GENERATE
@@ -769,7 +770,7 @@ void CSkeletonDoc::Generate()
 
 
 //tahle metoda asi prijde zrusit
-void CSkeletonDoc::GenerTransform1(IXMLDOMElementPtr & doc)
+void CSkeletonDoc::GenerTransform1(MSXML2::IXMLDOMElementPtr & doc)
 {
 	TransformActiveElements(doc);
 //	AfxMessageBox(doc->xml);
@@ -781,7 +782,7 @@ void CSkeletonDoc::GenerTransform1(IXMLDOMElementPtr & doc)
 
 
 //rekurzivni
-void CSkeletonDoc::TransformActiveElements(IXMLDOMElementPtr & element)
+void CSkeletonDoc::TransformActiveElements(MSXML2::IXMLDOMElementPtr & element)
 {
 	if (element == NULL) return;
 
@@ -794,9 +795,9 @@ void CSkeletonDoc::TransformActiveElements(IXMLDOMElementPtr & element)
 	}
 	else
 	{
-		IXMLDOMNodeListPtr iChildren = element->childNodes;
+		MSXML2::IXMLDOMNodeListPtr iChildren = element->childNodes;
 
-		IXMLDOMElementPtr iChild = NULL;
+		MSXML2::IXMLDOMElementPtr iChild = NULL;
 
 		while ((iChild = iChildren->nextNode()) != NULL)
 		{
@@ -815,9 +816,9 @@ void CSkeletonDoc::TransformActiveElements(IXMLDOMElementPtr & element)
 //DEL 	
 //DEL 	HTREEITEM hSelTreeItem = hTreeCtrl.GetSelectedItem();
 //DEL 
-//DEL 	IXMLDOMElementPtr selected_element = ElementFromItemData(hTreeCtrl.GetItemData( hSelTreeItem ));
+//DEL 	MSXML2::IXMLDOMElementPtr selected_element = ElementFromItemData(hTreeCtrl.GetItemData( hSelTreeItem ));
 //DEL 	
-//DEL 	IXMLDOMElementPtr parent_element= selected_element->parentNode;
+//DEL 	MSXML2::IXMLDOMElementPtr parent_element= selected_element->parentNode;
 //DEL 
 //DEL 
 //DEL 	parent_element->removeChild(selected_element);
@@ -858,14 +859,14 @@ void CSkeletonDoc::OnMmnewelement(UINT nMessageID)
 	HTREEITEM hSelTreeItem = hTreeCtrl.GetSelectedItem();
 	if (hSelTreeItem == NULL) return;
 
-	IXMLDOMElementPtr selected_element = ElementFromItemData(hTreeCtrl.GetItemData( hSelTreeItem ));	
+	MSXML2::IXMLDOMElementPtr selected_element = ElementFromItemData(hTreeCtrl.GetItemData( hSelTreeItem ));	
 
 	CElementManager::elId_t el_id = ElementIdFromCommandId(nMessageID);
 	if (el_id == ELID_UNKNOWN) return;
 
 	
 	
-	IXMLDOMElementPtr new_element = InsertNewElement(el_id, selected_element);
+	MSXML2::IXMLDOMElementPtr new_element = InsertNewElement(el_id, selected_element);
 	if (new_element != NULL) //tj. pridani se zdarilo
 	{
 		if (EditElement(new_element))
@@ -893,11 +894,11 @@ void CSkeletonDoc::OnMmnewelement(UINT nMessageID)
 	
 	HTREEITEM hSelTreeItem = hTreeCtrl.GetSelectedItem();
 
-	IXMLDOMElementPtr selected_element = ElementFromItemData(hTreeCtrl.GetItemData( hSelTreeItem ));	
+	MSXML2::IXMLDOMElementPtr selected_element = ElementFromItemData(hTreeCtrl.GetItemData( hSelTreeItem ));	
 	
 	CElementManager & OElementManager = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
 
-	IXMLDOMElementPtr new_element = NULL;
+	MSXML2::IXMLDOMElementPtr new_element = NULL;
 
 	//zobrazi zpravu s typem vybraneho elementu
 	//honza: ladici klidne zakomentujte
@@ -924,7 +925,7 @@ void CSkeletonDoc::OnMmnewelement(UINT nMessageID)
 			SetModifiedFlag();		
 			
 			//dedek: v medode EditElement se tez vola UpdateAllViews, tedy jesm tohle zakomentoval
-			//UpdateAllViews(NULL, (LPARAM) (IXMLDOMElement *) new_element);
+			//UpdateAllViews(NULL, (LPARAM) (MSXML2::IXMLDOMElement *) new_element);
 		}
 	}
 	//pridavany prvek je ACTIVE
@@ -938,7 +939,7 @@ void CSkeletonDoc::OnMmnewelement(UINT nMessageID)
 			EditActiveElement(new_element); 
 			
 			SetModifiedFlag();		
-			UpdateAllViews(NULL, (LPARAM) (IXMLDOMElement *) new_element);
+			UpdateAllViews(NULL, (LPARAM) (MSXML2::IXMLDOMElement *) new_element);
 		}
 
 	}
@@ -950,13 +951,13 @@ void CSkeletonDoc::OnMmnewelement(UINT nMessageID)
 }
 */
 
-void CSkeletonDoc::ChangeIDsInTree(IXMLDOMElementPtr pElm)
+void CSkeletonDoc::ChangeIDsInTree(MSXML2::IXMLDOMElementPtr pElm)
 {
 	if (pElm == NULL) return;
 
 	CElementManager & OElementManager = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;	
-	IXMLDOMNodeListPtr pChildren = pElm->childNodes;//ukazatel na potomky pElm
-	IXMLDOMNodePtr pChild = NULL;
+	MSXML2::IXMLDOMNodeListPtr pChildren = pElm->childNodes;//ukazatel na potomky pElm
+	MSXML2::IXMLDOMNodePtr pChild = NULL;
 
 	
 
@@ -977,10 +978,10 @@ void CSkeletonDoc::ChangeIDsInTree(IXMLDOMElementPtr pElm)
 
 
 
-BOOL CSkeletonDoc::IsDescendantOfElement(IXMLDOMElementPtr pDescendantXMLElm, IXMLDOMElementPtr pAncestorXMLElm)
+BOOL CSkeletonDoc::IsDescendantOfElement(MSXML2::IXMLDOMElementPtr pDescendantXMLElm, MSXML2::IXMLDOMElementPtr pAncestorXMLElm)
 {
 	BOOL bDescInAnc=FALSE;
-	IXMLDOMElementPtr pTop=m_pXMLDom->GetdocumentElement();
+	MSXML2::IXMLDOMElementPtr pTop=m_pXMLDom->GetdocumentElement();
 
 	while ((pTop!=pDescendantXMLElm)&& !(bDescInAnc= (pDescendantXMLElm==pAncestorXMLElm)))
 		pDescendantXMLElm = pDescendantXMLElm->GetparentNode();
@@ -990,7 +991,7 @@ BOOL CSkeletonDoc::IsDescendantOfElement(IXMLDOMElementPtr pDescendantXMLElm, IX
 }
 
 //rekurzivni
-void CSkeletonDoc::TransformAttrLinks(IXMLDOMElementPtr &element)
+void CSkeletonDoc::TransformAttrLinks(MSXML2::IXMLDOMElementPtr &element)
 {
 	if (element == NULL) return;
 
@@ -1012,8 +1013,8 @@ void CSkeletonDoc::TransformAttrLinks(IXMLDOMElementPtr &element)
 		break;
 
 	default:
-		IXMLDOMNodeListPtr iChildren = element->childNodes;
-		IXMLDOMElementPtr iChild = NULL;
+		MSXML2::IXMLDOMNodeListPtr iChildren = element->childNodes;
+		MSXML2::IXMLDOMElementPtr iChild = NULL;
 
 		while ((iChild = iChildren->nextNode()) != NULL)
 		{
@@ -1032,7 +1033,7 @@ BOOL CSkeletonDoc::IsIDInTree(CString Id)
 		
 		CString query; 
 		query.Format("id(\"%s\")", (LPCTSTR) Id); //napr.: query = 'id("hyp_4ft15")'
-		IXMLDOMNodePtr select = m_pXMLDom->selectSingleNode((LPCTSTR) query);
+		MSXML2::IXMLDOMNodePtr select = m_pXMLDom->selectSingleNode((LPCTSTR) query);
 		if (select == NULL) return FALSE; //kdyz to zadny uzel nenaslo tak id neni pouzite..
 		else //Iva:Id is used in the tree
 		{
@@ -1050,7 +1051,7 @@ BOOL CSkeletonDoc::OpenSkeletonFile(LPCTSTR file_name)
 
 	BOOL ret = FALSE;
 
-	IXMLDOMDocumentPtr open_doc;
+	MSXML2::IXMLDOMDocumentPtr open_doc;
 	open_doc.CreateInstance(_T("Msxml2.DOMDocument"));
 	open_doc->async = VARIANT_FALSE;
 
@@ -1058,8 +1059,8 @@ BOOL CSkeletonDoc::OpenSkeletonFile(LPCTSTR file_name)
 	{
 		m_pXMLDom->replaceChild(open_doc->documentElement, m_pXMLDom->documentElement);
 
-		IXMLDOMDocument2Ptr validator = m_pXMLDom;
-		IXMLDOMParseErrorPtr err = validator->validate();
+		MSXML2::IXMLDOMDocument2Ptr validator = m_pXMLDom;
+		MSXML2::IXMLDOMParseErrorPtr err = validator->validate();
 
 		if (err->errorCode == S_OK)
 		{

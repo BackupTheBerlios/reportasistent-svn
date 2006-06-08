@@ -14,8 +14,8 @@ class CElementTextDialog : public CDialog
 {
 // Construction
 public:
-	IXMLDOMElementPtr m_SelXMLElm;
-	CElementTextDialog(IXMLDOMElementPtr & SelXMLElm,CWnd* pParent = NULL);   // standard constructor
+	MSXML2::IXMLDOMElementPtr m_SelXMLElm;
+	CElementTextDialog(MSXML2::IXMLDOMElementPtr & SelXMLElm,CWnd* pParent = NULL);   // standard constructor
 
 // Dialog Data
 	//{{AFX_DATA(CElementTextDialog)

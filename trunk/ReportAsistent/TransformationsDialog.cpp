@@ -16,7 +16,7 @@ static char THIS_FILE[] = __FILE__;
 // CTransformationsDialog dialog
 
 
-CTransformationsDialog::CTransformationsDialog(IXMLDOMElementPtr & active_element, CWnd* pParent /*=NULL*/)
+CTransformationsDialog::CTransformationsDialog(MSXML2::IXMLDOMElementPtr & active_element, CWnd* pParent /*=NULL*/)
 	: CDialog(CTransformationsDialog::IDD, pParent), m_active_element(active_element)
 {
 	//{{AFX_DATA_INIT(CTransformationsDialog)
@@ -76,7 +76,7 @@ BOOL CTransformationsDialog::OnInitDialog()
 
 
 	//nacti transformace vybrane v prvku
-	IXMLDOMNodeListPtr selected_transfs = m_active_element->selectNodes("output/transformation/@name");
+	MSXML2::IXMLDOMNodeListPtr selected_transfs = m_active_element->selectNodes("output/transformation/@name");
 
 	for (a = 0; a < selected_transfs->length; a++)
 	{
@@ -113,17 +113,17 @@ BOOL CTransformationsDialog::SaveAll()
 	CheckAndRepareAttrLinkTable();
 
 
-	IXMLDOMNodePtr output_node = m_active_element->selectSingleNode("output");
+	MSXML2::IXMLDOMNodePtr output_node = m_active_element->selectSingleNode("output");
 
 	//vymaze soucasne transormace
-	IXMLDOMSelectionPtr sel = output_node->selectNodes("*");
+	MSXML2::IXMLDOMSelectionPtr sel = output_node->selectNodes("*");
 	sel->removeAll();
 	sel.Release();
 
 	//vytvori ukazkovou transformaci
-	IXMLDOMElementPtr transf_elem = m_active_element->ownerDocument->createElement("transformation");
-	IXMLDOMAttributePtr name_attr_elem = m_active_element->ownerDocument->createAttribute("name");
-	IXMLDOMAttributePtr type_attr_elem = m_active_element->ownerDocument->createAttribute("type");
+	MSXML2::IXMLDOMElementPtr transf_elem = m_active_element->ownerDocument->createElement("transformation");
+	MSXML2::IXMLDOMAttributePtr name_attr_elem = m_active_element->ownerDocument->createAttribute("name");
+	MSXML2::IXMLDOMAttributePtr type_attr_elem = m_active_element->ownerDocument->createAttribute("type");
 	type_attr_elem->text = "simple";
 	transf_elem->setAttributeNode(name_attr_elem);
 	transf_elem->setAttributeNode(type_attr_elem);
@@ -141,7 +141,7 @@ BOOL CTransformationsDialog::SaveAll()
 		//jedna se o attr_link_table
 		if (it_text == ATTR_TL_STR)
 		{
-			IXMLDOMElementPtr clone = transf_elem->cloneNode(VARIANT_FALSE);
+			MSXML2::IXMLDOMElementPtr clone = transf_elem->cloneNode(VARIANT_FALSE);
 			clone->setAttribute("type", "attr_link_table");
 			output_node->appendChild(clone);
 			clone.Release();
@@ -226,7 +226,7 @@ void CTransformationsDialog::OnConfigureAttrLinkTableButton()
 {
 	CheckAndRepareAttrLinkTable();
 
-	IXMLDOMElementPtr el_alt = m_active_element->selectSingleNode("attr_link_table");
+	MSXML2::IXMLDOMElementPtr el_alt = m_active_element->selectSingleNode("attr_link_table");
 
 	CAttributeLinkTableDialog dlg(el_alt, this, FALSE);
 
@@ -247,7 +247,7 @@ void CTransformationsDialog::OnAddAttrLinkTableButton()
 
 void CTransformationsDialog::CheckAndRepareAttrLinkTable()
 {
-	IXMLDOMElementPtr attr_lt = m_active_element->selectSingleNode("attr_link_table");
+	MSXML2::IXMLDOMElementPtr attr_lt = m_active_element->selectSingleNode("attr_link_table");
 	
 	if (attr_lt == NULL)
 	{

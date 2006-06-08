@@ -16,7 +16,7 @@ class CTransformationsDialog : public CDialog
 // Construction
 public:
 	BOOL SaveAll();
-	CTransformationsDialog(IXMLDOMElementPtr & active_element, CWnd* pParent = NULL);   // standard constructor
+	CTransformationsDialog(MSXML2::IXMLDOMElementPtr & active_element, CWnd* pParent = NULL);   // standard constructor
 
 // Dialog Data
 	//{{AFX_DATA(CTransformationsDialog)
@@ -51,7 +51,7 @@ protected:
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 private:
-	IXMLDOMElementPtr & m_active_element;
+	MSXML2::IXMLDOMElementPtr & m_active_element;
 };
 
 //{{AFX_INSERT_LOCATION}}

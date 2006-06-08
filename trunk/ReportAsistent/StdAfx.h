@@ -10,6 +10,10 @@
 #pragma once
 #endif // _MSC_VER > 1000
 
+#ifndef WINVER
+#define WINVER 0x0500
+#endif
+
 #define VC_EXTRALEAN		// Exclude rarely-used stuff from Windows headers
 
 #include <afxwin.h>         // MFC core and standard components
@@ -25,7 +29,7 @@
 
 //Deda: potreba pro MSXML
 #import <msxml3.dll>
-using namespace MSXML2;
+//using namespace MSXML2;
 //vlozi namespace MSXML2;
 
 //potreba pro WordLoader z VisualBasicu

@@ -1,4 +1,7 @@
 //functions and classes for LM Metabase socket
+#ifndef WINVER
+#define WINVER 0x0500
+#endif
 #include "afx.h"
 #include "afxtempl.h"
 //4ft_hypothese

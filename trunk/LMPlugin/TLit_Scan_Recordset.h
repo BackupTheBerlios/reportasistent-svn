@@ -6,6 +6,9 @@
 #endif // _MSC_VER > 1000
 // TLit_Scan_Recordset.h : header file
 //
+#ifndef WINVER
+#define WINVER 0x0500
+#endif
 #include "afxdb.h"
 /////////////////////////////////////////////////////////////////////////////
 // TLit_Scan_Recordset recordset

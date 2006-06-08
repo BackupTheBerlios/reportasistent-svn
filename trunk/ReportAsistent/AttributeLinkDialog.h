@@ -17,7 +17,7 @@ class CAttributeLinkDialog : public CDialog, CAttributeLinkDialogBase
 // Construction
 
 public:
-	CAttributeLinkDialog(IXMLDOMElementPtr & edited_element, CWnd* pParent = NULL);   // standard constructor
+	CAttributeLinkDialog(MSXML2::IXMLDOMElementPtr & edited_element, CWnd* pParent = NULL);   // standard constructor
 
 
 

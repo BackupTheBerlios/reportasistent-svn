@@ -14,8 +14,8 @@ class CElementChapterDialog : public CDialog
 {
 // Construction
 public:
-	IXMLDOMElementPtr m_SelXMLElm;
-	CElementChapterDialog(IXMLDOMElementPtr & SelXMLElm, CWnd* pParent = NULL);   // standard constructor
+	MSXML2::IXMLDOMElementPtr m_SelXMLElm;
+	CElementChapterDialog(MSXML2::IXMLDOMElementPtr & SelXMLElm, CWnd* pParent = NULL);   // standard constructor
 
 // Dialog Data
 	//{{AFX_DATA(CElementChapterDialog)

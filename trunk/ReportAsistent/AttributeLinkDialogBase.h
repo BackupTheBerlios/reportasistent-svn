@@ -16,10 +16,10 @@
 class CAttributeLinkDialogBase  
 {
 protected:
-	IXMLDOMElementPtr & m_edited_element;
+	MSXML2::IXMLDOMElementPtr & m_edited_element;
 
 public:
-	CAttributeLinkDialogBase(IXMLDOMElementPtr & edited_element);   // standard constructor
+	CAttributeLinkDialogBase(MSXML2::IXMLDOMElementPtr & edited_element);   // standard constructor
 
 protected:
 	void SaveTarget(CComboBox & target_combo);

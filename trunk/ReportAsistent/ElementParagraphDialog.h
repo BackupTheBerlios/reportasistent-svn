@@ -15,9 +15,9 @@ class CElementParagraphDialog : public CDialog
 {
 // Construction
 public:
-	IXMLDOMElementPtr m_SelXMLElm;
+	MSXML2::IXMLDOMElementPtr m_SelXMLElm;
 	void DDV_NonDuplicateID(CDataExchange *pDX, int nId, CString csIDEditValue);
-	CElementParagraphDialog(IXMLDOMElementPtr & SelXMLElm,CWnd* pParent = NULL);   // standard constructor
+	CElementParagraphDialog(MSXML2::IXMLDOMElementPtr & SelXMLElm,CWnd* pParent = NULL);   // standard constructor
 
 // Dialog Data
 	//{{AFX_DATA(CElementParagraphDialog)

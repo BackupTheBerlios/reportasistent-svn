@@ -17,7 +17,7 @@ static char THIS_FILE[] = __FILE__;
 // CAttributeLinkDialog dialog
 
 
-CAttributeLinkDialog::CAttributeLinkDialog(IXMLDOMElementPtr & edited_element, CWnd* pParent /*=NULL*/)
+CAttributeLinkDialog::CAttributeLinkDialog(MSXML2::IXMLDOMElementPtr & edited_element, CWnd* pParent /*=NULL*/)
 	: CDialog(CAttributeLinkDialog::IDD, pParent), CAttributeLinkDialogBase(edited_element)
 {
 	//{{AFX_DATA_INIT(CAttributeLinkDialog)
@@ -127,7 +127,7 @@ void CAttributeLinkDialog::OnOK()
 
 	if (style_str.GetLength() != 0)
 	{
-		IXMLDOMAttributePtr s_atr = m_edited_element->ownerDocument->createAttribute("style");
+		MSXML2::IXMLDOMAttributePtr s_atr = m_edited_element->ownerDocument->createAttribute("style");
 		s_atr->text = (LPCTSTR) style_str;
 		m_edited_element->setAttributeNode(s_atr);
 		s_atr.Release();

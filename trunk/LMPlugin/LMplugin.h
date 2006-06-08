@@ -3,6 +3,9 @@
 #define _LMplugin
 
 
+#ifndef WINVER
+#define WINVER 0x0500
+#endif
 #include <afx.h>
 #include <afxdisp.h>
 #include "SockInterface.h"

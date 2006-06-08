@@ -7,6 +7,10 @@
 // Hyp_4ft_Recordset.h : header file
 //
 
+#ifndef WINVER
+#define WINVER 0x0500
+#endif
+
 /////////////////////////////////////////////////////////////////////////////
 #include "afxdb.h"
 // Hyp_4ft_Recordset recordset

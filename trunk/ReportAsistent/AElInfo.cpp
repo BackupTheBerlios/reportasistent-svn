@@ -69,7 +69,7 @@ BOOL CAElInfo::LoadFromDir(LPCTSTR dir_path)
 	
 	
 	//nacti jmeno elementu
-	IXMLDOMNodePtr type_attr_node = pElementDefinitionDOM->selectSingleNode("//active_element/@type");
+	MSXML2::IXMLDOMNodePtr type_attr_node = pElementDefinitionDOM->selectSingleNode("//active_element/@type");
 	if (type_attr_node == NULL)
 	{
 		return FALSE;
@@ -86,12 +86,12 @@ BOOL CAElInfo::LoadFromDir(LPCTSTR dir_path)
 
 }
 
-IXMLDOMNodePtr CAElInfo::getFillElementAttributesTransformation()
+MSXML2::IXMLDOMNodePtr CAElInfo::getFillElementAttributesTransformation()
 {
 	return pFillElementAttributesDOM;
 }
 
-IXMLDOMNodePtr CAElInfo::getSimpleFilterTransformation()
+MSXML2::IXMLDOMNodePtr CAElInfo::getSimpleFilterTransformation()
 {
 	return pSimpleFilterDOM;
 }
@@ -106,7 +106,7 @@ BOOL CAElInfo::LoadElementIcon(CBitmap &icon)
 	return TRUE;
 }
 
-IXMLDOMElementPtr CAElInfo::CreateEmptyElement()
+MSXML2::IXMLDOMElementPtr CAElInfo::CreateEmptyElement()
 {
 	ASSERT(pElementDefinitionDOM != NULL);
 	ASSERT(pElementDefinitionDOM->documentElement != NULL);
@@ -168,7 +168,7 @@ CString CAElInfo::getTranformationName(int tr_index)
 }
 
 
-IXMLDOMNodePtr CAElInfo::getTranformationNode(int tr_index)
+MSXML2::IXMLDOMNodePtr CAElInfo::getTranformationNode(int tr_index)
 {
 	ASSERT(tr_index >= 0);
 	ASSERT(tr_index < getTranformationsCount());

@@ -9,6 +9,10 @@
 #pragma once
 #endif // _MSC_VER > 1000
 
+#ifndef WINVER
+#define WINVER 0x0500
+#endif
+
 #define EDIT_NEWLINE "\r\n"
 
 
@@ -68,14 +72,14 @@ public:
 
 			ret += EDIT_NEWLINE;
 			ret += "-------------- dalsi driver -----------" EDIT_NEWLINE;
-			ret += desc;
+			ret += (LPCTSTR) desc;
 			ret += EDIT_NEWLINE;
 
 			SQLCHAR * pc;
 		
 			for (pc = attr; (*pc != 0) && (pc - attr <= sizeof attr); pc = (SQLCHAR *) strchr((LPCTSTR) pc, 0)+1)
 			{
-				ret += pc;
+				ret += (LPCTSTR) pc;
 				ret += EDIT_NEWLINE;
 			}
 		
@@ -105,9 +109,9 @@ public:
 
 			ret += EDIT_NEWLINE;
 			ret += "-------------- dalsi datasource -----------" EDIT_NEWLINE;
-			ret += desc;
+			ret += (LPCTSTR) desc;
 			ret += EDIT_NEWLINE;
-			ret += attr;
+			ret += (LPCTSTR) attr;
 			ret += EDIT_NEWLINE;
 		
 			r = SQLDataSources(h, SQL_FETCH_NEXT, desc, sizeof desc, & desc_len, attr, sizeof attr, & attr_len);

@@ -6,6 +6,9 @@
 #endif // _MSC_VER > 1000
 // TCatDefEnum.h : header file
 //
+#ifndef WINVER
+#define WINVER 0x0500
+#endif
 #include "afxdb.h"
 /////////////////////////////////////////////////////////////////////////////
 // TCatDefEnum recordset

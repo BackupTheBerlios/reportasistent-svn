@@ -51,36 +51,36 @@ private:
 	CArray<CAElInfo *,CAElInfo *> active_elements;
 
 	CStringTableImpl attr_link_table_styles;
-	CArray<IXMLDOMDocument *, IXMLDOMDocument *> attr_link_table_doms;
+	CArray<MSXML2::IXMLDOMDocument *, MSXML2::IXMLDOMDocument *> attr_link_table_doms;
 
 
 public:
-	IXMLDOMDocumentPtr TransformAttrLinkTableNoReplaceSource(IXMLDOMElementPtr & element);
-	IXMLDOMDocument * getAttrLinkTableStyleDomByName(LPCTSTR style_name);
-	IXMLDOMDocument * getAttrLinkTableStyleDom(int index);
+	MSXML2::IXMLDOMDocumentPtr TransformAttrLinkTableNoReplaceSource(MSXML2::IXMLDOMElementPtr & element);
+	MSXML2::IXMLDOMDocument * getAttrLinkTableStyleDomByName(LPCTSTR style_name);
+	MSXML2::IXMLDOMDocument * getAttrLinkTableStyleDom(int index);
 	LPCTSTR getAttrLinkTableStyleName(int index);
 	int getAttrLinkTableStylesCount();
-	BOOL CanInsertBefore(IXMLDOMElementPtr &pInserted, IXMLDOMElementPtr &pTarget);
+	BOOL CanInsertBefore(MSXML2::IXMLDOMElementPtr &pInserted, MSXML2::IXMLDOMElementPtr &pTarget);
 	elId_t getFirstActiveElementID();
 	elId_t getFirstStaticElementID();
-	CString CreateElementCaption(IXMLDOMElementPtr & element);
+	CString CreateElementCaption(MSXML2::IXMLDOMElementPtr & element);
 	BOOL FillImageList(CImageList & img_list);
 	BOOL LoadElementIcon(elId_t element_id, CBitmap & icon);
 	CAElInfo * getActiveElementInfo(elId_t id);
 	BOOL isElementSupportedBySource(elId_t element_id, int source_index);
-	BOOL CanInsertChildHere(IXMLDOMElementPtr & child, IXMLDOMElementPtr & parent);
+	BOOL CanInsertChildHere(MSXML2::IXMLDOMElementPtr & child, MSXML2::IXMLDOMElementPtr & parent);
 	BOOL isElementActive(elId_t elementId);
-	IXMLDOMElementPtr CreateEmptyElement(CElementManager::elId_t id);
+	MSXML2::IXMLDOMElementPtr CreateEmptyElement(CElementManager::elId_t id);
 	elId_t ElementIdFromName(LPCTSTR el_name);
 
-	void TransformActiveElement(IXMLDOMElementPtr & element);
-	void TransformAttrLinkTable(IXMLDOMElementPtr & element);
-	void TransformAttrLink(IXMLDOMElementPtr & element);
+	void TransformActiveElement(MSXML2::IXMLDOMElementPtr & element);
+	void TransformAttrLinkTable(MSXML2::IXMLDOMElementPtr & element);
+	void TransformAttrLink(MSXML2::IXMLDOMElementPtr & element);
 
 
 
 	LPCTSTR getElementName(elId_t elementID);	//vrati jemno elementu s id elementID
-	elId_t IdentifyElement(IXMLDOMElementPtr & element);	//identifikuje element - vrati id
+	elId_t IdentifyElement(MSXML2::IXMLDOMElementPtr & element);	//identifikuje element - vrati id
 	elId_t getLastElementId();	//vrati posledni id ~ pocet znamych elementu
 
 	CElementManager(CDirectoriesManager & m);

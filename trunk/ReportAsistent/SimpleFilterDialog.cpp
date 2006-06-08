@@ -17,7 +17,7 @@ static char THIS_FILE[] = __FILE__;
 // CSimpleFilterDialog dialog
 
 
-CSimpleFilterDialog::CSimpleFilterDialog(IXMLDOMElementPtr & active_element, CWnd* pParent)
+CSimpleFilterDialog::CSimpleFilterDialog(MSXML2::IXMLDOMElementPtr & active_element, CWnd* pParent)
 	: CDialog(CSimpleFilterDialog::IDD, pParent), m_active_element(active_element)
 {
 	//{{AFX_DATA_INIT(CSimpleFilterDialog)
@@ -119,7 +119,7 @@ BOOL CSimpleFilterDialog::LoadSource(public_source_id_t sId)
 {
 	
 	//inicializace
-	IXMLDOMDocumentPtr filter_doc;
+	MSXML2::IXMLDOMDocumentPtr filter_doc;
 	filter_doc.CreateInstance(_T("Msxml2.DOMDocument"));
 	filter_doc->async = VARIANT_FALSE; // default - true,
 
@@ -152,7 +152,7 @@ BOOL CSimpleFilterDialog::LoadSource(public_source_id_t sId)
 
 
 	//ulozi element atributy
-	CAElTransform tr(m_active_element, (IXMLDOMNodePtr) filter_doc);
+	CAElTransform tr(m_active_element, (MSXML2::IXMLDOMNodePtr) filter_doc);
 	tr.FillElementAttributes(0);
 
 	
@@ -181,43 +181,49 @@ void CSimpleFilterDialog::UpDateDialog()
 {
 	int a,b;
 
-	m_FilterList.DeleteAllItems();
+//	m_FilterList.DeleteAllItems();
 
 	
 	// Delete all of the columns.
 	int nColumnCount = m_FilterList.GetHeaderCtrl()->GetItemCount();
+/****
+    int nColumnCount = 0;
+    CHeaderCtrl * hc = m_FilterList.GetHeaderCtrl();
+    if (hc != NULL)
+	    nColumnCount= hc->GetItemCount();
+/***/
 	for (int i=0;i < nColumnCount;i++)
 	{
 		m_FilterList.DeleteColumn(0);
 	}
 	
 	
-	IXMLDOMNodeListPtr attr_list = m_filter_DOM->selectNodes("/dialog_data/attributes/attribute");
+	MSXML2::IXMLDOMNodeListPtr attr_list = m_filter_DOM->selectNodes("/dialog_data/attributes/attribute");
 
 	
 	//vyrobime sloupce
 	for (a=0; a<attr_list->length; a++)
 	{
-		IXMLDOMElementPtr attr = attr_list->item[a];
+		MSXML2::IXMLDOMElementPtr attr = attr_list->item[a];
 
 		m_FilterList.InsertColumn(a, (_bstr_t) attr->getAttribute("name"), LVCFMT_LEFT, 75);
 
 	}
 
 	//naplnime list hodnotama
-	IXMLDOMNodeListPtr value_list = m_filter_DOM->selectNodes("/dialog_data/values/value");
+	MSXML2::IXMLDOMNodeListPtr value_list = m_filter_DOM->selectNodes("/dialog_data/values/value");
 
 	int item = 0;
 
 	for (b=0; b<value_list->length; b++)
 	{
-		IXMLDOMElementPtr value = value_list->item[b];
+		MSXML2::IXMLDOMElementPtr value = value_list->item[b];
 
 
 		//pro kazdy sloupec ulozime hodnotu
 		for (a=0; a<attr_list->length; a++)
 		{
-			IXMLDOMElementPtr attr = attr_list->item[a];
+			MSXML2::IXMLDOMElementPtr attr = attr_list->item[a];
 
 			if (a == 0)
 			{
@@ -239,10 +245,10 @@ void CSimpleFilterDialog::UpDateDialog()
 		//selsected polozky
 
 		CString patern = "filter[@type='simple']/selection[@id='";
-		patern += id;
+		patern += (LPCTSTR) id;
 		patern += "']";
 
-		IXMLDOMNodePtr select = m_active_element->selectSingleNode((LPCTSTR) patern);
+		MSXML2::IXMLDOMNodePtr select = m_active_element->selectSingleNode((LPCTSTR) patern);
 
 		if (select != NULL)
 			m_FilterList.SetItemState(item, LVIS_SELECTED, LVIS_SELECTED);
@@ -303,19 +309,19 @@ BOOL CSimpleFilterDialog::SaveAll()
 	m_active_element->setAttribute("source", (LPCTSTR) source);
 	
 	//okopiruje vzorovy element selection
-	IXMLDOMElementPtr selection_elem = m_active_element->ownerDocument->createElement("selection");
-	IXMLDOMAttributePtr id_attr = m_active_element->ownerDocument->createAttribute("id");
+	MSXML2::IXMLDOMElementPtr selection_elem = m_active_element->ownerDocument->createElement("selection");
+	MSXML2::IXMLDOMAttributePtr id_attr = m_active_element->ownerDocument->createAttribute("id");
 	selection_elem->setAttributeNode(id_attr);
 	id_attr.Release();
 	
 	//vymaze vsechny selection
-	IXMLDOMNodeListPtr list = m_active_element->selectNodes("filter[@type='simple']/selection");
-	IXMLDOMSelection * sel;
-	list.QueryInterface(__uuidof(IXMLDOMSelection), &sel);
+	MSXML2::IXMLDOMNodeListPtr list = m_active_element->selectNodes("filter[@type='simple']/selection");
+	MSXML2::IXMLDOMSelection * sel;
+	list.QueryInterface(__uuidof(MSXML2::IXMLDOMSelection), &sel);
 	sel->removeAll();
 	sel->Release();
 
-	IXMLDOMNodePtr filter = m_active_element->selectSingleNode("filter[@type='simple']");
+	MSXML2::IXMLDOMNodePtr filter = m_active_element->selectSingleNode("filter[@type='simple']");
 	
 	while (pos)
 	{

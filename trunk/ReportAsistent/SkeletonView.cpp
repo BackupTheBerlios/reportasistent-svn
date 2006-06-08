@@ -183,10 +183,10 @@ void CSkeletonView::OnUpdate(CView* pSender, LPARAM lHint, CObject* pHint)
 		/*
 		CTreeCtrl & tree = GetTreeCtrl();
 
-		IXMLDOMElement * new_element = (IXMLDOMElement *) lHint;
+		MSXML2::IXMLDOMElement * new_element = (MSXML2::IXMLDOMElement *) lHint;
 
 
-		GetDocument()->InsertNodeToTreeCtrl((IXMLDOMElementPtr) new_element, tree.GetSelectedItem(), tree);
+		GetDocument()->InsertNodeToTreeCtrl((MSXML2::IXMLDOMElementPtr) new_element, tree.GetSelectedItem(), tree);
 		*/
 	} else
 	{
@@ -215,8 +215,8 @@ void CSkeletonView::OnContextMenu(CWnd* pWnd, CPoint pointWnd)
 	 OElementManager.IdentifyElement 
 		(
 		//dedek: spravne o radek nize
-		//(IXMLDOMElementPtr)(IXMLDOMElement *) rTreeCtrl.GetItemData( hTreeCtrlItem)
-			(IXMLDOMElementPtr) GetDocument()->ElementFromItemData(rTreeCtrl.GetItemData(hTreeCtrlItem))
+		//(MSXML2::IXMLDOMElementPtr)(MSXML2::IXMLDOMElement *) rTreeCtrl.GetItemData( hTreeCtrlItem)
+			(MSXML2::IXMLDOMElementPtr) GetDocument()->ElementFromItemData(rTreeCtrl.GetItemData(hTreeCtrlItem))
 		);
 	
 	switch (idTypeEl)
@@ -339,7 +339,7 @@ void CSkeletonView::OnRButtonDown(UINT nFlags, CPoint point)
 // 	CElementManager::elId_t idTypeEl =
 // 	 OElementManager.IdentifyElement 
 // 		(
-// 		 (IXMLDOMElementPtr)(IXMLDOMElement *) rTreeCtrl.GetItemData( hTreeCtrlItem)
+// 		 (MSXML2::IXMLDOMElementPtr)(MSXML2::IXMLDOMElement *) rTreeCtrl.GetItemData( hTreeCtrlItem)
 // 		);
  	
 // 	switch (idTypeEl)
@@ -360,7 +360,7 @@ void CSkeletonView::OnEditCopy()
 
 
 	CTreeCtrl & rTreeCtrl = GetTreeCtrl();
-	IXMLDOMElementPtr SelXMLDomElement = GetDocument()->ElementFromItemData(rTreeCtrl.GetItemData(rTreeCtrl.GetSelectedItem()));
+	MSXML2::IXMLDOMElementPtr SelXMLDomElement = GetDocument()->ElementFromItemData(rTreeCtrl.GetItemData(rTreeCtrl.GetSelectedItem()));
 	
 //ziskam XML vybraneho prvku TreeCtrl
 	_bstr_t bstrSelElmXML= SelXMLDomElement->xml; 
@@ -418,7 +418,7 @@ void CSkeletonView::OnEditPaste()
 	AfxMessageBox("Bude se paste-ovat.",0,0);	
 
 	CTreeCtrl & rTreeCtrl = GetTreeCtrl();
-	IXMLDOMElementPtr SelXMLDomElement = GetDocument()->ElementFromItemData(rTreeCtrl.GetItemData(rTreeCtrl.GetSelectedItem()));
+	MSXML2::IXMLDOMElementPtr SelXMLDomElement = GetDocument()->ElementFromItemData(rTreeCtrl.GetItemData(rTreeCtrl.GetSelectedItem()));
 
 //Otevru clipboard a prectu z nej XML
 	if (0==OpenClipboard()) 
@@ -437,8 +437,8 @@ void CSkeletonView::OnEditPaste()
 
 	AfxMessageBox(pMemForXML,0,0);
 
-//vytvorim novy IXMLDOMDoc
-	IXMLDOMDocumentPtr pNewXMLDoc;
+//vytvorim novy MSXML2::IXMLDOMDoc
+	MSXML2::IXMLDOMDocumentPtr pNewXMLDoc;
 	pNewXMLDoc.CreateInstance(_T("Msxml2.DOMDocument"));	
 //XML do nej natahnu
 
@@ -453,7 +453,7 @@ void CSkeletonView::OnEditPaste()
 
 //zmenim id vsech prvku
 	CElementManager & OElementManager = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
-	IXMLDOMElementPtr pNewXMLElm = pNewXMLDoc->GetdocumentElement();
+	MSXML2::IXMLDOMElementPtr pNewXMLElm = pNewXMLDoc->GetdocumentElement();
 
 	GetDocument()->ChangeIDsInTree(pNewXMLElm);
 	AfxMessageBox(pNewXMLDoc->xml,0,0);
@@ -463,7 +463,7 @@ void CSkeletonView::OnEditPaste()
 	{
 		try
 		{
-			IXMLDOMElementPtr pResElm=SelXMLDomElement->appendChild(pNewXMLElm);
+			MSXML2::IXMLDOMElementPtr pResElm=SelXMLDomElement->appendChild(pNewXMLElm);
 			if (0!=pResElm)
 			{
 				GetDocument()->SetModifiedFlag();		
@@ -484,8 +484,8 @@ void CSkeletonView::OnEditPaste()
 	{
 		try
 		{
-			IXMLDOMNodePtr pParent=SelXMLDomElement->GetparentNode();
-			IXMLDOMElementPtr pResElm=pParent->insertBefore(pNewXMLElm,(IXMLDOMElement*)SelXMLDomElement);
+			MSXML2::IXMLDOMNodePtr pParent=SelXMLDomElement->GetparentNode();
+			MSXML2::IXMLDOMElementPtr pResElm=pParent->insertBefore(pNewXMLElm,(MSXML2::IXMLDOMElement*)SelXMLDomElement);
 			if (0!=pResElm)
 			{
 				GetDocument()->SetModifiedFlag();		
@@ -522,7 +522,7 @@ void CSkeletonView::OnBegindrag(NMHDR* pNMHDR, LRESULT* pResult)
 	ASSERT(!m_bDragging);
 	m_hitemDrag = rTreeCtrl.HitTest(ptAction, &nFlags);
 
-	IXMLDOMElementPtr pDragXMLDomElement = GetDocument()->ElementFromItemData(rTreeCtrl.GetItemData(m_hitemDrag));
+	MSXML2::IXMLDOMElementPtr pDragXMLDomElement = GetDocument()->ElementFromItemData(rTreeCtrl.GetItemData(m_hitemDrag));
 	//prvky ktere nelze presouvat:	jen report
 	if (ELID_REPORT==OElementManager.IdentifyElement(pDragXMLDomElement))
 		return;
@@ -576,13 +576,13 @@ void CSkeletonView::OnLButtonUp(UINT nFlags, CPoint point)
 
 
 		CElementManager & OElementManager = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
-		IXMLDOMElementPtr pXMLElmDrag= (IXMLDOMElement*)GetTreeCtrl().GetItemData(m_hitemDrag);
-		IXMLDOMElementPtr pXMLElmDrop= (IXMLDOMElement*)GetTreeCtrl().GetItemData(m_hitemDrop);
-		IXMLDOMElementPtr pNewXMLElm=NULL;
-		IXMLDOMElementPtr pResElm=NULL;
-		IXMLDOMElementPtr pParentDrag=NULL;
-		IXMLDOMElementPtr pParentDrop=NULL;
-		IXMLDOMElementPtr pRSiblingDrag=NULL;
+		MSXML2::IXMLDOMElementPtr pXMLElmDrag= (MSXML2::IXMLDOMElement*)GetTreeCtrl().GetItemData(m_hitemDrag);
+		MSXML2::IXMLDOMElementPtr pXMLElmDrop= (MSXML2::IXMLDOMElement*)GetTreeCtrl().GetItemData(m_hitemDrop);
+		MSXML2::IXMLDOMElementPtr pNewXMLElm=NULL;
+		MSXML2::IXMLDOMElementPtr pResElm=NULL;
+		MSXML2::IXMLDOMElementPtr pParentDrag=NULL;
+		MSXML2::IXMLDOMElementPtr pParentDrop=NULL;
+		MSXML2::IXMLDOMElementPtr pRSiblingDrag=NULL;
 
 		//AfxMessageBox(pXMLElmDrag->xml);
 		//AfxMessageBox(pXMLElmDrop->xml);
@@ -601,7 +601,7 @@ void CSkeletonView::OnLButtonUp(UINT nFlags, CPoint point)
 				pRSiblingDrag=pXMLElmDrag->GetnextSibling();
 				try
 				{
-					pNewXMLElm =pParentDrag->removeChild((IXMLDOMElement*)pXMLElmDrag);
+					pNewXMLElm =pParentDrag->removeChild((MSXML2::IXMLDOMElement*)pXMLElmDrag);
 				}						
 				catch (_com_error &e)
 				{
@@ -618,7 +618,7 @@ void CSkeletonView::OnLButtonUp(UINT nFlags, CPoint point)
 					try
 					{
 						pParentDrop=pXMLElmDrop->GetparentNode();
-						pResElm=pParentDrop->insertBefore(pNewXMLElm,(IXMLDOMElement*)pXMLElmDrop);
+						pResElm=pParentDrop->insertBefore(pNewXMLElm,(MSXML2::IXMLDOMElement*)pXMLElmDrop);
 						if (0!=pResElm)
 						{
 							GetDocument()->SetModifiedFlag();		
@@ -658,7 +658,7 @@ void CSkeletonView::OnLButtonUp(UINT nFlags, CPoint point)
 				{
 					if (NULL==pRSiblingDrag) pParentDrag->appendChild(pNewXMLElm);
 					else
-						pParentDrag->insertBefore(pNewXMLElm,(IXMLDOMElement*) pRSiblingDrag);
+						pParentDrag->insertBefore(pNewXMLElm,(MSXML2::IXMLDOMElement*) pRSiblingDrag);
 				}
 				catch (_com_error &e)
 				{
@@ -694,9 +694,9 @@ void CSkeletonView::OnMmdelete()
 	//dedek:
 	if (hSelTreeItem == NULL) return;
 
-	IXMLDOMElementPtr selected_element = GetDocument()->ElementFromItemData(GetTreeCtrl().GetItemData( hSelTreeItem ));
+	MSXML2::IXMLDOMElementPtr selected_element = GetDocument()->ElementFromItemData(GetTreeCtrl().GetItemData( hSelTreeItem ));
 	
-	IXMLDOMElementPtr parent_element= selected_element->parentNode;
+	MSXML2::IXMLDOMElementPtr parent_element= selected_element->parentNode;
 	
 	CElementManager & OElementManager = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
 	//prvky ktere nelze mazat:	jen report
@@ -704,7 +704,7 @@ void CSkeletonView::OnMmdelete()
 		return;
 
 
-	parent_element->removeChild((IXMLDOMElement*)selected_element);
+	parent_element->removeChild((MSXML2::IXMLDOMElement*)selected_element);
 
 	if (0 == GetTreeCtrl().DeleteItem(hSelTreeItem))
 	{

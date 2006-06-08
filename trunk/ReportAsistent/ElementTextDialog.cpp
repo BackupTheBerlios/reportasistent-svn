@@ -16,7 +16,7 @@ static char THIS_FILE[] = __FILE__;
 // CElementTextDialog dialog
 
 
-CElementTextDialog::CElementTextDialog(IXMLDOMElementPtr & SelXMLElm,CWnd* pParent /*=NULL*/)
+CElementTextDialog::CElementTextDialog(MSXML2::IXMLDOMElementPtr & SelXMLElm,CWnd* pParent /*=NULL*/)
 	: CDialog(CElementTextDialog::IDD, pParent), m_SelXMLElm(SelXMLElm)
 {
 	//{{AFX_DATA_INIT(CElementTextDialog)

@@ -26,14 +26,14 @@ static char THIS_FILE[]=__FILE__;
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
 
-CAElTransform::CAElTransform(IXMLDOMElementPtr & active_element, IXMLDOMNodePtr & plugin_output)
+CAElTransform::CAElTransform(MSXML2::IXMLDOMElementPtr & active_element, MSXML2::IXMLDOMNodePtr & plugin_output)
 	:m_active_element(active_element)
 {
 	m_plug_out = plugin_output;
 }
 
 
-CAElTransform::CAElTransform(IXMLDOMElementPtr & active_element)
+CAElTransform::CAElTransform(MSXML2::IXMLDOMElementPtr & active_element)
 	:m_active_element(active_element)
 {
 	//pouze nacteni pluginoutput
@@ -58,14 +58,14 @@ CAElTransform::~CAElTransform()
 	m_plug_out.Release();
 }
 
-IXMLDOMDocumentFragmentPtr CAElTransform::DoAllTransnformations()
+MSXML2::IXMLDOMDocumentFragmentPtr CAElTransform::DoAllTransnformations()
 {
 	//document fragment kam se budou ukladat jednotlive transformace
-	IXMLDOMDocumentFragmentPtr parent_frag =
+	MSXML2::IXMLDOMDocumentFragmentPtr parent_frag =
 		m_active_element->ownerDocument->createDocumentFragment();
 	
 	//provede tranformace na kazdou polozku vybranou v simple filter
-	ProcessSimpleFlter( (IXMLDOMNodePtr) parent_frag );
+	ProcessSimpleFlter( (MSXML2::IXMLDOMNodePtr) parent_frag );
 
 	FillElementAttributes(0);
 
@@ -89,18 +89,18 @@ IXMLDOMDocumentFragmentPtr CAElTransform::DoAllTransnformations()
 #define FILTER_ALL_TRANSFORMATINOS	12345
 
 //projde vsechny vybrane prvky ve filtru a pro kazdy provede vsechny transformace
-void CAElTransform::ProcessSimpleFlter(IXMLDOMNodePtr & destination_parent)
+void CAElTransform::ProcessSimpleFlter(MSXML2::IXMLDOMNodePtr & destination_parent)
 {
 
 	ProcessSimpleFlter(* this, FILTER_ALL_TRANSFORMATINOS, (LPARAM) destination_parent.GetInterfacePtr());
 /*
 	
-	IXMLDOMNodeListPtr selected_items;
+	MSXML2::IXMLDOMNodeListPtr selected_items;
 	selected_items = m_active_element->selectNodes("filter[@type='simple']/selection");
 
 	for (int a=0; a < selected_items->length; a++)
 	{
-		IXMLDOMElementPtr item = selected_items->item[a];
+		MSXML2::IXMLDOMElementPtr item = selected_items->item[a];
 
 		CString select = "id('";
 		select += (_bstr_t) item->getAttribute("id");
@@ -109,7 +109,7 @@ void CAElTransform::ProcessSimpleFlter(IXMLDOMNodePtr & destination_parent)
 
 
 		
-		IXMLDOMNodePtr node_to_transform = m_plug_out->selectSingleNode((LPCTSTR) select);
+		MSXML2::IXMLDOMNodePtr node_to_transform = m_plug_out->selectSingleNode((LPCTSTR) select);
 		
 		if (node_to_transform == NULL)
 		{
@@ -128,18 +128,18 @@ void CAElTransform::ProcessSimpleFlter(IXMLDOMNodePtr & destination_parent)
 
 //projde vsechny transformace, aplikuje je na target uzel v m_plugin_output
 //a vysledek upozi do destination_parent 
-void CAElTransform::ProcessAllTransformations(IXMLDOMNodePtr & target, IXMLDOMNodePtr & destination_parent)
+void CAElTransform::ProcessAllTransformations(MSXML2::IXMLDOMNodePtr & target, MSXML2::IXMLDOMNodePtr & destination_parent)
 {
 	CElementManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
 
-	IXMLDOMNodeListPtr tranformations; 
+	MSXML2::IXMLDOMNodeListPtr tranformations; 
 	tranformations = m_active_element->selectNodes("output/transformation");
 	
 	for (int a=0; a<tranformations->length; a++)
 	{
 		//sem prijde rozlyseni na attr_link_table
 
-		IXMLDOMElementPtr el_transformation = tranformations->item[a];
+		MSXML2::IXMLDOMElementPtr el_transformation = tranformations->item[a];
 
 		CString transformation_type_str = (LPCTSTR) (_bstr_t) el_transformation->getAttribute("type");
 
@@ -153,8 +153,8 @@ void CAElTransform::ProcessAllTransformations(IXMLDOMNodePtr & target, IXMLDOMNo
 
 			FillElementAttributes(target);
 
-			IXMLDOMDocumentPtr tr_table = m.TransformAttrLinkTableNoReplaceSource(
-					(IXMLDOMElementPtr) m_active_element->selectSingleNode("attr_link_table"));
+			MSXML2::IXMLDOMDocumentPtr tr_table = m.TransformAttrLinkTableNoReplaceSource(
+					(MSXML2::IXMLDOMElementPtr) m_active_element->selectSingleNode("attr_link_table"));
 
 			if (tr_table != NULL)
 			{
@@ -174,8 +174,8 @@ void CAElTransform::ProcessAllTransformations(IXMLDOMNodePtr & target, IXMLDOMNo
 
 //transformuje target uzel v m_plugin_output podle transormace definovane v tr_definition_element
 //a vysledek upozi do destination_parent
-void CAElTransform::ProcessSingleTransformation(IXMLDOMNodePtr & target,
-	IXMLDOMNodePtr & destination_parent, IXMLDOMElementPtr & tr_definition_element)
+void CAElTransform::ProcessSingleTransformation(MSXML2::IXMLDOMNodePtr & target,
+	MSXML2::IXMLDOMNodePtr & destination_parent, MSXML2::IXMLDOMElementPtr & tr_definition_element)
 {
 	CElementManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
 
@@ -184,7 +184,7 @@ void CAElTransform::ProcessSingleTransformation(IXMLDOMNodePtr & target,
 	
 	CAElInfo * el_info = m.getActiveElementInfo(m.IdentifyElement(m_active_element));
 	
-	IXMLDOMNodePtr & transformation_node = el_info->getTranformationNode(
+	MSXML2::IXMLDOMNodePtr & transformation_node = el_info->getTranformationNode(
 		el_info->FindTransformationByName((_bstr_t) tr_definition_element->getAttribute("name")));
 			
 
@@ -197,7 +197,7 @@ void CAElTransform::ProcessSingleTransformation(IXMLDOMNodePtr & target,
 
 
 	//privit misto pro vystup
-	IXMLDOMDocumentPtr transofmed_node;
+	MSXML2::IXMLDOMDocumentPtr transofmed_node;
 	transofmed_node.CreateInstance(_T("Msxml2.DOMDocument"));
 	transofmed_node->async = VARIANT_FALSE; // default - true,
 
@@ -219,7 +219,7 @@ void CAElTransform::ProcessSingleTransformation(IXMLDOMNodePtr & target,
 //varati TRUE pokud processor.ProcessFilteredOut alespon jednou uspela, pokud je filter prazdy vrati FALSE
 BOOL CAElTransform::ProcessSimpleFlter(CFilterProcessor & processor, LPARAM user1, LPARAM user2)
 {
-	IXMLDOMNodeListPtr selected_items;
+	MSXML2::IXMLDOMNodeListPtr selected_items;
 	selected_items = m_active_element->selectNodes("filter[@type='simple']/selection");
 
 	BOOL ret = FALSE;
@@ -228,16 +228,16 @@ BOOL CAElTransform::ProcessSimpleFlter(CFilterProcessor & processor, LPARAM user
 	for (int a=0; a < selected_items->length; a++)
 	{
 		
-		IXMLDOMElementPtr item = selected_items->item[a];
+		MSXML2::IXMLDOMElementPtr item = selected_items->item[a];
 
 		CString select = "id('";
-		select += (_bstr_t) item->getAttribute("id");
+		select += (LPCTSTR) (_bstr_t) item->getAttribute("id");
 		select += "')";
 		//napriklad: select = "id('hyp1')"
 
 
 		
-		IXMLDOMNodePtr node_to_transform = m_plug_out->selectSingleNode((LPCTSTR) select);
+		MSXML2::IXMLDOMNodePtr node_to_transform = m_plug_out->selectSingleNode((LPCTSTR) select);
 		
 		if (node_to_transform == NULL)
 		{
@@ -258,12 +258,12 @@ BOOL CAElTransform::ProcessSimpleFlter(CFilterProcessor & processor, LPARAM user
 
 #define FILTER_FILL_ELEMENT_ATTRIBUTES 54321
 
-BOOL CAElTransform::ProcessFilteredOut(IXMLDOMNodePtr filtered_output_node, int node_order, LPARAM user1, LPARAM user2)
+BOOL CAElTransform::ProcessFilteredOut(MSXML2::IXMLDOMNodePtr filtered_output_node, int node_order, LPARAM user1, LPARAM user2)
 {
 	if (user1 == FILTER_ALL_TRANSFORMATINOS)
 	{
 		ProcessAllTransformations(filtered_output_node,
-			/*destination_parent*/ (IXMLDOMNodePtr) (IXMLDOMNode *) user2);
+			/*destination_parent*/ (MSXML2::IXMLDOMNodePtr) (MSXML2::IXMLDOMNode *) user2);
 
 		return TRUE;
 	}
@@ -293,11 +293,11 @@ BOOL CAElTransform::FillElementAttributes(int index_of_filtered_out)
 
 
 //naplni atributy (<element_attributes>) v m_active_element podle uzlu output_node
-void CAElTransform::FillElementAttributes(IXMLDOMNodePtr &output_node)
+void CAElTransform::FillElementAttributes(MSXML2::IXMLDOMNodePtr &output_node)
 {
 	CElementManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
 
-	IXMLDOMDocumentPtr attributes_DOM;
+	MSXML2::IXMLDOMDocumentPtr attributes_DOM;
 	attributes_DOM.CreateInstance(_T("Msxml2.DOMDocument"));
 	attributes_DOM->async = VARIANT_FALSE;
 
@@ -339,7 +339,7 @@ void CAElTransform::FillElementAttributes(IXMLDOMNodePtr &output_node)
 	CString query_str;
 	query_str.Format("id(\"%s\")/attributes", (LPCTSTR) (_bstr_t) m_active_element->getAttribute("id"));
 
-	IXMLDOMNodePtr attributes_node = m_active_element->selectSingleNode((LPCTSTR) query_str);
+	MSXML2::IXMLDOMNodePtr attributes_node = m_active_element->selectSingleNode((LPCTSTR) query_str);
 	attributes_node->replaceChild(
 		attributes_DOM->documentElement,
 		attributes_node->selectSingleNode("element_attributes"));

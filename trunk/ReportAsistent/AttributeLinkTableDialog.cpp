@@ -15,7 +15,7 @@ static char THIS_FILE[] = __FILE__;
 // CAttributeLinkTableDialog dialog
 
 
-CAttributeLinkTableDialog::CAttributeLinkTableDialog(IXMLDOMElementPtr & edited_element, CWnd* pParent, BOOL show_target)
+CAttributeLinkTableDialog::CAttributeLinkTableDialog(MSXML2::IXMLDOMElementPtr & edited_element, CWnd* pParent, BOOL show_target)
 	: CDialog(CAttributeLinkTableDialog::IDD, pParent), CAttributeLinkDialogBase(edited_element),
 	m_bShowTarget(show_target)
 {
@@ -78,7 +78,7 @@ BOOL CAttributeLinkTableDialog::OnInitDialog()
 
 
 	//napln CaptionsList hodnotami
-	IXMLDOMNodeListPtr links = m_edited_element->selectNodes("link");
+	MSXML2::IXMLDOMNodeListPtr links = m_edited_element->selectNodes("link");
 
 	CString target_id;
 	m_TargetCombo.GetWindowText(target_id);
@@ -86,7 +86,7 @@ BOOL CAttributeLinkTableDialog::OnInitDialog()
 	int a;
 	for (a=0; a < links->length; a++)
 	{
-		IXMLDOMElementPtr link = links->item[a];
+		MSXML2::IXMLDOMElementPtr link = links->item[a];
 
 		//caption
 		int item = m_CaptionsList.InsertItem(a, (_bstr_t) link->getAttribute("caption"));
@@ -99,7 +99,7 @@ BOOL CAttributeLinkTableDialog::OnInitDialog()
 		CString query_str;
 		query_str.Format("id(\"%s\")/attributes/element_attributes/attribute[@name=\"%s\"]/@value", target_id, attr_name);
 
-		IXMLDOMNodePtr value_attr = m_edited_element->ownerDocument->selectSingleNode((LPCTSTR) query_str);
+		MSXML2::IXMLDOMNodePtr value_attr = m_edited_element->ownerDocument->selectSingleNode((LPCTSTR) query_str);
 
 		if (value_attr != NULL)
 		{
@@ -159,7 +159,7 @@ void CAttributeLinkTableDialog::OnRefreshButton()
 		query_str.Format("id(\"%s\")/attributes/element_attributes/attribute[@name=\"%s\"]/@value", target_id, attr_name);
 
 
-		IXMLDOMNodePtr attr_value = m_edited_element->ownerDocument->selectSingleNode((LPCTSTR) query_str);
+		MSXML2::IXMLDOMNodePtr attr_value = m_edited_element->ownerDocument->selectSingleNode((LPCTSTR) query_str);
 
 		if (attr_value != NULL)
 		{
@@ -280,12 +280,12 @@ void CAttributeLinkTableDialog::OnOK()
 	SaveTarget(m_TargetCombo);
 
 	//smaz vsecky link elementy
-	IXMLDOMSelectionPtr sel = m_edited_element->selectNodes("link");
+	MSXML2::IXMLDOMSelectionPtr sel = m_edited_element->selectNodes("link");
 	sel->removeAll();
 	sel.Release();
 
 	//vytvor vzorovy element
-	IXMLDOMElementPtr link_elenet = m_edited_element->ownerDocument->createElement("link");
+	MSXML2::IXMLDOMElementPtr link_elenet = m_edited_element->ownerDocument->createElement("link");
 	link_elenet->setAttributeNode(m_edited_element->ownerDocument->createAttribute("attr_name"));
 	link_elenet->setAttributeNode(m_edited_element->ownerDocument->createAttribute("caption"));
 

@@ -38,13 +38,13 @@ BOOL dedek_performLM(void * hSource, const char* AP, BSTR* result)
 
 	if (ft != "hyp_4ft") return FALSE;
 
-	IXMLDOMDocumentPtr dom;
+	MSXML2::IXMLDOMDocumentPtr dom;
 	dom.CreateInstance(_T("Msxml2.DOMDocument"));
 	dom->async = VARIANT_FALSE; // default - true,
 	
 	dom->load((LPCTSTR) _T("../XML/4ft_hyp.xml"));
 
-	IXMLDOMElementPtr el_hyp = dom->selectSingleNode("/active_list/hyp_4ft");
+	MSXML2::IXMLDOMElementPtr el_hyp = dom->selectSingleNode("/active_list/hyp_4ft");
 
 	el_hyp->setAttribute("db_name", (LPCTSTR) db->GetDatabaseName());
 
@@ -191,7 +191,8 @@ CString fLMKLCedent (void* hSource)
 	fclose (x);
 	//create xml data
 	buf = buf + " <active_list> ";
-	for (int i = 0; i < list.GetSize (); i++)
+	int i;
+    for (i = 0; i < list.GetSize (); i++)
 	{
 		buf = buf + list.GetAt (i)->xml_convert ();
 	}
@@ -354,7 +355,8 @@ CString fLMCFCedent (void* hSource)
 	fclose (x);
 	//create xml data
 	buf = buf + " <active_list> ";
-	for (int i = 0; i < list.GetSize (); i++)
+	int i;
+    for (i = 0; i < list.GetSize (); i++)
 	{
 		buf = buf + list.GetAt (i)->xml_convert ();
 	}
@@ -679,7 +681,8 @@ CString fLMBoolCedent (void* hSource)
 	fclose (x);
 	//create xml data
 	buf = buf + " <active_list> ";
-	for (int i = 0; i < list.GetSize (); i++)
+	int i;
+    for (i = 0; i < list.GetSize (); i++)
 	{
 		buf = buf + list.GetAt (i)->xml_convert ();
 	}
@@ -793,7 +796,8 @@ CString fLMAttribute(void* hSource)
 	fclose (x);
 	//create xml data
 	buf = buf + " <active_list> ";
-	for (int i = 0; i < list.GetSize (); i++)
+	int i;
+    for (i = 0; i < list.GetSize (); i++)
 	{
 		buf = buf + list.GetAt (i)->xml_convert ();
 	}
@@ -1014,7 +1018,8 @@ CString fLMCategory(void* hSource)
 	fclose (x);
 	//create xml data
 	buf = buf + " <active_list> ";
-	for (int i = 0; i < list.GetSize (); i++)
+	int i;
+    for (i = 0; i < list.GetSize (); i++)
 	{
 		buf = buf + list.GetAt (i)->xml_convert ();
 	}
@@ -1171,7 +1176,8 @@ CString fLM4fthyp(void * hSource)
 	fclose (x);
 	//create xml data
 	buf = buf + " <active_list> ";
-	for (int i = 0; i < list.GetSize (); i++)
+	int i;
+    for (i = 0; i < list.GetSize (); i++)
 	{
 		buf = buf + list.GetAt (i)->xml_convert ();
 	}

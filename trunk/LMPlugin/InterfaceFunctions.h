@@ -10,6 +10,10 @@ LM - Report Asistent
 #ifndef _INTERFACE_FUNCTIONS
 #define _INTERFACE_FUNCTIONS
 
+#ifndef WINVER
+#define WINVER 0x0500
+#endif
+
 #include <afx.h>
 #include "SockInterface.h"
 #include <wtypes.h>

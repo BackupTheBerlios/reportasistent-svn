@@ -55,7 +55,7 @@ protected:
 
 // Generated message map functions
 public:
-	IXMLDOMElement * ElementFromItemData(LPARAM item_data);
+	MSXML2::IXMLDOMElement * ElementFromItemData(LPARAM item_data);
 protected:
 	CSkeletonView * GetFirstView();
 	//{{AFX_MSG(CSkeletonDoc)
@@ -75,23 +75,23 @@ private:
 protected:
 	BOOL InitAndClearXmlDom();
 	BOOL OpenSkeletonFile(LPCTSTR file_name);
-	void TransformAttrLinks(IXMLDOMElementPtr & element);
+	void TransformAttrLinks(MSXML2::IXMLDOMElementPtr & element);
 	static CElementManager::elId_t ElementIdFromCommandId(UINT command);
-	static LPARAM CreateItemData(IXMLDOMElementPtr & element);
-	void ConfigureFilter(IXMLDOMElementPtr & active_element);
-	BOOL EditElement(IXMLDOMElementPtr selected_element);
-	BOOL EditActiveElement(IXMLDOMElementPtr &element);
-	IXMLDOMElementPtr InsertNewElement(CElementManager::elId_t elementID, IXMLDOMElementPtr & parent_element);
-	IXMLDOMElementPtr InsertNewElement(LPCTSTR element_name, IXMLDOMElementPtr & parent_element);
+	static LPARAM CreateItemData(MSXML2::IXMLDOMElementPtr & element);
+	void ConfigureFilter(MSXML2::IXMLDOMElementPtr & active_element);
+	BOOL EditElement(MSXML2::IXMLDOMElementPtr selected_element);
+	BOOL EditActiveElement(MSXML2::IXMLDOMElementPtr &element);
+	MSXML2::IXMLDOMElementPtr InsertNewElement(CElementManager::elId_t elementID, MSXML2::IXMLDOMElementPtr & parent_element);
+	MSXML2::IXMLDOMElementPtr InsertNewElement(LPCTSTR element_name, MSXML2::IXMLDOMElementPtr & parent_element);
 	
-	void GenerTransform1(IXMLDOMElementPtr & doc);
-	void TransformActiveElements(IXMLDOMElementPtr & element); //rekurzivni
+	void GenerTransform1(MSXML2::IXMLDOMElementPtr & doc);
+	void TransformActiveElements(MSXML2::IXMLDOMElementPtr & element); //rekurzivni
 
 	
 public:
 	BOOL IsIDInTree(CString Id);
-	BOOL IsDescendantOfElement(IXMLDOMElementPtr pDescendantXMLElm,IXMLDOMElementPtr pAncestorXMLElm);
-	void ChangeIDsInTree(IXMLDOMElementPtr pXMLElm);
+	BOOL IsDescendantOfElement(MSXML2::IXMLDOMElementPtr pDescendantXMLElm,MSXML2::IXMLDOMElementPtr pAncestorXMLElm);
+	void ChangeIDsInTree(MSXML2::IXMLDOMElementPtr pXMLElm);
 	void Generate();
 	CString CreateNewID(CElementManager::elId_t element_type);
 	static void DeleteItemData(LPARAM data);

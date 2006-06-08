@@ -69,7 +69,7 @@ LPCTSTR CElementManager::getElementName(elId_t elementID)
 }
 
 
-CElementManager::elId_t CElementManager::IdentifyElement(IXMLDOMElementPtr & element)
+CElementManager::elId_t CElementManager::IdentifyElement(MSXML2::IXMLDOMElementPtr & element)
 {
 	CString baseName = (BSTR) element->baseName;
 
@@ -136,13 +136,13 @@ CElementManager::elId_t CElementManager::ElementIdFromName(LPCTSTR el_name)
 	return ELID_UNKNOWN;
 }
 
-IXMLDOMElementPtr CElementManager::CreateEmptyElement(CElementManager::elId_t id)
+MSXML2::IXMLDOMElementPtr CElementManager::CreateEmptyElement(CElementManager::elId_t id)
 {
 	CSkeletonDoc * doc = ((CReportAsistentApp *) AfxGetApp())->FirstDocumentInFirstTemplate();
 
 	if (isElementActive(id))
 	{
-		IXMLDOMElementPtr ret = getActiveElementInfo(id)->CreateEmptyElement();
+		MSXML2::IXMLDOMElementPtr ret = getActiveElementInfo(id)->CreateEmptyElement();
 		//nastav unikatni id parametr
 		ret->setAttribute("id", (LPCTSTR) doc->CreateNewID(id));
 
@@ -152,7 +152,7 @@ IXMLDOMElementPtr CElementManager::CreateEmptyElement(CElementManager::elId_t id
 	
 	
 	
-	IXMLDOMDocumentPtr element_example;
+	MSXML2::IXMLDOMDocumentPtr element_example;
 	element_example.CreateInstance(_T("Msxml2.DOMDocument"));	
 	element_example->async = VARIANT_FALSE; // default - true,
 
@@ -188,7 +188,7 @@ IXMLDOMElementPtr CElementManager::CreateEmptyElement(CElementManager::elId_t id
 	}
 	
 	
-	IXMLDOMElementPtr ret = element_example->selectSingleNode((LPCTSTR) select);
+	MSXML2::IXMLDOMElementPtr ret = element_example->selectSingleNode((LPCTSTR) select);
 	if (ret == NULL) 
 	{
 		AfxMessageBox("Nezdarilo se najit odpovidajici xml prvek v souboru praznych prvku.");
@@ -219,18 +219,18 @@ BOOL CElementManager::isElementActive(elId_t elementId)
 
 
 //rozhodne, jestli element child muze byt pridan pod element parent
-BOOL CElementManager::CanInsertChildHere(IXMLDOMElementPtr &child, IXMLDOMElementPtr &parent)
+BOOL CElementManager::CanInsertChildHere(MSXML2::IXMLDOMElementPtr &child, MSXML2::IXMLDOMElementPtr &parent)
 {
-	IXMLDOMNodePtr new_child_appended;
+	MSXML2::IXMLDOMNodePtr new_child_appended;
 	
-	IXMLDOMParseErrorPtr err;
+	MSXML2::IXMLDOMParseErrorPtr err;
 	
 	//zkusi ho pridat a kdyz to projde tak ho zase vynda :-)
 	try
 	{
 		new_child_appended = parent->appendChild(child);
-		IXMLDOMDocument2 * doc2 = NULL; 
-		parent->ownerDocument.QueryInterface(__uuidof(IXMLDOMDocument2), &doc2);
+		MSXML2::IXMLDOMDocument2 * doc2 = NULL; 
+		parent->ownerDocument.QueryInterface(__uuidof(MSXML2::IXMLDOMDocument2), &doc2);
 
 		err = doc2->validate();
 		
@@ -349,7 +349,7 @@ BOOL CElementManager::FillImageList(CImageList &img_list)
 
 }
 
-CString CElementManager::CreateElementCaption(IXMLDOMElementPtr &pElement)
+CString CElementManager::CreateElementCaption(MSXML2::IXMLDOMElementPtr &pElement)
 {
 	ASSERT(pElement != NULL);
 
@@ -424,18 +424,18 @@ CString CElementManager::CreateElementCaption(IXMLDOMElementPtr &pElement)
 	return "";
 }
 
-BOOL CElementManager::CanInsertBefore(IXMLDOMElementPtr &pToInsert, IXMLDOMElementPtr &pTarget)
+BOOL CElementManager::CanInsertBefore(MSXML2::IXMLDOMElementPtr &pToInsert, MSXML2::IXMLDOMElementPtr &pTarget)
 {
-	IXMLDOMNodePtr pInserted;
-	IXMLDOMElementPtr pParent=pTarget->GetparentNode();
-	IXMLDOMParseErrorPtr err;
+	MSXML2::IXMLDOMNodePtr pInserted;
+	MSXML2::IXMLDOMElementPtr pParent=pTarget->GetparentNode();
+	MSXML2::IXMLDOMParseErrorPtr err;
 	
 	//zkusi ho pridat a kdyz to projde tak ho zase vynda :-)
 	try
 	{
-		pInserted = pParent->insertBefore(pToInsert,(IXMLDOMElement*)pTarget);
-		IXMLDOMDocument2 * doc2 = NULL; 
-		pParent->ownerDocument.QueryInterface(__uuidof(IXMLDOMDocument2), &doc2);
+		pInserted = pParent->insertBefore(pToInsert,(MSXML2::IXMLDOMElement*)pTarget);
+		MSXML2::IXMLDOMDocument2 * doc2 = NULL; 
+		pParent->ownerDocument.QueryInterface(__uuidof(MSXML2::IXMLDOMDocument2), &doc2);
 
 		err = doc2->validate();
 		
@@ -475,7 +475,7 @@ void CElementManager::LoadAttrLinkTableStyles(LPCTSTR directory_path)
 
 		 if (! finder.IsDots())
 		 {
-			 IXMLDOMDocumentPtr style_dom;
+			 MSXML2::IXMLDOMDocumentPtr style_dom;
 			 style_dom.CreateInstance("Msxml2.DOMDocument");
 			 style_dom->async = VARIANT_FALSE;
 
@@ -509,7 +509,7 @@ LPCTSTR CElementManager::getAttrLinkTableStyleName(int index)
 	return attr_link_table_styles.getItem(index);
 }
 
-IXMLDOMDocument * CElementManager::getAttrLinkTableStyleDom(int index)
+MSXML2::IXMLDOMDocument * CElementManager::getAttrLinkTableStyleDom(int index)
 {
 	ASSERT(index >= 0);
 	ASSERT(index < getAttrLinkTableStylesCount());
@@ -518,7 +518,7 @@ IXMLDOMDocument * CElementManager::getAttrLinkTableStyleDom(int index)
 	return attr_link_table_doms.GetAt(index);
 }
 
-IXMLDOMDocument * CElementManager::getAttrLinkTableStyleDomByName(LPCTSTR style_name)
+MSXML2::IXMLDOMDocument * CElementManager::getAttrLinkTableStyleDomByName(LPCTSTR style_name)
 {
 	int style_index = attr_link_table_styles.FindString(style_name);
 	if (style_index != -1)
@@ -529,7 +529,7 @@ IXMLDOMDocument * CElementManager::getAttrLinkTableStyleDomByName(LPCTSTR style_
 	return NULL;
 }
 
-void CElementManager::TransformActiveElement(IXMLDOMElementPtr & element)
+void CElementManager::TransformActiveElement(MSXML2::IXMLDOMElementPtr & element)
 {
 
 	CAElTransform tr(element);
@@ -537,9 +537,9 @@ void CElementManager::TransformActiveElement(IXMLDOMElementPtr & element)
 }
 
 
-void CElementManager::TransformAttrLinkTable(IXMLDOMElementPtr &element)
+void CElementManager::TransformAttrLinkTable(MSXML2::IXMLDOMElementPtr &element)
 {
-	IXMLDOMDocumentPtr transformed_table = TransformAttrLinkTableNoReplaceSource(element);
+	MSXML2::IXMLDOMDocumentPtr transformed_table = TransformAttrLinkTableNoReplaceSource(element);
 
 	if (transformed_table == NULL) return;
 	
@@ -552,16 +552,16 @@ void CElementManager::TransformAttrLinkTable(IXMLDOMElementPtr &element)
 }
 
 
-void CElementManager::TransformAttrLink(IXMLDOMElementPtr &element)
+void CElementManager::TransformAttrLink(MSXML2::IXMLDOMElementPtr &element)
 {
 
-	IXMLDOMElementPtr txt_elem = CreateEmptyElement(ELID_TEXT);
+	MSXML2::IXMLDOMElementPtr txt_elem = CreateEmptyElement(ELID_TEXT);
 	
 	//nastav style
 	_variant_t vt_style = element->getAttribute("style");
 	if (vt_style.vt != VT_NULL)
 	{
-		IXMLDOMAttributePtr style_attr = element->ownerDocument->createAttribute("style");
+		MSXML2::IXMLDOMAttributePtr style_attr = element->ownerDocument->createAttribute("style");
 		style_attr->text = (_bstr_t) vt_style;
 		txt_elem->setAttributeNode(style_attr);
 		style_attr.Release();
@@ -575,7 +575,7 @@ void CElementManager::TransformAttrLink(IXMLDOMElementPtr &element)
 		(LPCTSTR) (_bstr_t) element->getAttribute("attr_name"));
 
 
-	IXMLDOMNodePtr value_node = element->ownerDocument->selectSingleNode((LPCTSTR) query);
+	MSXML2::IXMLDOMNodePtr value_node = element->ownerDocument->selectSingleNode((LPCTSTR) query);
 
 	if (value_node != NULL)
 	{
@@ -590,14 +590,14 @@ void CElementManager::TransformAttrLink(IXMLDOMElementPtr &element)
 
 }
 
-IXMLDOMDocumentPtr CElementManager::TransformAttrLinkTableNoReplaceSource(IXMLDOMElementPtr &element)
+MSXML2::IXMLDOMDocumentPtr CElementManager::TransformAttrLinkTableNoReplaceSource(MSXML2::IXMLDOMElementPtr &element)
 {
 	CString target_str = (LPCTSTR) (_bstr_t) element->getAttribute("target");
 	CString style_str = (LPCTSTR) (_bstr_t) element->getAttribute("style");
 
 	if ((target_str.GetLength() == 0) || (style_str.GetLength() == 0)) return NULL;
 
-	IXMLDOMDocumentPtr transformed_table;
+	MSXML2::IXMLDOMDocumentPtr transformed_table;
 	transformed_table.CreateInstance(_T("Msxml2.DOMDocument"));	
 	transformed_table->async = VARIANT_FALSE;
 	
