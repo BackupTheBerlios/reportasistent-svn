@@ -117,7 +117,7 @@ namespace FEplugin_cs
                         rAnt.type = "Antecedent";
                         // literaly
                         int litCounter = 0;  // pocitadlo literalu teto hypotezy
-                        ArrayList ARLit_a = new ArrayList();
+                        List<Rec_ti_literal> Lit_a = new List<Rec_ti_literal>();
                         foreach (BooleanLiteralStruct lit in HypList[i].booleanLiterals)
                         {
                             if (lit.cedentType == CedentEnum.Antecedent)
@@ -127,13 +127,13 @@ namespace FEplugin_cs
                                 litCounter++;
                                 if (lit.negation)
                                     l.quant = "¬";
-                                l.quant = lit.literalName;
+                                l.quant += lit.literalName;
                                 foreach (string s in lit.categoriesNames)
                                     l.value += s;
-                                ARLit_a.Add(l);
+                                Lit_a.Add(l);
                             }
                         }
-                        Rec_ti_literal[] ALit_a = (Rec_ti_literal[])ARLit_a.ToArray(typeof(Rec_ti_literal)); // pole literalu daneho cedentu
+                        
                         #endregion
 
                         #region element ti_cedent (Succedent)
@@ -141,7 +141,7 @@ namespace FEplugin_cs
                         rSuc.id = "suc" + rHyp.id;
                         rSuc.type = "Succedent";
                         // literaly
-                        ArrayList ARLit_s = new ArrayList();
+                        List<Rec_ti_literal> Lit_s = new List<Rec_ti_literal>();
                         foreach (BooleanLiteralStruct lit in HypList[i].booleanLiterals)
                         {
                             if (lit.cedentType == CedentEnum.Succedent)
@@ -151,13 +151,13 @@ namespace FEplugin_cs
                                 litCounter++;
                                 if (lit.negation)
                                     l.quant = "¬";
-                                l.quant = lit.literalName;
+                                l.quant += lit.literalName;
                                 foreach (string s in lit.categoriesNames)
                                     l.value += s;
-                                ARLit_s.Add(l);
+                                Lit_s.Add(l);
                             }
                         }
-                        Rec_ti_literal[] ALit_s = (Rec_ti_literal[])ARLit_s.ToArray(typeof(Rec_ti_literal)); // pole literalu daneho cedentu
+                    
                         #endregion
 
                         #region element ti_cedent (Condition)
@@ -165,7 +165,7 @@ namespace FEplugin_cs
                         rCon.id = "con" + rHyp.id;
                         rCon.type = "Condition";
                         // literaly
-                        ArrayList ARLit_c = new ArrayList();
+                        List<Rec_ti_literal> Lit_c = new List<Rec_ti_literal>();
                         foreach (BooleanLiteralStruct lit in HypList[i].booleanLiterals)
                         {
                             if (lit.cedentType == CedentEnum.Condition)
@@ -175,13 +175,13 @@ namespace FEplugin_cs
                                 litCounter++;
                                 if (lit.negation)
                                     l.quant = "¬";
-                                l.quant = lit.literalName;
+                                l.quant += lit.literalName;
                                 foreach (string s in lit.categoriesNames)
                                     l.value += s;
-                                ARLit_s.Add(l);
+                                Lit_s.Add(l);
                             }
                         }
-                        Rec_ti_literal[] ALit_c = (Rec_ti_literal[])ARLit_c.ToArray(typeof(Rec_ti_literal)); // pole literalu daneho cedentu
+               
                         #endregion
 
                         #region Vypsani jedne hypotezy do XML stringu
@@ -190,11 +190,11 @@ namespace FEplugin_cs
                         // vypsani hypotezy do XML
                         oneHypString += rHyp.ToXML();
                         // vypsani Antecedentu do XML
-                        oneHypString += rAnt.ToXML(ALit_a);
+                        oneHypString += rAnt.ToXML(Lit_a);
                         // vypsani Succedentu do XML
-                        oneHypString += rSuc.ToXML(ALit_s);
+                        oneHypString += rSuc.ToXML(Lit_s);
                         // vypsani Condition do XML
-                        oneHypString += rCon.ToXML(ALit_c);
+                        oneHypString += rCon.ToXML(Lit_c);
 
                         resultString += oneHypString;
 
@@ -291,7 +291,7 @@ namespace FEplugin_cs
             XML += "<ti_cedent id=\"" + id + "\" type=\"" + type + "\"/>";
             return XML;
         }
-        public string ToXML(Rec_ti_literal[] Literals)
+        public string ToXML(List<Rec_ti_literal> Literals)
         {
             // dostane pole literalu, vygeneruje vsechny jako podelementy
 
