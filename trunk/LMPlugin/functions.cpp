@@ -1166,14 +1166,29 @@ CString fLM4fthyp(void * hSource)
 	else return "";
 	
 	//creation of xml string
-	//load DTD
-	FILE * x = fopen ("../XML/dtd.dtd", "r");
+	
+  
+  //load DTD
+/***** dedek: pracovni verze ****
+  CString dtd_str;
+  CFile f;
+  f.Open("../XML/dtd.dtd", CFile::modeRead);
+  f.Read(dtd_str.GetBuffer(f.GetLength()), f.GetLength());
+  dtd_str.ReleaseBuffer();
+  f.Close();
+  
+  buf += dtd_str;
+
+/** dedek bude predelano nahore */
+  FILE * x = fopen ("../XML/dtd.dtd", "r");
 	CString buf1;
 	while (fscanf (x, "%s", buf1) != EOF)
 	{
 		buf = buf + (const char *) buf1 + " ";
 	}
 	fclose (x);
+/*****/
+
 	//create xml data
 	buf = buf + " <active_list> ";
 	int i;
