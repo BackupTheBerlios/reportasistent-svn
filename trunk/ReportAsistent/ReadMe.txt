@@ -58,7 +58,7 @@ CGeneralManager * m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager;
 
 dedek TODO:
 
-mazat combobox stylu pri refresh tlacitku (attr_link)
+zavirat normal.dot - jinak ji to odmita menit v jinych spustenych wordech
 
 ?styly textu: combobox editovatelny a nove styly se vytvori v novem do dokumentu?
 -asi ne, je to blbost
@@ -128,6 +128,9 @@ je tam videt jak snadno se da zjistit, jestli je dane id uz pouzite..
 
 
 hotovo:
+
+mazat combobox stylu pri refresh tlacitku (attr_link)
+-hotovo
 
 pouzivat default source!
 -hotovo

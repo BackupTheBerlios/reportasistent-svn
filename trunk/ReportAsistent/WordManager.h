@@ -25,6 +25,7 @@ private:
 
 public:
 	void Add(LPCTSTR s);
+	void Clear();
 
 	int virtual getCount();
 	LPCTSTR virtual getItem(int index);

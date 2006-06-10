@@ -1046,7 +1046,7 @@ CString fLMCategory(void* hSource)
 
 CString fLM4fthyp(void * hSource)
 {
-	CString buf = "";
+	CString buf;
 	CString id_hlp;
 	THyp_4ft_Meta_Array list;
 	Hyp_4ft_Recordset rs ((CDatabase *) hSource);
@@ -1169,19 +1169,15 @@ CString fLM4fthyp(void * hSource)
 	
   
   //load DTD
-/***** dedek: korektni verze pro VS 2005 ****/
-  CString dtd_str;
-  CFile f;
-  f.Open("../XML/dtd.dtd", CFile::modeRead);
+/***** dedek: korektni verze nejen pro VS 2005 ****/
+  CFile f("../XML/dtd.dtd", CFile::modeRead);
   int size = (int) f.GetLength();
-  LPTSTR ps = dtd_str.GetBuffer(size);
+  LPTSTR ps = buf.GetBuffer(size);
   f.Read(ps, size);
   f.Close();
   ps[size] = 0; //data nactena ze souboru se jete musi ukoncit nulou aby reprezentovala validni string
-  dtd_str.ReleaseBuffer(); //od teto chvile je ps neplatny a nemelo by se do nej zapisovat
+  buf.ReleaseBuffer(); //od teto chvile je ps neplatny a nemelo by se do nej zapisovat
   
-  buf += dtd_str;
-
 /** dedek predelano nahore *
   FILE * x = fopen ("../XML/dtd.dtd", "r");
 	CString buf1;

@@ -17,6 +17,17 @@ static char THIS_FILE[]=__FILE__;
 //////////////////////////////////////////////////////////////////////
 
 
+void CStringTableImpl::Clear()
+{
+	for (int a=0; a<getCount(); a++)
+	{
+		delete data[a];
+	}
+
+	data.RemoveAll();
+}
+
+
 void CStringTableImpl::Add(LPCTSTR s)
 {
 	data.Add(new CString(s));
@@ -42,13 +53,7 @@ CStringTableImpl::~CStringTableImpl()
 //ladici:
 //	AfxMessageBox("destruktor: ~CStringTableImpl()");
 
-	for (int a=0; a<getCount(); a++)
-	{
-		//ladici:
-		//AfxMessageBox(* data[a]);
-		
-		delete data[a];
-	}
+	Clear();
 }
 
 void CWordManager::LoadWordStyles(LPCTSTR template_name)
@@ -79,6 +84,7 @@ void CWordManager::LoadWordTemplates()
 	SafeArrayGetLBound(ret_array, 1, & l_bound);
 	SafeArrayGetUBound(ret_array, 1, & u_bound);
 
+	m_WordTemplates.Clear();
 
 	for (LONG a = l_bound; a < u_bound; a++)
 	{
@@ -205,6 +211,8 @@ void CWordManager::LoadCharacterStyles(LPCTSTR template_name)
 	SafeArrayGetLBound(ret_array, 1, & l_bound);
 	SafeArrayGetUBound(ret_array, 1, & u_bound);
 
+	m_WordCharacterStyles.Clear();
+
 
 	for (LONG a = l_bound; a < u_bound; a++)
 	{
@@ -233,6 +241,8 @@ void CWordManager::LoadParagraphStyles(LPCTSTR template_name)
 
 	SafeArrayGetLBound(ret_array, 1, & l_bound);
 	SafeArrayGetUBound(ret_array, 1, & u_bound);
+
+	m_WordParagraphStyles.Clear();
 
 
 	for (LONG a = l_bound; a < u_bound; a++)
