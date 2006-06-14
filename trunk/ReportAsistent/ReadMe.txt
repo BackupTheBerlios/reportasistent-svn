@@ -35,6 +35,28 @@ honzovy poznamky:
 
 
 
+vola prevod na hex z xsl
+
+<?xml version='1.0'?>
+<xsl:stylesheet version="1.0"
+      xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+      xmlns:msxsl="urn:schemas-microsoft-com:xslt"
+      xmlns:user="http://mycompany.com/mynamespace">
+
+  <msxsl:script language="JScript" implements-prefix="user">
+    function xml(nodelist) {
+    return nodelist.toString(16);
+    }
+  </msxsl:script>
+
+  <xsl:template match="/">
+    <xsl:value-of select="user:xml(124)"/>
+  </xsl:template>
+
+</xsl:stylesheet>
+
+
+
 
 
 ve tride App je promenna m_pGeneralManager pro instance globalnich manageru
