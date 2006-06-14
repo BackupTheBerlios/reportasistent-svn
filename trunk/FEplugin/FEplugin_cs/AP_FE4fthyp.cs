@@ -178,7 +178,7 @@ namespace FEplugin_cs
                                 l.quant += lit.literalName;
                                 foreach (string s in lit.categoriesNames)
                                     l.value += s;
-                                Lit_s.Add(l);
+                                Lit_c.Add(l);
                             }
                         }
                
