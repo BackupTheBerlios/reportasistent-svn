@@ -198,7 +198,7 @@
                     fisher2 CDATA #REQUIRED
                     chi_sq2 CDATA #REQUIRED
                     
-                    d_per_sum CDATA #REQUIRED
+                    dr_sum CDATA #REQUIRED
                     df_conf CDATA #REQUIRED
                     df_dfui CDATA #REQUIRED
                     df_fue CDATA #REQUIRED
@@ -234,8 +234,8 @@
                     aic CDATA #REQUIRED
                     kend CDATA #REQUIRED 
   
-                    row_attribute IDREF #IMPLIED
-                    column_attribute IDREF #IMPLIED
+                    row_attributes IDREF #IMPLIED
+                    column_attributes IDREF #IMPLIED
                     condition IDREF #IMPLIED>
                     <!--row_attribute(antecedent),column_attribute(succedent): references to ti_cat_cedent; condition: reference to ti_cedent -->
 
@@ -277,12 +277,12 @@
                     da_sum CDATA #REQUIRED
                     da_min CDATA #REQUIRED
                     da_max CDATA #REQUIRED
+                    dr_sum CDATA #REQUIRED
                     dr_min CDATA #REQUIRED
-                    dr_min CDATA #REQUIRED
-                    dr_min CDATA #REQUIRED
+                    dr_max CDATA #REQUIRED
                        
-                    row_attribute IDREF #IMPLIED
-                    column_attribute IDREF #IMPLIED
+                    row_attributes IDREF #IMPLIED
+                    column_attributes IDREF #IMPLIED
                     condition IDREF #IMPLIED
                     set1 IDREF #IMPLIED
                     set2 IDREF #IMPLIED>
@@ -311,7 +311,7 @@
                     skew CDATA #REQUIRED
                     asym CDATA #REQUIRED 
   
-                    attribute IDREF #IMPLIED
+                    attributes IDREF #IMPLIED
                     condition IDREF #IMPLIED>
 <!--attribute(cedent): reference to ti_cat_cedent; condition: reference to ti_cedent -->
 
@@ -353,11 +353,11 @@
                     da_sum CDATA #REQUIRED
                     da_min CDATA #REQUIRED
                     da_max CDATA #REQUIRED
+                    dr_sum CDATA #REQUIRED
                     dr_min CDATA #REQUIRED
-                    dr_min CDATA #REQUIRED
-                    dr_min CDATA #REQUIRED
+                    dr_max CDATA #REQUIRED
     
-                    attribute IDREF #IMPLIED
+                    attributes IDREF #IMPLIED
                     condition IDREF #IMPLIED
                     set1 IDREF #IMPLIED
                     set2 IDREF #IMPLIED>
@@ -385,9 +385,9 @@
 
 
                    
-<!ELEMENT ti_cat_cedent (ti_literal*)>
+<!ELEMENT ti_cat_cedent (ti_cat_literal*)>
 <!ATTLIST ti_cat_cedent id ID #REQUIRED
-                      type CDATA #REQUIRED>  <!--row attribute, column attribute, condition -->
+                      type CDATA #REQUIRED>  <!--row attributes, column attributes, attributes, condition -->
 <!ELEMENT ti_cat_literal EMPTY>
 <!ATTLIST ti_cat_literal id ID #REQUIRED
                        quant CDATA #REQUIRED   
