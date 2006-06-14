@@ -2,10 +2,19 @@
 
 <xsl:stylesheet 
       xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+      xmlns:msxsl="urn:schemas-microsoft-com:xslt"
+      xmlns:dedek="http://reportasistent.com/dedek_namespace"
       version="1.0">
-          
-	
-	<xsl:template match="/active_list">		
+
+  <msxsl:script language="JScript" implements-prefix="dedek">
+    function hex(cislo) {
+      return cislo.toString(16);
+    }
+  </msxsl:script>
+
+
+
+  <xsl:template match="/active_list">		
 		<xsl:text disable-output-escaping="yes">
 
 &lt;dialog_data&gt;
@@ -99,7 +108,21 @@
 	
 		<xsl:value-of select="."/>
 
-		<xsl:text disable-output-escaping="yes">" </xsl:text>
+    
+    
+    
+<!-- volani JScriptu
+
+    <xsl:text>___</xsl:text>
+    <xsl:value-of select="dedek:hex(1245678)"/>
+
+ volani JScriptu konec -->
+
+
+    
+    
+    
+    <xsl:text disable-output-escaping="yes">" </xsl:text>
 
     	<xsl:apply-templates select="@*"/>
 	</xsl:template>
