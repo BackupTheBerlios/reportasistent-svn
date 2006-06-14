@@ -6,36 +6,48 @@
 <!ATTLIST visualization_options visualization_label CDATA #REQUIRED >  <!--typ vizualizace-->
 
 <!ELEMENT enum_option ( (enum_item)* ) > <!--vycet (ComboBox)-->
-<!ATTLIST enum_option variable_name CDATA #REQUIRED >  <!--nazev XSL promenne, ktera vzejde z teto polozky-->
-<!ATTLIST enum_option title CDATA #REQUIRED >  <!--nadpis polozky (popisek u combo boxu)-->
+<!ATTLIST enum_option variable_name CDATA #REQUIRED 
+                      title CDATA #REQUIRED >  
+<!--title: nadpis polozky (popisek u combo boxu)-->
+<!--variable_name: nazev XSL promenne, ktera vzejde z teto polozky-->
 
 <!ELEMENT enum_item EMPTY>
-<!ATTLIST enum_item value CDATA #REQUIRED >  <!--hodnota promenne nastaveni polozky-->
-<!ATTLIST enum_item label CDATA #REQUIRED >  <!--popis polozky (v combo boxu)-->
+<!ATTLIST enum_item value CDATA #REQUIRED 
+                    label CDATA #REQUIRED >
+<!--value: hodnota promenne nastaveni polozky-->
+<!--label: popis polozky (v combo boxu)-->
 
 <!ELEMENT number_option EMPTY  >  <!--ciselna hodnota -->
-<!ATTLIST number_option variable_name CDATA #REQUIRED >  <!--nazev XSL promenne, ktera vzejde z teto polozky-->
-<!ATTLIST number_option title CDATA #REQUIRED >  <!--nadpis polozky-->
-<!ATTLIST number_option num_type (integer | float) #REQUIRED>  <!--ciselny typ-->
-<!ATTLIST number_option dec CDATA "1">  <!--pocet desetinnych mist-->
-<!ATTLIST number_option min_value CDATA #IMPLIED >  <!--minimalni hodnota cisla-->
-<!ATTLIST number_option max_value CDATA #IMPLIED >  <!--maximalni hodnota cisla-->
+<!ATTLIST number_option variable_name CDATA #REQUIRED  
+<!ATTLIST number_option title CDATA #REQUIRED 
+                        num_type (integer | float) #REQUIRED
+                        dec CDATA "1"
+                        min_value CDATA #IMPLIED 
+                        max_value CDATA #IMPLIED >
+<!--max_value: maximalni hodnota cisla-->
+<!--variable_name: nazev XSL promenne, ktera vzejde z teto polozky-->
+<!--title: nadpis polozky-->
+<!--num_type: ciselny typ-->
+<!--dec: pocet desetinnych mist-->
+<!--min_value: minimalni hodnota cisla-->
 
 <!ELEMENT string_option EMPTY  >
 <!-- textovy retezec -->
-<!ATTLIST string_option variable_name CDATA #REQUIRED >
-<!--nazev XSL promenne, ktera vzejde z teto polozky-->
-<!ATTLIST string_option title CDATA #REQUIRED >
-<!--nadpis polozky-->
-<!ATTLIST string_option default_value CDATA #IMPLIED>
-<!--implicitni hodnota-->
+<!ATTLIST string_option variable_name CDATA #REQUIRED 
+                        title CDATA #REQUIRED
+                        default_value CDATA #IMPLIED>
+<!--variable_name: nazev XSL promenne, ktera vzejde z teto polozky-->
+<!--title: nadpis polozky-->
+<!--default_value: implicitni hodnota-->
 
 
 <!--Defaultni hodnoty nastavovanych promennych-->
 <!ELEMENT visualization_values ((variable)*) >
 
 <!ELEMENT variable EMPTY >
-<!ATTLIST variable name CDATA #REQUIRED >   <!--jmeno promenne -->
-<!ATTLIST variable value CDATA #REQUIRED >  <!--defaultni hodnota promenne-->
+<!ATTLIST variable name CDATA #REQUIRED 
+                   value CDATA #REQUIRED >
+<!--name: jmeno promenne -->
+<!--value: defaultni hodnota promenne-->
 
 ]>
