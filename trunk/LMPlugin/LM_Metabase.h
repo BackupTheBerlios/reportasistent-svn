@@ -7,6 +7,24 @@
 //4ft_hypothese
 //CString fLM4fthyp(void* hSource);
 
+class Task_Meta
+{
+public:
+	CString id;
+	CString db_name;
+	CString matrix_name;
+	CString task_name;
+	CString task_type;
+	CString gen_state;
+	CString gen_total_time;
+	CString gen_start_time;
+	CString num_hyp;
+	CString num_test;
+	CString xml_convert ();
+};
+
+typedef CArray <Task_Meta *, Task_Meta *> TTask_Meta_Array;
+
 struct KL_Literal_Meta
 {
 	CString underlying_attribute;

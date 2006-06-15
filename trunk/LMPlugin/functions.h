@@ -14,6 +14,10 @@
 
 // ===== FUNKCE ========
 
+// ---AP Task
+
+CString fLMTask (void* hSource);
+
 // ---AP KL cedent
 
 CString fLMKLCedent (void* hSource);

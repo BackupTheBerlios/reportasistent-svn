@@ -4,6 +4,13 @@
 #include "Hyp_4ft_Recordset.h"
 #include "comdef.h"
 
+CString Task_Meta::xml_convert ()
+{
+	CString xml_string;
+
+	return xml_string;
+}
+
 CString KL_Cedent_Meta::xml_convert ()
 {
 	CString xml_string;

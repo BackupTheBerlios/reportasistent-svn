@@ -55,6 +55,14 @@ BOOL dedek_performLM(void * hSource, const char* AP, BSTR* result)
 
 /****/
 
+// ---AP Task
+
+CString fLMTask (void* hSource)
+{
+	CString buf = "";
+	return buf;
+}
+
 // ---AP KL cedent
 
 CString fLMKLCedent (void* hSource)
