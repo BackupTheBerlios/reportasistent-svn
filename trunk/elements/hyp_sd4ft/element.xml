@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="windows-1250"?>
+
+		<active_element type="hyp_sd4ft" source="" id="hyp_sd4ft1">
+			<attributes>
+				<element_attributes>
+					<attribute name="id" value="" />
+					<attribute name="db_name" value="" />
+					<attribute name="matrix_name" value="" />
+					<attribute name="task_name" value="" />
+
+					<attribute name="a" value="" />
+					<attribute name="b" value="" />
+					<attribute name="c" value="" />
+					<attribute name="d" value="" />
+					<attribute name="e" value="" />
+					<attribute name="f" value="" />
+					<attribute name="g" value="" />
+					<attribute name="h" value="" />
+
+					<attribute name="conf1" value="" />
+					<attribute name="d_conf1" value="" />
+					<attribute name="e_conf1" value="" />
+					<attribute name="support1" value="" />
+					<attribute name="completeness1" value="" />
+					<attribute name="avg_diff1" value="" />
+					<attribute name="low_bnd_imp1" value="" />
+					<attribute name="up_bnd_imp1" value="" />
+					<attribute name="low_bnd_dbl_imp1" value="" />
+					<attribute name="up_bnd_dbl_imp1" value="" />
+					<attribute name="low_bnd_eq1" value="" />
+					<attribute name="up_bnd_eq1" value="" />
+					<attribute name="fisher1" value="" />
+					<attribute name="chi_sq1" value="" />
+
+					<attribute name="conf2" value="" />
+					<attribute name="d_conf2" value="" />
+					<attribute name="e_conf2" value="" />
+					<attribute name="support2" value="" />
+					<attribute name="completeness2" value="" />
+					<attribute name="avg_diff2" value="" />
+					<attribute name="low_bnd_imp2" value="" />
+					<attribute name="up_bnd_imp2" value="" />
+					<attribute name="low_bnd_dbl_imp2" value="" />
+					<attribute name="up_bnd_dbl_imp2" value="" />
+					<attribute name="low_bnd_eq2" value="" />
+					<attribute name="up_bnd_eq2" value="" />
+					<attribute name="fisher2" value="" />
+					<attribute name="chi_sq2" value="" />
+
+					<attribute name="dr_sum" value="" />
+					<attribute name="df_conf" value="" />
+					<attribute name="df_dfui" value="" />
+					<attribute name="df_fue" value="" />
+					<attribute name="df_avg" value="" />
+
+					<attribute name="antecedent" value="" />
+					<attribute name="succedent" value="" />
+					<attribute name="condition" value="" />
+					<attribute name="set1" value="" />
+					<attribute name="set2" value="" />
+				</element_attributes>
+			</attributes>
+			<filter type="simple">
+			</filter>
+			<output>
+				<!--transformation type="simple" name="HeaderAndCedents"/-->
+			</output>
+		</active_element>
