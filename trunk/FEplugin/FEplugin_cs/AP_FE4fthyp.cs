@@ -278,49 +278,7 @@ namespace FEplugin_cs
         #endregion
     }
 
-    public class Rec_ti_cedent
-    {
-        public string id = "";    // ID ti_cedentu
-        public string type = "";  // typ cetentu (Antecedent, Succedent, Condition)
+    // Rec_ti_cedent a Rec_ti_literal implementovane v souboru "AP_hypotheses_common.cs"
 
-        public string ToXML()
-        {
-            // neobsahuje zadne literaly (podelementy)
-
-            string XML = "";
-            XML += "<ti_cedent id=\"" + id + "\" type=\"" + type + "\"/>";
-            return XML;
-        }
-        public string ToXML(List<Rec_ti_literal> Literals)
-        {
-            // dostane pole literalu, vygeneruje vsechny jako podelementy
-
-            string XML = "";
-            XML += "<ti_cedent id=\"" + id + "\" type=\"" + type + "\">";
-            // vygenerovani vsech literalu
-            foreach (Rec_ti_literal L in Literals)
-                XML += L.ToXML();
-            XML += "</ti_cedent>";
-            return XML;
-        }
-
-    }
-
-    public class Rec_ti_literal
-    {
-        public string id = "";    // ID ti_literalu
-        public string quant = "";  // jmeno vlastnosti pouzite v hypoteze (napr. "Diastolicky tlak")
-        public string value = "";  // hodnota vlastnosti (napr. "<50;60)")
-
-
-        public string ToXML()
-        {
-            // nahrazeni znaku "<", ">" v retezcich (kvuli XML)
-            value = XMLHelper.replaceXMLsign(value);
-            string XML = "";
-            XML += "<ti_literal id=\"" + id + "\" quant=\"" + quant + "\" value=\"" + value + "\"/>";
-            return XML;
-        }
-    }
     #endregion
 }

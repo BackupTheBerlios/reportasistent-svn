@@ -77,7 +77,7 @@ namespace FEplugin_cs
 
                     // recordy pro ukladani vysledku
                     Rec_hyp_cf rHyp = new Rec_hyp_cf();   // CF hypoteza
-                    Rec_ti_cedent rAttr = new Rec_ti_cedent();  // Antecedent (attributes)
+                    Rec_ti_attribute rAnt = new Rec_ti_attribute();  // Antecedent (Attributes)
                     Rec_ti_cedent rCon = new Rec_ti_cedent();  // condition
              
 
@@ -122,34 +122,33 @@ namespace FEplugin_cs
                         
 
                         #endregion
-                        
 
-                        #region element ti_cedent Attributes (Antecedent)
 
-                        rAttr.id = rHyp.attributes;
-                        rAttr.type = "Attributes";
-                        // literaly
-                        int litCounter = 0;  // pocitadlo literalu teto hypotezy
-                        List<Rec_ti_literal> Lit_a = new List<Rec_ti_literal>();
+                        #region element ti_attribute  Attributes (Antecedent)
+
+                        rAnt.id = rHyp.attributes;
+                        rAnt.type = "Attributes";
+                        // kategorie
+                        List<Rec_ti_category> Cat_a = new List<Rec_ti_category>();
                         foreach (LiteralStruct lit in HypList[i].literals)
                         {
                             if (lit.cedentType == CedentEnum.Antecedent)
                             {
-                                Rec_ti_literal l = new Rec_ti_literal();
-                                l.id = "tiLit" + rHyp.id + "_" + litCounter.ToString();
-                                litCounter++;
-                                l.quant += lit.literalName;
+                                rAnt.quant += lit.literalName;
                                 foreach (string s in lit.categoriesNames)
-                                    l.value += s;
+                                {
+                                    Rec_ti_category C = new Rec_ti_category();
+                                    C.value = s;
+                                    Cat_a.Add(C);
+                                }
                                 // ??? k cemu je polozka LitralStruct.categoriesValues ?
-                                Lit_a.Add(l);
                             }
                         }
 
                         #endregion
 
                         #region element ti_cedent (Condition)
-
+                        int litCounter = 0;  // pocitadlo literalu tohoto cedentu
                         rCon.id = "con" + rHyp.id;
                         rCon.type = "Condition";
                         // literaly
@@ -179,7 +178,7 @@ namespace FEplugin_cs
                         // vypsani hypotezy do XML
                         oneHypString += rHyp.ToXML();
                         // vypsani Attributes (Antecedentu) do XML
-                        oneHypString += rAttr.ToXML(Lit_a);
+                        oneHypString += rAnt.ToXML(Cat_a);
                         // vypsani Condition do XML
                         oneHypString += rCon.ToXML(Lit_c);
                         

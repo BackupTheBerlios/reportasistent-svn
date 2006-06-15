@@ -77,8 +77,8 @@ namespace FEplugin_cs
 
                     // recordy pro ukladani vysledku
                     Rec_hyp_KL rHyp = new Rec_hyp_KL();   // KL hypoteza
-                    Rec_ti_cedent rAnt = new Rec_ti_cedent();  // Antecedent (Row attributes)
-                    Rec_ti_cedent rSuc = new Rec_ti_cedent();  // Succedent (Column attributes)
+                    Rec_ti_attribute rAnt = new Rec_ti_attribute();  // Antecedent (Row attributes)
+                    Rec_ti_attribute rSuc = new Rec_ti_attribute();  // Succedent (Column attributes)
                     Rec_ti_cedent rCon = new Rec_ti_cedent();  // condition
 
 
@@ -125,48 +125,47 @@ namespace FEplugin_cs
 
                         #endregion
 
-                        #region element ti_cedent Row attributes (Antecedent)
+                        #region element ti_attribute Row attributes (Antecedent)
 
                         rAnt.id = rHyp.row_attributes;
                         rAnt.type = "Row attributes";
-                        // literaly
-                        int litCounter = 0;  // pocitadlo literalu teto hypotezy
-                        List<Rec_ti_literal> Lit_a = new List<Rec_ti_literal>();
+                        // kategorie
+                        List<Rec_ti_category> Cat_a = new List<Rec_ti_category>();
                         foreach (LiteralStruct lit in HypList[i].literals)
                         {
                             if (lit.cedentType == CedentEnum.Antecedent)
                             {
-                                Rec_ti_literal l = new Rec_ti_literal();
-                                l.id = "tiLit" + rHyp.id + "_" + litCounter.ToString();
-                                litCounter++;
-                                l.quant += lit.literalName;
+                                rAnt.quant += lit.literalName;
                                 foreach (string s in lit.categoriesNames)
-                                    l.value += s;
+                                {
+                                    Rec_ti_category C = new Rec_ti_category();
+                                    C.value = s;
+                                    Cat_a.Add(C);
+                                }
                                 // ??? k cemu je polozka LitralStruct.categoriesValues ?
-                                Lit_a.Add(l);
                             }
                         }
 
                         #endregion
 
-                        #region element ti_cedent Column attributes (Succedent)
+                        #region element ti_attribute Column attributes (Succedent)
 
                         rSuc.id = rHyp.column_attributes;
                         rSuc.type = "Column attributes";
-                        // literaly
-                        List<Rec_ti_literal> Lit_s = new List<Rec_ti_literal>();
+                        // kategorie
+                        List<Rec_ti_category> Cat_s = new List<Rec_ti_category>();
                         foreach (LiteralStruct lit in HypList[i].literals)
                         {
                             if (lit.cedentType == CedentEnum.Succedent)
                             {
-                                Rec_ti_literal l = new Rec_ti_literal();
-                                l.id = "tiLit" + rHyp.id + "_" + litCounter.ToString();
-                                litCounter++;
-                                l.quant += lit.literalName;
+                                rSuc.quant += lit.literalName;
                                 foreach (string s in lit.categoriesNames)
-                                    l.value += s;
+                                {
+                                    Rec_ti_category C = new Rec_ti_category();
+                                    C.value = s;
+                                    Cat_s.Add(C);
+                                }
                                 // ??? k cemu je polozka LitralStruct.categoriesValues ?
-                                Lit_s.Add(l);
                             }
                         }
 
@@ -177,6 +176,7 @@ namespace FEplugin_cs
                         rCon.id = "con" + rHyp.id;
                         rCon.type = "Condition";
                         // literaly
+                        int litCounter = 0;  // pocitadlo literalu teto hypotezy
                         List<Rec_ti_literal> Lit_c = new List<Rec_ti_literal>();
                         foreach (BooleanLiteralStruct lit in HypList[i].booleanLiterals)
                         {
@@ -203,9 +203,9 @@ namespace FEplugin_cs
                         // vypsani hypotezy do XML
                         oneHypString += rHyp.ToXML();
                         // vypsani Row attributes (Antecedentu) do XML
-                        oneHypString += rAnt.ToXML(Lit_a);
+                        oneHypString += rAnt.ToXML(Cat_a);
                         // vypsani Column attributes (Succedentu) do XML
-                        oneHypString += rSuc.ToXML(Lit_s);
+                        oneHypString += rSuc.ToXML(Cat_s);
                         // vypsani Condition do XML
                         oneHypString += rCon.ToXML(Lit_c);
 
