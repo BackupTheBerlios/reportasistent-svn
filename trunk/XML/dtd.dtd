@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="windows-1250" ?>
 <!DOCTYPE active_list[
-  <!ELEMENT active_list ((hyp_4ft*, hyp_sd4ft*, hyp_kl*, hyp_sdkl*, hyp_cf*, hyp_sdcf*, category*, ti_cedent*, attribute*, bool_cedent*, CF_cedent*, KL_cedent*, hyp_kl*, Task*)*)>
+  <!ELEMENT active_list ((hyp_4ft*, hyp_sd4ft*, hyp_kl*, hyp_sdkl*, hyp_cf*, hyp_sdcf*, category*, ti_cedent*, ti_attribute*, attribute*, bool_cedent*, CF_cedent*, KL_cedent*, hyp_kl*, Task*)*)>
 
 
 <!-- Active elements "Analyzed data" -->
@@ -249,7 +249,7 @@
                     task_name CDATA #REQUIRED   
                     
                     sum1 CDATA #REQUIRED
-                    min2 CDATA #REQUIRED
+                    min1 CDATA #REQUIRED
                     max1 CDATA #REQUIRED
                     chi_sq1 CDATA #REQUIRED
                     fnc_s1 CDATA #REQUIRED
@@ -385,13 +385,12 @@
 
 
                    
-<!ELEMENT ti_cat_cedent (ti_cat_literal*)>
-<!ATTLIST ti_cat_cedent id ID #REQUIRED
-                      type CDATA #REQUIRED>  <!--row attributes, column attributes, attributes, condition -->
-<!ELEMENT ti_cat_literal EMPTY>
-<!ATTLIST ti_cat_literal id ID #REQUIRED
-                       quant CDATA #REQUIRED   
-                       value CDATA #REQUIRED>
+<!ELEMENT ti_attribute (ti_category*)>
+<!ATTLIST ti_attribute id ID #REQUIRED
+                      quant CDATA #REQUIRED   
+                      type CDATA #REQUIRED>  <!--row attribute, column attribute, attribute -->
+<!ELEMENT ti_category EMPTY>
+<!ATTLIST ti_category value CDATA #REQUIRED>
 <!--quant: name of the quantity used in hypothese, e. g. diastolic pressure  -->
 <!--value: value of the quantity used in hypothese, e. g. <50;60), empty for rows and columns -->
 ]>
