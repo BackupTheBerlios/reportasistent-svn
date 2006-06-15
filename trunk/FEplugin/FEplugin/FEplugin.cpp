@@ -24,24 +24,43 @@ CFESock::CFESock()
 {
 	APCount = _FE_AP_COUNT;
 	
-	// naplneni tabulky APTable   !!!! prozatimni  TODO
-	APTable[0].AP_ID = "hyp_4ft";	//na hyp_4ft prepsal deda
-	APTable[0].pFn = & fFE4fthyp;
+	// naplneni tabulky APTable
 
-	APTable[1].AP_ID = "attribute";
-	APTable[1].pFn = & fFEAttribute;
+	APTable[0].AP_ID = "attribute";
+	APTable[0].pFn = & fFEAttribute;
 
-	APTable[2].AP_ID = "category";
-	APTable[2].pFn = & fFECategory;
+	APTable[1].AP_ID = "category";
+	APTable[1].pFn = & fFECategory;
 
-	APTable[3].AP_ID = "bool_cedent";
-	APTable[3].pFn = & fFEBool_cedent;
+	APTable[2].AP_ID = "bool_cedent";
+	APTable[2].pFn = & fFEBool_cedent;
 
-	APTable[4].AP_ID = "KL_cedent";
-	APTable[4].pFn = & fFEKL_cedent;
+	APTable[3].AP_ID = "KL_cedent";
+	APTable[3].pFn = & fFEKL_cedent;
 
-	APTable[5].AP_ID = "CF_cedent";
-	APTable[5].pFn = & fFECF_cedent;
+	APTable[4].AP_ID = "CF_cedent";
+	APTable[4].pFn = & fFECF_cedent;
+
+	// AP hypotezy
+
+	APTable[5].AP_ID = "hyp_4ft";	//na hyp_4ft prepsal deda
+	APTable[5].pFn = & fFE4fthyp;
+
+	APTable[6].AP_ID = "hyp_sd4ft";
+	APTable[6].pFn = & fFEsd4fthyp;
+
+	APTable[7].AP_ID = "hyp_kl";
+	APTable[7].pFn = & fFEklhyp;
+
+
+	APTable[8].AP_ID = "hyp_sdkl";
+	APTable[8].pFn = & fFEsdklhyp;
+
+	APTable[9].AP_ID = "hyp_cf";
+	APTable[9].pFn = & fFEcfhyp;
+
+	APTable[10].AP_ID = "hyp_sdcf";
+	APTable[10].pFn = & fFEsdcfhyp;
 
 }
 

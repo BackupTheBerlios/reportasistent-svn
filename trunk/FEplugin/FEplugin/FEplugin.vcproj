@@ -6,7 +6,7 @@
 	ProjectGUID="{361041FE-3355-4A70-8D8D-B6CDF33411C4}"
 	RootNamespace="FEplugin"
 	Keyword="ManagedCProj"
-	AssemblyReferenceSearchPaths="&quot;D:\Projekt\Ferda\Ferda_checkout\bin\FrontEnd&quot;"
+	AssemblyReferenceSearchPaths="&quot;D:\Projekt\Ferda\Ferda_checkout\bin\FrontEnd&quot;;&quot;..\..\..\Ferda\Ferda_checkout\bin\FrontEnd&quot;"
 	>
 	<Platforms>
 		<Platform
@@ -18,10 +18,12 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="D:\Projekt\Vyvoj\ReportAsistent\Plugin\"
+			OutputDirectory="G:\Projekt\Vyvoj\ReportAsistent\Plugin\"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="2"
 			UseOfMFC="2"
+			UseOfATL="0"
+			ATLMinimizesCRunTimeLibraryUsage="false"
 			CharacterSet="1"
 			ManagedExtensions="1"
 			>

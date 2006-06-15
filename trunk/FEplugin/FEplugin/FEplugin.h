@@ -6,7 +6,7 @@
 
 #include <afx.h>
 #include <Windows.h>
-#include <afxdisp.h>
+//#include <afxdisp.h>
 #include "SockInterface.h"
 #include "functions.h"
 
@@ -15,7 +15,7 @@
 
 
 // !!! zde definujte pocet AP, ktere tato zasuvka podporuje
-#define _FE_AP_COUNT 6
+#define _FE_AP_COUNT 11
 
 
 // =========== TYPY ===============================

@@ -26,7 +26,9 @@ CString fFECategory(void* hSource)
 }
 
 
-// --- AP 4ft-hypoteza
+// --- AP Hypotezy
+
+	// 4ft
 
 CString fFE4fthyp(void * hSource)
 {
@@ -35,6 +37,57 @@ CString fFE4fthyp(void * hSource)
 	CString resultStr = (CString) HypList;
 	return resultStr;
 }
+
+	// SD-4ft
+
+CString fFEsd4fthyp(void * hSource)
+{
+	int indexSrc = ((int) hSource) - 1; 
+	System::String^ HypList = FEplugin_cs::AP_FEsd4fthyp::getList(indexSrc);
+	CString resultStr = (CString) HypList;
+	return resultStr;
+}
+
+	// KL
+
+CString fFEklhyp(void * hSource)
+{
+	int indexSrc = ((int) hSource) - 1; 
+	System::String^ HypList = FEplugin_cs::AP_FEklhyp::getList(indexSrc);
+	CString resultStr = (CString) HypList;
+	return resultStr;
+}
+
+	// SD-KL
+
+CString fFEsdklhyp(void * hSource)
+{
+	int indexSrc = ((int) hSource) - 1; 
+	System::String^ HypList = FEplugin_cs::AP_FEsdklhyp::getList(indexSrc);
+	CString resultStr = (CString) HypList;
+	return resultStr;
+}
+
+	// CF
+
+CString fFEcfhyp(void * hSource)
+{
+	int indexSrc = ((int) hSource) - 1; 
+	System::String^ HypList = FEplugin_cs::AP_FEcfhyp::getList(indexSrc);
+	CString resultStr = (CString) HypList;
+	return resultStr;
+}
+
+	// SD-CF
+
+CString fFEsdcfhyp(void * hSource)
+{
+	int indexSrc = ((int) hSource) - 1; 
+	System::String^ HypList = FEplugin_cs::AP_FEsdcfhyp::getList(indexSrc);
+	CString resultStr = (CString) HypList;
+	return resultStr;
+}
+
 
 // --- AP Atribut
 

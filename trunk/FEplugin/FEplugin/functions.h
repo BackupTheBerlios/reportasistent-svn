@@ -16,9 +16,14 @@
 CString fFECategory(void* hSource);
 
 
-// --- AP 4ft-hypoteza
+// --- AP Hypotezy
 
-CString fFE4fthyp(void* hSource);
+CString fFE4fthyp(void* hSource);  // 4ft-hypoteza
+CString fFEsd4fthyp(void* hSource);  // SD-4ft-hypoteza
+CString fFEklhyp(void* hSource);  // KL-hypoteza
+CString fFEsdklhyp(void* hSource);  // SD-KL-hypoteza
+CString fFEcfhyp(void* hSource);  // CF-hypoteza
+CString fFEsdcfhyp(void* hSource);  // SD-CF-hypoteza
 
 // --- AP Atribut
 
