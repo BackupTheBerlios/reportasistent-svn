@@ -261,6 +261,48 @@
             <Y>83</Y>
           </Position>
         </PositionSet>
+        <PositionSet>
+          <BoxProjectIdentifier>42</BoxProjectIdentifier>
+          <Position>
+            <X>325</X>
+            <Y>346</Y>
+          </Position>
+        </PositionSet>
+        <PositionSet>
+          <BoxProjectIdentifier>44</BoxProjectIdentifier>
+          <Position>
+            <X>465</X>
+            <Y>346</Y>
+          </Position>
+        </PositionSet>
+        <PositionSet>
+          <BoxProjectIdentifier>45</BoxProjectIdentifier>
+          <Position>
+            <X>605</X>
+            <Y>346</Y>
+          </Position>
+        </PositionSet>
+        <PositionSet>
+          <BoxProjectIdentifier>46</BoxProjectIdentifier>
+          <Position>
+            <X>324</X>
+            <Y>470</Y>
+          </Position>
+        </PositionSet>
+        <PositionSet>
+          <BoxProjectIdentifier>47</BoxProjectIdentifier>
+          <Position>
+            <X>464</X>
+            <Y>470</Y>
+          </Position>
+        </PositionSet>
+        <PositionSet>
+          <BoxProjectIdentifier>48</BoxProjectIdentifier>
+          <Position>
+            <X>604</X>
+            <Y>470</Y>
+          </Position>
+        </PositionSet>
       </PositionSets>
     </View>
     <View>
@@ -13370,8 +13412,16 @@
           <BoxProjectIdentifier>22</BoxProjectIdentifier>
         </Connection>
         <Connection>
-          <SocketName>SuccedentSetting</SocketName>
+          <SocketName>AntecedentSetting</SocketName>
           <BoxProjectIdentifier>23</BoxProjectIdentifier>
+        </Connection>
+        <Connection>
+          <SocketName>SuccedentSetting</SocketName>
+          <BoxProjectIdentifier>45</BoxProjectIdentifier>
+        </Connection>
+        <Connection>
+          <SocketName>SuccedentSetting</SocketName>
+          <BoxProjectIdentifier>48</BoxProjectIdentifier>
         </Connection>
       </Connections>
       <PropertySets>
@@ -13380,20 +13430,20 @@
           <Value xsi:type="GenerationInfoValueT">
             <Value>
               <generationState>Completed</generationState>
-              <generationNrOfTests>1</generationNrOfTests>
-              <generationNrOfHypotheses>1</generationNrOfHypotheses>
+              <generationNrOfTests>4</generationNrOfTests>
+              <generationNrOfHypotheses>4</generationNrOfHypotheses>
               <generationStartTime xsi:type="DateTimeTI">
-                <day>14</day>
+                <day>15</day>
                 <month>6</month>
                 <year>2006</year>
-                <hour>19</hour>
-                <minute>11</minute>
-                <second>50</second>
+                <hour>23</hour>
+                <minute>31</minute>
+                <second>16</second>
               </generationStartTime>
               <generationTotalTime xsi:type="TimeTI">
                 <hour>0</hour>
                 <minute>0</minute>
-                <second>19</second>
+                <second>32</second>
               </generationTotalTime>
             </Value>
           </Value>
@@ -13406,33 +13456,129 @@
                 <quantifierSetting>
                   <firstContingencyTableRows>
                     <ArrayOfInt>
-                      <int>198</int>
-                      <int>34</int>
-                      <int>288</int>
+                      <int>0</int>
+                      <int>0</int>
+                      <int>234</int>
+                      <int>225</int>
                       <int>45</int>
+                      <int>0</int>
+                      <int>61</int>
+                      <int>0</int>
                     </ArrayOfInt>
                     <ArrayOfInt>
-                      <int>1026</int>
-                      <int>162</int>
-                      <int>2106</int>
-                      <int>294</int>
+                      <int>387</int>
+                      <int>338</int>
+                      <int>432</int>
+                      <int>459</int>
+                      <int>486</int>
+                      <int>576</int>
+                      <int>450</int>
+                      <int>460</int>
                     </ArrayOfInt>
                     <ArrayOfInt>
+                      <int>171</int>
+                      <int>261</int>
+                      <int>90</int>
+                      <int>153</int>
+                      <int>90</int>
+                      <int>57</int>
+                      <int>108</int>
                       <int>342</int>
-                      <int>66</int>
-                      <int>801</int>
-                      <int>63</int>
                     </ArrayOfInt>
                     <ArrayOfInt>
                       <int>0</int>
                       <int>0</int>
                       <int>0</int>
                       <int>0</int>
+                      <int>0</int>
+                      <int>0</int>
+                      <int>0</int>
+                      <int>0</int>
                     </ArrayOfInt>
                     <ArrayOfInt>
                       <int>0</int>
                       <int>0</int>
-                      <int>36</int>
+                      <int>0</int>
+                      <int>0</int>
+                      <int>0</int>
+                      <int>0</int>
+                      <int>45</int>
+                      <int>0</int>
+                    </ArrayOfInt>
+                  </firstContingencyTableRows>
+                  <secondContingencyTableRows />
+                  <numericValues />
+                  <allObjectsCount>6181</allObjectsCount>
+                </quantifierSetting>
+                <booleanLiterals />
+                <literals>
+                  <LiteralStruct>
+                    <cedentType>Antecedent</cedentType>
+                    <categoriesNames>
+                      <string>&lt;10110;11110)</string>
+                      <string>&lt;8110;9110)</string>
+                      <string>&lt;9110;10110)</string>
+                      <string>&lt;12110;12541)</string>
+                      <string>&lt;11110;12110)</string>
+                    </categoriesNames>
+                    <literalName>salary</literalName>
+                    <categoriesValues>0</categoriesValues>
+                    <literalIdentifier>4</literalIdentifier>
+                  </LiteralStruct>
+                  <LiteralStruct>
+                    <cedentType>Succedent</cedentType>
+                    <categoriesNames>
+                      <string>[Usti nad Labem,Usti nad Orlici,Vsetin,Vyskov,Zdar</string>
+                      <string>[Decin,Domazlice,Frydek - Mistek,Havlickuv Brod,Ho</string>
+                      <string>[Olomouc,Opava,Ostrava - mesto,Pardubice,Pelhrimov</string>
+                      <string>[Jesenik,Jicin,Jihlava,Jindrichuv Hradec,Karlovy V</string>
+                      <string>[Praha - vychod,Praha - zapad,Prachatice,Prerov,Pr</string>
+                      <string>[Sokolov,Strakonice,Sumperk,Svitavy,Tabor,Tachov,T</string>
+                      <string>[Kutna Hora,Liberec,Litomerice,Louny,Melnik,Mlada </string>
+                      <string>[Benesov,Beroun,Blansko,Breclav,Brno,Brno - venkov</string>
+                    </categoriesNames>
+                    <literalName>District</literalName>
+                    <categoriesValues>0</categoriesValues>
+                    <literalIdentifier>47</literalIdentifier>
+                  </LiteralStruct>
+                </literals>
+              </HypothesisStruct>
+              <HypothesisStruct>
+                <quantifierSetting>
+                  <firstContingencyTableRows>
+                    <ArrayOfInt>
+                      <int>151</int>
+                      <int>99</int>
+                      <int>81</int>
+                      <int>126</int>
+                      <int>108</int>
+                    </ArrayOfInt>
+                    <ArrayOfInt>
+                      <int>640</int>
+                      <int>694</int>
+                      <int>724</int>
+                      <int>747</int>
+                      <int>783</int>
+                    </ArrayOfInt>
+                    <ArrayOfInt>
+                      <int>315</int>
+                      <int>217</int>
+                      <int>270</int>
+                      <int>245</int>
+                      <int>225</int>
+                    </ArrayOfInt>
+                    <ArrayOfInt>
+                      <int>0</int>
+                      <int>0</int>
+                      <int>0</int>
+                      <int>0</int>
+                      <int>0</int>
+                    </ArrayOfInt>
+                    <ArrayOfInt>
+                      <int>9</int>
+                      <int>9</int>
+                      <int>9</int>
+                      <int>9</int>
                       <int>9</int>
                     </ArrayOfInt>
                   </firstContingencyTableRows>
@@ -13458,6 +13604,71 @@
                   <LiteralStruct>
                     <cedentType>Succedent</cedentType>
                     <categoriesNames>
+                      <string>&lt;4542;6365)</string>
+                      <string>&lt;6365;41728&gt;</string>
+                      <string>&lt;304;2059)</string>
+                      <string>&lt;3312;4542)</string>
+                      <string>&lt;2059;3312)</string>
+                    </categoriesNames>
+                    <literalName>payments</literalName>
+                    <categoriesValues>0</categoriesValues>
+                    <literalIdentifier>44</literalIdentifier>
+                  </LiteralStruct>
+                </literals>
+              </HypothesisStruct>
+              <HypothesisStruct>
+                <quantifierSetting>
+                  <firstContingencyTableRows>
+                    <ArrayOfInt>
+                      <int>189</int>
+                      <int>198</int>
+                      <int>459</int>
+                      <int>216</int>
+                      <int>189</int>
+                      <int>198</int>
+                      <int>171</int>
+                      <int>207</int>
+                    </ArrayOfInt>
+                    <ArrayOfInt>
+                      <int>9</int>
+                      <int>9</int>
+                      <int>63</int>
+                      <int>45</int>
+                      <int>27</int>
+                      <int>66</int>
+                      <int>25</int>
+                      <int>45</int>
+                    </ArrayOfInt>
+                    <ArrayOfInt>
+                      <int>333</int>
+                      <int>324</int>
+                      <int>864</int>
+                      <int>504</int>
+                      <int>378</int>
+                      <int>324</int>
+                      <int>450</int>
+                      <int>450</int>
+                    </ArrayOfInt>
+                    <ArrayOfInt>
+                      <int>27</int>
+                      <int>68</int>
+                      <int>81</int>
+                      <int>72</int>
+                      <int>27</int>
+                      <int>45</int>
+                      <int>18</int>
+                      <int>100</int>
+                    </ArrayOfInt>
+                  </firstContingencyTableRows>
+                  <secondContingencyTableRows />
+                  <numericValues />
+                  <allObjectsCount>6181</allObjectsCount>
+                </quantifierSetting>
+                <booleanLiterals />
+                <literals>
+                  <LiteralStruct>
+                    <cedentType>Antecedent</cedentType>
+                    <categoriesNames>
                       <string>A</string>
                       <string>B</string>
                       <string>C</string>
@@ -13466,6 +13677,87 @@
                     <literalName>status</literalName>
                     <categoriesValues>0</categoriesValues>
                     <literalIdentifier>5</literalIdentifier>
+                  </LiteralStruct>
+                  <LiteralStruct>
+                    <cedentType>Succedent</cedentType>
+                    <categoriesNames>
+                      <string>[Usti nad Labem,Usti nad Orlici,Vsetin,Vyskov,Zdar</string>
+                      <string>[Decin,Domazlice,Frydek - Mistek,Havlickuv Brod,Ho</string>
+                      <string>[Olomouc,Opava,Ostrava - mesto,Pardubice,Pelhrimov</string>
+                      <string>[Jesenik,Jicin,Jihlava,Jindrichuv Hradec,Karlovy V</string>
+                      <string>[Praha - vychod,Praha - zapad,Prachatice,Prerov,Pr</string>
+                      <string>[Sokolov,Strakonice,Sumperk,Svitavy,Tabor,Tachov,T</string>
+                      <string>[Kutna Hora,Liberec,Litomerice,Louny,Melnik,Mlada </string>
+                      <string>[Benesov,Beroun,Blansko,Breclav,Brno,Brno - venkov</string>
+                    </categoriesNames>
+                    <literalName>District</literalName>
+                    <categoriesValues>0</categoriesValues>
+                    <literalIdentifier>47</literalIdentifier>
+                  </LiteralStruct>
+                </literals>
+              </HypothesisStruct>
+              <HypothesisStruct>
+                <quantifierSetting>
+                  <firstContingencyTableRows>
+                    <ArrayOfInt>
+                      <int>342</int>
+                      <int>396</int>
+                      <int>369</int>
+                      <int>396</int>
+                      <int>324</int>
+                    </ArrayOfInt>
+                    <ArrayOfInt>
+                      <int>52</int>
+                      <int>127</int>
+                      <int>18</int>
+                      <int>29</int>
+                      <int>63</int>
+                    </ArrayOfInt>
+                    <ArrayOfInt>
+                      <int>774</int>
+                      <int>549</int>
+                      <int>810</int>
+                      <int>729</int>
+                      <int>765</int>
+                    </ArrayOfInt>
+                    <ArrayOfInt>
+                      <int>73</int>
+                      <int>163</int>
+                      <int>40</int>
+                      <int>81</int>
+                      <int>81</int>
+                    </ArrayOfInt>
+                  </firstContingencyTableRows>
+                  <secondContingencyTableRows />
+                  <numericValues />
+                  <allObjectsCount>6181</allObjectsCount>
+                </quantifierSetting>
+                <booleanLiterals />
+                <literals>
+                  <LiteralStruct>
+                    <cedentType>Antecedent</cedentType>
+                    <categoriesNames>
+                      <string>A</string>
+                      <string>B</string>
+                      <string>C</string>
+                      <string>D</string>
+                    </categoriesNames>
+                    <literalName>status</literalName>
+                    <categoriesValues>0</categoriesValues>
+                    <literalIdentifier>5</literalIdentifier>
+                  </LiteralStruct>
+                  <LiteralStruct>
+                    <cedentType>Succedent</cedentType>
+                    <categoriesNames>
+                      <string>&lt;4542;6365)</string>
+                      <string>&lt;6365;41728&gt;</string>
+                      <string>&lt;304;2059)</string>
+                      <string>&lt;3312;4542)</string>
+                      <string>&lt;2059;3312)</string>
+                    </categoriesNames>
+                    <literalName>payments</literalName>
+                    <categoriesValues>0</categoriesValues>
+                    <literalIdentifier>44</literalIdentifier>
                   </LiteralStruct>
                 </literals>
               </HypothesisStruct>
@@ -15241,6 +15533,230 @@
         </Connection>
       </Connections>
       <PropertySets />
+    </Box>
+    <Box>
+      <CreatorIdentifier>DataMiningCommon.Column</CreatorIdentifier>
+      <ProjectIdentifier>42</ProjectIdentifier>
+      <Connections>
+        <Connection>
+          <SocketName>DataMatrixOrMultiColumn</SocketName>
+          <BoxProjectIdentifier>17</BoxProjectIdentifier>
+        </Connection>
+      </Connections>
+      <PropertySets>
+        <PropertySet>
+          <PropertyName>Name</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>payments</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+      </PropertySets>
+    </Box>
+    <Box>
+      <CreatorIdentifier>DataMiningCommon.Attributes.EquifrequencyIntervalsAttribute</CreatorIdentifier>
+      <ProjectIdentifier>44</ProjectIdentifier>
+      <Connections>
+        <Connection>
+          <SocketName>ColumnOrDerivedColumn</SocketName>
+          <BoxProjectIdentifier>42</BoxProjectIdentifier>
+        </Connection>
+      </Connections>
+      <PropertySets>
+        <PropertySet>
+          <PropertyName>CountOfCategories</PropertyName>
+          <Value xsi:type="LongValueT">
+            <Value>
+              <longValue>5</longValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>Domain</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>WholeDomain</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>From</PropertyName>
+          <Value xsi:type="DoubleValueT">
+            <Value>
+              <doubleValue>0</doubleValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>NameInLiterals</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>payments</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>To</PropertyName>
+          <Value xsi:type="DoubleValueT">
+            <Value>
+              <doubleValue>0</doubleValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>XCategory</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue />
+            </Value>
+          </Value>
+        </PropertySet>
+      </PropertySets>
+    </Box>
+    <Box>
+      <CreatorIdentifier>DataMiningCommon.CategorialPartialCedentSetting</CreatorIdentifier>
+      <ProjectIdentifier>45</ProjectIdentifier>
+      <Connections>
+        <Connection>
+          <SocketName>Attribute</SocketName>
+          <BoxProjectIdentifier>44</BoxProjectIdentifier>
+        </Connection>
+      </Connections>
+      <PropertySets>
+        <PropertySet>
+          <PropertyName>MaxLen</PropertyName>
+          <Value xsi:type="LongValueT">
+            <Value>
+              <longValue>1</longValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>MinLen</PropertyName>
+          <Value xsi:type="LongValueT">
+            <Value>
+              <longValue>1</longValue>
+            </Value>
+          </Value>
+        </PropertySet>
+      </PropertySets>
+    </Box>
+    <Box>
+      <CreatorIdentifier>DataMiningCommon.Column</CreatorIdentifier>
+      <ProjectIdentifier>46</ProjectIdentifier>
+      <Connections>
+        <Connection>
+          <SocketName>DataMatrixOrMultiColumn</SocketName>
+          <BoxProjectIdentifier>17</BoxProjectIdentifier>
+        </Connection>
+      </Connections>
+      <PropertySets>
+        <PropertySet>
+          <PropertyName>Name</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>District</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+      </PropertySets>
+    </Box>
+    <Box>
+      <CreatorIdentifier>DataMiningCommon.Attributes.EquidistantIntervalsAttribute</CreatorIdentifier>
+      <ProjectIdentifier>47</ProjectIdentifier>
+      <Connections>
+        <Connection>
+          <SocketName>ColumnOrDerivedColumn</SocketName>
+          <BoxProjectIdentifier>46</BoxProjectIdentifier>
+        </Connection>
+      </Connections>
+      <PropertySets>
+        <PropertySet>
+          <PropertyName>ClosedFrom</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>Left</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>Domain</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>WholeDomain</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>From</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>0</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>Lenght</PropertyName>
+          <Value xsi:type="DoubleValueT">
+            <Value>
+              <doubleValue>10</doubleValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>NameInLiterals</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>District</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>To</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>0</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>XCategory</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue />
+            </Value>
+          </Value>
+        </PropertySet>
+      </PropertySets>
+    </Box>
+    <Box>
+      <CreatorIdentifier>DataMiningCommon.CategorialPartialCedentSetting</CreatorIdentifier>
+      <ProjectIdentifier>48</ProjectIdentifier>
+      <Connections>
+        <Connection>
+          <SocketName>Attribute</SocketName>
+          <BoxProjectIdentifier>47</BoxProjectIdentifier>
+        </Connection>
+      </Connections>
+      <PropertySets>
+        <PropertySet>
+          <PropertyName>MaxLen</PropertyName>
+          <Value xsi:type="LongValueT">
+            <Value>
+              <longValue>1</longValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>MinLen</PropertyName>
+          <Value xsi:type="LongValueT">
+            <Value>
+              <longValue>1</longValue>
+            </Value>
+          </Value>
+        </PropertySet>
+      </PropertySets>
     </Box>
   </Boxes>
 </Project>
