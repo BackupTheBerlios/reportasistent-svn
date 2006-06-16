@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="windows-1250" ?>
 <!DOCTYPE active_list[
-  <!ELEMENT active_list ((hyp_4ft*, hyp_sd4ft*, hyp_kl*, hyp_sdkl*, hyp_cf*, hyp_sdcf*, category*, ti_cedent*, ti_attribute*, attribute*, bool_cedent*, CF_cedent*, KL_cedent*, hyp_kl*, Task*)*)>
+  
+<!ELEMENT active_list ((hyp_4ft*, hyp_sd4ft*, hyp_kl*, hyp_sdkl*, hyp_cf*, hyp_sdcf*, category*, ti_cedent*, ti_attribute*, attribute*, bool_cedent*, CF_cedent*, KL_cedent*, hyp_kl*, task*, quantifier*)*)>
 
 
 <!-- Active elements "Analyzed data" -->
@@ -9,8 +10,8 @@
 
 <!-- Active elements "Task" -->
 
-  <!ELEMENT Task EMPTY >
-  <!ATTLIST Task 	id ID #REQUIRED
+  <!ELEMENT task EMPTY >
+  <!ATTLIST task 	id ID #REQUIRED
 			            db_name CDATA #REQUIRED
 			            matrix_name CDATA #REQUIRED
 			            task_name CDATA #REQUIRED
@@ -395,6 +396,7 @@
 <!--value: value of the quantity used in hypothese, e. g. <50;60), empty for rows and columns -->
 
 
+
 <!-- Active elements Quantifiers -->
 
 <!ELEMENT quantifier (basic_quantifier*)>
@@ -408,13 +410,13 @@
 <!--type: type of quantifier (4FT, SD-4FT, KL, CF, .....) -->
 
 <!ELEMENT basic_quantifier (quant_item*)>
-<!ATTLIST basic_quantifier  name ID #REQUIRED
+<!ATTLIST basic_quantifier  name CDATA #REQUIRED
                     type CDATA #REQUIRED>
 <!--name: basic quantifier name (type) (i.e. Founded implication, Chi-square, .....) -->
 <!--type: type of basic quantifier (i.e. Aggregation, Functional ..) -->
 
 <!ELEMENT quant_item EMPTY>
-<!ATTLIST quant_item name ID #REQUIRED
+<!ATTLIST quant_item name CDATA #REQUIRED
                     value CDATA #REQUIRED>
 <!--quant_item: one item that can be set in basic quantifier (i.e. parameter and it's value)-->
 ]>
