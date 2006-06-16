@@ -65,9 +65,11 @@
     <Compile Include="AP_FECF_cedent.cs" />
     <Compile Include="AP_FEklhyp.cs" />
     <Compile Include="AP_FEKL_cedent.cs" />
+    <Compile Include="AP_FEQuantifiers.cs" />
     <Compile Include="AP_FEsd4fthyp.cs" />
     <Compile Include="AP_FEsdcfhyp.cs" />
     <Compile Include="AP_FEsdklhyp.cs" />
+    <Compile Include="AP_FETask.cs" />
     <Compile Include="AP_hypotheses_common.cs" />
     <Compile Include="BoxesHelper.cs" />
     <Compile Include="CFEsource.cs" />

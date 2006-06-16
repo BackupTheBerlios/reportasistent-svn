@@ -105,8 +105,8 @@ CString fFEAttribute(void* hSource)
 CString fFEBool_cedent(void* hSource)
 {
 	int indexSrc = ((int) hSource) - 1;
-	System::String^ AttrList = FEplugin_cs::AP_FEBool_cedent::getList(indexSrc);
-	CString resultStr = (CString) AttrList;
+	System::String^ BCList = FEplugin_cs::AP_FEBool_cedent::getList(indexSrc);
+	CString resultStr = (CString) BCList;
 	return resultStr;
 }
 
@@ -115,8 +115,8 @@ CString fFEBool_cedent(void* hSource)
 CString fFEKL_cedent(void* hSource)
 {
 	int indexSrc = ((int) hSource) - 1;
-	System::String^ AttrList = FEplugin_cs::AP_FEKL_cedent::getList(indexSrc);
-	CString resultStr = (CString) AttrList;
+	System::String^ KLCList = FEplugin_cs::AP_FEKL_cedent::getList(indexSrc);
+	CString resultStr = (CString) KLCList;
 	return resultStr;
 }
 
@@ -125,7 +125,27 @@ CString fFEKL_cedent(void* hSource)
 CString fFECF_cedent(void* hSource)
 {
 	int indexSrc = ((int) hSource) - 1;
-	System::String^ AttrList = FEplugin_cs::AP_FECF_cedent::getList(indexSrc);
-	CString resultStr = (CString) AttrList;
+	System::String^ CFCList = FEplugin_cs::AP_FECF_cedent::getList(indexSrc);
+	CString resultStr = (CString) CFCList;
+	return resultStr;
+}
+
+// --- AP Kvantifikator
+
+CString fFEQuantifier(void* hSource)
+{
+	int indexSrc = ((int) hSource) - 1;
+	System::String^ QantList = FEplugin_cs::AP_FEQuantifier::getList(indexSrc);
+	CString resultStr = (CString) QantList;
+	return resultStr;
+}
+
+// --- AP Task
+
+CString fFETask(void* hSource)
+{
+	int indexSrc = ((int) hSource) - 1;
+	System::String^ TaskList = FEplugin_cs::AP_FETask::getList(indexSrc);
+	CString resultStr = (CString) TaskList;
 	return resultStr;
 }

@@ -41,7 +41,13 @@ CString fFEKL_cedent(void* hSource);
 
 CString fFECF_cedent(void* hSource);
 
+// --- AP Kvantifikator
 
+CString fFEQuantifier(void* hSource);
+
+// --- AP Task
+
+CString fFETask(void* hSource);
 
 
 #endif /* _FUNCTIONS*/

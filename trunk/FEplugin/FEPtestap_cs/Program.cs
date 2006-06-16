@@ -39,7 +39,7 @@ namespace FEPtestap_cs
     
             // prohrabani se v archivu
             BoxesHelper.VypisKrabky(0, "LISpMinerTasks.FFTTask");
-            AP_FEsdcfhyp.getList(0);
+            AP_FETask.getList(0);
             //AP_FECF_cedent.getList(0);
         }
 
