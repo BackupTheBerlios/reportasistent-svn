@@ -393,5 +393,29 @@
 <!ATTLIST ti_category value CDATA #REQUIRED>
 <!--quant: name of the quantity used in hypothese, e. g. diastolic pressure  -->
 <!--value: value of the quantity used in hypothese, e. g. <50;60), empty for rows and columns -->
+
+
+<!-- Active elements Quantifiers -->
+
+<!ELEMENT quantifier (basic_quantifier*)>
+<!ATTLIST quantifier  id ID #REQUIRED
+                    db_name CDATA #REQUIRED
+                    matrix_name CDATA #REQUIRED
+                    task_name CDATA #REQUIRED   
+                    type CDATA #REQUIRED   
+                    basic_count CDATA #REQUIRED>
+<!--basic_count: number of basic quantifiers -->
+<!--type: type of quantifier (4FT, SD-4FT, KL, CF, .....) -->
+
+<!ELEMENT basic_quantifier (quant_item*)>
+<!ATTLIST basic_quantifier  name ID #REQUIRED
+                    type CDATA #REQUIRED>
+<!--name: basic quantifier name (type) (i.e. Founded implication, Chi-square, .....) -->
+<!--type: type of basic quantifier (i.e. Aggregation, Functional ..) -->
+
+<!ELEMENT quant_item EMPTY>
+<!ATTLIST quant_item name ID #REQUIRED
+                    value CDATA #REQUIRED>
+<!--quant_item: one item that can be set in basic quantifier (i.e. parameter and it's value)-->
 ]>
 
