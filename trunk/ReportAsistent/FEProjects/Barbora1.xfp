@@ -91,7 +91,7 @@
         <PositionSet>
           <BoxProjectIdentifier>13</BoxProjectIdentifier>
           <Position>
-            <X>880</X>
+            <X>881</X>
             <Y>159</Y>
           </Position>
         </PositionSet>
@@ -163,6 +163,27 @@
           <Position>
             <X>680</X>
             <Y>375</Y>
+          </Position>
+        </PositionSet>
+        <PositionSet>
+          <BoxProjectIdentifier>49</BoxProjectIdentifier>
+          <Position>
+            <X>884</X>
+            <Y>231</Y>
+          </Position>
+        </PositionSet>
+        <PositionSet>
+          <BoxProjectIdentifier>50</BoxProjectIdentifier>
+          <Position>
+            <X>883</X>
+            <Y>298</Y>
+          </Position>
+        </PositionSet>
+        <PositionSet>
+          <BoxProjectIdentifier>51</BoxProjectIdentifier>
+          <Position>
+            <X>887</X>
+            <Y>363</Y>
           </Position>
         </PositionSet>
       </PositionSets>
@@ -819,6 +840,18 @@
         <Connection>
           <SocketName>FFTQuantifier</SocketName>
           <BoxProjectIdentifier>13</BoxProjectIdentifier>
+        </Connection>
+        <Connection>
+          <SocketName>FFTQuantifier</SocketName>
+          <BoxProjectIdentifier>49</BoxProjectIdentifier>
+        </Connection>
+        <Connection>
+          <SocketName>FFTQuantifier</SocketName>
+          <BoxProjectIdentifier>50</BoxProjectIdentifier>
+        </Connection>
+        <Connection>
+          <SocketName>FFTQuantifier</SocketName>
+          <BoxProjectIdentifier>51</BoxProjectIdentifier>
         </Connection>
       </Connections>
       <PropertySets>
@@ -15753,6 +15786,67 @@
           <Value xsi:type="LongValueT">
             <Value>
               <longValue>1</longValue>
+            </Value>
+          </Value>
+        </PropertySet>
+      </PropertySets>
+    </Box>
+    <Box>
+      <CreatorIdentifier>LISpMinerTasks.FFTTask.Quantifiers.Functional.ChiSquared</CreatorIdentifier>
+      <ProjectIdentifier>49</ProjectIdentifier>
+      <Connections />
+      <PropertySets>
+        <PropertySet>
+          <PropertyName>ParamAlpha</PropertyName>
+          <Value xsi:type="DoubleValueT">
+            <Value>
+              <doubleValue>0.001</doubleValue>
+            </Value>
+          </Value>
+        </PropertySet>
+      </PropertySets>
+    </Box>
+    <Box>
+      <CreatorIdentifier>LISpMinerTasks.FFTTask.Quantifiers.Functional.FoundedEquivalence</CreatorIdentifier>
+      <ProjectIdentifier>50</ProjectIdentifier>
+      <Connections />
+      <PropertySets>
+        <PropertySet>
+          <PropertyName>ParamP</PropertyName>
+          <Value xsi:type="DoubleValueT">
+            <Value>
+              <doubleValue>0.9</doubleValue>
+            </Value>
+          </Value>
+        </PropertySet>
+      </PropertySets>
+    </Box>
+    <Box>
+      <CreatorIdentifier>LISpMinerTasks.FFTTask.Quantifiers.Functional.CriticalImplication</CreatorIdentifier>
+      <ProjectIdentifier>51</ProjectIdentifier>
+      <Connections />
+      <PropertySets>
+        <PropertySet>
+          <PropertyName>ParamAlpha</PropertyName>
+          <Value xsi:type="DoubleValueT">
+            <Value>
+              <doubleValue>0.05</doubleValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>ParamP</PropertyName>
+          <Value xsi:type="DoubleValueT">
+            <Value>
+              <doubleValue>0.9</doubleValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>Relation</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>GreaterThanOrEqual</stringValue>
             </Value>
           </Value>
         </PropertySet>
