@@ -19,7 +19,7 @@ public:
 	CString gen_total_time;
 	CString gen_start_time;
 	CString num_hyp;
-	CString num_test;
+	CString num_tests;
 	CString xml_convert ();
 };
 

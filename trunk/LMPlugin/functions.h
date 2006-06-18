@@ -6,6 +6,11 @@
 
 #ifndef WINVER
 #define WINVER 0x0400
+
+#ifndef HYPOTHESIS_LIMIT
+#define HYPOTHESIS_LIMIT 10000
+#endif
+
 #endif
 
 // ===== INCLUDE =======

@@ -8,6 +8,41 @@ CString Task_Meta::xml_convert ()
 {
 	CString xml_string;
 
+	db_name.Replace ("&", "&amp;");
+	matrix_name.Replace ("&", "&amp;");
+	task_name.Replace ("&", "&amp;");
+	task_type.Replace ("&", "&amp;");
+	gen_state.Replace ("&", "&amp;");
+	gen_total_time.Replace ("&", "&amp;");
+	gen_start_time.Replace ("&", "&amp;");
+	
+	db_name.Replace ("<", "&lt;");
+	matrix_name.Replace ("<", "&lt;");
+	task_name.Replace ("<", "&lt;");
+	task_type.Replace ("<", "&lt;");
+	gen_state.Replace ("<", "&lt;");
+	gen_total_time.Replace ("<", "&lt;");
+	gen_start_time.Replace ("<", "&lt;");
+
+	db_name.Replace (">", "&gt;");
+	matrix_name.Replace (">", "&gt;");
+	task_name.Replace (">", "&gt;");
+	task_type.Replace (">", "&gt;");
+	gen_state.Replace (">", "&gt;");
+	gen_total_time.Replace (">", "&gt;");
+	gen_start_time.Replace (">", "&gt;");
+
+	//beggining of the cedent element
+	xml_string = " <tsk id=\"" + id + "\" db_name=\"" + db_name + "\" ";
+	xml_string = xml_string + "matrix_name=\"" + matrix_name + "\" ";
+	xml_string = xml_string + "task_name=\"" + task_name + "\" ";
+	xml_string = xml_string + "task_type=\"" + task_type + "\" ";
+	xml_string = xml_string + "gen_state=\"" + gen_state + "\" ";
+	xml_string = xml_string + "gen_total_time=\"" + gen_total_time + "\" ";
+	xml_string = xml_string + "gen_start_time=\"" + gen_start_time + "\" ";
+	xml_string = xml_string + "num_hyp=\"" + num_hyp + "\" ";
+	xml_string = xml_string + "num_tests=\"" + num_tests + "\"/>";
+
 	return xml_string;
 }
 

@@ -62,6 +62,101 @@ BOOL dedek_performLM(void * hSource, const char* AP, BSTR* result)
 CString fLMTask (void* hSource)
 {
 	CString buf = "";
+	CString hlp;
+	CString db_name = ((CDatabase *) hSource)->GetDatabaseName ();
+	CString q_hyp;
+
+	TTask_Meta_Array list;
+	Task_Meta * pttask;
+	
+	Task_Recordset rs ((CDatabase *) hSource);
+	tiHypothesis_Recordset rs_hyp ((CDatabase *) hSource);
+
+	long hyp_cnt = 0; //number of hypothesis
+
+	LPCTSTR q = "SELECT * \
+				 FROM taTask, tmMatrix, tsTaskSubType \
+				 WHERE taTask.MatrixID=tmMatrix.MatrixID \
+				   AND taTask.TaskSubTypeID=tsTaskSubType.TaskSubTypeID";
+
+	if (rs.Open(AFX_DB_USE_DEFAULT_TYPE, q))
+	{
+		//iteration on query results
+		while (!rs.IsEOF())
+		{
+			pttask = new (Task_Meta);
+			pttask->db_name = db_name;
+			pttask->gen_start_time = rs.m_GenerationStartTime.Format ("%A, %d.%B %Y");
+			pttask->gen_total_time.Format ("%d", rs.m_GenerationTotalTime);
+			hlp.Format ("%d", rs.m_TaskID);
+			pttask->id = "Task" + hlp;
+			pttask->matrix_name = rs.m_Name2;
+			pttask->num_tests.Format ("%d", rs.m_GenerationNrOfTests);
+			pttask->task_name = rs.m_Name;
+			pttask->task_type = rs.m_Name3;
+			q_hyp = "SELECT * \
+					 FROM tiHypothesis \
+					 WHERE TaskID=" + hlp;
+			if (rs_hyp.Open (AFX_DB_USE_DEFAULT_TYPE, q_hyp))
+			{
+				hyp_cnt = 0;
+				while (!rs_hyp.IsEOF())
+				{
+					hyp_cnt++;
+					rs_hyp.MoveNext ();
+				}
+			}
+			else return "";
+			pttask->num_hyp.Format ("%d", hyp_cnt);
+			if (hyp_cnt >= HYPOTHESIS_LIMIT)
+			{
+				pttask->gen_state = "Limit of hypotheses reached";
+			}
+			else if (rs.m_GenerationInterrupted)
+			{
+				pttask->gen_state = "Generation interrupted";
+			}
+			else if (rs.m_HypothesisGenerated)
+			{
+				pttask->gen_state = "Hypotheses generated";
+			}
+			else pttask->gen_state = "Task has not been processed yet";
+			list.Add (pttask);
+			rs.MoveNext();
+		}
+		rs.Close();
+	}
+	else return "";
+
+	//creation of xml string
+	//load DTD
+	FILE * x = fopen ("../XML/dtd.dtd", "r");
+	CString buf1;
+	while (fscanf (x, "%s", buf1) != EOF)
+	{
+		buf = buf + (const char *) buf1 + " ";
+	}
+	fclose (x);
+	//create xml data
+	buf = buf + " <active_list> ";
+	int i;
+    for (i = 0; i < list.GetSize (); i++)
+	{
+		buf = buf + list.GetAt (i)->xml_convert ();
+	}
+	buf += " </active_list>";
+/*	//just for test - creates a xml file with all attributes
+	FILE * f = fopen ("test.xml", "w");
+	fprintf (f, "%s", buf);
+	fclose (f);
+
+
+	AfxMessageBox(buf);
+*/
+	for (i = 0; i < list.GetSize (); i++)
+		delete (list.GetAt (i));
+	list.RemoveAll ();
+
 	return buf;
 }
 
