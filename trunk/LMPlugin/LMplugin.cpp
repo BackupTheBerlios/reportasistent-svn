@@ -26,7 +26,6 @@ CLMSock::CLMSock()
 	// naplneni tabulky APTable   !!!! prozatimni  TODO
 	APTable[0].AP_ID = "hyp_4ft";	//na hyp_4ft prepsal deda
 	APTable[0].pFn = & fLM4fthyp;
-
 	
 	APTable[1].AP_ID = "category";
 	APTable[1].pFn = & fLMCategory;

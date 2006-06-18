@@ -18,6 +18,8 @@
 #include "TCFLiteral.h"
 #include "KL_Cedent_Recordset.h"
 #include "TKLLiteral.h"
+#include "Task_Recordset.h"
+#include "tiHypothesis_Recordset.h"
 
 //dedek: docasne
 /*****/

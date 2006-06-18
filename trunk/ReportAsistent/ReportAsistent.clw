@@ -2,13 +2,13 @@
 
 [General Info]
 Version=1
-LastClass=
+LastClass=CAboutDlg
 LastTemplate=CRecordset
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "ReportAsistent.h"
 LastPage=0
 
-ClassCount=18
+ClassCount=19
 Class1=CReportAsistentApp
 Class2=CSkeletonDoc
 Class3=CSkeletonView
@@ -18,30 +18,31 @@ ResourceCount=14
 Resource1=IDD_ABOUTBOX
 Resource2=IDR_MAINFRAME
 Class5=CAboutDlg
-Resource3=IDD_GENERATE_DIALOG (English (U.S.))
-Resource4=IDD_ATTRIBUTE_LINK_DIALOG (English (U.S.))
+Resource3=IDD_DIALOG_CHAPTER (English (U.S.))
+Resource4=IDD_ABOUTBOX (English (U.S.))
 Class6=CElementTextDialog
-Resource5=IDD_DIALOGTEXT (English (U.S.))
+Resource5=IDD_SIMPLE_FILTER_DIALOG (English (U.S.))
 Class7=CSimpleFilterDialog
-Resource6=IDD_DIALOG_PARAGRAPH (English (U.S.))
+Resource6=IDD_ACTIVE_ELEMENT_DIALOG (English (U.S.))
 Class8=CGenerateDialog
-Resource7=IDD_ABOUTBOX (English (U.S.))
+Resource7=IDD_TRANSFORMATIONS_DIALOG (English (U.S.))
 Class9=CSourcesDialog
-Resource8=IDD_ATTRIBUTE_LINK_TABLE_DIALOG (English (U.S.))
+Resource8=IDD_SOURCES_DIALOG (English (U.S.))
 Class10=CActiveElementDialog
-Resource9=IDD_ACTIVE_ELEMENT_DIALOG (English (U.S.))
+Resource9=IDD_GENERATE_DIALOG (English (U.S.))
 Class11=CTransformationsDialog
 Class12=Tcategory_Recordset
-Resource10=IDD_SOURCES_DIALOG (English (U.S.))
+Resource10=IDD_DIALOGTEXT (English (U.S.))
 Class13=CAttributeLinkDialog
-Resource11=IDD_TRANSFORMATIONS_DIALOG (English (U.S.))
+Resource11=IDD_ATTRIBUTE_LINK_TABLE_DIALOG (English (U.S.))
 Class14=CAttributeLinkTableDialog
-Resource12=IDD_DIALOG_CHAPTER (English (U.S.))
+Resource12=IDD_DIALOG_PARAGRAPH (English (U.S.))
 Class15=CElementParagraphDialog
 Class16=CElementChapterDialog
 Class17=CElementDialogBase
 Class18=TEmpty_Cedents_Recordset
-Resource13=IDD_SIMPLE_FILTER_DIALOG (English (U.S.))
+Resource13=IDD_ATTRIBUTE_LINK_DIALOG (English (U.S.))
+Class19=Task_Recordset
 Resource14=IDR_MAINFRAME (English (U.S.))
 
 [CLS:CReportAsistentApp]
@@ -1066,4 +1067,57 @@ Column31=[tmQuantity].[wSavedCountUsed], 4, 4
 Column32=[wUpdateVer], 4, 4
 Column33=[UserID], 4, 4
 Column34=[tmQuantity].[Notice], 12, 510
+
+[CLS:Task_Recordset]
+Type=0
+HeaderFile=Task_Recordset.h
+ImplementationFile=Task_Recordset.cpp
+BaseClass=CRecordset
+Filter=N
+VirtualFilter=r
+LastObject=Task_Recordset
+
+[DB:Task_Recordset]
+DB=1
+DBType=ODBC
+ColumnCount=26
+Column1=[TaskID], 4, 4
+Column2=[taTask].[Name], 12, 510
+Column3=[taTask].[TaskSubTypeID], 4, 4
+Column4=[TaskGroupID], 4, 4
+Column5=[UserID], 4, 4
+Column6=[taTask].[MatrixID], 4, 4
+Column7=[ParamBASE], 4, 4
+Column8=[ParamBASERelativ], -7, 1
+Column9=[ReadOnly], -7, 1
+Column10=[HypothesisGenerated], -7, 1
+Column11=[GenerationInterrupted], -7, 1
+Column12=[GenerationNrOfTests], 4, 4
+Column13=[GenerationStartTime], 11, 16
+Column14=[GenerationTotalTime], 4, 4
+Column15=[taTask].[Notice], 12, 510
+Column16=[tmMatrix].[MatrixID], 4, 4
+Column17=[tmMatrix].[Name], 12, 100
+Column18=[Initialised], -7, 1
+Column19=[RecordCount], 4, 4
+Column20=[tmMatrix].[Notice], 12, 510
+Column21=[wSavedCountUsed], 4, 4
+Column22=[tsTaskSubType].[TaskSubTypeID], 4, 4
+Column23=[tsTaskSubType].[Name], 12, 100
+Column24=[ShortName], 12, 40
+Column25=[Ord], 4, 4
+Column26=[tsTaskSubType].[Notice], 12, 510
+
+[DB:tiHypothesis_Recordset]
+DB=1
+DBType=ODBC
+ColumnCount=8
+Column1=[HypothesisID], 4, 4
+Column2=[TaskID], 4, 4
+Column3=[FreqA], 4, 4
+Column4=[FreqB], 4, 4
+Column5=[FreqC], 4, 4
+Column6=[FreqD], 4, 4
+Column7=[Weight], 8, 8
+Column8=[Ord], 4, 4
 
