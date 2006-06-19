@@ -105,6 +105,7 @@ CString fLMTask (void* hSource)
 					hyp_cnt++;
 					rs_hyp.MoveNext ();
 				}
+				rs_hyp.Close ();
 			}
 			else return "";
 			pttask->num_hyp.Format ("%d", hyp_cnt);

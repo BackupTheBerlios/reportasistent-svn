@@ -33,7 +33,7 @@ CString Task_Meta::xml_convert ()
 	gen_start_time.Replace (">", "&gt;");
 
 	//beggining of the cedent element
-	xml_string = " <tsk id=\"" + id + "\" db_name=\"" + db_name + "\" ";
+	xml_string = " <task id=\"" + id + "\" db_name=\"" + db_name + "\" ";
 	xml_string = xml_string + "matrix_name=\"" + matrix_name + "\" ";
 	xml_string = xml_string + "task_name=\"" + task_name + "\" ";
 	xml_string = xml_string + "task_type=\"" + task_type + "\" ";

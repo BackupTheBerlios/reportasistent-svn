@@ -42,7 +42,7 @@ CLMSock::CLMSock()
 	APTable[5].AP_ID = "KL_cedent";
 	APTable[5].pFn = & fLMKLCedent;
 
-	APTable[6].AP_ID = "Task";
+	APTable[6].AP_ID = "task";
 	APTable[6].pFn = & fLMTask;
 }
 
