@@ -5,6 +5,10 @@
       version="1.0">
           
 	
+	<xsl:key name="klic_cedenty" match="ti_cedent" use="@id" />
+	
+	
+	
 	<xsl:template match="hyp_4ft">
 				<xsl:text disable-output-escaping="yes">
 				</xsl:text>
@@ -13,7 +17,6 @@
 		
 		
 				<xsl:apply-templates select="@*"/>
-
 
 
 				<xsl:text disable-output-escaping="yes">
