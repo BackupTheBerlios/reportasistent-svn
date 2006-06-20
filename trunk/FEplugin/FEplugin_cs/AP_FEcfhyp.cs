@@ -128,6 +128,7 @@ namespace FEplugin_cs
 
                         rAnt.id = rHyp.attributes;
                         rAnt.type = "Attributes";
+                        rAnt.quant = "";   // smazani predchozi hodnoty
                         // kategorie
                         List<Rec_ti_category> Cat_a = new List<Rec_ti_category>();
                         foreach (LiteralStruct lit in HypList[i].literals)

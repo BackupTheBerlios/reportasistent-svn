@@ -18,7 +18,7 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="G:\Projekt\Vyvoj\ReportAsistent\Plugin\"
+			OutputDirectory="D:\Projekt\Vyvoj\ReportAsistent\Plugin\"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="2"
 			UseOfMFC="2"

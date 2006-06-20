@@ -10,7 +10,7 @@
 			>
 			<DebugSettings
 				Command="fetest.exe"
-				WorkingDirectory="D:\Projekt\Vyvoj\ReportAsistent\Plugin\"
+				WorkingDirectory="d:\Projekt\Vyvoj\ReportAsistent\Plugin\"
 				CommandArguments=""
 				Attach="false"
 				DebuggerType="3"

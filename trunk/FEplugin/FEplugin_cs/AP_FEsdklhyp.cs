@@ -179,6 +179,7 @@ namespace FEplugin_cs
 
                         rAnt.id = rHyp.row_attributes;
                         rAnt.type = "Row attributes";
+                        rAnt.quant = "";   // smazani predchozi hodnoty
                         // kategorie
                         List<Rec_ti_category> Cat_a = new List<Rec_ti_category>();
                         foreach (LiteralStruct lit in HypList[i].literals)
@@ -202,6 +203,7 @@ namespace FEplugin_cs
 
                         rSuc.id = rHyp.column_attributes;
                         rSuc.type = "Column attributes";
+                        rSuc.quant = "";   // smazani predchozi hodnoty
                         // kategorie
                         List<Rec_ti_category> Cat_s = new List<Rec_ti_category>();
                         foreach (LiteralStruct lit in HypList[i].literals)
@@ -432,28 +434,26 @@ namespace FEplugin_cs
             // vygenerovani podelementu - ciselnych hodnot kontingencni tabulky
                 // 1. tabulka
             XML += "<tab>";
-            int radku = Tab1[0].GetLength(0);
-            int sloupcu = Tab1.GetLength(0);
-
-            for (int i = 0; i < radku; i++)
+            foreach (int[] radek in Tab1)
             {
                 XML += "<r>";
-                for (int j = 0; j < sloupcu; j++)
-                    XML += "<c val=\"" + Tab1[j][i].ToString() + "\"/>";
+                foreach (int num in radek)
+                {
+                    XML += "<c val=\"" + num.ToString() + "\"/>";
+                }
                 XML += "</r>";
             }
             XML += "</tab>";
 
                 // 2. tabulka
             XML += "<tab>";
-            radku = Tab2[0].GetLength(0);
-            sloupcu = Tab2.GetLength(0);
-
-            for (int i = 0; i < radku; i++)
+            foreach (int[] radek in Tab2)
             {
                 XML += "<r>";
-                for (int j = 0; j < sloupcu; j++)
-                    XML += "<c val=\"" + Tab2[j][i].ToString() + "\"/>";
+                foreach (int num in radek)
+                {
+                    XML += "<c val=\"" + num.ToString() + "\"/>";
+                }
                 XML += "</r>";
             }
             XML += "</tab>";

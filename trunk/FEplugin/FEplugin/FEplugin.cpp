@@ -43,24 +43,34 @@ CFESock::CFESock()
 
 	// AP hypotezy
 
-	APTable[5].AP_ID = "hyp_4ft";	//na hyp_4ft prepsal deda
+	APTable[5].AP_ID = "hyp_4ft";	//  4FT
 	APTable[5].pFn = & fFE4fthyp;
 
-	APTable[6].AP_ID = "hyp_sd4ft";
+	APTable[6].AP_ID = "hyp_sd4ft";  // SD-4FT
 	APTable[6].pFn = & fFEsd4fthyp;
 
-	APTable[7].AP_ID = "hyp_kl";
+	APTable[7].AP_ID = "hyp_kl";	// KL
 	APTable[7].pFn = & fFEklhyp;
 
 
-	APTable[8].AP_ID = "hyp_sdkl";
+	APTable[8].AP_ID = "hyp_sdkl";	// SD-KL
 	APTable[8].pFn = & fFEsdklhyp;
 
-	APTable[9].AP_ID = "hyp_cf";
+	APTable[9].AP_ID = "hyp_cf";	// CF
 	APTable[9].pFn = & fFEcfhyp;
 
-	APTable[10].AP_ID = "hyp_sdcf";
+	APTable[10].AP_ID = "hyp_sdcf";	// SD-CF
 	APTable[10].pFn = & fFEsdcfhyp;
+
+	// AP Kvantifikator
+
+	APTable[11].AP_ID = "quantifier";
+	APTable[11].pFn = & fFEQuantifier;
+
+	// AP Task
+
+	APTable[12].AP_ID = "task";
+	APTable[12].pFn = & fFETask;
 
 }
 

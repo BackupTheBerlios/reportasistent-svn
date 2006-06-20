@@ -15,7 +15,7 @@
 
 
 // !!! zde definujte pocet AP, ktere tato zasuvka podporuje
-#define _FE_AP_COUNT 11
+#define _FE_AP_COUNT 13
 
 
 // =========== TYPY ===============================

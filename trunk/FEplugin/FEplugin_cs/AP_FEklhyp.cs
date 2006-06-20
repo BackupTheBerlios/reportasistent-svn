@@ -129,6 +129,7 @@ namespace FEplugin_cs
 
                         rAnt.id = rHyp.row_attributes;
                         rAnt.type = "Row attributes";
+                        rAnt.quant = "";   // smazani predchozi hodnoty
                         // kategorie
                         List<Rec_ti_category> Cat_a = new List<Rec_ti_category>();
                         foreach (LiteralStruct lit in HypList[i].literals)
@@ -152,6 +153,7 @@ namespace FEplugin_cs
 
                         rSuc.id = rHyp.column_attributes;
                         rSuc.type = "Column attributes";
+                        rSuc.quant = "";   // smazani predchozi hodnoty
                         // kategorie
                         List<Rec_ti_category> Cat_s = new List<Rec_ti_category>();
                         foreach (LiteralStruct lit in HypList[i].literals)
@@ -290,6 +292,8 @@ namespace FEplugin_cs
 
             // vygenerovani podelementu - ciselnych hodnot kontingencni tabulky
             XML += "<tab>";
+            /* Asi blba verze - prohozeny radky a sloupce
+             * 
             int radku = Tab[0].GetLength(0);
             int sloupcu = Tab.GetLength(0);
 
@@ -300,6 +304,17 @@ namespace FEplugin_cs
                     XML += "<c val=\"" + Tab[j][i].ToString() + "\"/>";
                 XML += "</r>";
             }
+             * */
+            foreach (int[] radek in Tab)
+            { 
+                XML += "<r>";
+                foreach (int num in radek)
+                {
+                    XML += "<c val=\"" + num.ToString() + "\"/>";
+                }
+                XML += "</r>";
+            }
+
             XML += "</tab>";
 
 
