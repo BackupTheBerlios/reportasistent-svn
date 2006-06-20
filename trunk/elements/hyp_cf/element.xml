@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="windows-1250"?>
+
+		<active_element type="hyp_cf" source="" id="hyp_cf1">
+			<attributes>
+				<element_attributes>
+				</element_attributes>
+			</attributes>
+			<filter type="simple">
+			</filter>
+			<output>
+				<!--transformation type="simple" name="HeaderAndCedents"/-->
+			</output>
+		</active_element>
