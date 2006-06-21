@@ -121,7 +121,7 @@ CString fLMTask (void* hSource)
 			{
 				pttask->gen_state = "Hypotheses generated";
 			}
-			else pttask->gen_state = "Task has not been processed yet";
+			else pttask->gen_state = "Modified task has not been processed yet";
 			list.Add (pttask);
 			rs.MoveNext();
 		}
