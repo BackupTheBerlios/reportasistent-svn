@@ -19,6 +19,10 @@
 
 // ===== FUNKCE ========
 
+// ---AP Quantifier
+
+CString fLMQuantifier (void* hSource);
+
 // ---AP Task
 
 CString fLMTask (void* hSource);

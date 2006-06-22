@@ -57,6 +57,17 @@ BOOL dedek_performLM(void * hSource, const char* AP, BSTR* result)
 
 /****/
 
+// ---AP Quantifier
+
+CString fLMQuantifier (void* hSource)
+{
+	CString buf = "";
+	CString hlp;
+	CString db_name = ((CDatabase *) hSource)->GetDatabaseName ();
+
+	return buf;
+}
+
 // ---AP Task
 
 CString fLMTask (void* hSource)

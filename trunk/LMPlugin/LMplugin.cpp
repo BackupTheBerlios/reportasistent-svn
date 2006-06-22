@@ -44,6 +44,9 @@ CLMSock::CLMSock()
 
 	APTable[6].AP_ID = "task";
 	APTable[6].pFn = & fLMTask;
+
+	APTable[7].AP_ID = "quantifier";
+	APTable[7].pFn = & fLMQuantifier;
 }
 
 
