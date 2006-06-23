@@ -61,6 +61,7 @@
 		       category_cnt CDATA #REQUIRED>
 
 
+<!-- Toto je puvodni implementace, bylo predelano pouze na dilci cedenty
 
   <!ELEMENT bool_cedent (sub_bool_cedent*)>
   <!ATTLIST bool_cedent id ID #REQUIRED
@@ -84,7 +85,28 @@
 		    literal_type CDATA #REQUIRED
 		    equivalence_class CDATA #REQUIRED>
 
+-->
 
+
+<!ELEMENT bool_cedent (literal*)>
+<!ATTLIST bool_cedent id ID #REQUIRED
+          name CDATA #REQUIRED
+          db_name CDATA #REQUIRED
+			    matrix_name CDATA #REQUIRED
+			    task_name CDATA #REQUIRED
+			    task_type CDATA #REQUIRED
+			    cedent_type CDATA #REQUIRED
+			    literal_cnt CDATA #REQUIRED
+			    length CDATA #REQUIRED>
+<!ELEMENT literal EMPTY>
+<!ATTLIST literal underlying_attribute CDATA #REQUIRED
+		    category_cnt CDATA #REQUIRED
+		    missing_type CDATA #REQUIRED
+		    coefficient_type CDATA #REQUIRED
+		    length CDATA #REQUIRED
+		    gace CDATA #REQUIRED
+		    literal_type CDATA #REQUIRED
+		    equivalence_class CDATA #REQUIRED>
 
 <!-- Active elements - Attributes and Categories -->
 
@@ -399,6 +421,8 @@
 
 <!-- Active elements Quantifiers -->
 
+<!-- Toto je puvodni implementace, bylo predelano pouze na zakladni kvantifikatory
+
 <!ELEMENT quantifier (basic_quantifier*)>
 <!ATTLIST quantifier  id ID #REQUIRED
                     db_name CDATA #REQUIRED
@@ -406,14 +430,23 @@
                     task_name CDATA #REQUIRED   
                     type CDATA #REQUIRED   
                     basic_count CDATA #REQUIRED>
+-->
 <!--basic_count: number of basic quantifiers -->
 <!--type: type of quantifier (4FT, SD-4FT, KL, CF, .....) -->
 
-<!ELEMENT basic_quantifier (quant_item*)>
-<!ATTLIST basic_quantifier  name CDATA #REQUIRED
+
+
+<!ELEMENT quantifier (quant_item*)>
+<!ATTLIST quantifier  id ID #REQUIRED
+                    db_name CDATA #REQUIRED
+                    matrix_name CDATA #REQUIRED
+                    task_name CDATA #REQUIRED   
+                    task_type CDATA #REQUIRED
+                    name CDATA #REQUIRED
                     type CDATA #REQUIRED>
 <!--name: basic quantifier name (type) (i.e. Founded implication, Chi-square, .....) -->
 <!--type: type of basic quantifier (i.e. Aggregation, Functional ..) -->
+<!--task_type: type of quantifier (4FT, SD-4FT, KL, CF, .....) -->
 
 <!ELEMENT quant_item EMPTY>
 <!ATTLIST quant_item name CDATA #REQUIRED
