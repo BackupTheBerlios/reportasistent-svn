@@ -108,14 +108,7 @@
 
 
 
-	<!-- naplni hodnotu pro missing_values -->
-	<xsl:template match="missing_value" mode="values">
-		<xsl:if test="position()!=1">
-			<xsl:text disable-output-escaping="no">; </xsl:text>
-		</xsl:if>
-
-		<xsl:value-of select="@name"/>
-	</xsl:template>
+	
 
 
 
