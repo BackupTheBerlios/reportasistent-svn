@@ -20,6 +20,7 @@
 #include "TKLLiteral.h"
 #include "Task_Recordset.h"
 #include "tiHypothesis_Recordset.h"
+#include "TFTQuantifier_Recordset.h"
 
 //dedek: docasne
 /*****/

@@ -177,6 +177,10 @@ SOURCE=.\TEmpty_Cedents_Recordset.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\TFTQuantifier_Recordset.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\tiHypothesis_Recordset.cpp
 # End Source File
 # Begin Source File
@@ -278,6 +282,10 @@ SOURCE=.\TCFLiteral.h
 # Begin Source File
 
 SOURCE=.\TEmpty_Cedents_Recordset.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\TFTQuantifier_Recordset.h
 # End Source File
 # Begin Source File
 

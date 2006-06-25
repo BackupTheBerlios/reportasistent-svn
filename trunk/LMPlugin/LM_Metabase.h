@@ -7,6 +7,29 @@
 //4ft_hypothese
 //CString fLM4fthyp(void* hSource);
 
+struct quant_item
+{
+	CString name;
+	CString value;
+};
+
+typedef CArray <quant_item, quant_item> Tquant_item_Array;
+
+class Quantifier_Meta
+{
+public:
+	CString				id;
+	CString				db_name;
+	CString				matrix_name;
+	CString				task_name;
+	CString				task_type;
+	CString				name;
+	CString				type;
+	Tquant_item_Array	items;
+};
+
+typedef CArray <Quantifier_Meta *, Quantifier_Meta *> TQuantifier_Meta_Array;
+
 class Task_Meta
 {
 public:
