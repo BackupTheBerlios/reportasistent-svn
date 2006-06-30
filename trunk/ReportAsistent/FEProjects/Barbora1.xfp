@@ -480,7 +480,7 @@
           <PropertyName>OdbcConnectionString</PropertyName>
           <Value xsi:type="StringValueT">
             <Value>
-              <stringValue>DSN=Barca;Persist security info=false</stringValue>
+              <stringValue>DSN=Barborka;Persist security info=false</stringValue>
             </Value>
           </Value>
         </PropertySet>
@@ -707,6 +707,10 @@
         <Connection>
           <SocketName>LiteralSetting</SocketName>
           <BoxProjectIdentifier>7</BoxProjectIdentifier>
+        </Connection>
+        <Connection>
+          <SocketName>LiteralSetting</SocketName>
+          <BoxProjectIdentifier>10</BoxProjectIdentifier>
         </Connection>
       </Connections>
       <PropertySets>
