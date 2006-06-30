@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="windows-1250"?>
+<visualization>
+
+  <visualization_options active_element="4ft hypothesis" visualization_label="Graph">
+
+    <!--setting of graph type-->
+    <enum_option variable_name="GraphType" title="Graph type">  
+       <enum_item  value="xl3DColumn" label="3D Column"/>
+       <enum_item  value="xl3DColumnClustered" label="3D Column - Clustered"/>
+       <enum_item  value="xl3DColumnStacked" label="3D Column - Stacked (absolute values)"/>
+       <enum_item  value="xl3DColumnStacked100" label="3D Column - Stacked (percentual values)"/>
+    </enum_option>
+
+    <!--setting whether to show a graph legend-->
+    <enum_option variable_name="LegendShow" title="Show graph legend">
+       <enum_item value="true" label="yes"/>  
+       <enum_item value="false" label="no"/>  
+    </enum_option>
+
+    <!-- setting of graph width (compared to page width)-->
+    <number_option variable_name="GraphWidth" title="Graph width (compared to page wigth)" num_type="float" dec="2" min_value="0" max_value="1"/>
+
+    <!-- setting of graph height (compared to page width)-->
+    <number_option variable_name="GraphHeight" title="Graph height (compared to page wigth)" num_type="float" dec="2" min_value="0" max_value="5"/>
+    
+  </visualization_options>
+
+  
+  
+  <!--default values of variables-->
+  
+  <visualization_values>
+      <variable name="GraphType" value="xl3DColumn" />
+      <variable name="LegendShow" value="false"/>
+      <variable name="GraphWidth" value="1"/>
+      <variable name="GraphHeight" value="0,75"/>
+  </visualization_values>
+
+</visualization>
