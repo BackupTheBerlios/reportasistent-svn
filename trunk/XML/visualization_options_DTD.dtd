@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="windows-1250"?>
 <!DOCTYPE visualization [
 
+<!ELEMENT visualization (visualization_options, visualization_values) >
+<!--visualization_options: definovani typu nastavovanych promennych a moznosyi vyctu-->
+<!--visualization_values: defaultni hodnoty promennych-->
+
+  
 <!ELEMENT visualization_options (( enum_option | number_option | string_option )*) > <!--seznam nastavovanych polozek-->
 <!ATTLIST visualization_options active_element CDATA #REQUIRED > <!--typ aktivniho prvku-->
 <!ATTLIST visualization_options visualization_label CDATA #REQUIRED >  <!--typ vizualizace-->
@@ -19,7 +24,7 @@
 
 <!ELEMENT number_option EMPTY  >  <!--ciselna hodnota -->
 <!ATTLIST number_option variable_name CDATA #REQUIRED  
-<!ATTLIST number_option title CDATA #REQUIRED 
+                        title CDATA #REQUIRED 
                         num_type (integer | float) #REQUIRED
                         dec CDATA "1"
                         min_value CDATA #IMPLIED 
