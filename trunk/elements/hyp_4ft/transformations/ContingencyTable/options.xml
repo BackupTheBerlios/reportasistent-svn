@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="windows-1250"?>
+<visualization>
+
+  <visualization_options active_element="4ft hypothesis" visualization_label="Contingency Table">
+
+    <!--setting whether to show a sum values (nine-fold table)-->
+    <enum_option variable_name="SumsShow" title="Show sum values (nine-fold table)">
+       <enum_item value="true" label="yes"/>  
+       <enum_item value="false" label="no"/>  
+    </enum_option>
+
+
+    <!--setting whether to colour-highlight table fields-->
+    <enum_option variable_name="ColourHighlight" title="Colour-highlight table fields">
+       <enum_item value="true" label="yes"/>  
+       <enum_item value="false" label="no"/>  
+    </enum_option>
+
+
+    <!--absolute or relative values in contingency table-->
+    <enum_option variable_name="TypeOfValues" title="Type of values in contingency table">
+       <enum_item value="Abslolute" label="Absolute"/>  
+       <enum_item value="Relative" label="Relative (percentual)"/>  
+    </enum_option>
+    
+  </visualization_options>
+
+  
+  
+  <!--default values of variables-->
+  
+  <visualization_values>
+      <variable name="SumShow" value="no" />
+      <variable name="ColourHighlighting" value="no"/>
+      <variable name="TypeOfValues" value="Absolute"/>
+  </visualization_values>
+
+</visualization>
