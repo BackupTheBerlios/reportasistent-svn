@@ -30,18 +30,15 @@
   <ItemGroup>
     <Reference Include="FerdaBase, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Ferda\Ferda_checkout\bin\FrontEnd\FerdaBase.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\..\ReportAsistent\Debug\FerdaBase.dll</HintPath>
     </Reference>
     <Reference Include="FerdaModulesManager, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Ferda\Ferda_checkout\bin\FrontEnd\FerdaModulesManager.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\..\ReportAsistent\Debug\FerdaModulesManager.dll</HintPath>
     </Reference>
     <Reference Include="FerdaProjectManager, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Ferda\Ferda_checkout\bin\FrontEnd\FerdaProjectManager.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\..\ReportAsistent\Debug\FerdaProjectManager.dll</HintPath>
     </Reference>
     <Reference Include="icecs, Version=3.0.1.0, Culture=neutral, PublicKeyToken=1f998c50fec78381">
       <SpecificVersion>False</SpecificVersion>

@@ -61,7 +61,7 @@ namespace FEplugin_cs
                     Rec_quantifier rQuant = new Rec_quantifier();
 
                     // vyplneni ID kvantifikatoru
-                    rQuant.id = "quant" + box.ProjectIdentifier;
+                    string id = "quant" + box.ProjectIdentifier;
 
                     try
                     {
@@ -78,21 +78,70 @@ namespace FEplugin_cs
                         // nalezeni jmena ulohy
                         rQuant.task_name = box.UserName;
 
-                        // vyplneni typu kvantifikatoru
-                        rQuant.type = TTS.TypeString;
+                        // vyplneni typu kvantifikatoru (ulohy)
+                        rQuant.task_type = TTS.TypeString;
 
                         // nalezeni vsech boxu - Zakladnich kvantifikatoru daneho tasku
                         IBoxModule[] BasicQuantsBoxes = box.GetConnections(TTS.QuantSocketName);
 
-                        // vyplneni poctu zakladnich kvantifikatoru
-                        rQuant.basic_count = BasicQuantsBoxes.GetLength(0);
+                        #region Cyklus - pres vsechny zakladni kvantifikatory
 
-                        string subelementsXML = "";
+                        int bq_num = 0;  // pomocna promenna - kvuli generovani ID
                         foreach (IBoxModule BQB in BasicQuantsBoxes)
-                            subelementsXML += getBasicQuantXML(BQB);
-                        
-                        // pridani kvantifikatoru do XML
-                        resultString += rQuant.ToXML(subelementsXML);
+                        {
+                            Rec_quantifier rQuant1 = rQuant;
+
+                            // nastaveni ID
+                            rQuant1.id = id + "_" + bq_num.ToString();
+                            bq_num++;
+
+                            // vyplneni polozky "name"
+                            rQuant1.name = BQB.UserName;
+
+                            // vyplneni polozky "type"
+                            if (BQB.MadeInCreator.Identifier.IndexOf("Functional") != -1)
+                                rQuant1.type = "Functional";
+                            else if (BQB.MadeInCreator.Identifier.IndexOf("Aggregation") != -1)
+                                rQuant1.type = "Aggregation";
+
+                            // nalezeni vsech polozek zakladniho kvantifikatoru a jejich hodnot
+                            List<Rec_quant_item> QItems = new List<Rec_quant_item>();
+
+                            PropertyInfo[] PI = BQB.MadeInCreator.Properties;
+                            foreach (PropertyInfo pi in PI)
+                            {
+                                // nova polozka nastaveni
+                                Rec_quant_item item = new Rec_quant_item();
+                                // vyplneni polozek
+                                item.name = pi.name; // "name"
+
+                                // TODO: zatim nevim, jestli lze tohle udelat lepe. Mozna predelat
+                                if (pi.typeClassIceId.IndexOf("Double") != -1)
+                                    item.value = BQB.GetPropertyDouble(pi.name).ToString();
+                                else if (pi.typeClassIceId.IndexOf("String") != -1)
+                                    item.value = BQB.GetPropertyString(pi.name);
+                                else if (pi.typeClassIceId.IndexOf("Float") != -1)
+                                    item.value = BQB.GetPropertyFloat(pi.name).ToString();
+                                else if (pi.typeClassIceId.IndexOf("Int") != -1)
+                                    item.value = BQB.GetPropertyInt(pi.name).ToString();
+                                else if (pi.typeClassIceId.IndexOf("Long") != -1)
+                                    item.value = BQB.GetPropertyLong(pi.name).ToString();
+                                else if (pi.typeClassIceId.IndexOf("Date") != -1)
+                                    item.value = BQB.GetPropertyDate(pi.name).ToString();
+                                else if (pi.typeClassIceId.IndexOf("Time") != -1)
+                                    item.value = BQB.GetPropertyTime(pi.name).ToString();
+                                else if (pi.typeClassIceId.IndexOf("Bool") != -1)
+                                    item.value = BQB.GetPropertyBool(pi.name).ToString();
+
+                                QItems.Add(item);
+                            }
+
+                        #endregion
+
+
+                            // pridani kvantifikatoru do XML
+                            resultString += rQuant1.ToXML(QItems);
+                        }
                     }
                     catch (System.Exception e)
                     {
@@ -120,60 +169,6 @@ namespace FEplugin_cs
         }
 
         
-        // vygeneruje XMLstring pro dany box zakladniho kvantifikatoru
-        private static string getBasicQuantXML(IBoxModule BasicQuantifierBox)
-        {
-            string resultStr = "";
-
-            // record pro dany zaklani kvantifikator (BasicQuantifierBox)
-            Rec_basic_quantifier rBQ = new Rec_basic_quantifier();
-
-            // vyplneni polozky "name"
-            rBQ.name = BasicQuantifierBox.UserName;
-
-            // vyplneni polozky "type"
-            if (BasicQuantifierBox.MadeInCreator.Identifier.IndexOf("Functional") != -1)
-                rBQ.type = "Functional";
-            else if (BasicQuantifierBox.MadeInCreator.Identifier.IndexOf("Aggregation") != -1)
-                rBQ.type = "Aggregation";
-
-            // nalezeni vsech polozek zakladniho kvantifikatoru a jejich hodnot
-            List<Rec_quant_item> QItems = new List<Rec_quant_item>();
-
-            PropertyInfo[] PI = BasicQuantifierBox.MadeInCreator.Properties;
-            foreach (PropertyInfo pi in PI)
-            {
-                // nova polozka nastaveni
-                Rec_quant_item item = new Rec_quant_item();
-                // vyplneni polozek
-                item.name = pi.name; // "name"
-
-                // TODO: zatim nevim, jestli lze tohle udelat lepe. Mozna predelat
-                if (pi.typeClassIceId.IndexOf("Double") != -1)
-                    item.value = BasicQuantifierBox.GetPropertyDouble(pi.name).ToString();
-                else if (pi.typeClassIceId.IndexOf("String") != -1)
-                    item.value = BasicQuantifierBox.GetPropertyString(pi.name);
-                else if (pi.typeClassIceId.IndexOf("Float") != -1)
-                    item.value = BasicQuantifierBox.GetPropertyFloat(pi.name).ToString();
-                else if (pi.typeClassIceId.IndexOf("Int") != -1)
-                    item.value = BasicQuantifierBox.GetPropertyInt(pi.name).ToString();
-                else if (pi.typeClassIceId.IndexOf("Long") != -1)
-                    item.value = BasicQuantifierBox.GetPropertyLong(pi.name).ToString();
-                else if (pi.typeClassIceId.IndexOf("Date") != -1)
-                    item.value = BasicQuantifierBox.GetPropertyDate(pi.name).ToString();
-                else if (pi.typeClassIceId.IndexOf("Time") != -1)
-                    item.value = BasicQuantifierBox.GetPropertyTime(pi.name).ToString();
-                else if (pi.typeClassIceId.IndexOf("Bool") != -1)
-                    item.value = BasicQuantifierBox.GetPropertyBool(pi.name).ToString();
-
-                QItems.Add(item);
-            }
-
-            resultStr += rBQ.ToXML(QItems);
-
-            return resultStr;
-        }
-
         
         // pomocna struktura - vsechny typy Tasku zpracovavane v cyklu v getList() a k nim potrebne polozky
         struct TaskTypeStruct
@@ -200,8 +195,10 @@ namespace FEplugin_cs
         public string db_name = "unknown";   // jmeno databaze
         public string matrix_name = "unknown"; // jmeno datove matice
         public string task_name = "unknown";   // jmeno ulohy
+        public string task_type = "unknown";   // typ ulohy
+        public string name = "unknown";   // jmeno (typ) zakladniho kvantifikatoru
         public string type = "unknown";   // typ kvantifikatoru (4FT, KL, ... )
-        public int basic_count = 0; //pocet zakladnich kvantifikatoru
+        
         
         
         #endregion
@@ -213,78 +210,27 @@ namespace FEplugin_cs
             string XML = "";
 
             XML += "<quantifier id=\"" + id + "\" db_name=\"" + db_name + "\" matrix_name=\"" + matrix_name +
-                   "\" task_name=\"" + task_name + "\" type=\"" + type + 
-                   "\" basic_count=\"" + basic_count.ToString() + "\"/>";
+                   "\" task_name=\"" + task_name + "\" task_type=\"" + task_type +
+                   "\" name=\"" + name + "\" type=\"" + type +  "\"/>";
             return XML;
-        }
-
-        public string ToXML(List<Rec_basic_quantifier> basic_quants)
-        {
-            string XML = "";
-
-            XML += "<quantifier id=\"" + id + "\" db_name=\"" + db_name + "\" matrix_name=\"" + matrix_name +
-                   "\" task_name=\"" + task_name + "\" type=\"" + type + 
-                   "\" basic_count=\"" + basic_count.ToString() + "\">";
-
-            // vygenerovani vsech podelementu
-            foreach(Rec_basic_quantifier quant in basic_quants)
-                XML += quant.ToXML();
-            
-            XML += "</quantifier>";
-            return XML;
-        }
-
-        public string ToXML(string subelements_string)
-        {
-            string XML = "";
-
-            XML += "<quantifier id=\"" + id + "\" db_name=\"" + db_name + "\" matrix_name=\"" + matrix_name +
-                   "\" task_name=\"" + task_name + "\" type=\"" + type +
-                   "\" basic_count=\"" + basic_count.ToString() + "\">";
-
-            // vlozeni retezce podelementu
-                XML += subelements_string;
-
-            XML += "</quantifier>";
-            return XML;
-        }
-
-        #endregion
-    }
-
-    public class Rec_basic_quantifier
-        {
-        #region DATA
-        public string name = "";    // jmeno (typ) zakladniho kvantifikatoru (Founded implication, Chi-square, .....)
-        public string type = "";   // typ zakladniho kvantifikatoru (Aggregation, Functional)
-                
-        #endregion
-
-        #region METHODS
-        // prevod recordu na XML string
-        public string ToXML()
-        {
-            string XML = "";
-
-            XML += "<basic_quantifier name=\"" + name + "\" type=\"" + type + "\"/>";
-            return XML;
-
         }
 
         public string ToXML(List<Rec_quant_item> items)
         {
             string XML = "";
 
-            XML += "<basic_quantifier name=\"" + name + "\" type=\"" + type + "\">";
+            XML += "<quantifier id=\"" + id + "\" db_name=\"" + db_name + "\" matrix_name=\"" + matrix_name +
+                   "\" task_name=\"" + task_name + "\" task_type=\"" + task_type +
+                   "\" name=\"" + name + "\" type=\"" + type + "\">";
 
             // vygenerovani podelementu - vsechny polozky
-            foreach(Rec_quant_item item in items)
+            foreach (Rec_quant_item item in items)
                 XML += item.ToXML();
-
-            XML += "</basic_quantifier>";
+            
+            XML += "</quantifier>";
             return XML;
-
         }
+
         #endregion
     }
 

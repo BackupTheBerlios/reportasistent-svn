@@ -71,12 +71,12 @@ namespace FEplugin_cs
                         // nalezeni jmena datoveho zdroje (databaze) - neni povinne!
                         IBoxModule[] db_names = BoxesHelper.ListAncestBoxesWithID(box, "DataMiningCommon.Database");
                         if (db_names.GetLength(0) == 1)  // byl nalezen pocet datovych zdroju ruzny od jedne
-                            rTask.db_name = (db_names[0].GetPropertyOther("DatabaseName") as StringT).stringValue;
+                            rTask.db_name = db_names[0].GetPropertyString("DatabaseName");
 
                         // nalezeni jmena datove matice - neni povinne!
                         IBoxModule[] matrix_names = BoxesHelper.ListAncestBoxesWithID(box, "DataMiningCommon.DataMatrix");
                         if (matrix_names.GetLength(0) == 1)  // byl nalezen pocet datovych matic ruzny od jedne
-                            rTask.matrix_name = (matrix_names[0].GetPropertyOther("Name") as StringT).stringValue;
+                            rTask.matrix_name = matrix_names[0].GetPropertyString("Name");
 
                         // nalezeni jmena ulohy
                         rTask.task_name = box.UserName;
