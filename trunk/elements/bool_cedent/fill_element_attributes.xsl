@@ -25,7 +25,7 @@
   				<xsl:text disable-output-escaping="yes">" /&gt;</xsl:text>
 -->
 
-				<xsl:apply-templates select="sub_bool_cedent" mode="recurent_scan" />
+				<xsl:apply-templates select="literal" mode="recurent_scan" />
 
 
 				<xsl:text disable-output-escaping="yes">

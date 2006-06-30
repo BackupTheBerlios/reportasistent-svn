@@ -21,7 +21,7 @@
 	&lt;values&gt;</xsl:text>				
 	
 
-		<xsl:apply-templates select="node()" mode="values"/>
+		<xsl:apply-templates select="bool_cedent" mode="values"/>
 
 		<xsl:text disable-output-escaping="yes">
 	&lt;/values&gt;
@@ -56,7 +56,7 @@
 		-->
 <xsl:text disable-output-escaping="yes">
 		</xsl:text>
-		<attribute name="structure"/>
+		
 
 
 
@@ -95,40 +95,17 @@
 		<xsl:text disable-output-escaping="yes">
 		&lt;value </xsl:text>
 		<xsl:apply-templates select="@*" mode="values"/>
-
-		<xsl:text disable-output-escaping="yes">structure="</xsl:text>
-		<xsl:apply-templates select="sub_bool_cedent" mode="values"/>
-		<xsl:text disable-output-escaping="yes">" </xsl:text>
-		<!--
-		<xsl:text disable-output-escaping="yes">missing_values="</xsl:text>
-		<xsl:apply-templates select="missing_value" mode="values"/>
-		<xsl:text disable-output-escaping="yes">"</xsl:text>
-        -->
-		<xsl:text disable-output-escaping="yes">/&gt;</xsl:text>
+		<!-- vypsani literalu-->
+		<xsl:text disable-output-escaping="yes">literals="</xsl:text>
+		<xsl:apply-templates select="literal" mode="values" />
+		<xsl:text disable-output-escaping="yes">" /&gt;</xsl:text>
 
 
 	</xsl:template>
 
 
 
-	<!-- naplni hodnotu pro categories -->
-	<xsl:template match="sub_bool_cedent" mode="values">
-		<xsl:if test="position()!=1">
-			<xsl:text disable-output-escaping="no">; </xsl:text>
-		</xsl:if>
-
-		<xsl:text disable-output-escaping="no">(name: </xsl:text>
-		<xsl:value-of select="@name"/>
-		<xsl:text disable-output-escaping="no">; literal_cnt: </xsl:text>
-		<xsl:value-of select="@literal_cnt"/>
-		<xsl:text disable-output-escaping="no">; length: </xsl:text>
-		<xsl:value-of select="@length"/>
-		<xsl:text disable-output-escaping="no">; literals: {</xsl:text>
-		
-		<xsl:apply-templates select="literal" mode="values"/>
-		<xsl:text disable-output-escaping="no">}</xsl:text>
-		<xsl:text disable-output-escaping="no">)</xsl:text>
-	</xsl:template>
+	
 
 
 
@@ -140,7 +117,7 @@
 		
 		<xsl:text disable-output-escaping="no">(underlying attribute: </xsl:text>
 		<xsl:value-of select="@underlying_attribute"/>
-		<xsl:text disable-output-escaping="no">; category_cnt: </xsl:text>
+		<xsl:text disable-output-escaping="no">; category count: </xsl:text>
 		<xsl:value-of select="@category_cnt"/>
 		<xsl:text disable-output-escaping="no">; missing type: </xsl:text>
 		<xsl:value-of select="@missing_type"/>
@@ -172,6 +149,7 @@
 
 	</xsl:template>
 
+	
 	
 
 
