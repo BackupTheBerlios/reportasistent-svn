@@ -3,8 +3,7 @@
 	ProjectType="Visual C++"
 	Version="8,00"
 	Name="LMplugin"
-	ProjectGUID="{545442B9-ABFC-4D94-A914-86F5FAAD8B1E}"
-	RootNamespace="LMplugin"
+	ProjectGUID="{FC3036D2-2489-4971-8311-93E28CA6DABC}"
 	Keyword="MFCProj"
 	>
 	<Platforms>
@@ -620,6 +619,26 @@
 				</FileConfiguration>
 			</File>
 			<File
+				RelativePath="TFTQuantifier_Recordset.cpp"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+			</File>
+			<File
 				RelativePath="tiHypothesis_Recordset.cpp"
 				>
 				<FileConfiguration
@@ -770,6 +789,10 @@
 			</File>
 			<File
 				RelativePath="TEmpty_Cedents_Recordset.h"
+				>
+			</File>
+			<File
+				RelativePath="TFTQuantifier_Recordset.h"
 				>
 			</File>
 			<File

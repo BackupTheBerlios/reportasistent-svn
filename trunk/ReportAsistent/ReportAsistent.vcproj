@@ -3,8 +3,7 @@
 	ProjectType="Visual C++"
 	Version="8,00"
 	Name="ReportAsistent"
-	ProjectGUID="{A967D10D-6EC2-45FC-8879-0C9327A3A31B}"
-	RootNamespace="ReportAsistent"
+	ProjectGUID="{10533463-1CF2-4976-93F0-3F3DC3DFB03C}"
 	Keyword="MFCProj"
 	>
 	<Platforms>
