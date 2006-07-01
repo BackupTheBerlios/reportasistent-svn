@@ -8,6 +8,7 @@
 #include "CSkeletonDoc.h"
 #include "SkeletonView.h"
 #include "SourcesDialog.h"
+#include "PropertyEditor.h"
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #undef THIS_FILE
@@ -66,6 +67,45 @@ BOOL CReportAsistentApp::InitInstance()
 
 		//pridal honza
 	m_pGeneralManager = new CGeneralManager();
+
+
+
+	
+	
+	
+	
+//dedek ladici:
+/******
+	CPropertyEditor pe("test prop");
+
+	pe.AddProperty(new CDoubleProperty("int prop1", 1.7E+308));
+	pe.AddProperty(new CDoubleProperty("int prop2", 50, -1, 1));
+	pe.AddProperty(new CDoubleProperty("int prop3", 0, -1, 2));
+	pe.AddProperty(new CDoubleProperty("int prop4", -1, 0.99999999999999999, 3));
+
+	CString str;
+	for (int a=0; a< 50; a++)
+	{
+		str.Format("text%d", a);
+		CEnumProperty * ep = new CEnumProperty(str, "enum4");
+		CString s2;
+		for (int b=0; b<8; b++)
+		{
+			s2.Format("enum%d", b);
+			ep->AddCombostr(s2);
+		}
+		pe.AddProperty(ep);
+	}
+	pe.AddProperty(new CStringProperty("konec", "kone4"));
+
+
+	pe.DoModal();
+/******/
+
+
+
+
+
 
 
 

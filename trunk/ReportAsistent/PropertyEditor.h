@@ -185,7 +185,8 @@ class CPropertyEditor : public CDialog
 {
 // Construction
 public:
-	CPropertyEditor(CWnd* pParent = NULL);   // standard constructor
+	CPropertyEditor(LPCTSTR caption, CWnd* pParent = NULL);   // standard constructor
+	virtual ~CPropertyEditor();
 
 // Dialog Data
 	//{{AFX_DATA(CPropertyEditor)
@@ -200,6 +201,8 @@ public:
 // Overrides
 	// ClassWizard generated virtual function overrides
 	//{{AFX_VIRTUAL(CPropertyEditor)
+	public:
+	virtual BOOL OnCmdMsg(UINT nID, int nCode, void* pExtra, AFX_CMDHANDLERINFO* pHandlerInfo);
 	protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
 	//}}AFX_VIRTUAL
@@ -209,9 +212,37 @@ protected:
 
 	// Generated message map functions
 	//{{AFX_MSG(CPropertyEditor)
-		// NOTE: the ClassWizard will add member functions here
+	afx_msg void OnDestroy();
+	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
+	afx_msg void OnVScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar);
+	virtual BOOL OnInitDialog();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
+
+
+private:
+	struct SProperty {CStatic * label; CComboBox * combo; CProperty * prop; };
+	CArray<SProperty, SProperty&> m_properties;
+	CList<int, int> m_err_props;
+	CString m_caption;
+
+
+protected:
+	int GetMaxVisiblePropertiesCount(void);
+	int GetFirstVisibleProperty(void);
+	int GetLastVisibleProperty(void);
+	void CreateProperty(int index);
+	void ShowVisibleProperties(void);
+	void CountPropertyRects(CRect & label_rect, CRect & combo_rect, int property_index);
+	BOOL ValidateProp(int index);
+
+
+public:
+	int GetPropertiesCount(void);
+	int AddProperty(CProperty * prop);
+	CProperty * GetValueOfProperty(int index);
+
+
 };
 
 //{{AFX_INSERT_LOCATION}}
