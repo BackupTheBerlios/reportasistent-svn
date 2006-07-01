@@ -26,12 +26,16 @@
 #define IDD_ATTRIBUTE_LINK_TABLE_DIALOG 152
 #define IDD_DIALOG_PARAGRAPH            153
 #define IDD_DIALOG_CHAPTER              154
+#define IDD_PROPERTY_EDITOR             155
 #define IDC_TREE1                       1000
 #define IDC_FILTER_LIST                 1000
+#define IDC_SCROLLBAR1                  1000
 #define IDC_EDIT1                       1001
 #define IDC_DIALTEXT_EDIT               1001
+#define IDC_STATIC1                     1001
 #define IDC_GENERATE_BUTTON             1002
 #define IDC_DATA_SOURCE_COMBO           1003
+#define IDC_ERROR_TEXT                  1003
 #define IDC_PLUGINS_COMBO               1004
 #define IDC_ADD_SOURCE_BUTTON           1006
 #define IDC_SOURCES_LIST                1007
@@ -92,7 +96,7 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
-#define _APS_NEXT_RESOURCE_VALUE        155
+#define _APS_NEXT_RESOURCE_VALUE        156
 #define _APS_NEXT_COMMAND_VALUE         32784
 #define _APS_NEXT_CONTROL_VALUE         1034
 #define _APS_NEXT_SYMED_VALUE           101

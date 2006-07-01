@@ -152,6 +152,10 @@ SOURCE=.\MainFrm.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\PropertyEditor.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\ReportAsistent.cpp
 # End Source File
 # Begin Source File
@@ -246,6 +250,10 @@ SOURCE=.\GenerateDialog.h
 # Begin Source File
 
 SOURCE=.\MainFrm.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\PropertyEditor.h
 # End Source File
 # Begin Source File
 
