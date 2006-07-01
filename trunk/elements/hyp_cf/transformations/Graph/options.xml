@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="windows-1250"?>
 <visualization>
 
-  <visualization_options active_element="4ft hypothesis" visualization_label="Graph">
+  <visualization_options active_element="CF hypothesis" visualization_label="Graph">
 
     <!-- setting the graph title -->
     <string_option variable_name="GraphTitle" title="Graph title" />    
@@ -9,9 +9,15 @@
     <!--setting of graph type-->
     <enum_option variable_name="GraphType" title="Graph type">  
        <enum_item  value="xl3DColumn" label="3D Column"/>
+       <enum_item  value="xlColumnClustered" label="Column - Clustered"/>
        <enum_item  value="xl3DColumnClustered" label="3D Column - Clustered"/>
+       <enum_item  value="xlColumnStacked" label="Column - Stacked (absolute values)"/>
        <enum_item  value="xl3DColumnStacked" label="3D Column - Stacked (absolute values)"/>
+       <enum_item  value="xlColumnStacked100" label="Column - Stacked (percentual values)"/>
        <enum_item  value="xl3DColumnStacked100" label="3D Column - Stacked (percentual values)"/>
+       <enum_item  value="xlPie" label="Pie"/>
+       <enum_item  value="xl3DPie" label="3D Pie"/>
+       <!-- pripadne doplnit dalsi vhodne typy grafu-->
     </enum_option>
 
     <!--setting whether to show a graph legend-->
@@ -34,8 +40,7 @@
   <!--default values of variables-->
   
   <visualization_values>
-      <variable name="GraphType" value="xl3DColumn" />
-      <variable name="GraphTitle" value="4ft Graph" />
+      <variable name="GraphType" value="xlPie" />
       <variable name="LegendShow" value="false"/>
       <variable name="GraphWidth" value="1"/>
       <variable name="GraphHeight" value="0,75"/>
