@@ -851,6 +851,9 @@ BOOL CDataSourcesManager::isElementSupportedByPlugin(int plugin_index, LPCTSTR e
 	ASSERT(plugin_index >= 0);
 	ASSERT(plugin_index < PlugsTab.GetSize());
 	
+//	ASSERT(isPluginValid(plugin_index));
+	if (! isPluginValid(plugin_index)) return FALSE;
+	
 	MSXML2::IXMLDOMDocumentPtr ael_list;
 	ael_list.CreateInstance(_T("Msxml2.DOMDocument"));
 	ael_list->async = VARIANT_FALSE; // default - true,

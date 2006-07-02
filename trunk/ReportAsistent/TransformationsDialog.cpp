@@ -22,6 +22,9 @@ CTransformationsDialog::CTransformationsDialog(MSXML2::IXMLDOMElementPtr & activ
 	//{{AFX_DATA_INIT(CTransformationsDialog)
 		// NOTE: the ClassWizard will add member initialization here
 	//}}AFX_DATA_INIT
+
+
+	m_cloned_element = m_active_element->cloneNode(VARIANT_TRUE);
 }
 
 
@@ -41,13 +44,16 @@ BEGIN_MESSAGE_MAP(CTransformationsDialog, CDialog)
 	ON_BN_CLICKED(IDC_REMOVE_BUTTON, OnRemoveButton)
 	ON_BN_CLICKED(IDC_MOVE_UP_BUTTON, OnMoveUpButton)
 	ON_BN_CLICKED(IDC_MOVE_DOWN_BUTTON, OnMoveDownButton)
-	ON_BN_CLICKED(IDC_CONFIGURE_ATTR_LINK_TABLE_BUTTON, OnConfigureAttrLinkTableButton)
+//	ON_BN_CLICKED(IDC_CONFIGURE_ATTR_LINK_TABLE_BUTTON, OnConfigureAttrLinkTableButton)
 	ON_BN_CLICKED(IDC_ADD_ATTR_LINK_TABLE_BUTTON, OnAddAttrLinkTableButton)
+	ON_BN_CLICKED(IDC_CONFIGURE_BUTTON, OnConfigureButton)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
 // CTransformationsDialog message handlers
+
+#define ATTR_TL_STR		"* attr_link_table *"
 
 BOOL CTransformationsDialog::OnInitDialog() 
 {
@@ -66,6 +72,8 @@ BOOL CTransformationsDialog::OnInitDialog()
 
 	CAElInfo * info = m.getActiveElementInfo(m.IdentifyElement(m_active_element));
 
+	
+	m_SupportedList.AddString(ATTR_TL_STR);
 	
 	//nacti podporovane transformace
 	for (a = 0; a < info->getTranformationsCount(); a++)
@@ -102,8 +110,6 @@ void CTransformationsDialog::OnCancel()
 
 	//CDialog::OnCancel();
 }
-
-#define ATTR_TL_STR		"* attr_link_table *"
 
 BOOL CTransformationsDialog::SaveAll()
 {
@@ -222,7 +228,8 @@ void CTransformationsDialog::OnMoveDownButton()
 }
 
 
-void CTransformationsDialog::OnConfigureAttrLinkTableButton() 
+//void CTransformationsDialog::OnConfigureAttrLinkTableButton() 
+void CTransformationsDialog::ConfigureAttrLinkTable() 
 {
 	CheckAndRepareAttrLinkTable();
 
@@ -261,4 +268,18 @@ void CTransformationsDialog::CheckAndRepareAttrLinkTable()
 	attr_lt->setAttribute("target", m_active_element->getAttribute("id"));
 	
 	attr_lt.Release();
+}
+
+void CTransformationsDialog::OnConfigureButton() 
+{
+	int cur_sel = m_SelectedList.GetCurSel();
+
+	if (cur_sel == LB_ERR) return;
+
+	if (cur_sel == m_SelectedList.FindString(cur_sel-1, ATTR_TL_STR))
+	{
+		ConfigureAttrLinkTable();
+		return;
+	}
+	
 }

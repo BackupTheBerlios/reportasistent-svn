@@ -11,7 +11,7 @@
 <!ATTLIST chapter title CDATA #REQUIRED >
 <!ATTLIST chapter id ID #REQUIRED >
 
-<!ELEMENT active_element ( attributes, filter, output, attr_link_table? )>
+<!ELEMENT active_element ( attributes, filter, output )>
 <!ATTLIST active_element type CDATA #REQUIRED >
 <!ATTLIST active_element source CDATA #REQUIRED >
 <!ATTLIST active_element id ID #REQUIRED >
@@ -32,9 +32,16 @@
 
 <!ELEMENT output (transformation*) >
 
-<!ELEMENT transformation EMPTY >
+<!ELEMENT transformation (attr_link_table | visualization_values)? >
 <!ATTLIST transformation type (attr_link_table | simple) #REQUIRED>
 <!ATTLIST transformation name CDATA #REQUIRED>
+
+<!ELEMENT visualization_values ((variable)*) >
+
+<!ELEMENT variable EMPTY >
+<!ATTLIST variable name CDATA #REQUIRED>
+<!ATTLIST variable value CDATA #REQUIRED> 
+
 	
 <!ELEMENT attr_link_table (link*) >
 <!ATTLIST attr_link_table target CDATA #REQUIRED>

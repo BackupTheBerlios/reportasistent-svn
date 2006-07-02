@@ -46,12 +46,15 @@ protected:
 	afx_msg void OnRemoveButton();
 	afx_msg void OnMoveUpButton();
 	afx_msg void OnMoveDownButton();
-	afx_msg void OnConfigureAttrLinkTableButton();
+	afx_msg void ConfigureAttrLinkTable();
 	afx_msg void OnAddAttrLinkTableButton();
+	afx_msg void OnConfigureButton();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 private:
 	MSXML2::IXMLDOMElementPtr & m_active_element;
+	MSXML2::IXMLDOMElementPtr m_cloned_element;
+	//zmeny se provadeji v klonu, pokud uzivatel zmacken OK, puvodni element (m_active_element) se nahradi klonem
 };
 
 //{{AFX_INSERT_LOCATION}}

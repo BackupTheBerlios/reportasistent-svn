@@ -70,6 +70,7 @@
 #define IDC_DIALCHAPTER_TITLEEDIT       1030
 #define IDC_ADD_ATTR_LINK_TABLE_BUTTON  1031
 #define IDC_CONFIGURE_ATTR_LINK_TABLE_BUTTON 1032
+#define IDC_CONFIGURE_BUTTON            1032
 #define ID_MMGENREP                     32771
 #define ID_MMSOURCES                    32772
 #define ID_ELEMENT_EDIT                 32780

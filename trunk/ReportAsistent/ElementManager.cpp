@@ -452,9 +452,16 @@ BOOL CElementManager::CanInsertBefore(MSXML2::IXMLDOMElementPtr &pToInsert, MSXM
 	pParent->removeChild(pInserted);
 
 	
-	/*****/    //honza: ladici klidne zakomentujete
+	/*****    //honza: ladici klidne zakomentujete
 	int a = err->errorCode;
-	if (a != S_OK) AfxMessageBox(err->reason);
+	if (a != S_OK)
+	{
+		AfxMessageBox(err->reason);
+		CString s;
+		s.Format("%d", err->filepos);
+		AfxMessageBox(s);
+		
+	}
 	/*****/
 
 	return 	err->errorCode == S_OK;	
