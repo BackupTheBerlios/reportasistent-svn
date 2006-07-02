@@ -26,6 +26,7 @@ public:
 	CString				name;
 	CString				type;
 	Tquant_item_Array	items;
+	CString             xml_convert ();
 };
 
 typedef CArray <Quantifier_Meta *, Quantifier_Meta *> TQuantifier_Meta_Array;

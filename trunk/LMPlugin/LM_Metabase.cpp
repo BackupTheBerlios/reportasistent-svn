@@ -4,6 +4,46 @@
 #include "Hyp_4ft_Recordset.h"
 #include "comdef.h"
 
+CString Quantifier_Meta::xml_convert ()
+{
+	CString xml_string;
+
+	db_name.Replace ("&", "&amp;");
+	matrix_name.Replace ("&", "&amp;");
+	task_name.Replace ("&", "&amp;");
+	task_type.Replace ("&", "&amp;");
+	name.Replace ("&", "&amp;");
+	type.Replace ("&", "&amp;");
+	
+	db_name.Replace ("<", "&lt;");
+	matrix_name.Replace ("<", "&lt;");
+	task_name.Replace ("<", "&lt;");
+	task_type.Replace ("<", "&lt;");
+	name.Replace ("<", "&lt;");
+	type.Replace ("<", "&lt;");
+
+	db_name.Replace (">", "&gt;");
+	matrix_name.Replace (">", "&gt;");
+	task_name.Replace (">", "&gt;");
+	task_type.Replace (">", "&gt;");
+	name.Replace (">", "&gt;");
+	type.Replace (">", "&gt;");
+
+	//beggining of the task element
+	xml_string = " <quantifier id=\"" + id + "\" db_name=\"" + db_name + "\" ";
+	xml_string = xml_string + "matrix_name=\"" + matrix_name + "\" ";
+	xml_string = xml_string + "task_name=\"" + task_name + "\" ";
+	xml_string = xml_string + "task_type=\"" + task_type + "\" ";
+	xml_string = xml_string + "name=\"" + name + "\" ";
+	xml_string = xml_string + "type=\"" + type + "\"> ";
+    for (int i = 0; i < items.GetSize (); i++)
+		xml_string = xml_string + "<quant_item name=\"" + items.GetAt (i).name +
+			"\" value=\"" + items.GetAt (i).value + "\" /> ";
+	xml_string = xml_string + "</quantifier>";
+
+	return xml_string;
+}
+
 CString Task_Meta::xml_convert ()
 {
 	CString xml_string;
@@ -32,7 +72,7 @@ CString Task_Meta::xml_convert ()
 	gen_total_time.Replace (">", "&gt;");
 	gen_start_time.Replace (">", "&gt;");
 
-	//beggining of the cedent element
+	//beggining of the task element
 	xml_string = " <task id=\"" + id + "\" db_name=\"" + db_name + "\" ";
 	xml_string = xml_string + "matrix_name=\"" + matrix_name + "\" ";
 	xml_string = xml_string + "task_name=\"" + task_name + "\" ";

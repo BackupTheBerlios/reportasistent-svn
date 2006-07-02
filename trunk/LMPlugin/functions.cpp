@@ -66,6 +66,215 @@ CString fLMQuantifier (void* hSource)
 	CString hlp;
 	CString db_name = ((CDatabase *) hSource)->GetDatabaseName ();
 
+	TQuantifier_Meta_Array list;
+	Quantifier_Meta * ptquant;
+	quant_item item;
+
+	TFTQuantifier_Recordset rs ((CDatabase *) hSource);
+
+	LPCTSTR q = "SELECT * \
+				 FROM taTask, tdFTQuantifier, tmMatrix, tsQuantifierType, tsTaskSubType \
+				 WHERE taTask.MatrixID=tmMatrix.MatrixID \
+				   AND taTask.TaskSubTypeID=tsTaskSubType.TaskSubTypeID \
+				   AND tdFTQuantifier.TaskID=taTask.TaskID \
+				   AND tsQuantifierType.QuantifierTypeID=tdFTQuantifier.FTQuantifierTypeID";
+
+	if (rs.Open(AFX_DB_USE_DEFAULT_TYPE, q))
+	{
+		//iteration on query results
+		while (!rs.IsEOF())
+		{
+			ptquant = new (Quantifier_Meta);
+			ptquant->db_name = db_name;
+			ptquant->matrix_name = rs.m_Name2;
+			ptquant->name = rs.m_Name3;
+			ptquant->task_name = rs.m_Name;
+			ptquant->task_type = rs.m_Name4;
+			ptquant->type = "";
+			hlp.Format ("%d", rs.m_FTQuantifierID);
+			hlp = "quantFT" + hlp;
+			ptquant->id = hlp;
+			if (rs.m_ShortName == "FUI")
+			{
+				item.name = "p";
+				item.value = (LPCTSTR) (_bstr_t) rs.m_ParamP;
+				ptquant->items.Add (item);
+			}
+			else if (rs.m_ShortName == "LCI")
+			{
+				item.name = "p";
+				item.value = (LPCTSTR) (_bstr_t) rs.m_ParamP;
+				ptquant->items.Add (item);
+				item.name = "Alpha";
+				item.value = (LPCTSTR) (_bstr_t) rs.m_ParamAlfa;
+				ptquant->items.Add (item);
+			}
+			else if (rs.m_ShortName == "SUPP")
+			{
+				item.name = "p";
+				item.value = (LPCTSTR) (_bstr_t) rs.m_ParamP;
+				ptquant->items.Add (item);
+			}
+			else if (rs.m_ShortName == "UCI")
+			{
+				item.name = "p";
+				item.value = (LPCTSTR) (_bstr_t) rs.m_ParamP;
+				ptquant->items.Add (item);
+				item.name = "Alpha";
+				item.value = (LPCTSTR) (_bstr_t) rs.m_ParamAlfa;
+				ptquant->items.Add (item);
+			}
+			else if (rs.m_ShortName == "AAI")
+			{
+				item.name = "p";
+				item.value = (LPCTSTR) (_bstr_t) rs.m_ParamP;
+				ptquant->items.Add (item);
+			}
+			else if (rs.m_ShortName == "BAI")
+			{
+				item.name = "p";
+				item.value = (LPCTSTR) (_bstr_t) rs.m_ParamP;
+				ptquant->items.Add (item);
+			}
+			else if (rs.m_ShortName == "DFUI")
+			{
+				item.name = "p";
+				item.value = (LPCTSTR) (_bstr_t) rs.m_ParamP;
+				ptquant->items.Add (item);
+			}
+			else if (rs.m_ShortName == "DLCI")
+			{
+				item.name = "p";
+				item.value = (LPCTSTR) (_bstr_t) rs.m_ParamP;
+				ptquant->items.Add (item);
+				item.name = "Alpha";
+				item.value = (LPCTSTR) (_bstr_t) rs.m_ParamAlfa;
+				ptquant->items.Add (item);
+			}
+			else if (rs.m_ShortName == "DUCI")
+			{
+				item.name = "p";
+				item.value = (LPCTSTR) (_bstr_t) rs.m_ParamP;
+				ptquant->items.Add (item);
+				item.name = "Alpha";
+				item.value = (LPCTSTR) (_bstr_t) rs.m_ParamAlfa;
+				ptquant->items.Add (item);
+			}
+			else if (rs.m_ShortName == "FUE")
+			{
+				item.name = "p";
+				item.value = (LPCTSTR) (_bstr_t) rs.m_ParamP;
+				ptquant->items.Add (item);
+			}
+			else if (rs.m_ShortName == "LCE")
+			{
+				item.name = "p";
+				item.value = (LPCTSTR) (_bstr_t) rs.m_ParamP;
+				ptquant->items.Add (item);
+				item.name = "Alpha";
+				item.value = (LPCTSTR) (_bstr_t) rs.m_ParamAlfa;
+				ptquant->items.Add (item);
+			}
+			else if (rs.m_ShortName == "UCE")
+			{
+				item.name = "p";
+				item.value = (LPCTSTR) (_bstr_t) rs.m_ParamP;
+				ptquant->items.Add (item);
+				item.name = "Alpha";
+				item.value = (LPCTSTR) (_bstr_t) rs.m_ParamAlfa;
+				ptquant->items.Add (item);
+			}
+			else if (rs.m_ShortName == "SID")
+			{
+				item.name = "Delta";
+				item.value = (LPCTSTR) (_bstr_t) rs.m_ParamDelta;
+				ptquant->items.Add (item);
+			}
+			else if (rs.m_ShortName == "FSH")
+			{
+				item.name = "Alpha";
+				item.value = (LPCTSTR) (_bstr_t) rs.m_ParamAlfa;
+				ptquant->items.Add (item);
+			}
+			else if (rs.m_ShortName == "CHI")
+			{
+				item.name = "Alpha";
+				item.value = (LPCTSTR) (_bstr_t) rs.m_ParamAlfa;
+				ptquant->items.Add (item);
+			}
+			else if (rs.m_ShortName == "E-Q")
+			{
+				item.name = "Delta";
+				item.value = (LPCTSTR) (_bstr_t) rs.m_ParamDelta;
+				ptquant->items.Add (item);
+			}
+			else if (rs.m_ShortName == "BASE")
+			{
+				if (rs.m_ParamRelativ)
+				{
+					item.name = "p";
+					item.value = (LPCTSTR) (_bstr_t) rs.m_ParamBeta;
+				}
+				else
+				{
+					item.name = "count";
+					item.value = (LPCTSTR) (_bstr_t) rs.m_ParamAlfa;
+				}
+				ptquant->items.Add (item);
+			}
+			else if (rs.m_ShortName == "CEIL")
+			{
+			if (rs.m_ParamRelativ)
+				{
+					item.name = "p";
+					item.value = (LPCTSTR) (_bstr_t) rs.m_ParamBeta;
+				}
+				else
+				{
+					item.name = "count";
+					item.value = (LPCTSTR) (_bstr_t) rs.m_ParamAlfa;
+				}
+				ptquant->items.Add (item);
+			}
+			list.Add (ptquant);
+			rs.MoveNext();
+		}
+		rs.Close();
+	}
+	else return "";
+
+	//creation of xml string
+	//load DTD
+	FILE * x = fopen ("../XML/dtd.dtd", "r");
+	CString buf1;
+	while (fscanf (x, "%s", buf1) != EOF)
+	{
+		buf = buf + (const char *) buf1 + " ";
+	}
+	fclose (x);
+	//create xml data
+	buf = buf + " <active_list> ";
+	int i;
+    for (i = 0; i < list.GetSize (); i++)
+	{
+		buf = buf + list.GetAt (i)->xml_convert ();
+	}
+	buf += " </active_list>";
+	//just for test - creates a xml file with all attributes
+	FILE * f = fopen ("test.xml", "w");
+	fprintf (f, "%s", buf);
+	fclose (f);
+
+/*
+	AfxMessageBox(buf);
+*/
+	for (i = 0; i < list.GetSize (); i++)
+	{
+		list.GetAt (i)->items.RemoveAll ();
+		delete (list.GetAt (i));
+	}
+	list.RemoveAll ();
+
 	return buf;
 }
 
