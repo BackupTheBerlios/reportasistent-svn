@@ -141,8 +141,7 @@ void CAElInfo::LoadTransformations(LPCTSTR dir_path)
 
 			 long options_error = S_OK;
 			 CFileFind options_find;
-			 if ((options_find.FindFile(finder.GetFilePath() + "\\options.xml")) &&
-					options_find.FindNextFile())
+			 if (options_find.FindFile(finder.GetFilePath() + "\\options.xml"))
 			 {
 				 tr->options.CreateInstance(_T("Msxml2.DOMDocument"));
 				 tr->options->async = VARIANT_FALSE;
@@ -199,6 +198,14 @@ MSXML2::IXMLDOMNodePtr CAElInfo::getTranformationNode(int tr_index)
 	ASSERT(tr_index < getTranformationsCount());
 
 	return m_transformations[tr_index]->doc;
+}
+
+MSXML2::IXMLDOMNodePtr CAElInfo::getTranformationOptionsDoc(int tr_index)
+{
+	ASSERT(tr_index >= 0);
+	ASSERT(tr_index < getTranformationsCount());
+
+	return m_transformations[tr_index]->options;
 }
 
 int CAElInfo::FindTransformationByName(LPCTSTR tr_name)

@@ -25,6 +25,8 @@ public:
 	int getTranformationsCount();
 	CString getTranformationName(int tr_index);
 	MSXML2::IXMLDOMNodePtr getTranformationNode(int tr_index);
+	MSXML2::IXMLDOMNodePtr getTranformationOptionsDoc(int tr_index);
+	
 
 
 private:

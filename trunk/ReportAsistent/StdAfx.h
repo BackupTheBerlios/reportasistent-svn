@@ -29,8 +29,8 @@
 
 //Deda: potreba pro MSXML
 #import <msxml3.dll>
-//using namespace MSXML2;
-//vlozi namespace MSXML2;
+//using namespace MSXML2; nepouzivat - pak to nejde prelozit ve VS 2005
+//vlozi namespace MSXML2; nepouzivat - pak to nejde prelozit ve VS 2005
 
 //potreba pro WordLoader z VisualBasicu
 #import "../VB-LMRA_WordLoader/LMRA_WordLoader.exe" named_guids

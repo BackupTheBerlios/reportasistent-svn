@@ -16,6 +16,9 @@
 <!ATTLIST active_element source CDATA #REQUIRED >
 <!ATTLIST active_element id ID #REQUIRED >
 
+<!-- sem se ukladaji atributy, na ktere je mozno ukazat pomoci attr_link -->
+<!-- plni se automaticky pri zavolani metody CAElTransform::FillElementAttributes,
+to se deje vzdy, kdyz se cte plugin output, napr pri otevreni simple fiter -->
 <!ELEMENT attributes (element_attributes) >
 
 <!ELEMENT element_attributes (attribute*) >
@@ -33,7 +36,7 @@
 <!ELEMENT output (transformation*) >
 
 <!ELEMENT transformation (attr_link_table | visualization_values)? >
-<!ATTLIST transformation type (attr_link_table | simple) #REQUIRED>
+<!ATTLIST transformation type (attr_link_table | simple | with_options) #REQUIRED>
 <!ATTLIST transformation name CDATA #REQUIRED>
 
 <!ELEMENT visualization_values ((variable)*) >

@@ -24,7 +24,7 @@ CTransformationsDialog::CTransformationsDialog(MSXML2::IXMLDOMElementPtr & activ
 	//}}AFX_DATA_INIT
 
 
-	m_cloned_element = m_active_element->cloneNode(VARIANT_TRUE);
+	m_cloned_output_element = m_active_element->selectSingleNode("output")->cloneNode(VARIANT_TRUE);
 }
 
 
@@ -45,7 +45,7 @@ BEGIN_MESSAGE_MAP(CTransformationsDialog, CDialog)
 	ON_BN_CLICKED(IDC_MOVE_UP_BUTTON, OnMoveUpButton)
 	ON_BN_CLICKED(IDC_MOVE_DOWN_BUTTON, OnMoveDownButton)
 //	ON_BN_CLICKED(IDC_CONFIGURE_ATTR_LINK_TABLE_BUTTON, OnConfigureAttrLinkTableButton)
-	ON_BN_CLICKED(IDC_ADD_ATTR_LINK_TABLE_BUTTON, OnAddAttrLinkTableButton)
+//	ON_BN_CLICKED(IDC_ADD_ATTR_LINK_TABLE_BUTTON, OnAddAttrLinkTableButton)
 	ON_BN_CLICKED(IDC_CONFIGURE_BUTTON, OnConfigureButton)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
@@ -114,9 +114,18 @@ void CTransformationsDialog::OnCancel()
 BOOL CTransformationsDialog::SaveAll()
 {
 	ASSERT(m_active_element != NULL);
+	ASSERT(m_cloned_output_element != NULL);
 
+	m_active_element->replaceChild(
+		m_cloned_output_element,
+		m_active_element->selectSingleNode("output"));
 
-	CheckAndRepareAttrLinkTable();
+	m_cloned_output_element = m_active_element->selectSingleNode("output")->cloneNode(VARIANT_TRUE);
+
+	return TRUE;
+
+/*
+//	CheckAndRepareAttrLinkTable();
 
 
 	MSXML2::IXMLDOMNodePtr output_node = m_active_element->selectSingleNode("output");
@@ -165,19 +174,78 @@ BOOL CTransformationsDialog::SaveAll()
 
 	
 	return TRUE;
+	/****/
 }
 
 void CTransformationsDialog::OnAddButton() 
 {
-	if (m_SupportedList.GetCurSel() == LB_ERR) return;
-	
-
 	CString selected_text;
+	int selected_item = m_SupportedList.GetCurSel();
 
-	m_SupportedList.GetText(m_SupportedList.GetCurSel(), selected_text);
+	if (selected_item == LB_ERR) return;
 	
-	m_SelectedList.AddString(selected_text);
+
+
+	m_SupportedList.GetText(selected_item, selected_text);
 	
+	int inserted_item = m_SelectedList.AddString(selected_text);
+	
+	
+	
+	//uprava xml
+
+	CElementManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
+
+	//vytvori ukazkovou transformaci
+	MSXML2::IXMLDOMElementPtr transf_elem = m_active_element->ownerDocument->createElement("transformation");
+	MSXML2::IXMLDOMAttributePtr name_attr_elem = m_active_element->ownerDocument->createAttribute("name");
+	MSXML2::IXMLDOMAttributePtr type_attr_elem = m_active_element->ownerDocument->createAttribute("type");
+	name_attr_elem->text = (LPCSTR) selected_text;
+	transf_elem->setAttributeNode(name_attr_elem);
+	name_attr_elem.Release();
+	
+	if (IsSelectedTransformationAttrLinkTable(inserted_item))
+	{
+		type_attr_elem->text = "attr_link_table";
+		transf_elem->setAttributeNode(type_attr_elem);
+
+		MSXML2::IXMLDOMElementPtr attr_lt;
+		attr_lt = m.CreateEmptyElement(ELID_ATTR_LINK_TABLE);
+
+		transf_elem->appendChild(attr_lt);
+		
+		//nastav id stejne jako m_active_element
+		attr_lt->setAttribute("target", m_active_element->getAttribute("id"));
+		attr_lt.Release();
+	}
+	else	//selected_item neni attr_link_table
+	{
+		int element_id = m.IdentifyElement(m_active_element);
+		CAElInfo * element_info = m.getActiveElementInfo(element_id);
+
+		MSXML2::IXMLDOMNodePtr options_node = 
+			element_info->getTranformationOptionsDoc(
+				element_info->FindTransformationByName(selected_text));
+		
+		if (options_node == NULL)
+		{
+			type_attr_elem->text = "simple";
+			transf_elem->setAttributeNode(type_attr_elem);
+		}
+		else
+		{
+			type_attr_elem->text = "with_options";
+			transf_elem->setAttributeNode(type_attr_elem);
+			transf_elem->appendChild(
+				options_node->selectSingleNode("/visualization/visualization_values")->cloneNode(VARIANT_TRUE));
+		}
+	}
+
+	type_attr_elem.Release();
+
+	m_cloned_output_element->appendChild(transf_elem);
+	transf_elem.Release();
+
 }
 
 void CTransformationsDialog::OnRemoveButton() 
@@ -189,10 +257,10 @@ void CTransformationsDialog::OnRemoveButton()
 
 	//uprava xml
 	CString query_str;
-	query_str.Format("output/transformation[%d]", selected_index);
+	query_str.Format("transformation[%d]", selected_index);
 
-	m_cloned_element->selectSingleNode("output")->removeChild(
-		m_cloned_element->selectSingleNode((LPCTSTR) query_str));
+	m_cloned_output_element->removeChild(
+		m_cloned_output_element->selectSingleNode((LPCTSTR) query_str));
 
 }
 
@@ -223,12 +291,12 @@ void CTransformationsDialog::OnMoveUpButton()
 	CString query_str1;
 	CString query_str2;
 
-	query_str1.Format("output/transformation[%d]", selected_index);
-	query_str2.Format("output/transformation[%d]", selected_index -1);
+	query_str1.Format("transformation[%d]", selected_index);
+	query_str2.Format("transformation[%d]", selected_index -1);
 
-	m_cloned_element->selectSingleNode("output")->insertBefore(
-		m_cloned_element->selectSingleNode((LPCTSTR) query_str1),
-		(MSXML2::IXMLDOMNode*) m_cloned_element->selectSingleNode((LPCTSTR) query_str2));
+	m_cloned_output_element->insertBefore(
+		m_cloned_output_element->selectSingleNode((LPCTSTR) query_str1),
+		(MSXML2::IXMLDOMNode*) m_cloned_output_element->selectSingleNode((LPCTSTR) query_str2));
 }
 
 void CTransformationsDialog::OnMoveDownButton() 
@@ -253,29 +321,39 @@ void CTransformationsDialog::OnMoveDownButton()
 	CString query_str1;
 	CString query_str2;
 
-	query_str1.Format("output/transformation[%d]", selected_index);
-	query_str2.Format("output/transformation[%d]", selected_index +2);
+	query_str1.Format("transformation[%d]", selected_index);
+	query_str2.Format("transformation[%d]", selected_index +2);
 
 	if (selected_index == m_SelectedList.GetCount()-2)
 	{
-		m_cloned_element->selectSingleNode("output")->insertBefore(
-			m_cloned_element->selectSingleNode((LPCTSTR) query_str1),
-			_variant_t((IDispatch *) NULL, FALSE));
+		m_cloned_output_element->appendChild(
+			m_cloned_output_element->selectSingleNode((LPCTSTR) query_str1));
 	}
 	else
 	{
-		m_cloned_element->selectSingleNode("output")->insertBefore(
-			m_cloned_element->selectSingleNode((LPCTSTR) query_str1),
-			(MSXML2::IXMLDOMNode*) m_cloned_element->selectSingleNode((LPCTSTR) query_str2));
+		m_cloned_output_element->insertBefore(
+			m_cloned_output_element->selectSingleNode((LPCTSTR) query_str1),
+			(MSXML2::IXMLDOMNode*) m_cloned_output_element->selectSingleNode((LPCTSTR) query_str2));
 	}
 
 }
 
+void CTransformationsDialog::ConfigureAttrLinkTable(MSXML2::IXMLDOMNodePtr & attr_link_tbl_node)
+{
+	CAttributeLinkTableDialog dlg(
+		(MSXML2::IXMLDOMElementPtr) attr_link_tbl_node, this, FALSE);
+
+	dlg.DoModal();
+
+}
+
+
 
 //void CTransformationsDialog::OnConfigureAttrLinkTableButton() 
+/*
 void CTransformationsDialog::ConfigureAttrLinkTable() 
 {
-	CheckAndRepareAttrLinkTable();
+//	CheckAndRepareAttrLinkTable();
 
 	MSXML2::IXMLDOMElementPtr el_alt = m_active_element->selectSingleNode("attr_link_table");
 
@@ -285,7 +363,6 @@ void CTransformationsDialog::ConfigureAttrLinkTable()
 	
 	el_alt.Release();
 }
-
 void CTransformationsDialog::OnAddAttrLinkTableButton() 
 {
 	CheckAndRepareAttrLinkTable();
@@ -295,9 +372,12 @@ void CTransformationsDialog::OnAddAttrLinkTableButton()
 		m_SelectedList.AddString(ATTR_TL_STR);	
 	}
 }
+*/
 
+/****
 void CTransformationsDialog::CheckAndRepareAttrLinkTable()
 {
+	
 	MSXML2::IXMLDOMElementPtr attr_lt = m_active_element->selectSingleNode("attr_link_table");
 	
 	if (attr_lt == NULL)
@@ -313,6 +393,7 @@ void CTransformationsDialog::CheckAndRepareAttrLinkTable()
 	
 	attr_lt.Release();
 }
+/****/
 
 void CTransformationsDialog::OnConfigureButton() 
 {
@@ -320,10 +401,25 @@ void CTransformationsDialog::OnConfigureButton()
 
 	if (cur_sel == LB_ERR) return;
 
-	if (cur_sel == m_SelectedList.FindString(cur_sel-1, ATTR_TL_STR))
+	if (IsSelectedTransformationAttrLinkTable(cur_sel))
 	{
-		ConfigureAttrLinkTable();
+		CString query_str;
+		query_str.Format("transformation[%d]/attr_link_table", cur_sel);
+		ConfigureAttrLinkTable(m_cloned_output_element->selectSingleNode((LPCTSTR) query_str));
 		return;
 	}
 	
+}
+
+BOOL CTransformationsDialog::IsSelectedTransformationWithOptions(int transform_index)
+{
+	return FALSE;
+}
+
+BOOL CTransformationsDialog::IsSelectedTransformationAttrLinkTable(int transform_index)
+{
+	ASSERT(transform_index >= 0);
+	ASSERT(transform_index < m_SelectedList.GetCount());
+
+	return transform_index == m_SelectedList.FindString(transform_index-1, ATTR_TL_STR);
 }

@@ -35,7 +35,9 @@ public:
 
 // Implementation
 protected:
-	void CheckAndRepareAttrLinkTable();
+	BOOL IsSelectedTransformationWithOptions(int transform_index);
+	BOOL IsSelectedTransformationAttrLinkTable(int transform_index);
+	void ConfigureAttrLinkTable(MSXML2::IXMLDOMNodePtr & attr_link_tbl_node);
 
 	// Generated message map functions
 	//{{AFX_MSG(CTransformationsDialog)
@@ -53,7 +55,7 @@ protected:
 	DECLARE_MESSAGE_MAP()
 private:
 	MSXML2::IXMLDOMElementPtr & m_active_element;
-	MSXML2::IXMLDOMElementPtr m_cloned_element;
+	MSXML2::IXMLDOMElementPtr m_cloned_output_element;
 	//zmeny se provadeji v klonu, pokud uzivatel zmacken OK, puvodni element (m_active_element) se nahradi klonem
 };
 

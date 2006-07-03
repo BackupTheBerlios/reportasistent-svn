@@ -4,7 +4,10 @@ honzovy poznamky:
 
 
 
-
+omluva vsem:
+nestiham ten editor konfiguraci pro transformace AP, prazdniny vubec nepodporuju pracovni nasazeni jake by bylo potreba.. 
+budu ted do nedele v Ostrove, pak zase budu komunikovat..
+dedek
 
 
 
@@ -17,22 +20,6 @@ honzovy poznamky:
 
 
 !!!!!!! uz by to melo jit prelozit ve VS 2005 !!!!!!
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 vola prevod na hex z xsl
