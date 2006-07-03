@@ -182,9 +182,17 @@ void CTransformationsDialog::OnAddButton()
 
 void CTransformationsDialog::OnRemoveButton() 
 {
-	if (m_SelectedList.GetCurSel() == LB_ERR) return;
+	int selected_index = m_SelectedList.GetCurSel();
+	if (selected_index == LB_ERR) return;
 
-	m_SelectedList.DeleteString(m_SelectedList.GetCurSel());
+	m_SelectedList.DeleteString(selected_index);
+
+	//uprava xml
+	CString query_str;
+	query_str.Format("output/transformation[%d]", selected_index);
+
+	m_cloned_element->selectSingleNode("output")->removeChild(
+		m_cloned_element->selectSingleNode((LPCTSTR) query_str));
 
 }
 
@@ -194,17 +202,33 @@ void CTransformationsDialog::OnMoveUpButton()
 
 	int selected_index = m_SelectedList.GetCurSel();
 	
-	CString selected_text;
-
 	if (selected_index <= 0) return;
+
+	
+	//uprava listboxu
+	CString selected_text;
 
 	m_SelectedList.GetText(selected_index, selected_text);
 		
 	m_SelectedList.DeleteString(selected_index);
 
-	m_SelectedList.InsertString(--selected_index, selected_text);
+	m_SelectedList.InsertString(selected_index-1, selected_text);
 
-	m_SelectedList.SelectString(--selected_index, selected_text);
+	m_SelectedList.SelectString(selected_index-2, selected_text);
+
+
+	
+	//uprava xml
+
+	CString query_str1;
+	CString query_str2;
+
+	query_str1.Format("output/transformation[%d]", selected_index);
+	query_str2.Format("output/transformation[%d]", selected_index -1);
+
+	m_cloned_element->selectSingleNode("output")->insertBefore(
+		m_cloned_element->selectSingleNode((LPCTSTR) query_str1),
+		(MSXML2::IXMLDOMNode*) m_cloned_element->selectSingleNode((LPCTSTR) query_str2));
 }
 
 void CTransformationsDialog::OnMoveDownButton() 
@@ -221,10 +245,30 @@ void CTransformationsDialog::OnMoveDownButton()
 		
 	m_SelectedList.DeleteString(selected_index);
 
-	m_SelectedList.InsertString(++selected_index, selected_text);
+	m_SelectedList.InsertString(selected_index+1, selected_text);
 
-	m_SelectedList.SelectString(--selected_index, selected_text);
+	m_SelectedList.SelectString(selected_index, selected_text);
 	
+	//uprava xml
+	CString query_str1;
+	CString query_str2;
+
+	query_str1.Format("output/transformation[%d]", selected_index);
+	query_str2.Format("output/transformation[%d]", selected_index +2);
+
+	if (selected_index == m_SelectedList.GetCount()-2)
+	{
+		m_cloned_element->selectSingleNode("output")->insertBefore(
+			m_cloned_element->selectSingleNode((LPCTSTR) query_str1),
+			_variant_t((IDispatch *) NULL, FALSE));
+	}
+	else
+	{
+		m_cloned_element->selectSingleNode("output")->insertBefore(
+			m_cloned_element->selectSingleNode((LPCTSTR) query_str1),
+			(MSXML2::IXMLDOMNode*) m_cloned_element->selectSingleNode((LPCTSTR) query_str2));
+	}
+
 }
 
 

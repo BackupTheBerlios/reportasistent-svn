@@ -131,20 +131,45 @@ void CAElInfo::LoadTransformations(LPCTSTR dir_path)
 		 if (finder.IsDirectory() && (! finder.IsDots()))
 		 {
 			 s_transformation * tr = new s_transformation;
+
 			 
 			 tr->name = finder.GetFileName();
-
+			 
 			 tr->doc.CreateInstance(_T("Msxml2.DOMDocument"));
 			 tr->doc->async = VARIANT_FALSE;
-
 			 tr->doc->load((LPCTSTR) (finder.GetFilePath() + "\\transform.xsl"));
 
-			 if (tr->doc->parseError->errorCode == S_OK)
+			 long options_error = S_OK;
+			 CFileFind options_find;
+			 if ((options_find.FindFile(finder.GetFilePath() + "\\options.xml")) &&
+					options_find.FindNextFile())
+			 {
+				 tr->options.CreateInstance(_T("Msxml2.DOMDocument"));
+				 tr->options->async = VARIANT_FALSE;
+				 tr->options->load((LPCTSTR) (finder.GetFilePath() + "\\options.xml"));
+				 options_error = tr->options->parseError->errorCode;
+			 }
+			 options_find.Close();
+			 
+			 if ((tr->doc->parseError->errorCode == S_OK) && (options_error == S_OK))
 			 {
 				 m_transformations.Add(tr);
 			 }
 			 else
 			 {
+				 //poslat error maessage ????????????
+				 /*
+				 if (tr->doc->parseError->errorCode != S_OK)
+				 {
+					 AfxMessageBox(tr->doc->parseError->reason);
+				 }
+				 */
+				 if (options_error != S_OK)
+				 {
+					 AfxMessageBox(tr->options->parseError->reason);
+				 }
+
+
 				 delete tr;
 			 }
 				 	

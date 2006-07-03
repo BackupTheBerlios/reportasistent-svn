@@ -32,6 +32,7 @@ private:
 	{
 		CString name;
 		MSXML2::IXMLDOMDocumentPtr doc;
+		MSXML2::IXMLDOMDocumentPtr options;
 	};
 
 	CString src_dir_path;
