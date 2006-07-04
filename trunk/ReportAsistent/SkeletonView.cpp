@@ -356,7 +356,7 @@ void CSkeletonView::OnRButtonDown(UINT nFlags, CPoint point)
  
 void CSkeletonView::OnEditCopy() 
 {
-	AfxMessageBox("Bude se kopirovat.",0,0);
+	//AfxMessageBox("Bude se kopirovat.",0,0);
 
 
 	CTreeCtrl & rTreeCtrl = GetTreeCtrl();
@@ -415,7 +415,7 @@ void CSkeletonView::OnEditCopy()
 
 void CSkeletonView::OnEditPaste() 
 {
-	AfxMessageBox("Bude se paste-ovat.",0,0);	
+	//AfxMessageBox("Bude se paste-ovat.",0,0);	
 
 	CTreeCtrl & rTreeCtrl = GetTreeCtrl();
 	MSXML2::IXMLDOMElementPtr SelXMLDomElement = GetDocument()->ElementFromItemData(rTreeCtrl.GetItemData(rTreeCtrl.GetSelectedItem()));
@@ -435,7 +435,7 @@ void CSkeletonView::OnEditPaste()
 		return;
 	}
 
-	AfxMessageBox(pMemForXML,0,0);
+	//AfxMessageBox(pMemForXML,0,0);
 
 //vytvorim novy MSXML2::IXMLDOMDoc
 	MSXML2::IXMLDOMDocumentPtr pNewXMLDoc;
@@ -456,7 +456,7 @@ void CSkeletonView::OnEditPaste()
 	MSXML2::IXMLDOMElementPtr pNewXMLElm = pNewXMLDoc->GetdocumentElement();
 
 	GetDocument()->ChangeIDsInTree(pNewXMLElm);
-	AfxMessageBox(pNewXMLDoc->xml,0,0);
+	//AfxMessageBox(pNewXMLDoc->xml,0,0);
 
 //zkusim vlozit DOVNITR do existujiciho
 	if (0!= OElementManager.CanInsertChildHere(pNewXMLElm,SelXMLDomElement))
@@ -608,9 +608,9 @@ void CSkeletonView::OnLButtonUp(UINT nFlags, CPoint point)
 					AfxMessageBox(e.Description());
 				}
 
-				AfxMessageBox("Odebran drag do:");
+				//AfxMessageBox("Odebran drag do:");
 
-				AfxMessageBox(pNewXMLElm->xml);
+				//AfxMessageBox(pNewXMLElm->xml);
 			
 			//otestuji, lze-li dat NewElm PRED Drop
 				if (0!= OElementManager.CanInsertBefore(pNewXMLElm,pXMLElmDrop))
