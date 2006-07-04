@@ -5,6 +5,7 @@
 #include "ReportAsistent.h"
 #include "TransformationsDialog.h"
 #include "AttributeLinkTableDialog.h"
+#include "PropertyEditor.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -408,12 +409,24 @@ void CTransformationsDialog::OnConfigureButton()
 		ConfigureAttrLinkTable(m_cloned_output_element->selectSingleNode((LPCTSTR) query_str));
 		return;
 	}
+  else if (IsSelectedTransformationWithOptions(cur_sel))
+  {
+    ConfigureTransformation(cur_sel);
+  }
 	
 }
 
 BOOL CTransformationsDialog::IsSelectedTransformationWithOptions(int transform_index)
 {
-	return FALSE;
+ 	ASSERT(transform_index >= 0);
+	ASSERT(transform_index < m_SelectedList.GetCount());
+
+  CString query_str;
+  query_str.Format("transformation[%d]/@type", transform_index);
+  
+  
+  return 
+    m_cloned_output_element->selectSingleNode((LPCTSTR) query_str)->text == _bstr_t("with_options");
 }
 
 BOOL CTransformationsDialog::IsSelectedTransformationAttrLinkTable(int transform_index)
@@ -422,4 +435,171 @@ BOOL CTransformationsDialog::IsSelectedTransformationAttrLinkTable(int transform
 	ASSERT(transform_index < m_SelectedList.GetCount());
 
 	return transform_index == m_SelectedList.FindString(transform_index-1, ATTR_TL_STR);
+}
+
+void CTransformationsDialog::ConfigureTransformation(int transform_index)
+{
+	ASSERT(transform_index >= 0);
+	ASSERT(transform_index < m_SelectedList.GetCount());
+
+	CElementManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
+
+  //element info
+  int element_id = m.IdentifyElement(m_active_element);
+	CAElInfo * element_info = m.getActiveElementInfo(element_id);
+
+	
+  CString query_str;
+  query_str.Format("transformation[%d]", transform_index);
+
+  //tranformation
+  MSXML2::IXMLDOMElementPtr transformation_element = m_cloned_output_element->selectSingleNode((LPCTSTR) query_str);
+  
+  //options definition
+  MSXML2::IXMLDOMNodePtr options_node = 
+		element_info->getTranformationOptionsDoc(
+			element_info->FindTransformationByName((_bstr_t) transformation_element->getAttribute("name")));
+
+  //single options
+  MSXML2::IXMLDOMNodeListPtr option_nodes = options_node->selectNodes("/visualization/visualization_options/*");
+
+  
+  //napln property editor
+  
+  
+  //label
+  CString label;
+  label.Format("%s (%s) properties", 
+    (LPCTSTR) options_node->selectSingleNode("/visualization/visualization_options/@visualization_label")->text,
+    (LPCTSTR) (_bstr_t) m_active_element->getAttribute("id"));
+  
+  CPropertyEditor property_editor(label, this);
+
+  for (int a=0; a < option_nodes->length; a++)
+  {
+    MSXML2::IXMLDOMElementPtr option_element = option_nodes->item[a];
+    CString option_type = (LPCTSTR) option_element->nodeName;
+    CString variable_name = (LPCTSTR) (_bstr_t) option_element->getAttribute("variable_name");
+    CString value_query_str; //dotaz na default value
+    value_query_str.Format("visualization_values/variable[@name=\"%s\"]/@value", (LPCTSTR) variable_name);
+    CString value = (LPCTSTR) transformation_element->selectSingleNode((LPCTSTR) value_query_str)->text;
+
+        
+    
+    if (option_type == "enum_option")
+    {
+      //enum
+   		
+      
+      
+      
+
+    
+      //value_label_query_str
+      CString value_label_query_str;
+      value_label_query_str.Format("/visualization/visualization_options/enum_option[@variable_name=\"%s\"]/enum_item[@value = \"%s\"]/@label",
+        (LPCTSTR) variable_name, (LPCTSTR) value);
+
+      CEnumProperty * ep = new CEnumProperty(
+        (_bstr_t) option_element->getAttribute("title"),  //label
+        options_node->selectSingleNode((LPCTSTR) value_label_query_str)->text);  //default value
+
+      
+      //napln combo hodnotami
+      MSXML2::IXMLDOMNodeListPtr enum_nodes = option_element->selectNodes("enum_item/@label");
+      for (int b=0; b < enum_nodes->length; b++)
+      {
+        ep->AddCombostr(enum_nodes->item[b]->text);
+      }
+      enum_nodes.Release();
+
+      property_editor.AddProperty(ep);
+
+    }
+    else if (option_type == "string_option")
+    {
+      //string
+      
+      property_editor.AddProperty(new CStringProperty(
+        (_bstr_t) option_element->getAttribute("title"),  //label
+        value));  //default value
+    }
+    else if (option_type == "number_option")
+    {
+      if ((_bstr_t) option_element->getAttribute("num_type") == _bstr_t("float"))
+      {
+        //float
+
+        double min = -1.7E+308;
+        double max = 1.7E+308;
+
+        
+        try 
+        {
+          min = option_element->getAttribute("min_value");
+        }
+        catch (...)
+        {
+          min = -1.7E+308;
+        }
+
+        try 
+        {
+          max = option_element->getAttribute("max_value");
+        }
+        catch (...)
+        {
+          max = 1.7E+308;
+        }
+        
+        
+        property_editor.AddProperty(new CDoubleProperty(
+          (_bstr_t) option_element->getAttribute("title"),  //label
+          (_variant_t) value, min, max));  //default value
+      }
+      else if ((_bstr_t) option_element->getAttribute("num_type") == _bstr_t("integer"))
+      {
+        //integer
+
+        int min = 0x80000000;
+        int max = 0x7FFFFFFF;
+
+        
+        try 
+        {
+          min = (long) option_element->getAttribute("min_value");
+        }
+        catch (...)
+        {
+          min = 0x80000000;
+        }
+
+        try 
+        {
+          max = (long) option_element->getAttribute("max_value");
+        }
+        catch (...)
+        {
+          max = 0x7FFFFFFF;
+        }
+        
+        
+        property_editor.AddProperty(new CIntProperty(
+          (_bstr_t) option_element->getAttribute("title"),  //label
+//          (long) (_variant_t) value, min, max));  //default value
+          0x7FFFFFFF, min, max));  //default value
+        
+      }
+    }
+
+//    AfxMessageBox(option_nodes->item[a]->xml);
+  }
+
+
+  property_editor.DoModal();
+
+  option_nodes.Release();
+
+  
+
 }

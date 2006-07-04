@@ -50,7 +50,7 @@ public:
 
 		try
 		{
-			try_convert = (short) (_variant_t) value;
+			try_convert = (long) (_variant_t) value;
 		}
 		catch (_com_error & e)
 		{
@@ -70,7 +70,8 @@ public:
 			return FALSE;
 		}
 
-		value.Format("%d", try_convert);
+    //zapise prectenou hodnotu do edit boxu zmeni napriklad 4,5 na 5
+//		value.Format("%d", try_convert);
 		return TRUE;
 	};
 

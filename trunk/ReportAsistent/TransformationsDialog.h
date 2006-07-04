@@ -35,6 +35,7 @@ public:
 
 // Implementation
 protected:
+	void ConfigureTransformation(int transform_index);
 	BOOL IsSelectedTransformationWithOptions(int transform_index);
 	BOOL IsSelectedTransformationAttrLinkTable(int transform_index);
 	void ConfigureAttrLinkTable(MSXML2::IXMLDOMNodePtr & attr_link_tbl_node);

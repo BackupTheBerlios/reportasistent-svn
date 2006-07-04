@@ -11,7 +11,7 @@
 
 
     <!--setting whether to colour-highlight table fields-->
-    <enum_option variable_name="ColourHighlight" title="Colour-highlight table fields">
+    <enum_option variable_name="ColourHighlighting" title="Colour-highlight table fields">
        <enum_item value="true" label="yes"/>  
        <enum_item value="false" label="no"/>  
     </enum_option>
@@ -19,9 +19,16 @@
 
     <!--absolute or relative values in contingency table-->
     <enum_option variable_name="TypeOfValues" title="Type of values in contingency table">
-       <enum_item value="Abslolute" label="Absolute"/>  
+       <enum_item value="Absolute" label="Absolute"/>  
        <enum_item value="Relative" label="Relative (percentual)"/>  
     </enum_option>
+
+<!--   
+    <string_option variable_name="xxx" title="string opt"/>
+
+	<number_option variable_name="y" title="yyyyyyyyyy " num_type="float" dec="2" min_value="0"/>
+	<number_option variable_name="z" title="zzzzzzzzzzz " num_type="integer" dec="2" max_value="5"/>
+-->
     
   </visualization_options>
 
@@ -30,9 +37,15 @@
   <!--default values of variables-->
   
   <visualization_values>
-      <variable name="SumShow" value="no" />
-      <variable name="ColourHighlighting" value="no"/>
+      <variable name="SumsShow" value="false" />
+      <variable name="ColourHighlighting" value="false"/>
       <variable name="TypeOfValues" value="Absolute"/>
+<!--
+      <variable name="xxx" value="cus vole"/>
+      <variable name="y" value="0"/>
+      <variable name="z" value="0"/>
+
+-->
   </visualization_values>
 
 </visualization>
