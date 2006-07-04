@@ -8,7 +8,7 @@
 <!ATTLIST report author CDATA #IMPLIED >
 <!ATTLIST report id ID #REQUIRED >
 
-<!ELEMENT chapter ( (paragraph | include | active_element)*, chapter* ) > <!--nejprve texty, pak vnorene kapitoly -->
+<!ELEMENT chapter (paragraph | include | active_element|chapter* ) > <!--nejprve texty, pak vnorene kapitoly -->
 <!ATTLIST chapter title CDATA #REQUIRED >
 <!ATTLIST chapter id ID #REQUIRED >
 

@@ -972,7 +972,10 @@ void CSkeletonDoc::ChangeIDsInTree(MSXML2::IXMLDOMElementPtr pElm)
 
 //zjistim id typu prvku a zmenim id prvku.
 	CElementManager::elId_t idTypeElm = OElementManager.IdentifyElement(pElm);
-	pElm->setAttribute("id",(LPCTSTR)CreateNewID(idTypeElm));	
+	CString new_ID=(LPCTSTR)CreateNewIDFromOld((LPCTSTR) (_bstr_t)varAtr);
+	//nyni by jeste mohla byt kontrola, neni-li new_ID nekde ve vkladanem podstromu...
+	//...to se ale diky tvorbe novych ID ze starych (ktera duplicitni urcite nebyla) nemuze stat.
+	pElm->setAttribute("id",(LPCTSTR) new_ID);	
 	return;
 }
 
@@ -1120,4 +1123,43 @@ BOOL CSkeletonDoc::InitAndClearXmlDom()
 	}
 
 	return TRUE;
+}
+
+CString CSkeletonDoc::CreateNewIDFromOld(CString old_ID)
+{
+	CString id;
+
+	int a;
+    for (a = 1; a < 0xFFFFFF; a++) //vygeneruje maximalne 0xFFFFFF=16777215 ruznych id :-)
+	{
+		id.Format("%s%d", old_ID, a); //napr.: old_ID= "mojeID" a id = "mojeID15"
+
+		
+		if ( ! IsIDInTree(id)) break;
+	}
+
+	//pokud cyklus probehnul 16777215-krat, je to dost podezrele :-)
+	ASSERT(a < 0xFFFFFF);
+
+	return id;
+
+}
+
+BOOL CSkeletonDoc::IsIDInTree(CString Id, MSXML2::IXMLDOMElementPtr pTree)
+{
+		//podivame se jestli uz dane id v kostre existuje:
+		//zkusime prvek s takovym id najit moci XPath funkce id()
+		
+		if (pTree==NULL) return FALSE;	
+
+		CString query; 
+		query.Format("id(\"%s\")", (LPCTSTR) Id); //napr.: query = 'id("hyp_4ft15")'
+		MSXML2::IXMLDOMNodePtr select = pTree->selectSingleNode((LPCTSTR) query);
+		if (select == NULL) return FALSE; //kdyz to zadny uzel nenaslo tak id neni pouzite..
+		else //Iva:Id is used in the tree
+		{
+			select.Release();
+			return TRUE;
+		}
+
 }

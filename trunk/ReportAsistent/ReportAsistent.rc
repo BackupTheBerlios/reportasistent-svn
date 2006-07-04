@@ -406,11 +406,13 @@ IDR_MAINFRAME           BITMAP  MOVEABLE PURE   "res\\Toolbar.bmp"
 IDB_CHAPTERICO          BITMAP  DISCARDABLE     "res\\Chapter.bmp"
 IDB_PARAGRAPHICO        BITMAP  DISCARDABLE     "res\\Paragraph.bmp"
 IDB_REPORTICO           BITMAP  DISCARDABLE     "res\\Report.bmp"
-IDB_TABLEICO            BITMAP  DISCARDABLE     "res\\Table.bmp"
 IDB_TEXTICO             BITMAP  DISCARDABLE     "res\\Text.bmp"
 IDB_UNKNOWNICO          BITMAP  DISCARDABLE     "res\\unknowni.bmp"
 IDB_4FTHYPOTEZAICO      BITMAP  DISCARDABLE     "res\\4ftHypoteza.bmp"
 IDB_TRANSFORMATIONS_LOGO BITMAP  DISCARDABLE     "res\\transformations_logo.bmp"
+IDB_INCLUDEICO          BITMAP  DISCARDABLE     "res\\include.bmp"
+IDB_ATTRLINKTABLEICO    BITMAP  DISCARDABLE     "res\\attrLinkTable.bmp"
+IDB_ATTRLINKICO         BITMAP  DISCARDABLE     "res\\attrLink.bmp"
 
 /////////////////////////////////////////////////////////////////////////////
 //

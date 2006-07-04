@@ -1,3 +1,10 @@
+Ivina poznamka - to vsichni:
+Zmenila jsem DTD - element chapter:
+puvodne: subkapitoly smi byt jen na konci nadrazene kapitoly
+Nove: subkapitoly smi byt kdekoliv v nadrazene kapitole
+
+
+to Deda: problemy s copy/paste jsou uz vyreseny, tvuj napad s variaci stareho ID jsem pouzila. :-)
 
 honzovy poznamky:
 
@@ -112,9 +119,12 @@ taky uz to umi Word styly - viz dialog pro attr_link
 chybka v copy/paste:
 kdyz dam copy na cely odstavec, ktery obsahuje dalsi prvky,
 tak potom nefunguje paste - prvkum uvnitr toho okopirovaneho odstavce se nezmeni id 
-- problem je v tom, ze kontrola id probiha pouze v ramci zobrazovaneho dokumentu nikoliv v ramci vkladanych dat
-potom se muze stat (stava se) ze to vsem nove vlozenym elementum stejneho typu vyrobi stejne id
--navic by mozna bylo fajn, kdyz by to existujici id nenahrazovalo uplne novymi ale jen je to trochu modifikovalo
+- problem je v tom, ze kontrola id probiha pouze v ramci zobrazovaneho dokumentu 
+	a nikoliv v ramci vkladanych dat
+potom se muze stat (stava se) ze to vsem nove vlozenym elementum stejneho typu 
+	vyrobi stejne id
+-navic by mozna bylo fajn, kdyz by to existujici id nenahrazovalo uplne novymi 
+	ale jen je to trochu modifikovalo
 
 
 predelal jsem svou uzasnou nahodnou funkci na generovani ID CSkeletonDoc::CreateNewID

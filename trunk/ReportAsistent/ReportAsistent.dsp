@@ -301,6 +301,10 @@ SOURCE=.\res\4ftHypoteza.bmp
 # End Source File
 # Begin Source File
 
+SOURCE=.\res\attrLinkTable.bmp
+# End Source File
+# Begin Source File
+
 SOURCE=.\res\bmtreebi.bmp
 # End Source File
 # Begin Source File

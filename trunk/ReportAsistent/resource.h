@@ -27,6 +27,9 @@
 #define IDD_DIALOG_PARAGRAPH            153
 #define IDD_DIALOG_CHAPTER              154
 #define IDD_PROPERTY_EDITOR             155
+#define IDB_INCLUDEICO                  157
+#define IDB_ATTRLINKTABLEICO            158
+#define IDB_ATTRLINKICO                 159
 #define IDC_TREE1                       1000
 #define IDC_FILTER_LIST                 1000
 #define IDC_SCROLLBAR1                  1000
@@ -97,7 +100,7 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
-#define _APS_NEXT_RESOURCE_VALUE        156
+#define _APS_NEXT_RESOURCE_VALUE        160
 #define _APS_NEXT_COMMAND_VALUE         32784
 #define _APS_NEXT_CONTROL_VALUE         1034
 #define _APS_NEXT_SYMED_VALUE           101

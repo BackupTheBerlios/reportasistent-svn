@@ -371,13 +371,13 @@ void CSkeletonView::OnEditCopy()
 						);
 	if (0==hgMemForXML) 
 	{
-		AfxMessageBox("Nepodarilo se alokovat dostatek pameti pro XML podstromu",0,0);
+		AfxMessageBox("Nepodarilo se alokovat dostatek pameti pro XML podstrom.",0,0);
 		return;
 	}
 
 	LPTSTR pMemForXML = (LPTSTR) GlobalLock(hgMemForXML);
 	strcpy(pMemForXML,(LPTSTR) bstrSelElmXML);
-	AfxMessageBox(pMemForXML,0,0);
+	//AfxMessageBox(pMemForXML,0,0);
 	
 
 	GlobalUnlock(hgMemForXML);
@@ -442,7 +442,7 @@ void CSkeletonView::OnEditPaste()
 	pNewXMLDoc.CreateInstance(_T("Msxml2.DOMDocument"));	
 //XML do nej natahnu
 
-	HRESULT hRes = pNewXMLDoc->loadXML(pMemForXML);//"<text id=\"text111\">moje</text>");
+	HRESULT hRes = pNewXMLDoc->loadXML(pMemForXML);
 	if (pNewXMLDoc->parseError->errorCode != S_OK)
 	{
 		AfxMessageBox(pNewXMLDoc->parseError->reason);

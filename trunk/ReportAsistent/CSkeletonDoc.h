@@ -89,6 +89,8 @@ protected:
 
 	
 public:
+	BOOL IsIDInTree (CString Id, MSXML2::IXMLDOMElementPtr pTree);
+	CString CreateNewIDFromOld(CString old_ID);
 	BOOL IsIDInTree(CString Id);
 	BOOL IsDescendantOfElement(MSXML2::IXMLDOMElementPtr pDescendantXMLElm,MSXML2::IXMLDOMElementPtr pAncestorXMLElm);
 	void ChangeIDsInTree(MSXML2::IXMLDOMElementPtr pXMLElm);

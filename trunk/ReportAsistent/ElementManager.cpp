@@ -28,9 +28,9 @@ UINT CElementManager::static_elements_bitmap_id[]=
 	IDB_TEXTICO                    ,
 	IDB_PARAGRAPHICO               ,
 	IDB_CHAPTERICO                 ,
-	IDB_UNKNOWNICO, //az bude ikona pro include tak dat sem                   
-	IDB_UNKNOWNICO, //az bude ikona pro atr_link tak dat sem                   
-	IDB_UNKNOWNICO //az bude ikona pro atr_link_table tak dat sem                   
+	IDB_INCLUDEICO, //az bude ikona pro include tak dat sem                   
+	IDB_ATTRLINKICO, //az bude ikona pro atr_link tak dat sem                   
+	IDB_ATTRLINKTABLEICO //az bude ikona pro atr_link_table tak dat sem                   
 };
 
 LPCTSTR CElementManager::static_elements_names[] = 
@@ -301,6 +301,7 @@ void CElementManager::LoadActiveElements(LPCTSTR elements_directory_path)
 }
 
 CAElInfo * CElementManager::getActiveElementInfo(elId_t id)
+
 {
 	if (! isElementActive(id)) return NULL;
 
@@ -325,14 +326,18 @@ BOOL CElementManager::LoadElementIcon(elId_t element_id, CBitmap &icon)
 {
 	ASSERT(element_id >= 0);
 	ASSERT(element_id <= getLastElementId());
-	
+
+	//static elements:
 	if (! isElementActive(element_id))
 	{
 		icon.LoadBitmap(static_elements_bitmap_id[element_id]);
 		return TRUE;
 	}
-
-	return getActiveElementInfo(element_id)->LoadElementIcon(icon);
+	//active elements:
+	int Res = getActiveElementInfo(element_id)->LoadElementIcon(icon);
+		//if active element doesn't have icon, it gets icon of "unknown" element
+	if (0==Res) icon.LoadBitmap(static_elements_bitmap_id[ELID_UNKNOWN]);
+	return TRUE;
 }
 
 BOOL CElementManager::FillImageList(CImageList &img_list)
