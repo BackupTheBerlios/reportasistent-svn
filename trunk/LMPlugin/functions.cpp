@@ -292,9 +292,9 @@ CString fLMQuantifier (void* hSource)
 			ptquant->items.Add (item);
 			
 			list.Add (ptquant);
-			rs.MoveNext();
+			rsCF.MoveNext();
 		}
-		rs.Close();
+		rsCF.Close();
 	}
 	else return "";
 
