@@ -28,11 +28,13 @@
 				<xsl:call-template name="categories" />  <!-- vypsani kategorii-->
 			</xsl:for-each>
 				
-				<chart title="SD graph" id="chart1">
-					<xsl:for-each select="r[position()=1]/c">
-						<value value="{@val}" id="{$id_base}_val{position()}" />	
-					</xsl:for-each>
-				</chart>			
+				<xsl:element name="chart">
+					<xsl:attribute name="id">chart1</xsl:attribute>				
+					<xsl:attribute name="title"><xsl:value-of select="key('key_ti_attribute',@attributes)/@quant" /></xsl:attribute>				
+						<xsl:for-each select="r[position()=1]/c">
+							<value value="{@val}" id="{$id_base}_val{position()}" />	
+						</xsl:for-each>
+				</xsl:element>			
 							
 			</graph>
 		</paragraph>						

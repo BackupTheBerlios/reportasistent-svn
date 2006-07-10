@@ -5,14 +5,34 @@
       xmlns:msxsl="urn:schemas-microsoft-com:xslt"
       xmlns:dedek="http://reportasistent.com/dedek_namespace"
       version="1.0">
- 
- 
-      
-<msxsl:script language="JScript" implements-prefix="dedek">
-    function hex(cislo) {
-      return cislo.toString(16);
-    }
-</msxsl:script>
+
+  <msxsl:script language="JScript" implements-prefix="dedek">
+
+	function RGB(val, max)
+	{
+		return "#ff"
+			 	+ hex2(val/max)
+				+ hex2(val/max);
+	}
+
+	function hex2(cislo)
+	{
+		var ret = (255 - Math.round(cislo * 255)).toString(16);
+
+		if (ret.length == 1)
+			return "0" + ret;
+		else
+			return ret;
+	}
+
+
+
+	function hex(cislo)
+	{
+		return cislo.toString(16);
+	}
+
+  </msxsl:script>
 
 
 
@@ -189,8 +209,8 @@
 					<xsl:element name="td">
 							<xsl:attribute name="id"><xsl:value-of select="$id_base"/>r2d2</xsl:attribute>
 							<xsl:if test="$ColourHighlighting='true'">
-								<xsl:variable name="barva_dec" select="(255-round(($a div $total)*256))" />
-								<xsl:attribute name="bgcolor">#ff<xsl:if test="$barva_dec &lt; 16">0</xsl:if><xsl:value-of select="dedek:hex($barva_dec)" /><xsl:if test="($barva_dec) &lt; 16">0</xsl:if><xsl:value-of select="dedek:hex($barva_dec)" />
+								<xsl:attribute name="bgcolor">
+									<xsl:value-of select="dedek:RGB(number($a) , number($total))" />
 								</xsl:attribute>
 							</xsl:if>
 							<text id="{$id_base}r2d2text"><xsl:value-of select="$a" /></text> 
@@ -199,8 +219,8 @@
 					<xsl:element name="td">
 							<xsl:attribute name="id"><xsl:value-of select="$id_base"/>r2d3</xsl:attribute>
 							<xsl:if test="$ColourHighlighting='true'">
-								<xsl:variable name="barva_dec" select="(255-round(($b div $total)*256))" />
-								<xsl:attribute name="bgcolor">#ff<xsl:if test="$barva_dec &lt; 16">0</xsl:if><xsl:value-of select="dedek:hex($barva_dec)" /><xsl:if test="($barva_dec) &lt; 16">0</xsl:if><xsl:value-of select="dedek:hex($barva_dec)" />
+								<xsl:attribute name="bgcolor">
+									<xsl:value-of select="dedek:RGB(number($b) , number($total))" />
 								</xsl:attribute>
 							</xsl:if>
 							<text id="{$id_base}r2d3text"><xsl:value-of select="$b" /></text> 
@@ -211,8 +231,8 @@
 						<xsl:element name="td">
 							<xsl:attribute name="id"><xsl:value-of select="$id_base"/>r2d4</xsl:attribute>
 							<xsl:if test="$ColourHighlighting='true'">
-								<xsl:variable name="barva_dec" select="(255-round(($r1 div $total)*256))" />
-								<xsl:attribute name="bgcolor">#ff<xsl:if test="$barva_dec &lt; 16">0</xsl:if><xsl:value-of select="dedek:hex($barva_dec)" /><xsl:if test="($barva_dec) &lt; 16">0</xsl:if><xsl:value-of select="dedek:hex($barva_dec)" />
+								<xsl:attribute name="bgcolor">
+									<xsl:value-of select="dedek:RGB(number($r1) , number($total))" />
 								</xsl:attribute>
 							</xsl:if>
 							<text id="{$id_base}r2d4text"><xsl:value-of select="$r1" /></text> 
@@ -229,8 +249,8 @@
 					<xsl:element name="td">
 							<xsl:attribute name="id"><xsl:value-of select="$id_base"/>r3d2</xsl:attribute>
 							<xsl:if test="$ColourHighlighting='true'">
-								<xsl:variable name="barva_dec" select="(255-round(($c div $total)*256))" />
-								<xsl:attribute name="bgcolor">#ff<xsl:if test="$barva_dec &lt; 16">0</xsl:if><xsl:value-of select="dedek:hex($barva_dec)" /><xsl:if test="($barva_dec) &lt; 16">0</xsl:if><xsl:value-of select="dedek:hex($barva_dec)" />
+								<xsl:attribute name="bgcolor">
+									<xsl:value-of select="dedek:RGB(number($c) , number($total))" />
 								</xsl:attribute>
 							</xsl:if>
 							<text id="{$id_base}r3d2text"><xsl:value-of select="$c" /></text> 
@@ -239,8 +259,8 @@
 					<xsl:element name="td">
 							<xsl:attribute name="id"><xsl:value-of select="$id_base"/>r3d3</xsl:attribute>
 							<xsl:if test="$ColourHighlighting='true'">
-								<xsl:variable name="barva_dec" select="(255-round(($d div $total)*256))" />
-								<xsl:attribute name="bgcolor">#ff<xsl:if test="$barva_dec &lt; 16">0</xsl:if><xsl:value-of select="dedek:hex($barva_dec)" /><xsl:if test="($barva_dec) &lt; 16">0</xsl:if><xsl:value-of select="dedek:hex($barva_dec)" />
+								<xsl:attribute name="bgcolor">
+									<xsl:value-of select="dedek:RGB(number($d) , number($total))" />
 								</xsl:attribute>
 							</xsl:if>
 							<text id="{$id_base}r3d3text"><xsl:value-of select="$d" /></text> 
@@ -251,8 +271,8 @@
 						<xsl:element name="td">
 							<xsl:attribute name="id"><xsl:value-of select="$id_base"/>r3d4</xsl:attribute>
 							<xsl:if test="$ColourHighlighting='true'">
-								<xsl:variable name="barva_dec" select="(255-round(($r2 div $total)*256))" />
-								<xsl:attribute name="bgcolor">#ff<xsl:if test="$barva_dec &lt; 16">0</xsl:if><xsl:value-of select="dedek:hex($barva_dec)" /><xsl:if test="($barva_dec) &lt; 16">0</xsl:if><xsl:value-of select="dedek:hex($barva_dec)" />
+								<xsl:attribute name="bgcolor">
+									<xsl:value-of select="dedek:RGB(number($d) , number($total))" />
 								</xsl:attribute>
 							</xsl:if>
 							<text id="{$id_base}r3d4text"><xsl:value-of select="$r2" /></text> 
@@ -269,8 +289,8 @@
 						<xsl:element name="td">
 							<xsl:attribute name="id"><xsl:value-of select="$id_base"/>r4d2</xsl:attribute>
 							<xsl:if test="$ColourHighlighting='true'">
-								<xsl:variable name="barva_dec" select="(255-round(($c1 div $total)*256))" />
-								<xsl:attribute name="bgcolor">#ff<xsl:if test="$barva_dec &lt; 16">0</xsl:if><xsl:value-of select="dedek:hex($barva_dec)" /><xsl:if test="($barva_dec) &lt; 16">0</xsl:if><xsl:value-of select="dedek:hex($barva_dec)" />
+								<xsl:attribute name="bgcolor">
+									<xsl:value-of select="dedek:RGB(number($c1) , number($total))" />
 								</xsl:attribute>
 							</xsl:if>
 							<text id="{$id_base}r4d2text"><xsl:value-of select="$c1" /></text> 
@@ -279,8 +299,8 @@
 						<xsl:element name="td">
 							<xsl:attribute name="id"><xsl:value-of select="$id_base"/>r4d3</xsl:attribute>
 							<xsl:if test="$ColourHighlighting='true'">
-								<xsl:variable name="barva_dec" select="(255-round(($c2 div $total)*256))" />
-								<xsl:attribute name="bgcolor">#ff<xsl:if test="$barva_dec &lt; 16">0</xsl:if><xsl:value-of select="dedek:hex($barva_dec)" /><xsl:if test="($barva_dec) &lt; 16">0</xsl:if><xsl:value-of select="dedek:hex($barva_dec)" />
+								<xsl:attribute name="bgcolor">
+									<xsl:value-of select="dedek:RGB(number($c2) , number($total))" />
 								</xsl:attribute>
 							</xsl:if>
 							<text id="{$id_base}r3d2text"><xsl:value-of select="$c2" /></text> 
@@ -289,8 +309,8 @@
 						<xsl:element name="td">
 							<xsl:attribute name="id"><xsl:value-of select="$id_base"/>r4d4</xsl:attribute>
 							<xsl:if test="$ColourHighlighting='true'">
-								<xsl:variable name="barva_dec" select="(255-round(($total div $total)*256))" />
-								<xsl:attribute name="bgcolor">#ff<xsl:if test="$barva_dec &lt; 16">0</xsl:if><xsl:value-of select="dedek:hex($barva_dec)" /><xsl:if test="($barva_dec) &lt; 16">0</xsl:if><xsl:value-of select="dedek:hex($barva_dec)" />
+							<xsl:attribute name="bgcolor">
+									<xsl:value-of select="dedek:RGB(number($total) , number($total))" />
 								</xsl:attribute>
 							</xsl:if>
 							<text id="{$id_base}r4d4text"><xsl:value-of select="$total" /></text> 
