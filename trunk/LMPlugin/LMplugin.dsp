@@ -173,6 +173,10 @@ SOURCE=.\TCFLiteral.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\TCFQuantifier_Recordset.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\TEmpty_Cedents_Recordset.cpp
 # End Source File
 # Begin Source File
@@ -278,6 +282,10 @@ SOURCE=.\TCatOrder.h
 # Begin Source File
 
 SOURCE=.\TCFLiteral.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\TCFQuantifier_Recordset.h
 # End Source File
 # Begin Source File
 

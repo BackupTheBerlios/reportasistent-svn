@@ -301,6 +301,10 @@ SOURCE=.\res\4ftHypoteza.bmp
 # End Source File
 # Begin Source File
 
+SOURCE=.\res\attrLink.bmp
+# End Source File
+# Begin Source File
+
 SOURCE=.\res\attrLinkTable.bmp
 # End Source File
 # Begin Source File
@@ -314,6 +318,10 @@ SOURCE=.\res\Chapter.bmp
 # Begin Source File
 
 SOURCE=.\res\CSkeletonDoc.ico
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\include.bmp
 # End Source File
 # Begin Source File
 

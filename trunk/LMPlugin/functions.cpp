@@ -21,6 +21,7 @@
 #include "Task_Recordset.h"
 #include "tiHypothesis_Recordset.h"
 #include "TFTQuantifier_Recordset.h"
+#include "TCFQuantifier_Recordset.h"
 
 //dedek: docasne
 /*****/
@@ -71,6 +72,7 @@ CString fLMQuantifier (void* hSource)
 	quant_item item;
 
 	TFTQuantifier_Recordset rs ((CDatabase *) hSource);
+	TCFQuantifier_Recordset rsCF ((CDatabase *) hSource);
 
 	LPCTSTR q = "SELECT * \
 				 FROM taTask, tdFTQuantifier, tmMatrix, tsQuantifierType, tsTaskSubType \
@@ -236,6 +238,59 @@ CString fLMQuantifier (void* hSource)
 				}
 				ptquant->items.Add (item);
 			}
+			list.Add (ptquant);
+			rs.MoveNext();
+		}
+		rs.Close();
+	}
+	else return "";
+
+	q = "SELECT * \
+		 FROM taTask, tdCFQuantifier, tmMatrix, tsCFQuantifierType,\
+		      tsCFQuantifierValueType, tsCompareType, tsTaskSubType \
+		 WHERE taTask.MatrixID=tmMatrix.MatrixID \
+		   AND taTask.TaskSubTypeID=tsTaskSubType.TaskSubTypeID \
+		   AND tdCFQuantifier.TaskID=taTask.TaskID \
+		   AND tsCFQuantifierType.CFQuantifierTypeID=tdCFQuantifier.CFQuantifierTypeID \
+		   AND tsCFQuantifierValueType.CFQuantifierValueTypeID=tdCFQuantifier.CFQuantifierValueTypeID \
+		   AND tsCompareType.CompareTypeID=tdCFQuantifier.CompareTypeID";
+
+	if (rsCF.Open(AFX_DB_USE_DEFAULT_TYPE, q))
+	{
+		//iteration on query results
+		while (!rsCF.IsEOF())
+		{
+			ptquant = new (Quantifier_Meta);
+			ptquant->db_name = db_name;
+			ptquant->matrix_name = rsCF.m_Name2;
+			ptquant->name = rsCF.m_Name3;
+			ptquant->task_name = rsCF.m_Name;
+			ptquant->task_type = rsCF.m_Name6;
+			ptquant->type = "";
+			hlp.Format ("%d", rsCF.m_CFQuantifierID);
+			hlp = "quantCF" + hlp;
+			ptquant->id = hlp;
+			
+			item.name = "Value type";
+			item.value = rsCF.m_Name4;
+			ptquant->items.Add (item);
+
+			item.name = "From";
+			item.value = (LPCTSTR) (_bstr_t) rsCF.m_FromCol;
+			ptquant->items.Add (item);
+
+			item.name = "To";
+			item.value = (LPCTSTR) (_bstr_t) rsCF.m_ToCol;
+			ptquant->items.Add (item);
+
+			item.name = "Param";
+			item.value = (LPCTSTR) (_bstr_t) rsCF.m_ValuePar;
+			ptquant->items.Add (item);
+
+			item.name = "Comparation";
+			item.value = rsCF.m_ShortName3;
+			ptquant->items.Add (item);
+			
 			list.Add (ptquant);
 			rs.MoveNext();
 		}

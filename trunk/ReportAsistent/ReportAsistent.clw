@@ -2,13 +2,13 @@
 
 [General Info]
 Version=1
-LastClass=CTransformationsDialog
-LastTemplate=CDialog
+LastClass=
+LastTemplate=CRecordset
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "ReportAsistent.h"
 LastPage=0
 
-ClassCount=20
+ClassCount=18
 Class1=CReportAsistentApp
 Class2=CSkeletonDoc
 Class3=CSkeletonView
@@ -19,32 +19,30 @@ Resource1=IDD_ABOUTBOX
 Resource2=IDR_MAINFRAME
 Class5=CAboutDlg
 Resource3=IDD_PROPERTY_EDITOR (English (U.S.))
-Resource4=IDD_ABOUTBOX (English (U.S.))
+Resource4=IDD_DIALOGTEXT (English (U.S.))
 Class6=CElementTextDialog
-Resource5=IDD_SIMPLE_FILTER_DIALOG (English (U.S.))
+Resource5=IDD_ATTRIBUTE_LINK_TABLE_DIALOG (English (U.S.))
 Class7=CSimpleFilterDialog
 Resource6=IDD_DIALOG_PARAGRAPH (English (U.S.))
 Class8=CGenerateDialog
 Resource7=IDD_GENERATE_DIALOG (English (U.S.))
 Class9=CSourcesDialog
-Resource8=IDD_ATTRIBUTE_LINK_DIALOG (English (U.S.))
+Resource8=IDD_SOURCES_DIALOG (English (U.S.))
 Class10=CActiveElementDialog
 Resource9=IDD_ACTIVE_ELEMENT_DIALOG (English (U.S.))
 Class11=CTransformationsDialog
 Class12=Tcategory_Recordset
-Resource10=IDD_DIALOGTEXT (English (U.S.))
+Resource10=IDD_TRANSFORMATIONS_DIALOG (English (U.S.))
 Class13=CAttributeLinkDialog
-Resource11=IDD_SOURCES_DIALOG (English (U.S.))
+Resource11=IDD_ABOUTBOX (English (U.S.))
 Class14=CAttributeLinkTableDialog
 Resource12=IDD_DIALOG_CHAPTER (English (U.S.))
 Class15=CElementParagraphDialog
 Class16=CElementChapterDialog
 Class17=CElementDialogBase
-Class18=TEmpty_Cedents_Recordset
-Resource13=IDD_TRANSFORMATIONS_DIALOG (English (U.S.))
-Class19=Task_Recordset
-Resource14=IDD_ATTRIBUTE_LINK_TABLE_DIALOG (English (U.S.))
-Class20=CPropertyEditor
+Class18=CPropertyEditor
+Resource13=IDD_SIMPLE_FILTER_DIALOG (English (U.S.))
+Resource14=IDD_ATTRIBUTE_LINK_DIALOG (English (U.S.))
 Resource15=IDR_MAINFRAME (English (U.S.))
 
 [CLS:CReportAsistentApp]
@@ -833,15 +831,6 @@ ImplementationFile=ElementDialogBase.cpp
 BaseClass=CDialog
 Filter=D
 
-[CLS:TEmpty_Cedents_Recordset]
-Type=0
-HeaderFile=TEmpty_Cedents_Recordset.h
-ImplementationFile=TEmpty_Cedents_Recordset.cpp
-BaseClass=CRecordset
-Filter=N
-VirtualFilter=r
-LastObject=TEmpty_Cedents_Recordset
-
 [DB:TEmpty_Cedents_Recordset]
 DB=1
 DBType=ODBC
@@ -1069,15 +1058,6 @@ Column32=[wUpdateVer], 4, 4
 Column33=[UserID], 4, 4
 Column34=[tmQuantity].[Notice], 12, 510
 
-[CLS:Task_Recordset]
-Type=0
-HeaderFile=Task_Recordset.h
-ImplementationFile=Task_Recordset.cpp
-BaseClass=CRecordset
-Filter=N
-VirtualFilter=r
-LastObject=Task_Recordset
-
 [DB:Task_Recordset]
 DB=1
 DBType=ODBC
@@ -1187,4 +1167,62 @@ BaseClass=CDialog
 Filter=D
 LastObject=CPropertyEditor
 VirtualFilter=dWC
+
+[DB:TCFQuantifier_Recordset]
+DB=1
+DBType=ODBC
+ColumnCount=53
+Column1=[taTask].[TaskID], 4, 4
+Column2=[taTask].[Name], 12, 510
+Column3=[taTask].[TaskSubTypeID], 4, 4
+Column4=[TaskGroupID], 4, 4
+Column5=[UserID], 4, 4
+Column6=[taTask].[MatrixID], 4, 4
+Column7=[ParamBASE], 4, 4
+Column8=[ParamBASERelativ], -7, 1
+Column9=[ReadOnly], -7, 1
+Column10=[HypothesisGenerated], -7, 1
+Column11=[GenerationInterrupted], -7, 1
+Column12=[GenerationNrOfTests], 4, 4
+Column13=[GenerationStartTime], 11, 16
+Column14=[GenerationTotalTime], 4, 4
+Column15=[taTask].[Notice], 12, 510
+Column16=[CFQuantifierID], 4, 4
+Column17=[tdCFQuantifier].[TaskID], 4, 4
+Column18=[tdCFQuantifier].[CFQuantifierTypeID], 4, 4
+Column19=[FromCol], 4, 4
+Column20=[ToCol], 4, 4
+Column21=[tdCFQuantifier].[CompareTypeID], 4, 4
+Column22=[ValuePar], 8, 8
+Column23=[tdCFQuantifier].[CFQuantifierValueTypeID], 4, 4
+Column24=[Threshold], 8, 8
+Column25=[Formula], -1, 2147483646
+Column26=[tdCFQuantifier].[Ord], 4, 4
+Column27=[tdCFQuantifier].[Notice], 12, 510
+Column28=[tmMatrix].[MatrixID], 4, 4
+Column29=[tmMatrix].[Name], 12, 100
+Column30=[Initialised], -7, 1
+Column31=[RecordCount], 4, 4
+Column32=[tmMatrix].[Notice], 12, 510
+Column33=[wSavedCountUsed], 4, 4
+Column34=[tsCFQuantifierType].[CFQuantifierTypeID], 4, 4
+Column35=[tsCFQuantifierType].[Name], 12, 100
+Column36=[tsCFQuantifierType].[ShortName], 12, 40
+Column37=[tsCFQuantifierType].[Ord], 4, 4
+Column38=[tsCFQuantifierType].[Notice], 12, 510
+Column39=[tsCFQuantifierValueType].[CFQuantifierValueTypeID], 4, 4
+Column40=[tsCFQuantifierValueType].[Name], 12, 100
+Column41=[tsCFQuantifierValueType].[ShortName], 12, 40
+Column42=[tsCFQuantifierValueType].[Ord], 4, 4
+Column43=[tsCFQuantifierValueType].[Notice], 12, 510
+Column44=[tsCompareType].[CompareTypeID], 4, 4
+Column45=[tsCompareType].[Name], 12, 100
+Column46=[tsCompareType].[ShortName], 12, 40
+Column47=[tsCompareType].[Ord], 4, 4
+Column48=[tsCompareType].[Notice], 12, 510
+Column49=[tsTaskSubType].[TaskSubTypeID], 4, 4
+Column50=[tsTaskSubType].[Name], 12, 100
+Column51=[tsTaskSubType].[ShortName], 12, 40
+Column52=[tsTaskSubType].[Ord], 4, 4
+Column53=[tsTaskSubType].[Notice], 12, 510
 
