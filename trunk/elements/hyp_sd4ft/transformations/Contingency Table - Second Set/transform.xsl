@@ -43,66 +43,66 @@
 
       
 
-	<xsl:template match="hyp_4ft">
+	<xsl:template match="hyp_sd4ft">
 		
 		<xsl:variable name="id_base" select="@id" />
-		<xsl:variable name="sum_1row" select="@a + @b" />
-		<xsl:variable name="sum_2row" select="@c + @d" />
-		<xsl:variable name="sum_1col" select="@a + @c" />
-		<xsl:variable name="sum_2col" select="@b + @d" />
-		<xsl:variable name="sum_total" select="@a + @b + @c + @d" />
+		<xsl:variable name="sum_1row" select="@e + @f" />
+		<xsl:variable name="sum_2row" select="@g + @h" />
+		<xsl:variable name="sum_1col" select="@e + @g" />
+		<xsl:variable name="sum_2col" select="@f + @h" />
+		<xsl:variable name="sum_total" select="@e + @f + @g + @h" />
 		<xsl:variable name="rozmer_tabulky"><xsl:if test="$SumShow='false'">3</xsl:if><xsl:if test="$SumShow='true'">4</xsl:if></xsl:variable>
 		
 		
-		<xsl:variable name="a">
+		<xsl:variable name="e">
 			<xsl:choose>
 				<xsl:when test="$TypeOfValues='Absolute'">
-					<xsl:value-of select="@a" />
+					<xsl:value-of select="@e" />
 				</xsl:when>
 			</xsl:choose>
 			<xsl:choose>
 				<xsl:when test="$TypeOfValues='Relative'">
-					<xsl:value-of select="round((@a div $sum_total) * 100)" />
+					<xsl:value-of select="round((@e div $sum_total) * 100)" />
 				</xsl:when>
 			</xsl:choose>
 		</xsl:variable>
 		
 		
-		<xsl:variable name="b">
+		<xsl:variable name="f">
 			<xsl:choose>
 				<xsl:when test="$TypeOfValues='Absolute'">
-					<xsl:value-of select="@b" />
+					<xsl:value-of select="@f" />
 				</xsl:when>
 			</xsl:choose>
 			<xsl:choose>
 				<xsl:when test="$TypeOfValues='Relative'">
-					<xsl:value-of select="round((@b div $sum_total) * 100)" />
+					<xsl:value-of select="round((@f div $sum_total) * 100)" />
 				</xsl:when>
 			</xsl:choose>
 		</xsl:variable>
 		
-		<xsl:variable name="c">
+		<xsl:variable name="g">
 			<xsl:choose>
 				<xsl:when test="$TypeOfValues='Absolute'">
-					<xsl:value-of select="@c" />
+					<xsl:value-of select="@g" />
 				</xsl:when>
 			</xsl:choose>
 			<xsl:choose>
 				<xsl:when test="$TypeOfValues='Relative'">
-					<xsl:value-of select="round((@c div $sum_total) * 100)" />
+					<xsl:value-of select="round((@g div $sum_total) * 100)" />
 				</xsl:when>
 			</xsl:choose>
 		</xsl:variable>
 		
-		<xsl:variable name="d">
+		<xsl:variable name="h">
 			<xsl:choose>
 				<xsl:when test="$TypeOfValues='Absolute'">
-					<xsl:value-of select="@d" />
+					<xsl:value-of select="@h" />
 				</xsl:when>
 			</xsl:choose>
 			<xsl:choose>
 				<xsl:when test="$TypeOfValues='Relative'">
-					<xsl:value-of select="round((@d div $sum_total) * 100)" />
+					<xsl:value-of select="round((@h div $sum_total) * 100)" />
 				</xsl:when>
 			</xsl:choose>
 		</xsl:variable>
@@ -210,20 +210,20 @@
 							<xsl:attribute name="id"><xsl:value-of select="$id_base"/>r2d2</xsl:attribute>
 							<xsl:if test="$ColourHighlighting='true'">
 								<xsl:attribute name="bgcolor">
-									<xsl:value-of select="dedek:RGB(number($a) , number($total))" />
+									<xsl:value-of select="dedek:RGB(number($e) , number($total))" />
 								</xsl:attribute>
 							</xsl:if>
-							<text id="{$id_base}r2d2text"><xsl:value-of select="$a" /></text> 
+							<text id="{$id_base}r2d2text"><xsl:value-of select="$e" /></text> 
 					</xsl:element>
 					
 					<xsl:element name="td">
 							<xsl:attribute name="id"><xsl:value-of select="$id_base"/>r2d3</xsl:attribute>
 							<xsl:if test="$ColourHighlighting='true'">
 								<xsl:attribute name="bgcolor">
-									<xsl:value-of select="dedek:RGB(number($b) , number($total))" />
+									<xsl:value-of select="dedek:RGB(number($f) , number($total))" />
 								</xsl:attribute>
 							</xsl:if>
-							<text id="{$id_base}r2d3text"><xsl:value-of select="$b" /></text> 
+							<text id="{$id_base}r2d3text"><xsl:value-of select="$f" /></text> 
 					</xsl:element>
 						
 					
@@ -250,20 +250,20 @@
 							<xsl:attribute name="id"><xsl:value-of select="$id_base"/>r3d2</xsl:attribute>
 							<xsl:if test="$ColourHighlighting='true'">
 								<xsl:attribute name="bgcolor">
-									<xsl:value-of select="dedek:RGB(number($c) , number($total))" />
+									<xsl:value-of select="dedek:RGB(number($g) , number($total))" />
 								</xsl:attribute>
 							</xsl:if>
-							<text id="{$id_base}r3d2text"><xsl:value-of select="$c" /></text> 
+							<text id="{$id_base}r3d2text"><xsl:value-of select="$g" /></text> 
 					</xsl:element>
 					
 					<xsl:element name="td">
 							<xsl:attribute name="id"><xsl:value-of select="$id_base"/>r3d3</xsl:attribute>
 							<xsl:if test="$ColourHighlighting='true'">
 								<xsl:attribute name="bgcolor">
-									<xsl:value-of select="dedek:RGB(number($d) , number($total))" />
+									<xsl:value-of select="dedek:RGB(number($h) , number($total))" />
 								</xsl:attribute>
 							</xsl:if>
-							<text id="{$id_base}r3d3text"><xsl:value-of select="$d" /></text> 
+							<text id="{$id_base}r3d3text"><xsl:value-of select="$h" /></text> 
 					</xsl:element>
 						
 					

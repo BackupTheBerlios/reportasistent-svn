@@ -40,7 +40,8 @@
   <!--default values of variables-->
   
   <visualization_values>
-      <variable name="GraphType" value="xlPie" />
+      <variable name="GraphType" value="xl3DColumn" />
+      <variable name="GraphTitle" value="CF graph" />
       <variable name="LegendShow" value="false"/>
       <variable name="GraphWidth" value="1"/>
       <variable name="GraphHeight" value="0,75"/>

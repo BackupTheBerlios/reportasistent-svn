@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="windows-1250"?>
+<visualization>
+
+  <visualization_options active_element="SD-4ft hypothesis" visualization_label="Contingency Table - Set Differences">
+
+    <!--setting whether to show a sum values-->
+    <enum_option variable_name="SumShow" title="Show sum values">
+       <enum_item value="true" label="yes"/>  
+       <enum_item value="false" label="no"/>  
+    </enum_option>
+
+
+    <!--setting whether to colour-highlight table fields-->
+    <enum_option variable_name="ColourHighlighting" title="Colour-highlight table fields">
+       <enum_item value="true" label="yes"/>  
+       <enum_item value="false" label="no"/>  
+    </enum_option>
+
+
+    <!--absolute or relative values in contingency table-->
+    <enum_option variable_name="TypeOfValues" title="Type of values in contingency table">
+       <enum_item value="Absolute" label="Absolute"/>  
+       <enum_item value="Relative" label="Relative (percentual)"/>  
+    </enum_option>
+
+    
+  </visualization_options>
+
+  
+  
+  <!--default values of variables-->
+  
+  <visualization_values>
+      <variable name="SumShow" value="false" />
+      <variable name="ColourHighlighting" value="false"/>
+      <variable name="TypeOfValues" value="Absolute"/>
+  </visualization_values>
+
+</visualization>

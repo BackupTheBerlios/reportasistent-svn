@@ -8,10 +8,10 @@
 	
 	<!-- Promenne - nastaveni vizualizaci-->
 <xsl:variable name="GraphType">xl3DColumn</xsl:variable>
+<xsl:variable name="GraphTitle">KL Graph</xsl:variable>
 <xsl:variable name="LegendShow">false</xsl:variable>
 <xsl:variable name="GraphWidth">1</xsl:variable>
 <xsl:variable name="GraphHeight">0,75</xsl:variable>
-<xsl:variable name="GraphTitle">KL graph</xsl:variable>
 	
 
 <xsl:key name="key_ti_attribute" match="ti_attribute" use="@id" />	

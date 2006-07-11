@@ -35,6 +35,7 @@
   
   <visualization_values>
       <variable name="GraphType" value="xl3DColumn" />
+      <variable name="GraphTitle" value="KL Graph" />
       <variable name="LegendShow" value="false"/>
       <variable name="GraphWidth" value="1"/>
       <variable name="GraphHeight" value="0,75"/>

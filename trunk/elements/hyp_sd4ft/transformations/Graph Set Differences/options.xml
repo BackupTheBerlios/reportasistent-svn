@@ -39,7 +39,7 @@
   <visualization_values>
       <variable name="GraphTitle" value="SD-4ft Graph - set differences" />
       <variable name="GraphType" value="xl3DColumnClustered" />
-      <variable name="LegendShow" value="false"/>
+      <variable name="LegendShow" value="true"/>
       <variable name="GraphWidth" value="1"/>
       <variable name="GraphHeight" value="0,75"/>
   </visualization_values>

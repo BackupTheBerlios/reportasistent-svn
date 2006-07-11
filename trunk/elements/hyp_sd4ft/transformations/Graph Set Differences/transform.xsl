@@ -9,7 +9,7 @@
 	<!-- Promenne - nastaveni vizualizaci-->
 <xsl:variable name="GraphType">xl3DColumnClustered</xsl:variable>
 <xsl:variable name="GraphTitle">SD-4ft Graph - set differences</xsl:variable>
-<xsl:variable name="LegendShow">false</xsl:variable>
+<xsl:variable name="LegendShow">true</xsl:variable>
 <xsl:variable name="GraphWidth">1</xsl:variable>
 <xsl:variable name="GraphHeight">0,75</xsl:variable>
 

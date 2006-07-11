@@ -39,18 +39,18 @@
 <xsl:key name="key_ti_attribute" match="ti_attribute" use="@id" />
 
 <!-- klic - hypotezy (Kody: kvuli pocitani sum sloupcu - mozna zkusit najit lepsi reseni)-->
-<xsl:key name="key_hyp_kl" match="hyp_kl" use="@id" />
+<xsl:key name="key_hyp_sdkl" match="hyp_sdkl" use="@id" />
 
 
 <!-- Promenne - nastaveni vizualizaci-->
-<xsl:variable name="SumShow">true</xsl:variable>
+<xsl:variable name="SumShow">false</xsl:variable>
 <xsl:variable name="ShowLegend">true</xsl:variable>
 <xsl:variable name="ColourHighlighting">false</xsl:variable>
 <xsl:variable name="TypeOfValues">Absolute</xsl:variable>
 
       
 
-	<xsl:template match="hyp_kl">
+	<xsl:template match="hyp_sdkl">
 		
 		<xsl:variable name="id_base" select="@id" />
 		
@@ -65,12 +65,12 @@
 		</xsl:variable>
 
 		
-		<xsl:variable name="sum_of_values" select="@sum" />
+		<xsl:variable name="sum_of_values" select="@sum1" />
 		
 		<xsl:variable name="total">
 			<xsl:choose>
 				<xsl:when test="$TypeOfValues='Absolute'">
-					<xsl:value-of select="@sum" />
+					<xsl:value-of select="@sum1" />
 				</xsl:when>
 				<xsl:when test="$TypeOfValues='Relative'">
 					100
@@ -216,7 +216,7 @@
 				
 						<xsl:for-each select="tab[position()=1]/r[position()=1]/c">
 							<xsl:variable name="col_number" select="position()" />	
-							<xsl:variable name="sum_of_column" select="sum(key('key_hyp_kl',$hyp_id)/tab[position()=1]/r/c[position()=$col_number]/@val)" />
+							<xsl:variable name="sum_of_column" select="sum(key('key_hyp_sdkl',$hyp_id)/tab[position()=1]/r/c[position()=$col_number]/@val)" />
 						
 							<xsl:element name="td">
 								<xsl:attribute name="id">

@@ -43,7 +43,7 @@
 
       
 
-	<xsl:template match="hyp_4ft">
+	<xsl:template match="hyp_sd4ft">
 		
 		<xsl:variable name="id_base" select="@id" />
 		<xsl:variable name="sum_1row" select="@a + @b" />
