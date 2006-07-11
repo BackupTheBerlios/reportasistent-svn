@@ -1,21 +1,17 @@
 <?xml version="1.0" encoding="windows-1250"?>
 <visualization>
 
-  <visualization_options active_element="4ft hypothesis" visualization_label="Graph">
+  <visualization_options active_element="SD-4ft hypothesis" visualization_label="Graph of first set">
 
     <!-- setting the graph title -->
     <string_option variable_name="GraphTitle" title="Graph title" />    
 
-	<!-- setting which graph to show-->
-	<enum_option variable_name="GraphNumber" title="Graph type">  
-       <enum_item  value="graph1" label="Graph1 (First set)"/>
-       <enum_item  value="graph2" label="Graph2 (Second set)"/>
-       <enum_item  value="both" label="Graph1 and Graph2"/>
-    </enum_option>
 
     <!--setting of graph type-->
     <enum_option variable_name="GraphType" title="Graph type">  
-       <enum_item  value="xl3DColumn" label="3D Column"/>
+       <enum_item  value="xlColumnClustered" label="Column - Clustered"/>
+       <enum_item  value="xlColumnStacked" label="Column - Stacked (absolute values)"/>
+       <enum_item  value="xlColumnStacked100" label="Column - Stacked (percentual values)"/>
        <enum_item  value="xl3DColumnClustered" label="3D Column - Clustered"/>
        <enum_item  value="xl3DColumnStacked" label="3D Column - Stacked (absolute values)"/>
        <enum_item  value="xl3DColumnStacked100" label="3D Column - Stacked (percentual values)"/>
@@ -41,9 +37,8 @@
   <!--default values of variables-->
   
   <visualization_values>
-      <variable name="GraphTitle" value="SD-4ft Graph" />
-      <variable name="GraphNumber" value="both" />
-      <variable name="GraphType" value="xl3DColumn" />
+      <variable name="GraphTitle" value="SD-4ft Graph - set differences" />
+      <variable name="GraphType" value="xl3DColumnClustered" />
       <variable name="LegendShow" value="false"/>
       <variable name="GraphWidth" value="1"/>
       <variable name="GraphHeight" value="0,75"/>
