@@ -4,8 +4,8 @@
 #include "stdafx.h"
 #include "ReportAsistent.h"
 #include "TransformationsDialog.h"
-#include "AttributeLinkTableDialog.h"
 #include "PropertyEditor.h"
+#include "AttributeLinkTableDialog.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -437,6 +437,127 @@ BOOL CTransformationsDialog::IsSelectedTransformationAttrLinkTable(int transform
 	return transform_index == m_SelectedList.FindString(transform_index-1, ATTR_TL_STR);
 }
 
+
+CString CTransformationsDialog::FindOptionEnumItemLabelFromValue(
+							MSXML2::IXMLDOMNodePtr & options_node,
+							LPCTSTR variable_name,
+							LPCTSTR otion_value)
+{
+	
+    CString value_label_query_str;
+	value_label_query_str.Format(
+		"/visualization/visualization_options/enum_option[@variable_name=\"%s\"]/enum_item[@value = \"%s\"]/@label",
+		variable_name, otion_value);
+
+	return (LPCTSTR) options_node->selectSingleNode((LPCTSTR) value_label_query_str)->text;
+}
+
+CString CTransformationsDialog::FindOptionEnumItemValueFromLabel(
+							MSXML2::IXMLDOMNodePtr & options_node,
+							LPCTSTR variable_name,
+							LPCTSTR otion_label)
+{
+	
+    CString label_query_str;
+	label_query_str.Format(
+		"/visualization/visualization_options/enum_option[@variable_name=\"%s\"]/enum_item[@label = \"%s\"]/@value",
+		variable_name, otion_label);
+
+	return (LPCTSTR) options_node->selectSingleNode((LPCTSTR) label_query_str)->text;
+}
+
+CProperty * CTransformationsDialog::CreateDoubleProperty(
+					MSXML2::IXMLDOMElementPtr & option_element,
+					MSXML2::IXMLDOMNodePtr & options_node,
+					LPCTSTR current_value)
+{
+	double min = -1.7E+308;
+	double max = 1.7E+308;
+
+	try 
+	{
+		min = option_element->getAttribute("min_value");
+	}
+	catch (...)
+	{
+		min = -1.7E+308;
+	}
+
+	try 
+	{
+		max = option_element->getAttribute("max_value");
+	}
+	catch (...)
+	{
+		max = 1.7E+308;
+	}
+
+
+	return new CDoubleProperty(
+		(_bstr_t) option_element->getAttribute("title"), //label
+		(_variant_t) current_value, min, max);	//default value
+}
+
+CProperty * CTransformationsDialog::CreateIntProperty(
+					MSXML2::IXMLDOMElementPtr & option_element,
+					MSXML2::IXMLDOMNodePtr & options_node,
+					LPCTSTR current_value)
+{
+	int min = 0x80000000;
+	int max = 0x7FFFFFFF;
+
+
+	try 
+	{
+		min = (long) option_element->getAttribute("min_value");
+	}
+	catch (...)
+	{
+		min = 0x80000000;
+	}
+
+	try 
+	{
+		max = (long) option_element->getAttribute("max_value");
+	}
+	catch (...)
+	{
+		max = 0x7FFFFFFF;
+	}
+
+
+	return new CIntProperty(
+		(_bstr_t) option_element->getAttribute("title"),  //label
+		(long) (_variant_t) current_value, min, max);  //default value
+}
+
+
+CProperty * CTransformationsDialog::CreateEnumProperty(
+					MSXML2::IXMLDOMElementPtr & option_element,
+					MSXML2::IXMLDOMNodePtr & options_node,
+					LPCTSTR current_value)
+{
+    CString variable_name = 
+		(LPCTSTR) (_bstr_t) option_element->getAttribute("variable_name");
+
+	CEnumProperty * ep = new CEnumProperty(
+		(_bstr_t) option_element->getAttribute("title"),  //label
+        FindOptionEnumItemLabelFromValue(options_node, variable_name, current_value));  //default value
+
+      //napln combo hodnotami
+      MSXML2::IXMLDOMNodeListPtr enum_nodes = 
+		  option_element->selectNodes("enum_item/@label");
+      
+	  for (int b=0; b < enum_nodes->length; b++)
+      {
+        ep->AddCombostr(enum_nodes->item[b]->text);
+      }
+      enum_nodes.Release();
+
+	return ep;
+}
+
+
 void CTransformationsDialog::ConfigureTransformation(int transform_index)
 {
 	ASSERT(transform_index >= 0);
@@ -486,34 +607,13 @@ void CTransformationsDialog::ConfigureTransformation(int transform_index)
 
         
     
+
     if (option_type == "enum_option")
     {
-      //enum
-   		
-      
-      
-      
+		//enum
 
-    
-      //value_label_query_str
-      CString value_label_query_str;
-      value_label_query_str.Format("/visualization/visualization_options/enum_option[@variable_name=\"%s\"]/enum_item[@value = \"%s\"]/@label",
-        (LPCTSTR) variable_name, (LPCTSTR) value);
-
-      CEnumProperty * ep = new CEnumProperty(
-        (_bstr_t) option_element->getAttribute("title"),  //label
-        options_node->selectSingleNode((LPCTSTR) value_label_query_str)->text);  //default value
-
-      
-      //napln combo hodnotami
-      MSXML2::IXMLDOMNodeListPtr enum_nodes = option_element->selectNodes("enum_item/@label");
-      for (int b=0; b < enum_nodes->length; b++)
-      {
-        ep->AddCombostr(enum_nodes->item[b]->text);
-      }
-      enum_nodes.Release();
-
-      property_editor.AddProperty(ep);
+		property_editor.AddProperty(
+		  CreateEnumProperty(option_element, options_node, value));
 
     }
     else if (option_type == "string_option")
@@ -530,65 +630,16 @@ void CTransformationsDialog::ConfigureTransformation(int transform_index)
       {
         //float
 
-        double min = -1.7E+308;
-        double max = 1.7E+308;
-
-        
-        try 
-        {
-          min = option_element->getAttribute("min_value");
-        }
-        catch (...)
-        {
-          min = -1.7E+308;
-        }
-
-        try 
-        {
-          max = option_element->getAttribute("max_value");
-        }
-        catch (...)
-        {
-          max = 1.7E+308;
-        }
-        
-        
-        property_editor.AddProperty(new CDoubleProperty(
-          (_bstr_t) option_element->getAttribute("title"),  //label
-          (_variant_t) value, min, max));  //default value
+		  property_editor.AddProperty(
+			  CreateDoubleProperty(option_element, options_node, value));
       }
       else if ((_bstr_t) option_element->getAttribute("num_type") == _bstr_t("integer"))
       {
         //integer
-
-        int min = 0x80000000;
-        int max = 0x7FFFFFFF;
-
-        
-        try 
-        {
-          min = (long) option_element->getAttribute("min_value");
-        }
-        catch (...)
-        {
-          min = 0x80000000;
-        }
-
-        try 
-        {
-          max = (long) option_element->getAttribute("max_value");
-        }
-        catch (...)
-        {
-          max = 0x7FFFFFFF;
-        }
-        
-        
-        property_editor.AddProperty(new CIntProperty(
-          (_bstr_t) option_element->getAttribute("title"),  //label
-//          (long) (_variant_t) value, min, max));  //default value
-          0x7FFFFFFF, min, max));  //default value
-        
+		  
+  		  property_editor.AddProperty(
+			  CreateIntProperty(option_element, options_node, value));
+  
       }
     }
 
@@ -596,10 +647,34 @@ void CTransformationsDialog::ConfigureTransformation(int transform_index)
   }
 
 
-  property_editor.DoModal();
-
-  option_nodes.Release();
 
   
+	if (IDOK == property_editor.DoModal())
+	{
+		//ulozit hodnoty z property editoru
+		for (int a=0; a < option_nodes->length; a++)
+		{
+		    MSXML2::IXMLDOMElementPtr option_element = option_nodes->item[a];
+			CString variable_name = (LPCTSTR) (_bstr_t) option_element->getAttribute("variable_name");
+			
+			CString value_query_str;
+		    value_query_str.Format("visualization_values/variable[@name=\"%s\"]/@value", (LPCTSTR) variable_name);
+			
+			//nastav hodnotu parametru value
+			if (option_element->nodeName == _bstr_t("enum_option"))
+			{
+				transformation_element->selectSingleNode((LPCTSTR) value_query_str)->text = 
+					(LPCTSTR) FindOptionEnumItemValueFromLabel(
+						options_node, variable_name, property_editor.GetValueOfProperty(a)->GetValue());
+			}
+			else
+			{
+				transformation_element->selectSingleNode((LPCTSTR) value_query_str)->text = 
+					property_editor.GetValueOfProperty(a)->GetValue();
+			}
+			option_element.Release();
+		}
+	}
 
+	option_nodes.Release();
 }

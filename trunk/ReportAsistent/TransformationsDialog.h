@@ -8,6 +8,8 @@
 // TransformationsDialog.h : header file
 //
 
+#include "PropertyEditor.h"
+
 /////////////////////////////////////////////////////////////////////////////
 // CTransformationsDialog dialog
 
@@ -58,6 +60,34 @@ private:
 	MSXML2::IXMLDOMElementPtr & m_active_element;
 	MSXML2::IXMLDOMElementPtr m_cloned_output_element;
 	//zmeny se provadeji v klonu, pokud uzivatel zmacken OK, puvodni element (m_active_element) se nahradi klonem
+
+private:
+	CString static FindOptionEnumItemLabelFromValue(
+							MSXML2::IXMLDOMNodePtr & options_node,
+							LPCTSTR variable_name,
+							LPCTSTR otion_value);
+
+	CString static FindOptionEnumItemValueFromLabel(
+							MSXML2::IXMLDOMNodePtr & options_node,
+							LPCTSTR variable_name,
+							LPCTSTR otion_value);
+
+	static CProperty * CreateEnumProperty(
+					MSXML2::IXMLDOMElementPtr & option_element,
+					MSXML2::IXMLDOMNodePtr & options_node,
+					LPCTSTR current_value);
+
+	static CProperty * CreateDoubleProperty(
+					MSXML2::IXMLDOMElementPtr & option_element,
+					MSXML2::IXMLDOMNodePtr & options_node,
+					LPCTSTR current_value);
+
+	static CProperty * CreateIntProperty(
+					MSXML2::IXMLDOMElementPtr & option_element,
+					MSXML2::IXMLDOMNodePtr & options_node,
+					LPCTSTR current_value);
+
+
 };
 
 //{{AFX_INSERT_LOCATION}}

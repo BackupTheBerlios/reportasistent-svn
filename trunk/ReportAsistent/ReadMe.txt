@@ -75,6 +75,9 @@ CGeneralManager * m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager;
 
 dedek TODO:
 
+doladit ukladani int hodnoty property editoru - ve stringu to mozna muze vratit desetinne cislo 
+
+
 zavirat normal.dot - jinak ji to odmita menit v jinych spustenych wordech
 
 ?styly textu: combobox editovatelny a nove styly se vytvori v novem do dokumentu?
