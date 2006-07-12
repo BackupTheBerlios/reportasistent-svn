@@ -70,51 +70,19 @@ BOOL CReportAsistentApp::InitInstance()
 
 
 
-	
-	
-	
-	
-//dedek ladici:
-/******
-	CPropertyEditor pe("test prop");
-
-	pe.AddProperty(new CDoubleProperty("int prop1", 1.7E+308));
-	pe.AddProperty(new CDoubleProperty("int prop2", 50, -1, 1));
-	pe.AddProperty(new CDoubleProperty("int prop3", 0, -1, 2));
-	pe.AddProperty(new CDoubleProperty("int prop4", -1, 0.99999999999999999, 3));
-
-	CString str;
-	for (int a=0; a< 50; a++)
-	{
-		str.Format("text%d", a);
-		CEnumProperty * ep = new CEnumProperty(str, "enum4");
-		CString s2;
-		for (int b=0; b<8; b++)
-		{
-			s2.Format("enum%d", b);
-			ep->AddCombostr(s2);
-		}
-		pe.AddProperty(ep);
-	}
-	pe.AddProperty(new CStringProperty("konec", "kone4"));
-
-
-	pe.DoModal();
-/******/
-
-
-
-
-
-
-
-
 	// Change the registry key under which our settings are stored.
 	// TODO: You should modify this string to be something appropriate
 	// such as the name of your company or organization.
-	SetRegistryKey(_T("Local AppWizard-Generated Applications"));
+	SetRegistryKey(_T("LISp-Miner"));
 
 	LoadStdProfileSettings();  // Load standard INI file options (including MRU)
+
+
+	//dedek
+	//zapis do windows registry
+	AfxGetApp()->WriteProfileString("Settings", "ExeFileDirectory", 
+		m_pGeneralManager->DirectoriesManager.getExeFileDirectory());
+
 
 	// Register the application's document templates.  Document templates
 	//  serve as the connection between documents, frame windows and views.

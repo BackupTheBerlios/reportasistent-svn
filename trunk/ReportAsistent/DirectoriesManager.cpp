@@ -31,6 +31,8 @@ CDirectoriesManager::CDirectoriesManager()
 
 	//smaze posledeni tri lomitka: "D:\lmra\ReportAsistent\Debug\ReportAsistent.exe" -> "D:\lmra"
 	PathFindFileName(module_path)[-1] = 0;
+	exe_dir = module_path;
+
 	PathFindFileName(module_path)[-1] = 0;
 	PathFindFileName(module_path)[-1] = 0;
 
@@ -70,4 +72,14 @@ CString CDirectoriesManager::getLMRA_WB_WordLoaderPath()
 CString CDirectoriesManager::getAttrLinkTableStylesDirectory()
 {
 	return application_root_path + "\\XML\\attr_link_table_styles";
+}
+
+CString CDirectoriesManager::getApplicationRoot()
+{
+	return application_root_path;
+}
+
+CString CDirectoriesManager::getExeFileDirectory()
+{
+	return exe_dir;
 }

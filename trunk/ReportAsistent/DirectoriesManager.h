@@ -12,6 +12,8 @@
 class CDirectoriesManager  
 {
 public:
+	CString getExeFileDirectory();
+	CString getApplicationRoot();
 	CString getAttrLinkTableStylesDirectory();
 	CString getLMRA_WB_WordLoaderPath();
 	CString getXMLFilesDirectory();
@@ -24,6 +26,7 @@ public:
 
 private:
 	CString application_root_path;
+	CString exe_dir;
 };
 
 #endif // !defined(AFX_DIRECTORIESMANAGER_H__230CE075_CAD7_4653_B7B5_39D4A6DC3DDD__INCLUDED_)
