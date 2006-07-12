@@ -197,7 +197,7 @@ MSXML2::IXMLDOMNodePtr CAElInfo::getTranformationNode(int tr_index)
 	ASSERT(tr_index >= 0);
 	ASSERT(tr_index < getTranformationsCount());
 
-	return m_transformations[tr_index]->doc;
+	return m_transformations[tr_index]->doc->documentElement;
 }
 
 MSXML2::IXMLDOMNodePtr CAElInfo::getTranformationOptionsDoc(int tr_index)
@@ -217,3 +217,6 @@ int CAElInfo::FindTransformationByName(LPCTSTR tr_name)
 
 	return -1;
 }
+
+
+

@@ -75,8 +75,10 @@ CGeneralManager * m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager;
 
 dedek TODO:
 
-doladit ukladani int hodnoty property editoru - ve stringu to mozna muze vratit desetinne cislo 
+otestovat: co kdyz se transformace jmenuje stejne jako * attrlink table *
 
+doladit ukladani int hodnoty property editoru - ve stringu to mozna muze vratit desetinne cislo 
+-hotovo nemuze
 
 zavirat normal.dot - jinak ji to odmita menit v jinych spustenych wordech
 

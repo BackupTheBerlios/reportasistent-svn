@@ -134,7 +134,7 @@ void CAElTransform::ProcessAllTransformations(MSXML2::IXMLDOMNodePtr & target, M
 
 	MSXML2::IXMLDOMNodeListPtr tranformations; 
 	tranformations = m_active_element->selectNodes("output/transformation");
-	
+
 	for (int a=0; a<tranformations->length; a++)
 	{
 		//sem prijde rozlyseni na attr_link_table
@@ -143,9 +143,22 @@ void CAElTransform::ProcessAllTransformations(MSXML2::IXMLDOMNodePtr & target, M
 
 		CString transformation_type_str = (LPCTSTR) (_bstr_t) el_transformation->getAttribute("type");
 
+
+		//nacteni ransformace	
+		CAElInfo * el_info = m.getActiveElementInfo(m.IdentifyElement(m_active_element));
+
+		MSXML2::IXMLDOMNodePtr & transformation_node = el_info->getTranformationNode(
+			el_info->FindTransformationByName((_bstr_t) el_transformation->getAttribute("name")));
+
+
 		if (transformation_type_str == "simple")
 		{
-			ProcessSingleTransformation(target, destination_parent, el_transformation);		
+			ProcessSingleTransformation(target, destination_parent, transformation_node);		
+		}
+		else if (transformation_type_str == "with_options")
+		{
+			SetTransformationOptions(transformation_node, el_transformation->selectSingleNode("visualization_values"));
+			ProcessSingleTransformation(target, destination_parent, transformation_node);		
 		}
 		else
 		{
@@ -154,7 +167,8 @@ void CAElTransform::ProcessAllTransformations(MSXML2::IXMLDOMNodePtr & target, M
 			FillElementAttributes(target);
 
 			MSXML2::IXMLDOMDocumentPtr tr_table = m.TransformAttrLinkTableNoReplaceSource(
-					(MSXML2::IXMLDOMElementPtr) m_active_element->selectSingleNode("attr_link_table"));
+//					(MSXML2::IXMLDOMElementPtr) m_active_element->selectSingleNode("attr_link_table"));
+					(MSXML2::IXMLDOMElementPtr) el_transformation->selectSingleNode("attr_link_table"));
 
 			if (tr_table != NULL)
 			{
@@ -171,22 +185,79 @@ void CAElTransform::ProcessAllTransformations(MSXML2::IXMLDOMNodePtr & target, M
 
 }
 
+/*
+	<!---
+
+
+
+
+	
+
+--->
+*/
+
+void CAElTransform::SetTransformationOptions(MSXML2::IXMLDOMNodePtr & el_transformation, MSXML2::IXMLDOMNodePtr & values_node)
+{
+	MSXML2::IXMLDOMNodeListPtr values = values_node->selectNodes("variable");
+
+	for (int a = 0; a < values->length; a++)
+	{
+		MSXML2::IXMLDOMElementPtr value_element = values->item[a];
+
+		MSXML2::IXMLDOMElementPtr variable_element;
+
+		CString variable_qury_str;
+		variable_qury_str.Format("/xsl:stylesheet/xsl:variable[@name=\'%s\']",
+			(LPCTSTR) (_bstr_t) value_element->getAttribute("name"));
+		variable_element = el_transformation->selectSingleNode((LPCTSTR) variable_qury_str);
+
+		if (variable_element == NULL)
+		{
+			AfxMessageBox(el_transformation->ownerDocument->xml);
+			//vytvori element <xsl:variable >
+			variable_element = el_transformation->ownerDocument->createNode(
+				_variant_t((long) MSXML2::NODE_ELEMENT), "xsl:variable", "http://www.w3.org/1999/XSL/Transform");
+
+			MSXML2::IXMLDOMAttributePtr name_attr =
+				el_transformation->ownerDocument->createAttribute("name");
+
+			name_attr->value = value_element->getAttribute("name");
+			variable_element->setAttributeNode(name_attr);
+			name_attr.Release();
+
+			MSXML2::IXMLDOMNodePtr first_node = el_transformation->selectSingleNode("/xsl:stylesheet/*");
+
+			if (first_node == NULL)
+			{
+				el_transformation->selectSingleNode("/xsl:stylesheet")->
+					appendChild(variable_element);
+
+			}
+			else
+			{
+				el_transformation->selectSingleNode("/xsl:stylesheet")->
+					insertBefore(variable_element, 
+						(MSXML2::IXMLDOMNode *) first_node);
+			}
+			
+
+			AfxMessageBox(el_transformation->xml);
+		}
+
+		variable_element->text = (_bstr_t) value_element->getAttribute("value");
+		
+		variable_element.Release();
+		value_element.Release();
+	}
+}
 
 //transformuje target uzel v m_plugin_output podle transormace definovane v tr_definition_element
 //a vysledek upozi do destination_parent
-void CAElTransform::ProcessSingleTransformation(MSXML2::IXMLDOMNodePtr & target,
-	MSXML2::IXMLDOMNodePtr & destination_parent, MSXML2::IXMLDOMElementPtr & tr_definition_element)
+void CAElTransform::ProcessSingleTransformation(
+						MSXML2::IXMLDOMNodePtr & target,
+						MSXML2::IXMLDOMNodePtr & destination_parent,
+						MSXML2::IXMLDOMNodePtr & transformation_node)
 {
-	CElementManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
-
-	
-	//nacteni ransformace
-	
-	CAElInfo * el_info = m.getActiveElementInfo(m.IdentifyElement(m_active_element));
-	
-	MSXML2::IXMLDOMNodePtr & transformation_node = el_info->getTranformationNode(
-		el_info->FindTransformationByName((_bstr_t) tr_definition_element->getAttribute("name")));
-			
 
 	
 /*	transformation_doc.CreateInstance(_T("Msxml2.DOMDocument"));

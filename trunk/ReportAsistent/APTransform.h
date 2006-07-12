@@ -43,8 +43,13 @@ protected:
 
 	void ProcessSimpleFlter(MSXML2::IXMLDOMNodePtr & destination_parent);
 	void ProcessAllTransformations(MSXML2::IXMLDOMNodePtr & target, MSXML2::IXMLDOMNodePtr & destination_parent);
-	void ProcessSingleTransformation(MSXML2::IXMLDOMNodePtr & target,
-			MSXML2::IXMLDOMNodePtr & destination_parent, MSXML2::IXMLDOMElementPtr & tr_definition_element);
+	void ProcessSingleTransformation(
+						MSXML2::IXMLDOMNodePtr & target,
+						MSXML2::IXMLDOMNodePtr & destination_parent,
+						MSXML2::IXMLDOMNodePtr & transformation_node);
+
+	void static CAElTransform::SetTransformationOptions(MSXML2::IXMLDOMNodePtr & el_transformation, MSXML2::IXMLDOMNodePtr & values_node);
+
 
 
 public:
