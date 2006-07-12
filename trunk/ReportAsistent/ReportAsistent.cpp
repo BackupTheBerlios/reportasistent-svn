@@ -80,8 +80,8 @@ BOOL CReportAsistentApp::InitInstance()
 
 	//dedek
 	//zapis do windows registry
-	AfxGetApp()->WriteProfileString("Settings", "ExeFileDirectory", 
-		m_pGeneralManager->DirectoriesManager.getExeFileDirectory());
+	AfxGetApp()->WriteProfileString("Settings", "ApplicationRoot", 
+		m_pGeneralManager->DirectoriesManager.getApplicationRoot());
 
 
 	// Register the application's document templates.  Document templates

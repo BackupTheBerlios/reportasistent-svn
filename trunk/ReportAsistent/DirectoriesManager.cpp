@@ -76,7 +76,7 @@ CString CDirectoriesManager::getAttrLinkTableStylesDirectory()
 
 CString CDirectoriesManager::getApplicationRoot()
 {
-	return application_root_path;
+	return application_root_path + "\\ReportAsistent";
 }
 
 CString CDirectoriesManager::getExeFileDirectory()
