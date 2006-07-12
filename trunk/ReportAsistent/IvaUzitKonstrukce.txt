@@ -12,3 +12,5 @@ Dialogy:
 Pretypovani:
 _variant_t varAtr = pElm->getAttribute("id");
 (LPCTSTR) (_bstr_t)varAtr
+
+Pozn. Chybka: Provedu-li paste a neni-li vybran zadny prvek kostry, program spadne
