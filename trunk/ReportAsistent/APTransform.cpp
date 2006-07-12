@@ -167,7 +167,6 @@ void CAElTransform::ProcessAllTransformations(MSXML2::IXMLDOMNodePtr & target, M
 			FillElementAttributes(target);
 
 			MSXML2::IXMLDOMDocumentPtr tr_table = m.TransformAttrLinkTableNoReplaceSource(
-//					(MSXML2::IXMLDOMElementPtr) m_active_element->selectSingleNode("attr_link_table"));
 					(MSXML2::IXMLDOMElementPtr) el_transformation->selectSingleNode("attr_link_table"));
 
 			if (tr_table != NULL)
@@ -175,26 +174,11 @@ void CAElTransform::ProcessAllTransformations(MSXML2::IXMLDOMNodePtr & target, M
 				destination_parent->appendChild(tr_table->documentElement);
 				tr_table.Release();
 			}
-			
-
 		}
 
 		el_transformation.Release();
-		
 	}
-
 }
-
-/*
-	<!---
-
-
-
-
-	
-
---->
-*/
 
 void CAElTransform::SetTransformationOptions(MSXML2::IXMLDOMNodePtr & el_transformation, MSXML2::IXMLDOMNodePtr & values_node)
 {
@@ -213,7 +197,6 @@ void CAElTransform::SetTransformationOptions(MSXML2::IXMLDOMNodePtr & el_transfo
 
 		if (variable_element == NULL)
 		{
-			AfxMessageBox(el_transformation->ownerDocument->xml);
 			//vytvori element <xsl:variable >
 			variable_element = el_transformation->ownerDocument->createNode(
 				_variant_t((long) MSXML2::NODE_ELEMENT), "xsl:variable", "http://www.w3.org/1999/XSL/Transform");
@@ -229,6 +212,7 @@ void CAElTransform::SetTransformationOptions(MSXML2::IXMLDOMNodePtr & el_transfo
 
 			if (first_node == NULL)
 			{
+				//asi by nemelo nastat, ale pro jistotu..
 				el_transformation->selectSingleNode("/xsl:stylesheet")->
 					appendChild(variable_element);
 
@@ -239,9 +223,6 @@ void CAElTransform::SetTransformationOptions(MSXML2::IXMLDOMNodePtr & el_transfo
 					insertBefore(variable_element, 
 						(MSXML2::IXMLDOMNode *) first_node);
 			}
-			
-
-			AfxMessageBox(el_transformation->xml);
 		}
 
 		variable_element->text = (_bstr_t) value_element->getAttribute("value");
@@ -258,15 +239,6 @@ void CAElTransform::ProcessSingleTransformation(
 						MSXML2::IXMLDOMNodePtr & destination_parent,
 						MSXML2::IXMLDOMNodePtr & transformation_node)
 {
-
-	
-/*	transformation_doc.CreateInstance(_T("Msxml2.DOMDocument"));
-	transformation_doc->async = VARIANT_FALSE; // default - true,
-	
-	transformation_doc->load( tr_definition_element->getAttribute("file"));
-*/
-
-
 	//privit misto pro vystup
 	MSXML2::IXMLDOMDocumentPtr transofmed_node;
 	transofmed_node.CreateInstance(_T("Msxml2.DOMDocument"));
@@ -359,7 +331,6 @@ BOOL CAElTransform::FillElementAttributes(int index_of_filtered_out)
 {
 
 	return ProcessSimpleFlter(* this, FILTER_FILL_ELEMENT_ATTRIBUTES, index_of_filtered_out);
-
 }
 
 
@@ -373,14 +344,6 @@ void CAElTransform::FillElementAttributes(MSXML2::IXMLDOMNodePtr &output_node)
 	attributes_DOM->async = VARIANT_FALSE;
 
 	
-	
-
-	//ladici:
-	//	_bstr_t bs;
-
-
-
-
 	//provede tranformaci
 	attributes_DOM->loadXML(
 		//ladici
@@ -388,9 +351,6 @@ void CAElTransform::FillElementAttributes(MSXML2::IXMLDOMNodePtr &output_node)
 		output_node->transformNode(
 			m.getActiveElementInfo(
 				m.IdentifyElement(m_active_element))->getFillElementAttributesTransformation()));
-
-	//ladici
-	//AfxMessageBox(bs);
 
 	if (attributes_DOM->parseError->errorCode != S_OK)
 	{

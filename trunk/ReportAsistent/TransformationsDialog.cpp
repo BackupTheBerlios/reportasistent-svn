@@ -45,8 +45,6 @@ BEGIN_MESSAGE_MAP(CTransformationsDialog, CDialog)
 	ON_BN_CLICKED(IDC_REMOVE_BUTTON, OnRemoveButton)
 	ON_BN_CLICKED(IDC_MOVE_UP_BUTTON, OnMoveUpButton)
 	ON_BN_CLICKED(IDC_MOVE_DOWN_BUTTON, OnMoveDownButton)
-//	ON_BN_CLICKED(IDC_CONFIGURE_ATTR_LINK_TABLE_BUTTON, OnConfigureAttrLinkTableButton)
-//	ON_BN_CLICKED(IDC_ADD_ATTR_LINK_TABLE_BUTTON, OnAddAttrLinkTableButton)
 	ON_BN_CLICKED(IDC_CONFIGURE_BUTTON, OnConfigureButton)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
@@ -124,58 +122,6 @@ BOOL CTransformationsDialog::SaveAll()
 	m_cloned_output_element = m_active_element->selectSingleNode("output")->cloneNode(VARIANT_TRUE);
 
 	return TRUE;
-
-/*
-//	CheckAndRepareAttrLinkTable();
-
-
-	MSXML2::IXMLDOMNodePtr output_node = m_active_element->selectSingleNode("output");
-
-	//vymaze soucasne transormace
-	MSXML2::IXMLDOMSelectionPtr sel = output_node->selectNodes("*");
-	sel->removeAll();
-	sel.Release();
-
-	//vytvori ukazkovou transformaci
-	MSXML2::IXMLDOMElementPtr transf_elem = m_active_element->ownerDocument->createElement("transformation");
-	MSXML2::IXMLDOMAttributePtr name_attr_elem = m_active_element->ownerDocument->createAttribute("name");
-	MSXML2::IXMLDOMAttributePtr type_attr_elem = m_active_element->ownerDocument->createAttribute("type");
-	type_attr_elem->text = "simple";
-	transf_elem->setAttributeNode(name_attr_elem);
-	transf_elem->setAttributeNode(type_attr_elem);
-	name_attr_elem.Release();
-	type_attr_elem.Release();
-
-	//ulozi transformace
-	for (int a = 0; a< m_SelectedList.GetCount(); a++)
-	{
-		CString it_text;
-		m_SelectedList.GetText(a, it_text);
-
-		transf_elem->setAttribute("name", (LPCTSTR) it_text);
-
-		//jedna se o attr_link_table
-		if (it_text == ATTR_TL_STR)
-		{
-			MSXML2::IXMLDOMElementPtr clone = transf_elem->cloneNode(VARIANT_FALSE);
-			clone->setAttribute("type", "attr_link_table");
-			output_node->appendChild(clone);
-			clone.Release();
-		}
-		else
-		{
-			output_node->appendChild(transf_elem->cloneNode(VARIANT_FALSE));
-		}
-
-	}
-
-
-	transf_elem.Release();
-	output_node.Release();
-
-	
-	return TRUE;
-	/****/
 }
 
 void CTransformationsDialog::OnAddButton() 
@@ -348,54 +294,6 @@ void CTransformationsDialog::ConfigureAttrLinkTable(MSXML2::IXMLDOMNodePtr & att
 
 }
 
-
-
-//void CTransformationsDialog::OnConfigureAttrLinkTableButton() 
-/*
-void CTransformationsDialog::ConfigureAttrLinkTable() 
-{
-//	CheckAndRepareAttrLinkTable();
-
-	MSXML2::IXMLDOMElementPtr el_alt = m_active_element->selectSingleNode("attr_link_table");
-
-	CAttributeLinkTableDialog dlg(el_alt, this, FALSE);
-
-	dlg.DoModal();
-	
-	el_alt.Release();
-}
-void CTransformationsDialog::OnAddAttrLinkTableButton() 
-{
-	CheckAndRepareAttrLinkTable();
-
-	if (LB_ERR == m_SelectedList.FindString(-1, ATTR_TL_STR))
-	{
-		m_SelectedList.AddString(ATTR_TL_STR);	
-	}
-}
-*/
-
-/****
-void CTransformationsDialog::CheckAndRepareAttrLinkTable()
-{
-	
-	MSXML2::IXMLDOMElementPtr attr_lt = m_active_element->selectSingleNode("attr_link_table");
-	
-	if (attr_lt == NULL)
-	{
-		CElementManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
-		attr_lt = m.CreateEmptyElement(ELID_ATTR_LINK_TABLE);
-
-		m_active_element->appendChild(attr_lt);
-	}
-
-	//nastav id stejne jako m_active_element
-	attr_lt->setAttribute("target", m_active_element->getAttribute("id"));
-	
-	attr_lt.Release();
-}
-/****/
-
 void CTransformationsDialog::OnConfigureButton() 
 {
 	int cur_sel = m_SelectedList.GetCurSel();
@@ -409,11 +307,10 @@ void CTransformationsDialog::OnConfigureButton()
 		ConfigureAttrLinkTable(m_cloned_output_element->selectSingleNode((LPCTSTR) query_str));
 		return;
 	}
-  else if (IsSelectedTransformationWithOptions(cur_sel))
-  {
-    ConfigureTransformation(cur_sel);
-  }
-	
+	else if (IsSelectedTransformationWithOptions(cur_sel))
+	{
+		ConfigureTransformation(cur_sel);
+	}
 }
 
 BOOL CTransformationsDialog::IsSelectedTransformationWithOptions(int transform_index)
@@ -468,7 +365,6 @@ CString CTransformationsDialog::FindOptionEnumItemValueFromLabel(
 
 CProperty * CTransformationsDialog::CreateDoubleProperty(
 					MSXML2::IXMLDOMElementPtr & option_element,
-					MSXML2::IXMLDOMNodePtr & options_node,
 					LPCTSTR current_value)
 {
 	double min = -1.7E+308;
@@ -500,7 +396,6 @@ CProperty * CTransformationsDialog::CreateDoubleProperty(
 
 CProperty * CTransformationsDialog::CreateIntProperty(
 					MSXML2::IXMLDOMElementPtr & option_element,
-					MSXML2::IXMLDOMNodePtr & options_node,
 					LPCTSTR current_value)
 {
 	int min = 0x80000000;
@@ -534,7 +429,6 @@ CProperty * CTransformationsDialog::CreateIntProperty(
 
 CProperty * CTransformationsDialog::CreateEnumProperty(
 					MSXML2::IXMLDOMElementPtr & option_element,
-					MSXML2::IXMLDOMNodePtr & options_node,
 					LPCTSTR current_value)
 {
     CString variable_name = 
@@ -542,7 +436,7 @@ CProperty * CTransformationsDialog::CreateEnumProperty(
 
 	CEnumProperty * ep = new CEnumProperty(
 		(_bstr_t) option_element->getAttribute("title"),  //label
-        FindOptionEnumItemLabelFromValue(options_node, variable_name, current_value));  //default value
+        FindOptionEnumItemLabelFromValue(option_element->selectSingleNode("/"), variable_name, current_value));  //default value
 
       //napln combo hodnotami
       MSXML2::IXMLDOMNodeListPtr enum_nodes = 
@@ -558,47 +452,11 @@ CProperty * CTransformationsDialog::CreateEnumProperty(
 }
 
 
-void CTransformationsDialog::ConfigureTransformation(int transform_index)
+void CTransformationsDialog::AddOptionToPropetryEditor(
+			MSXML2::IXMLDOMElementPtr & option_element,
+			MSXML2::IXMLDOMElementPtr & transformation_element,
+			CPropertyEditor & property_editor)
 {
-	ASSERT(transform_index >= 0);
-	ASSERT(transform_index < m_SelectedList.GetCount());
-
-	CElementManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
-
-  //element info
-  int element_id = m.IdentifyElement(m_active_element);
-	CAElInfo * element_info = m.getActiveElementInfo(element_id);
-
-	
-  CString query_str;
-  query_str.Format("transformation[%d]", transform_index);
-
-  //tranformation
-  MSXML2::IXMLDOMElementPtr transformation_element = m_cloned_output_element->selectSingleNode((LPCTSTR) query_str);
-  
-  //options definition
-  MSXML2::IXMLDOMNodePtr options_node = 
-		element_info->getTranformationOptionsDoc(
-			element_info->FindTransformationByName((_bstr_t) transformation_element->getAttribute("name")));
-
-  //single options
-  MSXML2::IXMLDOMNodeListPtr option_nodes = options_node->selectNodes("/visualization/visualization_options/*");
-
-  
-  //napln property editor
-  
-  
-  //label
-  CString label;
-  label.Format("%s (%s) properties", 
-    (LPCTSTR) options_node->selectSingleNode("/visualization/visualization_options/@visualization_label")->text,
-    (LPCTSTR) (_bstr_t) m_active_element->getAttribute("id"));
-  
-  CPropertyEditor property_editor(label, this);
-
-  for (int a=0; a < option_nodes->length; a++)
-  {
-    MSXML2::IXMLDOMElementPtr option_element = option_nodes->item[a];
     CString option_type = (LPCTSTR) option_element->nodeName;
     CString variable_name = (LPCTSTR) (_bstr_t) option_element->getAttribute("variable_name");
     CString value_query_str; //dotaz na default value
@@ -606,14 +464,12 @@ void CTransformationsDialog::ConfigureTransformation(int transform_index)
     CString value = (LPCTSTR) transformation_element->selectSingleNode((LPCTSTR) value_query_str)->text;
 
         
-    
-
     if (option_type == "enum_option")
     {
 		//enum
 
 		property_editor.AddProperty(
-		  CreateEnumProperty(option_element, options_node, value));
+		  CreateEnumProperty(option_element, value));
 
     }
     else if (option_type == "string_option")
@@ -631,27 +487,74 @@ void CTransformationsDialog::ConfigureTransformation(int transform_index)
         //float
 
 		  property_editor.AddProperty(
-			  CreateDoubleProperty(option_element, options_node, value));
+			  CreateDoubleProperty(option_element, value));
       }
       else if ((_bstr_t) option_element->getAttribute("num_type") == _bstr_t("integer"))
       {
         //integer
 		  
   		  property_editor.AddProperty(
-			  CreateIntProperty(option_element, options_node, value));
+			  CreateIntProperty(option_element, value));
   
       }
     }
+}
 
-//    AfxMessageBox(option_nodes->item[a]->xml);
-  }
+void CTransformationsDialog::ConfigureTransformation(int transform_index)
+{
+	ASSERT(transform_index >= 0);
+	ASSERT(transform_index < m_SelectedList.GetCount());
+
+	CElementManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
+
+	//element info
+	int element_id = m.IdentifyElement(m_active_element);
+	CAElInfo * element_info = m.getActiveElementInfo(element_id);
+
+
+	//tranformation
+	CString query_str;
+	query_str.Format("transformation[%d]", transform_index);
+	MSXML2::IXMLDOMElementPtr transformation_element = m_cloned_output_element->selectSingleNode((LPCTSTR) query_str);
+
+	//options definition
+	MSXML2::IXMLDOMNodePtr options_node = 
+		element_info->getTranformationOptionsDoc(
+			element_info->FindTransformationByName((_bstr_t) transformation_element->getAttribute("name")));
+
+	//single options
+	MSXML2::IXMLDOMNodeListPtr option_nodes = options_node->selectNodes("/visualization/visualization_options/*");
 
 
 
-  
+	
+	//napln property editor
+
+	//label
+	CString label;
+	label.Format("%s (%s) properties", 
+	(LPCTSTR) options_node->selectSingleNode("/visualization/visualization_options/@visualization_label")->text,
+	(LPCTSTR) (_bstr_t) m_active_element->getAttribute("id"));
+
+	CPropertyEditor property_editor(label, this);
+
+
+	//pridej jednotlive properties
+	for (int a=0; a < option_nodes->length; a++)
+	{
+		MSXML2::IXMLDOMElementPtr option_element = option_nodes->item[a];
+
+		AddOptionToPropetryEditor(option_element, transformation_element, property_editor);
+		option_element.Release();
+	}
+
+
+	//vytvor modalni dialog
 	if (IDOK == property_editor.DoModal())
 	{
-		//ulozit hodnoty z property editoru
+		
+		
+		//uloz hodnoty z property editoru
 		for (int a=0; a < option_nodes->length; a++)
 		{
 		    MSXML2::IXMLDOMElementPtr option_element = option_nodes->item[a];

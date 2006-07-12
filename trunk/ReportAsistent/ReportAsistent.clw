@@ -2,7 +2,7 @@
 
 [General Info]
 Version=1
-LastClass=
+LastClass=CTransformationsDialog
 LastTemplate=CRecordset
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "ReportAsistent.h"
@@ -18,31 +18,31 @@ ResourceCount=15
 Resource1=IDD_ABOUTBOX
 Resource2=IDR_MAINFRAME
 Class5=CAboutDlg
-Resource3=IDD_PROPERTY_EDITOR (English (U.S.))
-Resource4=IDD_DIALOGTEXT (English (U.S.))
+Resource3=IDD_DIALOG_CHAPTER (English (U.S.))
+Resource4=IDD_TRANSFORMATIONS_DIALOG (English (U.S.))
 Class6=CElementTextDialog
-Resource5=IDD_ATTRIBUTE_LINK_TABLE_DIALOG (English (U.S.))
+Resource5=IDD_ATTRIBUTE_LINK_DIALOG (English (U.S.))
 Class7=CSimpleFilterDialog
-Resource6=IDD_DIALOG_PARAGRAPH (English (U.S.))
+Resource6=IDD_ACTIVE_ELEMENT_DIALOG (English (U.S.))
 Class8=CGenerateDialog
-Resource7=IDD_GENERATE_DIALOG (English (U.S.))
+Resource7=IDD_PROPERTY_EDITOR (English (U.S.))
 Class9=CSourcesDialog
-Resource8=IDD_SOURCES_DIALOG (English (U.S.))
+Resource8=IDD_SIMPLE_FILTER_DIALOG (English (U.S.))
 Class10=CActiveElementDialog
-Resource9=IDD_ACTIVE_ELEMENT_DIALOG (English (U.S.))
+Resource9=IDD_GENERATE_DIALOG (English (U.S.))
 Class11=CTransformationsDialog
 Class12=Tcategory_Recordset
-Resource10=IDD_TRANSFORMATIONS_DIALOG (English (U.S.))
+Resource10=IDD_SOURCES_DIALOG (English (U.S.))
 Class13=CAttributeLinkDialog
-Resource11=IDD_ABOUTBOX (English (U.S.))
+Resource11=IDD_ATTRIBUTE_LINK_TABLE_DIALOG (English (U.S.))
 Class14=CAttributeLinkTableDialog
-Resource12=IDD_DIALOG_CHAPTER (English (U.S.))
+Resource12=IDD_DIALOG_PARAGRAPH (English (U.S.))
 Class15=CElementParagraphDialog
 Class16=CElementChapterDialog
 Class17=CElementDialogBase
 Class18=CPropertyEditor
-Resource13=IDD_SIMPLE_FILTER_DIALOG (English (U.S.))
-Resource14=IDD_ATTRIBUTE_LINK_DIALOG (English (U.S.))
+Resource13=IDD_ABOUTBOX (English (U.S.))
+Resource14=IDD_DIALOGTEXT (English (U.S.))
 Resource15=IDR_MAINFRAME (English (U.S.))
 
 [CLS:CReportAsistentApp]
@@ -176,21 +176,22 @@ CommandCount=17
 Type=1
 Class=?
 Command1=ID_EDIT_COPY
-Command2=ID_FILE_NEW
-Command3=ID_FILE_OPEN
-Command4=ID_FILE_SAVE
-Command5=ID_EDIT_PASTE
-Command6=ID_EDIT_UNDO
-Command7=ID_MMDELETE
-Command8=ID_EDIT_CUT
-Command9=ID_NEXT_PANE
-Command10=ID_PREV_PANE
-Command11=ID_EDIT_COPY
-Command12=ID_EDIT_PASTE
-Command13=ID_ELEMENT_EDIT
-Command14=ID_EDIT_CUT
-Command15=ID_EDIT_UNDO
-CommandCount=15
+Command2=ID_MMGENREP
+Command3=ID_FILE_NEW
+Command4=ID_FILE_OPEN
+Command5=ID_FILE_SAVE
+Command6=ID_EDIT_PASTE
+Command7=ID_EDIT_UNDO
+Command8=ID_MMDELETE
+Command9=ID_EDIT_CUT
+Command10=ID_NEXT_PANE
+Command11=ID_PREV_PANE
+Command12=ID_EDIT_COPY
+Command13=ID_EDIT_PASTE
+Command14=ID_ELEMENT_EDIT
+Command15=ID_EDIT_CUT
+Command16=ID_EDIT_UNDO
+CommandCount=16
 
 [DLG:IDD_ABOUTBOX (English (U.S.))]
 Type=1
@@ -275,13 +276,13 @@ HeaderFile=TransformationsDialog.h
 ImplementationFile=TransformationsDialog.cpp
 BaseClass=CDialog
 Filter=D
-LastObject=CTransformationsDialog
+LastObject=ID_VIEW_TOOLBAR
 VirtualFilter=dWC
 
 [DLG:IDD_TRANSFORMATIONS_DIALOG (English (U.S.))]
 Type=1
 Class=CTransformationsDialog
-ControlCount=11
+ControlCount=10
 Control1=IDC_SUPPORTED_TRANSF_LIST,listbox,1352728835
 Control2=IDC_SELECTED_TRANSFS_LIST,listbox,1352728833
 Control3=IDC_STATIC,static,1342308352
@@ -291,8 +292,7 @@ Control6=IDC_REMOVE_BUTTON,button,1342242816
 Control7=IDC_MOVE_UP_BUTTON,button,1342242816
 Control8=IDC_MOVE_DOWN_BUTTON,button,1342242816
 Control9=IDC_STATIC,static,1350565902
-Control10=IDC_ADD_ATTR_LINK_TABLE_BUTTON,button,1476460544
-Control11=IDC_CONFIGURE_BUTTON,button,1342242816
+Control10=IDC_CONFIGURE_BUTTON,button,1342242816
 
 [DLG:IDD_SIMPLE_FILTER_DIALOG (English (U.S.))]
 Type=1

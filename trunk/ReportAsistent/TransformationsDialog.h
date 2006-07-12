@@ -74,18 +74,21 @@ private:
 
 	static CProperty * CreateEnumProperty(
 					MSXML2::IXMLDOMElementPtr & option_element,
-					MSXML2::IXMLDOMNodePtr & options_node,
 					LPCTSTR current_value);
 
 	static CProperty * CreateDoubleProperty(
 					MSXML2::IXMLDOMElementPtr & option_element,
-					MSXML2::IXMLDOMNodePtr & options_node,
 					LPCTSTR current_value);
 
 	static CProperty * CreateIntProperty(
 					MSXML2::IXMLDOMElementPtr & option_element,
-					MSXML2::IXMLDOMNodePtr & options_node,
 					LPCTSTR current_value);
+
+	static void AddOptionToPropetryEditor(
+			MSXML2::IXMLDOMElementPtr & option_element,
+			MSXML2::IXMLDOMElementPtr & transformation_element,
+			CPropertyEditor & property_editor);
+
 
 
 };

@@ -41,7 +41,7 @@ public:
 	LPCTSTR virtual GetValue() {m_str_val.Format("%d", m_value); return m_str_val; };
 	int GetIntValue() {return m_value; };
 	
-	void virtual SetValue(LPCTSTR value) {m_value = atoi(value); };
+	void virtual SetValue(LPCTSTR value) {m_value = (long) (_variant_t) value; };
 	void SetIntValue(int value) {m_value = value; };
 	
 	BOOL virtual ValidateValue(CString & value, CString & error_message)
@@ -70,8 +70,9 @@ public:
 			return FALSE;
 		}
 
-    //zapise prectenou hodnotu do edit boxu zmeni napriklad 4,5 na 5
-//		value.Format("%d", try_convert);
+
+		//zapise prectenou hodnotu do edit boxu zmeni napriklad 4,5 na 5
+		value.Format("%d", try_convert);
 		return TRUE;
 	};
 

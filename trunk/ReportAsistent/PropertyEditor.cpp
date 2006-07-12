@@ -181,7 +181,12 @@ CProperty * CPropertyEditor::GetValueOfProperty(int index)
 	{
 		CString s;
 		p.combo->GetWindowText(s);
-		p.prop->SetValue(s);
+		CString err;
+		if (p.prop->ValidateValue(s, err))
+		{
+			p.prop->SetValue(s);
+			p.combo->SetWindowText(p.prop->GetValue());
+		}
 	}
 
 	return p.prop;
@@ -252,9 +257,10 @@ BOOL CPropertyEditor::ValidateProp(int index)
 	if (m_properties[index].prop->ValidateValue(new_val, err))
 	{
 		//valid
+		/*
 		if (new_val != value)
 			m_properties[index].combo->SetWindowText(new_val);
-	
+	*/
 		POSITION pos = m_err_props.Find(index);
 		if (pos != NULL)
 		{
@@ -399,6 +405,10 @@ BOOL CPropertyEditor::OnCmdMsg(UINT nID, int nCode, void* pExtra, AFX_CMDHANDLER
 			m_properties[index].combo->GetLBText(m_properties[index].combo->GetCurSel(), s);
 			m_properties[index].combo->SetWindowText(s);
 			ValidateProp(index);
+			break;
+		case CBN_KILLFOCUS:
+			//do comboboxu zapise skutecnou hodnotu
+			GetValueOfProperty(index);
 			break;
 		case CBN_EDITCHANGE:
 			ValidateProp(index);
