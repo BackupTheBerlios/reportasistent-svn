@@ -189,6 +189,7 @@
 
 
 		<paragraph>
+			<text id="{$id_base}title">Set differences:</text>
 			<xsl:element name="table" >
 			    <xsl:attribute name="id"><xsl:value-of select="$id_base"/>table1</xsl:attribute>
 			    <xsl:attribute name="cols"><xsl:value-of select="$pocet_sloupcu" /></xsl:attribute>
@@ -201,19 +202,19 @@
 					</td>
 					
 					<td id="{$id_base}r1d2">
-						<text id="{$id_base}r1d2text">Ant &amp; Suc</text> 
+						<text id="{$id_base}r1d2text">ant &amp; suc</text> 
 					</td>
 					
 					<td id="{$id_base}r1d3">
-						<text id="{$id_base}r1d3text">Ant &amp; ¬Suc</text> 
+						<text id="{$id_base}r1d3text">ant &amp; ¬suc</text> 
 					</td>
 					
 					<td id="{$id_base}r1d4">
-						<text id="{$id_base}r1d4text">¬Ant &amp; Suc</text> 
+						<text id="{$id_base}r1d4text">¬ant &amp; suc</text> 
 					</td>
 					
 					<td id="{$id_base}r1d5">
-						<text id="{$id_base}r1d5text">¬Ant &amp; ¬Suc</text> 
+						<text id="{$id_base}r1d5text">¬ant &amp; ¬suc</text> 
 					</td>
 					<xsl:if test="$SumShow='true'">
 						<td id="{$id_base}r1d6">

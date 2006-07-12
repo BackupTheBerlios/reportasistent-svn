@@ -10,7 +10,7 @@
 <xsl:variable name="GraphType">xl3DColumn</xsl:variable>
 <xsl:variable name="GraphTitle">4ft Graph</xsl:variable>
 <xsl:variable name="LegendShow">false</xsl:variable>
-<xsl:variable name="GraphWidth">1</xsl:variable>
+<xsl:variable name="GraphWidth">0,75</xsl:variable>
 <xsl:variable name="GraphHeight">0,75</xsl:variable>
 
 	

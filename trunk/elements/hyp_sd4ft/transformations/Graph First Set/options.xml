@@ -38,7 +38,7 @@
       <variable name="GraphTitle" value="SD-4ft Graph - first set" />
       <variable name="GraphType" value="xl3DColumn" />
       <variable name="LegendShow" value="false"/>
-      <variable name="GraphWidth" value="1"/>
+      <variable name="GraphWidth" value="0,75"/>
       <variable name="GraphHeight" value="0,75"/>
   </visualization_values>
 

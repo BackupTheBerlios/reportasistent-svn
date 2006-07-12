@@ -188,11 +188,11 @@
 					</td>
 					
 					<td id="{$id_base}r1d2">
-						<text id="{$id_base}r1d2text">antecedent</text> 
+						<text id="{$id_base}r1d2text">succedent</text> 
 					</td>
 					
 					<td id="{$id_base}r1d3">
-						<text id="{$id_base}r1d3text">not antecedent</text> 
+						<text id="{$id_base}r1d3text">¬ succedent</text> 
 					</td>
 					<xsl:if test="$SumShow='true'">
 						<td id="{$id_base}r1d4">
@@ -203,7 +203,7 @@
 				
 				<tr id="{$id_base}r2">
 					<td id="{$id_base}r2d1">
-						<text id="{$id_base}r2d1text">succedent</text> 
+						<text id="{$id_base}r2d1text">antecedent</text> 
 					</td>
 					
 					<xsl:element name="td">
@@ -243,7 +243,7 @@
 				<tr id="{$id_base}r3">
 					
 					<td id="{$id_base}r3d1">
-						<text id="{$id_base}r3d1text">not succedent</text> 
+						<text id="{$id_base}r3d1text">¬ antecedent</text> 
 					</td>
 					
 					<xsl:element name="td">
