@@ -47,10 +47,20 @@
 <xsl:variable name="ShowLegend">true</xsl:variable>
 <xsl:variable name="ColourHighlighting">false</xsl:variable>
 <xsl:variable name="TypeOfValues">Absolute</xsl:variable>
+<xsl:variable name="BorderGrey">true</xsl:variable>
 
       
 
 	<xsl:template match="hyp_sdkl">
+	
+	
+		<xsl:variable name="border_color">
+			<xsl:choose>
+				<xsl:when test="$BorderGrey='true'">#eeeeee</xsl:when>
+				<xsl:otherwise>#ffffff</xsl:otherwise>
+			</xsl:choose>
+		</xsl:variable>
+		
 		
 		<xsl:variable name="id_base" select="@id" />
 		
@@ -72,9 +82,7 @@
 				<xsl:when test="$TypeOfValues='Absolute'">
 					<xsl:value-of select="@sum1" />
 				</xsl:when>
-				<xsl:when test="$TypeOfValues='Relative'">
-					100
-				</xsl:when>
+				<xsl:when test="$TypeOfValues='Relative'">100</xsl:when>
 			</xsl:choose>
 		</xsl:variable>
 		
@@ -90,17 +98,7 @@
 
 		<paragraph>
 		
-			<!-- Show table legend-->
-			<xsl:if test="$ShowLegend='true'">
-				<text>
-					<xsl:text>Row attribute name: </xsl:text>
-					<xsl:value-of select="key('key_ti_attribute',$row_attr_id)/@quant" />
-				</text>
-				<text>
-					<xsl:text>Column attribute name: </xsl:text>
-					<xsl:value-of select="key('key_ti_attribute',$col_attr_id)/@quant" />
-				</text>
-			</xsl:if>
+			
 			
 			<!-- Create element "table"-->
 			<xsl:element name="table" >
@@ -111,7 +109,7 @@
 				
 				<!-- first row of table-->
 				<tr id="{$id_base}r0">
-							<td id="{$id_base}r0d0">
+							<td id="{$id_base}r0d0" bgcolor="{$border_color}">
 								<xsl:if test="$TypeOfValues='Relative'">
 									<text id="{$id_base}r0d0text">(%)</text> 
 								</xsl:if>
@@ -122,12 +120,16 @@
 									<xsl:attribute name="id">
 										<xsl:value-of select="$id_base" />r0d<xsl:value-of select="position()" />
 									</xsl:attribute>
+									<xsl:attribute name="bgcolor">
+										<xsl:value-of select="$border_color" />
+									</xsl:attribute>
+
 									<text id="{$id_base}r0d{position()}text"><xsl:value-of select="@value" /></text> 
 								</xsl:element>	
 							</xsl:for-each>
 							
 							<xsl:if test="$SumShow='true'">
-								<td id="{$id_base}r0d_sum">
+								<td id="{$id_base}r0d_sum" bgcolor="{$border_color}">
 									<text id="{$id_base}r0d_sum_text">sum of values</text>
 								</td>
 							</xsl:if>
@@ -142,7 +144,7 @@
 					
 					<tr id="{$id_base}r{$row_number}">
 					
-						<td id="{$id_base}r{$row_number}d0">
+						<td id="{$id_base}r{$row_number}d0" bgcolor="{$border_color}">
 							<text id="{$id_base}r{$row_number}d0text">
 									<xsl:value-of select="key('key_ti_attribute',$row_attr_id)/ti_category[position()=$row_number]/@value" />
 							</text> 
@@ -210,7 +212,7 @@
 				<xsl:if test="$SumShow='true'">
 					<tr id="{$id_base}r_sum">
 					
-						<td id="{$id_base}r_sum_d0">
+						<td id="{$id_base}r_sum_d0" bgcolor="{$border_color}">
 							<text id="{$id_base}r_sum_d0text">sum of values</text>
 						</td>
 				
@@ -260,6 +262,23 @@
 				
 				
 			</xsl:element>	
+			
+			<!-- Show table legend-->
+			<xsl:if test="$ShowLegend='true'">
+				<text id="{$id_base}leg1_1">
+					<br/>
+					<xsl:text>Row attribute name: </xsl:text>
+					<tab/>
+					<xsl:value-of select="key('key_ti_attribute',$row_attr_id)/@quant" />
+				</text>
+				<text id="{$id_base}leg1_2">
+					<br/>
+					<xsl:text>Column attribute name: </xsl:text>
+					<tab/>
+					<xsl:value-of select="key('key_ti_attribute',$col_attr_id)/@quant" />
+					<br/>
+				</text>
+			</xsl:if>		
 				
 		</paragraph>
 

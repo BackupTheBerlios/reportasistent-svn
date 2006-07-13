@@ -45,11 +45,20 @@
 <xsl:variable name="ColourHighlighting">false</xsl:variable>
 <xsl:variable name="TypeOfValues">Absolute</xsl:variable>
 <xsl:variable name="TablePosition">Vertical</xsl:variable>
+<xsl:variable name="BorderGrey">true</xsl:variable>
 
       
 
 	<xsl:template match="hyp_cf">
 		
+		<xsl:variable name="border_color">
+			<xsl:choose>
+				<xsl:when test="$BorderGrey='true'">#eeeeee</xsl:when>
+				<xsl:otherwise>#ffffff</xsl:otherwise>
+			</xsl:choose>
+		</xsl:variable>
+
+
 		<xsl:variable name="id_base" select="@id" />
 		
 		<xsl:variable name="pocet_radku">
@@ -85,7 +94,7 @@
 					<xsl:value-of select="@sum" />
 				</xsl:when>
 				<xsl:when test="$TypeOfValues='Relative'">
-					100
+					<xsl:text>100</xsl:text>
 				</xsl:when>
 			</xsl:choose>
 		</xsl:variable>
@@ -110,8 +119,8 @@
 					
 					<xsl:if test="$TablePosition='Horisontal'">
 						<tr id="{$id_base}r1">
-							<td id="{$id_base}r1d0">
-								<text id="{$id_base}r1d0text">Categories</text> 
+							<td id="{$id_base}r1d0" bgcolor="{$border_color}">
+								<text id="{$id_base}r1d0text">Category</text> 
 							</td>
 							
 							<xsl:for-each select="key('key_ti_attribute',$attr_id)/ti_category">
@@ -131,9 +140,9 @@
 						</tr>
 						
 						<tr id="{$id_base}r2">
-							<td id="{$id_base}r2d0">
+							<td id="{$id_base}r2d0" bgcolor="{$border_color}">
 								<text id="{$id_base}r1d0text">
-									<xsl:text>Frequencies</xsl:text>
+									<xsl:text>Frequency</xsl:text>
 									<xsl:if test="$TypeOfValues='Relative'">
 										<xsl:text> (%)</xsl:text>
 									</xsl:if>
@@ -178,12 +187,12 @@
 					
 					<xsl:if test="$TablePosition='Vertical'">
 						<tr id="{$id_base}r1">
-							<td id="{$id_base}r1d1">
-								<text id="{$id_base}r1d1text">Categories</text> 
+							<td id="{$id_base}r1d1" bgcolor="{$border_color}">
+								<text id="{$id_base}r1d1text">Category</text> 
 							</td>
-							<td id="{$id_base}r1d2">
+							<td id="{$id_base}r1d2" bgcolor="{$border_color}">
 								<text id="{$id_base}r1d2text">
-									<xsl:text>Frequencies</xsl:text>
+									<xsl:text>Frequency</xsl:text>
 									<xsl:if test="$TypeOfValues='Relative'">
 										<xsl:text> (%)</xsl:text>
 									</xsl:if>

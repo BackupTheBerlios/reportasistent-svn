@@ -4,7 +4,7 @@
   <visualization_options active_element="SD-KL hypothesis" visualization_label="Contingency Table - Second Set">
 
     <!--setting whether to show a sum values-->
-    <enum_option variable_name="SumsShow" title="Show sum values">
+    <enum_option variable_name="SumShow" title="Show sum values">
        <enum_item value="true" label="yes"/>  
        <enum_item value="false" label="no"/>  
     </enum_option>
@@ -12,6 +12,13 @@
 
     <!--setting whether to colour-highlight table fields-->
     <enum_option variable_name="ColourHighlighting" title="Colour-highlight table fields">
+       <enum_item value="true" label="yes"/>  
+       <enum_item value="false" label="no"/>  
+    </enum_option>
+
+
+    <!--setting whether to grey-colour table border-->
+    <enum_option variable_name="BorderGrey" title="Grey-colour table border">
        <enum_item value="true" label="yes"/>  
        <enum_item value="false" label="no"/>  
     </enum_option>
@@ -38,9 +45,10 @@
   <!--default values of variables-->
   
   <visualization_values>
-      <variable name="SumsShow" value="false" />
+      <variable name="SumShow" value="false" />
       <variable name="ShowLegend" value="true" />
       <variable name="ColourHighlighting" value="false"/>
+      <variable name="BorderGrey" value="true"/>
       <variable name="TypeOfValues" value="Absolute"/>
 
   </visualization_values>

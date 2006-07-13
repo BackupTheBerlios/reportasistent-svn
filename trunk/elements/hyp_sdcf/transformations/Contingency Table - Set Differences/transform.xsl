@@ -48,10 +48,19 @@
 <xsl:variable name="ColourHighlighting">false</xsl:variable>
 <xsl:variable name="TypeOfValues">Absolute</xsl:variable>
 <xsl:variable name="TablePosition">Vertical</xsl:variable>
+<xsl:variable name="BorderGrey">true</xsl:variable>
 
       
 
 	<xsl:template match="hyp_sdcf">
+
+		<xsl:variable name="border_color">
+			<xsl:choose>
+				<xsl:when test="$BorderGrey='true'">#eeeeee</xsl:when>
+				<xsl:otherwise>#ffffff</xsl:otherwise>
+			</xsl:choose>
+		</xsl:variable>
+
 		
 		<xsl:variable name="id_base" select="@id" />
 		
@@ -90,9 +99,7 @@
 				<xsl:when test="$TypeOfValues='Absolute'">
 					<xsl:value-of select="@sum1" />
 				</xsl:when>
-				<xsl:when test="$TypeOfValues='Relative'">
-					100
-				</xsl:when>
+				<xsl:when test="$TypeOfValues='Relative'">100</xsl:when>
 			</xsl:choose>
 		</xsl:variable>
 		
@@ -101,9 +108,7 @@
 				<xsl:when test="$TypeOfValues='Absolute'">
 					<xsl:value-of select="@sum2" />
 				</xsl:when>
-				<xsl:when test="$TypeOfValues='Relative'">
-					100
-				</xsl:when>
+				<xsl:when test="$TypeOfValues='Relative'">100</xsl:when>
 			</xsl:choose>
 		</xsl:variable>
 		
@@ -131,8 +136,8 @@
 					
 					<xsl:if test="$TablePosition='Horisontal'">
 						<tr id="{$id_base}r1">
-							<td id="{$id_base}r1d0" bgcolor="#333333">
-								<text id="{$id_base}r1d0text">Categories</text> 
+							<td id="{$id_base}r1d0" bgcolor="{$border_color}">
+								<text id="{$id_base}r1d0text">Category</text> 
 							</td>
 							
 							<xsl:for-each select="key('key_ti_attribute',$attr_id)/ti_category">
@@ -140,14 +145,13 @@
 									<xsl:attribute name="id">
 										<xsl:value-of select="$id_base" />r1d<xsl:value-of select="position()"/>
 									</xsl:attribute>
-									<xsl:attribute name="bgcolor">#333333</xsl:attribute>
 									
 									<text id="{$id_base}r1d{position()}text"><xsl:value-of select="@value" /></text> 
 								</xsl:element>
 							</xsl:for-each>
 							
 							<xsl:if test="$SumShow='true'">
-								<td id="{$id_base}r1d_sum" bgcolor="#333333">
+								<td id="{$id_base}r1d_sum">
 									<text id="{$id_base}r1d_sum_text">sum of values</text> 
 								</td>
 							</xsl:if>
@@ -158,7 +162,7 @@
 							<xsl:variable name="cislo_radku" select="position()" />
 						
 					    	<tr id="{$id_base}r{$cislo_radku}">
-								<td id="{$id_base}r{$cislo_radku}d0" bgcolor="#333333">
+								<td id="{$id_base}r{$cislo_radku}d0" bgcolor="{$border_color}">
 									<text id="{$id_base}r{$cislo_radku}d0text">
 										<xsl:if test="$cislo_radku='1'">
 											<xsl:text>First set</xsl:text>
@@ -166,7 +170,7 @@
 										<xsl:if test="$cislo_radku='2'">
 											<xsl:text>Second set</xsl:text>
 										</xsl:if>
-										<xsl:text> frequencies</xsl:text>
+										<xsl:text> frequency</xsl:text>
 										<xsl:if test="$TypeOfValues='Relative'">
 											<xsl:text> (%)</xsl:text>
 										</xsl:if>
@@ -229,20 +233,20 @@
 					
 					<xsl:if test="$TablePosition='Vertical'">
 						<tr id="{$id_base}r1">
-							<td id="{$id_base}r1d1">
-								<text id="{$id_base}r1d1text">Categories</text> 
+							<td id="{$id_base}r1d1" bgcolor="{$border_color}">
+								<text id="{$id_base}r1d1text">Category</text> 
 							</td>
-							<td id="{$id_base}r1d2">
+							<td id="{$id_base}r1d2" bgcolor="{$border_color}">
 								<text id="{$id_base}r1d2text">
-									<xsl:text>First set frequencies</xsl:text>
+									<xsl:text>First set frequency</xsl:text>
 									<xsl:if test="$TypeOfValues='Relative'">
 										<xsl:text> (%)</xsl:text>
 									</xsl:if>
 								</text> 
 							</td>							
-							<td id="{$id_base}r1d3">
+							<td id="{$id_base}r1d3" bgcolor="{$border_color}">
 								<text id="{$id_base}r1d3text">
-									<xsl:text>Second set frequencies</xsl:text>
+									<xsl:text>Second set frequency</xsl:text>
 									<xsl:if test="$TypeOfValues='Relative'">
 										<xsl:text> (%)</xsl:text>
 									</xsl:if>
@@ -256,7 +260,7 @@
 								<xsl:variable name="pozice" select="position()" />
 								<tr id="{$id_base}r{position()}">
 									<td id="{$id_base}r{position()}d1">
-										<text id="{$id_base}r{position()}d1text">
+										<text id="{$id_base}r{position()}d1text" bgcolor="{$border_color}">
 											<xsl:value-of select="key('key_ti_attribute',$attr_id)/ti_category[position()=$pozice]/@value" />
 										</text>
 									</td>

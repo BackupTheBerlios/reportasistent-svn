@@ -17,6 +17,12 @@
     </enum_option>
 
 
+    <!--setting whether to grey-colour table border-->
+    <enum_option variable_name="BorderGrey" title="Grey-colour table border">
+       <enum_item value="true" label="yes"/>  
+       <enum_item value="false" label="no"/>  
+    </enum_option>
+
     <!--absolute or relative values in contingency table-->
     <enum_option variable_name="TypeOfValues" title="Type of values in contingency table">
        <enum_item value="Absolute" label="Absolute"/>  
@@ -33,6 +39,7 @@
   <visualization_values>
       <variable name="SumShow" value="false" />
       <variable name="ColourHighlighting" value="false"/>
+      <variable name="BorderGrey" value="true"/>
       <variable name="TypeOfValues" value="Absolute"/>
   </visualization_values>
 

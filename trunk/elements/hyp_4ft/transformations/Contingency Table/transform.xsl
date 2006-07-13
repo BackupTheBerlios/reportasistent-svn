@@ -40,10 +40,18 @@
 <xsl:variable name="SumShow">true</xsl:variable>
 <xsl:variable name="ColourHighlighting">true</xsl:variable>
 <xsl:variable name="TypeOfValues">Absolute</xsl:variable>
+<xsl:variable name="BorderGrey">true</xsl:variable>
 
       
 
 	<xsl:template match="hyp_4ft">
+
+		<xsl:variable name="border_color">
+			<xsl:choose>
+				<xsl:when test="$BorderGrey='true'">#eeeeee</xsl:when>
+				<xsl:otherwise>#ffffff</xsl:otherwise>
+			</xsl:choose>
+		</xsl:variable>
 		
 		<xsl:variable name="id_base" select="@id" />
 		<xsl:variable name="sum_1row" select="@a + @b" />
@@ -181,28 +189,28 @@
 			    <xsl:attribute name="cols"><xsl:value-of select="$rozmer_tabulky" /></xsl:attribute>
 			    <xsl:attribute name="rows"><xsl:value-of select="$rozmer_tabulky" /></xsl:attribute>
 				<tr id="{$id_base}r1">
-					<td id="{$id_base}r1d1">
+					<td id="{$id_base}r1d1" bgcolor="{$border_color}">
 						<xsl:if test="$TypeOfValues='Relative'">
 							<text id="{$id_base}r1d1text">(%)</text> 
 						</xsl:if>
 					</td>
 					
-					<td id="{$id_base}r1d2">
+					<td id="{$id_base}r1d2" bgcolor="{$border_color}">
 						<text id="{$id_base}r1d2text">succedent</text> 
 					</td>
 					
-					<td id="{$id_base}r1d3">
+					<td id="{$id_base}r1d3" bgcolor="{$border_color}">
 						<text id="{$id_base}r1d3text">¬ succedent</text> 
 					</td>
 					<xsl:if test="$SumShow='true'">
-						<td id="{$id_base}r1d4">
+						<td id="{$id_base}r1d4" bgcolor="{$border_color}">
 							<text id="{$id_base}r1d4text">sum of values</text> 
 						</td>
 					</xsl:if>
 				</tr>
 				
 				<tr id="{$id_base}r2">
-					<td id="{$id_base}r2d1">
+					<td id="{$id_base}r2d1" bgcolor="{$border_color}">
 						<text id="{$id_base}r2d1text">antecedent</text> 
 					</td>
 					
@@ -242,7 +250,7 @@
 				
 				<tr id="{$id_base}r3">
 					
-					<td id="{$id_base}r3d1">
+					<td id="{$id_base}r3d1" bgcolor="{$border_color}">
 						<text id="{$id_base}r3d1text">¬ antecedent</text> 
 					</td>
 					
@@ -282,7 +290,7 @@
 				
 				<xsl:if test="$SumShow='true'">
 					<tr id="{$id_base}r4">
-						<td id="{$id_base}r4d1">
+						<td id="{$id_base}r4d1" bgcolor="{$border_color}">
 							<text id="{$id_base}r4d1text">sum of values</text> 
 						</td>
 						
