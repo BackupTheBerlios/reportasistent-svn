@@ -4,10 +4,12 @@ using System.Collections.Generic;
 using System.Collections;
 using System.Text;
 using System.Windows.Forms;
+using Microsoft.Win32;
 using Ferda;
 using Ferda.ProjectManager;
 using Ferda.ModulesManager;
 using Ferda.FrontEnd;
+
 
 
 
@@ -34,7 +36,11 @@ namespace FEplugin_cs
                 // nahrani konfigurace Ice ze souboru
                 // Kody: TODO ... odstranit "natvrdo" cesty ke konfiguracnim souborum, lepsi nacitat z registru/konf. souboru
                 Ferda.FrontEnd.FrontEndConfig iceConfig = Ferda.FrontEnd.FrontEndConfig.Load();
-                
+
+
+                // zmena aktualniho adresare na domovsky LMRA
+                DirManager.SetHomeLMRA_dir();
+
 
                 // inicializace polozky PM
                 PM = new ProjectManager(new string[0], iceConfig.ProjectManagerOptions);
@@ -49,6 +55,11 @@ namespace FEplugin_cs
                 //MessageBox.Show("Chyba :\n" + e.Message, "Vyjimka", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 DestroyPM();
                 throw;
+            }
+            finally 
+            {
+                // zmena aktualniho adresare zpet
+                DirManager.SetHomePrevious_dir();
             }
 
 
@@ -184,6 +195,44 @@ namespace FEplugin_cs
 
         public static string Test = "Testovaci retezec";
    
+    }
+
+    // trida pro zjistovani a nastavovani cest k adresarum
+    public class DirManager
+    {
+        static string LMRA_dir;     // adresar, kde je soubor ReportAsistent.exe
+        static string Previous_dir;
+
+        // staticky construktor
+        static DirManager()
+        {
+            // nalezeni klice v registru
+            RegistryKey regkey;
+            regkey = Registry.CurrentUser.OpenSubKey(@"Software\LISp-Miner\ReportAsistent\Settings");
+            if (regkey == null)
+                LMRA_dir = "";
+            else
+            {
+                LMRA_dir = (string)regkey.GetValue("ApplicationRoot");
+                if (LMRA_dir == null)
+                    LMRA_dir = "";
+            }
+
+            Previous_dir = Directory.GetCurrentDirectory();
+        }
+
+        public static void SetHomeLMRA_dir()  // nastavi jako aktualni adresar LMRA_dir a do Previous_dir uchova aktualni adresar
+        {
+            Previous_dir = Directory.GetCurrentDirectory();
+            Directory.SetCurrentDirectory(LMRA_dir);
+            
+        }
+
+        public static void SetHomePrevious_dir() // nastavi jako aktualni puvodni adresar (obsah Previous_dir)
+        {
+            Directory.SetCurrentDirectory(Previous_dir);
+        }
+
     }
 
 }
