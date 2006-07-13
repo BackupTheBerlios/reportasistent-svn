@@ -3,7 +3,7 @@
 	ProjectType="Visual C++"
 	Version="8,00"
 	Name="ReportAsistent"
-	ProjectGUID="{10533463-1CF2-4976-93F0-3F3DC3DFB03C}"
+	ProjectGUID="{F1290060-951D-4A84-ACFB-D9F0E3BDC45E}"
 	Keyword="MFCProj"
 	>
 	<Platforms>
@@ -517,6 +517,26 @@
 				</FileConfiguration>
 			</File>
 			<File
+				RelativePath="PropertyEditor.cpp"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+			</File>
+			<File
 				RelativePath="ReportAsistent.cpp"
 				>
 				<FileConfiguration
@@ -744,6 +764,10 @@
 				>
 			</File>
 			<File
+				RelativePath="PropertyEditor.h"
+				>
+			</File>
+			<File
 				RelativePath="ReportAsistent.h"
 				>
 			</File>
@@ -789,6 +813,14 @@
 				>
 			</File>
 			<File
+				RelativePath="res\attrLink.bmp"
+				>
+			</File>
+			<File
+				RelativePath="res\attrLinkTable.bmp"
+				>
+			</File>
+			<File
 				RelativePath="res\bmtreebi.bmp"
 				>
 			</File>
@@ -798,6 +830,10 @@
 			</File>
 			<File
 				RelativePath="res\CSkeletonDoc.ico"
+				>
+			</File>
+			<File
+				RelativePath="res\include.bmp"
 				>
 			</File>
 			<File
