@@ -4,7 +4,7 @@
   <visualization_options active_element="CF hypothesis" visualization_label="Contingency Table">
 
     <!--setting whether to show a sum values (nine-fold table)-->
-    <enum_option variable_name="SumsShow" title="Show sum values">
+    <enum_option variable_name="SumShow" title="Show sum values">
        <enum_item value="true" label="yes"/>  
        <enum_item value="false" label="no"/>  
     </enum_option>
@@ -43,7 +43,7 @@
   <!--default values of variables-->
   
   <visualization_values>
-      <variable name="SumsShow" value="false" />
+      <variable name="SumShow" value="false" />
       <variable name="ShowLegend" value="true" />
       <variable name="ColourHighlighting" value="false"/>
       <variable name="TypeOfValues" value="Absolute"/>

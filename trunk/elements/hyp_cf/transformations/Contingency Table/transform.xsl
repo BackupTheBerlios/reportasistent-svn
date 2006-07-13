@@ -94,13 +94,6 @@
 
 		<paragraph>
 		
-			<!-- Show table legend-->
-			<xsl:if test="$ShowLegend='true'">
-				<text>
-					<xsl:text>Attribute name: </xsl:text>
-					<xsl:value-of select="key('key_ti_attribute',@attributes)/@quant" />
-				</text>
-			</xsl:if>
 			
 			<!-- Create element "table"-->
 			<xsl:element name="table" >
@@ -254,8 +247,25 @@
 				</xsl:for-each>
 							
 			</xsl:element>
-		</paragraph>
+		
+		
+			<!-- Show table legend-->
+			<xsl:if test="$ShowLegend='true'">
+			
+					<text id="{$id_base}legeng" >
+						<br/>
+						<xsl:text>Attribute name: </xsl:text>
+						<tab/>
+						<xsl:value-of select="key('key_ti_attribute',@attributes)/@quant" />
+						<br/>
+					</text>
+			
+			</xsl:if>
 
+		
+		</paragraph>
+		
+		
 
 
 	</xsl:template>

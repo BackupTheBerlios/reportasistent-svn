@@ -40,9 +40,9 @@
 
 
 <!-- Promenne - nastaveni vizualizaci-->
-<xsl:variable name="SumShow">false</xsl:variable>
+<xsl:variable name="SumShow">true</xsl:variable>
 <xsl:variable name="ShowLegend">true</xsl:variable>
-<xsl:variable name="ColourHighlighting">false</xsl:variable>
+<xsl:variable name="ColourHighlighting">true</xsl:variable>
 <xsl:variable name="TypeOfValues">Absolute</xsl:variable>
 <xsl:variable name="TablePosition">Vertical</xsl:variable>
 
@@ -77,12 +77,12 @@
 		</xsl:variable>
 
 		
-		<xsl:variable name="sum_of_values" select="@sum" />
+		<xsl:variable name="sum_of_values" select="@sum1" />
 		
 		<xsl:variable name="total">
 			<xsl:choose>
 				<xsl:when test="$TypeOfValues='Absolute'">
-					<xsl:value-of select="@sum" />
+					<xsl:value-of select="@sum1" />
 				</xsl:when>
 				<xsl:when test="$TypeOfValues='Relative'">
 					100
@@ -94,13 +94,7 @@
 
 		<paragraph>
 		
-			<!-- Show table legend-->
-			<xsl:if test="$ShowLegend='true'">
-				<text>
-					<xsl:text>Attribute name: </xsl:text>
-					<xsl:value-of select="key('key_ti_attribute',@attributes)/@quant" />
-				</text>
-			</xsl:if>
+			<text id="{$id_base}title1">First set:</text>
 			
 			<!-- Create element "table"-->
 			<xsl:element name="table" >
@@ -254,6 +248,18 @@
 				</xsl:for-each>
 							
 			</xsl:element>
+			
+			<!-- Show table legend-->
+			<xsl:if test="$ShowLegend='true'">
+				<text>
+					<br/>
+					<xsl:text>Attribute name:</xsl:text>
+					<tab/>
+					<xsl:value-of select="key('key_ti_attribute',@attributes)/@quant" />
+					<br/>
+				</text>
+			</xsl:if>
+			
 		</paragraph>
 
 

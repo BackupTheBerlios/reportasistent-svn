@@ -115,6 +115,8 @@
 		
 		<paragraph>	
 		
+			<text id="{$id_base}title_dif">Set differences:</text>
+			
 			<!-- Create element "table"-->
 			<xsl:element name="table" >
 			    <xsl:attribute name="id"><xsl:value-of select="$id_base"/>table1</xsl:attribute>
@@ -129,7 +131,7 @@
 					
 					<xsl:if test="$TablePosition='Horisontal'">
 						<tr id="{$id_base}r1">
-							<td id="{$id_base}r1d0">
+							<td id="{$id_base}r1d0" bgcolor="#333333">
 								<text id="{$id_base}r1d0text">Categories</text> 
 							</td>
 							
@@ -138,12 +140,14 @@
 									<xsl:attribute name="id">
 										<xsl:value-of select="$id_base" />r1d<xsl:value-of select="position()"/>
 									</xsl:attribute>
+									<xsl:attribute name="bgcolor">#333333</xsl:attribute>
+									
 									<text id="{$id_base}r1d{position()}text"><xsl:value-of select="@value" /></text> 
 								</xsl:element>
 							</xsl:for-each>
 							
 							<xsl:if test="$SumShow='true'">
-								<td id="{$id_base}r1d_sum">
+								<td id="{$id_base}r1d_sum" bgcolor="#333333">
 									<text id="{$id_base}r1d_sum_text">sum of values</text> 
 								</td>
 							</xsl:if>
@@ -154,7 +158,7 @@
 							<xsl:variable name="cislo_radku" select="position()" />
 						
 					    	<tr id="{$id_base}r{$cislo_radku}">
-								<td id="{$id_base}r{$cislo_radku}d0">
+								<td id="{$id_base}r{$cislo_radku}d0" bgcolor="#333333">
 									<text id="{$id_base}r{$cislo_radku}d0text">
 										<xsl:if test="$cislo_radku='1'">
 											<xsl:text>First set</xsl:text>
@@ -335,19 +339,22 @@
 				
 							
 			</xsl:element>
+			
+			<!-- Show table legend-->
+			<xsl:if test="$ShowLegend='true'">
+				<text id="{$id_base}tab_dif_legend">
+					<br/>
+					<xsl:text>Attribute name: </xsl:text>
+					<tab/>
+					<xsl:value-of select="key('key_ti_attribute',@attributes)/@quant" />
+					<br/>
+				</text>
+			</xsl:if>
 		
 		</paragraph>
 
 
-		<!-- Show table legend-->
-		<xsl:if test="$ShowLegend='true'">
-		<paragraph>
-			<text>
-				<xsl:text>Attribute name: </xsl:text>
-				<xsl:value-of select="key('key_ti_attribute',@attributes)/@quant" />
-			</text>
-		</paragraph>
-		</xsl:if>
+		
 
 
 
