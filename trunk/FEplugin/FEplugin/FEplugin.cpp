@@ -130,6 +130,12 @@ CSockInterface* initSock()
 	SockInterfaceFE.hOpenSource = & fOpenSourceFE;
 	SockInterfaceFE.hCloseSource = & fCloseSourceFE;
 
+	// inicializace Ferdovske zasuvky
+	if(! FEplugin_cs::FEplugin_init::initialize())  // inicializace neuspela
+		return NULL;
+
+	
 	return (& SockInterfaceFE);
+	
 }
 

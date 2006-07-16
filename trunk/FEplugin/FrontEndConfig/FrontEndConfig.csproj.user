@@ -1,8 +1,0 @@
-﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <StartWorkingDirectory>G:\Projekt\Ferda\Ferda_checkout\bin\FrontEnd\</StartWorkingDirectory>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ReferencePath>D:\Projekt\Ferda\Ferda_checkout\bin\FrontEnd\;G:\Projekt\Ferda\Ferda_checkout\bin\FrontEnd\</ReferencePath>
-  </PropertyGroup>
-</Project>

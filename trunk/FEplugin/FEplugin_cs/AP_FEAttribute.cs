@@ -9,7 +9,7 @@ using Ferda.ModulesManager;
 using Ferda.Modules;
 using Ferda.Modules.Helpers;
 using Ferda.Modules.Quantifiers;
-using Ferda.FrontEnd;
+//using Ferda.FrontEnd;
 
 namespace FEplugin_cs
 {
@@ -25,12 +25,15 @@ namespace FEplugin_cs
             try { resultString = XMLHelper.loadDTD(); }
             catch (Exception e)
             {
+#if (LADENI)
                 MessageBox.Show("Chyba pri nacitani DTD: " + e.Message);
+#endif
                 return resultString;
             }
 
             // korenovy element
             resultString += "<active_list>";
+            string ErrStr = ""; // zaznam o chybach
 
 
             #region  A) nalezeni vsech krabicek Atributu (DataMiningCommon.Attributes.Attribute)
@@ -40,107 +43,113 @@ namespace FEplugin_cs
             // zpracovani kazde krabicky - ziskani z ni vsechny Atributy
             foreach (IBoxModule ABox in AttrBoxes)
             {
-                Rec_attribute rAttr = new Rec_attribute();
-
-                // nastaveni ID atributu
-                rAttr.id = "Attr" + ABox.ProjectIdentifier.ToString();
-                
-                // zjisteni jmena literalu
-                rAttr.attr_name = ABox.GetPropertyString("NameInLiterals");
-
-                // nalezeni jmena datoveho zdroje (databaze)
-                IBoxModule[] db_names = BoxesHelper.ListAncestBoxesWithID(ABox, "DataMiningCommon.Database");
-                if (db_names.GetLength(0) != 1)  // byl nalezen pocet datovych zdroju ruzny od jedne
-                    throw new System.Exception("bylo nalezeno " + db_names.GetLength(0).ToString() + " databazi");
-                rAttr.db_name = (db_names[0].GetPropertyOther("DatabaseName") as StringT).stringValue;
-
-                // nalezeni jmena datove matice
-                IBoxModule[] matrix_names = BoxesHelper.ListAncestBoxesWithID(ABox, "DataMiningCommon.DataMatrix");
-                if (matrix_names.GetLength(0) != 1)  // byl nalezen pocet datovych matic ruzny od jedne
-                    throw new System.Exception("bylo nalezeno " + matrix_names.GetLength(0).ToString() + " datovych matic");
-                rAttr.matrix_name = (matrix_names[0].GetPropertyOther("Name") as StringT).stringValue;
-
-                
-                // nalezeni jmena zdrojoveho sloupce nebo zpusobu odvozeni
-                IBoxModule[] col_names = BoxesHelper.ListDirectAncestBoxesWithID(ABox, "DataMiningCommon.Column");
-                if (col_names.GetLength(0) != 1 && col_names.GetLength(0) != 0)  // byl nalezen chybny pocet zdrojovych sloupcu
-                    throw new System.Exception("bylo nalezeno " + col_names.GetLength(0).ToString() + " zdrojovych sloupcu");
-                if(col_names.GetLength(0) == 1)
-                    rAttr.creation = col_names[0].GetPropertyString("Name");
-
-                IBoxModule[] dercol_names = BoxesHelper.ListDirectAncestBoxesWithID(ABox, "DataMiningCommon.DerivedColumn");
-                if (dercol_names.GetLength(0) != 1 && dercol_names.GetLength(0) != 0)  // byl nalezen chybny pocet zdrojovych sloupcu
-                    throw new System.Exception("bylo nalezeno " + dercol_names.GetLength(0).ToString() + " zdrojovych odvozenych sloupcu");
-                if (dercol_names.GetLength(0) == 1)
-                    rAttr.creation = dercol_names[0].GetPropertyString("Formula");
-                
-                  
-                // nalezeni poctu kategorii
-                rAttr.ctgr_count = ABox.GetPropertyLong("CountOfCategories");
-
-                // zjisteni kategorie "chybejici hodnota"
-                string nul_cat = ABox.GetPropertyString("IncludeNullCategory");
-                List<Rec_missing_value> MisVal_list = new List<Rec_missing_value>();  // pole recordu chybejicich hodnot
-                if (!String.IsNullOrEmpty(nul_cat))
+                try
                 {
-                    Rec_missing_value MisVal = new Rec_missing_value();
-                    MisVal.name = nul_cat;
-                    MisVal_list.Add(MisVal);
-                }
+                    Rec_attribute rAttr = new Rec_attribute();
 
-                // nalezeni nazvu kategorii a jejich frekvenci
-                List<Rec_ctgr> cat_list = new List<Rec_ctgr>(); // seznam kategorii
-                CategoriesStruct cat_str = (ABox.GetPropertyOther("Categories") as CategoriesT).categoriesValue;
-                
-                // long intervals
-                foreach (string key in cat_str.longIntervals.Keys)
-                {
+                    // nastaveni ID atributu
+                    rAttr.id = "Attr" + ABox.ProjectIdentifier.ToString();
+
+                    // zjisteni jmena literalu
+                    rAttr.attr_name = ABox.GetPropertyString("NameInLiterals");
+
+                    // nalezeni jmena datoveho zdroje (databaze)
+                    IBoxModule[] db_names = BoxesHelper.ListAncestBoxesWithID(ABox, "DataMiningCommon.Database");
+                    if (db_names.GetLength(0) != 1)  // byl nalezen pocet datovych zdroju ruzny od jedne
+                        throw new System.Exception("bylo nalezeno " + db_names.GetLength(0).ToString() + " databazi");
+                    rAttr.db_name = (db_names[0].GetPropertyOther("DatabaseName") as StringT).stringValue;
+
+                    // nalezeni jmena datove matice
+                    IBoxModule[] matrix_names = BoxesHelper.ListAncestBoxesWithID(ABox, "DataMiningCommon.DataMatrix");
+                    if (matrix_names.GetLength(0) != 1)  // byl nalezen pocet datovych matic ruzny od jedne
+                        throw new System.Exception("bylo nalezeno " + matrix_names.GetLength(0).ToString() + " datovych matic");
+                    rAttr.matrix_name = (matrix_names[0].GetPropertyOther("Name") as StringT).stringValue;
+
+
+                    // nalezeni jmena zdrojoveho sloupce nebo zpusobu odvozeni
+                    IBoxModule[] col_names = BoxesHelper.ListDirectAncestBoxesWithID(ABox, "DataMiningCommon.Column");
+                    if (col_names.GetLength(0) != 1 && col_names.GetLength(0) != 0)  // byl nalezen chybny pocet zdrojovych sloupcu
+                        throw new System.Exception("bylo nalezeno " + col_names.GetLength(0).ToString() + " zdrojovych sloupcu");
+                    if (col_names.GetLength(0) == 1)
+                        rAttr.creation = col_names[0].GetPropertyString("Name");
+
+                    IBoxModule[] dercol_names = BoxesHelper.ListDirectAncestBoxesWithID(ABox, "DataMiningCommon.DerivedColumn");
+                    if (dercol_names.GetLength(0) != 1 && dercol_names.GetLength(0) != 0)  // byl nalezen chybny pocet zdrojovych sloupcu
+                        throw new System.Exception("bylo nalezeno " + dercol_names.GetLength(0).ToString() + " zdrojovych odvozenych sloupcu");
+                    if (dercol_names.GetLength(0) == 1)
+                        rAttr.creation = dercol_names[0].GetPropertyString("Formula");
+
+
+                    // nalezeni poctu kategorii
+                    rAttr.ctgr_count = ABox.GetPropertyLong("CountOfCategories");
+
+                    // zjisteni kategorie "chybejici hodnota"
+                    string nul_cat = ABox.GetPropertyString("IncludeNullCategory");
+                    List<Rec_missing_value> MisVal_list = new List<Rec_missing_value>();  // pole recordu chybejicich hodnot
+                    if (!String.IsNullOrEmpty(nul_cat))
+                    {
+                        Rec_missing_value MisVal = new Rec_missing_value();
+                        MisVal.name = nul_cat;
+                        MisVal_list.Add(MisVal);
+                    }
+
+                    // nalezeni nazvu kategorii a jejich frekvenci
+                    List<Rec_ctgr> cat_list = new List<Rec_ctgr>(); // seznam kategorii
+                    CategoriesStruct cat_str = (ABox.GetPropertyOther("Categories") as CategoriesT).categoriesValue;
+
+                    // long intervals
+                    foreach (string key in cat_str.longIntervals.Keys)
+                    {
                         Rec_ctgr new_li = new Rec_ctgr();
                         new_li.freq = "N/A";  // Not Available - TODO (doimplementovat, bude-li mozno)
                         new_li.name = key;
                         cat_list.Add(new_li);
+                    }
+                    // float intervals
+                    foreach (string key in cat_str.floatIntervals.Keys)
+                    {
+                        Rec_ctgr new_li = new Rec_ctgr();
+                        new_li.freq = "N/A";  // Not Available - TODO (doimplementovat, bude-li mozno)
+                        new_li.name = key;
+                        cat_list.Add(new_li);
+                    }
+                    //  date time intervals
+                    foreach (string key in cat_str.dateTimeIntervals.Keys)
+                    {
+                        Rec_ctgr new_li = new Rec_ctgr();
+                        new_li.freq = "N/A";  // Not Available - TODO (doimplementovat, bude-li mozno)
+                        new_li.name = key;
+                        cat_list.Add(new_li);
+                    }
+                    // enums
+                    foreach (string key in cat_str.enums.Keys)
+                    {
+                        Rec_ctgr new_li = new Rec_ctgr();
+                        new_li.freq = "N/A";  // Not Available - TODO (doimplementovat, bude-li mozno)
+                        new_li.name = key;
+                        cat_list.Add(new_li);
+                    }
+
+
+
+                    #region Vypsani jednoho Atributu do XML stringu
+
+                    string oneAttrString = "";
+                    // vypsani hypotezy do XML
+
+                    if (MisVal_list.Count == 0 && cat_list.Count == 0)
+                        oneAttrString += rAttr.ToXML();
+                    else
+                        oneAttrString += rAttr.ToXML(cat_list, MisVal_list);
+
+                    resultString += oneAttrString;
+
+                    #endregion
                 }
-                // float intervals
-                foreach (string key in cat_str.floatIntervals.Keys)
+                catch (System.Exception e)
                 {
-                    Rec_ctgr new_li = new Rec_ctgr();
-                    new_li.freq = "N/A";  // Not Available - TODO (doimplementovat, bude-li mozno)
-                    new_li.name = key;
-                    cat_list.Add(new_li);
+                    ErrStr += "Box ProjectIdentifier=" + ABox.ProjectIdentifier.ToString() + ": " + e.Message + "\n";
                 }
-                //  date time intervals
-                foreach (string key in cat_str.dateTimeIntervals.Keys)
-                {
-                    Rec_ctgr new_li = new Rec_ctgr();
-                    new_li.freq = "N/A";  // Not Available - TODO (doimplementovat, bude-li mozno)
-                    new_li.name = key;
-                    cat_list.Add(new_li);
-                }
-                // enums
-                foreach (string key in cat_str.enums.Keys)
-                {
-                    Rec_ctgr new_li = new Rec_ctgr();
-                    new_li.freq = "N/A";  // Not Available - TODO (doimplementovat, bude-li mozno)
-                    new_li.name = key;
-                    cat_list.Add(new_li);
-                }
-
-
-
-                #region Vypsani jednoho Atributu do XML stringu
-
-                string oneAttrString = "";
-                // vypsani hypotezy do XML
-
-                if (MisVal_list.Count == 0 && cat_list.Count == 0)
-                    oneAttrString += rAttr.ToXML();
-                else
-                    oneAttrString += rAttr.ToXML(cat_list, MisVal_list);
-                
-                resultString += oneAttrString;
-
-                #endregion
-
 
             }
 
@@ -149,8 +158,15 @@ namespace FEplugin_cs
             // korenovy element
             resultString += "</active_list>";
 
+#if (LADENI)
+            // vypsani pripadne chybove hlasky:
+            if (!String.IsNullOrEmpty(ErrStr))
+                MessageBox.Show("Pri nacitani kategorii doslo k chybam:\n" + ErrStr, "Chyba", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+
             // Kody - ulozeni vystupu do souboru "XMLAttrExample.xml" v adresari 
             XMLHelper.saveXMLexample(resultString, "../XML/XMLAttrExample.xml");
+#endif
 
             return resultString;
         }  // TODO: atributy v krabickach EachValueOneCategory, Equidistant, Equifrequency???

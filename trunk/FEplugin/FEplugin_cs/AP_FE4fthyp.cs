@@ -9,7 +9,7 @@ using Ferda.ModulesManager;
 using Ferda.Modules;
 using Ferda.Modules.Helpers;
 using Ferda.Modules.Quantifiers;
-using Ferda.FrontEnd;
+//using Ferda.FrontEnd;
 
 namespace FEplugin_cs
 {
@@ -31,7 +31,9 @@ namespace FEplugin_cs
             try { resultString = XMLHelper.loadDTD(); }
             catch (Exception e)
             {
+#if (LADENI)
                 MessageBox.Show("Chyba pri nacitani DTD: " + e.Message);
+#endif
                 return resultString;
             }
 
@@ -208,17 +210,18 @@ namespace FEplugin_cs
                 }
             }
             #endregion
-
+#if (LADENI)
             // vypsani pripadne chybove hlasky:
             if (!String.IsNullOrEmpty(ErrStr))
                 MessageBox.Show("Pri nacitani hypotez doslo k chybam:\n" + ErrStr, "Chyba", MessageBoxButtons.OK, MessageBoxIcon.Error);
+#endif
 
             // korenovy element
             resultString += "</active_list>";
-
+#if (LADENI)
             // Kody - ulozeni vystupu do souboru "XML4fthypExample.xml" v adresari 
             XMLHelper.saveXMLexample(resultString, "../XML/XML4fthypExample.xml");
-
+#endif
             return resultString;
         }
     }

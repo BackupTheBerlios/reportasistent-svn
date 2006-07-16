@@ -9,7 +9,7 @@ using Ferda.ModulesManager;
 using Ferda.Modules;
 using Ferda.Modules.Helpers;
 using Ferda.Modules.Quantifiers;
-using Ferda.FrontEnd;
+//using Ferda.FrontEnd;
 
 namespace FEplugin_cs
 {

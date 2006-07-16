@@ -1,9 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.IO;
 using System.Collections;
 using FEplugin_cs;
 using System.Windows.Forms;
+using System.Reflection;
+//using Microsoft.Win32;
 
 
 
@@ -13,6 +16,14 @@ namespace FEPtestap_cs
     {
         static void Main(string[] args)
         {
+            //DirManager.SetHomeFerdaFrontEnd_dir();
+            //Directory.SetCurrentDirectory(@"c:\FerdaDataminer\FrontEnd");
+
+
+            if (!FEplugin_init.initialize())
+                return;
+            
+
             int index1 = 0;
             int index2 = 0;
             /*string soubor = OtevriSoubor();
@@ -30,11 +41,13 @@ namespace FEPtestap_cs
             {
                 Console.WriteLine("Vyjimka: " + e.Message);
             }
-            // 
+            /* 
             Console.WriteLine("Bylo vytvoreno " + CFEsourcesTab.SrcCount.ToString() + " zdroju\n");
             Console.WriteLine("pole CFEsourcesTab obsahuje " + CFEsourcesTab.Sources.Count.ToString() + " zdroju\n");
+            
+             */
             CFEsource src = (CFEsource) CFEsourcesTab.Sources[0];
-            Console.WriteLine("Zdroj " + index1.ToString() + " obsahuje " + ((CFEsource)CFEsourcesTab.Sources[index1]).PM.Archive.Boxes.GetLength(0).ToString() + " krabicek");
+            //Console.WriteLine("Zdroj " + index1.ToString() + " obsahuje " + ((CFEsource)CFEsourcesTab.Sources[index1]).PM.Archive.Boxes.GetLength(0).ToString() + " krabicek");
          //   Console.WriteLine("Zdroj " + index2.ToString() + " obsahuje " + ((CFEsource)CFEsourcesTab.Sources[index2]).PM.Archive.Boxes.GetLength(0).ToString() + " krabicek");
     
             // prohrabani se v archivu
@@ -43,18 +56,18 @@ namespace FEPtestap_cs
             //AP_FECF_cedent.getList(0);
         }
 
-        public static string OtevriSoubor()
-        {
-            OpenFileDialog ofd = new OpenFileDialog();
+        //public static string OtevriSoubor()
+        //{
+        //    OpenFileDialog ofd = new OpenFileDialog();
 
-            ofd.InitialDirectory = ".\\";
-            ofd.Filter = "Ferda Project files (*.xfp)|*.xfp|All files (*.*)|*.*";
-            ofd.FilterIndex = 2;
-            ofd.RestoreDirectory = true;
+        //    ofd.InitialDirectory = ".\\";
+        //    ofd.Filter = "Ferda Project files (*.xfp)|*.xfp|All files (*.*)|*.*";
+        //    ofd.FilterIndex = 2;
+        //    ofd.RestoreDirectory = true;
 
-            if (ofd.ShowDialog() == DialogResult.OK)
-                return ofd.FileName;
-            return ofd.FileName;
-        }
+        //    if (ofd.ShowDialog() == DialogResult.OK)
+        //        return ofd.FileName;
+        //    return ofd.FileName;
+        //}
     }
 }

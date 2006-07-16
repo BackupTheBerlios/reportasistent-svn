@@ -9,7 +9,7 @@ using Ferda.ModulesManager;
 using Ferda.Modules;
 using Ferda.Modules.Helpers;
 using Ferda.Modules.Quantifiers;
-using Ferda.FrontEnd;
+//using Ferda.FrontEnd;
 
 namespace FEplugin_cs
 {
@@ -27,13 +27,15 @@ namespace FEplugin_cs
         {
             string resultString = ""; // vysledny XML string
             string ErrStr = "";  // zaznamy o chybach
-            int counterID = 0;
+            //int counterID = 0;
 
             // nacteni DTD do resultStringu
             try { resultString = XMLHelper.loadDTD(); }
             catch (Exception e)
             {
+#if (LADENI)
                 MessageBox.Show("Chyba pri nacitani DTD: " + e.Message);
+#endif
                 return resultString;
             }
 
@@ -117,13 +119,14 @@ namespace FEplugin_cs
             // korenovy element
             resultString += "</active_list>";
 
+#if (LADENI)
             // vypsani pripadne chybove hlasky:
             if (!String.IsNullOrEmpty(ErrStr))  // LADICI
                 MessageBox.Show("Pri nacitani Tasku doslo k chybam:\n" + ErrStr, "Chyba", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-
             // Kody - ulozeni vystupu do souboru "XMLTaskExample.xml" v adresari 
             XMLHelper.saveXMLexample(resultString, "../XML/XMLTaskExample.xml");
+#endif
 
             return resultString;
 

@@ -9,7 +9,7 @@ using Ferda.ModulesManager;
 using Ferda.Modules;
 using Ferda.Modules.Helpers;
 using Ferda.Modules.Quantifiers;
-using Ferda.FrontEnd;
+//using Ferda.FrontEnd;
 
 namespace FEplugin_cs
 {
@@ -20,12 +20,15 @@ namespace FEplugin_cs
         public static string getList(int index)
         {
             string resultString = ""; // vysledny XML string
+            string ErrStr = "";  // zaznamy o chybach
 
             // nacteni DTD do resultStringu
             try { resultString = XMLHelper.loadDTD(); }
             catch (Exception e)
             {
+#if (LADENI)
                 MessageBox.Show("Chyba pri nacitani DTD: " + e.Message);
+#endif
                 return resultString;
             }
 
@@ -47,242 +50,248 @@ namespace FEplugin_cs
             // zpracovani kazde krabicky - ziskani z ni vsechny Kategorie
             foreach (IBoxModule ABox in AttrBoxes)
             {
-                List<Rec_category> rCats = new List<Rec_category>();  // seznam vsech kategorii daneho atributu
-                cat_id_counter = 1;
-
-                // zjisteni jmena atributu (v literalu)
-                attr_name = ABox.GetPropertyString("NameInLiterals");
-
-                // nalezeni jmena datoveho zdroje (databaze)
-                IBoxModule[] db_names = BoxesHelper.ListAncestBoxesWithID(ABox, "DataMiningCommon.Database");
-                if (db_names.GetLength(0) != 1)  // byl nalezen pocet datovych zdroju ruzny od jedne
-                    throw new System.Exception("bylo nalezeno " + db_names.GetLength(0).ToString() + " databazi");
-                db_name = (db_names[0].GetPropertyOther("DatabaseName") as StringT).stringValue;
-
-                // nalezeni jmena datove matice
-                IBoxModule[] matrix_names = BoxesHelper.ListAncestBoxesWithID(ABox, "DataMiningCommon.DataMatrix");
-                if (matrix_names.GetLength(0) != 1)  // byl nalezen pocet datovych matic ruzny od jedne
-                    throw new System.Exception("bylo nalezeno " + matrix_names.GetLength(0).ToString() + " datovych matic");
-                matrix_name = (matrix_names[0].GetPropertyOther("Name") as StringT).stringValue;
-
-
-
-                // nalezeni seznamu kategorii daneho atributu
-                List<Rec_ctgr> cat_list = new List<Rec_ctgr>(); // seznam kategorii
-                CategoriesStruct cat_str = (ABox.GetPropertyOther("Categories") as CategoriesT).categoriesValue;
-
-                #region Zpracovani kategorii typu Interval
-
-                // long intervals
-                foreach (string key in cat_str.longIntervals.Keys)
+                try
                 {
-                    Rec_category rCat = new Rec_category();
-                    rCat.id = "cat" + ABox.ProjectIdentifier.ToString() + "_" + cat_id_counter.ToString();
-                    cat_id_counter++;
-                    rCat.db_name = db_name;
-                    rCat.matrix_name = matrix_name;
-                    rCat.attr_name = attr_name;
-                    rCat.ctgr_name = key;
-                    rCat.ctgr_type = "Interval";
-                    rCat.ctgr_freq = "N/A";     // TODO: doimplementovat, pujde-li
-                    rCat.bool_type = "No boolean"; // TODO: co to je? Dodelat.
-                    rCat.def_length = cat_str.longIntervals[key].GetLength(0);
+                    List<Rec_category> rCats = new List<Rec_category>();  // seznam vsech kategorii daneho atributu
+                    cat_id_counter = 1;
 
-                    List<Rec_ctgr_def> ctgr_defs = new List<Rec_ctgr_def>();
-                    foreach (LongIntervalStruct lis in cat_str.longIntervals[key])
+                    // zjisteni jmena atributu (v literalu)
+                    attr_name = ABox.GetPropertyString("NameInLiterals");
+
+                    // nalezeni jmena datoveho zdroje (databaze)
+                    IBoxModule[] db_names = BoxesHelper.ListAncestBoxesWithID(ABox, "DataMiningCommon.Database");
+                    if (db_names.GetLength(0) != 1)  // byl nalezen pocet datovych zdroju ruzny od jedne
+                        throw new System.Exception("bylo nalezeno " + db_names.GetLength(0).ToString() + " databazi");
+                    db_name = (db_names[0].GetPropertyOther("DatabaseName") as StringT).stringValue;
+
+                    // nalezeni jmena datove matice
+                    IBoxModule[] matrix_names = BoxesHelper.ListAncestBoxesWithID(ABox, "DataMiningCommon.DataMatrix");
+                    if (matrix_names.GetLength(0) != 1)  // byl nalezen pocet datovych matic ruzny od jedne
+                        throw new System.Exception("bylo nalezeno " + matrix_names.GetLength(0).ToString() + " datovych matic");
+                    matrix_name = (matrix_names[0].GetPropertyOther("Name") as StringT).stringValue;
+
+
+
+                    // nalezeni seznamu kategorii daneho atributu
+                    List<Rec_ctgr> cat_list = new List<Rec_ctgr>(); // seznam kategorii
+                    CategoriesStruct cat_str = (ABox.GetPropertyOther("Categories") as CategoriesT).categoriesValue;
+
+                    #region Zpracovani kategorii typu Interval
+
+                    // long intervals
+                    foreach (string key in cat_str.longIntervals.Keys)
                     {
-                        Rec_ctgr_def ctgr_def = new Rec_ctgr_def();
-                        switch (lis.leftBoundType)
+                        Rec_category rCat = new Rec_category();
+                        rCat.id = "cat" + ABox.ProjectIdentifier.ToString() + "_" + cat_id_counter.ToString();
+                        cat_id_counter++;
+                        rCat.db_name = db_name;
+                        rCat.matrix_name = matrix_name;
+                        rCat.attr_name = attr_name;
+                        rCat.ctgr_name = key;
+                        rCat.ctgr_type = "Interval";
+                        rCat.ctgr_freq = "N/A";     // TODO: doimplementovat, pujde-li
+                        rCat.bool_type = "No boolean"; // TODO: co to je? Dodelat.
+                        rCat.def_length = cat_str.longIntervals[key].GetLength(0);
+
+                        List<Rec_ctgr_def> ctgr_defs = new List<Rec_ctgr_def>();
+                        foreach (LongIntervalStruct lis in cat_str.longIntervals[key])
                         {
-                            case BoundaryEnum.Infinity:
-                                ctgr_def.definition += "(-inf";
-                                break;
-                            case BoundaryEnum.Round:
-                                ctgr_def.definition += "(";
-                                break;
-                            case BoundaryEnum.Sharp:
-                                ctgr_def.definition += "<";
-                                break;
+                            Rec_ctgr_def ctgr_def = new Rec_ctgr_def();
+                            switch (lis.leftBoundType)
+                            {
+                                case BoundaryEnum.Infinity:
+                                    ctgr_def.definition += "(-inf";
+                                    break;
+                                case BoundaryEnum.Round:
+                                    ctgr_def.definition += "(";
+                                    break;
+                                case BoundaryEnum.Sharp:
+                                    ctgr_def.definition += "<";
+                                    break;
+                            }
+                            if (lis.leftBoundType != BoundaryEnum.Infinity)
+                                ctgr_def.definition += lis.leftBound.ToString() + ";";
+                            if (lis.rightBoundType != BoundaryEnum.Infinity)
+                                ctgr_def.definition += lis.rightBound.ToString();
+                            switch (lis.rightBoundType)
+                            {
+                                case BoundaryEnum.Infinity:
+                                    ctgr_def.definition += "+inf)";
+                                    break;
+                                case BoundaryEnum.Round:
+                                    ctgr_def.definition += ")";
+                                    break;
+                                case BoundaryEnum.Sharp:
+                                    ctgr_def.definition += ">";
+                                    break;
+                            }
+                            ctgr_defs.Add(ctgr_def);
                         }
-                        if (lis.leftBoundType != BoundaryEnum.Infinity)
-                            ctgr_def.definition += lis.leftBound.ToString() + ";";
-                        if (lis.rightBoundType != BoundaryEnum.Infinity)
-                            ctgr_def.definition += lis.rightBound.ToString();
-                        switch (lis.rightBoundType)
-                        {
-                            case BoundaryEnum.Infinity:
-                                ctgr_def.definition += "+inf)";
-                                break;
-                            case BoundaryEnum.Round:
-                                ctgr_def.definition += ")";
-                                break;
-                            case BoundaryEnum.Sharp:
-                                ctgr_def.definition += ">";
-                                break;
-                        }
-                        ctgr_defs.Add(ctgr_def);
+                        // vypsani jedne kategorie do XML
+                        string OneCatString = "";
+                        if (ctgr_defs.Count == 0)
+                            OneCatString += rCat.ToXML();
+                        else
+                            OneCatString += rCat.ToXML(ctgr_defs);
+
+                        resultString += OneCatString;
+
                     }
-                    // vypsani jedne kategorie do XML
-                    string OneCatString = "";
-                    if (ctgr_defs.Count == 0)
-                        OneCatString += rCat.ToXML();
-                    else
-                        OneCatString += rCat.ToXML(ctgr_defs);
+                    // float intervals
+                    foreach (string key in cat_str.floatIntervals.Keys)
+                    {
+                        Rec_category rCat = new Rec_category();
+                        rCat.id = "cat" + ABox.ProjectIdentifier.ToString() + "_" + cat_id_counter.ToString();
+                        cat_id_counter++;
+                        rCat.db_name = db_name;
+                        rCat.matrix_name = matrix_name;
+                        rCat.attr_name = attr_name;
+                        rCat.ctgr_name = key;
+                        rCat.ctgr_type = "Interval";
+                        rCat.ctgr_freq = "N/A";     // TODO: doimplementovat, pujde-li
+                        rCat.bool_type = "No boolean"; // TODO: co to je? Dodelat.
+                        rCat.def_length = cat_str.floatIntervals[key].GetLength(0);
 
-                    resultString += OneCatString;
+                        List<Rec_ctgr_def> ctgr_defs = new List<Rec_ctgr_def>();
+                        foreach (FloatIntervalStruct fis in cat_str.floatIntervals[key])
+                        {
+                            Rec_ctgr_def ctgr_def = new Rec_ctgr_def();
+                            switch (fis.leftBoundType)
+                            {
+                                case BoundaryEnum.Infinity:
+                                    ctgr_def.definition += "(-inf";
+                                    break;
+                                case BoundaryEnum.Round:
+                                    ctgr_def.definition += "(";
+                                    break;
+                                case BoundaryEnum.Sharp:
+                                    ctgr_def.definition += "<";
+                                    break;
+                            }
+                            if (fis.leftBoundType != BoundaryEnum.Infinity)
+                                ctgr_def.definition += fis.leftBound.ToString() + ";";
+                            if (fis.rightBoundType != BoundaryEnum.Infinity)
+                                ctgr_def.definition += fis.rightBound.ToString();
+                            switch (fis.rightBoundType)
+                            {
+                                case BoundaryEnum.Infinity:
+                                    ctgr_def.definition += "+inf)";
+                                    break;
+                                case BoundaryEnum.Round:
+                                    ctgr_def.definition += ")";
+                                    break;
+                                case BoundaryEnum.Sharp:
+                                    ctgr_def.definition += ">";
+                                    break;
+                            }
+                            ctgr_defs.Add(ctgr_def);
+                        }
+                        // vypsani jedne kategorie do XML
+                        string OneCatString = "";
+                        if (ctgr_defs.Count == 0)
+                            OneCatString += rCat.ToXML();
+                        else
+                            OneCatString += rCat.ToXML(ctgr_defs);
 
+                        resultString += OneCatString;
+
+                    }
+                    //  date time intervals  
+                    foreach (string key in cat_str.dateTimeIntervals.Keys)
+                    {
+                        Rec_category rCat = new Rec_category();
+                        rCat.id = "cat" + ABox.ProjectIdentifier.ToString() + "_" + cat_id_counter.ToString();
+                        cat_id_counter++;
+                        rCat.db_name = db_name;
+                        rCat.matrix_name = matrix_name;
+                        rCat.attr_name = attr_name;
+                        rCat.ctgr_name = key;
+                        rCat.ctgr_type = "Interval";
+                        rCat.ctgr_freq = "N/A";     // TODO: doimplementovat, pujde-li
+                        rCat.bool_type = "No boolean"; // TODO: co to je? Dodelat.
+                        rCat.def_length = cat_str.floatIntervals[key].GetLength(0);
+
+                        List<Rec_ctgr_def> ctgr_defs = new List<Rec_ctgr_def>();
+                        foreach (DateTimeIntervalStruct dis in cat_str.dateTimeIntervals[key])
+                        {
+                            Rec_ctgr_def ctgr_def = new Rec_ctgr_def();
+                            switch (dis.leftBoundType)
+                            {
+                                case BoundaryEnum.Infinity:
+                                    ctgr_def.definition += "(-inf";
+                                    break;
+                                case BoundaryEnum.Round:
+                                    ctgr_def.definition += "(";
+                                    break;
+                                case BoundaryEnum.Sharp:
+                                    ctgr_def.definition += "<";
+                                    break;
+                            }
+                            if (dis.leftBoundType != BoundaryEnum.Infinity)
+                                ctgr_def.definition += dis.leftBound.ToString() + ";";
+                            if (dis.rightBoundType != BoundaryEnum.Infinity)
+                                ctgr_def.definition += dis.rightBound.ToString();
+                            switch (dis.rightBoundType)
+                            {
+                                case BoundaryEnum.Infinity:
+                                    ctgr_def.definition += "+inf)";
+                                    break;
+                                case BoundaryEnum.Round:
+                                    ctgr_def.definition += ")";
+                                    break;
+                                case BoundaryEnum.Sharp:
+                                    ctgr_def.definition += ">";
+                                    break;
+                            }
+                            ctgr_defs.Add(ctgr_def);
+                        }
+                        // vypsani jedne kategorie do XML
+                        string OneCatString = "";
+                        if (ctgr_defs.Count == 0)
+                            OneCatString += rCat.ToXML();
+                        else
+                            OneCatString += rCat.ToXML(ctgr_defs);
+
+                        resultString += OneCatString;
+                    }
+                    #endregion
+
+                    // enums
+                    foreach (string key in cat_str.enums.Keys)
+                    {
+                        Rec_category rCat = new Rec_category();
+                        rCat.id = "cat" + ABox.ProjectIdentifier.ToString() + "_" + cat_id_counter.ToString();
+                        cat_id_counter++;
+                        rCat.db_name = db_name;
+                        rCat.matrix_name = matrix_name;
+                        rCat.attr_name = attr_name;
+                        rCat.ctgr_name = key;
+                        rCat.ctgr_type = "Enumeration";
+                        rCat.ctgr_freq = "N/A";     // TODO: doimplementovat, pujde-li
+                        rCat.bool_type = "No boolean"; // TODO: co to je? Dodelat.
+                        rCat.def_length = cat_str.enums[key].GetLength(0);
+
+                        List<Rec_ctgr_def> ctgr_defs = new List<Rec_ctgr_def>();
+                        foreach (string enu in cat_str.enums[key])
+                        {
+                            Rec_ctgr_def ctgr_def = new Rec_ctgr_def();
+                            ctgr_def.definition = enu;
+                            ctgr_defs.Add(ctgr_def);
+                        }
+                        // vypsani jedne kategorie do XML
+                        string OneCatString = "";
+                        if (ctgr_defs.Count == 0)
+                            OneCatString += rCat.ToXML();
+                        else
+                            OneCatString += rCat.ToXML(ctgr_defs);
+
+                        resultString += OneCatString;
+                    }
                 }
-                // float intervals
-                foreach (string key in cat_str.floatIntervals.Keys)
+                catch (System.Exception e)
                 {
-                    Rec_category rCat = new Rec_category();
-                    rCat.id = "cat" + ABox.ProjectIdentifier.ToString() + "_" + cat_id_counter.ToString();
-                    cat_id_counter++;
-                    rCat.db_name = db_name;
-                    rCat.matrix_name = matrix_name;
-                    rCat.attr_name = attr_name;
-                    rCat.ctgr_name = key;
-                    rCat.ctgr_type = "Interval";
-                    rCat.ctgr_freq = "N/A";     // TODO: doimplementovat, pujde-li
-                    rCat.bool_type = "No boolean"; // TODO: co to je? Dodelat.
-                    rCat.def_length = cat_str.floatIntervals[key].GetLength(0);
-
-                    List<Rec_ctgr_def> ctgr_defs = new List<Rec_ctgr_def>();
-                    foreach (FloatIntervalStruct fis in cat_str.floatIntervals[key])
-                    {
-                        Rec_ctgr_def ctgr_def = new Rec_ctgr_def();
-                        switch (fis.leftBoundType)
-                        {
-                            case BoundaryEnum.Infinity:
-                                ctgr_def.definition += "(-inf";
-                                break;
-                            case BoundaryEnum.Round:
-                                ctgr_def.definition += "(";
-                                break;
-                            case BoundaryEnum.Sharp:
-                                ctgr_def.definition += "<";
-                                break;
-                        }
-                        if (fis.leftBoundType != BoundaryEnum.Infinity)
-                            ctgr_def.definition += fis.leftBound.ToString() + ";";
-                        if (fis.rightBoundType != BoundaryEnum.Infinity)
-                            ctgr_def.definition += fis.rightBound.ToString();
-                        switch (fis.rightBoundType)
-                        {
-                            case BoundaryEnum.Infinity:
-                                ctgr_def.definition += "+inf)";
-                                break;
-                            case BoundaryEnum.Round:
-                                ctgr_def.definition += ")";
-                                break;
-                            case BoundaryEnum.Sharp:
-                                ctgr_def.definition += ">";
-                                break;
-                        }
-                        ctgr_defs.Add(ctgr_def);
-                    }
-                    // vypsani jedne kategorie do XML
-                    string OneCatString = "";
-                    if (ctgr_defs.Count == 0)
-                        OneCatString += rCat.ToXML();
-                    else
-                        OneCatString += rCat.ToXML(ctgr_defs);
-
-                    resultString += OneCatString;
-
+                    ErrStr += "Box ProjectIdentifier=" + ABox.ProjectIdentifier.ToString() + ": " + e.Message + "\n";
                 }
-                //  date time intervals  
-                foreach (string key in cat_str.dateTimeIntervals.Keys)
-                {
-                    Rec_category rCat = new Rec_category();
-                    rCat.id = "cat" + ABox.ProjectIdentifier.ToString() + "_" + cat_id_counter.ToString();
-                    cat_id_counter++;
-                    rCat.db_name = db_name;
-                    rCat.matrix_name = matrix_name;
-                    rCat.attr_name = attr_name;
-                    rCat.ctgr_name = key;
-                    rCat.ctgr_type = "Interval";
-                    rCat.ctgr_freq = "N/A";     // TODO: doimplementovat, pujde-li
-                    rCat.bool_type = "No boolean"; // TODO: co to je? Dodelat.
-                    rCat.def_length = cat_str.floatIntervals[key].GetLength(0);
-
-                    List<Rec_ctgr_def> ctgr_defs = new List<Rec_ctgr_def>();
-                    foreach (DateTimeIntervalStruct dis in cat_str.dateTimeIntervals[key])
-                    {
-                        Rec_ctgr_def ctgr_def = new Rec_ctgr_def();
-                        switch (dis.leftBoundType)
-                        {
-                            case BoundaryEnum.Infinity:
-                                ctgr_def.definition += "(-inf";
-                                break;
-                            case BoundaryEnum.Round:
-                                ctgr_def.definition += "(";
-                                break;
-                            case BoundaryEnum.Sharp:
-                                ctgr_def.definition += "<";
-                                break;
-                        }
-                        if (dis.leftBoundType != BoundaryEnum.Infinity)
-                            ctgr_def.definition += dis.leftBound.ToString() + ";";
-                        if (dis.rightBoundType != BoundaryEnum.Infinity)
-                            ctgr_def.definition += dis.rightBound.ToString();
-                        switch (dis.rightBoundType)
-                        {
-                            case BoundaryEnum.Infinity:
-                                ctgr_def.definition += "+inf)";
-                                break;
-                            case BoundaryEnum.Round:
-                                ctgr_def.definition += ")";
-                                break;
-                            case BoundaryEnum.Sharp:
-                                ctgr_def.definition += ">";
-                                break;
-                        }
-                        ctgr_defs.Add(ctgr_def);
-                    }
-                    // vypsani jedne kategorie do XML
-                    string OneCatString = "";
-                    if (ctgr_defs.Count == 0)
-                        OneCatString += rCat.ToXML();
-                    else
-                        OneCatString += rCat.ToXML(ctgr_defs);
-
-                    resultString += OneCatString;
-                }
-                #endregion
-
-                // enums
-                foreach (string key in cat_str.enums.Keys)
-                {
-                    Rec_category rCat = new Rec_category();
-                    rCat.id = "cat" + ABox.ProjectIdentifier.ToString() + "_" + cat_id_counter.ToString();
-                    cat_id_counter++;
-                    rCat.db_name = db_name;
-                    rCat.matrix_name = matrix_name;
-                    rCat.attr_name = attr_name;
-                    rCat.ctgr_name = key;
-                    rCat.ctgr_type = "Enumeration";
-                    rCat.ctgr_freq = "N/A";     // TODO: doimplementovat, pujde-li
-                    rCat.bool_type = "No boolean"; // TODO: co to je? Dodelat.
-                    rCat.def_length = cat_str.enums[key].GetLength(0);
-
-                    List<Rec_ctgr_def> ctgr_defs = new List<Rec_ctgr_def>();
-                    foreach (string enu in cat_str.enums[key])
-                    {
-                        Rec_ctgr_def ctgr_def = new Rec_ctgr_def();
-                        ctgr_def.definition = enu;
-                        ctgr_defs.Add(ctgr_def);
-                    }
-                    // vypsani jedne kategorie do XML
-                    string OneCatString = "";
-                    if (ctgr_defs.Count == 0)
-                        OneCatString += rCat.ToXML();
-                    else
-                        OneCatString += rCat.ToXML(ctgr_defs);
-
-                    resultString += OneCatString;
-                }
-
             }
 
             #endregion
@@ -290,8 +299,13 @@ namespace FEplugin_cs
 
             resultString += "</active_list>";
 
+#if (LADENI)
             // Kody - ulozeni vystupu do souboru "XMLAttrExample.xml" v adresari 
             XMLHelper.saveXMLexample(resultString, "../XML/XMLCatExample.xml");
+
+            if (ErrStr != "") // LADICI
+                MessageBox.Show("Chyby pri generovani seznamu Boolskych cedentu:\n" + ErrStr);
+#endif
 
             return resultString;
         }

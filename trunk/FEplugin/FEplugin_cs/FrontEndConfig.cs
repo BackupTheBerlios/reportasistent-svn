@@ -24,7 +24,7 @@ using System;
 using System.Reflection;
 using System.Text;
 
-namespace Ferda.FrontEnd
+namespace FEplugin_cs
 {
     /// <summary>
     /// Structure, that holds information about the ice configuration of the
@@ -58,20 +58,9 @@ namespace Ferda.FrontEnd
         /// </returns>
         public static FrontEndConfig Load()
         {
-            //getting the name of the executing assembly (should be FerdaFrontEnd.exe)
-            string assembly = Assembly.GetExecutingAssembly().FullName;
-            //getting the name of the exe program (without the suffix)
-            assembly = assembly.Substring(0, assembly.IndexOf(','));
-            //adding the suffix
             
-            // Kodym - pouzivam to jako knihovnu, potrebuji .dll misto .exe
-            // assembly += ".exe";
-            assembly += ".dll";
-
-            //getting the full location fo the .exe file
-            StringBuilder str = new StringBuilder(Assembly.GetExecutingAssembly().Location);
-            //replacing the .exe by the name of the config file
-            str.Replace(assembly, FileName);
+            // cesta a nazev souboru FrontEndConfig
+            string str = DirManager.get_FerdaFrontEnd_dir() + @"\FrontEndConfig.xml";
 
             System.IO.FileStream fs;
             //tries to open the file
@@ -81,7 +70,7 @@ namespace Ferda.FrontEnd
             }
             catch (Exception e)
             {
-                throw new Exception("Application was not able to load FrontEndConfig.xml", e);
+                throw new FE_error("FEP002");
             }
 
             FrontEndConfig config = new FrontEndConfig();

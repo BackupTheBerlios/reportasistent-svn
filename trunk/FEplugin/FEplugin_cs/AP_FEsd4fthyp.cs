@@ -9,7 +9,7 @@ using Ferda.ModulesManager;
 using Ferda.Modules;
 using Ferda.Modules.Helpers;
 using Ferda.Modules.Quantifiers;
-using Ferda.FrontEnd;
+//using Ferda.FrontEnd;
 
 namespace FEplugin_cs
 {
@@ -31,7 +31,9 @@ namespace FEplugin_cs
             try { resultString = XMLHelper.loadDTD(); }
             catch (Exception e)
             {
+#if (LADENI)
                 MessageBox.Show("Chyba pri nacitani DTD: " + e.Message);
+#endif
                 return resultString;
             }
 
@@ -292,15 +294,17 @@ namespace FEplugin_cs
             }
             #endregion
 
+            // korenovy element
+            resultString += "</active_list>";
+
+#if (LADENI)            
             // vypsani pripadne chybove hlasky:
             if (!String.IsNullOrEmpty(ErrStr))  // LADICI
                 MessageBox.Show("Pri nacitani SD4FT hypotez doslo k chybam:\n" + ErrStr, "Chyba", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-            // korenovy element
-            resultString += "</active_list>";
-
             // LADICI - Kody - ulozeni vystupu do souboru "XMLsd4fthypExample.xml" v adresari 
             XMLHelper.saveXMLexample(resultString, "../XML/XMLsd4fthypExample.xml");
+#endif
 
             return resultString;
         }

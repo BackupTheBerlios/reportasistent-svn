@@ -9,7 +9,7 @@ using Ferda.ModulesManager;
 using Ferda.Modules;
 using Ferda.Modules.Helpers;
 using Ferda.Modules.Quantifiers;
-using Ferda.FrontEnd;
+//using Ferda.FrontEnd;
 
 namespace FEplugin_cs
 {
@@ -27,7 +27,9 @@ namespace FEplugin_cs
             try { resultString = XMLHelper.loadDTD(); }
             catch (Exception e)
             {
+#if (LADENI)
                 MessageBox.Show("Chyba pri nacitani DTD: " + e.Message);
+#endif
                 return resultString;
             }
 
@@ -189,11 +191,13 @@ namespace FEplugin_cs
             // korenovy element
             resultString += "</active_list>";
 
+#if (LADENI)
             // Kody - ulozeni vystupu do souboru "XMLBool_cedentExample.xml" v adresari 
             XMLHelper.saveXMLexample(resultString, "../XML/XMLBool_cedentExample.xml");
 
             if (ErrStr != "") // LADICI
                 MessageBox.Show("Chyby pri generovani seznamu Boolskych cedentu:\n" + ErrStr);
+#endif
 
             return resultString;
         }

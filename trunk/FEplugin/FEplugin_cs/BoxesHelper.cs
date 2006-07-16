@@ -7,7 +7,7 @@ using System.Windows.Forms;
 using Ferda;
 using Ferda.ProjectManager;
 using Ferda.ModulesManager;
-using Ferda.FrontEnd;
+//using Ferda.FrontEnd;
 
 namespace FEplugin_cs
 {

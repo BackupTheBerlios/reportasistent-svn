@@ -9,7 +9,7 @@ using Ferda.ModulesManager;
 using Ferda.Modules;
 using Ferda.Modules.Helpers;
 using Ferda.Modules.Quantifiers;
-using Ferda.FrontEnd;
+//using Ferda.FrontEnd;
 
 namespace FEplugin_cs
 {
@@ -32,7 +32,9 @@ namespace FEplugin_cs
             try { resultString = XMLHelper.loadDTD(); }
             catch (Exception e)
             {
+#if (LADENI)
                 MessageBox.Show("Chyba pri nacitani DTD: " + e.Message);
+#endif
                 return resultString;
             }
             
@@ -157,13 +159,14 @@ namespace FEplugin_cs
             // korenovy element
             resultString += "</active_list>";
 
+#if (LADENI)
             // vypsani pripadne chybove hlasky:
             if (!String.IsNullOrEmpty(ErrStr))  // LADICI
                 MessageBox.Show("Pri nacitani Kvantifikatoru doslo k chybam:\n" + ErrStr, "Chyba", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-
             // Kody - ulozeni vystupu do souboru "XMLQuantExample.xml" v adresari 
             XMLHelper.saveXMLexample(resultString, "../XML/XMLQuantExample.xml");
+#endif
 
             return resultString;
         }

@@ -9,7 +9,7 @@ using Ferda.ModulesManager;
 using Ferda.Modules;
 using Ferda.Modules.Helpers;
 using Ferda.Modules.Quantifiers;
-using Ferda.FrontEnd;
+//using Ferda.FrontEnd;
 
 namespace FEplugin_cs
 {
@@ -27,7 +27,9 @@ namespace FEplugin_cs
             try { resultString = XMLHelper.loadDTD(); }
             catch (Exception e)
             {
+#if (LADENI)
                 MessageBox.Show("Chyba pri nacitani DTD: " + e.Message);
+#endif
                 return resultString;
             }
 
@@ -124,11 +126,13 @@ namespace FEplugin_cs
             // korenovy element
             resultString += "</active_list>";
 
+#if (LADENI)
             // Kody - ulozeni vystupu do souboru "XMLKL_cedentExample.xml" v adresari 
             XMLHelper.saveXMLexample(resultString, "../XML/XMLKL_cedentExample.xml");
 
             if (ErrStr != "") // LADICI
                 MessageBox.Show("Chyby pri generovani seznamu KL cedentu:\n" + ErrStr);
+#endif
 
             return resultString;
         }
@@ -136,7 +140,6 @@ namespace FEplugin_cs
         private static string getOneCedentXML(IBoxModule[] subcedents)
         {
             string XML = "";
-            string ErrList = "";
 
             #region cyklus - zpracovani vsech dilcich cedentu
 
