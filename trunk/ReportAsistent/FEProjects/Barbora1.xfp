@@ -331,6 +331,13 @@
             <Y>470</Y>
           </Position>
         </PositionSet>
+        <PositionSet>
+          <BoxProjectIdentifier>52</BoxProjectIdentifier>
+          <Position>
+            <X>76</X>
+            <Y>404</Y>
+          </Position>
+        </PositionSet>
       </PositionSets>
     </View>
     <View>
@@ -16182,6 +16189,49 @@
           <Value xsi:type="StringValueT">
             <Value>
               <stringValue>GreaterThanOrEqual</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+      </PropertySets>
+    </Box>
+    <Box>
+      <CreatorIdentifier>DataMiningCommon.Attributes.Attribute</CreatorIdentifier>
+      <UserName>atribut bez DB</UserName>
+      <ProjectIdentifier>52</ProjectIdentifier>
+      <Connections />
+      <PropertySets>
+        <PropertySet>
+          <PropertyName>Categories</PropertyName>
+          <Value xsi:type="CategoriesValueT">
+            <Value>
+              <DateTimes />
+              <Floats />
+              <Longs />
+              <Enums />
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>IncludeNullCategory</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue />
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>NameInLiterals</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue />
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>XCategory</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue />
             </Value>
           </Value>
         </PropertySet>
