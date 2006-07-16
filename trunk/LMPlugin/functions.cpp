@@ -22,6 +22,10 @@
 #include "tiHypothesis_Recordset.h"
 #include "TFTQuantifier_Recordset.h"
 #include "TCFQuantifier_Recordset.h"
+#include "TKLQuantifier_Recordset.h"
+#include "TDFQuantifier_Recordset.h"
+#include "TDCQuantifier_Recordset.h"
+#include "TDKQuantifier_Recordset.h"
 
 //dedek: docasne
 /*****/
@@ -73,6 +77,10 @@ CString fLMQuantifier (void* hSource)
 
 	TFTQuantifier_Recordset rs ((CDatabase *) hSource);
 	TCFQuantifier_Recordset rsCF ((CDatabase *) hSource);
+	TKLQuantifier_Recordset rsKL ((CDatabase *) hSource);
+	TDFQuantifier_Recordset rsDF ((CDatabase *) hSource);
+	TDCQuantifier_Recordset rsDC ((CDatabase *) hSource);
+	TDKQuantifier_Recordset rsDK ((CDatabase *) hSource);
 
 	LPCTSTR q = "SELECT * \
 				 FROM taTask, tdFTQuantifier, tmMatrix, tsQuantifierType, tsTaskSubType \
@@ -295,6 +303,244 @@ CString fLMQuantifier (void* hSource)
 			rsCF.MoveNext();
 		}
 		rsCF.Close();
+	}
+	else return "";
+
+	q = "SELECT * \
+		 FROM taTask, tdKLQuantifier, tmMatrix, tsCompareType,\
+		      tsKLQuantifierType, tsKLQuantifierValueType, tsTaskSubType \
+		 WHERE taTask.MatrixID=tmMatrix.MatrixID \
+		   AND taTask.TaskSubTypeID=tsTaskSubType.TaskSubTypeID \
+		   AND tdKLQuantifier.TaskID=taTask.TaskID \
+		   AND tsKLQuantifierType.KLQuantifierTypeID=tdKLQuantifier.KLQuantifierTypeID \
+		   AND tsKLQuantifierValueType.KLQuantifierValueTypeID=tdKLQuantifier.KLQuantifierValueTypeID \
+		   AND tsCompareType.CompareTypeID=tdKLQuantifier.CompareTypeID";
+
+	if (rsKL.Open(AFX_DB_USE_DEFAULT_TYPE, q))
+	{
+		//iteration on query results
+		while (!rsKL.IsEOF())
+		{
+			ptquant = new (Quantifier_Meta);
+			ptquant->db_name = db_name;
+			ptquant->matrix_name = rsKL.m_Name2;
+			ptquant->name = rsKL.m_Name4;
+			ptquant->task_name = rsKL.m_Name;
+			ptquant->task_type = rsKL.m_Name6;
+			ptquant->type = "";
+			hlp.Format ("%d", rsKL.m_KLQuantifierID);
+			hlp = "quantKL" + hlp;
+			ptquant->id = hlp;
+			
+			item.name = "Value type";
+			item.value = rsKL.m_Name5;
+			ptquant->items.Add (item);
+
+			item.name = "From Column";
+			item.value = (LPCTSTR) (_bstr_t) rsKL.m_FromCol;
+			ptquant->items.Add (item);
+
+			item.name = "To Column";
+			item.value = (LPCTSTR) (_bstr_t) rsKL.m_ToCol;
+			ptquant->items.Add (item);
+
+			item.name = "From Row";
+			item.value = (LPCTSTR) (_bstr_t) rsKL.m_FromRow;
+			ptquant->items.Add (item);
+
+			item.name = "To Row";
+			item.value = (LPCTSTR) (_bstr_t) rsKL.m_ToRow;
+			ptquant->items.Add (item);
+
+			item.name = "Param";
+			item.value = (LPCTSTR) (_bstr_t) rsKL.m_ValuePar;
+			ptquant->items.Add (item);
+
+			item.name = "Comparation";
+			item.value = rsKL.m_ShortName;
+			ptquant->items.Add (item);
+			
+			list.Add (ptquant);
+			rsKL.MoveNext();
+		}
+		rsKL.Close();
+	}
+	else return "";
+
+	q = "SELECT * \
+		 FROM taTask, tdDFQuantifier, tmMatrix, tsCompareType,\
+		      tsDFQuantifierType, tsDFQuantifierValueType, \
+			  tsSDQuantifierSourceType, tsTaskSubType \
+		 WHERE taTask.MatrixID=tmMatrix.MatrixID \
+		   AND taTask.TaskSubTypeID=tsTaskSubType.TaskSubTypeID \
+		   AND tdDFQuantifier.TaskID=taTask.TaskID \
+		   AND tsDFQuantifierType.DFQuantifierTypeID=tdDFQuantifier.DFQuantifierTypeID \
+		   AND tsDFQuantifierValueType.DFQuantifierValueTypeID=tdDFQuantifier.DFQuantifierValueTypeID \
+		   AND tsCompareType.CompareTypeID=tdDFQuantifier.CompareTypeID \
+		   AND tsSDQuantifierSourceType.SDQuantifierSourceTypeID=tdDFQuantifier.SDQuantifierSourceTypeID";
+
+	if (rsDF.Open(AFX_DB_USE_DEFAULT_TYPE, q))
+	{
+		//iteration on query results
+		while (!rsDF.IsEOF())
+		{
+			ptquant = new (Quantifier_Meta);
+			ptquant->db_name = db_name;
+			ptquant->matrix_name = rsDF.m_Name2;
+			ptquant->name = rsDF.m_Name4;
+			ptquant->task_name = rsDF.m_Name;
+			ptquant->task_type = rsDF.m_Name7;
+			ptquant->type = "";
+			hlp.Format ("%d", rsDF.m_DFQuantifierID);
+			hlp = "quantDF" + hlp;
+			ptquant->id = hlp;
+			
+			item.name = "Value type";
+			item.value = rsDF.m_Name5;
+			ptquant->items.Add (item);
+
+			item.name = "Param";
+			item.value = (LPCTSTR) (_bstr_t) rsDF.m_ValuePar;
+			ptquant->items.Add (item);
+
+			item.name = "Comparation";
+			item.value = rsDF.m_ShortName;
+			ptquant->items.Add (item);
+
+			item.name = "Source";
+			item.value = rsDF.m_Name6;
+			ptquant->items.Add (item);
+			
+			list.Add (ptquant);
+			rsDF.MoveNext();
+		}
+		rsDF.Close();
+	}
+	else return "";
+
+	q = "SELECT * \
+		 FROM taTask, tdDCQuantifier, tmMatrix, tsCompareType,\
+		      tsDCQuantifierType, tsDCQuantifierValueType, \
+			  tsSDQuantifierSourceType, tsTaskSubType \
+		 WHERE taTask.MatrixID=tmMatrix.MatrixID \
+		   AND taTask.TaskSubTypeID=tsTaskSubType.TaskSubTypeID \
+		   AND tdDCQuantifier.TaskID=taTask.TaskID \
+		   AND tsDCQuantifierType.DCQuantifierTypeID=tdDCQuantifier.DCQuantifierTypeID \
+		   AND tsDCQuantifierValueType.DCQuantifierValueTypeID=tdDCQuantifier.DCQuantifierValueTypeID \
+		   AND tsCompareType.CompareTypeID=tdDCQuantifier.CompareTypeID \
+		   AND tsSDQuantifierSourceType.SDQuantifierSourceTypeID=tdDCQuantifier.SDQuantifierSourceTypeID";
+
+	if (rsDC.Open(AFX_DB_USE_DEFAULT_TYPE, q))
+	{
+		//iteration on query results
+		while (!rsDC.IsEOF())
+		{
+			ptquant = new (Quantifier_Meta);
+			ptquant->db_name = db_name;
+			ptquant->matrix_name = rsDC.m_Name2;
+			ptquant->name = rsDC.m_Name4;
+			ptquant->task_name = rsDC.m_Name;
+			ptquant->task_type = rsDC.m_Name7;
+			ptquant->type = "";
+			hlp.Format ("%d", rsDC.m_DCQuantifierID);
+			hlp = "quantDC" + hlp;
+			ptquant->id = hlp;
+			
+			item.name = "Value type";
+			item.value = rsDC.m_Name5;
+			ptquant->items.Add (item);
+
+			item.name = "Param";
+			item.value = (LPCTSTR) (_bstr_t) rsDC.m_ValuePar;
+			ptquant->items.Add (item);
+
+			item.name = "Comparation";
+			item.value = rsDC.m_ShortName;
+			ptquant->items.Add (item);
+
+			item.name = "Source";
+			item.value = rsDC.m_Name6;
+			ptquant->items.Add (item);
+
+			item.name = "From Column";
+			item.value = (LPCTSTR) (_bstr_t) rsKL.m_FromCol;
+			ptquant->items.Add (item);
+
+			item.name = "To Column";
+			item.value = (LPCTSTR) (_bstr_t) rsKL.m_ToCol;
+			ptquant->items.Add (item);
+			
+			list.Add (ptquant);
+			rsDC.MoveNext();
+		}
+		rsDC.Close();
+	}
+	else return "";
+
+	q = "SELECT * \
+		 FROM taTask, tdDKQuantifier, tmMatrix, tsCompareType,\
+		      tsDKQuantifierType, tsDKQuantifierValueType, \
+			  tsSDQuantifierSourceType, tsTaskSubType \
+		 WHERE taTask.MatrixID=tmMatrix.MatrixID \
+		   AND taTask.TaskSubTypeID=tsTaskSubType.TaskSubTypeID \
+		   AND tdDKQuantifier.TaskID=taTask.TaskID \
+		   AND tsDKQuantifierType.DKQuantifierTypeID=tdDKQuantifier.DKQuantifierTypeID \
+		   AND tsDKQuantifierValueType.DKQuantifierValueTypeID=tdDKQuantifier.DKQuantifierValueTypeID \
+		   AND tsCompareType.CompareTypeID=tdDKQuantifier.CompareTypeID \
+		   AND tsSDQuantifierSourceType.SDQuantifierSourceTypeID=tdDKQuantifier.SDQuantifierSourceTypeID";
+
+	if (rsDK.Open(AFX_DB_USE_DEFAULT_TYPE, q))
+	{
+		//iteration on query results
+		while (!rsDK.IsEOF())
+		{
+			ptquant = new (Quantifier_Meta);
+			ptquant->db_name = db_name;
+			ptquant->matrix_name = rsDK.m_Name2;
+			ptquant->name = rsDK.m_Name4;
+			ptquant->task_name = rsDK.m_Name;
+			ptquant->task_type = rsDK.m_Name7;
+			ptquant->type = "";
+			hlp.Format ("%d", rsDK.m_DKQuantifierID);
+			hlp = "quantDK" + hlp;
+			ptquant->id = hlp;
+			
+			item.name = "Value type";
+			item.value = rsDK.m_Name5;
+			ptquant->items.Add (item);
+
+			item.name = "Param";
+			item.value = (LPCTSTR) (_bstr_t) rsDK.m_ValuePar;
+			ptquant->items.Add (item);
+
+			item.name = "Comparation";
+			item.value = rsDK.m_ShortName;
+			ptquant->items.Add (item);
+
+			item.name = "Source";
+			item.value = rsDK.m_Name6;
+			ptquant->items.Add (item);
+
+			item.name = "From Column";
+			item.value = (LPCTSTR) (_bstr_t) rsKL.m_FromCol;
+			ptquant->items.Add (item);
+
+			item.name = "To Column";
+			item.value = (LPCTSTR) (_bstr_t) rsKL.m_ToCol;
+			ptquant->items.Add (item);
+
+			item.name = "From Row";
+			item.value = (LPCTSTR) (_bstr_t) rsKL.m_FromRow;
+			ptquant->items.Add (item);
+
+			item.name = "To Row";
+			item.value = (LPCTSTR) (_bstr_t) rsKL.m_ToRow;
+			ptquant->items.Add (item);
+			
+			list.Add (ptquant);
+			rsDK.MoveNext();
+		}
+		rsDK.Close();
 	}
 	else return "";
 

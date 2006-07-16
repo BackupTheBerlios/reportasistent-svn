@@ -177,6 +177,18 @@ SOURCE=.\TCFQuantifier_Recordset.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\TDCQuantifier_Recordset.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\TDFQuantifier_Recordset.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\TDKQuantifier_Recordset.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\TEmpty_Cedents_Recordset.cpp
 # End Source File
 # Begin Source File
@@ -190,6 +202,10 @@ SOURCE=.\tiHypothesis_Recordset.cpp
 # Begin Source File
 
 SOURCE=.\TKLLiteral.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\TKLQuantifier_Recordset.cpp
 # End Source File
 # Begin Source File
 
@@ -289,6 +305,18 @@ SOURCE=.\TCFQuantifier_Recordset.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\TDCQuantifier_Recordset.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\TDFQuantifier_Recordset.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\TDKQuantifier_Recordset.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\TEmpty_Cedents_Recordset.h
 # End Source File
 # Begin Source File
@@ -302,6 +330,10 @@ SOURCE=.\tiHypothesis_Recordset.h
 # Begin Source File
 
 SOURCE=.\TKLLiteral.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\TKLQuantifier_Recordset.h
 # End Source File
 # Begin Source File
 
