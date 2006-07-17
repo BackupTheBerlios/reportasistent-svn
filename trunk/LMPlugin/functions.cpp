@@ -561,7 +561,7 @@ CString fLMQuantifier (void* hSource)
 		buf = buf + list.GetAt (i)->xml_convert ();
 	}
 	buf += " </active_list>";
-	//just for test - creates a xml file with all attributes
+/*	//just for test - creates a xml file with all attributes
 	FILE * f = fopen ("test.xml", "w");
 	fprintf (f, "%s", buf);
 	fclose (f);
@@ -1675,13 +1675,14 @@ CString fLMCategory(void* hSource)
 CString fLM4fthyp(void * hSource)
 {
 	CString buf;
+	CString db_name = ((CDatabase *) hSource)->GetDatabaseName ();
 	CString id_hlp;
 	THyp_4ft_Meta_Array list;
 	Hyp_4ft_Recordset rs ((CDatabase *) hSource);
 	Hyp_4ft_Meta * pthyp;
 	long h_id;
-	long m_id;
-	long t_id;
+//	long m_id;
+//	long t_id;
 	long l_id;
 	long c_id;
 	long h_id_tst = 0;//test variable - values from previous iteration
@@ -1692,7 +1693,20 @@ CString fLM4fthyp(void * hSource)
 	CString ced_name;
 	CString q_name;
 	CString q_value;
-	LPCTSTR q = "SELECT tiHypothesis.HypothesisID, taTask.MatrixID, tmMatrix.Name, taTask.TaskID, taTask.Name, tiHypothesis.FreqA, tiHypothesis.FreqB, tiHypothesis.FreqC, tiHypothesis.FreqD, tiLiteralI.LiteralIID, tiLiteralI.Negation, tsCedentType.Name, tmCategory.CategoryID, tmQuantity.Name, tmCategory.Name FROM tsCedentType, tiHypothesis, taTask, tmMatrix, tiLiteralI, tiCoefficient, tmCategory, tmQuantity WHERE tiCoefficient.TaskID=taTask.TaskID AND taTask.MatrixID=tmMatrix.MatrixID AND tiHypothesis.HypothesisID=tiLiteralI.HypothesisID AND tiLiteralI.LiteralIID=tiCoefficient.LiteralIID AND tiCoefficient.CategoryID=tmCategory.CategoryID AND tmCategory.QuantityID=tmQuantity.QuantityID AND tsCedentType.CedentTypeID=tiLiteralI.CedentTypeID ORDER BY tiHypothesis.HypothesisID, tiLiteralI.CedentTypeID";
+	CString q = "SELECT * \
+				 FROM taTask,tiCoefficient,  tiHypothesis, tiLiteralI, tmCategory, \
+				      tmMatrix, tmQuantity, tsCedentType, tsTaskSubType \
+				 WHERE tiCoefficient.TaskID=taTask.TaskID \
+				   AND taTask.MatrixID=tmMatrix.MatrixID \
+				   AND tiHypothesis.HypothesisID=tiLiteralI.HypothesisID \
+				   AND tiLiteralI.LiteralIID=tiCoefficient.LiteralIID \
+				   AND tiCoefficient.CategoryID=tmCategory.CategoryID \
+				   AND tmCategory.QuantityID=tmQuantity.QuantityID \
+				   AND tsCedentType.CedentTypeID=tiLiteralI.CedentTypeID \
+				   AND tsTaskSubType.ShortName=";
+	q += "'CDASSOC'";
+	q += "AND taTask.TaskSubTypeID=tsTaskSubType.TaskSubTypeID \
+				 ORDER BY tiHypothesis.HypothesisID, tiLiteralI.CedentTypeID";
 	//load data from metabase
 	if (rs.Open(AFX_DB_USE_DEFAULT_TYPE, q))
 	{
@@ -1700,14 +1714,14 @@ CString fLM4fthyp(void * hSource)
 		while (!rs.IsEOF())
 		{
 			h_id = rs.m_HypothesisID;
-			m_id = rs.m_MatrixID;
-			t_id = rs.m_TaskID;
-			l_id = rs.m_LiteralID;
+//			m_id = rs.m_MatrixID2;
+//			t_id = rs.m_TaskID;
+			l_id = rs.m_LiteralIID2;
 			neg_lit = rs.m_Negation;
-			ced_name = rs.m_CedentTypeName;
-			c_id = rs.m_CategoryID;
-			q_name = rs.m_QuantityID;
-			q_value = rs.m_Qvalue;
+			ced_name = rs.m_Name5;
+			c_id = rs.m_CategoryID2;
+			q_name = rs.m_Name4;
+			q_value = rs.m_Name2;
 			q_value.Replace ("<", "&lt;");
 			if (h_id != h_id_tst)
 			{
@@ -1715,9 +1729,9 @@ CString fLM4fthyp(void * hSource)
 				pthyp->flag_a = pthyp->flag_s = pthyp->flag_c = FALSE;
 				id_hlp.Format ("%d", h_id);
 				pthyp->id = "hyp4ft" + id_hlp;
-				pthyp->db_name = ((CDatabase *) hSource)->GetDatabaseName ();
-				pthyp->matrix_name = rs.m_MatrixName;
-				pthyp->task_name = rs.m_TaskName;
+				pthyp->db_name = db_name;
+				pthyp->matrix_name = rs.m_Name3;
+				pthyp->task_name = rs.m_Name;
 				pthyp->a = rs.m_FreqA;
 				pthyp->b = rs.m_FreqB;
 				pthyp->c = rs.m_FreqC;
