@@ -49,10 +49,6 @@ LPCTSTR CStringTableImpl::getItem(int index)
 
 CStringTableImpl::~CStringTableImpl()
 {
-	
-//ladici:
-//	AfxMessageBox("destruktor: ~CStringTableImpl()");
-
 	Clear();
 }
 
@@ -165,7 +161,7 @@ BOOL CWordManager::InitWordLoader()
 		BOOL ret = CreateProcess(m.getLMRA_WB_WordLoaderPath(), " register", NULL, NULL, FALSE, NORMAL_PRIORITY_CLASS, NULL, NULL, & si, & pi);
 		if (! ret) 
 		{
-			AfxMessageBox(IDS_WB_WORD_LOADER_NOT_REGISTRED);
+			CReportAsistentApp::ReportError(IDS_WB_WORD_LOADER_NOT_REGISTRED);
 			return FALSE;
 		}
 
@@ -176,7 +172,7 @@ BOOL CWordManager::InitWordLoader()
 
 		if (wait_ret != WAIT_OBJECT_0)
 		{
-			AfxMessageBox(IDS_WB_WORD_LOADER_NOT_REGISTRED);
+			CReportAsistentApp::ReportError(IDS_WB_WORD_LOADER_NOT_REGISTRED);
 			return FALSE;
 		}
 	
@@ -184,7 +180,7 @@ BOOL CWordManager::InitWordLoader()
 		hr = m_WordLoader.CreateInstance(CLSID_LMRA_XML_WordLoader);
 		if (S_OK != hr)
 		{
-			AfxMessageBox(IDS_WB_WORD_LOADER_NOT_REGISTRED);
+			CReportAsistentApp::ReportError(IDS_WB_WORD_LOADER_NOT_REGISTRED);
 			return FALSE;
 		}
 	}

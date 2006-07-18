@@ -85,7 +85,9 @@ void CAttributeLinkDialogBase::OnRefresh(CListCtrl & AttributesList, LPCTSTR tar
 	CAElTransform tr(el);
 
 	if (! tr.FillElementAttributes(0))
-		AfxMessageBox(IDS_REFRESH_EL_ATTRIBUTES_FAILED);
+	{
+		CReportAsistentApp::ReportError(IDS_REFRESH_EL_ATTRIBUTES_FAILED);
+	}
 	
 	el.Release();
 

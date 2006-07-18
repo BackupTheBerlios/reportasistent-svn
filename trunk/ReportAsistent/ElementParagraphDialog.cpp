@@ -61,6 +61,7 @@ void CElementParagraphDialog::DDV_NonDuplicateID(CDataExchange *pDX, int nId, CS
 		if (""==csIDEditValue) //Iva: ID can't be empty string
 		{
 			SetDlgItemText(nId, m_OldID );
+			//dedek: ?CReportAsistentApp::ReportError?
 			AfxMessageBox(IDS_INVALID_ELEMENT_ID);
 			pDX->Fail();
 		}
@@ -71,6 +72,7 @@ void CElementParagraphDialog::DDV_NonDuplicateID(CDataExchange *pDX, int nId, CS
 		{
 			SetDlgItemText(nId, m_OldID ); //Iva: return old value to edit box
 			AfxMessageBox(IDS_DUPLICATE_ELEMENT_ID);
+			//dedek: ?CReportAsistentApp::ReportError(IDS_DUPLICATE_ELEMENT_ID);?
 			pDX->Fail();
 		}
 

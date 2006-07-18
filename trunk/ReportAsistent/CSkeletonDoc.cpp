@@ -472,14 +472,14 @@ MSXML2::IXMLDOMElementPtr CSkeletonDoc::InsertNewElement(CElementManager::elId_t
 		}
 		catch (_com_error &e)
 		{
-			//AfxMessageBox(e.ErrorMessage());
+			//ladici
 			AfxMessageBox(e.Description());
 		}
 
 	}
 		
 	
-	AfxMessageBox(IDS_INSERT_NEW_ELEMENT_WRONG_LOCATION);	
+	CReportAsistentApp::ReportError(IDS_INSERT_NEW_ELEMENT_WRONG_LOCATION);	
 	
 	new_example.Release();
 	
@@ -670,12 +670,6 @@ LPARAM CSkeletonDoc::CreateItemData(MSXML2::IXMLDOMElementPtr & element)
 }
 
 
-
-
-
-
-
-
 void CSkeletonDoc::Generate()
 {
 	MSXML2::IXMLDOMElementPtr doc_element;
@@ -700,72 +694,6 @@ void CSkeletonDoc::Generate()
 
 	CWordManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->WordManager;
 	m.GenerateXMLString(doc_element->xml);
-
-	
-
-/***** generovani do Wordu	-stara verze
-
-	HRESULT hr;
-	
-	LMRA_WordLoader::_LMRA_XML_WordLoaderPtr word;
-	hr = word.CreateInstance(CLSID_LMRA_XML_WordLoader);
-
-	if (S_OK != hr)
-	{
-		AfxMessageBox(IDS_WB_WORD_LOADER_NOT_REGISTRED);
-
-		
-		
-		//dedek: pokusime se registrovat ActiveX objekt spustenim LMRA_WB_WordLoader s parametrem register
-		STARTUPINFO si;
-		ZeroMemory(& si, sizeof si);
-		
-		PROCESS_INFORMATION pi;
-		ZeroMemory(& pi, sizeof pi);
-
-
-		CDirectoriesManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->DirectoriesManager;
-
-		BOOL ret = CreateProcess(m.getLMRA_WB_WordLoaderPath(), " register", NULL, NULL, FALSE, NORMAL_PRIORITY_CLASS, NULL, NULL, & si, & pi);
-		if (! ret) 
-		{
-			return;
-		}
-
-		
-		//pockame az spusteny process skonci
-		DWORD wait_ret= WaitForSingleObject(pi.hProcess, 5000);
- 		CloseHandle(pi.hProcess);
-
-		if (wait_ret != WAIT_OBJECT_0) return;
-	
-
-		
-		
-		hr = word.CreateInstance(CLSID_LMRA_XML_WordLoader);
-		if (S_OK != hr) return;
-	}
-
-	try
-	{	
-		word->LoadFromString(doc_element->xml);
-	}
-	catch (_com_error & e)
-	{
-		CString err = "Chyba pri generovani.\n\nposledni zpracovavane id:   ";
-		err += word->GetstrLastProcessedId();
-		err += "\n\n";
-		err += word->GetstrLastError();
-		err += "\n";
-		err += e.Description();
-		err += "\n";
-		err += e.ErrorMessage();
-		AfxMessageBox(err);
-	}
-
-	word.Release();
-/******/
-
 }
 
 
@@ -887,70 +815,6 @@ void CSkeletonDoc::OnMmnewelement(UINT nMessageID)
 	selected_element.Release();
 }
 
-/*
-void CSkeletonDoc::OnMmnewelement(UINT nMessageID) 
-{
-	CTreeCtrl & hTreeCtrl = GetFirstView()->GetTreeCtrl();
-	
-	HTREEITEM hSelTreeItem = hTreeCtrl.GetSelectedItem();
-
-	MSXML2::IXMLDOMElementPtr selected_element = ElementFromItemData(hTreeCtrl.GetItemData( hSelTreeItem ));	
-	
-	CElementManager & OElementManager = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
-
-	MSXML2::IXMLDOMElementPtr new_element = NULL;
-
-	//zobrazi zpravu s typem vybraneho elementu
-	//honza: ladici klidne zakomentujte
-	/****
-	CElementManager::elId_t id = OElementManager.IdentifyElement(selected_element);
-	AfxMessageBox(OElementManager->getElementName(id));
-	/***//*
-
-	if (nMessageID < ID_MMNEWSTATICFIRST)
-	{	//CHYBA!!
-		AfxMessageBox(IDS_WRONG_TYPEELEMENTID,0,0);
-	}
-		
-	//pridavany prvek je STATIC
-	if ((nMessageID >= ID_MMNEWSTATICFIRST) && (nMessageID <= ID_MMNEWSTATICLAST))
-	{
-		new_element = InsertNewElement(
-			OElementManager.getElementName(nMessageID - ID_MMNEWSTATICFIRST+ OElementManager.getFirstStaticElementID()),
-			selected_element);
-		if (new_element != NULL) //tj. pridani se zdarilo
-		{
-			EditElement(new_element); 
-			
-			SetModifiedFlag();		
-			
-			//dedek: v medode EditElement se tez vola UpdateAllViews, tedy jesm tohle zakomentoval
-			//UpdateAllViews(NULL, (LPARAM) (MSXML2::IXMLDOMElement *) new_element);
-		}
-	}
-	//pridavany prvek je ACTIVE
-	if (nMessageID >= ID_MMNEWACTIVEFIRST)
-	{
-		new_element = InsertNewElement(
-			OElementManager.getElementName(nMessageID - ID_MMNEWACTIVEFIRST+ OElementManager.getFirstActiveElementID()),
-			selected_element);
-		if (new_element != NULL) //tj. pridani se zdarilo
-		{
-			EditActiveElement(new_element); 
-			
-			SetModifiedFlag();		
-			UpdateAllViews(NULL, (LPARAM) (MSXML2::IXMLDOMElement *) new_element);
-		}
-
-	}
-
-	if (nMessageID >= ID_MMNEWACTIVELAST)
-	{	//CHYBA!!
-		AfxMessageBox(IDS_WRONG_TYPEELEMENTID,0,0);
-	}	
-}
-*/
-
 void CSkeletonDoc::ChangeIDsInTree(MSXML2::IXMLDOMElementPtr pElm)
 {
 	if (pElm == NULL) return;
@@ -1071,9 +935,7 @@ BOOL CSkeletonDoc::OpenSkeletonFile(LPCTSTR file_name)
 		}
 		else
 		{
-			CString msg;
-			AfxFormatString2(msg, IDS_OPEN_FILE_FAILED, file_name, err->reason);
-			AfxMessageBox(msg);
+			CReportAsistentApp::ReportError(IDS_OPEN_FILE_FAILED, file_name, (LPCTSTR) err->reason);
 		}
 
 		err.Release();
@@ -1082,9 +944,7 @@ BOOL CSkeletonDoc::OpenSkeletonFile(LPCTSTR file_name)
 	}
 	else
 	{
-		CString msg;
-		AfxFormatString2(msg, IDS_OPEN_FILE_FAILED, file_name, open_doc->parseError->reason);
-		AfxMessageBox(msg);
+		CReportAsistentApp::ReportError(IDS_OPEN_FILE_FAILED, file_name, (LPCTSTR) open_doc->parseError->reason);
 	}
 
 	open_doc.Release();
@@ -1100,8 +960,7 @@ BOOL CSkeletonDoc::InitAndClearXmlDom()
 	hr= m_pXMLDom.CreateInstance(_T("Msxml2.DOMDocument"));
 	if (FAILED(hr)) 
 	{
-//		AfxGetMainWnd()->MessageBox("Failed to instantiate an XML DOM.", "error", MB_ICONERROR);
-		AfxMessageBox(IDS_FAILED_CREATE_XML_DOM_INSTANCE, MB_ICONERROR);
+		CReportAsistentApp::ReportError(IDS_FAILED_CREATE_XML_DOM_INSTANCE);
 		return FALSE;
 	}
 
@@ -1116,9 +975,7 @@ BOOL CSkeletonDoc::InitAndClearXmlDom()
 	m_pXMLDom->load((LPCTSTR) (m.getXMLFilesDirectory() + "/skeleton_DTD.xml"));
 	if (m_pXMLDom->parseError->errorCode != S_OK)
 	{
-		CString msg;
-		AfxFormatString1(msg, IDS_CREATE_NEW_FILE_FAILED, m_pXMLDom->parseError->reason);
-		AfxMessageBox(msg);
+		CReportAsistentApp::ReportError(IDS_CREATE_NEW_FILE_FAILED, (LPCTSTR) m_pXMLDom->parseError->reason);
 		return FALSE;
 	}
 

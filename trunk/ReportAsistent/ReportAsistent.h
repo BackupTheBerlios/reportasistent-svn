@@ -58,6 +58,8 @@ class CSkeletonDoc;
 class CReportAsistentApp : public CWinApp
 {
 public:
+	int static ReportError(UINT nResourceErrorStringID, ...);
+	
 	CSkeletonDoc * FirstDocumentInFirstTemplate();
 	CGeneralManager * m_pGeneralManager;
 	CReportAsistentApp();

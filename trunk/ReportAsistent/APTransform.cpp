@@ -354,9 +354,9 @@ void CAElTransform::FillElementAttributes(MSXML2::IXMLDOMNodePtr &output_node)
 
 	if (attributes_DOM->parseError->errorCode != S_OK)
 	{
-		CString err_str;
-		AfxFormatString2(err_str, IDS_ELEMENT_ATTRIBUTES_FAILED_LOAD, m_active_element->selectSingleNode("@id")->text, attributes_DOM->parseError->reason);
-		AfxMessageBox(err_str);
+		CReportAsistentApp::ReportError(IDS_ELEMENT_ATTRIBUTES_FAILED_LOAD,
+			(LPCTSTR) m_active_element->selectSingleNode("@id")->text,
+			(LPCTSTR) attributes_DOM->parseError->reason);
 		attributes_DOM.Release();
 		return;
 	}

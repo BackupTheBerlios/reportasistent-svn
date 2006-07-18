@@ -501,7 +501,9 @@ void CSkeletonView::OnEditPaste()
 		}
 	}
 
-	AfxMessageBox(IDS_INSERT_NEW_ELEMENT_WRONG_LOCATION,0,0);
+	//AfxMessageBox(IDS_INSERT_NEW_ELEMENT_WRONG_LOCATION,0,0); prepsano by dedek
+	CReportAsistentApp::ReportError(IDS_INSERT_NEW_ELEMENT_WRONG_LOCATION);
+
 	pNewXMLDoc.Release();	
 	return;
 }
@@ -664,7 +666,9 @@ void CSkeletonView::OnLButtonUp(UINT nFlags, CPoint point)
 				{
 					AfxMessageBox(e.Description());
 				}
-				AfxMessageBox(IDS_INSERT_NEW_ELEMENT_WRONG_LOCATION,0,0);
+				//AfxMessageBox(IDS_INSERT_NEW_ELEMENT_WRONG_LOCATION,0,0);
+				CReportAsistentApp::ReportError(IDS_INSERT_NEW_ELEMENT_WRONG_LOCATION);
+
 				
 											
 		}

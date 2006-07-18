@@ -45,6 +45,28 @@ CReportAsistentApp theApp;
 /////////////////////////////////////////////////////////////////////////////
 // CReportAsistentApp initialization
 
+#define FIRST_ERR_STR_ID IDS_INSERT_NEW_ELEMENT_WRONG_LOCATION
+
+int CReportAsistentApp::ReportError(UINT nResourceErrorStringID, ...)
+{
+	CString sFormatStr;
+	sFormatStr.LoadString(nResourceErrorStringID);
+
+	va_list params;
+	va_start(params, nResourceErrorStringID);
+
+	CString sMessgeText;
+	sMessgeText.FormatV(sFormatStr, params);
+	
+	va_end(params);
+	
+	CString sOutputText;
+	sOutputText.Format("Program error: ERR%03d\n\n%s", nResourceErrorStringID-FIRST_ERR_STR_ID, (LPCTSTR) sMessgeText);
+
+	return AfxMessageBox(sOutputText);
+}
+
+
 BOOL CReportAsistentApp::InitInstance()
 {
 	AfxEnableControlContainer();

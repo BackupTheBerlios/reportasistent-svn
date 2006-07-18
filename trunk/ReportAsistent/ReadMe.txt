@@ -6,51 +6,72 @@ Nove: subkapitoly smi byt kdekoliv v nadrazene kapitole
 
 to Deda: problemy s copy/paste jsou uz vyreseny, tvuj napad s variaci stareho ID jsem pouzila. :-)
 
+
+
+dedek:
+Vytvoril jsem novou statickou metodu CReportAsistentApp::ReportError,
+pres kterou by se mely vypisovat vsecky chybove hlasky, funguje jako printf
+
+
+
+Pro Ivu:
+
+Dalsi bug:
+id nesmi obsahovat ? * . a kdovi co jeste vsecko..
+asi to bude chtit kontrolovat primo pokusem o zmenu id prvku v kostre a odchytavat vyjimky
+
+
+
+pro vsechny ale havne pro Martina a Ivu:
+
+!!!Piste strukturovane a objektove!!!
+
+To uz si z prvaku nepamatujete jak se programuje?
+Proc kod jedne metody copy/paste prenasite do vsech objektu, chyba nebo zmena v tom kodu
+se pak musi prepisovat v kazdem zvlast a to se mi za vas uz nejak nechce :-)
+(jednou bych to jeste zvladnul :) ale trikrat az 7-krat ne)
+
+
+
+
+
+
+
+
+taky uz to umi Word styly - viz dialog pro attr_link
+
+
+
+
+
+chybka v copy/paste:
+kdyz dam copy na cely odstavec, ktery obsahuje dalsi prvky,
+tak potom nefunguje paste - prvkum uvnitr toho okopirovaneho odstavce se nezmeni id 
+- problem je v tom, ze kontrola id probiha pouze v ramci zobrazovaneho dokumentu 
+	a nikoliv v ramci vkladanych dat
+potom se muze stat (stava se) ze to vsem nove vlozenym elementum stejneho typu 
+	vyrobi stejne id
+-navic by mozna bylo fajn, kdyz by to existujici id nenahrazovalo uplne novymi 
+	ale jen je to trochu modifikovalo
+
+
+predelal jsem svou uzasnou nahodnou funkci na generovani ID CSkeletonDoc::CreateNewID
+je tam videt jak snadno se da zjistit, jestli je dane id uz pouzite..
+(koukal jsem ze uz jsi k tomu editovani id neco psala..)
+
+
+
+
+
+
+
+
+
+
 honzovy poznamky:
 
 
-
-
-
-omluva vsem:
-nestiham ten editor konfiguraci pro transformace AP, prazdniny vubec nepodporuju pracovni nasazeni jake by bylo potreba.. 
-budu ted do nedele v Ostrove, pak zase budu komunikovat..
-dedek
-
-
-
-
-
-
-
-
-
-
-
 !!!!!!! uz by to melo jit prelozit ve VS 2005 !!!!!!
-
-
-vola prevod na hex z xsl
-
-<?xml version='1.0'?>
-<xsl:stylesheet version="1.0"
-      xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-      xmlns:msxsl="urn:schemas-microsoft-com:xslt"
-      xmlns:user="http://mycompany.com/mynamespace">
-
-  <msxsl:script language="JScript" implements-prefix="user">
-    function xml(nodelist) {
-    return nodelist.toString(16);
-    }
-  </msxsl:script>
-
-  <xsl:template match="/">
-    <xsl:value-of select="user:xml(124)"/>
-  </xsl:template>
-
-</xsl:stylesheet>
-
-
 
 
 
@@ -102,39 +123,6 @@ DacourcesManager - 	pridat funci co zjisti podporovane prvky
 -nemelo by se prejmenovat APID?
 
 
-
-
-
-
-
-
-
-
-
-Pro Ivu:
-
-
-
-taky uz to umi Word styly - viz dialog pro attr_link
-
-
-
-
-
-chybka v copy/paste:
-kdyz dam copy na cely odstavec, ktery obsahuje dalsi prvky,
-tak potom nefunguje paste - prvkum uvnitr toho okopirovaneho odstavce se nezmeni id 
-- problem je v tom, ze kontrola id probiha pouze v ramci zobrazovaneho dokumentu 
-	a nikoliv v ramci vkladanych dat
-potom se muze stat (stava se) ze to vsem nove vlozenym elementum stejneho typu 
-	vyrobi stejne id
--navic by mozna bylo fajn, kdyz by to existujici id nenahrazovalo uplne novymi 
-	ale jen je to trochu modifikovalo
-
-
-predelal jsem svou uzasnou nahodnou funkci na generovani ID CSkeletonDoc::CreateNewID
-je tam videt jak snadno se da zjistit, jestli je dane id uz pouzite..
-(koukal jsem ze uz jsi k tomu editovani id neco psala..)
 
 
 

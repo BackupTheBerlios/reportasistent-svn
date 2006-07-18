@@ -668,24 +668,21 @@ BEGIN
     AFX_IDS_SCTASKLIST      "Activate Task List"
     IDS_INSERT_NEW_ELEMENT_WRONG_LOCATION 
                             "This element can not be placed here."
-    IDS_SIMPLE_FILTER_EMPTY_SELECTION 
-                            "Sorry, you have to select some items to make filter valid."
     IDS_SIMPLE_FILTER_FAILED_SOURCE_LOAD 
-                            "Sorry, but the selected source didn't return valid data for this active elemenet."
+                            "Selected source didn't return valid data for this active elemenet.\nDescription: %s"
     IDS_WB_WORD_LOADER_NOT_REGISTRED 
-                            "Sorry, Report Asistent instaklation si probably corrupt.\nFailed to load LMRA_WordLoader."
-    IDS_WRONG_TYPEELEMENTID "Chybny typ prvku - jeho ID je mimo povoleny rozsah."
+                            "Report Asistent instaklation si probably corrupt.\nFailed to load LMRA_WordLoader."
     IDS_REFRESH_EL_ATTRIBUTES_FAILED 
                             "Active element didn't support any atrributes.\nMaybe it's because of its filter is empty."
     IDS_ELEMENT_ATTRIBUTES_FAILED_LOAD 
-                            "Active element id: %1\nFailed to load element attributes.\nParse error: %2"
+                            "Active element id: %s\nFailed to load element attributes.\nParse error: %s"
     IDS_DUPLICATE_ELEMENT_ID 
                             "ID wasn't changed. Reason: The inserted ID would  be duplicate in the tree. "
     IDS_INVALID_ELEMENT_ID  "ID wasn't changed. Reason: The inserted ID is invalid. "
     IDS_FAILED_CREATE_XML_DOM_INSTANCE 
                             "Failed to instantiate an XML DOM. MSXML library is not installed correctly."
-    IDS_CREATE_NEW_FILE_FAILED "Failed to create new file.\nReason: %1"
-    IDS_OPEN_FILE_FAILED    "Failed to open file %1.\nReason: %2"
+    IDS_CREATE_NEW_FILE_FAILED "Failed to create new file.\nReason: %s"
+    IDS_OPEN_FILE_FAILED    "Failed to open file %s.\nReason: %s"
 END
 
 STRINGTABLE DISCARDABLE 

@@ -136,6 +136,7 @@ BOOL CSimpleFilterDialog::LoadSource(public_source_id_t sId)
 	if (NULL == (BSTR) s_out) 
 	{
 		filter_doc.Release();
+		CReportAsistentApp::ReportError(IDS_SIMPLE_FILTER_FAILED_SOURCE_LOAD, "Plugin output is empty.");
 		return FALSE;	
 	}
 
@@ -143,7 +144,7 @@ BOOL CSimpleFilterDialog::LoadSource(public_source_id_t sId)
 	HRESULT hRes=filter_doc->loadXML(s_out);
 	if (filter_doc->parseError->errorCode != S_OK)
 	{
-		AfxMessageBox(filter_doc->parseError->reason);
+		CReportAsistentApp::ReportError(IDS_SIMPLE_FILTER_FAILED_SOURCE_LOAD, (LPCTSTR) filter_doc->parseError->reason);
 		filter_doc.Release();
 		return FALSE;	
 	}
@@ -175,6 +176,7 @@ BOOL CSimpleFilterDialog::LoadSource(public_source_id_t sId)
 	}
 
 	filter_doc.Release();
+	CReportAsistentApp::ReportError(IDS_SIMPLE_FILTER_FAILED_SOURCE_LOAD, "Plugin output - document element is empty.");
 	return FALSE;	
 }
 
@@ -263,11 +265,13 @@ void CSimpleFilterDialog::OnSelchangeDataSourceCombo()
 	{
 		UpDateDialog();
 	}
+/*
 	else
 	{
 		AfxMessageBox(IDS_SIMPLE_FILTER_FAILED_SOURCE_LOAD);
+		presunuto do LoadSource
 	}
-
+*/
 }
 
 void CSimpleFilterDialog::OnCancel() 
