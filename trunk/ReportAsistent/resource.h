@@ -92,6 +92,9 @@
 #define IDS_FAILED_CREATE_XML_DOM_INSTANCE 61213
 #define IDS_CREATE_NEW_FILE_FAILED      61214
 #define IDS_OPEN_FILE_FAILED            61215
+#define IDS_AEL_TRANSFORTION_LOAD_FAILED 61216
+#define IDS_AEL_LOAD_FAILED             61217
+#define IDS_TR_OPTIONS_ERROR            61218
 
 // Next default values for new objects
 // 

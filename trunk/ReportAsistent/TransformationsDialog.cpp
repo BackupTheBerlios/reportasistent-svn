@@ -183,8 +183,19 @@ void CTransformationsDialog::OnAddButton()
 		{
 			type_attr_elem->text = "with_options";
 			transf_elem->setAttributeNode(type_attr_elem);
-			transf_elem->appendChild(
-				options_node->selectSingleNode("/visualization/visualization_values")->cloneNode(VARIANT_TRUE));
+			try
+			{
+				transf_elem->appendChild(
+					options_node->selectSingleNode("/visualization/visualization_values")->cloneNode(VARIANT_TRUE));
+			}
+			catch (_com_error &)
+			{
+				CReportAsistentApp::ReportError(IDS_TR_OPTIONS_ERROR, (LPCTSTR) selected_text,
+					"Tag visualization_values is missing");
+
+				m_SelectedList.DeleteString(inserted_item);
+				return ;
+			}
 		}
 	}
 
@@ -309,7 +320,21 @@ void CTransformationsDialog::OnConfigureButton()
 	}
 	else if (IsSelectedTransformationWithOptions(cur_sel))
 	{
-		ConfigureTransformation(cur_sel);
+		try
+		{
+			ConfigureTransformation(cur_sel);
+		}
+		catch (CString & msg)
+		{
+			CString tr_name;
+			m_SelectedList.GetText(cur_sel, tr_name);
+
+			CReportAsistentApp::ReportError(IDS_TR_OPTIONS_ERROR,
+				(LPCTSTR) tr_name, (LPCTSTR) msg);
+				
+			return;
+		}
+
 	}
 }
 
@@ -346,7 +371,19 @@ CString CTransformationsDialog::FindOptionEnumItemLabelFromValue(
 		"/visualization/visualization_options/enum_option[@variable_name=\"%s\"]/enum_item[@value = \"%s\"]/@label",
 		variable_name, otion_value);
 
-	return (LPCTSTR) options_node->selectSingleNode((LPCTSTR) value_label_query_str)->text;
+	_bstr_t ret;
+	try
+	{
+		ret = options_node->selectSingleNode((LPCTSTR) value_label_query_str)->text;
+	}
+	catch (_com_error &)
+	{
+		CString msg;
+		msg.Format("Label for value \"%s\" of enum variable \"%s\" is missing.", otion_value, variable_name);
+		throw msg;
+	}
+	
+	return  (LPCTSTR) ret;
 }
 
 CString CTransformationsDialog::FindOptionEnumItemValueFromLabel(
@@ -461,7 +498,18 @@ void CTransformationsDialog::AddOptionToPropetryEditor(
     CString variable_name = (LPCTSTR) (_bstr_t) option_element->getAttribute("variable_name");
     CString value_query_str; //dotaz na default value
     value_query_str.Format("visualization_values/variable[@name=\"%s\"]/@value", (LPCTSTR) variable_name);
-    CString value = (LPCTSTR) transformation_element->selectSingleNode((LPCTSTR) value_query_str)->text;
+	
+	CString value;
+	try
+	{
+		value = (LPCTSTR) transformation_element->selectSingleNode((LPCTSTR) value_query_str)->text;
+	}
+	catch (_com_error &)
+	{
+		CString err_msg;
+		err_msg.Format("Value of variable \"%s\" is missing.", variable_name);
+		throw err_msg;
+	}
 
         
     if (option_type == "enum_option")
@@ -545,6 +593,7 @@ void CTransformationsDialog::ConfigureTransformation(int transform_index)
 		MSXML2::IXMLDOMElementPtr option_element = option_nodes->item[a];
 
 		AddOptionToPropetryEditor(option_element, transformation_element, property_editor);
+		
 		option_element.Release();
 	}
 

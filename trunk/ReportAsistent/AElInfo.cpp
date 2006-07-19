@@ -54,17 +54,35 @@ BOOL CAElInfo::LoadFromDir(LPCTSTR dir_path)
 	
 	//nacteni pElementDefinitionDOM
 	pElementDefinitionDOM->load((LPCTSTR) (src_dir_path + "\\element.xml"));
-	if (pElementDefinitionDOM->parseError->errorCode  != S_OK) return FALSE;
+	if (pElementDefinitionDOM->parseError->errorCode  != S_OK)
+	{
+		CReportAsistentApp::ReportError(IDS_AEL_LOAD_FAILED, dir_path, "element.xml",
+			(LPCTSTR) pElementDefinitionDOM->parseError->reason);
+
+		return FALSE;
+	}
 
 	
 	//nacteni pSimpleFilterDOM
 	pSimpleFilterDOM->load((LPCTSTR) (src_dir_path + "\\simple_filter.xsl"));
-	if (pSimpleFilterDOM->parseError->errorCode  != S_OK) return FALSE;
+	if (pSimpleFilterDOM->parseError->errorCode  != S_OK)
+	{
+		CReportAsistentApp::ReportError(IDS_AEL_LOAD_FAILED, dir_path, "simple_filter.xsl",
+			(LPCTSTR) pSimpleFilterDOM->parseError->reason);
+
+		return FALSE;
+	}
 
 	
 	//nacteni pFillElementAttributesDOM
 	pFillElementAttributesDOM->load((LPCTSTR) (src_dir_path + "\\fill_element_attributes.xsl"));
-	if (pSimpleFilterDOM->parseError->errorCode  != S_OK) return FALSE;
+	if (pFillElementAttributesDOM->parseError->errorCode  != S_OK)
+	{
+		CReportAsistentApp::ReportError(IDS_AEL_LOAD_FAILED, dir_path, "fill_element_attributes.xsl",
+			(LPCTSTR) pFillElementAttributesDOM->parseError->reason);
+
+		return FALSE;
+	}
 
 	
 	
@@ -72,6 +90,9 @@ BOOL CAElInfo::LoadFromDir(LPCTSTR dir_path)
 	MSXML2::IXMLDOMNodePtr type_attr_node = pElementDefinitionDOM->selectSingleNode("//active_element/@type");
 	if (type_attr_node == NULL)
 	{
+		CReportAsistentApp::ReportError(IDS_AEL_LOAD_FAILED, dir_path, "element.xml",
+			"Unable to locate attribute \"type\" of \"active_element\" tag.");
+
 		return FALSE;
 	}
 
@@ -128,7 +149,7 @@ void CAElInfo::LoadTransformations(LPCTSTR dir_path)
 	{
 		 bWorking = finder.FindNextFile();
 
-		 if (finder.IsDirectory() && (! finder.IsDots()))
+		 if (finder.IsDirectory() && (! finder.IsDots()) && (! finder.IsHidden()))
 		 {
 			 s_transformation * tr = new s_transformation;
 
@@ -150,25 +171,29 @@ void CAElInfo::LoadTransformations(LPCTSTR dir_path)
 			 }
 			 options_find.Close();
 			 
-			 if ((tr->doc->parseError->errorCode == S_OK) && (options_error == S_OK))
+			 
+			 
+			 if (tr->doc->parseError->errorCode == S_OK)
 			 {
-				 m_transformations.Add(tr);
+				 if (options_error == S_OK)
+				 {
+					m_transformations.Add(tr);
+				 }
+				 else
+				 {
+					 CReportAsistentApp::ReportError(
+						 IDS_AEL_TRANSFORTION_LOAD_FAILED,
+						 getElementName(), (LPCTSTR) finder.GetFileTitle(),
+						 "options.xml", (LPCTSTR) tr->options->parseError->reason);
+					 delete tr;
+				 }
 			 }
 			 else
 			 {
-				 //poslat error maessage ????????????
-				 /*
-				 if (tr->doc->parseError->errorCode != S_OK)
-				 {
-					 AfxMessageBox(tr->doc->parseError->reason);
-				 }
-				 */
-				 if (options_error != S_OK)
-				 {
-					 AfxMessageBox(tr->options->parseError->reason);
-				 }
-
-
+				 CReportAsistentApp::ReportError(
+					 IDS_AEL_TRANSFORTION_LOAD_FAILED,
+					 getElementName(), (LPCTSTR) finder.GetFileTitle(),
+					 "transform.xsl", (LPCTSTR) tr->doc->parseError->reason);
 				 delete tr;
 			 }
 				 	

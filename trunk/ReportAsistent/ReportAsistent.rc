@@ -690,6 +690,14 @@ BEGIN
     ID_MMGENREP             "Generate report to Microsoft Word"
 END
 
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_AEL_TRANSFORTION_LOAD_FAILED 
+                            "Active element ""%s"" failed to load transformation ""%s"" (file %s).\nParse error: %s"
+    IDS_AEL_LOAD_FAILED     "Failed to load active element form directory %s\nfile: %s\nParse error: %s"
+    IDS_TR_OPTIONS_ERROR    "Error in transformation ""%s"" options definition.\nDescription: %s"
+END
+
 #endif    // English (U.S.) resources
 /////////////////////////////////////////////////////////////////////////////
 

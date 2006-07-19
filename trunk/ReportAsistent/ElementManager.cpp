@@ -237,7 +237,7 @@ BOOL CElementManager::CanInsertChildHere(MSXML2::IXMLDOMElementPtr &child, MSXML
 		doc2->Release();
 
 	}
-	catch (_com_error e)
+	catch (_com_error & e)
 	{
 		//AfxMessageBox(child->xml);
 		AfxMessageBox(e.Description());
@@ -282,7 +282,7 @@ void CElementManager::LoadActiveElements(LPCTSTR elements_directory_path)
 	{
 		 bWorking = finder.FindNextFile();
 
-		 if (finder.IsDirectory() && (! finder.IsDots()))
+		 if (finder.IsDirectory() && (! finder.IsDots()) && (! finder.IsHidden()))
 		 {
 			 CAElInfo * element_info = new CAElInfo();
 
@@ -447,7 +447,7 @@ BOOL CElementManager::CanInsertBefore(MSXML2::IXMLDOMElementPtr &pToInsert, MSXM
 		doc2->Release();
 
 	}
-	catch (_com_error e)
+	catch (_com_error & e)
 	{
 		//AfxMessageBox(child->xml);
 		AfxMessageBox(e.Description());
