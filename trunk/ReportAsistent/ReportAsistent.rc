@@ -669,11 +669,11 @@ BEGIN
     IDS_INSERT_NEW_ELEMENT_WRONG_LOCATION 
                             "This element can not be placed here."
     IDS_SIMPLE_FILTER_FAILED_SOURCE_LOAD 
-                            "Selected source didn't return valid data for this active elemenet.\nDescription: %s"
+                            "Selected source didn't return valid data for this active element.\nDescription: %s"
     IDS_WB_WORD_LOADER_NOT_REGISTRED 
-                            "Report Asistent instaklation si probably corrupt.\nFailed to load LMRA_WordLoader."
+                            "Failed to load LMRA_WordLoader.\nReport Asistent installation is probably corrupt."
     IDS_REFRESH_EL_ATTRIBUTES_FAILED 
-                            "Active element didn't support any atrributes.\nMaybe it's because of its filter is empty."
+                            "Active element didn't support any attributes.\nMaybe it's because of its filter is empty."
     IDS_ELEMENT_ATTRIBUTES_FAILED_LOAD 
                             "Active element id: %s\nFailed to load element attributes.\nParse error: %s"
     IDS_DUPLICATE_ELEMENT_ID 

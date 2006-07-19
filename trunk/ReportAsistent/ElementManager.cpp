@@ -247,7 +247,7 @@ BOOL CElementManager::CanInsertChildHere(MSXML2::IXMLDOMElementPtr &child, MSXML
 	parent->removeChild(new_child_appended);
 
 	
-	/*****/    //honza: ladici klidne zakomentujete
+	/*****    //honza: ladici klidne zakomentujete
 	int a = err->errorCode;
 	if (a != S_OK) AfxMessageBox(err->reason);
 	/*****/
