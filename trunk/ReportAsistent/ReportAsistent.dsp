@@ -341,6 +341,10 @@ SOURCE=.\res\ReportAsistent.rc2
 # End Source File
 # Begin Source File
 
+SOURCE=.\res\skeleton_DTD.xml
+# End Source File
+# Begin Source File
+
 SOURCE=.\res\Table.bmp
 # End Source File
 # Begin Source File
@@ -358,6 +362,10 @@ SOURCE=.\res\transformations_logo.bmp
 # Begin Source File
 
 SOURCE=.\res\unknowni.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\visualization_options_DTD.xml
 # End Source File
 # End Group
 # Begin Source File

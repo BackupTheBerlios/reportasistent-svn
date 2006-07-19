@@ -618,3 +618,47 @@ MSXML2::IXMLDOMDocumentPtr CElementManager::TransformAttrLinkTableNoReplaceSourc
 
 	return transformed_table;
 }
+
+void CElementManager::LoadXMLDOMFromResource(UINT nResourceID, MSXML2::IXMLDOMDocumentPtr &dom)
+{
+	HRSRC rsc = FindResource(AfxGetResourceHandle(), MAKEINTRESOURCE(nResourceID), "xml");
+	HGLOBAL hg = LoadResource(AfxGetResourceHandle(), rsc);
+	dom->loadXML((LPCTSTR) LockResource(hg));
+}
+
+
+BOOL CElementManager::ValidateVisualizationOtions(MSXML2::IXMLDOMDocumentPtr &vo_dom, CString & err_msg)
+{
+	MSXML2::IXMLDOMDocumentPtr validator;
+	validator.CreateInstance(_T("Msxml2.DOMDocument"));
+	validator->async = VARIANT_FALSE;
+
+	LoadXMLDOMFromResource(IDR_VISUALIZATION_OPTIONS_DTD, validator);
+
+
+	validator->replaceChild(
+		vo_dom->documentElement->cloneNode(VARIANT_TRUE),
+		validator->documentElement);
+
+	MSXML2::IXMLDOMParseErrorPtr err = 
+		((MSXML2::IXMLDOMDocument2Ptr) validator)->validate();
+
+	if (err->errorCode == S_OK)
+	{
+		err.Release();
+		validator.Release();
+		err_msg = "";
+		return TRUE;
+	}
+
+
+	err_msg = (LPCTSTR) err->reason;
+	err.Release();
+	validator.Release();
+	return FALSE;
+}
+
+void CElementManager::LoadSkeletonDTD(MSXML2::IXMLDOMDocumentPtr &dom)
+{
+	LoadXMLDOMFromResource(IDR_SKELETON_DTD, dom);
+}

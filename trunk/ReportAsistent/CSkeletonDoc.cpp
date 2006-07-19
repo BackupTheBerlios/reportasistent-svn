@@ -970,15 +970,20 @@ BOOL CSkeletonDoc::InitAndClearXmlDom()
 	
 	//nacti DTD
 	
+/***
 	CDirectoriesManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->DirectoriesManager;
-	
 	m_pXMLDom->load((LPCTSTR) (m.getXMLFilesDirectory() + "/skeleton_DTD.xml"));
 	if (m_pXMLDom->parseError->errorCode != S_OK)
 	{
 		CReportAsistentApp::ReportError(IDS_CREATE_NEW_FILE_FAILED, (LPCTSTR) m_pXMLDom->parseError->reason);
 		return FALSE;
 	}
+/***/
+	CElementManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
+	m.LoadSkeletonDTD(m_pXMLDom);
 
+
+	
 	return TRUE;
 }
 

@@ -56,3 +56,8 @@
 <!--value: defaultni hodnota promenne-->
 
 ]>
+
+<visualization>
+<visualization_options active_element="" visualization_label=""/>
+<visualization_values/>
+</visualization>

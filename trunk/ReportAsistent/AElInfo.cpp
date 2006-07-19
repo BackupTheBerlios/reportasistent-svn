@@ -142,6 +142,9 @@ void CAElInfo::LoadTransformations(LPCTSTR dir_path)
 {
 	CFileFind finder;
 
+	CElementManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
+
+
 	
 
 	BOOL bWorking = finder.FindFile((CString) dir_path + "\\*.*");
@@ -177,7 +180,19 @@ void CAElInfo::LoadTransformations(LPCTSTR dir_path)
 			 {
 				 if (options_error == S_OK)
 				 {
-					m_transformations.Add(tr);
+					 CString err_msg;
+					 if ((tr->options == NULL) || (m.ValidateVisualizationOtions(tr->options, err_msg)))
+					 {
+						 m_transformations.Add(tr);
+					 }
+					 else
+					 {
+						 CReportAsistentApp::ReportError(
+							 IDS_AEL_TRANSFORTION_LOAD_FAILED,
+							 getElementName(), (LPCTSTR) finder.GetFileTitle(),
+							 "options.xml", (LPCTSTR) err_msg);
+						 delete tr;
+					 }
 				 }
 				 else
 				 {

@@ -55,6 +55,10 @@ private:
 
 
 public:
+	static void LoadXMLDOMFromResource(UINT nResourceID, MSXML2::IXMLDOMDocumentPtr &dom);
+	static void LoadSkeletonDTD(MSXML2::IXMLDOMDocumentPtr & dom);
+	static BOOL ValidateVisualizationOtions(MSXML2::IXMLDOMDocumentPtr &vo_dom, CString & err_msg);
+
 	MSXML2::IXMLDOMDocumentPtr TransformAttrLinkTableNoReplaceSource(MSXML2::IXMLDOMElementPtr & element);
 	MSXML2::IXMLDOMDocument * getAttrLinkTableStyleDomByName(LPCTSTR style_name);
 	MSXML2::IXMLDOMDocument * getAttrLinkTableStyleDom(int index);
