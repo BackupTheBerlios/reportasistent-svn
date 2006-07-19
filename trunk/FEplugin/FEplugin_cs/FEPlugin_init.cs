@@ -33,6 +33,7 @@ namespace FEplugin_cs
         // staticky konstruktor - provede inicializaci
         static FEplugin_init()
         {
+            
             success = true;
             
             try
@@ -47,6 +48,8 @@ namespace FEplugin_cs
 
                 if (String.IsNullOrEmpty(lib_dir))
                     throw new FE_error("FEP001");
+
+                
 
                     // knihovny Ferdy potrebne pro FE Plugin
                 string[] Libraries = new string[] { "FerdaProjectManager.dll",
@@ -111,6 +114,7 @@ namespace FEplugin_cs
         // staticky construktor
         static DirManager()
         {
+            
             // nalezeni klice LMRA adresare v registru
             RegistryKey regkey;
             regkey = Registry.CurrentUser.OpenSubKey(@"Software\LISp-Miner\ReportAsistent\Settings");
@@ -197,23 +201,27 @@ namespace FEplugin_cs
         // properties
         public static FrontEndConfig IceConfig
         {
-            get { return iceConfig; }
+            get 
+            {
+                return iceConfig;
+            }
         }
 
         // staticky konstruktor
         static FEplugin_globals()
         {
+            
             #region nacteni iceConfig
             try
             {
                 FEplugin_globals.iceConfig = FrontEndConfig.Load();
 
-                if (FEplugin_globals.iceConfig.ProjectManagerOptions.IceGridAsService != true)  // IceGrid musi byt spusteno jako sluzba
-                    FEplugin_globals.iceConfig.ProjectManagerOptions.IceGridAsService = true;
-                if (FEplugin_globals.iceConfig.ProjectManagerOptions.StartIceGridLocaly != true)
-                    FEplugin_globals.iceConfig.ProjectManagerOptions.StartIceGridLocaly = true;
-                if (FEplugin_globals.iceConfig.ProjectManagerOptions.StopIceGridLocaly != false)
-                    FEplugin_globals.iceConfig.ProjectManagerOptions.StopIceGridLocaly = false;
+                //if (FEplugin_globals.iceConfig.ProjectManagerOptions.IceGridAsService != true)  // IceGrid musi byt spusteno jako sluzba
+                //    FEplugin_globals.iceConfig.ProjectManagerOptions.IceGridAsService = true;
+                //if (FEplugin_globals.iceConfig.ProjectManagerOptions.StartIceGridLocaly != true)
+                //    FEplugin_globals.iceConfig.ProjectManagerOptions.StartIceGridLocaly = true;
+                //if (FEplugin_globals.iceConfig.ProjectManagerOptions.StopIceGridLocaly != false)
+                //    FEplugin_globals.iceConfig.ProjectManagerOptions.StopIceGridLocaly = false;
 
                 iceConfig_initialized = true;
             }

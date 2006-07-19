@@ -45,6 +45,9 @@ namespace FEplugin_cs
             messages.Add(new err_msg("FEP001", "Ferda DataMiner not detected on this computer. FE plugin is not functional."));
             messages.Add(new err_msg("FEP002", "Application was not able to load FrontEndConfig.xml"));
             messages.Add(new err_msg("FEP003", "Ferda DataMiner DLL library was not found."));
+            messages.Add(new err_msg("FEP004", "Closing data source encountered a problem."));
+            messages.Add(new err_msg("FEP005", "Opening data source encountered a problem."));
+            messages.Add(new err_msg("FEP006", "Some another Ferda data source is already opened. Current Ferda DataMiner configuration not allows open more than one data source. (IceGridNode is not set as service.)"));
         }
 
         // vrati text chybove hlasky podle kodu chyby
@@ -84,7 +87,7 @@ namespace FEplugin_cs
             }
             
             if(!String.IsNullOrEmpty(message))
-                MessageBox.Show(code + ": " + message + param, "FE plugin error " + code, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Program error: " + code + "\n\n" + message + param, "ReportAsistent - FE plugin", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
     }
 

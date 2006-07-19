@@ -54,7 +54,7 @@ hSource_t fNewSourceFE(PersistID_t * pPerzistID)
 		if(index != -1)
 			return (hSource_t) (index + 1);
 	}
-	MessageBox::Show("Zdroj s PerzistID=" + perzist + " se nepodarilo otevrit", "Zdroj neotevren");
+	MessageBox::Show("Data source (Perzist ID: " + perzist + ") could not be open.", "ReportAsistent - FE plugin");
 	return NULL;
 
 
@@ -75,7 +75,7 @@ hSource_t fOpenSourceFE(PersistID_t PerzistID)
 		if(index != -1)
 		   return (hSource_t) (index + 1);
 	}
-	MessageBox::Show("Zdroj s PerzistID=" + perzist + " se nepodarilo otevrit", "Zdroj neotevren");
+	MessageBox::Show("Data source (Perzist ID: " + perzist + ") could not be open.", "ReportAsistent - FE plugin");
 	return NULL;
 
 }

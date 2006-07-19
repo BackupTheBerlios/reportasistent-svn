@@ -43,12 +43,17 @@ namespace FEplugin_cs
 
                 // nahrani projektu
                 if (LoadProject() == false)
-                    throw new System.Exception("Nepodarilo se nahrat projekt ze souboru " + SourcePath);
+                    throw new FE_error("FEP005", "Perzist ID: " + SourcePath + "\n\nReason: project can't be loaded");
+            }
+            catch (FE_error)
+            {
+                throw;
             }
             catch (System.Exception e)
             {
                 DestroyPM();
-                throw;
+                FE_error err = new FE_error("FEP005", "Perzist ID: " + SourcePath + "\n\nReason: " + e.Message);
+                throw (err);
             }
             finally 
             {
@@ -115,17 +120,21 @@ namespace FEplugin_cs
         // pocitadlo vytvorenych zdroju
         public static int SrcCount;
 
+        // pocitadlo vytvorenych otevrenych zdroju
+        public static int OpenSrcCount;
+
         public static CFEsource[] getSources()
         {
             CFEsource[] resultArray = (CFEsource[]) Sources.ToArray(typeof(CFEsource));
             return resultArray;
         }
 
-        // zkusebni cast (jestli jde inicializovat polozka pole)
+        // staticky konstruktor
         static CFEsourcesTab()
         {
             Sources = new ArrayList();
             SrcCount = 0;
+            OpenSrcCount = 0;
         }
 
         // pridani noveho zdroje (otevre dialog pro vyber zdroje, pote ho otevre a vrati handle (index) )
@@ -135,9 +144,19 @@ namespace FEplugin_cs
             CFEsource NS;
             try
             {
+                // test, jestli IceGridNode je nainstalovano jako sluzba. Pokud ne a je jiz otevren jiny zdroj, nemuze byt otevren dalsi
+                if (FEplugin_globals.IceConfig_initialized)
+                {
+                    if (FEplugin_globals.IceConfig.ProjectManagerOptions.IceGridAsService == false && OpenSrcCount >= 1)
+                    {
+                        throw new FE_error("FEP006");
+                    }
+                }
+                
                 NS = new CFEsource(PersistID);
                 int index = Sources.Add(NS);
                 SrcCount++;
+                OpenSrcCount++;
                 return index;
             }
             catch (FE_error e)
@@ -147,7 +166,8 @@ namespace FEplugin_cs
             }
             catch (System.Exception e)
             {
-                MessageBox.Show("Chyba pri otevirani zdroje " + PersistID + " :\n" + e.Message, "Vyjimka", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                FE_error err = new FE_error("FEP005", "Reason: " + e.Message);
+                FE_err_msg.show_err_msg(err);
                 return -1;
             }
 
@@ -165,10 +185,14 @@ namespace FEplugin_cs
             }
             catch (System.Exception e)
             {
-                MessageBox.Show("Chyba pri zavirani zdroje :\n" + e.Message, "Vyjimka", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                FE_error err = new FE_error("FEP004", "Reason: " + e.Message);
+                FE_err_msg.show_err_msg(err);
                 return false;
             }
+#if (LADICI)
             MessageBox.Show("Zdroj " +index.ToString()+ " byl zavren\n", "Ladici hlaska", MessageBoxButtons.OK);
+#endif
+            OpenSrcCount--;
             return true;
         }
         
