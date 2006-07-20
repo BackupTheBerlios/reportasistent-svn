@@ -147,23 +147,10 @@ void CAElTransform::ProcessAllTransformations(MSXML2::IXMLDOMNodePtr & target, M
 		//nacteni ransformace	
 		CAElInfo * el_info = m.getActiveElementInfo(m.IdentifyElement(m_active_element));
 
-		MSXML2::IXMLDOMNodePtr & transformation_node = el_info->getTranformationNode(
-			el_info->FindTransformationByName((_bstr_t) el_transformation->getAttribute("name")));
 
 
-		if (transformation_type_str == "simple")
+		if (transformation_type_str == "attr_link_table")
 		{
-			ProcessSingleTransformation(target, destination_parent, transformation_node);		
-		}
-		else if (transformation_type_str == "with_options")
-		{
-			SetTransformationOptions(transformation_node, el_transformation->selectSingleNode("visualization_values"));
-			ProcessSingleTransformation(target, destination_parent, transformation_node);		
-		}
-		else
-		{
-			ASSERT(transformation_type_str == "attr_link_table");
-
 			FillElementAttributes(target);
 
 			MSXML2::IXMLDOMDocumentPtr tr_table = m.TransformAttrLinkTableNoReplaceSource(
@@ -175,7 +162,38 @@ void CAElTransform::ProcessAllTransformations(MSXML2::IXMLDOMNodePtr & target, M
 				tr_table.Release();
 			}
 		}
+		else
+		{
+			int tr_index = el_info->FindTransformationByName(
+				(_bstr_t) el_transformation->getAttribute("name"));
 
+			if (tr_index == -1)
+			{
+				CReportAsistentApp::ReportError(IDS_WRONG_ELEMENT_TRANSFORMATION,
+					(LPCTSTR) (_bstr_t) el_transformation->getAttribute("name"),
+					(LPCTSTR) (_bstr_t) m_active_element->getAttribute("type"),
+					(LPCTSTR) (_bstr_t) m_active_element->getAttribute("id"));
+				el_transformation.Release();
+				return;
+			}
+
+
+			
+			
+			MSXML2::IXMLDOMNodePtr & transformation_node = el_info->getTranformationNode(tr_index);
+
+			if (transformation_type_str == "simple")
+			{
+				ProcessSingleTransformation(target, destination_parent, transformation_node);		
+			}
+			else if (transformation_type_str == "with_options")
+			{
+				SetTransformationOptions(transformation_node, el_transformation->selectSingleNode("visualization_values"));
+				ProcessSingleTransformation(target, destination_parent, transformation_node);		
+			}
+		}
+		
+		
 		el_transformation.Release();
 	}
 }

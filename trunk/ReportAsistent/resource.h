@@ -97,6 +97,7 @@
 #define IDS_AEL_TRANSFORTION_LOAD_FAILED 61216
 #define IDS_AEL_LOAD_FAILED             61217
 #define IDS_TR_OPTIONS_ERROR            61218
+#define IDS_WRONG_ELEMENT_TRANSFORMATION 61219
 
 // Next default values for new objects
 // 

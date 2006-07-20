@@ -127,7 +127,41 @@ int CDataSourcesManager::initPlugsTab(LPCTSTR plugins_dir_path)
 //		LibName = _PLUGIN_DIR_PATH + PlugsTab[j].PluginName;
 //dedek:
 		LibName.Format("%s\\%s", plugins_dir_path ,PlugsTab[j].PluginName);
-		PlugsTab[j].hLib = LoadLibrary(LibName);
+		try
+		{
+			HMODULE m;
+			PlugsTab[j].hLib = m = LoadLibrary(LibName);
+
+			if (m== NULL)
+			{
+
+				DWORD n;
+				LPVOID lpMsgBuf;
+FormatMessage( 
+    FORMAT_MESSAGE_ALLOCATE_BUFFER | 
+    FORMAT_MESSAGE_FROM_SYSTEM | 
+    FORMAT_MESSAGE_IGNORE_INSERTS,
+    NULL,
+    n = GetLastError(),
+    MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), // Default language
+    (LPTSTR) &lpMsgBuf,
+    0,
+    NULL 
+);
+// Process any inserts in lpMsgBuf.
+// ...
+// Display the string.
+MessageBox( NULL, (LPCTSTR)lpMsgBuf, "Error", MB_OK | MB_ICONINFORMATION );
+// Free the buffer.
+LocalFree( lpMsgBuf );
+			
+			}
+		}
+		catch (...)
+		{
+			PlugsTab[j].hLib = NULL;		
+		}
+
 		if(PlugsTab[j].hLib != NULL)
 		{
 			// ziskani adresy rozhrani
