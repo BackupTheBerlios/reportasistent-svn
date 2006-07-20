@@ -45,7 +45,7 @@ CReportAsistentApp theApp;
 /////////////////////////////////////////////////////////////////////////////
 // CReportAsistentApp initialization
 
-#define FIRST_ERR_STR_ID IDS_INSERT_NEW_ELEMENT_WRONG_LOCATION
+#define FIRST_ERR_STR_ID (IDS_INSERT_NEW_ELEMENT_WRONG_LOCATION-1)
 
 int CReportAsistentApp::ReportError(UINT nResourceErrorStringID, ...)
 {

@@ -380,5 +380,13 @@ SOURCE=.\ReadMe.txt
 
 SOURCE=.\ReportAsistent.reg
 # End Source File
+# Begin Source File
+
+SOURCE=..\XML\skeleton_DTD.xml
+# End Source File
+# Begin Source File
+
+SOURCE=..\XML\visualization_options_DTD.xml
+# End Source File
 # End Target
 # End Project

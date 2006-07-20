@@ -22,7 +22,7 @@
 
 // Delka nazvu prvku typu text v TreeCtrl
 #if !defined LENGTH_TREE_ITEM_NAME
-#define LENGTH_TREE_ITEM_NAME 15	//dedek: prepsal z 10 na 15
+#define LENGTH_TREE_ITEM_NAME 40	//dedek: prepsal z 10 na 15, 40
 #endif
 
 
