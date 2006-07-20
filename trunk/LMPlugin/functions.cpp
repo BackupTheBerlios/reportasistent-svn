@@ -36,6 +36,19 @@
 using namespace MSXML2;
 //vlozi namespace MSXML2;
 
+CString Get_DTD ()
+{
+	CString buf;
+	CFile f("../XML/dtd.dtd", CFile::modeRead);
+	int size = (int) f.GetLength();
+	LPTSTR ps = buf.GetBuffer(size);
+	f.Read(ps, size);
+	f.Close();
+	ps[size] = 0; //data nactena ze souboru se jete musi ukoncit nulou aby reprezentovala validni string
+	buf.ReleaseBuffer(); //od teto chvile je ps neplatny a nemelo by se do nej zapisovat
+	return buf;
+}
+
 
 //dedek: testovaci vystup neni to moc usetreny tak bacha :)
 BOOL dedek_performLM(void * hSource, const char* AP, BSTR* result)
@@ -546,13 +559,7 @@ CString fLMQuantifier (void* hSource)
 
 	//creation of xml string
 	//load DTD
-	FILE * x = fopen ("../XML/dtd.dtd", "r");
-	CString buf1;
-	while (fscanf (x, "%s", buf1) != EOF)
-	{
-		buf = buf + (const char *) buf1 + " ";
-	}
-	fclose (x);
+	buf = Get_DTD ();
 	//create xml data
 	buf = buf + " <active_list> ";
 	int i;
@@ -653,13 +660,7 @@ CString fLMTask (void* hSource)
 
 	//creation of xml string
 	//load DTD
-	FILE * x = fopen ("../XML/dtd.dtd", "r");
-	CString buf1;
-	while (fscanf (x, "%s", buf1) != EOF)
-	{
-		buf = buf + (const char *) buf1 + " ";
-	}
-	fclose (x);
+	buf = Get_DTD ();
 	//create xml data
 	buf = buf + " <active_list> ";
 	int i;
@@ -810,13 +811,7 @@ CString fLMKLCedent (void* hSource)
 
 	//creation of xml string
 	//load DTD
-	FILE * x = fopen ("../XML/dtd.dtd", "r");
-	CString buf1;
-	while (fscanf (x, "%s", buf1) != EOF)
-	{
-		buf = buf + (const char *) buf1 + " ";
-	}
-	fclose (x);
+	buf = Get_DTD ();
 	//create xml data
 	buf = buf + " <active_list> ";
 	int i;
@@ -974,13 +969,7 @@ CString fLMCFCedent (void* hSource)
 
 	//creation of xml string
 	//load DTD
-	FILE * x = fopen ("../XML/dtd.dtd", "r");
-	CString buf1;
-	while (fscanf (x, "%s", buf1) != EOF)
-	{
-		buf = buf + (const char *) buf1 + " ";
-	}
-	fclose (x);
+	buf = Get_DTD ();
 	//create xml data
 	buf = buf + " <active_list> ";
 	int i;
@@ -1300,13 +1289,7 @@ CString fLMBoolCedent (void* hSource)
 
 	//creation of xml string
 	//load DTD
-	FILE * x = fopen ("../XML/dtd.dtd", "r");
-	CString buf1;
-	while (fscanf (x, "%s", buf1) != EOF)
-	{
-		buf = buf + (const char *) buf1 + " ";
-	}
-	fclose (x);
+	buf = Get_DTD ();
 	//create xml data
 	buf = buf + " <active_list> ";
 	int i;
@@ -1415,13 +1398,7 @@ CString fLMAttribute(void* hSource)
 
 	//creation of xml string
 	//load DTD
-	FILE * x = fopen ("../XML/dtd.dtd", "r");
-	CString buf1;
-	while (fscanf (x, "%s", buf1) != EOF)
-	{
-		buf = buf + (const char *) buf1 + " ";
-	}
-	fclose (x);
+	buf = Get_DTD ();
 	//create xml data
 	buf = buf + " <active_list> ";
 	int i;
@@ -1637,13 +1614,7 @@ CString fLMCategory(void* hSource)
 
 	//creation of xml string
 	//load DTD
-	FILE * x = fopen ("../XML/dtd.dtd", "r");
-	CString buf1;
-	while (fscanf (x, "%s", buf1) != EOF)
-	{
-		buf = buf + (const char *) buf1 + " ";
-	}
-	fclose (x);
+	buf = Get_DTD ();
 	//create xml data
 	buf = buf + " <active_list> ";
 	int i;
@@ -1810,25 +1781,8 @@ CString fLM4fthyp(void * hSource)
 	//creation of xml string
 	
   
-  //load DTD
-/***** dedek: korektni verze nejen pro VS 2005 ****/
-  CFile f("../XML/dtd.dtd", CFile::modeRead);
-  int size = (int) f.GetLength();
-  LPTSTR ps = buf.GetBuffer(size);
-  f.Read(ps, size);
-  f.Close();
-  ps[size] = 0; //data nactena ze souboru se jete musi ukoncit nulou aby reprezentovala validni string
-  buf.ReleaseBuffer(); //od teto chvile je ps neplatny a nemelo by se do nej zapisovat
-  
-/** dedek predelano nahore *
-  FILE * x = fopen ("../XML/dtd.dtd", "r");
-	CString buf1;
-	while (fscanf (x, "%s", buf1) != EOF)
-	{
-		buf = buf + (const char *) buf1 + " ";
-	}
-	fclose (x);
-/*****/
+	//load DTD
+	buf = Get_DTD ();
 
 	//create xml data
 	buf = buf + " <active_list> ";
