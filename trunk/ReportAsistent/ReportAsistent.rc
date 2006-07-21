@@ -277,6 +277,15 @@ BEGIN
     LTEXT           "",IDC_ERROR_TEXT,7,224,149,26
 END
 
+IDD_WAIT_DIALOG DIALOG DISCARDABLE  0, 0, 136, 60
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Wait dialog"
+FONT 8, "MS Sans Serif"
+BEGIN
+    PUSHBUTTON      "Cancel",IDCANCEL,79,39,50,14
+    LTEXT           "Working...",IDC_STATIC,7,7,110,23
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -387,6 +396,14 @@ BEGIN
         RIGHTMARGIN, 156
         TOPMARGIN, 7
         BOTTOMMARGIN, 267
+    END
+
+    IDD_WAIT_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 129
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 53
     END
 END
 #endif    // APSTUDIO_INVOKED

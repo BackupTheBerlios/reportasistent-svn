@@ -2,8 +2,8 @@
 
 [General Info]
 Version=1
-LastClass=Hyp_4ft_Recordset
-LastTemplate=CRecordset
+LastClass=CWaitDialog
+LastTemplate=CDialog
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "ReportAsistent.h"
 LastPage=0
@@ -14,37 +14,38 @@ Class2=CSkeletonDoc
 Class3=CSkeletonView
 Class4=CMainFrame
 
-ResourceCount=15
+ResourceCount=16
 Resource1=IDD_ABOUTBOX
 Resource2=IDR_MAINFRAME
 Class5=CAboutDlg
-Resource3=IDD_DIALOG_CHAPTER (English (U.S.))
-Resource4=IDD_ATTRIBUTE_LINK_DIALOG (English (U.S.))
+Resource3=IDD_GENERATE_DIALOG (English (U.S.))
+Resource4=IDD_DIALOG_CHAPTER (English (U.S.))
 Class6=CElementTextDialog
-Resource5=IDD_DIALOGTEXT (English (U.S.))
+Resource5=IDD_ACTIVE_ELEMENT_DIALOG (English (U.S.))
 Class7=CSimpleFilterDialog
-Resource6=IDD_ACTIVE_ELEMENT_DIALOG (English (U.S.))
+Resource6=IDD_TRANSFORMATIONS_DIALOG (English (U.S.))
 Class8=CGenerateDialog
-Resource7=IDD_PROPERTY_EDITOR (English (U.S.))
+Resource7=IDD_SOURCES_DIALOG (English (U.S.))
 Class9=CSourcesDialog
-Resource8=IDD_SOURCES_DIALOG (English (U.S.))
+Resource8=IDD_DIALOG_PARAGRAPH (English (U.S.))
 Class10=CActiveElementDialog
-Resource9=IDD_GENERATE_DIALOG (English (U.S.))
+Resource9=IDD_PROPERTY_EDITOR (English (U.S.))
 Class11=CTransformationsDialog
 Class12=Tcategory_Recordset
-Resource10=IDD_TRANSFORMATIONS_DIALOG (English (U.S.))
+Resource10=IDD_ABOUTBOX (English (U.S.))
 Class13=CAttributeLinkDialog
-Resource11=IDD_ABOUTBOX (English (U.S.))
+Resource11=IDD_ATTRIBUTE_LINK_DIALOG (English (U.S.))
 Class14=CAttributeLinkTableDialog
-Resource12=IDD_DIALOG_PARAGRAPH (English (U.S.))
+Resource12=IDD_WAIT_DIALOG (English (U.S.))
 Class15=CElementParagraphDialog
 Class16=CElementChapterDialog
 Class17=CElementDialogBase
 Class18=CPropertyEditor
-Resource13=IDD_SIMPLE_FILTER_DIALOG (English (U.S.))
-Resource14=IDD_ATTRIBUTE_LINK_TABLE_DIALOG (English (U.S.))
-Class19=Hyp_4ft_Recordset
-Resource15=IDR_MAINFRAME (English (U.S.))
+Resource13=IDD_DIALOGTEXT (English (U.S.))
+Resource14=IDD_SIMPLE_FILTER_DIALOG (English (U.S.))
+Class19=CWaitDialog
+Resource15=IDD_ATTRIBUTE_LINK_TABLE_DIALOG (English (U.S.))
+Resource16=IDR_MAINFRAME (English (U.S.))
 
 [CLS:CReportAsistentApp]
 Type=0
@@ -1559,12 +1560,18 @@ Column69=[tsTaskSubType].[ShortName], 12, 40
 Column70=[tsTaskSubType].[Ord], 4, 4
 Column71=[tsTaskSubType].[Notice], 12, 510
 
-[CLS:Hyp_4ft_Recordset]
+[DLG:IDD_WAIT_DIALOG (English (U.S.))]
+Type=1
+Class=CWaitDialog
+ControlCount=2
+Control1=IDCANCEL,button,1342242816
+Control2=IDC_STATIC,static,1342308352
+
+[CLS:CWaitDialog]
 Type=0
-HeaderFile=Hyp_4ft_Recordset.h
-ImplementationFile=Hyp_4ft_Recordset.cpp
-BaseClass=CRecordset
-Filter=N
-VirtualFilter=r
-LastObject=Hyp_4ft_Recordset
+HeaderFile=WaitDialog.h
+ImplementationFile=WaitDialog.cpp
+BaseClass=CDialog
+Filter=D
+LastObject=CWaitDialog
 

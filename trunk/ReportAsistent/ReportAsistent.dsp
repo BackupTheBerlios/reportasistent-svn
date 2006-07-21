@@ -185,6 +185,10 @@ SOURCE=.\TransformationsDialog.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\WaitDialog.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\WordManager.cpp
 # End Source File
 # End Group
@@ -286,6 +290,10 @@ SOURCE=.\StdAfx.h
 # Begin Source File
 
 SOURCE=.\TransformationsDialog.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\WaitDialog.h
 # End Source File
 # Begin Source File
 

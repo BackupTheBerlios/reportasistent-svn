@@ -96,6 +96,10 @@ CGeneralManager * m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager;
 
 dedek TODO:
 
+mazat captions_list pri zmene targetu v attr_link_table
+
+zdokumentovat chybovou hlasku o neplatne volbe simple filtru pri generovani
+
 otestovat: co kdyz se transformace jmenuje stejne jako * attrlink table *
 
 doladit ukladani int hodnoty property editoru - ve stringu to mozna muze vratit desetinne cislo 

@@ -9,6 +9,7 @@
 #include "SkeletonView.h"
 #include "SourcesDialog.h"
 #include "PropertyEditor.h"
+#include "WaitDialog.h"
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #undef THIS_FILE
@@ -65,6 +66,23 @@ int CReportAsistentApp::ReportError(UINT nResourceErrorStringID, ...)
 
 	return AfxMessageBox(sOutputText);
 }
+
+
+
+/***************************************************/	
+//dedek: ukazka pro kodyho, prijde smazat	
+UINT TestovaciThread( LPVOID pParam )
+{
+	HWND * p_dlg_hwnd = (HWND *) pParam;
+
+	Sleep(2000);
+
+	SendMessage(* p_dlg_hwnd, WM_COMMAND, IDCANCEL, 0);
+
+	return 0;
+}
+/***************************************************/	
+
 
 
 BOOL CReportAsistentApp::InitInstance()
@@ -137,9 +155,27 @@ BOOL CReportAsistentApp::InitInstance()
 	m_pMainWnd->DragAcceptFiles();
 
 	
+	
+/***************************************************/	
+//dedek: ukazka pro kodyho, prijde smazat	
+	
+	CWaitDialog dlg(AfxGetMainWnd());
+
+	AfxBeginThread(TestovaciThread, & dlg.m_hWnd);
+
+	dlg.DoModal();
+
+/***************************************************/	
+
+
+	
 
 	return TRUE;
 }
+
+
+
+
 
 
 /////////////////////////////////////////////////////////////////////////////

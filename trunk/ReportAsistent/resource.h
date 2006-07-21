@@ -32,6 +32,7 @@
 #define IDB_ATTRLINKICO                 159
 #define IDR_SKELETON_DTD                160
 #define IDR_VISUALIZATION_OPTIONS_DTD   162
+#define IDD_WAIT_DIALOG                 163
 #define IDC_TREE1                       1000
 #define IDC_FILTER_LIST                 1000
 #define IDC_SCROLLBAR1                  1000
@@ -104,7 +105,7 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
-#define _APS_NEXT_RESOURCE_VALUE        163
+#define _APS_NEXT_RESOURCE_VALUE        164
 #define _APS_NEXT_COMMAND_VALUE         32784
 #define _APS_NEXT_CONTROL_VALUE         1034
 #define _APS_NEXT_SYMED_VALUE           101
