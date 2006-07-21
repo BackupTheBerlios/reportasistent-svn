@@ -47,6 +47,7 @@ namespace FEPtestap_cs
             
              */
             CFEsource src = (CFEsource) CFEsourcesTab.Sources[0];
+            CFEsourcesTab.CloseSource(0);
             //Console.WriteLine("Zdroj " + index1.ToString() + " obsahuje " + ((CFEsource)CFEsourcesTab.Sources[index1]).PM.Archive.Boxes.GetLength(0).ToString() + " krabicek");
          //   Console.WriteLine("Zdroj " + index2.ToString() + " obsahuje " + ((CFEsource)CFEsourcesTab.Sources[index2]).PM.Archive.Boxes.GetLength(0).ToString() + " krabicek");
     

@@ -52,7 +52,7 @@ namespace FEplugin_cs
                 
 
                     // knihovny Ferdy potrebne pro FE Plugin
-                string[] Libraries = new string[] { "FerdaProjectManager.dll",
+                string[] Libraries = new string[] { //"FerdaProjectManager.dll",
                                                     "FerdaModulesManager.dll",
                                                     "FerdaBoxInterfaces.dll",
                                                     "FerdaBase.dll",
@@ -66,11 +66,11 @@ namespace FEplugin_cs
                     
                     if (File.Exists(source_name))
                     {
-                        DateTime source_time = File.GetCreationTime(source_name);
+                        DateTime source_time = File.GetLastWriteTime(source_name);
                         DateTime target_time;
                         if (File.Exists(target_name))
                         {
-                            target_time = File.GetCreationTime(target_name);
+                            target_time = File.GetLastWriteTime(target_name);
                             if (target_time.CompareTo(source_time) < 0)  // prekopirovani souboru
                                 File.Copy(source_name, target_name);
                         }

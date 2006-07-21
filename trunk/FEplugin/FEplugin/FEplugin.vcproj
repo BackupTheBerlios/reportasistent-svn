@@ -96,9 +96,10 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
+			OutputDirectory="G:\Projekt\Vyvoj\ReportAsistent\Release\"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="2"
+			UseOfMFC="2"
 			CharacterSet="1"
 			ManagedExtensions="1"
 			WholeProgramOptimization="1"
@@ -139,7 +140,8 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="$(NoInherit)"
 				LinkIncremental="1"
-				GenerateDebugInformation="true"
+				ModuleDefinitionFile="FEplugin.def"
+				GenerateDebugInformation="false"
 				TargetMachine="1"
 			/>
 			<Tool

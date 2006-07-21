@@ -10,6 +10,7 @@
 
 using namespace System;
 using namespace System::Windows::Forms;
+using namespace System::IO;
 using namespace FEplugin_cs;
 
 
@@ -21,8 +22,16 @@ BOOL performFE(hSource_t hSource, const char* APName, BSTR* Result)
 	pFn_t pFn = FESock.getFnAddress(APName);	// ukazatel na funkci, ktera vyridi pozadavek
 	if (pFn == NULL) // chyba - neexistuje funkce vyrizujici tento AP
 		return FALSE;
+
+	// zmena adresare na domovsky LMRA
+	DirManager::SetHomeLMRA_dir();
+
 	CStrResult = pFn(hSource);
 	*Result =  CStrResult.AllocSysString();
+	
+	// zmena adresare na puvodni
+	DirManager::SetHomePrevious_dir();
+
 	return TRUE;
 }
 

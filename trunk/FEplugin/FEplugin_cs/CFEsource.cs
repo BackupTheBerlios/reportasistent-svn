@@ -34,9 +34,8 @@ namespace FEplugin_cs
             // inicializace PM
             try
             {
-                // zmena aktualniho adresare na domovsky LMRA
+                // zmena aktualniho adresare na domovsky Ferda FrontEnd
                 DirManager.SetHomeFerdaFrontEnd_dir();
-
 
                 // inicializace polozky PM
                 PM = new ProjectManager(new string[0], FEplugin_globals.IceConfig.ProjectManagerOptions);
@@ -182,6 +181,17 @@ namespace FEplugin_cs
                 {
                     ((CFEsource)Sources[index]).PM.DestroyProjectManager();
                 }
+            }
+            catch (SystemException e)
+            {
+                FE_error err = new FE_error("FEP004", "Reason: " + e.Message);
+                FE_err_msg.show_err_msg(err);
+                return false;
+            }
+            catch (Ice.NoEndpointException) // ztrata icegridnode, zdroj lze normalne uzavrit
+            {
+                OpenSrcCount--;
+                return true;
             }
             catch (System.Exception e)
             {

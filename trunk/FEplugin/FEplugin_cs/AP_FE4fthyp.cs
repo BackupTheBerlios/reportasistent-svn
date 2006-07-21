@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections;
 using System.Text;
 using System.Windows.Forms;
+using System.IO;
 using Ferda;
 using Ferda.ProjectManager;
 using Ferda.ModulesManager;
@@ -25,6 +26,8 @@ namespace FEplugin_cs
         /// <returns>Returns XML string with all occurences of Active element type "4ft hypothese" from data source with given index</returns>
         public static string getList(int index)
         {
+            
+            
             string resultString = ""; // vysledny XML string
 
             // nacteni DTD do resultStringu
@@ -43,6 +46,8 @@ namespace FEplugin_cs
             string PropName = "Hypotheses";  // nazev Property, ktera obsahuje seznam hypotez
             // nalezeni vsech krabicek 4FT-uloh
             IBoxModule[] FFTTaskBoxes = BoxesHelper.ListBoxesWithID(CFEsourcesTab.Sources[index] as CFEsource, "LISpMinerTasks.FFTTask");
+
+            
 
             // zpracovani kazde krabicky - ziskani z ni vsechny 4ft-hypotezy
             string ErrStr = ""; // zaznam o chybach
