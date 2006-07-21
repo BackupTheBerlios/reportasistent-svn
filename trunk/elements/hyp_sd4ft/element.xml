@@ -63,6 +63,5 @@
 			<filter type="simple">
 			</filter>
 			<output>
-				<!--transformation type="simple" name="HeaderAndCedents"/-->
 			</output>
 		</active_element>

@@ -31,6 +31,7 @@
 /*****/
 //Deda: potreba pro MSXML - potreba pro muj testovci vystup jinak (az bude lesi vystup) mozno smazat
 #include <afxdb.h>
+#include <Shlwapi.h>
 
 #import <msxml3.dll>
 using namespace MSXML2;
@@ -38,8 +39,19 @@ using namespace MSXML2;
 
 CString Get_DTD ()
 {
+	TCHAR module_path[MAX_PATH];
+	GetModuleFileName(NULL, module_path, MAX_PATH);
+
+	//postupne odpare z module_path poslednni dve lomitka
+	PathFindFileName(module_path)[-1] = 0;
+	PathFindFileName(module_path)[-1] = 0;
+	PathFindFileName(module_path)[-1] = 0;
+
+	CString file_path = module_path;
+	file_path += "\\XML\\dtd.dtd";
+	
 	CString buf;
-	CFile f("../XML/dtd.dtd", CFile::modeRead);
+	CFile f(file_path, CFile::modeRead);
 	int size = (int) f.GetLength();
 	LPTSTR ps = buf.GetBuffer(size);
 	f.Read(ps, size);

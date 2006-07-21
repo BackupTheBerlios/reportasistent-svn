@@ -149,8 +149,10 @@ BOOL CSimpleFilterDialog::LoadSource(public_source_id_t sId)
 		return FALSE;	
 	}
 
+#ifdef _DEBUG	
 	//dadici - kdykoliv smazat nebo zakomentovat
 	filter_doc->save("../XML/plug_out_example.xml");
+#endif
 
 
 	//ulozi element atributy
@@ -163,8 +165,10 @@ BOOL CSimpleFilterDialog::LoadSource(public_source_id_t sId)
 		filter_doc->transformNode(element_info->getSimpleFilterTransformation()));
 
 	
+#ifdef _DEBUG	
 	//dadici - kdykoliv smazat nebo zakomentovat
 	filter_doc->save("../XML/simple_filter_example.xml");
+#endif
 
 	
 	//pridat AddRef ?

@@ -131,31 +131,32 @@ int CDataSourcesManager::initPlugsTab(LPCTSTR plugins_dir_path)
 		{
 			HMODULE m;
 			PlugsTab[j].hLib = m = LoadLibrary(LibName);
-
+/********
 			if (m== NULL)
 			{
 
 				DWORD n;
 				LPVOID lpMsgBuf;
-FormatMessage( 
-    FORMAT_MESSAGE_ALLOCATE_BUFFER | 
-    FORMAT_MESSAGE_FROM_SYSTEM | 
-    FORMAT_MESSAGE_IGNORE_INSERTS,
-    NULL,
-    n = GetLastError(),
-    MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), // Default language
-    (LPTSTR) &lpMsgBuf,
-    0,
-    NULL 
-);
-// Process any inserts in lpMsgBuf.
-// ...
-// Display the string.
-MessageBox( NULL, (LPCTSTR)lpMsgBuf, "Error", MB_OK | MB_ICONINFORMATION );
-// Free the buffer.
-LocalFree( lpMsgBuf );
+				FormatMessage( 
+					FORMAT_MESSAGE_ALLOCATE_BUFFER | 
+					FORMAT_MESSAGE_FROM_SYSTEM | 
+					FORMAT_MESSAGE_IGNORE_INSERTS,
+					NULL,
+					n = GetLastError(),
+					MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), // Default language
+					(LPTSTR) &lpMsgBuf,
+					0,
+					NULL 
+				);
+				// Process any inserts in lpMsgBuf.
+				// ...
+				// Display the string.
+				MessageBox( NULL, (LPCTSTR)lpMsgBuf, "Error", MB_OK | MB_ICONINFORMATION );
+				// Free the buffer.
+				LocalFree( lpMsgBuf );
 			
 			}
+/******/
 		}
 		catch (...)
 		{
