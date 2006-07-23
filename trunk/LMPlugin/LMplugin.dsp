@@ -113,6 +113,10 @@ SOURCE=.\Hyp_4ft_Recordset.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\Hyp_CF_Recordset.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\InterfaceFunctions.cpp
 # End Source File
 # Begin Source File
@@ -234,6 +238,10 @@ SOURCE=.\functions.h
 # Begin Source File
 
 SOURCE=.\Hyp_4ft_Recordset.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Hyp_CF_Recordset.h
 # End Source File
 # Begin Source File
 

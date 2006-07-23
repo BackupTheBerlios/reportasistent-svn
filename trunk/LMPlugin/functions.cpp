@@ -26,6 +26,7 @@
 #include "TDFQuantifier_Recordset.h"
 #include "TDCQuantifier_Recordset.h"
 #include "TDKQuantifier_Recordset.h"
+#include "Hyp_CF_Recordset.h"
 
 //dedek: docasne
 /*****/
@@ -1653,7 +1654,7 @@ CString fLMCategory(void* hSource)
 }
 
 
-// --- AP 4ft-hypotesis
+// --- AP 4ft-hypotese
 
 CString fLM4fthyp(void * hSource)
 {
@@ -1818,5 +1819,59 @@ CString fLM4fthyp(void * hSource)
 	return buf;
 }
 
+// --- AP CF-hypotese
 
+CString fLMCFhyp(void* hSource)
+{
+	CString buf;
+	CString db_name = ((CDatabase *) hSource)->GetDatabaseName ();
+	CString id_hlp;
 
+	THyp_CF_Meta_Array list;
+	Hyp_CF_Recordset rs ((CDatabase *) hSource);
+	Hyp_CF_Meta * pthyp;
+
+	long h_id;
+	long l_id;
+
+	BOOL neg_lit;
+	CString neg_lit_smbl;
+
+	CString q_name;
+	CString q_value;
+
+	CString q = "SELECT * \
+				 FROM taTask, tdCFLiteralD, tiHypothesisCF, tmMatrix, tmQuantity \
+				 WHERE taTask.TaskID=tiHypothesisCF.TaskID \
+				   AND taTask.MatrixID=tmMatrix.MatrixID \
+				   AND tiHypothesisCF.CFLiteralDID=tdCFLiteralD.CFLiteralDID \
+				   AND tdCFLiteralD.QuantityID=tmQuantity.QuantityID";
+	//load data from metabase
+	if (rs.Open(AFX_DB_USE_DEFAULT_TYPE, q))
+	{
+		//iteration on query results
+		while (!rs.IsEOF())
+		{
+			h_id = rs.m_HypothesisCFID;
+			l_id = rs.m_CFLiteralDID;
+			pthyp = new (Hyp_CF_Meta);
+			id_hlp.Format ("%d", h_id);
+			pthyp->id = "hypCF" + id_hlp;
+			pthyp->db_name = db_name;
+			pthyp->matrix_name = rs.m_Name2;
+			pthyp->task_name = rs.m_Name;
+			pthyp->attribute = rs.m_Name3;
+			pthyp->a_id = "att_" + pthyp->id;
+			pthyp->c_id = "cond_" + pthyp->id;
+
+			//todo frekvence a podminka a kvantifikatory
+
+			list.Add (pthyp);
+			rs.MoveNext();
+		}
+		rs.Close();
+	}
+	else return "";
+
+	return buf;
+}

@@ -48,9 +48,13 @@ CString fLMAttribute(void* hSource);
 CString fLMCategory(void* hSource);
 
 
-// --- AP 4ft-hypothesis
+// --- AP 4ft-hypothese
 
 CString fLM4fthyp(void* hSource);
+
+// --- AP CF-hypothese
+
+CString fLMCFhyp(void* hSource);
 
 
 

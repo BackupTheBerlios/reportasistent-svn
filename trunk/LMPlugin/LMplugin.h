@@ -12,7 +12,7 @@
 #include "functions.h"
 
 // !!! zde definujte pocet AP, ktere tato zasuvka podporuje
-#define _LM_AP_COUNT 8
+#define _LM_AP_COUNT 9
 
 
 // =========== TYPY ===============================

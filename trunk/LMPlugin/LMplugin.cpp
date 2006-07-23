@@ -47,6 +47,9 @@ CLMSock::CLMSock()
 
 	APTable[7].AP_ID = "quantifier";
 	APTable[7].pFn = & fLMQuantifier;
+
+	APTable[8].AP_ID = "hyp_cf";
+	APTable[8].pFn = & fLMCFhyp;
 }
 
 

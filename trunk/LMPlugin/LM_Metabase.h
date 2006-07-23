@@ -253,3 +253,40 @@ public:
 };
 
 typedef CArray <Hyp_4ft_Meta *, Hyp_4ft_Meta *> THyp_4ft_Meta_Array;
+
+typedef CArray <CString, CString> CString_Array;
+
+class Hyp_CF_Meta
+{
+public:
+	CString			id;
+    CString			db_name;
+    CString			matrix_name;
+    CString			task_name;
+
+    CString			sum;
+    CString			min;
+    CString			max;
+    CString			v;
+    CString			nom_var;
+    CString			dor_var;
+
+	CString			avg_a;
+    CString			avg_g;
+    CString			var;
+    CString			st_dev;
+    CString			skew;
+    CString			asym;
+	
+	CString			attribute;
+    TLitArray		condition;
+
+	CString			a_id;
+    CString			c_id;
+
+	CString_Array	frequencies;
+
+	CString			xml_convert ();
+};
+
+typedef CArray <Hyp_CF_Meta *, Hyp_CF_Meta *> THyp_CF_Meta_Array;
