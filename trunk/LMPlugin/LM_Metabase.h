@@ -278,7 +278,8 @@ public:
     CString			skew;
     CString			asym;
 	
-	CString			attribute;
+	CString			quant;
+	CString_Array	attributes;
     TLitArray		condition;
 
 	CString			a_id;

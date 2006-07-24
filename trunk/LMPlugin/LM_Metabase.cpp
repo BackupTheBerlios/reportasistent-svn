@@ -8,6 +8,73 @@ CString Hyp_CF_Meta::xml_convert ()
 {
 	CString xml_string;
 
+	db_name.Replace ("&", "&amp;");
+	matrix_name.Replace ("&", "&amp;");
+	task_name.Replace ("&", "&amp;");
+	quant.Replace ("&", "&amp;");
+
+	db_name.Replace ("<", "&lt;");
+	matrix_name.Replace ("<", "&lt;");
+	task_name.Replace ("<", "&lt;");
+	quant.Replace ("<", "&lt;");
+
+	db_name.Replace (">", "&gt;");
+	matrix_name.Replace (">", "&gt;");
+	task_name.Replace (">", "&gt;");
+	quant.Replace (">", "&gt;");
+
+	//beginning of the hyp_cf element
+	xml_string = " <hyp_cf id=\"" + id + "\" db_name=\"" + db_name + "\" ";
+	xml_string = xml_string + "matrix_name=\"" + matrix_name + "\" ";
+	xml_string = xml_string + "task_name=\"" + task_name + "\" ";
+	
+	xml_string = xml_string + " sum=\"" + (LPCTSTR) (_bstr_t) sum + "\" ";
+	xml_string = xml_string + " min=\"" + (LPCTSTR) (_bstr_t) min + "\" ";
+	xml_string = xml_string + " max=\"" + (LPCTSTR) (_bstr_t) max + "\" ";
+	xml_string = xml_string + " v=\"" + (LPCTSTR) (_bstr_t) v + "\" ";
+	xml_string = xml_string + " nom_var=\"" + (LPCTSTR) (_bstr_t) nom_var + "\" ";
+	xml_string = xml_string + " dor_var=\"" + (LPCTSTR) (_bstr_t) dor_var + "\" ";
+	xml_string = xml_string + " avg_a=\"" + (LPCTSTR) (_bstr_t) avg_a + "\" ";
+	xml_string = xml_string + " avg_g=\"" + (LPCTSTR) (_bstr_t) avg_g + "\" ";
+	xml_string = xml_string + " var=\"" + (LPCTSTR) (_bstr_t) var + "\" ";
+	xml_string = xml_string + " st_dev=\"" + (LPCTSTR) (_bstr_t) st_dev + "\" ";
+	xml_string = xml_string + " skew=\"" + (LPCTSTR) (_bstr_t) skew + "\" ";
+	xml_string = xml_string + " asym=\"" + (LPCTSTR) (_bstr_t) asym + "\" ";
+	
+	xml_string = xml_string + " attributes=\"" + a_id + "\" ";
+	xml_string = xml_string + " condition=\"" + c_id + "\">";
+
+	xml_string = xml_string + " <r> ";
+
+	for (int i = 0; i < frequencies.GetSize (); i++)
+	{
+		xml_string = xml_string + " <c val=\"" + frequencies.GetAt (i) + "\"/> ";
+	}
+
+	xml_string = xml_string + " </r> ";
+
+	xml_string += " </hyp_cf>  ";
+	//end of hyp_cf element
+
+	xml_string = xml_string + " <ti_attribute id=\"" +
+		a_id + "\" quant=\"" + quant + "\" type=\"Attributes\"> ";
+	for (i = 0; i < attributes.GetSize (); i++)
+	{
+		xml_string = xml_string + " <ti_category value=\""
+			+ attributes.GetAt (i) + "\"/> ";
+	}
+	xml_string = xml_string + " </ti_attribute> ";
+
+	xml_string = xml_string + " <ti_cedent id=\"" +
+		c_id + "\" type=\"condition\"> ";
+	for (i = 0; i < condition.GetSize (); i++)
+	{
+		xml_string = xml_string + " <ti_literal id =\"" + condition.GetAt (i).id +
+			"\" quant=\"" + condition.GetAt (i).quant +
+			"\" value=\"" + condition.GetAt (i).value + "\"/> ";
+	}
+	xml_string = xml_string + " </ti_cedent> ";
+
 	return xml_string;
 }
 

@@ -181,6 +181,10 @@ SOURCE=.\TCFQuantifier_Recordset.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\TCondition_Recordset.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\TDCQuantifier_Recordset.cpp
 # End Source File
 # Begin Source File
@@ -201,6 +205,10 @@ SOURCE=.\TFTQuantifier_Recordset.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\tiCFFrequencyI_Recordset.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\tiHypothesis_Recordset.cpp
 # End Source File
 # Begin Source File
@@ -214,6 +222,10 @@ SOURCE=.\TKLQuantifier_Recordset.cpp
 # Begin Source File
 
 SOURCE=.\TLit_Scan_Recordset.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\tmCategory_Recordset.cpp
 # End Source File
 # End Group
 # Begin Group "Header Files"
@@ -313,6 +325,10 @@ SOURCE=.\TCFQuantifier_Recordset.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\TCondition_Recordset.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\TDCQuantifier_Recordset.h
 # End Source File
 # Begin Source File
@@ -333,6 +349,10 @@ SOURCE=.\TFTQuantifier_Recordset.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\tiCFFrequencyI_Recordset.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\tiHypothesis_Recordset.h
 # End Source File
 # Begin Source File
@@ -346,6 +366,10 @@ SOURCE=.\TKLQuantifier_Recordset.h
 # Begin Source File
 
 SOURCE=.\TLit_Scan_Recordset.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\tmCategory_Recordset.h
 # End Source File
 # End Group
 # Begin Group "Resource Files"

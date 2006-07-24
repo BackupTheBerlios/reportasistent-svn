@@ -27,6 +27,9 @@
 #include "TDCQuantifier_Recordset.h"
 #include "TDKQuantifier_Recordset.h"
 #include "Hyp_CF_Recordset.h"
+#include "tiCFFrequencyI_Recordset.h"
+#include "tmCategory_Recordset.h"
+#include "TCondition_Recordset.h"
 
 //dedek: docasne
 /*****/
@@ -1826,19 +1829,24 @@ CString fLMCFhyp(void* hSource)
 	CString buf;
 	CString db_name = ((CDatabase *) hSource)->GetDatabaseName ();
 	CString id_hlp;
+	CString hlp;
 
 	THyp_CF_Meta_Array list;
 	Hyp_CF_Recordset rs ((CDatabase *) hSource);
+	tiCFFrequencyI_Recordset rs_freq ((CDatabase *) hSource);
+	tmCategory_Recordset rs_attr ((CDatabase *) hSource);
+	TCondition_Recordset rs_cond ((CDatabase *) hSource);
 	Hyp_CF_Meta * pthyp;
 
 	long h_id;
 	long l_id;
 
-	BOOL neg_lit;
 	CString neg_lit_smbl;
 
 	CString q_name;
 	CString q_value;
+
+	Hyp_tiLiteral lit;
 
 	CString q = "SELECT * \
 				 FROM taTask, tdCFLiteralD, tiHypothesisCF, tmMatrix, tmQuantity \
@@ -1860,11 +1868,96 @@ CString fLMCFhyp(void* hSource)
 			pthyp->db_name = db_name;
 			pthyp->matrix_name = rs.m_Name2;
 			pthyp->task_name = rs.m_Name;
-			pthyp->attribute = rs.m_Name3;
-			pthyp->a_id = "att_" + pthyp->id;
+			pthyp->quant = rs.m_Name3;
+			pthyp->a_id = "attr_" + pthyp->id;
 			pthyp->c_id = "cond_" + pthyp->id;
 
-			//todo frekvence a podminka a kvantifikatory
+			id_hlp.Format ("%d", rs.m_HypothesisCFID);
+
+			CString q_freq = "SELECT * \
+							  FROM tiCFFrequencyI \
+							  WHERE tiCFFrequencyI.HypothesisCFID=" + id_hlp;			
+			if (rs_freq.Open(AFX_DB_USE_DEFAULT_TYPE, q_freq))
+			{
+				//iteration on query results
+				while (!rs_freq.IsEOF())
+				{
+					hlp.Format ("%d", rs_freq.m_Frequency);
+					pthyp->frequencies.Add (hlp);
+					rs_freq.MoveNext();
+				}
+				rs_freq.Close();
+			}
+			else return "";
+
+			id_hlp.Format ("%d", rs.m_QuantityID2);
+			CString q_attr = "SELECT * \
+							  FROM tmCategory \
+							  WHERE tmCategory.QuantityID=" + id_hlp;
+			q_attr += " ORDER BY CategoryID";
+			if (rs_attr.Open(AFX_DB_USE_DEFAULT_TYPE, q_attr))
+			{
+				//iteration on query results
+				while (!rs_attr.IsEOF())
+				{
+					hlp = rs_attr.m_Name;
+					hlp.Replace ("&", "&amp;");
+					hlp.Replace (">", "&gt;");
+					hlp.Replace ("<", "&lt;");
+					pthyp->attributes.Add (hlp);
+					rs_attr.MoveNext();
+				}
+				rs_attr.Close();
+			}
+			else return "";
+
+			id_hlp.Format ("%d", rs.m_HypothesisID);
+			CString q_cond = "SELECT * \
+							  FROM tiCoefficient, tiLiteralI, tmCategory, tmQuantity \
+							  WHERE tiLiteralI.LiteralIID=tiCoefficient.LiteralIID \
+								AND tiCoefficient.CategoryID=tmCategory.CategoryID \
+								AND tmCategory.QuantityID=tmQuantity.QuantityID \
+								AND tiLiteralI.HypothesisID=" + id_hlp;
+			if (rs_cond.Open(AFX_DB_USE_DEFAULT_TYPE, q_cond))
+			{
+				//iteration on query results
+				while (!rs_cond.IsEOF())
+				{
+					if (rs_cond.m_Negation)
+						neg_lit_smbl = "¬";
+					else
+						neg_lit_smbl = "";
+					id_hlp.Format ("%d", rs_cond.m_LiteralIID);
+					lit.id = "tiCFLit" + id_hlp + pthyp->id;
+					hlp = rs_cond.m_Name2;
+					hlp.Replace ("&", "&amp;");
+					hlp.Replace (">", "&gt;");
+					hlp.Replace ("<", "&lt;");
+					lit.quant = neg_lit_smbl + hlp;
+					hlp = rs_cond.m_Name;
+					hlp.Replace ("&", "&amp;");
+					hlp.Replace (">", "&gt;");
+					hlp.Replace ("<", "&lt;");
+					lit.value = hlp;
+					pthyp->condition.Add (lit);
+					rs_cond.MoveNext();
+				}
+				rs_cond.Close();
+			}
+			else return "";
+			//todo kvantifikatory
+			pthyp->asym = "0";
+			pthyp->avg_a = "0";
+			pthyp->avg_g = "0";
+			pthyp->dor_var = "0";
+			pthyp->max = "0";
+			pthyp->min = "0";
+			pthyp->nom_var = "0";
+			pthyp->skew = "0";
+			pthyp->st_dev = "0";
+			pthyp->sum = "0";
+			pthyp->v = "0";
+			pthyp->var = "0";
 
 			list.Add (pthyp);
 			rs.MoveNext();
@@ -1872,6 +1965,34 @@ CString fLMCFhyp(void* hSource)
 		rs.Close();
 	}
 	else return "";
+
+	//creation of xml string
+	
+  
+	//load DTD
+	buf = Get_DTD ();
+
+	//create xml data
+	buf = buf + " <active_list> ";
+	int i;
+    for (i = 0; i < list.GetSize (); i++)
+	{
+		buf = buf + list.GetAt (i)->xml_convert ();
+	}
+	buf += " </active_list>";
+	//just for test - creates a xml file with all hypothesis
+/*	FILE * f = fopen ("test.xml", "w");
+	fprintf (f, "%s", buf);
+	fclose (f);
+*/
+	for (i = 0; i < list.GetSize (); i++)
+	{
+		list.GetAt (i)->attributes.RemoveAll ();
+		list.GetAt (i)->condition.RemoveAll ();
+		list.GetAt (i)->frequencies.RemoveAll ();
+		delete (list.GetAt (i));
+	}
+	list.RemoveAll ();
 
 	return buf;
 }

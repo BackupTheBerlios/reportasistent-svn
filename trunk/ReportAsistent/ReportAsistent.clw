@@ -2,13 +2,13 @@
 
 [General Info]
 Version=1
-LastClass=
+LastClass=TCondition_Recordset
 LastTemplate=CRecordset
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "ReportAsistent.h"
 LastPage=0
 
-ClassCount=19
+ClassCount=20
 Class1=CReportAsistentApp
 Class2=CSkeletonDoc
 Class3=CSkeletonView
@@ -23,29 +23,30 @@ Resource4=IDD_DIALOG_PARAGRAPH (English (U.S.))
 Class6=CElementTextDialog
 Resource5=IDD_GENERATE_DIALOG (English (U.S.))
 Class7=CSimpleFilterDialog
-Resource6=IDD_DIALOGTEXT (English (U.S.))
+Resource6=IDD_SOURCES_DIALOG (English (U.S.))
 Class8=CGenerateDialog
-Resource7=IDD_ATTRIBUTE_LINK_DIALOG (English (U.S.))
+Resource7=IDD_SIMPLE_FILTER_DIALOG (English (U.S.))
 Class9=CSourcesDialog
 Resource8=IDD_ACTIVE_ELEMENT_DIALOG (English (U.S.))
 Class10=CActiveElementDialog
 Resource9=IDD_DIALOG_CHAPTER (English (U.S.))
 Class11=CTransformationsDialog
 Class12=Tcategory_Recordset
-Resource10=IDD_SOURCES_DIALOG (English (U.S.))
+Resource10=IDD_ATTRIBUTE_LINK_TABLE_DIALOG (English (U.S.))
 Class13=CAttributeLinkDialog
-Resource11=IDD_ATTRIBUTE_LINK_TABLE_DIALOG (English (U.S.))
+Resource11=IDD_TRANSFORMATIONS_DIALOG (English (U.S.))
 Class14=CAttributeLinkTableDialog
 Resource12=IDD_PROPERTY_EDITOR (English (U.S.))
 Class15=CElementParagraphDialog
 Class16=CElementChapterDialog
 Class17=CElementDialogBase
 Class18=CPropertyEditor
-Resource13=IDD_ABOUTBOX (English (U.S.))
-Resource14=IDD_TRANSFORMATIONS_DIALOG (English (U.S.))
+Resource13=IDD_ATTRIBUTE_LINK_DIALOG (English (U.S.))
+Resource14=IDD_ABOUTBOX (English (U.S.))
 Class19=CWaitDialog
-Resource15=IDD_SIMPLE_FILTER_DIALOG (English (U.S.))
+Resource15=IDD_DIALOGTEXT (English (U.S.))
 Resource16=IDR_MAINFRAME (English (U.S.))
+Class20=TCondition_Recordset
 
 [CLS:CReportAsistentApp]
 Type=0
@@ -1633,4 +1634,82 @@ Column40=[tmQuantity].[wSavedCountUsed], 4, 4
 Column41=[wUpdateVer], 4, 4
 Column42=[tmQuantity].[UserID], 4, 4
 Column43=[tmQuantity].[Notice], 12, 510
+
+[DB:tiCFFrequencyI_Recordset]
+DB=1
+DBType=ODBC
+ColumnCount=5
+Column1=[CFFrequencyIID], 4, 4
+Column2=[HypothesisCFID], 4, 4
+Column3=[Col], 4, 4
+Column4=[Frequency], 4, 4
+Column5=[TaskID], 4, 4
+
+[DB:tmCategory_Recordset]
+DB=1
+DBType=ODBC
+ColumnCount=10
+Column1=[CategoryID], 4, 4
+Column2=[Name], 12, 100
+Column3=[QuantityID], 4, 4
+Column4=[CategorySubTypeID], 4, 4
+Column5=[BoolTypeID], 4, 4
+Column6=[XCategory], -7, 1
+Column7=[IncludeNULL], -7, 1
+Column8=[Ord], 4, 4
+Column9=[Notice], 12, 510
+Column10=[wSavedCountUsed], 4, 4
+
+[CLS:TCondition_Recordset]
+Type=0
+HeaderFile=TCondition_Recordset.h
+ImplementationFile=TCondition_Recordset.cpp
+BaseClass=CRecordset
+Filter=N
+VirtualFilter=r
+
+[DB:TCondition_Recordset]
+DB=1
+DBType=ODBC
+ColumnCount=32
+Column1=[CoefficientID], 4, 4
+Column2=[tiCoefficient].[LiteralIID], 4, 4
+Column3=[tiCoefficient].[CategoryID], 4, 4
+Column4=[tiCoefficient].[TaskID], 4, 4
+Column5=[tiLiteralI].[LiteralIID], 4, 4
+Column6=[HypothesisID], 4, 4
+Column7=[CedentTypeID], 4, 4
+Column8=[LiteralDID], 4, 4
+Column9=[ChildIndex], 4, 4
+Column10=[Negation], -7, 1
+Column11=[tiLiteralI].[TaskID], 4, 4
+Column12=[tmCategory].[CategoryID], 4, 4
+Column13=[tmCategory].[Name], 12, 100
+Column14=[tmCategory].[QuantityID], 4, 4
+Column15=[CategorySubTypeID], 4, 4
+Column16=[BoolTypeID], 4, 4
+Column17=[XCategory], -7, 1
+Column18=[IncludeNULL], -7, 1
+Column19=[Ord], 4, 4
+Column20=[tmCategory].[Notice], 12, 510
+Column21=[tmCategory].[wSavedCountUsed], 4, 4
+Column22=[tmQuantity].[QuantityID], 4, 4
+Column23=[tmQuantity].[Name], 12, 100
+Column24=[ShortName], 12, 510
+Column25=[ShowName], -7, 1
+Column26=[AttributeID], 4, 4
+Column27=[ItemShift], 4, 4
+Column28=[ParentGroupID], 4, 4
+Column29=[tmQuantity].[wSavedCountUsed], 4, 4
+Column30=[wUpdateVer], 4, 4
+Column31=[UserID], 4, 4
+Column32=[tmQuantity].[Notice], 12, 510
+Column33=[ShowName], -7, 1
+Column34=[AttributeID], 4, 4
+Column35=[ItemShift], 4, 4
+Column36=[ParentGroupID], 4, 4
+Column37=[tmQuantity].[wSavedCountUsed], 4, 4
+Column38=[wUpdateVer], 4, 4
+Column39=[UserID], 4, 4
+Column40=[tmQuantity].[Notice], 12, 510
 
