@@ -149,3 +149,13 @@ CString fFETask(void* hSource)
 	CString resultStr = (CString) TaskList;
 	return resultStr;
 }
+
+// --- AP Ferdovska krabicka
+
+CString fFEferda_box(void* hSource)
+{
+	int indexSrc = ((int) hSource) - 1;
+	System::String^ BoxList = FEplugin_cs::AP_FEferda_box::getList(indexSrc);
+	CString resultStr = (CString) BoxList;
+	return resultStr;
+}

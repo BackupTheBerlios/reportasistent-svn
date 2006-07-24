@@ -36,7 +36,7 @@
     </Reference>
     <Reference Include="FerdaHelpers, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Ferda\Ferda_checkout\bin\FrontEnd\FerdaHelpers.dll</HintPath>
+      <HintPath>C:\FerdaDataminer\FrontEnd\FerdaHelpers.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="FerdaModulesManager, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -64,6 +64,7 @@
     <Compile Include="AP_FECategory.cs" />
     <Compile Include="AP_FEcfhyp.cs" />
     <Compile Include="AP_FECF_cedent.cs" />
+    <Compile Include="AP_FEferda_box.cs" />
     <Compile Include="AP_FEklhyp.cs" />
     <Compile Include="AP_FEKL_cedent.cs" />
     <Compile Include="AP_FEQuantifiers.cs" />

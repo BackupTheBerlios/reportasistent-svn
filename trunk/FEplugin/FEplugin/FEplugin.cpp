@@ -72,6 +72,11 @@ CFESock::CFESock()
 	APTable[12].AP_ID = "task";
 	APTable[12].pFn = & fFETask;
 
+	// AP Task
+
+	APTable[13].AP_ID = "ferda_box";
+	APTable[13].pFn = & fFEferda_box;
+
 }
 
 

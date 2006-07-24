@@ -49,5 +49,9 @@ CString fFEQuantifier(void* hSource);
 
 CString fFETask(void* hSource);
 
+// --- AP Ferdovska krabicka
+
+CString fFEferda_box(void* hSource);
+
 
 #endif /* _FUNCTIONS*/
