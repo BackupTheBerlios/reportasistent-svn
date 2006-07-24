@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="windows-1250" ?>
 <!DOCTYPE active_list[
   
-<!ELEMENT active_list ((hyp_4ft*, hyp_sd4ft*, hyp_kl*, hyp_sdkl*, hyp_cf*, hyp_sdcf*, category*, ti_cedent*, ti_attribute*, attribute*, bool_cedent*, CF_cedent*, KL_cedent*, hyp_kl*, task*, quantifier*)*)>
+<!ELEMENT active_list ((hyp_4ft*, hyp_sd4ft*, hyp_kl*, hyp_sdkl*, hyp_cf*, hyp_sdcf*, category*, ti_cedent*, ti_attribute*, attribute*, bool_cedent*, CF_cedent*, KL_cedent*, hyp_kl*, task*, quantifier*, ferda_box*)*)>
 
 
 <!-- Active elements "Analyzed data" -->
@@ -452,5 +452,24 @@
 <!ATTLIST quant_item name CDATA #REQUIRED
                     value CDATA #REQUIRED>
 <!--quant_item: one item that can be set in basic quantifier (i.e. parameter and it's value)-->
+
+
+<!-- Special Active elements for FE plugin -->
+
+<!--ferda_box - AP "univerzalni krabicka"-->
+
+<!ELEMENT ferda_box ((febox_property*, febox_socket*)*)>
+<!ATTLIST ferda_box 	id ID #REQUIRED
+      box_type CDATA #REQUIRED
+			user_name CDATA #REQUIRED
+			user_hint CDATA #IMPLIED>
+<!-- -->
+
+<!ELEMENT febox_property EMPTY>
+<!ATTLIST febox_property name CDATA #REQUIRED
+			  value CDATA #REQUIRED>
+<!-- name: name of property
+     value: value of property
+-->
 ]>
 
