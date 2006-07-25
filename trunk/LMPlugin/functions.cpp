@@ -30,6 +30,7 @@
 #include "tiCFFrequencyI_Recordset.h"
 #include "tmCategory_Recordset.h"
 #include "TCondition_Recordset.h"
+#include "Hyp_SD4ft_Recordset.h"
 
 //dedek: docasne
 /*****/
@@ -1708,12 +1709,17 @@ CString fLM4fthyp(void * hSource)
 			ced_name = rs.m_Name5;
 			c_id = rs.m_CategoryID2;
 			q_name = rs.m_Name4;
+			q_name.Replace ("&", "&amp;");
+			q_name.Replace (">", "&gt;");
+			q_name.Replace ("<", "&lt;");
 			q_value = rs.m_Name2;
+			q_value.Replace ("&", "&amp;");
+			q_value.Replace (">", "&gt;");
 			q_value.Replace ("<", "&lt;");
 			if (h_id != h_id_tst)
 			{
 				pthyp = new (Hyp_4ft_Meta);
-				pthyp->flag_a = pthyp->flag_s = pthyp->flag_c = FALSE;
+//				pthyp->flag_a = pthyp->flag_s = pthyp->flag_c = FALSE;
 				id_hlp.Format ("%d", h_id);
 				pthyp->id = "hyp4ft" + id_hlp;
 				pthyp->db_name = db_name;
@@ -1749,7 +1755,7 @@ CString fLM4fthyp(void * hSource)
 			if (ced_name == "Antecedent")
 			{
 				Hyp_tiLiteral x;
-				pthyp->flag_a = TRUE;
+//				pthyp->flag_a = TRUE;
 				id_hlp.Format ("%d", l_id);
 				x.id = "tiLit" + id_hlp + pthyp->id;
 				id_hlp.Format ("%d", c_id);
@@ -1762,7 +1768,7 @@ CString fLM4fthyp(void * hSource)
 			else if (ced_name == "Succedent")
 			{
 				Hyp_tiLiteral x;
-				pthyp->flag_s = TRUE;
+//				pthyp->flag_s = TRUE;
 				id_hlp.Format ("%d", l_id);
 				x.id = "tiLit" + id_hlp + pthyp->id;
 				id_hlp.Format ("%d", c_id);
@@ -1775,7 +1781,7 @@ CString fLM4fthyp(void * hSource)
 			else if (ced_name == "Condition")
 			{
 				Hyp_tiLiteral x;
-				pthyp->flag_c = TRUE;
+//				pthyp->flag_c = TRUE;
 				id_hlp.Format ("%d", l_id);
 				x.id = "tiLit" + id_hlp + pthyp->id;
 				id_hlp.Format ("%d", c_id);
@@ -1990,6 +1996,220 @@ CString fLMCFhyp(void* hSource)
 		list.GetAt (i)->attributes.RemoveAll ();
 		list.GetAt (i)->condition.RemoveAll ();
 		list.GetAt (i)->frequencies.RemoveAll ();
+		delete (list.GetAt (i));
+	}
+	list.RemoveAll ();
+
+	return buf;
+}
+
+// --- AP SD4FT-hypotese
+
+CString fLMSD4fthyp(void * hSource)
+{
+	CString buf;
+	CString db_name = ((CDatabase *) hSource)->GetDatabaseName ();
+	CString id_hlp;
+	THyp_SD4ft_Meta_Array list;
+	Hyp_SD4ft_Recordset rs ((CDatabase *) hSource);
+	Hyp_SD4ft_Meta * pthyp;
+	long h_id;
+//	long m_id;
+//	long t_id;
+	long l_id;
+	long c_id;
+	long h_id_tst = 0;//test variable - values from previous iteration
+
+	BOOL neg_lit;
+	CString neg_lit_smbl;
+	
+	CString ced_name;
+	CString q_name;
+	CString q_value;
+	CString q = "SELECT * \
+				 FROM taTask,tiCoefficient,  tiHypothesisDF, tiLiteralI, tmCategory, \
+				      tmMatrix, tmQuantity, tsCedentType \
+				 WHERE tiCoefficient.TaskID=taTask.TaskID \
+				   AND taTask.MatrixID=tmMatrix.MatrixID \
+				   AND tiHypothesisDF.HypothesisID=tiLiteralI.HypothesisID \
+				   AND tiLiteralI.LiteralIID=tiCoefficient.LiteralIID \
+				   AND tiCoefficient.CategoryID=tmCategory.CategoryID \
+				   AND tmCategory.QuantityID=tmQuantity.QuantityID \
+				   AND tsCedentType.CedentTypeID=tiLiteralI.CedentTypeID \
+				 ORDER BY tiHypothesisDF.HypothesisID";
+	//load data from metabase
+	if (rs.Open(AFX_DB_USE_DEFAULT_TYPE, q))
+	{
+		//iteration on query results
+		while (!rs.IsEOF())
+		{
+			h_id = rs.m_HypothesisDFID;
+//			m_id = rs.m_MatrixID2;
+//			t_id = rs.m_TaskID;
+			l_id = rs.m_LiteralIID2;
+			neg_lit = rs.m_Negation;
+			ced_name = rs.m_Name5;
+			c_id = rs.m_CategoryID2;
+			q_name = rs.m_Name4;
+			q_name.Replace ("&", "&amp;");
+			q_name.Replace (">", "&gt;");
+			q_name.Replace ("<", "&lt;");
+			q_value = rs.m_Name2;
+			q_value.Replace ("&", "&amp;");
+			q_value.Replace (">", "&gt;");
+			q_value.Replace ("<", "&lt;");
+			if (h_id != h_id_tst)
+			{
+				pthyp = new (Hyp_SD4ft_Meta);
+				id_hlp.Format ("%d", h_id);
+				pthyp->id = "hypSD4ft" + id_hlp;
+				pthyp->db_name = db_name;
+				pthyp->matrix_name = rs.m_Name3;
+				pthyp->task_name = rs.m_Name;
+				pthyp->a.Format ("%d", rs.m_FirstFreqA);
+				pthyp->b.Format ("%d", rs.m_FirstFreqB);
+				pthyp->c.Format ("%d", rs.m_FirstFreqC);
+				pthyp->d.Format ("%d", rs.m_FirstFreqD);
+				pthyp->e.Format ("%d", rs.m_SecondFreqA);
+				pthyp->f.Format ("%d", rs.m_SecondFreqB);
+				pthyp->g.Format ("%d", rs.m_SecondFreqC);
+				pthyp->h.Format ("%d", rs.m_SecondFreqD);
+
+				pthyp->conf1 = "0";
+				pthyp->d_conf1 = "0";
+				pthyp->e_conf1 = "0";
+				pthyp->support1 = "0";
+				pthyp->completeness1 = "0";
+				pthyp->avg_diff1 = "0";
+				pthyp->low_bnd_imp1 = "0";
+				pthyp->up_bnd_imp1 = "0";
+				pthyp->low_bnd_dbl_imp1 = "0";
+				pthyp->up_bnd_dbl_imp1 = "0";
+				pthyp->low_bnd_eq1 = "0";
+				pthyp->up_bnd_eq1 = "0";
+				pthyp->fisher1 = "0";
+				pthyp->chi_sq1 = "0";
+
+				pthyp->conf2 = "0";
+				pthyp->d_conf2 = "0";
+				pthyp->e_conf2 = "0";
+				pthyp->support2 = "0";
+				pthyp->completeness2 = "0";
+				pthyp->avg_diff2 = "0";
+				pthyp->low_bnd_imp2 = "0";
+				pthyp->up_bnd_imp2 = "0";
+				pthyp->low_bnd_dbl_imp2 = "0";
+				pthyp->up_bnd_dbl_imp2 = "0";
+				pthyp->low_bnd_eq2 = "0";
+				pthyp->up_bnd_eq2 = "0";
+				pthyp->fisher2 = "0";
+				pthyp->chi_sq2 = "0";
+				
+				pthyp->dr_sum = "0";
+				pthyp->df_conf = "0";
+				pthyp->df_dfui = "0";
+				pthyp->df_fue = "0";
+				pthyp->df_avg = "0";
+
+				pthyp->ant_id = "ant" + pthyp->id;
+				pthyp->suc_id = "suc" + pthyp->id;
+				pthyp->con_id = "con" + pthyp->id;
+				pthyp->set1_id = "set1" + pthyp->id;
+				pthyp->set2_id = "set2" + pthyp->id;
+
+				list.Add (pthyp);
+			}
+
+			if (ced_name == "Antecedent")
+			{
+				Hyp_tiLiteral x;
+				id_hlp.Format ("%d", l_id);
+				x.id = "tiLit" + id_hlp + pthyp->id;
+				id_hlp.Format ("%d", c_id);
+				x.id = x.id + id_hlp;
+				if (neg_lit) neg_lit_smbl = "¬"; else neg_lit_smbl = "";
+				x.quant = neg_lit_smbl + q_name;
+				x.value = q_value;
+				pthyp->antecedent.Add (x);
+			}
+			else if (ced_name == "Succedent")
+			{
+				Hyp_tiLiteral x;
+				id_hlp.Format ("%d", l_id);
+				x.id = "tiLit" + id_hlp + pthyp->id;
+				id_hlp.Format ("%d", c_id);
+				x.id = x.id + id_hlp;
+				if (neg_lit) neg_lit_smbl = "¬"; else neg_lit_smbl = "";
+				x.quant = neg_lit_smbl + q_name;
+				x.value = q_value;
+				pthyp->succedent.Add (x);
+			}
+			else if (ced_name == "Condition")
+			{
+				Hyp_tiLiteral x;
+				id_hlp.Format ("%d", l_id);
+				x.id = "tiLit" + id_hlp + pthyp->id;
+				id_hlp.Format ("%d", c_id);
+				x.id = x.id + id_hlp;
+				if (neg_lit) neg_lit_smbl = "¬"; else neg_lit_smbl = "";
+				x.quant = neg_lit_smbl + q_name;
+				x.value = q_value;
+				pthyp->condition.Add (x);
+			}
+			else if (ced_name == "First set")
+			{
+				Hyp_tiLiteral x;
+				id_hlp.Format ("%d", l_id);
+				x.id = "tiLit" + id_hlp + pthyp->id;
+				id_hlp.Format ("%d", c_id);
+				x.id = x.id + id_hlp;
+				if (neg_lit) neg_lit_smbl = "¬"; else neg_lit_smbl = "";
+				x.quant = neg_lit_smbl + q_name;
+				x.value = q_value;
+				pthyp->set1.Add (x);
+			}
+			else if (ced_name == "Second set")
+			{
+				Hyp_tiLiteral x;
+				id_hlp.Format ("%d", l_id);
+				x.id = "tiLit" + id_hlp + pthyp->id;
+				id_hlp.Format ("%d", c_id);
+				x.id = x.id + id_hlp;
+				if (neg_lit) neg_lit_smbl = "¬"; else neg_lit_smbl = "";
+				x.quant = neg_lit_smbl + q_name;
+				x.value = q_value;
+				pthyp->set2.Add (x);
+			}
+			else return "";//error
+
+			rs.MoveNext();
+			h_id_tst = h_id;
+		}
+		rs.Close();
+	}
+	else return "";
+	
+	//creation of xml string
+	
+  
+	//load DTD
+	buf = Get_DTD ();
+
+	//create xml data
+	buf = buf + " <active_list> ";
+	int i;
+    for (i = 0; i < list.GetSize (); i++)
+	{
+		buf = buf + list.GetAt (i)->xml_convert ();
+	}
+	buf += " </active_list>";
+	//just for test - creates a xml file with all hypothesis
+/*	FILE * f = fopen ("test.xml", "w");
+	fprintf (f, "%s", buf);
+	fclose (f);
+*/
+	for (i = 0; i < list.GetSize (); i++)
+	{
 		delete (list.GetAt (i));
 	}
 	list.RemoveAll ();

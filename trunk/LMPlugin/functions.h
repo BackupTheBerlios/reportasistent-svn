@@ -56,6 +56,10 @@ CString fLM4fthyp(void* hSource);
 
 CString fLMCFhyp(void* hSource);
 
+// --- AP SD4FT-hypotese
+
+CString fLMSD4fthyp(void * hSource);
+
 
 
 #endif /* _FUNCTIONS*/

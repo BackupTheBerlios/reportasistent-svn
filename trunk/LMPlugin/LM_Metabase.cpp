@@ -1,7 +1,6 @@
 //functions and classes for LM Metabase socket
 
 #include "LM_Metabase.h"
-#include "Hyp_4ft_Recordset.h"
 #include "comdef.h"
 
 CString Hyp_CF_Meta::xml_convert ()
@@ -28,18 +27,18 @@ CString Hyp_CF_Meta::xml_convert ()
 	xml_string = xml_string + "matrix_name=\"" + matrix_name + "\" ";
 	xml_string = xml_string + "task_name=\"" + task_name + "\" ";
 	
-	xml_string = xml_string + " sum=\"" + (LPCTSTR) (_bstr_t) sum + "\" ";
-	xml_string = xml_string + " min=\"" + (LPCTSTR) (_bstr_t) min + "\" ";
-	xml_string = xml_string + " max=\"" + (LPCTSTR) (_bstr_t) max + "\" ";
-	xml_string = xml_string + " v=\"" + (LPCTSTR) (_bstr_t) v + "\" ";
-	xml_string = xml_string + " nom_var=\"" + (LPCTSTR) (_bstr_t) nom_var + "\" ";
-	xml_string = xml_string + " dor_var=\"" + (LPCTSTR) (_bstr_t) dor_var + "\" ";
-	xml_string = xml_string + " avg_a=\"" + (LPCTSTR) (_bstr_t) avg_a + "\" ";
-	xml_string = xml_string + " avg_g=\"" + (LPCTSTR) (_bstr_t) avg_g + "\" ";
-	xml_string = xml_string + " var=\"" + (LPCTSTR) (_bstr_t) var + "\" ";
-	xml_string = xml_string + " st_dev=\"" + (LPCTSTR) (_bstr_t) st_dev + "\" ";
-	xml_string = xml_string + " skew=\"" + (LPCTSTR) (_bstr_t) skew + "\" ";
-	xml_string = xml_string + " asym=\"" + (LPCTSTR) (_bstr_t) asym + "\" ";
+	xml_string = xml_string + " sum=\"" + sum + "\" ";
+	xml_string = xml_string + " min=\"" + min + "\" ";
+	xml_string = xml_string + " max=\"" + max + "\" ";
+	xml_string = xml_string + " v=\"" + v + "\" ";
+	xml_string = xml_string + " nom_var=\"" + nom_var + "\" ";
+	xml_string = xml_string + " dor_var=\"" + dor_var + "\" ";
+	xml_string = xml_string + " avg_a=\"" + avg_a + "\" ";
+	xml_string = xml_string + " avg_g=\"" + avg_g + "\" ";
+	xml_string = xml_string + " var=\"" + var + "\" ";
+	xml_string = xml_string + " st_dev=\"" + st_dev + "\" ";
+	xml_string = xml_string + " skew=\"" + skew + "\" ";
+	xml_string = xml_string + " asym=\"" + asym + "\" ";
 	
 	xml_string = xml_string + " attributes=\"" + a_id + "\" ";
 	xml_string = xml_string + " condition=\"" + c_id + "\">";
@@ -430,6 +429,19 @@ CString Hyp_4ft_Meta::xml_convert ()
 	//todo: replace <,>, &
 	CString xml_string;
 	CString hlp;
+
+	db_name.Replace ("&", "&amp;");
+	matrix_name.Replace ("&", "&amp;");
+	task_name.Replace ("&", "&amp;");
+
+	db_name.Replace ("<", "&lt;");
+	matrix_name.Replace ("<", "&lt;");
+	task_name.Replace ("<", "&lt;");
+
+	db_name.Replace (">", "&gt;");
+	matrix_name.Replace (">", "&gt;");
+	task_name.Replace (">", "&gt;");
+
 	//beginning of the hyp_4ft element
 	xml_string = " <hyp_4ft id=\"" + id + "\" db_name=\"" + db_name + "\" ";
 	xml_string = xml_string + "matrix_name=\"" + matrix_name + "\" ";
@@ -498,5 +510,133 @@ CString Hyp_4ft_Meta::xml_convert ()
 	}
 	xml_string = xml_string + "</ti_cedent> ";
 		
+	return xml_string;
+}
+
+CString Hyp_SD4ft_Meta::xml_convert ()
+{
+	CString xml_string;
+
+	db_name.Replace ("&", "&amp;");
+	matrix_name.Replace ("&", "&amp;");
+	task_name.Replace ("&", "&amp;");
+
+	db_name.Replace ("<", "&lt;");
+	matrix_name.Replace ("<", "&lt;");
+	task_name.Replace ("<", "&lt;");
+
+	db_name.Replace (">", "&gt;");
+	matrix_name.Replace (">", "&gt;");
+	task_name.Replace (">", "&gt;");
+
+	//beginning of the hyp_sd4ft element
+	xml_string = " <hyp_sd4ft id=\"" + id + "\" db_name=\"" + db_name + "\" ";
+	xml_string = xml_string + "matrix_name=\"" + matrix_name + "\" ";
+	xml_string = xml_string + "task_name=\"" + task_name + "\" ";
+	xml_string = xml_string + "a=\"" + a + "\" ";
+	xml_string = xml_string + "b=\"" + b + "\" ";
+	xml_string = xml_string + "c=\"" + c + "\" ";
+	xml_string = xml_string + "d=\"" + d + "\" ";
+	xml_string = xml_string + "e=\"" + e + "\" ";
+	xml_string = xml_string + "f=\"" + f + "\" ";
+	xml_string = xml_string + "g=\"" + g + "\" ";
+	xml_string = xml_string + "h=\"" + h + "\" ";
+	
+	xml_string = xml_string + " conf1=\"" + conf1 + "\" ";
+	xml_string = xml_string + " d_conf1=\"" + d_conf1 + "\" ";
+	xml_string = xml_string + " e_conf1=\"" + e_conf1 + "\" ";
+	xml_string = xml_string + " support1=\"" + support1 + "\" ";
+	xml_string = xml_string + " completeness1=\"" + completeness1 + "\" ";
+	xml_string = xml_string + " avg_diff1=\"" + avg_diff1 + "\" ";
+	xml_string = xml_string + " low_bnd_imp1=\"" + low_bnd_imp1 + "\" ";
+	xml_string = xml_string + " up_bnd_imp1=\"" + up_bnd_imp1 + "\" ";
+	xml_string = xml_string + " low_bnd_dbl_imp1=\"" + low_bnd_dbl_imp1 + "\" ";
+	xml_string = xml_string + " up_bnd_dbl_imp1=\"" + up_bnd_dbl_imp1 + "\" ";
+	xml_string = xml_string + " low_bnd_eq1=\"" + low_bnd_eq1 + "\" ";
+	xml_string = xml_string + " up_bnd_eq1=\"" + up_bnd_eq1 + "\" ";
+	xml_string = xml_string + " fisher1=\"" + fisher1 + "\" ";
+	xml_string = xml_string + " chi_sq1=\"" + chi_sq1 + "\" ";
+
+	xml_string = xml_string + " conf2=\"" + conf2 + "\" ";
+	xml_string = xml_string + " d_conf2=\"" + d_conf2 + "\" ";
+	xml_string = xml_string + " e_conf2=\"" + e_conf2 + "\" ";
+	xml_string = xml_string + " support2=\"" + support2 + "\" ";
+	xml_string = xml_string + " completeness2=\"" + completeness2 + "\" ";
+	xml_string = xml_string + " avg_diff2=\"" + avg_diff2 + "\" ";
+	xml_string = xml_string + " low_bnd_imp2=\"" + low_bnd_imp2 + "\" ";
+	xml_string = xml_string + " up_bnd_imp2=\"" + up_bnd_imp2 + "\" ";
+	xml_string = xml_string + " low_bnd_dbl_imp2=\"" + low_bnd_dbl_imp2 + "\" ";
+	xml_string = xml_string + " up_bnd_dbl_imp2=\"" + up_bnd_dbl_imp2 + "\" ";
+	xml_string = xml_string + " low_bnd_eq2=\"" + low_bnd_eq2 + "\" ";
+	xml_string = xml_string + " up_bnd_eq2=\"" + up_bnd_eq2 + "\" ";
+	xml_string = xml_string + " fisher2=\"" + fisher2 + "\" ";
+	xml_string = xml_string + " chi_sq2=\"" + chi_sq2 + "\" ";
+
+	xml_string = xml_string + " dr_sum=\"" + dr_sum + "\" ";
+	xml_string = xml_string + " df_conf=\"" + df_conf + "\" ";
+	xml_string = xml_string + " df_dfui=\"" + df_dfui + "\" ";
+	xml_string = xml_string + " df_fue=\"" + df_fue + "\" ";
+	xml_string = xml_string + " df_avg=\"" + df_avg + "\" ";
+
+	xml_string = xml_string + " antecedent=\"" + ant_id + "\" ";
+	xml_string = xml_string + " succedent=\"" + suc_id + "\" ";
+	xml_string = xml_string + " condition=\"" + con_id + "\"";
+	xml_string = xml_string + " set1=\"" + set1_id + "\" ";
+	xml_string = xml_string + " set2=\"" + set2_id + "\"";
+	xml_string += "/>  ";
+	//end of hyp_sd4ft element
+
+	//beginning of ti_cedent elements
+	//Antecedent
+	xml_string = xml_string + "<ti_cedent  id=\"" + ant_id + "\"  type=\"Antecedent\"> ";
+	int i;
+    for (i = 0; i < antecedent.GetSize (); i++)
+	{
+		xml_string = xml_string + "<ti_literal  id=\"" + antecedent.GetAt (i).id +
+			"\"  quant=\"" + antecedent.GetAt (i).quant +
+			"\"  value=\"" + antecedent.GetAt (i).value + "\"/> ";
+	}
+	xml_string = xml_string + "</ti_cedent> ";
+	
+	//Succedent
+	xml_string = xml_string + "<ti_cedent  id=\"" + suc_id + "\"  type=\"Succedent\"> ";
+	for (i = 0; i < succedent.GetSize (); i++)
+	{
+		xml_string = xml_string + "<ti_literal  id=\"" + succedent.GetAt (i).id +
+			"\"  quant=\"" + succedent.GetAt (i).quant +
+			"\"  value=\"" + succedent.GetAt (i).value + "\"/> ";
+	}
+	xml_string = xml_string + "</ti_cedent> ";
+	
+	//Condition
+	xml_string = xml_string + "<ti_cedent  id=\"" + con_id + "\"  type=\"Condition\"> ";
+	for (i = 0; i < condition.GetSize (); i++)
+	{
+		xml_string = xml_string + "<ti_literal  id=\"" + condition.GetAt (i).id +
+			"\"  quant=\"" + condition.GetAt (i).quant +
+			"\"  value=\"" + condition.GetAt (i).value + "\"/> ";
+	}
+	xml_string = xml_string + "</ti_cedent> ";
+
+	//First set
+	xml_string = xml_string + "<ti_cedent  id=\"" + set1_id + "\"  type=\"First set\"> ";
+	for (i = 0; i < set1.GetSize (); i++)
+	{
+		xml_string = xml_string + "<ti_literal  id=\"" + set1.GetAt (i).id +
+			"\"  quant=\"" + set1.GetAt (i).quant +
+			"\"  value=\"" + set1.GetAt (i).value + "\"/> ";
+	}
+	xml_string = xml_string + "</ti_cedent> ";
+
+	//Second set
+	xml_string = xml_string + "<ti_cedent  id=\"" + set2_id + "\"  type=\"Second set\"> ";
+	for (i = 0; i < set2.GetSize (); i++)
+	{
+		xml_string = xml_string + "<ti_literal  id=\"" + set2.GetAt (i).id +
+			"\"  quant=\"" + set2.GetAt (i).quant +
+			"\"  value=\"" + set2.GetAt (i).value + "\"/> ";
+	}
+	xml_string = xml_string + "</ti_cedent> ";
+
 	return xml_string;
 }

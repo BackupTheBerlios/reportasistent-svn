@@ -245,9 +245,9 @@ public:
 	CString		ant_id;
 	CString		suc_id;
 	CString		con_id;
-	bool		flag_a;
-	bool		flag_s;
-	bool		flag_c;
+//	bool		flag_a;
+//	bool		flag_s;
+//	bool		flag_c;
 
 	CString		xml_convert ();
 };
@@ -291,3 +291,72 @@ public:
 };
 
 typedef CArray <Hyp_CF_Meta *, Hyp_CF_Meta *> THyp_CF_Meta_Array;
+
+class Hyp_SD4ft_Meta
+{
+public:
+	CString		id;
+    CString		db_name;
+    CString		matrix_name;
+    CString		task_name;
+    CString		a;
+    CString		b;
+    CString		c;
+    CString		d;
+	CString		e;
+    CString		f;
+    CString		g;
+    CString		h;
+
+	CString conf1;
+    CString d_conf1;
+    CString e_conf1;
+    CString support1;
+    CString completeness1;
+    CString avg_diff1;
+    CString low_bnd_imp1;
+    CString up_bnd_imp1;
+    CString low_bnd_dbl_imp1;
+    CString up_bnd_dbl_imp1;
+    CString low_bnd_eq1;
+    CString up_bnd_eq1;
+    CString fisher1;
+    CString chi_sq1;
+
+	CString conf2;
+    CString d_conf2;
+    CString e_conf2;
+    CString support2;
+    CString completeness2;
+    CString avg_diff2;
+    CString low_bnd_imp2;
+    CString up_bnd_imp2;
+    CString low_bnd_dbl_imp2;
+    CString up_bnd_dbl_imp2;
+    CString low_bnd_eq2;
+    CString up_bnd_eq2;
+    CString fisher2;
+    CString chi_sq2;
+	
+	CString dr_sum;
+    CString df_conf;
+    CString df_dfui;
+    CString df_fue;
+    CString df_avg;
+    
+    TLitArray	antecedent;
+    TLitArray	succedent;
+    TLitArray	condition;
+	TLitArray	set1;
+    TLitArray	set2;
+
+	CString		ant_id;
+	CString		suc_id;
+	CString		con_id;
+	CString		set1_id;
+	CString		set2_id;
+
+	CString		xml_convert ();
+};
+
+typedef CArray <Hyp_SD4ft_Meta *, Hyp_SD4ft_Meta *> THyp_SD4ft_Meta_Array;
