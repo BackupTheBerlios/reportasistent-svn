@@ -1658,7 +1658,7 @@ CString fLMCategory(void* hSource)
 }
 
 
-// --- AP 4ft-hypotese
+// --- AP 4ft-hypothese
 
 CString fLM4fthyp(void * hSource)
 {
@@ -1816,10 +1816,10 @@ CString fLM4fthyp(void * hSource)
 	}
 	buf += " </active_list>";
 	//just for test - creates a xml file with all hypothesis
-	FILE * f = fopen ("test.xml", "w");
+/*	FILE * f = fopen ("test.xml", "w");
 	fprintf (f, "%s", buf);
 	fclose (f);
-
+*/
 	for (i = 0; i < list.GetSize (); i++)
 	{
 		delete (list.GetAt (i));
@@ -1829,7 +1829,7 @@ CString fLM4fthyp(void * hSource)
 	return buf;
 }
 
-// --- AP CF-hypotese
+// --- AP CF-hypothese
 
 CString fLMCFhyp(void* hSource)
 {
@@ -1846,7 +1846,7 @@ CString fLMCFhyp(void* hSource)
 	Hyp_CF_Meta * pthyp;
 
 	long h_id;
-	long l_id;
+//	long l_id;
 
 	CString neg_lit_smbl;
 
@@ -1868,7 +1868,7 @@ CString fLMCFhyp(void* hSource)
 		while (!rs.IsEOF())
 		{
 			h_id = rs.m_HypothesisCFID;
-			l_id = rs.m_CFLiteralDID;
+//			l_id = rs.m_CFLiteralDID;
 			pthyp = new (Hyp_CF_Meta);
 			id_hlp.Format ("%d", h_id);
 			pthyp->id = "hypCF" + id_hlp;
@@ -1924,7 +1924,8 @@ CString fLMCFhyp(void* hSource)
 							  WHERE tiLiteralI.LiteralIID=tiCoefficient.LiteralIID \
 								AND tiCoefficient.CategoryID=tmCategory.CategoryID \
 								AND tmCategory.QuantityID=tmQuantity.QuantityID \
-								AND tiLiteralI.HypothesisID=" + id_hlp;
+								AND tiLiteralI.HypothesisID=" + id_hlp +
+							" ORDER BY tiLiteralI.LiteralIID";
 			if (rs_cond.Open(AFX_DB_USE_DEFAULT_TYPE, q_cond))
 			{
 				//iteration on query results
@@ -2004,7 +2005,7 @@ CString fLMCFhyp(void* hSource)
 	return buf;
 }
 
-// --- AP SD4FT-hypotese
+// --- AP SD4FT-hypothese
 
 CString fLMSD4fthyp(void * hSource)
 {
@@ -2037,7 +2038,7 @@ CString fLMSD4fthyp(void * hSource)
 				   AND tiCoefficient.CategoryID=tmCategory.CategoryID \
 				   AND tmCategory.QuantityID=tmQuantity.QuantityID \
 				   AND tsCedentType.CedentTypeID=tiLiteralI.CedentTypeID \
-				 ORDER BY tiHypothesisDF.HypothesisID";
+				 ORDER BY tiHypothesisDF.HypothesisID, tiLiteralI.LiteralIID";
 	//load data from metabase
 	if (rs.Open(AFX_DB_USE_DEFAULT_TYPE, q))
 	{
