@@ -484,29 +484,53 @@ CString Hyp_4ft_Meta::xml_convert ()
 	int i;
     for (i = 0; i < antecedent.GetSize (); i++)
 	{
-		xml_string = xml_string + "<ti_literal  id=\"" + antecedent.GetAt (i).id +
-			"\"  quant=\"" + antecedent.GetAt (i).quant +
-			"\"  value=\"" + antecedent.GetAt (i).value + "\"/> ";
+		if ((i == 0) || (antecedent.GetAt (i).quant != antecedent.GetAt (i - 1).quant))
+			xml_string = xml_string + "<ti_literal  id=\"" + antecedent.GetAt (i).id +
+				"\"  quant=\"" + antecedent.GetAt (i).quant +
+				"\"  value=\"";
+		xml_string = xml_string + antecedent.GetAt (i).value;
+		if ((i < antecedent.GetSize () - 1)
+			&&
+			(antecedent.GetAt (i).quant == antecedent.GetAt (i + 1).quant))
+			xml_string += ", ";
+		else
+			xml_string += "\"/> ";
 	}
 	xml_string = xml_string + "</ti_cedent> ";
 	
 	//Succedent
 	xml_string = xml_string + "<ti_cedent  id=\"" + suc_id + "\"  type=\"Succedent\"> ";
-	for (i = 0; i < succedent.GetSize (); i++)
+    for (i = 0; i < succedent.GetSize (); i++)
 	{
-		xml_string = xml_string + "<ti_literal  id=\"" + succedent.GetAt (i).id +
-			"\"  quant=\"" + succedent.GetAt (i).quant +
-			"\"  value=\"" + succedent.GetAt (i).value + "\"/> ";
+		if ((i == 0) || (succedent.GetAt (i).quant != succedent.GetAt (i - 1).quant))
+			xml_string = xml_string + "<ti_literal  id=\"" + succedent.GetAt (i).id +
+				"\"  quant=\"" + succedent.GetAt (i).quant +
+				"\"  value=\"";
+		xml_string = xml_string + succedent.GetAt (i).value;
+		if ((i < succedent.GetSize () - 1)
+			&&
+			(succedent.GetAt (i).quant == succedent.GetAt (i + 1).quant))
+			xml_string += ", ";
+		else
+			xml_string += "\"/> ";
 	}
 	xml_string = xml_string + "</ti_cedent> ";
 	
 	//Condition
 	xml_string = xml_string + "<ti_cedent  id=\"" + con_id + "\"  type=\"Condition\"> ";
-	for (i = 0; i < condition.GetSize (); i++)
+    for (i = 0; i < condition.GetSize (); i++)
 	{
-		xml_string = xml_string + "<ti_literal  id=\"" + condition.GetAt (i).id +
-			"\"  quant=\"" + condition.GetAt (i).quant +
-			"\"  value=\"" + condition.GetAt (i).value + "\"/> ";
+		if ((i == 0) || (condition.GetAt (i).quant != condition.GetAt (i - 1).quant))
+			xml_string = xml_string + "<ti_literal  id=\"" + condition.GetAt (i).id +
+				"\"  quant=\"" + condition.GetAt (i).quant +
+				"\"  value=\"";
+		xml_string = xml_string + condition.GetAt (i).value;
+		if ((i < condition.GetSize () - 1)
+			&&
+			(condition.GetAt (i).quant == condition.GetAt (i + 1).quant))
+			xml_string += ", ";
+		else
+			xml_string += "\"/> ";
 	}
 	xml_string = xml_string + "</ti_cedent> ";
 		

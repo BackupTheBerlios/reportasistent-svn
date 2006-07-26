@@ -1694,7 +1694,8 @@ CString fLM4fthyp(void * hSource)
 				   AND tsTaskSubType.ShortName=";
 	q += "'CDASSOC'";
 	q += "AND taTask.TaskSubTypeID=tsTaskSubType.TaskSubTypeID \
-				 ORDER BY tiHypothesis.HypothesisID, tiLiteralI.CedentTypeID";
+				 ORDER BY tiHypothesis.HypothesisID, tiLiteralI.CedentTypeID, \
+						  tiLiteralI.LiteralIID";
 	//load data from metabase
 	if (rs.Open(AFX_DB_USE_DEFAULT_TYPE, q))
 	{
@@ -1815,10 +1816,10 @@ CString fLM4fthyp(void * hSource)
 	}
 	buf += " </active_list>";
 	//just for test - creates a xml file with all hypothesis
-/*	FILE * f = fopen ("test.xml", "w");
+	FILE * f = fopen ("test.xml", "w");
 	fprintf (f, "%s", buf);
 	fclose (f);
-*/
+
 	for (i = 0; i < list.GetSize (); i++)
 	{
 		delete (list.GetAt (i));
