@@ -360,3 +360,64 @@ public:
 };
 
 typedef CArray <Hyp_SD4ft_Meta *, Hyp_SD4ft_Meta *> THyp_SD4ft_Meta_Array;
+
+class Hyp_SDCF_Meta
+{
+public:
+	CString			id;
+    CString			db_name;
+    CString			matrix_name;
+    CString			task_name;
+
+    CString			sum1;
+    CString			min1;
+    CString			max1;
+    CString			v1;
+    CString			nom_var1;
+    CString			dor_var1;
+	CString			avg_a1;
+    CString			avg_g1;
+    CString			var1;
+    CString			st_dev1;
+    CString			skew1;
+    CString			asym1;
+
+	CString			sum2;
+    CString			min2;
+    CString			max2;
+    CString			v2;
+    CString			nom_var2;
+    CString			dor_var2;
+	CString			avg_a2;
+    CString			avg_g2;
+    CString			var2;
+    CString			st_dev2;
+    CString			skew2;
+    CString			asym2;
+
+	
+    CString         da_sum;
+    CString         da_min;
+    CString         da_max;
+    CString         dr_sum;
+    CString         dr_min;
+    CString         dr_max;
+	
+	CString			quant;
+	CString_Array	attributes;
+    TLitArray		condition;
+	TLitArray		set1;
+	TLitArray		set2;
+
+	CString			a_id;
+    CString			c_id;
+	CString			s1_id;
+    CString			s2_id;
+
+	CString_Array	frequencies1;
+	CString_Array	frequencies2;
+
+	CString			xml_convert ();
+};
+
+typedef CArray <Hyp_SDCF_Meta *, Hyp_SDCF_Meta *> THyp_SDCF_Meta_Array;

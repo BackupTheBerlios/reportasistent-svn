@@ -2,13 +2,13 @@
 
 [General Info]
 Version=1
-LastClass=Hyp_SD4ft_Recordset
+LastClass=CAboutDlg
 LastTemplate=CRecordset
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "ReportAsistent.h"
 LastPage=0
 
-ClassCount=20
+ClassCount=19
 Class1=CReportAsistentApp
 Class2=CSkeletonDoc
 Class3=CSkeletonView
@@ -18,25 +18,25 @@ ResourceCount=16
 Resource1=IDD_ABOUTBOX
 Resource2=IDR_MAINFRAME
 Class5=CAboutDlg
-Resource3=IDD_ACTIVE_ELEMENT_DIALOG (English (U.S.))
-Resource4=IDD_PROPERTY_EDITOR (English (U.S.))
+Resource3=IDD_GENERATE_DIALOG (English (U.S.))
+Resource4=IDD_DIALOG_CHAPTER (English (U.S.))
 Class6=CElementTextDialog
-Resource5=IDD_DIALOG_PARAGRAPH (English (U.S.))
+Resource5=IDD_ACTIVE_ELEMENT_DIALOG (English (U.S.))
 Class7=CSimpleFilterDialog
 Resource6=IDD_SIMPLE_FILTER_DIALOG (English (U.S.))
 Class8=CGenerateDialog
 Resource7=IDD_ABOUTBOX (English (U.S.))
 Class9=CSourcesDialog
-Resource8=IDD_DIALOG_CHAPTER (English (U.S.))
+Resource8=IDD_DIALOG_PARAGRAPH (English (U.S.))
 Class10=CActiveElementDialog
-Resource9=IDD_WAIT_DIALOG (English (U.S.))
+Resource9=IDD_PROPERTY_EDITOR (English (U.S.))
 Class11=CTransformationsDialog
 Class12=Tcategory_Recordset
 Resource10=IDD_DIALOGTEXT (English (U.S.))
 Class13=CAttributeLinkDialog
 Resource11=IDD_SOURCES_DIALOG (English (U.S.))
 Class14=CAttributeLinkTableDialog
-Resource12=IDD_GENERATE_DIALOG (English (U.S.))
+Resource12=IDD_WAIT_DIALOG (English (U.S.))
 Class15=CElementParagraphDialog
 Class16=CElementChapterDialog
 Class17=CElementDialogBase
@@ -46,7 +46,6 @@ Resource14=IDD_ATTRIBUTE_LINK_TABLE_DIALOG (English (U.S.))
 Class19=CWaitDialog
 Resource15=IDD_ATTRIBUTE_LINK_DIALOG (English (U.S.))
 Resource16=IDR_MAINFRAME (English (U.S.))
-Class20=Hyp_SD4ft_Recordset
 
 [CLS:CReportAsistentApp]
 Type=0
@@ -1705,15 +1704,6 @@ Column38=[wUpdateVer], 4, 4
 Column39=[UserID], 4, 4
 Column40=[tmQuantity].[Notice], 12, 510
 
-[CLS:Hyp_SD4ft_Recordset]
-Type=0
-HeaderFile=Hyp_SD4ft_Recordset.h
-ImplementationFile=Hyp_SD4ft_Recordset.cpp
-BaseClass=CRecordset
-Filter=N
-VirtualFilter=r
-LastObject=Hyp_SD4ft_Recordset
-
 [DB:Hyp_SD4ft_Recordset]
 DB=1
 DBType=ODBC
@@ -1787,4 +1777,63 @@ Column66=[tsCedentType].[Name], 12, 100
 Column67=[tsCedentType].[ShortName], 12, 40
 Column68=[tsCedentType].[Ord], 4, 4
 Column69=[tsCedentType].[Notice], 12, 510
+
+[DB:Hyp_SDCF_Recordset]
+DB=1
+DBType=ODBC
+ColumnCount=43
+Column1=[taTask].[TaskID], 4, 4
+Column2=[taTask].[Name], 12, 510
+Column3=[TaskSubTypeID], 4, 4
+Column4=[TaskGroupID], 4, 4
+Column5=[taTask].[UserID], 4, 4
+Column6=[taTask].[MatrixID], 4, 4
+Column7=[ParamBASE], 4, 4
+Column8=[ParamBASERelativ], -7, 1
+Column9=[ReadOnly], -7, 1
+Column10=[HypothesisGenerated], -7, 1
+Column11=[GenerationInterrupted], -7, 1
+Column12=[GenerationNrOfTests], 4, 4
+Column13=[GenerationStartTime], 11, 16
+Column14=[GenerationTotalTime], 4, 4
+Column15=[taTask].[Notice], 12, 510
+Column16=[tdCFLiteralD].[CFLiteralDID], 4, 4
+Column17=[CFCedentDID], 4, 4
+Column18=[tdCFLiteralD].[QuantityID], 4, 4
+Column19=[Ord], 4, 4
+Column20=[tdCFLiteralD].[Notice], 12, 510
+Column21=[HypothesisDCID], 4, 4
+Column22=[HypothesisID], 4, 4
+Column23=[tiHypothesisDC].[TaskID], 4, 4
+Column24=[Cols], 4, 4
+Column25=[tiHypothesisDC].[CFLiteralDID], 4, 4
+Column26=[QuantityUpdateVer], 4, 4
+Column27=[tmMatrix].[MatrixID], 4, 4
+Column28=[tmMatrix].[Name], 12, 100
+Column29=[Initialised], -7, 1
+Column30=[RecordCount], 4, 4
+Column31=[tmMatrix].[Notice], 12, 510
+Column32=[tmMatrix].[wSavedCountUsed], 4, 4
+Column33=[tmQuantity].[QuantityID], 4, 4
+Column34=[tmQuantity].[Name], 12, 100
+Column35=[ShortName], 12, 510
+Column36=[ShowName], -7, 1
+Column37=[AttributeID], 4, 4
+Column38=[ItemShift], 4, 4
+Column39=[ParentGroupID], 4, 4
+Column40=[tmQuantity].[wSavedCountUsed], 4, 4
+Column41=[wUpdateVer], 4, 4
+Column42=[tmQuantity].[UserID], 4, 4
+Column43=[tmQuantity].[Notice], 12, 510
+
+[DB:tiDCFrequencyI_Recordset]
+DB=1
+DBType=ODBC
+ColumnCount=6
+Column1=[DCFrequencyIID], 4, 4
+Column2=[HypothesisDCID], 4, 4
+Column3=[CedentTypeID], 4, 4
+Column4=[TaskID], 4, 4
+Column5=[Col], 4, 4
+Column6=[Frequency], 4, 4
 

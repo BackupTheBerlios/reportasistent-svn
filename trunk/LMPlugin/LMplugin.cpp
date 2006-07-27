@@ -53,6 +53,9 @@ CLMSock::CLMSock()
 
 	APTable[9].AP_ID = "hyp_sd4ft";
 	APTable[9].pFn = & fLMSD4fthyp;
+
+	APTable[10].AP_ID = "hyp_sdcf";
+	APTable[10].pFn = & fLMSDCFhyp;
 }
 
 

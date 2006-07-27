@@ -674,7 +674,7 @@ CString Hyp_SD4ft_Meta::xml_convert ()
 	xml_string = xml_string + "</ti_cedent> ";
 
 	//First set
-	xml_string = xml_string + "<ti_cedent  id=\"" + set1_id + "\"  type=\"Condition\"> ";
+	xml_string = xml_string + "<ti_cedent  id=\"" + set1_id + "\"  type=\"First set\"> ";
     for (i = 0; i < set1.GetSize (); i++)
 	{
 		if ((i == 0) || (set1.GetAt (i).quant != set1.GetAt (i - 1).quant))
@@ -692,7 +692,153 @@ CString Hyp_SD4ft_Meta::xml_convert ()
 	xml_string = xml_string + "</ti_cedent> ";
 
 	//Second set
-	xml_string = xml_string + "<ti_cedent  id=\"" + set2_id + "\"  type=\"Condition\"> ";
+	xml_string = xml_string + "<ti_cedent  id=\"" + set2_id + "\"  type=\"Second set\"> ";
+    for (i = 0; i < set2.GetSize (); i++)
+	{
+		if ((i == 0) || (set2.GetAt (i).quant != set2.GetAt (i - 1).quant))
+			xml_string = xml_string + "<ti_literal  id=\"" + set2.GetAt (i).id +
+				"\"  quant=\"" + set2.GetAt (i).quant +
+				"\"  value=\"";
+		xml_string = xml_string + set2.GetAt (i).value;
+		if ((i < set2.GetSize () - 1)
+			&&
+			(set2.GetAt (i).quant == set2.GetAt (i + 1).quant))
+			xml_string += ", ";
+		else
+			xml_string += "\"/> ";
+	}
+	xml_string = xml_string + "</ti_cedent> ";
+
+	return xml_string;
+}
+
+CString Hyp_SDCF_Meta::xml_convert ()
+{
+	CString xml_string;
+
+	db_name.Replace ("&", "&amp;");
+	matrix_name.Replace ("&", "&amp;");
+	task_name.Replace ("&", "&amp;");
+	quant.Replace ("&", "&amp;");
+
+	db_name.Replace ("<", "&lt;");
+	matrix_name.Replace ("<", "&lt;");
+	task_name.Replace ("<", "&lt;");
+	quant.Replace ("<", "&lt;");
+
+	db_name.Replace (">", "&gt;");
+	matrix_name.Replace (">", "&gt;");
+	task_name.Replace (">", "&gt;");
+	quant.Replace (">", "&gt;");
+
+	//beginning of the hyp_cf element
+	xml_string = " <hyp_sdcf id=\"" + id + "\" db_name=\"" + db_name + "\" ";
+	xml_string = xml_string + "matrix_name=\"" + matrix_name + "\" ";
+	xml_string = xml_string + "task_name=\"" + task_name + "\" ";
+	
+	xml_string = xml_string + " sum1=\"" + sum1 + "\" ";
+	xml_string = xml_string + " min1=\"" + min1 + "\" ";
+	xml_string = xml_string + " max1=\"" + max1 + "\" ";
+	xml_string = xml_string + " v1=\"" + v1 + "\" ";
+	xml_string = xml_string + " nom_var1=\"" + nom_var1 + "\" ";
+	xml_string = xml_string + " dor_var1=\"" + dor_var1 + "\" ";
+	xml_string = xml_string + " avg_a1=\"" + avg_a1 + "\" ";
+	xml_string = xml_string + " avg_g1=\"" + avg_g1 + "\" ";
+	xml_string = xml_string + " var1=\"" + var1 + "\" ";
+	xml_string = xml_string + " st_dev1=\"" + st_dev1 + "\" ";
+	xml_string = xml_string + " skew1=\"" + skew1 + "\" ";
+	xml_string = xml_string + " asym1=\"" + asym1 + "\" ";
+
+	xml_string = xml_string + " sum2=\"" + sum2 + "\" ";
+	xml_string = xml_string + " min2=\"" + min2 + "\" ";
+	xml_string = xml_string + " max2=\"" + max2 + "\" ";
+	xml_string = xml_string + " v2=\"" + v2 + "\" ";
+	xml_string = xml_string + " nom_var2=\"" + nom_var2 + "\" ";
+	xml_string = xml_string + " dor_var2=\"" + dor_var2 + "\" ";
+	xml_string = xml_string + " avg_a2=\"" + avg_a2 + "\" ";
+	xml_string = xml_string + " avg_g2=\"" + avg_g2 + "\" ";
+	xml_string = xml_string + " var2=\"" + var2 + "\" ";
+	xml_string = xml_string + " st_dev2=\"" + st_dev2 + "\" ";
+	xml_string = xml_string + " skew2=\"" + skew2 + "\" ";
+	xml_string = xml_string + " asym2=\"" + asym2 + "\" ";
+
+	xml_string = xml_string + " da_sum=\"" + da_sum + "\" ";
+	xml_string = xml_string + " da_min=\"" + da_min + "\" ";
+	xml_string = xml_string + " da_max=\"" + da_max + "\" ";
+	xml_string = xml_string + " dr_sum=\"" + dr_sum + "\" ";
+	xml_string = xml_string + " dr_min=\"" + dr_min + "\" ";
+	xml_string = xml_string + " dr_max=\"" + dr_max + "\" ";
+
+	xml_string = xml_string + " attributes=\"" + a_id + "\" ";
+	xml_string = xml_string + " condition=\"" + c_id + "\" ";
+	xml_string = xml_string + " set1=\"" + s1_id + "\" ";
+	xml_string = xml_string + " set2=\"" + s2_id + "\">";
+
+	xml_string = xml_string + " <r> ";
+
+	for (int i = 0; i < frequencies1.GetSize (); i++)
+	{
+		xml_string = xml_string + " <c val=\"" + frequencies1.GetAt (i) + "\"/> ";
+	}
+
+	xml_string = xml_string + " </r> ";
+
+	xml_string = xml_string + " <r> ";
+
+	for (i = 0; i < frequencies2.GetSize (); i++)
+	{
+		xml_string = xml_string + " <c val=\"" + frequencies2.GetAt (i) + "\"/> ";
+	}
+
+	xml_string = xml_string + " </r> ";
+
+	xml_string += " </hyp_sdcf>  ";
+	//end of hyp_sdcf element
+
+	xml_string = xml_string + " <ti_attribute id=\"" +
+		a_id + "\" quant=\"" + quant + "\" type=\"Attributes\"> ";
+	for (i = 0; i < attributes.GetSize (); i++)
+	{
+		xml_string = xml_string + " <ti_category value=\""
+			+ attributes.GetAt (i) + "\"/> ";
+	}
+	xml_string = xml_string + " </ti_attribute> ";
+
+	xml_string = xml_string + "<ti_cedent  id=\"" + c_id + "\"  type=\"Condition\"> ";
+    for (i = 0; i < condition.GetSize (); i++)
+	{
+		if ((i == 0) || (condition.GetAt (i).quant != condition.GetAt (i - 1).quant))
+			xml_string = xml_string + "<ti_literal  id=\"" + condition.GetAt (i).id +
+				"\"  quant=\"" + condition.GetAt (i).quant +
+				"\"  value=\"";
+		xml_string = xml_string + condition.GetAt (i).value;
+		if ((i < condition.GetSize () - 1)
+			&&
+			(condition.GetAt (i).quant == condition.GetAt (i + 1).quant))
+			xml_string += ", ";
+		else
+			xml_string += "\"/> ";
+	}
+	xml_string = xml_string + "</ti_cedent> ";
+
+	xml_string = xml_string + "<ti_cedent  id=\"" + s1_id + "\"  type=\"First set\"> ";
+    for (i = 0; i < set1.GetSize (); i++)
+	{
+		if ((i == 0) || (set1.GetAt (i).quant != set1.GetAt (i - 1).quant))
+			xml_string = xml_string + "<ti_literal  id=\"" + set1.GetAt (i).id +
+				"\"  quant=\"" + set1.GetAt (i).quant +
+				"\"  value=\"";
+		xml_string = xml_string + set1.GetAt (i).value;
+		if ((i < set1.GetSize () - 1)
+			&&
+			(set1.GetAt (i).quant == set1.GetAt (i + 1).quant))
+			xml_string += ", ";
+		else
+			xml_string += "\"/> ";
+	}
+	xml_string = xml_string + "</ti_cedent> ";
+
+	xml_string = xml_string + "<ti_cedent  id=\"" + s2_id + "\"  type=\"Second set\"> ";
     for (i = 0; i < set2.GetSize (); i++)
 	{
 		if ((i == 0) || (set2.GetAt (i).quant != set2.GetAt (i - 1).quant))

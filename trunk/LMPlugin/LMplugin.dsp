@@ -121,6 +121,10 @@ SOURCE=.\Hyp_SD4ft_Recordset.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\Hyp_SDCF_Recordset.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\InterfaceFunctions.cpp
 # End Source File
 # Begin Source File
@@ -213,6 +217,10 @@ SOURCE=.\tiCFFrequencyI_Recordset.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\tiDCFrequencyI_Recordset.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\tiHypothesis_Recordset.cpp
 # End Source File
 # Begin Source File
@@ -262,6 +270,10 @@ SOURCE=.\Hyp_CF_Recordset.h
 # Begin Source File
 
 SOURCE=.\Hyp_SD4ft_Recordset.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Hyp_SDCF_Recordset.h
 # End Source File
 # Begin Source File
 
@@ -358,6 +370,10 @@ SOURCE=.\TFTQuantifier_Recordset.h
 # Begin Source File
 
 SOURCE=.\tiCFFrequencyI_Recordset.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\tiDCFrequencyI_Recordset.h
 # End Source File
 # Begin Source File
 
