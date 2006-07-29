@@ -7,6 +7,8 @@
 // WaitDialog.h : header file
 //
 
+#include "WaitAnimation.h"
+
 /////////////////////////////////////////////////////////////////////////////
 // CWaitDialog dialog
 
@@ -19,7 +21,7 @@ public:
 // Dialog Data
 	//{{AFX_DATA(CWaitDialog)
 	enum { IDD = IDD_WAIT_DIALOG };
-		// NOTE: the ClassWizard will add data members here
+	CWaitAnimation	m_wait_animation;
 	//}}AFX_DATA
 
 
@@ -35,7 +37,8 @@ protected:
 
 	// Generated message map functions
 	//{{AFX_MSG(CWaitDialog)
-		// NOTE: the ClassWizard will add member functions here
+	virtual BOOL OnInitDialog();
+	afx_msg void OnTimer(UINT nIDEvent);
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };

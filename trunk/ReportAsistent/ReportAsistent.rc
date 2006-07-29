@@ -283,7 +283,8 @@ CAPTION "Wait dialog"
 FONT 8, "MS Sans Serif"
 BEGIN
     PUSHBUTTON      "Cancel",IDCANCEL,79,39,50,14
-    LTEXT           "Working...",IDC_STATIC,7,7,110,23
+    LTEXT           "Working...",IDC_STATIC,79,7,50,23
+    LTEXT           "Static",IDC_WAIT_ANIMATION,7,7,53,46
 END
 
 
@@ -402,6 +403,7 @@ BEGIN
     BEGIN
         LEFTMARGIN, 7
         RIGHTMARGIN, 129
+        VERTGUIDE, 79
         TOPMARGIN, 7
         BOTTOMMARGIN, 53
     END

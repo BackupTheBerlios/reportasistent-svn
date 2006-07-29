@@ -77,6 +77,7 @@
 #define IDC_ADD_ATTR_LINK_TABLE_BUTTON  1031
 #define IDC_CONFIGURE_ATTR_LINK_TABLE_BUTTON 1032
 #define IDC_CONFIGURE_BUTTON            1032
+#define IDC_WAIT_ANIMATION              1034
 #define ID_MMGENREP                     32771
 #define ID_MMSOURCES                    32772
 #define ID_ELEMENT_EDIT                 32780
@@ -107,7 +108,7 @@
 #define _APS_3D_CONTROLS                     1
 #define _APS_NEXT_RESOURCE_VALUE        164
 #define _APS_NEXT_COMMAND_VALUE         32784
-#define _APS_NEXT_CONTROL_VALUE         1034
+#define _APS_NEXT_CONTROL_VALUE         1035
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

@@ -185,6 +185,10 @@ SOURCE=.\TransformationsDialog.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\WaitAnimation.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\WaitDialog.cpp
 # End Source File
 # Begin Source File
@@ -290,6 +294,10 @@ SOURCE=.\StdAfx.h
 # Begin Source File
 
 SOURCE=.\TransformationsDialog.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\WaitAnimation.h
 # End Source File
 # Begin Source File
 

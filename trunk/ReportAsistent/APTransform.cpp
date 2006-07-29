@@ -381,7 +381,8 @@ void CAElTransform::FillElementAttributes(MSXML2::IXMLDOMNodePtr &output_node)
 
 #ifdef _DEBUG	
 	//ladici
-	attributes_DOM->save("../XML/fill_element_attributes_example.xml");
+	CDirectoriesManager & dm = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->DirectoriesManager;
+	attributes_DOM->save((LPCTSTR) (dm.getXMLFilesDirectory() + "/fill_element_attributes_example.xml"));
 #endif
 
 /*********/	

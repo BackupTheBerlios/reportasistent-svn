@@ -151,7 +151,8 @@ BOOL CSimpleFilterDialog::LoadSource(public_source_id_t sId)
 
 #ifdef _DEBUG	
 	//dadici - kdykoliv smazat nebo zakomentovat
-	filter_doc->save("../XML/plug_out_example.xml");
+	CDirectoriesManager & dm = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->DirectoriesManager;
+	filter_doc->save((LPCTSTR) (dm.getXMLFilesDirectory() + "/plug_out_example.xml"));
 #endif
 
 
@@ -167,7 +168,7 @@ BOOL CSimpleFilterDialog::LoadSource(public_source_id_t sId)
 	
 #ifdef _DEBUG	
 	//dadici - kdykoliv smazat nebo zakomentovat
-	filter_doc->save("../XML/simple_filter_example.xml");
+	filter_doc->save((LPCTSTR) (dm.getXMLFilesDirectory() + "/simple_filter_example.xml"));
 #endif
 
 	

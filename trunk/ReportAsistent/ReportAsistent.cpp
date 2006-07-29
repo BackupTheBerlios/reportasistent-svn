@@ -75,7 +75,7 @@ UINT TestovaciThread( LPVOID pParam )
 {
 	HWND * p_dlg_hwnd = (HWND *) pParam;
 
-	Sleep(2000);
+	Sleep(10000);
 
 	SendMessage(* p_dlg_hwnd, WM_COMMAND, IDCANCEL, 0);
 
@@ -156,7 +156,7 @@ BOOL CReportAsistentApp::InitInstance()
 
 	
 	
-/***************************************************/	
+/***************************************************/
 //dedek: ukazka pro kodyho, prijde smazat	
 	
 	CWaitDialog dlg(AfxGetMainWnd());

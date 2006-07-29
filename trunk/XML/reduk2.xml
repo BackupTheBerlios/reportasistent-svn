@@ -55,9 +55,7 @@
 		<paragraph style="Normální" id="paragraph12414"><attr_link id="attr_link1" target="" attr_name=""/>
 		</paragraph>
 	</chapter>
-	<!--
 	<include file="../XML/include_doc.doc" id="include1"/>
-	-->
 	<chapter title="Chapter2" id="chapter7732"><paragraph style="Normální" id="paragraph6361">
 			<text id="text1839">The conclusion of all the report.</text>
 		</paragraph></chapter>

@@ -138,7 +138,9 @@ void CAttributeLinkTableDialog::OnSelchangeTargetCombo()
 {
 	CString target_id;
 	m_TargetCombo.GetWindowText(target_id);
-	FillAttributesList(m_AttributesList, target_id);	
+	FillAttributesList(m_AttributesList, target_id);
+
+	m_CaptionsList.DeleteAllItems();
 }
 
 void CAttributeLinkTableDialog::OnRefreshButton() 

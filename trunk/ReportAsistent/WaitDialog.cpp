@@ -28,16 +28,33 @@ void CWaitDialog::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CWaitDialog)
-		// NOTE: the ClassWizard will add DDX and DDV calls here
+	DDX_Control(pDX, IDC_WAIT_ANIMATION, m_wait_animation);
 	//}}AFX_DATA_MAP
 }
 
 
 BEGIN_MESSAGE_MAP(CWaitDialog, CDialog)
 	//{{AFX_MSG_MAP(CWaitDialog)
-		// NOTE: the ClassWizard will add message map macros here
+	ON_WM_TIMER()
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
 // CWaitDialog message handlers
+
+BOOL CWaitDialog::OnInitDialog() 
+{
+	CDialog::OnInitDialog();
+	
+	SetTimer(1, 30, NULL);
+	
+	return TRUE;  // return TRUE unless you set the focus to a control
+	              // EXCEPTION: OCX Property Pages should return FALSE
+}
+
+void CWaitDialog::OnTimer(UINT nIDEvent) 
+{
+	m_wait_animation.RedrawWindow();
+	
+	CDialog::OnTimer(nIDEvent);
+}
