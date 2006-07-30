@@ -272,7 +272,7 @@ int CAElInfo::FindTransformationByName(LPCTSTR tr_name)
 
 
 // kody: nastaveni jazyka transformace (hodnoty promenne "lng")
-BOOL setLanguageInTransformation(MSXML2::IXMLDOMNodePtr pTransf)
+BOOL CAElInfo::setLanguageInTransformation(MSXML2::IXMLDOMNodePtr pTransf)
 {
 	
 	MSXML2::IXMLDOMElementPtr variable_element;  // element s promennou 
@@ -291,11 +291,11 @@ BOOL setLanguageInTransformation(MSXML2::IXMLDOMNodePtr pTransf)
 			
 		}
 		
-		return true;
+		return TRUE;
 	}
 	catch(...)
 	{
-		return false;
+		return FALSE;
 	}
 
 }

@@ -1,16 +1,28 @@
 Kody to deda:
 - tak u Raucha ten FE plugin nefunguje, je invalidni :-/ Ma Win XP SP1. Musime z toho nejak dostat ty knihovny...
+dedek: hmmm to bude asi narocny ladeni, ale zkusime to nejak logovat nebo hlaskovat, at aspon vime cim to je..
+
 - BUG: pri generovani se generujou pouze aktivni prvky v prvni kapitole, AP v dalsich kapitolach to ignoruje
+dedek: opraveno, problem byl v chybe v souboru reduk2.xml
+
 - nefunguje mi Copy/Paste, hazi to posloupnost hlasek vcetne jedny bez jakyhokoliv textu :-)
+dedek: pouze release verze ?!!!, taky mi to nefunguje - prace pro Ivu..
+
 - Rauch trva na tom, aby byl LM_RA "dvojjazycnej" (cesky, anglicky). Nastesti ne na urovni programu (ovladaci prvky atd)
 ale na urovni jazyka generovany analyticky zpravy. 
 -> ve vsech XSL transformacich bude definovana promenna <xsl:variable name="lng"> nabyvajici hodnot "cz" nebo "en". 
 Chtelo by to mit v LM-RA nejakej Options dialog, kde se bude tohle nastavovat a pak pred provedenim transformace
 tu promennou pripadne prenastavit. (Lepsi reseni me nenapadlo).
+dedek: ok dohodnuto zapracuje kody s moji pomoci
+
 - Rauch chce listu s nabidkou aktivnich prvku
+dedek: prace pro Ivu
 
 
 
+
+
+------------------------------------------------------------------------------------------
 Ivina poznamka - to vsichni:
 Zmenila jsem DTD - element chapter:
 puvodne: subkapitoly smi byt jen na konci nadrazene kapitoly
@@ -21,12 +33,14 @@ to Deda: problemy s copy/paste jsou uz vyreseny, tvuj napad s variaci stareho ID
 
 
 
+------------------------------------------------------------------------------------------
 dedek:
 Vytvoril jsem novou statickou metodu CReportAsistentApp::ReportError,
 pres kterou by se mely vypisovat vsecky chybove hlasky, funguje jako printf
 
 
 
+------------------------------------------------------------------------------------------
 Pro Ivu:
 
 Dalsi bug:
@@ -35,6 +49,7 @@ asi to bude chtit kontrolovat primo pokusem o zmenu id prvku v kostre a odchytav
 
 
 
+------------------------------------------------------------------------------------------
 pro vsechny ale havne pro Martina a Ivu:
 
 !!!Piste strukturovane a objektove!!!
@@ -51,36 +66,16 @@ se pak musi prepisovat v kazdem zvlast a to se mi za vas uz nejak nechce :-)
 
 
 
+------------------------------------------------------------------------------------------
 taky uz to umi Word styly - viz dialog pro attr_link
 
 
 
 
 
-chybka v copy/paste:
-kdyz dam copy na cely odstavec, ktery obsahuje dalsi prvky,
-tak potom nefunguje paste - prvkum uvnitr toho okopirovaneho odstavce se nezmeni id 
-- problem je v tom, ze kontrola id probiha pouze v ramci zobrazovaneho dokumentu 
-	a nikoliv v ramci vkladanych dat
-potom se muze stat (stava se) ze to vsem nove vlozenym elementum stejneho typu 
-	vyrobi stejne id
--navic by mozna bylo fajn, kdyz by to existujici id nenahrazovalo uplne novymi 
-	ale jen je to trochu modifikovalo
 
 
-predelal jsem svou uzasnou nahodnou funkci na generovani ID CSkeletonDoc::CreateNewID
-je tam videt jak snadno se da zjistit, jestli je dane id uz pouzite..
-(koukal jsem ze uz jsi k tomu editovani id neco psala..)
-
-
-
-
-
-
-
-
-
-
+------------------------------------------------------------------------------------------
 honzovy poznamky:
 
 
@@ -88,6 +83,7 @@ honzovy poznamky:
 
 
 
+------------------------------------------------------------------------------------------
 ve tride App je promenna m_pGeneralManager pro instance globalnich manageru
 
 pro pouziti techto manageru:
@@ -107,6 +103,7 @@ CGeneralManager * m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager;
 
 
 
+------------------------------------------------------------------------------------------
 dedek TODO:
 
 
@@ -140,6 +137,26 @@ chtelo by to nejak upozornovat na to, ze aplikace pracuje, napr. menit kurzor na
 DacourcesManager - 	pridat funci co zjisti podporovane prvky
 -hotovo
 -nemelo by se prejmenovat APID?
+
+
+
+
+------------------------------------------------------------------------------------------
+hotovo:
+chybka v copy/paste:
+kdyz dam copy na cely odstavec, ktery obsahuje dalsi prvky,
+tak potom nefunguje paste - prvkum uvnitr toho okopirovaneho odstavce se nezmeni id 
+- problem je v tom, ze kontrola id probiha pouze v ramci zobrazovaneho dokumentu 
+	a nikoliv v ramci vkladanych dat
+potom se muze stat (stava se) ze to vsem nove vlozenym elementum stejneho typu 
+	vyrobi stejne id
+-navic by mozna bylo fajn, kdyz by to existujici id nenahrazovalo uplne novymi 
+	ale jen je to trochu modifikovalo
+
+
+predelal jsem svou uzasnou nahodnou funkci na generovani ID CSkeletonDoc::CreateNewID
+je tam videt jak snadno se da zjistit, jestli je dane id uz pouzite..
+(koukal jsem ze uz jsi k tomu editovani id neco psala..)
 
 
 

@@ -38,8 +38,12 @@ struct CGeneralManager
 {
 private:
 
+//dedek: sry ale kdyz to vidim..
+/*
 	enum Languages_enum {cz, en};  // moznosti jazyku
 	Languages_enum language;		// nastaveni jazyka
+*/
+	CString m_strLanguage;
 
 public:
 
@@ -50,43 +54,22 @@ public:
 
 	CGeneralManager() : 
 		DataSourcesManager(DirectoriesManager),
-		ElementManager(DirectoriesManager)
-		{
-			language = en;
-		};
+		ElementManager(DirectoriesManager),
+		m_strLanguage("en")
+	{};
 
 	// jazyk
-		CString getLanguage()  // vrati retezec s identifikatorem jazyka
-		{
-			CString result = "";
-			switch(language)
-			{
-			case en: 
-				result = "en";
-				break;
-			default:   // defaultni cestina
-				result = "cz";
-				break;
-			
-			}
-			return result;
-		}
+	LPCTSTR getLanguage()  // vrati retezec s identifikatorem jazyka
+	{
+		return m_strLanguage;
+	};
 
-		bool setLanguage(CString & lng)
-		{
-			if(lng == "cz")
-			{
-				language = cz;
-				return true;
-			}
-			else if (lng == "en")
-			{
-				language = en;
-				return true;
-			}
+	void setLanguage(LPCTSTR lng)
+	{
+		ASSERT((lng == CString("en")) || (lng == CString("cz")));
 
-			return false;
-		}
+		m_strLanguage = lng;
+	};
 };
 
 
