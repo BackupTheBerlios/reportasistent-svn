@@ -100,6 +100,7 @@ public:
 	//{{AFX_MSG(CReportAsistentApp)
 	afx_msg void OnAppAbout();
 	afx_msg void OnMmsources();
+	afx_msg void OnFileOptions();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };

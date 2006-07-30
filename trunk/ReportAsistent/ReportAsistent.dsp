@@ -152,6 +152,10 @@ SOURCE=.\MainFrm.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\OptionsDialog.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\PropertyEditor.cpp
 # End Source File
 # Begin Source File
@@ -262,6 +266,10 @@ SOURCE=.\GenerateDialog.h
 # Begin Source File
 
 SOURCE=.\MainFrm.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\OptionsDialog.h
 # End Source File
 # Begin Source File
 

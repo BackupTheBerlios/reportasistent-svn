@@ -33,6 +33,7 @@
 #define IDR_SKELETON_DTD                160
 #define IDR_VISUALIZATION_OPTIONS_DTD   162
 #define IDD_WAIT_DIALOG                 163
+#define IDD_OPTIONS_DIALOG              164
 #define IDC_TREE1                       1000
 #define IDC_FILTER_LIST                 1000
 #define IDC_SCROLLBAR1                  1000
@@ -78,10 +79,13 @@
 #define IDC_CONFIGURE_ATTR_LINK_TABLE_BUTTON 1032
 #define IDC_CONFIGURE_BUTTON            1032
 #define IDC_WAIT_ANIMATION              1034
+#define IDC_CZECH_RADIO                 1035
+#define IDC_ENGLISH_RADIO               1036
 #define ID_MMGENREP                     32771
 #define ID_MMSOURCES                    32772
 #define ID_ELEMENT_EDIT                 32780
 #define ID_MMDELETE                     32782
+#define ID_FILE_OPTIONS                 32787
 #define ID_MMNEWSTATICFIRST             39001
 #define ID_MMNEWSTATICLAST              39009
 #define ID_MMNEWACTIVEFIRST             39010
@@ -106,9 +110,9 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
-#define _APS_NEXT_RESOURCE_VALUE        164
-#define _APS_NEXT_COMMAND_VALUE         32784
-#define _APS_NEXT_CONTROL_VALUE         1035
+#define _APS_NEXT_RESOURCE_VALUE        165
+#define _APS_NEXT_COMMAND_VALUE         32788
+#define _APS_NEXT_CONTROL_VALUE         1037
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

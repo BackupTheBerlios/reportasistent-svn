@@ -10,6 +10,8 @@
 #include "SourcesDialog.h"
 #include "PropertyEditor.h"
 #include "WaitDialog.h"
+#include "OptionsDialog.h"
+
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #undef THIS_FILE
@@ -23,6 +25,7 @@ BEGIN_MESSAGE_MAP(CReportAsistentApp, CWinApp)
 	//{{AFX_MSG_MAP(CReportAsistentApp)
 	ON_COMMAND(ID_APP_ABOUT, OnAppAbout)
 	ON_COMMAND(ID_MMSOURCES, OnMmsources)
+	ON_COMMAND(ID_FILE_OPTIONS, OnFileOptions)
 	//}}AFX_MSG_MAP
 	// Standard file based document commands
 	ON_COMMAND(ID_FILE_NEW, CWinApp::OnFileNew)
@@ -75,7 +78,7 @@ UINT TestovaciThread( LPVOID pParam )
 {
 	HWND * p_dlg_hwnd = (HWND *) pParam;
 
-	Sleep(10000);
+	Sleep(500);
 
 	SendMessage(* p_dlg_hwnd, WM_COMMAND, IDCANCEL, 0);
 
@@ -264,10 +267,19 @@ CSkeletonDoc * CReportAsistentApp::FirstDocumentInFirstTemplate()
 
 }
 
-//honza
+//dedek
 void CReportAsistentApp::OnMmsources() 
 {
 	CSourcesDialog dlg(AfxGetMainWnd());
+
+	dlg.DoModal();
+	
+}
+
+//dedek
+void CReportAsistentApp::OnFileOptions() 
+{
+	COptionsDialog dlg(AfxGetMainWnd());
 
 	dlg.DoModal();
 	

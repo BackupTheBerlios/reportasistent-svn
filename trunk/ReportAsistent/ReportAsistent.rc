@@ -287,6 +287,20 @@ BEGIN
     LTEXT           "Static",IDC_WAIT_ANIMATION,7,7,53,46
 END
 
+IDD_OPTIONS_DIALOG DIALOG DISCARDABLE  0, 0, 208, 76
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Options"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,151,7,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,151,24,50,14
+    GROUPBOX        "Output language",IDC_STATIC,7,7,119,45
+    CONTROL         "Czech",IDC_CZECH_RADIO,"Button",BS_AUTORADIOBUTTON,16,
+                    19,36,10
+    CONTROL         "English",IDC_ENGLISH_RADIO,"Button",BS_AUTORADIOBUTTON,
+                    16,33,39,10
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -407,6 +421,15 @@ BEGIN
         TOPMARGIN, 7
         BOTTOMMARGIN, 53
     END
+
+    IDD_OPTIONS_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 201
+        VERTGUIDE, 16
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 69
+    END
 END
 #endif    // APSTUDIO_INVOKED
 
@@ -476,6 +499,8 @@ BEGIN
         MENUITEM SEPARATOR
         MENUITEM "&Generate report...\tCtrl+G", ID_MMGENREP
         MENUITEM SEPARATOR
+        MENUITEM "O&ptions...\tCtrl+P",         ID_FILE_OPTIONS
+        MENUITEM SEPARATOR
         MENUITEM "E&xit",                       ID_APP_EXIT
     END
     POPUP "&Edit"
@@ -519,6 +544,7 @@ BEGIN
     "G",            ID_MMGENREP,            VIRTKEY, CONTROL, NOINVERT
     "N",            ID_FILE_NEW,            VIRTKEY, CONTROL, NOINVERT
     "O",            ID_FILE_OPEN,           VIRTKEY, CONTROL, NOINVERT
+    "P",            ID_FILE_OPTIONS,        VIRTKEY, CONTROL, NOINVERT
     "S",            ID_FILE_SAVE,           VIRTKEY, CONTROL, NOINVERT
     "V",            ID_EDIT_PASTE,          VIRTKEY, CONTROL, NOINVERT
     VK_BACK,        ID_EDIT_UNDO,           VIRTKEY, ALT, NOINVERT
@@ -725,6 +751,11 @@ BEGIN
     IDS_TR_OPTIONS_ERROR    "Error in transformation ""%s"" options definition.\nDescription: %s"
     IDS_WRONG_ELEMENT_TRANSFORMATION 
                             "Transformation ""%s"" of active element ""%s"" not found.\nProcessed active element id: %s"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_FILE_OPTIONS         "Show options dilaog"
 END
 
 #endif    // English (U.S.) resources

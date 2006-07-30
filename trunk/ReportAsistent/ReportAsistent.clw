@@ -2,52 +2,54 @@
 
 [General Info]
 Version=1
-LastClass=CWordEventHandler
-LastTemplate=CCmdTarget
+LastClass=COptionsDialog
+LastTemplate=CDialog
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "ReportAsistent.h"
 LastPage=0
 
-ClassCount=21
+ClassCount=22
 Class1=CReportAsistentApp
 Class2=CSkeletonDoc
 Class3=CSkeletonView
 Class4=CMainFrame
 
-ResourceCount=16
+ResourceCount=17
 Resource1=IDD_ABOUTBOX
 Resource2=IDR_MAINFRAME
 Class5=CAboutDlg
-Resource3=IDD_ATTRIBUTE_LINK_TABLE_DIALOG (English (U.S.))
-Resource4=IDD_ACTIVE_ELEMENT_DIALOG (English (U.S.))
+Resource3=IDD_ATTRIBUTE_LINK_DIALOG (English (U.S.))
+Resource4=IDD_GENERATE_DIALOG (English (U.S.))
 Class6=CElementTextDialog
-Resource5=IDD_WAIT_DIALOG (English (U.S.))
+Resource5=IDD_DIALOGTEXT (English (U.S.))
 Class7=CSimpleFilterDialog
-Resource6=IDD_ATTRIBUTE_LINK_DIALOG (English (U.S.))
+Resource6=IDD_SOURCES_DIALOG (English (U.S.))
 Class8=CGenerateDialog
-Resource7=IDD_DIALOGTEXT (English (U.S.))
+Resource7=IDD_DIALOG_CHAPTER (English (U.S.))
 Class9=CSourcesDialog
-Resource8=IDD_TRANSFORMATIONS_DIALOG (English (U.S.))
+Resource8=IDD_SIMPLE_FILTER_DIALOG (English (U.S.))
 Class10=CActiveElementDialog
-Resource9=IDD_DIALOG_PARAGRAPH (English (U.S.))
+Resource9=IDD_ACTIVE_ELEMENT_DIALOG (English (U.S.))
 Class11=CTransformationsDialog
 Class12=Tcategory_Recordset
-Resource10=IDD_SIMPLE_FILTER_DIALOG (English (U.S.))
+Resource10=IDD_ATTRIBUTE_LINK_TABLE_DIALOG (English (U.S.))
 Class13=CAttributeLinkDialog
-Resource11=IDD_ABOUTBOX (English (U.S.))
+Resource11=IDD_PROPERTY_EDITOR (English (U.S.))
 Class14=CAttributeLinkTableDialog
-Resource12=IDD_GENERATE_DIALOG (English (U.S.))
+Resource12=IDD_OPTIONS_DIALOG (English (U.S.))
 Class15=CElementParagraphDialog
 Class16=CElementChapterDialog
 Class17=CElementDialogBase
 Class18=CPropertyEditor
-Resource13=IDD_PROPERTY_EDITOR (English (U.S.))
-Resource14=IDD_DIALOG_CHAPTER (English (U.S.))
+Resource13=IDD_TRANSFORMATIONS_DIALOG (English (U.S.))
+Resource14=IDD_DIALOG_PARAGRAPH (English (U.S.))
 Class19=CWaitDialog
-Resource15=IDD_SOURCES_DIALOG (English (U.S.))
+Resource15=IDD_ABOUTBOX (English (U.S.))
 Class20=CWaitAnimation
 Class21=CWordEventHandler
-Resource16=IDR_MAINFRAME (English (U.S.))
+Resource16=IDD_WAIT_DIALOG (English (U.S.))
+Class22=COptionsDialog
+Resource17=IDR_MAINFRAME (English (U.S.))
 
 [CLS:CReportAsistentApp]
 Type=0
@@ -163,18 +165,19 @@ Command3=ID_FILE_SAVE
 Command4=ID_FILE_SAVE_AS
 Command5=ID_FILE_MRU_FILE1
 Command6=ID_MMGENREP
-Command7=ID_APP_EXIT
-Command8=ID_EDIT_UNDO
-Command9=ID_EDIT_CUT
-Command10=ID_EDIT_COPY
-Command11=ID_EDIT_PASTE
-Command12=ID_MMDELETE
-Command13=ID_MMNEWSTATICFIRST
-Command14=ID_VIEW_TOOLBAR
-Command15=ID_VIEW_STATUS_BAR
-Command16=ID_MMSOURCES
-Command17=ID_APP_ABOUT
-CommandCount=17
+Command7=ID_FILE_OPTIONS
+Command8=ID_APP_EXIT
+Command9=ID_EDIT_UNDO
+Command10=ID_EDIT_CUT
+Command11=ID_EDIT_COPY
+Command12=ID_EDIT_PASTE
+Command13=ID_MMDELETE
+Command14=ID_MMNEWSTATICFIRST
+Command15=ID_VIEW_TOOLBAR
+Command16=ID_VIEW_STATUS_BAR
+Command17=ID_MMSOURCES
+Command18=ID_APP_ABOUT
+CommandCount=18
 
 [ACL:IDR_MAINFRAME (English (U.S.))]
 Type=1
@@ -183,19 +186,20 @@ Command1=ID_EDIT_COPY
 Command2=ID_MMGENREP
 Command3=ID_FILE_NEW
 Command4=ID_FILE_OPEN
-Command5=ID_FILE_SAVE
-Command6=ID_EDIT_PASTE
-Command7=ID_EDIT_UNDO
-Command8=ID_MMDELETE
-Command9=ID_EDIT_CUT
-Command10=ID_NEXT_PANE
-Command11=ID_PREV_PANE
-Command12=ID_EDIT_COPY
-Command13=ID_EDIT_PASTE
-Command14=ID_ELEMENT_EDIT
-Command15=ID_EDIT_CUT
-Command16=ID_EDIT_UNDO
-CommandCount=16
+Command5=ID_FILE_OPTIONS
+Command6=ID_FILE_SAVE
+Command7=ID_EDIT_PASTE
+Command8=ID_EDIT_UNDO
+Command9=ID_MMDELETE
+Command10=ID_EDIT_CUT
+Command11=ID_NEXT_PANE
+Command12=ID_PREV_PANE
+Command13=ID_EDIT_COPY
+Command14=ID_EDIT_PASTE
+Command15=ID_ELEMENT_EDIT
+Command16=ID_EDIT_CUT
+Command17=ID_EDIT_UNDO
+CommandCount=17
 
 [DLG:IDD_ABOUTBOX (English (U.S.))]
 Type=1
@@ -1856,5 +1860,23 @@ ImplementationFile=WordEventHandler.cpp
 BaseClass=CCmdTarget
 Filter=N
 VirtualFilter=C
-LastObject=CWordEventHandler
+LastObject=IDC_CZECH_RADIO
+
+[DLG:IDD_OPTIONS_DIALOG (English (U.S.))]
+Type=1
+Class=COptionsDialog
+ControlCount=5
+Control1=IDOK,button,1342242817
+Control2=IDCANCEL,button,1342242816
+Control3=IDC_STATIC,button,1342177287
+Control4=IDC_CZECH_RADIO,button,1342177289
+Control5=IDC_ENGLISH_RADIO,button,1342177289
+
+[CLS:COptionsDialog]
+Type=0
+HeaderFile=OptionsDialog.h
+ImplementationFile=OptionsDialog.cpp
+BaseClass=CDialog
+Filter=D
+VirtualFilter=dWC
 
