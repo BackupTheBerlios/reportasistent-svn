@@ -5,6 +5,7 @@
 #if !defined(AFX_WORDMANAGER_H__2A5B5F90_FAA9_46F2_BC25_BE144CE6ADF6__INCLUDED_)
 #define AFX_WORDMANAGER_H__2A5B5F90_FAA9_46F2_BC25_BE144CE6ADF6__INCLUDED_
 
+#include "WordEventHandler.h"	// Added by ClassView
 #if _MSC_VER > 1000
 #pragma once
 #endif // _MSC_VER > 1000
@@ -51,12 +52,16 @@ public:
 	CStringTable & getWordCharacterStyles() { return m_WordCharacterStyles; };
 
 private:
+	DWORD m_dwEventHandlerCookie;
+	CWordEventHandler * m_pEventHandler;
 	_LMRA_XML_WordLoaderPtr m_WordLoader;
 
 	CStringTableImpl m_WordTemplates;
 	CStringTableImpl m_WordParagraphStyles;
 	CStringTableImpl m_WordCharacterStyles;
 protected:
+	void DisconnectWordEventHandler();
+	BOOL InitWordEventHandler();
 	void LoadParagraphStyles(LPCTSTR template_name);
 	void LoadCharacterStyles(LPCTSTR template_name);
 	BOOL isInit();

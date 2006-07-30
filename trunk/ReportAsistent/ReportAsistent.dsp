@@ -193,6 +193,10 @@ SOURCE=.\WaitDialog.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\WordEventHandler.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\WordManager.cpp
 # End Source File
 # End Group
@@ -302,6 +306,10 @@ SOURCE=.\WaitAnimation.h
 # Begin Source File
 
 SOURCE=.\WaitDialog.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\WordEventHandler.h
 # End Source File
 # Begin Source File
 

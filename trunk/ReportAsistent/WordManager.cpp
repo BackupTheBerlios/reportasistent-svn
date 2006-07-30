@@ -127,6 +127,7 @@ void CWordManager::LoadWordTemplates()
 
 
 CWordManager::CWordManager()
+: m_pEventHandler(NULL)
 {
 	//ladici:
 	//LoadWordTemplates();
@@ -136,7 +137,11 @@ CWordManager::CWordManager()
 
 CWordManager::~CWordManager()
 {
-	if (m_WordLoader != NULL) m_WordLoader.Release();
+	if (m_WordLoader != NULL) 
+	{
+		DisconnectWordEventHandler();
+		m_WordLoader.Release();
+	}
 }
 
 BOOL CWordManager::InitWordLoader()
@@ -185,7 +190,7 @@ BOOL CWordManager::InitWordLoader()
 		}
 	}
 
-	return TRUE;
+	return InitWordEventHandler();
 }
 
 BOOL CWordManager::isInit()
@@ -273,4 +278,32 @@ void CWordManager::GenerateXMLString(_bstr_t XML_str)
 	}
 
 	m_WordLoader->LoadFromString(XML_str);
+}
+
+BOOL CWordManager::InitWordEventHandler()
+{
+	m_pEventHandler = new CWordEventHandler();
+
+	LPUNKNOWN p_unk = m_pEventHandler->GetIDispatch(FALSE);
+
+	if (AfxConnectionAdvise(m_WordLoader.GetInterfacePtr(), 
+			DIID___LMRA_XML_WordLoader, p_unk, FALSE, & m_dwEventHandlerCookie))
+		return TRUE;
+	else
+		return FALSE;
+}
+
+void CWordManager::DisconnectWordEventHandler()
+{
+	LPUNKNOWN p_unk = m_pEventHandler->GetIDispatch(FALSE);
+
+	AfxConnectionUnadvise(m_WordLoader.GetInterfacePtr(), 
+			DIID___LMRA_XML_WordLoader, p_unk, FALSE, m_dwEventHandlerCookie);
+
+	
+	if(m_pEventHandler != NULL)
+	{
+		delete m_pEventHandler;
+		m_pEventHandler = NULL;
+	}
 }

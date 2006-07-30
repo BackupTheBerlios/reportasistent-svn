@@ -11,9 +11,15 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = True
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = True
+Option Explicit
+
 Dim mstrLastId As String
 Dim mstrLastError As String
 Dim mWordForInfo As Word.Application
+
+Public Event HonzaEvent(ByVal name As String)
+
+
 
 Public Property Get strLastProcessedId() As String
     strLastProcessedId = mstrLastId
@@ -47,7 +53,7 @@ Public Function EnumTemplates() As String()
     
     n = 0
     For Each t In mWordForInfo.Templates
-        ret(n) = t.Name
+        ret(n) = t.name
         n = n + 1
     Next t
     
@@ -179,6 +185,9 @@ Public Function LoadFromString(ByVal strXMLSource As String)
     Dim errorHandler As New ErrorHandlerImpl     'Receive error events
     Dim word_loader As New WordLoader
     
+    
+
+    
     Set contentHandler.word_loader = word_loader
     Set contentHandler.LMRA_loader = Me
     Set errorHandler.LMRA_loader = Me
@@ -204,6 +213,7 @@ Public Function LoadFromString(ByVal strXMLSource As String)
     
 '    LoadFromFile = contentHandler.strOutput
 
+    RaiseEvent HonzaEvent("DDccDDkonec*")
 
 End Function
 
@@ -236,6 +246,8 @@ Public Function LoadFromFile(ByVal strFileName As String) As String
     reader.parseURL (strFileName)           'Parse the document
     
     LoadFromFile = contentHandler.strOutput
+    
+'    RaiseEvent HonzaEvent("DDccDDkonec*")
 
 End Function
 
