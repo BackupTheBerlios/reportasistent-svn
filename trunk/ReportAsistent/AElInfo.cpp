@@ -6,6 +6,8 @@
 #include "ReportAsistent.h"
 #include "AElInfo.h"
 
+
+
 #ifdef _DEBUG
 #undef THIS_FILE
 static char THIS_FILE[]=__FILE__;
@@ -107,8 +109,13 @@ BOOL CAElInfo::LoadFromDir(LPCTSTR dir_path)
 
 }
 
+
+
 MSXML2::IXMLDOMNodePtr CAElInfo::getFillElementAttributesTransformation()
 {
+	// kody: nastaveni jazyka transformace
+	setLanguageInTransformation(pFillElementAttributesDOM);
+	
 	return pFillElementAttributesDOM;
 }
 
@@ -258,5 +265,41 @@ int CAElInfo::FindTransformationByName(LPCTSTR tr_name)
 	return -1;
 }
 
+
+// -------------
+// kody: nazev xsl:variable v transformaci s nastavenim jazyka ("cz"= cesky, "en"= anglicky)
+#define _LANGUAGE_VAR_NAME "lng"
+
+
+// kody: nastaveni jazyka transformace (hodnoty promenne "lng")
+BOOL setLanguageInTransformation(MSXML2::IXMLDOMNodePtr pTransf)
+{
+	
+	MSXML2::IXMLDOMElementPtr variable_element;  // element s promennou 
+
+	CString variable_qury_str;
+	variable_qury_str.Format("/xsl:stylesheet/xsl:variable[@name=\'%s\']", (LPCTSTR) _LANGUAGE_VAR_NAME);
+	try
+	{
+		variable_element = pTransf->selectSingleNode((LPCTSTR) variable_qury_str);
+
+		if (variable_element != NULL)
+		{
+			variable_element->text = (_bstr_t) ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->getLanguage();
+		
+			variable_element.Release();
+			
+		}
+		
+		return true;
+	}
+	catch(...)
+	{
+		return false;
+	}
+
+}
+
+// -------------
 
 
