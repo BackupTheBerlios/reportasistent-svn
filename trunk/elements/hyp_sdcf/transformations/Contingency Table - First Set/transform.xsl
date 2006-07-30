@@ -135,7 +135,7 @@
 							
 							<xsl:if test="$SumShow='true'">
 								<td id="{$id_base}r1d_sum">
-									<text id="{$id_base}r1d_sum_text">sum of values</text> 
+									<text id="{$id_base}r1d_sum_text">?</text> 
 								</td>
 							</xsl:if>
 						</tr>
@@ -238,7 +238,7 @@
 						<xsl:if test="$SumShow='true'">
 							<tr id="{$id_base}r_sum">
 								<td id="{$id_base}r_sum_d1">
-									<text id="{$id_base}r_sum_d1text">sum of values</text>
+									<text id="{$id_base}r_sum_d1text">?</text>
 								</td>
 								
 								<td id="{$id_base}r_sum_d2">
@@ -262,7 +262,7 @@
 			<xsl:if test="$ShowLegend='true'">
 				<text>
 					<br/>
-					<xsl:text>Attribute name:</xsl:text>
+					<xsl:text>Attribute:</xsl:text>
 					<tab/>
 					<xsl:value-of select="key('key_ti_attribute',@attributes)/@quant" />
 					<br/>

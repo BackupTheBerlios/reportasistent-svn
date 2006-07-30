@@ -108,7 +108,9 @@ void CAttributeLinkDialog::OnOK()
 	if (pos != NULL)
 	{
 		int nItem = m_AttributesList.GetNextSelectedItem(pos);
-		s = m_AttributesList.GetItemText(nItem, ATTRLIST_CL_NAME);
+		// kody
+		//s = m_AttributesList.GetItemText(nItem, ATTRLIST_CL_NAME);
+		s = * (CString*) m_AttributesList.GetItemData(nItem);
 	}
 	m_edited_element->setAttribute("attr_name", (LPCTSTR) s);
 

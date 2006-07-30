@@ -8,62 +8,204 @@
     <!-- definovani klice - dulezite kvuli hledani elementu s danym ID v celem dokumentu -->
     <xsl:key name="attribute_id" match="ti_attribute" use="@id" />
     
-          
+    <!-- nastaveni jazyka (defaultne cz) -->
+	<xsl:variable name="lng">cz</xsl:variable>
+
+    
+        
 	
 	<xsl:template match="hyp_cf">
-				<xsl:text disable-output-escaping="yes">
-				</xsl:text>
+				
 				<element_attributes>
 				
 		
-				<!-- vygenerovani atributu -->
+					<!-- vygenerovani atributu -->
 				
-				<xsl:apply-templates select="@*"/>
+					<xsl:apply-templates select="@*"/>
 
-				<!-- vygenerovani hodnot kontingencni tabulky -->
+					
+					
+					<!-- vygenerovani hodnot kontingencni tabulky -->
 				
 				
-				<xsl:variable name="kategorie" >	
-					<xsl:value-of select="@attributes" />
-				</xsl:variable>
+					<xsl:variable name="kategorie" >	
+						<xsl:value-of select="@attributes" />
+					</xsl:variable>
 				
 				
 				
 				
 				   
-				   <xsl:for-each select="r/c">  <!-- cyklus pres polozky radku-->
+				    <xsl:for-each select="r/c">  <!-- cyklus pres polozky radku-->
 				   		<xsl:variable name="cislo_sloupce" select="position()" />
 				   		<xsl:variable name="jmeno" >
 				   				<xsl:text>Tab(</xsl:text>
 				   				<xsl:value-of select="key('attribute_id' , $kategorie)/ti_category[$cislo_sloupce]/@value" />
 				   				<xsl:text>)</xsl:text>
 				   		</xsl:variable>
-				   		
-				   		<xsl:text disable-output-escaping="yes">
-					</xsl:text>
-		
+				   	
 		
 						<attribute name="{$jmeno}" value="{@val}" />
 				   
-				   </xsl:for-each>
+				    </xsl:for-each>
 				   
-
-				<xsl:text disable-output-escaping="yes">
-				</xsl:text>
 				</element_attributes>
 	</xsl:template>
 
 
 	
+	
+	
+	
+	
+	
+	
+	
+	
 	<!-- vypise vsechny atributy krome cedentu-->
 	
 	<xsl:template match="@*">
 	
-					<xsl:text disable-output-escaping="yes">
-					</xsl:text>
-		
-		
-					<attribute name="{name()}" value="{.}" />
+	
+		<!-- labely polozek-->
+		<xsl:variable name="label">
+			<xsl:choose>
+			
+				<!-- nezavisle na jazyce -->
+				
+				<xsl:when test="name()='sum'">
+					<xsl:text>Sum</xsl:text>
+				</xsl:when>
+							
+				<xsl:when test="name()='min'">
+					<xsl:text>Min</xsl:text>
+				</xsl:when>
+							
+				<xsl:when test="name()='max'">
+					<xsl:text>Max</xsl:text>
+				</xsl:when>
+						
+				<xsl:when test="name()='v'">
+					<xsl:text>Variation ratio : 1-f(modal) </xsl:text>
+				</xsl:when>
+						
+				<xsl:when test="name()='nom_var'">
+					<xsl:text>Nominal variation : suma(f(i)*(1-f(i))) * K/(K-1) </xsl:text>
+				</xsl:when>
+							
+				<xsl:when test="name()='dor_var'">
+					<xsl:text>Discrete ordinary variation : 2*suma(F(i)*(1-F(i))* 2/(K-1)</xsl:text>
+				</xsl:when>
+							
+				
+				
+				
+				<!-- cesky -->
+				
+				<xsl:when test="$lng='cz'">    
+						<xsl:choose>
+							<xsl:when test="name()='db_name'">
+								<xsl:text>Databáze</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='matrix_name'">
+								<xsl:text>Datová matice</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='task_name'">
+								<xsl:text>Jméno úlohy</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='avg_a'">
+								<xsl:text>Aritmetický prùmìr kardinálních hodnot</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='avg_g'">
+								<xsl:text>Geometrický prùmìr kardinálních hodnot</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='var'">
+								<xsl:text>Variance kardinálních hodnot</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='st_dev'">
+								<xsl:text>Standardní deviace kardinálních hodnot</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='skew'">
+								<xsl:text>Skewness (šikmost) kardinálních hodnot</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='asym'">
+								<xsl:text>Koeficient asymetrie kardinálních hodnot</xsl:text>
+							</xsl:when>
+							
+							<xsl:otherwise>
+								<xsl:value-of select="name()"/>
+							</xsl:otherwise>
+						</xsl:choose>
+				</xsl:when>
+				
+				
+				<!-- english-->
+				
+				<xsl:when test="$lng='en'">	
+						<xsl:choose>
+							<xsl:when test="name()='db_name'">
+								<xsl:text>Database</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='matrix_name'">
+								<xsl:text>Data matrix</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='task_name'">
+								<xsl:text>Task name</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='avg_a'">
+								<xsl:text>Arithmetic average of cardinal values</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='avg_g'">
+								<xsl:text>Geometric average of cardinal values</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='var'">
+								<xsl:text>Variance of cardinal values</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='st_dev'">
+								<xsl:text>Standard deviation of cardinal values</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='skew'">
+								<xsl:text>Skewness of cardinal values</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='asym'">
+								<xsl:text>Asymetry coeficient of cardinal values</xsl:text>
+							</xsl:when>
+							
+							<xsl:otherwise>
+								<xsl:value-of select="name()"/>
+							</xsl:otherwise>
+						</xsl:choose>	
+				</xsl:when>
+				
+				<!-- jinak se pouzije nazev XML atributu-->
+				
+				<xsl:otherwise>
+					<xsl:value-of select="name()"/>
+				</xsl:otherwise>
+				
+			</xsl:choose>
+		</xsl:variable>
+			<!-- end of: labely polozek-->
+	
+	
+					<attribute name="{name()}" value="{.}" label="{$label}" />
+					
 	</xsl:template>
 	
 	

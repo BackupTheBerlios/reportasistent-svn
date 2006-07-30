@@ -1,3 +1,16 @@
+Kody to deda:
+- tak u Raucha ten FE plugin nefunguje, je invalidni :-/ Ma Win XP SP1. Musime z toho nejak dostat ty knihovny...
+- BUG: pri generovani se generujou pouze aktivni prvky v prvni kapitole, AP v dalsich kapitolach to ignoruje
+- nefunguje mi Copy/Paste, hazi to posloupnost hlasek vcetne jedny bez jakyhokoliv textu :-)
+- Rauch trva na tom, aby byl LM_RA "dvojjazycnej" (cesky, anglicky). Nastesti ne na urovni programu (ovladaci prvky atd)
+ale na urovni jazyka generovany analyticky zpravy. 
+-> ve vsech XSL transformacich bude definovana promenna <xsl:variable name="lng"> nabyvajici hodnot "cz" nebo "en". 
+Chtelo by to mit v LM-RA nejakej Options dialog, kde se bude tohle nastavovat a pak pred provedenim transformace
+tu promennou pripadne prenastavit. (Lepsi reseni me nenapadlo).
+- Rauch chce listu s nabidkou aktivnich prvku
+
+
+
 Ivina poznamka - to vsichni:
 Zmenila jsem DTD - element chapter:
 puvodne: subkapitoly smi byt jen na konci nadrazene kapitoly

@@ -36,7 +36,13 @@
 //konstruuje se v inti instance a nici v Exit instance
 struct CGeneralManager
 {
+private:
+
+	enum Languages_enum {cz, en};  // moznosti jazyku
+	Languages_enum language;		// nastaveni jazyka
+
 public:
+
 	CDirectoriesManager DirectoriesManager;
 	CElementManager ElementManager;
 	CDataSourcesManager DataSourcesManager;
@@ -45,7 +51,42 @@ public:
 	CGeneralManager() : 
 		DataSourcesManager(DirectoriesManager),
 		ElementManager(DirectoriesManager)
-			{};
+		{
+			language = en;
+		};
+
+	// jazyk
+		CString getLanguage()  // vrati retezec s identifikatorem jazyka
+		{
+			CString result = "";
+			switch(language)
+			{
+			case en: 
+				result = "en";
+				break;
+			default:   // defaultni cestina
+				result = "cz";
+				break;
+			
+			}
+			return result;
+		}
+
+		bool setLanguage(CString & lng)
+		{
+			if(lng == "cz")
+			{
+				language = cz;
+				return true;
+			}
+			else if (lng == "en")
+			{
+				language = en;
+				return true;
+			}
+
+			return false;
+		}
 };
 
 

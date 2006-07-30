@@ -42,7 +42,27 @@
 <xsl:variable name="TypeOfValues">Absolute</xsl:variable>
 <xsl:variable name="BorderGrey">true</xsl:variable>
 
-      
+
+<!-- nastaveni jazyka (defaultne cestina)-->
+<xsl:variable name="lng">cz</xsl:variable>
+
+
+
+<!-- nastaveni jazykovych popisku (labelu) -->
+<xsl:variable name="label_sum">   <!-- label v tabulce v kolonkach souctu-->
+	<xsl:choose>
+	
+		<xsl:when test="$lng='cz'">souèet</xsl:when>
+		<xsl:when test="$lng='en'">sum</xsl:when>
+		<xsl:otherwise>sum</xsl:otherwise>
+		
+	</xsl:choose>
+</xsl:variable>
+
+
+
+<!-- TEMPLATES-->      
+
 
 	<xsl:template match="hyp_4ft">
 
@@ -204,7 +224,7 @@
 					</td>
 					<xsl:if test="$SumShow='true'">
 						<td id="{$id_base}r1d4" bgcolor="{$border_color}">
-							<text id="{$id_base}r1d4text">sum of values</text> 
+							<text id="{$id_base}r1d4text"><xsl:value-of select="$label_sum"/></text> 
 						</td>
 					</xsl:if>
 				</tr>
@@ -291,7 +311,7 @@
 				<xsl:if test="$SumShow='true'">
 					<tr id="{$id_base}r4">
 						<td id="{$id_base}r4d1" bgcolor="{$border_color}">
-							<text id="{$id_base}r4d1text">sum of values</text> 
+							<text id="{$id_base}r4d1text"><xsl:value-of select="$label_sum"/></text> 
 						</td>
 						
 						<xsl:element name="td">

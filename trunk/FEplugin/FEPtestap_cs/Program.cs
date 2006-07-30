@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 using System.Collections;
+using System.Xml;
 using FEplugin_cs;
 using System.Windows.Forms;
 using System.Reflection;
@@ -19,6 +20,8 @@ namespace FEPtestap_cs
             //DirManager.SetHomeFerdaFrontEnd_dir();
             //Directory.SetCurrentDirectory(@"c:\FerdaDataminer\FrontEnd");
 
+            // zkouska XML
+            //XMLzkus.zkus();
 
             if (!FEplugin_init.initialize())
                 return;
@@ -34,7 +37,7 @@ namespace FEPtestap_cs
             {
                 //CFEsource src2 = new CFEsource(@"c:\Documents and Settings\Honza\Dokumenty\Barbora1.xfp");
                 //index1 = CFEsourcesTab.NewSource(@"c:\Documents and Settings\Honza\Dokumenty\FERDA_CABG.xfp");
-                index1 = CFEsourcesTab.NewSource(@"D:\Projekt\Vyvoj\ReportAsistent\FEProjects\Barbora1.xfp");
+                index1 = CFEsourcesTab.NewSource(@"G:\Projekt\Vyvoj\ReportAsistent\FEProjects\Barbora1.xfp");
                 //index2 = CFEsourcesTab.NewSource(@"c:\Documents and Settings\Honza\Dokumenty\FERDA_CABG.xfp");
             }
             catch (System.Exception e)
@@ -55,6 +58,7 @@ namespace FEPtestap_cs
             BoxesHelper.VypisKrabky(0, "LISpMinerTasks.FFTTask");
             AP_FEferda_box.getList(0);
             //AP_FECF_cedent.getList(0);
+            Console.WriteLine("\n\nKONEC");
         }
 
         //public static string OtevriSoubor()
@@ -70,5 +74,36 @@ namespace FEPtestap_cs
         //        return ofd.FileName;
         //    return ofd.FileName;
         //}
+    }
+
+    public class XMLzkus
+    {
+        public static void zkus()
+        {
+            string path = @"d:\xml2.xml";
+            XmlDocument doc = new XmlDocument();
+
+            doc.Load(path);
+
+            // nalezeni  nejmspejsu elementu BoxesLocalization
+            XmlNode atr = doc.SelectSingleNode("/BoxesLocalization");
+            //string URI = atr.NamespaceURI;
+
+            XmlNamespaceManager NSM = new XmlNamespaceManager(doc.NameTable);
+
+            NSM.AddNamespace("ns", @"http://ferda.is-a-geek.net");
+
+            string query = "/ns:BoxesLocalization/ns:BoxLocalization[ns:Identifier='DataMiningCommon.DerivedColumn']/ns:Label";
+
+            XmlNodeList l = doc.SelectNodes(query,NSM);
+            if (l.Count > 0)
+            {
+                foreach (XmlNode n in l)
+                {
+                    Console.WriteLine("\n\n");
+                    Console.Write(n.InnerText);
+                }
+            }
+        }
     }
 }

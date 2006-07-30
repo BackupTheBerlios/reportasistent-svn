@@ -18,62 +18,6 @@
             <Y>326</Y>
           </Position>
         </PositionSet>
-        <PositionSet>
-          <BoxProjectIdentifier>7</BoxProjectIdentifier>
-          <Position>
-            <X>380</X>
-            <Y>326</Y>
-          </Position>
-        </PositionSet>
-        <PositionSet>
-          <BoxProjectIdentifier>8</BoxProjectIdentifier>
-          <Position>
-            <X>520</X>
-            <Y>326</Y>
-          </Position>
-        </PositionSet>
-        <PositionSet>
-          <BoxProjectIdentifier>9</BoxProjectIdentifier>
-          <Position>
-            <X>520</X>
-            <Y>386</Y>
-          </Position>
-        </PositionSet>
-        <PositionSet>
-          <BoxProjectIdentifier>10</BoxProjectIdentifier>
-          <Position>
-            <X>520</X>
-            <Y>266</Y>
-          </Position>
-        </PositionSet>
-        <PositionSet>
-          <BoxProjectIdentifier>11</BoxProjectIdentifier>
-          <Position>
-            <X>390</X>
-            <Y>480</Y>
-          </Position>
-        </PositionSet>
-        <PositionSet>
-          <BoxProjectIdentifier>12</BoxProjectIdentifier>
-          <Position>
-            <X>530</X>
-            <Y>480</Y>
-          </Position>
-        </PositionSet>
-        <PositionSet>
-          <BoxProjectIdentifier>13</BoxProjectIdentifier>
-          <Position>
-            <X>402</X>
-            <Y>629</Y>
-          </Position>
-        </PositionSet>
-        <PositionSet>
-          <BoxProjectIdentifier>14</BoxProjectIdentifier>
-          <Position>
-            <X>542</X>
-            <Y>629</Y>
-          </Position>
-        </PositionSet>
       </PositionSets>
     </View>
     <View>
@@ -100,54 +44,228 @@
             <Y>123</Y>
           </Position>
         </PositionSet>
+        <PositionSet>
+          <BoxProjectIdentifier>26</BoxProjectIdentifier>
+          <Position>
+            <X>250</X>
+            <Y>183</Y>
+          </Position>
+        </PositionSet>
+        <PositionSet>
+          <BoxProjectIdentifier>28</BoxProjectIdentifier>
+          <Position>
+            <X>390</X>
+            <Y>183</Y>
+          </Position>
+        </PositionSet>
+        <PositionSet>
+          <BoxProjectIdentifier>29</BoxProjectIdentifier>
+          <Position>
+            <X>250</X>
+            <Y>63</Y>
+          </Position>
+        </PositionSet>
+        <PositionSet>
+          <BoxProjectIdentifier>30</BoxProjectIdentifier>
+          <Position>
+            <X>390</X>
+            <Y>63</Y>
+          </Position>
+        </PositionSet>
+        <PositionSet>
+          <BoxProjectIdentifier>31</BoxProjectIdentifier>
+          <Position>
+            <X>252</X>
+            <Y>372</Y>
+          </Position>
+        </PositionSet>
+        <PositionSet>
+          <BoxProjectIdentifier>32</BoxProjectIdentifier>
+          <Position>
+            <X>374</X>
+            <Y>369</Y>
+          </Position>
+        </PositionSet>
+        <PositionSet>
+          <BoxProjectIdentifier>33</BoxProjectIdentifier>
+          <Position>
+            <X>244</X>
+            <Y>496</Y>
+          </Position>
+        </PositionSet>
+        <PositionSet>
+          <BoxProjectIdentifier>34</BoxProjectIdentifier>
+          <Position>
+            <X>378</X>
+            <Y>494</Y>
+          </Position>
+        </PositionSet>
+        <PositionSet>
+          <BoxProjectIdentifier>35</BoxProjectIdentifier>
+          <Position>
+            <X>242</X>
+            <Y>560</Y>
+          </Position>
+        </PositionSet>
+        <PositionSet>
+          <BoxProjectIdentifier>36</BoxProjectIdentifier>
+          <Position>
+            <X>382</X>
+            <Y>560</Y>
+          </Position>
+        </PositionSet>
+        <PositionSet>
+          <BoxProjectIdentifier>37</BoxProjectIdentifier>
+          <Position>
+            <X>246</X>
+            <Y>435</Y>
+          </Position>
+        </PositionSet>
+        <PositionSet>
+          <BoxProjectIdentifier>38</BoxProjectIdentifier>
+          <Position>
+            <X>386</X>
+            <Y>434</Y>
+          </Position>
+        </PositionSet>
+        <PositionSet>
+          <BoxProjectIdentifier>39</BoxProjectIdentifier>
+          <Position>
+            <X>488</X>
+            <Y>122</Y>
+          </Position>
+        </PositionSet>
+        <PositionSet>
+          <BoxProjectIdentifier>40</BoxProjectIdentifier>
+          <Position>
+            <X>628</X>
+            <Y>122</Y>
+          </Position>
+        </PositionSet>
+        <PositionSet>
+          <BoxProjectIdentifier>41</BoxProjectIdentifier>
+          <Position>
+            <X>491</X>
+            <Y>62</Y>
+          </Position>
+        </PositionSet>
+        <PositionSet>
+          <BoxProjectIdentifier>42</BoxProjectIdentifier>
+          <Position>
+            <X>631</X>
+            <Y>62</Y>
+          </Position>
+        </PositionSet>
+        <PositionSet>
+          <BoxProjectIdentifier>43</BoxProjectIdentifier>
+          <Position>
+            <X>488</X>
+            <Y>183</Y>
+          </Position>
+        </PositionSet>
+        <PositionSet>
+          <BoxProjectIdentifier>44</BoxProjectIdentifier>
+          <Position>
+            <X>626</X>
+            <Y>183</Y>
+          </Position>
+        </PositionSet>
+        <PositionSet>
+          <BoxProjectIdentifier>45</BoxProjectIdentifier>
+          <Position>
+            <X>516</X>
+            <Y>369</Y>
+          </Position>
+        </PositionSet>
+        <PositionSet>
+          <BoxProjectIdentifier>46</BoxProjectIdentifier>
+          <Position>
+            <X>656</X>
+            <Y>369</Y>
+          </Position>
+        </PositionSet>
+        <PositionSet>
+          <BoxProjectIdentifier>47</BoxProjectIdentifier>
+          <Position>
+            <X>526</X>
+            <Y>434</Y>
+          </Position>
+        </PositionSet>
+        <PositionSet>
+          <BoxProjectIdentifier>48</BoxProjectIdentifier>
+          <Position>
+            <X>666</X>
+            <Y>434</Y>
+          </Position>
+        </PositionSet>
+        <PositionSet>
+          <BoxProjectIdentifier>49</BoxProjectIdentifier>
+          <Position>
+            <X>518</X>
+            <Y>494</Y>
+          </Position>
+        </PositionSet>
+        <PositionSet>
+          <BoxProjectIdentifier>50</BoxProjectIdentifier>
+          <Position>
+            <X>658</X>
+            <Y>494</Y>
+          </Position>
+        </PositionSet>
+        <PositionSet>
+          <BoxProjectIdentifier>51</BoxProjectIdentifier>
+          <Position>
+            <X>522</X>
+            <Y>560</Y>
+          </Position>
+        </PositionSet>
+        <PositionSet>
+          <BoxProjectIdentifier>52</BoxProjectIdentifier>
+          <Position>
+            <X>662</X>
+            <Y>560</Y>
+          </Position>
+        </PositionSet>
+        <PositionSet>
+          <BoxProjectIdentifier>53</BoxProjectIdentifier>
+          <Position>
+            <X>747</X>
+            <Y>123</Y>
+          </Position>
+        </PositionSet>
+        <PositionSet>
+          <BoxProjectIdentifier>54</BoxProjectIdentifier>
+          <Position>
+            <X>770</X>
+            <Y>460</Y>
+          </Position>
+        </PositionSet>
+        <PositionSet>
+          <BoxProjectIdentifier>55</BoxProjectIdentifier>
+          <Position>
+            <X>860</X>
+            <Y>274</Y>
+          </Position>
+        </PositionSet>
+        <PositionSet>
+          <BoxProjectIdentifier>56</BoxProjectIdentifier>
+          <Position>
+            <X>871</X>
+            <Y>432</Y>
+          </Position>
+        </PositionSet>
+        <PositionSet>
+          <BoxProjectIdentifier>57</BoxProjectIdentifier>
+          <Position>
+            <X>872</X>
+            <Y>482</Y>
+          </Position>
+        </PositionSet>
       </PositionSets>
     </View>
     <View>
       <Name>New Desktop3</Name>
-      <PositionSets>
-        <PositionSet>
-          <BoxProjectIdentifier>19</BoxProjectIdentifier>
-          <Position>
-            <X>349</X>
-            <Y>84</Y>
-          </Position>
-        </PositionSet>
-        <PositionSet>
-          <BoxProjectIdentifier>20</BoxProjectIdentifier>
-          <Position>
-            <X>152</X>
-            <Y>72</Y>
-          </Position>
-        </PositionSet>
-        <PositionSet>
-          <BoxProjectIdentifier>22</BoxProjectIdentifier>
-          <Position>
-            <X>159</X>
-            <Y>165</Y>
-          </Position>
-        </PositionSet>
-        <PositionSet>
-          <BoxProjectIdentifier>23</BoxProjectIdentifier>
-          <Position>
-            <X>165</X>
-            <Y>299</Y>
-          </Position>
-        </PositionSet>
-        <PositionSet>
-          <BoxProjectIdentifier>24</BoxProjectIdentifier>
-          <Position>
-            <X>176</X>
-            <Y>433</Y>
-          </Position>
-        </PositionSet>
-        <PositionSet>
-          <BoxProjectIdentifier>25</BoxProjectIdentifier>
-          <Position>
-            <X>179</X>
-            <Y>586</Y>
-          </Position>
-        </PositionSet>
-      </PositionSets>
+      <PositionSets />
     </View>
   </Views>
   <Boxes>
@@ -173,7 +291,7 @@
           <PropertyName>OdbcConnectionString</PropertyName>
           <Value xsi:type="StringValueT">
             <Value>
-              <stringValue>DSN=Stulong2;Persist security info=false</stringValue>
+              <stringValue>DSN=St;Persist security info=false</stringValue>
             </Value>
           </Value>
         </PropertySet>
@@ -199,387 +317,6 @@
         </PropertySet>
         <PropertySet>
           <PropertyName>PrimaryKeyColumns</PropertyName>
-          <Value xsi:type="StringValueT">
-            <Value>
-              <stringValue />
-            </Value>
-          </Value>
-        </PropertySet>
-      </PropertySets>
-    </Box>
-    <Box>
-      <CreatorIdentifier>DataMiningCommon.Column</CreatorIdentifier>
-      <ProjectIdentifier>7</ProjectIdentifier>
-      <Connections>
-        <Connection>
-          <SocketName>DataMatrixOrMultiColumn</SocketName>
-          <BoxProjectIdentifier>1</BoxProjectIdentifier>
-        </Connection>
-      </Connections>
-      <PropertySets>
-        <PropertySet>
-          <PropertyName>Name</PropertyName>
-          <Value xsi:type="StringValueT">
-            <Value>
-              <stringValue>CUKR</stringValue>
-            </Value>
-          </Value>
-        </PropertySet>
-      </PropertySets>
-    </Box>
-    <Box>
-      <CreatorIdentifier>DataMiningCommon.Attributes.Attribute</CreatorIdentifier>
-      <ProjectIdentifier>8</ProjectIdentifier>
-      <Connections>
-        <Connection>
-          <SocketName>ColumnOrDerivedColumn</SocketName>
-          <BoxProjectIdentifier>7</BoxProjectIdentifier>
-        </Connection>
-      </Connections>
-      <PropertySets>
-        <PropertySet>
-          <PropertyName>Categories</PropertyName>
-          <Value xsi:type="CategoriesValueT">
-            <Value>
-              <DateTimes />
-              <Floats />
-              <Longs />
-              <Enums>
-                <EnumCategory>
-                  <Name>Sladi_extremne</Name>
-                  <Value>
-                    <string>24</string>
-                    <string>25</string>
-                    <string>30</string>
-                  </Value>
-                </EnumCategory>
-                <EnumCategory>
-                  <Name>Neudano</Name>
-                  <Value>
-                    <string>_DbNull</string>
-                  </Value>
-                </EnumCategory>
-                <EnumCategory>
-                  <Name>Sladi_stredne</Name>
-                  <Value>
-                    <string>10</string>
-                    <string>11</string>
-                    <string>6</string>
-                    <string>7</string>
-                    <string>8</string>
-                    <string>9</string>
-                  </Value>
-                </EnumCategory>
-                <EnumCategory>
-                  <Name>Sladi_hodne</Name>
-                  <Value>
-                    <string>12</string>
-                    <string>14</string>
-                    <string>15</string>
-                    <string>16</string>
-                    <string>18</string>
-                    <string>20</string>
-                  </Value>
-                </EnumCategory>
-                <EnumCategory>
-                  <Name>Sladi_malo</Name>
-                  <Value>
-                    <string>1</string>
-                    <string>2</string>
-                    <string>3</string>
-                    <string>4</string>
-                    <string>5</string>
-                  </Value>
-                </EnumCategory>
-                <EnumCategory>
-                  <Name>Nesladi</Name>
-                  <Value>
-                    <string>0</string>
-                  </Value>
-                </EnumCategory>
-              </Enums>
-            </Value>
-          </Value>
-        </PropertySet>
-        <PropertySet>
-          <PropertyName>IncludeNullCategory</PropertyName>
-          <Value xsi:type="StringValueT">
-            <Value>
-              <stringValue>Neudano</stringValue>
-            </Value>
-          </Value>
-        </PropertySet>
-        <PropertySet>
-          <PropertyName>NameInLiterals</PropertyName>
-          <Value xsi:type="StringValueT">
-            <Value>
-              <stringValue>CUKR</stringValue>
-            </Value>
-          </Value>
-        </PropertySet>
-        <PropertySet>
-          <PropertyName>XCategory</PropertyName>
-          <Value xsi:type="StringValueT">
-            <Value>
-              <stringValue />
-            </Value>
-          </Value>
-        </PropertySet>
-      </PropertySets>
-    </Box>
-    <Box>
-      <CreatorIdentifier>DataMiningCommon.Attributes.EquidistantIntervalsAttribute</CreatorIdentifier>
-      <ProjectIdentifier>9</ProjectIdentifier>
-      <Connections>
-        <Connection>
-          <SocketName>ColumnOrDerivedColumn</SocketName>
-          <BoxProjectIdentifier>7</BoxProjectIdentifier>
-        </Connection>
-      </Connections>
-      <PropertySets>
-        <PropertySet>
-          <PropertyName>ClosedFrom</PropertyName>
-          <Value xsi:type="StringValueT">
-            <Value>
-              <stringValue>Left</stringValue>
-            </Value>
-          </Value>
-        </PropertySet>
-        <PropertySet>
-          <PropertyName>Domain</PropertyName>
-          <Value xsi:type="StringValueT">
-            <Value>
-              <stringValue>WholeDomain</stringValue>
-            </Value>
-          </Value>
-        </PropertySet>
-        <PropertySet>
-          <PropertyName>From</PropertyName>
-          <Value xsi:type="StringValueT">
-            <Value>
-              <stringValue>0</stringValue>
-            </Value>
-          </Value>
-        </PropertySet>
-        <PropertySet>
-          <PropertyName>Lenght</PropertyName>
-          <Value xsi:type="DoubleValueT">
-            <Value>
-              <doubleValue>5</doubleValue>
-            </Value>
-          </Value>
-        </PropertySet>
-        <PropertySet>
-          <PropertyName>NameInLiterals</PropertyName>
-          <Value xsi:type="StringValueT">
-            <Value>
-              <stringValue>CUKR_ED</stringValue>
-            </Value>
-          </Value>
-        </PropertySet>
-        <PropertySet>
-          <PropertyName>To</PropertyName>
-          <Value xsi:type="StringValueT">
-            <Value>
-              <stringValue>0</stringValue>
-            </Value>
-          </Value>
-        </PropertySet>
-        <PropertySet>
-          <PropertyName>XCategory</PropertyName>
-          <Value xsi:type="StringValueT">
-            <Value>
-              <stringValue />
-            </Value>
-          </Value>
-        </PropertySet>
-      </PropertySets>
-    </Box>
-    <Box>
-      <CreatorIdentifier>DataMiningCommon.Attributes.EquifrequencyIntervalsAttribute</CreatorIdentifier>
-      <ProjectIdentifier>10</ProjectIdentifier>
-      <Connections>
-        <Connection>
-          <SocketName>ColumnOrDerivedColumn</SocketName>
-          <BoxProjectIdentifier>7</BoxProjectIdentifier>
-        </Connection>
-      </Connections>
-      <PropertySets>
-        <PropertySet>
-          <PropertyName>CountOfCategories</PropertyName>
-          <Value xsi:type="LongValueT">
-            <Value>
-              <longValue>4</longValue>
-            </Value>
-          </Value>
-        </PropertySet>
-        <PropertySet>
-          <PropertyName>Domain</PropertyName>
-          <Value xsi:type="StringValueT">
-            <Value>
-              <stringValue>WholeDomain</stringValue>
-            </Value>
-          </Value>
-        </PropertySet>
-        <PropertySet>
-          <PropertyName>From</PropertyName>
-          <Value xsi:type="DoubleValueT">
-            <Value>
-              <doubleValue>0</doubleValue>
-            </Value>
-          </Value>
-        </PropertySet>
-        <PropertySet>
-          <PropertyName>NameInLiterals</PropertyName>
-          <Value xsi:type="StringValueT">
-            <Value>
-              <stringValue>CUKR_EF</stringValue>
-            </Value>
-          </Value>
-        </PropertySet>
-        <PropertySet>
-          <PropertyName>To</PropertyName>
-          <Value xsi:type="DoubleValueT">
-            <Value>
-              <doubleValue>0</doubleValue>
-            </Value>
-          </Value>
-        </PropertySet>
-        <PropertySet>
-          <PropertyName>XCategory</PropertyName>
-          <Value xsi:type="StringValueT">
-            <Value>
-              <stringValue />
-            </Value>
-          </Value>
-        </PropertySet>
-      </PropertySets>
-    </Box>
-    <Box>
-      <CreatorIdentifier>DataMiningCommon.Column</CreatorIdentifier>
-      <ProjectIdentifier>11</ProjectIdentifier>
-      <Connections>
-        <Connection>
-          <SocketName>DataMatrixOrMultiColumn</SocketName>
-          <BoxProjectIdentifier>1</BoxProjectIdentifier>
-        </Connection>
-      </Connections>
-      <PropertySets>
-        <PropertySet>
-          <PropertyName>Name</PropertyName>
-          <Value xsi:type="StringValueT">
-            <Value>
-              <stringValue>CHLST</stringValue>
-            </Value>
-          </Value>
-        </PropertySet>
-      </PropertySets>
-    </Box>
-    <Box>
-      <CreatorIdentifier>DataMiningCommon.Attributes.Attribute</CreatorIdentifier>
-      <ProjectIdentifier>12</ProjectIdentifier>
-      <Connections>
-        <Connection>
-          <SocketName>ColumnOrDerivedColumn</SocketName>
-          <BoxProjectIdentifier>11</BoxProjectIdentifier>
-        </Connection>
-      </Connections>
-      <PropertySets>
-        <PropertySet>
-          <PropertyName>Categories</PropertyName>
-          <Value xsi:type="CategoriesValueT">
-            <Value>
-              <DateTimes />
-              <Floats />
-              <Longs>
-                <LongCategory>
-                  <Name>Dobry</Name>
-                  <Value>
-                    <LongIntervalStruct>
-                      <leftBoundType>Round</leftBoundType>
-                      <rightBoundType>Round</rightBoundType>
-                      <leftBound>112</leftBound>
-                      <rightBound>200</rightBound>
-                    </LongIntervalStruct>
-                    <LongIntervalStruct>
-                      <leftBoundType>Round</leftBoundType>
-                      <rightBoundType>Round</rightBoundType>
-                      <leftBound>250</leftBound>
-                      <rightBound>300</rightBound>
-                    </LongIntervalStruct>
-                  </Value>
-                </LongCategory>
-              </Longs>
-              <Enums />
-            </Value>
-          </Value>
-        </PropertySet>
-        <PropertySet>
-          <PropertyName>IncludeNullCategory</PropertyName>
-          <Value xsi:type="StringValueT">
-            <Value>
-              <stringValue />
-            </Value>
-          </Value>
-        </PropertySet>
-        <PropertySet>
-          <PropertyName>NameInLiterals</PropertyName>
-          <Value xsi:type="StringValueT">
-            <Value>
-              <stringValue>CHLST</stringValue>
-            </Value>
-          </Value>
-        </PropertySet>
-        <PropertySet>
-          <PropertyName>XCategory</PropertyName>
-          <Value xsi:type="StringValueT">
-            <Value>
-              <stringValue />
-            </Value>
-          </Value>
-        </PropertySet>
-      </PropertySets>
-    </Box>
-    <Box>
-      <CreatorIdentifier>DataMiningCommon.Column</CreatorIdentifier>
-      <ProjectIdentifier>13</ProjectIdentifier>
-      <Connections>
-        <Connection>
-          <SocketName>DataMatrixOrMultiColumn</SocketName>
-          <BoxProjectIdentifier>1</BoxProjectIdentifier>
-        </Connection>
-      </Connections>
-      <PropertySets>
-        <PropertySet>
-          <PropertyName>Name</PropertyName>
-          <Value xsi:type="StringValueT">
-            <Value>
-              <stringValue>VZDELANI</stringValue>
-            </Value>
-          </Value>
-        </PropertySet>
-      </PropertySets>
-    </Box>
-    <Box>
-      <CreatorIdentifier>DataMiningCommon.Attributes.EachValueOneCategoryAttribute</CreatorIdentifier>
-      <ProjectIdentifier>14</ProjectIdentifier>
-      <Connections>
-        <Connection>
-          <SocketName>ColumnOrDerivedColumn</SocketName>
-          <BoxProjectIdentifier>13</BoxProjectIdentifier>
-        </Connection>
-      </Connections>
-      <PropertySets>
-        <PropertySet>
-          <PropertyName>NameInLiterals</PropertyName>
-          <Value xsi:type="StringValueT">
-            <Value>
-              <stringValue>VZDELANI</stringValue>
-            </Value>
-          </Value>
-        </PropertySet>
-        <PropertySet>
-          <PropertyName>XCategory</PropertyName>
           <Value xsi:type="StringValueT">
             <Value>
               <stringValue />
@@ -632,42 +369,70 @@
           <Value xsi:type="CategoriesValueT">
             <Value>
               <DateTimes />
-              <Floats>
-                <FloatCategory>
-                  <Name>Dobra_vaha</Name>
+              <Floats />
+              <Longs>
+                <LongCategory>
+                  <Name>Obezita</Name>
                   <Value>
-                    <FloatIntervalStruct>
+                    <LongIntervalStruct>
                       <leftBoundType>Round</leftBoundType>
-                      <rightBoundType>Sharp</rightBoundType>
-                      <leftBound>0</leftBound>
-                      <rightBound>20</rightBound>
-                    </FloatIntervalStruct>
+                      <rightBoundType>Round</rightBoundType>
+                      <leftBound>30</leftBound>
+                      <rightBound>35</rightBound>
+                    </LongIntervalStruct>
                   </Value>
-                </FloatCategory>
-                <FloatCategory>
-                  <Name>Nadvaha</Name>
+                </LongCategory>
+                <LongCategory>
+                  <Name>Podvaha</Name>
                   <Value>
-                    <FloatIntervalStruct>
+                    <LongIntervalStruct>
+                      <leftBoundType>Round</leftBoundType>
+                      <rightBoundType>Round</rightBoundType>
+                      <leftBound>15</leftBound>
+                      <rightBound>20</rightBound>
+                    </LongIntervalStruct>
+                  </Value>
+                </LongCategory>
+                <LongCategory>
+                  <Name>Normal</Name>
+                  <Value>
+                    <LongIntervalStruct>
                       <leftBoundType>Round</leftBoundType>
                       <rightBoundType>Round</rightBoundType>
                       <leftBound>20</leftBound>
-                      <rightBound>60</rightBound>
-                    </FloatIntervalStruct>
+                      <rightBound>25</rightBound>
+                    </LongIntervalStruct>
                   </Value>
-                </FloatCategory>
-                <FloatCategory>
-                  <Name>T3</Name>
+                </LongCategory>
+                <LongCategory>
+                  <Name>nadvaha</Name>
                   <Value>
-                    <FloatIntervalStruct>
-                      <leftBoundType>Sharp</leftBoundType>
-                      <rightBoundType>Infinity</rightBoundType>
-                      <leftBound>61</leftBound>
-                      <rightBound>0</rightBound>
-                    </FloatIntervalStruct>
+                    <LongIntervalStruct>
+                      <leftBoundType>Round</leftBoundType>
+                      <rightBoundType>Round</rightBoundType>
+                      <leftBound>25</leftBound>
+                      <rightBound>30</rightBound>
+                    </LongIntervalStruct>
                   </Value>
-                </FloatCategory>
-              </Floats>
-              <Longs />
+                </LongCategory>
+                <LongCategory>
+                  <Name>tezka obezita</Name>
+                  <Value>
+                    <LongIntervalStruct>
+                      <leftBoundType>Round</leftBoundType>
+                      <rightBoundType>Round</rightBoundType>
+                      <leftBound>35</leftBound>
+                      <rightBound>40</rightBound>
+                    </LongIntervalStruct>
+                    <LongIntervalStruct>
+                      <leftBoundType>Round</leftBoundType>
+                      <rightBoundType>Round</rightBoundType>
+                      <leftBound>40</leftBound>
+                      <rightBound>45</rightBound>
+                    </LongIntervalStruct>
+                  </Value>
+                </LongCategory>
+              </Longs>
               <Enums />
             </Value>
           </Value>
@@ -699,9 +464,1175 @@
       </PropertySets>
     </Box>
     <Box>
-      <CreatorIdentifier>LISpMinerTasks.FFTTask</CreatorIdentifier>
-      <ProjectIdentifier>19</ProjectIdentifier>
+      <CreatorIdentifier>LISpMinerTasks.KLTask</CreatorIdentifier>
+      <ProjectIdentifier>21</ProjectIdentifier>
       <Connections />
+      <PropertySets>
+        <PropertySet>
+          <PropertyName>GenerationInfo</PropertyName>
+          <Value xsi:type="GenerationInfoValueT">
+            <Value>
+              <generationState>DidNotStart</generationState>
+              <generationNrOfTests>0</generationNrOfTests>
+              <generationNrOfHypotheses>0</generationNrOfHypotheses>
+              <generationStartTime xsi:type="DateTimeTI">
+                <day>0</day>
+                <month>0</month>
+                <year>0</year>
+                <hour>0</hour>
+                <minute>0</minute>
+                <second>0</second>
+              </generationStartTime>
+              <generationTotalTime xsi:type="TimeTI">
+                <hour>0</hour>
+                <minute>0</minute>
+                <second>0</second>
+              </generationTotalTime>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>Hypotheses</PropertyName>
+          <Value xsi:type="HypothesesValueT">
+            <Value />
+          </Value>
+        </PropertySet>
+      </PropertySets>
+    </Box>
+    <Box>
+      <CreatorIdentifier>DataMiningCommon.Column</CreatorIdentifier>
+      <ProjectIdentifier>26</ProjectIdentifier>
+      <Connections>
+        <Connection>
+          <SocketName>DataMatrixOrMultiColumn</SocketName>
+          <BoxProjectIdentifier>1</BoxProjectIdentifier>
+        </Connection>
+      </Connections>
+      <PropertySets>
+        <PropertySet>
+          <PropertyName>Name</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>SUBSC</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+      </PropertySets>
+    </Box>
+    <Box>
+      <CreatorIdentifier>DataMiningCommon.Attributes.EquidistantIntervalsAttribute</CreatorIdentifier>
+      <ProjectIdentifier>28</ProjectIdentifier>
+      <Connections>
+        <Connection>
+          <SocketName>ColumnOrDerivedColumn</SocketName>
+          <BoxProjectIdentifier>26</BoxProjectIdentifier>
+        </Connection>
+      </Connections>
+      <PropertySets>
+        <PropertySet>
+          <PropertyName>ClosedFrom</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>Left</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>Domain</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>WholeDomain</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>From</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>4</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>Lenght</PropertyName>
+          <Value xsi:type="DoubleValueT">
+            <Value>
+              <doubleValue>5</doubleValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>NameInLiterals</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>SUBSC</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>To</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>74</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>XCategory</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue />
+            </Value>
+          </Value>
+        </PropertySet>
+      </PropertySets>
+    </Box>
+    <Box>
+      <CreatorIdentifier>DataMiningCommon.Column</CreatorIdentifier>
+      <ProjectIdentifier>29</ProjectIdentifier>
+      <Connections>
+        <Connection>
+          <SocketName>DataMatrixOrMultiColumn</SocketName>
+          <BoxProjectIdentifier>1</BoxProjectIdentifier>
+        </Connection>
+      </Connections>
+      <PropertySets>
+        <PropertySet>
+          <PropertyName>Name</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>TRIC</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+      </PropertySets>
+    </Box>
+    <Box>
+      <CreatorIdentifier>DataMiningCommon.Attributes.EquidistantIntervalsAttribute</CreatorIdentifier>
+      <ProjectIdentifier>30</ProjectIdentifier>
+      <Connections>
+        <Connection>
+          <SocketName>ColumnOrDerivedColumn</SocketName>
+          <BoxProjectIdentifier>29</BoxProjectIdentifier>
+        </Connection>
+      </Connections>
+      <PropertySets>
+        <PropertySet>
+          <PropertyName>ClosedFrom</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>Left</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>Domain</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>WholeDomain</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>From</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>1</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>Lenght</PropertyName>
+          <Value xsi:type="DoubleValueT">
+            <Value>
+              <doubleValue>5</doubleValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>NameInLiterals</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>TRIC</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>To</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>36</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>XCategory</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue />
+            </Value>
+          </Value>
+        </PropertySet>
+      </PropertySets>
+    </Box>
+    <Box>
+      <CreatorIdentifier>DataMiningCommon.Column</CreatorIdentifier>
+      <ProjectIdentifier>31</ProjectIdentifier>
+      <Connections>
+        <Connection>
+          <SocketName>DataMatrixOrMultiColumn</SocketName>
+          <BoxProjectIdentifier>1</BoxProjectIdentifier>
+        </Connection>
+      </Connections>
+      <PropertySets>
+        <PropertySet>
+          <PropertyName>Name</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>DIABET</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+      </PropertySets>
+    </Box>
+    <Box>
+      <CreatorIdentifier>DataMiningCommon.Attributes.Attribute</CreatorIdentifier>
+      <ProjectIdentifier>32</ProjectIdentifier>
+      <Connections>
+        <Connection>
+          <SocketName>ColumnOrDerivedColumn</SocketName>
+          <BoxProjectIdentifier>31</BoxProjectIdentifier>
+        </Connection>
+      </Connections>
+      <PropertySets>
+        <PropertySet>
+          <PropertyName>Categories</PropertyName>
+          <Value xsi:type="CategoriesValueT">
+            <Value>
+              <DateTimes />
+              <Floats />
+              <Longs />
+              <Enums>
+                <EnumCategory>
+                  <Name>ne</Name>
+                  <Value>
+                    <string>2</string>
+                  </Value>
+                </EnumCategory>
+                <EnumCategory>
+                  <Name>ano</Name>
+                  <Value>
+                    <string>1</string>
+                  </Value>
+                </EnumCategory>
+                <EnumCategory>
+                  <Name>neudano</Name>
+                  <Value>
+                    <string>6</string>
+                  </Value>
+                </EnumCategory>
+              </Enums>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>IncludeNullCategory</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue />
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>NameInLiterals</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>DIABET</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>XCategory</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue />
+            </Value>
+          </Value>
+        </PropertySet>
+      </PropertySets>
+    </Box>
+    <Box>
+      <CreatorIdentifier>DataMiningCommon.Column</CreatorIdentifier>
+      <ProjectIdentifier>33</ProjectIdentifier>
+      <Connections>
+        <Connection>
+          <SocketName>DataMatrixOrMultiColumn</SocketName>
+          <BoxProjectIdentifier>1</BoxProjectIdentifier>
+        </Connection>
+      </Connections>
+      <PropertySets>
+        <PropertySet>
+          <PropertyName>Name</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>HT</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+      </PropertySets>
+    </Box>
+    <Box>
+      <CreatorIdentifier>DataMiningCommon.Attributes.Attribute</CreatorIdentifier>
+      <ProjectIdentifier>34</ProjectIdentifier>
+      <Connections>
+        <Connection>
+          <SocketName>ColumnOrDerivedColumn</SocketName>
+          <BoxProjectIdentifier>33</BoxProjectIdentifier>
+        </Connection>
+      </Connections>
+      <PropertySets>
+        <PropertySet>
+          <PropertyName>Categories</PropertyName>
+          <Value xsi:type="CategoriesValueT">
+            <Value>
+              <DateTimes />
+              <Floats />
+              <Longs />
+              <Enums>
+                <EnumCategory>
+                  <Name>ne</Name>
+                  <Value>
+                    <string>2</string>
+                  </Value>
+                </EnumCategory>
+                <EnumCategory>
+                  <Name>ano</Name>
+                  <Value>
+                    <string>1</string>
+                  </Value>
+                </EnumCategory>
+                <EnumCategory>
+                  <Name>neudano</Name>
+                  <Value>
+                    <string>6</string>
+                  </Value>
+                </EnumCategory>
+              </Enums>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>IncludeNullCategory</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue />
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>NameInLiterals</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>HT</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>XCategory</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue />
+            </Value>
+          </Value>
+        </PropertySet>
+      </PropertySets>
+    </Box>
+    <Box>
+      <CreatorIdentifier>DataMiningCommon.Column</CreatorIdentifier>
+      <ProjectIdentifier>35</ProjectIdentifier>
+      <Connections>
+        <Connection>
+          <SocketName>DataMatrixOrMultiColumn</SocketName>
+          <BoxProjectIdentifier>1</BoxProjectIdentifier>
+        </Connection>
+      </Connections>
+      <PropertySets>
+        <PropertySet>
+          <PropertyName>Name</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>IM</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+      </PropertySets>
+    </Box>
+    <Box>
+      <CreatorIdentifier>DataMiningCommon.Attributes.Attribute</CreatorIdentifier>
+      <ProjectIdentifier>36</ProjectIdentifier>
+      <Connections>
+        <Connection>
+          <SocketName>ColumnOrDerivedColumn</SocketName>
+          <BoxProjectIdentifier>35</BoxProjectIdentifier>
+        </Connection>
+      </Connections>
+      <PropertySets>
+        <PropertySet>
+          <PropertyName>Categories</PropertyName>
+          <Value xsi:type="CategoriesValueT">
+            <Value>
+              <DateTimes />
+              <Floats />
+              <Longs />
+              <Enums>
+                <EnumCategory>
+                  <Name>ne</Name>
+                  <Value>
+                    <string>2</string>
+                  </Value>
+                </EnumCategory>
+                <EnumCategory>
+                  <Name>ano</Name>
+                  <Value>
+                    <string>1</string>
+                  </Value>
+                </EnumCategory>
+                <EnumCategory>
+                  <Name>neudano</Name>
+                  <Value>
+                    <string>6</string>
+                  </Value>
+                </EnumCategory>
+              </Enums>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>IncludeNullCategory</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue />
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>NameInLiterals</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>IM</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>XCategory</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue />
+            </Value>
+          </Value>
+        </PropertySet>
+      </PropertySets>
+    </Box>
+    <Box>
+      <CreatorIdentifier>DataMiningCommon.Column</CreatorIdentifier>
+      <ProjectIdentifier>37</ProjectIdentifier>
+      <Connections>
+        <Connection>
+          <SocketName>DataMatrixOrMultiColumn</SocketName>
+          <BoxProjectIdentifier>1</BoxProjectIdentifier>
+        </Connection>
+      </Connections>
+      <PropertySets>
+        <PropertySet>
+          <PropertyName>Name</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>DUSNOST</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+      </PropertySets>
+    </Box>
+    <Box>
+      <CreatorIdentifier>DataMiningCommon.Attributes.Attribute</CreatorIdentifier>
+      <ProjectIdentifier>38</ProjectIdentifier>
+      <Connections>
+        <Connection>
+          <SocketName>ColumnOrDerivedColumn</SocketName>
+          <BoxProjectIdentifier>37</BoxProjectIdentifier>
+        </Connection>
+      </Connections>
+      <PropertySets>
+        <PropertySet>
+          <PropertyName>Categories</PropertyName>
+          <Value xsi:type="CategoriesValueT">
+            <Value>
+              <DateTimes />
+              <Floats />
+              <Longs />
+              <Enums>
+                <EnumCategory>
+                  <Name>stupen I</Name>
+                  <Value>
+                    <string>2</string>
+                  </Value>
+                </EnumCategory>
+                <EnumCategory>
+                  <Name>stupen IV</Name>
+                  <Value>
+                    <string>6</string>
+                  </Value>
+                </EnumCategory>
+                <EnumCategory>
+                  <Name>stupen II</Name>
+                  <Value>
+                    <string>3</string>
+                  </Value>
+                </EnumCategory>
+                <EnumCategory>
+                  <Name>stupen III</Name>
+                  <Value>
+                    <string>4</string>
+                  </Value>
+                </EnumCategory>
+                <EnumCategory>
+                  <Name>nepritomna</Name>
+                  <Value>
+                    <string>1</string>
+                  </Value>
+                </EnumCategory>
+              </Enums>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>IncludeNullCategory</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue />
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>NameInLiterals</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>DUSNOST</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>XCategory</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue />
+            </Value>
+          </Value>
+        </PropertySet>
+      </PropertySets>
+    </Box>
+    <Box>
+      <CreatorIdentifier>DataMiningCommon.AtomSetting</CreatorIdentifier>
+      <ProjectIdentifier>39</ProjectIdentifier>
+      <Connections>
+        <Connection>
+          <SocketName>Attribute</SocketName>
+          <BoxProjectIdentifier>18</BoxProjectIdentifier>
+        </Connection>
+      </Connections>
+      <PropertySets>
+        <PropertySet>
+          <PropertyName>Category</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue />
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>CoefficientType</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>Interval</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>MaxLen</PropertyName>
+          <Value xsi:type="LongValueT">
+            <Value>
+              <longValue>3</longValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>MinLen</PropertyName>
+          <Value xsi:type="LongValueT">
+            <Value>
+              <longValue>1</longValue>
+            </Value>
+          </Value>
+        </PropertySet>
+      </PropertySets>
+    </Box>
+    <Box>
+      <CreatorIdentifier>DataMiningCommon.LiteralSetting</CreatorIdentifier>
+      <ProjectIdentifier>40</ProjectIdentifier>
+      <Connections>
+        <Connection>
+          <SocketName>AtomSetting</SocketName>
+          <BoxProjectIdentifier>39</BoxProjectIdentifier>
+        </Connection>
+      </Connections>
+      <PropertySets>
+        <PropertySet>
+          <PropertyName>GaceType</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>Positive</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>LiteralType</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>Basic</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+      </PropertySets>
+    </Box>
+    <Box>
+      <CreatorIdentifier>DataMiningCommon.AtomSetting</CreatorIdentifier>
+      <ProjectIdentifier>41</ProjectIdentifier>
+      <Connections>
+        <Connection>
+          <SocketName>Attribute</SocketName>
+          <BoxProjectIdentifier>30</BoxProjectIdentifier>
+        </Connection>
+      </Connections>
+      <PropertySets>
+        <PropertySet>
+          <PropertyName>Category</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue />
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>CoefficientType</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>Interval</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>MaxLen</PropertyName>
+          <Value xsi:type="LongValueT">
+            <Value>
+              <longValue>5</longValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>MinLen</PropertyName>
+          <Value xsi:type="LongValueT">
+            <Value>
+              <longValue>1</longValue>
+            </Value>
+          </Value>
+        </PropertySet>
+      </PropertySets>
+    </Box>
+    <Box>
+      <CreatorIdentifier>DataMiningCommon.LiteralSetting</CreatorIdentifier>
+      <ProjectIdentifier>42</ProjectIdentifier>
+      <Connections>
+        <Connection>
+          <SocketName>AtomSetting</SocketName>
+          <BoxProjectIdentifier>41</BoxProjectIdentifier>
+        </Connection>
+      </Connections>
+      <PropertySets>
+        <PropertySet>
+          <PropertyName>GaceType</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>Positive</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>LiteralType</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>Basic</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+      </PropertySets>
+    </Box>
+    <Box>
+      <CreatorIdentifier>DataMiningCommon.AtomSetting</CreatorIdentifier>
+      <ProjectIdentifier>43</ProjectIdentifier>
+      <Connections>
+        <Connection>
+          <SocketName>Attribute</SocketName>
+          <BoxProjectIdentifier>28</BoxProjectIdentifier>
+        </Connection>
+      </Connections>
+      <PropertySets>
+        <PropertySet>
+          <PropertyName>Category</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue />
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>CoefficientType</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>Interval</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>MaxLen</PropertyName>
+          <Value xsi:type="LongValueT">
+            <Value>
+              <longValue>5</longValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>MinLen</PropertyName>
+          <Value xsi:type="LongValueT">
+            <Value>
+              <longValue>1</longValue>
+            </Value>
+          </Value>
+        </PropertySet>
+      </PropertySets>
+    </Box>
+    <Box>
+      <CreatorIdentifier>DataMiningCommon.LiteralSetting</CreatorIdentifier>
+      <ProjectIdentifier>44</ProjectIdentifier>
+      <Connections>
+        <Connection>
+          <SocketName>AtomSetting</SocketName>
+          <BoxProjectIdentifier>43</BoxProjectIdentifier>
+        </Connection>
+      </Connections>
+      <PropertySets>
+        <PropertySet>
+          <PropertyName>GaceType</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>Positive</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>LiteralType</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>Basic</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+      </PropertySets>
+    </Box>
+    <Box>
+      <CreatorIdentifier>DataMiningCommon.AtomSetting</CreatorIdentifier>
+      <ProjectIdentifier>45</ProjectIdentifier>
+      <Connections>
+        <Connection>
+          <SocketName>Attribute</SocketName>
+          <BoxProjectIdentifier>32</BoxProjectIdentifier>
+        </Connection>
+      </Connections>
+      <PropertySets>
+        <PropertySet>
+          <PropertyName>Category</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>ano</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>CoefficientType</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>OneParticularCategory</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>MaxLen</PropertyName>
+          <Value xsi:type="LongValueT">
+            <Value>
+              <longValue>1</longValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>MinLen</PropertyName>
+          <Value xsi:type="LongValueT">
+            <Value>
+              <longValue>1</longValue>
+            </Value>
+          </Value>
+        </PropertySet>
+      </PropertySets>
+    </Box>
+    <Box>
+      <CreatorIdentifier>DataMiningCommon.LiteralSetting</CreatorIdentifier>
+      <ProjectIdentifier>46</ProjectIdentifier>
+      <Connections>
+        <Connection>
+          <SocketName>AtomSetting</SocketName>
+          <BoxProjectIdentifier>45</BoxProjectIdentifier>
+        </Connection>
+      </Connections>
+      <PropertySets>
+        <PropertySet>
+          <PropertyName>GaceType</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>Positive</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>LiteralType</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>Basic</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+      </PropertySets>
+    </Box>
+    <Box>
+      <CreatorIdentifier>DataMiningCommon.AtomSetting</CreatorIdentifier>
+      <ProjectIdentifier>47</ProjectIdentifier>
+      <Connections>
+        <Connection>
+          <SocketName>Attribute</SocketName>
+          <BoxProjectIdentifier>38</BoxProjectIdentifier>
+        </Connection>
+      </Connections>
+      <PropertySets>
+        <PropertySet>
+          <PropertyName>Category</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>nepritomna</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>CoefficientType</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>OneParticularCategory</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>MaxLen</PropertyName>
+          <Value xsi:type="LongValueT">
+            <Value>
+              <longValue>1</longValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>MinLen</PropertyName>
+          <Value xsi:type="LongValueT">
+            <Value>
+              <longValue>1</longValue>
+            </Value>
+          </Value>
+        </PropertySet>
+      </PropertySets>
+    </Box>
+    <Box>
+      <CreatorIdentifier>DataMiningCommon.LiteralSetting</CreatorIdentifier>
+      <ProjectIdentifier>48</ProjectIdentifier>
+      <Connections>
+        <Connection>
+          <SocketName>AtomSetting</SocketName>
+          <BoxProjectIdentifier>47</BoxProjectIdentifier>
+        </Connection>
+      </Connections>
+      <PropertySets>
+        <PropertySet>
+          <PropertyName>GaceType</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>Negative</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>LiteralType</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>Basic</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+      </PropertySets>
+    </Box>
+    <Box>
+      <CreatorIdentifier>DataMiningCommon.AtomSetting</CreatorIdentifier>
+      <ProjectIdentifier>49</ProjectIdentifier>
+      <Connections>
+        <Connection>
+          <SocketName>Attribute</SocketName>
+          <BoxProjectIdentifier>34</BoxProjectIdentifier>
+        </Connection>
+      </Connections>
+      <PropertySets>
+        <PropertySet>
+          <PropertyName>Category</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>ano</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>CoefficientType</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>OneParticularCategory</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>MaxLen</PropertyName>
+          <Value xsi:type="LongValueT">
+            <Value>
+              <longValue>1</longValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>MinLen</PropertyName>
+          <Value xsi:type="LongValueT">
+            <Value>
+              <longValue>1</longValue>
+            </Value>
+          </Value>
+        </PropertySet>
+      </PropertySets>
+    </Box>
+    <Box>
+      <CreatorIdentifier>DataMiningCommon.LiteralSetting</CreatorIdentifier>
+      <ProjectIdentifier>50</ProjectIdentifier>
+      <Connections>
+        <Connection>
+          <SocketName>AtomSetting</SocketName>
+          <BoxProjectIdentifier>49</BoxProjectIdentifier>
+        </Connection>
+      </Connections>
+      <PropertySets>
+        <PropertySet>
+          <PropertyName>GaceType</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>Positive</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>LiteralType</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>Basic</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+      </PropertySets>
+    </Box>
+    <Box>
+      <CreatorIdentifier>DataMiningCommon.AtomSetting</CreatorIdentifier>
+      <ProjectIdentifier>51</ProjectIdentifier>
+      <Connections>
+        <Connection>
+          <SocketName>Attribute</SocketName>
+          <BoxProjectIdentifier>36</BoxProjectIdentifier>
+        </Connection>
+      </Connections>
+      <PropertySets>
+        <PropertySet>
+          <PropertyName>Category</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>ano</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>CoefficientType</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>OneParticularCategory</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>MaxLen</PropertyName>
+          <Value xsi:type="LongValueT">
+            <Value>
+              <longValue>1</longValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>MinLen</PropertyName>
+          <Value xsi:type="LongValueT">
+            <Value>
+              <longValue>1</longValue>
+            </Value>
+          </Value>
+        </PropertySet>
+      </PropertySets>
+    </Box>
+    <Box>
+      <CreatorIdentifier>DataMiningCommon.LiteralSetting</CreatorIdentifier>
+      <ProjectIdentifier>52</ProjectIdentifier>
+      <Connections>
+        <Connection>
+          <SocketName>AtomSetting</SocketName>
+          <BoxProjectIdentifier>51</BoxProjectIdentifier>
+        </Connection>
+      </Connections>
+      <PropertySets>
+        <PropertySet>
+          <PropertyName>GaceType</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>Positive</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>LiteralType</PropertyName>
+          <Value xsi:type="StringValueT">
+            <Value>
+              <stringValue>Basic</stringValue>
+            </Value>
+          </Value>
+        </PropertySet>
+      </PropertySets>
+    </Box>
+    <Box>
+      <CreatorIdentifier>DataMiningCommon.BooleanPartialCedentSetting</CreatorIdentifier>
+      <ProjectIdentifier>53</ProjectIdentifier>
+      <Connections>
+        <Connection>
+          <SocketName>LiteralSetting</SocketName>
+          <BoxProjectIdentifier>42</BoxProjectIdentifier>
+        </Connection>
+        <Connection>
+          <SocketName>LiteralSetting</SocketName>
+          <BoxProjectIdentifier>40</BoxProjectIdentifier>
+        </Connection>
+        <Connection>
+          <SocketName>LiteralSetting</SocketName>
+          <BoxProjectIdentifier>44</BoxProjectIdentifier>
+        </Connection>
+      </Connections>
+      <PropertySets>
+        <PropertySet>
+          <PropertyName>MaxLen</PropertyName>
+          <Value xsi:type="LongValueT">
+            <Value>
+              <longValue>99</longValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>MinLen</PropertyName>
+          <Value xsi:type="LongValueT">
+            <Value>
+              <longValue>1</longValue>
+            </Value>
+          </Value>
+        </PropertySet>
+      </PropertySets>
+    </Box>
+    <Box>
+      <CreatorIdentifier>DataMiningCommon.BooleanPartialCedentSetting</CreatorIdentifier>
+      <ProjectIdentifier>54</ProjectIdentifier>
+      <Connections>
+        <Connection>
+          <SocketName>LiteralSetting</SocketName>
+          <BoxProjectIdentifier>46</BoxProjectIdentifier>
+        </Connection>
+        <Connection>
+          <SocketName>LiteralSetting</SocketName>
+          <BoxProjectIdentifier>48</BoxProjectIdentifier>
+        </Connection>
+        <Connection>
+          <SocketName>LiteralSetting</SocketName>
+          <BoxProjectIdentifier>50</BoxProjectIdentifier>
+        </Connection>
+        <Connection>
+          <SocketName>LiteralSetting</SocketName>
+          <BoxProjectIdentifier>52</BoxProjectIdentifier>
+        </Connection>
+      </Connections>
+      <PropertySets>
+        <PropertySet>
+          <PropertyName>MaxLen</PropertyName>
+          <Value xsi:type="LongValueT">
+            <Value>
+              <longValue>99</longValue>
+            </Value>
+          </Value>
+        </PropertySet>
+        <PropertySet>
+          <PropertyName>MinLen</PropertyName>
+          <Value xsi:type="LongValueT">
+            <Value>
+              <longValue>1</longValue>
+            </Value>
+          </Value>
+        </PropertySet>
+      </PropertySets>
+    </Box>
+    <Box>
+      <CreatorIdentifier>LISpMinerTasks.FFTTask</CreatorIdentifier>
+      <UserName>Uloha 1 (1)</UserName>
+      <ProjectIdentifier>55</ProjectIdentifier>
+      <Connections>
+        <Connection>
+          <SocketName>AntecedentSetting</SocketName>
+          <BoxProjectIdentifier>53</BoxProjectIdentifier>
+        </Connection>
+        <Connection>
+          <SocketName>SuccedentSetting</SocketName>
+          <BoxProjectIdentifier>54</BoxProjectIdentifier>
+        </Connection>
+        <Connection>
+          <SocketName>FFTQuantifier</SocketName>
+          <BoxProjectIdentifier>56</BoxProjectIdentifier>
+        </Connection>
+        <Connection>
+          <SocketName>FFTQuantifier</SocketName>
+          <BoxProjectIdentifier>57</BoxProjectIdentifier>
+        </Connection>
+      </Connections>
       <PropertySets>
         <PropertySet>
           <PropertyName>GenerationInfo</PropertyName>
@@ -767,265 +1698,47 @@
       </PropertySets>
     </Box>
     <Box>
-      <CreatorIdentifier>LISpMinerTasks.CFTask</CreatorIdentifier>
-      <ProjectIdentifier>20</ProjectIdentifier>
+      <CreatorIdentifier>LISpMinerTasks.FFTTask.Quantifiers.Functional.AboveAverageImplication</CreatorIdentifier>
+      <ProjectIdentifier>56</ProjectIdentifier>
       <Connections />
       <PropertySets>
         <PropertySet>
-          <PropertyName>GenerationInfo</PropertyName>
-          <Value xsi:type="GenerationInfoValueT">
+          <PropertyName>ParamK</PropertyName>
+          <Value xsi:type="DoubleValueT">
             <Value>
-              <generationState>DidNotStart</generationState>
-              <generationNrOfTests>0</generationNrOfTests>
-              <generationNrOfHypotheses>0</generationNrOfHypotheses>
-              <generationStartTime xsi:type="DateTimeTI">
-                <day>0</day>
-                <month>0</month>
-                <year>0</year>
-                <hour>0</hour>
-                <minute>0</minute>
-                <second>0</second>
-              </generationStartTime>
-              <generationTotalTime xsi:type="TimeTI">
-                <hour>0</hour>
-                <minute>0</minute>
-                <second>0</second>
-              </generationTotalTime>
-            </Value>
-          </Value>
-        </PropertySet>
-        <PropertySet>
-          <PropertyName>Hypotheses</PropertyName>
-          <Value xsi:type="HypothesesValueT">
-            <Value />
-          </Value>
-        </PropertySet>
-      </PropertySets>
-    </Box>
-    <Box>
-      <CreatorIdentifier>LISpMinerTasks.KLTask</CreatorIdentifier>
-      <ProjectIdentifier>21</ProjectIdentifier>
-      <Connections />
-      <PropertySets>
-        <PropertySet>
-          <PropertyName>GenerationInfo</PropertyName>
-          <Value xsi:type="GenerationInfoValueT">
-            <Value>
-              <generationState>DidNotStart</generationState>
-              <generationNrOfTests>0</generationNrOfTests>
-              <generationNrOfHypotheses>0</generationNrOfHypotheses>
-              <generationStartTime xsi:type="DateTimeTI">
-                <day>0</day>
-                <month>0</month>
-                <year>0</year>
-                <hour>0</hour>
-                <minute>0</minute>
-                <second>0</second>
-              </generationStartTime>
-              <generationTotalTime xsi:type="TimeTI">
-                <hour>0</hour>
-                <minute>0</minute>
-                <second>0</second>
-              </generationTotalTime>
-            </Value>
-          </Value>
-        </PropertySet>
-        <PropertySet>
-          <PropertyName>Hypotheses</PropertyName>
-          <Value xsi:type="HypothesesValueT">
-            <Value />
-          </Value>
-        </PropertySet>
-      </PropertySets>
-    </Box>
-    <Box>
-      <CreatorIdentifier>LISpMinerTasks.SDFFTTask</CreatorIdentifier>
-      <ProjectIdentifier>22</ProjectIdentifier>
-      <Connections />
-      <PropertySets>
-        <PropertySet>
-          <PropertyName>FirstSet</PropertyName>
-          <Value xsi:type="StringValueT">
-            <Value>
-              <stringValue>Cedent1</stringValue>
-            </Value>
-          </Value>
-        </PropertySet>
-        <PropertySet>
-          <PropertyName>GenerationInfo</PropertyName>
-          <Value xsi:type="GenerationInfoValueT">
-            <Value>
-              <generationState>DidNotStart</generationState>
-              <generationNrOfTests>0</generationNrOfTests>
-              <generationNrOfHypotheses>0</generationNrOfHypotheses>
-              <generationStartTime xsi:type="DateTimeTI">
-                <day>0</day>
-                <month>0</month>
-                <year>0</year>
-                <hour>0</hour>
-                <minute>0</minute>
-                <second>0</second>
-              </generationStartTime>
-              <generationTotalTime xsi:type="TimeTI">
-                <hour>0</hour>
-                <minute>0</minute>
-                <second>0</second>
-              </generationTotalTime>
-            </Value>
-          </Value>
-        </PropertySet>
-        <PropertySet>
-          <PropertyName>Hypotheses</PropertyName>
-          <Value xsi:type="HypothesesValueT">
-            <Value />
-          </Value>
-        </PropertySet>
-        <PropertySet>
-          <PropertyName>SecondSet</PropertyName>
-          <Value xsi:type="StringValueT">
-            <Value>
-              <stringValue>Cedent2</stringValue>
+              <doubleValue>5</doubleValue>
             </Value>
           </Value>
         </PropertySet>
       </PropertySets>
     </Box>
     <Box>
-      <CreatorIdentifier>LISpMinerTasks.SDCFTask</CreatorIdentifier>
-      <ProjectIdentifier>23</ProjectIdentifier>
+      <CreatorIdentifier>LISpMinerTasks.FFTTask.Quantifiers.Functional.BaseCeil</CreatorIdentifier>
+      <ProjectIdentifier>57</ProjectIdentifier>
       <Connections />
       <PropertySets>
         <PropertySet>
-          <PropertyName>FirstSet</PropertyName>
+          <PropertyName>Relation</PropertyName>
           <Value xsi:type="StringValueT">
             <Value>
-              <stringValue>Cedent1</stringValue>
+              <stringValue>GreaterThanOrEqual</stringValue>
             </Value>
           </Value>
         </PropertySet>
         <PropertySet>
-          <PropertyName>GenerationInfo</PropertyName>
-          <Value xsi:type="GenerationInfoValueT">
+          <PropertyName>Treshold</PropertyName>
+          <Value xsi:type="DoubleValueT">
             <Value>
-              <generationState>DidNotStart</generationState>
-              <generationNrOfTests>0</generationNrOfTests>
-              <generationNrOfHypotheses>0</generationNrOfHypotheses>
-              <generationStartTime xsi:type="DateTimeTI">
-                <day>0</day>
-                <month>0</month>
-                <year>0</year>
-                <hour>0</hour>
-                <minute>0</minute>
-                <second>0</second>
-              </generationStartTime>
-              <generationTotalTime xsi:type="TimeTI">
-                <hour>0</hour>
-                <minute>0</minute>
-                <second>0</second>
-              </generationTotalTime>
+              <doubleValue>3</doubleValue>
             </Value>
           </Value>
         </PropertySet>
         <PropertySet>
-          <PropertyName>Hypotheses</PropertyName>
-          <Value xsi:type="HypothesesValueT">
-            <Value />
-          </Value>
-        </PropertySet>
-        <PropertySet>
-          <PropertyName>SecondSet</PropertyName>
+          <PropertyName>Units</PropertyName>
           <Value xsi:type="StringValueT">
             <Value>
-              <stringValue>Cedent2</stringValue>
+              <stringValue>AbsoluteNumber</stringValue>
             </Value>
-          </Value>
-        </PropertySet>
-      </PropertySets>
-    </Box>
-    <Box>
-      <CreatorIdentifier>LISpMinerTasks.SDKLTask</CreatorIdentifier>
-      <ProjectIdentifier>24</ProjectIdentifier>
-      <Connections />
-      <PropertySets>
-        <PropertySet>
-          <PropertyName>FirstSet</PropertyName>
-          <Value xsi:type="StringValueT">
-            <Value>
-              <stringValue>Cedent1</stringValue>
-            </Value>
-          </Value>
-        </PropertySet>
-        <PropertySet>
-          <PropertyName>GenerationInfo</PropertyName>
-          <Value xsi:type="GenerationInfoValueT">
-            <Value>
-              <generationState>DidNotStart</generationState>
-              <generationNrOfTests>0</generationNrOfTests>
-              <generationNrOfHypotheses>0</generationNrOfHypotheses>
-              <generationStartTime xsi:type="DateTimeTI">
-                <day>0</day>
-                <month>0</month>
-                <year>0</year>
-                <hour>0</hour>
-                <minute>0</minute>
-                <second>0</second>
-              </generationStartTime>
-              <generationTotalTime xsi:type="TimeTI">
-                <hour>0</hour>
-                <minute>0</minute>
-                <second>0</second>
-              </generationTotalTime>
-            </Value>
-          </Value>
-        </PropertySet>
-        <PropertySet>
-          <PropertyName>Hypotheses</PropertyName>
-          <Value xsi:type="HypothesesValueT">
-            <Value />
-          </Value>
-        </PropertySet>
-        <PropertySet>
-          <PropertyName>SecondSet</PropertyName>
-          <Value xsi:type="StringValueT">
-            <Value>
-              <stringValue>Cedent2</stringValue>
-            </Value>
-          </Value>
-        </PropertySet>
-      </PropertySets>
-    </Box>
-    <Box>
-      <CreatorIdentifier>LISpMinerTasks.KLTask</CreatorIdentifier>
-      <ProjectIdentifier>25</ProjectIdentifier>
-      <Connections />
-      <PropertySets>
-        <PropertySet>
-          <PropertyName>GenerationInfo</PropertyName>
-          <Value xsi:type="GenerationInfoValueT">
-            <Value>
-              <generationState>DidNotStart</generationState>
-              <generationNrOfTests>0</generationNrOfTests>
-              <generationNrOfHypotheses>0</generationNrOfHypotheses>
-              <generationStartTime xsi:type="DateTimeTI">
-                <day>0</day>
-                <month>0</month>
-                <year>0</year>
-                <hour>0</hour>
-                <minute>0</minute>
-                <second>0</second>
-              </generationStartTime>
-              <generationTotalTime xsi:type="TimeTI">
-                <hour>0</hour>
-                <minute>0</minute>
-                <second>0</second>
-              </generationTotalTime>
-            </Value>
-          </Value>
-        </PropertySet>
-        <PropertySet>
-          <PropertyName>Hypotheses</PropertyName>
-          <Value xsi:type="HypothesesValueT">
-            <Value />
           </Value>
         </PropertySet>
       </PropertySets>

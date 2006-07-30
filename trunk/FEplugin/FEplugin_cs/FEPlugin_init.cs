@@ -108,6 +108,7 @@ namespace FEplugin_cs
     {
         static string LMRA_dir;     // adresar, kde je soubor ReportAsistent.exe
         static string FerdaFrontEnd_dir;     // adresar, kde je Ferda FrontEnd
+        static string FerdaBoxes_dir;   // adresar, kde jsou informace o Ferdovskych Boxech
         static string Previous_dir;
 
 
@@ -127,18 +128,28 @@ namespace FEplugin_cs
                     LMRA_dir = "";
             }
 
-            // nalezeni klice FerdaFrontEnd adresare v registru
+            // nalezeni klice v registru pro ziskani adresaru FerdaFrontEnd a FerdaBoxes
             RegistryKey regkey2;
             regkey2 = Registry.CurrentUser.OpenSubKey(@"Software\Ferda DataMiner");
             if (regkey2 == null)
+            {
                 FerdaFrontEnd_dir = "";
+                FerdaBoxes_dir = "";
+            }
             else
             {
                 FerdaFrontEnd_dir = (string)regkey2.GetValue("InstallDir");
+                FerdaBoxes_dir = (string)regkey2.GetValue("InstallDir");
                 if (FerdaFrontEnd_dir == null)
+                {
                     FerdaFrontEnd_dir = "";
+                    FerdaBoxes_dir = "";
+                }
                 else
+                {
                     FerdaFrontEnd_dir += @"\FrontEnd";
+                    FerdaBoxes_dir += @"\Server\BoxModulesServices";
+                }
 
             }
 
@@ -177,6 +188,12 @@ namespace FEplugin_cs
         public static string get_FerdaFrontEnd_dir()
         {
             return FerdaFrontEnd_dir;
+        }
+
+        // vrati cestu do adresare, kde je FerdaBoxes
+        public static string get_FerdaBoxes_dir()
+        {
+            return FerdaBoxes_dir;
         }
 
         // vrati cestu do adresare, kde je ReportAsistent.exe

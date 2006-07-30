@@ -47,6 +47,10 @@ private:
 
 	CArray<s_transformation *,s_transformation*> m_transformations;
 
+	
+	// kody: nastaveni jazyka transformace (hodnoty promenne "lng")
+	BOOL setLanguageInTransformation(MSXML2::IXMLDOMNodePtr pTransf);
+
 };
 
 #endif // !defined(AFX_AELINFO_H__0974EB59_93DF_4180_9E7B_8B12A39E63F5__INCLUDED_)

@@ -5,6 +5,10 @@
       version="1.0">
     
     
+    <!-- nastaveni jazyka (defaultne cz) -->
+	<xsl:variable name="lng">cz</xsl:variable>
+
+    
     <!-- definovani klice - dulezite kvuli hledani elementu s danym ID v celem dokumentu -->
     <xsl:key name="attribute_id" match="ti_attribute" use="@id" />
     
@@ -63,19 +67,188 @@
 	</xsl:template>
 
 
+
+
+
+
+
+
+
+
 	
 	<!-- vypise vsechny atributy krome cedentu-->
 	
 	<xsl:template match="@*">
 	
-					<xsl:text disable-output-escaping="yes">
-					</xsl:text>
+		
+		<!-- labely polozek-->
+		<xsl:variable name="label">
+			<xsl:choose>
+			
+				<!-- nezavisle na jazyce -->
+				
+				<xsl:when test="name()='sum'">
+					<xsl:text>Sum</xsl:text>
+				</xsl:when>
+							
+				<xsl:when test="name()='min'">
+					<xsl:text>Min</xsl:text>
+				</xsl:when>
+							
+				<xsl:when test="name()='max'">
+					<xsl:text>Max</xsl:text>
+				</xsl:when>
+						
+				
+				
+				
+				<!-- cesky -->
+				
+				<xsl:when test="$lng='cz'">	
+						<xsl:choose>
+							<xsl:when test="name()='db_name'">
+								<xsl:text>Databáze</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='matrix_name'">
+								<xsl:text>Datová matice</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='task_name'">
+								<xsl:text>Jméno úlohy</xsl:text>
+							</xsl:when>
+							
+							
+							
+							
+							
+							<xsl:when test="name()='chi_sq'">
+								<xsl:text>ChiSq : Chi-kvadrát test</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='fnc_s'">
+								<xsl:text>FncS : function-type KL-Quantifier (sum)</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='fnc_r'">
+								<xsl:text>FncR : function-type KL-Quantifier (row)</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='h_c'">
+								<xsl:text>Nepodmínìná entropie H(C)</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='h_r'">
+								<xsl:text>Nepodmínìná entropie H(R)</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='h_c_r'">
+								<xsl:text>Podmínìná entropie H(C|R)</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='mi'">
+								<xsl:text>Mutual information MI(C,R) normalizovaná</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='aic'">
+								<xsl:text>Asymetrický informaèní koeficient AIC(R,C)</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='kend'">
+								<xsl:text>Kendallùv coefficient</xsl:text>
+							</xsl:when>
+							
+							<xsl:otherwise>
+								<xsl:value-of select="name()"/>
+							</xsl:otherwise>
+						</xsl:choose>	
+				</xsl:when>
+				
+				
+				<!-- english-->
+				
+				<xsl:when test="$lng='en'">    
+						<xsl:choose>
+							<xsl:when test="name()='db_name'">
+								<xsl:text>Database</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='matrix_name'">
+								<xsl:text>Data matrix</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='task_name'">
+								<xsl:text>Task name</xsl:text>
+							</xsl:when>
+							
+						
+							
+							<xsl:when test="name()='chi_sq'">
+								<xsl:text>ChiSq : Chi-square test</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='fnc_s'">
+								<xsl:text>FncS : function-type KL-Quantifier (sum)</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='fnc_r'">
+								<xsl:text>FncR : function-type KL-Quantifier (row)</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='h_c'">
+								<xsl:text>Unconditional entropy H(C)</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='h_r'">
+								<xsl:text>Unconditional entropy H(R)</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='h_c_r'">
+								<xsl:text>Conditional entropy H(C|R)</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='mi'">
+								<xsl:text>Mutual information MI(C,R) normalized</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='aic'">
+								<xsl:text>Asymetric information coefficient AIC(R,C)</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='kend'">
+								<xsl:text>Kendall coefficient</xsl:text>
+							</xsl:when>
+							
+							<xsl:otherwise>
+								<xsl:value-of select="name()"/>
+							</xsl:otherwise>
+						</xsl:choose>
+				</xsl:when>
+				
+				
+				
+				
+				<!-- jinak se pouzije nazev XML atributu-->
+				
+				<xsl:otherwise>
+					<xsl:value-of select="name()"/>
+				</xsl:otherwise>
+				
+			</xsl:choose>
+		</xsl:variable>
+			<!-- end of: labely polozek-->
+
 		
 		
-					<attribute name="{name()}" value="{.}" />
+					<attribute name="{name()}" value="{.}" label="{$label}" />
 	</xsl:template>
 	
 	
+
+
+
+
+
 
 
 

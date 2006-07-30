@@ -43,6 +43,51 @@
 <xsl:variable name="BorderGrey">true</xsl:variable>
       
 
+
+<!-- nastaveni jazyka (defaultne cestina)-->
+<xsl:variable name="lng">cz</xsl:variable>
+
+
+
+<!-- nastaveni jazykovych popisku (labelu) -->
+
+
+<xsl:variable name="label_sum">   <!-- label v tabulce v kolonkach souctu-->
+	<xsl:choose>	
+		<xsl:when test="$lng='cz'">souèet</xsl:when>
+		<xsl:when test="$lng='en'">sum</xsl:when>
+		<xsl:otherwise>sum</xsl:otherwise>
+	</xsl:choose>
+</xsl:variable>
+
+<xsl:variable name="label_tab_header">   <!-- hlavicka tabulky-->
+	<xsl:choose>	
+		<xsl:when test="$lng='cz'">Rozdíly množin:</xsl:when>
+		<xsl:when test="$lng='en'">Set differences:</xsl:when>
+		<xsl:otherwise>Set differences</xsl:otherwise>
+	</xsl:choose>
+</xsl:variable>
+
+<xsl:variable name="label_item1">   <!-- 1. polozka tabulky-->
+	<xsl:choose>	
+		<xsl:when test="$lng='cz'">První množina</xsl:when>
+		<xsl:when test="$lng='en'">First set</xsl:when>
+		<xsl:otherwise>First set</xsl:otherwise>
+	</xsl:choose>
+</xsl:variable>
+
+<xsl:variable name="label_item2">   <!-- 2. polozka tabulky-->
+	<xsl:choose>	
+		<xsl:when test="$lng='cz'">Druhá množina</xsl:when>
+		<xsl:when test="$lng='en'">Second set</xsl:when>
+		<xsl:otherwise>Second set</xsl:otherwise>
+	</xsl:choose>
+</xsl:variable>
+
+
+<!-- TEMPLATES -->
+
+
 	<xsl:template match="hyp_sd4ft">
 		
 		<xsl:variable name="border_color">
@@ -197,7 +242,7 @@
 
 
 		<paragraph>
-			<text id="{$id_base}title">Set differences:</text>
+			<text id="{$id_base}title"><xsl:value-of select="$label_tab_header"/></text>
 			<xsl:element name="table" >
 			    <xsl:attribute name="id"><xsl:value-of select="$id_base"/>table1</xsl:attribute>
 			    <xsl:attribute name="cols"><xsl:value-of select="$pocet_sloupcu" /></xsl:attribute>
@@ -226,14 +271,14 @@
 					</td>
 					<xsl:if test="$SumShow='true'">
 						<td id="{$id_base}r1d6" bgcolor="{$border_color}">
-							<text id="{$id_base}r1d6text">sum of values</text> 
+							<text id="{$id_base}r1d6text"><xsl:value-of select="$label_sum"/></text> 
 						</td>
 					</xsl:if>
 				</tr>
 				
 				<tr id="{$id_base}r2">
 					<td id="{$id_base}r2d1" bgcolor="{$border_color}">
-						<text id="{$id_base}r2d1text">First set</text> 
+						<text id="{$id_base}r2d1text"><xsl:value-of select="$label_item1"/></text> 
 					</td>
 					
 					<xsl:element name="td">
@@ -291,7 +336,7 @@
 				<tr id="{$id_base}r3">
 					
 					<td id="{$id_base}r3d1" bgcolor="{$border_color}">
-						<text id="{$id_base}r3d1text">Second set</text> 
+						<text id="{$id_base}r3d1text"><xsl:value-of select="$label_item2"/></text> 
 					</td>
 					
 					

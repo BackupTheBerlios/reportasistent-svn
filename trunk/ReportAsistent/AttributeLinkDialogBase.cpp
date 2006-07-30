@@ -7,6 +7,7 @@
 #include "AttributeLinkDialogBase.h"
 #include "APTransform.h"
 
+
 #ifdef _DEBUG
 #undef THIS_FILE
 static char THIS_FILE[]=__FILE__;
@@ -96,6 +97,14 @@ void CAttributeLinkDialogBase::OnRefresh(CListCtrl & AttributesList, LPCTSTR tar
 
 void CAttributeLinkDialogBase::FillAttributesList(CListCtrl & AttributesList, LPCTSTR target_id)
 {
+	// smazani puvodniho obsahu
+		// kody
+	for (int i=0; i<AttributesList.GetItemCount(); i++)
+	{
+		if (AttributesList.GetItemData(i) != NULL)
+			delete (CString*) AttributesList.GetItemData(i);
+	}
+		//  /kody
 	AttributesList.DeleteAllItems();
 	
 	CString query;
@@ -107,9 +116,33 @@ void CAttributeLinkDialogBase::FillAttributesList(CListCtrl & AttributesList, LP
 	{
 		MSXML2::IXMLDOMElementPtr el = sel->item[a];
 
-		int item = AttributesList.InsertItem(a, (_bstr_t) el->getAttribute("name"));
+		// kody - pokus
+
+		
+		 _bstr_t Label;  // pokud je v XML definovan atribut "label", bude mit jeho hodnotu. jinak bude hodnota atributu "name"
+
+		
+		try 
+		{ 
+			Label = (_bstr_t) el->getAttribute("label");
+		}
+		catch(...) 
+		{
+			Label = (_bstr_t) el->getAttribute("name");
+		}
+		
+		// atribut "name" uchovan do ItemData polozky
+		CString* pName = new CString();
+		*pName = (CString) (BSTR) (_bstr_t) el->getAttribute("name");
+
+		// /kody - smaz
+
+		//int item = AttributesList.InsertItem(a, (_bstr_t) el->getAttribute("name"));
+		int item = AttributesList.InsertItem(a, Label);  
 
 		AttributesList.SetItemText(item, ATTRLIST_CL_VALUE, (_bstr_t) el->getAttribute("value"));
+
+		AttributesList.SetItemData(item, (DWORD) pName);
 
 		el.Release();
 

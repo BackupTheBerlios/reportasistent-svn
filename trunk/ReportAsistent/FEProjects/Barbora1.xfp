@@ -467,6 +467,8 @@
     <Box>
       <CreatorIdentifier>DataMiningCommon.Database</CreatorIdentifier>
       <UserName>databaze Barbora</UserName>
+      <UserHint>schvalne, kam se zaradi tenhle komentar. Mel by k databazi
+</UserHint>
       <ProjectIdentifier>0</ProjectIdentifier>
       <Connections />
       <PropertySets>
@@ -487,7 +489,7 @@
           <PropertyName>OdbcConnectionString</PropertyName>
           <Value xsi:type="StringValueT">
             <Value>
-              <stringValue>DSN=Barborka;Persist security info=false</stringValue>
+              <stringValue>DSN=Barbora fn;Persist security info=false</stringValue>
             </Value>
           </Value>
         </PropertySet>

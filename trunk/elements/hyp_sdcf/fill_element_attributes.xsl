@@ -3,6 +3,10 @@
 <xsl:stylesheet 
       xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
       version="1.0">
+      
+    <!-- nastaveni jazyka (defaultne cz) -->
+	<xsl:variable name="lng">cz</xsl:variable>
+
     
     
     <!-- definovani klice - dulezite kvuli hledani elementu s danym ID v celem dokumentu -->
@@ -58,19 +62,311 @@
 	</xsl:template>
 
 
+
+
+
+
+
+
+
+
+
+
+
 	
 	<!-- vypise vsechny atributy krome cedentu-->
 	
 	<xsl:template match="@*">
 	
-					<xsl:text disable-output-escaping="yes">
-					</xsl:text>
+			<!-- labely polozek-->
+		<xsl:variable name="label">
+			<xsl:choose>
+			
+				<!-- nezavisle na jazyce -->
+				
+				<xsl:when test="name()='sum1'">
+					<xsl:text>Sum 1</xsl:text>
+				</xsl:when>
+							
+				<xsl:when test="name()='min1'">
+					<xsl:text>Min 1</xsl:text>
+				</xsl:when>
+							
+				<xsl:when test="name()='max1'">
+					<xsl:text>Max 1</xsl:text>
+				</xsl:when>
+						
+				<xsl:when test="name()='v1'">
+					<xsl:text>Variation ratio 1 : 1-f(modal) </xsl:text>
+				</xsl:when>
+						
+				<xsl:when test="name()='nom_var1'">
+					<xsl:text>Nominal variation 1 : suma(f(i)*(1-f(i))) * K/(K-1) </xsl:text>
+				</xsl:when>
+				
+				<xsl:when test="name()='dor_var1'">
+					<xsl:text>Discrete ordinary variation 1 : 2*suma(F(i)*(1-F(i))* 2/(K-1)</xsl:text>
+				</xsl:when>
+				
+				
+				
+				<xsl:when test="name()='sum2'">
+					<xsl:text>Sum 2</xsl:text>
+				</xsl:when>
+							
+				<xsl:when test="name()='min2'">
+					<xsl:text>Min 2</xsl:text>
+				</xsl:when>
+							
+				<xsl:when test="name()='max2'">
+					<xsl:text>Max 2</xsl:text>
+				</xsl:when>
+						
+				<xsl:when test="name()='v2'">
+					<xsl:text>Variation ratio 2 : 1-f(modal) </xsl:text>
+				</xsl:when>
+						
+				<xsl:when test="name()='nom_var2'">
+					<xsl:text>Nominal variation 2 : suma(f(i)*(1-f(i))) * K/(K-1) </xsl:text>
+				</xsl:when>
+				
+				<xsl:when test="name()='dor_var2'">
+					<xsl:text>Discrete ordinary variation 2 : 2*suma(F(i)*(1-F(i))* 2/(K-1)</xsl:text>
+				</xsl:when>
+							
+				
+				
+				
+				<!-- cesky -->
+				
+				<xsl:when test="$lng='cz'">    
+						<xsl:choose>
+							<xsl:when test="name()='db_name'">
+								<xsl:text>Databáze</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='matrix_name'">
+								<xsl:text>Datová matice</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='task_name'">
+								<xsl:text>Jméno úlohy</xsl:text>
+							</xsl:when>
+							
+							
+							
+							<xsl:when test="name()='avg_a1'">
+								<xsl:text>Aritmetický prùmìr kardinálních hodnot 1</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='avg_g1'">
+								<xsl:text>Geometrický prùmìr kardinálních hodnot 1</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='var1'">
+								<xsl:text>Variance kardinálních hodnot 1</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='st_dev1'">
+								<xsl:text>Standardní deviace kardinálních hodnot 1</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='skew1'">
+								<xsl:text>Skewness (šikmost) kardinálních hodnot 1</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='asym1'">
+								<xsl:text>Koeficient asymetrie kardinálních hodnot 1</xsl:text>
+							</xsl:when>
+							
+							
+							
+							<xsl:when test="name()='avg_a2'">
+								<xsl:text>Aritmetický prùmìr kardinálních hodnot 2</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='avg_g2'">
+								<xsl:text>Geometrický prùmìr kardinálních hodnot 2</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='var2'">
+								<xsl:text>Variance kardinálních hodnot 2</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='st_dev2'">
+								<xsl:text>Standardní deviace kardinálních hodnot 2</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='skew2'">
+								<xsl:text>Skewness (šikmost) kardinálních hodnot 2</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='asym2'">
+								<xsl:text>Koeficient asymetrie kardinálních hodnot 2</xsl:text>
+							</xsl:when>
+							
+							
+							
+							<xsl:when test="name()='da_sum'">
+								<xsl:text>DA-Sum : Souèet rozdílù absolutních frekvencí</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='da_min'">
+								<xsl:text>DA-Min : Minimum z rozdílù absolutních frekvencí</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='da_max'">
+								<xsl:text>DA-Max : Maximum z rozdílù absolutních frekvencí</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='dr_sum'">
+								<xsl:text>D%-Sum : Souèet rozdílù relativních frekvencí</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='dr_min'">
+								<xsl:text>D%-Min : Minimum z rozdílù relativních frekvencí</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='dr_max'">
+								<xsl:text>D%-Max : Maximum z rozdílù relativních frekvencí</xsl:text>
+							</xsl:when>
+							
+							
+							
+							<xsl:otherwise>
+								<xsl:value-of select="name()"/>
+							</xsl:otherwise>
+						</xsl:choose>
+				</xsl:when>
+				
+				
+				<!-- english-->
+				
+				<xsl:when test="$lng='en'">	
+						<xsl:choose>
+							<xsl:when test="name()='db_name'">
+								<xsl:text>Database</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='matrix_name'">
+								<xsl:text>Data matrix</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='task_name'">
+								<xsl:text>Task name</xsl:text>
+							</xsl:when>
+							
+							
+							
+							<xsl:when test="name()='avg_a1'">
+								<xsl:text>Arithmetic average of cardinal values1</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='avg_g1'">
+								<xsl:text>Geometric average of cardinal values 1</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='var1'">
+								<xsl:text>Variance of cardinal values 1</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='st_dev1'">
+								<xsl:text>Standard deviation of cardinal values 1</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='skew1'">
+								<xsl:text>Skewness of cardinal values 1</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='asym1'">
+								<xsl:text>Asymetry coeficient of cardinal values 1</xsl:text>
+							</xsl:when>
+							
+							
+							
+							<xsl:when test="name()='avg_a2'">
+								<xsl:text>Arithmetic average of cardinal values 2</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='avg_g2'">
+								<xsl:text>Geometric average of cardinal values 2</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='var2'">
+								<xsl:text>Variance of cardinal values 2</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='st_dev2'">
+								<xsl:text>Standard deviation of cardinal values 2</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='skew2'">
+								<xsl:text>Skewness of cardinal values 2</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='asym2'">
+								<xsl:text>Asymetry coeficient of cardinal values 2</xsl:text>
+							</xsl:when>
+							
+							
+							<xsl:when test="name()='da_sum'">
+								<xsl:text>DA-Sum : Sum of absolute differences of all frequencies</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='da_min'">
+								<xsl:text>DA-Min : Minimal absolute difference of corresponding frequencies</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='da_max'">
+								<xsl:text>DA-Max : Maximal absolute difference of correspondint frequencies</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='dr_sum'">
+								<xsl:text>D%-Sum : Sum of differences of relative frequencies</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='dr_min'">
+								<xsl:text>D%-Min : Minimal difference of relative frequencies</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='dr_max'">
+								<xsl:text>D%-Max : Maximal difference of relative frequencies</xsl:text>
+							</xsl:when>
+							
+							
+							
+							<xsl:otherwise>
+								<xsl:value-of select="name()"/>
+							</xsl:otherwise>
+						</xsl:choose>	
+				</xsl:when>
+				
+				<!-- jinak se pouzije nazev XML atributu-->
+				
+				<xsl:otherwise>
+					<xsl:value-of select="name()"/>
+				</xsl:otherwise>
+				
+			</xsl:choose>
+		</xsl:variable>
+			<!-- end of: labely polozek--> 
+
+
 		
-		
-					<attribute name="{name()}" value="{.}" />
+					<attribute name="{name()}" value="{.}" label="{$label}" />
+					
 	</xsl:template>
 	
 	
+
+
+
+
+
+
+
+
+
 
 
 

@@ -182,12 +182,14 @@ void CAttributeLinkTableDialog::OnAddButton()
 	if (pos == NULL) return;
 	int nItem = m_AttributesList.GetNextSelectedItem(pos);
 	
-	CString name = m_AttributesList.GetItemText(nItem, ATTRLIST_CL_NAME);
+	CString label = m_AttributesList.GetItemText(nItem, ATTRLIST_CL_NAME);
 	CString value = m_AttributesList.GetItemText(nItem, ATTRLIST_CL_VALUE);
+	// kody
+	CString name = * (CString*) m_AttributesList.GetItemData(nItem);
 
 
 	//vloz polozku na konec captions listu
-	int item = m_CaptionsList.InsertItem(m_CaptionsList.GetItemCount(), name);
+	int item = m_CaptionsList.InsertItem(m_CaptionsList.GetItemCount(), label);
 	m_CaptionsList.SetItemText(item, CAPTLIST_CL_NAME, name);
 	m_CaptionsList.SetItemText(item, CAPTLIST_CL_VALUE, value);
 
