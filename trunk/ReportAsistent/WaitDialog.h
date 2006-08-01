@@ -39,8 +39,11 @@ protected:
 	//{{AFX_MSG(CWaitDialog)
 	virtual BOOL OnInitDialog();
 	afx_msg void OnTimer(UINT nIDEvent);
+	afx_msg void OnExitButton();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
+private:
+	BOOL m_bEndDialog;
 };
 
 //{{AFX_INSERT_LOCATION}}

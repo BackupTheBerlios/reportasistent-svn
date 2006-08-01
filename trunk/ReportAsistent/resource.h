@@ -81,6 +81,7 @@
 #define IDC_WAIT_ANIMATION              1034
 #define IDC_CZECH_RADIO                 1035
 #define IDC_ENGLISH_RADIO               1036
+#define IDC_EXIT_BUTTON                 1037
 #define ID_MMGENREP                     32771
 #define ID_MMSOURCES                    32772
 #define ID_ELEMENT_EDIT                 32780
@@ -112,7 +113,7 @@
 #define _APS_3D_CONTROLS                     1
 #define _APS_NEXT_RESOURCE_VALUE        166
 #define _APS_NEXT_COMMAND_VALUE         32788
-#define _APS_NEXT_CONTROL_VALUE         1037
+#define _APS_NEXT_CONTROL_VALUE         1038
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

@@ -16,7 +16,7 @@ static char THIS_FILE[] = __FILE__;
 
 
 CWaitDialog::CWaitDialog(CWnd* pParent /*=NULL*/)
-	: CDialog(CWaitDialog::IDD, pParent)
+	: CDialog(CWaitDialog::IDD, pParent), m_bEndDialog(FALSE)
 {
 	//{{AFX_DATA_INIT(CWaitDialog)
 		// NOTE: the ClassWizard will add member initialization here
@@ -36,6 +36,7 @@ void CWaitDialog::DoDataExchange(CDataExchange* pDX)
 BEGIN_MESSAGE_MAP(CWaitDialog, CDialog)
 	//{{AFX_MSG_MAP(CWaitDialog)
 	ON_WM_TIMER()
+	ON_BN_CLICKED(IDC_EXIT_BUTTON, OnExitButton)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -54,7 +55,15 @@ BOOL CWaitDialog::OnInitDialog()
 
 void CWaitDialog::OnTimer(UINT nIDEvent) 
 {
+	if (m_bEndDialog) EndDialog(IDOK);
+
 	m_wait_animation.RedrawWindow();
 	
 	CDialog::OnTimer(nIDEvent);
+}
+
+void CWaitDialog::OnExitButton() 
+{
+	m_bEndDialog = TRUE;
+	//EndDialog(IDOK);	
 }

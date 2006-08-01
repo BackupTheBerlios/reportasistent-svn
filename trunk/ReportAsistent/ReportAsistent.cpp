@@ -80,7 +80,8 @@ UINT TestovaciThread( LPVOID pParam )
 
 	Sleep(2000);
 
-	SendMessage(* p_dlg_hwnd, WM_COMMAND, IDCANCEL, 0);
+	if (IsWindow(* p_dlg_hwnd))
+		SendMessage(* p_dlg_hwnd, WM_COMMAND, IDC_EXIT_BUTTON, 0);
 
 	return 0;
 }
