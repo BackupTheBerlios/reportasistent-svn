@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="windows-1250"?>
+<visualization>
+
+  <visualization_options active_element="CF hypothesis" visualization_label="Header and cedents">
+
+    <!--setting of header-->
+    <string_option variable_name="Header" title="Title (header)">
+    </string_option>
+
+
+    <!--setting whether to show attributes-->
+    <enum_option variable_name="ShowAttributes" title="Show attributes">
+       <enum_item value="true" label="yes"/>  
+       <enum_item value="false" label="no"/>  
+    </enum_option>
+    
+    
+    <!--setting whether to show condition-->
+    <enum_option variable_name="ShowCondition" title="Show Condition">
+       <enum_item value="true" label="yes"/>  
+       <enum_item value="false" label="no"/>  
+    </enum_option>
+    
+  </visualization_options>
+
+  
+  
+  <!--default values of variables-->
+  
+  <visualization_values>
+      <variable name="Header" value="CFhyp" />
+      <variable name="ShowAttributes" value="true"/>
+      <variable name="ShowCondition" value="true"/>
+  </visualization_values>
+
+</visualization>

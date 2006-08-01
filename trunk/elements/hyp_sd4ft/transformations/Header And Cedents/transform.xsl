@@ -14,12 +14,14 @@
 <xsl:variable name="ShowAntecedent">true</xsl:variable>
 <xsl:variable name="ShowSuccedent">true</xsl:variable>
 <xsl:variable name="ShowCondition">true</xsl:variable>      
+<xsl:variable name="ShowFirstSet">true</xsl:variable>      
+<xsl:variable name="ShowSecondSet">true</xsl:variable>      
 	
 	
 	
 
 
-<xsl:template match="hyp_4ft"> <!-- nezpomen prepsat na match="/hyp_4ft" - odebrat lomitko -->
+<xsl:template match="hyp_sd4ft"> <!-- nezpomen prepsat na match="/hyp_4ft" - odebrat lomitko -->
 
 		
 	<chapter title="{$Header}">
@@ -34,6 +36,14 @@
 	
 	<xsl:if test="$ShowCondition='true'">		
 		<xsl:apply-templates select="id(@condition)"/>
+	</xsl:if>
+	
+	<xsl:if test="$ShowFirstSet='true'">		
+		<xsl:apply-templates select="id(@set1)"/>
+	</xsl:if>
+	
+	<xsl:if test="$ShowSecondSet='true'">		
+		<xsl:apply-templates select="id(@set2)"/>
 	</xsl:if>
 	
 	</chapter>

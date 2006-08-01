@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="windows-1250"?>
 
-		<active_element type="quantifier" source="" id="quantifier1">
+		<active_element type="quantifier" source="" id="quantifier1" label="Quantifier">
 			<attributes>
 				<element_attributes>
 				</element_attributes>

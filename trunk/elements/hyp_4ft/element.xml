@@ -1,33 +1,8 @@
 <?xml version="1.0" encoding="windows-1250"?>
 
-		<active_element type="hyp_4ft" source="" id="hyp_4ft1">
+		<active_element type="hyp_4ft" source="" id="hyp_4ft1" label="4FT hypothesis">
 			<attributes>
 				<element_attributes>
-					<attribute name="id" value="" label="" />
-					<attribute name="db_name" value="" label="" />
-					<attribute name="matrix_name" value="" label="" />
-					<attribute name="task_name" value="" label="" />
-					<attribute name="a" value="" label="" />
-					<attribute name="b" value="" label="" />
-					<attribute name="c" value="" label="" />
-					<attribute name="d" value="" label="" />
-					<attribute name="conf" value="" label="" />
-					<attribute name="d_conf" value="" label="" />
-					<attribute name="e_conf" value="" label="" />
-					<attribute name="support" value="" label="" />
-					<attribute name="completeness" value="" label="" />
-					<attribute name="avg_diff" value="" label="" />
-					<attribute name="low_bnd_imp" value="" label="" />
-					<attribute name="up_bnd_imp" value="" label="" />
-					<attribute name="low_bnd_dbl_imp" value="" label="" />
-					<attribute name="up_bnd_dbl_imp" value="" label="" />
-					<attribute name="low_bnd_eq" value="" label="" />
-					<attribute name="up_bnd_eq" value="" label="" />
-					<attribute name="fisher" value="" label="" />
-					<attribute name="chi_sq" value="" label="" />
-					<attribute name="antecedent" value="" label="" />
-					<attribute name="succedent" value="" label="" />
-					<attribute name="condition" value="" label="" />
 				</element_attributes>
 			</attributes>
 			<filter type="simple">

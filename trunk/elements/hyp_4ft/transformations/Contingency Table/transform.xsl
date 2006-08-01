@@ -6,6 +6,13 @@
       xmlns:dedek="http://reportasistent.com/dedek_namespace"
       version="1.0">
 
+
+
+<!-- nastaveni jazyka (defaultne cestina)-->
+<xsl:variable name="lng">cz</xsl:variable>
+
+
+
   <msxsl:script language="JScript" implements-prefix="dedek">
 
 	function RGB(val, max)
@@ -43,8 +50,7 @@
 <xsl:variable name="BorderGrey">true</xsl:variable>
 
 
-<!-- nastaveni jazyka (defaultne cestina)-->
-<xsl:variable name="lng">cz</xsl:variable>
+
 
 
 

@@ -3,7 +3,19 @@
 <xsl:stylesheet 
       xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
       version="1.0">
-          
+  
+  
+   
+    <!-- nastaveni jazyka (defaultne cz) -->
+	<xsl:variable name="lng">cz</xsl:variable>
+       
+
+
+
+
+<!-- ================= TEMPLATE ============================== -->
+
+
 	
 	<xsl:template match="/active_list">		
 		<xsl:text disable-output-escaping="yes">
@@ -36,7 +48,8 @@
 	</xsl:template>
 
 	
-	
+
+<!-- ================= TEMPLATE ============================== -->	
 
 
 
@@ -67,24 +80,115 @@
 	</xsl:template>
 	
 
+<!-- ================= TEMPLATE ============================== -->
+
 
 	<!-- vypise vsechny atributy -->
 	<xsl:template match="@*" mode="attributes">
 	
-		<xsl:text disable-output-escaping="yes">
-		&lt;attribute name="</xsl:text>
 	
-		<xsl:value-of select="name()"/>
-	
-		<!-- =<xsl:value-of select="."/> -->
+		<!-- nastaveni jazyka - labely-->
+		
+		<xsl:variable name="label">
+			<xsl:choose>
+			
+				<!-- nezavisle na jazyce -->				
+				
+				<!-- cesky -->
+				
+				<xsl:when test="$lng='cz'">    
+						<xsl:choose>
+							<xsl:when test="name()='db_name'">
+								<xsl:text>Databáze</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='matrix_name'">
+								<xsl:text>Datová matice</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='attr_name'">
+								<xsl:text>Jméno atributu</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='creation'">
+								<xsl:text>Zdrojový sloupec</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='ctgr_count'">
+								<xsl:text>Poèet kategorií</xsl:text>
+							</xsl:when>
+							
+							
+							<xsl:otherwise>
+								<xsl:value-of select="name()"/>
+							</xsl:otherwise>
+						</xsl:choose>
+				</xsl:when>
+				
+				
+				<!-- english-->
+				
+				<xsl:when test="$lng='en'">	
+						<xsl:choose>
+							<xsl:when test="name()='db_name'">
+								<xsl:text>Database</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='matrix_name'">
+								<xsl:text>Data matrix</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='task_name'">
+								<xsl:text>Task name</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='attr_name'">
+								<xsl:text>Attribute name</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='creation'">
+								<xsl:text>Source column</xsl:text>
+							</xsl:when>
+							
+							<xsl:when test="name()='ctgr_count'">
+								<xsl:text>Count of categories</xsl:text>
+							</xsl:when>
+							
+							<xsl:otherwise>
+								<xsl:value-of select="name()"/>
+							</xsl:otherwise>
+						</xsl:choose>	
+				</xsl:when>
+				
+				<!-- jinak se pouzije nazev XML atributu-->
+				
+				<xsl:otherwise>
+					<xsl:value-of select="name()"/>
+				</xsl:otherwise>
+				
+			</xsl:choose>
+		</xsl:variable>
 
-		<xsl:text disable-output-escaping="yes">"/&gt;</xsl:text>
+		<!-- nastaveni jazyka - labely-->
+		
+		
+	
+	
+	
+	
+		<xsl:element name="attribute">
+		
+			<xsl:attribute name="name"><xsl:value-of select="name()"/></xsl:attribute>
+			<xsl:attribute name="label"><xsl:value-of select="$label"/></xsl:attribute>
+	
+		</xsl:element>
+	
 
 	</xsl:template>
 
 
 
-
+<!-- ================= TEMPLATE ============================== -->
 
 
 	<!-- vypise hodnoty -->
@@ -108,6 +212,8 @@
 
 	</xsl:template>
 
+
+<!-- ================= TEMPLATE ============================== -->
 
 
 	<!-- naplni hodnotu pro categories -->
@@ -133,6 +239,9 @@
 		<xsl:value-of select="@name"/>
 	</xsl:template>
 
+
+
+<!-- ================= TEMPLATE ============================== -->
 
 
 	<!-- naplni hodnotu -->

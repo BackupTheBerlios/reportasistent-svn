@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="windows-1250"?>
 
-		<active_element type="hyp_sdkl" source="" id="hyp_sdkl1">
+		<active_element type="hyp_sdkl" source="" id="hyp_sdkl1" label="SD-KL hypothesis">
 			<attributes>
 				<element_attributes>
 				</element_attributes>

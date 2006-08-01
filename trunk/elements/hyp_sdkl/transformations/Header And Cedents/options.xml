@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="windows-1250"?>
+<visualization>
+
+  <visualization_options active_element="SD-KL hypothesis" visualization_label="Header and cedents">
+
+    <!--setting of header-->
+    <string_option variable_name="Header" title="Title (header)">
+    </string_option>
+
+
+    <!--setting whether to show antecedent-->
+    <enum_option variable_name="ShowRowAttributes" title="Show Row attributes">
+       <enum_item value="true" label="yes"/>  
+       <enum_item value="false" label="no"/>  
+    </enum_option>
+    
+    <!--setting whether to show succedent-->
+    <enum_option variable_name="ShowColumnAttributes" title="Show Column attributes">
+       <enum_item value="true" label="yes"/>  
+       <enum_item value="false" label="no"/>  
+    </enum_option>
+    
+    <!--setting whether to show condition-->
+    <enum_option variable_name="ShowCondition" title="Show Condition">
+       <enum_item value="true" label="yes"/>  
+       <enum_item value="false" label="no"/>  
+    </enum_option>
+    
+    <!--setting whether to show First set-->
+	<enum_option variable_name="ShowFirstSet" title="Show First set">
+		<enum_item value="true" label="yes"/>
+		<enum_item value="false" label="no"/>
+	</enum_option>
+		
+	<!--setting whether to show Second set-->
+	<enum_option variable_name="ShowSecondSet" title="Show Second set">
+		<enum_item value="true" label="yes"/>
+		<enum_item value="false" label="no"/>
+	</enum_option>
+    
+  </visualization_options>
+
+  
+  
+  <!--default values of variables-->
+  
+  <visualization_values>
+      <variable name="Header" value="SD-KLhyp" />
+      <variable name="ShowRowAttributes" value="true"/>
+      <variable name="ShowColumnAttributes" value="true"/>
+      <variable name="ShowCondition" value="true"/>
+      <variable name="ShowFirstSet" value="true"/>
+	  <variable name="ShowSecondSet" value="true"/>
+  </visualization_values>
+
+</visualization>

@@ -11,25 +11,25 @@
 
 <!-- Promenne - nastaveni vizualizaci-->
 <xsl:variable name="Header"></xsl:variable>
-<xsl:variable name="ShowAntecedent">true</xsl:variable>
-<xsl:variable name="ShowSuccedent">true</xsl:variable>
+<xsl:variable name="ShowRowAttributes">true</xsl:variable>
+<xsl:variable name="ShowColumnAttributes">true</xsl:variable>
 <xsl:variable name="ShowCondition">true</xsl:variable>      
 	
 	
 	
 
 
-<xsl:template match="hyp_4ft"> <!-- nezpomen prepsat na match="/hyp_4ft" - odebrat lomitko -->
+<xsl:template match="hyp_kl"> <!-- nezpomen prepsat na match="/hyp_4ft" - odebrat lomitko -->
 
 		
 	<chapter title="{$Header}">
 
-	<xsl:if test="$ShowAntecedent='true'">	
-		<xsl:apply-templates select="id(@antecedent)"/>
+	<xsl:if test="$ShowRowAttributes='true'">	
+		<xsl:apply-templates select="id(@row_attributes)"/>
 	</xsl:if>
 	
-	<xsl:if test="$ShowSuccedent='true'">	
-		<xsl:apply-templates select="id(@succedent)"/>
+	<xsl:if test="$ShowColumnAttributes='true'">	
+		<xsl:apply-templates select="id(@column_attributes)"/>
 	</xsl:if>
 	
 	<xsl:if test="$ShowCondition='true'">		
@@ -44,7 +44,7 @@
 
 
 
-	
+<!-- Templates for boolean cedents-->	
 
 
 	<xsl:template match="ti_cedent">
@@ -75,6 +75,40 @@
 	
 	</xsl:template>
       
+
+
+
+<!-- Templates for categorial cedents-->	
+
+	
+	<xsl:template match="ti_attribute">
+	
+	<paragraph>
+		
+		<text>
+			<xsl:value-of select="@type"/>:<br/>			
+			<xsl:value-of select="@quant"/>:<tab/>
+			<xsl:apply-templates select="ti_category"/>
+			<br/>
+		</text>
+		
+	</paragraph>
+		
+	</xsl:template>
+	
+	
+
+
+
+	<xsl:template match="ti_category">
+		<xsl:if test="position()!=1">
+			<xsl:text> , </xsl:text>
+		</xsl:if>
+
+		<xsl:value-of select="@value"/>
+						
+	
+	</xsl:template>
 
 
 

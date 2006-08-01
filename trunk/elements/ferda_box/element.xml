@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="windows-1250"?>
 	
-		<active_element type="ferda_box" source="" id="ferda_box1">
+		<active_element type="ferda_box" source="" id="ferda_box1" label="Ferda DataMiner box">
 			<attributes>
 				<element_attributes>
 				</element_attributes>
