@@ -6,6 +6,15 @@
       xmlns:dedek="http://reportasistent.com/dedek_namespace"
       version="1.0">
 
+  
+  
+  
+  <!-- nastaveni jazyka (defaultne cestina)-->
+	<xsl:variable name="lng">cz</xsl:variable>
+
+
+  
+  
   <msxsl:script language="JScript" implements-prefix="dedek">
 
 	function RGB(val, max)
@@ -46,6 +55,49 @@
 <xsl:variable name="TypeOfValues">Absolute</xsl:variable>
 <xsl:variable name="TablePosition">Vertical</xsl:variable>
 <xsl:variable name="BorderGrey">true</xsl:variable>
+
+
+
+<!-- nastaveni jazykovych popisku (labelu) -->
+
+
+<xsl:variable name="label_sum">   <!-- label v tabulce v kolonkach souctu-->
+	<xsl:choose>
+		<xsl:when test="$lng='cz'">souèet</xsl:when>
+		<xsl:when test="$lng='en'">sum</xsl:when>
+		<xsl:otherwise>sum</xsl:otherwise>
+	</xsl:choose>
+</xsl:variable>
+
+
+<xsl:variable name="label_set_number">   <!-- nadpis tabulky: cislo mnoziny-->
+	<xsl:choose>
+		<xsl:when test="$lng='cz'">První množina</xsl:when>
+		<xsl:when test="$lng='en'">First set</xsl:when>
+		<xsl:otherwise>First set</xsl:otherwise>
+	</xsl:choose>
+</xsl:variable>
+
+<xsl:variable name="label_cat">   <!-- nadpis tabulky: Category-->
+	<xsl:choose>
+		<xsl:when test="$lng='cz'">Kategorie</xsl:when>
+		<xsl:when test="$lng='en'">Category</xsl:when>
+		<xsl:otherwise>Category</xsl:otherwise>
+	</xsl:choose>
+</xsl:variable>
+
+<xsl:variable name="label_freq">   <!-- nadpis tabulky: cislo mnoziny-->
+	<xsl:choose>
+		<xsl:when test="$lng='cz'">Frekvence</xsl:when>
+		<xsl:when test="$lng='en'">Frequency</xsl:when>
+		<xsl:otherwise>Frequency</xsl:otherwise>
+	</xsl:choose>
+</xsl:variable>
+
+
+    
+<!-- TEMPLATES -->
+
 
       
 
@@ -102,8 +154,6 @@
 		
 
 		<paragraph>
-		
-			<text id="{$id_base}title1">First set:</text>
 			
 			<!-- Create element "table"-->
 			<xsl:element name="table" >
@@ -112,6 +162,7 @@
 			    <xsl:attribute name="rows"><xsl:value-of select="$pocet_radku" /></xsl:attribute>
 				
 				<xsl:variable name="attr_id" select="@attributes" />
+				<xsl:variable name="attr_name" select="key('key_ti_attribute',@attributes)/@quant" />
 				
 				<xsl:for-each select="r[position()=1]">
 				
@@ -121,7 +172,7 @@
 					<xsl:if test="$TablePosition='Horisontal'">
 						<tr id="{$id_base}r1">
 							<td id="{$id_base}r1d0" bgcolor="{$border_color}">
-								<text id="{$id_base}r1d0text">Category</text> 
+								<text id="{$id_base}r1d0text"><xsl:value-of select="$label_cat" /> (<xsl:value-of select="$attr_name" />)</text> 
 							</td>
 							
 							<xsl:for-each select="key('key_ti_attribute',$attr_id)/ti_category">
@@ -135,7 +186,7 @@
 							
 							<xsl:if test="$SumShow='true'">
 								<td id="{$id_base}r1d_sum">
-									<text id="{$id_base}r1d_sum_text">?</text> 
+									<text id="{$id_base}r1d_sum_text"><xsl:value-of select="$label_sum" /></text> 
 								</td>
 							</xsl:if>
 						</tr>
@@ -143,7 +194,7 @@
 						<tr id="{$id_base}r2">
 							<td id="{$id_base}r2d0" bgcolor="{$border_color}">
 								<text id="{$id_base}r1d0text">
-									<xsl:text>Frequency</xsl:text>
+									<xsl:value-of select="$label_freq" />
 									<xsl:if test="$TypeOfValues='Relative'">
 										<xsl:text> (%)</xsl:text>
 									</xsl:if>
@@ -189,11 +240,11 @@
 					<xsl:if test="$TablePosition='Vertical'">
 						<tr id="{$id_base}r1">
 							<td id="{$id_base}r1d1" bgcolor="{$border_color}">
-								<text id="{$id_base}r1d1text">Category</text> 
+								<text id="{$id_base}r1d1text"><xsl:value-of select="$label_cat" /> (<xsl:value-of select="$attr_name" />)</text> 
 							</td>
 							<td id="{$id_base}r1d2" bgcolor="{$border_color}">
 								<text id="{$id_base}r1d2text">
-									<xsl:text>Frequency</xsl:text>
+									<xsl:value-of select="$label_freq" />
 									<xsl:if test="$TypeOfValues='Relative'">
 										<xsl:text> (%)</xsl:text>
 									</xsl:if>
@@ -238,7 +289,7 @@
 						<xsl:if test="$SumShow='true'">
 							<tr id="{$id_base}r_sum">
 								<td id="{$id_base}r_sum_d1">
-									<text id="{$id_base}r_sum_d1text">?</text>
+									<text id="{$id_base}r_sum_d1text"><xsl:value-of select="$label_sum" /></text>
 								</td>
 								
 								<td id="{$id_base}r_sum_d2">
@@ -262,9 +313,9 @@
 			<xsl:if test="$ShowLegend='true'">
 				<text>
 					<br/>
-					<xsl:text>Attribute:</xsl:text>
+					<xsl:text>Tab:</xsl:text>
 					<tab/>
-					<xsl:value-of select="key('key_ti_attribute',@attributes)/@quant" />
+					<xsl:value-of select="$label_set_number" />
 					<br/>
 				</text>
 			</xsl:if>

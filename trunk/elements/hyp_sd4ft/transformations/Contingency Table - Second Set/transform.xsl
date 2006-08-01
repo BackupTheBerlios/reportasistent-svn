@@ -41,6 +41,7 @@
 <xsl:variable name="ColourHighlighting">true</xsl:variable>
 <xsl:variable name="TypeOfValues">Absolute</xsl:variable>
 <xsl:variable name="BorderGrey">true</xsl:variable>
+<xsl:variable name="ShowLegend">true</xsl:variable>
 
 
   
@@ -62,8 +63,8 @@
 
 <xsl:variable name="label_set_number">   <!-- nadpis tabulky: cislo mnoziny-->
 	<xsl:choose>
-		<xsl:when test="$lng='cz'">Druhá množina:"</xsl:when>
-		<xsl:when test="$lng='en'">Second set:"</xsl:when>
+		<xsl:when test="$lng='cz'">Druhá množina</xsl:when>
+		<xsl:when test="$lng='en'">Second set</xsl:when>
 		<xsl:otherwise>Second set</xsl:otherwise>
 	</xsl:choose>
 </xsl:variable>
@@ -212,7 +213,6 @@
 		
 
 		<paragraph>
-			<text id="{$id_base}title"><xsl:value-of select="$label_set_number"/></text>
 			<xsl:element name="table" >
 			    <xsl:attribute name="id"><xsl:value-of select="$id_base"/>table1</xsl:attribute>
 			    <xsl:attribute name="cols"><xsl:value-of select="$rozmer_tabulky" /></xsl:attribute>
@@ -357,6 +357,15 @@
 				</xsl:if>
 							
 			</xsl:element>
+			
+			
+			<!-- Show table legend-->
+			<xsl:if test="$ShowLegend='true'">
+				<text id="{$id_base}title"><br/><xsl:text>Tab: </xsl:text><xsl:value-of select="$label_set_number"/><br/></text> 
+			</xsl:if>
+
+			
+			
 		</paragraph>
 
 

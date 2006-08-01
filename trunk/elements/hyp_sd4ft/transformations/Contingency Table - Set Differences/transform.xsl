@@ -41,6 +41,7 @@
 <xsl:variable name="ColourHighlighting">false</xsl:variable>
 <xsl:variable name="TypeOfValues">Absolute</xsl:variable>
 <xsl:variable name="BorderGrey">true</xsl:variable>
+<xsl:variable name="ShowLegend">true</xsl:variable>
       
 
 
@@ -62,8 +63,8 @@
 
 <xsl:variable name="label_tab_header">   <!-- hlavicka tabulky-->
 	<xsl:choose>	
-		<xsl:when test="$lng='cz'">Rozdíly množin:</xsl:when>
-		<xsl:when test="$lng='en'">Set differences:</xsl:when>
+		<xsl:when test="$lng='cz'">Rozdíly množin</xsl:when>
+		<xsl:when test="$lng='en'">Set differences</xsl:when>
 		<xsl:otherwise>Set differences</xsl:otherwise>
 	</xsl:choose>
 </xsl:variable>
@@ -83,6 +84,15 @@
 		<xsl:otherwise>Second set</xsl:otherwise>
 	</xsl:choose>
 </xsl:variable>
+
+<xsl:variable name="label_set_number">   <!-- nadpis tabulky: cislo mnoziny-->
+	<xsl:choose>
+		<xsl:when test="$lng='cz'">Rozdíly množin</xsl:when>
+		<xsl:when test="$lng='en'">Set differences</xsl:when>
+		<xsl:otherwise>Set differences</xsl:otherwise>
+	</xsl:choose>
+</xsl:variable>
+
 
 
 <!-- TEMPLATES -->
@@ -242,7 +252,7 @@
 
 
 		<paragraph>
-			<text id="{$id_base}title"><xsl:value-of select="$label_tab_header"/></text>
+			
 			<xsl:element name="table" >
 			    <xsl:attribute name="id"><xsl:value-of select="$id_base"/>table1</xsl:attribute>
 			    <xsl:attribute name="cols"><xsl:value-of select="$pocet_sloupcu" /></xsl:attribute>
@@ -395,6 +405,13 @@
 				
 							
 			</xsl:element>
+			
+			
+			<!-- Show table legend-->
+			<xsl:if test="$ShowLegend='true'">
+				<text id="{$id_base}title"><br/><xsl:text>Tab: </xsl:text><xsl:value-of select="$label_set_number"/><br/></text> 
+			</xsl:if>			
+			
 		</paragraph>
 
 

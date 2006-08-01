@@ -45,6 +45,7 @@
 
 <!-- Promenne - nastaveni vizualizaci-->
 <xsl:variable name="SumShow">true</xsl:variable>
+<xsl:variable name="ShowLegend">true</xsl:variable>
 <xsl:variable name="ColourHighlighting">true</xsl:variable>
 <xsl:variable name="TypeOfValues">Absolute</xsl:variable>
 <xsl:variable name="BorderGrey">true</xsl:variable>
@@ -354,6 +355,14 @@
 				</xsl:if>
 							
 			</xsl:element>
+			
+			<!-- Show table legend-->
+			<xsl:if test="$ShowLegend='true'">
+				<text id="{$id_base}title"><br/>Tab:<tab/><br/></text> 
+			</xsl:if>
+
+			
+			
 		</paragraph>
 
 

@@ -6,6 +6,13 @@
       xmlns:dedek="http://reportasistent.com/dedek_namespace"
       version="1.0">
 
+
+	<!-- nastaveni jazyka (defaultne cestina)-->
+	<xsl:variable name="lng">cz</xsl:variable>
+
+
+
+
   <msxsl:script language="JScript" implements-prefix="dedek">
 
 	function RGB(val, max)
@@ -48,6 +55,34 @@
 <xsl:variable name="ColourHighlighting">false</xsl:variable>
 <xsl:variable name="TypeOfValues">Absolute</xsl:variable>
 <xsl:variable name="BorderGrey">true</xsl:variable>
+
+
+
+<!-- nastaveni jazykovych popisku (labelu) -->
+
+
+<xsl:variable name="label_sum">   <!-- label v tabulce v kolonkach souctu-->
+	<xsl:choose>
+		<xsl:when test="$lng='cz'">souèet</xsl:when>
+		<xsl:when test="$lng='en'">sum</xsl:when>
+		<xsl:otherwise>sum</xsl:otherwise>
+	</xsl:choose>
+</xsl:variable>
+
+
+<xsl:variable name="label_set_number">   <!-- nadpis tabulky: cislo mnoziny-->
+	<xsl:choose>
+		<xsl:when test="$lng='cz'">Druhá množina</xsl:when>
+		<xsl:when test="$lng='en'">Second set</xsl:when>
+		<xsl:otherwise>Second set</xsl:otherwise>
+	</xsl:choose>
+</xsl:variable>
+
+
+    
+<!-- TEMPLATES -->
+
+
 
       
 
@@ -92,12 +127,22 @@
 			<xsl:value-of select="@column_attributes" />
 		</xsl:variable>
 		
+		<xsl:variable name="row_attr_name">
+			<xsl:value-of select="key('key_ti_attribute',$row_attr_id)/@quant" />
+		</xsl:variable>
+		
+		<xsl:variable name="col_attr_name">
+			<xsl:value-of select="key('key_ti_attribute',$col_attr_id)/@quant" />
+		</xsl:variable>
+
+		
 		<xsl:variable name="hyp_id" select="@id" />
 
 		<paragraph>
 		
 			
 			<!-- Create element "table"-->
+			
 			<xsl:element name="table" >
 			    <xsl:attribute name="id"><xsl:value-of select="$id_base"/>table1</xsl:attribute>
 			    <xsl:attribute name="cols"><xsl:value-of select="$pocet_sloupcu" /></xsl:attribute>
@@ -107,8 +152,9 @@
 				<!-- first row of table-->
 				<tr id="{$id_base}r0">
 							<td id="{$id_base}r0d0" bgcolor="{$border_color}">
+								<xsl:value-of select="$row_attr_name"/> \ <xsl:value-of select="$col_attr_name"/>
 								<xsl:if test="$TypeOfValues='Relative'">
-									<text id="{$id_base}r0d0text">(%)</text> 
+									<text id="{$id_base}r0d0text"> (%)</text> 
 								</xsl:if>
 							</td>
 							
@@ -127,7 +173,7 @@
 							
 							<xsl:if test="$SumShow='true'">
 								<td id="{$id_base}r0d_sum" bgcolor="{$border_color}">
-									<text id="{$id_base}r0d_sum_text">sum of values</text>
+									<text id="{$id_base}r0d_sum_text"><xsl:value-of select="$label_sum"/></text>
 								</td>
 							</xsl:if>
 				</tr>
@@ -210,7 +256,7 @@
 					<tr id="{$id_base}r_sum">
 					
 						<td id="{$id_base}r_sum_d0" bgcolor="{$border_color}">
-							<text id="{$id_base}r_sum_d0text">sum of values</text>
+							<text id="{$id_base}r_sum_d0text"><xsl:value-of select="$label_sum"/></text>
 						</td>
 				
 						<xsl:for-each select="tab[position()=2]/r[position()=1]/c">
@@ -262,20 +308,9 @@
 			
 			<!-- Show table legend-->
 			<xsl:if test="$ShowLegend='true'">
-				<text id="{$id_base}leg2_2">
-					<br/>
-					<xsl:text>Row attribute name: </xsl:text>
-					<tab/>
-					<xsl:value-of select="key('key_ti_attribute',$row_attr_id)/@quant" />
-				</text>
-				<text id="{$id_base}leg2_1">
-					<br/>
-					<xsl:text>Column attribute name: </xsl:text>
-					<tab/>
-					<xsl:value-of select="key('key_ti_attribute',$col_attr_id)/@quant" />
-					<br/>
-				</text>
-			</xsl:if>		
+				<text id="{$id_base}title"><br/><xsl:text>Tab: </xsl:text><xsl:value-of select="$label_set_number"/><br/></text> 
+			</xsl:if>
+				
 				
 		</paragraph>
 

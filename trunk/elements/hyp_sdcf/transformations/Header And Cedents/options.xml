@@ -39,7 +39,7 @@
   <!--default values of variables-->
   
   <visualization_values>
-      <variable name="Header" value="SD-KLhyp" />
+      <variable name="Header" value="SD-CFhyp" />
       <variable name="ShowAttributes" value="true"/>
       <variable name="ShowCondition" value="true"/>
       <variable name="ShowFirstSet" value="true"/>

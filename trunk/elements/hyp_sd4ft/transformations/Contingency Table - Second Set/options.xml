@@ -30,6 +30,12 @@
        <enum_item value="Relative" label="Relative (percentual)"/>  
     </enum_option>
 
+    <!--setting whether to show a table legend-->
+    <enum_option variable_name="ShowLegend" title="Show table legend">
+	<enum_item value="true" label="yes"/>
+	<enum_item value="false" label="no"/>
+    </enum_option>
+
     
   </visualization_options>
 
@@ -39,6 +45,7 @@
   
   <visualization_values>
       <variable name="SumShow" value="false" />
+      <variable name="ShowLegend" value="true"/>
       <variable name="ColourHighlighting" value="false"/>
       <variable name="BorderGrey" value="true"/>
       <variable name="TypeOfValues" value="Absolute"/>
