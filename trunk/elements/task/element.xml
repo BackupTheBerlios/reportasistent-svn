@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="windows-1250"?>
 	
-		<active_element type="task" source="" id="task1">
+		<active_element type="task" source="" id="task1" label="Task">
 			<attributes>
 				<element_attributes>
 				</element_attributes>
