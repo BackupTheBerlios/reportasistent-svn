@@ -260,7 +260,7 @@
                     row_attributes IDREF #IMPLIED
                     column_attributes IDREF #IMPLIED
                     condition IDREF #IMPLIED>
-                    <!--row_attribute(antecedent),column_attribute(succedent): references to ti_cat_cedent; condition: reference to ti_cedent -->
+                    <!--row_attribute(antecedent),column_attribute(succedent): references to ti_attribute; condition: reference to ti_cedent -->
 
 <!-- SD-KL hypothesis -->
 
@@ -309,7 +309,7 @@
                     condition IDREF #IMPLIED
                     set1 IDREF #IMPLIED
                     set2 IDREF #IMPLIED>
-                  <!--row_attribute(antecedent),column_attribute(succedent): references to ti_cat_cedent
+                  <!--row_attribute(antecedent),column_attribute(succedent): references to ti_attribute
                       condition,set1,set2 : reference to ti_cedent-->
 
 <!-- CF hypothesis -->
@@ -336,7 +336,7 @@
   
                     attributes IDREF #IMPLIED
                     condition IDREF #IMPLIED>
-<!--attribute(cedent): reference to ti_cat_cedent; condition: reference to ti_cedent -->
+<!--attribute(cedent): reference to ti_attribute; condition: reference to ti_cedent -->
 
 
 <!-- SD-CF hypothesis -->
@@ -384,7 +384,7 @@
                     condition IDREF #IMPLIED
                     set1 IDREF #IMPLIED
                     set2 IDREF #IMPLIED>
-<!--attribute(cedent): reference to ti_cat_cedent; condition,set1,set2: reference to ti_cedent -->
+<!--attribute(cedent): reference to ti_attribute; condition,set1,set2: reference to ti_cedent -->
 
 
 <!ELEMENT tab (r*)>

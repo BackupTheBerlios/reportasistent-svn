@@ -15,6 +15,7 @@
 <!ATTLIST active_element type CDATA #REQUIRED >
 <!ATTLIST active_element source CDATA #REQUIRED >
 <!ATTLIST active_element id ID #REQUIRED >
+<!ATTLIST active_element label CDATA #IMPLIED >
 
 <!-- sem se ukladaji atributy, na ktere je mozno ukazat pomoci attr_link -->
 <!-- plni se automaticky pri zavolani metody CAElTransform::FillElementAttributes,
@@ -26,6 +27,7 @@ to se deje vzdy, kdyz se cte plugin output, napr pri otevreni simple fiter -->
 <!ELEMENT attribute EMPTY >
 <!ATTLIST attribute name CDATA #REQUIRED>
 <!ATTLIST attribute value CDATA #REQUIRED>
+<!ATTLIST attribute label CDATA #IMPLIED>
 
 <!ELEMENT filter (selection*) >
 <!ATTLIST filter type CDATA #REQUIRED>
