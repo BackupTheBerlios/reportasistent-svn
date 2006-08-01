@@ -68,6 +68,16 @@ LPCTSTR CElementManager::getElementName(elId_t elementID)
 	return getActiveElementInfo(elementID)->getElementName();
 }
 
+// kody
+LPCTSTR CElementManager::getElementLabel(elId_t elementID)
+{
+	if (elementID > getLastElementId()) elementID = ELID_UNKNOWN;
+
+	if (! isElementActive(elementID)) return static_elements_names[elementID];
+
+	return getActiveElementInfo(elementID)->getElementLabel();
+}
+
 
 CElementManager::elId_t CElementManager::IdentifyElement(MSXML2::IXMLDOMElementPtr & element)
 {

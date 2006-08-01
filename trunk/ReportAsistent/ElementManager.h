@@ -84,6 +84,7 @@ public:
 
 
 	LPCTSTR getElementName(elId_t elementID);	//vrati jemno elementu s id elementID
+	LPCTSTR getElementLabel(elId_t elementID);	//vrati label elementu s id elementID
 	elId_t IdentifyElement(MSXML2::IXMLDOMElementPtr & element);	//identifikuje element - vrati id
 	elId_t getLastElementId();	//vrati posledni id ~ pocet znamych elementu
 

@@ -19,6 +19,7 @@ public:
 	MSXML2::IXMLDOMNodePtr getFillElementAttributesTransformation();
 	BOOL LoadFromDir(LPCTSTR dir_path);
 	LPCTSTR getElementName();
+	LPCTSTR getElementLabel();
 	CAElInfo();
 	virtual ~CAElInfo();
 
@@ -42,6 +43,7 @@ private:
 	MSXML2::IXMLDOMDocumentPtr pFillElementAttributesDOM;
 	MSXML2::IXMLDOMDocumentPtr pElementDefinitionDOM;
 	CString el_name;
+	CString el_label;	// kody: label AP
 
 	void LoadTransformations(LPCTSTR dir_path);
 

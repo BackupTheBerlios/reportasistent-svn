@@ -50,6 +50,11 @@ LPCTSTR CAElInfo::getElementName()
 	return el_name;
 }
 
+LPCTSTR CAElInfo::getElementLabel()
+{
+	return el_label;
+}
+
 BOOL CAElInfo::LoadFromDir(LPCTSTR dir_path)
 {
 	src_dir_path = dir_path;
@@ -100,6 +105,19 @@ BOOL CAElInfo::LoadFromDir(LPCTSTR dir_path)
 
 	el_name = (LPCTSTR) type_attr_node->text;
 	type_attr_node.Release();
+
+	// kody: nacti label elementu
+	MSXML2::IXMLDOMNodePtr label_attr_node = pElementDefinitionDOM->selectSingleNode("//active_element/@label");
+	if (label_attr_node == NULL)
+	{
+		CReportAsistentApp::ReportError(IDS_AEL_LOAD_FAILED, dir_path, "element.xml",
+			"Unable to locate attribute \"label\" of \"active_element\" tag.");
+
+		return FALSE;
+	}
+
+	el_label = (LPCTSTR) label_attr_node->text;
+	label_attr_node.Release();
 
 	
 	//nacti transformace

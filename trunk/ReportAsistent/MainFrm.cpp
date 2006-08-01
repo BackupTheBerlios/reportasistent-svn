@@ -115,7 +115,7 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 		hNewMenu->InsertMenu(	-1, //pridej na konec seznamu
 								MF_BYPOSITION,
 								ID_MMNEWACTIVEFIRST + I,
-								OElementManager.getElementName(I+OElementManager.getFirstActiveElementID()) //nazev
+								OElementManager.getElementLabel/*kody: predtim bylo Name*/(I+OElementManager.getFirstActiveElementID()) //nazev
 								);	
 	}
 	//pokud by se zmeny neprovedly, je treba volat: CWnd::DrawMenuBar()
