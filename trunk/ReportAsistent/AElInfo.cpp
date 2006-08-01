@@ -121,6 +121,9 @@ MSXML2::IXMLDOMNodePtr CAElInfo::getFillElementAttributesTransformation()
 
 MSXML2::IXMLDOMNodePtr CAElInfo::getSimpleFilterTransformation()
 {
+	// kody: nastaveni jazyka transformace
+	setLanguageInTransformation(pSimpleFilterDOM);
+
 	return pSimpleFilterDOM;
 }
 
@@ -243,6 +246,9 @@ MSXML2::IXMLDOMNodePtr CAElInfo::getTranformationNode(int tr_index)
 {
 	ASSERT(tr_index >= 0);
 	ASSERT(tr_index < getTranformationsCount());
+
+	// kody: nastaveni jazyka transformace
+	setLanguageInTransformation(m_transformations[tr_index]->doc->documentElement);	
 
 	return m_transformations[tr_index]->doc->documentElement;
 }

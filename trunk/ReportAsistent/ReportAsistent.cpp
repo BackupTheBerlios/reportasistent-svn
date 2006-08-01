@@ -78,7 +78,7 @@ UINT TestovaciThread( LPVOID pParam )
 {
 	HWND * p_dlg_hwnd = (HWND *) pParam;
 
-	Sleep(500);
+	Sleep(2000);
 
 	SendMessage(* p_dlg_hwnd, WM_COMMAND, IDCANCEL, 0);
 
