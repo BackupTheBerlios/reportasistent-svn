@@ -14,13 +14,32 @@
 
 class CWaitDialog : public CDialog
 {
+public:
+//	DoThreadFunction(WaitUserThreadFunction5 f, LPARAM Param1,  LPARAM Param2, LPARAM Param3, LPARAM Param4, LPARAM Param5)
+	typedef void (* WaitUserThreadFunction0) ();
+	typedef void (* WaitUserThreadFunction1) (LPARAM Param1);
+	typedef void (* WaitUserThreadFunction2) (LPARAM Param1,  LPARAM Param2);
+	typedef void (* WaitUserThreadFunction3) (LPARAM Param1,  LPARAM Param2, LPARAM Param3);
+	typedef void (* WaitUserThreadFunction4) (LPARAM Param1,  LPARAM Param2, LPARAM Param3, LPARAM Param4);
+	typedef void (* WaitUserThreadFunction5) (LPARAM Param1,  LPARAM Param2, LPARAM Param3, LPARAM Param4, LPARAM Param5);
+
+	
 // Construction
 public:
-	CWaitDialog(CWnd* pParent = NULL);   // standard constructor
+	void DoThreadFunction(WaitUserThreadFunction5 f, LPARAM Param1,  LPARAM Param2, LPARAM Param3, LPARAM Param4, LPARAM Param5);
+	void DoThreadFunction(WaitUserThreadFunction4 f, LPARAM Param1,  LPARAM Param2, LPARAM Param3, LPARAM Param4);
+	void DoThreadFunction(WaitUserThreadFunction3 f, LPARAM Param1,  LPARAM Param2, LPARAM Param3);
+	void DoThreadFunction(WaitUserThreadFunction2 f, LPARAM Param1,  LPARAM Param2);
+	void DoThreadFunction(WaitUserThreadFunction1 f, LPARAM Param1);
+	void DoThreadFunction(WaitUserThreadFunction0 f);
+	
+	
+	CWaitDialog(LPCTSTR strDlgText, CWnd* pParent = NULL);   // standard constructor
 
 // Dialog Data
 	//{{AFX_DATA(CWaitDialog)
 	enum { IDD = IDD_WAIT_DIALOG };
+	CStatic	m_ReasonText;
 	CWaitAnimation	m_wait_animation;
 	//}}AFX_DATA
 
@@ -34,15 +53,18 @@ public:
 
 // Implementation
 protected:
+	void DoThreadFunctionImpl(void * f, int nParams, LPARAM Param1,  LPARAM Param2, LPARAM Param3, LPARAM Param4, LPARAM Param5);
 
 	// Generated message map functions
 	//{{AFX_MSG(CWaitDialog)
 	virtual BOOL OnInitDialog();
 	afx_msg void OnTimer(UINT nIDEvent);
 	afx_msg void OnExitButton();
+	virtual void OnCancel();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 private:
+	LPCTSTR m_strDlgText;
 	BOOL m_bEndDialog;
 };
 

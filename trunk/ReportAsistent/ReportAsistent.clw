@@ -2,7 +2,7 @@
 
 [General Info]
 Version=1
-LastClass=COptionsDialog
+LastClass=CWaitDialog
 LastTemplate=CDialog
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "ReportAsistent.h"
@@ -18,36 +18,36 @@ ResourceCount=17
 Resource1=IDD_ABOUTBOX
 Resource2=IDR_MAINFRAME
 Class5=CAboutDlg
-Resource3=IDD_SOURCES_DIALOG (English (U.S.))
-Resource4=IDD_OPTIONS_DIALOG (English (U.S.))
+Resource3=IDD_ATTRIBUTE_LINK_TABLE_DIALOG (English (U.S.))
+Resource4=IDD_ACTIVE_ELEMENT_DIALOG (English (U.S.))
 Class6=CElementTextDialog
-Resource5=IDD_TRANSFORMATIONS_DIALOG (English (U.S.))
+Resource5=IDD_ABOUTBOX (English (U.S.))
 Class7=CSimpleFilterDialog
-Resource6=IDD_PROPERTY_EDITOR (English (U.S.))
+Resource6=IDD_OPTIONS_DIALOG (English (U.S.))
 Class8=CGenerateDialog
-Resource7=IDD_DIALOG_PARAGRAPH (English (U.S.))
+Resource7=IDD_PROPERTY_EDITOR (English (U.S.))
 Class9=CSourcesDialog
-Resource8=IDD_ATTRIBUTE_LINK_TABLE_DIALOG (English (U.S.))
+Resource8=IDD_DIALOG_PARAGRAPH (English (U.S.))
 Class10=CActiveElementDialog
-Resource9=IDD_GENERATE_DIALOG (English (U.S.))
+Resource9=IDD_TRANSFORMATIONS_DIALOG (English (U.S.))
 Class11=CTransformationsDialog
 Class12=Tcategory_Recordset
-Resource10=IDD_ATTRIBUTE_LINK_DIALOG (English (U.S.))
+Resource10=IDD_SIMPLE_FILTER_DIALOG (English (U.S.))
 Class13=CAttributeLinkDialog
-Resource11=IDD_DIALOG_CHAPTER (English (U.S.))
+Resource11=IDD_WAIT_DIALOG (English (U.S.))
 Class14=CAttributeLinkTableDialog
-Resource12=IDD_WAIT_DIALOG (English (U.S.))
+Resource12=IDD_GENERATE_DIALOG (English (U.S.))
 Class15=CElementParagraphDialog
 Class16=CElementChapterDialog
 Class17=CElementDialogBase
 Class18=CPropertyEditor
-Resource13=IDD_SIMPLE_FILTER_DIALOG (English (U.S.))
-Resource14=IDD_ACTIVE_ELEMENT_DIALOG (English (U.S.))
+Resource13=IDD_DIALOG_CHAPTER (English (U.S.))
+Resource14=IDD_DIALOGTEXT (English (U.S.))
 Class19=CWaitDialog
-Resource15=IDD_DIALOGTEXT (English (U.S.))
+Resource15=IDD_SOURCES_DIALOG (English (U.S.))
 Class20=CWaitAnimation
 Class21=CWordEventHandler
-Resource16=IDD_ABOUTBOX (English (U.S.))
+Resource16=IDD_ATTRIBUTE_LINK_DIALOG (English (U.S.))
 Class22=COptionsDialog
 Resource17=IDR_MAINFRAME (English (U.S.))
 
@@ -1569,10 +1569,12 @@ Column71=[tsTaskSubType].[Notice], 12, 510
 [DLG:IDD_WAIT_DIALOG (English (U.S.))]
 Type=1
 Class=CWaitDialog
-ControlCount=3
-Control1=IDCANCEL,button,1342242816
-Control2=IDC_STATIC,static,1342308352
+ControlCount=5
+Control1=IDCANCEL,button,1476460544
+Control2=IDC_REASON_TEXT,static,1342308352
 Control3=IDC_WAIT_ANIMATION,static,1342308352
+Control4=IDC_EXIT_BUTTON,button,1073807360
+Control5=IDC_BUTTON1,button,1476460544
 
 [CLS:CWaitDialog]
 Type=0
@@ -1580,7 +1582,7 @@ HeaderFile=WaitDialog.h
 ImplementationFile=WaitDialog.cpp
 BaseClass=CDialog
 Filter=D
-LastObject=IDC_WAIT_ANIMATION
+LastObject=IDC_REASON_TEXT
 VirtualFilter=dWC
 
 [DB:tiHypothesisCF_Recordset]

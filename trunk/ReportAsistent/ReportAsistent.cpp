@@ -74,16 +74,17 @@ int CReportAsistentApp::ReportError(UINT nResourceErrorStringID, ...)
 
 /***************************************************/	
 //dedek: ukazka pro kodyho, prijde smazat	
-UINT TestovaciThread( LPVOID pParam )
+void PerformThreadFunction(LPARAM Param1,  LPARAM Param2, LPARAM Param3)
 {
-	HWND * p_dlg_hwnd = (HWND *) pParam;
+//	HWND * p_dlg_hwnd = (HWND *) pParam;
 
-	Sleep(2000);
-
+	Sleep(7000);
+/*
 	if (IsWindow(* p_dlg_hwnd))
 		SendMessage(* p_dlg_hwnd, WM_COMMAND, IDC_EXIT_BUTTON, 0);
 
 	return 0;
+*/
 }
 /***************************************************/	
 
@@ -163,12 +164,14 @@ BOOL CReportAsistentApp::InitInstance()
 /***************************************************/
 //dedek: ukazka pro kodyho, prijde smazat	
 	
-	CWaitDialog dlg(AfxGetMainWnd());
+	CWaitDialog dlg("ahoj", AfxGetMainWnd());
 
+	dlg.DoThreadFunction(PerformThreadFunction, 1, 2, 3);
+/*
 	AfxBeginThread(TestovaciThread, & dlg.m_hWnd);
 
 	dlg.DoModal();
-
+*/
 /***************************************************/	
 
 
