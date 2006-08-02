@@ -1,6 +1,6 @@
 VERSION 1.0 CLASS
 BEGIN
-  MultiUse = 0   'False
+  MultiUse = -1  'True
   Persistable = 0  'NotPersistable
   DataBindingBehavior = 0  'vbNone
   DataSourceBehavior  = 0  'vbNone
@@ -48,7 +48,7 @@ Public Function EnumTemplates() As String()
     
     ReDim ret(0 To mWordForInfo.Templates.Count - 1)
     
-    Dim t As Word.Template
+    Dim t As Word.template
     Dim n As Integer
     
     n = 0
@@ -61,20 +61,22 @@ Public Function EnumTemplates() As String()
 End Function
 
 'vraci pole stringu
-Public Function EnumParagraphStyles(ByVal template_name As String) As String()
+Public Function EnumParagraphStyles(ByVal template_id) As String()
+    Dim ret() As String
 
     If mWordForInfo Is Nothing Then
         Set mWordForInfo = CreateObject("Word.Application")
     End If
     
     Dim template_doc As Word.Document
-    Set template_doc = mWordForInfo.Templates(template_name).OpenAsDocument
+    On Error GoTo end_ret
+    Set template_doc = mWordForInfo.Templates(template_id).OpenAsDocument
     
     Dim s As Word.style
     Dim n As Integer
     
     'zjistuime, kolik je character stylu
-    n = 0
+    n = -1
     For Each s In template_doc.Styles
         If s.Type = wdStyleTypeParagraph Then
             n = n + 1
@@ -82,7 +84,6 @@ Public Function EnumParagraphStyles(ByVal template_name As String) As String()
     Next s
     
     
-    Dim ret() As String
     
     ReDim ret(0 To n)
     
@@ -98,25 +99,29 @@ Public Function EnumParagraphStyles(ByVal template_name As String) As String()
  
     template_doc.Close
     
+end_ret:
     EnumParagraphStyles = ret
 
 End Function
 
 'vraci pole stringu
-Public Function EnumCharacterStyles(ByVal template_name As String) As String()
+Public Function EnumCharacterStyles(ByVal template_id) As String()
+    Dim ret() As String
 
     If mWordForInfo Is Nothing Then
         Set mWordForInfo = CreateObject("Word.Application")
     End If
     
     Dim template_doc As Word.Document
-    Set template_doc = mWordForInfo.Templates(template_name).OpenAsDocument
+    
+    On Error GoTo end_ret
+    Set template_doc = mWordForInfo.Templates(template_id).OpenAsDocument
     
     Dim s As Word.style
     Dim n As Integer
     
     'zjistuime, kolik je character stylu
-    n = 0
+    n = -1
     For Each s In template_doc.Styles
         If s.Type = wdStyleTypeCharacter Then
             n = n + 1
@@ -124,7 +129,6 @@ Public Function EnumCharacterStyles(ByVal template_name As String) As String()
     Next s
     
     
-    Dim ret() As String
     
     ReDim ret(0 To n)
     
@@ -140,6 +144,7 @@ Public Function EnumCharacterStyles(ByVal template_name As String) As String()
  
     template_doc.Close
     
+end_ret:
     EnumCharacterStyles = ret
 
 End Function

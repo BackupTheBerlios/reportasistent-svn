@@ -118,6 +118,7 @@ doladit ukladani int hodnoty property editoru - ve stringu to mozna muze vratit 
 -hotovo nemuze
 
 zavirat normal.dot - jinak ji to odmita menit v jinych spustenych wordech
+-hotovo normal.dot se zavira COM Word ne
 
 ?styly textu: combobox editovatelny a nove styly se vytvori v novem do dokumentu?
 -asi ne, je to blbost

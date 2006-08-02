@@ -56,7 +56,7 @@ Begin VB.Form Form1
       Height          =   375
       Left            =   480
       TabIndex        =   0
-      Text            =   "normal.dot"
+      Text            =   "1"
       Top             =   3840
       Width           =   3615
    End

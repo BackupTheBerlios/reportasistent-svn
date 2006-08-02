@@ -14,6 +14,7 @@
 class CStringTable
 {
 public:
+	int FindStringNoCase(LPCTSTR str);
 	int FindString(LPCTSTR str);
 	int virtual getCount() = NULL;
 	LPCTSTR virtual getItem(int index) = NULL;

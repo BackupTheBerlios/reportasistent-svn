@@ -59,6 +59,7 @@ void CWordManager::LoadWordStyles(LPCTSTR template_name)
 		if (! InitWordLoader()) return;
 	}
 
+	LoadWordTemplates();
 	LoadParagraphStyles(template_name);
 	LoadCharacterStyles(template_name);
 }
@@ -75,14 +76,14 @@ void CWordManager::LoadWordTemplates()
 
 
 	LONG l_bound = 0;
-	LONG u_bound = 0;
+	LONG u_bound = -1;
 
 	SafeArrayGetLBound(ret_array, 1, & l_bound);
 	SafeArrayGetUBound(ret_array, 1, & u_bound);
 
 	m_WordTemplates.Clear();
 
-	for (LONG a = l_bound; a < u_bound; a++)
+	for (LONG a = l_bound; a <= u_bound; a++)
 	{
 		BSTR arg;
 		SafeArrayGetElement(ret_array, &a, & arg);
@@ -148,7 +149,7 @@ BOOL CWordManager::InitWordLoader()
 {
 	HRESULT hr;
 	
-	hr = m_WordLoader.CreateInstance(CLSID_LMRA_XML_WordLoader);
+	hr = m_WordLoader.CreateInstance("LMRA_WordLoader.LMRA_XML_WordLoader");
 
 	if (S_OK != hr)
 	{
@@ -182,7 +183,7 @@ BOOL CWordManager::InitWordLoader()
 		}
 	
 
-		hr = m_WordLoader.CreateInstance(CLSID_LMRA_XML_WordLoader);
+		hr = m_WordLoader.CreateInstance("LMRA_WordLoader.LMRA_XML_WordLoader");
 		if (S_OK != hr)
 		{
 			CReportAsistentApp::ReportError(IDS_WB_WORD_LOADER_NOT_REGISTRED);
@@ -198,16 +199,19 @@ BOOL CWordManager::isInit()
 	return m_WordLoader != NULL;
 }
 
+
+
 void CWordManager::LoadCharacterStyles(LPCTSTR template_name)
 {
 	ASSERT(isInit());
 
 
-	SAFEARRAY * ret_array = m_WordLoader->EnumCharacterStyles(template_name);
+	SAFEARRAY * ret_array = m_WordLoader->EnumCharacterStyles(
+		(long) (getWordTemplates().FindStringNoCase(template_name)+1));
 
 
 	LONG l_bound = 0;
-	LONG u_bound = 0;
+	LONG u_bound = -1;
 
 	SafeArrayGetLBound(ret_array, 1, & l_bound);
 	SafeArrayGetUBound(ret_array, 1, & u_bound);
@@ -215,7 +219,7 @@ void CWordManager::LoadCharacterStyles(LPCTSTR template_name)
 	m_WordCharacterStyles.Clear();
 
 
-	for (LONG a = l_bound; a < u_bound; a++)
+	for (LONG a = l_bound; a <= u_bound; a++)
 	{
 		BSTR arg;
 		SafeArrayGetElement(ret_array, &a, & arg);
@@ -234,11 +238,12 @@ void CWordManager::LoadParagraphStyles(LPCTSTR template_name)
 	ASSERT(isInit());
 
 
-	SAFEARRAY * ret_array = m_WordLoader->EnumParagraphStyles(template_name);
+	SAFEARRAY * ret_array = m_WordLoader->EnumParagraphStyles(
+		(long) (getWordTemplates().FindStringNoCase(template_name)+1));
 
 
 	LONG l_bound = 0;
-	LONG u_bound = 0;
+	LONG u_bound = -1;
 
 	SafeArrayGetLBound(ret_array, 1, & l_bound);
 	SafeArrayGetUBound(ret_array, 1, & u_bound);
@@ -246,7 +251,7 @@ void CWordManager::LoadParagraphStyles(LPCTSTR template_name)
 	m_WordParagraphStyles.Clear();
 
 
-	for (LONG a = l_bound; a < u_bound; a++)
+	for (LONG a = l_bound; a <= u_bound; a++)
 	{
 		BSTR arg;
 		SafeArrayGetElement(ret_array, &a, & arg);
@@ -259,6 +264,17 @@ void CWordManager::LoadParagraphStyles(LPCTSTR template_name)
 	
 	SafeArrayDestroy(ret_array);
 }
+
+int CStringTable::FindStringNoCase(LPCTSTR str)
+{
+	for (int a = 0; a < getCount(); a++)
+	{
+		if (((CString) getItem(a)).CompareNoCase(str) == 0) return a;
+	}
+
+	return -1;
+}
+
 
 int CStringTable::FindString(LPCTSTR str)
 {
