@@ -5,6 +5,7 @@
 #include "stdafx.h"
 #include "ReportAsistent.h"
 #include "DataSourceManager.h"
+#include "WaitDialog.h"
 
 #ifdef _DEBUG
 #undef THIS_FILE
@@ -88,6 +89,20 @@ CDataSourcesManager::CDataSourcesManager(CDirectoriesManager & m)
 // destruktor
 CDataSourcesManager::~CDataSourcesManager()
 {
+	// kody: zavreni vsech datovych zdroju (kvuli Ferdovi)
+	// ***
+	for (int i = 0;  i < SourcesTab.GetSize(); i++)
+	{
+		try
+		{
+			if(isSourceConnected(i))
+				CloseSource(i);
+		}
+		catch(...) {}
+	}
+
+	// ***
+	
 	saveSourcesTab();
 }
 
@@ -731,10 +746,25 @@ BSTR CDataSourcesManager::CallPerformProc(int source_index, LPCTSTR element_id) 
 	if((j != -1) && (PlugsTab[j].Valid()) && (SourcesTab[SI].SourceHandle != NULL)) // zasuvka je platna a zdroj otevreny
 	{
 		// zavolani  fce Perform zasuvky
-		BOOL PerfRes = PlugsTab[j].SockInterface->hPerform(SourcesTab[SI].SourceHandle, element_id, &Result);
+		//BOOL PerfRes = PlugsTab[j].SockInterface->hPerform(SourcesTab[SI].SourceHandle, element_id, &Result);
+		// kody: vytvoreni WaitDialogu a volani jeho DoThreadFunction()
+		CWaitDialog d("Loading data from source");
+		d.DoThreadFunction((CWaitDialog::WaitUserThreadFunction4) PerformThreadFunction,
+							(LPARAM) PlugsTab[j].SockInterface->hPerform,
+						    (LPARAM) SourcesTab[SI].SourceHandle,
+							(LPARAM) element_id,
+							(LPARAM) &Result);
 	}
 
 	return Result;
+}
+
+
+void CDataSourcesManager::PerformThreadFunction(LPARAM hPreformFn, LPARAM hSource, LPARAM element_id, LPARAM pResult)
+{
+	 ((hPerform_t) hPreformFn) ((void*) hSource, (LPCTSTR) element_id, (BSTR*) pResult);
+	
+	return;
 }
 
 //dedek

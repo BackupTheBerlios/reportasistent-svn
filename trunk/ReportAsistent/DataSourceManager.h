@@ -220,6 +220,7 @@ public:
 	//predbezne:
 	BSTR CallPerformProc(int source_index, LPCTSTR element_id); //vrati XML string
 	BSTR GetPluginOutput(public_source_id_t source, LPCTSTR ap_name); //zavola CallPerformProc
+	void PerformThreadFunction(LPARAM hPreformFn, LPARAM hSource, LPARAM element_id, LPARAM pResult);
 
 
 /* kody - pro Dedu
