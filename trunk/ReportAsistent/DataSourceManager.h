@@ -185,12 +185,14 @@ public:
 	
 	//pres zasuvku pripoji novy zdroj
 	int ConnectNewSource(plugin_id_t plugin);	//vrati index noveho zdroje, (-1 = chyba)
+	void static ConnectNewSourceThreadFunction(LPARAM hNewSourceFn, LPARAM NewSourcePerzistID, LPARAM h_hSource);
 												
 	//vyhodi zdroj z tabulky zdroju
 	BOOL RemoveSource(int source_index);	
 
 	//pripoji jiz znamy zdroj pres zname persistnet_id na indexu source_index
 	BOOL ConnectSource(int source_index);
+	void static ConnectSourceThreadFunction(LPARAM hOpenSourceFn, LPARAM PID, LPARAM h_hSource);
 	
 	// uzavre zdroj
 	BOOL CloseSource(int source_index);

@@ -5,6 +5,7 @@
 #include "stdafx.h"
 #include "ReportAsistent.h"
 #include "WordManager.h"
+#include "WaitDialog.h"
 
 #ifdef _DEBUG
 #undef THIS_FILE
@@ -52,6 +53,17 @@ CStringTableImpl::~CStringTableImpl()
 	Clear();
 }
 
+
+//---------
+// kody - spatne, opravit
+void CWordManager::LoadWordStylesThreadFunction(LPARAM template_name, LPARAM CWordManagerInstance)
+{
+	( (CWordManager*) CWordManagerInstance)->LoadWordTemplates();
+	( (CWordManager*) CWordManagerInstance)->LoadParagraphStyles((LPCTSTR )template_name);
+	( (CWordManager*) CWordManagerInstance)->LoadCharacterStyles((LPCTSTR )template_name);
+}
+
+
 void CWordManager::LoadWordStyles(LPCTSTR template_name)
 {
 	if (! isInit()) 
@@ -59,6 +71,15 @@ void CWordManager::LoadWordStyles(LPCTSTR template_name)
 		if (! InitWordLoader()) return;
 	}
 
+	/*
+	// pridal Kody - opravit
+	CWaitDialog d("Loading Word styles");
+	CWordManager* pThisInstance = this;
+	d.DoThreadFunction(LoadWordStylesThreadFunction,
+						(LPARAM) template_name,
+						(LPARAM) pThisInstance);
+						*/
+	// bylo puvodne
 	LoadWordTemplates();
 	LoadParagraphStyles(template_name);
 	LoadCharacterStyles(template_name);

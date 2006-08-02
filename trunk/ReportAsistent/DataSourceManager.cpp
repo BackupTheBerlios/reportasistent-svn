@@ -555,7 +555,17 @@ BOOL CDataSourcesManager::isPluginValid(int plugin_index)
 
 
 
+
+
 // ConnectNewSource
+
+void CDataSourcesManager::ConnectNewSourceThreadFunction(LPARAM hNewSourceFn, LPARAM NewSourcePerzistID, LPARAM h_hSource)
+{
+	* ((hSource_t *) h_hSource) = ((hNewSource_t) hNewSourceFn)  ((PersistID_t *) NewSourcePerzistID);
+	
+	return;
+}
+
 int CDataSourcesManager::ConnectNewSource(plugin_id_t plugin)   //pres zasuvku pripoji novy zdroj
 {
 	// nalezeni prislusne zasuvky - polozky v tabulce zasuvek s PluginName = plugin
@@ -571,8 +581,15 @@ int CDataSourcesManager::ConnectNewSource(plugin_id_t plugin)   //pres zasuvku p
 	// zavolani funkce zasuvky pro vytvoreni noveho zdroje
 	PersistID_t NewSourcePerzistID = NULL;	// vrati zasuvka - perzistentni ID noveho zdroje
 	hSource_t   NewSourceHandler;		// handler na novy zdroj
-		// zavolani funkce zasuvky
-	NewSourceHandler = PlugsTab[i].SockInterface->hNewSource (&NewSourcePerzistID);
+		// zavolani funkce zasuvky v novem vlakne
+	CWaitDialog d("Connecting new data source");
+	d.DoThreadFunction(  ConnectNewSourceThreadFunction,
+						(LPARAM) PlugsTab[i].SockInterface->hNewSource,
+						(LPARAM) & NewSourcePerzistID,
+						(LPARAM) & NewSourceHandler);
+	
+	
+	//NewSourceHandler = PlugsTab[i].SockInterface->hNewSource (&NewSourcePerzistID);
 	if(NewSourceHandler == NULL)  // chyba v zasuvce
 	{
 		SysFreeString(NewSourcePerzistID);
@@ -623,6 +640,15 @@ BOOL CDataSourcesManager::RemoveSource(int source_index)	//vyhodi zdroj z tabulk
 
 
 // ConnectSource
+
+// 
+void CDataSourcesManager::ConnectSourceThreadFunction(LPARAM hOpenSourceFn, LPARAM PID, LPARAM h_hSource)
+{
+	* ((hSource_t *) h_hSource) = ((hOpenSource_t) hOpenSourceFn) (* ((PersistID_t *) PID));
+	
+	return;
+}
+
 BOOL CDataSourcesManager::ConnectSource(int source_index)
 {
 	int SI = source_index;	// kratsi nazev :-)
@@ -645,8 +671,14 @@ BOOL CDataSourcesManager::ConnectSource(int source_index)
 
 	// zavolani funkce zasuvky, ktera pripoji zdroj
 	PersistID_t PID = (SourcesTab[SI].PerzistID).AllocSysString();
-			// zavolani funkce zasuvky
-	hSource_t SourceH = PlugsTab[i].SockInterface->hOpenSource(PID);
+			// zavolani funkce zasuvky v novem vlakne
+	hSource_t SourceH;
+	CWaitDialog d("Connecting data source");
+	d.DoThreadFunction(  ConnectSourceThreadFunction,
+						(LPARAM) PlugsTab[i].SockInterface->hOpenSource,
+						(LPARAM) & PID,
+						(LPARAM) & SourceH);
+	//hSource_t SourceH = PlugsTab[i].SockInterface->hOpenSource(PID);
 	
 	// vyplneni handleru na zdroj v polozce tabulky
 	SourcesTab[SI].SourceHandle = SourceH;
@@ -759,7 +791,7 @@ BSTR CDataSourcesManager::CallPerformProc(int source_index, LPCTSTR element_id) 
 	return Result;
 }
 
-
+// 
 void CDataSourcesManager::PerformThreadFunction(LPARAM hPreformFn, LPARAM hSource, LPARAM element_id, LPARAM pResult)
 {
 	 ((hPerform_t) hPreformFn) ((void*) hSource, (LPCTSTR) element_id, (BSTR*) pResult);

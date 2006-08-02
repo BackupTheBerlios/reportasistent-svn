@@ -47,6 +47,10 @@ public:
 
 	void LoadWordTemplates();
 	void LoadWordStyles(LPCTSTR template_name = "normal.dot");
+	// kody: funkce pro vlakno
+	void static CWordManager::LoadWordStylesThreadFunction(LPARAM template_name, LPARAM CWordManagerInstance);
+	void LoadParagraphStyles(LPCTSTR template_name);  // kody: kvuli novymu vlaknu a volani ze staticky metody presunuto z protected sem
+	void LoadCharacterStyles(LPCTSTR template_name);
 	
 	CStringTable & getWordTemplates() { return m_WordTemplates; };
 	CStringTable & getWordParagraphStyles() { return m_WordParagraphStyles; };
@@ -63,8 +67,8 @@ private:
 protected:
 	void DisconnectWordEventHandler();
 	BOOL InitWordEventHandler();
-	void LoadParagraphStyles(LPCTSTR template_name);
-	void LoadCharacterStyles(LPCTSTR template_name);
+	//void LoadParagraphStyles(LPCTSTR template_name);   //kody: presunuto do public
+	//void LoadCharacterStyles(LPCTSTR template_name);
 	BOOL isInit();
 };
 
