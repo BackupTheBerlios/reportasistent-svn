@@ -83,7 +83,8 @@
 #define IDC_ENGLISH_RADIO               1036
 #define IDC_EXIT_BUTTON                 1037
 #define IDC_REASON_TEXT                 1038
-#define IDC_BUTTON1                     1039
+#define IDC_RESUME_APP_BUTTON           1039
+#define IDC_KILL_THREAD_BUTTON          1040
 #define ID_MMGENREP                     32771
 #define ID_MMSOURCES                    32772
 #define ID_ELEMENT_EDIT                 32780
@@ -93,6 +94,8 @@
 #define ID_MMNEWSTATICLAST              39009
 #define ID_MMNEWACTIVEFIRST             39010
 #define ID_MMNEWACTIVELAST              39100
+#define IDS_CONFIRM_THRAD_KILL          61400
+#define IDS_CONFIRM_APP_RESUME          61401
 #define IDS_INSERT_NEW_ELEMENT_WRONG_LOCATION 61205
 #define IDS_SIMPLE_FILTER_FAILED_SOURCE_LOAD 61206
 #define IDS_WB_WORD_LOADER_NOT_REGISTRED 61207

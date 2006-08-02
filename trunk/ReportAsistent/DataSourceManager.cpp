@@ -749,7 +749,7 @@ BSTR CDataSourcesManager::CallPerformProc(int source_index, LPCTSTR element_id) 
 		//BOOL PerfRes = PlugsTab[j].SockInterface->hPerform(SourcesTab[SI].SourceHandle, element_id, &Result);
 		// kody: vytvoreni WaitDialogu a volani jeho DoThreadFunction()
 		CWaitDialog d("Loading data from source");
-		d.DoThreadFunction((CWaitDialog::WaitUserThreadFunction4) PerformThreadFunction,
+		d.DoThreadFunction(PerformThreadFunction,
 							(LPARAM) PlugsTab[j].SockInterface->hPerform,
 						    (LPARAM) SourcesTab[SI].SourceHandle,
 							(LPARAM) element_id,

@@ -277,17 +277,17 @@ BEGIN
     LTEXT           "",IDC_ERROR_TEXT,7,224,149,26
 END
 
-IDD_WAIT_DIALOG DIALOGEX 0, 0, 182, 71
+IDD_WAIT_DIALOG DIALOGEX 0, 0, 188, 71
 STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION
 EXSTYLE WS_EX_TOOLWINDOW
 CAPTION "Working..."
-FONT 8, "MS Sans Serif"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
 BEGIN
-    PUSHBUTTON      "Cancel",IDCANCEL,137,50,38,14,WS_DISABLED
-    LTEXT           "Working...",IDC_REASON_TEXT,79,7,96,23
+    LTEXT           "Working...",IDC_REASON_TEXT,79,7,102,23
     LTEXT           "Static",IDC_WAIT_ANIMATION,7,7,64,57
     PUSHBUTTON      "exit button",IDC_EXIT_BUTTON,54,26,50,14,NOT WS_VISIBLE
-    PUSHBUTTON      "Kill App!",IDC_BUTTON1,79,50,42,14,WS_DISABLED
+    PUSHBUTTON      "Resume app...",IDC_RESUME_APP_BUTTON,127,50,54,14
+    PUSHBUTTON      "Kill thread!",IDC_KILL_THREAD_BUTTON,79,50,42,14
 END
 
 IDD_OPTIONS_DIALOG DIALOG DISCARDABLE  0, 0, 208, 76
@@ -419,7 +419,7 @@ BEGIN
     IDD_WAIT_DIALOG, DIALOG
     BEGIN
         LEFTMARGIN, 7
-        RIGHTMARGIN, 175
+        RIGHTMARGIN, 181
         VERTGUIDE, 79
         TOPMARGIN, 7
         BOTTOMMARGIN, 64
@@ -754,6 +754,12 @@ BEGIN
     IDS_TR_OPTIONS_ERROR    "Error in transformation ""%s"" options definition.\nDescription: %s"
     IDS_WRONG_ELEMENT_TRANSFORMATION 
                             "Transformation ""%s"" of active element ""%s"" not found.\nProcessed active element id: %s"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_CONFIRM_THRAD_KILL  "Warning: Killing of working thread in the middle of its work may cause unpredictable problems in running of the application. The application could even fall down and destroy some your data or Windows resources.\n\nReally kill the thrad?"
+    IDS_CONFIRM_APP_RESUME  "Warninig: Resuming the application will let the working thread still working in background. But the result of its work will be discarted. The application will run slower for a while, but you can save your work and exit it.\n\nReally resume the application?"
 END
 
 STRINGTABLE DISCARDABLE 

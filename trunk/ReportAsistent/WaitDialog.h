@@ -14,6 +14,15 @@
 
 class CWaitDialog : public CDialog
 {
+private:
+	struct SThreadPramas
+	{
+		HWND hWaitDlg;
+		void * pUserFunction;
+		int nParams;	//number of prametrs
+		LPARAM params[5];
+	} * m_pThreadPramas;
+
 public:
 //	DoThreadFunction(WaitUserThreadFunction5 f, LPARAM Param1,  LPARAM Param2, LPARAM Param3, LPARAM Param4, LPARAM Param5)
 	typedef void (* WaitUserThreadFunction0) ();
@@ -34,7 +43,7 @@ public:
 	void DoThreadFunction(WaitUserThreadFunction0 f);
 	
 	
-	CWaitDialog(LPCTSTR strDlgText, CWnd* pParent = NULL);   // standard constructor
+	CWaitDialog(LPCTSTR strDlgText, BOOL bShowKillButtons = TRUE, CWnd* pParent = NULL);   // standard constructor
 
 // Dialog Data
 	//{{AFX_DATA(CWaitDialog)
@@ -53,7 +62,7 @@ public:
 
 // Implementation
 protected:
-	void DoThreadFunctionImpl(void * f, int nParams, LPARAM Param1,  LPARAM Param2, LPARAM Param3, LPARAM Param4, LPARAM Param5);
+	void DoThreadFunctionImpl(void * f);
 
 	// Generated message map functions
 	//{{AFX_MSG(CWaitDialog)
@@ -61,9 +70,16 @@ protected:
 	afx_msg void OnTimer(UINT nIDEvent);
 	afx_msg void OnExitButton();
 	virtual void OnCancel();
+	afx_msg void OnKillThreadButton();
+	afx_msg void OnResumeAppButton();
+	afx_msg void OnDestroy();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 private:
+	BOOL m_bShowKillButtons;
+	UINT m_nTimer;
+	CWinThread * m_pWorkerThread;
+	static UINT ThreadControllingFunction( LPVOID pParam );
 	LPCTSTR m_strDlgText;
 	BOOL m_bEndDialog;
 };
