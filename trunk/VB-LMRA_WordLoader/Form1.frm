@@ -8,6 +8,14 @@ Begin VB.Form Form1
    LinkTopic       =   "Form1"
    ScaleHeight     =   7875
    ScaleWidth      =   10890
+   Begin VB.CommandButton cmdOpenEditor 
+      Caption         =   "OpenWordEditor"
+      Height          =   975
+      Left            =   8760
+      TabIndex        =   6
+      Top             =   3120
+      Width           =   1455
+   End
    Begin VB.CommandButton cmdEnumTest 
       Caption         =   "Enum test1"
       Height          =   375
@@ -18,11 +26,11 @@ Begin VB.Form Form1
    End
    Begin VB.CommandButton cmdXMLStringProcess 
       Caption         =   "Process XML string"
-      Height          =   2175
+      Height          =   1335
       Left            =   8400
       TabIndex        =   4
-      Top             =   960
-      Width           =   1815
+      Top             =   480
+      Width           =   1935
    End
    Begin VB.TextBox txtXMLString 
       Height          =   2535
@@ -115,6 +123,22 @@ Private Sub cmdEnumTest_Click()
     Next
     
     
+    
+
+End Sub
+
+Private Sub cmdOpenEditor_Click()
+    Dim obj As New LMRA_XML_WordLoader
+    
+    obj.AddActiveElement "category", "Category", "D:\Sources\MyProjects\LM_Report_Asistent\svn\elements\category\icon.bmp"
+    obj.AddActiveElement "hyp_cf", "CF hypotesis", "D:\Sources\MyProjects\LM_Report_Asistent\svn\elements\hyp_cf\icon.bmp"
+    obj.AddActiveElement "bool_cedent", "Bool cedent", "D:\Sources\MyProjects\LM_Report_Asistent\svn\elements\bool_cedent\icon3.bmp"
+    obj.AddActiveElement "bool_cedent", "Bool cedent", "D:\Sources\MyProjects\LM_Report_Asistent\svn\elements\bool_cedent\icon.bmp"
+    obj.AddActiveElement "hyp_cf", "CF hypotesis", "D:\Sources\MyProjects\LM_Report_Asistent\svn\elements\hyp_cf\icon2.bmp"
+    obj.AddActiveElement "bool_cedent", "Bool cedent", "D:\Sources\MyProjects\LM_Report_Asistent\svn\elements\bool_cedent\icon1.bmp"
+    obj.AddActiveElement "category", "Category", "D:\Sources\MyProjects\LM_Report_Asistent\svn\elements\category\icon.bmp"
+    
+    obj.OpenWordEditor
     
 
 End Sub

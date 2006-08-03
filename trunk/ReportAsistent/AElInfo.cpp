@@ -145,9 +145,15 @@ MSXML2::IXMLDOMNodePtr CAElInfo::getSimpleFilterTransformation()
 	return pSimpleFilterDOM;
 }
 
+
+CString CAElInfo::getElementIconPath()
+{
+	return src_dir_path + "\\icon.bmp";
+}
+
 BOOL CAElInfo::LoadElementIcon(CBitmap &icon)
 {
-	HBITMAP hb = (HBITMAP) LoadImage(NULL, src_dir_path + "\\icon.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+	HBITMAP hb = (HBITMAP) LoadImage(NULL, getElementIconPath(), IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 
 	if (hb == NULL) return FALSE;
 
@@ -325,5 +331,6 @@ BOOL CAElInfo::setLanguageInTransformation(MSXML2::IXMLDOMNodePtr pTransf)
 }
 
 // -------------
+
 
 

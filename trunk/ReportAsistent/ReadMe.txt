@@ -1,3 +1,24 @@
+DEDEK:
+
+zacinam s pluginem do Wordu
+
+vsichni uz muzete testovat - budu moc rad 
+
+dejte vedet kdyz to nebude chodit
+
+spousti se: v RA klavesova zkratka Ctrl + W
+
+
+
+momentalne to umi:
+pouze zobrazi nefunkcni toolbar AP
+
+
+
+
+
+
+------------------------------------------------------------------------------------------
 Kody to deda:
 - tak u Raucha ten FE plugin nefunguje, je invalidni :-/ Ma Win XP SP1. Musime z toho nejak dostat ty knihovny...
 dedek: hmmm to bude asi narocny ladeni, ale zkusime to nejak logovat nebo hlaskovat, at aspon vime cim to je..

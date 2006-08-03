@@ -40,6 +40,7 @@ public:
 class CWordManager  
 {
 public:
+	void OpenWordEditor();
 	void GenerateXMLString(_bstr_t XML_str);
 	BOOL InitWordLoader();
 	CWordManager();
@@ -65,6 +66,7 @@ private:
 	CStringTableImpl m_WordParagraphStyles;
 	CStringTableImpl m_WordCharacterStyles;
 protected:
+	void FillActiveElements();
 	void DisconnectWordEventHandler();
 	BOOL InitWordEventHandler();
 	//void LoadParagraphStyles(LPCTSTR template_name);   //kody: presunuto do public

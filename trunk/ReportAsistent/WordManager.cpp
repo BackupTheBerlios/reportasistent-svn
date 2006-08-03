@@ -212,6 +212,8 @@ BOOL CWordManager::InitWordLoader()
 		}
 	}
 
+	FillActiveElements();
+	
 	return InitWordEventHandler();
 }
 
@@ -342,5 +344,41 @@ void CWordManager::DisconnectWordEventHandler()
 	{
 		delete m_pEventHandler;
 		m_pEventHandler = NULL;
+	}
+}
+
+void CWordManager::OpenWordEditor()
+{
+	if (! isInit()) 
+	{
+		if (! InitWordLoader()) return;
+	}
+
+
+	try
+	{
+		m_WordLoader->OpenWordEditor();
+	}
+	catch (_com_error e)
+	{
+		//ladici
+		AfxMessageBox(e.Description());
+	}
+}
+
+void CWordManager::FillActiveElements()
+{
+	CElementManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
+
+	for (int a=0; a <= m.getLastElementId(); a++)
+	{
+		if (m.isElementActive(a))
+		{
+			CAElInfo * i = m.getActiveElementInfo(a);
+			m_WordLoader->AddActiveElement(
+				i->getElementName(),
+				i->getElementLabel(),
+				(LPCTSTR) i->getElementIconPath());
+		}
 	}
 }

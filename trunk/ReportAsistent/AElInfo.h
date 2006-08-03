@@ -12,6 +12,7 @@
 class CAElInfo  
 {
 public:
+	CString getElementIconPath();
 	int FindTransformationByName(LPCTSTR tr_name);
 	MSXML2::IXMLDOMElementPtr CreateEmptyElement();
 	BOOL LoadElementIcon(CBitmap &icon);

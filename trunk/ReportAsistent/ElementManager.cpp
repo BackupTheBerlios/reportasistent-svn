@@ -54,7 +54,7 @@ CElementManager::elId_t CElementManager::FirstActiveElementID = 5;
 
 CElementManager::elId_t CElementManager::getLastElementId()
 {
-	int pom = active_elements.GetUpperBound();
+//	int pom = active_elements.GetUpperBound();
 	return LENGTH(static_elements_names) + active_elements.GetUpperBound();
 }
 

@@ -90,12 +90,11 @@
 #define ID_ELEMENT_EDIT                 32780
 #define ID_MMDELETE                     32782
 #define ID_FILE_OPTIONS                 32787
+#define ID_OPEN_WORD_EDITOR             32788
 #define ID_MMNEWSTATICFIRST             39001
 #define ID_MMNEWSTATICLAST              39009
 #define ID_MMNEWACTIVEFIRST             39010
 #define ID_MMNEWACTIVELAST              39100
-#define IDS_CONFIRM_THRAD_KILL          61400
-#define IDS_CONFIRM_APP_RESUME          61401
 #define IDS_INSERT_NEW_ELEMENT_WRONG_LOCATION 61205
 #define IDS_SIMPLE_FILTER_FAILED_SOURCE_LOAD 61206
 #define IDS_WB_WORD_LOADER_NOT_REGISTRED 61207
@@ -110,6 +109,8 @@
 #define IDS_AEL_LOAD_FAILED             61217
 #define IDS_TR_OPTIONS_ERROR            61218
 #define IDS_WRONG_ELEMENT_TRANSFORMATION 61219
+#define IDS_CONFIRM_THRAD_KILL          61400
+#define IDS_CONFIRM_APP_RESUME          61401
 
 // Next default values for new objects
 // 
@@ -117,7 +118,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
 #define _APS_NEXT_RESOURCE_VALUE        166
-#define _APS_NEXT_COMMAND_VALUE         32788
+#define _APS_NEXT_COMMAND_VALUE         32789
 #define _APS_NEXT_CONTROL_VALUE         1040
 #define _APS_NEXT_SYMED_VALUE           101
 #endif

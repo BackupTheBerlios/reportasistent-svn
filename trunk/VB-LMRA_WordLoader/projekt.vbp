@@ -11,6 +11,7 @@ Class=ErrorHandlerImpl; ErrorHandlerImpl.cls
 Class=WordLoader; WordLoader.cls
 Module=MainModule; Main.bas
 Class=LMRA_XML_WordLoader; LMRA_XML_WordLoader.cls
+Class=cbAElButtonEvents; cbAElButtonEvents.cls
 IconForm="Form1"
 Startup="Sub Main"
 HelpFile=""

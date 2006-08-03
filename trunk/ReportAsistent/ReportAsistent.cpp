@@ -26,6 +26,7 @@ BEGIN_MESSAGE_MAP(CReportAsistentApp, CWinApp)
 	ON_COMMAND(ID_APP_ABOUT, OnAppAbout)
 	ON_COMMAND(ID_MMSOURCES, OnMmsources)
 	ON_COMMAND(ID_FILE_OPTIONS, OnFileOptions)
+	ON_COMMAND(ID_OPEN_WORD_EDITOR, OnOpenWordEditor)
 	//}}AFX_MSG_MAP
 	// Standard file based document commands
 	ON_COMMAND(ID_FILE_NEW, CWinApp::OnFileNew)
@@ -289,4 +290,10 @@ void CReportAsistentApp::OnFileOptions()
 
 	dlg.DoModal();
 	
+}
+
+//dedek otevre word v RA edit modu
+void CReportAsistentApp::OnOpenWordEditor() 
+{
+	m_pGeneralManager->WordManager.OpenWordEditor();
 }

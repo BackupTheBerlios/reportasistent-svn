@@ -101,6 +101,7 @@ public:
 	afx_msg void OnAppAbout();
 	afx_msg void OnMmsources();
 	afx_msg void OnFileOptions();
+	afx_msg void OnOpenWordEditor();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };

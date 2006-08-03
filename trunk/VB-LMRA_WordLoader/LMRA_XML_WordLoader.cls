@@ -16,9 +16,90 @@ Option Explicit
 Dim mstrLastId As String
 Dim mstrLastError As String
 Dim mWordForInfo As Word.Application
+Dim mActiveElemetns As New Collection
+Dim mWordEvents As New Collection
+Dim ButtonEvent As cbAElButtonEvents
 
 Public Event HonzaEvent(ByVal name As String)
+Public Event ActiveElementSelected(ByVal name As String)
 
+Public Sub AddActiveElement(ByVal strType As String, ByVal strLabel As String, ByVal strIamgePath As String)
+
+'    MsgBox strType & vbNewLine & strLabel & vbNewLine & strIamgePath
+    
+    Dim AEl(2) As String
+    
+    
+    AEl(0) = strType
+    AEl(1) = strLabel
+    AEl(2) = strIamgePath
+    
+    mActiveElemetns.Add AEl
+End Sub
+
+
+Private Sub CreateRAToolbar(WordApp As Word.Application)
+    Dim bar As Office.CommandBar
+    Set bar = WordApp.CommandBars.Add(name:="Report Asistent", Temporary:=True)
+    
+    'MsgBox "in bar added"
+    
+    Dim but As Office.CommandBarButton
+    Dim AEl
+    
+    For Each AEl In mActiveElemetns
+ '       MsgBox "next " & AEl(0) & vbNewLine & AEl(1) & vbNewLine & AEl(2)
+        Set but = bar.Controls.Add(Type:=msoControlButton)
+        but.style = msoButtonIconAndCaption
+        
+        but.Tag = AEl(0)
+        but.Caption = AEl(1)
+        
+        Dim img As IPictureDisp
+        Set img = Nothing
+        On Error Resume Next
+        Set img = LoadPicture(AEl(2))
+        On Error GoTo 0
+        If (Not img Is Nothing) Then
+            Clipboard.SetData img
+            but.PasteFace
+        End If
+                        
+        Set ButtonEvent = New cbAElButtonEvents
+        Set ButtonEvent.cbBtn = but
+        Set ButtonEvent.LMRA_loader = Me
+        mWordEvents.Add ButtonEvent
+        
+'        MsgBox "hotovo " & AEl(0)
+    Next
+       
+    'udela z toolobaru svisly
+    bar.Width = 0
+    bar.Visible = True
+End Sub
+
+
+
+
+Public Sub ActiveElementSelected(ByVal el_name As String)
+    MsgBox "element: " & el_name
+    RaiseEvent ActiveElementSelected(el_name)
+End Sub
+
+
+
+
+Public Sub OpenWordEditor()
+    Dim WordApp As Word.Application
+    
+    Set WordApp = CreateObject("Word.Application")
+    'MsgBox "word created"
+    
+    CreateRAToolbar WordApp
+    'MsgBox "tool bar added"
+    
+    WordApp.Visible = True
+End Sub
 
 
 Public Property Get strLastProcessedId() As String
@@ -48,7 +129,7 @@ Public Function EnumTemplates() As String()
     
     ReDim ret(0 To mWordForInfo.Templates.Count - 1)
     
-    Dim t As Word.template
+    Dim t As Word.Template
     Dim n As Integer
     
     n = 0
