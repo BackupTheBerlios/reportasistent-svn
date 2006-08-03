@@ -8,6 +8,14 @@ Begin VB.Form Form1
    LinkTopic       =   "Form1"
    ScaleHeight     =   7875
    ScaleWidth      =   10890
+   Begin VB.CommandButton cmdFileToStr 
+      Caption         =   "Load file to str ^"
+      Height          =   375
+      Left            =   480
+      TabIndex        =   7
+      Top             =   3240
+      Width           =   1575
+   End
    Begin VB.CommandButton cmdOpenEditor 
       Caption         =   "OpenWordEditor"
       Height          =   975
@@ -55,16 +63,16 @@ Begin VB.Form Form1
    Begin VB.CommandButton cmdXMLProcess 
       Caption         =   "process the XML file!"
       Height          =   375
-      Left            =   480
+      Left            =   2400
       TabIndex        =   1
-      Top             =   3120
+      Top             =   3240
       Width           =   1695
    End
    Begin VB.TextBox txtFilePath 
       Height          =   375
       Left            =   480
       TabIndex        =   0
-      Text            =   "1"
+      Text            =   "..\XML\redukovany.xml"
       Top             =   3840
       Width           =   3615
    End
@@ -75,13 +83,16 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
+    
+    
+Dim mLMRA As New LMRA_XML_WordLoader
 
 Private Sub XML_Process()
     Dim obj As New LMRA_XML_WordLoader
     
     Err.Clear
     On Error Resume Next
-    txtOutput.text = obj.LoadFromFile(txtFilePath)
+    obj.LoadFromFile txtFilePath
     
     If Not Err.Number = 0 Then
         MsgBox "Error in file opening." & vbNewLine & txtFilePath.text & vbNewLine & Err.Description
@@ -127,6 +138,13 @@ Private Sub cmdEnumTest_Click()
 
 End Sub
 
+Private Sub cmdFileToStr_Click()
+    Dim fs As New FileSystemObject
+    
+    
+    txtXMLString = fs.GetFile(txtFilePath).OpenAsTextStream(ForReading).ReadAll
+End Sub
+
 Private Sub cmdOpenEditor_Click()
     Dim obj As New LMRA_XML_WordLoader
     
@@ -149,13 +167,11 @@ End Sub
 
  
 Private Sub cmdXMLStringProcess_Click()
-    Dim obj As New LMRA_XML_WordLoader
-    
     Err.Clear
     On Error Resume Next
-    txtOutput.text = obj.LoadFromString(txtXMLString)
+    mLMRA.LoadFromStringToWordEditor (txtXMLString)
     
-    txtOutput.text = txtOutput.text & vbNewLine & obj.strLastError & vbNewLine & obj.strLastProcessedId
+    txtOutput.text = txtOutput.text & vbNewLine & mLMRA.strLastError & vbNewLine & mLMRA.strLastProcessedId
     
     
     If Not Err.Number = 0 Then

@@ -30,6 +30,10 @@ Dim mGraph As Graph.Chart
 Dim mstrGraphProgID As String
 Dim mTable As Word.Table
 
+Public Sub SetWordApplication(ByRef app As Word.Application)
+    Set mWordApp = app
+End Sub
+
 Public Property Set LMRA_loader(P As LMRA_XML_WordLoader)
    Set mLMRA = P
 End Property
@@ -40,7 +44,7 @@ Private Sub Class_Initialize()
 End Sub
 
 
-Public Sub SetDocument(doc As Word.Document)
+Public Sub SetAndClearDocument(doc As Word.Document)
     Set mWordApp = doc.Application
     
     mWordApp.Visible = True
@@ -53,16 +57,16 @@ End Sub
 
 
 Public Sub NewDocument()
-    Dim d As Word.Document
+    Dim D As Word.Document
     
     
     Set mWordApp = CreateObject("Word.Application")
     
     mWordApp.Visible = True
     
-    Set d = mWordApp.Documents.Add("Normal.dot")
+    Set D = mWordApp.Documents.Add("Normal.dot")
     
-    d.Select
+    D.Select
      
     
     
@@ -85,19 +89,6 @@ End Sub
 
 
 Private Sub AddText(text As String, Optional style)
-    
-'!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-'!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-'!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-'meni nove odstavce &#10; LF na prechod na novy radek Word Chr(11)
-'!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-'!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-'!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-'    text = Replace(text, vbLf, Chr(11))
-'!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-'!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-'!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
     If IsMissing(style) Then
         mWordApp.Selection.TypeText text
     Else
@@ -209,33 +200,11 @@ Public Sub LoadTableColumn(oAttributes As MSXML2.IVBSAXAttributes)
     bg_color = (Num And &HFF) * 256 * 256
     bg_color = bg_color + (Num And &H2000FF00 And &H1000FF00)   'finta na VB - potrebujem 32bit AND
     bg_color = bg_color + (((Num And &HFF0000) / 256) / 256)
-    
-    
-'    num = (num & &HFF00) / 256
-'    bg_color = bg_color + ((num & &HFF) * 256)
-'    num = (num & &HFF00) / 256
-'    bg_color = bg_color + num
-    
-'    bg_color = hex_bg
-    
+        
     mWordApp.Selection.Cells(1).Shading.BackgroundPatternColor = bg_color
         
 EndSub:
-    
-    
-'        With mWordApp.Selection.Cells(1)
-'            r = .RowIndex
-'            c = .ColumnIndex
-        
-'            .Merge mTable.Cell( _
-'                Row:=.RowIndex + rs - 1, _
-'                Column:=.ColumnIndex + cs - 1)
-'        End With
-        
-'        mTable.Cell(r, c).Select
-            
-
-    
+       
 End Sub
 
 Public Sub LoadTableRow(oAttributes As MSXML2.IVBSAXAttributes)
@@ -316,16 +285,10 @@ Public Sub LoadInclude(oAttributes As MSXML2.IVBSAXAttributes)
 '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 '!!!!!!!!!!nastavuje pocatek relativnicj cest!!!!!!!!
 '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    mWordApp.ChangeFileOpenDirectory App.Path
+    mWordApp.ChangeFileOpenDirectory app.Path
 '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    
-'    ChangeFileOpenDirectory "D:\lmra\XML\"
-'   Documents.Open FileName:="include_doc.doc", ConfirmConversions:=False, _
-'        ReadOnly:=False, AddToRecentFiles:=False, PasswordDocument:="", _
-'        PasswordTemplate:="", Revert:=False, WritePasswordDocument:="", _
-'        WritePasswordTemplate:="", Format:=wdOpenFormatAuto
-    
+        
     On Error GoTo FileError
     Set open_doc = mWordApp.Documents.Open( _
         FileName:=oAttributes.getValueFromName("", "file"), _
@@ -350,7 +313,7 @@ FileError:
 
     mLMRA.strLastError = "Error in iclude file loading!" _
         & vbNewLine & "filename: " & oAttributes.getValueFromName("", "file") & vbNewLine _
-        & "file open directory: " & App.Path & vbNewLine
+        & "file open directory: " & app.Path & vbNewLine
     
    
     Err.Clear
@@ -476,16 +439,6 @@ Public Sub LoadReport(oAttributes As MSXML2.IVBSAXAttributes)
     AddTitle oAttributes.getValueFromName("", "author")
     mintHeadinglevel = 1
  
-    
-    On Error GoTo 0
-    
-'    For i = 0 To (oAttributes.length - 1)
-'        frmMain.rtfOutput.Text = frmMain.rtfOutput.Text & " " & _
-'        oAttributes.getLocalName(i) & "=""" & oAttributes.getValue(i) _
-'        & """"
-'    Next
-
-
 End Sub
 
 Public Sub EndDocument()

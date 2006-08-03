@@ -46,6 +46,7 @@ protected:
 	// Generated OLE dispatch map functions
 	//{{AFX_DISPATCH(CWordEventHandler)
 	afx_msg void onHonzaEvent(LPCTSTR str);
+	afx_msg void onActiveElementSelected(LPCTSTR strElementName);
 	//}}AFX_DISPATCH
 	DECLARE_DISPATCH_MAP()
 	DECLARE_INTERFACE_MAP()

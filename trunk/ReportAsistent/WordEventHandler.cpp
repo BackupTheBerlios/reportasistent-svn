@@ -46,6 +46,7 @@ END_MESSAGE_MAP()
 BEGIN_DISPATCH_MAP(CWordEventHandler, CCmdTarget)
 	//{{AFX_DISPATCH_MAP(CWordEventHandler)
 	DISP_FUNCTION(CWordEventHandler, "HonzaEvent", onHonzaEvent, VT_EMPTY, VTS_BSTR)
+	DISP_FUNCTION(CWordEventHandler, "ActiveElementSelected", onActiveElementSelected, VT_EMPTY, VTS_BSTR)
 	//}}AFX_DISPATCH_MAP
 END_DISPATCH_MAP()
 
@@ -66,4 +67,9 @@ void CWordEventHandler::onHonzaEvent(LPCTSTR str)
 	msg += str;
 
 	AfxMessageBox(msg);
+}
+
+void CWordEventHandler::onActiveElementSelected(LPCTSTR strElementName) 
+{
+	AfxMessageBox(strElementName);
 }

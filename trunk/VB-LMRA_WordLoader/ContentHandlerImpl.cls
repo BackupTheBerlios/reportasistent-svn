@@ -17,21 +17,11 @@ Implements IVBSAXContentHandler
 
 
 Dim wl As WordLoader
-Dim mstrOutput As String
 Dim mLMRA As LMRA_XML_WordLoader
 
 
 Public Property Set LMRA_loader(P As LMRA_XML_WordLoader)
    Set mLMRA = P
-End Property
-
-
-Public Property Let strOutput(P As String)
-    mstrOutput = P
-End Property
-
-Public Property Get strOutput() As String
-    strOutput = mstrOutput
 End Property
 
 Public Property Set word_loader(P As WordLoader)
@@ -49,18 +39,7 @@ Private Sub IVBSAXContentHandler_startElement(strNamespaceURI As String, strLoca
     On Error Resume Next
     mLMRA.strLastProcessedId = oAttributes.getValueFromName("", "id")
     On Error GoTo 0
-    
-    mstrOutput = mstrOutput & "<" & strLocalName
-    
-    For i = 0 To (oAttributes.Length - 1)
-        mstrOutput = mstrOutput & " " & _
-        oAttributes.getLocalName(i) & "=""" & oAttributes.getValue(i) & """"
-    Next
-    
-    mstrOutput = mstrOutput & ">"
-            
-
-
+      
     
     Select Case strLocalName
         Case "report"
@@ -95,7 +74,6 @@ Private Sub IVBSAXContentHandler_startElement(strNamespaceURI As String, strLoca
 End Sub
 
 Private Sub IVBSAXContentHandler_endElement(strNamespaceURI As String, strLocalName As String, strQName As String)
-    mstrOutput = mstrOutput & "</" & strLocalName & ">"
     
     Select Case strLocalName
         Case "chapter"
@@ -128,7 +106,6 @@ Private Sub IVBSAXContentHandler_characters(strChars As String)
     strChars = Replace(strChars, vbNewLine, " ")
     
     wl.TypeText strChars
-    mstrOutput = mstrOutput & strChars
 End Sub
 
 Private Sub IVBSAXContentHandler_endDocument()

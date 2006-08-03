@@ -19,6 +19,8 @@ Dim mWordForInfo As Word.Application
 Dim mActiveElemetns As New Collection
 Dim mWordEvents As New Collection
 Dim ButtonEvent As cbAElButtonEvents
+Dim mWordEditor As Word.Application
+
 
 Public Event HonzaEvent(ByVal name As String)
 Public Event ActiveElementSelected(ByVal name As String)
@@ -82,7 +84,7 @@ End Sub
 
 
 Public Sub ActiveElementSelected(ByVal el_name As String)
-    MsgBox "element: " & el_name
+'    MsgBox "element: " & el_name
     RaiseEvent ActiveElementSelected(el_name)
 End Sub
 
@@ -90,15 +92,19 @@ End Sub
 
 
 Public Sub OpenWordEditor()
-    Dim WordApp As Word.Application
-    
-    Set WordApp = CreateObject("Word.Application")
+    If Not mWordEditor Is Nothing Then
+        Exit Sub
+    End If
+       
+    Set mWordEditor = CreateObject("Word.Application")
     'MsgBox "word created"
     
-    CreateRAToolbar WordApp
+    CreateRAToolbar mWordEditor
     'MsgBox "tool bar added"
     
-    WordApp.Visible = True
+    mWordEditor.Documents.Add.Select
+    
+    mWordEditor.Visible = True
 End Sub
 
 
@@ -231,114 +237,83 @@ end_ret:
 End Function
 
 
-Public Function LoadFromStringToDoc(ByVal strXMLSource As String, out_doc As Object)
+Public Sub LoadFromStringToClearDoc(ByVal strXMLSource As String, out_doc As Object)
     Dim reader As New SAXXMLReader30             'Reads the XML document
-    Dim contentHandler As New ContentHandlerImpl 'Receives parsing events
-    Dim errorHandler As New ErrorHandlerImpl     'Receive error events
     Dim word_loader As New WordLoader
     
-        
-    Set contentHandler.word_loader = word_loader
-    Set contentHandler.LMRA_loader = Me
-    Set errorHandler.LMRA_loader = Me
-    
-    contentHandler.strOutput = ""
-        
-'    Dim dtdHandler As New DTDHandlerImpl
-'    txtOutput.text = ""
-    Set reader.contentHandler = contentHandler   'They work together
-    Set reader.errorHandler = errorHandler       'They also work together
-'    Set reader.dtdHandler = dtdHandler
-'    On Error GoTo 10
+    InitReaderWordLoader reader, word_loader
 
-    word_loader.SetDocument out_doc
+    word_loader.SetAndClearDocument out_doc
 '    word_loader.NewDocument
     
-    
-
-    
-    'chyba se osetri az vne procedury
-'    On Error Resume Next
     reader.parse strXMLSource
+End Sub
 
-End Function
-
-Public Function LoadFromString(ByVal strXMLSource As String)
-'    MsgBox strXMLSource
+Public Sub LoadFromStringToWordEditor(ByVal strXMLSource As String)
+    If mWordEditor Is Nothing Then
+        OpenWordEditor
+    End If
     
+    If Not mWordEditor.Selection Is Nothing Then
+        Dim reader As New SAXXMLReader30             'Reads the XML document
+        Dim word_loader As New WordLoader
+        InitReaderWordLoader reader, word_loader
+        
+        word_loader.SetWordApplication mWordEditor
+        reader.parse strXMLSource
+                
+    End If
+
+End Sub
+
+Public Sub LoadFromString(ByVal strXMLSource As String)
     Dim reader As New SAXXMLReader30             'Reads the XML document
-    Dim contentHandler As New ContentHandlerImpl 'Receives parsing events
-    Dim errorHandler As New ErrorHandlerImpl     'Receive error events
     Dim word_loader As New WordLoader
     
-    
-
-    
-    Set contentHandler.word_loader = word_loader
-    Set contentHandler.LMRA_loader = Me
-    Set errorHandler.LMRA_loader = Me
-    Set word_loader.LMRA_loader = Me
-
-    contentHandler.strOutput = ""
-        
-'    Dim dtdHandler As New DTDHandlerImpl
-'    txtOutput.text = ""
-    Set reader.contentHandler = contentHandler   'They work together
-    Set reader.errorHandler = errorHandler       'They also work together
-'    Set reader.dtdHandler = dtdHandler
-'    On Error GoTo 10
+    InitReaderWordLoader reader, word_loader
 
     word_loader.NewDocument
-    
-    
-
-    
-    'chyba se osetri az vne procedury
-'    On Error Resume Next
+       
     reader.parse strXMLSource
     
-'    LoadFromFile = contentHandler.strOutput
 
     RaiseEvent HonzaEvent("DDccDDkonec*")
 
-End Function
+End Sub
 
 
-Public Function LoadFromFile(ByVal strFileName As String) As String
-    Dim reader As New SAXXMLReader30             'Reads the XML document
+Private Sub InitReaderWordLoader(ByRef reader As SAXXMLReader30, ByRef word_loader As WordLoader)
     Dim contentHandler As New ContentHandlerImpl 'Receives parsing events
     Dim errorHandler As New ErrorHandlerImpl     'Receive error events
-    Dim word_loader As New WordLoader
     
     Set contentHandler.word_loader = word_loader
     Set contentHandler.LMRA_loader = Me
     Set errorHandler.LMRA_loader = Me
-    contentHandler.strOutput = ""
-            
-'    Dim dtdHandler As New DTDHandlerImpl
-'    txtOutput.text = ""
+    
     Set reader.contentHandler = contentHandler   'They work together
     Set reader.errorHandler = errorHandler       'They also work together
-'    Set reader.dtdHandler = dtdHandler
-'    On Error GoTo 10
+End Sub
+
+
+Public Sub LoadFromFile(ByVal strFileName As String)
+    Dim reader As New SAXXMLReader30             'Reads the XML document
+    Dim word_loader As New WordLoader
+    
+    InitReaderWordLoader reader, word_loader
 
     word_loader.NewDocument
     
-    
-
-    
-    'chyba se osetri az vne procedury
-    'On Error Resume Next
     reader.parseURL (strFileName)           'Parse the document
     
-    LoadFromFile = contentHandler.strOutput
-    
-'    RaiseEvent HonzaEvent("DDccDDkonec*")
-
-End Function
+End Sub
 
 Private Sub Class_Terminate()
     If Not mWordForInfo Is Nothing Then
         mWordForInfo.Quit
+    End If
+    
+    If Not mWordEditor Is Nothing Then
+        On Error Resume Next
+        mWordEditor.Quit SaveChanges:=False
     End If
 End Sub
