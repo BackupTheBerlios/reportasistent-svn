@@ -45,7 +45,6 @@ END_MESSAGE_MAP()
 
 BEGIN_DISPATCH_MAP(CWordEventHandler, CCmdTarget)
 	//{{AFX_DISPATCH_MAP(CWordEventHandler)
-	DISP_FUNCTION(CWordEventHandler, "HonzaEvent", onHonzaEvent, VT_EMPTY, VTS_BSTR)
 	DISP_FUNCTION(CWordEventHandler, "ActiveElementSelected", onActiveElementSelected, VT_EMPTY, VTS_BSTR)
 	//}}AFX_DISPATCH_MAP
 END_DISPATCH_MAP()
@@ -60,14 +59,6 @@ END_INTERFACE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
 // CWordEventHandler message handlers
-
-void CWordEventHandler::onHonzaEvent(LPCTSTR str) 
-{
-	CString msg = "Tak se to povedlo, dostal jsi event od Wordu (HonzaEvent)\nzprava: ";
-	msg += str;
-
-	AfxMessageBox(msg);
-}
 
 void CWordEventHandler::onActiveElementSelected(LPCTSTR strElementName) 
 {

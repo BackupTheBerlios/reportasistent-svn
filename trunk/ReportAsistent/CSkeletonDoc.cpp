@@ -64,29 +64,16 @@ BOOL CSkeletonDoc::OnNewDocument()
 		return FALSE;
 	}
 
-	
-	//vytvor prazny report
-//	CGeneralManager * m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager;
-
-	//by bylo fajn, ale pak tam neni DTD
-	//pXMLDom->appendChild(m->ElementManager.CreateEmptyElement(elId_t_REPORT));
-
-	//docasne reseni:
+	return TRUE;
+/*
 	CDirectoriesManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->DirectoriesManager;
 
-	//otevri "prazdny" dokument
-
 #ifdef _DEBUG
-
-	//	m_pXMLDom->load((LPCTSTR) (m.getXMLFilesDirectory() + "/prazdny.xml"));
 	return OpenSkeletonFile(m.getXMLFilesDirectory() + "/prazdny.xml");
-
 #else	
-
-	//	m_pXMLDom->load((LPCTSTR) (m.getXMLFilesDirectory() + "/reduk2.xml"));
 	return OpenSkeletonFile(m.getXMLFilesDirectory() + "/reduk2.xml");
-
 #endif
+*/
 }
 
 
@@ -138,38 +125,6 @@ BOOL CSkeletonDoc::OnOpenDocument(LPCTSTR lpszPathName)
 	}
 	
 	return OpenSkeletonFile(lpszPathName);
-
-/*
-	
-	HRESULT hr;
-
-	hr= m_pXMLDom.CreateInstance(_T("Msxml2.DOMDocument"));
-	if (FAILED(hr)) 
-	{
-		//mozna prepsat pomoci string table?
-		AfxGetMainWnd()->MessageBox("Failed to instantiate an XML DOM.", "error", MB_ICONERROR);
-		return FALSE;
-	}
-
-	m_pXMLDom->async = VARIANT_FALSE; // default - true,
-
-	if(m_pXMLDom->load((LPCTSTR) lpszPathName) != VARIANT_TRUE)
-	{
-
-		CString s;
-		CString errstr( (BSTR) m_pXMLDom->parseError->Getreason());
-
-		//mozna prepsat pomoci string table?
-		s.Format("\nError in XML file reading.\n%s", lpszPathName);
-
-		errstr += s;
-
-		AfxGetMainWnd()->MessageBox(errstr, "error", MB_ICONERROR);
-
-		return FALSE;
-	}
-
-*/
 }
 
 void CSkeletonDoc::FillTreeControl(CTreeCtrl  & tree_control)
@@ -200,8 +155,8 @@ void CSkeletonDoc::InsertNodeToTreeCtrl(MSXML2::IXMLDOMElementPtr pElement,
 									   CTreeCtrl  & tree_control,
 									   HTREEITEM hInsertAfter) //hInsertAfter = TVI_LAST
 {
-//dedek: nova verze
-/****/	
+//dedek:
+
 	if (pElement == NULL) return;
 
 	HTREEITEM hTreeItem=NULL;
@@ -228,161 +183,6 @@ void CSkeletonDoc::InsertNodeToTreeCtrl(MSXML2::IXMLDOMElementPtr pElement,
 	}
 
 	tree_control.Expand(hTreeItem, TVE_EXPAND);
-
-
-/******
-dedek: stara verze	
-	
-	
-	//pridal honza
-	if (pElement == NULL) return;
-	
-	
-	
-	MSXML2::MSXML2::IXMLDOMNodeListPtr pChildren = pElement->childNodes;//ukazatel na potomky pElementu
-	MSXML2::MSXML2::IXMLDOMNodePtr pChild = NULL;
-	CString csElementType; //typ prvku XMLstromu: text/chapter/report/...
-	char sTextValue [256]; //text ktery se stane jmenem polozky v CtrlTree
-	HTREEITEM hTreeItem=NULL;
-	BOOL bChildrenYes=TRUE; //urcuje, mohu-li potomky tohoto prvku vlozit do kostry 
-							//..napr. chapter - ano, 4fthypoteza- ne.
-
-	
-		
-		csElementType=(LPCTSTR)(pElement->baseName);
-
-		//pridam prvek do TreeCtrl..pro typ prvku REPORT
-		if (0==strcmp("report",csElementType))
-		{
-			hTreeItem = tree_control.InsertItem((LPCTSTR) (_bstr_t) csElementType,//text prvku TreeCtrl
-													IDB_REPORTICO-IDB_BMTREEFIRST-1,//nImage
-													IDB_REPORTICO-IDB_BMTREEFIRST-1,//nSelectedImage
-													hParentItem);
-		}
-		else
-			//pridam prvek do TreeCtrl..pro typ prvku TEXT:
-					//<text value="Vysledky."/> 
-			if (0==strcmp("text",csElementType))
-			{
-
-/**		prepsal honza
-				_variant_t & Value = pElement->getAttribute("value");
-
-				if (Value.vt == VT_NULL) 
-/****
-
-				_bstr_t & Value = pElement->text;
-				if ((BSTR) Value == NULL) 					
-					sprintf(sTextValue,"Text - empty");
-				else
-				{
-					sprintf(sTextValue,"%.*s...",LENGTH_TREE_ITEM_NAME-3,(LPCTSTR) (_bstr_t) Value);
-				}
-
-				hTreeItem = tree_control.InsertItem(sTextValue,//text prvku TreeCtrl
-													IDB_TEXTICO-IDB_BMTREEFIRST-1,//nImage
-													IDB_TEXTICO-IDB_BMTREEFIRST-1,//nSelectedImage
-													hParentItem);
-			}
-			else 
-				//pridam prvek do TreeCtrl ..pro typ prvku CHAPTER:
-					//<chapter title = "Muzi">
-				if (0==strcmp("chapter",csElementType))
-				{
-					_variant_t & Value = pElement->getAttribute("title");
-
-					if (Value.vt == VT_NULL) 
-						sprintf(sTextValue,"Title - missing");
-					else
-					{
-						sprintf(sTextValue,"%.*s...",LENGTH_TREE_ITEM_NAME-3,(LPCTSTR) (_bstr_t) Value);
-					}
-
-					hTreeItem = tree_control.InsertItem(sTextValue,//text prvku TreeCtrl
-														IDB_CHAPTERICO-IDB_BMTREEFIRST-1,//nImage
-														IDB_CHAPTERICO-IDB_BMTREEFIRST-1,//nSelectedImage
-														hParentItem);
-				}
-				//pridam prvek do TreeCtrl ..pro typ prvku PARAGRAPH
-				else
-					if (0==strcmp("paragraph",csElementType))
-					{
-						hTreeItem = tree_control.InsertItem((LPCTSTR) (_bstr_t) csElementType,//text prvku TreeCtrl
-														IDB_PARAGRAPHICO-IDB_BMTREEFIRST-1,//nImage
-														IDB_PARAGRAPHICO-IDB_BMTREEFIRST-1,//nSelectedImage
-														hParentItem);
-					}
-					else
-				//pridam prvek do TreeCtrl ..pro typ prvku ACTIVE_ELEMENT
-						if (0==strcmp("active_element",csElementType))
-						{
-							_variant_t & vtTypeActElm = pElement->getAttribute("type");
-							if (0==strcmp("hyp_4ft",(LPCTSTR) (_bstr_t) vtTypeActElm))
-							//pridam prvek do TreeCtrl ..pro typ prvku 4FT-HYPOTEZA
-								/****<active_element type="hyp_4ft" source="honzova_metabaze" id="hyp_4ft1">
-									<params/>
-								
-									<filter type="simple">
-										<selection id="hyp1"/>
-										<selection id="hyp3"/>
-									</filter>
-								
-									<output>
-										<transformation file="../4ft_generuj1.xsl"/>
-										<transformation file="../4ft_generuj1.xsl"/>
-									</output>
-								</active_element>/*****
-							{
-								_variant_t & vtId = pElement->getAttribute("id");
-
-								if (vtId.vt == VT_NULL) 
-									sprintf(sTextValue,"Id - missing");
-								else
-								{
-									sprintf(sTextValue,"%s",(LPCTSTR) (_bstr_t) vtId);
-								}
-
-								hTreeItem = tree_control.InsertItem(sTextValue,//text prvku TreeCtrl
-																	IDB_4FTHYPOTEZAICO-IDB_BMTREEFIRST-1,//nImage
-																	IDB_4FTHYPOTEZAICO-IDB_BMTREEFIRST-1,//nSelectedImage
-																	hParentItem);
-								bChildrenYes=FALSE; // potomci nemaji byt prvky kostry, protoze jsou to zalezitosti pro dialog 4fthypotezy.
-
-							}
-							else
-							//pridam aktivni prvek do TreeCtrl..pro jiny typ prvku nez vyse uvedeny
-							hTreeItem = tree_control.InsertItem((LPCTSTR) (_bstr_t) csElementType,//text prvku TreeCtrl
-														IDB_UNKNOWNICO-IDB_BMTREEFIRST-1,//nImage
-														IDB_UNKNOWNICO-IDB_BMTREEFIRST-1,//nSelectedImage
-													hParentItem);
-
-
-						}
-						//pridam prvek do TreeCtrl..pro jiny typ prvku nez vyse uvedeny
-						else
-							hTreeItem = tree_control.InsertItem((LPCTSTR) (_bstr_t) csElementType,//text prvku TreeCtrl
-														IDB_UNKNOWNICO-IDB_BMTREEFIRST-1,//nImage
-														IDB_UNKNOWNICO-IDB_BMTREEFIRST-1,//nSelectedImage
-													hParentItem);
-
-
-		pElement.AddRef();
-
-		//ukazu TV_ITEM.lParam na odpovidajici uzel XML stromu
-
-		
-		tree_control.SetItemData(hTreeItem, CreateItemData(pElement));
-
-
-	while (bChildrenYes && (pChild = pChildren->nextNode()) != NULL)
-	{
-
-		//rekurze
-		InsetNodeToTreeCtrl(pChild, hTreeItem, tree_control);
-	}
-
-  /*****/
-
 }
 
 //pridal honza
@@ -394,9 +194,6 @@ BOOL CSkeletonDoc::OnSaveDocument(LPCTSTR lpszPathName)
 	
 	return TRUE;	//CDocument::OnSaveDocument(lpszPathName); - nepouzivat prepise nam soubor vyse
 }
-
-
-
 
 
 //pridal honza - vrati prvni view ve kterem je zobrazovan tento dokument
@@ -580,7 +377,7 @@ BOOL CSkeletonDoc::EditElement(MSXML2::IXMLDOMElementPtr selected_element)
 
 		}
 
-case  ELID_PARAGRAPH:
+	case  ELID_PARAGRAPH:
 		{
 			//Vytvorim instanci dialogu pro Prvek Chapter
 			CElementParagraphDialog OElementParagraphDialog(selected_element,AfxGetMainWnd());
@@ -596,7 +393,8 @@ case  ELID_PARAGRAPH:
 
 
 		}
-case  ELID_CHAPTER:
+	
+	case  ELID_CHAPTER:
 		{
 			//Vytvorim instanci dialogu pro Prvek Chapter
 			CElementChapterDialog OElementChapterDialog(selected_element,AfxGetMainWnd());
@@ -613,6 +411,7 @@ case  ELID_CHAPTER:
 			//return Res;
 
 		}
+	
 	case ELID_ATTR_LINK:
 		{
 			CAttributeLinkDialog dlg(selected_element, AfxGetMainWnd());
@@ -736,31 +535,6 @@ void CSkeletonDoc::TransformActiveElements(MSXML2::IXMLDOMElementPtr & element)
 	}
 	
 }
-
-
-//DEL void CSkeletonDoc::OnMmdelete() 
-//DEL {
-//DEL 	CTreeCtrl & hTreeCtrl = GetFirstView()->GetTreeCtrl();
-//DEL 	
-//DEL 	HTREEITEM hSelTreeItem = hTreeCtrl.GetSelectedItem();
-//DEL 
-//DEL 	MSXML2::IXMLDOMElementPtr selected_element = ElementFromItemData(hTreeCtrl.GetItemData( hSelTreeItem ));
-//DEL 	
-//DEL 	MSXML2::IXMLDOMElementPtr parent_element= selected_element->parentNode;
-//DEL 
-//DEL 
-//DEL 	parent_element->removeChild(selected_element);
-//DEL 
-//DEL 	if (0 == hTreeCtrl.DeleteItem(hSelTreeItem))
-//DEL 	{
-//DEL 		AfxMessageBox("Smazani prvku z TreeCtrl se nepovedlo.",0,0);
-//DEL 		return;
-//DEL 	}
-//DEL 	
-//DEL 
-//DEL 	SetModifiedFlag();		
-//DEL 	UpdateAllViews(NULL);
-//DEL }
 
 
 //dedek:

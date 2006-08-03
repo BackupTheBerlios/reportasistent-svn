@@ -54,97 +54,41 @@ CStringTableImpl::~CStringTableImpl()
 }
 
 
-//---------
-// kody - spatne, opravit
-void CWordManager::LoadWordStylesThreadFunction(LPARAM template_name, LPARAM CWordManagerInstance)
+
+void CWordManager::LoadWordStylesThreadFunction(LPARAM template_name, LPARAM pWordManager)
 {
-	( (CWordManager*) CWordManagerInstance)->LoadWordTemplates();
-	( (CWordManager*) CWordManagerInstance)->LoadParagraphStyles((LPCTSTR )template_name);
-	( (CWordManager*) CWordManagerInstance)->LoadCharacterStyles((LPCTSTR )template_name);
+	//dedek:	COM objekt nelze pouzit v jinem vlakne nez v tom, ktere ho vytvorilo.
+	//			Proto zde musim vytvorit novy COM objekt.
+	
+	CWordManager * m = (CWordManager *) pWordManager;
+
+	_LMRA_XML_WordLoaderPtr WordLoader;
+	
+	if (m->CreateVBRAInstance(WordLoader))
+	{
+		m->LoadWordTemplates(WordLoader);
+		m->LoadParagraphStyles(WordLoader, (LPCTSTR) template_name);
+		m->LoadCharacterStyles(WordLoader, (LPCTSTR) template_name);
+
+		WordLoader.Release();
+	}	
 }
 
 
 void CWordManager::LoadWordStyles(LPCTSTR template_name)
 {
-	if (! isInit()) 
-	{
-		if (! InitWordLoader()) return;
-	}
-
-	/*
-	// pridal Kody - opravit
-	CWaitDialog d("Loading Word styles");
-	CWordManager* pThisInstance = this;
+	CWaitDialog d("Loading Word styles...");
 	d.DoThreadFunction(LoadWordStylesThreadFunction,
 						(LPARAM) template_name,
-						(LPARAM) pThisInstance);
-						*/
-	// bylo puvodne
-	LoadWordTemplates();
-	LoadParagraphStyles(template_name);
-	LoadCharacterStyles(template_name);
+						(LPARAM) this);
 }
 
 
-void CWordManager::LoadWordTemplates()
+void CWordManager::LoadWordTemplates(_LMRA_XML_WordLoaderPtr & WordLoader)
 {
-	if (! isInit()) 
-	{
-		if (! InitWordLoader()) return;
-	}
+	SAFEARRAY * ret_array = WordLoader->EnumTemplates();
 
-	SAFEARRAY * ret_array = m_WordLoader->EnumTemplates();
-
-
-	LONG l_bound = 0;
-	LONG u_bound = -1;
-
-	SafeArrayGetLBound(ret_array, 1, & l_bound);
-	SafeArrayGetUBound(ret_array, 1, & u_bound);
-
-	m_WordTemplates.Clear();
-
-	for (LONG a = l_bound; a <= u_bound; a++)
-	{
-		BSTR arg;
-		SafeArrayGetElement(ret_array, &a, & arg);
-
-		_bstr_t s;
-		s.Assign(arg);
-
-		m_WordTemplates.Add(s);
-	}
-	
-	SafeArrayDestroy(ret_array);
-
-
-/*		
-	SAFEARRAY * enum_arr = word->EnumCharacterStyles("normal.dot");
-
-	LONG l_bound = 0;
-	LONG u_bound = 0;
-
-	SafeArrayGetLBound(enum_arr, 1, & l_bound);
-	SafeArrayGetUBound(enum_arr, 1, & u_bound);
-
-	CString sl;
-	sl.Format("%d - %d", l_bound, u_bound);
-	AfxMessageBox(sl);
-
-	for (LONG a = l_bound; a < u_bound; a++)
-	{
-		BSTR arg;
-		SafeArrayGetElement(enum_arr, &a, & arg);
-
-		_bstr_t s;
-		s.Assign(arg);
-
-		AfxMessageBox(s);
-	}
-	
-	SafeArrayDestroy(enum_arr);
-*/
-
+	LoadSafeArrayToStringTable(ret_array, m_WordTemplates);
 }
 
 
@@ -168,49 +112,7 @@ CWordManager::~CWordManager()
 
 BOOL CWordManager::InitWordLoader()
 {
-	HRESULT hr;
-	
-	hr = m_WordLoader.CreateInstance("LMRA_WordLoader.LMRA_XML_WordLoader");
-
-	if (S_OK != hr)
-	{
-				
-		//dedek: pokusime se registrovat ActiveX objekt spustenim LMRA_WB_WordLoader s parametrem register
-		STARTUPINFO si;
-		ZeroMemory(& si, sizeof si);
-		
-		PROCESS_INFORMATION pi;
-		ZeroMemory(& pi, sizeof pi);
-
-
-		CDirectoriesManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->DirectoriesManager;
-
-		BOOL ret = CreateProcess(m.getLMRA_WB_WordLoaderPath(), " register", NULL, NULL, FALSE, NORMAL_PRIORITY_CLASS, NULL, NULL, & si, & pi);
-		if (! ret) 
-		{
-			CReportAsistentApp::ReportError(IDS_WB_WORD_LOADER_NOT_REGISTRED);
-			return FALSE;
-		}
-
-		
-		//pockame az spusteny process skonci
-		DWORD wait_ret= WaitForSingleObject(pi.hProcess, 5000);
- 		CloseHandle(pi.hProcess);
-
-		if (wait_ret != WAIT_OBJECT_0)
-		{
-			CReportAsistentApp::ReportError(IDS_WB_WORD_LOADER_NOT_REGISTRED);
-			return FALSE;
-		}
-	
-
-		hr = m_WordLoader.CreateInstance("LMRA_WordLoader.LMRA_XML_WordLoader");
-		if (S_OK != hr)
-		{
-			CReportAsistentApp::ReportError(IDS_WB_WORD_LOADER_NOT_REGISTRED);
-			return FALSE;
-		}
-	}
+	CreateVBRAInstance(m_WordLoader);
 
 	FillActiveElements();
 	
@@ -224,68 +126,21 @@ BOOL CWordManager::isInit()
 
 
 
-void CWordManager::LoadCharacterStyles(LPCTSTR template_name)
+void CWordManager::LoadCharacterStyles(_LMRA_XML_WordLoaderPtr & WordLoader, LPCTSTR template_name)
 {
-	ASSERT(isInit());
-
-
-	SAFEARRAY * ret_array = m_WordLoader->EnumCharacterStyles(
+	SAFEARRAY * ret_array = WordLoader->EnumCharacterStyles(
 		(long) (getWordTemplates().FindStringNoCase(template_name)+1));
 
-
-	LONG l_bound = 0;
-	LONG u_bound = -1;
-
-	SafeArrayGetLBound(ret_array, 1, & l_bound);
-	SafeArrayGetUBound(ret_array, 1, & u_bound);
-
-	m_WordCharacterStyles.Clear();
-
-
-	for (LONG a = l_bound; a <= u_bound; a++)
-	{
-		BSTR arg;
-		SafeArrayGetElement(ret_array, &a, & arg);
-
-		_bstr_t s;
-		s.Assign(arg);
-
-		m_WordCharacterStyles.Add(s);
-	}
-	
-	SafeArrayDestroy(ret_array);
+	LoadSafeArrayToStringTable(ret_array, m_WordCharacterStyles);
 }
 
-void CWordManager::LoadParagraphStyles(LPCTSTR template_name)
+void CWordManager::LoadParagraphStyles(_LMRA_XML_WordLoaderPtr & WordLoader, LPCTSTR template_name)
 {
-	ASSERT(isInit());
-
-
-	SAFEARRAY * ret_array = m_WordLoader->EnumParagraphStyles(
+	SAFEARRAY * ret_array = WordLoader->EnumParagraphStyles(
 		(long) (getWordTemplates().FindStringNoCase(template_name)+1));
 
 
-	LONG l_bound = 0;
-	LONG u_bound = -1;
-
-	SafeArrayGetLBound(ret_array, 1, & l_bound);
-	SafeArrayGetUBound(ret_array, 1, & u_bound);
-
-	m_WordParagraphStyles.Clear();
-
-
-	for (LONG a = l_bound; a <= u_bound; a++)
-	{
-		BSTR arg;
-		SafeArrayGetElement(ret_array, &a, & arg);
-
-		_bstr_t s;
-		s.Assign(arg);
-
-		m_WordParagraphStyles.Add(s);
-	}
-	
-	SafeArrayDestroy(ret_array);
+	LoadSafeArrayToStringTable(ret_array, m_WordParagraphStyles);
 }
 
 int CStringTable::FindStringNoCase(LPCTSTR str)
@@ -381,4 +236,81 @@ void CWordManager::FillActiveElements()
 				(LPCTSTR) i->getElementIconPath());
 		}
 	}
+}
+
+BOOL CWordManager::CreateVBRAInstance(_LMRA_XML_WordLoaderPtr & refLMRAInterface)
+{
+	HRESULT hr;
+	
+	hr = refLMRAInterface.CreateInstance("LMRA_WordLoader.LMRA_XML_WordLoader");
+
+	if (S_OK != hr)
+	{
+				
+		//dedek: pokusime se registrovat ActiveX objekt spustenim LMRA_WB_WordLoader s parametrem register
+		STARTUPINFO si;
+		ZeroMemory(& si, sizeof si);
+		
+		PROCESS_INFORMATION pi;
+		ZeroMemory(& pi, sizeof pi);
+
+
+		CDirectoriesManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->DirectoriesManager;
+
+		BOOL ret = CreateProcess(m.getLMRA_WB_WordLoaderPath(), " register", NULL, NULL, FALSE, NORMAL_PRIORITY_CLASS, NULL, NULL, & si, & pi);
+		if (! ret) 
+		{
+			CReportAsistentApp::ReportError(IDS_WB_WORD_LOADER_NOT_REGISTRED);
+			return FALSE;
+		}
+
+		
+		//pockame az spusteny process skonci
+		DWORD wait_ret= WaitForSingleObject(pi.hProcess, 5000);
+ 		CloseHandle(pi.hProcess);
+
+		if (wait_ret != WAIT_OBJECT_0)
+		{
+			CReportAsistentApp::ReportError(IDS_WB_WORD_LOADER_NOT_REGISTRED);
+			return FALSE;
+		}
+	
+
+		hr = refLMRAInterface.CreateInstance("LMRA_WordLoader.LMRA_XML_WordLoader");
+		if (S_OK != hr)
+		{
+			CReportAsistentApp::ReportError(IDS_WB_WORD_LOADER_NOT_REGISTRED);
+			return FALSE;
+		}
+	}
+
+	return TRUE;
+}
+
+//vrati pocet zkopirovanych stringu
+int CWordManager::LoadSafeArrayToStringTable(SAFEARRAY *sarray, CStringTableImpl &str_table)
+{
+	LONG l_bound = 0;
+	LONG u_bound = -1;
+
+	SafeArrayGetLBound(sarray, 1, & l_bound);
+	SafeArrayGetUBound(sarray, 1, & u_bound);
+
+	str_table.Clear();
+
+
+	for (LONG a = l_bound; a <= u_bound; a++)
+	{
+		BSTR arg;
+		SafeArrayGetElement(sarray, &a, & arg);
+
+		_bstr_t s;
+		s.Assign(arg);
+
+		str_table.Add(s);
+	}
+	
+	SafeArrayDestroy(sarray);
+
+	return u_bound - l_bound +1;
 }

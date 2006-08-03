@@ -8,8 +8,6 @@
 #include "CSkeletonDoc.h"
 #include "SkeletonView.h"
 #include "SourcesDialog.h"
-#include "PropertyEditor.h"
-#include "WaitDialog.h"
 #include "OptionsDialog.h"
 
 #ifdef _DEBUG
@@ -70,28 +68,6 @@ int CReportAsistentApp::ReportError(UINT nResourceErrorStringID, ...)
 
 	return AfxMessageBox(sOutputText);
 }
-
-
-
-/***************************************************/	
-//dedek: ukazka pro kodyho, prijde smazat	
-void PokusThreadFunction(LPARAM Param1,  LPARAM Param2, LPARAM Param3)
-{
-//	HWND * p_dlg_hwnd = (HWND *) pParam;
-
-	Sleep(700);
-
-	MessageBeep(1);
-/*
-	if (IsWindow(* p_dlg_hwnd))
-		SendMessage(* p_dlg_hwnd, WM_COMMAND, IDC_EXIT_BUTTON, 0);
-
-	return 0;
-*/
-}
-/***************************************************/	
-
-
 
 BOOL CReportAsistentApp::InitInstance()
 {
@@ -161,25 +137,7 @@ BOOL CReportAsistentApp::InitInstance()
 
 	// Enable drag/drop open
 	m_pMainWnd->DragAcceptFiles();
-
-	
-	
-/***************************************************/
-//dedek: ukazka pro kodyho, prijde smazat	
-	
-	CWaitDialog dlg("ahoj");
-
-	dlg.DoThreadFunction(PokusThreadFunction, 1, 2, 3);
-/*
-	AfxBeginThread(TestovaciThread, & dlg.m_hWnd);
-
-	dlg.DoModal();
-*/
-/***************************************************/	
-
-
-	
-
+		
 	return TRUE;
 }
 
@@ -243,13 +201,6 @@ void CReportAsistentApp::OnAppAbout()
 
 /////////////////////////////////////////////////////////////////////////////
 // CReportAsistentApp message handlers
-
-//Iva
-//DEL void CReportAsistentApp::OnMMNewText() 
-//DEL {
-//DEL 	//Pridam do TreeCtrl Novou Item a do XML stromu taky.
-//DEL 	
-//DEL }
 
 int CReportAsistentApp::ExitInstance() 
 {

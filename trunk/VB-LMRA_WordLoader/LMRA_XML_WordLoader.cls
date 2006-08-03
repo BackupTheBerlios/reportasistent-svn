@@ -7,7 +7,7 @@ BEGIN
   MTSTransactionMode  = 0  'NotAnMTSObject
 END
 Attribute VB_Name = "LMRA_XML_WordLoader"
-Attribute VB_GlobalNameSpace = False
+Attribute VB_GlobalNameSpace = True
 Attribute VB_Creatable = True
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = True
@@ -22,7 +22,7 @@ Dim ButtonEvent As cbAElButtonEvents
 Dim mWordEditor As Word.Application
 
 
-Public Event HonzaEvent(ByVal name As String)
+'Public Event HonzaEvent(ByVal name As String)
 Public Event ActiveElementSelected(ByVal name As String)
 
 Public Sub AddActiveElement(ByVal strType As String, ByVal strLabel As String, ByVal strIamgePath As String)
@@ -277,7 +277,7 @@ Public Sub LoadFromString(ByVal strXMLSource As String)
     reader.parse strXMLSource
     
 
-    RaiseEvent HonzaEvent("DDccDDkonec*")
+'    RaiseEvent HonzaEvent("DDccDDkonec*")
 
 End Sub
 

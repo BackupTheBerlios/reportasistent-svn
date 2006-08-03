@@ -2,7 +2,7 @@
 <!DOCTYPE report [
 
 <!ELEMENT report ( chapter | include )* >
-<!ATTLIST report title CDATA #IMPLIED >
+<!ATTLIST report title CDATA #REQUIRED >
 <!ATTLIST report subtitle CDATA #IMPLIED >
 <!ATTLIST report author CDATA #IMPLIED >
 <!ATTLIST report id ID #REQUIRED >
@@ -15,7 +15,7 @@
 <!ATTLIST active_element type CDATA #REQUIRED >
 <!ATTLIST active_element source CDATA #REQUIRED >
 <!ATTLIST active_element id ID #REQUIRED >
-<!ATTLIST active_element label CDATA #IMPLIED >
+<!ATTLIST active_element label CDATA #REQUIRED >
 
 <!-- sem se ukladaji atributy, na ktere je mozno ukazat pomoci attr_link -->
 <!-- plni se automaticky pri zavolani metody CAElTransform::FillElementAttributes,
@@ -126,4 +126,4 @@ to se deje vzdy, kdyz se cte plugin output, napr pri otevreni simple fiter -->
 
 
 
-<report id="report1" />
+<report id="report1" title="" />

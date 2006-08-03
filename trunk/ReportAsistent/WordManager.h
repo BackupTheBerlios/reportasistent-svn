@@ -46,18 +46,22 @@ public:
 	CWordManager();
 	virtual ~CWordManager();
 
-	void LoadWordTemplates();
 	void LoadWordStyles(LPCTSTR template_name = "normal.dot");
+protected:
+	void LoadWordTemplates(_LMRA_XML_WordLoaderPtr & WordLoader);
+	void LoadParagraphStyles(_LMRA_XML_WordLoaderPtr & WordLoader, LPCTSTR template_name);  // kody: kvuli novymu vlaknu a volani ze staticky metody presunuto z protected sem
+	void LoadCharacterStyles(_LMRA_XML_WordLoaderPtr & WordLoader, LPCTSTR template_name);
 	// kody: funkce pro vlakno
-	void static CWordManager::LoadWordStylesThreadFunction(LPARAM template_name, LPARAM CWordManagerInstance);
-	void LoadParagraphStyles(LPCTSTR template_name);  // kody: kvuli novymu vlaknu a volani ze staticky metody presunuto z protected sem
-	void LoadCharacterStyles(LPCTSTR template_name);
+	void static CWordManager::LoadWordStylesThreadFunction(LPARAM template_name, LPARAM pWordManager);
 	
+public:
 	CStringTable & getWordTemplates() { return m_WordTemplates; };
 	CStringTable & getWordParagraphStyles() { return m_WordParagraphStyles; };
 	CStringTable & getWordCharacterStyles() { return m_WordCharacterStyles; };
 
 private:
+	static int LoadSafeArrayToStringTable(SAFEARRAY * sarray, CStringTableImpl & st);
+	static BOOL CreateVBRAInstance(_LMRA_XML_WordLoaderPtr & refLMRAInterface);
 	DWORD m_dwEventHandlerCookie;
 	CWordEventHandler * m_pEventHandler;
 	_LMRA_XML_WordLoaderPtr m_WordLoader;

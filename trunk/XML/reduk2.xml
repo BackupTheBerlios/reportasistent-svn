@@ -5,7 +5,7 @@
 		<paragraph style="Normální" id="paragraph1">
 			<text id="text1">The beginning of all the text.</text>
 		</paragraph>
-		<active_element type="hyp_4ft" source="" id="hyp_4ft1">
+		<active_element type="hyp_4ft" source="" id="hyp_4ft1" label="">
 			<attributes>
 				<element_attributes>
 					<attribute name="id" value=""/>
@@ -40,7 +40,7 @@
 			<output>
 			</output>
 		</active_element>
-		<active_element type="category" source="" id="category1">
+		<active_element type="category" source="" id="category1" label="">
 			<attributes>
 				<element_attributes>
 				</element_attributes>
