@@ -72,6 +72,8 @@ public:
 private:
 	MSXML2::IXMLDOMDocumentPtr m_pXMLDom;
 
+public:
+	static BOOL EditActiveElement(MSXML2::IXMLDOMElementPtr &element);
 protected:
 	BOOL InitAndClearXmlDom();
 	BOOL OpenSkeletonFile(LPCTSTR file_name);
@@ -80,7 +82,6 @@ protected:
 	static LPARAM CreateItemData(MSXML2::IXMLDOMElementPtr & element);
 	void ConfigureFilter(MSXML2::IXMLDOMElementPtr & active_element);
 	BOOL EditElement(MSXML2::IXMLDOMElementPtr selected_element);
-	BOOL EditActiveElement(MSXML2::IXMLDOMElementPtr &element);
 	MSXML2::IXMLDOMElementPtr InsertNewElement(CElementManager::elId_t elementID, MSXML2::IXMLDOMElementPtr & parent_element);
 	MSXML2::IXMLDOMElementPtr InsertNewElement(LPCTSTR element_name, MSXML2::IXMLDOMElementPtr & parent_element);
 	

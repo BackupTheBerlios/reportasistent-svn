@@ -4,6 +4,8 @@
 #include "stdafx.h"
 #include "ReportAsistent.h"
 #include "WordEventHandler.h"
+#include "CSkeletonDoc.h"
+#include "APTransform.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -62,5 +64,36 @@ END_INTERFACE_MAP()
 
 void CWordEventHandler::onActiveElementSelected(LPCTSTR strElementName) 
 {
-	AfxMessageBox(strElementName);
+	CElementManager & em = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
+	CWordManager & wm = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->WordManager;
+
+	//load element
+	int element_index = em.ElementIdFromName(strElementName);
+	MSXML2::IXMLDOMElementPtr active_element = 
+		em.CreateEmptyElement(element_index);
+
+	
+	//load document
+	MSXML2::IXMLDOMDocumentPtr doc;
+	doc.CreateInstance(_T("Msxml2.DOMDocument"));
+	em.LoadSkeletonDTD(doc);
+	
+	//insert element to chapter and document
+	doc->documentElement->
+		appendChild(em.CreateEmptyElement(ELID_CHAPTER))->
+			appendChild(active_element);
+
+
+	//configure by dilaog
+	CSkeletonDoc::EditActiveElement(active_element);
+
+	//transform and generate
+	CAElTransform transform(active_element);
+	
+	wm.GenerateXMLStringToWordEditor(transform.DoAllTransnformations()->xml);
+
+	
+	
+	active_element.Release();
+	doc.Release();
 }

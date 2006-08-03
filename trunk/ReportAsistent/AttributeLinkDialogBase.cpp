@@ -79,8 +79,10 @@ void CAttributeLinkDialogBase::OnRefresh(CListCtrl & AttributesList, LPCTSTR tar
 	MSXML2::IXMLDOMElementPtr el = m_edited_element->ownerDocument->selectSingleNode((LPCTSTR) query);
 
 	
-	if (el == NULL) return;
-
+	if (el == NULL)
+	{
+		return;
+	}
 
 
 	CAElTransform tr(el);

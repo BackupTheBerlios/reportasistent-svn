@@ -55,6 +55,7 @@ protected:
 	void static CWordManager::LoadWordStylesThreadFunction(LPARAM template_name, LPARAM pWordManager);
 	
 public:
+	void GenerateXMLStringToWordEditor(_bstr_t XML_str);
 	CStringTable & getWordTemplates() { return m_WordTemplates; };
 	CStringTable & getWordParagraphStyles() { return m_WordParagraphStyles; };
 	CStringTable & getWordCharacterStyles() { return m_WordCharacterStyles; };

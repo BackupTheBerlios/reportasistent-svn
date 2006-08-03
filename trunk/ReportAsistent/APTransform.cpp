@@ -79,9 +79,8 @@ MSXML2::IXMLDOMDocumentFragmentPtr CAElTransform::DoAllTransnformations()
 /*****/
 	
 	//vysledek vsech transformaci ulozime na misto output element
-	m_active_element->replaceChild(parent_frag, m_active_element->selectSingleNode("output"));
-	
-	
+	m_active_element->replaceChild(parent_frag->cloneNode(VARIANT_TRUE), m_active_element->selectSingleNode("output"));
+
 	return parent_frag;
 }
 

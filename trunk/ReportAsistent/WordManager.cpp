@@ -164,6 +164,17 @@ int CStringTable::FindString(LPCTSTR str)
 	return -1;
 }
 
+void CWordManager::GenerateXMLStringToWordEditor(_bstr_t XML_str)
+{
+	if (! isInit()) 
+	{
+		if (! InitWordLoader()) return;
+	}
+
+	m_WordLoader->LoadFromStringToWordEditor(XML_str);
+
+}
+
 void CWordManager::GenerateXMLString(_bstr_t XML_str)
 {
 	if (! isInit()) 

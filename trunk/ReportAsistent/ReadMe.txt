@@ -11,7 +11,7 @@ spousti se: v RA klavesova zkratka Ctrl + W
 
 
 momentalne to umi:
-pouze zobrazi nefunkcni toolbar AP
+zobrazi toolbar AP, vklada AP
 
 
 
@@ -127,6 +127,9 @@ CGeneralManager * m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager;
 ------------------------------------------------------------------------------------------
 dedek TODO:
 
+otestovat zabijeni vlaken a hlavne resume application v jednotlivych situacich
+
+coz takhle nejak inteligentne usporadat AP?
 
 zdokumentovat chybovou hlasku o neplatne volbe simple filtru pri generovani
 
