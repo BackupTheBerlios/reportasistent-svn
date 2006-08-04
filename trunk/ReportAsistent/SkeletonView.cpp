@@ -389,6 +389,10 @@ void CSkeletonView::OnEditCopy()
 		AfxMessageBox("Clipboard pouziva nekdo jiny",0,0);
 		return;
 	}
+	
+	CWnd * hOwner = GetClipboardOwner();
+	EmptyClipboard();
+	hOwner = GetClipboardOwner();
 
 	//??Jaky mam dat format??
 	if(0== SetClipboardData(CF_TEXT, // clipboard format - pripadne:CF_TEXT
@@ -404,9 +408,7 @@ void CSkeletonView::OnEditCopy()
 //zavru clipboard
 	ASSERT(0!=CloseClipboard());
 
-
-// uvolnim globalni pamet
-	ASSERT(NULL==GlobalFree(hgMemForXML));
+	//ASSERT(NULL==GlobalFree(hgMemForXML));   globalni pamet nesmim uvolnovat!! - ta uz nyni patri clipboardu
 	DWORD dErr = GetLastError();
 
 	return;
@@ -426,7 +428,9 @@ void CSkeletonView::OnEditPaste()
 		AfxMessageBox("Clipboard pouziva nekdo jiny",0,0);
 		return;
 	}
-	LPCTSTR pMemForXML = (LPCTSTR)GetClipboardData(CF_TEXT);
+	LPCTSTR pMemForXML; //= (LPCTSTR)GetClipboardData(CF_TEXT);
+	HANDLE hMem=GetClipboardData(CF_TEXT);
+	pMemForXML = (LPCTSTR) GlobalLock(hMem);
 
 	if (NULL==pMemForXML) 
 	{
@@ -449,6 +453,7 @@ void CSkeletonView::OnEditPaste()
 	}
 
 //zavru clipboard
+	GlobalUnlock(hMem);
 	ASSERT(0!=CloseClipboard());
 
 //zmenim id vsech prvku
