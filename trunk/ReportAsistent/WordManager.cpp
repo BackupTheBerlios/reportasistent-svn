@@ -101,6 +101,7 @@ CWordManager::CWordManager()
 
 }
 
+
 CWordManager::~CWordManager()
 {
 	if (m_WordLoader != NULL) 
@@ -112,11 +113,15 @@ CWordManager::~CWordManager()
 
 BOOL CWordManager::InitWordLoader()
 {
-	CreateVBRAInstance(m_WordLoader);
+	if (CreateVBRAInstance(m_WordLoader))
+	{
 
-	FillActiveElements();
+		FillActiveElements();
 	
-	return InitWordEventHandler();
+		return InitWordEventHandler();
+	}
+
+	return FALSE;
 }
 
 BOOL CWordManager::isInit()
@@ -175,6 +180,7 @@ void CWordManager::GenerateXMLStringToWordEditor(_bstr_t XML_str)
 
 }
 
+
 void CWordManager::GenerateXMLString(_bstr_t XML_str)
 {
 	if (! isInit()) 
@@ -219,6 +225,8 @@ void CWordManager::OpenWordEditor()
 	{
 		if (! InitWordLoader()) return;
 	}
+
+	AfxGetApp()->GetMainWnd()->ShowWindow(SW_HIDE);
 
 
 	try

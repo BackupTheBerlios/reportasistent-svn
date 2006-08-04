@@ -45,9 +45,14 @@ BEGIN_MESSAGE_MAP(CWordEventHandler, CCmdTarget)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
+
 BEGIN_DISPATCH_MAP(CWordEventHandler, CCmdTarget)
 	//{{AFX_DISPATCH_MAP(CWordEventHandler)
 	DISP_FUNCTION(CWordEventHandler, "ActiveElementSelected", onActiveElementSelected, VT_EMPTY, VTS_BSTR)
+	DISP_FUNCTION(CWordEventHandler, "SetSources", onSetSources, VT_EMPTY, VTS_NONE)
+	DISP_FUNCTION(CWordEventHandler, "SetOptions", onSetOptions, VT_EMPTY, VTS_NONE)
+	DISP_FUNCTION(CWordEventHandler, "SkeletonEditor", onSkeletonEditor, VT_EMPTY, VTS_NONE)
+	DISP_FUNCTION(CWordEventHandler, "WordQuit", onWordQuit, VT_EMPTY, VTS_NONE)
 	//}}AFX_DISPATCH_MAP
 END_DISPATCH_MAP()
 
@@ -85,15 +90,37 @@ void CWordEventHandler::onActiveElementSelected(LPCTSTR strElementName)
 
 
 	//configure by dilaog
-	CSkeletonDoc::EditActiveElement(active_element);
-
-	//transform and generate
-	CAElTransform transform(active_element);
+	if (CSkeletonDoc::EditActiveElement(active_element))
+	{
+		//transform and generate
+		CAElTransform transform(active_element);
 	
-	wm.GenerateXMLStringToWordEditor(transform.DoAllTransnformations()->xml);
+		wm.GenerateXMLStringToWordEditor(transform.DoAllTransnformations()->xml);
+	}
 
 	
 	
 	active_element.Release();
 	doc.Release();
 }
+
+void CWordEventHandler::onSetOptions() 
+{
+	 AfxGetApp()->GetMainWnd()->SendMessage(WM_COMMAND, ID_FILE_OPTIONS);
+}
+
+void CWordEventHandler::onSetSources() 
+{
+	 AfxGetApp()->GetMainWnd()->SendMessage(WM_COMMAND, ID_MMSOURCES);
+}
+
+void CWordEventHandler::onSkeletonEditor() 
+{
+	AfxGetApp()->GetMainWnd()->ShowWindow(SW_SHOW);
+}
+
+void CWordEventHandler::onWordQuit() 
+{
+	AfxGetApp()->GetMainWnd()->ShowWindow(SW_SHOW);
+}
+

@@ -11,9 +11,19 @@ spousti se: v RA klavesova zkratka Ctrl + W
 
 
 momentalne to umi:
-zobrazi toolbar AP, vklada AP
+zobrazi toolbar AP, vklada AP, zobrazuje konfig dialogy
+pozor dialogy obcas nevyskoci na obrazovku a je nutne na ne prepnout (Alt + Tab)
 
 
+
+
+------------------------------------------------------------------------------------------
+dedek to kody
+asi mam bug v Feplugin
+nejde mi pripojit v release modu, v debug funguje
+
+tenhle prikaz v CDataSourcesManager::initPlugsTab hazi vyjimku:
+PlugsTab[j].SockInterface = pInitFn();
 
 
 

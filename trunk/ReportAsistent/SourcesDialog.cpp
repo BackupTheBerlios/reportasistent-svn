@@ -77,15 +77,20 @@ BOOL CSourcesDialog::OnInitDialog()
 	CDataSourcesManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->DataSourcesManager;
 
 	
+	int last_valid_plugin = 0;
+	
 	//nacte plugins
 	for (a=0; a<m.getPlugsCount(); a++)
 	{
 		if (m.isPluginValid(a))
-		{
+		{			
+			last_valid_plugin = a;
 			m_PluginCombo.AddString(m.getPluginID(a));
 
 		}
-		/****/ //ladici
+
+/*******************************************************/
+#ifdef _DEBUG	
 		else
 		{
 			CString s = "*** invalid: ";
@@ -94,10 +99,12 @@ BOOL CSourcesDialog::OnInitDialog()
 			m_PluginCombo.AddString(s);
 
 		}
-		/****/
+#endif
+/*******************************************************/
+
 	}
 
-	m_PluginCombo.SelectString(-1, m.getPluginID(0));
+	m_PluginCombo.SelectString(-1, m.getPluginID(last_valid_plugin));
 
 	UpDateList();
 

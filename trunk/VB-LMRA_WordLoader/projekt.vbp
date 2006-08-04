@@ -12,6 +12,7 @@ Class=WordLoader; WordLoader.cls
 Module=MainModule; Main.bas
 Class=LMRA_XML_WordLoader; LMRA_XML_WordLoader.cls
 Class=cbAElButtonEvents; cbAElButtonEvents.cls
+Class=cbCommandEvents; cbCommandEvents.cls
 IconForm="Form1"
 Startup="Sub Main"
 HelpFile=""
@@ -42,7 +43,7 @@ StartMode=1
 Unattended=0
 Retained=0
 ThreadPerObject=0
-MaxNumberOfThreads=2
+MaxNumberOfThreads=1
 DebugStartupOption=2
 DebugStartupComponent=D:\Sources\MyProjects\LM_Report_Asistent\svn\VB-LMRA_WordLoader\LMRA_WordLoader.exe
 

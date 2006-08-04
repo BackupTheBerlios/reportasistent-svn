@@ -129,6 +129,7 @@ int CDataSourcesManager::initPlugsTab(LPCTSTR plugins_dir_path)
 	{
 		Found = FList.FindNextFile();
 		//printf("%s\n", FList.GetFileName());
+		
 		PlugsTab.Add(CPluginRec(FList.GetFileName()));
 		i++;
 	}
@@ -185,7 +186,15 @@ int CDataSourcesManager::initPlugsTab(LPCTSTR plugins_dir_path)
 			if(pInitFn != NULL)		// byla nalezena inicializacni funkce knihovny
 			{
 				// volani inicializacni funkce a nastaveni SockInterface
-				PlugsTab[j].SockInterface = pInitFn();
+				try
+				{
+					PlugsTab[j].SockInterface = pInitFn();
+				} 
+				catch (...)
+				{
+					::MessageBox(NULL, "Varovani: pri nacitani zasuvky doslo k vyjimce.\n\nprikaz: PlugsTab[j].SockInterface = pInitFn();", PlugsTab[j].PluginName, MB_ICONWARNING);
+
+				}
 			}
 		
 		}

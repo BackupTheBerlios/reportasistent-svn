@@ -7,23 +7,30 @@ BEGIN
   MTSTransactionMode  = 0  'NotAnMTSObject
 END
 Attribute VB_Name = "LMRA_XML_WordLoader"
-Attribute VB_GlobalNameSpace = True
+Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = True
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = True
 Option Explicit
+
+Private WithEvents evWordApp As Word.Application
+Attribute evWordApp.VB_VarHelpID = -1
 
 Dim mstrLastId As String
 Dim mstrLastError As String
 Dim mWordForInfo As Word.Application
 Dim mActiveElemetns As New Collection
 Dim mWordEvents As New Collection
-Dim ButtonEvent As cbAElButtonEvents
+Dim ButtonEvent 'As cbAElButtonEvents   'pouziva se jete pro cbCommandEvents
 Dim mWordEditor As Word.Application
 
 
 'Public Event HonzaEvent(ByVal name As String)
 Public Event ActiveElementSelected(ByVal name As String)
+Public Event SetSources()
+Public Event SetOptions()
+Public Event SkeletonEditor()
+Public Event WordQuit()
 
 Public Sub AddActiveElement(ByVal strType As String, ByVal strLabel As String, ByVal strIamgePath As String)
 
@@ -40,22 +47,69 @@ Public Sub AddActiveElement(ByVal strType As String, ByVal strLabel As String, B
 End Sub
 
 
+Private Sub evWordApp_Quit()
+    Set mWordEditor = Nothing
+    
+    RaiseEvent WordQuit
+End Sub
+
+Public Sub CommandEvent(ByVal button_tag As String)
+    'MsgBox button_tag
+    
+    Select Case button_tag
+        Case "Options"
+            RaiseEvent SetOptions
+        
+        Case "Skeleton Editor"
+            RaiseEvent SkeletonEditor
+        
+        Case "Data Sources"
+            RaiseEvent SetSources
+    End Select
+End Sub
+
+Private Sub AddButtonToBar(ByRef bar As Office.CommandBar, ByVal caption As String, ByVal faceid)
+    Dim but As Office.CommandBarButton
+    
+    Set but = bar.Controls.Add(Type:=msoControlButton)
+    but.style = msoButtonIconAndCaption
+    but.caption = caption
+    but.Tag = but.caption
+    but.faceid = faceid
+    Set ButtonEvent = New cbCommandEvents
+    Set ButtonEvent.cbBtn = but
+    Set ButtonEvent.LMRA_loader = Me
+    mWordEvents.Add ButtonEvent
+End Sub
+
 Private Sub CreateRAToolbar(WordApp As Word.Application)
     Dim bar As Office.CommandBar
     Set bar = WordApp.CommandBars.Add(name:="Report Asistent", Temporary:=True)
+        
+    'ovladaci tlacitka
+    AddButtonToBar bar, "Skeleton Editor", 1016
+    AddButtonToBar bar, "Data Sources", 2308
+    AddButtonToBar bar, "Options", 1607
+            
     
-    'MsgBox "in bar added"
-    
+    'tlacitka AP
     Dim but As Office.CommandBarButton
     Dim AEl
+    Dim group_begin As Boolean
+    group_begin = True
     
     For Each AEl In mActiveElemetns
  '       MsgBox "next " & AEl(0) & vbNewLine & AEl(1) & vbNewLine & AEl(2)
+                
         Set but = bar.Controls.Add(Type:=msoControlButton)
+        but.BeginGroup = group_begin
+        group_begin = False
+    
+        
         but.style = msoButtonIconAndCaption
         
         but.Tag = AEl(0)
-        but.Caption = AEl(1)
+        but.caption = AEl(1)
         
         Dim img As IPictureDisp
         Set img = Nothing
@@ -81,8 +135,6 @@ Private Sub CreateRAToolbar(WordApp As Word.Application)
 End Sub
 
 
-
-
 Public Sub ActiveElementSelected(ByVal el_name As String)
 '    MsgBox "element: " & el_name
     RaiseEvent ActiveElementSelected(el_name)
@@ -96,9 +148,15 @@ Public Sub OpenWordEditor()
         Exit Sub
     End If
        
+    'MsgBox "word creating"
     Set mWordEditor = CreateObject("Word.Application")
     'MsgBox "word created"
     
+    Set evWordApp = Nothing
+    'MsgBox "ev set"
+    Set evWordApp = mWordEditor
+    'MsgBox "tool bar loading"
+        
     CreateRAToolbar mWordEditor
     'MsgBox "tool bar added"
     
@@ -317,3 +375,4 @@ Private Sub Class_Terminate()
         mWordEditor.Quit SaveChanges:=False
     End If
 End Sub
+

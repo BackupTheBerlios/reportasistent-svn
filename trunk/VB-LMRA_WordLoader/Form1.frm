@@ -56,7 +56,7 @@ Begin VB.Form Form1
       MultiLine       =   -1  'True
       ScrollBars      =   3  'Both
       TabIndex        =   2
-      Text            =   "Form1.frx":0006
+      Text            =   "Form1.frx":000A
       Top             =   4440
       Width           =   10215
    End
@@ -180,6 +180,7 @@ Private Sub cmdXMLStringProcess_Click()
 End Sub
 
 Private Sub Form_Load()
-    Caption = FileSystem.CurDir
+    caption = FileSystem.CurDir
 '    XML_Process
 End Sub
+
