@@ -23,6 +23,8 @@ Dim mActiveElemetns As New Collection
 Dim mWordEvents As New Collection
 Dim ButtonEvent 'As cbAElButtonEvents   'pouziva se jete pro cbCommandEvents
 Dim mWordEditor As Word.Application
+Dim mstrParentTaskName As String
+
 
 
 'Public Event HonzaEvent(ByVal name As String)
@@ -31,6 +33,19 @@ Public Event SetSources()
 Public Event SetOptions()
 Public Event SkeletonEditor()
 Public Event WordQuit()
+
+Public Property Let strParentTaskName(ByVal strName As String)
+    mstrParentTaskName = strName
+End Property
+
+
+Public Property Get isWordEditorActive() As Boolean
+    If mWordEditor Is Nothing Then
+        isWordEditorActive = False
+    Else
+        isWordEditorActive = True
+    End If
+End Property
 
 Public Sub AddActiveElement(ByVal strType As String, ByVal strLabel As String, ByVal strIamgePath As String)
 
@@ -53,9 +68,24 @@ Private Sub evWordApp_Quit()
     RaiseEvent WordQuit
 End Sub
 
+Private Sub ActivateParentTask()
+    'On Error Resume Next
+    'Tasks("LMRA_WordLoader").Activate False
+    If Tasks.Exists(mstrParentTaskName) Then
+        Tasks(mstrParentTaskName).Activate False
+    Else
+        MsgBox "Task not exist: " & mstrParentTaskName
+    End If
+    
+End Sub
+
 Public Sub CommandEvent(ByVal button_tag As String)
     'MsgBox button_tag
+    'mWordEditor.Visible = False
     
+    ActivateParentTask
+    
+        
     Select Case button_tag
         Case "Options"
             RaiseEvent SetOptions
@@ -66,6 +96,8 @@ Public Sub CommandEvent(ByVal button_tag As String)
         Case "Data Sources"
             RaiseEvent SetSources
     End Select
+    
+    'mWordEditor.Visible = True
 End Sub
 
 Private Sub AddButtonToBar(ByRef bar As Office.CommandBar, ByVal caption As String, ByVal faceid)
@@ -84,7 +116,7 @@ End Sub
 
 Private Sub CreateRAToolbar(WordApp As Word.Application)
     Dim bar As Office.CommandBar
-    Set bar = WordApp.CommandBars.Add(name:="Report Asistent", Temporary:=True)
+    Set bar = WordApp.CommandBars.Add(name:="Report Asistent", Position:=msoBarFloating, Temporary:=True)
         
     'ovladaci tlacitka
     AddButtonToBar bar, "Skeleton Editor", 1016
@@ -130,6 +162,7 @@ Private Sub CreateRAToolbar(WordApp As Word.Application)
     Next
        
     'udela z toolobaru svisly
+    'bar.Left = 30
     bar.Width = 0
     bar.Visible = True
 End Sub
@@ -137,6 +170,8 @@ End Sub
 
 Public Sub ActiveElementSelected(ByVal el_name As String)
 '    MsgBox "element: " & el_name
+    ActivateParentTask
+    
     RaiseEvent ActiveElementSelected(el_name)
 End Sub
 
@@ -156,11 +191,12 @@ Public Sub OpenWordEditor()
     'MsgBox "ev set"
     Set evWordApp = mWordEditor
     'MsgBox "tool bar loading"
+    
+    mWordEditor.Documents.Add.Select
         
     CreateRAToolbar mWordEditor
     'MsgBox "tool bar added"
     
-    mWordEditor.Documents.Add.Select
     
     mWordEditor.Visible = True
 End Sub
@@ -170,7 +206,7 @@ Public Property Get strLastProcessedId() As String
     strLastProcessedId = mstrLastId
 End Property
 
-Public Property Let strLastProcessedId(P As String)
+Public Property Let strLastProcessedId(ByVal P As String)
    mstrLastId = P
 End Property
 
@@ -178,7 +214,7 @@ Public Property Get strLastError() As String
     strLastError = mstrLastError
 End Property
 
-Public Property Let strLastError(P As String)
+Public Property Let strLastError(ByVal P As String)
    mstrLastError = P
 End Property
 

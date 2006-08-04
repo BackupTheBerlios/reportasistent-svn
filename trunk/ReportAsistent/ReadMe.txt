@@ -2,9 +2,12 @@ DEDEK:
 
 zacinam s pluginem do Wordu
 
-vsichni uz muzete testovat - budu moc rad 
+vsichni uz muzete testovat - budu moc rad,
+zajima me jak to funguje ve vasich wordech..
 
 dejte vedet kdyz to nebude chodit
+
+
 
 spousti se: v RA klavesova zkratka Ctrl + W
 
@@ -12,7 +15,15 @@ spousti se: v RA klavesova zkratka Ctrl + W
 
 momentalne to umi:
 zobrazi toolbar AP, vklada AP, zobrazuje konfig dialogy
+
 pozor dialogy obcas nevyskoci na obrazovku a je nutne na ne prepnout (Alt + Tab)
+--tohle jsem snad :) uz vyresil
+
+
+
+hodilo by se:
+coz takhle nejak inteligentne usporadat AP?
+treba abecedne podle name (ale musely by se prejmenovat cedenty), nebo by to slo podle nazvu adresaru..
 
 
 
@@ -21,9 +32,12 @@ pozor dialogy obcas nevyskoci na obrazovku a je nutne na ne prepnout (Alt + Tab)
 dedek to kody
 asi mam bug v Feplugin
 nejde mi pripojit v release modu, v debug funguje
-
 tenhle prikaz v CDataSourcesManager::initPlugsTab hazi vyjimku:
 PlugsTab[j].SockInterface = pInitFn();
+
+uz vim cim to je - v tom adresari (release) nejsou ty ferdovsky dll..
+tak je to asi ok, sry
+
 
 
 

@@ -84,6 +84,8 @@ void CWordManager::LoadWordStyles(LPCTSTR template_name)
 }
 
 
+
+
 void CWordManager::LoadWordTemplates(_LMRA_XML_WordLoaderPtr & WordLoader)
 {
 	SAFEARRAY * ret_array = WordLoader->EnumTemplates();
@@ -219,6 +221,16 @@ void CWordManager::DisconnectWordEventHandler()
 	}
 }
 
+
+void CWordManager::SetWordEditorParentTaskName()
+{
+	ASSERT(isInit());
+
+	CString wdCaption;
+	AfxGetApp()->GetMainWnd()->GetWindowText(wdCaption);
+	m_WordLoader->PutstrParentTaskName((LPCTSTR) wdCaption);
+}
+
 void CWordManager::OpenWordEditor()
 {
 	if (! isInit()) 
@@ -226,8 +238,10 @@ void CWordManager::OpenWordEditor()
 		if (! InitWordLoader()) return;
 	}
 
-	AfxGetApp()->GetMainWnd()->ShowWindow(SW_HIDE);
+	WordEditHideMainWindow();
 
+
+	SetWordEditorParentTaskName();
 
 	try
 	{
@@ -332,4 +346,34 @@ int CWordManager::LoadSafeArrayToStringTable(SAFEARRAY *sarray, CStringTableImpl
 	SafeArrayDestroy(sarray);
 
 	return u_bound - l_bound +1;
+}
+
+
+void CWordManager::WordEditHideMainWindow()
+{
+	if (m_WordLoader->GetisWordEditorActive() == VARIANT_FALSE)
+	{
+	
+		ZeroMemory(& m_origWINDOWPLACEMENT, sizeof m_origWINDOWPLACEMENT);
+		m_origWINDOWPLACEMENT.length = sizeof m_origWINDOWPLACEMENT;
+		
+		AfxGetApp()->GetMainWnd()->GetWindowPlacement(& m_origWINDOWPLACEMENT);
+	}
+
+	WINDOWPLACEMENT newpl;
+	ZeroMemory(& newpl, sizeof newpl);
+	newpl.length = sizeof newpl;
+
+	newpl.flags = WPF_SETMINPOSITION;
+	newpl.showCmd = SW_MINIMIZE; //SW_SHOWMINIMIZED
+
+	AfxGetApp()->GetMainWnd()->SetWindowPlacement(& newpl);
+//	AfxGetApp()->GetMainWnd()->EnableWindow(FALSE);
+
+}
+
+void CWordManager::WordEditShowMainWindow()
+{
+	m_origWINDOWPLACEMENT.showCmd = SW_RESTORE;
+	AfxGetApp()->GetMainWnd()->SetWindowPlacement(& m_origWINDOWPLACEMENT);
 }

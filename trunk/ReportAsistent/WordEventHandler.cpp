@@ -94,14 +94,20 @@ void CWordEventHandler::onActiveElementSelected(LPCTSTR strElementName)
 	{
 		//transform and generate
 		CAElTransform transform(active_element);
+
+		transform.DoAllTransnformations();
 	
-		wm.GenerateXMLStringToWordEditor(transform.DoAllTransnformations()->xml);
+		wm.GenerateXMLStringToWordEditor(active_element->xml);
 	}
 
 	
 	
 	active_element.Release();
 	doc.Release();
+
+	
+	
+//	((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->WordManager.SetWordEditorParentTaskName();
 }
 
 void CWordEventHandler::onSetOptions() 
@@ -116,11 +122,15 @@ void CWordEventHandler::onSetSources()
 
 void CWordEventHandler::onSkeletonEditor() 
 {
-	AfxGetApp()->GetMainWnd()->ShowWindow(SW_SHOW);
+//	AfxGetApp()->GetMainWnd()->ShowWindow(SW_SHOW);
+//	AfxGetApp()->GetMainWnd()->EnableWindow();
+	//AfxGetApp()->GetMainWnd()->BringWindowToTop();
+
+	((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->WordManager.WordEditShowMainWindow();
 }
 
 void CWordEventHandler::onWordQuit() 
 {
-	AfxGetApp()->GetMainWnd()->ShowWindow(SW_SHOW);
+	((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->WordManager.WordEditShowMainWindow();
 }
 

@@ -37,8 +37,6 @@ public:
 
 
 
-
-
 class CWordManager  
 {
 public:
@@ -57,12 +55,16 @@ protected:
 	void static CWordManager::LoadWordStylesThreadFunction(LPARAM template_name, LPARAM pWordManager);
 	
 public:
+	void WordEditShowMainWindow();
+	void WordEditHideMainWindow();
+	void SetWordEditorParentTaskName();
 	void GenerateXMLStringToWordEditor(_bstr_t XML_str);
 	CStringTable & getWordTemplates() { return m_WordTemplates; };
 	CStringTable & getWordParagraphStyles() { return m_WordParagraphStyles; };
 	CStringTable & getWordCharacterStyles() { return m_WordCharacterStyles; };
 
 private:
+	WINDOWPLACEMENT m_origWINDOWPLACEMENT;
 	static int LoadSafeArrayToStringTable(SAFEARRAY * sarray, CStringTableImpl & st);
 	static BOOL CreateVBRAInstance(_LMRA_XML_WordLoaderPtr & refLMRAInterface);
 	DWORD m_dwEventHandlerCookie;

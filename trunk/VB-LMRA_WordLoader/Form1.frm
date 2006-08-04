@@ -8,6 +8,14 @@ Begin VB.Form Form1
    LinkTopic       =   "Form1"
    ScaleHeight     =   7875
    ScaleWidth      =   10890
+   Begin VB.CommandButton cmdTasks 
+      Caption         =   "tasks"
+      Height          =   375
+      Left            =   7920
+      TabIndex        =   8
+      Top             =   3480
+      Width           =   495
+   End
    Begin VB.CommandButton cmdFileToStr 
       Caption         =   "Load file to str ^"
       Height          =   375
@@ -85,6 +93,9 @@ Attribute VB_Exposed = False
 Option Explicit
     
     
+Private WithEvents evLMRA As LMRA_XML_WordLoader
+Attribute evLMRA.VB_VarHelpID = -1
+    
 Dim mLMRA As New LMRA_XML_WordLoader
 
 Private Sub XML_Process()
@@ -146,19 +157,28 @@ Private Sub cmdFileToStr_Click()
 End Sub
 
 Private Sub cmdOpenEditor_Click()
-    Dim obj As New LMRA_XML_WordLoader
+    mLMRA.strParentTaskName = caption
     
-    obj.AddActiveElement "category", "Category", "D:\Sources\MyProjects\LM_Report_Asistent\svn\elements\category\icon.bmp"
-    obj.AddActiveElement "hyp_cf", "CF hypotesis", "D:\Sources\MyProjects\LM_Report_Asistent\svn\elements\hyp_cf\icon.bmp"
-    obj.AddActiveElement "bool_cedent", "Bool cedent", "D:\Sources\MyProjects\LM_Report_Asistent\svn\elements\bool_cedent\icon3.bmp"
-    obj.AddActiveElement "bool_cedent", "Bool cedent", "D:\Sources\MyProjects\LM_Report_Asistent\svn\elements\bool_cedent\icon.bmp"
-    obj.AddActiveElement "hyp_cf", "CF hypotesis", "D:\Sources\MyProjects\LM_Report_Asistent\svn\elements\hyp_cf\icon2.bmp"
-    obj.AddActiveElement "bool_cedent", "Bool cedent", "D:\Sources\MyProjects\LM_Report_Asistent\svn\elements\bool_cedent\icon1.bmp"
-    obj.AddActiveElement "category", "Category", "D:\Sources\MyProjects\LM_Report_Asistent\svn\elements\category\icon.bmp"
+    If Not mLMRA.isWordEditorActive Then
+        mLMRA.AddActiveElement "category", "Category", "D:\Sources\MyProjects\LM_Report_Asistent\svn\elements\hyp_4ft\icon.bmp"
+        mLMRA.AddActiveElement "hyp_cf", "CF hypotesis", "D:\Sources\MyProjects\LM_Report_Asistent\svn\elements\hyp_cf\icon.bmp"
+        mLMRA.AddActiveElement "bool_cedent", "Bool cedent", "D:\Sources\MyProjects\LM_Report_Asistent\svn\elements\attribute\icon.bmp"
+        mLMRA.AddActiveElement "bool_cedent", "Bool cedent", "D:\Sources\MyProjects\LM_Report_Asistent\svn\elements\bool_cedent\icon.bmp"
+        mLMRA.AddActiveElement "hyp_cf", "CF hypotesis", "D:\Sources\MyProjects\LM_Report_Asistent\svn\elements\hyp_sdcf\icon.bmp"
+        mLMRA.AddActiveElement "bool_cedent", "Bool cedent", "D:\Sources\MyProjects\LM_Report_Asistent\svn\elements\bool_cedent\icon.bmp"
+        mLMRA.AddActiveElement "category", "Category", "D:\Sources\MyProjects\LM_Report_Asistent\svn\elements\quantifier\icon.bmp"
+    End If
     
-    obj.OpenWordEditor
-    
+'    Visible = False
+    mLMRA.OpenWordEditor
+End Sub
 
+Private Sub cmdTasks_Click()
+    Dim t As Task
+    For Each t In Tasks
+        txtOutput = txtOutput & t.name & vbTab & t.Parent & vbNewLine
+        
+    Next
 End Sub
 
 Private Sub cmdXMLProcess_Click()
@@ -179,8 +199,25 @@ Private Sub cmdXMLStringProcess_Click()
     End If
 End Sub
 
+
+Private Sub evLMRA_SkeletonEditor()
+    On Error Resume Next
+    Visible = True
+    SetFocus
+    
+    
+    
+    MsgBox "Skeleton editor"
+End Sub
+
+Private Sub evLMRA_WordQuit()
+    Visible = True
+End Sub
+
 Private Sub Form_Load()
-    caption = FileSystem.CurDir
+    'caption = FileSystem.CurDir
+    
+    Set evLMRA = mLMRA
 '    XML_Process
 End Sub
 
