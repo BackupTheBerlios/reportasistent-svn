@@ -480,7 +480,7 @@ IDB_PARAGRAPHICO        BITMAP  DISCARDABLE     "res\\Paragraph.bmp"
 IDB_REPORTICO           BITMAP  DISCARDABLE     "res\\Report.bmp"
 IDB_TEXTICO             BITMAP  DISCARDABLE     "res\\Text.bmp"
 IDB_UNKNOWNICO          BITMAP  DISCARDABLE     "res\\unknowni.bmp"
-IDB_4FTHYPOTEZAICO      BITMAP  DISCARDABLE     "res\\4ftHypoteza.bmp"
+//IDB_4FTHYPOTEZAICO      BITMAP  DISCARDABLE     "res\\4ftHypoteza.bmp"
 IDB_TRANSFORMATIONS_LOGO BITMAP  DISCARDABLE     "res\\transformations_logo.bmp"
 IDB_INCLUDEICO          BITMAP  DISCARDABLE     "res\\include.bmp"
 IDB_ATTRLINKTABLEICO    BITMAP  DISCARDABLE     "res\\attrLinkTable.bmp"
@@ -722,6 +722,7 @@ BEGIN
     ID_EDIT_SELECT_ALL      "Select the entire document\nSelect All"
     ID_EDIT_UNDO            "Undo the last action\nUndo"
     ID_EDIT_REDO            "Redo the previously undone action\nRedo"
+	ID_MMSOURCES			"Connect sources to the report\nConnect Sources"
 END
 
 STRINGTABLE DISCARDABLE 

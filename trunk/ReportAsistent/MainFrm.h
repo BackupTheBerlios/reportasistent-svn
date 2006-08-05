@@ -41,11 +41,12 @@ protected:  // control bar embedded members
 	CStatusBar  m_wndStatusBar;
 	CToolBar    m_wndToolBar;
 	CReBar      m_wndReBar;
-	CDialogBar      m_wndDlgBar;
-
+//	CDialogBar      m_wndDlgBar;
+	CToolBar m_wndAEToolBar;
 // Generated message map functions
 protected:
-	CToolBar m_wndAEToolBar;
+	CToolTipCtrl m_AEToolTips;
+	
 	//{{AFX_MSG(CMainFrame)
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
 	//}}AFX_MSG

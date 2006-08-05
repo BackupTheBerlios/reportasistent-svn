@@ -57,14 +57,14 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 		return -1;      // fail to create
 	}
 
-	//vytvoreni dialogbaru
+/*	//vytvoreni dialogbaru
 	if (!m_wndDlgBar.Create(this, IDR_MAINFRAME, 
 		CBRS_ALIGN_BOTTOM, AFX_IDW_DIALOGBAR))
 	{
 		TRACE0("Failed to create dialogbar\n");
 		return -1;		// fail to create
 	}
-
+*/
 
 	//CPoint point( 50, 50 );	
 	//this->FloatControlBar(&m_wndDlgBar, point,CBRS_ALIGN_TOP );
@@ -73,8 +73,8 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 
 	//vytvoreni rebaru
 	if (!m_wndReBar.Create(this) ||
-		!m_wndReBar.AddBar(&m_wndToolBar) ||
-		!m_wndReBar.AddBar(&m_wndDlgBar))
+		!m_wndReBar.AddBar(&m_wndToolBar)/* ||
+		!m_wndReBar.AddBar(&m_wndDlgBar)*/)
 	{
 		TRACE0("Failed to create rebar\n");
 		return -1;      // fail to create
@@ -132,11 +132,18 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 
 //Vytvorim ToolBar aktivnich prvku:
 
+	CRect rcBorders (0, 1, 1, 5);
+	m_wndAEToolBar.CreateEx(this,//AfxGetApp()->GetMainWnd(), 
+							TBSTYLE_FLAT, 
+							WS_CHILD | WS_VISIBLE | CBRS_ALIGN_BOTTOM|CBRS_TOOLTIPS|CBRS_FLYBY , 
+							rcBorders, 
+							AFX_IDW_TOOLBAR);
 
-	m_wndAEToolBar.Create( AfxGetApp()->GetMainWnd(),			//CWnd* pParentWnd, 
+
+/*							( AfxGetApp()->GetMainWnd(),			//CWnd* pParentWnd, 
 							WS_CHILD | WS_VISIBLE | CBRS_BOTTOM |CBRS_SIZE_DYNAMIC,	//dwStyle
 							AFX_IDW_TOOLBAR );					//nID
-
+*/
 	CToolBarCtrl& TBCtrl = m_wndAEToolBar.GetToolBarCtrl();
 	
 	//nactu obrazky
@@ -149,16 +156,14 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	mImageList.Remove(0);//odstranim obrazek prvku Report
 
 	int nBut=mImageList.GetImageCount( );
-	CPoint size(22,24);
+	CPoint size(20,24);
 	TBCtrl.SetButtonSize(size);
 	TBCtrl.SetImageList(&mImageList);
-	
-	
-
-
 
 	TBBUTTON TBButtons[MAX_ELEMENT_COUNT];
 
+	
+	
 	//staticke
 	for(I=0; 
 		I<=(OElementManager.getFirstActiveElementID() - OElementManager.getFirstStaticElementID()-1);I++)
@@ -171,12 +176,12 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	}
 	//separator
 	UINT J=I;
-	TBButtons[J].iBitmap=J;
+/*	TBButtons[J].iBitmap=J;
 	TBButtons[J].idCommand=0;
 	TBButtons[J].fsState=TBSTATE_ENABLED;
 	TBButtons[J].fsStyle=TBSTYLE_SEP;
 	TBButtons[J].dwData=NULL;
-	J++;
+	J++;*/
 	//aktivni
 	for(I=0;I<=(OElementManager.getLastElementId() - OElementManager.getFirstActiveElementID());I++)
 	{
@@ -187,7 +192,24 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 		TBButtons[J+I].dwData=NULL;
 	}
 		
-	TBCtrl.AddButtons(nBut+1, TBButtons );
+	TBCtrl.AddButtons(nBut/*+1*/, TBButtons );
+
+//Pridani ToolTipu k AE Tool Baru
+	m_AEToolTips.Create(&m_wndAEToolBar,0);
+	CString cstrToolTip;
+	int Id;
+	CRect rect;
+
+	for (Id=OElementManager.ElementIdFromName("text") ; Id <=OElementManager.getLastElementId() ; Id++)
+	{
+		cstrToolTip = OElementManager.getElementName(Id);
+		m_AEToolTips.AddTool(this, (LPCTSTR)cstrToolTip, NULL, 0);
+	}
+
+	//m_AEToolTips.Activate(TRUE);
+	TBCtrl.SetToolTips(&m_AEToolTips);
+	CToolTipCtrl * pom = TBCtrl.GetToolTips();
+
 	//:Iva
 
     // TODO: Remove this if you don't want tool tips
