@@ -48,7 +48,8 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 {
 	if (CFrameWnd::OnCreate(lpCreateStruct) == -1)
 		return -1;
-	
+
+	//vytvoreni toolbaru	
 	if (!m_wndToolBar.CreateEx(this) ||
 		!m_wndToolBar.LoadToolBar(IDR_MAINFRAME))
 	{
@@ -56,13 +57,21 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 		return -1;      // fail to create
 	}
 
+	//vytvoreni dialogbaru
 	if (!m_wndDlgBar.Create(this, IDR_MAINFRAME, 
-		CBRS_ALIGN_TOP, AFX_IDW_DIALOGBAR))
+		CBRS_ALIGN_BOTTOM, AFX_IDW_DIALOGBAR))
 	{
 		TRACE0("Failed to create dialogbar\n");
 		return -1;		// fail to create
 	}
 
+
+	//CPoint point( 50, 50 );	
+	//this->FloatControlBar(&m_wndDlgBar, point,CBRS_ALIGN_TOP );
+
+
+
+	//vytvoreni rebaru
 	if (!m_wndReBar.Create(this) ||
 		!m_wndReBar.AddBar(&m_wndToolBar) ||
 		!m_wndReBar.AddBar(&m_wndDlgBar))
@@ -79,7 +88,7 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 		return -1;      // fail to create
 	}
 
-    //Iva: Dynamicky pridam do menu seznam prvku ke vlozeni do kostry
+//Iva: Dynamicky pridam do menu seznam prvku ke vlozeni do kostry
 	CMenu * hMainMenu = /*AfxGetApp()->GetMainWnd()->*/GetMenu();
 	CMenu * hNewMenu = hMainMenu->GetSubMenu(1/*Edit*/)->GetSubMenu(7/*New*/);
 	char Textik [20]="";
@@ -119,12 +128,72 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 								);	
 	}
 	//pokud by se zmeny neprovedly, je treba volat: CWnd::DrawMenuBar()
-	//:Iva
 
+
+//Vytvorim ToolBar aktivnich prvku:
+
+
+	m_wndAEToolBar.Create( AfxGetApp()->GetMainWnd(),			//CWnd* pParentWnd, 
+							WS_CHILD | WS_VISIBLE | CBRS_BOTTOM |CBRS_SIZE_DYNAMIC,	//dwStyle
+							AFX_IDW_TOOLBAR );					//nID
+
+	CToolBarCtrl& TBCtrl = m_wndAEToolBar.GetToolBarCtrl();
+	
+	//nactu obrazky
+	mImageList.Create(16, 16, //rozmery obrazku k nacteni do ImageListu	
+						ILC_MASK, 
+						NUM_PICTURES_TREECTRL, //pocatecni pocet obrazku v ImageListu..viz Stdafx.h
+						MAX_ELEMENT_COUNT);//o kolik obrazku se ImageList muze zvetsit.. ??
+	OElementManager.FillImageList(mImageList);
+	mImageList.Remove(0);//odstranim obrazek prvku Unknown
+	mImageList.Remove(0);//odstranim obrazek prvku Report
+
+	int nBut=mImageList.GetImageCount( );
+	CPoint size(22,24);
+	TBCtrl.SetButtonSize(size);
+	TBCtrl.SetImageList(&mImageList);
+	
+	
+
+
+
+	TBBUTTON TBButtons[MAX_ELEMENT_COUNT];
+
+	//staticke
+	for(I=0; 
+		I<=(OElementManager.getFirstActiveElementID() - OElementManager.getFirstStaticElementID()-1);I++)
+	{
+		TBButtons[I].iBitmap=I;
+		TBButtons[I].idCommand=ID_MMNEWSTATICFIRST + I;
+		TBButtons[I].fsState=TBSTATE_ENABLED;
+		TBButtons[I].fsStyle=TBSTYLE_BUTTON;
+		TBButtons[I].dwData=NULL;
+	}
+	//separator
+	UINT J=I;
+	TBButtons[J].iBitmap=J;
+	TBButtons[J].idCommand=0;
+	TBButtons[J].fsState=TBSTATE_ENABLED;
+	TBButtons[J].fsStyle=TBSTYLE_SEP;
+	TBButtons[J].dwData=NULL;
+	J++;
+	//aktivni
+	for(I=0;I<=(OElementManager.getLastElementId() - OElementManager.getFirstActiveElementID());I++)
+	{
+		TBButtons[J+I].iBitmap=J+I;
+		TBButtons[J+I].idCommand=ID_MMNEWACTIVEFIRST + I;
+		TBButtons[J+I].fsState=TBSTATE_ENABLED;
+		TBButtons[J+I].fsStyle=TBSTYLE_BUTTON;
+		TBButtons[J+I].dwData=NULL;
+	}
+		
+	TBCtrl.AddButtons(nBut+1, TBButtons );
+	//:Iva
 
     // TODO: Remove this if you don't want tool tips
 	m_wndToolBar.SetBarStyle(m_wndToolBar.GetBarStyle() |
 		CBRS_TOOLTIPS | CBRS_FLYBY);
+
 
 	return 0;
 }

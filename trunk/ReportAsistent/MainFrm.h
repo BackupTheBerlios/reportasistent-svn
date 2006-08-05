@@ -30,6 +30,7 @@ public:
 
 // Implementation
 public:
+	CImageList mImageList;
 	virtual ~CMainFrame();
 #ifdef _DEBUG
 	virtual void AssertValid() const;
@@ -44,6 +45,7 @@ protected:  // control bar embedded members
 
 // Generated message map functions
 protected:
+	CToolBar m_wndAEToolBar;
 	//{{AFX_MSG(CMainFrame)
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
 	//}}AFX_MSG

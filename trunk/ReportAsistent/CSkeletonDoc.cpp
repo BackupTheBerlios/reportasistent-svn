@@ -596,7 +596,7 @@ void CSkeletonDoc::OnMmnewelement(UINT nMessageID)
 		}
 		else
 		{
-			//pokud editace neprobhla uspene, element se z kostry smaze
+			//pokud editace neprobehla uspene, element se z kostry smaze
 			new_element->parentNode->removeChild(new_element);
 		}
 

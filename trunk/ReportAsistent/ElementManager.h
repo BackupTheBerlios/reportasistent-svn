@@ -33,8 +33,7 @@
 #define ELID_INCLUDE			5
 #define ELID_ATTR_LINK			6
 #define ELID_ATTR_LINK_TABLE	7
-//#define elId_t_HYP4FT		6  !!! nebude existovat 
-							//aktivni prvky se vytvareji dynamicky, jdou doinstalovat
+#define	MAX_ELEMENT_COUNT		100
 
 class CElementManager  
 {
