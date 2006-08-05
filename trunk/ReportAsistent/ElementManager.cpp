@@ -384,6 +384,11 @@ CString CElementManager::CreateElementCaption(MSXML2::IXMLDOMElementPtr &pElemen
 	case  ELID_REPORT:
 		value = pElement->selectSingleNode("@title")->text;
 		if (value.length() == 0) return getElementName(element_id);
+		if (value.length() <=LENGTH_TREE_ITEM_NAME) 					 
+		{
+			ret="Report: ";
+			return ret += (LPCTSTR) value;
+		}
 		else
 		{
 			ret.Format("Report: %.*s...", LENGTH_TREE_ITEM_NAME-3, (LPCTSTR) value);
@@ -392,7 +397,9 @@ CString CElementManager::CreateElementCaption(MSXML2::IXMLDOMElementPtr &pElemen
 
 	case  ELID_CHAPTER:
 		value = pElement->selectSingleNode("@title")->text;
-		if (value.length() == 0) return "Text - empty";
+		if (value.length() == 0) return "No name";
+		if (value.length() <=LENGTH_TREE_ITEM_NAME) 					 
+			return ret=(LPCTSTR) value;
 		else
 		{
 			ret.Format("%.*s...", LENGTH_TREE_ITEM_NAME-3, (LPCTSTR) value);
@@ -402,6 +409,8 @@ CString CElementManager::CreateElementCaption(MSXML2::IXMLDOMElementPtr &pElemen
 	
 	case  ELID_TEXT:
 		if (pElement->text.length() == 0) return "Text - empty";
+		if (pElement->text.length() <= LENGTH_TREE_ITEM_NAME) 					 
+			return ret=(LPCTSTR) pElement->text;
 		else
 		{
 			ret.Format("%.*s...", LENGTH_TREE_ITEM_NAME-3, (LPCTSTR) pElement->text);			 

@@ -34,6 +34,7 @@
 #define IDR_VISUALIZATION_OPTIONS_DTD   162
 #define IDD_WAIT_DIALOG                 163
 #define IDD_OPTIONS_DIALOG              164
+#define IDD_DIALOG_REPORT               166
 #define IDC_TREE1                       1000
 #define IDC_FILTER_LIST                 1000
 #define IDC_SCROLLBAR1                  1000
@@ -85,6 +86,8 @@
 #define IDC_REASON_TEXT                 1038
 #define IDC_RESUME_APP_BUTTON           1039
 #define IDC_KILL_THREAD_BUTTON          1040
+#define IDC_DIALREPORT_IDEDIT           1040
+#define IDC_DIALREPORT_TITLEEDIT        1041
 #define ID_MMGENREP                     32771
 #define ID_MMSOURCES                    32772
 #define ID_ELEMENT_EDIT                 32780
@@ -117,9 +120,9 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
-#define _APS_NEXT_RESOURCE_VALUE        166
+#define _APS_NEXT_RESOURCE_VALUE        167
 #define _APS_NEXT_COMMAND_VALUE         32789
-#define _APS_NEXT_CONTROL_VALUE         1040
+#define _APS_NEXT_CONTROL_VALUE         1042
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

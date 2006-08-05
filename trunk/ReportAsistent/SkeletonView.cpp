@@ -77,9 +77,14 @@ void CSkeletonView::OnInitialUpdate()
 	long        lStyleOld;
 
 	lStyleOld = GetWindowLong(m_hWnd, GWL_STYLE);
-	lStyleOld |= TVS_EDITLABELS|TVS_HASBUTTONS |TVS_HASLINES|TVS_LINESATROOT|TVS_SHOWSELALWAYS;
+	lStyleOld |= TVS_HASBUTTONS |TVS_HASLINES|TVS_LINESATROOT|TVS_SHOWSELALWAYS;
 
 	SetWindowLong(m_hWnd, GWL_STYLE, lStyleOld);
+	UINT cis = GetTreeCtrl().GetIndent(); //default: 19
+	GetTreeCtrl().SetIndent(25);
+	cis = GetTreeCtrl().GetItemHeight(); //default: 16
+	GetTreeCtrl().SetItemHeight(20 );
+
 
 
 //Iva: Natahnu obrazky pro TreeCtrl

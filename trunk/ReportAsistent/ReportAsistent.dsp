@@ -140,6 +140,10 @@ SOURCE=.\ElementParagraphDialog.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\ElementReportDialog.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\ElementTextDialog.cpp
 # End Source File
 # Begin Source File
@@ -254,6 +258,10 @@ SOURCE=.\ElementManager.h
 # Begin Source File
 
 SOURCE=.\ElementParagraphDialog.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\ElementReportDialog.h
 # End Source File
 # Begin Source File
 

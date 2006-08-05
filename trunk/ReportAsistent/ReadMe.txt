@@ -52,6 +52,7 @@ dedek: opraveno, problem byl v chybe v souboru reduk2.xml
 
 - nefunguje mi Copy/Paste, hazi to posloupnost hlasek vcetne jedny bez jakyhokoliv textu :-)
 dedek: pouze release verze ?!!!, taky mi to nefunguje - prace pro Ivu..
+Iva: opraveno.
 
 - Rauch trva na tom, aby byl LM_RA "dvojjazycnej" (cesky, anglicky). Nastesti ne na urovni programu (ovladaci prvky atd)
 ale na urovni jazyka generovany analyticky zpravy. 

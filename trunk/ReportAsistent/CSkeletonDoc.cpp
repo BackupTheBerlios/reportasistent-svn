@@ -12,6 +12,7 @@
 #include "ElementTextDialog.h"
 #include "ElementParagraphDialog.h"
 #include "ElementChapterDialog.h"
+#include "ElementReportDialog.h"
 #include "ActiveElementDialog.h"
 #include "AttributeLinkDialog.h"
 #include "AttributeLinkTableDialog.h"
@@ -406,6 +407,23 @@ BOOL CSkeletonDoc::EditElement(MSXML2::IXMLDOMElementPtr selected_element)
 				selected_element->setAttribute("id",(LPCTSTR) OElementChapterDialog.m_DialChapterIDEditValue);		
 				//Title:
 				selected_element->setAttribute("title",(LPCTSTR) OElementChapterDialog.m_DialChapterTitleEditValue);
+			}
+			return Res == IDOK;
+			//return Res;
+
+		}
+	case  ELID_REPORT:
+		{
+			//Vytvorim instanci dialogu pro Prvek Report
+			CElementReportDialog OElementReportDialog(selected_element,AfxGetMainWnd());
+			UINT Res= OElementReportDialog.DoModal() ;
+			if (Res == IDOK)
+			{
+			//Zmeny z dialogu soupnu do XMLDom stromu
+				//Id:
+				selected_element->setAttribute("id",(LPCTSTR) OElementReportDialog.m_DialReportIDEditValue);		
+				//Title:
+				selected_element->setAttribute("title",(LPCTSTR) OElementReportDialog.m_DialReportTitleEditValue);
 			}
 			return Res == IDOK;
 			//return Res;
