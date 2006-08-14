@@ -153,18 +153,51 @@ Public Sub EndTableRow()
 '    End If
 End Sub
 
+Public Static Function HTMLRGB_2_VBRGB(ByVal html_hex_color As String) As Long
+    Dim n As Long
+    
+    Dim r As Long
+    Dim g As Long
+    Dim b As Long
+
+    html_hex_color = Replace(html_hex_color, "#", "&H")
+    n = html_hex_color
+    
+    r = ((n And &HFF0000) / 256) / 256
+    g = (n And &HFF00) / 256
+    b = n And &HFF
+    
+    HTMLRGB_2_VBRGB = RGB(r, g, b)
+
+End Function
+
+
+Public Static Sub SetCellBorder(ByRef border As Word.border, ByVal width As Double)
+    If width > 0 Then
+        border.LineStyle = wdLineStyleSingle
+        border.LineWidth = CountBorderLineWidth(width)
+    Else
+        border.LineStyle = wdLineStyleNone
+    End If
+End Sub
+
 
 Public Sub LoadTableColumn(oAttributes As MSXML2.IVBSAXAttributes)
     Dim cs As Integer
     Dim rs As Integer
     
-    Dim c As Integer
-    Dim r As Integer
+    'Dim c As Integer
+    'Dim r As Integer
     Dim hex_bg As String
-    Dim bg_color As Long
-    Dim Num As Long
+    'Dim bg_color As Long
+    'Dim Num As Long
     
+    Dim bTop As Variant
+    Dim bBottom As Variant
+    Dim bLeft As Variant
+    Dim bRight As Variant
     
+     
     Dim fc As Word.Cell
     Dim pom_c As Word.Cell
     
@@ -190,19 +223,29 @@ Public Sub LoadTableColumn(oAttributes As MSXML2.IVBSAXAttributes)
        
     End If
         
+    On Error Resume Next
+    
+    bTop = oAttributes.getValueFromName("", "border_top")
+    bBottom = oAttributes.getValueFromName("", "border_bottom")
+    bLeft = oAttributes.getValueFromName("", "border_left")
+    bRight = oAttributes.getValueFromName("", "border_right")
+    
+    On Error GoTo 0
+    
+    If Not bTop = "" Then SetCellBorder mWordApp.Selection.Cells(1).Borders(wdBorderTop), bTop
+    If Not bBottom = "" Then SetCellBorder mWordApp.Selection.Cells(1).Borders(wdBorderBottom), bBottom
+    If Not bLeft = "" Then SetCellBorder mWordApp.Selection.Cells(1).Borders(wdBorderLeft), bLeft
+    If Not bRight = "" Then SetCellBorder mWordApp.Selection.Cells(1).Borders(wdBorderRight), bRight
+    
+    
     On Error GoTo EndSub
     
     hex_bg = oAttributes.getValueFromName("", "bgcolor")
-    hex_bg = Replace(hex_bg, "#", "&H")
-    Num = hex_bg
     
-'vymwena souradnic: RGB -> BGR
-    bg_color = (Num And &HFF) * 256 * 256
-    bg_color = bg_color + (Num And &H2000FF00 And &H1000FF00)   'finta na VB - potrebujem 32bit AND
-    bg_color = bg_color + (((Num And &HFF0000) / 256) / 256)
-        
-    mWordApp.Selection.Cells(1).Shading.BackgroundPatternColor = bg_color
-        
+            
+    mWordApp.Selection.Cells(1).Shading.BackgroundPatternColor = HTMLRGB_2_VBRGB(hex_bg)
+    
+           
 EndSub:
        
 End Sub
@@ -218,8 +261,33 @@ Public Sub EndTable()
     mWordApp.ActiveDocument.range(mTable.range.End, mTable.range.End).Select
 End Sub
 
+Public Static Function CountBorderLineWidth(ByVal width As Double) As Word.WdLineWidth
+    Select Case width
+        Case 0
+            CountBorderLineWidth = wdLineStyleNone
+        Case Is > 4.5
+            CountBorderLineWidth = wdLineWidth600pt
+        Case Is > 3
+            CountBorderLineWidth = wdLineWidth450pt
+        Case Is > 2.25
+            CountBorderLineWidth = wdLineWidth300pt
+        Case Is > 1.5
+            CountBorderLineWidth = wdLineWidth225pt
+        Case Is > 1
+            CountBorderLineWidth = wdLineWidth150pt
+        Case Is > 0.75
+            CountBorderLineWidth = wdLineWidth100pt
+        Case Is > 0.5
+            CountBorderLineWidth = wdLineWidth075pt
+        Case Is > 0.25
+            CountBorderLineWidth = wdLineWidth050pt
+        Case Is > 0
+            CountBorderLineWidth = wdLineWidth025pt
+    End Select
+End Function
+
 Public Sub LoadTable(oAttributes As MSXML2.IVBSAXAttributes)
-    Dim bw As Integer
+    Dim bw As Double
     
     Set mTable = mWordApp.ActiveDocument.Tables.Add( _
         range:=mWordApp.Selection.range, _
@@ -234,12 +302,15 @@ Public Sub LoadTable(oAttributes As MSXML2.IVBSAXAttributes)
     On Error GoTo 0
     
     If bw > 0 Then
-    
         mTable.Borders.InsideLineStyle = wdLineStyleSingle
         mTable.Borders.OutsideLineStyle = wdLineStyleSingle
-        
+                
+        mTable.Borders.InsideLineWidth = CountBorderLineWidth(bw)
+        mTable.Borders.OutsideLineWidth = CountBorderLineWidth(bw)
+    Else
+        mTable.Borders.InsideLineStyle = wdLineStyleNone
+        mTable.Borders.OutsideLineStyle = wdLineStyleNone
     End If
-    
 End Sub
 
 Public Sub EndText()
@@ -324,14 +395,26 @@ End Sub
 
 Public Sub LoadChart(oAttributes As MSXML2.IVBSAXAttributes)
     Dim title As String
+    Dim color As String
     
     mintLastGraphCell = 2
     mintGraphCharts = mintGraphCharts + 1
     
-    On Error GoTo EndSub
+    
+    On Error GoTo NoTitle
     
     title = oAttributes.getValueFromName("", "title")
     mGraph.Application.DataSheet.Cells(mintGraphCharts + 1, 1) = title
+    
+    
+NoTitle:
+    On Error GoTo EndSub
+    'pokud neni titulek, aby se vytvorila series ktere se pak priradi barva
+    mGraph.Application.DataSheet.Cells(mintGraphCharts + 1, 2) = 0
+    
+    color = oAttributes.getValueFromName("", "color")
+    mGraph.SeriesCollection(mintGraphCharts).Interior.color = HTMLRGB_2_VBRGB(color)
+    
     
 
 EndSub:
@@ -368,6 +451,7 @@ Public Sub LoadGraph(oAttributes As MSXML2.IVBSAXAttributes)
     Dim intChartType As Integer
     Dim intWidth As Variant
     Dim intHeight As Variant
+    Dim sBGColor As String
     
     mintLastGraphCell = 1
     mintGraphCharts = 0
@@ -379,6 +463,8 @@ Public Sub LoadGraph(oAttributes As MSXML2.IVBSAXAttributes)
     intWidth = 1
     intHeight = 0.7
     
+    sBGColor = ""
+    
     On Error Resume Next
     
     sTitle = oAttributes.getValueFromName("", "title")
@@ -386,17 +472,23 @@ Public Sub LoadGraph(oAttributes As MSXML2.IVBSAXAttributes)
     bHasLegend = oAttributes.getValueFromName("", "showlegend")
     intWidth = oAttributes.getValueFromName("", "width")
     intHeight = oAttributes.getValueFromName("", "height")
+    intHeight = oAttributes.getValueFromName("", "height")
+    sBGColor = oAttributes.getValueFromName("", "bgcolor")
 
     
     On Error GoTo 0
     
-    mGraph.Width = mWordApp.ActiveDocument.PageSetup.PageWidth * intWidth
+    mGraph.width = mWordApp.ActiveDocument.PageSetup.PageWidth * intWidth
     mGraph.Height = mWordApp.ActiveDocument.PageSetup.PageWidth * intHeight
 
     
     If Len(sTitle) > 0 Then
         mGraph.HasTitle = True
         mGraph.ChartTitle.text = sTitle
+    End If
+    
+    If (Not sBGColor = "") Then
+        mGraph.Walls.Interior.color = HTMLRGB_2_VBRGB(sBGColor)
     End If
     
     mGraph.HasLegend = bHasLegend

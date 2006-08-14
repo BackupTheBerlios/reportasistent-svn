@@ -7,7 +7,7 @@
 <!ATTLIST report author CDATA #IMPLIED >
 <!ATTLIST report id ID #REQUIRED >
 
-<!ELEMENT chapter (paragraph | include | active_element | attr_link_table | chapter)*  > <!--nejprve texty, pak vnorene kapitoly -->
+<!ELEMENT chapter (paragraph | include | active_element | attr_link_table | chapter)*  > 
 <!ATTLIST chapter title CDATA #REQUIRED >
 <!ATTLIST chapter id ID #REQUIRED >
 
@@ -88,6 +88,7 @@ to se deje vzdy, kdyz se cte plugin output, napr pri otevreni simple fiter -->
 <!ATTLIST graph showlegend (true | false) "false" >
 <!ATTLIST graph height CDATA #IMPLIED >	<!-- nasobek sirky strnaky -->
 <!ATTLIST graph width CDATA #IMPLIED >	<!-- nasobek sirky strnaky -->	
+<!ATTLIST graph bgcolor CDATA #IMPLIED >	<!-- pouze kody #RRGGBB pojmenovane barvy nejsou podporovany -->	
 <!ATTLIST graph id ID #REQUIRED >
 
 
@@ -100,6 +101,7 @@ to se deje vzdy, kdyz se cte plugin output, napr pri otevreni simple fiter -->
 
 <!ELEMENT chart ( value+ ) >
 <!ATTLIST chart title CDATA #IMPLIED >
+<!ATTLIST chart color CDATA #IMPLIED > <!-- pouze kody #RRGGBB pojmenovane barvy nejsou podporovany -->
 <!ATTLIST chart id ID #REQUIRED >
 
 <!ELEMENT value EMPTY >
@@ -109,7 +111,7 @@ to se deje vzdy, kdyz se cte plugin output, napr pri otevreni simple fiter -->
 <!ELEMENT table ( tr+ ) >
 <!ATTLIST table cols CDATA #REQUIRED >
 <!ATTLIST table rows CDATA #REQUIRED >
-<!ATTLIST table borderwidth CDATA "0" >	<!-- default borderwidth=0 -->
+<!ATTLIST table borderwidth CDATA "0" >	<!-- sirka cary -->
 <!ATTLIST table id ID #REQUIRED >
 
 <!ELEMENT tr ( td+ ) >
@@ -119,6 +121,11 @@ to se deje vzdy, kdyz se cte plugin output, napr pri otevreni simple fiter -->
 <!ATTLIST td colspan CDATA #IMPLIED >
 <!ATTLIST td rowspan CDATA #IMPLIED >
 <!ATTLIST td bgcolor CDATA #IMPLIED >	<!-- pouze kody #RRGGBB pojmenovane barvy nejsou podporovany -->
+<!ATTLIST td border_top CDATA #IMPLIED >	<!-- sirka cary -->
+<!ATTLIST td border_bottom CDATA #IMPLIED >	<!-- sirka cary -->
+<!ATTLIST td border_left CDATA #IMPLIED >	<!-- sirka cary -->
+<!ATTLIST td border_right CDATA #IMPLIED >	<!-- sirka cary -->
+
 <!ATTLIST td id ID #REQUIRED >
 
 

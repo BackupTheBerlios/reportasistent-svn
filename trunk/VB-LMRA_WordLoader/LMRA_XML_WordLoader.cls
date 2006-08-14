@@ -163,7 +163,7 @@ Private Sub CreateRAToolbar(WordApp As Word.Application)
        
     'udela z toolobaru svisly
     'bar.Left = 30
-    bar.Width = 0
+    bar.width = 0
     bar.Visible = True
 End Sub
 

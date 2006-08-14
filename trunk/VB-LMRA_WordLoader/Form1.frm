@@ -50,7 +50,7 @@ Begin VB.Form Form1
    End
    Begin VB.TextBox txtXMLString 
       Height          =   2535
-      Left            =   240
+      Left            =   480
       MultiLine       =   -1  'True
       ScrollBars      =   3  'Both
       TabIndex        =   3
@@ -64,7 +64,7 @@ Begin VB.Form Form1
       MultiLine       =   -1  'True
       ScrollBars      =   3  'Both
       TabIndex        =   2
-      Text            =   "Form1.frx":000A
+      Text            =   "Form1.frx":0395
       Top             =   4440
       Width           =   10215
    End

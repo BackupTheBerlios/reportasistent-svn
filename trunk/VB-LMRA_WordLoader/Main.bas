@@ -28,6 +28,11 @@ End Sub
 
 #If Mac Then
 
+<table rows="1" cols="1">
+<tr><td bgcolor="#FF0000"><text>XxxxX</text></td></tr>
+</table>
+
+
 Sub InsertText(text_element As REPORTASISTENTLib.ElementText, Optional range As Word.range)
     If Not range Is Nothing Then range.Select
     
