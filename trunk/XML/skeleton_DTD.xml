@@ -111,7 +111,7 @@ to se deje vzdy, kdyz se cte plugin output, napr pri otevreni simple fiter -->
 <!ELEMENT table ( tr+ ) >
 <!ATTLIST table cols CDATA #REQUIRED >
 <!ATTLIST table rows CDATA #REQUIRED >
-<!ATTLIST table borderwidth CDATA "0" >	<!-- sirka cary -->
+<!ATTLIST table borderwidth CDATA "0" >	<!-- sirka cary napr: 0,25 0,50 0,75 1,00 1,50 2,25 3,00 4,50 6,00 -->
 <!ATTLIST table id ID #REQUIRED >
 
 <!ELEMENT tr ( td+ ) >
@@ -121,10 +121,12 @@ to se deje vzdy, kdyz se cte plugin output, napr pri otevreni simple fiter -->
 <!ATTLIST td colspan CDATA #IMPLIED >
 <!ATTLIST td rowspan CDATA #IMPLIED >
 <!ATTLIST td bgcolor CDATA #IMPLIED >	<!-- pouze kody #RRGGBB pojmenovane barvy nejsou podporovany -->
-<!ATTLIST td border_top CDATA #IMPLIED >	<!-- sirka cary -->
-<!ATTLIST td border_bottom CDATA #IMPLIED >	<!-- sirka cary -->
-<!ATTLIST td border_left CDATA #IMPLIED >	<!-- sirka cary -->
-<!ATTLIST td border_right CDATA #IMPLIED >	<!-- sirka cary -->
+<!ATTLIST td border_top CDATA #IMPLIED >	<!-- sirka cary napr: 0,25 0,50 0,75 1,00 1,50 2,25 3,00 4,50 6,00 -->
+<!ATTLIST td border_bottom CDATA #IMPLIED >	<!-- sirka cary napr: 0,25 0,50 0,75 1,00 1,50 2,25 3,00 4,50 6,00 -->
+<!ATTLIST td border_left CDATA #IMPLIED >	<!-- sirka cary napr: 0,25 0,50 0,75 1,00 1,50 2,25 3,00 4,50 6,00 -->
+<!ATTLIST td border_right CDATA #IMPLIED >	<!-- sirka cary napr: 0,25 0,50 0,75 1,00 1,50 2,25 3,00 4,50 6,00 -->
+
+
 
 <!ATTLIST td id ID #REQUIRED >
 
