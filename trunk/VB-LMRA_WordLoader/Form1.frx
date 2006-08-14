@@ -1,4 +1,4 @@
-ˇí<x>
+ˇç<x>
 <table rows="1" cols="10">
 <tr>
 <td border_top="5"><text>****</text></td>
@@ -14,14 +14,14 @@
 </tr>
 </table>
 
-<graph title="4FT table 2nd-try" showlegend="true" charttype="xlColumnStacked" height="0,4" bgcolor="#00FF00">
+<graph title="4FT table 2nd-try" showlegend="true" charttype="xl3dColumn" height="0,4" bgcolor="#00FF00">
 <categories>
 	<category title="succedent"/>
 	<category title="not succedent"/>
 </categories>
-<chart title="antecend" color="#0000FF">
+<chart title="antecend">
 	<value value="29"/>
-	<value value="14"/>
+	<value value="14" color="#FFFFFF"/>
 </chart>			
 <chart title="not antecend">
 	<value value="628"/>

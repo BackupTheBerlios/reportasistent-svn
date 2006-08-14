@@ -64,7 +64,7 @@ Begin VB.Form Form1
       MultiLine       =   -1  'True
       ScrollBars      =   3  'Both
       TabIndex        =   2
-      Text            =   "Form1.frx":0395
+      Text            =   "Form1.frx":0390
       Top             =   4440
       Width           =   10215
    End

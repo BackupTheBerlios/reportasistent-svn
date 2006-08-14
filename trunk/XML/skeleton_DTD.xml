@@ -106,6 +106,7 @@ to se deje vzdy, kdyz se cte plugin output, napr pri otevreni simple fiter -->
 
 <!ELEMENT value EMPTY >
 <!ATTLIST value value CDATA #REQUIRED >	<!-- cislo nebo cislo s procentama -->
+<!ATTLIST value color CDATA #IMPLIED > <!-- pouze kody #RRGGBB pojmenovane barvy nejsou podporovany -->
 <!ATTLIST value id ID #REQUIRED >
 
 <!ELEMENT table ( tr+ ) >

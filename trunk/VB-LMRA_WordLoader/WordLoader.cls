@@ -163,9 +163,12 @@ Public Static Function HTMLRGB_2_VBRGB(ByVal html_hex_color As String) As Long
     html_hex_color = Replace(html_hex_color, "#", "&H")
     n = html_hex_color
     
-    r = ((n And &HFF0000) / 256) / 256
-    g = (n And &HFF00) / 256
     b = n And &HFF
+    n = n \ 256
+    g = (n And &HFF)
+    n = n \ 256
+    r = (n And &HFF)
+    
     
     HTMLRGB_2_VBRGB = RGB(r, g, b)
 
@@ -423,10 +426,24 @@ End Sub
 
 Public Sub LoadChartValue(oAttributes As MSXML2.IVBSAXAttributes)
     Dim val As String
+    Dim color As String
     
     val = oAttributes.getValueFromName("", "value")
     mGraph.Application.DataSheet.Cells(mintGraphCharts + 1, mintLastGraphCell) = val
     
+    On Error GoTo EndSub
+    
+    color = oAttributes.getValueFromName("", "color")
+    
+    On Error GoTo 0
+    
+    If Not color = "" Then
+        mGraph.SeriesCollection(mintGraphCharts).Points(mintLastGraphCell - 1).Interior.color = _
+            HTMLRGB_2_VBRGB(color)
+    End If
+    
+    
+EndSub:
     mintLastGraphCell = mintLastGraphCell + 1
 End Sub
 
