@@ -42,13 +42,12 @@ void CEToolBar::OnMouseMove(UINT nFlags, CPoint point)
 	TBBUTTON tbBut;
 	CToolBarCtrl & TBCtrl = this->GetToolBarCtrl();
 	int iBut  = TBCtrl.HitTest(&point);	
-	TBCtrl.GetButton(iBut,&tbBut);
-	int elID = tbBut.dwData; // ve fci CMainFrm.CreateS(A)EToolBar() do teto polozky vkladam Id typu prvku, ktery toto tlacitko vytvari
-	CString statusMsg = "Create new ";
-	statusMsg += OElementManager.getElementLabel(elID);
 	if ( 0<=iBut) //Mys je nad nejakym tlacitkem
 	{
-
+		TBCtrl.GetButton(iBut,&tbBut);
+		int elID = tbBut.dwData; // ve fci CMainFrm.CreateS(A)EToolBar() do teto polozky vkladam Id typu prvku, ktery toto tlacitko vytvari
+		CString statusMsg = "Create new ";
+		statusMsg += OElementManager.getElementLabel(elID);
 		CFrameWnd* mWnd = AfxGetMainWnd()->GetTopLevelFrame();
 
 		StatBar = (CStatusBar*)(mWnd->GetMessageBar());
