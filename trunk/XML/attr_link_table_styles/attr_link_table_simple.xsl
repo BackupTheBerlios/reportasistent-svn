@@ -11,7 +11,7 @@
 				
 		<xsl:text disable-output-escaping="yes">
 		</xsl:text>
-		<attr_link_table_output>
+		<output>
 	
 		<xsl:apply-templates select="link">
 			<xsl:with-param name="target_active_element">
@@ -24,7 +24,7 @@
 		<xsl:text disable-output-escaping="yes">
 		
 		</xsl:text>
-		</attr_link_table_output>
+		</output>
 	</xsl:template>
 
 
@@ -38,7 +38,7 @@
 		<xsl:text disable-output-escaping="yes">
 		
 				</xsl:text>
-		<paragraph>
+		<paragraph id="para_attr_{@attr_name}">
 	
 
 
@@ -48,7 +48,7 @@
 		<xsl:text disable-output-escaping="yes">
 					</xsl:text>
 
-		<text>
+		<text id="text_attr_{@attr_name}">
 			<xsl:value-of select="@caption"/><xsl:text>:</xsl:text>
 			<tab/>
 			<xsl:value-of select="id($target_active_element)//attribute[@name = $attr_name]/@value"/>

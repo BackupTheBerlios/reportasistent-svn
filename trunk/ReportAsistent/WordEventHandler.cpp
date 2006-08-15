@@ -79,9 +79,9 @@ void CWordEventHandler::onActiveElementSelected(LPCTSTR strElementName)
 
 	
 	//load document
-	MSXML2::IXMLDOMDocumentPtr doc;
+	MSXML2::IXMLDOMDocument2Ptr doc;
 	doc.CreateInstance(_T("Msxml2.DOMDocument"));
-	em.LoadSkeletonDTD(doc);
+	em.LoadSkeletonDTD((MSXML2::IXMLDOMDocumentPtr &) doc);
 	
 	//insert element to chapter and document
 	doc->documentElement->
@@ -96,6 +96,14 @@ void CWordEventHandler::onActiveElementSelected(LPCTSTR strElementName)
 		CAElTransform transform(active_element);
 
 		transform.DoAllTransnformations();
+
+		MSXML2::IXMLDOMParseErrorPtr err = doc->validate();
+
+		if (err->errorCode != S_OK)
+		{
+			AfxMessageBox(err->reason);
+			AfxMessageBox(active_element->selectSingleNode("output")->xml);
+		}
 	
 		wm.GenerateXMLStringToWordEditor(active_element->xml);
 	}

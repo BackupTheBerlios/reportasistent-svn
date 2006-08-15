@@ -78,8 +78,12 @@ MSXML2::IXMLDOMDocumentFragmentPtr CAElTransform::DoAllTransnformations()
 	}
 /*****/
 	
-	//vysledek vsech transformaci ulozime na misto output element
-	m_active_element->replaceChild(parent_frag->cloneNode(VARIANT_TRUE), m_active_element->selectSingleNode("output"));
+	//vysledek vsech transformaci ulozime na misto vtrku output elementu
+	MSXML2::IXMLDOMNodePtr out = m_active_element->selectSingleNode("output");
+
+	((MSXML2::IXMLDOMSelectionPtr) out->selectNodes("*"))->removeAll();
+	
+	out->appendChild(parent_frag->cloneNode(VARIANT_TRUE));
 
 	return parent_frag;
 }
