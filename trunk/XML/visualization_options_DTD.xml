@@ -6,7 +6,7 @@
 <!--visualization_values: defaultni hodnoty promennych-->
 
   
-<!ELEMENT visualization_options (( enum_option | number_option | string_option | colour_option )*) > <!--seznam nastavovanych polozek-->
+<!ELEMENT visualization_options (( enum_option | number_option | string_option | color_option )*) > <!--seznam nastavovanych polozek-->
 <!ATTLIST visualization_options active_element CDATA #REQUIRED > <!--typ aktivniho prvku-->
 <!ATTLIST visualization_options visualization_label CDATA #REQUIRED >  <!--typ vizualizace-->
 
@@ -44,9 +44,9 @@
 <!--title: nadpis polozky-->
 
 
-<!ELEMENT colour_option EMPTY  >
+<!ELEMENT color_option EMPTY  >
 <!-- textovy retezec -->
-<!ATTLIST colour_option variable_name CDATA #REQUIRED 
+<!ATTLIST color_option variable_name CDATA #REQUIRED 
                         title CDATA #REQUIRED>
 <!--variable_name: nazev XSL promenne, ktera vzejde z teto polozky-->
 <!--title: nadpis polozky-->
