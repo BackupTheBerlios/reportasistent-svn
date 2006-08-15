@@ -39,6 +39,9 @@ void CEToolBar::OnMouseMove(UINT nFlags, CPoint point)
 	CElementManager & OElementManager = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
 
 	CStatusBar * StatBar;
+	CFrameWnd* mWnd = AfxGetMainWnd()->GetTopLevelFrame();
+	StatBar = (CStatusBar*)(mWnd->GetMessageBar());
+
 	TBBUTTON tbBut;
 	CToolBarCtrl & TBCtrl = this->GetToolBarCtrl();
 	int iBut  = TBCtrl.HitTest(&point);	
@@ -48,13 +51,13 @@ void CEToolBar::OnMouseMove(UINT nFlags, CPoint point)
 		int elID = tbBut.dwData; // ve fci CMainFrm.CreateS(A)EToolBar() do teto polozky vkladam Id typu prvku, ktery toto tlacitko vytvari
 		CString statusMsg = "Create new ";
 		statusMsg += OElementManager.getElementLabel(elID);
-		CFrameWnd* mWnd = AfxGetMainWnd()->GetTopLevelFrame();
-
-		StatBar = (CStatusBar*)(mWnd->GetMessageBar());
+		
 		if (StatBar)
 			StatBar->SetPaneText(0,(LPCTSTR) statusMsg,TRUE);
 
 	}
+	else
+		if (StatBar)StatBar->SetPaneText(0,"Ready",TRUE);
 	
 
 	CToolBar::OnMouseMove(nFlags,point); 
