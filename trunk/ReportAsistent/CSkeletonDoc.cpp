@@ -685,23 +685,6 @@ void CSkeletonDoc::TransformAttrLinks(MSXML2::IXMLDOMElementPtr &element)
 }
 
 
-BOOL CSkeletonDoc::IsIDInTree(CString Id)
-{
-		//podivame se jestli uz dane id v kostre existuje:
-		//zkusime prvek s takovym id najit moci XPath funkce id()
-		
-		CString query; 
-		query.Format("id(\"%s\")", (LPCTSTR) Id); //napr.: query = 'id("hyp_4ft15")'
-		MSXML2::IXMLDOMNodePtr select = m_pXMLDom->selectSingleNode((LPCTSTR) query);
-		if (select == NULL) return FALSE; //kdyz to zadny uzel nenaslo tak id neni pouzite..
-		else //Iva:Id is used in the tree
-		{
-			select.Release();
-			return TRUE;
-		}
-
-}
-
 
 BOOL CSkeletonDoc::OpenSkeletonFile(LPCTSTR file_name)
 {
@@ -799,6 +782,25 @@ CString CSkeletonDoc::CreateNewIDFromOld(CString old_ID)
 
 }
 
+BOOL CSkeletonDoc::IsIDInTree(CString Id)
+{
+
+	return IsIDInTree(Id, m_pXMLDom->documentElement);
+		//podivame se jestli uz dane id v kostre existuje:
+		//zkusime prvek s takovym id najit moci XPath funkce id()
+/*		
+		CString query; 
+		query.Format("id(\"%s\")", (LPCTSTR) Id); //napr.: query = 'id("hyp_4ft15")'
+		MSXML2::IXMLDOMNodePtr select = m_pXMLDom->selectSingleNode((LPCTSTR) query);
+		if (select == NULL) return FALSE; //kdyz to zadny uzel nenaslo tak id neni pouzite..
+		else //Iva:Id is used in the tree
+		{
+			select.Release();
+			return TRUE;
+		}
+*/
+}
+
 BOOL CSkeletonDoc::IsIDInTree(CString Id, MSXML2::IXMLDOMElementPtr pTree)
 {
 		//podivame se jestli uz dane id v kostre existuje:
@@ -807,7 +809,7 @@ BOOL CSkeletonDoc::IsIDInTree(CString Id, MSXML2::IXMLDOMElementPtr pTree)
 		if (pTree==NULL) return FALSE;	
 
 		CString query; 
-		query.Format("id(\"%s\")", (LPCTSTR) Id); //napr.: query = 'id("hyp_4ft15")'
+		query.Format("//*[@id=\"%s\"]", (LPCTSTR) Id); //napr.: query = '//*[@id="hyp_4ft15"]'
 		MSXML2::IXMLDOMNodePtr select = pTree->selectSingleNode((LPCTSTR) query);
 		if (select == NULL) return FALSE; //kdyz to zadny uzel nenaslo tak id neni pouzite..
 		else //Iva:Id is used in the tree

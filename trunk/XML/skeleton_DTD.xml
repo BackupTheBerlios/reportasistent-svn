@@ -5,11 +5,11 @@
 <!ATTLIST report title CDATA #REQUIRED >
 <!ATTLIST report subtitle CDATA #IMPLIED >
 <!ATTLIST report author CDATA #IMPLIED >
-<!ATTLIST report id ID #REQUIRED >
+<!ATTLIST report id CDATA #REQUIRED >
 
 <!ELEMENT chapter (paragraph | include | active_element | attr_link_table | chapter)*  > 
 <!ATTLIST chapter title CDATA #REQUIRED >
-<!ATTLIST chapter id ID #REQUIRED >
+<!ATTLIST chapter id CDATA #REQUIRED >
 
 <!ELEMENT active_element ( attributes, filter, output )>
 <!ATTLIST active_element type CDATA #REQUIRED >
@@ -51,7 +51,7 @@ to se deje vzdy, kdyz se cte plugin output, napr pri otevreni simple fiter -->
 <!ELEMENT attr_link_table (link*) >
 <!ATTLIST attr_link_table target CDATA #REQUIRED>
 <!ATTLIST attr_link_table style CDATA #REQUIRED>
-<!ATTLIST attr_link_table id ID #REQUIRED >
+<!ATTLIST attr_link_table id CDATA #REQUIRED >
 
 <!ELEMENT link EMPTY>
 <!ATTLIST link attr_name CDATA #REQUIRED>
@@ -60,22 +60,22 @@ to se deje vzdy, kdyz se cte plugin output, napr pri otevreni simple fiter -->
 
 <!ELEMENT include EMPTY >
 <!ATTLIST include file CDATA #REQUIRED >
-<!ATTLIST include id ID #REQUIRED >
+<!ATTLIST include id CDATA #REQUIRED >
 
 <!ELEMENT paragraph ( graph | table | text | attr_link)* >
 <!ATTLIST paragraph style CDATA #IMPLIED >
-<!ATTLIST paragraph id ID #REQUIRED >
+<!ATTLIST paragraph id CDATA #REQUIRED >
 
 <!ELEMENT text ( #PCDATA | br | tab )* >
 <!ATTLIST text style CDATA #IMPLIED >
-<!ATTLIST text id ID #REQUIRED >
+<!ATTLIST text id CDATA #REQUIRED >
 
 <!ELEMENT tab EMPTY > <!-- do textu vlozi tabulator -->
 
 <!ELEMENT br EMPTY > <!-- do textu vlozi prechod na novy radek - nikoliv konec odstavce -->
 
 <!ELEMENT attr_link EMPTY >
-<!ATTLIST attr_link id ID #REQUIRED >
+<!ATTLIST attr_link id CDATA #REQUIRED >
 <!ATTLIST attr_link target CDATA #REQUIRED >
 <!ATTLIST attr_link attr_name CDATA #REQUIRED >
 <!ATTLIST attr_link style CDATA #IMPLIED >
@@ -89,34 +89,34 @@ to se deje vzdy, kdyz se cte plugin output, napr pri otevreni simple fiter -->
 <!ATTLIST graph height CDATA #IMPLIED >	<!-- nasobek sirky strnaky -->
 <!ATTLIST graph width CDATA #IMPLIED >	<!-- nasobek sirky strnaky -->	
 <!ATTLIST graph bgcolor CDATA #IMPLIED >	<!-- pouze kody #RRGGBB pojmenovane barvy nejsou podporovany -->	
-<!ATTLIST graph id ID #REQUIRED >
+<!ATTLIST graph id CDATA #REQUIRED >
 
 
 <!ELEMENT categories ( category+ ) >
-<!ATTLIST categories id ID #REQUIRED >
+<!ATTLIST categories id CDATA #REQUIRED >
 
 <!ELEMENT category EMPTY >
 <!ATTLIST category title CDATA #REQUIRED >
-<!ATTLIST category id ID #REQUIRED >
+<!ATTLIST category id CDATA #REQUIRED >
 
 <!ELEMENT chart ( value+ ) >
 <!ATTLIST chart title CDATA #IMPLIED >
 <!ATTLIST chart color CDATA #IMPLIED > <!-- pouze kody #RRGGBB pojmenovane barvy nejsou podporovany -->
-<!ATTLIST chart id ID #REQUIRED >
+<!ATTLIST chart id CDATA #REQUIRED >
 
 <!ELEMENT value EMPTY >
 <!ATTLIST value value CDATA #REQUIRED >	<!-- cislo nebo cislo s procentama -->
 <!ATTLIST value color CDATA #IMPLIED > <!-- pouze kody #RRGGBB pojmenovane barvy nejsou podporovany -->
-<!ATTLIST value id ID #REQUIRED >
+<!ATTLIST value id CDATA #REQUIRED >
 
 <!ELEMENT table ( tr+ ) >
 <!ATTLIST table cols CDATA #REQUIRED >
 <!ATTLIST table rows CDATA #REQUIRED >
 <!ATTLIST table borderwidth CDATA "0" >	<!-- sirka cary napr: 0,25 0,50 0,75 1,00 1,50 2,25 3,00 4,50 6,00 -->
-<!ATTLIST table id ID #REQUIRED >
+<!ATTLIST table id CDATA #REQUIRED >
 
 <!ELEMENT tr ( td+ ) >
-<!ATTLIST tr id ID #REQUIRED >
+<!ATTLIST tr id CDATA #REQUIRED >
 
 <!ELEMENT td ( text? ) >
 <!ATTLIST td colspan CDATA #IMPLIED >
@@ -129,7 +129,7 @@ to se deje vzdy, kdyz se cte plugin output, napr pri otevreni simple fiter -->
 
 
 
-<!ATTLIST td id ID #REQUIRED >
+<!ATTLIST td id CDATA #REQUIRED >
 
 
 ]>

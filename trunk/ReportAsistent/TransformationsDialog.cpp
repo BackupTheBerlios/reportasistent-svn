@@ -25,6 +25,9 @@ CTransformationsDialog::CTransformationsDialog(MSXML2::IXMLDOMElementPtr & activ
 	//}}AFX_DATA_INIT
 
 
+	srand( (unsigned)time( NULL ) );
+
+	
 	m_cloned_output_element = m_active_element->selectSingleNode("output")->cloneNode(VARIANT_TRUE);
 }
 
@@ -115,6 +118,8 @@ BOOL CTransformationsDialog::SaveAll()
 	ASSERT(m_active_element != NULL);
 	ASSERT(m_cloned_output_element != NULL);
 
+	AfxMessageBox(m_cloned_output_element->xml);
+	
 	m_active_element->replaceChild(
 		m_cloned_output_element,
 		m_active_element->selectSingleNode("output"));
@@ -153,11 +158,19 @@ void CTransformationsDialog::OnAddButton()
 	
 	if (IsSelectedTransformationAttrLinkTable(inserted_item))
 	{
+
+		
 		type_attr_elem->text = "attr_link_table";
 		transf_elem->setAttributeNode(type_attr_elem);
 
 		MSXML2::IXMLDOMElementPtr attr_lt;
 		attr_lt = m.CreateEmptyElement(ELID_ATTR_LINK_TABLE);
+
+		CString new_id;
+		CString old_id = (LPCTSTR) (_bstr_t) attr_lt->getAttribute("id");
+		new_id.Format("%s_trsnsform%d", (LPCTSTR) old_id, rand());
+		attr_lt->setAttribute("id", (LPCTSTR) new_id);
+
 
 		transf_elem->appendChild(attr_lt);
 		
