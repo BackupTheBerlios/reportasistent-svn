@@ -1,7 +1,7 @@
 // MainFrm.h : interface of the CMainFrame class
 //
 /////////////////////////////////////////////////////////////////////////////
-
+#include "EToolBar.h"
 #if !defined(AFX_MAINFRM_H__E34B981C_C7C4_458F_ADD4_1E455C86A3D3__INCLUDED_)
 #define AFX_MAINFRM_H__E34B981C_C7C4_458F_ADD4_1E455C86A3D3__INCLUDED_
 
@@ -30,7 +30,8 @@ public:
 
 // Implementation
 public:
-	CImageList mImageList;
+	CImageList mSImageList;
+	CImageList mAImageList;
 	virtual ~CMainFrame();
 #ifdef _DEBUG
 	virtual void AssertValid() const;
@@ -42,13 +43,21 @@ protected:  // control bar embedded members
 	CToolBar    m_wndToolBar;
 	CReBar      m_wndReBar;
 //	CDialogBar      m_wndDlgBar;
-	CToolBar m_wndAEToolBar;
+	CEToolBar m_wndAEToolBar;
+	CEToolBar m_wndSEToolBar;
 // Generated message map functions
 protected:
 	CToolTipCtrl m_AEToolTips;
+	BOOL CreateSEToolBar();
+	BOOL CreateAEToolBar();
+	CToolTipCtrl m_SEToolTips;
 	
 	//{{AFX_MSG(CMainFrame)
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
+	afx_msg void OnUpdateViewStaticelementstoolbar(CCmdUI* pCmdUI);
+	afx_msg void OnViewStaticelementstoolbar();
+	afx_msg void OnViewActiveelementtoolbar();
+	afx_msg void OnUpdateViewActiveelementtoolbar(CCmdUI* pCmdUI);
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };

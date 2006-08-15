@@ -2,13 +2,13 @@
 
 [General Info]
 Version=1
-LastClass=CElementReportDialog
-LastTemplate=CDialog
+LastClass=CEToolBar
+LastTemplate=CToolBarCtrl
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "ReportAsistent.h"
 LastPage=0
 
-ClassCount=23
+ClassCount=24
 Class1=CReportAsistentApp
 Class2=CSkeletonDoc
 Class3=CSkeletonView
@@ -16,40 +16,41 @@ Class4=CMainFrame
 
 ResourceCount=17
 Resource1=IDD_ABOUTBOX
-Resource2=IDD_SOURCES_DIALOG (English (U.S.))
+Resource2=IDD_ABOUTBOX (English (U.S.))
 Class5=CAboutDlg
-Resource3=IDD_DIALOGTEXT (English (U.S.))
-Resource4=IDD_DIALOG_REPORT (English (U.S.))
+Resource3=IDD_TRANSFORMATIONS_DIALOG (English (U.S.))
+Resource4=IDD_GENERATE_DIALOG (English (U.S.))
 Class6=CElementTextDialog
-Resource5=IDD_WAIT_DIALOG (English (U.S.))
+Resource5=IDD_OPTIONS_DIALOG (English (U.S.))
 Class7=CSimpleFilterDialog
-Resource6=IDD_PROPERTY_EDITOR (English (U.S.))
+Resource6=IDD_WAIT_DIALOG (English (U.S.))
 Class8=CGenerateDialog
-Resource7=IDD_OPTIONS_DIALOG (English (U.S.))
+Resource7=IDD_DIALOG_REPORT (English (U.S.))
 Class9=CSourcesDialog
-Resource8=IDD_ACTIVE_ELEMENT_DIALOG (English (U.S.))
+Resource8=IDD_DIALOG_PARAGRAPH (English (U.S.))
 Class10=CActiveElementDialog
-Resource9=IDD_ABOUTBOX (English (U.S.))
+Resource9=IDD_DIALOGTEXT (English (U.S.))
 Class11=CTransformationsDialog
 Class12=Tcategory_Recordset
-Resource10=IDD_ATTRIBUTE_LINK_TABLE_DIALOG (English (U.S.))
+Resource10=IDD_ATTRIBUTE_LINK_DIALOG (English (U.S.))
 Class13=CAttributeLinkDialog
-Resource11=IDD_TRANSFORMATIONS_DIALOG (English (U.S.))
+Resource11=IDD_SIMPLE_FILTER_DIALOG (English (U.S.))
 Class14=CAttributeLinkTableDialog
-Resource12=IDD_GENERATE_DIALOG (English (U.S.))
+Resource12=IDD_ACTIVE_ELEMENT_DIALOG (English (U.S.))
 Class15=CElementParagraphDialog
 Class16=CElementChapterDialog
 Class17=CElementDialogBase
 Class18=CPropertyEditor
-Resource13=IDD_DIALOG_CHAPTER (English (U.S.))
-Resource14=IDD_ATTRIBUTE_LINK_DIALOG (English (U.S.))
+Resource13=IDD_PROPERTY_EDITOR (English (U.S.))
+Resource14=IDD_SOURCES_DIALOG (English (U.S.))
 Class19=CWaitDialog
-Resource15=IDD_SIMPLE_FILTER_DIALOG (English (U.S.))
+Resource15=IDD_ATTRIBUTE_LINK_TABLE_DIALOG (English (U.S.))
 Class20=CWaitAnimation
 Class21=CWordEventHandler
-Resource16=IDD_DIALOG_PARAGRAPH (English (U.S.))
+Resource16=IDD_DIALOG_CHAPTER (English (U.S.))
 Class22=COptionsDialog
 Class23=CElementReportDialog
+Class24=CEToolBar
 Resource17=IDR_MAINFRAME (English (U.S.))
 
 [CLS:CReportAsistentApp]
@@ -85,7 +86,7 @@ Type=0
 HeaderFile=MainFrm.h
 ImplementationFile=MainFrm.cpp
 Filter=T
-LastObject=CMainFrame
+LastObject=ID_VIEW_ACTIVEELEMENTTOOLBAR
 BaseClass=CFrameWnd
 VirtualFilter=fWC
 
@@ -175,10 +176,12 @@ Command12=ID_EDIT_PASTE
 Command13=ID_MMDELETE
 Command14=ID_MMNEWSTATICFIRST
 Command15=ID_VIEW_TOOLBAR
-Command16=ID_VIEW_STATUS_BAR
-Command17=ID_MMSOURCES
-Command18=ID_APP_ABOUT
-CommandCount=18
+Command16=ID_VIEW_STATICELEMENTSTOOLBAR
+Command17=ID_VIEW_ACTIVEELEMENTTOOLBAR
+Command18=ID_VIEW_STATUS_BAR
+Command19=ID_MMSOURCES
+Command20=ID_APP_ABOUT
+CommandCount=20
 
 [ACL:IDR_MAINFRAME (English (U.S.))]
 Type=1
@@ -1903,4 +1906,13 @@ BaseClass=CDialog
 Filter=D
 LastObject=CElementReportDialog
 VirtualFilter=dWC
+
+[CLS:CEToolBar]
+Type=0
+HeaderFile=EToolBar.h
+ImplementationFile=EToolBar.cpp
+BaseClass=CToolBarCtrl
+Filter=W
+VirtualFilter=YWC
+LastObject=CEToolBar
 

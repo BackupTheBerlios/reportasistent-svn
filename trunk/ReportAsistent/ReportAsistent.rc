@@ -480,7 +480,6 @@ IDB_PARAGRAPHICO        BITMAP  DISCARDABLE     "res\\Paragraph.bmp"
 IDB_REPORTICO           BITMAP  DISCARDABLE     "res\\Report.bmp"
 IDB_TEXTICO             BITMAP  DISCARDABLE     "res\\Text.bmp"
 IDB_UNKNOWNICO          BITMAP  DISCARDABLE     "res\\unknowni.bmp"
-//IDB_4FTHYPOTEZAICO      BITMAP  DISCARDABLE     "res\\4ftHypoteza.bmp"
 IDB_TRANSFORMATIONS_LOGO BITMAP  DISCARDABLE     "res\\transformations_logo.bmp"
 IDB_INCLUDEICO          BITMAP  DISCARDABLE     "res\\include.bmp"
 IDB_ATTRLINKTABLEICO    BITMAP  DISCARDABLE     "res\\attrLinkTable.bmp"
@@ -522,7 +521,7 @@ BEGIN
         MENUITEM SEPARATOR
         MENUITEM "Recent File",                 ID_FILE_MRU_FILE1, GRAYED
         MENUITEM SEPARATOR
-        MENUITEM "&Generate report...\tCtrl+G", ID_MMGENREP
+        MENUITEM "&Generate Report...\tCtrl+G", ID_MMGENREP
         MENUITEM SEPARATOR
         MENUITEM "O&ptions...\tCtrl+P",         ID_FILE_OPTIONS
         MENUITEM SEPARATOR
@@ -544,8 +543,11 @@ BEGIN
     END
     POPUP "&View"
     BEGIN
-        MENUITEM "&Toolbar",                    ID_VIEW_TOOLBAR
-        MENUITEM "&Status Bar",                 ID_VIEW_STATUS_BAR
+        MENUITEM "Standard &Toolbar",           ID_VIEW_TOOLBAR
+        MENUITEM "&Static Elements Toolbar",    ID_VIEW_STATICELEMENTSTOOLBAR
+
+        MENUITEM "&Active Elements Toolbar",    ID_VIEW_ACTIVEELEMENTTOOLBAR
+        MENUITEM "S&tatus Bar",                 ID_VIEW_STATUS_BAR
     END
     POPUP "Data Source"
     BEGIN
@@ -722,13 +724,29 @@ BEGIN
     ID_EDIT_SELECT_ALL      "Select the entire document\nSelect All"
     ID_EDIT_UNDO            "Undo the last action\nUndo"
     ID_EDIT_REDO            "Redo the previously undone action\nRedo"
-	ID_MMSOURCES			"Connect sources to the report\nConnect Sources"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_MMGENREP             "Generate report to Microsoft Word"
+    ID_MMSOURCES            "Connect sources to the report\nConnect Sources"
 END
 
 STRINGTABLE DISCARDABLE 
 BEGIN
     ID_VIEW_TOOLBAR         "Show or hide the toolbar\nToggle ToolBar"
     ID_VIEW_STATUS_BAR      "Show or hide the status bar\nToggle StatusBar"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_FILE_OPTIONS         "Show options dialog"
+    ID_VIEW_STATICELEMENTTOOLBAR 
+                            "Show or hide the toolbar of static elements\nToggle Static Elements ToolBar"
+    ID_VIEW_ACTIVEELEMENTTOOLBAR 
+                            "Show or hide the toolbar of active elements\nToggle Active Elements ToolBar"
+    ID_VIEW_STATICELEMENTSTOOLBAR 
+                            "Show or hide the toolbar of static elements\nToggle Static Elements ToolBar"
 END
 
 STRINGTABLE DISCARDABLE 
@@ -767,11 +785,6 @@ END
 
 STRINGTABLE DISCARDABLE 
 BEGIN
-    ID_MMGENREP             "Generate report to Microsoft Word"
-END
-
-STRINGTABLE DISCARDABLE 
-BEGIN
     IDS_AEL_TRANSFORTION_LOAD_FAILED 
                             "Active element ""%s"" failed to load transformation ""%s"" (file %s).\nParse error: %s"
     IDS_AEL_LOAD_FAILED     "Failed to load active element form directory %s\nfile: %s\nParse error: %s"
@@ -784,11 +797,6 @@ STRINGTABLE DISCARDABLE
 BEGIN
     IDS_CONFIRM_THRAD_KILL  "Warning: Killing of working thread in the middle of its work may cause unpredictable problems in running of the application. The application could even fall down and destroy some your data or Windows resources.\n\nReally kill the thrad?"
     IDS_CONFIRM_APP_RESUME  "Warninig: Resuming the application will let the working thread still working in background. But the result of its work will be discarted. The application will run slower for a while, but you can save your work and exit it.\n\nReally resume the application?"
-END
-
-STRINGTABLE DISCARDABLE 
-BEGIN
-    ID_FILE_OPTIONS         "Show options dilaog"
 END
 
 #endif    // English (U.S.) resources

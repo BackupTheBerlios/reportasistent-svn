@@ -92,7 +92,7 @@ void CSkeletonView::OnInitialUpdate()
 
 	pImageList = new CImageList();
 	pImageList->Create(16, 16,  //rozmery obrazku k nacteni do ImageListu
-						ILC_MASK, 
+						ILC_MASK|ILC_COLOR8,  
 						NUM_PICTURES_TREECTRL, //pocatecni pocet obrazku v ImageListu..viz Stdafx.h
 						10);//o kolik obrazku se ImageList muze zvetsit.. ??
 

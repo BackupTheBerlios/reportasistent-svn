@@ -94,6 +94,10 @@
 #define ID_MMDELETE                     32782
 #define ID_FILE_OPTIONS                 32787
 #define ID_OPEN_WORD_EDITOR             32788
+#define ID_VIEW_STATICELEMENTTOOLBAR    32789
+#define ID_VIEW_ACTIVEELEMENTTOOLBAR    32790
+#define ID_BUTTON32791                  32791
+#define ID_VIEW_STATICELEMENTSTOOLBAR   32792
 #define ID_MMNEWSTATICFIRST             39001
 #define ID_MMNEWSTATICLAST              39009
 #define ID_MMNEWACTIVEFIRST             39010
@@ -121,7 +125,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
 #define _APS_NEXT_RESOURCE_VALUE        168
-#define _APS_NEXT_COMMAND_VALUE         32789
+#define _APS_NEXT_COMMAND_VALUE         32793
 #define _APS_NEXT_CONTROL_VALUE         1042
 #define _APS_NEXT_SYMED_VALUE           101
 #endif

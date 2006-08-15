@@ -148,6 +148,10 @@ SOURCE=.\ElementTextDialog.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\EToolBar.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\GenerateDialog.cpp
 # End Source File
 # Begin Source File
@@ -266,6 +270,10 @@ SOURCE=.\ElementReportDialog.h
 # Begin Source File
 
 SOURCE=.\ElementTextDialog.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\EToolBar.h
 # End Source File
 # Begin Source File
 
