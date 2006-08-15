@@ -3,6 +3,20 @@
 
   <visualization_options active_element="4ft hypothesis" visualization_label="Graph">
 
+    
+    <!--setting whether to show a table for First set-->
+    <enum_option variable_name="FirstSetShow" title="Show table of First set">
+       <enum_item value="true" label="yes"/>  
+       <enum_item value="false" label="no"/>  
+    </enum_option>
+
+    <!--setting whether to show a table for Second set-->
+    <enum_option variable_name="SecondSetShow" title="Show table of Second set">
+       <enum_item value="true" label="yes"/>  
+       <enum_item value="false" label="no"/>  
+    </enum_option>
+
+
     <!-- setting the graph title -->
     <string_option variable_name="GraphTitle" title="Graph title (editable)" />    
 
@@ -53,9 +67,11 @@
   <!--default values of variables-->
   
   <visualization_values>
+      <variable name="FirstSetShow" value="true" />
+      <variable name="SecondSetShow" value="true" />
       <variable name="GraphType" value="xl3DColumn" />
       <variable name="ValuesType" value="abs" />
-      <variable name="GraphTitle" value="4ft Graph" />
+      <variable name="GraphTitle" value="SD-4ft Graph" />
       <variable name="LegendShow" value="false"/>
       <variable name="GraphWidth" value="75e-2"/>
       <variable name="GraphHeight" value="75e-2"/>
