@@ -44,7 +44,8 @@ void CEToolBar::OnMouseMove(UINT nFlags, CPoint point)
 	int iBut  = TBCtrl.HitTest(&point);	
 	TBCtrl.GetButton(iBut,&tbBut);
 	int elID = tbBut.dwData; // ve fci CMainFrm.CreateS(A)EToolBar() do teto polozky vkladam Id typu prvku, ktery toto tlacitko vytvari
-
+	CString statusMsg = "Create new ";
+	statusMsg += OElementManager.getElementLabel(elID);
 	if ( 0<=iBut) //Mys je nad nejakym tlacitkem
 	{
 
@@ -52,7 +53,7 @@ void CEToolBar::OnMouseMove(UINT nFlags, CPoint point)
 
 		StatBar = (CStatusBar*)(mWnd->GetMessageBar());
 		if (StatBar)
-			StatBar->SetPaneText(0,OElementManager.getElementName(elID),TRUE);
+			StatBar->SetPaneText(0,(LPCTSTR) statusMsg,TRUE);
 
 	}
 	

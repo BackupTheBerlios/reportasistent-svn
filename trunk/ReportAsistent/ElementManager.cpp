@@ -46,6 +46,18 @@ LPCTSTR CElementManager::static_elements_names[] =
 	"attr_link_table"
 };
 
+LPCTSTR CElementManager::static_elements_long_names[] = 
+{
+	"unknown", //v menu->pridej novy prvek: NENI
+	"Report", //v menu->pridej novy prvek: NENI
+	//STATICKE
+	"Text",
+	"Paragraph",
+	"Chapter", 
+	"Include",
+	"Attribute Link",
+	"Attribute Link Table"
+};
 CElementManager::elId_t CElementManager::FirstStaticElementID = 2;
 
 CElementManager::elId_t CElementManager::FirstActiveElementID = 5;
@@ -73,7 +85,7 @@ LPCTSTR CElementManager::getElementLabel(elId_t elementID)
 {
 	if (elementID > getLastElementId()) elementID = ELID_UNKNOWN;
 
-	if (! isElementActive(elementID)) return static_elements_names[elementID];
+	if (! isElementActive(elementID)) return static_elements_long_names[elementID];
 
 	return getActiveElementInfo(elementID)->getElementLabel();
 }

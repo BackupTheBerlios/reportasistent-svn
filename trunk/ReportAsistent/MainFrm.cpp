@@ -247,7 +247,7 @@ BOOL CMainFrame::CreateAEToolBar()
 
 	for (I=0;I<nBut;I++) // propojeni textu do tooltipu a tooltipu k tlacitkum
 	{
-		cstrToolTip = OElementManager.getElementName(I+OElementManager.getFirstActiveElementID());
+		cstrToolTip = OElementManager.getElementLabel(I+OElementManager.getFirstActiveElementID());
 		m_wndAEToolBar.GetItemRect( I, &rect );
 		m_AEToolTips.AddTool(&m_wndAEToolBar, (LPCTSTR)cstrToolTip, &rect, I+1/*zvlastnost teto funkce - indexovani od 1*/);
 	}
@@ -328,7 +328,7 @@ BOOL CMainFrame::CreateSEToolBar()
 	
 	for (I=0;I<nBut;I++)// propojeni textu do tooltipu a tooltipu k tlacitkum
 	{
-		cstrToolTip = OElementManager.getElementName(I+OElementManager.ElementIdFromName("text"));
+		cstrToolTip = OElementManager.getElementLabel(I+OElementManager.ElementIdFromName("text"));
 		m_wndSEToolBar.GetItemRect( I, &rect );
 		//prirazeni jiz propojeneho tooltipu k toolbaru (propojenych tooltipu k memu toolbaru muze byt vic, timto urcim, ktery chci nyni pouzivat
 		m_SEToolTips.AddTool(&m_wndSEToolBar, (LPCTSTR)cstrToolTip, &rect, I+1/*zvlastnost teto funkce - indexovani od 1*/);

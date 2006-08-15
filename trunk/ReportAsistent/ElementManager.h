@@ -47,6 +47,7 @@ private:
 	//seznam typu prvku dostupnych v aplikaci :statickych(= v XML stromu jmeno tagu) i aktivnich(= v XML stromu hodnota atributu "type" prislusneho tagu).
 	static UINT static_elements_bitmap_id[];
 	static LPCTSTR static_elements_names[]; 
+	static LPCTSTR static_elements_long_names [];
 	CArray<CAElInfo *,CAElInfo *> active_elements;
 
 	CStringTableImpl attr_link_table_styles;
@@ -91,6 +92,7 @@ public:
 	~CElementManager();
 
 protected:
+	
 	void LoadAttrLinkTableStyles(LPCTSTR directory_path);
 	void LoadActiveElements(LPCTSTR elements_directory_path);
 };
