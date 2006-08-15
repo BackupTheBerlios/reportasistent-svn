@@ -18,13 +18,18 @@ static char THIS_FILE[] = __FILE__;
 
 
 #define PROPERTY_CONTROLS_ID_JUMP 300
+#define IDs_per_PROPERTY 3
 
-#define PROPINDEX_2_COMBOCTRL(index) (IDC_STATIC1 +PROPERTY_CONTROLS_ID_JUMP +index*2)
-#define COMBOCTRL_2_PROPINDEX(ctrl) ((ctrl - PROPERTY_CONTROLS_ID_JUMP - IDC_STATIC1)/2)
+#define PROPINDEX_2_COMBOCTRL(index) (IDC_STATIC1 +PROPERTY_CONTROLS_ID_JUMP +index*IDs_per_PROPERTY)
+#define COMBOCTRL_2_PROPINDEX(ctrl) ((ctrl - PROPERTY_CONTROLS_ID_JUMP - IDC_STATIC1)/IDs_per_PROPERTY)
+#define IS_COMBO_CONTROL(ctrl) (((ctrl - PROPERTY_CONTROLS_ID_JUMP - IDC_STATIC1) % IDs_per_PROPERTY) == 0)
 
-#define PROPINDEX_2_LABELCTRL(index) (IDC_STATIC1 +PROPERTY_CONTROLS_ID_JUMP +index*2 +1)
-#define LABELCTRL_2_PROPINDEX(ctrl) ((ctrl - PROPERTY_CONTROLS_ID_JUMP - IDC_STATIC1 -1)/2)
+#define PROPINDEX_2_LABELCTRL(index) (IDC_STATIC1 +PROPERTY_CONTROLS_ID_JUMP +index*IDs_per_PROPERTY +1)
+#define LABELCTRL_2_PROPINDEX(ctrl) ((ctrl - PROPERTY_CONTROLS_ID_JUMP - IDC_STATIC1 -1)/IDs_per_PROPERTY)
 
+#define PROPINDEX_2_CUSTOMCTRL(index) (IDC_STATIC1 +PROPERTY_CONTROLS_ID_JUMP +index*IDs_per_PROPERTY +2)
+#define CUSTOMCTRL_2_PROPINDEX(ctrl) ((ctrl - PROPERTY_CONTROLS_ID_JUMP - IDC_STATIC1 -2)/IDs_per_PROPERTY)
+#define IS_CUSTOM_CONTROL(ctrl) (((ctrl - PROPERTY_CONTROLS_ID_JUMP - IDC_STATIC1) % IDs_per_PROPERTY) == 2)
 
 /////////////////////////////////////////////////////////////////////////////
 // CPropertyEditor dialog
@@ -45,6 +50,7 @@ CPropertyEditor::~CPropertyEditor()
 		delete m_properties[a].prop;
 		if (m_properties[a].label != NULL) delete m_properties[a].label;
 		if (m_properties[a].combo != NULL) delete m_properties[a].combo;
+		if (m_properties[a].custom != NULL) delete m_properties[a].custom;
 	}
 }
 
@@ -110,6 +116,17 @@ HBRUSH CPropertyEditor::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 void CPropertyEditor::OnVScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar) 
 {
 	// TODO: Add your message handler code here and/or call default
+
+	if (IS_CUSTOM_CONTROL(pScrollBar->GetDlgCtrlID()))
+	{
+		int index = COMBOCTRL_2_PROPINDEX(pScrollBar->GetDlgCtrlID());
+		if ((index >= 0) && (index < GetPropertiesCount()))
+		{
+			OnCmdMsg(pScrollBar->GetDlgCtrlID(), nSBCode, pScrollBar, (AFX_CMDHANDLERINFO*) nPos);
+		}
+}
+
+	if (pScrollBar != & m_scrollbar) return ;
 	
 	int new_pos = pScrollBar->GetScrollPos();
 
@@ -229,17 +246,30 @@ void CPropertyEditor::ShowVisibleProperties(void)
 		{
 			m_properties[a].combo->ShowWindow(SW_HIDE);
 			m_properties[a].label->ShowWindow(SW_HIDE);
+			if (m_properties[a].custom != NULL) m_properties[a].custom->ShowWindow(SW_HIDE);
 		}
 		else
 		{
-			CRect cr, lr;
-			CountPropertyRects(lr, cr, a);
+			CRect cr, lr, custr;
+			CountPropertyRects(lr, cr, custr, a);
 
 			m_properties[a].label->MoveWindow(lr);
-			m_properties[a].combo->SetWindowPos(NULL, cr.left, cr.top, cr.Width(), cr.Height(), SWP_NOSIZE | SWP_NOZORDER | SWP_NOACTIVATE);
-
+			m_properties[a].combo->SetWindowPos(
+				NULL, cr.left, cr.top, cr.Width(), cr.Height(),
+				SWP_NOSIZE | SWP_NOZORDER | SWP_NOACTIVATE);
+			
 			m_properties[a].combo->ShowWindow(SW_SHOW);
 			m_properties[a].label->ShowWindow(SW_SHOW);
+
+			if (m_properties[a].custom != NULL)
+			{
+				m_properties[a].custom->SetWindowPos(
+					NULL, custr.left, custr.top, custr.Width(), custr.Height(), 
+					SWP_NOSIZE | SWP_NOZORDER | SWP_NOACTIVATE);
+				
+				m_properties[a].custom->ShowWindow(SW_SHOW);
+			}
+
 		}
 	}
 
@@ -308,8 +338,8 @@ void CPropertyEditor::CreateProperty(int index)
 
 	int pos = index;
 
-	CRect cr, lr;
-	CountPropertyRects(lr, cr, index);
+	CRect cr, lr, custr;
+	CountPropertyRects(lr, cr, custr, index);
 
 	DWORD visible = 
 		(pos <= GetLastVisibleProperty()) && (pos >= GetFirstVisibleProperty()) ?
@@ -327,6 +357,7 @@ void CPropertyEditor::CreateProperty(int index)
 	p.combo->SetFont(m_ok_button.GetFont(), FALSE);
 
 	p.prop->InitCombo(p.combo);
+	p.custom = p.prop->CreateCustomControl(WS_CHILD|visible, PROPINDEX_2_CUSTOMCTRL(index), this, custr);
 	
 	//nastav default_value
 	int sel = p.combo->SelectString(-1, p.prop->GetValue()); //nejprve zkusime jestli hodnotya jiz v listu neni
@@ -362,11 +393,17 @@ void CPropertyEditor::CreateProperty(int index)
 		m_scrollbar.EnableScrollBar(ESB_ENABLE_BOTH);
 
 
+	//ShowVisibleProperties();
+	//ted nevolat - pada
 	return;
 }
 
-void CPropertyEditor::CountPropertyRects(CRect & label_rect, CRect & combo_rect, int property_index)
+void CPropertyEditor::CountPropertyRects(CRect & label_rect, CRect & combo_rect, CRect & custom_rect, int property_index)
 {
+	ASSERT(property_index >= 0);
+	ASSERT(property_index < GetPropertiesCount());
+
+	
 	CRect r, sr;
 	m_static_border.GetWindowRect(r);
 	m_scrollbar.GetWindowRect(sr);
@@ -386,47 +423,72 @@ void CPropertyEditor::CountPropertyRects(CRect & label_rect, CRect & combo_rect,
 
 	combo_rect.left = x;
 	combo_rect.top = y + capt_height;
-	combo_rect.right = x + w;
+	combo_rect.right = x + w - m_properties[property_index].prop->GetCustomControlWidth();
 	combo_rect.bottom = y + capt_height + COMBO_HEIGHT;
+
+	custom_rect.left = combo_rect.right;
+	custom_rect.top = y + capt_height;
+	custom_rect.right = x + w;
+	custom_rect.bottom = y + capt_height*2;
 }
 
 BOOL CPropertyEditor::OnCmdMsg(UINT nID, int nCode, void* pExtra, AFX_CMDHANDLERINFO* pHandlerInfo) 
 {
 	// TODO: Add your specialized code here and/or call the base class
 
-	int index = COMBOCTRL_2_PROPINDEX(nID);
-	CString s, err;
-
-	if ((index >= 0) && (index < GetPropertiesCount()))
+	if (IS_COMBO_CONTROL(nID))
 	{
-		switch (nCode)
+
+		int index = COMBOCTRL_2_PROPINDEX(nID);
+		CString s, err;
+
+		if ((index >= 0) && (index < GetPropertiesCount()))
 		{
-		case CBN_SELCHANGE:
-			m_properties[index].combo->GetLBText(m_properties[index].combo->GetCurSel(), s);
-			m_properties[index].combo->SetWindowText(s);
-			ValidateProp(index);
-			break;
-		case CBN_KILLFOCUS:
-			//do comboboxu zapise skutecnou hodnotu
-			GetValueOfProperty(index);
-			break;
-		case CBN_EDITCHANGE:
-			ValidateProp(index);
-			break;
-		case CBN_EDITUPDATE:
-			if (index < GetFirstVisibleProperty())
+			switch (nCode)
 			{
-				m_scrollbar.SetScrollPos(index);
-				ShowVisibleProperties();
+			case CBN_SELCHANGE:
+				m_properties[index].combo->GetLBText(m_properties[index].combo->GetCurSel(), s);
+				m_properties[index].combo->SetWindowText(s);
+				ValidateProp(index);
+				break;
+			case CBN_KILLFOCUS:
+				//do comboboxu zapise skutecnou hodnotu
+				GetValueOfProperty(index);
+				break;
+			case CBN_EDITCHANGE:
+				ValidateProp(index);
+				break;
+			case CBN_EDITUPDATE:
+				if (index < GetFirstVisibleProperty())
+				{
+					m_scrollbar.SetScrollPos(index);
+					ShowVisibleProperties();
+				}
+				else if (index > GetLastVisibleProperty())
+				{
+					m_scrollbar.SetScrollPos(index - GetMaxVisiblePropertiesCount() +1);
+					ShowVisibleProperties();
+				}
+				break;
 			}
-			else if (index > GetLastVisibleProperty())
-			{
-				m_scrollbar.SetScrollPos(index - GetMaxVisiblePropertiesCount() +1);
-				ShowVisibleProperties();
-			}
-			break;
 		}
 	}
+	else if (IS_CUSTOM_CONTROL(nID))
+	{
+		int index = COMBOCTRL_2_PROPINDEX(nID);
+		if ((index >= 0) && (index < GetPropertiesCount()))
+		{
+			if (m_properties[index].prop->OnCustomCommand(nID, nCode, pExtra, pHandlerInfo))
+			{
+				//prepsat hodnotu
+				m_properties[index].combo->SetWindowText(
+					m_properties[index].prop->GetValue());
+				ValidateProp(index);
+				//do comboboxu zapise skutecnou hodnotu
+			}
+		}
+	}
+
 	
 	return CDialog::OnCmdMsg(nID, nCode, pExtra, pHandlerInfo);
 }
@@ -441,6 +503,7 @@ int CPropertyEditor::AddProperty(CProperty * prop)
 
 	sp.combo = NULL;
 	sp.label = NULL;
+	sp.custom = NULL;
 	sp.prop = prop;
 
 	int index = (int) m_properties.Add(sp);

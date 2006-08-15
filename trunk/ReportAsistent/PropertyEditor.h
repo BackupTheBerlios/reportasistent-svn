@@ -21,6 +21,10 @@ public:
 	BOOL virtual ValidateValue(CString & value, CString & error_message) = 0;
 	DWORD virtual GetComboStyle() = 0;
 	void virtual InitCombo(CComboBox * combo) {};
+	int virtual GetCustomControlWidth() {return 0; };
+	virtual CWnd * CreateCustomControl(DWORD wstyle, UINT ctrlID, CWnd * pParentWnd, const CRect & custom_rect) {return NULL; };
+	virtual BOOL OnCustomCommand(UINT nID, int nCode, void* pExtra, AFX_CMDHANDLERINFO* pHandlerInfo) {return FALSE; };
+	//vraci TRUE pokud se ma prekreslit hodnota 
 
 	virtual ~CProperty() {};
 
@@ -43,7 +47,36 @@ public:
 	
 	void virtual SetValue(LPCTSTR value) {m_value = (long) (_variant_t) value; };
 	void SetIntValue(int value) {m_value = value; };
+
+	int virtual GetCustomControlWidth() {return GetSystemMetrics(SM_CYCAPTION); };
 	
+	virtual CWnd * CreateCustomControl(DWORD wstyle, UINT ctrlID, CWnd * pParentWnd, const CRect & custom_rect)
+	{
+		CSpinButtonCtrl * spin = new CSpinButtonCtrl();
+
+		spin->Create(wstyle, custom_rect, pParentWnd, ctrlID);
+		return spin;
+	};
+
+	virtual BOOL OnCustomCommand(UINT nID, int nCode, void* pExtra, AFX_CMDHANDLERINFO* pHandlerInfo)
+	{
+		if (nCode == SB_THUMBPOSITION)
+		{
+			int pos = (int) pHandlerInfo;
+			CSpinButtonCtrl * sb = (CSpinButtonCtrl *) pExtra;
+
+			if (pos == 0)
+				SetIntValue(GetIntValue() +1);
+			else if (pos == 1)
+				SetIntValue(GetIntValue() -1);
+
+			sb->SetPos(0);
+			return TRUE; 
+		}
+
+		return FALSE; 
+	};
+
 	BOOL virtual ValidateValue(CString & value, CString & error_message)
 	{
 		int try_convert=0;
@@ -223,7 +256,7 @@ protected:
 
 
 private:
-	struct SProperty {CStatic * label; CComboBox * combo; CProperty * prop; };
+	struct SProperty {CStatic * label; CComboBox * combo; CProperty * prop; CWnd * custom; };
 	CArray<SProperty, SProperty&> m_properties;
 	CList<int, int> m_err_props;
 	CString m_caption;
@@ -235,7 +268,7 @@ protected:
 	int GetLastVisibleProperty(void);
 	void CreateProperty(int index);
 	void ShowVisibleProperties(void);
-	void CountPropertyRects(CRect & label_rect, CRect & combo_rect, int property_index);
+	void CountPropertyRects(CRect & label_rect, CRect & combo_rect, CRect & custom_rect, int property_index);
 	BOOL ValidateProp(int index);
 
 
