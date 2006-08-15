@@ -240,6 +240,8 @@ public:
 
 	BOOL virtual ValidateValue(CString & value, CString & error_message)
 	{
+		if (value == "") return TRUE;
+		
 		LPCTSTR color_str = value;
 		if (* color_str != '#')
 		{
