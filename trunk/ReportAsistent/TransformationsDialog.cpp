@@ -118,7 +118,7 @@ BOOL CTransformationsDialog::SaveAll()
 	ASSERT(m_active_element != NULL);
 	ASSERT(m_cloned_output_element != NULL);
 
-	AfxMessageBox(m_cloned_output_element->xml);
+//	AfxMessageBox(m_cloned_output_element->xml);
 	
 	m_active_element->replaceChild(
 		m_cloned_output_element,
@@ -538,6 +538,14 @@ void CTransformationsDialog::AddOptionToPropetryEditor(
       //string
       
       property_editor.AddProperty(new CStringProperty(
+        (_bstr_t) option_element->getAttribute("title"),  //label
+        value));  //default value
+    }
+    else if (option_type == "color_option")
+    {
+      //color
+      
+      property_editor.AddProperty(new CColorProperty(
         (_bstr_t) option_element->getAttribute("title"),  //label
         value));  //default value
     }

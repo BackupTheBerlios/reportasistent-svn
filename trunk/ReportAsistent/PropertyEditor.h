@@ -196,6 +196,76 @@ public:
 	DWORD virtual GetComboStyle() {return CBS_DROPDOWN; };
 };
 
+class CColorProperty: public CStringProperty
+{
+private:
+	static COLORREF switchRB(COLORREF c)
+	{
+		BYTE r = GetRValue(c);
+		BYTE g = GetGValue(c);
+		BYTE b = GetBValue(c);
+
+		return RGB(b,g,r);
+	}
+
+
+public:
+	CColorProperty(LPCTSTR label, LPCTSTR default_value): CStringProperty(label, default_value) {};
+
+	int virtual GetCustomControlWidth() {return 20; };
+
+	virtual BOOL OnCustomCommand(UINT nID, int nCode, void* pExtra, AFX_CMDHANDLERINFO* pHandlerInfo)
+	{
+		long c = strtol(GetValue()+1, NULL, 16);
+		CColorDialog dlg(switchRB(c), CC_FULLOPEN | CC_ANYCOLOR | CC_FULLOPEN | CC_SOLIDCOLOR);
+		if (dlg.DoModal() == IDOK)
+		{
+			CString val;
+			val.Format("#%06X", switchRB(dlg.GetColor()));
+			
+			SetValue(val);
+			return TRUE;
+		}
+		return FALSE;
+	};
+
+	virtual CWnd * CreateCustomControl(DWORD wstyle, UINT ctrlID, CWnd * pParentWnd, const CRect & custom_rect)
+	{
+		CButton * but = new CButton();
+		but->Create("...", BS_PUSHBUTTON | wstyle, custom_rect, pParentWnd, ctrlID);
+
+		return but;
+	};
+
+
+	BOOL virtual ValidateValue(CString & value, CString & error_message)
+	{
+		LPCTSTR color_str = value;
+		if (* color_str != '#')
+		{
+			error_message = "First character must be \"#\".";			
+			return FALSE;
+		}
+
+		if (value.GetLength() != 7)
+		{
+			error_message = "Color string should be 7 characters long.";			
+			return FALSE;
+		}
+
+		for (int a=1; a<7; a++)
+		{
+			int ch = toupper(color_str[a]);
+			if (! (isdigit(ch) || ((ch >= 'A') && (ch <= 'F'))))
+			{
+				error_message = "Wrong hexadecimal number format.";			
+				return FALSE;
+			}
+		}
+		return TRUE;
+	};
+};
+
 class CEnumProperty: public CStringProperty
 {
 private:
