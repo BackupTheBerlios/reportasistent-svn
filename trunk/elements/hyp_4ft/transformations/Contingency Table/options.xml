@@ -11,41 +11,41 @@
 
 
     <!--setting whether to color-highlight table fields-->
-    <enum_option variable_name="ColorHighlighting" title="Color-highlight table data fields">
+    <enum_option variable_name="ColorHighlighting" title="Red-highlight data fields">
        <enum_item value="true" label="yes"/>  
        <enum_item value="false" label="no"/>  
     </enum_option>
 
 
     <!--setting whether to color-highlight table border-->
-    <enum_option variable_name="BorderHighlight" title="Color-highlight table border fields">
+    <enum_option variable_name="BorderHighlight" title="Color-highlight border fields">
        <enum_item value="true" label="yes"/>  
        <enum_item value="false" label="no"/>  
     </enum_option>
 
 
     <!--setting of table border fields color-->
-    <color_option variable_name="BorderColor" title="Color of table border fields" />
+    <color_option variable_name="BorderColor" title="Color of border fields" />
        
 
 
     <!--absolute or relative values in contingency table-->
-    <enum_option variable_name="TypeOfValues" title="Type of values in contingency table">
+    <enum_option variable_name="TypeOfValues" title="Type of values">
        <enum_item  value="abs" label="Absolute"/>
        <enum_item  value="rel_sum" label="Relative (to sum)"/>
        <enum_item  value="rel_max" label="Relative (to max)"/>
-       <enum_item  value="rel_col" label="Relative (to column sum)"/>
-       <enum_item  value="rel_row" label="Relative (to row sum)"/>  
+       <enum_item  value="rel_col" label="Relative (to column)"/>
+       <enum_item  value="rel_row" label="Relative (to row)"/>  
     </enum_option>
 
 
     <!-- setting of antecedent and succedent labels (will be shown in graph description and legend) -->
-    <string_option variable_name="AntecedentLabel" title="Antecedent label (will be shown in graph description) - (editable)" />    
-    <string_option variable_name="SuccedentLabel" title="Succedent label (will be shown in graph description) - (editable)" /> 
+    <string_option variable_name="AntecedentLabel" title="Antecedent label (shown in table header) - (editable)" />    
+    <string_option variable_name="SuccedentLabel" title="Succedent label (shown in table header) - (editable)" /> 
 
 
     <!-- setting the table border width -->
-    <enum_option variable_name="BorderOutWidth" title="Table border field - outer line width">
+    <enum_option variable_name="BorderOutWidth" title="Border field - outer line width">
        <enum_item  value="0" label="no boarder"/>
        <enum_item  value="25e-2" label="0.25 point"/>
        <enum_item  value="5e-1" label="0.50 point"/>
@@ -59,7 +59,7 @@
     </enum_option>
 
     <!-- setting the table border width -->
-    <enum_option variable_name="BorderFrmWidth" title="Table border field - inner line width">
+    <enum_option variable_name="BorderFrmWidth" title="Border field - inner line width">
        <enum_item  value="0" label="no boarder"/>
        <enum_item  value="25e-2" label="0.25 point"/>
        <enum_item  value="5e-1" label="0.50 point"/>
@@ -73,7 +73,7 @@
     </enum_option>
 
     <!-- setting the table border width -->
-    <enum_option variable_name="BorderInWidth" title="Table data field - inner line width">
+    <enum_option variable_name="BorderInWidth" title="Data field - inner line width">
        <enum_item  value="0" label="no boarder"/>
        <enum_item  value="25e-2" label="0.25 point"/>
        <enum_item  value="5e-1" label="0.50 point"/>
@@ -89,13 +89,13 @@
 
 
     <!--setting whether to show a table legend-->
-    <enum_option variable_name="ShowLegend" title="Show table legend">
+    <enum_option variable_name="ShowLegend" title="Show table description">
 	<enum_item value="true" label="yes"/>
 	<enum_item value="false" label="no"/>
     </enum_option>
 
     <!-- setting the table legend -->
-    <string_option variable_name="TabLegend" title="Table legend - (editable)" />    
+    <string_option variable_name="TabLegend" title="Table description - (editable)" />    
 
 
   </visualization_options>
@@ -107,12 +107,12 @@
   <visualization_values>
       <variable name="SumShow" value="false" />
       <variable name="ShowLegend" value="true"/>
-      <variable name="TabLegend" value="Tab:"/>
+      <variable name="TabLegend" value="Tab. "/>
       <variable name="ColorHighlighting" value="false"/>
       <variable name="BorderHighlight" value="true"/>
       <variable name="BorderColor" value="#eeeeee"/>
       <variable name="TypeOfValues" value="abs"/>
-      <variable name="BorderOutWidth" value="225e-2"/>
+      <variable name="BorderOutWidth" value="15e-1"/>
       <variable name="BorderFrmWidth" value="1"/>
       <variable name="BorderInWidth" value="0"/>
       <variable name="AntecedentLabel" value="antecedent"/>
