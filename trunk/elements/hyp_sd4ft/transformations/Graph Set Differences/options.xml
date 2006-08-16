@@ -1,20 +1,26 @@
 <?xml version="1.0" encoding="windows-1250"?>
 <visualization>
 
-  <visualization_options active_element="SD-4ft hypothesis" visualization_label="Graph of first set">
+  <visualization_options active_element="4ft hypothesis" visualization_label="Graph">
 
+    
     <!-- setting the graph title -->
-    <string_option variable_name="GraphTitle" title="Graph title" />    
-
+    <string_option variable_name="GraphTitle" title="Graph title - (editable)" />    
 
     <!--setting of graph type-->
     <enum_option variable_name="GraphType" title="Graph type">  
-       <enum_item  value="xlColumnClustered" label="Column - Clustered"/>
-       <enum_item  value="xlColumnStacked" label="Column - Stacked (absolute values)"/>
-       <enum_item  value="xlColumnStacked100" label="Column - Stacked (percentual values)"/>
+       <enum_item  value="xl3DColumn" label="3D Column"/>
        <enum_item  value="xl3DColumnClustered" label="3D Column - Clustered"/>
-       <enum_item  value="xl3DColumnStacked" label="3D Column - Stacked (absolute values)"/>
-       <enum_item  value="xl3DColumnStacked100" label="3D Column - Stacked (percentual values)"/>
+       <enum_item  value="xl3DColumnStacked" label="3D Column - Stacked"/>
+       <enum_item  value="xlColumnClustered" label="Column - Clustered"/>
+       <enum_item  value="xlColumnStacked" label="Column - Stacked"/>
+    </enum_option>
+
+    <!--setting of values type-->
+    <enum_option variable_name="ValuesType" title="Type of values">  
+       <enum_item  value="abs" label="Absolute"/>
+       <enum_item  value="rel_sum" label="Relative (to sum)"/>
+       <enum_item  value="rel_max" label="Relative (to max)"/>
     </enum_option>
 
     <!--setting whether to show a graph legend-->
@@ -23,11 +29,20 @@
        <enum_item value="false" label="no"/>  
     </enum_option>
 
+
+    <!-- setting of antecedent and succedent labels (will be shown in graph description and legend) -->
+    <string_option variable_name="AntecedentLabel" title="Antecedent label (shown in graph description) - (editable)" />    
+    <string_option variable_name="SuccedentLabel" title="Succedent label (shown in graph description) - (editable)" />    
+
+    <!--setting of chart colors-->
+    <color_option variable_name="Chart1Color" title="Chart 1 color - (#RRGGBB)" />  
+    <color_option variable_name="Chart2Color" title="Chart 2 color - (#RRGGBB)" />  
+
     <!-- setting of graph width (compared to page width)-->
-    <number_option variable_name="GraphWidth" title="Graph width (compared to page wigth)" num_type="float" dec="2" min_value="0" max_value="1"/>
+    <number_option variable_name="GraphWidth" title="Graph width (to page wigth) - (editable)" num_type="float" dec="2" min_value="0" max_value="1"/>
 
     <!-- setting of graph height (compared to page width)-->
-    <number_option variable_name="GraphHeight" title="Graph height (compared to page wigth)" num_type="float" dec="2" min_value="0" max_value="5"/>
+    <number_option variable_name="GraphHeight" title="Graph height (to page wigth) - (editable)" num_type="float" dec="2" min_value="0" max_value="5"/>
     
     
   </visualization_options>
@@ -37,11 +52,16 @@
   <!--default values of variables-->
   
   <visualization_values>
-      <variable name="GraphTitle" value="SD-4ft Graph - set differences" />
-      <variable name="GraphType" value="xl3DColumnClustered" />
+      <variable name="GraphType" value="xlColumnClustered" />
+      <variable name="ValuesType" value="abs" />
+      <variable name="GraphTitle" value="SD-4ft Graph" />
       <variable name="LegendShow" value="true"/>
-      <variable name="GraphWidth" value="0,75"/>
-      <variable name="GraphHeight" value="0,75"/>
+      <variable name="GraphWidth" value="1"/>
+      <variable name="GraphHeight" value="75e-2"/>
+      <variable name="Chart1Color" value=""/>
+      <variable name="Chart2Color" value=""/>
+      <variable name="AntecedentLabel" value="antecedent"/>
+      <variable name="SuccedentLabel" value="succedent"/>
   </visualization_values>
 
 </visualization>

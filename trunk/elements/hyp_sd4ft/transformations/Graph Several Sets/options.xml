@@ -5,20 +5,20 @@
 
     
     <!--setting whether to show a table for First set-->
-    <enum_option variable_name="FirstSetShow" title="Show table of First set">
+    <enum_option variable_name="FirstSetShow" title="First set show">
        <enum_item value="true" label="yes"/>  
        <enum_item value="false" label="no"/>  
     </enum_option>
 
     <!--setting whether to show a table for Second set-->
-    <enum_option variable_name="SecondSetShow" title="Show table of Second set">
+    <enum_option variable_name="SecondSetShow" title="Second set show">
        <enum_item value="true" label="yes"/>  
        <enum_item value="false" label="no"/>  
     </enum_option>
 
 
     <!-- setting the graph title -->
-    <string_option variable_name="GraphTitle" title="Graph title (editable)" />    
+    <string_option variable_name="GraphTitle" title="Graph title - (editable)" />    
 
     <!--setting of graph type-->
     <enum_option variable_name="GraphType" title="Graph type">  
@@ -30,7 +30,7 @@
     </enum_option>
 
     <!--setting of values type-->
-    <enum_option variable_name="ValuesType" title="Values type">  
+    <enum_option variable_name="ValuesType" title="Type of values">  
        <enum_item  value="abs" label="Absolute"/>
        <enum_item  value="rel_sum" label="Relative (to sum)"/>
        <enum_item  value="rel_max" label="Relative (to max)"/>
@@ -46,8 +46,8 @@
 
 
     <!-- setting of antecedent and succedent labels (will be shown in graph description and legend) -->
-    <string_option variable_name="AntecedentLabel" title="Antecedent label (will be shown in graph description) - (editable)" />    
-    <string_option variable_name="SuccedentLabel" title="Succedent label (will be shown in graph description) - (editable)" />    
+    <string_option variable_name="AntecedentLabel" title="Antecedent label (shown in graph description) - (editable)" />    
+    <string_option variable_name="SuccedentLabel" title="Succedent label (shown in graph description) - (editable)" />    
 
     <!--setting of chart colors-->
     <color_option variable_name="Chart1Color" title="Chart 1 color - (#RRGGBB)" />  
