@@ -3,46 +3,99 @@
 
   <visualization_options active_element="CF hypothesis" visualization_label="Contingency Table">
 
-    <!--setting whether to show a sum values (nine-fold table)-->
-    <enum_option variable_name="SumShow" title="Show sum values">
+    <!--setting whether to show a sum values-->
+    <enum_option variable_name="SumShow" title="Show sum of values (for absolute values only)">
        <enum_item value="true" label="yes"/>  
        <enum_item value="false" label="no"/>  
     </enum_option>
 
 
-    <!--setting whether to colour-highlight table fields-->
-    <enum_option variable_name="ColourHighlighting" title="Colour-highlight table fields">
-       <enum_item value="true" label="yes"/>  
-       <enum_item value="false" label="no"/>  
-    </enum_option>
-
-
-    <!--setting whether to grey-colour table border-->
-    <enum_option variable_name="BorderGrey" title="Grey-colour table border">
-       <enum_item value="true" label="yes"/>  
-       <enum_item value="false" label="no"/>  
-    </enum_option>
-
-
-    <!--absolute or relative values in contingency table-->
-    <enum_option variable_name="TypeOfValues" title="Type of values in contingency table">
-       <enum_item value="Absolute" label="Absolute"/>  
-       <enum_item value="Relative" label="Relative (percentual)"/>  
-    </enum_option>
-
-	
-    <!--Position of contingency table-->
-    <enum_option variable_name="TablePosition" title="Contingency table position">
+    <!--setting of table position-->
+    <enum_option variable_name="TablePosition" title="Table position">
        <enum_item value="Horisontal" label="Horisontal"/>  
        <enum_item value="Vertical" label="Vertical"/>  
     </enum_option>
 
-    <!--setting whether to show a table legend-->
-    <enum_option variable_name="ShowLegend" title="Show table legend">
+    <!--setting whether to color-highlight table fields-->
+    <enum_option variable_name="ColorHighlighting" title="Red-highlight data fields">
        <enum_item value="true" label="yes"/>  
        <enum_item value="false" label="no"/>  
     </enum_option>
-    
+
+
+    <!--setting whether to color-highlight table border-->
+    <enum_option variable_name="BorderHighlight" title="Color-highlight border fields">
+       <enum_item value="true" label="yes"/>  
+       <enum_item value="false" label="no"/>  
+    </enum_option>
+
+
+    <!--setting of table border fields color-->
+    <color_option variable_name="BorderColor" title="Color of border fields" />
+       
+
+
+    <!--absolute or relative values in contingency table-->
+    <enum_option variable_name="TypeOfValues" title="Type of values">
+       <enum_item  value="abs" label="Absolute"/>
+       <enum_item  value="rel_sum" label="Relative (to sum)"/>
+       <enum_item  value="rel_max" label="Relative (to max)"/>
+    </enum_option>
+
+    <!-- setting the table border width -->
+    <enum_option variable_name="BorderOutWidth" title="Border field - outer line width">
+       <enum_item  value="0" label="no boarder"/>
+       <enum_item  value="25e-2" label="0.25 point"/>
+       <enum_item  value="5e-1" label="0.50 point"/>
+       <enum_item  value="75e-2" label="0.75 point"/>
+       <enum_item  value="1" label="1.00 point"/>
+       <enum_item  value="15e-1" label="1.50 points"/>  
+       <enum_item  value="225e-2" label="2.25 points"/>  
+       <enum_item  value="3" label="3.00 points"/>  
+       <enum_item  value="45e-1" label="4.50 points"/>  
+       <enum_item  value="6" label="6.00 points"/>  
+    </enum_option>
+
+    <!-- setting the table border width -->
+    <enum_option variable_name="BorderFrmWidth" title="Border field - inner line width">
+       <enum_item  value="0" label="no boarder"/>
+       <enum_item  value="25e-2" label="0.25 point"/>
+       <enum_item  value="5e-1" label="0.50 point"/>
+       <enum_item  value="75e-2" label="0.75 point"/>
+       <enum_item  value="1" label="1.00 point"/>
+       <enum_item  value="15e-1" label="1.50 points"/>  
+       <enum_item  value="225e-2" label="2.25 points"/>  
+       <enum_item  value="3" label="3.00 points"/>  
+       <enum_item  value="45e-1" label="4.50 points"/>  
+       <enum_item  value="6" label="6.00 points"/>  
+    </enum_option>
+
+    <!-- setting the table border width -->
+    <enum_option variable_name="BorderInWidth" title="Data field - inner line width">
+       <enum_item  value="0" label="no boarder"/>
+       <enum_item  value="25e-2" label="0.25 point"/>
+       <enum_item  value="5e-1" label="0.50 point"/>
+       <enum_item  value="75e-2" label="0.75 point"/>
+       <enum_item  value="1" label="1.00 point"/>
+       <enum_item  value="15e-1" label="1.50 points"/>  
+       <enum_item  value="225e-2" label="2.25 points"/>  
+       <enum_item  value="3" label="3.00 points"/>  
+       <enum_item  value="45e-1" label="4.50 points"/>  
+       <enum_item  value="6" label="6.00 points"/>  
+    </enum_option>
+
+
+
+    <!--setting whether to show a table legend-->
+    <enum_option variable_name="ShowLegend" title="Show table description">
+	<enum_item value="true" label="yes"/>
+	<enum_item value="false" label="no"/>
+    </enum_option>
+
+    <!-- setting the table legend -->
+    <string_option variable_name="TabLegend" title="Table description - (editable)" />    
+
+
   </visualization_options>
 
   
@@ -51,10 +104,15 @@
   
   <visualization_values>
       <variable name="SumShow" value="false" />
-      <variable name="ShowLegend" value="true" />
-      <variable name="ColourHighlighting" value="false"/>
-      <variable name="BorderGrey" value="true"/>
-      <variable name="TypeOfValues" value="Absolute"/>
+      <variable name="ShowLegend" value="true"/>
+      <variable name="TabLegend" value="Tab. "/>
+      <variable name="ColorHighlighting" value="false"/>
+      <variable name="BorderHighlight" value="true"/>
+      <variable name="BorderColor" value="#eeeeee"/>
+      <variable name="TypeOfValues" value="abs"/>
+      <variable name="BorderOutWidth" value="15e-1"/>
+      <variable name="BorderFrmWidth" value="1"/>
+      <variable name="BorderInWidth" value="0"/>
       <variable name="TablePosition" value="Vertical"/>
 
   </visualization_values>
