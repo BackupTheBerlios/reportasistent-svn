@@ -46,7 +46,7 @@
 
       <variable name="GraphType" value="xl3DColumn" />
       <variable name="ValuesType" value="abs" />
-      <variable name="GraphTitle" value="4ft Graph" />
+      <variable name="GraphTitle" value="KL Graph" />
       <variable name="LegendShow" value="true"/>
       <variable name="GraphWidth" value="75e-2"/>
       <variable name="GraphHeight" value="75e-2"/>

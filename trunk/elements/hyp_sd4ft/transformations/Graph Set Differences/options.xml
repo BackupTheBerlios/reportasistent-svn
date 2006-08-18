@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="windows-1250"?>
 <visualization>
 
-  <visualization_options active_element="SD-CF hypothesis" visualization_label="Graph - Set Differences">
+  <visualization_options active_element="SD-4ft hypothesis" visualization_label="Graph Set Differences">
 
     <!-- setting the graph title -->
     <string_option variable_name="GraphTitle" title="Graph title - (editable)" />    
 
     <!--setting of graph type-->
     <enum_option variable_name="GraphType" title="Graph type">  
-       <enum_item  value="xlColumnStacked" label="Column"/>
-       <enum_item  value="xl3DColumnStacked" label="3D Column"/>
-       <enum_item  value="xlPie" label="Pie"/>
-       <enum_item  value="xl3DPie" label="3D Pie"/>
-       <enum_item  value="xlBarClustered" label="Bar"/>
-       <enum_item  value="xlLine" label="Line"/>
+       <enum_item  value="xl3DColumn" label="3D Column"/>
+       <enum_item  value="xl3DColumnClustered" label="3D Column - Clustered"/>
+       <enum_item  value="xl3DColumnStacked" label="3D Column - Stacked"/>
+       <enum_item  value="xlColumnClustered" label="Column - Clustered"/>
+       <enum_item  value="xlColumnStacked" label="Column - Stacked"/>
     </enum_option>
 
     <!--setting of differences type-->
@@ -27,6 +26,8 @@
        <enum_item  value="abs" label="Absolute"/>
        <enum_item  value="rel_sum" label="Relative (to sum)"/>
        <enum_item  value="rel_max" label="Relative (to max)"/>
+       <enum_item  value="rel_col" label="Relative (to column)"/>
+       <enum_item  value="rel_row" label="Relative (to row)"/>
     </enum_option>
 
     <!--setting whether to show a graph legend-->
@@ -36,9 +37,13 @@
     </enum_option>
 
 
-    <!--setting of chart colors-->
-    <color_option variable_name="ChartColor" title="Chart color - (#RRGGBB)" />  
+    <!-- setting of antecedent and succedent labels (will be shown in graph description and legend) -->
+    <string_option variable_name="AntecedentLabel" title="Antecedent label (shown in graph description) - (editable)" />    
+    <string_option variable_name="SuccedentLabel" title="Succedent label (shown in graph description) - (editable)" />    
 
+    <!--setting of chart colors-->
+    <color_option variable_name="Chart1Color" title="Chart 1 color - (#RRGGBB)" />  
+    <color_option variable_name="Chart2Color" title="Chart 2 color - (#RRGGBB)" />  
 
     <!-- setting of graph width (compared to page width)-->
     <number_option variable_name="GraphWidth" title="Graph width (to page wigth) - (editable)" num_type="float" dec="2" min_value="0" max_value="1"/>
@@ -54,14 +59,17 @@
   <!--default values of variables-->
   
   <visualization_values>
-      <variable name="GraphType" value="xlColumnStacked" />
+      <variable name="GraphType" value="xl3DColumn" />
       <variable name="ValuesType" value="abs" />
       <variable name="DifType" value="dif_abs" />
-      <variable name="GraphTitle" value="SD-CF Graph" />
-      <variable name="LegendShow" value="true"/>
+      <variable name="GraphTitle" value="4ft Graph" />
+      <variable name="LegendShow" value="false"/>
       <variable name="GraphWidth" value="75e-2"/>
       <variable name="GraphHeight" value="75e-2"/>
-      <variable name="ChartColor" value=""/>
+      <variable name="Chart1Color" value=""/>
+      <variable name="Chart2Color" value=""/>
+      <variable name="AntecedentLabel" value="antecedent"/>
+      <variable name="SuccedentLabel" value="succedent"/>
   </visualization_values>
 
 </visualization>

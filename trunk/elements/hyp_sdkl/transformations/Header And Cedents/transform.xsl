@@ -18,6 +18,16 @@
 <xsl:variable name="ShowSecondSet">true</xsl:variable>         
 	
 	
+
+<!-- nastaveni jazykovych popisku (labelu) -->
+<xsl:variable name="label_empty">   <!-- label pokud je cedent bez omezeni-->
+	<xsl:choose>
+		<xsl:when test="$lng='cz'">bez omezení</xsl:when>
+		<xsl:when test="$lng='en'">no restriction</xsl:when>
+		<xsl:otherwise>no restriction</xsl:otherwise>
+	</xsl:choose>
+</xsl:variable>
+
 	
 
 
@@ -65,6 +75,9 @@
 		<text>
 			<xsl:value-of select="@type"/>:<br/>			
 			<xsl:apply-templates select="ti_literal"/>
+			<xsl:if test="count(ti_literal)=0">
+				<xsl:value-of select="$label_empty"/>
+			</xsl:if>
 			<br/>
 		</text>
 		
