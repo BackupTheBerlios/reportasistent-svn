@@ -258,7 +258,6 @@
 									
 									<xsl:variable name="hodnota">
 										<xsl:value-of select="dedek:normalize_value(number(@val), number($norm_factor))" />
-										<xsl:if test="$TypeOfValues!='abs'">%</xsl:if>
 									</xsl:variable>
 									
 									<text id="{$id_base}r1d{position()}text"><xsl:value-of select="$hodnota"/></text> 
@@ -340,7 +339,6 @@
 									
 									<xsl:variable name="hodnota">
 										<xsl:value-of select="dedek:normalize_value(number(@val), number($norm_factor))" />
-										<xsl:if test="$TypeOfValues!='abs'">%</xsl:if>
 									</xsl:variable>
 									
 									<text id="{$id_base}r{position()}d2text"><xsl:value-of select="$hodnota"/></text> 

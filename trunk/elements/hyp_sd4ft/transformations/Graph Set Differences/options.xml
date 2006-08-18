@@ -56,7 +56,7 @@
       <variable name="ValuesType" value="abs" />
       <variable name="GraphTitle" value="SD-4ft Graph" />
       <variable name="LegendShow" value="true"/>
-      <variable name="GraphWidth" value="1"/>
+      <variable name="GraphWidth" value="75e-2"/>
       <variable name="GraphHeight" value="75e-2"/>
       <variable name="Chart1Color" value=""/>
       <variable name="Chart2Color" value=""/>

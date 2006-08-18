@@ -4,14 +4,22 @@
   <visualization_options active_element="KL hypothesis" visualization_label="Graph">
 
     <!-- setting the graph title -->
-    <string_option variable_name="GraphTitle" title="Graph title" />    
+    <string_option variable_name="GraphTitle" title="Graph title - (editable)" />    
 
     <!--setting of graph type-->
     <enum_option variable_name="GraphType" title="Graph type">  
        <enum_item  value="xl3DColumn" label="3D Column"/>
        <enum_item  value="xl3DColumnClustered" label="3D Column - Clustered"/>
-       <enum_item  value="xl3DColumnStacked" label="3D Column - Stacked (absolute values)"/>
-       <enum_item  value="xl3DColumnStacked100" label="3D Column - Stacked (percentual values)"/>
+       <enum_item  value="xl3DColumnStacked" label="3D Column - Stacked"/>
+    </enum_option>
+
+    <!--setting of values type-->
+    <enum_option variable_name="ValuesType" title="Type of values">  
+       <enum_item  value="abs" label="Absolute"/>
+       <enum_item  value="rel_sum" label="Relative (to sum)"/>
+       <enum_item  value="rel_max" label="Relative (to max)"/>
+       <enum_item  value="rel_col" label="Relative (to column)"/>
+       <enum_item  value="rel_row" label="Relative (to row)"/>
     </enum_option>
 
     <!--setting whether to show a graph legend-->
@@ -21,10 +29,10 @@
     </enum_option>
 
     <!-- setting of graph width (compared to page width)-->
-    <number_option variable_name="GraphWidth" title="Graph width (compared to page wigth)" num_type="float" dec="2" min_value="0" max_value="1"/>
+    <number_option variable_name="GraphWidth" title="Graph width (to page wigth) - (editable)" num_type="float" dec="2" min_value="0" max_value="1"/>
 
     <!-- setting of graph height (compared to page width)-->
-    <number_option variable_name="GraphHeight" title="Graph height (compared to page wigth)" num_type="float" dec="2" min_value="0" max_value="5"/>
+    <number_option variable_name="GraphHeight" title="Graph height (to page wigth) - (editable)" num_type="float" dec="2" min_value="0" max_value="5"/>
     
     
   </visualization_options>
@@ -34,11 +42,15 @@
   <!--default values of variables-->
   
   <visualization_values>
+
+
       <variable name="GraphType" value="xl3DColumn" />
-      <variable name="GraphTitle" value="KL Graph" />
-      <variable name="LegendShow" value="false"/>
-      <variable name="GraphWidth" value="1"/>
-      <variable name="GraphHeight" value="0,75"/>
+      <variable name="ValuesType" value="abs" />
+      <variable name="GraphTitle" value="4ft Graph" />
+      <variable name="LegendShow" value="true"/>
+      <variable name="GraphWidth" value="75e-2"/>
+      <variable name="GraphHeight" value="75e-2"/>
+
   </visualization_values>
 
 </visualization>
