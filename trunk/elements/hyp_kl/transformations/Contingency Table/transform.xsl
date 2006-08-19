@@ -37,12 +37,16 @@
 	{
 		return cislo.toString(16);
 	}
-	
+
 	
 	function normalize_value(co, cim)
 	{
-		return Math.round(100*(co/cim));
+		var delitel = cim;
+		if (delitel == 0)
+			delitel = 1;
+		return Math.round(100*(co/delitel));
 	}
+
 
   </msxsl:script>
 

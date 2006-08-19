@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="windows-1250"?>
+<visualization>
+
+  <visualization_options active_element="SD-KL hypothesis" visualization_label="Graph">
+
+    <!--setting whether to show a table for First set-->
+    <enum_option variable_name="FirstSetShow" title="First set show">
+       <enum_item value="true" label="yes"/>  
+       <enum_item value="false" label="no"/>  
+    </enum_option>
+
+    <!--setting whether to show a table for Second set-->
+    <enum_option variable_name="SecondSetShow" title="Second set show">
+       <enum_item value="true" label="yes"/>  
+       <enum_item value="false" label="no"/>  
+    </enum_option>
+
+    <!-- setting the graph title -->
+    <string_option variable_name="GraphTitle" title="Graph title - (editable)" />    
+
+    <!--setting of graph type-->
+    <enum_option variable_name="GraphType" title="Graph type">  
+       <enum_item  value="xl3DColumn" label="3D Column"/>
+       <enum_item  value="xl3DColumnClustered" label="3D Column - Clustered"/>
+       <enum_item  value="xl3DColumnStacked" label="3D Column - Stacked"/>
+    </enum_option>
+
+    <!--setting of values type-->
+    <enum_option variable_name="ValuesType" title="Type of values">  
+       <enum_item  value="abs" label="Absolute"/>
+       <enum_item  value="rel_sum" label="Relative (to sum)"/>
+       <enum_item  value="rel_max" label="Relative (to max)"/>
+       <enum_item  value="rel_col" label="Relative (to column)"/>
+       <enum_item  value="rel_row" label="Relative (to row)"/>
+    </enum_option>
+
+    <!--setting whether to show a graph legend-->
+    <enum_option variable_name="LegendShow" title="Show graph legend">
+       <enum_item value="true" label="yes"/>  
+       <enum_item value="false" label="no"/>  
+    </enum_option>
+
+    <!-- setting of graph width (compared to page width)-->
+    <number_option variable_name="GraphWidth" title="Graph width (to page wigth) - (editable)" num_type="float" dec="2" min_value="0" max_value="1"/>
+
+    <!-- setting of graph height (compared to page width)-->
+    <number_option variable_name="GraphHeight" title="Graph height (to page wigth) - (editable)" num_type="float" dec="2" min_value="0" max_value="5"/>
+    
+    
+  </visualization_options>
+
+  
+  
+  <!--default values of variables-->
+  
+  <visualization_values>
+
+      <variable name="FirstSetShow" value="true" />
+      <variable name="SecondSetShow" value="true" />
+      <variable name="GraphType" value="xl3DColumn" />
+      <variable name="ValuesType" value="abs" />
+      <variable name="GraphTitle" value="SD-KL Graph" />
+      <variable name="LegendShow" value="true"/>
+      <variable name="GraphWidth" value="75e-2"/>
+      <variable name="GraphHeight" value="75e-2"/>
+
+  </visualization_values>
+
+</visualization>
