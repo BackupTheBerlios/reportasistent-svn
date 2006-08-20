@@ -1934,7 +1934,7 @@ CString fLMCFhyp(void* hSource)
 								AND tiCoefficient.CategoryID=tmCategory.CategoryID \
 								AND tmCategory.QuantityID=tmQuantity.QuantityID \
 								AND tiLiteralI.HypothesisID=" + id_hlp +
-							" ORDER BY tiLiteralI.LiteralIID";
+							" ORDER BY tmCategory.Ord";
 			if (rs_cond.Open(AFX_DB_USE_DEFAULT_TYPE, q_cond))
 			{
 				//iteration on query results
@@ -2047,7 +2047,7 @@ CString fLMSD4fthyp(void * hSource)
 				   AND tiCoefficient.CategoryID=tmCategory.CategoryID \
 				   AND tmCategory.QuantityID=tmQuantity.QuantityID \
 				   AND tsCedentType.CedentTypeID=tiLiteralI.CedentTypeID \
-				 ORDER BY tiHypothesisDF.HypothesisID, tiLiteralI.LiteralIID";
+				 ORDER BY tiHypothesisDF.HypothesisID, tmCategory.Ord";
 	//load data from metabase
 	if (rs.Open(AFX_DB_USE_DEFAULT_TYPE, q))
 	{
@@ -2348,7 +2348,7 @@ CString fLMSDCFhyp(void * hSource)
 								AND tiCoefficient.CategoryID=tmCategory.CategoryID \
 								AND tmCategory.QuantityID=tmQuantity.QuantityID \
 								AND tiLiteralI.HypothesisID=" + id_hlp +
-							" ORDER BY tiLiteralI.LiteralIID";
+							" ORDER BY tmCategory.Ord";
 			if (rs_cond.Open(AFX_DB_USE_DEFAULT_TYPE, q_cond))
 			{
 				//iteration on query results
@@ -2386,7 +2386,7 @@ CString fLMSDCFhyp(void * hSource)
 						AND tiCoefficient.CategoryID=tmCategory.CategoryID \
 						AND tmCategory.QuantityID=tmQuantity.QuantityID \
 						AND tiLiteralI.HypothesisID=" + id_hlp +
-					" ORDER BY tiLiteralI.LiteralIID";
+					" ORDER BY tmCategory.Ord";
 			if (rs_cond.Open(AFX_DB_USE_DEFAULT_TYPE, q_cond))
 			{
 				//iteration on query results
@@ -2424,7 +2424,7 @@ CString fLMSDCFhyp(void * hSource)
 						AND tiCoefficient.CategoryID=tmCategory.CategoryID \
 						AND tmCategory.QuantityID=tmQuantity.QuantityID \
 						AND tiLiteralI.HypothesisID=" + id_hlp +
-					" ORDER BY tiLiteralI.LiteralIID";
+					" ORDER BY tmCategory.Ord";
 			if (rs_cond.Open(AFX_DB_USE_DEFAULT_TYPE, q_cond))
 			{
 				//iteration on query results
@@ -2696,7 +2696,7 @@ CString fLMKLhyp(void* hSource)
 								AND tiCoefficient.CategoryID=tmCategory.CategoryID \
 								AND tmCategory.QuantityID=tmQuantity.QuantityID \
 								AND tiLiteralI.HypothesisID=" + id_hlp +
-							" ORDER BY tiLiteralI.LiteralIID";
+							" ORDER BY tmCategory.Ord";
 			if (rs_cond.Open(AFX_DB_USE_DEFAULT_TYPE, q_cond))
 			{
 				//iteration on query results
@@ -2990,7 +2990,7 @@ CString fLMSDKLhyp(void* hSource)
 								AND tiCoefficient.CategoryID=tmCategory.CategoryID \
 								AND tmCategory.QuantityID=tmQuantity.QuantityID \
 								AND tiLiteralI.HypothesisID=" + id_hlp +
-							" ORDER BY tiLiteralI.LiteralIID";
+							" ORDER BY tmCategory.Ord";
 			if (rs_cond.Open(AFX_DB_USE_DEFAULT_TYPE, q_cond))
 			{
 				//iteration on query results
@@ -3028,7 +3028,7 @@ CString fLMSDKLhyp(void* hSource)
 						AND tiCoefficient.CategoryID=tmCategory.CategoryID \
 						AND tmCategory.QuantityID=tmQuantity.QuantityID \
 						AND tiLiteralI.HypothesisID=" + id_hlp +
-					" ORDER BY tiLiteralI.LiteralIID";
+					" ORDER BY tmCategory.Ord";
 			if (rs_cond.Open(AFX_DB_USE_DEFAULT_TYPE, q_cond))
 			{
 				//iteration on query results
@@ -3066,7 +3066,7 @@ CString fLMSDKLhyp(void* hSource)
 						AND tiCoefficient.CategoryID=tmCategory.CategoryID \
 						AND tmCategory.QuantityID=tmQuantity.QuantityID \
 						AND tiLiteralI.HypothesisID=" + id_hlp +
-					" ORDER BY tiLiteralI.LiteralIID";
+					" ORDER BY tmCategory.Ord";
 			if (rs_cond.Open(AFX_DB_USE_DEFAULT_TYPE, q_cond))
 			{
 				//iteration on query results
