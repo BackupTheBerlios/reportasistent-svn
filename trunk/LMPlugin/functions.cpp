@@ -1700,10 +1700,10 @@ CString fLM4fthyp(void * hSource)
 				   AND tmCategory.QuantityID=tmQuantity.QuantityID \
 				   AND tsCedentType.CedentTypeID=tiLiteralI.CedentTypeID \
 				   AND tsTaskSubType.ShortName=";
-	q += "'CDASSOC'";
-	q += "AND taTask.TaskSubTypeID=tsTaskSubType.TaskSubTypeID \
+	q +=									 "'CDASSOC'";
+	q +=		  "AND taTask.TaskSubTypeID=tsTaskSubType.TaskSubTypeID \
 				 ORDER BY tiHypothesis.HypothesisID, tiLiteralI.CedentTypeID, \
-						  tiLiteralI.LiteralIID";
+						  tmCategory.Ord";
 	//load data from metabase
 	if (rs.Open(AFX_DB_USE_DEFAULT_TYPE, q))
 	{
