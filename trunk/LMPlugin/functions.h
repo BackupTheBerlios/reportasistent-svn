@@ -64,6 +64,12 @@ CString fLMSD4fthyp(void * hSource);
 
 CString fLMSDCFhyp(void * hSource);
 
+// --- AP KL-hypothese
 
+CString fLMKLhyp(void * hSource);
+
+// --- AP SDKL-hypothese
+
+CString fLMSDKLhyp(void * hSource);
 
 #endif /* _FUNCTIONS*/

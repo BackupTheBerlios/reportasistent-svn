@@ -117,11 +117,19 @@ SOURCE=.\Hyp_CF_Recordset.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\Hyp_KL_Recordset.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\Hyp_SD4ft_Recordset.cpp
 # End Source File
 # Begin Source File
 
 SOURCE=.\Hyp_SDCF_Recordset.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\Hyp_SDKL_Recordset.cpp
 # End Source File
 # Begin Source File
 
@@ -221,11 +229,27 @@ SOURCE=.\tiDCFrequencyI_Recordset.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\tiDKFrequencyI_Recordset.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\tiHypothesis_Recordset.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\tiKLFrequencyI_Recordset.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\TKLCategory_Recordset.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\TKLLiteral.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\TKLquant_Recordset.cpp
 # End Source File
 # Begin Source File
 
@@ -269,11 +293,19 @@ SOURCE=.\Hyp_CF_Recordset.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\Hyp_KL_Recordset.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\Hyp_SD4ft_Recordset.h
 # End Source File
 # Begin Source File
 
 SOURCE=.\Hyp_SDCF_Recordset.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Hyp_SDKL_Recordset.h
 # End Source File
 # Begin Source File
 
@@ -377,11 +409,27 @@ SOURCE=.\tiDCFrequencyI_Recordset.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\tiDKFrequencyI_Recordset.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\tiHypothesis_Recordset.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\tiKLFrequencyI_Recordset.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\TKLCategory_Recordset.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\TKLLiteral.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\TKLquant_Recordset.h
 # End Source File
 # Begin Source File
 

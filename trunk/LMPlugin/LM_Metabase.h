@@ -421,3 +421,106 @@ public:
 };
 
 typedef CArray <Hyp_SDCF_Meta *, Hyp_SDCF_Meta *> THyp_SDCF_Meta_Array;
+
+typedef CArray <CString_Array *, CString_Array *> TCString_Tab;
+
+class Hyp_KL_Meta
+{
+public:
+	CString			id;
+    CString			db_name;
+    CString			matrix_name;
+    CString			task_name;
+
+    CString			sum;
+    CString			min;
+    CString			max;
+    CString			chi_sq;
+    CString			fnc_s;
+    CString			fnc_r;
+    CString			h_c;
+    CString			h_r;
+    CString			h_c_r;
+    CString			mi;
+    CString			aic;
+    CString			kend;
+
+	CString			quant_row;
+	CString			quant_col;
+	
+	CString_Array	row_attributes;
+	CString_Array	column_attributes;
+    TLitArray		condition;
+	TCString_Tab	table;
+
+	CString			row_id;
+	CString			col_id;
+    CString			c_id;
+
+	CString			xml_convert ();
+};
+
+typedef CArray <Hyp_KL_Meta *, Hyp_KL_Meta *> THyp_KL_Meta_Array;
+
+class Hyp_SDKL_Meta
+{
+public:
+	CString			id;
+    CString			db_name;
+    CString			matrix_name;
+    CString			task_name;
+
+    CString			sum1;
+    CString			min1;
+    CString			max1;
+    CString			chi_sq1;
+    CString			fnc_s1;
+    CString			fnc_r1;
+    CString			h_c1;
+    CString			h_r1;
+    CString			h_c_r1;
+    CString			mi1;
+    CString			aic1;
+    CString			kend1;
+
+	CString			sum2;
+    CString			min2;
+    CString			max2;
+    CString			chi_sq2;
+    CString			fnc_s2;
+    CString			fnc_r2;
+    CString			h_c2;
+    CString			h_r2;
+    CString			h_c_r2;
+    CString			mi2;
+    CString			aic2;
+    CString			kend2;
+
+    CString			da_sum;
+    CString			da_min;
+    CString			da_max;
+    CString			dr_sum;
+    CString			dr_min;
+    CString			dr_max;
+
+	CString			quant_row;
+	CString			quant_col;
+	
+	CString_Array	row_attributes;
+	CString_Array	column_attributes;
+    TLitArray		condition;
+	TLitArray		set1;
+	TLitArray		set2;
+	TCString_Tab	table1;
+	TCString_Tab	table2;
+
+	CString			row_id;
+	CString			col_id;
+    CString			c_id;
+	CString			s1_id;
+	CString			s2_id;
+
+	CString			xml_convert ();
+};
+
+typedef CArray <Hyp_SDKL_Meta *, Hyp_SDKL_Meta *> THyp_SDKL_Meta_Array;

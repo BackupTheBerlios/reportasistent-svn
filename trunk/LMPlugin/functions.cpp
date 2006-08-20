@@ -33,6 +33,12 @@
 #include "Hyp_SD4ft_Recordset.h"
 #include "Hyp_SDCF_Recordset.h"
 #include "tiDCFrequencyI_Recordset.h"
+#include "Hyp_KL_Recordset.h"
+#include "tiKLFrequencyI_Recordset.h"
+#include "TKLquant_Recordset.h"
+#include "TKLCategory_Recordset.h"
+#include "Hyp_SDKL_Recordset.h"
+#include "tiDKFrequencyI_Recordset.h"
 
 //dedek: docasne
 /*****/
@@ -2429,7 +2435,7 @@ CString fLMSDCFhyp(void * hSource)
 					else
 						neg_lit_smbl = "";
 					id_hlp.Format ("%d", rs_cond.m_LiteralIID);
-					lit.id = "tiCFLit" + id_hlp + pthyp->id;
+					lit.id = "tiDCLit" + id_hlp + pthyp->id;
 					hlp = rs_cond.m_Name2;
 					hlp.Replace ("&", "&amp;");
 					hlp.Replace (">", "&gt;");
@@ -2512,6 +2518,667 @@ CString fLMSDCFhyp(void * hSource)
 		list.GetAt (i)->frequencies2.RemoveAll ();
 		list.GetAt (i)->set1.RemoveAll ();
 		list.GetAt (i)->set2.RemoveAll ();
+		delete (list.GetAt (i));
+	}
+	list.RemoveAll ();
+
+	return buf;
+}
+
+CString fLMKLhyp(void* hSource)
+{
+	CString buf;
+	CString db_name = ((CDatabase *) hSource)->GetDatabaseName ();
+	CString id_hlp;
+	CString hlp;
+
+	THyp_KL_Meta_Array list;
+	Hyp_KL_Recordset rs ((CDatabase *) hSource);
+	tiKLFrequencyI_Recordset rs_freq ((CDatabase *) hSource);
+	TKLCategory_Recordset rs_attr ((CDatabase *) hSource);
+	TCondition_Recordset rs_cond ((CDatabase *) hSource);
+	TKLquant_Recordset rs_quant ((CDatabase *) hSource);
+	Hyp_KL_Meta * pthyp;
+
+	long h_id;
+	long row;
+
+	CString neg_lit_smbl;
+
+	CString q_name;
+	CString q_value;
+
+	CString_Array * row_freq_hlp;
+
+	Hyp_tiLiteral lit;
+
+	CString q = "SELECT * \
+				 FROM taTask, tiHypothesisKL, tmMatrix \
+				 WHERE taTask.TaskID=tiHypothesisKL.TaskID \
+				   AND taTask.MatrixID=tmMatrix.MatrixID";
+	//load data from metabase
+	if (rs.Open(AFX_DB_USE_DEFAULT_TYPE, q))
+	{
+		//iteration on query results
+		while (!rs.IsEOF())
+		{
+			h_id = rs.m_HypothesisKLID;
+			pthyp = new (Hyp_KL_Meta);
+			id_hlp.Format ("%d", h_id);
+			pthyp->id = "hypKL" + id_hlp;
+			pthyp->db_name = db_name;
+			pthyp->matrix_name = rs.m_Name2;
+			pthyp->task_name = rs.m_Name;
+
+			id_hlp.Format ("%d", rs.m_KLLiteralDColID);
+
+			CString q_quant = "SELECT * \
+							   FROM tdKLLiteralD, tmQuantity \
+							   WHERE tdKLLiteralD.QuantityID=tmQuantity.QuantityID \
+							     AND tdKLLiteralD.KLLiteralDID=" + id_hlp;
+			//single row returned expected
+			if (rs_quant.Open(AFX_DB_USE_DEFAULT_TYPE, q_quant))
+			{
+				//iteration on query results
+				while (!rs_quant.IsEOF())
+				{
+					pthyp->quant_col = rs_quant.m_Name;
+					rs_quant.MoveNext();
+				}
+				rs_quant.Close();
+			}
+			else return "";
+
+			id_hlp.Format ("%d", rs.m_KLLiteralDRowID);
+
+			q_quant = "SELECT * \
+					   FROM tdKLLiteralD, tmQuantity \
+					   WHERE tdKLLiteralD.QuantityID=tmQuantity.QuantityID \
+					     AND tdKLLiteralD.KLLiteralDID=" + id_hlp;
+			//single row returned expected
+			if (rs_quant.Open(AFX_DB_USE_DEFAULT_TYPE, q_quant))
+			{
+				//iteration on query results
+				while (!rs_quant.IsEOF())
+				{
+					pthyp->quant_row = rs_quant.m_Name;
+					rs_quant.MoveNext();
+				}
+				rs_quant.Close();
+			}
+			else return "";
+			
+			pthyp->row_id = "attr_row_" + pthyp->id;
+			pthyp->col_id = "attr_col_" + pthyp->id;
+			pthyp->c_id = "cond_" + pthyp->id;
+
+			id_hlp.Format ("%d", rs.m_HypothesisKLID);
+
+			CString q_freq = "SELECT * \
+							  FROM tiKLFrequencyI \
+							  WHERE tiKLFrequencyI.HypothesisKLID=" + id_hlp +
+							" ORDER BY Row, Col";			
+			if (rs_freq.Open(AFX_DB_USE_DEFAULT_TYPE, q_freq))
+			{
+				//iteration on query results
+				row_freq_hlp = new (CString_Array);
+				row = -1;
+				while (!rs_freq.IsEOF())
+				{
+					if ((row != rs_freq.m_Row) && (row != -1))
+					{
+						pthyp->table.Add (row_freq_hlp);
+						row_freq_hlp = new (CString_Array);
+					}
+					hlp.Format ("%d", rs_freq.m_Frequency);
+					row_freq_hlp->Add (hlp);
+					row = rs_freq.m_Row;
+					rs_freq.MoveNext();
+				}
+				rs_freq.Close();
+				if (row_freq_hlp->GetSize () > 0)
+					pthyp->table.Add (row_freq_hlp);
+			}
+			else return "";
+
+			id_hlp.Format ("%d", rs.m_KLLiteralDColID);
+
+			CString q_attr = "SELECT * \
+							  FROM tdKLLiteralD, tmCategory, tmQuantity \
+							  WHERE tdKLLiteralD.QuantityID=tmQuantity.QuantityID \
+							    AND tmCategory.QuantityID=tmQuantity.QuantityID \
+							    AND tdKLLiteralD.KLLiteralDID=" + id_hlp;
+			q_attr += " ORDER BY tmCategory.CategoryID";
+			if (rs_attr.Open(AFX_DB_USE_DEFAULT_TYPE, q_attr))
+			{
+				//iteration on query results
+				while (!rs_attr.IsEOF())
+				{
+					hlp = rs_attr.m_Name;
+					hlp.Replace ("&", "&amp;");
+					hlp.Replace (">", "&gt;");
+					hlp.Replace ("<", "&lt;");
+					pthyp->column_attributes.Add (hlp);
+					rs_attr.MoveNext();
+				}
+				rs_attr.Close();
+			}
+			else return "";
+
+			id_hlp.Format ("%d", rs.m_KLLiteralDRowID);
+
+			q_attr = "SELECT * \
+					  FROM tdKLLiteralD, tmCategory, tmQuantity \
+					  WHERE tdKLLiteralD.QuantityID=tmQuantity.QuantityID \
+					    AND tmCategory.QuantityID=tmQuantity.QuantityID \
+					    AND tdKLLiteralD.KLLiteralDID=" + id_hlp;
+			q_attr += " ORDER BY tmCategory.CategoryID";
+			if (rs_attr.Open(AFX_DB_USE_DEFAULT_TYPE, q_attr))
+			{
+				//iteration on query results
+				while (!rs_attr.IsEOF())
+				{
+					hlp = rs_attr.m_Name;
+					hlp.Replace ("&", "&amp;");
+					hlp.Replace (">", "&gt;");
+					hlp.Replace ("<", "&lt;");
+					pthyp->row_attributes.Add (hlp);
+					rs_attr.MoveNext();
+				}
+				rs_attr.Close();
+			}
+			else return "";
+
+			id_hlp.Format ("%d", rs.m_HypothesisID);
+			CString q_cond = "SELECT * \
+							  FROM tiCoefficient, tiLiteralI, tmCategory, tmQuantity \
+							  WHERE tiLiteralI.LiteralIID=tiCoefficient.LiteralIID \
+								AND tiCoefficient.CategoryID=tmCategory.CategoryID \
+								AND tmCategory.QuantityID=tmQuantity.QuantityID \
+								AND tiLiteralI.HypothesisID=" + id_hlp +
+							" ORDER BY tiLiteralI.LiteralIID";
+			if (rs_cond.Open(AFX_DB_USE_DEFAULT_TYPE, q_cond))
+			{
+				//iteration on query results
+				while (!rs_cond.IsEOF())
+				{
+					if (rs_cond.m_Negation)
+						neg_lit_smbl = "¬";
+					else
+						neg_lit_smbl = "";
+					id_hlp.Format ("%d", rs_cond.m_LiteralIID);
+					lit.id = "tiKLLit" + id_hlp + pthyp->id;
+					hlp = rs_cond.m_Name2;
+					hlp.Replace ("&", "&amp;");
+					hlp.Replace (">", "&gt;");
+					hlp.Replace ("<", "&lt;");
+					lit.quant = neg_lit_smbl + hlp;
+					hlp = rs_cond.m_Name;
+					hlp.Replace ("&", "&amp;");
+					hlp.Replace (">", "&gt;");
+					hlp.Replace ("<", "&lt;");
+					lit.value = hlp;
+					pthyp->condition.Add (lit);
+					rs_cond.MoveNext();
+				}
+				rs_cond.Close();
+			}
+			else return "";
+
+			pthyp->sum = "0";
+            pthyp->min = "0";
+            pthyp->max = "0";
+            pthyp->chi_sq = "0";
+            pthyp->fnc_s = "0";
+            pthyp->fnc_r = "0";
+            pthyp->h_c = "0";
+            pthyp->h_r = "0";
+            pthyp->h_c_r = "0";
+            pthyp->mi = "0";
+            pthyp->aic = "0";
+            pthyp->kend = "0"; 
+
+			list.Add (pthyp);
+			rs.MoveNext();
+		}
+		rs.Close();
+	}
+	else return "";
+
+	//creation of xml string
+	
+  
+	//load DTD
+	buf = Get_DTD ();
+
+	//create xml data
+	buf = buf + " <active_list> ";
+	int i;
+    for (i = 0; i < list.GetSize (); i++)
+	{
+		buf = buf + list.GetAt (i)->xml_convert ();
+	}
+	buf += " </active_list>";
+	//just for test - creates a xml file with all hypothesis
+/*	FILE * f = fopen ("test.xml", "w");
+	fprintf (f, "%s", buf);
+	fclose (f);
+*/
+	for (i = 0; i < list.GetSize (); i++)
+	{
+		list.GetAt (i)->row_attributes.RemoveAll ();
+		list.GetAt (i)->column_attributes.RemoveAll ();
+		list.GetAt (i)->condition.RemoveAll ();
+		for (int j = 0; j < list.GetAt (i)->table.GetSize (); j++)
+		{
+			for (int k = 0; list.GetAt (i)->table.GetAt (j)->GetSize (); k++)
+			{
+				list.GetAt (i)->table.GetAt (j)->RemoveAll ();
+			}
+			delete (list.GetAt (i)->table.GetAt (j));
+		}
+		list.GetAt (i)->table.RemoveAll ();
+		delete (list.GetAt (i));
+	}
+	list.RemoveAll ();
+
+	return buf;
+}
+
+CString fLMSDKLhyp(void* hSource)
+{
+	CString buf;
+	CString db_name = ((CDatabase *) hSource)->GetDatabaseName ();
+	CString id_hlp;
+	CString hlp;
+
+	THyp_SDKL_Meta_Array list;
+	Hyp_SDKL_Recordset rs ((CDatabase *) hSource);
+	tiDKFrequencyI_Recordset rs_freq ((CDatabase *) hSource);
+	TKLCategory_Recordset rs_attr ((CDatabase *) hSource);
+	TCondition_Recordset rs_cond ((CDatabase *) hSource);
+	TKLquant_Recordset rs_quant ((CDatabase *) hSource);
+	Hyp_SDKL_Meta * pthyp;
+
+	long h_id;
+	long row;
+
+	CString neg_lit_smbl;
+
+	CString q_name;
+	CString q_value;
+
+	CString_Array * row_freq_hlp;
+
+	Hyp_tiLiteral lit;
+
+	CString q = "SELECT * \
+				 FROM taTask, tiHypothesisDK, tmMatrix \
+				 WHERE taTask.TaskID=tiHypothesisDK.TaskID \
+				   AND taTask.MatrixID=tmMatrix.MatrixID";
+	//load data from metabase
+	if (rs.Open(AFX_DB_USE_DEFAULT_TYPE, q))
+	{
+		//iteration on query results
+		while (!rs.IsEOF())
+		{
+			h_id = rs.m_HypothesisDKID;
+			pthyp = new (Hyp_SDKL_Meta);
+			id_hlp.Format ("%d", h_id);
+			pthyp->id = "hypSDKL" + id_hlp;
+			pthyp->db_name = db_name;
+			pthyp->matrix_name = rs.m_Name2;
+			pthyp->task_name = rs.m_Name;
+
+			id_hlp.Format ("%d", rs.m_KLLiteralDColID);
+
+			CString q_quant = "SELECT * \
+							   FROM tdKLLiteralD, tmQuantity \
+							   WHERE tdKLLiteralD.QuantityID=tmQuantity.QuantityID \
+							     AND tdKLLiteralD.KLLiteralDID=" + id_hlp;
+			//single row returned expected
+			if (rs_quant.Open(AFX_DB_USE_DEFAULT_TYPE, q_quant))
+			{
+				//iteration on query results
+				while (!rs_quant.IsEOF())
+				{
+					pthyp->quant_col = rs_quant.m_Name;
+					rs_quant.MoveNext();
+				}
+				rs_quant.Close();
+			}
+			else return "";
+
+			id_hlp.Format ("%d", rs.m_KLLiteralDRowID);
+
+			q_quant = "SELECT * \
+					   FROM tdKLLiteralD, tmQuantity \
+					   WHERE tdKLLiteralD.QuantityID=tmQuantity.QuantityID \
+					     AND tdKLLiteralD.KLLiteralDID=" + id_hlp;
+			//single row returned expected
+			if (rs_quant.Open(AFX_DB_USE_DEFAULT_TYPE, q_quant))
+			{
+				//iteration on query results
+				while (!rs_quant.IsEOF())
+				{
+					pthyp->quant_row = rs_quant.m_Name;
+					rs_quant.MoveNext();
+				}
+				rs_quant.Close();
+			}
+			else return "";
+			
+			pthyp->row_id = "attr_row_" + pthyp->id;
+			pthyp->col_id = "attr_col_" + pthyp->id;
+			pthyp->c_id = "cond_" + pthyp->id;
+			pthyp->s1_id = "set1_" + pthyp->id;
+			pthyp->s2_id = "set2_" + pthyp->id;
+
+			id_hlp.Format ("%d", rs.m_HypothesisDKID);
+			//first set frequencies
+			CString q_freq = "SELECT * \
+							  FROM tiDKFrequencyI \
+							  WHERE HypothesisDKID=" + id_hlp +
+							 "  AND CedentTypeID=5 \
+							  ORDER BY Row, Col";			
+			if (rs_freq.Open(AFX_DB_USE_DEFAULT_TYPE, q_freq))
+			{
+				//iteration on query results
+				row_freq_hlp = new (CString_Array);
+				row = -1;
+				while (!rs_freq.IsEOF())
+				{
+					if ((row != rs_freq.m_Row) && (row != -1))
+					{
+						pthyp->table1.Add (row_freq_hlp);
+						row_freq_hlp = new (CString_Array);
+					}
+					hlp.Format ("%d", rs_freq.m_Frequency);
+					row_freq_hlp->Add (hlp);
+					row = rs_freq.m_Row;
+					rs_freq.MoveNext();
+				}
+				rs_freq.Close();
+				if (row_freq_hlp->GetSize () > 0)
+					pthyp->table1.Add (row_freq_hlp);
+			}
+			else return "";
+
+			//second set frequencies
+			q_freq = "SELECT * \
+					  FROM tiDKFrequencyI \
+					  WHERE HypothesisDKID=" + id_hlp +
+					 "  AND CedentTypeID=6 \
+					  ORDER BY Row, Col";			
+			if (rs_freq.Open(AFX_DB_USE_DEFAULT_TYPE, q_freq))
+			{
+				//iteration on query results
+				row_freq_hlp = new (CString_Array);
+				row = -1;
+				while (!rs_freq.IsEOF())
+				{
+					if ((row != rs_freq.m_Row) && (row != -1))
+					{
+						pthyp->table2.Add (row_freq_hlp);
+						row_freq_hlp = new (CString_Array);
+					}
+					hlp.Format ("%d", rs_freq.m_Frequency);
+					row_freq_hlp->Add (hlp);
+					row = rs_freq.m_Row;
+					rs_freq.MoveNext();
+				}
+				rs_freq.Close();
+				if (row_freq_hlp->GetSize () > 0)
+					pthyp->table2.Add (row_freq_hlp);
+			}
+			else return "";
+
+			id_hlp.Format ("%d", rs.m_KLLiteralDColID);
+
+			CString q_attr = "SELECT * \
+							  FROM tdKLLiteralD, tmCategory, tmQuantity \
+							  WHERE tdKLLiteralD.QuantityID=tmQuantity.QuantityID \
+							    AND tmCategory.QuantityID=tmQuantity.QuantityID \
+							    AND tdKLLiteralD.KLLiteralDID=" + id_hlp;
+			q_attr += " ORDER BY tmCategory.CategoryID";
+			if (rs_attr.Open(AFX_DB_USE_DEFAULT_TYPE, q_attr))
+			{
+				//iteration on query results
+				while (!rs_attr.IsEOF())
+				{
+					hlp = rs_attr.m_Name;
+					hlp.Replace ("&", "&amp;");
+					hlp.Replace (">", "&gt;");
+					hlp.Replace ("<", "&lt;");
+					pthyp->column_attributes.Add (hlp);
+					rs_attr.MoveNext();
+				}
+				rs_attr.Close();
+			}
+			else return "";
+
+			id_hlp.Format ("%d", rs.m_KLLiteralDRowID);
+
+			q_attr = "SELECT * \
+					  FROM tdKLLiteralD, tmCategory, tmQuantity \
+					  WHERE tdKLLiteralD.QuantityID=tmQuantity.QuantityID \
+					    AND tmCategory.QuantityID=tmQuantity.QuantityID \
+					    AND tdKLLiteralD.KLLiteralDID=" + id_hlp;
+			q_attr += " ORDER BY tmCategory.CategoryID";
+			if (rs_attr.Open(AFX_DB_USE_DEFAULT_TYPE, q_attr))
+			{
+				//iteration on query results
+				while (!rs_attr.IsEOF())
+				{
+					hlp = rs_attr.m_Name;
+					hlp.Replace ("&", "&amp;");
+					hlp.Replace (">", "&gt;");
+					hlp.Replace ("<", "&lt;");
+					pthyp->row_attributes.Add (hlp);
+					rs_attr.MoveNext();
+				}
+				rs_attr.Close();
+			}
+			else return "";
+
+			//condition
+			id_hlp.Format ("%d", rs.m_HypothesisID);
+			CString q_cond = "SELECT * \
+							  FROM tiCoefficient, tiLiteralI, tmCategory, tmQuantity \
+							  WHERE tiLiteralI.LiteralIID=tiCoefficient.LiteralIID \
+							    AND tiLiteralI.CedentTypeID=4 \
+								AND tiCoefficient.CategoryID=tmCategory.CategoryID \
+								AND tmCategory.QuantityID=tmQuantity.QuantityID \
+								AND tiLiteralI.HypothesisID=" + id_hlp +
+							" ORDER BY tiLiteralI.LiteralIID";
+			if (rs_cond.Open(AFX_DB_USE_DEFAULT_TYPE, q_cond))
+			{
+				//iteration on query results
+				while (!rs_cond.IsEOF())
+				{
+					if (rs_cond.m_Negation)
+						neg_lit_smbl = "¬";
+					else
+						neg_lit_smbl = "";
+					id_hlp.Format ("%d", rs_cond.m_LiteralIID);
+					lit.id = "tiDKLit" + id_hlp + pthyp->id;
+					hlp = rs_cond.m_Name2;
+					hlp.Replace ("&", "&amp;");
+					hlp.Replace (">", "&gt;");
+					hlp.Replace ("<", "&lt;");
+					lit.quant = neg_lit_smbl + hlp;
+					hlp = rs_cond.m_Name;
+					hlp.Replace ("&", "&amp;");
+					hlp.Replace (">", "&gt;");
+					hlp.Replace ("<", "&lt;");
+					lit.value = hlp;
+					pthyp->condition.Add (lit);
+					rs_cond.MoveNext();
+				}
+				rs_cond.Close();
+			}
+			else return "";
+
+			//first set
+			id_hlp.Format ("%d", rs.m_HypothesisID);
+			q_cond = "SELECT * \
+					  FROM tiCoefficient, tiLiteralI, tmCategory, tmQuantity \
+					  WHERE tiLiteralI.LiteralIID=tiCoefficient.LiteralIID \
+					    AND tiLiteralI.CedentTypeID=5 \
+						AND tiCoefficient.CategoryID=tmCategory.CategoryID \
+						AND tmCategory.QuantityID=tmQuantity.QuantityID \
+						AND tiLiteralI.HypothesisID=" + id_hlp +
+					" ORDER BY tiLiteralI.LiteralIID";
+			if (rs_cond.Open(AFX_DB_USE_DEFAULT_TYPE, q_cond))
+			{
+				//iteration on query results
+				while (!rs_cond.IsEOF())
+				{
+					if (rs_cond.m_Negation)
+						neg_lit_smbl = "¬";
+					else
+						neg_lit_smbl = "";
+					id_hlp.Format ("%d", rs_cond.m_LiteralIID);
+					lit.id = "tiDKLit" + id_hlp + pthyp->id;
+					hlp = rs_cond.m_Name2;
+					hlp.Replace ("&", "&amp;");
+					hlp.Replace (">", "&gt;");
+					hlp.Replace ("<", "&lt;");
+					lit.quant = neg_lit_smbl + hlp;
+					hlp = rs_cond.m_Name;
+					hlp.Replace ("&", "&amp;");
+					hlp.Replace (">", "&gt;");
+					hlp.Replace ("<", "&lt;");
+					lit.value = hlp;
+					pthyp->set1.Add (lit);
+					rs_cond.MoveNext();
+				}
+				rs_cond.Close();
+			}
+			else return "";
+
+			//second set
+			id_hlp.Format ("%d", rs.m_HypothesisID);
+			q_cond = "SELECT * \
+					  FROM tiCoefficient, tiLiteralI, tmCategory, tmQuantity \
+					  WHERE tiLiteralI.LiteralIID=tiCoefficient.LiteralIID \
+					    AND tiLiteralI.CedentTypeID=6 \
+						AND tiCoefficient.CategoryID=tmCategory.CategoryID \
+						AND tmCategory.QuantityID=tmQuantity.QuantityID \
+						AND tiLiteralI.HypothesisID=" + id_hlp +
+					" ORDER BY tiLiteralI.LiteralIID";
+			if (rs_cond.Open(AFX_DB_USE_DEFAULT_TYPE, q_cond))
+			{
+				//iteration on query results
+				while (!rs_cond.IsEOF())
+				{
+					if (rs_cond.m_Negation)
+						neg_lit_smbl = "¬";
+					else
+						neg_lit_smbl = "";
+					id_hlp.Format ("%d", rs_cond.m_LiteralIID);
+					lit.id = "tiDKLit" + id_hlp + pthyp->id;
+					hlp = rs_cond.m_Name2;
+					hlp.Replace ("&", "&amp;");
+					hlp.Replace (">", "&gt;");
+					hlp.Replace ("<", "&lt;");
+					lit.quant = neg_lit_smbl + hlp;
+					hlp = rs_cond.m_Name;
+					hlp.Replace ("&", "&amp;");
+					hlp.Replace (">", "&gt;");
+					hlp.Replace ("<", "&lt;");
+					lit.value = hlp;
+					pthyp->set2.Add (lit);
+					rs_cond.MoveNext();
+				}
+				rs_cond.Close();
+			}
+			else return "";
+
+			pthyp->sum1 = "0";
+            pthyp->min1 = "0";
+            pthyp->max1 = "0";
+            pthyp->chi_sq1 = "0";
+            pthyp->fnc_s1 = "0";
+            pthyp->fnc_r1 = "0";
+            pthyp->h_c1 = "0";
+            pthyp->h_r1 = "0";
+            pthyp->h_c_r1 = "0";
+            pthyp->mi1 = "0";
+            pthyp->aic1 = "0";
+            pthyp->kend1 = "0";
+			
+			pthyp->sum2 = "0";
+            pthyp->min2 = "0";
+            pthyp->max2 = "0";
+            pthyp->chi_sq2 = "0";
+            pthyp->fnc_s2 = "0";
+            pthyp->fnc_r2 = "0";
+            pthyp->h_c2 = "0";
+            pthyp->h_r2 = "0";
+            pthyp->h_c_r2 = "0";
+            pthyp->mi2 = "0";
+            pthyp->aic2 = "0";
+            pthyp->kend2 = "0";
+
+			pthyp->da_sum = "0";
+            pthyp->da_min = "0";
+            pthyp->da_max = "0";
+            pthyp->dr_sum = "0";
+            pthyp->dr_min = "0";
+            pthyp->dr_max = "0";
+
+			list.Add (pthyp);
+			rs.MoveNext();
+		}
+		rs.Close();
+	}
+	else return "";
+
+	//creation of xml string
+	
+  
+	//load DTD
+	buf = Get_DTD ();
+
+	//create xml data
+	buf = buf + " <active_list> ";
+	int i;
+    for (i = 0; i < list.GetSize (); i++)
+	{
+		buf = buf + list.GetAt (i)->xml_convert ();
+	}
+	buf += " </active_list>";
+	//just for test - creates a xml file with all hypothesis
+	FILE * f = fopen ("test.xml", "w");
+	fprintf (f, "%s", buf);
+	fclose (f);
+
+	for (i = 0; i < list.GetSize (); i++)
+	{
+		list.GetAt (i)->row_attributes.RemoveAll ();
+		list.GetAt (i)->column_attributes.RemoveAll ();
+		list.GetAt (i)->condition.RemoveAll ();
+		list.GetAt (i)->set1.RemoveAll ();
+		list.GetAt (i)->set2.RemoveAll ();
+		for (int j = 0; j < list.GetAt (i)->table1.GetSize (); j++)
+		{
+			for (int k = 0; list.GetAt (i)->table1.GetAt (j)->GetSize (); k++)
+			{
+				list.GetAt (i)->table1.GetAt (j)->RemoveAll ();
+			}
+			delete (list.GetAt (i)->table1.GetAt (j));
+		}
+		for (j = 0; j < list.GetAt (i)->table2.GetSize (); j++)
+		{
+			for (int k = 0; list.GetAt (i)->table2.GetAt (j)->GetSize (); k++)
+			{
+				list.GetAt (i)->table2.GetAt (j)->RemoveAll ();
+			}
+			delete (list.GetAt (i)->table2.GetAt (j));
+		}
+		list.GetAt (i)->table1.RemoveAll ();
+		list.GetAt (i)->table2.RemoveAll ();
 		delete (list.GetAt (i));
 	}
 	list.RemoveAll ();

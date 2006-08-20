@@ -857,3 +857,271 @@ CString Hyp_SDCF_Meta::xml_convert ()
 
 	return xml_string;
 }
+
+CString Hyp_KL_Meta::xml_convert ()
+{
+	CString xml_string;
+
+	db_name.Replace ("&", "&amp;");
+	matrix_name.Replace ("&", "&amp;");
+	task_name.Replace ("&", "&amp;");
+	quant_row.Replace ("&", "&amp;");
+	quant_col.Replace ("&", "&amp;");
+
+	db_name.Replace ("<", "&lt;");
+	matrix_name.Replace ("<", "&lt;");
+	task_name.Replace ("<", "&lt;");
+	quant_row.Replace ("<", "&lt;");
+	quant_col.Replace ("<", "&lt;");
+
+	db_name.Replace (">", "&gt;");
+	matrix_name.Replace (">", "&gt;");
+	task_name.Replace (">", "&gt;");
+	quant_row.Replace (">", "&gt;");
+	quant_col.Replace (">", "&gt;");
+
+	//beginning of the hyp_kl element
+	xml_string = " <hyp_kl id=\"" + id + "\" db_name=\"" + db_name + "\" ";
+	xml_string = xml_string + "matrix_name=\"" + matrix_name + "\" ";
+	xml_string = xml_string + "task_name=\"" + task_name + "\" ";
+	
+	xml_string = xml_string + " sum=\"" + sum + "\" ";
+	xml_string = xml_string + " min=\"" + min + "\" ";
+	xml_string = xml_string + " max=\"" + max + "\" ";
+	xml_string = xml_string + " chi_sq=\"" + chi_sq + "\" ";
+	xml_string = xml_string + " fnc_s=\"" + fnc_s + "\" ";
+	xml_string = xml_string + " fnc_r=\"" + fnc_r + "\" ";
+	xml_string = xml_string + " h_c=\"" + h_c + "\" ";
+	xml_string = xml_string + " h_r=\"" + h_r + "\" ";
+	xml_string = xml_string + " h_c_r=\"" + h_c_r + "\" ";
+	xml_string = xml_string + " mi=\"" + mi + "\" ";
+	xml_string = xml_string + " aic=\"" + aic + "\" ";
+	xml_string = xml_string + " kend=\"" + kend + "\" ";
+
+	xml_string = xml_string + " row_attributes=\"" + row_id + "\" ";
+	xml_string = xml_string + " column_attributes=\"" + col_id + "\" ";
+	xml_string = xml_string + " condition=\"" + c_id + "\">";
+
+	xml_string = xml_string + " <tab> ";
+
+	for (int i = 0; i < table.GetSize (); i++)
+	{
+		xml_string = xml_string + " <r> ";
+		for (int j = 0; j < table.GetAt (i)->GetSize (); j++)
+		{
+			xml_string = xml_string + " <c val=\"" + table.GetAt (i)->GetAt (j) + "\"/> ";
+		}
+		xml_string = xml_string + " </r> ";
+	}
+
+	xml_string = xml_string + " </tab> ";
+
+	xml_string += " </hyp_kl>  ";
+	//end of hyp_kl element
+
+	xml_string = xml_string + " <ti_attribute id=\"" +
+		row_id + "\" quant=\"" + quant_row + "\" type=\"Attributes\"> ";
+	for (i = 0; i < row_attributes.GetSize (); i++)
+	{
+		xml_string = xml_string + " <ti_category value=\""
+			+ row_attributes.GetAt (i) + "\"/> ";
+	}
+	xml_string = xml_string + " </ti_attribute> ";
+
+	xml_string = xml_string + " <ti_attribute id=\"" +
+		col_id + "\" quant=\"" + quant_col + "\" type=\"Attributes\"> ";
+	for (i = 0; i < column_attributes.GetSize (); i++)
+	{
+		xml_string = xml_string + " <ti_category value=\""
+			+ column_attributes.GetAt (i) + "\"/> ";
+	}
+	xml_string = xml_string + " </ti_attribute> ";
+
+	xml_string = xml_string + "<ti_cedent  id=\"" + c_id + "\"  type=\"Condition\"> ";
+    for (i = 0; i < condition.GetSize (); i++)
+	{
+		if ((i == 0) || (condition.GetAt (i).quant != condition.GetAt (i - 1).quant))
+			xml_string = xml_string + "<ti_literal  id=\"" + condition.GetAt (i).id +
+				"\"  quant=\"" + condition.GetAt (i).quant +
+				"\"  value=\"";
+		xml_string = xml_string + condition.GetAt (i).value;
+		if ((i < condition.GetSize () - 1)
+			&&
+			(condition.GetAt (i).quant == condition.GetAt (i + 1).quant))
+			xml_string += ", ";
+		else
+			xml_string += "\"/> ";
+	}
+	xml_string = xml_string + "</ti_cedent> ";
+
+	return xml_string;
+}
+
+CString Hyp_SDKL_Meta::xml_convert ()
+{
+	CString xml_string;
+
+	db_name.Replace ("&", "&amp;");
+	matrix_name.Replace ("&", "&amp;");
+	task_name.Replace ("&", "&amp;");
+	quant_row.Replace ("&", "&amp;");
+	quant_col.Replace ("&", "&amp;");
+
+	db_name.Replace ("<", "&lt;");
+	matrix_name.Replace ("<", "&lt;");
+	task_name.Replace ("<", "&lt;");
+	quant_row.Replace ("<", "&lt;");
+	quant_col.Replace ("<", "&lt;");
+
+	db_name.Replace (">", "&gt;");
+	matrix_name.Replace (">", "&gt;");
+	task_name.Replace (">", "&gt;");
+	quant_row.Replace (">", "&gt;");
+	quant_col.Replace (">", "&gt;");
+
+	//beginning of the hyp_sdkl element
+	xml_string = " <hyp_sdkl id=\"" + id + "\" db_name=\"" + db_name + "\" ";
+	xml_string = xml_string + "matrix_name=\"" + matrix_name + "\" ";
+	xml_string = xml_string + "task_name=\"" + task_name + "\" ";
+	
+	xml_string = xml_string + " sum1=\"" + sum1 + "\" ";
+	xml_string = xml_string + " min1=\"" + min1 + "\" ";
+	xml_string = xml_string + " max1=\"" + max1 + "\" ";
+	xml_string = xml_string + " chi_sq1=\"" + chi_sq1 + "\" ";
+	xml_string = xml_string + " fnc_s1=\"" + fnc_s1 + "\" ";
+	xml_string = xml_string + " fnc_r1=\"" + fnc_r1 + "\" ";
+	xml_string = xml_string + " h_c1=\"" + h_c1 + "\" ";
+	xml_string = xml_string + " h_r1=\"" + h_r1 + "\" ";
+	xml_string = xml_string + " h_c_r1=\"" + h_c_r1 + "\" ";
+	xml_string = xml_string + " mi1=\"" + mi1 + "\" ";
+	xml_string = xml_string + " aic1=\"" + aic1 + "\" ";
+	xml_string = xml_string + " kend1=\"" + kend1 + "\" ";
+
+	xml_string = xml_string + " sum2=\"" + sum2 + "\" ";
+	xml_string = xml_string + " min2=\"" + min2 + "\" ";
+	xml_string = xml_string + " max2=\"" + max2 + "\" ";
+	xml_string = xml_string + " chi_sq2=\"" + chi_sq2 + "\" ";
+	xml_string = xml_string + " fnc_s2=\"" + fnc_s2 + "\" ";
+	xml_string = xml_string + " fnc_r2=\"" + fnc_r2 + "\" ";
+	xml_string = xml_string + " h_c2=\"" + h_c2 + "\" ";
+	xml_string = xml_string + " h_r2=\"" + h_r2 + "\" ";
+	xml_string = xml_string + " h_c_r2=\"" + h_c_r2 + "\" ";
+	xml_string = xml_string + " mi2=\"" + mi2 + "\" ";
+	xml_string = xml_string + " aic2=\"" + aic2 + "\" ";
+	xml_string = xml_string + " kend2=\"" + kend2 + "\" ";
+
+	xml_string = xml_string + " da_sum=\"" + da_sum + "\" ";
+	xml_string = xml_string + " da_min=\"" + da_min + "\" ";
+	xml_string = xml_string + " da_max=\"" + da_max + "\" ";
+	xml_string = xml_string + " dr_sum=\"" + dr_sum + "\" ";
+	xml_string = xml_string + " dr_min=\"" + dr_min + "\" ";
+	xml_string = xml_string + " dr_max=\"" + dr_max + "\" ";
+
+	xml_string = xml_string + " row_attributes=\"" + row_id + "\" ";
+	xml_string = xml_string + " column_attributes=\"" + col_id + "\" ";
+	xml_string = xml_string + " condition=\"" + c_id + "\" ";
+	xml_string = xml_string + " set1=\"" + s1_id + "\" ";
+	xml_string = xml_string + " set2=\"" + s2_id + "\">";
+
+	xml_string = xml_string + " <tab> ";
+
+	for (int i = 0; i < table1.GetSize (); i++)
+	{
+		xml_string = xml_string + " <r> ";
+		for (int j = 0; j < table1.GetAt (i)->GetSize (); j++)
+		{
+			xml_string = xml_string + " <c val=\"" + table1.GetAt (i)->GetAt (j) + "\"/> ";
+		}
+		xml_string = xml_string + " </r> ";
+	}
+
+	xml_string = xml_string + " </tab> ";
+
+	xml_string = xml_string + " <tab> ";
+
+	for (i = 0; i < table2.GetSize (); i++)
+	{
+		xml_string = xml_string + " <r> ";
+		for (int j = 0; j < table2.GetAt (i)->GetSize (); j++)
+		{
+			xml_string = xml_string + " <c val=\"" + table2.GetAt (i)->GetAt (j) + "\"/> ";
+		}
+		xml_string = xml_string + " </r> ";
+	}
+
+	xml_string = xml_string + " </tab> ";
+
+	xml_string += " </hyp_sdkl>  ";
+	//end of hyp_sdkl element
+
+	xml_string = xml_string + " <ti_attribute id=\"" +
+		row_id + "\" quant=\"" + quant_row + "\" type=\"Attributes\"> ";
+	for (i = 0; i < row_attributes.GetSize (); i++)
+	{
+		xml_string = xml_string + " <ti_category value=\""
+			+ row_attributes.GetAt (i) + "\"/> ";
+	}
+	xml_string = xml_string + " </ti_attribute> ";
+
+	xml_string = xml_string + " <ti_attribute id=\"" +
+		col_id + "\" quant=\"" + quant_col + "\" type=\"Attributes\"> ";
+	for (i = 0; i < column_attributes.GetSize (); i++)
+	{
+		xml_string = xml_string + " <ti_category value=\""
+			+ column_attributes.GetAt (i) + "\"/> ";
+	}
+	xml_string = xml_string + " </ti_attribute> ";
+
+	xml_string = xml_string + "<ti_cedent  id=\"" + c_id + "\"  type=\"Condition\"> ";
+    for (i = 0; i < condition.GetSize (); i++)
+	{
+		if ((i == 0) || (condition.GetAt (i).quant != condition.GetAt (i - 1).quant))
+			xml_string = xml_string + "<ti_literal  id=\"" + condition.GetAt (i).id +
+				"\"  quant=\"" + condition.GetAt (i).quant +
+				"\"  value=\"";
+		xml_string = xml_string + condition.GetAt (i).value;
+		if ((i < condition.GetSize () - 1)
+			&&
+			(condition.GetAt (i).quant == condition.GetAt (i + 1).quant))
+			xml_string += ", ";
+		else
+			xml_string += "\"/> ";
+	}
+	xml_string = xml_string + "</ti_cedent> ";
+
+	xml_string = xml_string + "<ti_cedent  id=\"" + s1_id + "\"  type=\"First set\"> ";
+    for (i = 0; i < set1.GetSize (); i++)
+	{
+		if ((i == 0) || (set1.GetAt (i).quant != set1.GetAt (i - 1).quant))
+			xml_string = xml_string + "<ti_literal  id=\"" + set1.GetAt (i).id +
+				"\"  quant=\"" + set1.GetAt (i).quant +
+				"\"  value=\"";
+		xml_string = xml_string + set1.GetAt (i).value;
+		if ((i < set1.GetSize () - 1)
+			&&
+			(set1.GetAt (i).quant == set1.GetAt (i + 1).quant))
+			xml_string += ", ";
+		else
+			xml_string += "\"/> ";
+	}
+	xml_string = xml_string + "</ti_cedent> ";
+
+	xml_string = xml_string + "<ti_cedent  id=\"" + s2_id + "\"  type=\"Second set\"> ";
+    for (i = 0; i < set2.GetSize (); i++)
+	{
+		if ((i == 0) || (set2.GetAt (i).quant != set2.GetAt (i - 1).quant))
+			xml_string = xml_string + "<ti_literal  id=\"" + set2.GetAt (i).id +
+				"\"  quant=\"" + set2.GetAt (i).quant +
+				"\"  value=\"";
+		xml_string = xml_string + set2.GetAt (i).value;
+		if ((i < set2.GetSize () - 1)
+			&&
+			(set2.GetAt (i).quant == set2.GetAt (i + 1).quant))
+			xml_string += ", ";
+		else
+			xml_string += "\"/> ";
+	}
+	xml_string = xml_string + "</ti_cedent> ";
+
+	return xml_string;
+}
