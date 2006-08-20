@@ -1910,7 +1910,7 @@ CString fLMCFhyp(void* hSource)
 			CString q_attr = "SELECT * \
 							  FROM tmCategory \
 							  WHERE tmCategory.QuantityID=" + id_hlp;
-			q_attr += " ORDER BY CategoryID";
+			q_attr += " ORDER BY Ord";
 			if (rs_attr.Open(AFX_DB_USE_DEFAULT_TYPE, q_attr))
 			{
 				//iteration on query results
@@ -2322,7 +2322,7 @@ CString fLMSDCFhyp(void * hSource)
 			CString q_attr = "SELECT * \
 							  FROM tmCategory \
 							  WHERE tmCategory.QuantityID=" + id_hlp;
-			q_attr += " ORDER BY CategoryID";
+			q_attr += " ORDER BY Ord";
 			if (rs_attr.Open(AFX_DB_USE_DEFAULT_TYPE, q_attr))
 			{
 				//iteration on query results
@@ -2648,7 +2648,7 @@ CString fLMKLhyp(void* hSource)
 							  WHERE tdKLLiteralD.QuantityID=tmQuantity.QuantityID \
 							    AND tmCategory.QuantityID=tmQuantity.QuantityID \
 							    AND tdKLLiteralD.KLLiteralDID=" + id_hlp;
-			q_attr += " ORDER BY tmCategory.CategoryID";
+			q_attr += " ORDER BY tmCategory.Ord";
 			if (rs_attr.Open(AFX_DB_USE_DEFAULT_TYPE, q_attr))
 			{
 				//iteration on query results
@@ -2672,7 +2672,7 @@ CString fLMKLhyp(void* hSource)
 					  WHERE tdKLLiteralD.QuantityID=tmQuantity.QuantityID \
 					    AND tmCategory.QuantityID=tmQuantity.QuantityID \
 					    AND tdKLLiteralD.KLLiteralDID=" + id_hlp;
-			q_attr += " ORDER BY tmCategory.CategoryID";
+			q_attr += " ORDER BY tmCategory.Ord";
 			if (rs_attr.Open(AFX_DB_USE_DEFAULT_TYPE, q_attr))
 			{
 				//iteration on query results
@@ -2940,7 +2940,7 @@ CString fLMSDKLhyp(void* hSource)
 							  WHERE tdKLLiteralD.QuantityID=tmQuantity.QuantityID \
 							    AND tmCategory.QuantityID=tmQuantity.QuantityID \
 							    AND tdKLLiteralD.KLLiteralDID=" + id_hlp;
-			q_attr += " ORDER BY tmCategory.CategoryID";
+			q_attr += " ORDER BY tmCategory.Ord";
 			if (rs_attr.Open(AFX_DB_USE_DEFAULT_TYPE, q_attr))
 			{
 				//iteration on query results
@@ -2964,7 +2964,7 @@ CString fLMSDKLhyp(void* hSource)
 					  WHERE tdKLLiteralD.QuantityID=tmQuantity.QuantityID \
 					    AND tmCategory.QuantityID=tmQuantity.QuantityID \
 					    AND tdKLLiteralD.KLLiteralDID=" + id_hlp;
-			q_attr += " ORDER BY tmCategory.CategoryID";
+			q_attr += " ORDER BY tmCategory.Ord";
 			if (rs_attr.Open(AFX_DB_USE_DEFAULT_TYPE, q_attr))
 			{
 				//iteration on query results
