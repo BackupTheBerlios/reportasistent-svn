@@ -321,6 +321,10 @@ SOURCE=.\LM_Metabase.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\LMCFQuant.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\LMplugin.h
 # End Source File
 # Begin Source File

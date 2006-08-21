@@ -3150,10 +3150,10 @@ CString fLMSDKLhyp(void* hSource)
 	}
 	buf += " </active_list>";
 	//just for test - creates a xml file with all hypothesis
-	FILE * f = fopen ("test.xml", "w");
+/*	FILE * f = fopen ("test.xml", "w");
 	fprintf (f, "%s", buf);
 	fclose (f);
-
+*/
 	for (i = 0; i < list.GetSize (); i++)
 	{
 		list.GetAt (i)->row_attributes.RemoveAll ();
@@ -3169,7 +3169,7 @@ CString fLMSDKLhyp(void* hSource)
 			}
 			delete (list.GetAt (i)->table1.GetAt (j));
 		}
-		for (int j = 0; j < list.GetAt (i)->table2.GetSize (); j++)
+		for (j = 0; j < list.GetAt (i)->table2.GetSize (); j++)
 		{
 			for (int k = 0; list.GetAt (i)->table2.GetAt (j)->GetSize (); k++)
 			{
