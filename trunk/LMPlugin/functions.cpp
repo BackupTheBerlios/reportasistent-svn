@@ -3169,7 +3169,7 @@ CString fLMSDKLhyp(void* hSource)
 			}
 			delete (list.GetAt (i)->table1.GetAt (j));
 		}
-		for (j = 0; j < list.GetAt (i)->table2.GetSize (); j++)
+		for (int j = 0; j < list.GetAt (i)->table2.GetSize (); j++)
 		{
 			for (int k = 0; list.GetAt (i)->table2.GetAt (j)->GetSize (); k++)
 			{

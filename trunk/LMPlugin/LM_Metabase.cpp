@@ -44,8 +44,8 @@ CString Hyp_CF_Meta::xml_convert ()
 	xml_string = xml_string + " condition=\"" + c_id + "\">";
 
 	xml_string = xml_string + " <r> ";
-
-	for (int i = 0; i < frequencies.GetSize (); i++)
+	int i;
+	for (i = 0; i < frequencies.GetSize (); i++)
 	{
 		xml_string = xml_string + " <c val=\"" + frequencies.GetAt (i) + "\"/> ";
 	}
@@ -775,8 +775,8 @@ CString Hyp_SDCF_Meta::xml_convert ()
 	xml_string = xml_string + " set2=\"" + s2_id + "\">";
 
 	xml_string = xml_string + " <r> ";
-
-	for (int i = 0; i < frequencies1.GetSize (); i++)
+	int i;
+	for (i = 0; i < frequencies1.GetSize (); i++)
 	{
 		xml_string = xml_string + " <c val=\"" + frequencies1.GetAt (i) + "\"/> ";
 	}
@@ -903,8 +903,8 @@ CString Hyp_KL_Meta::xml_convert ()
 	xml_string = xml_string + " condition=\"" + c_id + "\">";
 
 	xml_string = xml_string + " <tab> ";
-
-	for (int i = 0; i < table.GetSize (); i++)
+	int i;
+	for (i = 0; i < table.GetSize (); i++)
 	{
 		xml_string = xml_string + " <r> ";
 		for (int j = 0; j < table.GetAt (i)->GetSize (); j++)
@@ -1024,8 +1024,8 @@ CString Hyp_SDKL_Meta::xml_convert ()
 	xml_string = xml_string + " set2=\"" + s2_id + "\">";
 
 	xml_string = xml_string + " <tab> ";
-
-	for (int i = 0; i < table1.GetSize (); i++)
+	int i;
+	for (i = 0; i < table1.GetSize (); i++)
 	{
 		xml_string = xml_string + " <r> ";
 		for (int j = 0; j < table1.GetAt (i)->GetSize (); j++)
