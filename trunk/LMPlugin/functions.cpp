@@ -1898,8 +1898,7 @@ CString fLMCFhyp(void* hSource)
 				//iteration on query results
 				while (!rs_freq.IsEOF())
 				{
-					hlp.Format ("%d", rs_freq.m_Frequency);
-					pthyp->frequencies.Add (hlp);
+					pthyp->frequencies.Add (rs_freq.m_Frequency);
 					rs_freq.MoveNext();
 				}
 				rs_freq.Close();
@@ -1962,17 +1961,19 @@ CString fLMCFhyp(void* hSource)
 				rs_cond.Close();
 			}
 			else return "";
-			//todo kvantifikatory
+
 			pthyp->asym = "0";
 			pthyp->avg_a = "0";
 			pthyp->avg_g = "0";
-			pthyp->dor_var = "0";
-			pthyp->max = "0";
-			pthyp->min = "0";
-			pthyp->nom_var = "0";
+			pthyp->dor_var = pthyp->get_dor_var ();
+			hlp.Format ("%d", pthyp->get_max ());
+			pthyp->max = hlp;
+			pthyp->min = pthyp->get_min ();
+			pthyp->nom_var = pthyp->get_nom_var ();
 			pthyp->skew = "0";
 			pthyp->st_dev = "0";
-			pthyp->sum = "0";
+			hlp.Format ("%d", pthyp->get_sum ());
+			pthyp->sum = hlp;
 			pthyp->v = "0";
 			pthyp->var = "0";
 

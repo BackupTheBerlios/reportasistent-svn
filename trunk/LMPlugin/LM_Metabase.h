@@ -256,6 +256,8 @@ typedef CArray <Hyp_4ft_Meta *, Hyp_4ft_Meta *> THyp_4ft_Meta_Array;
 
 typedef CArray <CString, CString> CString_Array;
 
+typedef CArray <int, int> Cint_Array;
+
 class Hyp_CF_Meta
 {
 public:
@@ -285,9 +287,18 @@ public:
 	CString			a_id;
     CString			c_id;
 
-	CString_Array	frequencies;
+	Cint_Array		frequencies;
 
 	CString			xml_convert ();
+	int				get_sum ();
+	CString			get_min ();
+	int				get_max ();
+//	CString			get_v ();
+	CString			get_nom_var ();
+	CString			get_dor_var ();
+private:
+	double			GetVariationRatio ();
+	
 };
 
 typedef CArray <Hyp_CF_Meta *, Hyp_CF_Meta *> THyp_CF_Meta_Array;
