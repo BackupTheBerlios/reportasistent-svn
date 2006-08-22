@@ -411,47 +411,39 @@ CString Bool_Cedent_Meta::xml_convert ()
 	xml_string = xml_string + "task_name=\"" + task_name + "\" ";
 	xml_string = xml_string + "task_type=\"" + task_type + "\" ";
 	xml_string = xml_string + "cedent_type=\"" + cedent_type + "\" ";
-	xml_string = xml_string + "sub_cedent_cnt=\"" + sub_cedent_cnt + "\" >";
-	for (int i = 0; i < sub_cedents_list.GetSize (); i++)
+	xml_string = xml_string + "name=\"" + name + "\" ";
+	xml_string = xml_string + "literal_cnt=\"" + literal_cnt + "\" ";
+	xml_string = xml_string + "length=\"" + length + "\" >";
+	for (int j = 0; j < lit_list.GetSize (); j++)
 	{
 		xml_string = xml_string +
-			"<sub_bool_cedent name=\"" + sub_cedents_list.GetAt (i)->name + "\" ";
+			"<literal underlying_attribute=\"" +
+			lit_list.GetAt (j).underlying_attribute + "\" ";
 		xml_string = xml_string +
-			"literal_cnt=\"" + sub_cedents_list.GetAt (i)->literal_cnt + "\" ";
+			"category_cnt=\"" +
+			lit_list.GetAt (j).category_cnt + "\" ";
 		xml_string = xml_string +
-			"length=\"" + sub_cedents_list.GetAt (i)->length + "\" >";
-		for (int j = 0; j < sub_cedents_list.GetAt (i)->lit_list.GetSize (); j++)
-		{
-			xml_string = xml_string +
-				"<literal underlying_attribute=\"" +
-				sub_cedents_list.GetAt (i)->lit_list.GetAt (j).underlying_attribute + "\" ";
-			xml_string = xml_string +
-				"category_cnt=\"" +
-				sub_cedents_list.GetAt (i)->lit_list.GetAt (j).category_cnt + "\" ";
-			xml_string = xml_string +
-				"missing_type=\"" +
-				sub_cedents_list.GetAt (i)->lit_list.GetAt (j).missing_type + "\" ";
-			xml_string = xml_string +
-				"coefficient_type=\"" +
-				sub_cedents_list.GetAt (i)->lit_list.GetAt (j).coefficient_type + "\" ";
-			xml_string = xml_string +
-				"length=\"" +
-				sub_cedents_list.GetAt (i)->lit_list.GetAt (j).length + "\" ";
-			xml_string = xml_string +
-				"gace=\"" +
-				sub_cedents_list.GetAt (i)->lit_list.GetAt (j).gace + "\" ";
-			xml_string = xml_string +
-				"literal_type=\"" +
-				sub_cedents_list.GetAt (i)->lit_list.GetAt (j).literal_type + "\" ";
-			xml_string = xml_string +
-				"equivalence_class=\"" +
-				sub_cedents_list.GetAt (i)->lit_list.GetAt (j).equivalence_class + "\"/> ";
-		}
-		xml_string = xml_string + "</sub_bool_cedent> ";
+			"missing_type=\"" +
+			lit_list.GetAt (j).missing_type + "\" ";
+		xml_string = xml_string +
+			"coefficient_type=\"" +
+			lit_list.GetAt (j).coefficient_type + "\" ";
+		xml_string = xml_string +
+			"length=\"" +
+			lit_list.GetAt (j).length + "\" ";
+		xml_string = xml_string +
+			"gace=\"" +
+			lit_list.GetAt (j).gace + "\" ";
+		xml_string = xml_string +
+			"literal_type=\"" +
+			lit_list.GetAt (j).literal_type + "\" ";
+		xml_string = xml_string +
+			"equivalence_class=\"" +
+			lit_list.GetAt (j).equivalence_class + "\"/> ";
 	}
-	xml_string = xml_string + "</bool_cedent> ";
+xml_string = xml_string + "</bool_cedent> ";
 
-	return xml_string;
+return xml_string;
 }
 
 CString Attribute_Meta::xml_convert ()

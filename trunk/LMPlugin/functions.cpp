@@ -1044,8 +1044,8 @@ CString fLMBoolCedent (void* hSource)
 	long l_id;
 	long l_id_tst = 0; //test, wheather the new literal appears
 	long c = 0; //counter - help variable
-	long indx; //help variable
-	long y; //help variable
+//	long indx; //help variable
+//	long y; //help variable
 
 	BOOL missing_type = FALSE;
 
@@ -1058,7 +1058,6 @@ CString fLMBoolCedent (void* hSource)
 	TEmpty_Cedents_Recordset rs_em ((CDatabase *) hSource);
 	TLit_Scan_Recordset rs_lit ((CDatabase *) hSource);
 
-	Sub_Bool_Cedent_Meta * ptsub_bool_cedent;
 	Literal_Meta lit;
 
 	CString q_eq;
@@ -1094,12 +1093,10 @@ CString fLMBoolCedent (void* hSource)
 		while (!rs.IsEOF())
 		{
 			c++;
-			ct_id = rs.m_CedentTypeID;
 			c_id = rs.m_CedentDID;
 			l_id = rs.m_LiteralDID;
-			if (ct_id != ct_id_tst) //new cedent
+			if (c_id != c_id_tst) //new sub cedent
 			{
-				sub_cedent_cnt = 0;
 				literal_cnt = 0;
 				ptboolcdnt = new (Bool_Cedent_Meta);
 				ptboolcdnt->db_name = db_name;
@@ -1109,30 +1106,22 @@ CString fLMBoolCedent (void* hSource)
 				ptboolcdnt->task_name = rs.m_Name;
 				ptboolcdnt->task_type = rs.m_Name10;
 				ptboolcdnt->cedent_type = rs.m_Name6;
-				list.Add (ptboolcdnt);
-			}
-			if (c_id != c_id_tst) //new sub cedent
-			{
-				ptsub_bool_cedent = new (Sub_Bool_Cedent_Meta);
-				literal_cnt = 0;
-				sub_cedent_cnt++;
-				ptboolcdnt->sub_cedent_cnt.Format ("%d", sub_cedent_cnt);
 				hlp = rs.m_Name2;
 				hlp.Replace ("&", "&amp;");
 				hlp.Replace ("<", "&lt;");
 				hlp.Replace (">", "&gt;");
-				ptsub_bool_cedent->name = hlp;
+				ptboolcdnt->name = hlp;
 				hlp.Format ("%d", rs.m_MinLen);
 				hlp1.Format ("%d", rs.m_MaxLen);
 				hlp += " - ";
 				hlp += hlp1;
-				ptsub_bool_cedent->length = hlp;
-				ptboolcdnt->sub_cedents_list.Add (ptsub_bool_cedent);
+				ptboolcdnt->length = hlp;
+				list.Add (ptboolcdnt);
 			}
 			if (l_id != l_id_tst) //new literal
 			{
 				literal_cnt++;
-				ptsub_bool_cedent->literal_cnt.Format ("%d", literal_cnt);
+				ptboolcdnt->literal_cnt.Format ("%d", literal_cnt);
 				hlp = rs.m_Name3;
 				hlp.Replace ("&", "&amp;");
 				hlp.Replace ("<", "&lt;");
@@ -1229,7 +1218,7 @@ CString fLMBoolCedent (void* hSource)
 				lit.category_cnt.Format ("%d", c);
 				if (missing_type) lit.missing_type = "Yes";
 				else lit.missing_type = "No";
-				ptsub_bool_cedent->lit_list.Add (lit);
+				ptboolcdnt->lit_list.Add (lit);
 			}
 			l_id_tst = l_id;
 			c_id_tst = c_id;
@@ -1261,7 +1250,7 @@ CString fLMBoolCedent (void* hSource)
 			if (c == 0) //new empty subcedent
 			{
 				//find cedent for this subcedent, if not exists, create new cedent or subcedent
-				indx = -1;
+/*				indx = -1;
 				for (y = 0; y < list.GetSize (); y++)
 				{
 					if ((list.GetAt (y)->task_name == rs_em.m_Name)
@@ -1274,38 +1263,32 @@ CString fLMBoolCedent (void* hSource)
 						break;
 					}
 				}
-				ptsub_bool_cedent = new (Sub_Bool_Cedent_Meta);
-				ptsub_bool_cedent->literal_cnt.Format ("%d", 0);
-				ptsub_bool_cedent->name = rs_em.m_Name2;
+*/				ptboolcdnt = new (Bool_Cedent_Meta);
+				ptboolcdnt->literal_cnt.Format ("%d", 0);
+				ptboolcdnt->name = rs_em.m_Name2;
 				hlp.Format ("%d", rs_em.m_MinLen);
 				hlp1.Format ("%d", rs_em.m_MaxLen);
 				hlp += " - ";
 				hlp += hlp1;
-				ptsub_bool_cedent->length = hlp;
-				ptsub_bool_cedent->lit_list.RemoveAll ();
-				if (indx == -1) //new cedent must be created
-				{
-					ptboolcdnt = new (Bool_Cedent_Meta);
-					sub_cedent_cnt = 1;
-					ptboolcdnt->db_name = db_name;
-					hlp.Format ("%d", rs_em.m_CedentDID);
-					ptboolcdnt->id = "cdnt" + hlp;
-					ptboolcdnt->matrix_name = rs_em.m_Name3;
-					ptboolcdnt->task_name = rs_em.m_Name;
-					ptboolcdnt->task_type = rs_em.m_Name5;
-					ptboolcdnt->cedent_type = rs_em.m_Name4;
-					ptboolcdnt->sub_cedent_cnt.Format ("%d", sub_cedent_cnt);
-					ptboolcdnt->sub_cedents_list.Add (ptsub_bool_cedent);
-					list.Add (ptboolcdnt);
-				}
-				else //add subcedent to existing cedent
+				ptboolcdnt->length = hlp;
+				ptboolcdnt->lit_list.RemoveAll ();
+				ptboolcdnt->db_name = db_name;
+				hlp.Format ("%d", rs_em.m_CedentDID);
+				ptboolcdnt->id = "cdnt" + hlp;
+				ptboolcdnt->matrix_name = rs_em.m_Name3;
+				ptboolcdnt->task_name = rs_em.m_Name;
+				ptboolcdnt->task_type = rs_em.m_Name5;
+				ptboolcdnt->cedent_type = rs_em.m_Name4;
+				list.Add (ptboolcdnt);
+				
+/*				else //add subcedent to existing cedent
 				{
 					list.GetAt (indx)->sub_cedents_list.Add (ptsub_bool_cedent);
 					sub_cedent_cnt = atol (list.GetAt (indx)->sub_cedent_cnt);
 					sub_cedent_cnt++;
 					list.GetAt (indx)->sub_cedent_cnt.Format ("%d", sub_cedent_cnt);
 				}
-			}
+*/			}
 			rs_em.MoveNext ();
 		}
 		rs_em.Close ();
@@ -1333,11 +1316,6 @@ CString fLMBoolCedent (void* hSource)
 */
 	for (i = 0; i < list.GetSize (); i++)
 	{
-		for (int j = 0; j < list.GetAt (i)->sub_cedents_list.GetSize (); j++)
-		{
-			delete (list.GetAt (i)->sub_cedents_list.GetAt (j));
-		}
-		list.GetAt (i)->sub_cedents_list.RemoveAll ();
 		delete (list.GetAt (i));
 	}
 	list.RemoveAll ();

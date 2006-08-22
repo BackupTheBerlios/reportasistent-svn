@@ -131,16 +131,6 @@ struct Literal_Meta
 
 typedef CArray <Literal_Meta, Literal_Meta> TLiteral_Meta_Array;
 
-struct Sub_Bool_Cedent_Meta
-{
-	CString				literal_cnt;
-	CString				name;
-	CString				length;
-	TLiteral_Meta_Array	lit_list;
-};
-
-typedef CArray <Sub_Bool_Cedent_Meta *, Sub_Bool_Cedent_Meta *> TSub_Bool_Cedent_Meta_Array;
-
 class Bool_Cedent_Meta
 {
 public:
@@ -150,8 +140,10 @@ public:
 	CString						task_name;
 	CString						task_type;
 	CString						cedent_type;
-	CString						sub_cedent_cnt;
-	TSub_Bool_Cedent_Meta_Array	sub_cedents_list;
+	CString						literal_cnt;
+	CString						name;
+	CString						length;
+	TLiteral_Meta_Array			lit_list;
 	CString						xml_convert ();
 };
 
