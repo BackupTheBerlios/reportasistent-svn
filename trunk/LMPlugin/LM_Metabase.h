@@ -417,10 +417,23 @@ public:
 	CString			s1_id;
     CString			s2_id;
 
-	CString_Array	frequencies1;
-	CString_Array	frequencies2;
+	Cint_Array		frequencies1;
+	Cint_Array		frequencies2;
 
 	CString			xml_convert ();
+	int				get_sum1 ();
+	CString			get_min1 ();
+	int				get_max1 ();
+	CString			get_nom_var1 ();
+	CString			get_dor_var1 ();
+	int				get_sum2 ();
+	CString			get_min2 ();
+	int				get_max2 ();
+	CString			get_nom_var2 ();
+	CString			get_dor_var2 ();
+private:
+	double			GetVariationRatio1 ();
+	double			GetVariationRatio2 ();
 };
 
 typedef CArray <Hyp_SDCF_Meta *, Hyp_SDCF_Meta *> THyp_SDCF_Meta_Array;

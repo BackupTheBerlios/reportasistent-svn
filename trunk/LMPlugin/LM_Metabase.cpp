@@ -818,6 +818,7 @@ CString Hyp_SD4ft_Meta::xml_convert ()
 CString Hyp_SDCF_Meta::xml_convert ()
 {
 	CString xml_string;
+	CString hlp;
 
 	db_name.Replace ("&", "&amp;");
 	matrix_name.Replace ("&", "&amp;");
@@ -881,7 +882,8 @@ CString Hyp_SDCF_Meta::xml_convert ()
 	int i;
 	for (i = 0; i < frequencies1.GetSize (); i++)
 	{
-		xml_string = xml_string + " <c val=\"" + frequencies1.GetAt (i) + "\"/> ";
+		hlp.Format ("%d", frequencies1.GetAt (i));
+		xml_string = xml_string + " <c val=\"" + hlp + "\"/> ";
 	}
 
 	xml_string = xml_string + " </r> ";
@@ -890,7 +892,8 @@ CString Hyp_SDCF_Meta::xml_convert ()
 
 	for (i = 0; i < frequencies2.GetSize (); i++)
 	{
-		xml_string = xml_string + " <c val=\"" + frequencies2.GetAt (i) + "\"/> ";
+		hlp.Format ("%d", frequencies2.GetAt (i));
+		xml_string = xml_string + " <c val=\"" + hlp + "\"/> ";
 	}
 
 	xml_string = xml_string + " </r> ";
@@ -959,6 +962,180 @@ CString Hyp_SDCF_Meta::xml_convert ()
 	xml_string = xml_string + "</ti_cedent> ";
 
 	return xml_string;
+}
+
+int Hyp_SDCF_Meta::get_sum1 ()
+{
+	int s = 0;
+	int i;
+
+	for (i = 0; i < frequencies1.GetSize (); i++) s += frequencies1.GetAt (i);
+
+	return s;
+}
+
+int Hyp_SDCF_Meta::get_max1 ()
+{
+	int m = frequencies1.GetAt (0);
+	int i;
+	for (i = 1; i < frequencies1.GetSize (); i++)
+		if (frequencies1.GetAt (i) > m) m = frequencies1.GetAt (i);
+
+	return m;
+}
+
+CString Hyp_SDCF_Meta::get_min1 ()
+{
+	int m = frequencies1.GetAt (0);
+	int i;
+	CString hlp;
+
+	for (i = 1; i < frequencies1.GetSize (); i++)
+		if (frequencies1.GetAt (i) < m) m = frequencies1.GetAt (i);
+
+	hlp.Format ("%d", m);
+	return hlp;
+}
+
+double Hyp_SDCF_Meta::GetVariationRatio1 ()
+{
+	double dSum= get_sum1 ();
+	if ( dSum == 0.0) return 0.0;
+
+	double dMax= get_max1 ();
+	return 1 - dMax/dSum;
+}
+
+CString Hyp_SDCF_Meta::get_nom_var1 ()
+{
+	int j;
+	if (frequencies1.GetSize () <= 1) return (LPCTSTR) (_bstr_t) (0.0);
+
+	double dSum= get_sum1 ();
+	if ( dSum == 0.0) return (LPCTSTR) (_bstr_t) (0.0);
+
+	double dNomVar= 0;
+	for (j= 0; j < frequencies1.GetSize (); j++)
+	{
+		int nValue= frequencies1.GetAt (j);
+		double dFi= nValue / dSum;
+
+		dNomVar+= dFi * dFi;
+	}
+	dNomVar= 1 - dNomVar;
+
+	return
+		(LPCTSTR) (_bstr_t) ((frequencies1.GetSize () * dNomVar) / (frequencies1.GetSize () - 1));
+}
+
+CString Hyp_SDCF_Meta::get_dor_var1 ()
+{
+	if ( frequencies1.GetSize () <= 1) return (LPCTSTR) (_bstr_t) (0.0);
+
+	double dSum= get_sum1 ();
+	if ( dSum == 0.0) return (LPCTSTR) (_bstr_t) (0.0);
+
+	double dDorVar= 0;
+	double dSumF= 0;
+	for (int j= 0; j < frequencies1.GetSize (); j++)
+	{
+		int nValue= frequencies1.GetAt (j);
+		double dFi= nValue / dSum;
+
+		dSumF+= dFi;
+
+		dDorVar+= dSumF * (1 - dSumF);
+	}
+	dDorVar= 2 * dDorVar;
+
+	return (LPCTSTR) (_bstr_t) ((2 * dDorVar) / ( frequencies1.GetSize ()- 1));
+}
+
+int Hyp_SDCF_Meta::get_sum2 ()
+{
+	int s = 0;
+	int i;
+
+	for (i = 0; i < frequencies2.GetSize (); i++) s += frequencies2.GetAt (i);
+
+	return s;
+}
+
+int Hyp_SDCF_Meta::get_max2 ()
+{
+	int m = frequencies2.GetAt (0);
+	int i;
+	for (i = 1; i < frequencies2.GetSize (); i++)
+		if (frequencies2.GetAt (i) > m) m = frequencies2.GetAt (i);
+
+	return m;
+}
+
+CString Hyp_SDCF_Meta::get_min2 ()
+{
+	int m = frequencies2.GetAt (0);
+	int i;
+	CString hlp;
+
+	for (i = 1; i < frequencies2.GetSize (); i++)
+		if (frequencies2.GetAt (i) < m) m = frequencies2.GetAt (i);
+
+	hlp.Format ("%d", m);
+	return hlp;
+}
+
+double Hyp_SDCF_Meta::GetVariationRatio2 ()
+{
+	double dSum= get_sum2 ();
+	if ( dSum == 0.0) return 0.0;
+
+	double dMax= get_max2 ();
+	return 1 - dMax/dSum;
+}
+
+CString Hyp_SDCF_Meta::get_nom_var2 ()
+{
+	int j;
+	if (frequencies2.GetSize () <= 1) return (LPCTSTR) (_bstr_t) (0.0);
+
+	double dSum= get_sum2 ();
+	if ( dSum == 0.0) return (LPCTSTR) (_bstr_t) (0.0);
+
+	double dNomVar= 0;
+	for (j= 0; j < frequencies2.GetSize (); j++)
+	{
+		int nValue= frequencies2.GetAt (j);
+		double dFi= nValue / dSum;
+
+		dNomVar+= dFi * dFi;
+	}
+	dNomVar= 1 - dNomVar;
+
+	return
+		(LPCTSTR) (_bstr_t) ((frequencies2.GetSize () * dNomVar) / (frequencies2.GetSize () - 1));
+}
+
+CString Hyp_SDCF_Meta::get_dor_var2 ()
+{
+	if ( frequencies2.GetSize () <= 1) return (LPCTSTR) (_bstr_t) (0.0);
+
+	double dSum= get_sum2 ();
+	if ( dSum == 0.0) return (LPCTSTR) (_bstr_t) (0.0);
+
+	double dDorVar= 0;
+	double dSumF= 0;
+	for (int j= 0; j < frequencies2.GetSize (); j++)
+	{
+		int nValue= frequencies2.GetAt (j);
+		double dFi= nValue / dSum;
+
+		dSumF+= dFi;
+
+		dDorVar+= dSumF * (1 - dSumF);
+	}
+	dDorVar= 2 * dDorVar;
+
+	return (LPCTSTR) (_bstr_t) ((2 * dDorVar) / ( frequencies2.GetSize ()- 1));
 }
 
 CString Hyp_KL_Meta::xml_convert ()

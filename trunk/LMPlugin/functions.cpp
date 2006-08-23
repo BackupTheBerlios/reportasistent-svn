@@ -1037,8 +1037,8 @@ CString fLMBoolCedent (void* hSource)
 	
 	long sub_cedent_cnt = 0;
 	long literal_cnt = 0;
-	long ct_id;
-	long ct_id_tst = 0;  //test, wheather the new cedent type appears
+//	long ct_id;
+//	long ct_id_tst = 0;  //test, wheather the new cedent type appears
 	long c_id;
 	long c_id_tst = 0; //test, wheather the new sub cedent appears
 	long l_id;
@@ -1222,7 +1222,7 @@ CString fLMBoolCedent (void* hSource)
 			}
 			l_id_tst = l_id;
 			c_id_tst = c_id;
-			ct_id_tst = ct_id;
+//			ct_id_tst = ct_id;
 			rs.MoveNext();
 		}
 		rs.Close();
@@ -2271,8 +2271,7 @@ CString fLMSDCFhyp(void * hSource)
 				//iteration on query results
 				while (!rs_freq.IsEOF())
 				{
-					hlp.Format ("%d", rs_freq.m_Frequency);
-					pthyp->frequencies1.Add (hlp);
+					pthyp->frequencies1.Add (rs_freq.m_Frequency);
 					rs_freq.MoveNext();
 				}
 				rs_freq.Close();
@@ -2289,8 +2288,7 @@ CString fLMSDCFhyp(void * hSource)
 				//iteration on query results
 				while (!rs_freq.IsEOF())
 				{
-					hlp.Format ("%d", rs_freq.m_Frequency);
-					pthyp->frequencies2.Add (hlp);
+					pthyp->frequencies2.Add (rs_freq.m_Frequency);
 					rs_freq.MoveNext();
 				}
 				rs_freq.Close();
@@ -2436,26 +2434,32 @@ CString fLMSDCFhyp(void * hSource)
 			pthyp->asym1 = "0";
 			pthyp->avg_a1 = "0";
 			pthyp->avg_g1 = "0";
-			pthyp->dor_var1 = "0";
-			pthyp->max1 = "0";
-			pthyp->min1 = "0";
-			pthyp->nom_var1 = "0";
+			pthyp->dor_var1 = pthyp->get_dor_var1 ();
+			hlp.Format ("%d", pthyp->get_max1 ());
+			pthyp->max1 = hlp;
+			hlp.Format ("%d", pthyp->get_min1 ());
+			pthyp->min1 = hlp;
+			pthyp->nom_var1 = pthyp->get_nom_var1 ();
 			pthyp->skew1 = "0";
 			pthyp->st_dev1 = "0";
-			pthyp->sum1 = "0";
+			hlp.Format ("%d", pthyp->get_sum1 ());
+			pthyp->sum1 = hlp;
 			pthyp->v1 = "0";
 			pthyp->var1 = "0";
 
 			pthyp->asym2 = "0";
 			pthyp->avg_a2 = "0";
 			pthyp->avg_g2 = "0";
-			pthyp->dor_var2 = "0";
-			pthyp->max2 = "0";
-			pthyp->min2 = "0";
-			pthyp->nom_var2 = "0";
+			pthyp->dor_var2 = pthyp->get_dor_var2 ();
+			hlp.Format ("%d", pthyp->get_max2 ());
+			pthyp->max2 = hlp;
+			hlp.Format ("%d", pthyp->get_min2 ());
+			pthyp->min2 = hlp;
+			pthyp->nom_var2 = pthyp->get_nom_var2 ();
 			pthyp->skew2 = "0";
 			pthyp->st_dev2 = "0";
-			pthyp->sum2 = "0";
+			hlp.Format ("%d", pthyp->get_sum2 ());
+			pthyp->sum2 = hlp;
 			pthyp->v2 = "0";
 			pthyp->var2 = "0";
 			
@@ -2485,10 +2489,10 @@ CString fLMSDCFhyp(void * hSource)
 	}
 	buf += " </active_list>";
 	//just for test - creates a xml file with all hypothesis
-	FILE * f = fopen ("test.xml", "w");
+/*	FILE * f = fopen ("test.xml", "w");
 	fprintf (f, "%s", buf);
 	fclose (f);
-
+*/
 	for (i = 0; i < list.GetSize (); i++)
 	{
 		list.GetAt (i)->attributes.RemoveAll ();
