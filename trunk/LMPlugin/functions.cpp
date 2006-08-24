@@ -2437,8 +2437,8 @@ CString fLMSDCFhyp(void * hSource)
 			pthyp->dor_var1 = pthyp->get_dor_var1 ();
 			hlp.Format ("%d", pthyp->get_max1 ());
 			pthyp->max1 = hlp;
-			hlp.Format ("%d", pthyp->get_min1 ());
-			pthyp->min1 = hlp;
+			
+			pthyp->min1 = pthyp->get_min1 ();
 			pthyp->nom_var1 = pthyp->get_nom_var1 ();
 			pthyp->skew1 = "0";
 			pthyp->st_dev1 = "0";
@@ -2453,8 +2453,8 @@ CString fLMSDCFhyp(void * hSource)
 			pthyp->dor_var2 = pthyp->get_dor_var2 ();
 			hlp.Format ("%d", pthyp->get_max2 ());
 			pthyp->max2 = hlp;
-			hlp.Format ("%d", pthyp->get_min2 ());
-			pthyp->min2 = hlp;
+			
+			pthyp->min2 = pthyp->get_min2 ();
 			pthyp->nom_var2 = pthyp->get_nom_var2 ();
 			pthyp->skew2 = "0";
 			pthyp->st_dev2 = "0";

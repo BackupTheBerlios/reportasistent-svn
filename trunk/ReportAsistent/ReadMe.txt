@@ -1,3 +1,22 @@
+Kody:
+BUG u vytvareni noveho LM datoveho zdroje - nove vytvarenej zdroj se vporadku
+ otevre a da se pouzivat, ale z jeho PerzistID se vrati pouze prvnich 63 znaku.
+ Kdyz je cesta k souboru s metabazi delsi, tak se usekne za 63. znakem, za to se prida ".mdb"
+ Takze kdyz se zdroj zavre a da se znovu otevrit, zarve to, ze je neplatna cesta.
+ 
+ Problem je ve funkci fNewSourceLM(), ale myslim si, ze se odehrava nekde v ramci tridy CDatabase.
+ Vola se tam
+ db = new CDatabase();
+ db->Open(NULL, FALSE, TRUE, _T("ODBC;DSN=" + s), TRUE);  // tady se sam otevre dialog pro vyber souboru s metabazi??
+ ...
+ CString new_pid =  db->GetDatabaseName(); // tohle uz vrati jen tech max. 63 znaku
+
+nenasel jsem nikde, ze by u CDatabase byly buffery nejak omezeny ...
+
+ ------------------------------------------------------------
+
+
+
 DEDEK:
 
 zacinam s pluginem do Wordu
