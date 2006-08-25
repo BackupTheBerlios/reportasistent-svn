@@ -290,6 +290,9 @@ BOOL CWordManager::CreateVBRAInstance(_LMRA_XML_WordLoaderPtr & refLMRAInterface
 
 		CDirectoriesManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->DirectoriesManager;
 
+		// kody - smaz
+		AfxMessageBox(m.getLMRA_WB_WordLoaderPath());
+
 		BOOL ret = CreateProcess(m.getLMRA_WB_WordLoaderPath(), " register", NULL, NULL, FALSE, NORMAL_PRIORITY_CLASS, NULL, NULL, & si, & pi);
 		if (! ret) 
 		{
@@ -297,6 +300,8 @@ BOOL CWordManager::CreateVBRAInstance(_LMRA_XML_WordLoaderPtr & refLMRAInterface
 			return FALSE;
 		}
 
+		// kody - smaz
+		AfxMessageBox("registracni proces spusten");
 		
 		//pockame az spusteny process skonci
 		DWORD wait_ret= WaitForSingleObject(pi.hProcess, 5000);
@@ -308,6 +313,8 @@ BOOL CWordManager::CreateVBRAInstance(_LMRA_XML_WordLoaderPtr & refLMRAInterface
 			return FALSE;
 		}
 	
+		// kody - smaz
+		AfxMessageBox("registracni proces skoncil uspesne");
 
 		hr = refLMRAInterface.CreateInstance("LMRA_WordLoader.LMRA_XML_WordLoader");
 		if (S_OK != hr)
@@ -316,6 +323,8 @@ BOOL CWordManager::CreateVBRAInstance(_LMRA_XML_WordLoaderPtr & refLMRAInterface
 			return FALSE;
 		}
 	}
+	// kody - smaz
+	//AfxMessageBox("Netreba registrovat ActiveX");
 
 	return TRUE;
 }

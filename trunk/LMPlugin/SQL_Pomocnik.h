@@ -140,8 +140,12 @@ public:
 			//mozna pridat konfigurovatelnost
 			if (0 == strcmp((LPCTSTR) attr, "Microsoft Access Driver (*.mdb)"))
 			{
-				ret = desc;
-				return TRUE;
+				// kody - provizorni kvuli rozchozeni u Raucha
+				if ((0 == strcmp((LPCTSTR) desc, "MS Access Database")) || (0 == strcmp((LPCTSTR) desc, "Databáze MS Access")))
+				{
+					ret = desc;
+					return TRUE;
+				}
 			}
 
 			r = SQLDataSources(h, SQL_FETCH_NEXT, desc, sizeof desc, & desc_len, attr, sizeof attr, & attr_len);

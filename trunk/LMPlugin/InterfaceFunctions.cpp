@@ -117,6 +117,21 @@ hSource_t fNewSourceLM(PersistID_t * pPerzistID)
 	char buf[1001];
 	GetCurrentDirectory(1000, buf);
 
+	// smaz (kody)-----
+	CString hlaska = "Access Datasource: " + s;
+	AfxMessageBox(hlaska);
+		// ulozeni seznamu vsech ODBC driveru a zdroju do souboru "drivers.txt"
+	CString drv_enum;
+	CString src_enum;
+	pom.EnumODBCDataSources(drv_enum);
+	pom.EnumODBCDrivers(src_enum);
+	CFile f;
+	f.Open((LPCTSTR) "drivers.txt", CFile::modeCreate | CFile::modeWrite);
+	f.Write(drv_enum, drv_enum.GetLength());
+	f.Write(src_enum, src_enum.GetLength());
+	f.Close();
+	// -----------
+	
 
 	db = new CDatabase();
 	if (!db->Open(NULL, FALSE, TRUE, _T("ODBC;DSN=" + s), TRUE))
