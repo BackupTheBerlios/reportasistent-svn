@@ -23,7 +23,8 @@
 <xsl:variable name="Chart2Color">#4040fc</xsl:variable>
 <xsl:variable name="AntecedentLabel">antecedent</xsl:variable>
 <xsl:variable name="SuccedentLabel">succedent</xsl:variable>
-
+<xsl:variable name="NotAntecedentLabel">¬ antecedent</xsl:variable>
+<xsl:variable name="NotSuccedentLabel">¬ succedent</xsl:variable>
 
 
 
@@ -165,10 +166,10 @@
 				<categories id="categories1">
 					
 						<category title="{$AntecedentLabel} &amp; {$SuccedentLabel}" id="category1"></category>
-						<category title="{$AntecedentLabel} &amp; ¬ {$SuccedentLabel}" id="category2"></category>
+						<category title="{$AntecedentLabel} &amp; {$NotSuccedentLabel}" id="category2"></category>
 					
-						<category title="¬ {$AntecedentLabel} &amp; {$SuccedentLabel}" id="category3"></category>
-						<category title="¬ {$AntecedentLabel} &amp; ¬ {$SuccedentLabel}" id="category4"></category>
+						<category title="{$NotAntecedentLabel} &amp; {$SuccedentLabel}" id="category3"></category>
+						<category title="{$NotAntecedentLabel} &amp; {$NotSuccedentLabel}" id="category4"></category>
 					
 				</categories>
 

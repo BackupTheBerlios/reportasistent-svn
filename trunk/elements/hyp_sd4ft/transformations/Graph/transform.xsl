@@ -22,6 +22,8 @@
 <xsl:variable name="Chart2Color">#4040fc</xsl:variable>
 <xsl:variable name="AntecedentLabel">antecedent</xsl:variable>
 <xsl:variable name="SuccedentLabel">succedent</xsl:variable>
+<xsl:variable name="NotAntecedentLabel">¬ antecedent</xsl:variable>
+<xsl:variable name="NotSuccedentLabel">¬ succedent</xsl:variable>
 
 
 
@@ -178,18 +180,18 @@
 				<categories id="categories1_1">
 					<xsl:if test="$FirstSetShow='true'">				
 						<category title="{$SuccedentLabel}" id="category1_1"></category>
-						<category title="¬ {$SuccedentLabel}" id="category2_1"></category>
+						<category title="{$NotSuccedentLabel}" id="category2_1"></category>
 						<xsl:if test="$SecondSetShow='true'">			
 							<category title="" id="category_mezera"/>
 						</xsl:if>
 					</xsl:if>
 					<xsl:if test="$SecondSetShow='true'">				
 						<category title="{$SuccedentLabel}" id="category1_2"></category>
-						<category title="¬ {$SuccedentLabel}" id="category2_2"></category>
+						<category title="{$NotSuccedentLabel}" id="category2_2"></category>
 					</xsl:if>
 				</categories>
 
-				<chart title="¬ {$AntecedentLabel}" id="chart1_1" color="{$Chart1Color}">
+				<chart title="{$NotAntecedentLabel}" id="chart1_1" color="{$Chart1Color}">
 					<xsl:if test="$FirstSetShow='true'">			
 						<value value="{$c}" id="value3_1"></value>
 						<value value="{$d}" id="value4_1"></value>

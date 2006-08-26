@@ -20,6 +20,8 @@
 <xsl:variable name="Chart2Color">#4040fc</xsl:variable>
 <xsl:variable name="AntecedentLabel">antecedent</xsl:variable>
 <xsl:variable name="SuccedentLabel">succedent</xsl:variable>
+<xsl:variable name="NotAntecedentLabel">¬ antecedent</xsl:variable>
+<xsl:variable name="NotSuccedentLabel">¬ succedent</xsl:variable>
 
 
 
@@ -113,9 +115,9 @@
 			<graph title="{$GraphTitle}" showlegend="{$LegendShow}" charttype="{$GraphType}" height="{$GraphHeight}" width="{$GraphWidth}" id="{@id}_4ftgraph">
 				<categories id="categories1">
 					<category title="{$SuccedentLabel}" id="category1"></category>
-					<category title="¬ {$SuccedentLabel}" id="category2"></category>
+					<category title="{$NotSuccedentLabel}" id="category2"></category>
 				</categories>			
-				<chart title="¬ {$AntecedentLabel}" id="chart1" color="{$Chart1Color}">
+				<chart title="{$NotAntecedentLabel}" id="chart1" color="{$Chart1Color}">
 					<value value="{$c}" id="value3"></value>
 					<value value="{$d}" id="value4"></value>
 				</chart>

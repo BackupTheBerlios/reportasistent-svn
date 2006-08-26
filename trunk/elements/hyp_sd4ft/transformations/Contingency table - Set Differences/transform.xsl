@@ -72,6 +72,8 @@
 <xsl:variable name="BorderFrmWidth">1</xsl:variable> <!-- tloustka ohraniceni ciselnych policek tabulky-->
 <xsl:variable name="AntecedentLabel">antecedent</xsl:variable>
 <xsl:variable name="SuccedentLabel">succedent</xsl:variable>
+<xsl:variable name="NotAntecedentLabel">¬ antecedent</xsl:variable>
+<xsl:variable name="NotSuccedentLabel">¬ succedent</xsl:variable>
 
 
 
@@ -231,7 +233,7 @@
 					</td>
 					
 					<td id="{$id_base}r1d3" bgcolor="{$border_color}" border_top="{$bord_out}"  border_right="{$bord_out}" border_bottom="{$bord_frm}">
-						<text id="{$id_base}r1d3text">¬ <xsl:value-of select="$SuccedentLabel"/></text> 
+						<text id="{$id_base}r1d3text"><xsl:value-of select="$NotSuccedentLabel"/></text> 
 					</td>
 				</tr>
 				
@@ -259,7 +261,7 @@
 				<tr id="{$id_base}r3">
 					
 					<td id="{$id_base}r3d1" bgcolor="{$border_color}" border_left="{$bord_out}" border_right="{$bord_frm}" border_bottom="{$bord_out}">
-						<text id="{$id_base}r3d1text">¬ <xsl:value-of select="$AntecedentLabel"/></text> 
+						<text id="{$id_base}r3d1text"><xsl:value-of select="$NotAntecedentLabel"/></text> 
 					</td>
 					
 					<xsl:element name="td">

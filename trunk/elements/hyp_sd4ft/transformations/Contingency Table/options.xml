@@ -55,7 +55,9 @@
 
     <!-- setting of antecedent and succedent labels (will be shown in graph description and legend) -->
     <string_option variable_name="AntecedentLabel" title="Antecedent label (shown in table header) - (editable)" />    
+    <string_option variable_name="NotAntecedentLabel" title="Not Antecedent label (shown in table header) - (editable)" />    
     <string_option variable_name="SuccedentLabel" title="Succedent label (shown in table header) - (editable)" /> 
+    <string_option variable_name="NotSuccedentLabel" title="Not Succedent label (shown in table header) - (editable)" />
 
 
     <!-- setting the table border width -->
@@ -133,6 +135,8 @@
       <variable name="BorderInWidth" value="0"/>
       <variable name="AntecedentLabel" value="antecedent"/>
       <variable name="SuccedentLabel" value="succedent"/>
+      <variable name="NotAntecedentLabel" value="¬ antecedent"/>
+      <variable name="NotSuccedentLabel" value="¬ succedent"/>
 
 
   </visualization_values>
