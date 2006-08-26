@@ -22,6 +22,8 @@ CElementReportDialog::CElementReportDialog(MSXML2::IXMLDOMElementPtr & SelXMLElm
 	//{{AFX_DATA_INIT(CElementReportDialog)
 	m_DialReportIDEditValue = _T("");
 	m_DialReportTitleEditValue = _T("");
+	m_DialReportSubtitleEditValue = _T("");
+	m_DialReportAuthorEditValue = _T("");
 	//}}AFX_DATA_INIT
 	
 	//Inicializuji promenne dialogu		
@@ -34,6 +36,14 @@ CElementReportDialog::CElementReportDialog(MSXML2::IXMLDOMElementPtr & SelXMLElm
 	varAtr=m_SelXMLElm->getAttribute("title");
 	if (varAtr.vt!=VT_NULL)
 		m_DialReportTitleEditValue = (LPCTSTR) (_bstr_t)  varAtr;
+	//Subtitle
+	varAtr=m_SelXMLElm->getAttribute("subtitle");
+	if (varAtr.vt!=VT_NULL)
+		m_DialReportSubtitleEditValue = (LPCTSTR) (_bstr_t)  varAtr;
+	//Title
+	varAtr=m_SelXMLElm->getAttribute("author");
+	if (varAtr.vt!=VT_NULL)
+		m_DialReportAuthorEditValue = (LPCTSTR) (_bstr_t)  varAtr;
 
 }
 
@@ -43,6 +53,8 @@ void CElementReportDialog::DoDataExchange(CDataExchange* pDX)
 	//{{AFX_DATA_MAP(CElementReportDialog)
 	DDX_Text(pDX, IDC_DIALREPORT_IDEDIT, m_DialReportIDEditValue);
 	DDX_Text(pDX, IDC_DIALREPORT_TITLEEDIT, m_DialReportTitleEditValue);
+	DDX_Text(pDX, IDC_DIALREPORT_SUBTITLEEDIT, m_DialReportSubtitleEditValue);
+	DDX_Text(pDX, IDC_DIALREPORT_AUTHOREDIT, m_DialReportAuthorEditValue);
 	//}}AFX_DATA_MAP
 	DDV_NonDuplicateID(pDX,IDC_DIALREPORT_IDEDIT, m_DialReportIDEditValue);	
 }

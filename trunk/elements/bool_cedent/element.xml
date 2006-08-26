@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="windows-1250"?>
 	
-		<active_element type="bool_cedent" source="" id="bool_cedent1" label="Boolean cedent">
+		<active_element type="bool_cedent" source="" id="bool_cedent1" label="Cedent Boolean">
 			<attributes>
 				<element_attributes>
 				</element_attributes>

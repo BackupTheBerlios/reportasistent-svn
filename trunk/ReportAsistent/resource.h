@@ -88,6 +88,8 @@
 #define IDC_KILL_THREAD_BUTTON          1040
 #define IDC_DIALREPORT_IDEDIT           1040
 #define IDC_DIALREPORT_TITLEEDIT        1041
+#define IDC_DIALREPORT_SUBTITLEEDIT     1042
+#define IDC_DIALREPORT_AUTHOREDIT       1043
 #define ID_MMGENREP                     32771
 #define ID_MMSOURCES                    32772
 #define ID_ELEMENT_EDIT                 32780

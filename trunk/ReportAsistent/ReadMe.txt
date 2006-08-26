@@ -44,6 +44,9 @@ hodilo by se:
 coz takhle nejak inteligentne usporadat AP?
 treba abecedne podle name (ale musely by se prejmenovat cedenty), nebo by to slo podle nazvu adresaru..
 
+Kody: pridal jsem abecedni trideni podle labelu (name). Aby byly hypotezy a cedenty u sebe, prejmenoval jsem je na
+"hypothesis XY" a "cedent XY"
+
 
 
 

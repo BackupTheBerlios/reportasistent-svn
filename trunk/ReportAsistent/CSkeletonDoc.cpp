@@ -424,6 +424,10 @@ BOOL CSkeletonDoc::EditElement(MSXML2::IXMLDOMElementPtr selected_element)
 				selected_element->setAttribute("id",(LPCTSTR) OElementReportDialog.m_DialReportIDEditValue);		
 				//Title:
 				selected_element->setAttribute("title",(LPCTSTR) OElementReportDialog.m_DialReportTitleEditValue);
+				//Subtitle:
+				selected_element->setAttribute("subtitle",(LPCTSTR) OElementReportDialog.m_DialReportSubtitleEditValue);
+				//Author:
+				selected_element->setAttribute("author",(LPCTSTR) OElementReportDialog.m_DialReportAuthorEditValue);
 			}
 			return Res == IDOK;
 			//return Res;

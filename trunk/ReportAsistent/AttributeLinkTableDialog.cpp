@@ -129,7 +129,9 @@ BOOL CAttributeLinkTableDialog::OnInitDialog()
 		m_StyleCombo.SelectString(-1, m.getAttrLinkTableStyleName(0));
 	}
 
-	
+	// kody - pridan refresh pri kazdem otevreni dialogu
+	OnRefreshButton();
+
 	return TRUE;  // return TRUE unless you set the focus to a control
 	              // EXCEPTION: OCX Property Pages should return FALSE
 }

@@ -21,6 +21,8 @@ public:
 	enum { IDD = IDD_DIALOG_REPORT };
 	CString	m_DialReportIDEditValue;
 	CString	m_DialReportTitleEditValue;
+	CString	m_DialReportSubtitleEditValue;
+	CString	m_DialReportAuthorEditValue;
 	//}}AFX_DATA
 
 

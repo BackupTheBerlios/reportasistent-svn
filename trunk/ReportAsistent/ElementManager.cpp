@@ -320,6 +320,9 @@ void CElementManager::LoadActiveElements(LPCTSTR elements_directory_path)
 	}
 
 	finder.Close();
+
+	// kody - setrideni pole "active_elements" podle labelu akt. prvku
+	sortActiveElementsByLabel();
 }
 
 CAElInfo * CElementManager::getActiveElementInfo(elId_t id)
@@ -692,4 +695,31 @@ BOOL CElementManager::ValidateVisualizationOtions(MSXML2::IXMLDOMDocumentPtr &vo
 void CElementManager::LoadSkeletonDTD(MSXML2::IXMLDOMDocumentPtr &dom)
 {
 	LoadXMLDOMFromResource(IDR_SKELETON_DTD, dom);
+}
+
+
+void CElementManager::sortActiveElementsByLabel()
+{
+	//CArray<CAElInfo *,CAElInfo *> active_elements;
+	int pozice,	min, i;
+	int	prvku = active_elements.GetSize();
+	CAElInfo *pom;
+	if (prvku > 1)
+	{
+		for(pozice = 0; pozice < prvku-1; pozice++ )
+		{
+			min= pozice;
+			for (i=pozice+1; i<prvku; i++)
+			{
+				if ((CString) (active_elements[i]->getElementLabel()) < (CString) (active_elements[min]->getElementLabel()))
+					min = i;
+			}
+			if (min != pozice)
+			{
+				pom = active_elements[pozice];
+				active_elements[pozice] = active_elements[min];
+				active_elements[min] = pom;
+			}
+		}
+	}
 }

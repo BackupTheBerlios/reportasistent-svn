@@ -95,6 +95,8 @@ protected:
 	
 	void LoadAttrLinkTableStyles(LPCTSTR directory_path);
 	void LoadActiveElements(LPCTSTR elements_directory_path);
+	// kody - setridi pole "active_elements" podle labelu
+	void sortActiveElementsByLabel();
 };
 
 #endif // !defined(AFX_ELEMENTMANAGER_H__6942C897_7B81_4C40_AA9D_0877F1FFF55A__INCLUDED_)

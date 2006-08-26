@@ -591,7 +591,7 @@ int CDataSourcesManager::ConnectNewSource(plugin_id_t plugin)   //pres zasuvku p
 	PersistID_t NewSourcePerzistID = NULL;	// vrati zasuvka - perzistentni ID noveho zdroje
 	hSource_t   NewSourceHandler;		// handler na novy zdroj
 		// zavolani funkce zasuvky v novem vlakne
-	CWaitDialog d("Connecting new data source");
+	CWaitDialog d("Creating new data source");
 	d.DoThreadFunction(  ConnectNewSourceThreadFunction,
 						(LPARAM) PlugsTab[i].SockInterface->hNewSource,
 						(LPARAM) & NewSourcePerzistID,
@@ -682,7 +682,8 @@ BOOL CDataSourcesManager::ConnectSource(int source_index)
 	PersistID_t PID = (SourcesTab[SI].PerzistID).AllocSysString();
 			// zavolani funkce zasuvky v novem vlakne
 	hSource_t SourceH;
-	CWaitDialog d("Connecting data source");
+	CString DlgText = "Connecting data source:\n\n" + SourcesTab[SI].PublicID;
+	CWaitDialog d((LPCTSTR) DlgText);
 	d.DoThreadFunction(  ConnectSourceThreadFunction,
 						(LPARAM) PlugsTab[i].SockInterface->hOpenSource,
 						(LPARAM) & PID,
@@ -789,7 +790,8 @@ BSTR CDataSourcesManager::CallPerformProc(int source_index, LPCTSTR element_id) 
 		// zavolani  fce Perform zasuvky
 		//BOOL PerfRes = PlugsTab[j].SockInterface->hPerform(SourcesTab[SI].SourceHandle, element_id, &Result);
 		// kody: vytvoreni WaitDialogu a volani jeho DoThreadFunction()
-		CWaitDialog d("Loading data from source");
+		CString DlgText = "Loading data from source\n\n" + SourcesTab[SI].PublicID;
+		CWaitDialog d((LPCTSTR) DlgText);
 		d.DoThreadFunction(PerformThreadFunction,
 							(LPARAM) PlugsTab[j].SockInterface->hPerform,
 						    (LPARAM) SourcesTab[SI].SourceHandle,
@@ -971,7 +973,7 @@ BOOL CDataSourcesManager::isElementSupportedByPlugin(int plugin_index, LPCTSTR e
 	{
 		CString query_str;
 		query_str.Format("/LIST/APID[@NAME = \"%s\"]", element_name);
-
+		
 		if (NULL != ael_list->selectSingleNode((LPCTSTR) query_str)) return TRUE;
 	}
 
