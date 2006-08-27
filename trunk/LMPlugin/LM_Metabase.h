@@ -431,6 +431,12 @@ public:
 	int				get_max2 ();
 	CString			get_nom_var2 ();
 	CString			get_dor_var2 ();
+	CString			get_da_sum ();
+	CString			get_da_min ();
+	CString			get_da_max ();
+	CString			get_dr_sum ();
+	CString			get_dr_min ();
+	CString			get_dr_max ();
 private:
 	double			GetVariationRatio1 ();
 	double			GetVariationRatio2 ();

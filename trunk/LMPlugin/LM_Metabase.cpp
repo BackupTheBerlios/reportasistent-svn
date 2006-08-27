@@ -2,6 +2,7 @@
 
 #include "LM_Metabase.h"
 #include "comdef.h"
+#include "math.h"
 
 CString Hyp_CF_Meta::xml_convert ()
 {
@@ -1136,6 +1137,76 @@ CString Hyp_SDCF_Meta::get_dor_var2 ()
 	dDorVar= 2 * dDorVar;
 
 	return (LPCTSTR) (_bstr_t) ((2 * dDorVar) / ( frequencies2.GetSize ()- 1));
+}
+
+CString Hyp_SDCF_Meta::get_da_sum ()
+{
+	int i;
+	int sum = 0;
+	CString hlp;
+	for (i = 0; i < frequencies1.GetSize (); i++)
+		sum += abs (frequencies1.GetAt (i) - frequencies2.GetAt (i));
+	hlp.Format ("%d", sum);
+	return hlp;
+}
+
+CString Hyp_SDCF_Meta::get_da_min ()
+{
+	int i;
+	int min = abs (frequencies1.GetAt (0) - frequencies2.GetAt (0));
+	CString hlp;
+	for (i = 1; i < frequencies1.GetSize (); i++)
+		if (abs (frequencies1.GetAt (i) - frequencies2.GetAt (i)) < min)
+			min =abs (frequencies1.GetAt (i) - frequencies2.GetAt (i));
+	hlp.Format ("%d", min);
+	return hlp;
+}
+
+CString Hyp_SDCF_Meta::get_da_max ()
+{
+	int i;
+	int max = abs (frequencies1.GetAt (0) - frequencies2.GetAt (0));
+	CString hlp;
+	for (i = 1; i < frequencies1.GetSize (); i++)
+		if (abs (frequencies1.GetAt (i) - frequencies2.GetAt (i)) > max)
+			max =abs (frequencies1.GetAt (i) - frequencies2.GetAt (i));
+	hlp.Format ("%d", max);
+	return hlp;
+}
+
+CString Hyp_SDCF_Meta::get_dr_sum ()
+{
+	int i;
+	double sum = 0.0;
+	double sum1 = (double) get_sum1 ();
+	double sum2 = (double) get_sum2 ();
+	for (i = 0; i < frequencies1.GetSize (); i++)
+		sum += fabs (frequencies1.GetAt (i) / sum1 - frequencies2.GetAt (i) / sum2);
+	return (LPCTSTR) (_bstr_t) sum;
+}
+
+CString Hyp_SDCF_Meta::get_dr_min ()
+{
+	int i;
+	double sum1 = (double) get_sum1 ();
+	double sum2 = (double) get_sum2 ();
+	double min = fabs (frequencies1.GetAt (0) / sum1 - frequencies2.GetAt (0) / sum2);
+	for (i = 1; i < frequencies1.GetSize (); i++)
+		if (fabs (frequencies1.GetAt (i) / sum1 - frequencies2.GetAt (i) / sum2) < min)
+			min = fabs (frequencies1.GetAt (i) / sum1 - frequencies2.GetAt (i) / sum2);
+	return (LPCTSTR) (_bstr_t) min;
+}
+
+CString Hyp_SDCF_Meta::get_dr_max ()
+{
+	int i;
+	double sum1 = (double) get_sum1 ();
+	double sum2 = (double) get_sum2 ();
+	double max = fabs (frequencies1.GetAt (0) / sum1 - frequencies2.GetAt (0) / sum2);
+	for (i = 1; i < frequencies1.GetSize (); i++)
+		if (fabs (frequencies1.GetAt (i) / sum1 - frequencies2.GetAt (i) / sum2) > max)
+			max = fabs (frequencies1.GetAt (i) / sum1 - frequencies2.GetAt (i) / sum2);
+	return (LPCTSTR) (_bstr_t) max;
 }
 
 CString Hyp_KL_Meta::xml_convert ()
