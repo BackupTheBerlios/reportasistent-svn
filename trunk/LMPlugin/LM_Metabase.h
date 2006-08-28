@@ -444,7 +444,7 @@ private:
 
 typedef CArray <Hyp_SDCF_Meta *, Hyp_SDCF_Meta *> THyp_SDCF_Meta_Array;
 
-typedef CArray <CString_Array *, CString_Array *> TCString_Tab;
+typedef CArray <Cint_Array *, Cint_Array *> Tint_Tab;
 
 class Hyp_KL_Meta
 {
@@ -473,13 +473,16 @@ public:
 	CString_Array	row_attributes;
 	CString_Array	column_attributes;
     TLitArray		condition;
-	TCString_Tab	table;
+	Tint_Tab		table;
 
 	CString			row_id;
 	CString			col_id;
     CString			c_id;
 
 	CString			xml_convert ();
+	int				get_sum ();
+	CString			get_min ();
+	int				get_max ();
 };
 
 typedef CArray <Hyp_KL_Meta *, Hyp_KL_Meta *> THyp_KL_Meta_Array;
@@ -533,8 +536,8 @@ public:
     TLitArray		condition;
 	TLitArray		set1;
 	TLitArray		set2;
-	TCString_Tab	table1;
-	TCString_Tab	table2;
+	Tint_Tab		table1;
+	Tint_Tab		table2;
 
 	CString			row_id;
 	CString			col_id;

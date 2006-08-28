@@ -2531,7 +2531,7 @@ CString fLMKLhyp(void* hSource)
 	CString q_name;
 	CString q_value;
 
-	CString_Array * row_freq_hlp;
+	Cint_Array * row_freq_hlp;
 
 	Hyp_tiLiteral lit;
 
@@ -2604,17 +2604,16 @@ CString fLMKLhyp(void* hSource)
 			if (rs_freq.Open(AFX_DB_USE_DEFAULT_TYPE, q_freq))
 			{
 				//iteration on query results
-				row_freq_hlp = new (CString_Array);
+				row_freq_hlp = new (Cint_Array);
 				row = -1;
 				while (!rs_freq.IsEOF())
 				{
 					if ((row != rs_freq.m_Row) && (row != -1))
 					{
 						pthyp->table.Add (row_freq_hlp);
-						row_freq_hlp = new (CString_Array);
+						row_freq_hlp = new (Cint_Array);
 					}
-					hlp.Format ("%d", rs_freq.m_Frequency);
-					row_freq_hlp->Add (hlp);
+					row_freq_hlp->Add (rs_freq.m_Frequency);
 					row = rs_freq.m_Row;
 					rs_freq.MoveNext();
 				}
@@ -2708,9 +2707,11 @@ CString fLMKLhyp(void* hSource)
 			}
 			else return "";
 
-			pthyp->sum = "0";
-            pthyp->min = "0";
-            pthyp->max = "0";
+			hlp.Format ("%d", pthyp->get_sum ());
+			pthyp->sum = hlp;
+            pthyp->min = pthyp->get_min ();
+			hlp.Format ("%d", pthyp->get_max ());
+            pthyp->max = hlp;
             pthyp->chi_sq = "0";
             pthyp->fnc_s = "0";
             pthyp->fnc_r = "0";
@@ -2791,7 +2792,7 @@ CString fLMSDKLhyp(void* hSource)
 	CString q_name;
 	CString q_value;
 
-	CString_Array * row_freq_hlp;
+	Cint_Array * row_freq_hlp;
 
 	Hyp_tiLiteral lit;
 
@@ -2867,17 +2868,16 @@ CString fLMSDKLhyp(void* hSource)
 			if (rs_freq.Open(AFX_DB_USE_DEFAULT_TYPE, q_freq))
 			{
 				//iteration on query results
-				row_freq_hlp = new (CString_Array);
+				row_freq_hlp = new (Cint_Array);
 				row = -1;
 				while (!rs_freq.IsEOF())
 				{
 					if ((row != rs_freq.m_Row) && (row != -1))
 					{
 						pthyp->table1.Add (row_freq_hlp);
-						row_freq_hlp = new (CString_Array);
+						row_freq_hlp = new (Cint_Array);
 					}
-					hlp.Format ("%d", rs_freq.m_Frequency);
-					row_freq_hlp->Add (hlp);
+					row_freq_hlp->Add (rs_freq.m_Frequency);
 					row = rs_freq.m_Row;
 					rs_freq.MoveNext();
 				}
@@ -2896,17 +2896,16 @@ CString fLMSDKLhyp(void* hSource)
 			if (rs_freq.Open(AFX_DB_USE_DEFAULT_TYPE, q_freq))
 			{
 				//iteration on query results
-				row_freq_hlp = new (CString_Array);
+				row_freq_hlp = new (Cint_Array);
 				row = -1;
 				while (!rs_freq.IsEOF())
 				{
 					if ((row != rs_freq.m_Row) && (row != -1))
 					{
 						pthyp->table2.Add (row_freq_hlp);
-						row_freq_hlp = new (CString_Array);
+						row_freq_hlp = new (Cint_Array);
 					}
-					hlp.Format ("%d", rs_freq.m_Frequency);
-					row_freq_hlp->Add (hlp);
+					row_freq_hlp->Add (rs_freq.m_Frequency);
 					row = rs_freq.m_Row;
 					rs_freq.MoveNext();
 				}

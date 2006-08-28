@@ -1212,6 +1212,7 @@ CString Hyp_SDCF_Meta::get_dr_max ()
 CString Hyp_KL_Meta::xml_convert ()
 {
 	CString xml_string;
+	CString hlp;
 
 	db_name.Replace ("&", "&amp;");
 	matrix_name.Replace ("&", "&amp;");
@@ -1260,7 +1261,8 @@ CString Hyp_KL_Meta::xml_convert ()
 		xml_string = xml_string + " <r> ";
 		for (int j = 0; j < table.GetAt (i)->GetSize (); j++)
 		{
-			xml_string = xml_string + " <c val=\"" + table.GetAt (i)->GetAt (j) + "\"/> ";
+			hlp.Format ("%d", table.GetAt (i)->GetAt (j));
+			xml_string = xml_string + " <c val=\"" + hlp + "\"/> ";
 		}
 		xml_string = xml_string + " </r> ";
 	}
@@ -1308,9 +1310,50 @@ CString Hyp_KL_Meta::xml_convert ()
 	return xml_string;
 }
 
+int Hyp_KL_Meta::get_sum ()
+{
+	int s = 0;
+	int i;
+	int j;
+
+	for (i = 0; i < table.GetSize (); i++)
+		for (j = 0; j < table.GetAt (i)->GetSize (); j++)
+			s += table.GetAt (i)->GetAt (j);
+
+	return s;
+}
+
+int Hyp_KL_Meta::get_max ()
+{
+	int m = table.GetAt (0)->GetAt (0);
+	int i;
+	int j;
+	for (i = 0; i < table.GetSize (); i++)
+		for (j = 0; j < table.GetAt (i)->GetSize (); j++)
+			if (table.GetAt (i)->GetAt (j) > m) m = table.GetAt (i)->GetAt (j);
+
+	return m;
+}
+
+CString Hyp_KL_Meta::get_min ()
+{
+	int m = table.GetAt (0)->GetAt (0);
+	int i;
+	int j;
+	CString hlp;
+
+	for (i = 0; i < table.GetSize (); i++)
+		for (j = 0; j < table.GetAt (i)->GetSize (); j++)
+			if (table.GetAt (i)->GetAt (j) < m) m = table.GetAt (i)->GetAt (j);
+
+	hlp.Format ("%d", m);
+	return hlp;
+}
+
 CString Hyp_SDKL_Meta::xml_convert ()
 {
 	CString xml_string;
+	CString hlp;
 
 	db_name.Replace ("&", "&amp;");
 	matrix_name.Replace ("&", "&amp;");
@@ -1381,7 +1424,8 @@ CString Hyp_SDKL_Meta::xml_convert ()
 		xml_string = xml_string + " <r> ";
 		for (int j = 0; j < table1.GetAt (i)->GetSize (); j++)
 		{
-			xml_string = xml_string + " <c val=\"" + table1.GetAt (i)->GetAt (j) + "\"/> ";
+			hlp.Format ("%d", table1.GetAt (i)->GetAt (j));
+			xml_string = xml_string + " <c val=\"" + hlp + "\"/> ";
 		}
 		xml_string = xml_string + " </r> ";
 	}
@@ -1395,7 +1439,8 @@ CString Hyp_SDKL_Meta::xml_convert ()
 		xml_string = xml_string + " <r> ";
 		for (int j = 0; j < table2.GetAt (i)->GetSize (); j++)
 		{
-			xml_string = xml_string + " <c val=\"" + table2.GetAt (i)->GetAt (j) + "\"/> ";
+			hlp.Format ("%d", table2.GetAt (i)->GetAt (j));
+			xml_string = xml_string + " <c val=\"" + hlp + "\"/> ";
 		}
 		xml_string = xml_string + " </r> ";
 	}
