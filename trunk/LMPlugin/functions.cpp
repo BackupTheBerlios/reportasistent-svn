@@ -2712,13 +2712,13 @@ CString fLMKLhyp(void* hSource)
             pthyp->min = pthyp->get_min ();
 			hlp.Format ("%d", pthyp->get_max ());
             pthyp->max = hlp;
-            pthyp->chi_sq = "0";
-            pthyp->fnc_s = "0";
-            pthyp->fnc_r = "0";
-            pthyp->h_c = "0";
-            pthyp->h_r = "0";
-            pthyp->h_c_r = "0";
-            pthyp->mi = "0";
+            pthyp->chi_sq = pthyp->get_chi_sq ();
+            pthyp->fnc_s = pthyp->get_fnc_s ();
+            pthyp->fnc_r = pthyp->get_fnc_r ();
+            pthyp->h_c = (LPCTSTR) (_bstr_t) pthyp->get_h_c ();
+            pthyp->h_r = (LPCTSTR) (_bstr_t) pthyp->get_h_r ();
+            pthyp->h_c_r = (LPCTSTR) (_bstr_t) pthyp->get_h_c_r ();
+            pthyp->mi = pthyp->get_mi ();
             pthyp->aic = "0";
             pthyp->kend = "0"; 
 

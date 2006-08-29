@@ -1350,6 +1350,216 @@ CString Hyp_KL_Meta::get_min ()
 	return hlp;
 }
 
+int Hyp_KL_Meta::get_row_sum (Tint_Tab * tab, int row)
+{
+	int i;
+	int sum = 0;
+	for (i = 0; i < tab->GetAt (row)->GetSize (); i++)
+		sum += tab->GetAt (row)->GetAt (i);
+	return sum;
+}
+
+int Hyp_KL_Meta::get_col_sum (Tint_Tab * tab, int col)
+{
+	int i;
+	int sum = 0;
+	for (i = 0; i < tab->GetSize (); i++)
+		sum += tab->GetAt (i)->GetAt (col);
+	return sum;
+}
+
+CString Hyp_KL_Meta::get_chi_sq ()
+{
+	int sum = get_sum ();
+	double dValue;
+	double dChiSq= 0;
+	int i;
+	int j;
+	int nRk;
+	int nSl;
+
+	if ( sum == 0) return "";//to check
+
+	for (i = 0; i < table.GetSize () ; i++)
+	{
+		nRk= get_row_sum (&table, i);
+
+		for (j = 0; j < table.GetAt (i)->GetSize (); j++)
+		{
+			nSl= get_col_sum (&table, j);
+
+			if ( nRk != 0 &&
+				 nSl != 0)
+			{
+				dValue= (double)(table.GetAt (i)->GetAt (j))- ((double)nRk)*nSl/((double)sum);
+				dChiSq+= (dValue*dValue)/(((double)nRk)*nSl);
+			}
+		}
+	}
+	return (LPCTSTR) (_bstr_t) (sum * dChiSq);
+}
+
+CString Hyp_KL_Meta::get_fnc_s ()
+{
+	int nTotalSum = get_sum ();
+	if ( nTotalSum == 0) return "";//to check
+
+	double dSum = 0;
+	int i;
+	int j;
+	int nMax;
+	int dValue;
+	for (i = 0; i < table.GetSize (); i++)
+	{
+		nMax= 0;
+		for (j = 0; j < table.GetAt (i)->GetSize (); j++)
+		{
+			dValue= table.GetAt (i)->GetAt (j);
+			if ( dValue > nMax) nMax = dValue;
+		}
+		dSum += nMax;
+	}
+	return (LPCTSTR) (_bstr_t) (dSum / nTotalSum);
+}
+
+CString Hyp_KL_Meta::get_fnc_r ()
+{
+	int nTotalSum= get_sum();
+	if ( nTotalSum == 0) return "";//to check
+
+	double dSum= 0;
+	int i;
+	int j;
+	int nMax;
+	int nValue;
+	for (i = 0; i < table.GetSize (); i++)
+	{
+		nMax= 0;
+		for (j = 0; j < table.GetAt (i)->GetSize (); j++)
+		{
+			nValue = table.GetAt (i)->GetAt (j);
+			if ( nValue > nMax) nMax = nValue;
+		}
+		dSum += nMax * get_row_sum (&table, i);
+	}
+	return (LPCTSTR) (_bstr_t) (dSum / (((double)nTotalSum)* nTotalSum));
+}
+
+double Hyp_KL_Meta::get_h_c ()
+{
+	double dSum= get_sum ();
+	if ( dSum == 0) return 0.0;//to check
+
+	double dLog2= log( 2);
+	int j;
+	int nSl;
+	double dValue;
+
+	double dHC= 0;
+	for (j = 0; j < table.GetAt (0)->GetSize (); j++)
+	{
+		nSl = get_col_sum (&table, j);
+
+		if ( nSl != 0)
+		{
+			dValue = (nSl/dSum) * (log(nSl/dSum)/dLog2);
+			dHC += dValue;
+		}
+	}
+
+	dHC = -dHC;
+
+	return dHC;
+}
+
+double Hyp_KL_Meta::get_h_r ()
+{
+	double dSum= get_sum ();
+	if ( dSum == 0) return 0.0;//to check
+
+	double dLog2= log( 2);
+	int i;
+	int nRk;
+	double dValue;
+
+	double dHR= 0;
+	for (i= 0; i < table.GetSize (); i++)
+	{
+		nRk= get_row_sum (&table, i);
+
+		if ( nRk != 0)
+		{
+			dValue= (nRk/dSum)*(log(nRk/dSum)/dLog2);
+			dHR+= dValue;
+		}
+	}
+
+	dHR= -dHR;
+
+	return dHR;
+}
+
+double Hyp_KL_Meta::get_h_c_r ()
+{
+	double dSum= get_sum ();
+	if ( dSum == 0) return 0.0;//to check
+
+	double dLog2= log( 2);
+	int i;
+	int j;
+	int nRk;
+	int nSl;
+	double dHAVk;
+	double dValueF;
+	double dValue;
+
+	double dHA= 0;
+	for (i = 0; i < table.GetSize (); i++)
+	{
+		nRk = get_row_sum (&table, i);
+
+		dHAVk = 0;
+		if ( nRk != 0)
+		{
+			for (j = 0; j < table.GetAt (i)->GetSize (); j++)
+			{
+				nSl = get_col_sum (&table, j);
+
+				dValueF = (double) table.GetAt (i)->GetAt (j);
+				if ( dValueF != 0)
+				{
+					dValue = (dValueF / nRk) * (log(dValueF / nRk) / dLog2);
+					dHAVk += dValue;
+				}
+			}
+			dHAVk = -dHAVk;
+
+			dHA += nRk*dHAVk/dSum;
+		}
+	}
+
+	return dHA;
+}
+
+CString Hyp_KL_Meta::get_mi ()
+{
+	double dHC = get_h_c ();
+//	if ( _isnan( dHC)) return "";//to check
+
+	double dHR = get_h_r ();
+//	if ( _isnan( dHR)) return "";//to check
+
+	double dHCR = get_h_c_r ();
+//	if ( _isnan( dHCR)) "";//to check
+
+	double dMin = dHC < dHR ? dHC : dHR;
+	if (dMin == 0) return "";//to check
+
+	double dICR = (dHC - dHCR)/dMin;
+
+	return (LPCTSTR) (_bstr_t) dICR;
+}
+
 CString Hyp_SDKL_Meta::xml_convert ()
 {
 	CString xml_string;

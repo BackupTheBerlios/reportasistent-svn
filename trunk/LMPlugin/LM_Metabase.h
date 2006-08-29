@@ -483,6 +483,16 @@ public:
 	int				get_sum ();
 	CString			get_min ();
 	int				get_max ();
+	CString			get_chi_sq ();
+	CString			get_fnc_s ();
+	CString			get_fnc_r ();
+	double			get_h_c ();
+	double			get_h_r ();
+	double			get_h_c_r ();
+	CString			get_mi ();
+private:
+	int				get_row_sum (Tint_Tab * tab, int row);
+	int				get_col_sum (Tint_Tab * tab, int col);
 };
 
 typedef CArray <Hyp_KL_Meta *, Hyp_KL_Meta *> THyp_KL_Meta_Array;
