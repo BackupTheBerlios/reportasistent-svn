@@ -2719,8 +2719,8 @@ CString fLMKLhyp(void* hSource)
             pthyp->h_r = (LPCTSTR) (_bstr_t) pthyp->get_h_r ();
             pthyp->h_c_r = (LPCTSTR) (_bstr_t) pthyp->get_h_c_r ();
             pthyp->mi = pthyp->get_mi ();
-            pthyp->aic = "0";
-            pthyp->kend = "0"; 
+            pthyp->aic = pthyp->get_aic ();
+            pthyp->kend = pthyp->get_kend (); 
 
 			list.Add (pthyp);
 			rs.MoveNext();

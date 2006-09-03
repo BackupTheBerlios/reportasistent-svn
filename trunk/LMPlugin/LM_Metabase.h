@@ -490,6 +490,8 @@ public:
 	double			get_h_r ();
 	double			get_h_c_r ();
 	CString			get_mi ();
+	CString			get_aic ();
+	CString			get_kend ();
 private:
 	int				get_row_sum (Tint_Tab * tab, int row);
 	int				get_col_sum (Tint_Tab * tab, int col);

@@ -1513,7 +1513,7 @@ double Hyp_KL_Meta::get_h_c_r ()
 	double dValueF;
 	double dValue;
 
-	double dHA= 0;
+	double dHA = 0;
 	for (i = 0; i < table.GetSize (); i++)
 	{
 		nRk = get_row_sum (&table, i);
@@ -1558,6 +1558,70 @@ CString Hyp_KL_Meta::get_mi ()
 	double dICR = (dHC - dHCR)/dMin;
 
 	return (LPCTSTR) (_bstr_t) dICR;
+}
+
+CString Hyp_KL_Meta::get_aic ()
+{
+	double dSum = get_sum ();
+	if ( dSum == 0) return "";//to check
+
+	double dNl= 0.0;
+	int j;
+	int i;
+	int nSl;
+	int nRk;
+	int nValue;
+
+	for (j = 0; j < table.GetAt (0)->GetSize (); j++)
+	{
+		nSl = get_col_sum (&table, j);
+
+		if ( nSl != 0)
+		{
+			dNl += nSl * log( nSl);
+		}
+	}
+
+	double dDelitel = dSum * log( dSum) - dNl;
+
+	if (dDelitel == 0) return "";//to check
+
+	double dNk = 0.0;
+	for (i= 0; i < table.GetSize (); i++)
+	{
+		nRk = get_row_sum (&table, i);
+
+		if ( nRk != 0)
+		{
+			dNk += nRk * log( nRk);
+		}
+	}
+	
+	double dAkl= 0.0;
+	{
+	for (i = 0; i < table.GetSize (); i++)
+	{
+		for (j = 0; j < table.GetAt (0)->GetSize (); j++)
+		{
+			nValue = table.GetAt (i)->GetAt (j);
+			if ( nValue != 0)
+			{
+				dAkl += nValue * log( nValue);
+			}
+		}
+	}
+	}
+
+	double dDelenec = dNk - dAkl;
+
+	double dTheta = 1 - dDelenec / dDelitel;
+
+	return (LPCTSTR) (_bstr_t) dTheta;
+}
+
+CString Hyp_KL_Meta::get_kend ()
+{
+	return "";
 }
 
 CString Hyp_SDKL_Meta::xml_convert ()
