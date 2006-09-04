@@ -558,6 +558,42 @@ public:
 	CString			s2_id;
 
 	CString			xml_convert ();
+	
+	int				get_sum1 ();
+	CString			get_min1 ();
+	int				get_max1 ();
+	CString			get_chi_sq1 ();
+	CString			get_fnc_s1 ();
+	CString			get_fnc_r1 ();
+	double			get_h_c1 ();
+	double			get_h_r1 ();
+	double			get_h_c_r1 ();
+	CString			get_mi1 ();
+	CString			get_aic1 ();
+	CString			get_kend1 ();
+
+	int				get_sum2 ();
+	CString			get_min2 ();
+	int				get_max2 ();
+	CString			get_chi_sq2 ();
+	CString			get_fnc_s2 ();
+	CString			get_fnc_r2 ();
+	double			get_h_c2 ();
+	double			get_h_r2 ();
+	double			get_h_c_r2 ();
+	CString			get_mi2 ();
+	CString			get_aic2 ();
+	CString			get_kend2 ();
+
+	CString			get_da_sum ();
+    CString			get_da_min ();
+    CString			get_da_max ();
+    CString			get_dr_sum ();
+    CString			get_dr_min ();
+    CString			get_dr_max ();
+private:
+	int				get_row_sum (Tint_Tab * tab, int row);
+	int				get_col_sum (Tint_Tab * tab, int col);
 };
 
 typedef CArray <Hyp_SDKL_Meta *, Hyp_SDKL_Meta *> THyp_SDKL_Meta_Array;

@@ -1621,7 +1621,68 @@ CString Hyp_KL_Meta::get_aic ()
 
 CString Hyp_KL_Meta::get_kend ()
 {
-	return "";
+	double dSum = get_sum ();
+	if (dSum == 0) return "";//to check
+
+	double dNk2 = 0;
+	int i;
+	int j;
+	int nRk;
+	int nSl;
+	
+	for (i = 0; i < table.GetSize (); i++)
+	{
+		nRk= get_row_sum (&table, i);
+		dNk2 += ((double)nRk) * nRk;
+	}
+
+	double dNl2 = 0;
+	for (j = 0; j < table.GetAt (0)->GetSize (); j++)
+	{
+		nSl = get_col_sum (&table, j);
+		dNl2 += ((double)nSl) * nSl;
+	}
+
+	double dSum2 = dSum * dSum;
+
+	double dDelitel = sqrt( (dSum2 - dNk2) * (dSum2 - dNl2));
+
+	if (dDelitel == 0) return "";//to check
+
+	double dP = 0;
+	double dQ = 0;
+	double dPkl;
+	double dQkl;
+	int i2;
+	int j2;
+
+	{
+		for (i = 0; i < table.GetSize (); i++)
+		{
+			for (j = 0; j < table.GetAt (0)->GetSize (); j++)
+			{
+				dPkl= 0;
+				dQkl= 0;
+
+				for (i2 = i+ 1; i2 < table.GetSize (); i2++)
+				{
+					for (j2 = 0; j2 < table.GetAt (0)->GetSize (); j2++)
+					{ 
+						if (j2 < j) dQkl += (double)(table.GetAt (i2)->GetAt (j2));
+						if (j2 > j) dPkl += (double)(table.GetAt (i2)->GetAt (j2));    
+					}
+				}
+
+				dQ += ((double)(table.GetAt (i)->GetAt (j))) * dQkl;
+				dP += ((double)(table.GetAt (i)->GetAt (j))) * dPkl;
+			}
+		}
+	}
+	double dDelenec= 2 * (dP- dQ);
+
+	double dTauB = dDelenec / dDelitel;
+
+	return (LPCTSTR) (_bstr_t) dTauB;
 }
 
 CString Hyp_SDKL_Meta::xml_convert ()
@@ -1794,4 +1855,736 @@ CString Hyp_SDKL_Meta::xml_convert ()
 	xml_string = xml_string + "</ti_cedent> ";
 
 	return xml_string;
+}
+
+int Hyp_SDKL_Meta::get_sum1 ()
+{
+	int s = 0;
+	int i;
+	int j;
+
+	for (i = 0; i < table1.GetSize (); i++)
+		for (j = 0; j < table1.GetAt (i)->GetSize (); j++)
+			s += table1.GetAt (i)->GetAt (j);
+
+	return s;
+}
+
+int Hyp_SDKL_Meta::get_max1 ()
+{
+	int m = table1.GetAt (0)->GetAt (0);
+	int i;
+	int j;
+	for (i = 0; i < table1.GetSize (); i++)
+		for (j = 0; j < table1.GetAt (i)->GetSize (); j++)
+			if (table1.GetAt (i)->GetAt (j) > m) m = table1.GetAt (i)->GetAt (j);
+
+	return m;
+}
+
+CString Hyp_SDKL_Meta::get_min1 ()
+{
+	int m = table1.GetAt (0)->GetAt (0);
+	int i;
+	int j;
+	CString hlp;
+
+	for (i = 0; i < table1.GetSize (); i++)
+		for (j = 0; j < table1.GetAt (i)->GetSize (); j++)
+			if (table1.GetAt (i)->GetAt (j) < m) m = table1.GetAt (i)->GetAt (j);
+
+	hlp.Format ("%d", m);
+	return hlp;
+}
+
+int Hyp_SDKL_Meta::get_row_sum (Tint_Tab * tab, int row)
+{
+	int i;
+	int sum = 0;
+	for (i = 0; i < tab->GetAt (row)->GetSize (); i++)
+		sum += tab->GetAt (row)->GetAt (i);
+	return sum;
+}
+
+int Hyp_SDKL_Meta::get_col_sum (Tint_Tab * tab, int col)
+{
+	int i;
+	int sum = 0;
+	for (i = 0; i < tab->GetSize (); i++)
+		sum += tab->GetAt (i)->GetAt (col);
+	return sum;
+}
+
+CString Hyp_SDKL_Meta::get_chi_sq1 ()
+{
+	int sum = get_sum1 ();
+	double dValue;
+	double dChiSq= 0;
+	int i;
+	int j;
+	int nRk;
+	int nSl;
+
+	if ( sum == 0) return "";//to check
+
+	for (i = 0; i < table1.GetSize () ; i++)
+	{
+		nRk= get_row_sum (&table1, i);
+
+		for (j = 0; j < table1.GetAt (i)->GetSize (); j++)
+		{
+			nSl= get_col_sum (&table1, j);
+
+			if ( nRk != 0 &&
+				 nSl != 0)
+			{
+				dValue= (double)(table1.GetAt (i)->GetAt (j))- ((double)nRk)*nSl/((double)sum);
+				dChiSq+= (dValue*dValue)/(((double)nRk)*nSl);
+			}
+		}
+	}
+	return (LPCTSTR) (_bstr_t) (sum * dChiSq);
+}
+
+CString Hyp_SDKL_Meta::get_fnc_s1 ()
+{
+	int nTotalSum = get_sum1 ();
+	if ( nTotalSum == 0) return "";//to check
+
+	double dSum = 0;
+	int i;
+	int j;
+	int nMax;
+	int dValue;
+	for (i = 0; i < table1.GetSize (); i++)
+	{
+		nMax= 0;
+		for (j = 0; j < table1.GetAt (i)->GetSize (); j++)
+		{
+			dValue= table1.GetAt (i)->GetAt (j);
+			if ( dValue > nMax) nMax = dValue;
+		}
+		dSum += nMax;
+	}
+	return (LPCTSTR) (_bstr_t) (dSum / nTotalSum);
+}
+
+CString Hyp_SDKL_Meta::get_fnc_r1 ()
+{
+	int nTotalSum= get_sum1 ();
+	if ( nTotalSum == 0) return "";//to check
+
+	double dSum= 0;
+	int i;
+	int j;
+	int nMax;
+	int nValue;
+	for (i = 0; i < table1.GetSize (); i++)
+	{
+		nMax= 0;
+		for (j = 0; j < table1.GetAt (i)->GetSize (); j++)
+		{
+			nValue = table1.GetAt (i)->GetAt (j);
+			if ( nValue > nMax) nMax = nValue;
+		}
+		dSum += nMax * get_row_sum (&table1, i);
+	}
+	return (LPCTSTR) (_bstr_t) (dSum / (((double)nTotalSum)* nTotalSum));
+}
+
+double Hyp_SDKL_Meta::get_h_c1 ()
+{
+	double dSum= get_sum1 ();
+	if ( dSum == 0) return 0.0;//to check
+
+	double dLog2= log( 2);
+	int j;
+	int nSl;
+	double dValue;
+
+	double dHC= 0;
+	for (j = 0; j < table1.GetAt (0)->GetSize (); j++)
+	{
+		nSl = get_col_sum (&table1, j);
+
+		if ( nSl != 0)
+		{
+			dValue = (nSl/dSum) * (log(nSl/dSum)/dLog2);
+			dHC += dValue;
+		}
+	}
+
+	dHC = -dHC;
+
+	return dHC;
+}
+
+double Hyp_SDKL_Meta::get_h_r1 ()
+{
+	double dSum= get_sum1 ();
+	if ( dSum == 0) return 0.0;//to check
+
+	double dLog2= log( 2);
+	int i;
+	int nRk;
+	double dValue;
+
+	double dHR= 0;
+	for (i= 0; i < table1.GetSize (); i++)
+	{
+		nRk= get_row_sum (&table1, i);
+
+		if ( nRk != 0)
+		{
+			dValue= (nRk/dSum)*(log(nRk/dSum)/dLog2);
+			dHR+= dValue;
+		}
+	}
+
+	dHR= -dHR;
+
+	return dHR;
+}
+
+double Hyp_SDKL_Meta::get_h_c_r1 ()
+{
+	double dSum= get_sum1 ();
+	if ( dSum == 0) return 0.0;//to check
+
+	double dLog2= log( 2);
+	int i;
+	int j;
+	int nRk;
+	int nSl;
+	double dHAVk;
+	double dValueF;
+	double dValue;
+
+	double dHA = 0;
+	for (i = 0; i < table1.GetSize (); i++)
+	{
+		nRk = get_row_sum (&table1, i);
+
+		dHAVk = 0;
+		if ( nRk != 0)
+		{
+			for (j = 0; j < table1.GetAt (i)->GetSize (); j++)
+			{
+				nSl = get_col_sum (&table1, j);
+
+				dValueF = (double) table1.GetAt (i)->GetAt (j);
+				if ( dValueF != 0)
+				{
+					dValue = (dValueF / nRk) * (log(dValueF / nRk) / dLog2);
+					dHAVk += dValue;
+				}
+			}
+			dHAVk = -dHAVk;
+
+			dHA += nRk*dHAVk/dSum;
+		}
+	}
+
+	return dHA;
+}
+
+CString Hyp_SDKL_Meta::get_mi1 ()
+{
+	double dHC = get_h_c1 ();
+//	if ( _isnan( dHC)) return "";//to check
+
+	double dHR = get_h_r1 ();
+//	if ( _isnan( dHR)) return "";//to check
+
+	double dHCR = get_h_c_r1 ();
+//	if ( _isnan( dHCR)) "";//to check
+
+	double dMin = dHC < dHR ? dHC : dHR;
+	if (dMin == 0) return "";//to check
+
+	double dICR = (dHC - dHCR)/dMin;
+
+	return (LPCTSTR) (_bstr_t) dICR;
+}
+
+CString Hyp_SDKL_Meta::get_aic1 ()
+{
+	double dSum = get_sum1 ();
+	if ( dSum == 0) return "";//to check
+
+	double dNl= 0.0;
+	int j;
+	int i;
+	int nSl;
+	int nRk;
+	int nValue;
+
+	for (j = 0; j < table1.GetAt (0)->GetSize (); j++)
+	{
+		nSl = get_col_sum (&table1, j);
+
+		if ( nSl != 0)
+		{
+			dNl += nSl * log( nSl);
+		}
+	}
+
+	double dDelitel = dSum * log( dSum) - dNl;
+
+	if (dDelitel == 0) return "";//to check
+
+	double dNk = 0.0;
+	for (i= 0; i < table1.GetSize (); i++)
+	{
+		nRk = get_row_sum (&table1, i);
+
+		if ( nRk != 0)
+		{
+			dNk += nRk * log( nRk);
+		}
+	}
+	
+	double dAkl= 0.0;
+	{
+	for (i = 0; i < table1.GetSize (); i++)
+	{
+		for (j = 0; j < table1.GetAt (0)->GetSize (); j++)
+		{
+			nValue = table1.GetAt (i)->GetAt (j);
+			if ( nValue != 0)
+			{
+				dAkl += nValue * log( nValue);
+			}
+		}
+	}
+	}
+
+	double dDelenec = dNk - dAkl;
+
+	double dTheta = 1 - dDelenec / dDelitel;
+
+	return (LPCTSTR) (_bstr_t) dTheta;
+}
+
+CString Hyp_SDKL_Meta::get_kend1 ()
+{
+	double dSum = get_sum1 ();
+	if (dSum == 0) return "";//to check
+
+	double dNk2 = 0;
+	int i;
+	int j;
+	int nRk;
+	int nSl;
+	
+	for (i = 0; i < table1.GetSize (); i++)
+	{
+		nRk= get_row_sum (&table1, i);
+		dNk2 += ((double)nRk) * nRk;
+	}
+
+	double dNl2 = 0;
+	for (j = 0; j < table1.GetAt (0)->GetSize (); j++)
+	{
+		nSl = get_col_sum (&table1, j);
+		dNl2 += ((double)nSl) * nSl;
+	}
+
+	double dSum2 = dSum * dSum;
+
+	double dDelitel = sqrt( (dSum2 - dNk2) * (dSum2 - dNl2));
+
+	if (dDelitel == 0) return "";//to check
+
+	double dP = 0;
+	double dQ = 0;
+	double dPkl;
+	double dQkl;
+	int i2;
+	int j2;
+
+	{
+		for (i = 0; i < table1.GetSize (); i++)
+		{
+			for (j = 0; j < table1.GetAt (0)->GetSize (); j++)
+			{
+				dPkl= 0;
+				dQkl= 0;
+
+				for (i2 = i+ 1; i2 < table1.GetSize (); i2++)
+				{
+					for (j2 = 0; j2 < table1.GetAt (0)->GetSize (); j2++)
+					{ 
+						if (j2 < j) dQkl += (double)(table1.GetAt (i2)->GetAt (j2));
+						if (j2 > j) dPkl += (double)(table1.GetAt (i2)->GetAt (j2));    
+					}
+				}
+
+				dQ += ((double)(table1.GetAt (i)->GetAt (j))) * dQkl;
+				dP += ((double)(table1.GetAt (i)->GetAt (j))) * dPkl;
+			}
+		}
+	}
+	double dDelenec= 2 * (dP- dQ);
+
+	double dTauB = dDelenec / dDelitel;
+
+	return (LPCTSTR) (_bstr_t) dTauB;
+}
+
+int Hyp_SDKL_Meta::get_sum2 ()
+{
+	int s = 0;
+	int i;
+	int j;
+
+	for (i = 0; i < table2.GetSize (); i++)
+		for (j = 0; j < table2.GetAt (i)->GetSize (); j++)
+			s += table2.GetAt (i)->GetAt (j);
+
+	return s;
+}
+
+int Hyp_SDKL_Meta::get_max2 ()
+{
+	int m = table2.GetAt (0)->GetAt (0);
+	int i;
+	int j;
+	for (i = 0; i < table2.GetSize (); i++)
+		for (j = 0; j < table2.GetAt (i)->GetSize (); j++)
+			if (table2.GetAt (i)->GetAt (j) > m) m = table2.GetAt (i)->GetAt (j);
+
+	return m;
+}
+
+CString Hyp_SDKL_Meta::get_min2 ()
+{
+	int m = table2.GetAt (0)->GetAt (0);
+	int i;
+	int j;
+	CString hlp;
+
+	for (i = 0; i < table2.GetSize (); i++)
+		for (j = 0; j < table2.GetAt (i)->GetSize (); j++)
+			if (table2.GetAt (i)->GetAt (j) < m) m = table2.GetAt (i)->GetAt (j);
+
+	hlp.Format ("%d", m);
+	return hlp;
+}
+
+CString Hyp_SDKL_Meta::get_chi_sq2 ()
+{
+	int sum = get_sum2 ();
+	double dValue;
+	double dChiSq= 0;
+	int i;
+	int j;
+	int nRk;
+	int nSl;
+
+	if ( sum == 0) return "";//to check
+
+	for (i = 0; i < table2.GetSize () ; i++)
+	{
+		nRk= get_row_sum (&table2, i);
+
+		for (j = 0; j < table2.GetAt (i)->GetSize (); j++)
+		{
+			nSl= get_col_sum (&table2, j);
+
+			if ( nRk != 0 &&
+				 nSl != 0)
+			{
+				dValue= (double)(table2.GetAt (i)->GetAt (j))- ((double)nRk)*nSl/((double)sum);
+				dChiSq+= (dValue*dValue)/(((double)nRk)*nSl);
+			}
+		}
+	}
+	return (LPCTSTR) (_bstr_t) (sum * dChiSq);
+}
+
+CString Hyp_SDKL_Meta::get_fnc_s2 ()
+{
+	int nTotalSum = get_sum2 ();
+	if ( nTotalSum == 0) return "";//to check
+
+	double dSum = 0;
+	int i;
+	int j;
+	int nMax;
+	int dValue;
+	for (i = 0; i < table2.GetSize (); i++)
+	{
+		nMax= 0;
+		for (j = 0; j < table2.GetAt (i)->GetSize (); j++)
+		{
+			dValue= table2.GetAt (i)->GetAt (j);
+			if ( dValue > nMax) nMax = dValue;
+		}
+		dSum += nMax;
+	}
+	return (LPCTSTR) (_bstr_t) (dSum / nTotalSum);
+}
+
+CString Hyp_SDKL_Meta::get_fnc_r2 ()
+{
+	int nTotalSum= get_sum2 ();
+	if ( nTotalSum == 0) return "";//to check
+
+	double dSum= 0;
+	int i;
+	int j;
+	int nMax;
+	int nValue;
+	for (i = 0; i < table2.GetSize (); i++)
+	{
+		nMax= 0;
+		for (j = 0; j < table2.GetAt (i)->GetSize (); j++)
+		{
+			nValue = table2.GetAt (i)->GetAt (j);
+			if ( nValue > nMax) nMax = nValue;
+		}
+		dSum += nMax * get_row_sum (&table2, i);
+	}
+	return (LPCTSTR) (_bstr_t) (dSum / (((double)nTotalSum)* nTotalSum));
+}
+
+double Hyp_SDKL_Meta::get_h_c2 ()
+{
+	double dSum= get_sum2 ();
+	if ( dSum == 0) return 0.0;//to check
+
+	double dLog2= log( 2);
+	int j;
+	int nSl;
+	double dValue;
+
+	double dHC= 0;
+	for (j = 0; j < table2.GetAt (0)->GetSize (); j++)
+	{
+		nSl = get_col_sum (&table2, j);
+
+		if ( nSl != 0)
+		{
+			dValue = (nSl/dSum) * (log(nSl/dSum)/dLog2);
+			dHC += dValue;
+		}
+	}
+
+	dHC = -dHC;
+
+	return dHC;
+}
+
+double Hyp_SDKL_Meta::get_h_r2 ()
+{
+	double dSum= get_sum2 ();
+	if ( dSum == 0) return 0.0;//to check
+
+	double dLog2= log( 2);
+	int i;
+	int nRk;
+	double dValue;
+
+	double dHR= 0;
+	for (i= 0; i < table2.GetSize (); i++)
+	{
+		nRk= get_row_sum (&table2, i);
+
+		if ( nRk != 0)
+		{
+			dValue= (nRk/dSum)*(log(nRk/dSum)/dLog2);
+			dHR+= dValue;
+		}
+	}
+
+	dHR= -dHR;
+
+	return dHR;
+}
+
+double Hyp_SDKL_Meta::get_h_c_r2 ()
+{
+	double dSum= get_sum2 ();
+	if ( dSum == 0) return 0.0;//to check
+
+	double dLog2= log( 2);
+	int i;
+	int j;
+	int nRk;
+	int nSl;
+	double dHAVk;
+	double dValueF;
+	double dValue;
+
+	double dHA = 0;
+	for (i = 0; i < table2.GetSize (); i++)
+	{
+		nRk = get_row_sum (&table2, i);
+
+		dHAVk = 0;
+		if ( nRk != 0)
+		{
+			for (j = 0; j < table2.GetAt (i)->GetSize (); j++)
+			{
+				nSl = get_col_sum (&table2, j);
+
+				dValueF = (double) table2.GetAt (i)->GetAt (j);
+				if ( dValueF != 0)
+				{
+					dValue = (dValueF / nRk) * (log(dValueF / nRk) / dLog2);
+					dHAVk += dValue;
+				}
+			}
+			dHAVk = -dHAVk;
+
+			dHA += nRk*dHAVk/dSum;
+		}
+	}
+
+	return dHA;
+}
+
+CString Hyp_SDKL_Meta::get_mi2 ()
+{
+	double dHC = get_h_c2 ();
+//	if ( _isnan( dHC)) return "";//to check
+
+	double dHR = get_h_r2 ();
+//	if ( _isnan( dHR)) return "";//to check
+
+	double dHCR = get_h_c_r2 ();
+//	if ( _isnan( dHCR)) "";//to check
+
+	double dMin = dHC < dHR ? dHC : dHR;
+	if (dMin == 0) return "";//to check
+
+	double dICR = (dHC - dHCR)/dMin;
+
+	return (LPCTSTR) (_bstr_t) dICR;
+}
+
+CString Hyp_SDKL_Meta::get_aic2 ()
+{
+	double dSum = get_sum2 ();
+	if ( dSum == 0) return "";//to check
+
+	double dNl= 0.0;
+	int j;
+	int i;
+	int nSl;
+	int nRk;
+	int nValue;
+
+	for (j = 0; j < table2.GetAt (0)->GetSize (); j++)
+	{
+		nSl = get_col_sum (&table2, j);
+
+		if ( nSl != 0)
+		{
+			dNl += nSl * log( nSl);
+		}
+	}
+
+	double dDelitel = dSum * log( dSum) - dNl;
+
+	if (dDelitel == 0) return "";//to check
+
+	double dNk = 0.0;
+	for (i= 0; i < table2.GetSize (); i++)
+	{
+		nRk = get_row_sum (&table2, i);
+
+		if ( nRk != 0)
+		{
+			dNk += nRk * log( nRk);
+		}
+	}
+	
+	double dAkl= 0.0;
+	{
+	for (i = 0; i < table2.GetSize (); i++)
+	{
+		for (j = 0; j < table2.GetAt (0)->GetSize (); j++)
+		{
+			nValue = table2.GetAt (i)->GetAt (j);
+			if ( nValue != 0)
+			{
+				dAkl += nValue * log( nValue);
+			}
+		}
+	}
+	}
+
+	double dDelenec = dNk - dAkl;
+
+	double dTheta = 1 - dDelenec / dDelitel;
+
+	return (LPCTSTR) (_bstr_t) dTheta;
+}
+
+CString Hyp_SDKL_Meta::get_kend2 ()
+{
+	double dSum = get_sum2 ();
+	if (dSum == 0) return "";//to check
+
+	double dNk2 = 0;
+	int i;
+	int j;
+	int nRk;
+	int nSl;
+	
+	for (i = 0; i < table2.GetSize (); i++)
+	{
+		nRk= get_row_sum (&table2, i);
+		dNk2 += ((double)nRk) * nRk;
+	}
+
+	double dNl2 = 0;
+	for (j = 0; j < table2.GetAt (0)->GetSize (); j++)
+	{
+		nSl = get_col_sum (&table2, j);
+		dNl2 += ((double)nSl) * nSl;
+	}
+
+	double dSum2 = dSum * dSum;
+
+	double dDelitel = sqrt( (dSum2 - dNk2) * (dSum2 - dNl2));
+
+	if (dDelitel == 0) return "";//to check
+
+	double dP = 0;
+	double dQ = 0;
+	double dPkl;
+	double dQkl;
+	int i2;
+	int j2;
+
+	{
+		for (i = 0; i < table2.GetSize (); i++)
+		{
+			for (j = 0; j < table2.GetAt (0)->GetSize (); j++)
+			{
+				dPkl= 0;
+				dQkl= 0;
+
+				for (i2 = i+ 1; i2 < table2.GetSize (); i2++)
+				{
+					for (j2 = 0; j2 < table2.GetAt (0)->GetSize (); j2++)
+					{ 
+						if (j2 < j) dQkl += (double)(table2.GetAt (i2)->GetAt (j2));
+						if (j2 > j) dPkl += (double)(table2.GetAt (i2)->GetAt (j2));    
+					}
+				}
+
+				dQ += ((double)(table2.GetAt (i)->GetAt (j))) * dQkl;
+				dP += ((double)(table2.GetAt (i)->GetAt (j))) * dPkl;
+			}
+		}
+	}
+	double dDelenec= 2 * (dP- dQ);
+
+	double dTauB = dDelenec / dDelitel;
+
+	return (LPCTSTR) (_bstr_t) dTauB;
 }
