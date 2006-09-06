@@ -3107,12 +3107,12 @@ CString fLMSDKLhyp(void* hSource)
             pthyp->aic2 = pthyp->get_aic2 ();
             pthyp->kend2 = pthyp->get_kend2 ();
 
-			pthyp->da_sum = "0";
-            pthyp->da_min = "0";
-            pthyp->da_max = "0";
-            pthyp->dr_sum = "0";
-            pthyp->dr_min = "0";
-            pthyp->dr_max = "0";
+			pthyp->da_sum = pthyp->get_da_sum ();
+            pthyp->da_min = pthyp->get_da_min ();
+            pthyp->da_max = pthyp->get_da_max ();
+            pthyp->dr_sum = pthyp->get_dr_sum ();
+            pthyp->dr_min = pthyp->get_dr_min ();
+            pthyp->dr_max = pthyp->get_dr_max ();
 
 			list.Add (pthyp);
 			rs.MoveNext();

@@ -2588,3 +2588,104 @@ CString Hyp_SDKL_Meta::get_kend2 ()
 
 	return (LPCTSTR) (_bstr_t) dTauB;
 }
+
+CString Hyp_SDKL_Meta::get_da_max ()
+{
+	int i;
+	int j;
+	int max = abs (table1.GetAt (0)->GetAt (0) - table2.GetAt (0)->GetAt (0));
+	CString hlp;
+	for (i = 0; i < table1.GetSize (); i++)
+		for (j = 0; j < table1.GetAt (i)->GetSize (); j++)
+			if (abs (table1.GetAt (i)->GetAt (j) - table2.GetAt (i)->GetAt (j)) > max)
+				max = abs (table1.GetAt (i)->GetAt (j) - table2.GetAt (i)->GetAt (j));
+	hlp.Format ("%d", max);
+	return hlp;
+}
+
+CString Hyp_SDKL_Meta::get_da_sum ()
+{
+	int i;
+	int j;
+	int sum = 0;
+	CString hlp;
+	for (i = 0; i < table1.GetSize (); i++)
+		for (j = 0; j < table1.GetAt (i)->GetSize (); j++)
+			sum += abs (table1.GetAt (i)->GetAt (j) - table2.GetAt (i)->GetAt (j));
+	hlp.Format ("%d", sum);
+	return hlp;
+}
+
+CString Hyp_SDKL_Meta::get_da_min ()
+{
+	int i;
+	int j;
+	int min = abs (table1.GetAt (0)->GetAt (0) - table2.GetAt (0)->GetAt (0));
+	CString hlp;
+	for (i = 0; i < table1.GetSize (); i++)
+		for (j = 0; j < table1.GetAt (i)->GetSize (); j++)
+			if (abs (table1.GetAt (i)->GetAt (j) - table2.GetAt (i)->GetAt (j)) < min)
+				min = abs (table1.GetAt (i)->GetAt (j) - table2.GetAt (i)->GetAt (j));
+	hlp.Format ("%d", min);
+	return hlp;
+}
+
+CString Hyp_SDKL_Meta::get_dr_sum ()
+{
+	int i;
+	int j;
+	double sum = 0.0;
+	double sum1 = (double) get_sum1 ();
+	double sum2 = (double) get_sum2 ();
+	for (i = 0; i < table1.GetSize (); i++)
+		for (j = 0; j < table1.GetAt (i)->GetSize (); j++)
+		{
+			sum += fabs ((table1.GetAt (i)->GetAt (j)) / sum1
+			             -
+						 (table2.GetAt (i)->GetAt (j)) / sum2);
+		}
+	return (LPCTSTR) (_bstr_t) sum;
+}
+
+CString Hyp_SDKL_Meta::get_dr_min ()
+{
+	int i;
+	int j;
+	double sum1 = (double) get_sum1 ();
+	double sum2 = (double) get_sum2 ();
+	double min =
+		fabs ((table1.GetAt (0)->GetAt (0)) / sum1 - (table2.GetAt (0)->GetAt (0)) / sum2);
+	for (i = 0; i < table1.GetSize (); i++)
+		for (j = 0; j < table1.GetAt (i)->GetSize (); j++)
+		{
+			if (fabs ((table1.GetAt (i)->GetAt (j)) / sum1
+				      -
+					  (table2.GetAt (i)->GetAt (j)) / sum2) < min)
+				min =
+				fabs ((table1.GetAt (i)->GetAt (j)) / sum1
+				      -
+					  (table2.GetAt (i)->GetAt (j)) / sum2);
+		}
+	return (LPCTSTR) (_bstr_t) min;
+}
+
+CString Hyp_SDKL_Meta::get_dr_max ()
+{
+	int i;
+	int j;
+	double sum1 = (double) get_sum1 ();
+	double sum2 = (double) get_sum2 ();
+	double max =
+		fabs ((table1.GetAt (0)->GetAt (0)) / sum1 - (table2.GetAt (0)->GetAt (0)) / sum2);
+	for (i = 0; i < table1.GetSize (); i++)
+		for (j = 0; j < table1.GetAt (i)->GetSize (); j++)
+		{
+			if (fabs ((table1.GetAt (i)->GetAt (j)) / sum1
+				      -
+					  (table2.GetAt (i)->GetAt (j)) / sum2) < max)
+				max =
+				fabs ((table1.GetAt (i)->GetAt (j)) / sum1
+				      - (table2.GetAt (i)->GetAt (j)) / sum2);
+		}
+	return (LPCTSTR) (_bstr_t) max;
+}
