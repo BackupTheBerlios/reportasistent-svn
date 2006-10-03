@@ -3,7 +3,7 @@
 	ProjectType="Visual C++"
 	Version="8,00"
 	Name="ReportAsistent"
-	ProjectGUID="{F1290060-951D-4A84-ACFB-D9F0E3BDC45E}"
+	ProjectGUID="{52241382-62D5-4A84-AE93-879CE6AA2BAB}"
 	Keyword="MFCProj"
 	>
 	<Platforms>
@@ -457,7 +457,47 @@
 				</FileConfiguration>
 			</File>
 			<File
+				RelativePath="ElementReportDialog.cpp"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+			</File>
+			<File
 				RelativePath="ElementTextDialog.cpp"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="EToolBar.cpp"
 				>
 				<FileConfiguration
 					Name="Debug|Win32"
@@ -498,6 +538,26 @@
 			</File>
 			<File
 				RelativePath="MainFrm.cpp"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="OptionsDialog.cpp"
 				>
 				<FileConfiguration
 					Name="Debug|Win32"
@@ -679,6 +739,66 @@
 				</FileConfiguration>
 			</File>
 			<File
+				RelativePath="WaitAnimation.cpp"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="WaitDialog.cpp"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="WordEventHandler.cpp"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+			</File>
+			<File
 				RelativePath="WordManager.cpp"
 				>
 				<FileConfiguration
@@ -752,7 +872,15 @@
 				>
 			</File>
 			<File
+				RelativePath="ElementReportDialog.h"
+				>
+			</File>
+			<File
 				RelativePath="ElementTextDialog.h"
+				>
+			</File>
+			<File
+				RelativePath="EToolBar.h"
 				>
 			</File>
 			<File
@@ -761,6 +889,10 @@
 			</File>
 			<File
 				RelativePath="MainFrm.h"
+				>
+			</File>
+			<File
+				RelativePath="OptionsDialog.h"
 				>
 			</File>
 			<File
@@ -797,6 +929,18 @@
 			</File>
 			<File
 				RelativePath="TransformationsDialog.h"
+				>
+			</File>
+			<File
+				RelativePath="WaitAnimation.h"
+				>
+			</File>
+			<File
+				RelativePath="WaitDialog.h"
+				>
+			</File>
+			<File
+				RelativePath="WordEventHandler.h"
 				>
 			</File>
 			<File
@@ -853,6 +997,10 @@
 				>
 			</File>
 			<File
+				RelativePath="res\skeleton_DTD.xml"
+				>
+			</File>
+			<File
 				RelativePath="res\Table.bmp"
 				>
 			</File>
@@ -872,6 +1020,10 @@
 				RelativePath="res\unknowni.bmp"
 				>
 			</File>
+			<File
+				RelativePath="res\visualization_options_DTD.xml"
+				>
+			</File>
 		</Filter>
 		<File
 			RelativePath="IvaUzitKonstrukce.txt"
@@ -883,6 +1035,14 @@
 		</File>
 		<File
 			RelativePath="ReportAsistent.reg"
+			>
+		</File>
+		<File
+			RelativePath="..\XML\skeleton_DTD.xml"
+			>
+		</File>
+		<File
+			RelativePath="..\XML\visualization_options_DTD.xml"
 			>
 		</File>
 	</Files>

@@ -1450,7 +1450,7 @@ double Hyp_KL_Meta::get_h_c ()
 	double dSum= get_sum ();
 	if ( dSum == 0) return 0.0;//to check
 
-	double dLog2= log( 2);
+	double dLog2= log((double) 2);
 	int j;
 	int nSl;
 	double dValue;
@@ -1477,7 +1477,7 @@ double Hyp_KL_Meta::get_h_r ()
 	double dSum= get_sum ();
 	if ( dSum == 0) return 0.0;//to check
 
-	double dLog2= log( 2);
+	double dLog2= log((double) 2);
 	int i;
 	int nRk;
 	double dValue;
@@ -1504,7 +1504,7 @@ double Hyp_KL_Meta::get_h_c_r ()
 	double dSum= get_sum ();
 	if ( dSum == 0) return 0.0;//to check
 
-	double dLog2= log( 2);
+	double dLog2= log((double) 2);
 	int i;
 	int j;
 	int nRk;
@@ -1578,7 +1578,7 @@ CString Hyp_KL_Meta::get_aic ()
 
 		if ( nSl != 0)
 		{
-			dNl += nSl * log( nSl);
+			dNl += nSl * log((double) nSl);
 		}
 	}
 
@@ -1593,7 +1593,7 @@ CString Hyp_KL_Meta::get_aic ()
 
 		if ( nRk != 0)
 		{
-			dNk += nRk * log( nRk);
+			dNk += nRk * log((double) nRk);
 		}
 	}
 	
@@ -1606,7 +1606,7 @@ CString Hyp_KL_Meta::get_aic ()
 			nValue = table.GetAt (i)->GetAt (j);
 			if ( nValue != 0)
 			{
-				dAkl += nValue * log( nValue);
+				dAkl += nValue * log((double) nValue);
 			}
 		}
 	}
@@ -1997,7 +1997,7 @@ double Hyp_SDKL_Meta::get_h_c1 ()
 	double dSum= get_sum1 ();
 	if ( dSum == 0) return 0.0;//to check
 
-	double dLog2= log( 2);
+	double dLog2= log((double) 2);
 	int j;
 	int nSl;
 	double dValue;
@@ -2024,7 +2024,7 @@ double Hyp_SDKL_Meta::get_h_r1 ()
 	double dSum= get_sum1 ();
 	if ( dSum == 0) return 0.0;//to check
 
-	double dLog2= log( 2);
+	double dLog2= log((double) 2);
 	int i;
 	int nRk;
 	double dValue;
@@ -2051,7 +2051,7 @@ double Hyp_SDKL_Meta::get_h_c_r1 ()
 	double dSum= get_sum1 ();
 	if ( dSum == 0) return 0.0;//to check
 
-	double dLog2= log( 2);
+	double dLog2= log((double) 2);
 	int i;
 	int j;
 	int nRk;
@@ -2125,7 +2125,7 @@ CString Hyp_SDKL_Meta::get_aic1 ()
 
 		if ( nSl != 0)
 		{
-			dNl += nSl * log( nSl);
+			dNl += nSl * log((double) nSl);
 		}
 	}
 
@@ -2140,7 +2140,7 @@ CString Hyp_SDKL_Meta::get_aic1 ()
 
 		if ( nRk != 0)
 		{
-			dNk += nRk * log( nRk);
+			dNk += nRk * log((double) nRk);
 		}
 	}
 	
@@ -2153,7 +2153,7 @@ CString Hyp_SDKL_Meta::get_aic1 ()
 			nValue = table1.GetAt (i)->GetAt (j);
 			if ( nValue != 0)
 			{
-				dAkl += nValue * log( nValue);
+				dAkl += nValue * log((double) nValue);
 			}
 		}
 	}
@@ -2354,7 +2354,7 @@ double Hyp_SDKL_Meta::get_h_c2 ()
 	double dSum= get_sum2 ();
 	if ( dSum == 0) return 0.0;//to check
 
-	double dLog2= log( 2);
+	double dLog2= log((double) 2);
 	int j;
 	int nSl;
 	double dValue;
@@ -2381,7 +2381,7 @@ double Hyp_SDKL_Meta::get_h_r2 ()
 	double dSum= get_sum2 ();
 	if ( dSum == 0) return 0.0;//to check
 
-	double dLog2= log( 2);
+	double dLog2= log((double) 2);
 	int i;
 	int nRk;
 	double dValue;
@@ -2408,7 +2408,7 @@ double Hyp_SDKL_Meta::get_h_c_r2 ()
 	double dSum= get_sum2 ();
 	if ( dSum == 0) return 0.0;//to check
 
-	double dLog2= log( 2);
+	double dLog2= log((double) 2);
 	int i;
 	int j;
 	int nRk;
@@ -2482,7 +2482,7 @@ CString Hyp_SDKL_Meta::get_aic2 ()
 
 		if ( nSl != 0)
 		{
-			dNl += nSl * log( nSl);
+			dNl += nSl * log((double) nSl);
 		}
 	}
 
@@ -2497,7 +2497,7 @@ CString Hyp_SDKL_Meta::get_aic2 ()
 
 		if ( nRk != 0)
 		{
-			dNk += nRk * log( nRk);
+			dNk += nRk * log((double) nRk);
 		}
 	}
 	
@@ -2510,7 +2510,7 @@ CString Hyp_SDKL_Meta::get_aic2 ()
 			nValue = table2.GetAt (i)->GetAt (j);
 			if ( nValue != 0)
 			{
-				dAkl += nValue * log( nValue);
+				dAkl += nValue * log((double) nValue);
 			}
 		}
 	}

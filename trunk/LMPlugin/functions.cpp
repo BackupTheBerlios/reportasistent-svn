@@ -3147,7 +3147,8 @@ CString fLMSDKLhyp(void* hSource)
 		list.GetAt (i)->condition.RemoveAll ();
 		list.GetAt (i)->set1.RemoveAll ();
 		list.GetAt (i)->set2.RemoveAll ();
-		for (int j = 0; j < list.GetAt (i)->table1.GetSize (); j++)
+		int j;
+		for (j = 0; j < list.GetAt (i)->table1.GetSize (); j++)
 		{
 			for (int k = 0; list.GetAt (i)->table1.GetAt (j)->GetSize (); k++)
 			{

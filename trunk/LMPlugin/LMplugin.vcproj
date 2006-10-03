@@ -3,7 +3,7 @@
 	ProjectType="Visual C++"
 	Version="8,00"
 	Name="LMplugin"
-	ProjectGUID="{4ACD5411-5726-4848-8170-B17A8626C9E3}"
+	ProjectGUID="{1D0C84BD-B360-4735-94FA-C6D5DA6A0EA6}"
 	Keyword="MFCProj"
 	>
 	<Platforms>
@@ -296,6 +296,106 @@
 			</File>
 			<File
 				RelativePath="Hyp_4ft_Recordset.cpp"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="Hyp_CF_Recordset.cpp"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="Hyp_KL_Recordset.cpp"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="Hyp_SD4ft_Recordset.cpp"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="Hyp_SDCF_Recordset.cpp"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="Hyp_SDKL_Recordset.cpp"
 				>
 				<FileConfiguration
 					Name="Debug|Win32"
@@ -619,6 +719,86 @@
 				</FileConfiguration>
 			</File>
 			<File
+				RelativePath="TCondition_Recordset.cpp"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="TDCQuantifier_Recordset.cpp"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="TDFQuantifier_Recordset.cpp"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="TDKQuantifier_Recordset.cpp"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+			</File>
+			<File
 				RelativePath="TEmpty_Cedents_Recordset.cpp"
 				>
 				<FileConfiguration
@@ -659,7 +839,107 @@
 				</FileConfiguration>
 			</File>
 			<File
+				RelativePath="tiCFFrequencyI_Recordset.cpp"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="tiDCFrequencyI_Recordset.cpp"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="tiDKFrequencyI_Recordset.cpp"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+			</File>
+			<File
 				RelativePath="tiHypothesis_Recordset.cpp"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="tiKLFrequencyI_Recordset.cpp"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="TKLCategory_Recordset.cpp"
 				>
 				<FileConfiguration
 					Name="Debug|Win32"
@@ -699,7 +979,67 @@
 				</FileConfiguration>
 			</File>
 			<File
+				RelativePath="TKLquant_Recordset.cpp"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="TKLQuantifier_Recordset.cpp"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+			</File>
+			<File
 				RelativePath="TLit_Scan_Recordset.cpp"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="tmCategory_Recordset.cpp"
 				>
 				<FileConfiguration
 					Name="Debug|Win32"
@@ -741,6 +1081,26 @@
 			</File>
 			<File
 				RelativePath="Hyp_4ft_Recordset.h"
+				>
+			</File>
+			<File
+				RelativePath="Hyp_CF_Recordset.h"
+				>
+			</File>
+			<File
+				RelativePath="Hyp_KL_Recordset.h"
+				>
+			</File>
+			<File
+				RelativePath="Hyp_SD4ft_Recordset.h"
+				>
+			</File>
+			<File
+				RelativePath="Hyp_SDCF_Recordset.h"
+				>
+			</File>
+			<File
+				RelativePath="Hyp_SDKL_Recordset.h"
 				>
 			</File>
 			<File
@@ -812,6 +1172,22 @@
 				>
 			</File>
 			<File
+				RelativePath="TCondition_Recordset.h"
+				>
+			</File>
+			<File
+				RelativePath="TDCQuantifier_Recordset.h"
+				>
+			</File>
+			<File
+				RelativePath="TDFQuantifier_Recordset.h"
+				>
+			</File>
+			<File
+				RelativePath="TDKQuantifier_Recordset.h"
+				>
+			</File>
+			<File
 				RelativePath="TEmpty_Cedents_Recordset.h"
 				>
 			</File>
@@ -820,7 +1196,27 @@
 				>
 			</File>
 			<File
+				RelativePath="tiCFFrequencyI_Recordset.h"
+				>
+			</File>
+			<File
+				RelativePath="tiDCFrequencyI_Recordset.h"
+				>
+			</File>
+			<File
+				RelativePath="tiDKFrequencyI_Recordset.h"
+				>
+			</File>
+			<File
 				RelativePath="tiHypothesis_Recordset.h"
+				>
+			</File>
+			<File
+				RelativePath="tiKLFrequencyI_Recordset.h"
+				>
+			</File>
+			<File
+				RelativePath="TKLCategory_Recordset.h"
 				>
 			</File>
 			<File
@@ -828,7 +1224,19 @@
 				>
 			</File>
 			<File
+				RelativePath="TKLquant_Recordset.h"
+				>
+			</File>
+			<File
+				RelativePath="TKLQuantifier_Recordset.h"
+				>
+			</File>
+			<File
 				RelativePath="TLit_Scan_Recordset.h"
+				>
+			</File>
+			<File
+				RelativePath="tmCategory_Recordset.h"
 				>
 			</File>
 		</Filter>
