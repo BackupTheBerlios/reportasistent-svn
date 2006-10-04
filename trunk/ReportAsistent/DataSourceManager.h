@@ -68,6 +68,37 @@ typedef CSockInterface* (* pSockIfaceFn_t) ();
 
 // ================== TRIDY ==================================
 
+// bufferovani vystupu
+class APBuf
+{
+public:
+	LPCTSTR ap_name;
+	BSTR buffer;
+	
+	APBuf(LPCTSTR name, BSTR buf);
+	APBuf();
+};
+
+
+class COutputBuffer
+{
+	CArray<APBuf,APBuf> BufArray;	// pole bufferu
+
+public:
+	int getBuffersCount();  // ret. number of AP which are buffered for the current data source
+	int getAPIndex(LPCTSTR APName);
+	BOOL isAPBuffered(LPCTSTR APName);
+	BSTR getBuffer(LPCTSTR APName); //returns buffer for given AP
+	void setBuffer(LPCTSTR APName, BSTR Buffer); // sets buffer -||-
+
+	COutputBuffer();
+	~COutputBuffer();
+private:
+	int insertNewAP(LPCTSTR APName, BSTR Buffer);
+
+};
+
+
 
 // --------- CPluginRec - polozka tabulky zasuvek
 class CPluginRec 
@@ -92,17 +123,21 @@ public:
 	persistent_id_t    PerzistID;	// connection string
 	plugin_id_t	       PluginID;	// jedna z PluginName v tabulce zasuvek
 	source_handle_t	   SourceHandle;// handle na otevreny zdroj
+	COutputBuffer *	   Buffer;	// buffer vystupu AP zdroje
 
 	
 	int	PluginIndex;  // index zaznamu v tabulce zasuvek, jejiz PluginName se shoduje s PluginID teto instance
-					  // == -1 pokut takovy neexistuje
-
+					  // == -1 pokut takovy neexistuje	
+	
+	
 	BOOL Valid();					// priznak, zda je tento zaznam v poradku
 
 
-	// konstruktor
+	// konstruktor a destruktor
 	CSourceRec();
+	~CSourceRec();
 };
+
 
 // ===========================================================
 

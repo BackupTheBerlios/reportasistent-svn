@@ -63,8 +63,14 @@ CSourceRec::CSourceRec()
 	PublicID = "";
 	PluginIndex = -1;
 	SourceHandle = NULL;
+	Buffer = new COutputBuffer();
 }
 
+// destruktor
+CSourceRec::~CSourceRec()
+{
+	delete(Buffer);
+}
 
 // Valid()
 BOOL CSourceRec::Valid()
@@ -74,6 +80,94 @@ BOOL CSourceRec::Valid()
 	
 	return FALSE;
 }
+
+
+/////////////////////////////////////////////////////////////////
+// --------- APBuf -----
+APBuf::APBuf(LPCTSTR name, BSTR buf)
+{
+	ap_name = name;
+	buffer = buf;
+}	
+
+APBuf::APBuf()
+{
+	ap_name = NULL;
+	buffer = NULL;
+}
+
+/////////////////////////////////////////////////////////////////
+// --------- COutputBuffer -----
+
+// konstruktor
+COutputBuffer::COutputBuffer()
+{
+}
+
+// destruktor - uvolneni pameti po bufferech
+COutputBuffer::~COutputBuffer()
+{
+	int i;
+	for(i=0; i<getBuffersCount(); i++)
+		SysFreeString(BufArray[i].buffer);
+	BufArray.RemoveAll();
+}
+
+
+int COutputBuffer::getBuffersCount()
+{
+	return BufArray.GetCount();
+}
+
+int COutputBuffer::getAPIndex(LPCTSTR APName)
+{
+	// returns index of active element "APName" in BufArray or -1 if this active element is not in array
+	int i;
+	for(i=0; i<getBuffersCount(); i++)
+	{
+		if(APName == BufArray[i].ap_name)
+		{
+			return i;
+		}
+	}
+	return -1;
+}
+
+BOOL COutputBuffer::isAPBuffered(LPCTSTR APName)
+{
+	if(getAPIndex(APName) == -1)
+		return false;
+	return true;
+}
+
+
+BSTR COutputBuffer::getBuffer(LPCTSTR APName)
+{
+	int i = getAPIndex(APName);
+	if(i != -1)
+		return BufArray[i].buffer;
+	return NULL;
+}
+
+void COutputBuffer::setBuffer(LPCTSTR APName, BSTR Buffer)
+{
+	int i = getAPIndex(APName);
+	if(i != -1)
+	{
+		BufArray[i].buffer = Buffer;
+		return;
+	}
+	insertNewAP(APName, Buffer);
+}
+
+
+int COutputBuffer::insertNewAP(LPCTSTR APName, BSTR Buffer)
+{
+	APBuf NewItem = APBuf(APName, Buffer);
+	int index = BufArray.Add((APBuf)NewItem);
+	return index;
+}
+
 
 /////////////////////////////////////////////////////////////////
 // ----------- CDataSourcesManager -----
@@ -819,7 +913,19 @@ BSTR CDataSourcesManager::GetPluginOutput(public_source_id_t source, LPCTSTR ap_
 		if (! ConnectSource(src_index)) return NULL;
 	}
 
-	return CallPerformProc(src_index, ap_name);
+	/*return CallPerformProc(src_index, ap_name);*/
+
+	COutputBuffer * OB = SourcesTab[src_index].Buffer;
+	
+	if(OB->isAPBuffered(ap_name))		// vystup jiz v bufferu
+		return OB->getBuffer(ap_name);
+
+	// vystup neni v bufferu - nacte se ze zasuvky, ulozi se do bufferu a vrati se
+	BSTR result = CallPerformProc(src_index, ap_name);
+	OB->setBuffer(ap_name, result);
+	return result;
+
+
 }
 
 
