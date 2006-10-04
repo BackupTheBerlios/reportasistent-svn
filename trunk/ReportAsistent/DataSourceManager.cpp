@@ -69,7 +69,7 @@ CSourceRec::CSourceRec()
 // destruktor
 CSourceRec::~CSourceRec()
 {
-	delete(Buffer);
+//	delete(Buffer);
 }
 
 // Valid()
@@ -84,7 +84,7 @@ BOOL CSourceRec::Valid()
 
 /////////////////////////////////////////////////////////////////
 // --------- APBuf -----
-APBuf::APBuf(LPCTSTR name, BSTR buf)
+APBuf::APBuf(CString name, CString buf)
 {
 	ap_name = name;
 	buffer = buf;
@@ -92,8 +92,8 @@ APBuf::APBuf(LPCTSTR name, BSTR buf)
 
 APBuf::APBuf()
 {
-	ap_name = NULL;
-	buffer = NULL;
+	ap_name = "";
+	buffer = "";
 }
 
 /////////////////////////////////////////////////////////////////
@@ -107,10 +107,7 @@ COutputBuffer::COutputBuffer()
 // destruktor - uvolneni pameti po bufferech
 COutputBuffer::~COutputBuffer()
 {
-	int i;
-	for(i=0; i<getBuffersCount(); i++)
-		SysFreeString(BufArray[i].buffer);
-	BufArray.RemoveAll();
+	//BufArray.RemoveAll();
 }
 
 
@@ -119,13 +116,13 @@ int COutputBuffer::getBuffersCount()
 	return BufArray.GetCount();
 }
 
-int COutputBuffer::getAPIndex(LPCTSTR APName)
+int COutputBuffer::getAPIndex(CString APName)
 {
 	// returns index of active element "APName" in BufArray or -1 if this active element is not in array
 	int i;
 	for(i=0; i<getBuffersCount(); i++)
 	{
-		if(APName == BufArray[i].ap_name)
+		if(BufArray[i]->ap_name == APName)
 		{
 			return i;
 		}
@@ -133,7 +130,7 @@ int COutputBuffer::getAPIndex(LPCTSTR APName)
 	return -1;
 }
 
-BOOL COutputBuffer::isAPBuffered(LPCTSTR APName)
+BOOL COutputBuffer::isAPBuffered(CString APName)
 {
 	if(getAPIndex(APName) == -1)
 		return false;
@@ -141,30 +138,30 @@ BOOL COutputBuffer::isAPBuffered(LPCTSTR APName)
 }
 
 
-BSTR COutputBuffer::getBuffer(LPCTSTR APName)
+BSTR COutputBuffer::getBuffer(CString APName)
 {
 	int i = getAPIndex(APName);
 	if(i != -1)
-		return BufArray[i].buffer;
+		return (BufArray[i]->buffer).AllocSysString();
 	return NULL;
 }
 
-void COutputBuffer::setBuffer(LPCTSTR APName, BSTR Buffer)
+void COutputBuffer::setBuffer(CString APName, BSTR Buffer)
 {
 	int i = getAPIndex(APName);
 	if(i != -1)
 	{
-		BufArray[i].buffer = Buffer;
+		BufArray[i]->buffer = (CString) Buffer;
 		return;
 	}
-	insertNewAP(APName, Buffer);
+	insertNewAP(APName, (CString) Buffer);
 }
 
 
-int COutputBuffer::insertNewAP(LPCTSTR APName, BSTR Buffer)
+int COutputBuffer::insertNewAP(CString APName, CString Buffer)
 {
-	APBuf NewItem = APBuf(APName, Buffer);
-	int index = BufArray.Add((APBuf)NewItem);
+	APBuf* NewItem = new APBuf(APName, Buffer);
+	int index = BufArray.Add((APBuf*)NewItem);
 	return index;
 }
 
@@ -907,6 +904,7 @@ void CDataSourcesManager::PerformThreadFunction(LPARAM hPreformFn, LPARAM hSourc
 //dedek
 BSTR CDataSourcesManager::GetPluginOutput(public_source_id_t source, LPCTSTR ap_name)
 {
+	CString ap_name_CS = (CString) ap_name;
 	int src_index = FindSourceByPublicID(source);
 	if (! isSourceConnected(src_index)) 
 	{
@@ -917,12 +915,12 @@ BSTR CDataSourcesManager::GetPluginOutput(public_source_id_t source, LPCTSTR ap_
 
 	COutputBuffer * OB = SourcesTab[src_index].Buffer;
 	
-	if(OB->isAPBuffered(ap_name))		// vystup jiz v bufferu
-		return OB->getBuffer(ap_name);
+	if(OB->isAPBuffered(ap_name_CS))		// vystup jiz v bufferu
+		return OB->getBuffer(ap_name_CS);
 
 	// vystup neni v bufferu - nacte se ze zasuvky, ulozi se do bufferu a vrati se
 	BSTR result = CallPerformProc(src_index, ap_name);
-	OB->setBuffer(ap_name, result);
+	OB->setBuffer(ap_name_CS, result);
 	return result;
 
 

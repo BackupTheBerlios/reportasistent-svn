@@ -72,29 +72,29 @@ typedef CSockInterface* (* pSockIfaceFn_t) ();
 class APBuf
 {
 public:
-	LPCTSTR ap_name;
-	BSTR buffer;
+	CString ap_name;
+	CString buffer;
 	
-	APBuf(LPCTSTR name, BSTR buf);
+	APBuf(CString name, CString buf);
 	APBuf();
 };
 
 
 class COutputBuffer
 {
-	CArray<APBuf,APBuf> BufArray;	// pole bufferu
+	CArray<APBuf*,APBuf*> BufArray;	// pole bufferu
 
 public:
 	int getBuffersCount();  // ret. number of AP which are buffered for the current data source
-	int getAPIndex(LPCTSTR APName);
-	BOOL isAPBuffered(LPCTSTR APName);
-	BSTR getBuffer(LPCTSTR APName); //returns buffer for given AP
-	void setBuffer(LPCTSTR APName, BSTR Buffer); // sets buffer -||-
+	int getAPIndex(CString APName);
+	BOOL isAPBuffered(CString APName);
+	BSTR getBuffer(CString APName); //returns buffer for given AP
+	void setBuffer(CString APName, BSTR Buffer); // sets buffer -||-
 
 	COutputBuffer();
 	~COutputBuffer();
 private:
-	int insertNewAP(LPCTSTR APName, BSTR Buffer);
+	int insertNewAP(CString APName, CString Buffer);
 
 };
 
