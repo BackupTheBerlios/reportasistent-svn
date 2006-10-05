@@ -23,7 +23,7 @@
 //v konstruktoru dostane odkaz na prvek kostry active_element
 //pri IDOK zmeni simple filter tag v tomto prvku podle volby uzivatele
 
-class CSimpleFilterDialog : public CDialog
+class CSimpleFilterDialog : public CPropertyPage
 {
 // Construction
 public:
@@ -66,6 +66,7 @@ private:
 	MSXML2::IXMLDOMElementPtr m_filter_DOM;	//data pouzita na naplneni list veiw
 //	MSXML2::IXMLDOMDocumentPtr m_filter_transform;
 
+//  afx_msg void OnEnterIdle(UINT nWhy, CWnd* pWho);
 };
 
 //{{AFX_INSERT_LOCATION}}

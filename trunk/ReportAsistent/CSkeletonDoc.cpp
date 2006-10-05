@@ -17,6 +17,7 @@
 #include "AttributeLinkDialog.h"
 #include "AttributeLinkTableDialog.h"
 #include "ComplexFilterDialog.h"
+#include "WaitDialog.h"
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #undef THIS_FILE
@@ -323,32 +324,28 @@ CString CSkeletonDoc::CreateNewID(CElementManager::elId_t element_type)
 //nenastuvuje ModifiedFlag, neprekresluje
 BOOL CSkeletonDoc::EditActiveElement(MSXML2::IXMLDOMElementPtr &element)
 {
-/*
 	//dedek: stara verze
-  
-	CActiveElementDialog dlg(element, AfxGetMainWnd());
 
-
+/*
+  CActiveElementDialog dlg(element, AfxGetMainWnd());
 	return IDOK == dlg.DoModal();
 */
 
 	//dedek: nove verze pres property sheet
 
-	CPropertySheet sheet("sem prijde nazev AP", AfxGetMainWnd());
+	CPropertySheet sheet((LPCTSTR) (_bstr_t) element->getAttribute("id"), AfxGetMainWnd());
 
-	CComplexFilterDialog * p_filter = new CComplexFilterDialog();
-	CTransformationsDialog * p_transforms = new CTransformationsDialog(element);
+	CComplexFilterDialog cmpl_filter;
+	CSimpleFilterDialog filter(element);
+	CTransformationsDialog transforms(element);
 	
-	sheet.AddPage(p_filter);
-	sheet.AddPage(p_transforms);
+  sheet.AddPage(& cmpl_filter);
+	sheet.AddPage(& filter);
+	sheet.AddPage(& transforms);
 
-	int res = sheet.DoModal();
+//  CWaitDialog::prefered_parent = & sheet;
 
-	delete p_filter;
-	delete p_transforms;
-
-
-	return IDOK == res;
+	return IDOK == sheet.DoModal();
 
 //		ConfigureFilter(element);
 }

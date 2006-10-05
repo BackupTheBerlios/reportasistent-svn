@@ -18,7 +18,7 @@ static char THIS_FILE[] = __FILE__;
 
 
 CSimpleFilterDialog::CSimpleFilterDialog(MSXML2::IXMLDOMElementPtr & active_element, CWnd* pParent)
-	: CDialog(CSimpleFilterDialog::IDD, pParent), m_active_element(active_element)
+: CPropertyPage(CSimpleFilterDialog::IDD), m_active_element(active_element)
 {
 	//{{AFX_DATA_INIT(CSimpleFilterDialog)
 		// NOTE: the ClassWizard will add member initialization here
@@ -59,7 +59,7 @@ CSimpleFilterDialog::~CSimpleFilterDialog()
 
 void CSimpleFilterDialog::DoDataExchange(CDataExchange* pDX)
 {
-	CDialog::DoDataExchange(pDX);
+  CPropertyPage::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CSimpleFilterDialog)
 	DDX_Control(pDX, IDC_DATA_SOURCE_COMBO, m_SourcesCombo);
 	DDX_Control(pDX, IDC_FILTER_LIST, m_FilterList);
@@ -67,11 +67,12 @@ void CSimpleFilterDialog::DoDataExchange(CDataExchange* pDX)
 }
 
 
-BEGIN_MESSAGE_MAP(CSimpleFilterDialog, CDialog)
+BEGIN_MESSAGE_MAP(CSimpleFilterDialog, CPropertyPage)
 	//{{AFX_MSG_MAP(CSimpleFilterDialog)
 	ON_NOTIFY(LVN_DELETEITEM, IDC_FILTER_LIST, OnDeleteitemFilterList)
 	ON_CBN_SELCHANGE(IDC_DATA_SOURCE_COMBO, OnSelchangeDataSourceCombo)
 	//}}AFX_MSG_MAP
+//  ON_WM_ENTERIDLE()
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -79,7 +80,7 @@ END_MESSAGE_MAP()
 
 BOOL CSimpleFilterDialog::OnInitDialog() 
 {
-	CDialog::OnInitDialog();
+  CPropertyPage::OnInitDialog();
 
 	CDataSourcesManager & dm = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->DataSourcesManager;
 	CElementManager & em = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
@@ -339,3 +340,10 @@ BOOL CSimpleFilterDialog::SaveAll()
 
 	return TRUE;
 }
+
+//void CSimpleFilterDialog::OnEnterIdle(UINT nWhy, CWnd* pWho)
+//{
+//  CPropertyPage::OnEnterIdle(nWhy, pWho);
+//
+//  // TODO: Add your message handler code here
+//}

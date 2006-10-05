@@ -3,7 +3,7 @@
 	ProjectType="Visual C++"
 	Version="8,00"
 	Name="ReportAsistent"
-	ProjectGUID="{52241382-62D5-4A84-AE93-879CE6AA2BAB}"
+	ProjectGUID="{D86B6029-2CBD-40DF-A7F1-A76D2783AC90}"
 	Keyword="MFCProj"
 	>
 	<Platforms>
@@ -318,6 +318,26 @@
 			</File>
 			<File
 				RelativePath="AttributeLinkTableDialog.cpp"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="ComplexFilterDialog.cpp"
 				>
 				<FileConfiguration
 					Name="Debug|Win32"
@@ -848,6 +868,10 @@
 				>
 			</File>
 			<File
+				RelativePath="ComplexFilterDialog.h"
+				>
+			</File>
+			<File
 				RelativePath="CSkeletonDoc.h"
 				>
 			</File>
@@ -1047,5 +1071,9 @@
 		</File>
 	</Files>
 	<Globals>
+		<Global
+			Name="RESOURCE_FILE"
+			Value="ReportAsistent.rc"
+		/>
 	</Globals>
 </VisualStudioProject>

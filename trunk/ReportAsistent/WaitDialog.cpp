@@ -26,7 +26,7 @@ CWaitDialog::CWaitDialog(LPCTSTR strDlgText, BOOL bShowKillButtons, CWnd* pParen
 		// NOTE: the ClassWizard will add member initialization here
 	//}}AFX_DATA_INIT
 
-	m_pThreadPramas = new SThreadPramas();
+	m_pThreadPramas = new SThreadPramas;
 }
 
 

@@ -3,7 +3,7 @@
 	ProjectType="Visual C++"
 	Version="8,00"
 	Name="LMplugin"
-	ProjectGUID="{1D0C84BD-B360-4735-94FA-C6D5DA6A0EA6}"
+	ProjectGUID="{92DF52EA-937C-4B74-9622-37CF46033E84}"
 	Keyword="MFCProj"
 	>
 	<Platforms>
