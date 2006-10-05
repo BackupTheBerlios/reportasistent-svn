@@ -16,6 +16,7 @@
 #include "ActiveElementDialog.h"
 #include "AttributeLinkDialog.h"
 #include "AttributeLinkTableDialog.h"
+#include "ComplexFilterDialog.h"
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #undef THIS_FILE
@@ -322,11 +323,32 @@ CString CSkeletonDoc::CreateNewID(CElementManager::elId_t element_type)
 //nenastuvuje ModifiedFlag, neprekresluje
 BOOL CSkeletonDoc::EditActiveElement(MSXML2::IXMLDOMElementPtr &element)
 {
+/*
+	//dedek: stara verze
+  
 	CActiveElementDialog dlg(element, AfxGetMainWnd());
 
 
 	return IDOK == dlg.DoModal();
+*/
 
+	//dedek: nove verze pres property sheet
+
+	CPropertySheet sheet("sem prijde nazev AP", AfxGetMainWnd());
+
+	CComplexFilterDialog * p_filter = new CComplexFilterDialog();
+	CTransformationsDialog * p_transforms = new CTransformationsDialog(element);
+	
+	sheet.AddPage(p_filter);
+	sheet.AddPage(p_transforms);
+
+	int res = sheet.DoModal();
+
+	delete p_filter;
+	delete p_transforms;
+
+
+	return IDOK == res;
 
 //		ConfigureFilter(element);
 }

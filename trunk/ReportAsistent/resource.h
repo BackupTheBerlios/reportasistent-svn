@@ -35,6 +35,7 @@
 #define IDD_WAIT_DIALOG                 163
 #define IDD_OPTIONS_DIALOG              164
 #define IDD_DIALOG_REPORT               166
+#define IDD_COMPLEX_FILTER_DIALOG       168
 #define IDC_TREE1                       1000
 #define IDC_FILTER_LIST                 1000
 #define IDC_SCROLLBAR1                  1000
@@ -126,7 +127,7 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
-#define _APS_NEXT_RESOURCE_VALUE        168
+#define _APS_NEXT_RESOURCE_VALUE        169
 #define _APS_NEXT_COMMAND_VALUE         32793
 #define _APS_NEXT_CONTROL_VALUE         1042
 #define _APS_NEXT_SYMED_VALUE           101

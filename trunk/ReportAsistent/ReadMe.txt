@@ -1,3 +1,11 @@
+DEDEK:
+V GUI chybi:
+
+dialog include
+styly v dialozich text, odstavec
+zmena id v dialozich pro attr_link, attr_link_table, include, AP - tam opatrne, nemuze obsahovat cokoliv je to XML ID
+
+
 Kody:
 BUG u vytvareni noveho LM datoveho zdroje - nove vytvarenej zdroj se vporadku
  otevre a da se pouzivat, ale z jeho PerzistID se vrati pouze prvnich 63 znaku.

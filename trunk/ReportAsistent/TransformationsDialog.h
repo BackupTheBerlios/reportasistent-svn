@@ -13,7 +13,7 @@
 /////////////////////////////////////////////////////////////////////////////
 // CTransformationsDialog dialog
 
-class CTransformationsDialog : public CDialog
+class CTransformationsDialog : public CPropertyPage
 {
 // Construction
 public:

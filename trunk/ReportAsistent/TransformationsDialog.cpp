@@ -18,7 +18,7 @@ static char THIS_FILE[] = __FILE__;
 
 
 CTransformationsDialog::CTransformationsDialog(MSXML2::IXMLDOMElementPtr & active_element, CWnd* pParent /*=NULL*/)
-	: CDialog(CTransformationsDialog::IDD, pParent), m_active_element(active_element)
+	: CPropertyPage(CTransformationsDialog::IDD/*, pParent*/), m_active_element(active_element)
 {
 	//{{AFX_DATA_INIT(CTransformationsDialog)
 		// NOTE: the ClassWizard will add member initialization here
@@ -34,7 +34,7 @@ CTransformationsDialog::CTransformationsDialog(MSXML2::IXMLDOMElementPtr & activ
 
 void CTransformationsDialog::DoDataExchange(CDataExchange* pDX)
 {
-	CDialog::DoDataExchange(pDX);
+	CPropertyPage::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CTransformationsDialog)
 	DDX_Control(pDX, IDC_SUPPORTED_TRANSF_LIST, m_SupportedList);
 	DDX_Control(pDX, IDC_SELECTED_TRANSFS_LIST, m_SelectedList);
@@ -42,7 +42,7 @@ void CTransformationsDialog::DoDataExchange(CDataExchange* pDX)
 }
 
 
-BEGIN_MESSAGE_MAP(CTransformationsDialog, CDialog)
+BEGIN_MESSAGE_MAP(CTransformationsDialog, CPropertyPage)
 	//{{AFX_MSG_MAP(CTransformationsDialog)
 	ON_BN_CLICKED(IDC_ADD_BUTTON, OnAddButton)
 	ON_BN_CLICKED(IDC_REMOVE_BUTTON, OnRemoveButton)
@@ -59,7 +59,7 @@ END_MESSAGE_MAP()
 
 BOOL CTransformationsDialog::OnInitDialog() 
 {
-	CDialog::OnInitDialog();
+	CPropertyPage::OnInitDialog();
 
 	int a;
 

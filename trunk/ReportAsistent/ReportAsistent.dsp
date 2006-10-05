@@ -116,6 +116,10 @@ SOURCE=.\AttributeLinkTableDialog.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\ComplexFilterDialog.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\CSkeletonDoc.cpp
 # End Source File
 # Begin Source File
@@ -238,6 +242,10 @@ SOURCE=.\AttributeLinkDialogBase.h
 # Begin Source File
 
 SOURCE=.\AttributeLinkTableDialog.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\ComplexFilterDialog.h
 # End Source File
 # Begin Source File
 
