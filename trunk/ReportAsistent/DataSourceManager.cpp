@@ -113,7 +113,7 @@ COutputBuffer::~COutputBuffer()
 
 int COutputBuffer::getBuffersCount()
 {
-	return BufArray.GetCount();
+	return BufArray.GetSize();
 }
 
 int COutputBuffer::getAPIndex(CString APName)
