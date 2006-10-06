@@ -122,8 +122,9 @@ BOOL CSimpleFilterDialog::LoadSource(public_source_id_t sId)
 	
 	//inicializace
 	MSXML2::IXMLDOMDocumentPtr filter_doc;
-	filter_doc.CreateInstance(_T("Msxml2.DOMDocument"));
-	filter_doc->async = VARIANT_FALSE; // default - true,
+	MSXML2::IXMLDOMDocumentPtr filter_doc2;
+	filter_doc2.CreateInstance(_T("Msxml2.DOMDocument"));
+	filter_doc2->async = VARIANT_FALSE; // default - true,
 
 	CGeneralManager * m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager;
 
@@ -133,22 +134,14 @@ BOOL CSimpleFilterDialog::LoadSource(public_source_id_t sId)
 
 
 	//nacte data z plugin output
-	BSTR s_out = m->DataSourcesManager.GetPluginOutput(sId, (_bstr_t) element_info->getElementName());
-	if (NULL == (BSTR) s_out) 
+
+	if (! m->DataSourcesManager.GetPluginOutput(sId, (_bstr_t) element_info->getElementName(), filter_doc)) 
 	{
 		filter_doc.Release();
 		CReportAsistentApp::ReportError(IDS_SIMPLE_FILTER_FAILED_SOURCE_LOAD, "Plugin output is empty.");
 		return FALSE;	
 	}
 
-	//vytvoreni XML DOM z nacteneho XML stringu
-	HRESULT hRes=filter_doc->loadXML(s_out);
-	if (filter_doc->parseError->errorCode != S_OK)
-	{
-		CReportAsistentApp::ReportError(IDS_SIMPLE_FILTER_FAILED_SOURCE_LOAD, (LPCTSTR) filter_doc->parseError->reason);
-		filter_doc.Release();
-		return FALSE;	
-	}
 
 #ifdef _DEBUG	
 	//dadici - kdykoliv smazat nebo zakomentovat
@@ -163,7 +156,7 @@ BOOL CSimpleFilterDialog::LoadSource(public_source_id_t sId)
 
 	
 	//transformuje data z plugin output a vysledek nacte do m_filter_dom	
-	filter_doc->loadXML(
+	filter_doc2->loadXML(
 		filter_doc->transformNode(element_info->getSimpleFilterTransformation()));
 
 	
@@ -174,9 +167,10 @@ BOOL CSimpleFilterDialog::LoadSource(public_source_id_t sId)
 
 	
 	//pridat AddRef ?
-	if (filter_doc->documentElement != NULL)
+	if (filter_doc2->documentElement != NULL)
 	{
-		m_filter_DOM = filter_doc->documentElement;
+		m_filter_DOM = filter_doc2->documentElement;
+		filter_doc2.Release();
 		filter_doc.Release();
 		return TRUE;
 	}

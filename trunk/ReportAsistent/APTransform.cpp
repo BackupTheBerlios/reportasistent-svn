@@ -38,16 +38,17 @@ CAElTransform::CAElTransform(MSXML2::IXMLDOMElementPtr & active_element)
 {
 	//pouze nacteni pluginoutput
 	
-	m_plug_out.CreateInstance(_T("Msxml2.DOMDocument"));
-	m_plug_out->async = VARIANT_FALSE; // default - true,
+	//m_plug_out.CreateInstance(_T("Msxml2.DOMDocument"));
+	//m_plug_out->async = VARIANT_FALSE; // default - true,
 	
 
 	CDataSourcesManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->DataSourcesManager;
 
 	
-	m_plug_out->loadXML(m.GetPluginOutput(
+	m.GetPluginOutput(
 		(LPCTSTR) (_bstr_t) m_active_element->getAttribute("source"),
-		(_bstr_t) m_active_element->getAttribute("type")));
+		(_bstr_t) m_active_element->getAttribute("type"),
+		m_plug_out);
 
 }
  

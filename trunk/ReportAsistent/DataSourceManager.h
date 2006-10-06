@@ -73,10 +73,16 @@ class APBuf
 {
 public:
 	CString ap_name;
-	CString buffer;
+	MSXML2::IXMLDOMDocumentPtr buffer;
 	
-	APBuf(CString name, CString buf);
+	APBuf(CString name, BSTR buf);
 	APBuf();
+	~APBuf();
+
+	BOOL isBufferInitialized();
+
+
+	static BOOL setBuffer(BSTR str, MSXML2::IXMLDOMDocumentPtr & xml);
 };
 
 
@@ -88,13 +94,13 @@ public:
 	int getBuffersCount();  // ret. number of AP which are buffered for the current data source
 	int getAPIndex(CString APName);
 	BOOL isAPBuffered(CString APName);
-	BSTR getBuffer(CString APName); //returns buffer for given AP
+	BOOL getBuffer(CString APName, MSXML2::IXMLDOMDocumentPtr & xml_dom); //returns buffer for given AP
 	void setBuffer(CString APName, BSTR Buffer); // sets buffer -||-
 
 	COutputBuffer();
 	~COutputBuffer();
 private:
-	int insertNewAP(CString APName, CString Buffer);
+	int insertNewAP(CString APName, BSTR Buffer);
 
 };
 
@@ -256,7 +262,7 @@ public:
 	//a tady nebo v plugin mamageru budou funkce pro zavaloni perform na danem zdroji
 	//predbezne:
 	BSTR CallPerformProc(int source_index, LPCTSTR element_id); //vrati XML string
-	BSTR GetPluginOutput(public_source_id_t source, LPCTSTR ap_name); //zavola CallPerformProc
+	BOOL GetPluginOutput(public_source_id_t source, LPCTSTR ap_name, MSXML2::IXMLDOMDocumentPtr & xml_dom); //zavola CallPerformProc
 	void static PerformThreadFunction(LPARAM hPreformFn, LPARAM hSource, LPARAM element_id, LPARAM pResult);
 
 

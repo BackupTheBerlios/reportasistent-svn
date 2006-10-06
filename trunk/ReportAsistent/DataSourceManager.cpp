@@ -84,16 +84,48 @@ BOOL CSourceRec::Valid()
 
 /////////////////////////////////////////////////////////////////
 // --------- APBuf -----
-APBuf::APBuf(CString name, CString buf)
+APBuf::APBuf(CString name, BSTR buf)
 {
 	ap_name = name;
-	buffer = buf;
+	
+	// vytvoreni XML DOM 
+	APBuf::setBuffer(buf, buffer);
 }	
 
 APBuf::APBuf()
 {
 	ap_name = "";
-	buffer = "";
+	buffer = NULL;
+}
+
+APBuf::~APBuf()
+{
+	buffer.Release();
+}
+
+BOOL APBuf::isBufferInitialized()
+{
+	if (buffer != NULL  && (buffer->documentElement != NULL))
+		return TRUE;
+	return FALSE;
+}
+
+BOOL APBuf::setBuffer(BSTR str, MSXML2::IXMLDOMDocumentPtr & xml)
+{
+	
+	xml.CreateInstance(_T("Msxml2.DOMDocument"));
+	xml->async = VARIANT_FALSE; // default - true,
+	//vytvoreni XML DOM z nacteneho XML stringu
+	HRESULT hRes=xml->loadXML(str);
+	if (xml->parseError->errorCode != S_OK)
+	{
+		//CReportAsistentApp::ReportError(IDS_SIMPLE_FILTER_FAILED_SOURCE_LOAD, (LPCTSTR) xml->parseError->reason);
+		xml.Release();
+		xml = NULL;	
+		return FALSE;
+	}
+
+	return TRUE;
 }
 
 /////////////////////////////////////////////////////////////////
@@ -138,12 +170,21 @@ BOOL COutputBuffer::isAPBuffered(CString APName)
 }
 
 
-BSTR COutputBuffer::getBuffer(CString APName)
+BOOL COutputBuffer::getBuffer(CString APName, MSXML2::IXMLDOMDocumentPtr & xml_dom)
 {
 	int i = getAPIndex(APName);
 	if(i != -1)
-		return (BufArray[i]->buffer).AllocSysString();
-	return NULL;
+	{
+		//xml_dom.CreateInstance(_T("Msxml2.DOMDocument"));
+		//xml_dom->async = VARIANT_FALSE; // default - true,
+		//xml_dom.
+		xml_dom = BufArray[i]->buffer;//->cloneNode(TRUE);
+
+		return TRUE;
+	}
+		
+	xml_dom = NULL;
+	return FALSE;
 }
 
 void COutputBuffer::setBuffer(CString APName, BSTR Buffer)
@@ -151,14 +192,16 @@ void COutputBuffer::setBuffer(CString APName, BSTR Buffer)
 	int i = getAPIndex(APName);
 	if(i != -1)
 	{
-		BufArray[i]->buffer = (CString) Buffer;
+		BufArray[i]->buffer.Release();
+		APBuf::setBuffer(Buffer, BufArray[i]->buffer);		
+
 		return;
 	}
-	insertNewAP(APName, (CString) Buffer);
+	insertNewAP(APName, Buffer);
 }
 
 
-int COutputBuffer::insertNewAP(CString APName, CString Buffer)
+int COutputBuffer::insertNewAP(CString APName, BSTR Buffer)
 {
 	APBuf* NewItem = new APBuf(APName, Buffer);
 	int index = BufArray.Add((APBuf*)NewItem);
@@ -902,28 +945,29 @@ void CDataSourcesManager::PerformThreadFunction(LPARAM hPreformFn, LPARAM hSourc
 }
 
 //dedek
-BSTR CDataSourcesManager::GetPluginOutput(public_source_id_t source, LPCTSTR ap_name)
+BOOL CDataSourcesManager::GetPluginOutput(public_source_id_t source, LPCTSTR ap_name, MSXML2::IXMLDOMDocumentPtr & xml_dom)
 {
 	CString ap_name_CS = (CString) ap_name;
 	int src_index = FindSourceByPublicID(source);
 	if (! isSourceConnected(src_index)) 
 	{
-		if (! ConnectSource(src_index)) return NULL;
+		if (! ConnectSource(src_index)) return FALSE;
 	}
 
 	/*return CallPerformProc(src_index, ap_name);*/
 
 	COutputBuffer * OB = SourcesTab[src_index].Buffer;
-	
-	if(OB->isAPBuffered(ap_name_CS))		// vystup jiz v bufferu
-		return OB->getBuffer(ap_name_CS);
 
 	// vystup neni v bufferu - nacte se ze zasuvky, ulozi se do bufferu a vrati se
-	BSTR result = CallPerformProc(src_index, ap_name);
-	OB->setBuffer(ap_name_CS, result);
-	return result;
+	if(!OB->isAPBuffered(ap_name_CS))		// vystup jeste neni v bufferu
+	{
+		BSTR result = CallPerformProc(src_index, ap_name);
+		OB->setBuffer(ap_name_CS, result);
+	}
+	
+	OB->getBuffer(ap_name_CS, xml_dom);
 
-
+	return TRUE;
 }
 
 
