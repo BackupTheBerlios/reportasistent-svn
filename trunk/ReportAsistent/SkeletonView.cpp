@@ -34,6 +34,7 @@ BEGIN_MESSAGE_MAP(CSkeletonView, CTreeView)
 	ON_COMMAND(ID_EDIT_CUT, OnEditCut)
 	ON_COMMAND(ID_MMDELETE, OnMmdelete)
 	ON_WM_CAPTURECHANGED()
+	ON_WM_HELPINFO()
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -118,6 +119,8 @@ void CSkeletonView::OnInitialUpdate()
 
 	GetTreeCtrl().SetImageList(pImageList, TVSIL_NORMAL);
 
+	//Iva: zde bude naplneni TreeCtrl ( fce CSkeletonDocument->FillTreeCtrl(pTree) )
+	GetDocument()->FillTreeControl(GetTreeCtrl());
 
 }
 
@@ -181,24 +184,58 @@ void CSkeletonView::OnUpdate(CView* pSender, LPARAM lHint, CObject* pHint)
 {
 	//duvod proc je zde toto: pri pouhem FillTreeCtrl by se strom zobrazil do nerozbalene podoby
 	//a na misto kam bylo pridano by bylo nutne znovu se prolistovat
-	if (lHint != NULL)
-	{
+
+	//neni-li specifikovana akce nebo k ni chybi parametry, necham cely strom jenom premalovat
+	if (lHint == 0) return;
+	if (pHint == NULL) return;
+
+	CTreeCtrl & pTreeCtrl = GetTreeCtrl();
+		/*
 		ASSERT(FALSE);
 		//dedek: zuseno, nepouziva se
-		/*
-		CTreeCtrl & tree = GetTreeCtrl();
-
+		
 		MSXML2::IXMLDOMElement * new_element = (MSXML2::IXMLDOMElement *) lHint;
 
 
 		GetDocument()->InsertNodeToTreeCtrl((MSXML2::IXMLDOMElementPtr) new_element, tree.GetSelectedItem(), tree);
-		*/
-	} else
-	{
-		//Deda: Naplneni TreeCtrl
-		GetDocument()->FillTreeControl(GetTreeCtrl());
 
+	 
+		//Deda: Naplneni TreeCtrl
+			GetDocument()->FillTreeControl(GetTreeCtrl());
+		*/
+	
+
+	//Iva: New version
+	switch (lHint)
+	{
+	case UT_DEL:
+		if (NULL != ((CUT_Hint*)pHint)->pTreeItem)
+				pTreeCtrl.DeleteItem( ((CUT_Hint*)pHint)->pTreeItem);	
+		break;
+	case UT_INS:
+			if ((NULL != ((CUT_Hint*)pHint)->pTreeItem) && (NULL != ((CUT_Hint*)pHint)->pElement))
+			{	
+				HTREEITEM inserted_item = GetDocument()->InsertNodeToTreeCtrl(((CUT_Hint*)pHint)->pElement,((CUT_Hint*)pHint)->pTreeItem,pTreeCtrl,((CUT_Hint*)pHint)->pInsertAfter);
+			//Pridany prvek by mel byt zviditelnen = v rozbalenem seznamu, pokud neni videt
+				if (0!= pTreeCtrl.EnsureVisible(inserted_item))
+					pTreeCtrl.Expand(((CUT_Hint*)pHint)->pTreeItem,TVE_EXPAND);  
+			}
+		break;
+	case UT_EDIT:	
+			if (NULL != ((CUT_Hint*)pHint)->pTreeItem) 
+			{
+				CElementManager & OElementManager = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
+				MSXML2::IXMLDOMElementPtr edited_element = GetDocument()->ElementFromItemData(pTreeCtrl.GetItemData(((CUT_Hint*)pHint)->pTreeItem));
+				
+				pTreeCtrl.SetItemText(((CUT_Hint*)pHint)->pTreeItem, OElementManager.CreateElementCaption( edited_element));
+			}	
+				//Zde by mohlo byt InvalidateRect !!!
+		break;
+	default: //new creation of tree
+		ASSERT(FALSE); //Invalid update command
+		break;
 	}
+
 }
 
 
@@ -369,6 +406,7 @@ void CSkeletonView::OnEditCopy()
 	
 //ziskam XML vybraneho prvku TreeCtrl
 	_bstr_t bstrSelElmXML= SelXMLDomElement->xml; 
+	//AfxMessageBox((LPTSTR)bstrSelElmXML,0,0);
 
 //Alokuji globalni pamet a XML do ni zkopiruji
 	HGLOBAL hgMemForXML = GlobalAlloc(GMEM_MOVEABLE | GMEM_DDESHARE ,    // allocation attributes
@@ -381,7 +419,7 @@ void CSkeletonView::OnEditCopy()
 	}
 
 	LPTSTR pMemForXML = (LPTSTR) GlobalLock(hgMemForXML);
-	//strcpy(pMemForXML,(LPTSTR) bstrSelElmXML);
+	strcpy(pMemForXML,(LPTSTR) bstrSelElmXML);
 	//AfxMessageBox(pMemForXML,0,0);
 	
 
@@ -476,8 +514,12 @@ void CSkeletonView::OnEditPaste()
 			MSXML2::IXMLDOMElementPtr pResElm=SelXMLDomElement->appendChild(pNewXMLElm);
 			if (0!=pResElm)
 			{
+				CUT_Hint oHint(rTreeCtrl.GetSelectedItem(),pNewXMLElm,TVI_LAST);
+				GetDocument()->SetModifiedFlag();
+				GetDocument()->UpdateAllViews(NULL,UT_INS, &oHint);
 				GetDocument()->SetModifiedFlag();		
 				GetDocument()->UpdateAllViews(NULL, 0);
+
 			}
 			pNewXMLDoc.Release();
 			return; //povedlo se prvek vlozit DOVNITR
@@ -498,6 +540,10 @@ void CSkeletonView::OnEditPaste()
 			MSXML2::IXMLDOMElementPtr pResElm=pParent->insertBefore(pNewXMLElm,(MSXML2::IXMLDOMElement*)SelXMLDomElement);
 			if (0!=pResElm)
 			{
+				CUT_Hint oHint(rTreeCtrl.GetParentItem(rTreeCtrl.GetSelectedItem()),pNewXMLElm,rTreeCtrl.GetPrevSiblingItem(rTreeCtrl.GetSelectedItem()));
+				GetDocument()->SetModifiedFlag();
+				GetDocument()->UpdateAllViews(NULL,UT_INS, &oHint);
+
 				GetDocument()->SetModifiedFlag();		
 				GetDocument()->UpdateAllViews(NULL, 0);
 			}
@@ -585,6 +631,7 @@ void CSkeletonView::OnLButtonUp(UINT nFlags, CPoint point)
 		m_pimagelist->EndDrag();
 		delete m_pimagelist;
 		m_pimagelist = NULL;
+		BOOL bDropped = FALSE;
 
 
 		CElementManager & OElementManager = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
@@ -633,8 +680,13 @@ void CSkeletonView::OnLButtonUp(UINT nFlags, CPoint point)
 						pResElm=pParentDrop->insertBefore(pNewXMLElm,(MSXML2::IXMLDOMElement*)pXMLElmDrop);
 						if (0!=pResElm)
 						{
+							CUT_Hint oHint(GetTreeCtrl().GetParentItem(m_hitemDrop),pNewXMLElm,GetTreeCtrl().GetPrevSiblingItem(m_hitemDrop));
+							GetDocument()->SetModifiedFlag();
+							GetDocument()->UpdateAllViews(NULL,UT_INS, &oHint);
+							/*
 							GetDocument()->SetModifiedFlag();		
-							GetDocument()->UpdateAllViews(NULL, 0);
+							GetDocument()->UpdateAllViews(NULL, 0);*/
+							bDropped = TRUE;
 							goto end_place;	 //povedlo se prvek vlozit PRED
 						}
 
@@ -654,8 +706,13 @@ void CSkeletonView::OnLButtonUp(UINT nFlags, CPoint point)
 						pResElm=pXMLElmDrop->appendChild(pNewXMLElm);
 						if (0!=pResElm)
 						{
+							CUT_Hint oHint(m_hitemDrop,pNewXMLElm,TVI_LAST);
+							GetDocument()->SetModifiedFlag();
+							GetDocument()->UpdateAllViews(NULL,UT_INS, &oHint);
+/*
 							GetDocument()->SetModifiedFlag();		
 							GetDocument()->UpdateAllViews(NULL, 0);
+*/							bDropped = TRUE;
 							goto end_place; //povedlo se dat prvek DOVNITR 
 						}
 					}
@@ -671,6 +728,7 @@ void CSkeletonView::OnLButtonUp(UINT nFlags, CPoint point)
 					if (NULL==pRSiblingDrag) pParentDrag->appendChild(pNewXMLElm);
 					else
 						pParentDrag->insertBefore(pNewXMLElm,(MSXML2::IXMLDOMElement*) pRSiblingDrag);
+						
 				}
 				catch (_com_error &e)
 				{
@@ -686,6 +744,14 @@ void CSkeletonView::OnLButtonUp(UINT nFlags, CPoint point)
 		MessageBeep(0);
 		
 		end_place:
+		if (bDropped==TRUE)
+		{
+             //Iva:Update of TreeCtrl
+             CUT_Hint oHint(m_hitemDrag,0,0);
+             GetDocument()->SetModifiedFlag();
+             GetDocument()->UpdateAllViews(NULL,UT_DEL, &oHint);
+		}
+
 		ReleaseCapture();
 		m_bDragging = FALSE;
 		GetTreeCtrl().SelectDropTarget(NULL);
@@ -720,15 +786,10 @@ void CSkeletonView::OnMmdelete()
 
 	parent_element->removeChild((MSXML2::IXMLDOMElement*)selected_element);
 
-	if (0 == GetTreeCtrl().DeleteItem(hSelTreeItem))
-	{
-		AfxMessageBox("Smazani prvku z TreeCtrl se nepovedlo.",0,0);
-		return;
-	}
-	
-
-	GetDocument()->SetModifiedFlag();		
-	GetDocument()->UpdateAllViews(NULL);
+	//Iva: update of the TreeCtrl
+	CUT_Hint oHint(hSelTreeItem,0,0);
+	GetDocument()->SetModifiedFlag();
+	GetDocument()->UpdateAllViews(NULL,UT_DEL, &oHint);
 	
 }
 
@@ -737,4 +798,10 @@ void CSkeletonView::OnCaptureChanged(CWnd *pWnd)
 	// TODO: Add your message handler code here
 	
 	CTreeView::OnCaptureChanged(pWnd);
+}
+
+BOOL CSkeletonView::OnHelpInfo(HELPINFO* pHelpInfo) 
+{
+	AfxMessageBox("Nazdar");
+	return CTreeView::OnHelpInfo(pHelpInfo);
 }

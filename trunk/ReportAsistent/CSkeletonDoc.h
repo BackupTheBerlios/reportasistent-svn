@@ -66,7 +66,7 @@ protected:
 	DECLARE_MESSAGE_MAP()
 
 public:
-	static void InsertNodeToTreeCtrl(MSXML2::IXMLDOMElementPtr pElement, 
+	static HTREEITEM InsertNodeToTreeCtrl(MSXML2::IXMLDOMElementPtr pElement, 
 									HTREEITEM hParentItem, 
 									CTreeCtrl  & tree_control, HTREEITEM hInsertAfter = TVI_LAST);
 private:

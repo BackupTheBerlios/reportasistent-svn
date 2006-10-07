@@ -93,6 +93,7 @@ dedek: ok dohodnuto zapracuje kody s moji pomoci
 
 - Rauch chce listu s nabidkou aktivnich prvku
 dedek: prace pro Ivu
+Iva: hotovo.
 
 
 

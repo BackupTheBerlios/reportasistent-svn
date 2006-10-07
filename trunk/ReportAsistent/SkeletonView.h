@@ -9,6 +9,41 @@
 #pragma once
 #endif // _MSC_VER > 1000
 
+//Iva: Definition of constants for OnUpdate(), its lHint parameter
+#ifndef UT_DEL
+	#define UT_DEL 1
+#endif
+#ifndef UT_INS
+	#define UT_INS 2
+#endif
+#ifndef UT_EDIT
+	#define UT_EDIT 3
+#endif
+
+//Iva: Definition of class for OnUpdate(), its pHint parameter
+class CUT_Hint : public CObject
+{
+public:
+	HTREEITEM pTreeItem;
+	MSXML2::IXMLDOMElementPtr pElement;
+	HTREEITEM pInsertAfter;
+
+	CUT_Hint()
+	{
+		pTreeItem = NULL;
+		pElement= NULL;
+		pInsertAfter= TVI_LAST;
+	}
+
+	CUT_Hint(HTREEITEM a, MSXML2::IXMLDOMElementPtr b, HTREEITEM c )
+	{
+		pTreeItem = a;
+		pElement= b;
+		pInsertAfter= c;
+	}
+};
+
+
 
 class CSkeletonView : public CTreeView
 {
@@ -65,6 +100,7 @@ protected:
 	afx_msg void OnEditCut();
 	afx_msg void OnMmdelete();
 	afx_msg void OnCaptureChanged(CWnd *pWnd);
+	afx_msg BOOL OnHelpInfo(HELPINFO* pHelpInfo);
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };

@@ -25,6 +25,7 @@ BEGIN_MESSAGE_MAP(CReportAsistentApp, CWinApp)
 	ON_COMMAND(ID_MMSOURCES, OnMmsources)
 	ON_COMMAND(ID_FILE_OPTIONS, OnFileOptions)
 	ON_COMMAND(ID_OPEN_WORD_EDITOR, OnOpenWordEditor)
+	ON_WM_HELPINFO()
 	//}}AFX_MSG_MAP
 	// Standard file based document commands
 	ON_COMMAND(ID_FILE_NEW, CWinApp::OnFileNew)
@@ -247,4 +248,19 @@ void CReportAsistentApp::OnFileOptions()
 void CReportAsistentApp::OnOpenWordEditor() 
 {
 	m_pGeneralManager->WordManager.OpenWordEditor();
+}
+
+BOOL CReportAsistentApp::OnHelpInfo(HELPINFO* pHelpInfo) 
+{
+	if (pHelpInfo->iContextType == HELPINFO_WINDOW)
+	{
+		AfxMessageBox("ahoj");
+		return TRUE;/*HtmlHelp((HWND)pHelpInfo->hItemHandle,
+						"my_chm.chm::/ctrlhlp.txt",
+						HH_TP_HELP_WM_HELP,
+						(DWORD)(LPVOID)myarray) 
+				!= NULL;*/
+	}
+return TRUE;
+
 }

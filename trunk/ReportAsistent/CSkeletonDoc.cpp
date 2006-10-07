@@ -153,14 +153,14 @@ void CSkeletonDoc::FillTreeControl(CTreeCtrl  & tree_control)
 }
 
 
-void CSkeletonDoc::InsertNodeToTreeCtrl(MSXML2::IXMLDOMElementPtr pElement, 
+HTREEITEM CSkeletonDoc::InsertNodeToTreeCtrl(MSXML2::IXMLDOMElementPtr pElement, 
 									   HTREEITEM hParentItem, 
 									   CTreeCtrl  & tree_control,
-									   HTREEITEM hInsertAfter) //hInsertAfter = TVI_LAST
+									   HTREEITEM hInsertAfter) //v CSkeletonDoc.h je zadana defaultni hodnota: hInsertAfter = TVI_LAST
 {
 //dedek:
 
-	if (pElement == NULL) return;
+	if (pElement == NULL) return NULL;
 
 	HTREEITEM hTreeItem=NULL;
 	CElementManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
@@ -173,7 +173,7 @@ void CSkeletonDoc::InsertNodeToTreeCtrl(MSXML2::IXMLDOMElementPtr pElement,
 
 	
 	//u kterych elementu nebude videt vnitrek
-	if (m.isElementActive(el_id) || (el_id == ELID_ATTR_LINK_TABLE)) return;
+	if (m.isElementActive(el_id) || (el_id == ELID_ATTR_LINK_TABLE)) return hTreeItem;
 	
 	
 	//rekurnetne projede deti;
@@ -184,8 +184,11 @@ void CSkeletonDoc::InsertNodeToTreeCtrl(MSXML2::IXMLDOMElementPtr pElement,
 
 		InsertNodeToTreeCtrl(pChild, hTreeItem, tree_control);
 	}
-
+	
+	//rozbali prvek TreeCtrl ( a protoze tato fce je volana na kazdy prvek, rozbali kazdy)
 	tree_control.Expand(hTreeItem, TVE_EXPAND);
+
+	return hTreeItem;
 }
 
 //pridal honza
@@ -211,16 +214,18 @@ void CSkeletonDoc::OnElementEdit()
 	CTreeCtrl & tree = GetFirstView()->GetTreeCtrl();
 
 	//dedek:
-	if (tree.GetSelectedItem() == NULL) return;
+	HTREEITEM sel_item = tree.GetSelectedItem();
+	if (sel_item  == NULL) return;
 
 	
 	
-	MSXML2::IXMLDOMElementPtr edited_element = ElementFromItemData(tree.GetItemData(tree.GetSelectedItem()));
+	MSXML2::IXMLDOMElementPtr edited_element = ElementFromItemData(tree.GetItemData(sel_item));
 
 	if (EditElement(edited_element))
 	{
+		CUT_Hint oHint(sel_item,0,0);
 		SetModifiedFlag();
-		UpdateAllViews(NULL);
+		UpdateAllViews(NULL,UT_EDIT, &oHint);
 	}
 
 }
@@ -614,8 +619,9 @@ void CSkeletonDoc::OnMmnewelement(UINT nMessageID)
 	{
 		if (EditElement(new_element))
 		{
+			CUT_Hint oHint(hSelTreeItem,new_element,TVI_LAST);
 			SetModifiedFlag();
-			UpdateAllViews(NULL);
+			UpdateAllViews(NULL,UT_INS, &oHint);
 		}
 		else
 		{

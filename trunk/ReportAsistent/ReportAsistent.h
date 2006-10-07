@@ -102,6 +102,7 @@ public:
 	afx_msg void OnMmsources();
 	afx_msg void OnFileOptions();
 	afx_msg void OnOpenWordEditor();
+	afx_msg BOOL OnHelpInfo(HELPINFO* pHelpInfo);
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };
