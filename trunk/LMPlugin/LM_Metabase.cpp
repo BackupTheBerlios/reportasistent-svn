@@ -3,6 +3,7 @@
 #include "LM_Metabase.h"
 #include "comdef.h"
 #include "math.h"
+#include "Faktorial.h"
 
 CString Hyp_CF_Meta::xml_convert ()
 {
@@ -646,6 +647,67 @@ CString Hyp_4ft_Meta::xml_convert ()
 	xml_string = xml_string + "</ti_cedent> ";
 		
 	return xml_string;
+}
+
+double Hyp_4ft_Meta::get_chi_sq ()
+{
+	if ((a + c) * (b + d) * (a + b) * (c + d) == 0) return 0;
+
+	double dDelta = a * d - b * c;
+
+	return ((a + b + c + d) * dDelta * dDelta) / 
+		   ((a + c) * (b + d) * (a + b) * (c + d));
+				// Pozor! Zde preteklo
+}
+
+double Hyp_4ft_Meta::get_fisher ()
+{
+
+	if ( !gLnFaktTab.Init( a + b + c + d + 1)) return 0.0;//chyba!!!!!!!!!!!
+		// Upozorneni, ze bude potrebovat az do nMaxN
+
+	long r= a + b;
+	long s= c + d;
+	long k= a + c;
+	long l= b + d;
+	long n= r + s; //a + b + c + d
+
+	double dValue= exp( gLnFaktTab.GetLnFakt( r)+ gLnFaktTab.GetLnFakt( s)+ 
+				gLnFaktTab.GetLnFakt( k)+ gLnFaktTab.GetLnFakt( l)-
+				gLnFaktTab.GetLnFakt( n)- gLnFaktTab.GetLnFakt( a)-
+				gLnFaktTab.GetLnFakt( r- a)- gLnFaktTab.GetLnFakt( k- a)-
+				gLnFaktTab.GetLnFakt( n- r- k+ a));
+		// dValue obsahuje jeden clen souctu pro konkretni i
+		// Hodnota V(i) pro i == a
+
+	// Pozor!! Pokud by se funkce GetValue volala vicekrat, je vyhodnejsi
+	// nejprve provest soucet log pro r, s, k, l a n (viz. moznosti vypoctu Fi-Testu)
+
+	long minRK= r < k ? r : k;	// min( r, k)
+
+	double dSuma= dValue;		// Celkovy soucet
+	long c1 = n- r- k;
+
+	long i;
+
+	for (i= a + 1; i <= minRK; i++)	// od a+ 1 do min(r,k)
+	{
+		// Vypocet pomocneho zlomku urcujiho rozdil mezi V(i) a V(i+1)
+		double dDelta= ((double)( r- i+ 1)*( k- i+ 1))/ ( i* (c1+ i));
+		if ( dDelta == 0) break;
+			// Zde je otazkou, jestli tento test nezdrzuje vic nez
+			// pripadne nasobeni 0
+		dValue= dValue* dDelta;
+			// Pozor na problem v nepresnosti vypoctu dValue * dDelta pro male dValue!
+/*
+		dValue= GetValue( i, n, r, s, k, l);
+			// dValue obsahuje jeden clen souctu pro konkretni i
+		if ( dValue <= 0) break;
+*/
+		dSuma+= dValue;
+	}
+
+	return dSuma;
 }
 
 CString Hyp_SD4ft_Meta::xml_convert ()

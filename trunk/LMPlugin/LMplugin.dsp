@@ -105,6 +105,10 @@ SOURCE=.\Equivalence_Lit_Rs.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\Faktorial.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\functions.cpp
 # End Source File
 # Begin Source File
@@ -278,6 +282,10 @@ SOURCE=.\CF_Cedent_Recordset.h
 # Begin Source File
 
 SOURCE=.\Equivalence_Lit_Rs.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Faktorial.h
 # End Source File
 # Begin Source File
 

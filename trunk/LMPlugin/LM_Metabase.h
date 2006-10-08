@@ -242,6 +242,8 @@ public:
 //	bool		flag_c;
 
 	CString		xml_convert ();
+	double		get_fisher ();
+	double		get_chi_sq ();
 };
 
 typedef CArray <Hyp_4ft_Meta *, Hyp_4ft_Meta *> THyp_4ft_Meta_Array;

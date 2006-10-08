@@ -1729,8 +1729,8 @@ CString fLM4fthyp(void * hSource)
 				pthyp->up_bnd_dbl_imp = 0;
 				pthyp->low_bnd_eq = 0;
 				pthyp->up_bnd_eq = 0;
-				pthyp->fisher = 0;
-				pthyp->chi_sq = 0;
+				pthyp->fisher = pthyp->get_fisher ();
+				pthyp->chi_sq = pthyp->get_chi_sq ();
 
 				pthyp->ant_id = "ant" + pthyp->id;
 				pthyp->suc_id = "suc" + pthyp->id;
