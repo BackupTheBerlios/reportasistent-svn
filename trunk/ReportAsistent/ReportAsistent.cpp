@@ -25,7 +25,10 @@ BEGIN_MESSAGE_MAP(CReportAsistentApp, CWinApp)
 	ON_COMMAND(ID_MMSOURCES, OnMmsources)
 	ON_COMMAND(ID_FILE_OPTIONS, OnFileOptions)
 	ON_COMMAND(ID_OPEN_WORD_EDITOR, OnOpenWordEditor)
-	ON_WM_HELPINFO()
+
+#if _MFC_VER < 0x0800
+  ON_WM_HELPINFO()
+#endif
 	//}}AFX_MSG_MAP
 	// Standard file based document commands
 	ON_COMMAND(ID_FILE_NEW, CWinApp::OnFileNew)

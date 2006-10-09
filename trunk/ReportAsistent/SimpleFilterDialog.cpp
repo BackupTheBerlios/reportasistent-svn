@@ -19,6 +19,7 @@ static char THIS_FILE[] = __FILE__;
 
 CSimpleFilterDialog::CSimpleFilterDialog(MSXML2::IXMLDOMElementPtr & active_element, CWnd* pParent)
 : CPropertyPage(CSimpleFilterDialog::IDD), m_active_element(active_element)
+, m_bSourceIsInit(FALSE)
 {
 	//{{AFX_DATA_INIT(CSimpleFilterDialog)
 		// NOTE: the ClassWizard will add member initialization here
@@ -73,6 +74,10 @@ BEGIN_MESSAGE_MAP(CSimpleFilterDialog, CPropertyPage)
 	ON_CBN_SELCHANGE(IDC_DATA_SOURCE_COMBO, OnSelchangeDataSourceCombo)
 	//}}AFX_MSG_MAP
 //  ON_WM_ENTERIDLE()
+//ON_WM_ACTIVATE()
+ON_WM_CTLCOLOR()
+//ON_NOTIFY(LVN_ODSTATECHANGED, IDC_FILTER_LIST, &CSimpleFilterDialog::OnLvnOdstatechangedFilterList)
+ON_NOTIFY(NM_CLICK, IDC_FILTER_LIST, &CSimpleFilterDialog::OnNMClickFilterList)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -99,7 +104,8 @@ BOOL CSimpleFilterDialog::OnInitDialog()
 	if (sel == CB_ERR) m_SourcesCombo.SelectString(-1, dm.getDefaultSource());
 
 
-	OnSelchangeDataSourceCombo();
+	//OnSelchangeDataSourceCombo();
+  m_bSourceIsInit = FALSE;
 	  
 
 	return TRUE;  // return TRUE unless you set the focus to a control
@@ -265,6 +271,8 @@ void CSimpleFilterDialog::OnSelchangeDataSourceCombo()
 	{
 		UpDateDialog();
 	}
+
+  SetModified();
 /*
 	else
 	{
@@ -273,22 +281,6 @@ void CSimpleFilterDialog::OnSelchangeDataSourceCombo()
 	}
 */
 }
-
-void CSimpleFilterDialog::OnCancel() 
-{
-	GetParent()->SendMessage(WM_COMMAND, IDC_SWITCH_BUTTON | (BN_CLICKED << 16), (LPARAM) m_hWnd);
-	
-	//CDialog::OnCancel();
-}
-
-
-void CSimpleFilterDialog::OnOK() 
-{
-	GetParent()->SendMessage(WM_COMMAND, IDC_SWITCH_BUTTON | (BN_CLICKED << 16), (LPARAM) m_hWnd);
-
-//	CDialog::OnOK();
-}
-
 
 
 BOOL CSimpleFilterDialog::SaveAll()
@@ -335,9 +327,70 @@ BOOL CSimpleFilterDialog::SaveAll()
 	return TRUE;
 }
 
-//void CSimpleFilterDialog::OnEnterIdle(UINT nWhy, CWnd* pWho)
+
+
+
+HBRUSH CSimpleFilterDialog::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
+{
+  HBRUSH hbr = CPropertyPage::OnCtlColor(pDC, pWnd, nCtlColor);
+
+  //dedek: tohle se tady vola kvuli inicializaci filtru - kdyz se to delalo uz v init_dialog tak to padalo!!
+  if (! m_bSourceIsInit)
+  {
+    m_bSourceIsInit = TRUE;
+    OnSelchangeDataSourceCombo();
+    SetModified(FALSE);
+    Invalidate(FALSE);
+  }
+
+  // TODO:  Change any attributes of the DC here
+
+  // TODO:  Return a different brush if the default is not desired
+  return hbr;
+}
+
+
+BOOL CSimpleFilterDialog::OnApply()
+{
+  if (SaveAll())
+  {
+    SetModified(FALSE);
+    return TRUE;
+  }
+
+  return FALSE;
+}
+
+//void CSimpleFilterDialog::OnCancel() 
 //{
-//  CPropertyPage::OnEnterIdle(nWhy, pWho);
-//
-//  // TODO: Add your message handler code here
+//	GetParent()->SendMessage(WM_COMMAND, IDC_SWITCH_BUTTON | (BN_CLICKED << 16), (LPARAM) m_hWnd);
+//	
+//	//CDialog::OnCancel();
 //}
+
+
+
+
+void CSimpleFilterDialog::OnOK()
+{
+  OnApply();
+
+  CPropertyPage::OnOK();
+}
+
+
+
+//void CSimpleFilterDialog::OnLvnOdstatechangedFilterList(NMHDR *pNMHDR, LRESULT *pResult)
+//{
+//  LPNMLVODSTATECHANGE pStateChanged = reinterpret_cast<LPNMLVODSTATECHANGE>(pNMHDR);
+//  // TODO: Add your control notification handler code here
+//  *pResult = 0;
+//}
+
+void CSimpleFilterDialog::OnNMClickFilterList(NMHDR *pNMHDR, LRESULT *pResult)
+{
+  SetModified();
+
+  // TODO: Add your control notification handler code here
+  *pResult = 0;
+}

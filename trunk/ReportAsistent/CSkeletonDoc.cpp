@@ -344,8 +344,8 @@ BOOL CSkeletonDoc::EditActiveElement(MSXML2::IXMLDOMElementPtr &element)
 	CSimpleFilterDialog filter(element);
 	CTransformationsDialog transforms(element);
 	
-  sheet.AddPage(& cmpl_filter);
 	sheet.AddPage(& filter);
+  sheet.AddPage(& cmpl_filter);
 	sheet.AddPage(& transforms);
 
 //  CWaitDialog::prefered_parent = & sheet;

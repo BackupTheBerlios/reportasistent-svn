@@ -46,7 +46,7 @@ bool CLnFaktTab::Init( long n)
 
 		long i;
 
-		for (i= 1; i <= n; i++) m_LnFaktTab[i]= m_LnFaktTab[i-1]+ log(i);
+		for (i= 1; i <= n; i++) m_LnFaktTab[i]= m_LnFaktTab[i-1]+ log((double) i);
 			// ln( n!) == ln(1)+ ln(2)+ ...+ ln(n)
 			// ln( n!) == ln((n-1)!)+ ln( n)
 	}
