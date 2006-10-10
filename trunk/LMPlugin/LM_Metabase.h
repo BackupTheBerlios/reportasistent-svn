@@ -244,6 +244,12 @@ public:
 	CString		xml_convert ();
 	double		get_fisher ();
 	double		get_chi_sq ();
+	double		get_low_bnd_imp ();
+	double		get_up_bnd_imp ();
+	double		get_low_bnd_dbl_imp ();
+	double		get_up_bnd_dbl_imp ();
+	double		get_low_bnd_eq ();
+	double		get_up_bnd_eq ();
 };
 
 typedef CArray <Hyp_4ft_Meta *, Hyp_4ft_Meta *> THyp_4ft_Meta_Array;

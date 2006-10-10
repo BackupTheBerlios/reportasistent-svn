@@ -1722,13 +1722,12 @@ CString fLM4fthyp(void * hSource)
 				pthyp->support = ((double)rs.m_FreqA/(rs.m_FreqA+rs.m_FreqB+rs.m_FreqC+rs.m_FreqD));
 				pthyp->completeness = ((double)rs.m_FreqA/(rs.m_FreqA+rs.m_FreqC));
 				pthyp->avg_diff = ((double)rs.m_FreqA*(rs.m_FreqA+rs.m_FreqB+rs.m_FreqC+rs.m_FreqD)/((rs.m_FreqA+rs.m_FreqB)*(rs.m_FreqA+rs.m_FreqC))- 1);
-				//not implemented yet, therefore all the values are 0
-				pthyp->low_bnd_imp = 0;
-				pthyp->up_bnd_imp = 0;
-				pthyp->low_bnd_dbl_imp = 0;
-				pthyp->up_bnd_dbl_imp = 0;
-				pthyp->low_bnd_eq = 0;
-				pthyp->up_bnd_eq = 0;
+				pthyp->low_bnd_imp = pthyp->get_low_bnd_imp ();
+				pthyp->up_bnd_imp = pthyp->get_up_bnd_imp ();
+				pthyp->low_bnd_dbl_imp = pthyp->get_low_bnd_dbl_imp ();
+				pthyp->up_bnd_dbl_imp = pthyp->get_up_bnd_dbl_imp ();
+				pthyp->low_bnd_eq = pthyp->get_low_bnd_eq ();
+				pthyp->up_bnd_eq = pthyp->get_up_bnd_eq ();
 				pthyp->fisher = pthyp->get_fisher ();
 				pthyp->chi_sq = pthyp->get_chi_sq ();
 
