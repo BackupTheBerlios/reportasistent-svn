@@ -48,7 +48,7 @@ CAElTransform::CAElTransform(MSXML2::IXMLDOMElementPtr & active_element)
 	m.GetPluginOutput(
 		(LPCTSTR) (_bstr_t) m_active_element->getAttribute("source"),
 		(_bstr_t) m_active_element->getAttribute("type"),
-		m_plug_out);
+		& m_plug_out);
 
 }
  
@@ -56,7 +56,7 @@ CAElTransform::CAElTransform(MSXML2::IXMLDOMElementPtr & active_element)
 
 CAElTransform::~CAElTransform()
 {
-	m_plug_out.Release();
+	if (m_plug_out != NULL) m_plug_out.Release();
 }
 
 MSXML2::IXMLDOMDocumentFragmentPtr CAElTransform::DoAllTransnformations()

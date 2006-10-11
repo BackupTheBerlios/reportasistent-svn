@@ -170,7 +170,7 @@ BOOL COutputBuffer::isAPBuffered(CString APName)
 }
 
 
-BOOL COutputBuffer::getBuffer(CString APName, MSXML2::IXMLDOMDocumentPtr & xml_dom)
+BOOL COutputBuffer::getBuffer(CString APName, MSXML2::IXMLDOMDocument ** xml_dom)
 {
 	int i = getAPIndex(APName);
 	if(i != -1)
@@ -178,7 +178,8 @@ BOOL COutputBuffer::getBuffer(CString APName, MSXML2::IXMLDOMDocumentPtr & xml_d
 		//xml_dom.CreateInstance(_T("Msxml2.DOMDocument"));
 		//xml_dom->async = VARIANT_FALSE; // default - true,
 		//xml_dom.
-		xml_dom = BufArray[i]->buffer;//->cloneNode(TRUE);
+		* xml_dom = BufArray[i]->buffer;//->cloneNode(TRUE);
+    BufArray[i]->buffer.AddRef();
 
 		return TRUE;
 	}
@@ -945,7 +946,7 @@ void CDataSourcesManager::PerformThreadFunction(LPARAM hPreformFn, LPARAM hSourc
 }
 
 //dedek
-BOOL CDataSourcesManager::GetPluginOutput(public_source_id_t source, LPCTSTR ap_name, MSXML2::IXMLDOMDocumentPtr & xml_dom)
+BOOL CDataSourcesManager::GetPluginOutput(public_source_id_t source, LPCTSTR ap_name, MSXML2::IXMLDOMDocument ** xml_dom)
 {
 	CString ap_name_CS = (CString) ap_name;
 	int src_index = FindSourceByPublicID(source);

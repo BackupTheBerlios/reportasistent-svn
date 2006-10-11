@@ -46,7 +46,7 @@ protected:
 	//{{AFX_MSG(CTransformationsDialog)
 	virtual BOOL OnInitDialog();
 	virtual void OnOK();
-	virtual void OnCancel();
+//	virtual void OnCancel();
 	afx_msg void OnAddButton();
 	afx_msg void OnRemoveButton();
 	afx_msg void OnMoveUpButton();
@@ -91,6 +91,7 @@ private:
 
 
 
+  virtual BOOL OnApply();
 };
 
 //{{AFX_INSERT_LOCATION}}

@@ -101,17 +101,9 @@ BOOL CTransformationsDialog::OnInitDialog()
 
 void CTransformationsDialog::OnOK() 
 {
-	GetParent()->SendMessage(WM_COMMAND, IDC_SWITCH_BUTTON | (BN_CLICKED << 16), (LPARAM) m_hWnd);
-	
-//	CDialog::OnOK();
+  OnApply();
 }
 
-void CTransformationsDialog::OnCancel() 
-{
-	GetParent()->SendMessage(WM_COMMAND, IDC_SWITCH_BUTTON | (BN_CLICKED << 16), (LPARAM) m_hWnd);
-
-	//CDialog::OnCancel();
-}
 
 BOOL CTransformationsDialog::SaveAll()
 {
@@ -125,6 +117,8 @@ BOOL CTransformationsDialog::SaveAll()
 		m_active_element->selectSingleNode("output"));
 
 	m_cloned_output_element = m_active_element->selectSingleNode("output")->cloneNode(VARIANT_TRUE);
+
+  SetModified(FALSE);
 
 	return TRUE;
 }
@@ -217,6 +211,8 @@ void CTransformationsDialog::OnAddButton()
 	m_cloned_output_element->appendChild(transf_elem);
 	transf_elem.Release();
 
+  SetModified();
+
 }
 
 void CTransformationsDialog::OnRemoveButton() 
@@ -233,6 +229,7 @@ void CTransformationsDialog::OnRemoveButton()
 	m_cloned_output_element->removeChild(
 		m_cloned_output_element->selectSingleNode((LPCTSTR) query_str));
 
+  SetModified();
 }
 
 void CTransformationsDialog::OnMoveUpButton() 
@@ -268,6 +265,8 @@ void CTransformationsDialog::OnMoveUpButton()
 	m_cloned_output_element->insertBefore(
 		m_cloned_output_element->selectSingleNode((LPCTSTR) query_str1),
 		(MSXML2::IXMLDOMNode*) m_cloned_output_element->selectSingleNode((LPCTSTR) query_str2));
+
+  SetModified();
 }
 
 void CTransformationsDialog::OnMoveDownButton() 
@@ -307,6 +306,7 @@ void CTransformationsDialog::OnMoveDownButton()
 			(MSXML2::IXMLDOMNode*) m_cloned_output_element->selectSingleNode((LPCTSTR) query_str2));
 	}
 
+  SetModified();
 }
 
 void CTransformationsDialog::ConfigureAttrLinkTable(MSXML2::IXMLDOMNodePtr & attr_link_tbl_node)
@@ -314,7 +314,10 @@ void CTransformationsDialog::ConfigureAttrLinkTable(MSXML2::IXMLDOMNodePtr & att
 	CAttributeLinkTableDialog dlg(
 		(MSXML2::IXMLDOMElementPtr) attr_link_tbl_node, this, FALSE);
 
-	dlg.DoModal();
+	if (dlg.DoModal() == IDOK)
+  {
+    SetModified();
+  }
 
 }
 
@@ -650,4 +653,9 @@ void CTransformationsDialog::ConfigureTransformation(int transform_index)
 	}
 
 	option_nodes.Release();
+}
+
+BOOL CTransformationsDialog::OnApply()
+{
+  return SaveAll();
 }

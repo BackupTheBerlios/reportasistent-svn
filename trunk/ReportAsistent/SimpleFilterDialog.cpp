@@ -77,7 +77,7 @@ BEGIN_MESSAGE_MAP(CSimpleFilterDialog, CPropertyPage)
 //ON_WM_ACTIVATE()
 ON_WM_CTLCOLOR()
 //ON_NOTIFY(LVN_ODSTATECHANGED, IDC_FILTER_LIST, &CSimpleFilterDialog::OnLvnOdstatechangedFilterList)
-ON_NOTIFY(NM_CLICK, IDC_FILTER_LIST, &CSimpleFilterDialog::OnNMClickFilterList)
+ON_NOTIFY(NM_CLICK, IDC_FILTER_LIST, OnNMClickFilterList)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -141,7 +141,7 @@ BOOL CSimpleFilterDialog::LoadSource(public_source_id_t sId)
 
 	//nacte data z plugin output
 
-	if (! m->DataSourcesManager.GetPluginOutput(sId, (_bstr_t) element_info->getElementName(), filter_doc)) 
+	if (! m->DataSourcesManager.GetPluginOutput(sId, (_bstr_t) element_info->getElementName(), & filter_doc)) 
 	{
 		filter_doc.Release();
 		CReportAsistentApp::ReportError(IDS_SIMPLE_FILTER_FAILED_SOURCE_LOAD, "Plugin output is empty.");
@@ -361,15 +361,6 @@ BOOL CSimpleFilterDialog::OnApply()
   return FALSE;
 }
 
-//void CSimpleFilterDialog::OnCancel() 
-//{
-//	GetParent()->SendMessage(WM_COMMAND, IDC_SWITCH_BUTTON | (BN_CLICKED << 16), (LPARAM) m_hWnd);
-//	
-//	//CDialog::OnCancel();
-//}
-
-
-
 
 void CSimpleFilterDialog::OnOK()
 {
@@ -379,13 +370,6 @@ void CSimpleFilterDialog::OnOK()
 }
 
 
-
-//void CSimpleFilterDialog::OnLvnOdstatechangedFilterList(NMHDR *pNMHDR, LRESULT *pResult)
-//{
-//  LPNMLVODSTATECHANGE pStateChanged = reinterpret_cast<LPNMLVODSTATECHANGE>(pNMHDR);
-//  // TODO: Add your control notification handler code here
-//  *pResult = 0;
-//}
 
 void CSimpleFilterDialog::OnNMClickFilterList(NMHDR *pNMHDR, LRESULT *pResult)
 {
