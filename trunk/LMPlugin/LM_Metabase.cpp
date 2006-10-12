@@ -1017,6 +1017,36 @@ CString Hyp_SD4ft_Meta::xml_convert ()
 	return xml_string;
 }
 
+double Hyp_SD4ft_Meta::get_conf (long _a, long _b)
+{
+	return ((double) _a	/ (_a + _b));
+}
+
+double Hyp_SD4ft_Meta::get_d_conf (long _a, long _b, long _c)
+{
+	return ((double) _a / (_a + _b + _c));
+}
+
+double Hyp_SD4ft_Meta::get_e_conf (long _a, long _b, long _c, long _d)
+{
+	return ((double) (_a + _d) / (_a + _b + _c + _d));
+}
+
+double Hyp_SD4ft_Meta::get_support (long _a, long _b, long _c, long _d)
+{
+	return ((double) _a / (_a + _b + _c + _d));
+}
+
+double Hyp_SD4ft_Meta::get_completeness (long _a, long _c)
+{
+	return ((double) _a / (_a + _c));
+}
+
+double Hyp_SD4ft_Meta::get_avg_diff (long _a, long _b, long _c, long _d)
+{
+	return ((double) _a * (_a + _b + _c + _d) / ((_a + _b) * (_a + _c)) - 1);
+}
+
 CString Hyp_SDCF_Meta::xml_convert ()
 {
 	CString xml_string;

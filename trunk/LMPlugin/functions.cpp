@@ -2064,12 +2064,18 @@ CString fLMSD4fthyp(void * hSource)
 				pthyp->g.Format ("%d", rs.m_SecondFreqC);
 				pthyp->h.Format ("%d", rs.m_SecondFreqD);
 
-				pthyp->conf1 = "0";
-				pthyp->d_conf1 = "0";
-				pthyp->e_conf1 = "0";
-				pthyp->support1 = "0";
-				pthyp->completeness1 = "0";
-				pthyp->avg_diff1 = "0";
+				pthyp->conf1 = (LPCTSTR) (_bstr_t)
+					(pthyp->get_conf (rs.m_FirstFreqA, rs.m_FirstFreqB));
+				pthyp->d_conf1 = (LPCTSTR) (_bstr_t)
+					(pthyp->get_d_conf (rs.m_FirstFreqA, rs.m_FirstFreqB, rs.m_FirstFreqC));
+				pthyp->e_conf1 = (LPCTSTR) (_bstr_t)
+					(pthyp->get_e_conf (rs.m_FirstFreqA, rs.m_FirstFreqB, rs.m_FirstFreqC, rs.m_FirstFreqD));
+				pthyp->support1 = (LPCTSTR) (_bstr_t)
+					(pthyp->get_support (rs.m_FirstFreqA, rs.m_FirstFreqB, rs.m_FirstFreqC, rs.m_FirstFreqD));
+				pthyp->completeness1 = (LPCTSTR) (_bstr_t)
+					(pthyp->get_completeness (rs.m_FirstFreqA, rs.m_FirstFreqC));
+				pthyp->avg_diff1 = (LPCTSTR) (_bstr_t)
+					pthyp->get_avg_diff (rs.m_FirstFreqA, rs.m_FirstFreqB, rs.m_FirstFreqC, rs.m_FirstFreqD);
 				pthyp->low_bnd_imp1 = "0";
 				pthyp->up_bnd_imp1 = "0";
 				pthyp->low_bnd_dbl_imp1 = "0";
@@ -2079,12 +2085,18 @@ CString fLMSD4fthyp(void * hSource)
 				pthyp->fisher1 = "0";
 				pthyp->chi_sq1 = "0";
 
-				pthyp->conf2 = "0";
-				pthyp->d_conf2 = "0";
-				pthyp->e_conf2 = "0";
-				pthyp->support2 = "0";
-				pthyp->completeness2 = "0";
-				pthyp->avg_diff2 = "0";
+				pthyp->conf2 = (LPCTSTR) (_bstr_t)
+					(pthyp->get_conf (rs.m_SecondFreqA, rs.m_SecondFreqB));
+				pthyp->d_conf2 = (LPCTSTR) (_bstr_t)
+					(pthyp->get_d_conf (rs.m_SecondFreqA, rs.m_SecondFreqB, rs.m_SecondFreqC));
+				pthyp->e_conf2 = (LPCTSTR) (_bstr_t)
+					(pthyp->get_e_conf (rs.m_SecondFreqA, rs.m_SecondFreqB, rs.m_SecondFreqC, rs.m_SecondFreqD));
+				pthyp->support2 = (LPCTSTR) (_bstr_t)
+					(pthyp->get_support (rs.m_SecondFreqA, rs.m_SecondFreqB, rs.m_SecondFreqC, rs.m_SecondFreqD));
+				pthyp->completeness2 = (LPCTSTR) (_bstr_t)
+					(pthyp->get_completeness (rs.m_SecondFreqA, rs.m_SecondFreqC));
+				pthyp->avg_diff2 = (LPCTSTR) (_bstr_t)
+					pthyp->get_avg_diff (rs.m_SecondFreqA, rs.m_SecondFreqB, rs.m_SecondFreqC, rs.m_SecondFreqD);
 				pthyp->low_bnd_imp2 = "0";
 				pthyp->up_bnd_imp2 = "0";
 				pthyp->low_bnd_dbl_imp2 = "0";

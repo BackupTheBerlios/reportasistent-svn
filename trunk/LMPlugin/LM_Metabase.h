@@ -368,6 +368,12 @@ public:
 	CString		set2_id;
 
 	CString		xml_convert ();
+	double		get_conf (long _a, long _b);
+	double		get_d_conf (long _a, long _b, long _c);
+	double		get_e_conf (long _a, long _b, long _c, long _d);
+	double		get_support (long _a, long _b, long _c, long _d);
+	double		get_completeness (long _a, long _c);
+	double		get_avg_diff (long _a, long _b, long _c, long _d);
 };
 
 typedef CArray <Hyp_SD4ft_Meta *, Hyp_SD4ft_Meta *> THyp_SD4ft_Meta_Array;
