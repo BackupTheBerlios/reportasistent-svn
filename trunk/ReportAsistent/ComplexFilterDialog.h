@@ -1,3 +1,4 @@
+#include "afxwin.h"
 #if !defined(AFX_COMPLEXFILTERDIALOG_H__2CD50BAE_2DA0_4301_AEB9_05756F4ED841__INCLUDED_)
 #define AFX_COMPLEXFILTERDIALOG_H__2CD50BAE_2DA0_4301_AEB9_05756F4ED841__INCLUDED_
 
@@ -12,11 +13,11 @@
 
 class CComplexFilterDialog : public CPropertyPage
 {
-	DECLARE_DYNCREATE(CComplexFilterDialog)
+//	DECLARE_DYNCREATE(CComplexFilterDialog)
 
 // Construction
 public:
-	CComplexFilterDialog();
+	CComplexFilterDialog(MSXML2::IXMLDOMElementPtr & active_element, CWnd* pParent = NULL);	// nestandard constructor :-)
 	~CComplexFilterDialog();
 
 // Dialog Data
@@ -42,6 +43,15 @@ protected:
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 
+public:
+	virtual BOOL OnInitDialog();
+private:
+	BOOL m_bSourceIsInit;
+	CComboBox m_SourcesCombo;
+	MSXML2::IXMLDOMElementPtr & m_active_element;
+
+	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
+	afx_msg void OnSelchangeDataSourceCombo();
 };
 
 //{{AFX_INSERT_LOCATION}}

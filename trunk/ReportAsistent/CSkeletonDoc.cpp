@@ -338,14 +338,23 @@ BOOL CSkeletonDoc::EditActiveElement(MSXML2::IXMLDOMElementPtr &element)
 
 	//dedek: nove verze pres property sheet
 
+	CElementManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
+
 	CPropertySheet sheet((LPCTSTR) (_bstr_t) element->getAttribute("id"), AfxGetMainWnd());
 
-	CComplexFilterDialog cmpl_filter;
+	CComplexFilterDialog cmpl_filter(element);
 	CSimpleFilterDialog filter(element);
+
+	if (NULL != m.getActiveElementInfo(m.IdentifyElement(element))->getComplexFilterTransformation())
+	{
+		sheet.AddPage(& cmpl_filter);
+	}
+	else
+	{
+		sheet.AddPage(& filter);
+	}
+
 	CTransformationsDialog transforms(element);
-	
-	sheet.AddPage(& filter);
-  sheet.AddPage(& cmpl_filter);
 	sheet.AddPage(& transforms);
 
 //  CWaitDialog::prefered_parent = & sheet;

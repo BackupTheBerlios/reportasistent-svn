@@ -85,7 +85,7 @@ END_MESSAGE_MAP()
 
 BOOL CSimpleFilterDialog::OnInitDialog() 
 {
-  CPropertyPage::OnInitDialog();
+	CPropertyPage::OnInitDialog();
 
 	CDataSourcesManager & dm = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->DataSourcesManager;
 	CElementManager & em = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
@@ -104,8 +104,9 @@ BOOL CSimpleFilterDialog::OnInitDialog()
 	if (sel == CB_ERR) m_SourcesCombo.SelectString(-1, dm.getDefaultSource());
 
 
+	//ve VS2005 nefungovalo, preneseno do OnCtlColor
 	//OnSelchangeDataSourceCombo();
-  m_bSourceIsInit = FALSE;
+	m_bSourceIsInit = FALSE;
 	  
 
 	return TRUE;  // return TRUE unless you set the focus to a control
