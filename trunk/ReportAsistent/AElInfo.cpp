@@ -20,9 +20,6 @@ static char THIS_FILE[]=__FILE__;
 
 CAElInfo::CAElInfo()
 {
-	pSimpleFilterDOM.CreateInstance("Msxml2.DOMDocument");
-	pSimpleFilterDOM->async = VARIANT_FALSE;
-
 	pElementDefinitionDOM.CreateInstance("Msxml2.DOMDocument");
 	pElementDefinitionDOM->async = VARIANT_FALSE;
 
@@ -33,6 +30,7 @@ CAElInfo::CAElInfo()
 CAElInfo::~CAElInfo()
 {
 	if (pSimpleFilterDOM != NULL) pSimpleFilterDOM.Release();
+	if (pComplexFilterDOM != NULL) pComplexFilterDOM.Release();
 	if (pElementDefinitionDOM != NULL) pElementDefinitionDOM.Release();
 	if (pFillElementAttributesDOM != NULL) 	pFillElementAttributesDOM.Release();
 
@@ -69,14 +67,58 @@ BOOL CAElInfo::LoadFromDir(LPCTSTR dir_path)
 		return FALSE;
 	}
 
-	
+/*	
+			 CFileFind options_find;
+			 //if file exists options.xml
+			 if (options_find.FindFile(finder.GetFilePath() + "\\options.xml"))
+			 {
+				 tr->options.CreateInstance(_T("Msxml2.DOMDocument"));
+				 tr->options->async = VARIANT_FALSE;
+				 tr->options->load((LPCTSTR) (finder.GetFilePath() + "\\options.xml"));
+				 options_error = tr->options->parseError->errorCode;
+			 }
+			 options_find.Close();
+*/	
 	//nacteni pSimpleFilterDOM
-	pSimpleFilterDOM->load((LPCTSTR) (src_dir_path + "\\simple_filter.xsl"));
-	if (pSimpleFilterDOM->parseError->errorCode  != S_OK)
+	CFileFind exists_file_find;
+	if (exists_file_find.FindFile(src_dir_path + "\\simple_filter.xsl"))
 	{
-		CReportAsistentApp::ReportError(IDS_AEL_LOAD_FAILED, dir_path, "simple_filter.xsl",
-			(LPCTSTR) pSimpleFilterDOM->parseError->reason);
+		pSimpleFilterDOM.CreateInstance("Msxml2.DOMDocument");
+		pSimpleFilterDOM->async = VARIANT_FALSE;
 
+		pSimpleFilterDOM->load((LPCTSTR) (src_dir_path + "\\simple_filter.xsl"));
+		if (pSimpleFilterDOM->parseError->errorCode  != S_OK)
+		{
+			CReportAsistentApp::ReportError(IDS_AEL_LOAD_FAILED, dir_path, "simple_filter.xsl",
+				(LPCTSTR) pSimpleFilterDOM->parseError->reason);
+
+			pSimpleFilterDOM.Release();
+		}
+	}
+	exists_file_find.Close();
+
+	//nacteni pComplexFilterDOM
+	if (exists_file_find.FindFile(src_dir_path + "\\complex_filter.xsl"))
+	{
+		pComplexFilterDOM.CreateInstance("Msxml2.DOMDocument");
+		pComplexFilterDOM->async = VARIANT_FALSE;
+
+		pComplexFilterDOM->load((LPCTSTR) (src_dir_path + "\\complex_filter.xsl"));
+		if (pComplexFilterDOM->parseError->errorCode  != S_OK)
+		{
+
+			long code = pComplexFilterDOM->parseError->errorCode;
+			CReportAsistentApp::ReportError(IDS_AEL_LOAD_FAILED, dir_path, "complex_filter.xsl",
+				(LPCTSTR) pComplexFilterDOM->parseError->reason);
+
+			pComplexFilterDOM.Release();
+		}
+	}
+
+	if ((pComplexFilterDOM == NULL) && (pSimpleFilterDOM == NULL))
+	{
+		//nepodarilo se nacist zadny filter, prvek pridan do databaze AP
+		CReportAsistentApp::ReportError(IDS_AEL_NOFILTER, dir_path);
 		return FALSE;
 	}
 
@@ -135,6 +177,14 @@ MSXML2::IXMLDOMNodePtr CAElInfo::getFillElementAttributesTransformation()
 	setLanguageInTransformation(pFillElementAttributesDOM);
 	
 	return pFillElementAttributesDOM;
+}
+
+MSXML2::IXMLDOMNodePtr CAElInfo::getComplexFilterTransformation()
+{
+	// kody: nastaveni jazyka transformace
+	setLanguageInTransformation(pComplexFilterDOM);
+
+	return pComplexFilterDOM;
 }
 
 MSXML2::IXMLDOMNodePtr CAElInfo::getSimpleFilterTransformation()
@@ -199,6 +249,7 @@ void CAElInfo::LoadTransformations(LPCTSTR dir_path)
 
 			 long options_error = S_OK;
 			 CFileFind options_find;
+			 //if file exists options.xml
 			 if (options_find.FindFile(finder.GetFilePath() + "\\options.xml"))
 			 {
 				 tr->options.CreateInstance(_T("Msxml2.DOMDocument"));

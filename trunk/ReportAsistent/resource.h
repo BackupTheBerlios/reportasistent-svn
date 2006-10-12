@@ -1,5 +1,5 @@
 //{{NO_DEPENDENCIES}}
-// Microsoft Developer Studio generated include file.
+// Microsoft Visual C++ generated include file.
 // Used by ReportAsistent.rc
 //
 #define IDD_ABOUTBOX                    100
@@ -119,6 +119,7 @@
 #define IDS_AEL_LOAD_FAILED             61217
 #define IDS_TR_OPTIONS_ERROR            61218
 #define IDS_WRONG_ELEMENT_TRANSFORMATION 61219
+#define IDS_AEL_NOFILTER                61220
 #define IDS_CONFIRM_THRAD_KILL          61400
 #define IDS_CONFIRM_APP_RESUME          61401
 

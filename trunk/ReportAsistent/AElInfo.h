@@ -17,6 +17,7 @@ public:
 	MSXML2::IXMLDOMElementPtr CreateEmptyElement();
 	BOOL LoadElementIcon(CBitmap &icon);
 	MSXML2::IXMLDOMNodePtr getSimpleFilterTransformation();
+	MSXML2::IXMLDOMNodePtr getComplexFilterTransformation();
 	MSXML2::IXMLDOMNodePtr getFillElementAttributesTransformation();
 	BOOL LoadFromDir(LPCTSTR dir_path);
 	LPCTSTR getElementName();
@@ -40,6 +41,7 @@ private:
 	};
 
 	CString src_dir_path;
+	MSXML2::IXMLDOMDocumentPtr pComplexFilterDOM;
 	MSXML2::IXMLDOMDocumentPtr pSimpleFilterDOM;
 	MSXML2::IXMLDOMDocumentPtr pFillElementAttributesDOM;
 	MSXML2::IXMLDOMDocumentPtr pElementDefinitionDOM;

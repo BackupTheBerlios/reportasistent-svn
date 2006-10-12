@@ -777,6 +777,7 @@ BEGIN
     IDS_TR_OPTIONS_ERROR    "Error in transformation ""%s"" options definition.\nDescription: %s"
     IDS_WRONG_ELEMENT_TRANSFORMATION 
                             "Transformation ""%s"" of active element ""%s"" not found.\nProcessed active element id: %s"
+    IDS_AEL_NOFILTER        "Warning: Active element ""%s"" was not loaded because no filter file was found."
 END
 
 STRINGTABLE 
