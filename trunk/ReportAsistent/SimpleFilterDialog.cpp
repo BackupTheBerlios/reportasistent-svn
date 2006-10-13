@@ -273,7 +273,7 @@ void CSimpleFilterDialog::OnSelchangeDataSourceCombo()
 		UpDateDialog();
 	}
 
-  SetModified();
+    SetModified();
 /*
 	else
 	{
@@ -379,3 +379,5 @@ void CSimpleFilterDialog::OnNMClickFilterList(NMHDR *pNMHDR, LRESULT *pResult)
   // TODO: Add your control notification handler code here
   *pResult = 0;
 }
+
+

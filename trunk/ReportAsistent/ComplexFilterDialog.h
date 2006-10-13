@@ -49,9 +49,15 @@ private:
 	BOOL m_bSourceIsInit;
 	CComboBox m_SourcesCombo;
 	MSXML2::IXMLDOMElementPtr & m_active_element;
+   	MSXML2::IXMLDOMElementPtr m_filter_DOM;	//data pouzita na naplneni list veiw
+
 
 	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
 	afx_msg void OnSelchangeDataSourceCombo();
+
+    BOOL LoadSource(public_source_id_t sId);
+    void UpDateDialog();
+
 };
 
 //{{AFX_INSERT_LOCATION}}

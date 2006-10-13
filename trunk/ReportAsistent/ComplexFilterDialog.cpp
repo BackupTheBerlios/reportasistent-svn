@@ -4,6 +4,7 @@
 #include "stdafx.h"
 #include "ReportAsistent.h"
 #include "ComplexFilterDialog.h"
+#include "APTransform.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -96,5 +97,77 @@ HBRUSH CComplexFilterDialog::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 
 void CComplexFilterDialog::OnSelchangeDataSourceCombo()
 {
-	// TODO: Add your control notification handler code here
+	CString text;
+	m_SourcesCombo.GetWindowText(text);
+
+	if (text.GetLength() == 0) return;
+
+	if (LoadSource(text))
+	{
+		UpDateDialog();
+	}
+
+    SetModified();
+}
+
+
+BOOL CComplexFilterDialog::LoadSource(public_source_id_t sId)
+{
+	CGeneralManager * m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager;
+
+    CAElInfo * element_info = m->ElementManager.getActiveElementInfo(
+								m->ElementManager.IdentifyElement(m_active_element));
+
+   	
+    MSXML2::IXMLDOMDocumentPtr plugout_doc;
+
+	//nacte data z plugin output
+	if (! m->DataSourcesManager.GetPluginOutput(sId, element_info->getElementName(), & plugout_doc))
+	{
+		CReportAsistentApp::ReportError(IDS_SIMPLE_FILTER_FAILED_SOURCE_LOAD, "Plugin output is empty.");
+		return FALSE;	
+	}
+
+#ifdef _DEBUG	
+    plugout_doc->save((LPCTSTR) (m->DirectoriesManager.getXMLFilesDirectory() + "/plug_out_example.xml"));
+#endif
+
+	
+    //ulozi element atributy
+	CAElTransform tr(m_active_element, (MSXML2::IXMLDOMNodePtr) plugout_doc);
+	tr.FillElementAttributes(0);
+
+
+    //transformace plugout na filter dom
+    MSXML2::IXMLDOMDocumentPtr filter_doc;
+    filter_doc.CreateInstance(_T("Msxml2.DOMDocument"));
+	filter_doc->async = VARIANT_FALSE; // default - true,
+	filter_doc->loadXML(
+		plugout_doc->transformNode(element_info->getComplexFilterTransformation()));
+
+    plugout_doc.Release();
+
+    if (filter_doc->documentElement != NULL)
+	{
+    	//ok data nactena
+
+#ifdef _DEBUG	
+    	filter_doc->save((LPCTSTR) (m->DirectoriesManager.getXMLFilesDirectory() + "/complex_filter_example.xml"));
+#endif
+        m_filter_DOM = filter_doc->documentElement;
+		filter_doc.Release();
+		return TRUE;
+	}
+
+    //problem, zdroj neprosel    
+   	CReportAsistentApp::ReportError(IDS_SIMPLE_FILTER_FAILED_SOURCE_LOAD, "Plugin output - document element is empty.");
+    return FALSE;
+}
+
+
+void CComplexFilterDialog::UpDateDialog()
+{
+
+    AfxMessageBox("ok source loaded");
+
 }

@@ -1,3 +1,7 @@
+dedek todo
+CComplexFilterDialog::LoadSource "predelat vyplnovani element attributes"    
+
+
 dedek:
 a mame tam zase nejaky memory leaks!!
 Tak jestli o necem vite (iva, kody - je to v projektu ReportAsistent) zkuste opravit..
