@@ -2075,15 +2075,23 @@ CString fLMSD4fthyp(void * hSource)
 				pthyp->completeness1 = (LPCTSTR) (_bstr_t)
 					(pthyp->get_completeness (rs.m_FirstFreqA, rs.m_FirstFreqC));
 				pthyp->avg_diff1 = (LPCTSTR) (_bstr_t)
-					pthyp->get_avg_diff (rs.m_FirstFreqA, rs.m_FirstFreqB, rs.m_FirstFreqC, rs.m_FirstFreqD);
-				pthyp->low_bnd_imp1 = "0";
-				pthyp->up_bnd_imp1 = "0";
-				pthyp->low_bnd_dbl_imp1 = "0";
-				pthyp->up_bnd_dbl_imp1 = "0";
-				pthyp->low_bnd_eq1 = "0";
-				pthyp->up_bnd_eq1 = "0";
-				pthyp->fisher1 = "0";
-				pthyp->chi_sq1 = "0";
+					(pthyp->get_avg_diff (rs.m_FirstFreqA, rs.m_FirstFreqB, rs.m_FirstFreqC, rs.m_FirstFreqD));
+				pthyp->low_bnd_imp1 = (LPCTSTR) (_bstr_t)
+					(pthyp->get_low_bnd_imp (rs.m_FirstFreqA, rs.m_FirstFreqB));
+				pthyp->up_bnd_imp1 = (LPCTSTR) (_bstr_t)
+					(pthyp->get_up_bnd_imp (rs.m_FirstFreqA, rs.m_FirstFreqB));
+				pthyp->low_bnd_dbl_imp1 = (LPCTSTR) (_bstr_t)
+					(pthyp->get_low_bnd_dbl_imp (rs.m_FirstFreqA, rs.m_FirstFreqB, rs.m_FirstFreqC));
+				pthyp->up_bnd_dbl_imp1 = (LPCTSTR) (_bstr_t)
+					(pthyp->get_up_bnd_dbl_imp (rs.m_FirstFreqA, rs.m_FirstFreqB, rs.m_FirstFreqC));
+				pthyp->low_bnd_eq1 = (LPCTSTR) (_bstr_t)
+					(pthyp->get_low_bnd_eq (rs.m_FirstFreqA, rs.m_FirstFreqB, rs.m_FirstFreqC, rs.m_FirstFreqD));
+				pthyp->up_bnd_eq1 = (LPCTSTR) (_bstr_t)
+					(pthyp->get_up_bnd_eq (rs.m_FirstFreqA, rs.m_FirstFreqB, rs.m_FirstFreqC, rs.m_FirstFreqD));
+				pthyp->fisher1 = (LPCTSTR) (_bstr_t)
+					(pthyp->get_fisher (rs.m_FirstFreqA, rs.m_FirstFreqB, rs.m_FirstFreqC, rs.m_FirstFreqD));
+				pthyp->chi_sq1 = (LPCTSTR) (_bstr_t)
+					(pthyp->get_chi_sq (rs.m_FirstFreqA, rs.m_FirstFreqB, rs.m_FirstFreqC, rs.m_FirstFreqD));
 
 				pthyp->conf2 = (LPCTSTR) (_bstr_t)
 					(pthyp->get_conf (rs.m_SecondFreqA, rs.m_SecondFreqB));
@@ -2096,21 +2104,35 @@ CString fLMSD4fthyp(void * hSource)
 				pthyp->completeness2 = (LPCTSTR) (_bstr_t)
 					(pthyp->get_completeness (rs.m_SecondFreqA, rs.m_SecondFreqC));
 				pthyp->avg_diff2 = (LPCTSTR) (_bstr_t)
-					pthyp->get_avg_diff (rs.m_SecondFreqA, rs.m_SecondFreqB, rs.m_SecondFreqC, rs.m_SecondFreqD);
-				pthyp->low_bnd_imp2 = "0";
-				pthyp->up_bnd_imp2 = "0";
-				pthyp->low_bnd_dbl_imp2 = "0";
-				pthyp->up_bnd_dbl_imp2 = "0";
-				pthyp->low_bnd_eq2 = "0";
-				pthyp->up_bnd_eq2 = "0";
-				pthyp->fisher2 = "0";
-				pthyp->chi_sq2 = "0";
-				
-				pthyp->dr_sum = "0";
-				pthyp->df_conf = "0";
-				pthyp->df_dfui = "0";
-				pthyp->df_fue = "0";
-				pthyp->df_avg = "0";
+					(pthyp->get_avg_diff (rs.m_SecondFreqA, rs.m_SecondFreqB, rs.m_SecondFreqC, rs.m_SecondFreqD));
+				pthyp->low_bnd_imp2 = (LPCTSTR) (_bstr_t)
+					(pthyp->get_low_bnd_imp (rs.m_SecondFreqA, rs.m_SecondFreqB));
+				pthyp->up_bnd_imp2 = (LPCTSTR) (_bstr_t)
+					(pthyp->get_up_bnd_imp (rs.m_SecondFreqA, rs.m_SecondFreqB));
+				pthyp->low_bnd_dbl_imp2 = (LPCTSTR) (_bstr_t)
+					(pthyp->get_low_bnd_dbl_imp (rs.m_SecondFreqA, rs.m_SecondFreqB, rs.m_SecondFreqC));
+				pthyp->up_bnd_dbl_imp2 = (LPCTSTR) (_bstr_t)
+					(pthyp->get_up_bnd_dbl_imp (rs.m_SecondFreqA, rs.m_SecondFreqB, rs.m_SecondFreqC));
+				pthyp->low_bnd_eq2 = (LPCTSTR) (_bstr_t)
+					(pthyp->get_low_bnd_eq (rs.m_SecondFreqA, rs.m_SecondFreqB, rs.m_SecondFreqC, rs.m_SecondFreqD));
+				pthyp->up_bnd_eq2 = (LPCTSTR) (_bstr_t)
+					(pthyp->get_up_bnd_eq (rs.m_SecondFreqA, rs.m_SecondFreqB, rs.m_SecondFreqC, rs.m_SecondFreqD));
+				pthyp->fisher2 = (LPCTSTR) (_bstr_t)
+					(pthyp->get_fisher (rs.m_SecondFreqA, rs.m_SecondFreqB, rs.m_SecondFreqC, rs.m_SecondFreqD));
+				pthyp->chi_sq2 = (LPCTSTR) (_bstr_t)
+					(pthyp->get_chi_sq (rs.m_SecondFreqA, rs.m_SecondFreqB, rs.m_SecondFreqC, rs.m_SecondFreqD));
+
+				pthyp->dr_sum = (LPCTSTR) (_bstr_t) (
+					pthyp->get_dr_sum (	rs.m_FirstFreqA, rs.m_FirstFreqB, rs.m_FirstFreqC, rs.m_FirstFreqD,
+										rs.m_SecondFreqA, rs.m_SecondFreqB, rs.m_SecondFreqC, rs.m_SecondFreqD));
+				pthyp->df_conf = (LPCTSTR) (_bstr_t) (pthyp->get_conf (rs.m_FirstFreqA, rs.m_FirstFreqB) -
+					pthyp->get_conf (rs.m_SecondFreqA, rs.m_SecondFreqB));
+				pthyp->df_dfui = (LPCTSTR) (_bstr_t) (pthyp->get_d_conf (rs.m_FirstFreqA, rs.m_FirstFreqB, rs.m_FirstFreqC) -
+					pthyp->get_d_conf (rs.m_SecondFreqA, rs.m_SecondFreqB, rs.m_SecondFreqC));
+				pthyp->df_fue = (LPCTSTR) (_bstr_t) (pthyp->get_e_conf (rs.m_FirstFreqA, rs.m_FirstFreqB, rs.m_FirstFreqC, rs.m_FirstFreqD) -
+					pthyp->get_e_conf (rs.m_SecondFreqA, rs.m_SecondFreqB, rs.m_SecondFreqC, rs.m_SecondFreqD));
+				pthyp->df_avg = (LPCTSTR) (_bstr_t) (pthyp->get_avg_diff (rs.m_FirstFreqA, rs.m_FirstFreqB, rs.m_FirstFreqC, rs.m_FirstFreqD) -
+					pthyp->get_avg_diff (rs.m_SecondFreqA, rs.m_SecondFreqB, rs.m_SecondFreqC, rs.m_SecondFreqD));
 
 				pthyp->ant_id = "ant" + pthyp->id;
 				pthyp->suc_id = "suc" + pthyp->id;

@@ -374,6 +374,16 @@ public:
 	double		get_support (long _a, long _b, long _c, long _d);
 	double		get_completeness (long _a, long _c);
 	double		get_avg_diff (long _a, long _b, long _c, long _d);
+	double		get_low_bnd_imp (long _a, long _b);
+	double		get_up_bnd_imp (long _a, long _b);
+	double		get_low_bnd_dbl_imp (long _a, long _b, long _c);
+	double		get_up_bnd_dbl_imp (long _a, long _b, long _c);
+	double		get_low_bnd_eq (long _a, long _b, long _c, long _d);
+	double		get_up_bnd_eq (long _a, long _b, long _c, long _d);
+	double		get_fisher (long _a, long _b, long _c, long _d);
+	double		get_chi_sq (long _a, long _b, long _c, long _d);
+	double		get_dr_sum (long _a, long _b, long _c, long _d,
+							long _e, long _f, long _g, long _h);
 };
 
 typedef CArray <Hyp_SD4ft_Meta *, Hyp_SD4ft_Meta *> THyp_SD4ft_Meta_Array;

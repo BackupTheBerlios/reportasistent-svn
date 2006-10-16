@@ -1047,6 +1047,218 @@ double Hyp_SD4ft_Meta::get_avg_diff (long _a, long _b, long _c, long _d)
 	return ((double) _a * (_a + _b + _c + _d) / ((_a + _b) * (_a + _c)) - 1);
 }
 
+double Hyp_SD4ft_Meta::get_chi_sq (long _a, long _b, long _c, long _d)
+{
+	if ((_a + _c) * (_b + _d) * (_a + _b) * (_c + _d) == 0) return 0;
+
+	double dDelta = _a * _d - _b * _c;
+
+	return ((_a + _b + _c + _d) * dDelta * dDelta) / 
+		   ((_a + _c) * (_b + _d) * (_a + _b) * (_c + _d));
+				// Pozor! Zde preteklo
+}
+
+double Hyp_SD4ft_Meta::get_fisher (long _a, long _b, long _c, long _d)
+{
+
+	if ( !gLnFaktTab.Init( _a + _b + _c + _d + 1)) return 0.0;//chyba!!!!!!!!!!!
+
+	long r= _a + _b;
+	long s= _c + _d;
+	long k= _a + _c;
+	long l= _b + _d;
+	long n= r + s; //a + b + c + d
+
+	double dValue= exp( gLnFaktTab.GetLnFakt( r)+ gLnFaktTab.GetLnFakt( s)+ 
+				gLnFaktTab.GetLnFakt( k)+ gLnFaktTab.GetLnFakt( l)-
+				gLnFaktTab.GetLnFakt( n)- gLnFaktTab.GetLnFakt( _a)-
+				gLnFaktTab.GetLnFakt( r- _a)- gLnFaktTab.GetLnFakt( k- _a)-
+				gLnFaktTab.GetLnFakt( n- r- k+ _a));
+		// dValue obsahuje jeden clen souctu pro konkretni i
+		// Hodnota V(i) pro i == a
+
+	// Pozor!! Pokud by se funkce GetValue volala vicekrat, je vyhodnejsi
+	// nejprve provest soucet log pro r, s, k, l a n (viz. moznosti vypoctu Fi-Testu)
+
+	long minRK= r < k ? r : k;	// min( r, k)
+
+	double dSuma= dValue;		// Celkovy soucet
+	long c1 = n- r- k;
+
+	long i;
+
+	for (i= _a + 1; i <= minRK; i++)	// od a+ 1 do min(r,k)
+	{
+		// Vypocet pomocneho zlomku urcujiho rozdil mezi V(i) a V(i+1)
+		double dDelta= ((double)( r- i+ 1)*( k- i+ 1))/ ( i* (c1+ i));
+		if ( dDelta == 0) break;
+			// Zde je otazkou, jestli tento test nezdrzuje vic nez
+			// pripadne nasobeni 0
+		dValue= dValue* dDelta;
+			// Pozor na problem v nepresnosti vypoctu dValue * dDelta pro male dValue!
+/*
+		dValue= GetValue( i, n, r, s, k, l);
+			// dValue obsahuje jeden clen souctu pro konkretni i
+		if ( dValue <= 0) break;
+*/
+		dSuma+= dValue;
+	}
+
+	return dSuma;
+}
+
+double Hyp_SD4ft_Meta::get_low_bnd_imp (long _a, long _b)
+{
+	if ( !gLnFaktTab.Init( _a + _b + 1)) return 0.0; //chyba!!!!!!!!!!!!!!!!!
+
+	double const m_p = 0.9;
+	double m_pLog = log( m_p);			// Pro zrychleni vypoctu
+	double m_1pLog = log( 1- m_p);		// Pro zrychleni vypoctu
+
+	long ab= _a + _b;
+
+	double nSuma= 0.0;		// Celkovy soucet
+	long i;
+
+	for (i = _a; i <= ab; i++)	// od a do a+b
+	{
+		nSuma += exp( gLnFaktTab.GetLnFakt(ab)- 
+				( gLnFaktTab.GetLnFakt(i)+ gLnFaktTab.GetLnFakt(ab - i))+
+				m_pLog*i+ m_1pLog*(ab - i));
+	}
+
+	return nSuma;
+}
+
+double Hyp_SD4ft_Meta::get_up_bnd_imp (long _a, long _b)
+{
+	if ( !gLnFaktTab.Init( _a + _b + 1)) return 0.0; //chyba!!!!!!!!!!!!!!!!!
+
+	double const m_p = 0.9;
+	double m_pLog = log( m_p);			// Pro zrychleni vypoctu
+	double m_1pLog = log( 1- m_p);		// Pro zrychleni vypoctu
+
+	long r = _a + _b;
+
+	double nSuma= 0.0;		// Celkovy soucet
+	long i;
+
+	for (i = 0; i <= _a; i++)
+	{
+		nSuma += exp( gLnFaktTab.GetLnFakt( r)- 
+				(gLnFaktTab.GetLnFakt( i)+ gLnFaktTab.GetLnFakt( r- i))+
+				m_pLog*i+ m_1pLog*( r- i));
+	}
+
+	return nSuma;
+}
+
+double Hyp_SD4ft_Meta::get_low_bnd_dbl_imp (long _a, long _b, long _c)
+{
+	if ( !gLnFaktTab.Init( _a + _b + _c + 1)) return 0.0; //chyba!!!!!!!!!!!!!!!!!
+
+	double const m_p = 0.9;
+	double m_pLog = log( m_p);			// Pro zrychleni vypoctu
+	double m_1pLog = log( 1- m_p);		// Pro zrychleni vypoctu
+
+	long abc = _a + _b + _c;
+
+	double nSuma= 0.0;		// Celkovy soucet
+	long i;
+
+	for (i = _a; i <= abc; i++)	// od a do a+b+c
+	{
+		nSuma += exp( gLnFaktTab.GetLnFakt( abc) - 
+				( gLnFaktTab.GetLnFakt( i) + gLnFaktTab.GetLnFakt( abc- i))+
+				m_pLog*i+ m_1pLog*( abc- i));
+	}
+
+	return nSuma;
+}
+
+double Hyp_SD4ft_Meta::get_up_bnd_dbl_imp (long _a, long _b, long _c)
+{
+	if ( !gLnFaktTab.Init( _a + _b + _c + 1)) return 0.0; //chyba!!!!!!!!!!!!!!!!!
+
+	double const m_p = 0.9;
+	double m_pLog = log( m_p);			// Pro zrychleni vypoctu
+	double m_1pLog = log( 1- m_p);		// Pro zrychleni vypoctu
+
+	long abc = _a + _b + _c;
+
+	double nSuma= 0.0;		// Celkovy soucet
+	long i;
+
+	for (i = 0; i <= _a; i++)
+	{
+		nSuma += exp( gLnFaktTab.GetLnFakt( abc) - 
+				( gLnFaktTab.GetLnFakt( i) + gLnFaktTab.GetLnFakt( abc- i))+
+				m_pLog*i+ m_1pLog*( abc- i));
+	}
+
+	return nSuma;
+}
+
+double Hyp_SD4ft_Meta::get_low_bnd_eq (long _a, long _b, long _c, long _d)
+{
+	if ( !gLnFaktTab.Init( _a + _b + _c + _d + 1)) return 0.0; //chyba!!!!!!!!!!!!!
+
+	double const m_p = 0.9;
+	double m_pLog= log( m_p);			// Pro zrychleni vypoctu
+	double m_1pLog= log( 1- m_p);		// Pro zrychleni vypoctu
+
+	long n = _a + _b + _c + _d;
+	long ad= _a + _d;
+
+	double nSuma= 0;			// Celkovy soucet
+	long i;
+
+	for (i= ad; i <= n; i++)	// od (a+d) do n
+	{
+		nSuma += exp( gLnFaktTab.GetLnFakt(n) - 
+				 ( gLnFaktTab.GetLnFakt( i) + gLnFaktTab.GetLnFakt(n - i))+
+				 m_pLog*i+ m_1pLog*(n - i));
+	}
+
+	return nSuma;
+}
+
+double Hyp_SD4ft_Meta::get_up_bnd_eq (long _a, long _b, long _c, long _d)
+{
+	if ( !gLnFaktTab.Init( _a + _b + _c + _d + 1)) return 0.0; //chyba!!!!!!!!!!!!!
+
+	double const m_p = 0.9;
+	double m_pLog= log( m_p);			// Pro zrychleni vypoctu
+	double m_1pLog= log( 1- m_p);		// Pro zrychleni vypoctu
+
+	long n = _a + _b + _c + _d;
+	long ad= _a + _d;
+
+	double nSuma= 0;			// Celkovy soucet
+	long i;
+
+	for (i= 0; i <= ad; i++)
+	{
+		nSuma += exp( gLnFaktTab.GetLnFakt(n) - 
+				( gLnFaktTab.GetLnFakt( i) + gLnFaktTab.GetLnFakt(n - i))+
+				m_pLog*i+ m_1pLog*(n - i));
+	}
+
+	return nSuma;
+}
+
+double Hyp_SD4ft_Meta::get_dr_sum (long _a, long _b, long _c, long _d,
+								   long _e, long _f, long _g, long _h)
+{
+	long sum1 = _a + _b + _c + _d;
+	long sum2 = _e + _f + _g + _h;
+	double dr_sum = fabs (((double) _a / sum1) - ((double) _e / sum2)) +
+					fabs (((double) _b / sum1) - ((double) _f / sum2)) +
+					fabs (((double) _c / sum1) - ((double) _g / sum2)) +
+					fabs (((double) _d / sum1) - ((double) _h / sum2));
+	return dr_sum;
+}
+
 CString Hyp_SDCF_Meta::xml_convert ()
 {
 	CString xml_string;
