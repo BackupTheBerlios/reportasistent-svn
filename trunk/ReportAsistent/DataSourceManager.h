@@ -156,7 +156,7 @@ private:
 	public_source_id_t default_source;
 //  DATA
 	CArray<CPluginRec,CPluginRec> PlugsTab;		// tabulka zasuvek
-	CArray<CSourceRec,CSourceRec> SourcesTab;	// tabulka zdroju
+	CArray<CSourceRec *, CSourceRec *> SourcesTab;	// tabulka zdroju
 
 public:
 	BOOL isElementSupportedByPlugin(int plugin_index, LPCTSTR element_name);

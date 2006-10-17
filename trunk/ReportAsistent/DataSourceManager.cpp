@@ -69,7 +69,7 @@ CSourceRec::CSourceRec()
 // destruktor
 CSourceRec::~CSourceRec()
 {
-//	delete(Buffer);
+	delete(Buffer);
 }
 
 // Valid()
@@ -139,7 +139,12 @@ COutputBuffer::COutputBuffer()
 // destruktor - uvolneni pameti po bufferech
 COutputBuffer::~COutputBuffer()
 {
-	//BufArray.RemoveAll();
+	for (int a = 0; a < BufArray.GetSize(); a++)
+	{
+		delete BufArray[a];
+	}
+
+	BufArray.RemoveAll();
 }
 
 
@@ -226,6 +231,8 @@ CDataSourcesManager::~CDataSourcesManager()
 {
 	// kody: zavreni vsech datovych zdroju (kvuli Ferdovi)
 	// ***
+	saveSourcesTab();
+
 	for (int i = 0;  i < SourcesTab.GetSize(); i++)
 	{
 		try
@@ -234,11 +241,12 @@ CDataSourcesManager::~CDataSourcesManager()
 				CloseSource(i);
 		}
 		catch(...) {}
+
+		delete SourcesTab[i];
 	}
 
 	// ***
 	
-	saveSourcesTab();
 }
 
 
@@ -388,20 +396,20 @@ BOOL CDataSourcesManager::initSourcesTab(LPCTSTR config_file_path)
 					if(pChild->baseName == (_bstr_t) "SOURCE")  // definice polozky v tabulce zdroju
 					{
 						// pridani prvku do tabulky zdroju
-						SourcesTab.Add(CSourceRec());
+						SourcesTab.Add(new CSourceRec);
 							// PUBLIC_ID
 						Atr_val = pChild->getAttribute("PUBLIC_ID");
 						if(Atr_val.vt != VT_NULL)
-							SourcesTab[i].PublicID = (BSTR) (_bstr_t) Atr_val;
+							SourcesTab[i]->PublicID = (BSTR) (_bstr_t) Atr_val;
 							// PERZISTENT_ID
 						Atr_val = pChild->getAttribute("PERZISTENT_ID");
 						if(Atr_val.vt != VT_NULL)
-							SourcesTab[i].PerzistID = (BSTR) (_bstr_t) Atr_val;
+							SourcesTab[i]->PerzistID = (BSTR) (_bstr_t) Atr_val;
 
 							// PLUGIN_ID
 						Atr_val = pChild->getAttribute("PLUGIN_ID");
 						if(Atr_val.vt != VT_NULL)
-							SourcesTab[i].PluginID = (BSTR) (_bstr_t) Atr_val;
+							SourcesTab[i]->PluginID = (BSTR) (_bstr_t) Atr_val;
 
 						i++;
 					}
@@ -432,9 +440,9 @@ BOOL CDataSourcesManager::initSourcesTab(LPCTSTR config_file_path)
 	{
 		for(int k=0; k<=PlugsTab.GetUpperBound(); k++)
 		{
-			if(SourcesTab[j].PluginID == PlugsTab[k].PluginName)
+			if(SourcesTab[j]->PluginID == PlugsTab[k].PluginName)
 			{
-				SourcesTab[j].PluginIndex = k;	// nastaveni indexu v tabulce zasuvek
+				SourcesTab[j]->PluginIndex = k;	// nastaveni indexu v tabulce zasuvek
 				break;
 			}
 		}
@@ -589,7 +597,7 @@ int CDataSourcesManager::getValidSourcesCount()
 	int Count = 0;
 	for(int i=0; i<=SourcesTab.GetUpperBound(); i++)
 	{
-		if(SourcesTab[i].Valid())
+		if(SourcesTab[i]->Valid())
 			Count++;
 	}
 	
@@ -601,7 +609,7 @@ public_source_id_t CDataSourcesManager::getSourcePublicID(int source_index)
 {
 	public_source_id_t Ret = "";
 	if(SourcesTab.GetUpperBound() >= source_index  &&  source_index>=0)
-		Ret = SourcesTab[source_index].PublicID;
+		Ret = SourcesTab[source_index]->PublicID;
 
 	return Ret;
 }
@@ -612,7 +620,7 @@ persistent_id_t CDataSourcesManager::getSourcePersistentID(int source_index)
 {
 	persistent_id_t Ret = "";
 	if(SourcesTab.GetUpperBound() >= source_index  &&  source_index>=0)
-		Ret = SourcesTab[source_index].PerzistID;
+		Ret = SourcesTab[source_index]->PerzistID;
 
 	return Ret;
 }
@@ -623,7 +631,7 @@ plugin_id_t CDataSourcesManager::getSourcePlugin(int source_index)
 {
 	plugin_id_t Ret = "";
 	if(SourcesTab.GetUpperBound() >= source_index  &&  source_index>=0)
-		Ret = SourcesTab[source_index].PluginID;
+		Ret = SourcesTab[source_index]->PluginID;
 
 	return Ret;
 }
@@ -633,7 +641,7 @@ int CDataSourcesManager::getSourcePluginIndex(int source_index)
 {
 	int Ret = -1;
 	if(SourcesTab.GetUpperBound() >= source_index  &&  source_index>=0)
-		Ret = SourcesTab[source_index].PluginIndex;
+		Ret = SourcesTab[source_index]->PluginIndex;
 
 	return Ret;
 }
@@ -644,7 +652,7 @@ source_handle_t CDataSourcesManager::getSourceHandle(int source_index)
 {
 	source_handle_t Ret = NULL;
 	if(SourcesTab.GetUpperBound() >= source_index  &&  source_index>=0)
-		Ret = SourcesTab[source_index].SourceHandle;
+		Ret = SourcesTab[source_index]->SourceHandle;
 
 	return Ret;
 }
@@ -655,7 +663,7 @@ BOOL CDataSourcesManager::setSourcePublicID(int source_index, public_source_id_t
 {
 	if(SourcesTab.GetUpperBound() >= source_index  &&  source_index>=0)
 	{
-		SourcesTab[source_index].PublicID = source_id;
+		SourcesTab[source_index]->PublicID = source_id;
 		return TRUE;
 	}
 
@@ -668,7 +676,7 @@ BOOL CDataSourcesManager::isSourceConnected(int source_index)
 {
 	if(SourcesTab.GetUpperBound() >= source_index  &&  source_index>=0)
 	{
-		if(SourcesTab[source_index].SourceHandle != NULL)
+		if(SourcesTab[source_index]->SourceHandle != NULL)
 			return TRUE;
 	}
 
@@ -680,7 +688,7 @@ BOOL CDataSourcesManager::isSourceValid(int source_index)
 {
 	if(SourcesTab.GetUpperBound() >= source_index  &&  source_index>=0)
 	{
-		return SourcesTab[source_index].Valid();
+		return SourcesTab[source_index]->Valid();
 	}
 
 	return FALSE;
@@ -741,16 +749,16 @@ int CDataSourcesManager::ConnectNewSource(plugin_id_t plugin)   //pres zasuvku p
 	}
 
 	// vytvoreninove polozky v tabulce zdroju a nastaveni jejich polozek
-	int j = SourcesTab.Add(CSourceRec()); // index nove pridavaneho zaznamu do tabulky zdroju
-	SourcesTab[j].PerzistID = NewSourcePerzistID;
-	SourcesTab[j].SourceHandle = NewSourceHandler;
-	SourcesTab[j].PluginID = PlugsTab[i].PluginName;
-	SourcesTab[j].PluginIndex = i;
+	int j = SourcesTab.Add(new CSourceRec); // index nove pridavaneho zaznamu do tabulky zdroju
+	SourcesTab[j]->PerzistID = NewSourcePerzistID;
+	SourcesTab[j]->SourceHandle = NewSourceHandler;
+	SourcesTab[j]->PluginID = PlugsTab[i].PluginName;
+	SourcesTab[j]->PluginIndex = i;
 	
 	//pridal dedek
 	CString public_id;
 	public_id.Format("new_%s_source_%d", (LPCTSTR) PlugsTab[i].PluginName, getSourcesCount());
-	SourcesTab[j].PublicID = public_id;
+	SourcesTab[j]->PublicID = public_id;
 	
 	SysFreeString(NewSourcePerzistID);
 	return j;	
@@ -768,12 +776,12 @@ BOOL CDataSourcesManager::RemoveSource(int source_index)	//vyhodi zdroj z tabulk
 	
 	// odpojeni zrdoje, je-li pripojen
 	int PlIndex;	// index zasuvky
-	if(SourcesTab[source_index].SourceHandle != NULL)
+	if(SourcesTab[source_index]->SourceHandle != NULL)
 	{
-		PlIndex = SourcesTab[source_index].PluginIndex;
+		PlIndex = SourcesTab[source_index]->PluginIndex;
 		if(PlugsTab[PlIndex].Valid())	// zasuvka je platna
 			// odpojeni zasuvky
-			PlugsTab[PlIndex].SockInterface->hCloseSource(SourcesTab[source_index].SourceHandle);
+			PlugsTab[PlIndex].SockInterface->hCloseSource(SourcesTab[source_index]->SourceHandle);
 	}
 
 	// zruseni zaznamu v tabulce zdroju
@@ -803,21 +811,21 @@ BOOL CDataSourcesManager::ConnectSource(int source_index)
 		
 
 	// kontrola, zda je zdroj pripojen k validni zasuvce
-	if(SourcesTab[SI].PluginIndex == -1)
+	if(SourcesTab[SI]->PluginIndex == -1)
 		return FALSE;
-	if(PlugsTab[SourcesTab[SI].PluginIndex].Valid() == FALSE)
+	if(PlugsTab[SourcesTab[SI]->PluginIndex].Valid() == FALSE)
 		return FALSE;
 	// kontrola, zda uz zdroj neni pripojen
 	if(isSourceConnected(SI))
 		return TRUE;
 
-	int i = SourcesTab[SI].PluginIndex;	// index zasuvky v tabulce zasuvek
+	int i = SourcesTab[SI]->PluginIndex;	// index zasuvky v tabulce zasuvek
 
 	// zavolani funkce zasuvky, ktera pripoji zdroj
-	PersistID_t PID = (SourcesTab[SI].PerzistID).AllocSysString();
+	PersistID_t PID = (SourcesTab[SI]->PerzistID).AllocSysString();
 			// zavolani funkce zasuvky v novem vlakne
 	hSource_t SourceH;
-	CString DlgText = "Connecting data source:\n\n" + SourcesTab[SI].PublicID;
+	CString DlgText = "Connecting data source:\n\n" + SourcesTab[SI]->PublicID;
 	CWaitDialog d((LPCTSTR) DlgText);
 	d.DoThreadFunction(  ConnectSourceThreadFunction,
 						(LPARAM) PlugsTab[i].SockInterface->hOpenSource,
@@ -826,7 +834,7 @@ BOOL CDataSourcesManager::ConnectSource(int source_index)
 	//hSource_t SourceH = PlugsTab[i].SockInterface->hOpenSource(PID);
 	
 	// vyplneni handleru na zdroj v polozce tabulky
-	SourcesTab[SI].SourceHandle = SourceH;
+	SourcesTab[SI]->SourceHandle = SourceH;
 
 	SysFreeString(PID);
 	if(SourceH == NULL)
@@ -844,15 +852,15 @@ BOOL CDataSourcesManager::CloseSource(int source_index)
 	
 	// odpojeni zrdoje
 	int PlIndex;	// index zasuvky
-	if(SourcesTab[source_index].SourceHandle != NULL)
+	if(SourcesTab[source_index]->SourceHandle != NULL)
 	{
-		PlIndex = SourcesTab[source_index].PluginIndex;
+		PlIndex = SourcesTab[source_index]->PluginIndex;
 		if(PlugsTab[PlIndex].Valid())	// zasuvka je platna
 			// odpojeni zasuvky
-			PlugsTab[PlIndex].SockInterface->hCloseSource(SourcesTab[source_index].SourceHandle);
+			PlugsTab[PlIndex].SockInterface->hCloseSource(SourcesTab[source_index]->SourceHandle);
 	}
 
-	SourcesTab[source_index].SourceHandle = NULL;
+	SourcesTab[source_index]->SourceHandle = NULL;
 	return TRUE;
 }
 
@@ -863,7 +871,7 @@ int CDataSourcesManager::FindSourceByPublicID(public_source_id_t id) //vrati ind
 	int Index = -1;	// index zdroje
 	for(int i=0; i<=SourcesTab.GetUpperBound(); i++)
 	{
-		if(SourcesTab[i].PublicID == id)
+		if(SourcesTab[i]->PublicID == id)
 		{
 			Index = i;
 			break;
@@ -889,14 +897,14 @@ int CDataSourcesManager::FindSourceByPublicID(public_source_id_t id) //vrati ind
 // AddSource
 int CDataSourcesManager::AddSource(plugin_id_t plugin, persistent_id_t persistent_id, public_source_id_t public_id)
 {
-	int i = SourcesTab.Add(CSourceRec()); // pridani noveho prvku, ziskani indexu
+	int i = SourcesTab.Add(new CSourceRec); // pridani noveho prvku, ziskani indexu
 	// vyplneni polozek noveho prvku
-	SourcesTab[i].PerzistID = persistent_id;
-	SourcesTab[i].PluginID = plugin;
-	SourcesTab[i].PublicID = public_id;
+	SourcesTab[i]->PerzistID = persistent_id;
+	SourcesTab[i]->PluginID = plugin;
+	SourcesTab[i]->PublicID = public_id;
 	
 	// nalezeni zasuvky a vyplneni indexu zasuvky
-	 SourcesTab[i].PluginIndex = FindPluginByPluginName(plugin);
+	 SourcesTab[i]->PluginIndex = FindPluginByPluginName(plugin);
 	
 	return i;
 }
@@ -918,18 +926,18 @@ BSTR CDataSourcesManager::CallPerformProc(int source_index, LPCTSTR element_id) 
 	if(SourcesTab.GetUpperBound() < SI)   // kontrola indexu a odkazu na zasuvku
 		return Result;
 
-	int j = SourcesTab[SI].PluginIndex;  // nalezeni indexu zasuvky
+	int j = SourcesTab[SI]->PluginIndex;  // nalezeni indexu zasuvky
 
-	if((j != -1) && (PlugsTab[j].Valid()) && (SourcesTab[SI].SourceHandle != NULL)) // zasuvka je platna a zdroj otevreny
+	if((j != -1) && (PlugsTab[j].Valid()) && (SourcesTab[SI]->SourceHandle != NULL)) // zasuvka je platna a zdroj otevreny
 	{
 		// zavolani  fce Perform zasuvky
 		//BOOL PerfRes = PlugsTab[j].SockInterface->hPerform(SourcesTab[SI].SourceHandle, element_id, &Result);
 		// kody: vytvoreni WaitDialogu a volani jeho DoThreadFunction()
-		CString DlgText = "Loading data from source\n\n" + SourcesTab[SI].PublicID;
+		CString DlgText = "Loading data from source\n\n" + SourcesTab[SI]->PublicID;
 		CWaitDialog d((LPCTSTR) DlgText);
 		d.DoThreadFunction(PerformThreadFunction,
 							(LPARAM) PlugsTab[j].SockInterface->hPerform,
-						    (LPARAM) SourcesTab[SI].SourceHandle,
+						    (LPARAM) SourcesTab[SI]->SourceHandle,
 							(LPARAM) element_id,
 							(LPARAM) &Result);
 	}
@@ -957,7 +965,7 @@ BOOL CDataSourcesManager::GetPluginOutput(public_source_id_t source, LPCTSTR ap_
 
 	/*return CallPerformProc(src_index, ap_name);*/
 
-	COutputBuffer * OB = SourcesTab[src_index].Buffer;
+	COutputBuffer * OB = SourcesTab[src_index]->Buffer;
 
 	// vystup neni v bufferu - nacte se ze zasuvky, ulozi se do bufferu a vrati se
 	if(!OB->isAPBuffered(ap_name_CS))		// vystup jeste neni v bufferu
