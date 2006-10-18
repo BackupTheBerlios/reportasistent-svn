@@ -62,6 +62,7 @@ private:
 	CListBox m_ValuesList;
 	afx_msg void OnLbnSelchangeAttributesList();
 	afx_msg void OnDestroy();
+	void ClearAttributesList(void);
 };
 
 //{{AFX_INSERT_LOCATION}}

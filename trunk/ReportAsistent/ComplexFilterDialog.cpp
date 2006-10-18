@@ -173,7 +173,7 @@ void CComplexFilterDialog::UpDateDialog()
 {
 	//fill attributes list
 
-	m_AttributesList.ResetContent();
+	ClearAttributesList();
 	
 	MSXML2::IXMLDOMNodeListPtr attributes = m_filter_DOM->selectNodes("/dialog_data/attributes/attribute");
 
@@ -191,19 +191,45 @@ void CComplexFilterDialog::UpDateDialog()
 
 void CComplexFilterDialog::OnLbnSelchangeAttributesList()
 {
-	//fill values
+	m_ValuesList.ResetContent();
+	
+	int cur_sel = m_AttributesList.GetCurSel();
 
+	if (cur_sel == LB_ERR) return;
+
+	CString * cur_str =	(CString *) m_AttributesList.GetItemDataPtr(cur_sel);
+
+	CString query_str = "/dialog_data/values/value/@";
+	query_str += * cur_str;
+
+	MSXML2::IXMLDOMNodeListPtr values = m_filter_DOM->selectNodes((LPCTSTR) query_str);
+
+	for (int a = 0; a < values->length; a++)
+	{
+		CString value = (LPCTSTR) values->item[a]->text;
+		if (LB_ERR == m_ValuesList.FindStringExact(-1, value))
+		{			
+			m_ValuesList.AddString(value);						
+		}
+	}
 
 }
 
 void CComplexFilterDialog::OnDestroy()
 {
-	for (int a = 0; a < m_AttributesList.GetCount(); a++)
-	{
-		delete (CString *) m_AttributesList.GetItemDataPtr(a);
-	}
+	ClearAttributesList();
 	
 	CPropertyPage::OnDestroy();
 
 	// TODO: Add your message handler code here
+}
+
+void CComplexFilterDialog::ClearAttributesList(void)
+{
+	for (int a = 0; a < m_AttributesList.GetCount(); a++)
+	{
+		delete (CString *) m_AttributesList.GetItemDataPtr(a);
+	}
+
+	m_AttributesList.ResetContent();
 }

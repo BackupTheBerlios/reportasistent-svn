@@ -5,6 +5,9 @@
 #if !defined(AFX_WORDMANAGER_H__2A5B5F90_FAA9_46F2_BC25_BE144CE6ADF6__INCLUDED_)
 #define AFX_WORDMANAGER_H__2A5B5F90_FAA9_46F2_BC25_BE144CE6ADF6__INCLUDED_
 
+#include <vector>
+#include <algorithm>
+
 #include "WordEventHandler.h"	// Added by ClassView
 #if _MSC_VER > 1000
 #pragma once
@@ -23,7 +26,8 @@ public:
 class CStringTableImpl : public CStringTable
 {
 private:
-	CArray<CString *, CString *> data;	// tabulka zdroju
+//	CArray<CString *, CString *> data;	// tabulka zdroju
+	std::vector <CString *> data;
 
 public:
 	void Add(LPCTSTR s);
@@ -33,6 +37,8 @@ public:
 	LPCTSTR virtual getItem(int index);
 
 	~CStringTableImpl();
+public:
+	void Sort(BOOL ascending = TRUE);
 };
 
 

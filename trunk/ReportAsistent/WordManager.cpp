@@ -25,19 +25,20 @@ void CStringTableImpl::Clear()
 		delete data[a];
 	}
 
-	data.RemoveAll();
+//	data.RemoveAll();
+	data.clear();
 }
 
 
 void CStringTableImpl::Add(LPCTSTR s)
 {
-	data.Add(new CString(s));
+	data.push_back(new CString(s));
 //	int a = data.GetSize();
 }
 
 int CStringTableImpl::getCount()
 {
-	return data.GetSize();
+	return data.size();
 }
 
 LPCTSTR CStringTableImpl::getItem(int index)
@@ -385,4 +386,10 @@ void CWordManager::WordEditShowMainWindow()
 {
 	m_origWINDOWPLACEMENT.showCmd = SW_RESTORE;
 	AfxGetApp()->GetMainWnd()->SetWindowPlacement(& m_origWINDOWPLACEMENT);
+}
+
+void CStringTableImpl::Sort(BOOL ascending)
+{
+	std::sort(data.begin(), data.end());
+
 }
