@@ -92,7 +92,11 @@
 #define IDC_DIALREPORT_IDEDIT           1040
 #define IDC_DIALREPORT_TITLEEDIT        1041
 #define IDC_DIALREPORT_SUBTITLEEDIT     1042
+#define IDC_ASCENDING_RADIO             1042
 #define IDC_DIALREPORT_AUTHOREDIT       1043
+#define IDC_DESCENDING_RADIO            1043
+#define IDC_CHECK1                      1044
+#define IDC_NUMERIC_SORT_CHECK          1044
 #define ID_MMGENREP                     32771
 #define ID_MMSOURCES                    32772
 #define ID_ELEMENT_EDIT                 32780
@@ -132,7 +136,7 @@
 #define _APS_3D_CONTROLS                     1
 #define _APS_NEXT_RESOURCE_VALUE        169
 #define _APS_NEXT_COMMAND_VALUE         32793
-#define _APS_NEXT_CONTROL_VALUE         1042
+#define _APS_NEXT_CONTROL_VALUE         1045
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

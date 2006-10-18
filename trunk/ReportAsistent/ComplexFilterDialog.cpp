@@ -49,6 +49,8 @@ BEGIN_MESSAGE_MAP(CComplexFilterDialog, CPropertyPage)
 	ON_CBN_SELCHANGE(IDC_DATA_SOURCE_COMBO, OnSelchangeDataSourceCombo)
 	ON_LBN_SELCHANGE(IDC_ATTRIBUTES_LIST, OnLbnSelchangeAttributesList)
 	ON_WM_DESTROY()
+	ON_BN_CLICKED(IDC_ASCENDING_RADIO, OnBnClickedAscendingRadio)
+	ON_BN_CLICKED(IDC_DESCENDING_RADIO, OnBnClickedDescendingRadio)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -199,18 +201,66 @@ void CComplexFilterDialog::OnLbnSelchangeAttributesList()
 
 	CString * cur_str =	(CString *) m_AttributesList.GetItemDataPtr(cur_sel);
 
-	CString query_str = "/dialog_data/values/value/@";
+	CString query_str;
+	query_str.Format("/dialog_data/attributes/attribute[@name=\"%s\"]", (LPCTSTR) * cur_str);
+
+	BOOL num_sort = FALSE;
+	BOOL asc_sort = TRUE;
+	MSXML2::IXMLDOMElementPtr attr_elem = m_filter_DOM->selectSingleNode((LPCTSTR) query_str);
+	if (attr_elem != NULL)
+	{
+		try 
+		{
+			if (((LPCTSTR) (_bstr_t) (attr_elem->getAttribute("numeric_sort"))) == CString("true"))
+				num_sort = TRUE;
+		}
+		catch (...) {}
+
+		try 
+		{
+			if (((LPCTSTR) (_bstr_t) (attr_elem->getAttribute("default_sort_direction"))) == CString("descending"))
+				asc_sort = FALSE;
+		}
+		catch (...) {}
+	}
+
+	if (num_sort)
+		CheckDlgButton(IDC_NUMERIC_SORT_CHECK, BST_CHECKED);
+	else
+		CheckDlgButton(IDC_NUMERIC_SORT_CHECK, BST_UNCHECKED);
+
+	if (asc_sort)
+		CheckRadioButton(IDC_ASCENDING_RADIO, IDC_DESCENDING_RADIO, IDC_ASCENDING_RADIO);
+	else
+		CheckRadioButton(IDC_ASCENDING_RADIO, IDC_DESCENDING_RADIO, IDC_DESCENDING_RADIO);
+
+
+	query_str = "/dialog_data/values/value/@";
 	query_str += * cur_str;
 
 	MSXML2::IXMLDOMNodeListPtr values = m_filter_DOM->selectNodes((LPCTSTR) query_str);
 
-	for (int a = 0; a < values->length; a++)
+	CStringTableImpl str_table;
+
+	int a;
+	for (a = 0; a < values->length; a++)
 	{
 		CString value = (LPCTSTR) values->item[a]->text;
-		if (LB_ERR == m_ValuesList.FindStringExact(-1, value))
+		if (-1 == str_table.FindString(value))
 		{			
-			m_ValuesList.AddString(value);						
+			str_table.Add(value);						
 		}
+	}
+
+	if (IDC_DESCENDING_RADIO == GetCheckedRadioButton(IDC_ASCENDING_RADIO, IDC_DESCENDING_RADIO))
+		str_table.Sort(FALSE);
+	else
+		str_table.Sort(TRUE);
+
+
+	for (a = 0; a < str_table.getCount(); a++)
+	{
+		m_ValuesList.AddString(str_table.getItem(a));
 	}
 
 }
@@ -232,4 +282,14 @@ void CComplexFilterDialog::ClearAttributesList(void)
 	}
 
 	m_AttributesList.ResetContent();
+}
+
+void CComplexFilterDialog::OnBnClickedAscendingRadio()
+{
+	OnLbnSelchangeAttributesList();
+}
+
+void CComplexFilterDialog::OnBnClickedDescendingRadio()
+{
+	OnLbnSelchangeAttributesList();
 }

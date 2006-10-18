@@ -388,8 +388,22 @@ void CWordManager::WordEditShowMainWindow()
 	AfxGetApp()->GetMainWnd()->SetWindowPlacement(& m_origWINDOWPLACEMENT);
 }
 
+
+bool CStringTableImpl::str_sort_asc(CString * s1,  CString * s2)
+{
+	return *s1 < *s2;
+}
+
+bool CStringTableImpl::str_sort_desc(CString * s1,  CString * s2)
+{
+	return *s1 > *s2;
+}
+
 void CStringTableImpl::Sort(BOOL ascending)
 {
-	std::sort(data.begin(), data.end());
+	if (ascending)
+		std::sort(data.begin(), data.end(), str_sort_asc);
+	else
+		std::sort(data.begin(), data.end(), str_sort_desc);
 
 }

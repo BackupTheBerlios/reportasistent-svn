@@ -63,6 +63,8 @@ private:
 	afx_msg void OnLbnSelchangeAttributesList();
 	afx_msg void OnDestroy();
 	void ClearAttributesList(void);
+	afx_msg void OnBnClickedAscendingRadio();
+	afx_msg void OnBnClickedDescendingRadio();
 };
 
 //{{AFX_INSERT_LOCATION}}
