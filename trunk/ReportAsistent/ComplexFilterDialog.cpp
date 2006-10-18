@@ -36,6 +36,8 @@ void CComplexFilterDialog::DoDataExchange(CDataExchange* pDX)
 	// NOTE: the ClassWizard will add DDX and DDV calls here
 	//}}AFX_DATA_MAP
 	DDX_Control(pDX, IDC_DATA_SOURCE_COMBO, m_SourcesCombo);
+	DDX_Control(pDX, IDC_ATTRIBUTES_LIST, m_AttributesList);
+	DDX_Control(pDX, IDC_VALUES_LIST, m_ValuesList);
 }
 
 
@@ -45,6 +47,8 @@ BEGIN_MESSAGE_MAP(CComplexFilterDialog, CPropertyPage)
 	//}}AFX_MSG_MAP
 	ON_WM_CTLCOLOR()
 	ON_CBN_SELCHANGE(IDC_DATA_SOURCE_COMBO, OnSelchangeDataSourceCombo)
+	ON_LBN_SELCHANGE(IDC_ATTRIBUTES_LIST, OnLbnSelchangeAttributesList)
+	ON_WM_DESTROY()
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -167,7 +171,39 @@ BOOL CComplexFilterDialog::LoadSource(public_source_id_t sId)
 
 void CComplexFilterDialog::UpDateDialog()
 {
+	//fill attributes list
 
-    AfxMessageBox("ok source loaded");
+	m_AttributesList.ResetContent();
+	
+	MSXML2::IXMLDOMNodeListPtr attributes = m_filter_DOM->selectNodes("/dialog_data/attributes/attribute");
 
+	for (int a = 0; a < attributes->length; a++)
+	{
+		int i = m_AttributesList.AddString(attributes->item[a]->selectSingleNode("@label")->text);
+
+		m_AttributesList.SetItemDataPtr(i, 
+			new CString((LPCTSTR) attributes->item[a]->selectSingleNode("@name")->text));
+
+	}
+
+	attributes.Release();
+}
+
+void CComplexFilterDialog::OnLbnSelchangeAttributesList()
+{
+	//fill values
+
+
+}
+
+void CComplexFilterDialog::OnDestroy()
+{
+	for (int a = 0; a < m_AttributesList.GetCount(); a++)
+	{
+		delete (CString *) m_AttributesList.GetItemDataPtr(a);
+	}
+	
+	CPropertyPage::OnDestroy();
+
+	// TODO: Add your message handler code here
 }

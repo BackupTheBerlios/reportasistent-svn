@@ -101,12 +101,17 @@ void CAttributeLinkDialogBase::FillAttributesList(CListCtrl & AttributesList, LP
 {
 	// smazani puvodniho obsahu
 		// kody
+
+//dedek: presunuto do OnLvnDeleteitemAttributesList	
+/*
+
 	for (int i=0; i<AttributesList.GetItemCount(); i++)
 	{
 		if (AttributesList.GetItemData(i) != NULL)
 			delete (CString*) AttributesList.GetItemData(i);
 	}
-		//  /kody
+*/
+	//  /kody
 	AttributesList.DeleteAllItems();
 	
 	CString query;

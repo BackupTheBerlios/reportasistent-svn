@@ -58,6 +58,10 @@ private:
     BOOL LoadSource(public_source_id_t sId);
     void UpDateDialog();
 
+	CListBox m_AttributesList;
+	CListBox m_ValuesList;
+	afx_msg void OnLbnSelchangeAttributesList();
+	afx_msg void OnDestroy();
 };
 
 //{{AFX_INSERT_LOCATION}}

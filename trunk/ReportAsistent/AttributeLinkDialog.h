@@ -50,6 +50,8 @@ protected:
 	afx_msg void OnStylesRefreshButton();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
+public:
+	afx_msg void OnLvnDeleteitemAttributesList(NMHDR *pNMHDR, LRESULT *pResult);
 };
 
 //{{AFX_INSERT_LOCATION}}

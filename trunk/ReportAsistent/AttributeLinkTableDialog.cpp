@@ -50,6 +50,7 @@ BEGIN_MESSAGE_MAP(CAttributeLinkTableDialog, CDialog)
 	ON_BN_CLICKED(IDC_MOVE_UP_BUTTON, OnMoveUpButton)
 	ON_BN_CLICKED(IDC_MOVE_DOWN_BUTTON2, OnMoveDownButton)
 	//}}AFX_MSG_MAP
+	ON_NOTIFY(LVN_DELETEITEM, IDC_ATTRIBUTES_LIST, OnLvnDeleteitemAttributesList)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -313,3 +314,13 @@ void CAttributeLinkTableDialog::OnOK()
 	
 	CDialog::OnOK();
 }
+
+void CAttributeLinkTableDialog::OnLvnDeleteitemAttributesList(NMHDR *pNMHDR, LRESULT *pResult)
+{
+	LPNMLISTVIEW pNMLV = reinterpret_cast<LPNMLISTVIEW>(pNMHDR);
+
+	delete (CString *) pNMLV->lParam;
+
+	*pResult = 0;
+}
+

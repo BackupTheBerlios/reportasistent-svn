@@ -66,6 +66,8 @@
 #define IDC_TARGET_COMBO                1021
 #define IDC_ATTRIBUTES_LIST             1022
 #define IDC_REFRESH_BUTTON              1023
+#define IDC_ATTRIBUTES_LIST2            1023
+#define IDC_VALUES_LIST                 1023
 #define IDC_LIST1                       1024
 #define IDC_CAPTIONS_LIST               1024
 #define IDC_STYLES_COMBO                1024
