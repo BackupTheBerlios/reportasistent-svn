@@ -193,20 +193,57 @@ void CComplexFilterDialog::UpDateDialog()
 
 void CComplexFilterDialog::OnLbnSelchangeAttributesList()
 {
-	m_ValuesList.ResetContent();
-	
-	int cur_sel = m_AttributesList.GetCurSel();
 
+	int cur_sel = m_AttributesList.GetCurSel();
 	if (cur_sel == LB_ERR) return;
 
 	CString * cur_str =	(CString *) m_AttributesList.GetItemDataPtr(cur_sel);
 
 	CString query_str;
 	query_str.Format("/dialog_data/attributes/attribute[@name=\"%s\"]", (LPCTSTR) * cur_str);
+	MSXML2::IXMLDOMElementPtr attr_elem = m_filter_DOM->selectSingleNode((LPCTSTR) query_str);
+	SetSortButtons(attr_elem);
+	attr_elem.Release();
 
+
+	FillValuesList(* cur_str);
+
+}
+
+void CComplexFilterDialog::OnDestroy()
+{
+	ClearAttributesList();
+	
+	CPropertyPage::OnDestroy();
+
+	// TODO: Add your message handler code here
+}
+
+void CComplexFilterDialog::ClearAttributesList(void)
+{
+	for (int a = 0; a < m_AttributesList.GetCount(); a++)
+	{
+		delete (CString *) m_AttributesList.GetItemDataPtr(a);
+	}
+
+	m_AttributesList.ResetContent();
+}
+
+void CComplexFilterDialog::OnBnClickedAscendingRadio()
+{
+	FillValuesList();
+}
+
+void CComplexFilterDialog::OnBnClickedDescendingRadio()
+{
+	FillValuesList();
+}
+
+void CComplexFilterDialog::SetSortButtons(MSXML2::IXMLDOMElementPtr & attr_elem)
+{
 	BOOL num_sort = FALSE;
 	BOOL asc_sort = TRUE;
-	MSXML2::IXMLDOMElementPtr attr_elem = m_filter_DOM->selectSingleNode((LPCTSTR) query_str);
+
 	if (attr_elem != NULL)
 	{
 		try 
@@ -234,9 +271,22 @@ void CComplexFilterDialog::OnLbnSelchangeAttributesList()
 	else
 		CheckRadioButton(IDC_ASCENDING_RADIO, IDC_DESCENDING_RADIO, IDC_DESCENDING_RADIO);
 
+}
 
+void CComplexFilterDialog::FillValuesList(LPCTSTR cur_attr_str)
+{
+	m_ValuesList.ResetContent();
+	
+	if (cur_attr_str == NULL)
+	{
+		int cur_sel = m_AttributesList.GetCurSel();
+		if (cur_sel == LB_ERR) return;
+		cur_attr_str = * (CString *) m_AttributesList.GetItemDataPtr(cur_sel);
+	}
+
+		CString query_str;
 	query_str = "/dialog_data/values/value/@";
-	query_str += * cur_str;
+	query_str += cur_attr_str;
 
 	MSXML2::IXMLDOMNodeListPtr values = m_filter_DOM->selectNodes((LPCTSTR) query_str);
 
@@ -263,33 +313,6 @@ void CComplexFilterDialog::OnLbnSelchangeAttributesList()
 		m_ValuesList.AddString(str_table.getItem(a));
 	}
 
-}
 
-void CComplexFilterDialog::OnDestroy()
-{
-	ClearAttributesList();
-	
-	CPropertyPage::OnDestroy();
 
-	// TODO: Add your message handler code here
-}
-
-void CComplexFilterDialog::ClearAttributesList(void)
-{
-	for (int a = 0; a < m_AttributesList.GetCount(); a++)
-	{
-		delete (CString *) m_AttributesList.GetItemDataPtr(a);
-	}
-
-	m_AttributesList.ResetContent();
-}
-
-void CComplexFilterDialog::OnBnClickedAscendingRadio()
-{
-	OnLbnSelchangeAttributesList();
-}
-
-void CComplexFilterDialog::OnBnClickedDescendingRadio()
-{
-	OnLbnSelchangeAttributesList();
 }

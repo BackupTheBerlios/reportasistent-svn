@@ -65,6 +65,9 @@ private:
 	void ClearAttributesList(void);
 	afx_msg void OnBnClickedAscendingRadio();
 	afx_msg void OnBnClickedDescendingRadio();
+protected:
+	void SetSortButtons(MSXML2::IXMLDOMElementPtr & attr_elem);
+	void FillValuesList(LPCTSTR cur_attr_str = NULL);
 };
 
 //{{AFX_INSERT_LOCATION}}
