@@ -68,6 +68,8 @@ private:
 protected:
 	void SetSortButtons(MSXML2::IXMLDOMElementPtr & attr_elem);
 	void FillValuesList(LPCTSTR cur_attr_str = NULL);
+public:
+	afx_msg void OnBnClickedNumericSortCheck();
 };
 
 //{{AFX_INSERT_LOCATION}}

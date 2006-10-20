@@ -51,6 +51,7 @@ BEGIN_MESSAGE_MAP(CComplexFilterDialog, CPropertyPage)
 	ON_WM_DESTROY()
 	ON_BN_CLICKED(IDC_ASCENDING_RADIO, OnBnClickedAscendingRadio)
 	ON_BN_CLICKED(IDC_DESCENDING_RADIO, OnBnClickedDescendingRadio)
+	ON_BN_CLICKED(IDC_NUMERIC_SORT_CHECK, OnBnClickedNumericSortCheck)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -298,14 +299,24 @@ void CComplexFilterDialog::FillValuesList(LPCTSTR cur_attr_str)
 		CString value = (LPCTSTR) values->item[a]->text;
 		if (-1 == str_table.FindString(value))
 		{			
-			str_table.Add(value);						
+			str_table.Add(value);
 		}
 	}
 
-	if (IDC_DESCENDING_RADIO == GetCheckedRadioButton(IDC_ASCENDING_RADIO, IDC_DESCENDING_RADIO))
-		str_table.Sort(FALSE);
+	if (IsDlgButtonChecked(IDC_NUMERIC_SORT_CHECK))
+	{
+		if (IDC_DESCENDING_RADIO == GetCheckedRadioButton(IDC_ASCENDING_RADIO, IDC_DESCENDING_RADIO))
+			str_table.SortNumeric(FALSE);
+		else
+			str_table.SortNumeric(TRUE);
+	}
 	else
-		str_table.Sort(TRUE);
+	{
+		if (IDC_DESCENDING_RADIO == GetCheckedRadioButton(IDC_ASCENDING_RADIO, IDC_DESCENDING_RADIO))
+			str_table.Sort(FALSE);
+		else
+			str_table.Sort(TRUE);
+	}
 
 
 	for (a = 0; a < str_table.getCount(); a++)
@@ -315,4 +326,9 @@ void CComplexFilterDialog::FillValuesList(LPCTSTR cur_attr_str)
 
 
 
+}
+
+void CComplexFilterDialog::OnBnClickedNumericSortCheck()
+{
+	FillValuesList();
 }

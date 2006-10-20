@@ -97,6 +97,13 @@
 #define IDC_DESCENDING_RADIO            1043
 #define IDC_CHECK1                      1044
 #define IDC_NUMERIC_SORT_CHECK          1044
+#define IDC_BUTTON2                     1046
+#define IDC_BUTTON3                     1047
+#define IDC_BUTTON4                     1048
+#define IDC_RADIO1                      1049
+#define IDC_RADIO2                      1050
+#define IDC_RADIO3                      1051
+#define IDC_EDIT2                       1052
 #define ID_MMGENREP                     32771
 #define ID_MMSOURCES                    32772
 #define ID_ELEMENT_EDIT                 32780
@@ -136,7 +143,7 @@
 #define _APS_3D_CONTROLS                     1
 #define _APS_NEXT_RESOURCE_VALUE        169
 #define _APS_NEXT_COMMAND_VALUE         32793
-#define _APS_NEXT_CONTROL_VALUE         1045
+#define _APS_NEXT_CONTROL_VALUE         1053
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif
