@@ -26,6 +26,7 @@ public:
 	CListCtrl	m_CaptionsList;
 	CComboBox	m_TargetCombo;
 	CListCtrl	m_AttributesList;
+	CString	m_AttrLinkTable_IdEdit;
 	//}}AFX_DATA
 
 
@@ -38,6 +39,8 @@ public:
 
 // Implementation
 protected:
+	void DDV_NonDuplicateID(CDataExchange *pDX, int nId, CString csIDEditValue);
+	CString m_OldID;
 
 	// Generated message map functions
 	//{{AFX_MSG(CAttributeLinkTableDialog)

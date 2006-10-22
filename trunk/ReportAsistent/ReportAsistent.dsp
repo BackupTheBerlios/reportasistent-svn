@@ -136,6 +136,10 @@ SOURCE=.\ElementChapterDialog.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\ElementIncludeDialog.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\ElementManager.cpp
 # End Source File
 # Begin Source File
@@ -262,6 +266,10 @@ SOURCE=.\DirectoriesManager.h
 # Begin Source File
 
 SOURCE=.\ElementChapterDialog.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\ElementIncludeDialog.h
 # End Source File
 # Begin Source File
 

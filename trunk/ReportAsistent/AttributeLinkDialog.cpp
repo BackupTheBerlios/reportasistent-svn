@@ -5,6 +5,7 @@
 #include "ReportAsistent.h"
 #include "AttributeLinkDialog.h"
 #include "APTransform.h"
+#include "CSkeletonDoc.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -21,8 +22,15 @@ CAttributeLinkDialog::CAttributeLinkDialog(MSXML2::IXMLDOMElementPtr & edited_el
 	: CDialog(CAttributeLinkDialog::IDD, pParent), CAttributeLinkDialogBase(edited_element)
 {
 	//{{AFX_DATA_INIT(CAttributeLinkDialog)
-		// NOTE: the ClassWizard will add member initialization here
+	m_AttrLink_IdEdit = _T("");
 	//}}AFX_DATA_INIT
+
+	//Iva: Initialisation of variables of the dialog		
+	//Id
+	_variant_t varAtr=m_SelXMLElm->getAttribute("id");
+	m_OldID=(LPCTSTR) (_bstr_t)  varAtr;
+	if (varAtr.vt!=VT_NULL)
+		m_AttrLink_IdEdit = m_OldID;
 }
 
 
@@ -33,7 +41,9 @@ void CAttributeLinkDialog::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_STYLES_COMBO, m_StylesCombo);
 	DDX_Control(pDX, IDC_ATTRIBUTES_LIST, m_AttributesList);
 	DDX_Control(pDX, IDC_TARGET_COMBO, m_TargetCombo);
+	DDX_Text(pDX, IDC_ATTRLINK_ID_EDIT, m_AttrLink_IdEdit);
 	//}}AFX_DATA_MAP
+	DDV_NonDuplicateID(pDX,IDC_ATTRLINK_ID_EDIT, m_AttrLink_IdEdit);
 }
 
 
@@ -62,7 +72,7 @@ BOOL CAttributeLinkDialog::OnInitDialog()
 
 
 	//vyber style v comboboxu
-	_variant_t style = m_edited_element->getAttribute("style");
+	_variant_t style = m_SelXMLElm->getAttribute("style");
 	if (style.vt != VT_NULL)
 	{
 		m_StylesCombo.SelectString(-1, (_bstr_t) style);
@@ -74,7 +84,7 @@ BOOL CAttributeLinkDialog::OnInitDialog()
 	LVFINDINFO info;
 	ZeroMemory(& info, sizeof info);
 
-	CString attr_n = (LPCTSTR) (_bstr_t) m_edited_element->getAttribute("attr_name");
+	CString attr_n = (LPCTSTR) (_bstr_t) m_SelXMLElm->getAttribute("attr_name");
 
 	info.flags = LVFI_STRING;
 	info.psz = attr_n;
@@ -101,6 +111,9 @@ void CAttributeLinkDialog::OnOK()
 {
 	CString s;
 	
+	//Id - saved after the close of the dialog in class CSkeletonDoc
+
+	//target
 	
 	SaveTarget(m_TargetCombo);
 	
@@ -113,16 +126,16 @@ void CAttributeLinkDialog::OnOK()
 		//s = m_AttributesList.GetItemText(nItem, ATTRLIST_CL_NAME);
 		s = * (CString*) m_AttributesList.GetItemData(nItem);
 	}
-	m_edited_element->setAttribute("attr_name", (LPCTSTR) s);
+	m_SelXMLElm->setAttribute("attr_name", (LPCTSTR) s);
 
 	
 	
 	//style
 	
-	//vymaz attribyt style z tagu
-	if (m_edited_element->attributes->getNamedItem("style") != NULL)
+	//vymaz attribut style z tagu
+	if (m_SelXMLElm->attributes->getNamedItem("style") != NULL)
 	{
-		m_edited_element->attributes->removeNamedItem("style");
+		m_SelXMLElm->attributes->removeNamedItem("style");
 	}
 
 	CString style_str;
@@ -130,9 +143,9 @@ void CAttributeLinkDialog::OnOK()
 
 	if (style_str.GetLength() != 0)
 	{
-		MSXML2::IXMLDOMAttributePtr s_atr = m_edited_element->ownerDocument->createAttribute("style");
+		MSXML2::IXMLDOMAttributePtr s_atr = m_SelXMLElm->ownerDocument->createAttribute("style");
 		s_atr->text = (LPCTSTR) style_str;
-		m_edited_element->setAttributeNode(s_atr);
+		m_SelXMLElm->setAttributeNode(s_atr);
 		s_atr.Release();
 	}
 	
@@ -198,4 +211,31 @@ void CAttributeLinkDialog::OnLvnDeleteitemAttributesList(NMHDR *pNMHDR, LRESULT 
 	delete (CString *) pNMLV->lParam;
 
 	*pResult = 0;
+}
+
+void CAttributeLinkDialog::DDV_NonDuplicateID(CDataExchange *pDX, int nId, CString csIDEditValue)
+{
+	if (0!=pDX->m_bSaveAndValidate) //Iva: if it's end of dialog, not beginning
+	{
+
+		if (""==csIDEditValue) //Iva: ID can't be empty string
+		{
+			SetDlgItemText(nId, m_OldID );
+			//dedek: ?CReportAsistentApp::ReportError?
+			AfxMessageBox(IDS_INVALID_ELEMENT_ID);
+			pDX->Fail();
+		}
+
+		CSkeletonDoc * Doc = ((CReportAsistentApp *) AfxGetApp())->FirstDocumentInFirstTemplate();
+		if (m_OldID!=csIDEditValue &&  //Iva: if "==", then ID is in tree, but it's OK
+			Doc->IsIDInTree(csIDEditValue))
+		{
+			SetDlgItemText(nId, m_OldID ); //Iva: return old value to edit box
+			AfxMessageBox(IDS_DUPLICATE_ELEMENT_ID);
+			//dedek: ?CReportAsistentApp::ReportError(IDS_DUPLICATE_ELEMENT_ID);?
+			pDX->Fail();
+		}
+
+	}
+
 }

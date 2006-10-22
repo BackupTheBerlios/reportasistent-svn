@@ -20,17 +20,17 @@ static char THIS_FILE[]=__FILE__;
 
 
 CAttributeLinkDialogBase::CAttributeLinkDialogBase(MSXML2::IXMLDOMElementPtr & edited_element)
-	:m_edited_element(edited_element)
+	:m_SelXMLElm(edited_element)
 {
 	ASSERT(edited_element != NULL);
 }
 
 void CAttributeLinkDialogBase::InitBaseDialog(CListCtrl & AttributesList, CComboBox & TargetCombo)
 {
-	ASSERT(m_edited_element != NULL);
+	ASSERT(m_SelXMLElm != NULL);
 
 	FillTargets(TargetCombo);
-	if (CB_ERR == TargetCombo.SelectString(-1, (_bstr_t) m_edited_element->getAttribute("target")))
+	if (CB_ERR == TargetCombo.SelectString(-1, (_bstr_t) m_SelXMLElm->getAttribute("target")))
 	{
 		if (TargetCombo.GetCount() > 0)
 		{		
@@ -52,8 +52,8 @@ void CAttributeLinkDialogBase::InitBaseDialog(CListCtrl & AttributesList, CCombo
 void CAttributeLinkDialogBase::FillTargets(CComboBox & TargetCombo)
 {
 
-	MSXML2::IXMLDOMNodeListPtr el_list = m_edited_element->ownerDocument->selectNodes("//active_element/@id");
-//	MSXML2::IXMLDOMNodeListPtr el_list = m_edited_element->selectNodes("//active_element/@id");
+	MSXML2::IXMLDOMNodeListPtr el_list = m_SelXMLElm->ownerDocument->selectNodes("//active_element/@id");
+//	MSXML2::IXMLDOMNodeListPtr el_list = m_SelXMLElm->selectNodes("//active_element/@id");
 
 	for (int a=0; a < el_list->length; a++)
 	{
@@ -76,7 +76,7 @@ void CAttributeLinkDialogBase::OnRefresh(CListCtrl & AttributesList, LPCTSTR tar
 	CString query;
 	query.Format("id(\"%s\")", target_id);
 	
-	MSXML2::IXMLDOMElementPtr el = m_edited_element->ownerDocument->selectSingleNode((LPCTSTR) query);
+	MSXML2::IXMLDOMElementPtr el = m_SelXMLElm->ownerDocument->selectSingleNode((LPCTSTR) query);
 
 	
 	if (el == NULL)
@@ -117,7 +117,7 @@ void CAttributeLinkDialogBase::FillAttributesList(CListCtrl & AttributesList, LP
 	CString query;
 	query.Format("id(\"%s\")/attributes/element_attributes/attribute", target_id);
 
-	MSXML2::IXMLDOMSelectionPtr sel = (MSXML2::IXMLDOMSelectionPtr) m_edited_element->ownerDocument->selectNodes((LPCTSTR) query);
+	MSXML2::IXMLDOMSelectionPtr sel = (MSXML2::IXMLDOMSelectionPtr) m_SelXMLElm->ownerDocument->selectNodes((LPCTSTR) query);
 
 	for (int a=0; a < sel->length; a++)
 	{
@@ -165,5 +165,5 @@ void CAttributeLinkDialogBase::SaveTarget(CComboBox &target_combo)
 	CString s;
 	
 	target_combo.GetWindowText(s);
-	m_edited_element->setAttribute("target", (LPCTSTR) s);
+	m_SelXMLElm->setAttribute("target", (LPCTSTR) s);
 }

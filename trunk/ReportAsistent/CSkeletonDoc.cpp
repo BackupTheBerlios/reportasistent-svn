@@ -16,6 +16,7 @@
 #include "ActiveElementDialog.h"
 #include "AttributeLinkDialog.h"
 #include "AttributeLinkTableDialog.h"
+#include "ElementIncludeDialog.h"
 #include "ComplexFilterDialog.h"
 #include "WaitDialog.h"
 #ifdef _DEBUG
@@ -413,7 +414,7 @@ BOOL CSkeletonDoc::EditElement(MSXML2::IXMLDOMElementPtr selected_element)
 
 	case  ELID_PARAGRAPH:
 		{
-			//Vytvorim instanci dialogu pro Prvek Chapter
+			//Vytvorim instanci dialogu pro Prvek Paragraph
 			CElementParagraphDialog OElementParagraphDialog(selected_element,AfxGetMainWnd());
 			UINT Res= OElementParagraphDialog.DoModal() ;
 			if (Res == IDOK)
@@ -469,16 +470,48 @@ BOOL CSkeletonDoc::EditElement(MSXML2::IXMLDOMElementPtr selected_element)
 	
 	case ELID_ATTR_LINK:
 		{
-			CAttributeLinkDialog dlg(selected_element, AfxGetMainWnd());
-			return dlg.DoModal() == IDOK;
+			//Vytvorim instanci dialogu pro Prvek attr_link
+			CAttributeLinkDialog OElementAttrLinkDialog(selected_element,AfxGetMainWnd());
+			UINT Res= OElementAttrLinkDialog.DoModal() ;
+			if (Res == IDOK)
+			{
+			//Zmeny z dialogu soupnu do XMLDom stromu
+				//Id:
+				selected_element->setAttribute("id",(LPCTSTR) OElementAttrLinkDialog.m_AttrLink_IdEdit);		
+			}
+			return Res == IDOK;
 		}
 
 	case ELID_ATTR_LINK_TABLE:
 		{
-			CAttributeLinkTableDialog dlg(selected_element, AfxGetMainWnd());
-			return dlg.DoModal() == IDOK;
-		}
+			//Vytvorim instanci dialogu pro Prvek attr_link_table
+			CAttributeLinkTableDialog OElementAttrLinkTableDialog(selected_element,AfxGetMainWnd());
+			UINT Res= OElementAttrLinkTableDialog.DoModal() ;
+			if (Res == IDOK)
+			{
+			//Zmenu Id z dialogu soupnu do XMLDom stromu
+				//Id:
+				selected_element->setAttribute("id",(LPCTSTR) OElementAttrLinkTableDialog.m_AttrLinkTable_IdEdit);		
+			}
+			return Res == IDOK;
 
+		}
+	case ELID_INCLUDE:
+		{
+			//Vytvorim instanci dialogu pro Prvek Include
+			CElementIncludeDialog OElementIncludeDialog(selected_element,AfxGetMainWnd());
+			UINT Res= OElementIncludeDialog.DoModal() ;
+			if (Res == IDOK)
+			{
+			//Zmenu Id z dialogu soupnu do XMLDom stromu
+				//Id:
+				selected_element->setAttribute("id",(LPCTSTR) OElementIncludeDialog.m_Include_IdEdit);		
+				selected_element->setAttribute("file",(LPCTSTR) OElementIncludeDialog.m_IncludeFileName);		
+
+			}
+			return Res == IDOK;
+
+		}
 	default:
 		//ostatni prvky
 		return IDOK == AfxMessageBox(selected_element->xml, MB_OKCANCEL);		

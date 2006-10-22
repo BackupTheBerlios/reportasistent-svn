@@ -4,6 +4,7 @@
 #include "stdafx.h"
 #include "ReportAsistent.h"
 #include "AttributeLinkTableDialog.h"
+#include "CSkeletonDoc.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -22,8 +23,15 @@ CAttributeLinkTableDialog::CAttributeLinkTableDialog(MSXML2::IXMLDOMElementPtr &
 	ASSERT(edited_element != NULL);
 	
 	//{{AFX_DATA_INIT(CAttributeLinkTableDialog)
-		// NOTE: the ClassWizard will add member initialization here
+	m_AttrLinkTable_IdEdit = _T("");
 	//}}AFX_DATA_INIT
+
+	//Iva: Initialisation of variables of the dialog		
+	//Id
+	_variant_t varAtr=m_SelXMLElm->getAttribute("id");
+	m_OldID=(LPCTSTR) (_bstr_t)  varAtr;
+	if (varAtr.vt!=VT_NULL)
+		m_AttrLinkTable_IdEdit = m_OldID;
 }
 
 
@@ -35,7 +43,10 @@ void CAttributeLinkTableDialog::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_CAPTIONS_LIST, m_CaptionsList);
 	DDX_Control(pDX, IDC_TARGET_COMBO, m_TargetCombo);
 	DDX_Control(pDX, IDC_ATTRIBUTES_LIST, m_AttributesList);
+	DDX_Text(pDX, IDC_ATTRLINKTABLE_ID_EDIT, m_AttrLinkTable_IdEdit);
+	DDV_MaxChars(pDX, m_AttrLinkTable_IdEdit, 50);
 	//}}AFX_DATA_MAP
+	DDV_NonDuplicateID(pDX,IDC_ATTRLINKTABLE_ID_EDIT, m_AttrLinkTable_IdEdit);
 }
 
 
@@ -79,7 +90,7 @@ BOOL CAttributeLinkTableDialog::OnInitDialog()
 
 
 	//napln CaptionsList hodnotami
-	MSXML2::IXMLDOMNodeListPtr links = m_edited_element->selectNodes("link");
+	MSXML2::IXMLDOMNodeListPtr links = m_SelXMLElm->selectNodes("link");
 
 	CString target_id;
 	m_TargetCombo.GetWindowText(target_id);
@@ -100,7 +111,7 @@ BOOL CAttributeLinkTableDialog::OnInitDialog()
 		CString query_str;
 		query_str.Format("id(\"%s\")/attributes/element_attributes/attribute[@name=\"%s\"]/@value", target_id, attr_name);
 
-		MSXML2::IXMLDOMNodePtr value_attr = m_edited_element->ownerDocument->selectSingleNode((LPCTSTR) query_str);
+		MSXML2::IXMLDOMNodePtr value_attr = m_SelXMLElm->ownerDocument->selectSingleNode((LPCTSTR) query_str);
 
 		if (value_attr != NULL)
 		{
@@ -123,7 +134,7 @@ BOOL CAttributeLinkTableDialog::OnInitDialog()
 	}
 
 	//vyber style
-	int sel = m_StyleCombo.SelectString(-1, (_bstr_t) m_edited_element->getAttribute("style"));
+	int sel = m_StyleCombo.SelectString(-1, (_bstr_t) m_SelXMLElm->getAttribute("style"));
 	//vyber se nezdaril => kdyz exituje nejaky styl vyber prvni
 	if ((sel == CB_ERR) && (item != CB_ERR))
 	{
@@ -164,7 +175,7 @@ void CAttributeLinkTableDialog::OnRefreshButton()
 		query_str.Format("id(\"%s\")/attributes/element_attributes/attribute[@name=\"%s\"]/@value", target_id, attr_name);
 
 
-		MSXML2::IXMLDOMNodePtr attr_value = m_edited_element->ownerDocument->selectSingleNode((LPCTSTR) query_str);
+		MSXML2::IXMLDOMNodePtr attr_value = m_SelXMLElm->ownerDocument->selectSingleNode((LPCTSTR) query_str);
 
 		if (attr_value != NULL)
 		{
@@ -287,14 +298,14 @@ void CAttributeLinkTableDialog::OnOK()
 	SaveTarget(m_TargetCombo);
 
 	//smaz vsecky link elementy
-	MSXML2::IXMLDOMSelectionPtr sel = m_edited_element->selectNodes("link");
+	MSXML2::IXMLDOMSelectionPtr sel = m_SelXMLElm->selectNodes("link");
 	sel->removeAll();
 	sel.Release();
 
 	//vytvor vzorovy element
-	MSXML2::IXMLDOMElementPtr link_elenet = m_edited_element->ownerDocument->createElement("link");
-	link_elenet->setAttributeNode(m_edited_element->ownerDocument->createAttribute("attr_name"));
-	link_elenet->setAttributeNode(m_edited_element->ownerDocument->createAttribute("caption"));
+	MSXML2::IXMLDOMElementPtr link_elenet = m_SelXMLElm->ownerDocument->createElement("link");
+	link_elenet->setAttributeNode(m_SelXMLElm->ownerDocument->createAttribute("attr_name"));
+	link_elenet->setAttributeNode(m_SelXMLElm->ownerDocument->createAttribute("caption"));
 
 	//pridej elementy podle listu
 	for (int a=0; a < m_CaptionsList.GetItemCount(); a++)
@@ -302,7 +313,7 @@ void CAttributeLinkTableDialog::OnOK()
 		link_elenet->setAttribute("attr_name", (LPCTSTR) m_CaptionsList.GetItemText(a, CAPTLIST_CL_NAME));
 		link_elenet->setAttribute("caption", (LPCTSTR) m_CaptionsList.GetItemText(a, CAPTLIST_CL_CAPTION));
 
-		m_edited_element->appendChild(link_elenet->cloneNode(VARIANT_FALSE));
+		m_SelXMLElm->appendChild(link_elenet->cloneNode(VARIANT_FALSE));
 	}
 
 	link_elenet.Release();
@@ -310,7 +321,7 @@ void CAttributeLinkTableDialog::OnOK()
 	//uloz style
 	CString style_str;
 	m_StyleCombo.GetWindowText(style_str);
-	m_edited_element->setAttribute("style", (LPCTSTR) style_str);
+	m_SelXMLElm->setAttribute("style", (LPCTSTR) style_str);
 	
 	CDialog::OnOK();
 }
@@ -324,3 +335,29 @@ void CAttributeLinkTableDialog::OnLvnDeleteitemAttributesList(NMHDR *pNMHDR, LRE
 	*pResult = 0;
 }
 
+void CAttributeLinkTableDialog::DDV_NonDuplicateID(CDataExchange *pDX, int nId, CString csIDEditValue)
+{
+	if (0!=pDX->m_bSaveAndValidate) //Iva: if it's end of dialog, not beginning
+	{
+
+		if (""==csIDEditValue) //Iva: ID can't be empty string
+		{
+			SetDlgItemText(nId, m_OldID );
+			//dedek: ?CReportAsistentApp::ReportError?
+			AfxMessageBox(IDS_INVALID_ELEMENT_ID);
+			pDX->Fail();
+		}
+
+		CSkeletonDoc * Doc = ((CReportAsistentApp *) AfxGetApp())->FirstDocumentInFirstTemplate();
+		if (m_OldID!=csIDEditValue &&  //Iva: if "==", then ID is in tree, but it's OK
+			Doc->IsIDInTree(csIDEditValue))
+		{
+			SetDlgItemText(nId, m_OldID ); //Iva: return old value to edit box
+			AfxMessageBox(IDS_DUPLICATE_ELEMENT_ID);
+			//dedek: ?CReportAsistentApp::ReportError(IDS_DUPLICATE_ELEMENT_ID);?
+			pDX->Fail();
+		}
+
+	}
+
+}

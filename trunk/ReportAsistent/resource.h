@@ -1,5 +1,5 @@
 //{{NO_DEPENDENCIES}}
-// Microsoft Visual C++ generated include file.
+// Microsoft Developer Studio generated include file.
 // Used by ReportAsistent.rc
 //
 #define IDD_ABOUTBOX                    100
@@ -36,6 +36,7 @@
 #define IDD_OPTIONS_DIALOG              164
 #define IDD_DIALOG_REPORT               166
 #define IDD_COMPLEX_FILTER_DIALOG       168
+#define IDD_INCLUDE_DIALOG              170
 #define IDC_TREE1                       1000
 #define IDC_FILTER_LIST                 1000
 #define IDC_SCROLLBAR1                  1000
@@ -95,7 +96,6 @@
 #define IDC_ASCENDING_RADIO             1042
 #define IDC_DIALREPORT_AUTHOREDIT       1043
 #define IDC_DESCENDING_RADIO            1043
-#define IDC_CHECK1                      1044
 #define IDC_NUMERIC_SORT_CHECK          1044
 #define IDC_BUTTON2                     1046
 #define IDC_BUTTON3                     1047
@@ -104,6 +104,12 @@
 #define IDC_RADIO2                      1050
 #define IDC_RADIO3                      1051
 #define IDC_EDIT2                       1052
+#define IDC_ATTRLINK_ID_EDIT            1053
+#define IDC_ATTRLINKTABLE_ID_EDIT       1054
+#define IDC_INCLUDE_FILENAME_EDIT       1055
+#define IDC_BROWSE_BUTTON               1056
+#define IDC_INCLUDE_ID_EDIT             1057
+#define IDC_BUTTON1                     1058
 #define ID_MMGENREP                     32771
 #define ID_MMSOURCES                    32772
 #define ID_ELEMENT_EDIT                 32780
@@ -133,6 +139,7 @@
 #define IDS_TR_OPTIONS_ERROR            61218
 #define IDS_WRONG_ELEMENT_TRANSFORMATION 61219
 #define IDS_AEL_NOFILTER                61220
+#define IDS_INVALID_FILE_NAME           61221
 #define IDS_CONFIRM_THRAD_KILL          61400
 #define IDS_CONFIRM_APP_RESUME          61401
 
@@ -141,9 +148,9 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
-#define _APS_NEXT_RESOURCE_VALUE        169
+#define _APS_NEXT_RESOURCE_VALUE        170
 #define _APS_NEXT_COMMAND_VALUE         32793
-#define _APS_NEXT_CONTROL_VALUE         1053
+#define _APS_NEXT_CONTROL_VALUE         1060
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

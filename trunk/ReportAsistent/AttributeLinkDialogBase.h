@@ -16,7 +16,7 @@
 class CAttributeLinkDialogBase  
 {
 protected:
-	MSXML2::IXMLDOMElementPtr & m_edited_element;
+	MSXML2::IXMLDOMElementPtr & m_SelXMLElm;
 
 public:
 	CAttributeLinkDialogBase(MSXML2::IXMLDOMElementPtr & edited_element);   // standard constructor

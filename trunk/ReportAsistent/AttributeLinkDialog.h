@@ -27,6 +27,7 @@ public:
 	CComboBox	m_StylesCombo;
 	CListCtrl	m_AttributesList;
 	CComboBox	m_TargetCombo;
+	CString	m_AttrLink_IdEdit;
 	//}}AFX_DATA
 
 
@@ -39,6 +40,8 @@ public:
 
 // Implementation
 protected:
+	void DDV_NonDuplicateID(CDataExchange *pDX, int nId, CString csIDEditValue);
+	CString m_OldID;
 	void FillStylesCombo();
 
 	// Generated message map functions
