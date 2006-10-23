@@ -62,7 +62,7 @@ CString Get_DTD ()
 	PathFindFileName(module_path)[-1] = 0;
 
 	CString file_path = module_path;
-	file_path += "\\XML\\dtd.dtd";
+	file_path += "\\XML\\plug_output_DTD.xml";
 	
 	CString buf;
 	CFile f(file_path, CFile::modeRead);
