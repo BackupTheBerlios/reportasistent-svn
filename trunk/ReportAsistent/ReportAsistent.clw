@@ -2,13 +2,13 @@
 
 [General Info]
 Version=1
-LastClass=CTransformationsDialog
-LastTemplate=CPropertyPage
+LastClass=TCoef_type_Recordset
+LastTemplate=CRecordset
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "ReportAsistent.h"
 LastPage=0
 
-ClassCount=25
+ClassCount=26
 Class1=CReportAsistentApp
 Class2=CSkeletonDoc
 Class3=CSkeletonView
@@ -16,44 +16,45 @@ Class4=CMainFrame
 
 ResourceCount=18
 Resource1=IDD_ABOUTBOX
-Resource2=IDD_OPTIONS_DIALOG (English (U.S.))
+Resource2=IDD_PROPERTY_EDITOR (English (U.S.))
 Class5=CAboutDlg
-Resource3=IDD_ATTRIBUTE_LINK_DIALOG (English (U.S.))
-Resource4=IDD_GENERATE_DIALOG (English (U.S.))
+Resource3=IDD_ABOUTBOX (English (U.S.))
+Resource4=IDD_DIALOG_REPORT (English (U.S.))
 Class6=CElementTextDialog
-Resource5=IDD_SOURCES_DIALOG (English (U.S.))
+Resource5=IDD_DIALOGTEXT (English (U.S.))
 Class7=CSimpleFilterDialog
-Resource6=IDD_DIALOG_CHAPTER (English (U.S.))
+Resource6=IDD_ACTIVE_ELEMENT_DIALOG (English (U.S.))
 Class8=CGenerateDialog
-Resource7=IDD_PROPERTY_EDITOR (English (U.S.))
+Resource7=IDD_DIALOG_PARAGRAPH (English (U.S.))
 Class9=CSourcesDialog
-Resource8=IDD_ACTIVE_ELEMENT_DIALOG (English (U.S.))
+Resource8=IDD_COMPLEX_FILTER_DIALOG (English (U.S.))
 Class10=CActiveElementDialog
-Resource9=IDD_DIALOG_REPORT (English (U.S.))
+Resource9=IDD_WAIT_DIALOG (English (U.S.))
 Class11=CTransformationsDialog
 Class12=Tcategory_Recordset
-Resource10=IDD_SIMPLE_FILTER_DIALOG (English (U.S.))
+Resource10=IDD_ATTRIBUTE_LINK_DIALOG (English (U.S.))
 Class13=CAttributeLinkDialog
-Resource11=IDD_ATTRIBUTE_LINK_TABLE_DIALOG (English (U.S.))
+Resource11=IDD_SOURCES_DIALOG (English (U.S.))
 Class14=CAttributeLinkTableDialog
-Resource12=IDD_COMPLEX_FILTER_DIALOG (English (U.S.))
+Resource12=IDD_OPTIONS_DIALOG (English (U.S.))
 Class15=CElementParagraphDialog
 Class16=CElementChapterDialog
 Class17=CElementDialogBase
 Class18=CPropertyEditor
-Resource13=IDD_WAIT_DIALOG (English (U.S.))
-Resource14=IDD_DIALOG_PARAGRAPH (English (U.S.))
+Resource13=IDD_DIALOG_CHAPTER (English (U.S.))
+Resource14=IDD_GENERATE_DIALOG (English (U.S.))
 Class19=CWaitDialog
-Resource15=IDD_DIALOGTEXT (English (U.S.))
+Resource15=IDD_SIMPLE_FILTER_DIALOG (English (U.S.))
 Class20=CWaitAnimation
 Class21=CWordEventHandler
-Resource16=IDD_ABOUTBOX (English (U.S.))
+Resource16=IDD_TRANSFORMATIONS_DIALOG (English (U.S.))
 Class22=COptionsDialog
 Class23=CElementReportDialog
 Class24=CEToolBar
-Resource17=IDD_TRANSFORMATIONS_DIALOG (English (U.S.))
+Resource17=IDD_ATTRIBUTE_LINK_TABLE_DIALOG (English (U.S.))
 Class25=CComplexFilterDialog
 Resource18=IDR_MAINFRAME (English (U.S.))
+Class26=TCoef_type_Recordset
 
 [CLS:CReportAsistentApp]
 Type=0
@@ -291,7 +292,7 @@ HeaderFile=TransformationsDialog.h
 ImplementationFile=TransformationsDialog.cpp
 BaseClass=CDialog
 Filter=D
-LastObject=IDC_REMOVE_BUTTON
+LastObject=CTransformationsDialog
 VirtualFilter=dWC
 
 [DLG:IDD_TRANSFORMATIONS_DIALOG (English (U.S.))]
@@ -1925,9 +1926,17 @@ LastObject=CEToolBar
 [DLG:IDD_COMPLEX_FILTER_DIALOG (English (U.S.))]
 Type=1
 Class=CComplexFilterDialog
-ControlCount=2
-Control1=IDOK,button,1342242817
-Control2=IDCANCEL,button,1342242816
+ControlCount=10
+Control1=IDC_STATIC,static,1342308352
+Control2=IDC_DATA_SOURCE_COMBO,combobox,1344340227
+Control3=IDC_ATTRIBUTES_LIST,listbox,1353777409
+Control4=IDC_STATIC,static,1342308352
+Control5=IDC_VALUES_LIST,listbox,1353777409
+Control6=IDC_STATIC,static,1342308352
+Control7=IDC_STATIC,button,1342177287
+Control8=IDC_ASCENDING_RADIO,button,1342242825
+Control9=IDC_DESCENDING_RADIO,button,1342242825
+Control10=IDC_NUMERIC_SORT_CHECK,button,1342242819
 
 [CLS:CComplexFilterDialog]
 Type=0
@@ -1935,4 +1944,35 @@ HeaderFile=ComplexFilterDialog.h
 ImplementationFile=ComplexFilterDialog.cpp
 BaseClass=CPropertyPage
 Filter=D
+
+[CLS:TCoef_type_Recordset]
+Type=0
+HeaderFile=TCoef_type_Recordset.h
+ImplementationFile=TCoef_type_Recordset.cpp
+BaseClass=CRecordset
+Filter=N
+VirtualFilter=r
+LastObject=TCoef_type_Recordset
+
+[DB:TCoef_type_Recordset]
+DB=1
+DBType=ODBC
+ColumnCount=17
+Column1=[LiteralDID], 4, 4
+Column2=[CedentDID], 4, 4
+Column3=[QuantityID], 4, 4
+Column4=[CategoryID], 4, 4
+Column5=[LiteralTypeID], 4, 4
+Column6=[GaceTypeID], 4, 4
+Column7=[EquivalenceClassID], 4, 4
+Column8=[tdLiteralD].[CoefficientTypeID], 4, 4
+Column9=[MinLen], 4, 4
+Column10=[MaxLen], 4, 4
+Column11=[tdLiteralD].[Ord], 4, 4
+Column12=[tdLiteralD].[Notice], 12, 510
+Column13=[tsCoefficientType].[CoefficientTypeID], 4, 4
+Column14=[Name], 12, 100
+Column15=[ShortName], 12, 40
+Column16=[tsCoefficientType].[Ord], 4, 4
+Column17=[tsCoefficientType].[Notice], 12, 510
 

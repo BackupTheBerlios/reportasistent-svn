@@ -39,6 +39,7 @@
 #include "TKLCategory_Recordset.h"
 #include "Hyp_SDKL_Recordset.h"
 #include "tiDKFrequencyI_Recordset.h"
+#include "TCoef_type_Recordset.h"
 
 //dedek: docasne
 /*****/
@@ -2002,6 +2003,7 @@ CString fLMSD4fthyp(void * hSource)
 	CString id_hlp;
 	THyp_SD4ft_Meta_Array list;
 	Hyp_SD4ft_Recordset rs ((CDatabase *) hSource);
+	TCoef_type_Recordset rs_coef_type ((CDatabase *) hSource);
 	Hyp_SD4ft_Meta * pthyp;
 	long h_id;
 //	long m_id;
@@ -2009,6 +2011,8 @@ CString fLMSD4fthyp(void * hSource)
 	long l_id;
 	long c_id;
 	long h_id_tst = 0;//test variable - values from previous iteration
+	long ld_id;//store the tdCedentDID
+	long ld_id_tst = -1;//tests, wheather the new tdCedentDID appears
 
 	BOOL neg_lit;
 	CString neg_lit_smbl;
@@ -2016,6 +2020,8 @@ CString fLMSD4fthyp(void * hSource)
 	CString ced_name;
 	CString q_name;
 	CString q_value;
+	CString q_type;
+	CString q_coef_type;
 	CString q = "SELECT * \
 				 FROM taTask,tiCoefficient,  tiHypothesisDF, tiLiteralI, tmCategory, \
 				      tmMatrix, tmQuantity, tsCedentType \
@@ -2039,6 +2045,27 @@ CString fLMSD4fthyp(void * hSource)
 //			m_id = rs.m_MatrixID2;
 //			t_id = rs.m_TaskID;
 			l_id = rs.m_LiteralIID2;
+			ld_id = rs.m_LiteralDID;
+			id_hlp.Format ("%d", ld_id);
+			//exactly one row expected to return by the following query:
+			q_coef_type = "SELECT * \
+						   FROM tdLiteralD, tsCoefficientType \
+						  WHERE LiteralDID=" + id_hlp;
+			q_coef_type +=
+				" AND tdLiteralD.CoefficientTypeID=tsCoefficientType.CoefficientTypeID";
+			if (rs_coef_type.Open(AFX_DB_USE_DEFAULT_TYPE, q_coef_type))
+			{
+				while (!rs_coef_type.IsEOF())
+				{
+					q_type = rs_coef_type.m_ShortName;
+					q_type.Replace ("&", "&amp;");
+					q_type.Replace (">", "&gt;");
+					q_type.Replace ("<", "&lt;");
+					rs_coef_type.MoveNext ();
+				}
+				rs_coef_type.Close ();
+			}
+			else return "";
 			neg_lit = rs.m_Negation;
 			ced_name = rs.m_Name5;
 			c_id = rs.m_CategoryID2;

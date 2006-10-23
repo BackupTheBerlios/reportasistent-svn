@@ -201,6 +201,10 @@ SOURCE=.\TCFQuantifier_Recordset.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\TCoef_type_Recordset.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\TCondition_Recordset.cpp
 # End Source File
 # Begin Source File
@@ -382,6 +386,10 @@ SOURCE=.\TCFLiteral.h
 # Begin Source File
 
 SOURCE=.\TCFQuantifier_Recordset.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\TCoef_type_Recordset.h
 # End Source File
 # Begin Source File
 
