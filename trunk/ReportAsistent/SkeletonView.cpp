@@ -405,7 +405,7 @@ void CSkeletonView::OnEditCopy()
 	}
 
 	LPTSTR pMemForXML = (LPTSTR) GlobalLock(hgMemForXML);
-	strcpy(pMemForXML,(LPTSTR) bstrSelElmXML);
+	strncpy(pMemForXML ,(LPTSTR) bstrSelElmXML,(DWORD)bstrSelElmXML.length() + 1);
 	//AfxMessageBox(pMemForXML,0,0);
 	
 
