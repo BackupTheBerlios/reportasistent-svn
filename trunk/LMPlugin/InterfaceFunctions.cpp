@@ -117,9 +117,10 @@ hSource_t fNewSourceLM(PersistID_t * pPerzistID)
 	char buf[1001];
 	GetCurrentDirectory(1000, buf);
 
-	// smaz (kody)-----
-	CString hlaska = "Access Datasource: " + s;
-	AfxMessageBox(hlaska);
+	// ladici (kody)-----
+//	CString hlaska = "Access Datasource: " + s;
+//	AfxMessageBox(hlaska);
+
 		// ulozeni seznamu vsech ODBC driveru a zdroju do souboru "drivers.txt"
 	CString drv_enum;
 	CString src_enum;
