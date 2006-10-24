@@ -55,7 +55,8 @@ LPCTSTR CAElInfo::getElementLabel()
 
 BOOL CAElInfo::LoadFromDir(LPCTSTR dir_path)
 {
-	src_dir_path = dir_path;
+  
+  src_dir_path = dir_path;
 	
 	//nacteni pElementDefinitionDOM
 	pElementDefinitionDOM->load((LPCTSTR) (src_dir_path + "\\element.xml"));
@@ -96,7 +97,6 @@ BOOL CAElInfo::LoadFromDir(LPCTSTR dir_path)
 		}
 	}
 	exists_file_find.Close();
-
 	//nacteni pComplexFilterDOM
 	if (exists_file_find.FindFile(src_dir_path + "\\complex_filter.xsl"))
 	{
@@ -133,7 +133,7 @@ BOOL CAElInfo::LoadFromDir(LPCTSTR dir_path)
 		return FALSE;
 	}
 
-	
+
 	
 	//nacti jmeno elementu
 	MSXML2::IXMLDOMNodePtr type_attr_node = pElementDefinitionDOM->selectSingleNode("//active_element/@type");
@@ -148,6 +148,7 @@ BOOL CAElInfo::LoadFromDir(LPCTSTR dir_path)
 	el_name = (LPCTSTR) type_attr_node->text;
 	type_attr_node.Release();
 
+
 	// kody: nacti label elementu
 	MSXML2::IXMLDOMNodePtr label_attr_node = pElementDefinitionDOM->selectSingleNode("//active_element/@label");
 	if (label_attr_node == NULL)
@@ -161,8 +162,8 @@ BOOL CAElInfo::LoadFromDir(LPCTSTR dir_path)
 	el_label = (LPCTSTR) label_attr_node->text;
 	label_attr_node.Release();
 
-	
-	//nacti transformace
+
+  //nacti transformace
 	LoadTransformations((CString) dir_path + "\\transformations");
 
 	return TRUE;
@@ -247,7 +248,8 @@ void CAElInfo::LoadTransformations(LPCTSTR dir_path)
 			 tr->doc->async = VARIANT_FALSE;
 			 tr->doc->load((LPCTSTR) (finder.GetFilePath() + "\\transform.xsl"));
 
-			 long options_error = S_OK;
+
+       long options_error = S_OK;
 			 CFileFind options_find;
 			 //if file exists options.xml
 			 if (options_find.FindFile(finder.GetFilePath() + "\\options.xml"))
@@ -295,8 +297,7 @@ void CAElInfo::LoadTransformations(LPCTSTR dir_path)
 					 getElementName(), (LPCTSTR) finder.GetFileTitle(),
 					 "transform.xsl", (LPCTSTR) tr->doc->parseError->reason);
 				 delete tr;
-			 }
-				 	
+			 }				 	
 		 }
 	}
 

@@ -144,10 +144,10 @@ CAPTION "&Simple filter"
 FONT 8, "MS Sans Serif", 0, 0, 0x1
 BEGIN
     CONTROL         "List1",IDC_FILTER_LIST,"SysListView32",LVS_REPORT | LVS_SHOWSELALWAYS | LVS_SORTASCENDING | WS_BORDER | WS_TABSTOP,7,42,476,159
-    LTEXT           "honza:\n\ttohle je pracovni verze filter dialogu, konecna podoba muze byt uplne jina\n\tpredevsim sloupce v seznamu muzou mit jine poradi, nektere se nemuseji vubec zobrazovat\n\tkdokoliv to chcete vylepsit muzete",IDC_STATIC,7,7,476,33
+    LTEXT           "honza:\n\ttohle je pracovni verze filter dialogu, konecna podoba muze byt uplne jina\n\tpredevsim sloupce v seznamu muzou mit jine poradi, nektere se nemuseji vubec zobrazovat\n\tkdokoliv to chcete vylepsit muzete",IDC_STATIC,7,7,476,33,NOT WS_VISIBLE
     LTEXT           "- osobne bych privital, kdyz bych se ktomu uz nemusel vracet",IDC_STATIC,145,31,294,9
-    LTEXT           "Data source:",IDC_STATIC,58,210,42,8
-    COMBOBOX        IDC_DATA_SOURCE_COMBO,56,220,208,72,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Data source:",IDC_STATIC,7,218,42,8
+    COMBOBOX        IDC_DATA_SOURCE_COMBO,7,228,208,72,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
 END
 
 IDD_TRANSFORMATIONS_DIALOG DIALOGEX 0, 0, 518, 282
@@ -163,7 +163,7 @@ BEGIN
     PUSHBUTTON      "<<",IDC_REMOVE_BUTTON,157,109,38,14
     PUSHBUTTON      "move up",IDC_MOVE_UP_BUTTON,334,91,45,14
     PUSHBUTTON      "move down",IDC_MOVE_DOWN_BUTTON,334,109,45,14
-    CONTROL         150,IDC_STATIC,"Static",SS_BITMAP | WS_BORDER,386,160,125,87
+    CONTROL         150,IDC_STATIC,"Static",SS_BITMAP | NOT WS_VISIBLE | WS_BORDER,386,160,125,87
     PUSHBUTTON      "Configure...",IDC_CONFIGURE_BUTTON,334,49,78,14
 END
 
@@ -243,16 +243,16 @@ BEGIN
     EDITTEXT        IDC_DIALCHAPTER_TITLEEDIT,25,30,205,12,ES_AUTOHSCROLL
 END
 
-IDD_PROPERTY_EDITOR DIALOG  0, 0, 163, 274
+IDD_PROPERTY_EDITOR DIALOGEX 0, 0, 231, 404
 STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Dialog"
-FONT 8, "MS Sans Serif"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
 BEGIN
-    DEFPUSHBUTTON   "OK",IDOK,45,253,50,14
-    PUSHBUTTON      "Cancel",IDCANCEL,106,253,50,14
-    SCROLLBAR       IDC_SCROLLBAR1,145,7,11,209,SBS_VERT
-    CONTROL         "",IDC_STATIC1,"Static",SS_BLACKFRAME,7,7,149,209
-    LTEXT           "",IDC_ERROR_TEXT,7,224,149,26
+    DEFPUSHBUTTON   "OK",IDOK,111,383,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,174,383,50,14
+    SCROLLBAR       IDC_SCROLLBAR1,213,7,11,357,SBS_VERT
+    CONTROL         "",IDC_STATIC1,"Static",SS_BLACKFRAME,7,7,217,357
+    LTEXT           "",IDC_ERROR_TEXT,7,224,217,26
 END
 
 IDD_WAIT_DIALOG DIALOGEX 0, 0, 188, 71
@@ -441,9 +441,10 @@ BEGIN
     IDD_PROPERTY_EDITOR, DIALOG
     BEGIN
         LEFTMARGIN, 7
-        RIGHTMARGIN, 156
+        RIGHTMARGIN, 224
         TOPMARGIN, 7
-        BOTTOMMARGIN, 267
+        BOTTOMMARGIN, 397
+        HORZGUIDE, 364
     END
 
     IDD_WAIT_DIALOG, DIALOG

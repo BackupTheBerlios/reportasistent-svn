@@ -75,7 +75,9 @@ int CReportAsistentApp::ReportError(UINT nResourceErrorStringID, ...)
 
 BOOL CReportAsistentApp::InitInstance()
 {
-	AfxEnableControlContainer();
+//  AfxMessageBox("1");
+  
+  AfxEnableControlContainer();
 
 	// Standard initialization
 	// If you are not using these features and wish to reduce the size
@@ -92,6 +94,7 @@ BOOL CReportAsistentApp::InitInstance()
 
 		//pridal honza
 	CoInitialize(NULL);
+//  AfxMessageBox("2");
 
 		//pridal honza
 	m_pGeneralManager = new CGeneralManager();
@@ -135,12 +138,16 @@ BOOL CReportAsistentApp::InitInstance()
 	if (!ProcessShellCommand(cmdInfo))
 		return FALSE;
 
-	// The one and only window has been initialized, so show and update it.
+//  AfxMessageBox("3");
+
+  // The one and only window has been initialized, so show and update it.
 	m_pMainWnd->ShowWindow(SW_SHOW);
 	m_pMainWnd->UpdateWindow();
 
 	// Enable drag/drop open
 	m_pMainWnd->DragAcceptFiles();
+
+//  AfxMessageBox("4");
 		
 	return TRUE;
 }

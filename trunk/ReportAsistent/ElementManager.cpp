@@ -125,8 +125,12 @@ CElementManager::elId_t CElementManager::IdentifyElement(MSXML2::IXMLDOMElementP
 
 CElementManager::CElementManager(CDirectoriesManager & m)
 {
-	LoadActiveElements(m.getElementsDirectory());
+//  AfxMessageBox(m.getElementsDirectory());
+
+  LoadActiveElements(m.getElementsDirectory());
+//  AfxMessageBox("2222al");
 	LoadAttrLinkTableStyles(m.getAttrLinkTableStylesDirectory());
+//  AfxMessageBox("333al");
 }
 
 CElementManager::~CElementManager()
@@ -308,7 +312,9 @@ void CElementManager::LoadActiveElements(LPCTSTR elements_directory_path)
 		 {
 			 CAElInfo * element_info = new CAElInfo();
 
-			 if (element_info->LoadFromDir(finder.GetFilePath()))
+//			 AfxMessageBox(finder.GetFilePath());
+       
+       if (element_info->LoadFromDir(finder.GetFilePath()))
 			 {
 				 active_elements.Add(element_info);
 			 }
@@ -663,6 +669,7 @@ void CElementManager::LoadXMLDOMFromResource(UINT nResourceID, MSXML2::IXMLDOMDo
 
 BOOL CElementManager::ValidateVisualizationOtions(MSXML2::IXMLDOMDocumentPtr &vo_dom, CString & err_msg)
 {
+
 	MSXML2::IXMLDOMDocumentPtr validator;
 	validator.CreateInstance(_T("Msxml2.DOMDocument"));
 	validator->async = VARIANT_FALSE;
@@ -670,9 +677,28 @@ BOOL CElementManager::ValidateVisualizationOtions(MSXML2::IXMLDOMDocumentPtr &vo
 	LoadXMLDOMFromResource(IDR_VISUALIZATION_OPTIONS_DTD, validator);
 
 
-	validator->replaceChild(
-		vo_dom->documentElement->cloneNode(VARIANT_TRUE),
-		validator->documentElement);
+  MSXML2::IXMLDOMNodePtr clone = vo_dom->documentElement->cloneNode(VARIANT_TRUE);
+
+/*
+  if (clone != NULL) AfxMessageBox("no problem");
+  AfxMessageBox(clone->xml);
+  AfxMessageBox(validator->xml);
+*/
+	try
+  {
+    validator->replaceChild(
+	  	clone,
+		  validator->documentElement);
+  }
+  catch (_com_error e)
+  {
+    err_msg = (LPCTSTR) e.ErrorMessage();
+	  validator.Release();
+
+    return FALSE;
+  }
+
+//  AfxMessageBox("tady");
 
 	MSXML2::IXMLDOMParseErrorPtr err = 
 		((MSXML2::IXMLDOMDocument2Ptr) validator)->validate();
@@ -689,7 +715,8 @@ BOOL CElementManager::ValidateVisualizationOtions(MSXML2::IXMLDOMDocumentPtr &vo
 	err_msg = (LPCTSTR) err->reason;
 	err.Release();
 	validator.Release();
-	return FALSE;
+
+  return FALSE;
 }
 
 void CElementManager::LoadSkeletonDTD(MSXML2::IXMLDOMDocumentPtr &dom)

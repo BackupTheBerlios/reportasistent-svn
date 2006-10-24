@@ -21,6 +21,9 @@ CDirectoriesManager::CDirectoriesManager()
 {
 //	CString dbg = AfxGetApp()->getmo;
 
+//   AfxMessageBox("111dirctories");
+
+
 	//dedek: tohle chci zprovoznit
 	//GetModuleFileName
 
@@ -37,6 +40,8 @@ CDirectoriesManager::CDirectoriesManager()
 	PathFindFileName(module_path)[-1] = 0;
 
 	application_root_path = module_path;
+
+//  AfxMessageBox("222");
 }
 
 CDirectoriesManager::~CDirectoriesManager()

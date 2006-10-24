@@ -222,8 +222,11 @@ int COutputBuffer::insertNewAP(CString APName, BSTR Buffer)
 CDataSourcesManager::CDataSourcesManager(CDirectoriesManager & m)
 {
 	// inicializace tabulky zasuvek a tabulky zdroju
-	initPlugsTab(m.getPluginsDirectory());
+//  AfxMessageBox("11");
+  initPlugsTab(m.getPluginsDirectory());
+//  AfxMessageBox("22");
 	initSourcesTab(m.getSourcesConfigFilePath());
+//  AfxMessageBox("33");
 }
 
 // destruktor
