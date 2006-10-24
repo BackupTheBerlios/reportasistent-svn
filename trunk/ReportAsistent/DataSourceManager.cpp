@@ -280,6 +280,7 @@ int CDataSourcesManager::initPlugsTab(LPCTSTR plugins_dir_path)
 		i++;
 	}
 
+
 	// inicializace vsech zasuvek
 	pSockIfaceFn_t pInitFn;
 	CString LibName;
@@ -334,7 +335,9 @@ int CDataSourcesManager::initPlugsTab(LPCTSTR plugins_dir_path)
 				// volani inicializacni funkce a nastaveni SockInterface
 				try
 				{
+//		AfxMessageBox(LibName);
 					PlugsTab[j].SockInterface = pInitFn();
+//		AfxMessageBox(LibName);
 				} 
 				catch (...)
 				{

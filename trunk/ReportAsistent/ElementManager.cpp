@@ -128,9 +128,7 @@ CElementManager::CElementManager(CDirectoriesManager & m)
 //  AfxMessageBox(m.getElementsDirectory());
 
   LoadActiveElements(m.getElementsDirectory());
-//  AfxMessageBox("2222al");
 	LoadAttrLinkTableStyles(m.getAttrLinkTableStylesDirectory());
-//  AfxMessageBox("333al");
 }
 
 CElementManager::~CElementManager()
@@ -661,9 +659,18 @@ MSXML2::IXMLDOMDocumentPtr CElementManager::TransformAttrLinkTableNoReplaceSourc
 
 void CElementManager::LoadXMLDOMFromResource(UINT nResourceID, MSXML2::IXMLDOMDocumentPtr &dom)
 {
-	HRSRC rsc = FindResource(AfxGetResourceHandle(), MAKEINTRESOURCE(nResourceID), "xml");
+	HRSRC rsc = FindResource(AfxGetResourceHandle(), MAKEINTRESOURCE(nResourceID), "XML");
 	HGLOBAL hg = LoadResource(AfxGetResourceHandle(), rsc);
-	dom->loadXML((LPCTSTR) LockResource(hg));
+
+	LPTSTR ps = (LPTSTR) LockResource(hg);
+	ps[SizeofResource(AfxGetResourceHandle(), rsc)] = 0;
+	dom->loadXML(ps);
+	
+	if (dom->parseError->errorCode != S_OK)
+	{
+		AfxMessageBox((LPCTSTR) LockResource(hg));
+	}
+
 }
 
 
@@ -675,6 +682,8 @@ BOOL CElementManager::ValidateVisualizationOtions(MSXML2::IXMLDOMDocumentPtr &vo
 	validator->async = VARIANT_FALSE;
 
 	LoadXMLDOMFromResource(IDR_VISUALIZATION_OPTIONS_DTD, validator);
+
+	if (validator->parseError->errorCode != S_OK) return TRUE;
 
 
   MSXML2::IXMLDOMNodePtr clone = vo_dom->documentElement->cloneNode(VARIANT_TRUE);

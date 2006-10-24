@@ -292,7 +292,7 @@ BOOL CWordManager::CreateVBRAInstance(_LMRA_XML_WordLoaderPtr & refLMRAInterface
 		CDirectoriesManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->DirectoriesManager;
 
 		// kody - smaz
-		AfxMessageBox(m.getLMRA_WB_WordLoaderPath());
+		//AfxMessageBox(m.getLMRA_WB_WordLoaderPath());
 
 		BOOL ret = CreateProcess(m.getLMRA_WB_WordLoaderPath(), " register", NULL, NULL, FALSE, NORMAL_PRIORITY_CLASS, NULL, NULL, & si, & pi);
 		if (! ret) 
@@ -302,7 +302,7 @@ BOOL CWordManager::CreateVBRAInstance(_LMRA_XML_WordLoaderPtr & refLMRAInterface
 		}
 
 		// kody - smaz
-		AfxMessageBox("registracni proces spusten");
+		//AfxMessageBox("registracni proces spusten");
 		
 		//pockame az spusteny process skonci
 		DWORD wait_ret= WaitForSingleObject(pi.hProcess, 5000);
@@ -315,7 +315,7 @@ BOOL CWordManager::CreateVBRAInstance(_LMRA_XML_WordLoaderPtr & refLMRAInterface
 		}
 	
 		// kody - smaz
-		AfxMessageBox("registracni proces skoncil uspesne");
+		//AfxMessageBox("registracni proces skoncil uspesne");
 
 		hr = refLMRAInterface.CreateInstance("LMRA_WordLoader.LMRA_XML_WordLoader");
 		if (S_OK != hr)
