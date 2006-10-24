@@ -3,7 +3,7 @@
 	ProjectType="Visual C++"
 	Version="8,00"
 	Name="LMplugin"
-	ProjectGUID="{630BF6C8-0EB5-46BA-8817-CF824130568D}"
+	ProjectGUID="{2657246E-73F4-4A74-AD56-462504CB668C}"
 	Keyword="MFCProj"
 	>
 	<Platforms>
@@ -739,6 +739,26 @@
 				</FileConfiguration>
 			</File>
 			<File
+				RelativePath="TCoef_type_Recordset.cpp"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+			</File>
+			<File
 				RelativePath="TCondition_Recordset.cpp"
 				>
 				<FileConfiguration
@@ -1193,6 +1213,10 @@
 			</File>
 			<File
 				RelativePath="TCFQuantifier_Recordset.h"
+				>
+			</File>
+			<File
+				RelativePath="TCoef_type_Recordset.h"
 				>
 			</File>
 			<File

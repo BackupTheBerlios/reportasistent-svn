@@ -3,8 +3,7 @@
 	ProjectType="Visual C++"
 	Version="8,00"
 	Name="ReportAsistent"
-	ProjectGUID="{665D2DFF-8C53-4E9A-85B3-AA621CAFD7EC}"
-	RootNamespace="ReportAsistent"
+	ProjectGUID="{93BA5CB8-6EAE-4359-A996-915BD4C41D0A}"
 	Keyword="MFCProj"
 	>
 	<Platforms>
@@ -419,6 +418,26 @@
 			</File>
 			<File
 				RelativePath="ElementChapterDialog.cpp"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="ElementIncludeDialog.cpp"
 				>
 				<FileConfiguration
 					Name="Debug|Win32"
@@ -889,6 +908,10 @@
 				>
 			</File>
 			<File
+				RelativePath="ElementIncludeDialog.h"
+				>
+			</File>
+			<File
 				RelativePath="ElementManager.h"
 				>
 			</File>
@@ -1072,9 +1095,5 @@
 		</File>
 	</Files>
 	<Globals>
-		<Global
-			Name="RESOURCE_FILE"
-			Value="ReportAsistent.rc"
-		/>
 	</Globals>
 </VisualStudioProject>

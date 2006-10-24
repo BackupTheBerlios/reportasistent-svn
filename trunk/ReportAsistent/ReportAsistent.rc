@@ -143,9 +143,7 @@ STYLE DS_SETFONT | WS_CHILD | WS_CAPTION
 CAPTION "&Simple filter"
 FONT 8, "MS Sans Serif", 0, 0, 0x1
 BEGIN
-    CONTROL         "List1",IDC_FILTER_LIST,"SysListView32",LVS_REPORT | LVS_SHOWSELALWAYS | LVS_SORTASCENDING | WS_BORDER | WS_TABSTOP,7,42,476,159
-    LTEXT           "honza:\n\ttohle je pracovni verze filter dialogu, konecna podoba muze byt uplne jina\n\tpredevsim sloupce v seznamu muzou mit jine poradi, nektere se nemuseji vubec zobrazovat\n\tkdokoliv to chcete vylepsit muzete",IDC_STATIC,7,7,476,33,NOT WS_VISIBLE
-    LTEXT           "- osobne bych privital, kdyz bych se ktomu uz nemusel vracet",IDC_STATIC,145,31,294,9
+    CONTROL         "List1",IDC_FILTER_LIST,"SysListView32",LVS_REPORT | LVS_SHOWSELALWAYS | LVS_SORTASCENDING | WS_BORDER | WS_TABSTOP,7,7,476,199
     LTEXT           "Data source:",IDC_STATIC,7,218,42,8
     COMBOBOX        IDC_DATA_SOURCE_COMBO,7,228,208,72,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
 END
