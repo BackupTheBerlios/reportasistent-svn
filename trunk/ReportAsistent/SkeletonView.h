@@ -72,6 +72,7 @@ public:
 
 // Implementation
 public:
+	CImageList m_ImageList;
 	BOOL m_bDragging;
 	CImageList* m_pimagelist;
 	HTREEITEM m_hitemDrop;

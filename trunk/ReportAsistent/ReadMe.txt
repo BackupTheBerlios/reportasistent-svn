@@ -35,6 +35,7 @@ nenasel jsem nikde, ze by u CDatabase byly buffery nejak omezeny ...
 
 DEDEK:
 
+
 zacinam s pluginem do Wordu
 
 vsichni uz muzete testovat - budu moc rad,

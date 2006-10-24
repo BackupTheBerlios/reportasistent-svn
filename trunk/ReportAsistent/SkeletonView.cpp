@@ -89,35 +89,21 @@ void CSkeletonView::OnInitialUpdate()
 
 
 //Iva: Natahnu obrazky pro TreeCtrl
-	CImageList          *pImageList;
 
-	pImageList = new CImageList();
-	pImageList->Create(16, 16,  //rozmery obrazku k nacteni do ImageListu
+	
+
+	m_ImageList.Create(16, 16,  //rozmery obrazku k nacteni do ImageListu
 						ILC_MASK|ILC_COLOR8,  
 						NUM_PICTURES_TREECTRL, //pocatecni pocet obrazku v ImageListu..viz Stdafx.h
 						10);//o kolik obrazku se ImageList muze zvetsit.. ??
 
 	
-/*****   //dedek: zakomentoval pro ladeni
-
-	int			nIDPic; // ID obrazku v resourcich
-	CBitmap     oBitmap;// objekt obrazek po natazeni z resourcu
-
-	//Natahne obrazky pro TreeCtrl pro vsechny typy prvku
-	for (nIDPic = IDB_BMTREEFIRST; nIDPic <=IDB_BMTREELAST; nIDPic++)  
-	{
-		oBitmap.LoadBitmap(nIDPic);
-		pImageList->Add(&oBitmap, (COLORREF)0xFFFFFF);
-		oBitmap.DeleteObject();
-	}
-/*****/
-
-	//dedek: nova verze
 	CElementManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
-	m.FillImageList(* pImageList);
+	
+	m.FillImageList( m_ImageList);
 
 
-	GetTreeCtrl().SetImageList(pImageList, TVSIL_NORMAL);
+	GetTreeCtrl().SetImageList(&m_ImageList, TVSIL_NORMAL);
 
 	//Iva: zde bude naplneni TreeCtrl ( fce CSkeletonDocument->FillTreeCtrl(pTree) )
 	GetDocument()->FillTreeControl(GetTreeCtrl());

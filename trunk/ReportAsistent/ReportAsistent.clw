@@ -51,11 +51,11 @@ Resource16=IDD_ATTRIBUTE_LINK_TABLE_DIALOG (English (U.S.))
 Class22=COptionsDialog
 Class23=CElementReportDialog
 Class24=CEToolBar
-Resource17=IDD_SOURCES_DIALOG (English (U.S.))
+Resource17=IDR_MAINFRAME (English (U.S.))
 Class25=CComplexFilterDialog
 Resource18=IDD_DIALOGTEXT (English (U.S.))
 Class26=TCoef_type_Recordset
-Resource19=IDR_MAINFRAME (English (U.S.))
+Resource19=IDD_SOURCES_DIALOG (English (U.S.))
 
 [CLS:CReportAsistentApp]
 Type=0
