@@ -2012,7 +2012,7 @@ CString fLMSD4fthyp(void * hSource)
 	long c_id;
 	long h_id_tst = 0;//test variable - values from previous iteration
 	long ld_id;//store the tdCedentDID
-	long ld_id_tst = -1;//tests, wheather the new tdCedentDID appears
+	long ld_id_tst = -1;//tests, whether the new tdCedentDID appears
 
 	BOOL neg_lit;
 	CString neg_lit_smbl;
@@ -2183,6 +2183,7 @@ CString fLMSD4fthyp(void * hSource)
 				if (neg_lit) neg_lit_smbl = "¬"; else neg_lit_smbl = "";
 				x.quant = neg_lit_smbl + q_name;
 				x.value = q_value;
+				x.coef_type = q_coef_type;
 				pthyp->antecedent.Add (x);
 			}
 			else if (ced_name == "Succedent")
@@ -2195,6 +2196,7 @@ CString fLMSD4fthyp(void * hSource)
 				if (neg_lit) neg_lit_smbl = "¬"; else neg_lit_smbl = "";
 				x.quant = neg_lit_smbl + q_name;
 				x.value = q_value;
+				x.coef_type = q_coef_type;
 				pthyp->succedent.Add (x);
 			}
 			else if (ced_name == "Condition")
@@ -2207,6 +2209,7 @@ CString fLMSD4fthyp(void * hSource)
 				if (neg_lit) neg_lit_smbl = "¬"; else neg_lit_smbl = "";
 				x.quant = neg_lit_smbl + q_name;
 				x.value = q_value;
+				x.coef_type = q_coef_type;
 				pthyp->condition.Add (x);
 			}
 			else if (ced_name == "First set")
@@ -2219,6 +2222,7 @@ CString fLMSD4fthyp(void * hSource)
 				if (neg_lit) neg_lit_smbl = "¬"; else neg_lit_smbl = "";
 				x.quant = neg_lit_smbl + q_name;
 				x.value = q_value;
+				x.coef_type = q_coef_type;
 				pthyp->set1.Add (x);
 			}
 			else if (ced_name == "Second set")
@@ -2231,6 +2235,7 @@ CString fLMSD4fthyp(void * hSource)
 				if (neg_lit) neg_lit_smbl = "¬"; else neg_lit_smbl = "";
 				x.quant = neg_lit_smbl + q_name;
 				x.value = q_value;
+				x.coef_type = q_coef_type;
 				pthyp->set2.Add (x);
 			}
 			else return "";//error

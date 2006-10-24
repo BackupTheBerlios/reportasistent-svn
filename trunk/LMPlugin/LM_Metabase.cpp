@@ -5,6 +5,68 @@
 #include "math.h"
 #include "Faktorial.h"
 
+CString cedent_format (TLitArray & cedent)
+{
+	CString xml_string = "";
+	CString first;
+	CString last;
+	int cnt;
+	int i;
+	for (i = 0; i < cedent.GetSize (); i++)
+	{
+		if ((i == 0) || (cedent.GetAt (i).quant != cedent.GetAt (i - 1).quant))
+			//new literal
+		{
+			xml_string = xml_string + "<ti_literal  id=\"" + cedent.GetAt (i).id +
+				"\"  quant=\"" + cedent.GetAt (i).quant +
+				"\"  value=\"";
+			cnt = 0;
+			if (cedent.GetAt (i).coef_type == "int")
+			{
+				first = cedent.GetAt (i).value;
+				last = first;
+			}
+		}
+		
+		
+		
+		cnt++;
+		if (cedent.GetAt (i).coef_type == "int")
+		{
+			last = cedent.GetAt (i).value;
+		}
+		else if (	cedent.GetAt (i).coef_type == "subset"
+					||
+					cedent.GetAt (i).coef_type == "one")
+			xml_string = xml_string + cedent.GetAt (i).value;
+		
+		
+		
+		if ((i < cedent.GetSize () - 1)
+			&&
+			(cedent.GetAt (i).quant == cedent.GetAt (i + 1).quant))
+			//the next value belongs to the same literal
+		{
+			if (	cedent.GetAt (i).coef_type == "subset"
+					||
+					cedent.GetAt (i).coef_type == "one")
+				xml_string += ", ";
+		}
+		else
+			//the next value belongs to the new literal
+		{
+			if (cedent.GetAt (i).coef_type == "int")
+			{
+				if (cnt == 1) xml_string += first;
+				else if (cnt == 2) xml_string = xml_string + first + ", " + last;
+				else xml_string = xml_string + first + ".." + last;
+			}
+			xml_string += "\"/> ";
+		}
+	}
+	return xml_string;
+}
+
 CString Hyp_CF_Meta::xml_convert ()
 {
 	CString xml_string;
@@ -925,8 +987,9 @@ CString Hyp_SD4ft_Meta::xml_convert ()
 	//beginning of ti_cedent elements
 	//Antecedent
 	xml_string = xml_string + "<ti_cedent  id=\"" + ant_id + "\"  type=\"Antecedent\"> ";
+//	xml_string += cedent_format (antecedent);
 	int i;
-    for (i = 0; i < antecedent.GetSize (); i++)
+	for (i = 0; i < antecedent.GetSize (); i++)
 	{
 		if ((i == 0) || (antecedent.GetAt (i).quant != antecedent.GetAt (i - 1).quant))
 			xml_string = xml_string + "<ti_literal  id=\"" + antecedent.GetAt (i).id +

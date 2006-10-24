@@ -203,6 +203,7 @@ struct Hyp_tiLiteral
 	CString	quant;
 	CString	value;
 	CString type;
+	CString	coef_type;
 };
 
 typedef CArray <Hyp_tiLiteral, Hyp_tiLiteral> TLitArray;
