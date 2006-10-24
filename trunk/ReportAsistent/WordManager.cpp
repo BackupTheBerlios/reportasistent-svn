@@ -477,3 +477,13 @@ void CStringTableImpl::Sort(BOOL ascending)
 	else
 		std::sort(data.begin(), data.end(), str_sort_desc);
 }
+
+CString CWordManager::getLastProcessedId(void)
+{
+  return (CString) (LPCTSTR) m_WordLoader->GetstrLastProcessedId();
+}
+
+CString CWordManager::getLastError(void)
+{
+  return (CString) (LPCTSTR) m_WordLoader->GetstrLastError();
+}

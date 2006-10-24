@@ -580,7 +580,15 @@ void CSkeletonDoc::Generate()
 //generovani do Wordu
 
 	CWordManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->WordManager;
-	m.GenerateXMLString(doc_element->xml);
+  
+  try
+  {
+	  m.GenerateXMLString(doc_element->xml);
+  }
+  catch (_com_error e)
+  {
+    CReportAsistentApp::ReportError(IDS_GENERATING_FAILED, (LPCTSTR) m.getLastProcessedId(), (LPCTSTR) m.getLastError());
+  }
 }
 
 

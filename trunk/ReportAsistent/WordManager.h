@@ -95,6 +95,10 @@ protected:
 	//void LoadParagraphStyles(LPCTSTR template_name);   //kody: presunuto do public
 	//void LoadCharacterStyles(LPCTSTR template_name);
 	BOOL isInit();
+public:
+  CString getLastProcessedId(void);
+  CString getLastError(void);
+  
 };
 
 #endif // !defined(AFX_WORDMANAGER_H__2A5B5F90_FAA9_46F2_BC25_BE144CE6ADF6__INCLUDED_)
