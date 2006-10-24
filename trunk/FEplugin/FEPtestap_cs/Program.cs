@@ -37,7 +37,7 @@ namespace FEPtestap_cs
             {
                 //CFEsource src2 = new CFEsource(@"c:\Documents and Settings\Honza\Dokumenty\Barbora1.xfp");
                 //index1 = CFEsourcesTab.NewSource(@"c:\Documents and Settings\Honza\Dokumenty\FERDA_CABG.xfp");
-                index1 = CFEsourcesTab.NewSource(@"G:\Projekt\Vyvoj\ReportAsistent\FEProjects\Barbora1.xfp");
+                index1 = CFEsourcesTab.NewSource(@"D:\Projekt\Vyvoj\ReportAsistent\FEProjects\Barbora1.xfp");
                 //index2 = CFEsourcesTab.NewSource(@"c:\Documents and Settings\Honza\Dokumenty\FERDA_CABG.xfp");
             }
             catch (System.Exception e)
@@ -56,7 +56,8 @@ namespace FEPtestap_cs
     
             // prohrabani se v archivu
             BoxesHelper.VypisKrabky(0, "LISpMinerTasks.FFTTask");
-            AP_FEferda_box.getList(0);
+            string blabla = AP_FE4fthyp.getList(0);
+            Console.Write("\n\n" + blabla);
             //AP_FECF_cedent.getList(0);
             Console.WriteLine("\n\nKONEC");
         }

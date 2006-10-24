@@ -15,7 +15,7 @@ namespace FEplugin_cs
         public static string loadDTD()  // vrati DTD aktivnich prvku
         {
             string DTD = "";
-            string path = "../XML/dtd.dtd";   // relativni cesta k DTD souboru
+            string path = "../XML/plug_output_DTD.xml";   // relativni cesta k DTD souboru
 
             if (!File.Exists(path))
             {
