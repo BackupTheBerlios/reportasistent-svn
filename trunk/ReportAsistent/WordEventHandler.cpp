@@ -97,6 +97,7 @@ void CWordEventHandler::onActiveElementSelected(LPCTSTR strElementName)
 
 		transform.DoAllTransnformations();
 
+#ifdef _DEBUG
 		MSXML2::IXMLDOMParseErrorPtr err = doc->validate();
 
 		if (err->errorCode != S_OK)
@@ -104,6 +105,7 @@ void CWordEventHandler::onActiveElementSelected(LPCTSTR strElementName)
 			AfxMessageBox(err->reason);
 			AfxMessageBox(active_element->selectSingleNode("output")->xml);
 		}
+#endif
 	
 		wm.GenerateXMLStringToWordEditor(active_element->xml);
 	}

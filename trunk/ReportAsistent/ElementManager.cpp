@@ -663,7 +663,7 @@ void CElementManager::LoadXMLDOMFromResource(UINT nResourceID, MSXML2::IXMLDOMDo
 	HGLOBAL hg = LoadResource(AfxGetResourceHandle(), rsc);
 
 	LPTSTR ps = (LPTSTR) LockResource(hg);
-	ps[SizeofResource(AfxGetResourceHandle(), rsc)] = 0;
+	ps[SizeofResource(AfxGetResourceHandle(), rsc)-1] = 0;
 	dom->loadXML(ps);
 	
 	if (dom->parseError->errorCode != S_OK)
