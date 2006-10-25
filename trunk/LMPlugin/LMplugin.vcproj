@@ -3,8 +3,7 @@
 	ProjectType="Visual C++"
 	Version="8,00"
 	Name="LMplugin"
-	ProjectGUID="{051EAF8D-7C64-436E-8366-B1E18E725A44}"
-	RootNamespace="LMplugin"
+	ProjectGUID="{C97B64BA-3F6F-4960-AA0E-229B97AF155A}"
 	Keyword="MFCProj"
 	>
 	<Platforms>
@@ -145,7 +144,6 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalOptions="/MD"
 				Optimization="2"
 				InlineFunctionExpansion="1"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;LMPLUGIN_EXPORTS"

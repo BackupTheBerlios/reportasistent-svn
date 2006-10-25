@@ -11,7 +11,7 @@
 /////////////////////////////////////////////////////////////////////////////
 // CComplexFilterDialog dialog
 
-class CComplexFilterDialog : public CPropertyPage
+class CComplexFilterDialog : public CDialog
 {
 //	DECLARE_DYNCREATE(CComplexFilterDialog)
 

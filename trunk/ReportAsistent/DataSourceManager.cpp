@@ -954,7 +954,14 @@ BSTR CDataSourcesManager::CallPerformProc(int source_index, LPCTSTR element_id) 
 // 
 void CDataSourcesManager::PerformThreadFunction(LPARAM hPreformFn, LPARAM hSource, LPARAM element_id, LPARAM pResult)
 {
-	 ((hPerform_t) hPreformFn) ((void*) hSource, (LPCTSTR) element_id, (BSTR*) pResult);
+	try
+	{
+		((hPerform_t) hPreformFn) ((void*) hSource, (LPCTSTR) element_id, (BSTR*) pResult);
+	}
+	catch (...)
+	{
+		* ((BSTR*) pResult) = NULL;
+	}
 	
 	return;
 }
@@ -976,7 +983,11 @@ BOOL CDataSourcesManager::GetPluginOutput(public_source_id_t source, LPCTSTR ap_
 	// vystup neni v bufferu - nacte se ze zasuvky, ulozi se do bufferu a vrati se
 	if(!OB->isAPBuffered(ap_name_CS))		// vystup jeste neni v bufferu
 	{
-		BSTR result = CallPerformProc(src_index, ap_name);
+		BSTR result = CallPerformProc(src_index, ap_name);		
+		
+		//dedek:
+		if (result == NULL) return FALSE;
+
 		OB->setBuffer(ap_name_CS, result);
 	}
 	

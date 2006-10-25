@@ -18,7 +18,7 @@ static char THIS_FILE[] = __FILE__;
 //IMPLEMENT_DYNCREATE(CComplexFilterDialog, CPropertyPage)
 
 CComplexFilterDialog::CComplexFilterDialog(MSXML2::IXMLDOMElementPtr & active_element, CWnd* pParent)	// nestandard constructor :-)
-: CPropertyPage(CComplexFilterDialog::IDD), m_active_element(active_element), m_bSourceIsInit(FALSE)
+: CDialog(CComplexFilterDialog::IDD, pParent), m_active_element(active_element), m_bSourceIsInit(FALSE)
 {
 	//{{AFX_DATA_INIT(CComplexFilterDialog)
 		// NOTE: the ClassWizard will add member initialization here
@@ -31,7 +31,7 @@ CComplexFilterDialog::~CComplexFilterDialog()
 
 void CComplexFilterDialog::DoDataExchange(CDataExchange* pDX)
 {
-	CPropertyPage::DoDataExchange(pDX);
+	CDialog::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CComplexFilterDialog)
 	// NOTE: the ClassWizard will add DDX and DDV calls here
 	//}}AFX_DATA_MAP
@@ -41,7 +41,7 @@ void CComplexFilterDialog::DoDataExchange(CDataExchange* pDX)
 }
 
 
-BEGIN_MESSAGE_MAP(CComplexFilterDialog, CPropertyPage)
+BEGIN_MESSAGE_MAP(CComplexFilterDialog, CDialog)
 	//{{AFX_MSG_MAP(CComplexFilterDialog)
 		// NOTE: the ClassWizard will add message map macros here
 	//}}AFX_MSG_MAP
@@ -59,7 +59,7 @@ END_MESSAGE_MAP()
 
 BOOL CComplexFilterDialog::OnInitDialog()
 {
-	CPropertyPage::OnInitDialog();
+	CDialog::OnInitDialog();
 
 	
 	
@@ -85,7 +85,7 @@ BOOL CComplexFilterDialog::OnInitDialog()
 
 HBRUSH CComplexFilterDialog::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 {
-	HBRUSH hbr = CPropertyPage::OnCtlColor(pDC, pWnd, nCtlColor);
+	HBRUSH hbr = CDialog::OnCtlColor(pDC, pWnd, nCtlColor);
 
 	// TODO:  Change any attributes of the DC here
 
@@ -94,7 +94,7 @@ HBRUSH CComplexFilterDialog::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 	{
 		m_bSourceIsInit = TRUE;
 		OnSelchangeDataSourceCombo();
-		SetModified(FALSE);
+//		SetModified(FALSE);
 		Invalidate(FALSE);
 	}
 
@@ -114,7 +114,7 @@ void CComplexFilterDialog::OnSelchangeDataSourceCombo()
 		UpDateDialog();
 	}
 
-    SetModified();
+//    SetModified();
 }
 
 
@@ -215,7 +215,7 @@ void CComplexFilterDialog::OnDestroy()
 {
 	ClearAttributesList();
 	
-	CPropertyPage::OnDestroy();
+	CDialog::OnDestroy();
 
 	// TODO: Add your message handler code here
 }

@@ -3,7 +3,7 @@
 	ProjectType="Visual C++"
 	Version="8,00"
 	Name="ReportAsistent"
-	ProjectGUID="{A4BCFA4D-24BA-4BF5-8B72-653C327A9A74}"
+	ProjectGUID="{688AA29B-13F5-412C-94A4-32B9E3396CD5}"
 	Keyword="MFCProj"
 	>
 	<Platforms>
@@ -218,6 +218,26 @@
 			>
 			<File
 				RelativePath="ActiveElementDialog.cpp"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="AElFiltersConfigDialog.cpp"
 				>
 				<FileConfiguration
 					Name="Debug|Win32"
@@ -868,6 +888,10 @@
 				>
 			</File>
 			<File
+				RelativePath="AElFiltersConfigDialog.h"
+				>
+			</File>
+			<File
 				RelativePath="AElInfo.h"
 				>
 			</File>
@@ -1095,5 +1119,9 @@
 		</File>
 	</Files>
 	<Globals>
+		<Global
+			Name="RESOURCE_FILE"
+			Value="ReportAsistent.rc"
+		/>
 	</Globals>
 </VisualStudioProject>
