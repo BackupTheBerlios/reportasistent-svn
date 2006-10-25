@@ -100,7 +100,7 @@ APBuf::APBuf()
 
 APBuf::~APBuf()
 {
-	buffer.Release();
+	if (buffer != NULL) buffer.Release();
 }
 
 BOOL APBuf::isBufferInitialized()
@@ -120,11 +120,10 @@ BOOL APBuf::setBuffer(BSTR str, MSXML2::IXMLDOMDocumentPtr & xml)
 	if (xml->parseError->errorCode != S_OK)
 	{
 		//CReportAsistentApp::ReportError(IDS_SIMPLE_FILTER_FAILED_SOURCE_LOAD, (LPCTSTR) xml->parseError->reason);
-		/*
-			dedek: release se dela az v konstruktoru
+
 		xml.Release();
 		xml = NULL;	
-		*/
+
 		return FALSE;
 	}
 
@@ -173,8 +172,8 @@ int COutputBuffer::getAPIndex(CString APName)
 BOOL COutputBuffer::isAPBuffered(CString APName)
 {
 	if(getAPIndex(APName) == -1)
-		return false;
-	return true;
+		return FALSE;
+	return TRUE;
 }
 
 
@@ -991,9 +990,6 @@ BOOL CDataSourcesManager::GetPluginOutput(public_source_id_t source, LPCTSTR ap_
 	{
 		BSTR result = CallPerformProc(src_index, ap_name);		
 		
-		//dedek:
-		if (result == NULL) return FALSE;
-
 		OB->setBuffer(ap_name_CS, result);
 	}
 	
