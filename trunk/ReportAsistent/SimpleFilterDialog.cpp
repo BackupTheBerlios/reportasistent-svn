@@ -275,6 +275,10 @@ void CSimpleFilterDialog::OnSelchangeDataSourceCombo()
 	{
 		UpDateDialog();
 	}
+	else
+	{
+		m_FilterList.DeleteAllItems();
+	}
 
     SetModified();
 /*
