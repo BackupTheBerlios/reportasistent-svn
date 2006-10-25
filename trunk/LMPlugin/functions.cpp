@@ -1458,8 +1458,8 @@ CString fLMCategory(void* hSource)
 	CString subqintervall;
 	CString subqintervalr;
 	CString qord;
-
-//	fLMCedent (hSource);
+	BOOL result;
+	bool exc = false;
 
 	LPCTSTR q =	
 		"SELECT * \
@@ -1471,7 +1471,19 @@ CString fLMCategory(void* hSource)
 			AND tmCategory.BoolTypeID = tsBoolType.BoolTypeID \
 			ORDER BY tmCategory.CategoryID";
 
-	if (rs.Open(AFX_DB_USE_DEFAULT_TYPE, q))
+	try
+	{
+		result = rs.Open(AFX_DB_USE_DEFAULT_TYPE, q);
+	}
+	catch (CDBException* e)
+	{
+		exc = true;
+		AfxMessageBox("Bad metabase version.");
+		e->Delete ();
+	}
+	if (exc) return "";
+	
+	if (result)
 	{
 		//iteration on query results
 		while (!rs.IsEOF())
@@ -1494,7 +1506,18 @@ CString fLMCategory(void* hSource)
 					 WHERE tmCategoryEnumValue.CategoryID=" + hlp +
 					  " AND tmCategoryEnumValue.ValueID=tmValue.ValueID \
 						AND tmValue.ValueSubTypeID=tsValueSubType.ValueSubTypeID";
-				if (rs_def_enum.Open(AFX_DB_USE_DEFAULT_TYPE, subqenum))
+				try
+				{
+					result = rs_def_enum.Open(AFX_DB_USE_DEFAULT_TYPE, subqenum);
+				}
+				catch (CDBException* e)
+				{
+					exc = true;
+					AfxMessageBox("Bad metabase version.");
+					e->Delete ();
+				}
+				if (exc) return "";
+				if (result)
 				{
 					while (!rs_def_enum.IsEOF ())
 					{
@@ -1535,9 +1558,20 @@ CString fLMCategory(void* hSource)
 					   " AND tmInterval.ToValueID=tmValue.ValueID \
 						AND tmValue.ValueSubTypeID=tsValueSubType.ValueSubTypeID \
 						AND tmInterval.RightBracketTypeID=tsBracketType.BracketTypeID";
-				if ((rs_def_int_l.Open(AFX_DB_USE_DEFAULT_TYPE, subqintervall))
-					&&
-					(rs_def_int_r.Open(AFX_DB_USE_DEFAULT_TYPE, subqintervalr)))
+				try
+				{
+					result = (rs_def_int_l.Open(AFX_DB_USE_DEFAULT_TYPE, subqintervall))
+							  &&
+							 (rs_def_int_r.Open(AFX_DB_USE_DEFAULT_TYPE, subqintervalr));
+				}
+				catch (CDBException* e)
+				{
+					exc = true;
+					AfxMessageBox("Bad metabase version.");
+					e->Delete ();
+				}
+				if (exc) return "";
+				if (result)
 				{
 					while ((!rs_def_int_l.IsEOF ()) && (!rs_def_int_r.IsEOF ()))
 					{
