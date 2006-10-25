@@ -120,8 +120,11 @@ BOOL APBuf::setBuffer(BSTR str, MSXML2::IXMLDOMDocumentPtr & xml)
 	if (xml->parseError->errorCode != S_OK)
 	{
 		//CReportAsistentApp::ReportError(IDS_SIMPLE_FILTER_FAILED_SOURCE_LOAD, (LPCTSTR) xml->parseError->reason);
+		/*
+			dedek: release se dela az v konstruktoru
 		xml.Release();
 		xml = NULL;	
+		*/
 		return FALSE;
 	}
 
@@ -184,12 +187,15 @@ BOOL COutputBuffer::getBuffer(CString APName, MSXML2::IXMLDOMDocument ** xml_dom
 		//xml_dom->async = VARIANT_FALSE; // default - true,
 		//xml_dom.
 		* xml_dom = BufArray[i]->buffer;//->cloneNode(TRUE);
-    BufArray[i]->buffer.AddRef();
+		
+		if (* xml_dom == NULL) return FALSE; 
+		
+		BufArray[i]->buffer.AddRef();
 
 		return TRUE;
 	}
 		
-	xml_dom = NULL;
+	* xml_dom = NULL;
 	return FALSE;
 }
 
@@ -993,7 +999,7 @@ BOOL CDataSourcesManager::GetPluginOutput(public_source_id_t source, LPCTSTR ap_
 	
 	OB->getBuffer(ap_name_CS, xml_dom);
 
-	return TRUE;
+	return (* xml_dom != NULL) && ((* xml_dom)->documentElement != NULL);
 }
 
 

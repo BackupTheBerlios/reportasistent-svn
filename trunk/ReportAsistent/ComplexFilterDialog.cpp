@@ -114,6 +114,7 @@ void CComplexFilterDialog::OnSelchangeDataSourceCombo()
 		UpDateDialog();
 	}
 
+
 //    SetModified();
 }
 
