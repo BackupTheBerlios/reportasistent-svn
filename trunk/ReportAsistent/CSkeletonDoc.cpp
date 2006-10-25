@@ -19,6 +19,8 @@
 #include "ElementIncludeDialog.h"
 #include "ComplexFilterDialog.h"
 #include "WaitDialog.h"
+#include "AElFiltersConfigDialog.h"
+
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #undef THIS_FILE
@@ -343,16 +345,17 @@ BOOL CSkeletonDoc::EditActiveElement(MSXML2::IXMLDOMElementPtr &element)
 
 	CPropertySheet sheet((LPCTSTR) (_bstr_t) element->getAttribute("id"), AfxGetMainWnd());
 
-	CComplexFilterDialog cmpl_filter(element);
-	CSimpleFilterDialog filter(element);
+//	CComplexFilterDialog cmpl_filter(element);
+	CAElFiltersConfigDialog filters(element);
+	CSimpleFilterDialog simple_filter(element);
 
 	if (NULL != m.getActiveElementInfo(m.IdentifyElement(element))->getComplexFilterTransformation())
 	{
-		sheet.AddPage(& cmpl_filter);
+		sheet.AddPage(& filters);
 	}
 	else
 	{
-		sheet.AddPage(& filter);
+		sheet.AddPage(& simple_filter);
 	}
 
 	CTransformationsDialog transforms(element);

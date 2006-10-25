@@ -2,8 +2,8 @@
 
 [General Info]
 Version=1
-LastClass=TCoef_type_Recordset
-LastTemplate=CRecordset
+LastClass=CAElFiltersConfigDialog
+LastTemplate=CDialog
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "ReportAsistent.h"
 LastPage=0
@@ -14,48 +14,49 @@ Class2=CSkeletonDoc
 Class3=CSkeletonView
 Class4=CMainFrame
 
-ResourceCount=19
+ResourceCount=20
 Resource1=IDD_ABOUTBOX
-Resource2=IDD_WAIT_DIALOG (English (U.S.))
+Resource2=IDD_FILTER_AND_CONFIG_DIALOG (English (U.S.))
 Class5=CAboutDlg
-Resource3=IDD_TRANSFORMATIONS_DIALOG (English (U.S.))
-Resource4=IDD_COMPLEX_FILTER_DIALOG (English (U.S.))
+Resource3=IDD_ATTRIBUTE_LINK_DIALOG (English (U.S.))
+Resource4=IDD_WAIT_DIALOG (English (U.S.))
 Class6=CElementTextDialog
 Resource5=IDD_SIMPLE_FILTER_DIALOG (English (U.S.))
 Class7=CSimpleFilterDialog
-Resource6=IDD_DIALOG_PARAGRAPH (English (U.S.))
+Resource6=IDD_INCLUDE_DIALOG (English (U.S.))
 Class8=CGenerateDialog
-Resource7=IDD_DIALOG_CHAPTER (English (U.S.))
+Resource7=IDD_GENERATE_DIALOG (English (U.S.))
 Class9=CSourcesDialog
-Resource8=IDD_INCLUDE_DIALOG (English (U.S.))
+Resource8=IDD_SOURCES_DIALOG (English (U.S.))
 Class10=CActiveElementDialog
-Resource9=IDD_OPTIONS_DIALOG (English (U.S.))
+Resource9=IDD_DIALOG_CHAPTER (English (U.S.))
 Class11=CTransformationsDialog
 Class12=Tcategory_Recordset
-Resource10=IDD_ABOUTBOX (English (U.S.))
+Resource10=IDD_DIALOG_PARAGRAPH (English (U.S.))
 Class13=CAttributeLinkDialog
-Resource11=IDD_GENERATE_DIALOG (English (U.S.))
+Resource11=IDD_DIALOG_REPORT (English (U.S.))
 Class14=CAttributeLinkTableDialog
-Resource12=IDD_DIALOG_REPORT (English (U.S.))
+Resource12=IDD_ATTRIBUTE_LINK_TABLE_DIALOG (English (U.S.))
 Class15=CElementParagraphDialog
 Class16=CElementChapterDialog
 Class17=CElementDialogBase
 Class18=CPropertyEditor
 Resource13=IDD_PROPERTY_EDITOR (English (U.S.))
-Resource14=IDD_ACTIVE_ELEMENT_DIALOG (English (U.S.))
+Resource14=IDD_COMPLEX_FILTER_DIALOG (English (U.S.))
 Class19=CWaitDialog
-Resource15=IDD_ATTRIBUTE_LINK_DIALOG (English (U.S.))
+Resource15=IDD_DIALOGTEXT (English (U.S.))
 Class20=CWaitAnimation
 Class21=CWordEventHandler
-Resource16=IDD_ATTRIBUTE_LINK_TABLE_DIALOG (English (U.S.))
+Resource16=IDD_ACTIVE_ELEMENT_DIALOG (English (U.S.))
 Class22=COptionsDialog
 Class23=CElementReportDialog
 Class24=CEToolBar
-Resource17=IDR_MAINFRAME (English (U.S.))
+Resource17=IDD_TRANSFORMATIONS_DIALOG (English (U.S.))
 Class25=CComplexFilterDialog
-Resource18=IDD_DIALOGTEXT (English (U.S.))
-Class26=TCoef_type_Recordset
-Resource19=IDD_SOURCES_DIALOG (English (U.S.))
+Resource18=IDD_ABOUTBOX (English (U.S.))
+Resource19=IDD_OPTIONS_DIALOG (English (U.S.))
+Class26=CAElFiltersConfigDialog
+Resource20=IDR_MAINFRAME (English (U.S.))
 
 [CLS:CReportAsistentApp]
 Type=0
@@ -308,18 +309,16 @@ Control5=IDC_ADD_BUTTON,button,1342242816
 Control6=IDC_REMOVE_BUTTON,button,1342242816
 Control7=IDC_MOVE_UP_BUTTON,button,1342242816
 Control8=IDC_MOVE_DOWN_BUTTON,button,1342242816
-Control9=IDC_STATIC,static,1350565902
+Control9=IDC_STATIC,static,1082130446
 Control10=IDC_CONFIGURE_BUTTON,button,1342242816
 
 [DLG:IDD_SIMPLE_FILTER_DIALOG (English (U.S.))]
 Type=1
 Class=CSimpleFilterDialog
-ControlCount=5
+ControlCount=3
 Control1=IDC_FILTER_LIST,SysListView32,1350631449
 Control2=IDC_STATIC,static,1342308352
-Control3=IDC_STATIC,static,1342308352
-Control4=IDC_STATIC,static,1342308352
-Control5=IDC_DATA_SOURCE_COMBO,combobox,1344340227
+Control3=IDC_DATA_SOURCE_COMBO,combobox,1344340227
 
 [DLG:IDD_ACTIVE_ELEMENT_DIALOG (English (U.S.))]
 Type=1
@@ -1956,15 +1955,6 @@ ImplementationFile=ComplexFilterDialog.cpp
 BaseClass=CPropertyPage
 Filter=D
 
-[CLS:TCoef_type_Recordset]
-Type=0
-HeaderFile=TCoef_type_Recordset.h
-ImplementationFile=TCoef_type_Recordset.cpp
-BaseClass=CRecordset
-Filter=N
-VirtualFilter=r
-LastObject=TCoef_type_Recordset
-
 [DB:TCoef_type_Recordset]
 DB=1
 DBType=ODBC
@@ -1998,4 +1988,18 @@ Control4=IDC_INCLUDE_ID_EDIT,edit,1350631568
 Control5=IDC_INCLUDE_FILENAME_EDIT,edit,1350631552
 Control6=IDC_BROWSE_BUTTON,button,1342242816
 Control7=IDC_STATIC,static,1342308352
+
+[DLG:IDD_FILTER_AND_CONFIG_DIALOG (English (U.S.))]
+Type=1
+Class=CAElFiltersConfigDialog
+ControlCount=1
+Control1=IDC_STATIC,static,1342308352
+
+[CLS:CAElFiltersConfigDialog]
+Type=0
+HeaderFile=AElFiltersConfigDialog.h
+ImplementationFile=AElFiltersConfigDialog.cpp
+BaseClass=CDialog
+Filter=D
+LastObject=CAElFiltersConfigDialog
 

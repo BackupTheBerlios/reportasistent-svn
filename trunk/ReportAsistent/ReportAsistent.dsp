@@ -96,6 +96,10 @@ SOURCE=.\ActiveElementDialog.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\AElFiltersConfigDialog.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\AElInfo.cpp
 # End Source File
 # Begin Source File
@@ -226,6 +230,10 @@ SOURCE=.\WordManager.cpp
 # Begin Source File
 
 SOURCE=.\ActiveElementDialog.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\AElFiltersConfigDialog.h
 # End Source File
 # Begin Source File
 
