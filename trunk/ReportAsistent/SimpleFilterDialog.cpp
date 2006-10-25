@@ -144,7 +144,10 @@ BOOL CSimpleFilterDialog::LoadSource(public_source_id_t sId)
 
 	if (! m->DataSourcesManager.GetPluginOutput(sId, (_bstr_t) element_info->getElementName(), & filter_doc)) 
 	{
-		filter_doc.Release();
+		if (filter_doc != NULL)
+		{
+			filter_doc.Release();
+		}
 		CReportAsistentApp::ReportError(IDS_SIMPLE_FILTER_FAILED_SOURCE_LOAD, "Plugin output is empty.");
 		return FALSE;	
 	}
