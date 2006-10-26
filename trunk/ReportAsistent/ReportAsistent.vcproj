@@ -3,7 +3,8 @@
 	ProjectType="Visual C++"
 	Version="8,00"
 	Name="ReportAsistent"
-	ProjectGUID="{688AA29B-13F5-412C-94A4-32B9E3396CD5}"
+	ProjectGUID="{CC6F4AD6-FBAB-425A-A5F9-721A639831DA}"
+	RootNamespace="ReportAsistent"
 	Keyword="MFCProj"
 	>
 	<Platforms>
@@ -1119,9 +1120,5 @@
 		</File>
 	</Files>
 	<Globals>
-		<Global
-			Name="RESOURCE_FILE"
-			Value="ReportAsistent.rc"
-		/>
 	</Globals>
 </VisualStudioProject>

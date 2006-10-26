@@ -35,6 +35,35 @@ BEGIN_MESSAGE_MAP(CReportAsistentApp, CWinApp)
 	ON_COMMAND(ID_FILE_OPEN, CWinApp::OnFileOpen)
 END_MESSAGE_MAP()
 
+
+/////////////////////////////////////////////////////////////////////////////
+// CAboutDlg dialog used for App About
+
+class CAboutDlg : public CDialog
+{
+public:
+	CAboutDlg();
+
+// Dialog Data
+	//{{AFX_DATA(CAboutDlg)
+	enum { IDD = IDD_ABOUTBOX };
+	//}}AFX_DATA
+
+	// ClassWizard generated virtual function overrides
+	//{{AFX_VIRTUAL(CAboutDlg)
+	protected:
+	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
+	//}}AFX_VIRTUAL
+
+// Implementation
+protected:
+	//{{AFX_MSG(CAboutDlg)
+		// No message handlers
+	//}}AFX_MSG
+	DECLARE_MESSAGE_MAP()
+};
+
+
 /////////////////////////////////////////////////////////////////////////////
 // CReportAsistentApp construction
 
@@ -75,7 +104,6 @@ int CReportAsistentApp::ReportError(UINT nResourceErrorStringID, ...)
 
 BOOL CReportAsistentApp::InitInstance()
 {
-//  AfxMessageBox("1");
   
   AfxEnableControlContainer();
 
@@ -92,11 +120,16 @@ BOOL CReportAsistentApp::InitInstance()
 	Enable3dControlsStatic();	// Call this when linking to MFC statically
 #endif
 
-		//pridal honza
+	//dedek
 	CoInitialize(NULL);
 //  AfxMessageBox("2");
 
-		//pridal honza
+	CAboutDlg a_dlg;
+	a_dlg.Create(IDD_ABOUTBOX);
+	a_dlg.ShowWindow(SW_SHOW);
+	a_dlg.UpdateWindow();
+
+	//dedek
 	m_pGeneralManager = new CGeneralManager();
 
 
@@ -139,6 +172,9 @@ BOOL CReportAsistentApp::InitInstance()
 		return FALSE;
 
 //  AfxMessageBox("3");
+	
+//	Sleep(5000);
+	a_dlg.ShowWindow(SW_HIDE);
 
   // The one and only window has been initialized, so show and update it.
 	m_pMainWnd->ShowWindow(SW_SHOW);
@@ -149,40 +185,11 @@ BOOL CReportAsistentApp::InitInstance()
 
 //  AfxMessageBox("4");
 		
+
 	return TRUE;
 }
 
 
-
-
-
-
-/////////////////////////////////////////////////////////////////////////////
-// CAboutDlg dialog used for App About
-
-class CAboutDlg : public CDialog
-{
-public:
-	CAboutDlg();
-
-// Dialog Data
-	//{{AFX_DATA(CAboutDlg)
-	enum { IDD = IDD_ABOUTBOX };
-	//}}AFX_DATA
-
-	// ClassWizard generated virtual function overrides
-	//{{AFX_VIRTUAL(CAboutDlg)
-	protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
-	//}}AFX_VIRTUAL
-
-// Implementation
-protected:
-	//{{AFX_MSG(CAboutDlg)
-		// No message handlers
-	//}}AFX_MSG
-	DECLARE_MESSAGE_MAP()
-};
 
 CAboutDlg::CAboutDlg() : CDialog(CAboutDlg::IDD)
 {
