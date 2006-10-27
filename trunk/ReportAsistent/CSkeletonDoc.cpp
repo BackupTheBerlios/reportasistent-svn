@@ -159,7 +159,7 @@ void CSkeletonDoc::FillTreeControl(CTreeCtrl  & tree_control)
 HTREEITEM CSkeletonDoc::InsertNodeToTreeCtrl(MSXML2::IXMLDOMElementPtr pElement, 
 									   HTREEITEM hParentItem, 
 									   CTreeCtrl  & tree_control,
-									   HTREEITEM hInsertAfter) //v CSkeletonDoc.h je zadana defaultni hodnota: hInsertAfter = TVI_LAST
+									   HTREEITEM hInsertAfter) //v CSkeletonDoc.h je zadana defaultni hodnota: hInsertAfter = TVI_LAST(=0xffff0002)
 {
 //dedek:
 
@@ -169,6 +169,11 @@ HTREEITEM CSkeletonDoc::InsertNodeToTreeCtrl(MSXML2::IXMLDOMElementPtr pElement,
 	CElementManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
 
 	CElementManager::elId_t el_id = m.IdentifyElement(pElement);
+
+	if (hInsertAfter==NULL) 
+	{
+		hInsertAfter=TVI_FIRST ;
+	}
 	
 	hTreeItem = tree_control.InsertItem(m.CreateElementCaption(pElement), el_id, el_id, hParentItem, hInsertAfter);
 
