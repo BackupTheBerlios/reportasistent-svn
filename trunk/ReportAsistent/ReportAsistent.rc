@@ -906,7 +906,7 @@ BEGIN
     IDS_WRONG_ELEMENT_TRANSFORMATION 
                             "Transformation ""%s"" of active element ""%s"" not found.\nProcessed active element id: %s"
     IDS_AEL_NOFILTER        "Warning: Active element ""%s"" was not loaded because no filter file was found."
-    IDS_INVALID_FILE_NAME   "Given file name of path is invalid."
+    IDS_INVALID_FILE_NAME   "Given file name or path is invalid."
     IDS_GENERATING_FAILED   "Generating of the report failed.\nLast processed element id: %s\nReason: %s"
 END
 
