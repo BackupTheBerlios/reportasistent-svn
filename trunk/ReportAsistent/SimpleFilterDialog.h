@@ -36,6 +36,7 @@ public:
 	enum { IDD = IDD_SIMPLE_FILTER_DIALOG };
 	CComboBox	m_SourcesCombo;
 	CListCtrl	m_FilterList;
+	CString	m_SF_IdEdit;
 	//}}AFX_DATA
 
 
@@ -48,6 +49,9 @@ public:
 
 // Implementation
 protected:
+	CString m_OldID;
+	void DDV_NonDuplicateID(CDataExchange *pDX, int nId, CString csIDEditValue);
+
 	void UpDateDialog();
 	BOOL LoadSource(public_source_id_t sId);
 

@@ -5,7 +5,7 @@
 #include "ReportAsistent.h"
 #include "SimpleFilterDialog.h"
 #include "APTransform.h"
-//#include "SkeletonManager.h"
+#include "CSkeletonDoc.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -22,7 +22,7 @@ CSimpleFilterDialog::CSimpleFilterDialog(MSXML2::IXMLDOMElementPtr & active_elem
 , m_bSourceIsInit(FALSE)
 {
 	//{{AFX_DATA_INIT(CSimpleFilterDialog)
-		// NOTE: the ClassWizard will add member initialization here
+	m_SF_IdEdit = _T("");
 	//}}AFX_DATA_INIT
 
 
@@ -45,6 +45,14 @@ CSimpleFilterDialog::CSimpleFilterDialog(MSXML2::IXMLDOMElementPtr & active_elem
 
 
 //	filter_transform.Release();
+
+	//Iva: Inicialisation 
+	//Id:
+	_variant_t varAtr=m_active_element->getAttribute("id");
+	m_OldID=(LPCTSTR) (_bstr_t)  varAtr;
+	if (varAtr.vt!=VT_NULL)
+		m_SF_IdEdit = m_OldID;
+
 }
 
 CSimpleFilterDialog::~CSimpleFilterDialog()
@@ -64,7 +72,11 @@ void CSimpleFilterDialog::DoDataExchange(CDataExchange* pDX)
 	//{{AFX_DATA_MAP(CSimpleFilterDialog)
 	DDX_Control(pDX, IDC_DATA_SOURCE_COMBO, m_SourcesCombo);
 	DDX_Control(pDX, IDC_FILTER_LIST, m_FilterList);
+	DDX_Text(pDX, IDC_SIMPLEFILTER_ID_EDIT, m_SF_IdEdit);
+	DDV_MaxChars(pDX, m_SF_IdEdit, 50);
 	//}}AFX_DATA_MAP
+	DDV_NonDuplicateID(pDX,IDC_SIMPLEFILTER_ID_EDIT, m_SF_IdEdit);
+
 }
 
 
@@ -387,4 +399,29 @@ void CSimpleFilterDialog::OnNMClickFilterList(NMHDR *pNMHDR, LRESULT *pResult)
   *pResult = 0;
 }
 
+void CSimpleFilterDialog::DDV_NonDuplicateID(CDataExchange *pDX, int nId, CString csIDEditValue)
+{
+	if (0!=pDX->m_bSaveAndValidate) //Iva: if it's end of dialog, not beginning
+	{
 
+		if (""==csIDEditValue) //Iva: ID can't be empty string
+		{
+			SetDlgItemText(nId, m_OldID );
+			//dedek: ?CReportAsistentApp::ReportError?
+			AfxMessageBox(IDS_INVALID_ELEMENT_ID);
+			pDX->Fail();
+		}
+
+		CSkeletonDoc * Doc = ((CReportAsistentApp *) AfxGetApp())->FirstDocumentInFirstTemplate();
+		if (m_OldID!=csIDEditValue &&  //Iva: if "==", then ID is in tree, but it's OK
+			Doc->IsIDInTree(csIDEditValue))
+		{
+			SetDlgItemText(nId, m_OldID ); //Iva: return old value to edit box
+			AfxMessageBox(IDS_DUPLICATE_ELEMENT_ID);
+			//dedek: ?CReportAsistentApp::ReportError(IDS_DUPLICATE_ELEMENT_ID);?
+			pDX->Fail();
+		}
+
+	}
+
+}

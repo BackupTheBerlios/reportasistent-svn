@@ -21,7 +21,7 @@ public:
 // Dialog Data
 	//{{AFX_DATA(CAElFiltersConfigDialog)
 	enum { IDD = IDD_FILTER_AND_CONFIG_DIALOG };
-		// NOTE: the ClassWizard will add data members here
+	CString	m_CF_IdEdit;
 	//}}AFX_DATA
 
 
@@ -38,16 +38,16 @@ private:
 
 // Implementation
 protected:
-
+	void DDV_NonDuplicateID(CDataExchange *pDX, int nId, CString csIDEditValue);
 	// Generated message map functions
 	//{{AFX_MSG(CAElFiltersConfigDialog)
 		// NOTE: the ClassWizard will add member functions here
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 public:
-	afx_msg void OnBnClickedAddFilterButton();
 	CComboBox m_SourcesCombo;
 protected:
+	CString m_OldID;
 //	virtual void PreInitDialog();
 public:
 	virtual BOOL OnInitDialog();

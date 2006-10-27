@@ -1,4 +1,4 @@
-// Microsoft Visual C++ generated resource script.
+//Microsoft Developer Studio generated resource script.
 //
 #include "resource.h"
 
@@ -27,18 +27,18 @@ LANGUAGE LANG_CZECH, SUBLANG_DEFAULT
 // TEXTINCLUDE
 //
 
-1 TEXTINCLUDE 
+1 TEXTINCLUDE MOVEABLE PURE 
 BEGIN
     "resource.h\0"
 END
 
-2 TEXTINCLUDE 
+2 TEXTINCLUDE MOVEABLE PURE 
 BEGIN
     "#include ""afxres.h""\r\n"
     "\0"
 END
 
-3 TEXTINCLUDE 
+3 TEXTINCLUDE MOVEABLE PURE 
 BEGIN
     "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
     "#define _AFX_NO_OLE_RESOURCES\r\n"
@@ -76,137 +76,166 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 // Dialog
 //
 
-IDD_SOURCES_DIALOG DIALOG  0, 0, 419, 226
-STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+IDD_SOURCES_DIALOG DIALOG DISCARDABLE  0, 0, 419, 186
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Data Sources"
 FONT 8, "MS Sans Serif"
 BEGIN
-    LTEXT           "honza: zkrasleni/predelani tohohle dialogu kymkoliv se vubec nebranim - jen pracovni verze",IDC_STATIC,7,7,405,8
-    LTEXT           "Plugin:",IDC_STATIC,42,42,22,8
-    COMBOBOX        IDC_PLUGINS_COMBO,92,41,179,92,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
-    GROUPBOX        "Add new source",IDC_STATIC,21,23,284,65
-    PUSHBUTTON      "&Add new source..",IDC_ADD_SOURCE_BUTTON,69,63,92,14
-    CONTROL         "List2",IDC_SOURCES_LIST,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_EDITLABELS | WS_BORDER | WS_TABSTOP,79,101,312,104
-    PUSHBUTTON      "&Open",IDC_OPEN_BUTTON,13,111,58,15
-    PUSHBUTTON      "&Close",IDC_CLOSE_BUTTON,14,130,58,15
-    PUSHBUTTON      "&Remove",IDC_REMOVE_BUTTON,13,150,58,15
-    PUSHBUTTON      "Re&name",IDC_RENAME_BUTTON,14,170,58,15
-    PUSHBUTTON      "Set &default",IDC_SET_DEFAULT_BUTTON,14,188,58,15
+    LTEXT           "Type of source (plugin):",IDC_STATIC,20,150,75,8
+    COMBOBOX        IDC_PLUGINS_COMBO,100,150,170,92,CBS_DROPDOWNLIST | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "Add new source",IDC_STATIC,10,135,395,40
+    PUSHBUTTON      "Choose and &add new source...",IDC_ADD_SOURCE_BUTTON,
+                    275,150,120,14
+    CONTROL         "List2",IDC_SOURCES_LIST,"SysListView32",LVS_REPORT | 
+                    LVS_SINGLESEL | LVS_EDITLABELS | WS_BORDER | WS_TABSTOP,
+                    85,20,312,95
+    PUSHBUTTON      "&Open",IDC_OPEN_BUTTON,20,20,58,15
+    PUSHBUTTON      "&Close",IDC_CLOSE_BUTTON,20,40,58,15
+    PUSHBUTTON      "&Remove",IDC_REMOVE_BUTTON,20,60,58,15
+    PUSHBUTTON      "Re&name",IDC_RENAME_BUTTON,20,80,58,15
+    PUSHBUTTON      "Set &default",IDC_SET_DEFAULT_BUTTON,20,100,58,15
+    GROUPBOX        "Available Sources",IDC_STATIC,10,5,395,120
 END
 
-IDD_ATTRIBUTE_LINK_DIALOG DIALOG  0, 0, 317, 231
-STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+IDD_ATTRIBUTE_LINK_DIALOG DIALOG DISCARDABLE  0, 0, 317, 231
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Dialog"
 FONT 8, "MS Sans Serif"
 BEGIN
     DEFPUSHBUTTON   "OK",IDOK,114,210,41,14
     PUSHBUTTON      "Cancel",IDCANCEL,162,209,41,14
-    COMBOBOX        IDC_TARGET_COMBO,10,50,115,123,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_TARGET_COMBO,10,50,115,123,CBS_DROPDOWNLIST | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
     LTEXT           "Target element:",IDC_STATIC,10,35,50,8
-    CONTROL         "List1",IDC_ATTRIBUTES_LIST,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | WS_BORDER | WS_TABSTOP,10,90,295,90
+    CONTROL         "List1",IDC_ATTRIBUTES_LIST,"SysListView32",LVS_REPORT | 
+                    LVS_SINGLESEL | LVS_SHOWSELALWAYS | WS_BORDER | 
+                    WS_TABSTOP,10,90,295,90
     LTEXT           "Element attributes:",IDC_STATIC,10,75,59,8
     PUSHBUTTON      "<< &Refresh",IDC_REFRESH_BUTTON,255,185,50,14
-    COMBOBOX        IDC_STYLES_COMBO,140,50,115,123,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_STYLES_COMBO,140,50,115,123,CBS_DROPDOWNLIST | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
     LTEXT           "Text style:",IDC_STATIC,140,35,33,8
     PUSHBUTTON      "<< Re&fresh",IDC_STYLES_REFRESH_BUTTON,260,50,45,15
     LTEXT           "ID:",IDC_STATIC,9,16,10,10
-    EDITTEXT        IDC_ATTRLINK_ID_EDIT,24,15,100,12,ES_LOWERCASE | ES_AUTOHSCROLL
+    EDITTEXT        IDC_ATTRLINK_ID_EDIT,24,15,100,12,ES_LOWERCASE | 
+                    ES_AUTOHSCROLL
 END
 
-IDD_ATTRIBUTE_LINK_TABLE_DIALOG DIALOG  0, 0, 517, 201
-STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+IDD_ATTRIBUTE_LINK_TABLE_DIALOG DIALOG DISCARDABLE  0, 0, 517, 201
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Dialog"
 FONT 8, "MS Sans Serif"
 BEGIN
     DEFPUSHBUTTON   "OK",IDOK,175,180,50,14
     PUSHBUTTON      "Cancel",IDCANCEL,250,180,50,14
-    COMBOBOX        IDC_TARGET_COMBO,125,20,118,123,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_TARGET_COMBO,125,20,118,123,CBS_DROPDOWNLIST | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
     LTEXT           "Target element:",IDC_STATIC,125,10,50,8
-    CONTROL         "List1",IDC_ATTRIBUTES_LIST,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | WS_BORDER | WS_TABSTOP,10,50,205,95
+    CONTROL         "List1",IDC_ATTRIBUTES_LIST,"SysListView32",LVS_REPORT | 
+                    LVS_SINGLESEL | LVS_SHOWSELALWAYS | WS_BORDER | 
+                    WS_TABSTOP,10,50,205,95
     LTEXT           "Element attributes:",IDC_STATIC,10,40,59,8
     PUSHBUTTON      "&Refresh",IDC_REFRESH_BUTTON,165,145,50,14
-    CONTROL         "List1",IDC_CAPTIONS_LIST,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_EDITLABELS | WS_BORDER | WS_TABSTOP,255,50,205,95
+    CONTROL         "List1",IDC_CAPTIONS_LIST,"SysListView32",LVS_REPORT | 
+                    LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_EDITLABELS | 
+                    WS_BORDER | WS_TABSTOP,255,50,205,95
     PUSHBUTTON      ">>",IDC_ADD_BUTTON,220,70,30,14
     PUSHBUTTON      "<<",IDC_REMOVE_BUTTON,220,90,30,14
     LTEXT           "Selected attributes",IDC_STATIC,255,40,60,8
     PUSHBUTTON      "move &up",IDC_MOVE_UP_BUTTON,465,60,45,14
     PUSHBUTTON      "move &down",IDC_MOVE_DOWN_BUTTON2,465,80,45,14
     PUSHBUTTON      "&Edit caption",IDC_EDIT_CAPTION_BUTTON,410,35,50,14
-    COMBOBOX        IDC_STYLE_COMBO,255,20,118,123,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_STYLE_COMBO,255,20,118,123,CBS_DROPDOWNLIST | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
     LTEXT           "Style:",IDC_STATIC,255,10,18,8
     LTEXT           "ID:",IDC_STATIC,10,10,10,10
-    EDITTEXT        IDC_ATTRLINKTABLE_ID_EDIT,10,20,100,12,ES_LOWERCASE | ES_AUTOHSCROLL
+    EDITTEXT        IDC_ATTRLINKTABLE_ID_EDIT,10,20,100,12,ES_LOWERCASE | 
+                    ES_AUTOHSCROLL
 END
 
-IDD_SIMPLE_FILTER_DIALOG DIALOGEX 0, 0, 490, 279
-STYLE DS_SETFONT | WS_CHILD | WS_CAPTION
+IDD_SIMPLE_FILTER_DIALOG DIALOG DISCARDABLE  0, 0, 490, 279
+STYLE WS_CHILD | WS_CAPTION
 CAPTION "&Simple filter"
-FONT 8, "MS Sans Serif", 0, 0, 0x1
+FONT 8, "MS Sans Serif"
 BEGIN
-    CONTROL         "List1",IDC_FILTER_LIST,"SysListView32",LVS_REPORT | LVS_SHOWSELALWAYS | LVS_SORTASCENDING | WS_BORDER | WS_TABSTOP,7,7,476,232
-    LTEXT           "Data source:",IDC_STATIC,7,249,42,8
-    COMBOBOX        IDC_DATA_SOURCE_COMBO,7,260,208,72,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "List1",IDC_FILTER_LIST,"SysListView32",LVS_REPORT | 
+                    LVS_SHOWSELALWAYS | LVS_SORTASCENDING | WS_BORDER | 
+                    WS_TABSTOP,5,7,476,232
+    LTEXT           "Data source:",IDC_STATIC,5,245,42,8
+    COMBOBOX        IDC_DATA_SOURCE_COMBO,5,255,208,72,CBS_DROPDOWNLIST | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "ID:",IDC_STATIC,250,245,10,10
+    EDITTEXT        IDC_SIMPLEFILTER_ID_EDIT,250,255,100,12,ES_LOWERCASE | 
+                    ES_AUTOHSCROLL
 END
 
 IDD_TRANSFORMATIONS_DIALOG DIALOGEX 0, 0, 518, 282
-STYLE DS_SETFONT | WS_CHILD | WS_CAPTION
+STYLE WS_CHILD | WS_CAPTION
 CAPTION "&Transformations"
 FONT 8, "MS Sans Serif", 0, 0, 0x1
 BEGIN
-    LISTBOX         IDC_SUPPORTED_TRANSF_LIST,29,28,122,178,LBS_SORT | LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
-    LISTBOX         IDC_SELECTED_TRANSFS_LIST,202,28,122,178,LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    LISTBOX         IDC_SUPPORTED_TRANSF_LIST,29,28,122,178,LBS_SORT | 
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    LISTBOX         IDC_SELECTED_TRANSFS_LIST,202,28,122,178,
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
     LTEXT           "Supported transformations:",IDC_STATIC,29,20,85,8
     LTEXT           "Selected transformations:",IDC_STATIC,202,20,80,8
     PUSHBUTTON      ">>",IDC_ADD_BUTTON,157,91,38,14
     PUSHBUTTON      "<<",IDC_REMOVE_BUTTON,157,109,38,14
     PUSHBUTTON      "move up",IDC_MOVE_UP_BUTTON,334,91,45,14
     PUSHBUTTON      "move down",IDC_MOVE_DOWN_BUTTON,334,109,45,14
-    CONTROL         150,IDC_STATIC,"Static",SS_BITMAP | NOT WS_VISIBLE | WS_BORDER,386,160,125,87
+    CONTROL         150,IDC_STATIC,"Static",SS_BITMAP | NOT WS_VISIBLE | 
+                    WS_BORDER,386,160,125,87
     PUSHBUTTON      "Configure...",IDC_CONFIGURE_BUTTON,334,49,78,14
 END
 
-IDD_DIALOGTEXT DIALOG  0, 0, 202, 151
-STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+IDD_DIALOGTEXT DIALOG DISCARDABLE  0, 0, 202, 151
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Text features"
 FONT 8, "MS Sans Serif"
 BEGIN
     DEFPUSHBUTTON   "OK",IDOK,15,130,50,14
     PUSHBUTTON      "Cancel",IDCANCEL,135,130,50,14
-    EDITTEXT        IDC_DIALTEXT_EDIT,5,40,190,85,ES_MULTILINE | ES_AUTOVSCROLL
+    EDITTEXT        IDC_DIALTEXT_EDIT,5,40,190,85,ES_MULTILINE | 
+                    ES_AUTOVSCROLL
     LTEXT           "ID:",IDC_STATIC,5,10,10,10
-    EDITTEXT        IDC_DIALTEXT_IDEDIT,20,10,75,12,ES_LOWERCASE | ES_AUTOHSCROLL
+    EDITTEXT        IDC_DIALTEXT_IDEDIT,20,10,75,12,ES_LOWERCASE | 
+                    ES_AUTOHSCROLL
     LTEXT           "Text:",IDC_STATIC,5,30,17,8
 END
 
 IDD_ABOUTBOX DIALOGEX 0, 0, 235, 55
-STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "About ReportAsistent"
 FONT 8, "MS Sans Serif", 0, 0, 0x1
 BEGIN
     ICON            IDR_MAINFRAME,IDC_STATIC,11,17,20,20
-    LTEXT           "ReportAsistent Version 1.0",IDC_STATIC,40,10,119,8,SS_NOPREFIX
+    LTEXT           "ReportAsistent Version 1.0",IDC_STATIC,40,10,119,8,
+                    SS_NOPREFIX
     LTEXT           "Copyright (C) 2006",IDC_STATIC,40,25,103,8
     DEFPUSHBUTTON   "OK",IDOK,178,7,50,14,WS_GROUP
 END
 
-IDR_MAINFRAME DIALOG  0, 0, 60, 15
-STYLE DS_SETFONT | WS_CHILD
+IDR_MAINFRAME DIALOG DISCARDABLE  0, 0, 60, 15
+STYLE WS_CHILD
 FONT 8, "MS Sans Serif"
 BEGIN
     LTEXT           "***",IDC_STATIC,19,1,25,11
 END
 
 IDD_GENERATE_DIALOG DIALOGEX 0, 0, 147, 60
-STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 EXSTYLE WS_EX_TOOLWINDOW
 CAPTION "Generate Report"
 FONT 8, "MS Sans Serif", 0, 0, 0x1
 BEGIN
-    DEFPUSHBUTTON   "Generate the report !",IDC_GENERATE_BUTTON,23,17,101,26,BS_MULTILINE
+    DEFPUSHBUTTON   "Generate the report !",IDC_GENERATE_BUTTON,23,17,101,26,
+                    BS_MULTILINE
 END
 
-IDD_ACTIVE_ELEMENT_DIALOG DIALOG  0, 0, 552, 326
-STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+IDD_ACTIVE_ELEMENT_DIALOG DIALOG DISCARDABLE  0, 0, 552, 326
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Active Element Configuration"
 FONT 8, "MS Sans Serif"
 BEGIN
@@ -217,32 +246,34 @@ BEGIN
     PUSHBUTTON      "&Switch tabs",IDC_SWITCH_BUTTON,5,305,50,14
 END
 
-IDD_DIALOG_PARAGRAPH DIALOG  0, 0, 122, 50
-STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+IDD_DIALOG_PARAGRAPH DIALOG DISCARDABLE  0, 0, 122, 50
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Paragraph features"
 FONT 8, "MS Sans Serif"
 BEGIN
     DEFPUSHBUTTON   "OK",IDOK,5,30,50,14
     PUSHBUTTON      "Cancel",IDCANCEL,65,30,50,14
     LTEXT           "ID:",IDC_STATIC,5,10,10,10
-    EDITTEXT        IDC_DIALPARAGRAPH_IDEDIT,20,10,75,12,ES_LOWERCASE | ES_AUTOHSCROLL
+    EDITTEXT        IDC_DIALPARAGRAPH_IDEDIT,20,10,75,12,ES_LOWERCASE | 
+                    ES_AUTOHSCROLL
 END
 
-IDD_DIALOG_CHAPTER DIALOG  0, 0, 237, 71
-STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+IDD_DIALOG_CHAPTER DIALOG DISCARDABLE  0, 0, 237, 71
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Chapter features"
 FONT 8, "MS Sans Serif"
 BEGIN
     DEFPUSHBUTTON   "OK",IDOK,20,50,50,14
     PUSHBUTTON      "Cancel",IDCANCEL,175,50,50,14
     LTEXT           "ID:",IDC_STATIC,10,10,10,10
-    EDITTEXT        IDC_DIALCHAPTER_IDEDIT,25,10,75,12,ES_LOWERCASE | ES_AUTOHSCROLL
+    EDITTEXT        IDC_DIALCHAPTER_IDEDIT,25,10,75,12,ES_LOWERCASE | 
+                    ES_AUTOHSCROLL
     LTEXT           "Title:",IDC_STATIC,5,30,16,8
     EDITTEXT        IDC_DIALCHAPTER_TITLEEDIT,25,30,205,12,ES_AUTOHSCROLL
 END
 
 IDD_PROPERTY_EDITOR DIALOGEX 0, 0, 231, 374
-STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Dialog"
 FONT 8, "MS Sans Serif", 0, 0, 0x1
 BEGIN
@@ -254,7 +285,7 @@ BEGIN
 END
 
 IDD_WAIT_DIALOG DIALOGEX 0, 0, 188, 71
-STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION
 EXSTYLE WS_EX_TOOLWINDOW
 CAPTION "Working..."
 FONT 8, "MS Sans Serif", 0, 0, 0x1
@@ -266,27 +297,30 @@ BEGIN
     PUSHBUTTON      "Kill thread!",IDC_KILL_THREAD_BUTTON,79,50,42,14
 END
 
-IDD_OPTIONS_DIALOG DIALOG  0, 0, 208, 76
-STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+IDD_OPTIONS_DIALOG DIALOG DISCARDABLE  0, 0, 208, 76
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Options"
 FONT 8, "MS Sans Serif"
 BEGIN
     DEFPUSHBUTTON   "OK",IDOK,151,7,50,14
     PUSHBUTTON      "Cancel",IDCANCEL,151,24,50,14
     GROUPBOX        "Output language",IDC_STATIC,7,7,119,45
-    CONTROL         "Czech",IDC_CZECH_RADIO,"Button",BS_AUTORADIOBUTTON,16,19,36,10
-    CONTROL         "English",IDC_ENGLISH_RADIO,"Button",BS_AUTORADIOBUTTON,16,33,39,10
+    CONTROL         "Czech",IDC_CZECH_RADIO,"Button",BS_AUTORADIOBUTTON,16,
+                    19,36,10
+    CONTROL         "English",IDC_ENGLISH_RADIO,"Button",BS_AUTORADIOBUTTON,
+                    16,33,39,10
 END
 
-IDD_DIALOG_REPORT DIALOG  0, 0, 250, 113
-STYLE DS_SETFONT | DS_MODALFRAME | DS_CONTEXTHELP | WS_POPUP | WS_CAPTION | WS_SYSMENU
+IDD_DIALOG_REPORT DIALOG DISCARDABLE  0, 0, 250, 113
+STYLE DS_MODALFRAME | DS_CONTEXTHELP | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Report features"
 FONT 8, "MS Sans Serif"
 BEGIN
     DEFPUSHBUTTON   "OK",IDOK,15,92,50,14
     PUSHBUTTON      "Cancel",IDCANCEL,175,92,50,14
     LTEXT           "ID:",IDC_STATIC,10,10,10,10
-    EDITTEXT        IDC_DIALREPORT_IDEDIT,37,7,75,12,ES_LOWERCASE | ES_AUTOHSCROLL
+    EDITTEXT        IDC_DIALREPORT_IDEDIT,37,7,75,12,ES_LOWERCASE | 
+                    ES_AUTOHSCROLL
     LTEXT           "Title:",IDC_STATIC,5,30,16,8
     EDITTEXT        IDC_DIALREPORT_TITLEEDIT,38,30,205,12,ES_AUTOHSCROLL
     EDITTEXT        IDC_DIALREPORT_SUBTITLEEDIT,38,47,205,12,ES_AUTOHSCROLL
@@ -295,61 +329,78 @@ BEGIN
     EDITTEXT        IDC_DIALREPORT_AUTHOREDIT,38,65,205,12,ES_AUTOHSCROLL
 END
 
-IDD_COMPLEX_FILTER_DIALOG DIALOGEX 0, 0, 506, 358
-STYLE DS_SETFONT | DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+IDD_COMPLEX_FILTER_DIALOG DIALOG DISCARDABLE  0, 0, 506, 358
+STYLE DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Filter"
-FONT 8, "MS Sans Serif", 0, 0, 0x1
+FONT 8, "MS Sans Serif"
 BEGIN
-    COMBOBOX        IDC_DATA_SOURCE_COMBO,373,44,46,72,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
-    LISTBOX         IDC_ATTRIBUTES_LIST,7,16,110,220,LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_HSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_DATA_SOURCE_COMBO,373,44,46,72,CBS_DROPDOWNLIST | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LISTBOX         IDC_ATTRIBUTES_LIST,7,16,110,219,LBS_NOINTEGRALHEIGHT | 
+                    WS_VSCROLL | WS_HSCROLL | WS_TABSTOP
     LTEXT           "Attributes:",IDC_STATIC,7,7,79,8
-    LISTBOX         IDC_VALUES_LIST,138,16,110,210,LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_HSCROLL | WS_TABSTOP
+    LISTBOX         IDC_VALUES_LIST,138,16,110,219,LBS_NOINTEGRALHEIGHT | 
+                    WS_VSCROLL | WS_HSCROLL | WS_TABSTOP
     LTEXT           "Values:",IDC_STATIC,138,7,79,8
     GROUPBOX        "Sort order",IDC_STATIC,257,16,77,42
-    CONTROL         "Ascending",IDC_ASCENDING_RADIO,"Button",BS_AUTORADIOBUTTON | WS_TABSTOP,270,29,49,10
-    CONTROL         "Descending",IDC_DESCENDING_RADIO,"Button",BS_AUTORADIOBUTTON | WS_TABSTOP,270,44,54,10
-    CONTROL         "Numeric sort",IDC_NUMERIC_SORT_CHECK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,270,67,55,10
-    CONTROL         "&Treshold value filter",IDC_RADIO1,"Button",BS_AUTORADIOBUTTON,270,158,129,8
-    CONTROL         "Fi&xed value filter",IDC_RADIO2,"Button",BS_AUTORADIOBUTTON,269,173,143,8
-    CONTROL         "Top &n values filter",IDC_RADIO3,"Button",BS_AUTORADIOBUTTON,270,189,125,8
+    CONTROL         "Ascending",IDC_ASCENDING_RADIO,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,270,29,49,10
+    CONTROL         "Descending",IDC_DESCENDING_RADIO,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,270,44,54,10
+    CONTROL         "Numeric sort",IDC_NUMERIC_SORT_CHECK,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,270,67,55,10
+    CONTROL         "&Treshold value filter",IDC_RADIO1,"Button",
+                    BS_AUTORADIOBUTTON,270,158,129,8
+    CONTROL         "Fi&xed value filter",IDC_RADIO2,"Button",
+                    BS_AUTORADIOBUTTON,269,173,143,8
+    CONTROL         "Top &n values filter",IDC_RADIO3,"Button",
+                    BS_AUTORADIOBUTTON,270,189,125,8
     GROUPBOX        "Filter type",IDC_STATIC,257,140,188,75
     EDITTEXT        IDC_EDIT2,336,113,130,12,ES_AUTOHSCROLL
     LTEXT           "Treshold or fixed value:",IDC_STATIC,335,101,107,8
     DEFPUSHBUTTON   "OK",IDOK,449,7,50,14
     PUSHBUTTON      "Cancel",IDCANCEL,449,25,50,14
-    CONTROL         "",IDC_RESULT_LIST,"SysListView32",LVS_REPORT | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,7,266,351,85
+    CONTROL         "",IDC_RESULT_LIST,"SysListView32",LVS_REPORT | 
+                    LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,7,266,351,85
     LTEXT           "Result:",IDC_STATIC,7,253,23,8
 END
 
-IDD_INCLUDE_DIALOG DIALOG  0, 0, 186, 95
-STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+IDD_INCLUDE_DIALOG DIALOG DISCARDABLE  0, 0, 186, 95
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Dialog"
 FONT 8, "MS Sans Serif"
 BEGIN
     DEFPUSHBUTTON   "OK",IDOK,40,75,50,14
     PUSHBUTTON      "Cancel",IDCANCEL,95,75,50,14
     LTEXT           "ID:",IDC_STATIC,10,11,10,10
-    EDITTEXT        IDC_INCLUDE_ID_EDIT,25,10,100,12,ES_LOWERCASE | ES_AUTOHSCROLL
+    EDITTEXT        IDC_INCLUDE_ID_EDIT,25,10,100,12,ES_LOWERCASE | 
+                    ES_AUTOHSCROLL
     EDITTEXT        IDC_INCLUDE_FILENAME_EDIT,10,40,115,12,ES_AUTOHSCROLL
     PUSHBUTTON      "&Browse...",IDC_BROWSE_BUTTON,130,40,45,15
     LTEXT           "Name of file to be included:",IDC_STATIC,10,30,90,10
 END
 
-IDD_FILTER_AND_CONFIG_DIALOG DIALOGEX 0, 0, 484, 332
-STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+IDD_FILTER_AND_CONFIG_DIALOG DIALOG DISCARDABLE  0, 0, 367, 276
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "&Filters && config"
-FONT 8, "MS Sans Serif", 0, 0, 0x0
+FONT 8, "MS Sans Serif"
 BEGIN
-    GROUPBOX        "Filters",IDC_STATIC,7,7,470,147
-    LTEXT           "Data source:",IDC_STATIC,7,299,42,8
-    COMBOBOX        IDC_DATA_SOURCE_COMBO,7,313,208,72,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
-    PUSHBUTTON      "Add..",IDC_ADD_FILTER_BUTTON,205,28,50,14
-    PUSHBUTTON      "Configure..",IDC_ADD_FILTER_BUTTON2,263,28,50,14
-    PUSHBUTTON      "move up",IDC_MOVE_UP_BUTTON,201,75,45,14
-    PUSHBUTTON      "move down",IDC_MOVE_DOWN_BUTTON,201,93,45,14
-    CONTROL         "",IDC_RESULT_LIST,"SysListView32",LVS_REPORT | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,7,188,351,85
-    CONTROL         "",IDC_FILTERS_LIST,"SysListView32",LVS_REPORT | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,15,21,178,108
-    LTEXT           "Result:",IDC_STATIC,7,175,23,8
+    GROUPBOX        "Filters",IDC_STATIC,5,5,353,135
+    LTEXT           "Data source:",IDC_STATIC,5,245,42,8
+    COMBOBOX        IDC_DATA_SOURCE_COMBO,5,255,208,72,CBS_DROPDOWNLIST | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "Add...",IDC_ADD_FILTER_BUTTON,290,20,50,14
+    PUSHBUTTON      "Configure...",IDC_ADD_FILTER_BUTTON2,290,40,50,14
+    PUSHBUTTON      "Move up",IDC_MOVE_UP_BUTTON,290,95,50,14
+    PUSHBUTTON      "Move down",IDC_MOVE_DOWN_BUTTON,290,116,50,14
+    CONTROL         "",IDC_RESULT_LIST,"SysListView32",LVS_REPORT | 
+                    LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,5,159,355,81
+    CONTROL         "",IDC_FILTERS_LIST,"SysListView32",LVS_REPORT | 
+                    LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,15,20,260,109
+    LTEXT           "Result:",IDC_STATIC,5,145,23,8
+    LTEXT           "ID:",IDC_STATIC,260,245,10,10
+    EDITTEXT        IDC_CF_ID_EDIT,260,255,100,12,ES_LOWERCASE | 
+                    ES_AUTOHSCROLL
 END
 
 
@@ -359,14 +410,14 @@ END
 //
 
 #ifdef APSTUDIO_INVOKED
-GUIDELINES DESIGNINFO 
+GUIDELINES DESIGNINFO MOVEABLE PURE 
 BEGIN
     IDD_SOURCES_DIALOG, DIALOG
     BEGIN
         LEFTMARGIN, 7
         RIGHTMARGIN, 412
         TOPMARGIN, 7
-        BOTTOMMARGIN, 219
+        BOTTOMMARGIN, 179
     END
 
     IDD_ATTRIBUTE_LINK_DIALOG, DIALOG
@@ -516,9 +567,9 @@ BEGIN
     IDD_FILTER_AND_CONFIG_DIALOG, DIALOG
     BEGIN
         LEFTMARGIN, 7
-        RIGHTMARGIN, 477
+        RIGHTMARGIN, 360
         TOPMARGIN, 7
-        BOTTOMMARGIN, 325
+        BOTTOMMARGIN, 269
     END
 END
 #endif    // APSTUDIO_INVOKED
@@ -531,31 +582,31 @@ END
 
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
-IDR_MAINFRAME           ICON                    "res\\ReportAsistent.ico"
-IDR_REPORTTYPE          ICON                    "res\\CSkeletonDoc.ico"
+IDR_MAINFRAME           ICON    DISCARDABLE     "res\\ReportAsistent.ico"
+IDR_REPORTTYPE          ICON    DISCARDABLE     "res\\CSkeletonDoc.ico"
 
 /////////////////////////////////////////////////////////////////////////////
 //
 // Bitmap
 //
 
-IDR_MAINFRAME           BITMAP                  "res\\Toolbar.bmp"
-IDB_CHAPTERICO          BITMAP                  "res\\Chapter.bmp"
-IDB_PARAGRAPHICO        BITMAP                  "res\\Paragraph.bmp"
-IDB_REPORTICO           BITMAP                  "res\\Report.bmp"
-IDB_TEXTICO             BITMAP                  "res\\Text.bmp"
-IDB_UNKNOWNICO          BITMAP                  "res\\unknowni.bmp"
-IDB_TRANSFORMATIONS_LOGO BITMAP                  "res\\transformations_logo.bmp"
-IDB_INCLUDEICO          BITMAP                  "res\\include.bmp"
-IDB_ATTRLINKTABLEICO    BITMAP                  "res\\attrLinkTable.bmp"
-IDB_ATTRLINKICO         BITMAP                  "res\\attrLink.bmp"
+IDR_MAINFRAME           BITMAP  MOVEABLE PURE   "res\\Toolbar.bmp"
+IDB_CHAPTERICO          BITMAP  MOVEABLE PURE   "res\\Chapter.bmp"
+IDB_PARAGRAPHICO        BITMAP  MOVEABLE PURE   "res\\Paragraph.bmp"
+IDB_REPORTICO           BITMAP  MOVEABLE PURE   "res\\Report.bmp"
+IDB_TEXTICO             BITMAP  MOVEABLE PURE   "res\\Text.bmp"
+IDB_UNKNOWNICO          BITMAP  MOVEABLE PURE   "res\\unknowni.bmp"
+IDB_TRANSFORMATIONS_LOGO BITMAP  MOVEABLE PURE   "res\\transformations_logo.bmp"
+IDB_INCLUDEICO          BITMAP  MOVEABLE PURE   "res\\include.bmp"
+IDB_ATTRLINKTABLEICO    BITMAP  MOVEABLE PURE   "res\\attrLinkTable.bmp"
+IDB_ATTRLINKICO         BITMAP  MOVEABLE PURE   "res\\attrLink.bmp"
 
 /////////////////////////////////////////////////////////////////////////////
 //
 // Toolbar
 //
 
-IDR_MAINFRAME TOOLBAR  16, 16
+IDR_MAINFRAME TOOLBAR MOVEABLE PURE  16, 16
 BEGIN
     BUTTON      ID_FILE_NEW
     BUTTON      ID_FILE_OPEN
@@ -575,7 +626,7 @@ END
 // Menu
 //
 
-IDR_MAINFRAME MENU 
+IDR_MAINFRAME MENU DISCARDABLE 
 BEGIN
     POPUP "&File"
     BEGIN
@@ -610,6 +661,7 @@ BEGIN
     BEGIN
         MENUITEM "Standard &Toolbar",           ID_VIEW_TOOLBAR
         MENUITEM "&Static Elements Toolbar",    ID_VIEW_STATICELEMENTSTOOLBAR
+
         MENUITEM "&Active Elements Toolbar",    ID_VIEW_ACTIVEELEMENTTOOLBAR
         MENUITEM "S&tatus Bar",                 ID_VIEW_STATUS_BAR
     END
@@ -629,7 +681,7 @@ END
 // Accelerator
 //
 
-IDR_MAINFRAME ACCELERATORS 
+IDR_MAINFRAME ACCELERATORS MOVEABLE PURE 
 BEGIN
     "C",            ID_EDIT_COPY,           VIRTKEY, CONTROL, NOINVERT
     "G",            ID_MMGENREP,            VIRTKEY, CONTROL, NOINVERT
@@ -652,6 +704,7 @@ BEGIN
 END
 
 
+#ifndef _MAC
 /////////////////////////////////////////////////////////////////////////////
 //
 // Version
@@ -674,13 +727,13 @@ BEGIN
     BEGIN
         BLOCK "040904B0"
         BEGIN
-            VALUE "FileDescription", "ReportAsistent MFC Application"
-            VALUE "FileVersion", "1, 0, 0, 1"
-            VALUE "InternalName", "ReportAsistent"
-            VALUE "LegalCopyright", "Copyright (C) 2006"
-            VALUE "OriginalFilename", "ReportAsistent.EXE"
-            VALUE "ProductName", "ReportAsistent Application"
-            VALUE "ProductVersion", "1, 0, 0, 1"
+            VALUE "FileDescription", "ReportAsistent MFC Application\0"
+            VALUE "FileVersion", "1, 0, 0, 1\0"
+            VALUE "InternalName", "ReportAsistent\0"
+            VALUE "LegalCopyright", "Copyright (C) 2006\0"
+            VALUE "OriginalFilename", "ReportAsistent.EXE\0"
+            VALUE "ProductName", "ReportAsistent Application\0"
+            VALUE "ProductVersion", "1, 0, 0, 1\0"
         END
     END
     BLOCK "VarFileInfo"
@@ -689,32 +742,34 @@ BEGIN
     END
 END
 
+#endif    // !_MAC
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
 // XML
 //
 
-IDR_SKELETON_DTD        XML                     "..\\xml\\skeleton_DTD.xml"
-IDR_VISUALIZATION_OPTIONS_DTD XML                     "..\\xml\\visualization_options_DTD.xml"
+IDR_SKELETON_DTD        XML     MOVEABLE PURE   "..\\xml\\skeleton_DTD.xml"
+IDR_VISUALIZATION_OPTIONS_DTD XML     MOVEABLE PURE   "..\\xml\\visualization_options_DTD.xml"
 
 /////////////////////////////////////////////////////////////////////////////
 //
 // String Table
 //
 
-STRINGTABLE 
+STRINGTABLE DISCARDABLE 
 BEGIN
     IDR_MAINFRAME           "LM - Report Asistent\n\nReport\nLM - Report Asistent Files (*.lmra)\n.lmra\nLMReportAsistent.Document\nLM - Report Asistent (report skeleton)"
 END
 
-STRINGTABLE 
+STRINGTABLE DISCARDABLE 
 BEGIN
     AFX_IDS_APP_TITLE       "ReportAsistent"
     AFX_IDS_IDLEMESSAGE     "Ready"
 END
 
-STRINGTABLE 
+STRINGTABLE DISCARDABLE 
 BEGIN
     ID_INDICATOR_EXT        "EXT"
     ID_INDICATOR_CAPS       "CAP"
@@ -724,7 +779,7 @@ BEGIN
     ID_INDICATOR_REC        "REC"
 END
 
-STRINGTABLE 
+STRINGTABLE DISCARDABLE 
 BEGIN
     ID_FILE_NEW             "Create a new document\nNew"
     ID_FILE_OPEN            "Open an existing document\nOpen"
@@ -733,13 +788,13 @@ BEGIN
     ID_FILE_SAVE_AS         "Save the active document with a new name\nSave As"
 END
 
-STRINGTABLE 
+STRINGTABLE DISCARDABLE 
 BEGIN
     ID_APP_ABOUT            "Display program information, version number and copyright\nAbout"
     ID_APP_EXIT             "Quit the application; prompts to save documents\nExit"
 END
 
-STRINGTABLE 
+STRINGTABLE DISCARDABLE 
 BEGIN
     ID_FILE_MRU_FILE1       "Open this document"
     ID_FILE_MRU_FILE2       "Open this document"
@@ -759,18 +814,18 @@ BEGIN
     ID_FILE_MRU_FILE16      "Open this document"
 END
 
-STRINGTABLE 
+STRINGTABLE DISCARDABLE 
 BEGIN
     ID_NEXT_PANE            "Switch to the next window pane\nNext Pane"
     ID_PREV_PANE            "Switch back to the previous window pane\nPrevious Pane"
 END
 
-STRINGTABLE 
+STRINGTABLE DISCARDABLE 
 BEGIN
     ID_WINDOW_SPLIT         "Split the active window into panes\nSplit"
 END
 
-STRINGTABLE 
+STRINGTABLE DISCARDABLE 
 BEGIN
     ID_EDIT_CLEAR           "Erase the selection\nErase"
     ID_EDIT_CLEAR_ALL       "Erase everything\nErase All"
@@ -785,19 +840,19 @@ BEGIN
     ID_EDIT_REDO            "Redo the previously undone action\nRedo"
 END
 
-STRINGTABLE 
+STRINGTABLE DISCARDABLE 
 BEGIN
     ID_MMGENREP             "Generate report to Microsoft Word"
     ID_MMSOURCES            "Connect sources to the report\nConnect Sources"
 END
 
-STRINGTABLE 
+STRINGTABLE DISCARDABLE 
 BEGIN
     ID_VIEW_TOOLBAR         "Show or hide the toolbar\nToggle ToolBar"
     ID_VIEW_STATUS_BAR      "Show or hide the status bar\nToggle StatusBar"
 END
 
-STRINGTABLE 
+STRINGTABLE DISCARDABLE 
 BEGIN
     ID_FILE_OPTIONS         "Show options dialog"
     ID_VIEW_STATICELEMENTTOOLBAR 
@@ -808,7 +863,7 @@ BEGIN
                             "Show or hide the toolbar of static elements\nToggle Static Elements ToolBar"
 END
 
-STRINGTABLE 
+STRINGTABLE DISCARDABLE 
 BEGIN
     AFX_IDS_SCSIZE          "Change the window size"
     AFX_IDS_SCMOVE          "Change the window position"
@@ -819,7 +874,7 @@ BEGIN
     AFX_IDS_SCCLOSE         "Close the active window and prompts to save the documents"
 END
 
-STRINGTABLE 
+STRINGTABLE DISCARDABLE 
 BEGIN
     AFX_IDS_SCRESTORE       "Restore the window to normal size"
     AFX_IDS_SCTASKLIST      "Activate Task List"
@@ -842,7 +897,7 @@ BEGIN
     IDS_OPEN_FILE_FAILED    "Failed to open file %s.\nReason: %s"
 END
 
-STRINGTABLE 
+STRINGTABLE DISCARDABLE 
 BEGIN
     IDS_AEL_TRANSFORTION_LOAD_FAILED 
                             "Active element ""%s"" failed to load transformation ""%s"" (file %s).\nParse error: %s"
@@ -855,7 +910,7 @@ BEGIN
     IDS_GENERATING_FAILED   "Generating of the report failed.\nLast processed element id: %s\nReason: %s"
 END
 
-STRINGTABLE 
+STRINGTABLE DISCARDABLE 
 BEGIN
     IDS_CONFIRM_THRAD_KILL  "Warning: Killing of working thread in the middle of its work may cause unpredictable problems in running of the application. The application could even fall down and destroy some your data or Windows resources.\n\nReally kill the thrad?"
     IDS_CONFIRM_APP_RESUME  "Warninig: Resuming the application will let the working thread still working in background. But the result of its work will be discarted. The application will run slower for a while, but you can save your work and exit it.\n\nReally resume the application?"

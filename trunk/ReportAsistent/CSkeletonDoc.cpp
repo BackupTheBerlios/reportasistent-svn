@@ -353,23 +353,38 @@ BOOL CSkeletonDoc::EditActiveElement(MSXML2::IXMLDOMElementPtr &element)
 //	CComplexFilterDialog cmpl_filter(element);
 	CAElFiltersConfigDialog filters(element);
 	CSimpleFilterDialog simple_filter(element);
+	BOOL bSimpleFilter=true;
 
 	if (NULL != m.getActiveElementInfo(m.IdentifyElement(element))->getComplexFilterTransformation())
 	{
 		sheet.AddPage(& filters);
+		bSimpleFilter=false;
 	}
 	else
 	{
 		sheet.AddPage(& simple_filter);
+		bSimpleFilter=true;
 	}
 
 	CTransformationsDialog transforms(element);
 	sheet.AddPage(& transforms);
 
 //  CWaitDialog::prefered_parent = & sheet;
+	
+	int Res = sheet.DoModal();
+	if (Res == IDOK)
+	{
+		//Zmenu Id soupnu do XMLDom stromu
+		if (bSimpleFilter) 
+			element->setAttribute("id", (LPCTSTR)((CSimpleFilterDialog*)sheet.GetPage(0))->m_SF_IdEdit );        
+		else
+			element->setAttribute("id", (LPCTSTR)((CAElFiltersConfigDialog*)sheet.GetPage(0))->m_CF_IdEdit );        
 
-	return IDOK == sheet.DoModal();
+	}
 
+	return IDOK == Res;
+
+			
 //		ConfigureFilter(element);
 }
 
