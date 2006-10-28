@@ -56,7 +56,7 @@ namespace FEPtestap_cs
     
             // prohrabani se v archivu
             BoxesHelper.VypisKrabky(0, "LISpMinerTasks.FFTTask");
-            string blabla = AP_FE4fthyp.getList(0);
+            string blabla = AP_FEferda_box.getList(0);
             Console.Write("\n\n" + blabla);
             //AP_FECF_cedent.getList(0);
             Console.WriteLine("\n\nKONEC");

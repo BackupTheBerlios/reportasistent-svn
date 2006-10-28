@@ -43,7 +43,7 @@ namespace FEplugin_cs
             
 
             bool nactena_lokalizace = false;
-            XmlDocument lokalizaceDoc = new XmlDocument(); // XML dokument s nactenou lokalizaci
+            //XmlDocument lokalizaceDoc = new XmlDocument(); // XML dokument s nactenou lokalizaci
             XmlNamespaceManager NS_manager; // NameSpace manager XML dokumentu
 
             string XPathQuery = "";     // XPath dotaz
@@ -57,7 +57,7 @@ namespace FEplugin_cs
 
                 string path = DirManager.get_FerdaBoxes_dir() + @"\boxesLocalization.en-US.xml";  // anglicka lokalizace
 
-                lokalizaceDoc.Load(path);
+                //lokalizaceDoc.Load(path);
 
                 nactena_lokalizace = true;
             }
@@ -93,26 +93,29 @@ namespace FEplugin_cs
                     // nalezeni typu krabicky
                     rBox.box_type = box.MadeInCreator.Identifier;
 
-                        // zkusim zjistit Label z lokalizace
-                        if (nactena_lokalizace)
-                        {
-                            try
-                            {
-                                // namespace manager - namespace pro dotaz
-                                NS_manager = new XmlNamespaceManager(lokalizaceDoc.NameTable);
-                                NS_manager.AddNamespace("ns", @"http://ferda.is-a-geek.net");
+                    //zjisteni lokalizovaneho typu krabicky
+                    rBox.box_type = box.MadeInCreator.Label;
 
-                                // sestaveni dotazu
-                                XPathQuery = "/ns:BoxesLocalization/ns:BoxLocalization[ns:Identifier='" +
-                                            rBox.box_type +
-                                            "']/ns:Label";
+                        //// zkusim zjistit Label z lokalizace
+                        //if (nactena_lokalizace)
+                        //{
+                        //    try
+                        //    {
+                        //        // namespace manager - namespace pro dotaz
+                        //        NS_manager = new XmlNamespaceManager(lokalizaceDoc.NameTable);
+                        //        NS_manager.AddNamespace("ns", @"http://ferda.is-a-geek.net");
 
-                                XmlNodeList resultNodeList = lokalizaceDoc.SelectNodes(XPathQuery, NS_manager);
-                                if (resultNodeList.Count > 0)
-                                    rBox.box_type = resultNodeList[0].InnerXml;
-                            }
-                            catch (Exception) { }
-                        }
+                        //        // sestaveni dotazu
+                        //        XPathQuery = "/ns:BoxesLocalization/ns:BoxLocalization[ns:Identifier='" +
+                        //                    rBox.box_type +
+                        //                    "']/ns:Label";
+
+                        //        XmlNodeList resultNodeList = lokalizaceDoc.SelectNodes(XPathQuery, NS_manager);
+                        //        if (resultNodeList.Count > 0)
+                        //            rBox.box_type = resultNodeList[0].InnerXml;
+                        //    }
+                        //    catch (Exception) { }
+                        //}
 
                     // nalezeni uzivatelskeho jmena krabicky
                     rBox.user_name = box.UserName;
