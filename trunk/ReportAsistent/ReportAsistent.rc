@@ -671,6 +671,7 @@ BEGIN
     END
     POPUP "&Help"
     BEGIN
+        MENUITEM "&Help Topics...",             ID_HLP_TOPICS
         MENUITEM "&About ReportAsistent...",    ID_APP_ABOUT
     END
 END

@@ -34,7 +34,6 @@ BEGIN_MESSAGE_MAP(CSkeletonView, CTreeView)
 	ON_COMMAND(ID_EDIT_CUT, OnEditCut)
 	ON_COMMAND(ID_MMDELETE, OnMmdelete)
 	ON_WM_CAPTURECHANGED()
-	ON_WM_HELPINFO()
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -786,8 +785,4 @@ void CSkeletonView::OnCaptureChanged(CWnd *pWnd)
 	CTreeView::OnCaptureChanged(pWnd);
 }
 
-BOOL CSkeletonView::OnHelpInfo(HELPINFO* pHelpInfo) 
-{
-	AfxMessageBox("Nazdar");
-	return CTreeView::OnHelpInfo(pHelpInfo);
-}
+

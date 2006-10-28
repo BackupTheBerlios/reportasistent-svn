@@ -6,7 +6,8 @@
 
 #if _MSC_VER > 1000
 #pragma once
-#endif // _MSC_VER > 1000
+#endif 
+// _MSC_VER > 1000
 
 #ifndef __AFXWIN_H__
 	#error include 'stdafx.h' before including this file for PCH
@@ -102,7 +103,7 @@ public:
 	afx_msg void OnMmsources();
 	afx_msg void OnFileOptions();
 	afx_msg void OnOpenWordEditor();
-	afx_msg BOOL OnHelpInfo(HELPINFO* pHelpInfo);
+	afx_msg void OnHlpTopics();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };

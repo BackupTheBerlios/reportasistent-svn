@@ -25,10 +25,7 @@ BEGIN_MESSAGE_MAP(CReportAsistentApp, CWinApp)
 	ON_COMMAND(ID_MMSOURCES, OnMmsources)
 	ON_COMMAND(ID_FILE_OPTIONS, OnFileOptions)
 	ON_COMMAND(ID_OPEN_WORD_EDITOR, OnOpenWordEditor)
-
-#if _MFC_VER < 0x0800
-  ON_WM_HELPINFO()
-#endif
+	ON_COMMAND(ID_HLP_TOPICS, OnHlpTopics)
 	//}}AFX_MSG_MAP
 	// Standard file based document commands
 	ON_COMMAND(ID_FILE_NEW, CWinApp::OnFileNew)
@@ -184,7 +181,7 @@ BOOL CReportAsistentApp::InitInstance()
 	m_pMainWnd->DragAcceptFiles();
 
 //  AfxMessageBox("4");
-		
+	
 
 	return TRUE;
 }
@@ -267,17 +264,10 @@ void CReportAsistentApp::OnOpenWordEditor()
 	m_pGeneralManager->WordManager.OpenWordEditor();
 }
 
-BOOL CReportAsistentApp::OnHelpInfo(HELPINFO* pHelpInfo) 
+//Iva: If Help Topics in the menu is chosen, this is the handler
+void CReportAsistentApp::OnHlpTopics() 
 {
-	if (pHelpInfo->iContextType == HELPINFO_WINDOW)
-	{
-		AfxMessageBox("ahoj");
-		return TRUE;/*HtmlHelp((HWND)pHelpInfo->hItemHandle,
-						"my_chm.chm::/ctrlhlp.txt",
-						HH_TP_HELP_WM_HELP,
-						(DWORD)(LPVOID)myarray) 
-				!= NULL;*/
-	}
-return TRUE;
 
+	WinHelp( 0, HELP_FINDER);//Displays the Help Topics dialog box
+	
 }

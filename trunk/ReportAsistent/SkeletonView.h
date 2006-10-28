@@ -101,7 +101,6 @@ protected:
 	afx_msg void OnEditCut();
 	afx_msg void OnMmdelete();
 	afx_msg void OnCaptureChanged(CWnd *pWnd);
-	afx_msg BOOL OnHelpInfo(HELPINFO* pHelpInfo);
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };
