@@ -460,5 +460,9 @@ SOURCE=..\XML\skeleton_DTD.xml
 
 SOURCE=..\XML\visualization_options_DTD.xml
 # End Source File
+# Begin Source File
+
+SOURCE=.\zlepseni_ovladani.txt
+# End Source File
 # End Target
 # End Project

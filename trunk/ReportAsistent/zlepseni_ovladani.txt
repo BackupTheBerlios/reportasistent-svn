@@ -1,0 +1,50 @@
+V tomto souboru jsou navrhy na zprijemneni ovladani programu LM-RA:
+
+1) editor kostry
+   -------------
+- zavedeni klavesovych zkratek pro vkladani statickych prvku do kostry, napr:
+	- Text: Ctrl+T
+	- Chapter: Ctrl+C
+	- Paragraph: Ctrl+P
+	- Attribute Link
+	- Include
+  nebo jinych, aby to nekolidovalo s jiz zavedenymi
+
+- vytvorit specialni pripad pro vkladani prvku Text do Chapter - automaticky vlozi Paragraph a text do nej Text
+
+2) Dialog vyberu transformaci pro aktivni prvky
+   --------------------------------------------
+
+- Ze sloupce "Supported transformations" do sloupce "Selected transformations" se transformace presune (krome tlacitka ">>") take:
+	- oznacena polozka stiskem Enter
+	- dvojklik na vybranou polozku
+	- moznost oznaceni vice polozek seznamu a jejich preneseni do "Selected transformations" pomoci tlacitka ">>"	
+
+- Dialog nastaveni vizualizaci se pro oznacenou polozku ve sloupci "Selected transformations" otevre (krome tlacitka "Configure..") taky:
+	- oznacena polozka stiskem Enter
+	- dvojklik na vybranou polozku
+
+- Vybrana polozka sloupce "Selected transformations" se z nej odstrani (krome tlacitka "<<") taky:
+	- oznacena polozka stiskem klavesy "Delete"
+
+- Tlacitko Configure by mohlo byt zasednute a aktivovat se pouze je-li oznacena nejaka polozka ve sloupci "Selected transformations"
+
+- zmena poradi polozek v seznamu "Selected transformations" by se mohla (krome tlacitek "move up" a "move down") provadet uchopenim polozky a pretahnuti mysi (jestli neni moc HC)
+
+3) Attribute Link Table dialog
+   ---------------------------
+
+- u operaci vyberu a premisteni polozek z "Element attributes" do "Selected attributes" a odstranovani ze "Selected attributes" plati totez jako v bode 2)
+
+
+
+==========================================================
+NALEZENE BUGY V OVLADACICH PRVCICH
+----------------------------------
+
+1) v Attribute Link dialogu - nepamatuje si naposledy vybranou polozku 
+			    - pridat refresh obsahu pri otevreni dialogu
+
+2) V editoru kostry - pri kopirovani jednoho odstavce a vlozeni hned za sebe se generuji v opacnem poradi, nez jsou v kostre.
+
+3) v editoru kostry - nefunguje klavesova zkratka (Ctrl+M) na otevreni dialogu Data Sources
