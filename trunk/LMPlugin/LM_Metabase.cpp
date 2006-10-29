@@ -5,62 +5,57 @@
 #include "math.h"
 #include "Faktorial.h"
 
-CString cedent_format (TLitArray & cedent)
+CString format_cedent (TLitArray & antecedent)
 {
+	int i;
+	int cnt;
 	CString xml_string = "";
 	CString first;
 	CString last;
-	int cnt;
-	int i;
-	for (i = 0; i < cedent.GetSize (); i++)
-	{
-		if ((i == 0) || (cedent.GetAt (i).quant != cedent.GetAt (i - 1).quant))
-			//new literal
-		{
-			xml_string = xml_string + "<ti_literal  id=\"" + cedent.GetAt (i).id +
-				"\"  quant=\"" + cedent.GetAt (i).quant +
-				"\"  value=\"";
-			cnt = 0;
-			if (cedent.GetAt (i).coef_type == "int")
-			{
-				first = cedent.GetAt (i).value;
-				last = first;
-			}
-		}
+	for (i = 0; i < antecedent.GetSize (); i++) 
+	{ 
+		if ((i == 0) || (antecedent.GetAt (i).quant != antecedent.GetAt (i - 1).quant)) 
+		{ 
+			xml_string = xml_string + "<ti_literal  id=\"" + antecedent.GetAt (i).id + 
+				"\"  quant=\"" + antecedent.GetAt (i).quant + 
+				"\"  value=\""; 
+			cnt = 0; 
+			if (antecedent.GetAt (i).coef_type == "int") 
+			{ 
+				first = antecedent.GetAt (i).value; 
+				last = first; 
+			} 
+		} 
+				
+		cnt++; 
+		if (antecedent.GetAt (i).coef_type == "int") 
+		{ 
+			last = antecedent.GetAt (i).value; 
+		} 
+		else if (	antecedent.GetAt (i).coef_type == "subset" 
+					|| 
+					antecedent.GetAt (i).coef_type == "one") 
+			xml_string = xml_string + antecedent.GetAt (i).value; 
 		
 		
 		
-		cnt++;
-		if (cedent.GetAt (i).coef_type == "int")
-		{
-			last = cedent.GetAt (i).value;
-		}
-		else if (	cedent.GetAt (i).coef_type == "subset"
-					||
-					cedent.GetAt (i).coef_type == "one")
-			xml_string = xml_string + cedent.GetAt (i).value;
-		
-		
-		
-		if ((i < cedent.GetSize () - 1)
-			&&
-			(cedent.GetAt (i).quant == cedent.GetAt (i + 1).quant))
-			//the next value belongs to the same literal
-		{
-			if (	cedent.GetAt (i).coef_type == "subset"
-					||
-					cedent.GetAt (i).coef_type == "one")
-				xml_string += ", ";
-		}
-		else
-			//the next value belongs to the new literal
-		{
-			if (cedent.GetAt (i).coef_type == "int")
-			{
-				if (cnt == 1) xml_string += first;
-				else if (cnt == 2) xml_string = xml_string + first + ", " + last;
-				else xml_string = xml_string + first + ".." + last;
-			}
+		if ((i < antecedent.GetSize () - 1) 
+			&& 
+			(antecedent.GetAt (i).quant == antecedent.GetAt (i + 1).quant))
+		{ 
+			if (	antecedent.GetAt (i).coef_type == "subset" 
+					|| 
+					antecedent.GetAt (i).coef_type == "one") 
+				xml_string += ", "; 
+		} 
+		else 
+		{ 
+			if (antecedent.GetAt (i).coef_type == "int") 
+			{ 
+				if (cnt == 1) xml_string += first; 
+				else if (cnt == 2) xml_string = xml_string + first + ", " + last; 
+				else xml_string = xml_string + first + ".." + last; 
+			} 
 			xml_string += "\"/> ";
 		}
 	}
@@ -914,6 +909,8 @@ double Hyp_4ft_Meta::get_up_bnd_eq ()
 CString Hyp_SD4ft_Meta::xml_convert ()
 {
 	CString xml_string;
+	CString first;
+	CString last;
 
 	db_name.Replace ("&", "&amp;");
 	matrix_name.Replace ("&", "&amp;");
@@ -987,94 +984,27 @@ CString Hyp_SD4ft_Meta::xml_convert ()
 	//beginning of ti_cedent elements
 	//Antecedent
 	xml_string = xml_string + "<ti_cedent  id=\"" + ant_id + "\"  type=\"Antecedent\"> ";
-//	xml_string += cedent_format (antecedent);
-	int i;
-	for (i = 0; i < antecedent.GetSize (); i++)
-	{
-		if ((i == 0) || (antecedent.GetAt (i).quant != antecedent.GetAt (i - 1).quant))
-			xml_string = xml_string + "<ti_literal  id=\"" + antecedent.GetAt (i).id +
-				"\"  quant=\"" + antecedent.GetAt (i).quant +
-				"\"  value=\"";
-		xml_string = xml_string + antecedent.GetAt (i).value;
-		if ((i < antecedent.GetSize () - 1)
-			&&
-			(antecedent.GetAt (i).quant == antecedent.GetAt (i + 1).quant))
-			xml_string += ", ";
-		else
-			xml_string += "\"/> ";
-	}
+	xml_string += format_cedent (antecedent);
 	xml_string = xml_string + "</ti_cedent> ";
 	
 	//Succedent
 	xml_string = xml_string + "<ti_cedent  id=\"" + suc_id + "\"  type=\"Succedent\"> ";
-    for (i = 0; i < succedent.GetSize (); i++)
-	{
-		if ((i == 0) || (succedent.GetAt (i).quant != succedent.GetAt (i - 1).quant))
-			xml_string = xml_string + "<ti_literal  id=\"" + succedent.GetAt (i).id +
-				"\"  quant=\"" + succedent.GetAt (i).quant +
-				"\"  value=\"";
-		xml_string = xml_string + succedent.GetAt (i).value;
-		if ((i < succedent.GetSize () - 1)
-			&&
-			(succedent.GetAt (i).quant == succedent.GetAt (i + 1).quant))
-			xml_string += ", ";
-		else
-			xml_string += "\"/> ";
-	}
+	xml_string += format_cedent (succedent);
 	xml_string = xml_string + "</ti_cedent> ";
-	
+
 	//Condition
 	xml_string = xml_string + "<ti_cedent  id=\"" + con_id + "\"  type=\"Condition\"> ";
-    for (i = 0; i < condition.GetSize (); i++)
-	{
-		if ((i == 0) || (condition.GetAt (i).quant != condition.GetAt (i - 1).quant))
-			xml_string = xml_string + "<ti_literal  id=\"" + condition.GetAt (i).id +
-				"\"  quant=\"" + condition.GetAt (i).quant +
-				"\"  value=\"";
-		xml_string = xml_string + condition.GetAt (i).value;
-		if ((i < condition.GetSize () - 1)
-			&&
-			(condition.GetAt (i).quant == condition.GetAt (i + 1).quant))
-			xml_string += ", ";
-		else
-			xml_string += "\"/> ";
-	}
+	xml_string += format_cedent (condition);
 	xml_string = xml_string + "</ti_cedent> ";
 
 	//First set
 	xml_string = xml_string + "<ti_cedent  id=\"" + set1_id + "\"  type=\"First set\"> ";
-    for (i = 0; i < set1.GetSize (); i++)
-	{
-		if ((i == 0) || (set1.GetAt (i).quant != set1.GetAt (i - 1).quant))
-			xml_string = xml_string + "<ti_literal  id=\"" + set1.GetAt (i).id +
-				"\"  quant=\"" + set1.GetAt (i).quant +
-				"\"  value=\"";
-		xml_string = xml_string + set1.GetAt (i).value;
-		if ((i < set1.GetSize () - 1)
-			&&
-			(set1.GetAt (i).quant == set1.GetAt (i + 1).quant))
-			xml_string += ", ";
-		else
-			xml_string += "\"/> ";
-	}
+	xml_string += format_cedent (set1);
 	xml_string = xml_string + "</ti_cedent> ";
 
 	//Second set
 	xml_string = xml_string + "<ti_cedent  id=\"" + set2_id + "\"  type=\"Second set\"> ";
-    for (i = 0; i < set2.GetSize (); i++)
-	{
-		if ((i == 0) || (set2.GetAt (i).quant != set2.GetAt (i - 1).quant))
-			xml_string = xml_string + "<ti_literal  id=\"" + set2.GetAt (i).id +
-				"\"  quant=\"" + set2.GetAt (i).quant +
-				"\"  value=\"";
-		xml_string = xml_string + set2.GetAt (i).value;
-		if ((i < set2.GetSize () - 1)
-			&&
-			(set2.GetAt (i).quant == set2.GetAt (i + 1).quant))
-			xml_string += ", ";
-		else
-			xml_string += "\"/> ";
-	}
+	xml_string += format_cedent (set2);
 	xml_string = xml_string + "</ti_cedent> ";
 
 	return xml_string;

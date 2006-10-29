@@ -2217,7 +2217,7 @@ CString fLMSD4fthyp(void * hSource)
 				if (neg_lit) neg_lit_smbl = "¬"; else neg_lit_smbl = "";
 				x.quant = neg_lit_smbl + q_name;
 				x.value = q_value;
-				x.coef_type = q_coef_type;
+				x.coef_type = q_type;
 				pthyp->antecedent.Add (x);
 			}
 			else if (ced_name == "Succedent")
@@ -2230,7 +2230,7 @@ CString fLMSD4fthyp(void * hSource)
 				if (neg_lit) neg_lit_smbl = "¬"; else neg_lit_smbl = "";
 				x.quant = neg_lit_smbl + q_name;
 				x.value = q_value;
-				x.coef_type = q_coef_type;
+				x.coef_type = q_type;
 				pthyp->succedent.Add (x);
 			}
 			else if (ced_name == "Condition")
@@ -2243,7 +2243,7 @@ CString fLMSD4fthyp(void * hSource)
 				if (neg_lit) neg_lit_smbl = "¬"; else neg_lit_smbl = "";
 				x.quant = neg_lit_smbl + q_name;
 				x.value = q_value;
-				x.coef_type = q_coef_type;
+				x.coef_type = q_type;
 				pthyp->condition.Add (x);
 			}
 			else if (ced_name == "First set")
@@ -2256,7 +2256,7 @@ CString fLMSD4fthyp(void * hSource)
 				if (neg_lit) neg_lit_smbl = "¬"; else neg_lit_smbl = "";
 				x.quant = neg_lit_smbl + q_name;
 				x.value = q_value;
-				x.coef_type = q_coef_type;
+				x.coef_type = q_type;
 				pthyp->set1.Add (x);
 			}
 			else if (ced_name == "Second set")
@@ -2269,7 +2269,7 @@ CString fLMSD4fthyp(void * hSource)
 				if (neg_lit) neg_lit_smbl = "¬"; else neg_lit_smbl = "";
 				x.quant = neg_lit_smbl + q_name;
 				x.value = q_value;
-				x.coef_type = q_coef_type;
+				x.coef_type = q_type;
 				pthyp->set2.Add (x);
 			}
 			else return "";//error
