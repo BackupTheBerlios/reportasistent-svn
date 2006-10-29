@@ -26,6 +26,11 @@
 #define LENGTH_TREE_ITEM_NAME 40	//dedek: prepsal z 10 na 15, 40
 #endif
 
+//IDs from Help file ReportAsistent.hlp
+#if !defined IDH_CONTENTS
+#define IDH_CONTENTS 77001
+#endif
+
 
 
 #include "ElementManager.h"

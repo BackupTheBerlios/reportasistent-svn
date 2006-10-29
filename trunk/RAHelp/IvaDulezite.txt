@@ -1,0 +1,1 @@
+Pokud kdokoliv zmeni helpfile, musi ho prekopirovat do adresare ReportAsistent a prejmenovat ho na ReportAsistent.hlp, aby se tenhle helpfile spoustel z aplikace.

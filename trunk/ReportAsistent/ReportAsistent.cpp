@@ -30,6 +30,8 @@ BEGIN_MESSAGE_MAP(CReportAsistentApp, CWinApp)
 	// Standard file based document commands
 	ON_COMMAND(ID_FILE_NEW, CWinApp::OnFileNew)
 	ON_COMMAND(ID_FILE_OPEN, CWinApp::OnFileOpen)
+
+
 END_MESSAGE_MAP()
 
 
@@ -268,6 +270,14 @@ void CReportAsistentApp::OnOpenWordEditor()
 void CReportAsistentApp::OnHlpTopics() 
 {
 
-	WinHelp( 0, HELP_FINDER);//Displays the Help Topics dialog box
+	//WinHelp((unsigned long)"What", HELP_KEY);//Displays Help Topics dialog box, according to "key word"
+	WinHelp(IDH_CONTENTS, HELP_CONTEXT);//Displays Help Topics dialog box, according to "mapped ID"
 	
 }
+
+
+
+//DEL void CReportAsistentApp::OnHelp() 
+//DEL {
+//DEL 	WinHelp(IDH_CONTENTS, HELP_CONTEXT);//Displays Help Topics dialog box, according to "mapped ID"	
+//DEL }

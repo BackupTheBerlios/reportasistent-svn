@@ -25,7 +25,9 @@ public:
 // Overrides
 	// ClassWizard generated virtual function overrides
 	//{{AFX_VIRTUAL(CMainFrame)
+	public:
 	virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
+	virtual void WinHelp(DWORD dwData, UINT nCmd = HELP_CONTEXT);
 	//}}AFX_VIRTUAL
 
 // Implementation

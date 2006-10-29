@@ -25,6 +25,11 @@ BEGIN_MESSAGE_MAP(CMainFrame, CFrameWnd)
 	ON_COMMAND(ID_VIEW_ACTIVEELEMENTTOOLBAR, OnViewActiveelementtoolbar)
 	ON_UPDATE_COMMAND_UI(ID_VIEW_ACTIVEELEMENTTOOLBAR, OnUpdateViewActiveelementtoolbar)
 	//}}AFX_MSG_MAP
+   ON_COMMAND(ID_HELP_FINDER, CFrameWnd::OnHelpFinder)
+   ON_COMMAND(ID_HELP, CFrameWnd::OnHelp)
+   ON_COMMAND(ID_CONTEXT_HELP, CFrameWnd::OnContextHelp)
+   ON_COMMAND(ID_DEFAULT_HELP, CFrameWnd::OnHelpFinder)
+
 END_MESSAGE_MAP()
 
 static UINT indicators[] =
@@ -438,4 +443,17 @@ void CMainFrame::OnUpdateViewActiveelementtoolbar(CCmdUI* pCmdUI)
 	TBCtrl.AddButtons(nBut //+1
 						, TBButtons );
 */
+
+
+void CMainFrame::WinHelp(DWORD dwData, UINT nCmd) 
+{
+	if (nCmd == HELP_CONTEXT)
+	{
+		CString Pom;
+		Pom.Format("HELP_CONTEXT , %d", dwData) ;
+		AfxMessageBox( (LPCTSTR)Pom);
+	} 
+
+	CFrameWnd::WinHelp(dwData, nCmd);
+}
 

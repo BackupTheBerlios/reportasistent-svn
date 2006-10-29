@@ -7,5 +7,8 @@ HLP=Help.hlp
 
 [FILES]
 Topics.rtf
-Error messages.rtf
-Visualizations.rtf
+
+[MAP]
+IDH_CONNECTSOURCE=77003               ; Page about Connection of source metabase
+IDH_CONTENTS=77001          ; Top page of help
+IDH_INSTAL=77002        ; Page about instalation of Report Asistent
