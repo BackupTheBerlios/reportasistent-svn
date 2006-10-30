@@ -104,18 +104,18 @@ namespace FEplugin_cs
                         // hodnoty kvantifikatoru - prvni mnozina
                         try
                         {
-                            rHyp.sum = CT.SumOfValues;
-                            rHyp.min = CT.MinValue;
-                            rHyp.max = CT.MaxValue;
-                            rHyp.chi_sq = TwoDimensionalContingencyTable.ChiSquare(CT);
-                            rHyp.fnc_s = TwoDimensionalContingencyTable.SumOfRowMaximumsValue(CT);
-                            rHyp.fnc_r = TwoDimensionalContingencyTable.MinOfRowMaximumsValue(CT);
-                            rHyp.h_c = CT.MarginalColumnEntropy;
-                            rHyp.h_r = CT.MarginalRowEntropy;
-                            rHyp.h_c_r = TwoDimensionalContingencyTable.ConditionalCREntropyValue(CT);
-                            rHyp.mi = CT.MutualInformation;
+                            rHyp.sum = CT.SumOfValues.ToString();
+                            rHyp.min = CT.MinValue.ToString();
+                            rHyp.max = CT.MaxValue.ToString();
+                            rHyp.chi_sq = TwoDimensionalContingencyTable.ChiSquare(CT).ToString();
+                            rHyp.fnc_s = TwoDimensionalContingencyTable.SumOfRowMaximumsValue(CT).ToString();
+                            rHyp.fnc_r = TwoDimensionalContingencyTable.MinOfRowMaximumsValue(CT).ToString();
+                            rHyp.h_c = CT.MarginalColumnEntropy.ToString();
+                            rHyp.h_r = CT.MarginalRowEntropy.ToString();
+                            rHyp.h_c_r = TwoDimensionalContingencyTable.ConditionalCREntropyValue(CT).ToString();
+                            rHyp.mi = CT.MutualInformation.ToString();
                             //rHyp.aic = CT.???;  TODO
-                            rHyp.kend = TwoDimensionalContingencyTable.KendalValue(CT);
+                            rHyp.kend = TwoDimensionalContingencyTable.KendalValue(CT).ToString();
                         }
                         catch (System.Exception e) // TODO: Ferda ma chyby ve vypoctech -> opravit! 
                         {
@@ -192,8 +192,14 @@ namespace FEplugin_cs
                                 if (lit.negation)
                                     l.quant = "¬";
                                 l.quant += lit.literalName;
+                                int counter = 0;
                                 foreach (string s in lit.categoriesNames)
+                                {
+                                    if (counter > 0)
+                                        l.value += ",";
                                     l.value += s;
+                                    counter++;
+                                }
                                 Lit_c.Add(l);
                             }
                         }
@@ -257,18 +263,18 @@ namespace FEplugin_cs
 
         public int[][] Tab; // kontingencni tabulka
 
-        public double sum = 0;
-        public double min = 0;
-        public double max = 0;
-        public double chi_sq = 0;
-        public double fnc_s = 0;
-        public double fnc_r = 0;
-        public double h_c = 0;
-        public double h_r = 0;
-        public double h_c_r = 0;
-        public double mi = 0;
-        public double aic = 0;
-        public double kend = 0;
+        public string sum = "unknown";
+        public string min = "unknown";
+        public string max = "unknown";
+        public string chi_sq = "unknown";
+        public string fnc_s = "unknown";
+        public string fnc_r = "unknown";
+        public string h_c = "unknown";
+        public string h_r = "unknown";
+        public string h_c_r = "unknown";
+        public string mi = "unknown";
+        public string aic = "unknown";
+        public string kend = "unknown";
 
         public string row_attributes = "";  // reference (Antecedent)
         public string column_attributes = "";  // reference (Succedent)
@@ -285,12 +291,12 @@ namespace FEplugin_cs
             XML += "<hyp_kl id=\"" + id + "\" db_name=\"" + db_name + "\" matrix_name=\"" + matrix_name +
                    "\" task_name=\"" + task_name +
                 // hodnoty kvantifikatoru
-                   "\" sum=\"" + sum.ToString() + "\" min=\"" + min.ToString() + "\" max=\"" + max.ToString() +
-                   "\" chi_sq=\"" + chi_sq.ToString() + "\" fnc_s=\"" + fnc_s.ToString() +
-                   "\" fnc_r=\"" + fnc_r.ToString() + "\" h_c=\"" + h_c.ToString() +
-                   "\" h_r=\"" + h_r.ToString() + "\" h_c_r=\"" + h_c_r.ToString() +
-                   "\" mi=\"" + mi.ToString() + "\" aic=\"" + aic.ToString() +
-                   "\" kend=\"" + kend.ToString() +
+                   "\" sum=\"" + sum + "\" min=\"" + min + "\" max=\"" + max +
+                   "\" chi_sq=\"" + chi_sq + "\" fnc_s=\"" + fnc_s +
+                   "\" fnc_r=\"" + fnc_r + "\" h_c=\"" + h_c +
+                   "\" h_r=\"" + h_r + "\" h_c_r=\"" + h_c_r +
+                   "\" mi=\"" + mi + "\" aic=\"" + aic +
+                   "\" kend=\"" + kend +
                 // cedenty
                    "\" row_attributes=\"" + row_attributes + "\" column_attributes=\"" + column_attributes +
                    "\" condition=\"" + condition + "\">";

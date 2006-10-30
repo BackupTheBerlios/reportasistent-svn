@@ -101,22 +101,24 @@ namespace FEplugin_cs
                         rHyp.succedent = "suc" + rHyp.id;
                         rHyp.condition = "con" + rHyp.id;
                         FourFoldContingencyTable FFT = new FourFoldContingencyTable(HypList[i].quantifierSetting.firstContingencyTableRows);
-                        rHyp.a = FFT.A;
-                        rHyp.b = FFT.B;
-                        rHyp.c = FFT.C;
-                        rHyp.d = FFT.D;
+                        rHyp.a = FFT.A.ToString();
+                        rHyp.b = FFT.B.ToString();
+                        rHyp.c = FFT.C.ToString();
+                        rHyp.d = FFT.D.ToString();
                         // hodnoty kvantifikatoru
-                        rHyp.conf = FourFoldContingencyTable.FoundedImplicationValue(FFT);  // Founded implication (a/a+b)
-                        rHyp.d_conf = FourFoldContingencyTable.DoubleFoundedImplicationValue(FFT); // Double Founded implication (a/a+b+c)
-                        rHyp.e_conf = FourFoldContingencyTable.FoundedEquivalenceValue(FFT);   // Founded Equivalence (a+d)/(a+b+c+d)  ??? BUG ve Ferdovi
-                        rHyp.support = FourFoldContingencyTable.BaseCeilValue(FFT); //???  Support (a/a+b+c+d)
-                        rHyp.avg_diff = FourFoldContingencyTable.AboveAverageImplicationValue(FFT) - 1; // Averafe difference ((a*(a+b+c+d))/((a+b)*(a+c)) -1)
+                        rHyp.conf = FourFoldContingencyTable.FoundedImplicationValue(FFT).ToString();  // Founded implication (a/a+b)
+                        rHyp.d_conf = FourFoldContingencyTable.DoubleFoundedImplicationValue(FFT).ToString(); // Double Founded implication (a/a+b+c)
+                        rHyp.e_conf = FourFoldContingencyTable.FoundedEquivalenceValue(FFT).ToString();   // Founded Equivalence (a+d)/(a+b+c+d)  ??? BUG ve Ferdovi
+                        rHyp.support = FourFoldContingencyTable.BaseCeilValue(FFT).ToString(); //???  Support (a/a+b+c+d)
+                            // pomocna promenna
+                        double avg_diff = FourFoldContingencyTable.AboveAverageImplicationValue(FFT) - 1; // Averafe difference ((a*(a+b+c+d))/((a+b)*(a+c)) -1)
+                        rHyp.avg_diff = avg_diff.ToString();
                         // tyto hodnoty se vypocitavaji (mozna zbytecne?)
-                        rHyp.fisher = FFT.FisherValue();
-                        rHyp.chi_sq = FFT.ChiSquareValue();
+                        rHyp.fisher = FFT.FisherValue().ToString();
+                        rHyp.chi_sq = FFT.ChiSquareValue().ToString();
 
                         #endregion
-                        // TODO - dodelat vypocty, ostatni ciselne polozky (hodnoty nekterych kvantifikatoru atd.)
+                        
 
                         #region element ti_cedent (Antecedent)
 
@@ -135,8 +137,14 @@ namespace FEplugin_cs
                                 if (lit.negation)
                                     l.quant = "¬";
                                 l.quant += lit.literalName;
+                                int counter = 0;
                                 foreach (string s in lit.categoriesNames)
+                                {
+                                    if (counter > 0)
+                                        l.value += ",";
                                     l.value += s;
+                                    counter++;
+                                }
                                 Lit_a.Add(l);
                             }
                         }
@@ -159,8 +167,14 @@ namespace FEplugin_cs
                                 if (lit.negation)
                                     l.quant = "¬";
                                 l.quant += lit.literalName;
+                                int counter = 0;
                                 foreach (string s in lit.categoriesNames)
+                                {
+                                    if (counter > 0)
+                                        l.value += ",";
                                     l.value += s;
+                                    counter++;
+                                }
                                 Lit_s.Add(l);
                             }
                         }
@@ -183,8 +197,14 @@ namespace FEplugin_cs
                                 if (lit.negation)
                                     l.quant = "¬";
                                 l.quant += lit.literalName;
+                                int counter = 0;
                                 foreach (string s in lit.categoriesNames)
+                                {
+                                    if (counter > 0)
+                                        l.value += ",";
                                     l.value += s;
+                                    counter++;
+                                }
                                 Lit_c.Add(l);
                             }
                         }
@@ -240,24 +260,24 @@ namespace FEplugin_cs
         public string db_name = "";   // jmeno databaze
         public string matrix_name = ""; // jmeno datove matice
         public string task_name = "";   // jmeno ulohy
-        public double a = 0;
-        public double b = 0;
-        public double c = 0;
-        public double d = 0;
-        public double conf = 0;
-        public double d_conf = 0;
-        public double e_conf = 0;
-        public double support = 0;
-        public double completness = 0;
-        public double avg_diff = 0;
-        public double low_bnd_imp = 0;
-        public double up_bnd_imp = 0;
-        public double low_bnd_dbl_imp = 0;
-        public double up_bnd_dbl_imp = 0;
-        public double low_bnd_eq = 0;
-        public double up_bnd_eq = 0;
-        public double fisher = 0;
-        public double chi_sq = 0;
+        public string a = "unknown";
+        public string b = "unknown";
+        public string c = "unknown";
+        public string d = "unknown";
+        public string conf = "unknown";
+        public string d_conf = "unknown";
+        public string e_conf = "unknown";
+        public string support = "unknown";
+        public string completness = "unknown";
+        public string avg_diff = "unknown";
+        public string low_bnd_imp = "unknown";
+        public string up_bnd_imp = "unknown";
+        public string low_bnd_dbl_imp = "unknown";
+        public string up_bnd_dbl_imp = "unknown";
+        public string low_bnd_eq = "unknown";
+        public string up_bnd_eq = "unknown";
+        public string fisher = "unknown";
+        public string chi_sq = "unknown";
         public string antecedent = "";  // reference
         public string succedent = "";   // reference
         public string condition = "";   // reference
@@ -270,15 +290,15 @@ namespace FEplugin_cs
             string XML = "";
 
             XML += "<hyp_4ft id=\"" + id + "\" db_name=\"" + db_name + "\" matrix_name=\"" + matrix_name +
-                   "\" task_name=\"" + task_name + "\" a=\"" + a.ToString() + "\" b=\"" + b.ToString() +
-                   "\" c=\"" + c.ToString() + "\" d=\"" + d.ToString() + "\" conf=\"" + conf.ToString() +
-                   "\" d_conf=\"" + d_conf.ToString() + "\" e_conf=\"" + e_conf.ToString() +
-                   "\" support=\"" + support.ToString() + "\" completeness=\"" + completness.ToString() +
-                   "\" avg_diff=\"" + avg_diff.ToString() + "\" low_bnd_imp=\"" + low_bnd_imp.ToString() +
-                   "\" up_bnd_imp=\"" + up_bnd_imp.ToString() + "\" low_bnd_dbl_imp=\"" + low_bnd_dbl_imp.ToString() +
-                   "\" up_bnd_dbl_imp=\"" + up_bnd_dbl_imp.ToString() + "\" low_bnd_eq=\"" + low_bnd_eq.ToString() +
-                   "\" up_bnd_eq=\"" + up_bnd_eq.ToString() + "\" fisher=\"" + fisher.ToString() +
-                   "\" chi_sq=\"" + chi_sq.ToString() + "\" antecedent=\"" + antecedent +
+                   "\" task_name=\"" + task_name + "\" a=\"" + a + "\" b=\"" + b +
+                   "\" c=\"" + c + "\" d=\"" + d + "\" conf=\"" + conf +
+                   "\" d_conf=\"" + d_conf + "\" e_conf=\"" + e_conf +
+                   "\" support=\"" + support + "\" completeness=\"" + completness +
+                   "\" avg_diff=\"" + avg_diff + "\" low_bnd_imp=\"" + low_bnd_imp +
+                   "\" up_bnd_imp=\"" + up_bnd_imp + "\" low_bnd_dbl_imp=\"" + low_bnd_dbl_imp +
+                   "\" up_bnd_dbl_imp=\"" + up_bnd_dbl_imp + "\" low_bnd_eq=\"" + low_bnd_eq +
+                   "\" up_bnd_eq=\"" + up_bnd_eq + "\" fisher=\"" + fisher +
+                   "\" chi_sq=\"" + chi_sq + "\" antecedent=\"" + antecedent +
                    "\" succedent=\"" + succedent + "\" condition=\"" + condition + "\"/>";
             return XML;
 

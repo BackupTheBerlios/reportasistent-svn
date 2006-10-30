@@ -118,18 +118,18 @@ namespace FEplugin_cs
                         // hodnoty kvantifikatoru - set1
                         try
                         {
-                            rHyp.sum1 = CT1.SumOfValues;
-                            rHyp.min1 = CT1.MinValue;
-                            rHyp.max1 = CT1.MaxValue;
-                            rHyp.v1 = CT1.VariationRatio;
-                            rHyp.nom_var1 = CT1.NominalVariation;
-                            rHyp.dor_var1 = CT1.DiscreteOrdinaryVariation;
-                            rHyp.avg_a1 = CT1.ArithmeticAverage;
-                            rHyp.avg_g1 = CT1.GeometricAverage;
-                            rHyp.var1 = CT1.Variance;
-                            rHyp.st_dev1 = CT1.StandardDeviation;
-                            rHyp.skew1 = CT1.Skewness;
-                            rHyp.asym1 = CT1.Asymentry;
+                            rHyp.sum1 = CT1.SumOfValues.ToString();
+                            rHyp.min1 = CT1.MinValue.ToString();
+                            rHyp.max1 = CT1.MaxValue.ToString();
+                            rHyp.v1 = CT1.VariationRatio.ToString();
+                            rHyp.nom_var1 = CT1.NominalVariation.ToString();
+                            rHyp.dor_var1 = CT1.DiscreteOrdinaryVariation.ToString();
+                            rHyp.avg_a1 = CT1.ArithmeticAverage.ToString();
+                            rHyp.avg_g1 = CT1.GeometricAverage.ToString();
+                            rHyp.var1 = CT1.Variance.ToString();
+                            rHyp.st_dev1 = CT1.StandardDeviation.ToString();
+                            rHyp.skew1 = CT1.Skewness.ToString();
+                            rHyp.asym1 = CT1.Asymentry.ToString();
                         }
                         catch (System.Exception e) // TODO: Ferda ma chyby ve vypoctech -> opravit! 
                         {
@@ -139,18 +139,18 @@ namespace FEplugin_cs
                         // hodnoty kvantifikatoru - set2
                         try
                         {
-                            rHyp.sum2 = CT2.SumOfValues;
-                            rHyp.min2 = CT2.MinValue;
-                            rHyp.max2 = CT2.MaxValue;
-                            rHyp.v2 = CT2.VariationRatio;
-                            rHyp.nom_var2 = CT2.NominalVariation;
-                            rHyp.dor_var2 = CT2.DiscreteOrdinaryVariation;
-                            rHyp.avg_a2 = CT2.ArithmeticAverage;
-                            rHyp.avg_g2 = CT2.GeometricAverage;
-                            rHyp.var2 = CT2.Variance;
-                            rHyp.st_dev2 = CT2.StandardDeviation;
-                            rHyp.skew2 = CT2.Skewness;
-                            rHyp.asym2 = CT2.Asymentry;
+                            rHyp.sum2 = CT2.SumOfValues.ToString();
+                            rHyp.min2 = CT2.MinValue.ToString();
+                            rHyp.max2 = CT2.MaxValue.ToString();
+                            rHyp.v2 = CT2.VariationRatio.ToString();
+                            rHyp.nom_var2 = CT2.NominalVariation.ToString();
+                            rHyp.dor_var2 = CT2.DiscreteOrdinaryVariation.ToString();
+                            rHyp.avg_a2 = CT2.ArithmeticAverage.ToString();
+                            rHyp.avg_g2 = CT2.GeometricAverage.ToString();
+                            rHyp.var2 = CT2.Variance.ToString();
+                            rHyp.st_dev2 = CT2.StandardDeviation.ToString();
+                            rHyp.skew2 = CT2.Skewness.ToString();
+                            rHyp.asym2 = CT2.Asymentry.ToString();
                         }
                         catch (System.Exception e) // TODO: Ferda ma chyby ve vypoctech -> opravit! 
                         {
@@ -160,12 +160,12 @@ namespace FEplugin_cs
                         // hodnoty kvantifikatoru - rozdil set1 a set2
                         try
                         {
-                            rHyp.da_sum = OneDimensionalContingencyTable.Value<OneDimensionalContingencyTable>(sum_delegat, CT1, CT2, OperationModeEnum.DifferencesOfAbsoluteFrequencies);
-                            rHyp.da_min = OneDimensionalContingencyTable.Value<OneDimensionalContingencyTable>(min_delegat, CT1, CT2, OperationModeEnum.DifferencesOfAbsoluteFrequencies);
-                            rHyp.da_max = OneDimensionalContingencyTable.Value<OneDimensionalContingencyTable>(max_delegat, CT1, CT2, OperationModeEnum.DifferencesOfAbsoluteFrequencies);
-                            rHyp.dr_sum = OneDimensionalContingencyTable.Value<OneDimensionalContingencyTable>(sum_delegat, CT1, CT2, OperationModeEnum.DifferencesOfRelativeFrequencies);
-                            rHyp.dr_min = OneDimensionalContingencyTable.Value<OneDimensionalContingencyTable>(min_delegat, CT1, CT2, OperationModeEnum.DifferencesOfRelativeFrequencies);
-                            rHyp.dr_max = OneDimensionalContingencyTable.Value<OneDimensionalContingencyTable>(max_delegat, CT1, CT2, OperationModeEnum.DifferencesOfRelativeFrequencies);
+                            rHyp.da_sum = OneDimensionalContingencyTable.Value<OneDimensionalContingencyTable>(sum_delegat, CT1, CT2, OperationModeEnum.DifferencesOfAbsoluteFrequencies).ToString();
+                            rHyp.da_min = OneDimensionalContingencyTable.Value<OneDimensionalContingencyTable>(min_delegat, CT1, CT2, OperationModeEnum.DifferencesOfAbsoluteFrequencies).ToString();
+                            rHyp.da_max = OneDimensionalContingencyTable.Value<OneDimensionalContingencyTable>(max_delegat, CT1, CT2, OperationModeEnum.DifferencesOfAbsoluteFrequencies).ToString();
+                            rHyp.dr_sum = OneDimensionalContingencyTable.Value<OneDimensionalContingencyTable>(sum_delegat, CT1, CT2, OperationModeEnum.DifferencesOfRelativeFrequencies).ToString();
+                            rHyp.dr_min = OneDimensionalContingencyTable.Value<OneDimensionalContingencyTable>(min_delegat, CT1, CT2, OperationModeEnum.DifferencesOfRelativeFrequencies).ToString();
+                            rHyp.dr_max = OneDimensionalContingencyTable.Value<OneDimensionalContingencyTable>(max_delegat, CT1, CT2, OperationModeEnum.DifferencesOfRelativeFrequencies).ToString();
                         }
                         catch (System.Exception e) // TODO: Ferda ma chyby ve vypoctech -> opravit! 
                         {
@@ -217,8 +217,14 @@ namespace FEplugin_cs
                                 if (lit.negation)
                                     l.quant = "¬";
                                 l.quant += lit.literalName;
+                                int counter = 0;
                                 foreach (string s in lit.categoriesNames)
+                                {
+                                    if (counter > 0)
+                                        l.value += ",";
                                     l.value += s;
+                                    counter++;
+                                }
                                 Lit_c.Add(l);
                             }
                         }
@@ -241,8 +247,14 @@ namespace FEplugin_cs
                                 if (lit.negation)
                                     l.quant = "¬";
                                 l.quant += lit.literalName;
+                                int counter = 0;
                                 foreach (string s in lit.categoriesNames)
+                                {
+                                    if (counter > 0)
+                                        l.value += ",";
                                     l.value += s;
+                                    counter++;
+                                }
                                 Lit_s1.Add(l);
                             }
                         }
@@ -265,8 +277,14 @@ namespace FEplugin_cs
                                 if (lit.negation)
                                     l.quant = "¬";
                                 l.quant += lit.literalName;
+                                int counter = 0;
                                 foreach (string s in lit.categoriesNames)
+                                {
+                                    if (counter > 0)
+                                        l.value += ",";
                                     l.value += s;
+                                    counter++;
+                                }
                                 Lit_s2.Add(l);
                             }
                         }
@@ -335,40 +353,40 @@ namespace FEplugin_cs
         public int[] Tab2; // 2. kontingencni tabulka
 
         // kvantifikatory - set1
-        public double sum1 = 0;
-        public double min1 = 0;
-        public double max1 = 0;
-        public double v1 = 0;
-        public double nom_var1 = 0;
-        public double dor_var1 = 0;
-        public double avg_a1 = 0;
-        public double avg_g1 = 0;
-        public double var1 = 0;
-        public double st_dev1 = 0;
-        public double skew1 = 0;
-        public double asym1 = 0;
+        public string sum1 = "unknown";
+        public string min1 = "unknown";
+        public string max1 = "unknown";
+        public string v1 = "unknown";
+        public string nom_var1 = "unknown";
+        public string dor_var1 = "unknown";
+        public string avg_a1 = "unknown";
+        public string avg_g1 = "unknown";
+        public string var1 = "unknown";
+        public string st_dev1 = "unknown";
+        public string skew1 = "unknown";
+        public string asym1 = "unknown";
         
         // kvantifikatory - set2
-        public double sum2 = 0;
-        public double min2 = 0;
-        public double max2 = 0;
-        public double v2 = 0;
-        public double nom_var2 = 0;
-        public double dor_var2 = 0;
-        public double avg_a2 = 0;
-        public double avg_g2 = 0;
-        public double var2 = 0;
-        public double st_dev2 = 0;
-        public double skew2 = 0;
-        public double asym2 = 0;
+        public string sum2 = "unknown";
+        public string min2 = "unknown";
+        public string max2 = "unknown";
+        public string v2 = "unknown";
+        public string nom_var2 = "unknown";
+        public string dor_var2 = "unknown";
+        public string avg_a2 = "unknown";
+        public string avg_g2 = "unknown";
+        public string var2 = "unknown";
+        public string st_dev2 = "unknown";
+        public string skew2 = "unknown";
+        public string asym2 = "unknown";
 
         // kvantifikatory - rozdil set1 a set2
-        public double da_sum = 0;
-        public double da_min = 0;
-        public double da_max = 0;
-        public double dr_sum = 0;
-        public double dr_min = 0;
-        public double dr_max = 0;
+        public string da_sum = "unknown";
+        public string da_min = "unknown";
+        public string da_max = "unknown";
+        public string dr_sum = "unknown";
+        public string dr_min = "unknown";
+        public string dr_max = "unknown";
 
         public string attributes = "";  // reference (Antecedent)
         public string condition = "";   // reference
@@ -386,23 +404,23 @@ namespace FEplugin_cs
             XML += "<hyp_sdcf id=\"" + id + "\" db_name=\"" + db_name + "\" matrix_name=\"" + matrix_name +
                    "\" task_name=\"" + task_name +
                 // hodnoty kvantifikatoru - set1
-                   "\" sum1=\"" + sum1.ToString() + "\" min1=\"" + min1.ToString() + "\" max1=\"" + max1.ToString() +
-                   "\" v1=\"" + v1.ToString() + "\" nom_var1=\"" + nom_var1.ToString() +
-                   "\" dor_var1=\"" + dor_var1.ToString() + "\" avg_a1=\"" + avg_a1.ToString() +
-                   "\" avg_g1=\"" + avg_g1.ToString() + "\" var1=\"" + var1.ToString() +
-                   "\" st_dev1=\"" + st_dev1.ToString() + "\" skew1=\"" + skew1.ToString() +
-                   "\" asym1=\"" + asym1.ToString() +
+                   "\" sum1=\"" + sum1 + "\" min1=\"" + min1 + "\" max1=\"" + max1 +
+                   "\" v1=\"" + v1 + "\" nom_var1=\"" + nom_var1 +
+                   "\" dor_var1=\"" + dor_var1 + "\" avg_a1=\"" + avg_a1 +
+                   "\" avg_g1=\"" + avg_g1 + "\" var1=\"" + var1 +
+                   "\" st_dev1=\"" + st_dev1 + "\" skew1=\"" + skew1 +
+                   "\" asym1=\"" + asym1 +
                 // hodnoty kvantifikatoru - set2
-                   "\" sum2=\"" + sum2.ToString() + "\" min2=\"" + min2.ToString() + "\" max2=\"" + max2.ToString() +
-                   "\" v2=\"" + v2.ToString() + "\" nom_var2=\"" + nom_var2.ToString() +
-                   "\" dor_var2=\"" + dor_var2.ToString() + "\" avg_a2=\"" + avg_a2.ToString() +
-                   "\" avg_g2=\"" + avg_g2.ToString() + "\" var2=\"" + var2.ToString() +
-                   "\" st_dev2=\"" + st_dev2.ToString() + "\" skew2=\"" + skew2.ToString() +
-                   "\" asym2=\"" + asym2.ToString() +
+                   "\" sum2=\"" + sum2 + "\" min2=\"" + min2 + "\" max2=\"" + max2 +
+                   "\" v2=\"" + v2 + "\" nom_var2=\"" + nom_var2 +
+                   "\" dor_var2=\"" + dor_var2 + "\" avg_a2=\"" + avg_a2 +
+                   "\" avg_g2=\"" + avg_g2 + "\" var2=\"" + var2 +
+                   "\" st_dev2=\"" + st_dev2 + "\" skew2=\"" + skew2 +
+                   "\" asym2=\"" + asym2 +
                 // hodnoty kvantifikatoru - rozdil set1 a set2
-                    "\" da_sum=\"" + da_sum.ToString() + "\" da_min=\"" + da_min.ToString() + 
-                    "\" da_max=\"" + da_max.ToString() + "\" dr_sum=\"" + dr_sum.ToString() +
-                    "\" dr_min=\"" + dr_min.ToString() + "\" dr_max=\"" + dr_max.ToString() +
+                    "\" da_sum=\"" + da_sum + "\" da_min=\"" + da_min + 
+                    "\" da_max=\"" + da_max + "\" dr_sum=\"" + dr_sum +
+                    "\" dr_min=\"" + dr_min + "\" dr_max=\"" + dr_max +
                 // cedenty
                    "\" attributes=\"" + attributes +
                    "\" condition=\"" + condition +

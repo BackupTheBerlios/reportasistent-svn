@@ -119,18 +119,18 @@ namespace FEplugin_cs
                         // hodnoty kvantifikatoru - set1
                         try
                         {
-                            rHyp.sum1 = CT1.SumOfValues;
-                            rHyp.min1 = CT1.MinValue;
-                            rHyp.max1 = CT1.MaxValue;
-                            rHyp.chi_sq1 = TwoDimensionalContingencyTable.ChiSquare(CT1);
-                            rHyp.fnc_s1 = TwoDimensionalContingencyTable.SumOfRowMaximumsValue(CT1);
-                            rHyp.fnc_r1 = TwoDimensionalContingencyTable.MinOfRowMaximumsValue(CT1);
-                            rHyp.h_c1 = CT1.MarginalColumnEntropy;
-                            rHyp.h_r1 = CT1.MarginalRowEntropy;
-                            rHyp.h_c_r1 = TwoDimensionalContingencyTable.ConditionalCREntropyValue(CT1);
-                            rHyp.mi1 = CT1.MutualInformation;
+                            rHyp.sum1 = CT1.SumOfValues.ToString();
+                            rHyp.min1 = CT1.MinValue.ToString();
+                            rHyp.max1 = CT1.MaxValue.ToString();
+                            rHyp.chi_sq1 = TwoDimensionalContingencyTable.ChiSquare(CT1).ToString();
+                            rHyp.fnc_s1 = TwoDimensionalContingencyTable.SumOfRowMaximumsValue(CT1).ToString();
+                            rHyp.fnc_r1 = TwoDimensionalContingencyTable.MinOfRowMaximumsValue(CT1).ToString();
+                            rHyp.h_c1 = CT1.MarginalColumnEntropy.ToString();
+                            rHyp.h_r1 = CT1.MarginalRowEntropy.ToString();
+                            rHyp.h_c_r1 = TwoDimensionalContingencyTable.ConditionalCREntropyValue(CT1).ToString();
+                            rHyp.mi1 = CT1.MutualInformation.ToString();
                             //rHyp.aic = CT.???;  TODO
-                            rHyp.kend1 = TwoDimensionalContingencyTable.KendalValue(CT1);
+                            rHyp.kend1 = TwoDimensionalContingencyTable.KendalValue(CT1).ToString();
                         }
                         catch (System.Exception e) // TODO: Ferda ma chyby ve vypoctech -> opravit! 
                         {
@@ -139,18 +139,18 @@ namespace FEplugin_cs
                         // hodnoty kvantifikatoru - set2
                         try
                         {
-                            rHyp.sum2 = CT2.SumOfValues;
-                            rHyp.min2 = CT2.MinValue;
-                            rHyp.max2 = CT2.MaxValue;
-                            rHyp.chi_sq2 = TwoDimensionalContingencyTable.ChiSquare(CT2);
-                            rHyp.fnc_s2 = TwoDimensionalContingencyTable.SumOfRowMaximumsValue(CT2);
-                            rHyp.fnc_r2 = TwoDimensionalContingencyTable.MinOfRowMaximumsValue(CT2);
-                            rHyp.h_c2 = CT2.MarginalColumnEntropy;
-                            rHyp.h_r2 = CT2.MarginalRowEntropy;
-                            rHyp.h_c_r2 = TwoDimensionalContingencyTable.ConditionalCREntropyValue(CT2);
-                            rHyp.mi2 = CT2.MutualInformation;
+                            rHyp.sum2 = CT2.SumOfValues.ToString();
+                            rHyp.min2 = CT2.MinValue.ToString();
+                            rHyp.max2 = CT2.MaxValue.ToString();
+                            rHyp.chi_sq2 = TwoDimensionalContingencyTable.ChiSquare(CT2).ToString();
+                            rHyp.fnc_s2 = TwoDimensionalContingencyTable.SumOfRowMaximumsValue(CT2).ToString();
+                            rHyp.fnc_r2 = TwoDimensionalContingencyTable.MinOfRowMaximumsValue(CT2).ToString();
+                            rHyp.h_c2 = CT2.MarginalColumnEntropy.ToString();
+                            rHyp.h_r2 = CT2.MarginalRowEntropy.ToString();
+                            rHyp.h_c_r2 = TwoDimensionalContingencyTable.ConditionalCREntropyValue(CT2).ToString();
+                            rHyp.mi2 = CT2.MutualInformation.ToString();
                             //rHyp.aic = CT.???;  TODO
-                            rHyp.kend2 = TwoDimensionalContingencyTable.KendalValue(CT2);
+                            rHyp.kend2 = TwoDimensionalContingencyTable.KendalValue(CT2).ToString();
                         }
                         catch (System.Exception e) // TODO: Ferda ma chyby ve vypoctech -> opravit! 
                         {
@@ -159,12 +159,12 @@ namespace FEplugin_cs
                         // hodnoty kvantifikatoru - rozdil set1 a set2
                         try
                         {
-                            rHyp.da_sum = TwoDimensionalContingencyTable.Value<TwoDimensionalContingencyTable>(sum_delegat, CT1, CT2, OperationModeEnum.DifferencesOfAbsoluteFrequencies);
-                            rHyp.da_min = TwoDimensionalContingencyTable.Value<TwoDimensionalContingencyTable>(min_delegat, CT1, CT2, OperationModeEnum.DifferencesOfAbsoluteFrequencies);
-                            rHyp.da_max = TwoDimensionalContingencyTable.Value<TwoDimensionalContingencyTable>(max_delegat, CT1, CT2, OperationModeEnum.DifferencesOfAbsoluteFrequencies);
-                            rHyp.dr_sum = TwoDimensionalContingencyTable.Value<TwoDimensionalContingencyTable>(sum_delegat, CT1, CT2, OperationModeEnum.DifferencesOfRelativeFrequencies);
-                            rHyp.dr_min = TwoDimensionalContingencyTable.Value<TwoDimensionalContingencyTable>(min_delegat, CT1, CT2, OperationModeEnum.DifferencesOfRelativeFrequencies);
-                            rHyp.dr_max = TwoDimensionalContingencyTable.Value<TwoDimensionalContingencyTable>(max_delegat, CT1, CT2, OperationModeEnum.DifferencesOfRelativeFrequencies);
+                            rHyp.da_sum = TwoDimensionalContingencyTable.Value<TwoDimensionalContingencyTable>(sum_delegat, CT1, CT2, OperationModeEnum.DifferencesOfAbsoluteFrequencies).ToString();
+                            rHyp.da_min = TwoDimensionalContingencyTable.Value<TwoDimensionalContingencyTable>(min_delegat, CT1, CT2, OperationModeEnum.DifferencesOfAbsoluteFrequencies).ToString();
+                            rHyp.da_max = TwoDimensionalContingencyTable.Value<TwoDimensionalContingencyTable>(max_delegat, CT1, CT2, OperationModeEnum.DifferencesOfAbsoluteFrequencies).ToString();
+                            rHyp.dr_sum = TwoDimensionalContingencyTable.Value<TwoDimensionalContingencyTable>(sum_delegat, CT1, CT2, OperationModeEnum.DifferencesOfRelativeFrequencies).ToString();
+                            rHyp.dr_min = TwoDimensionalContingencyTable.Value<TwoDimensionalContingencyTable>(min_delegat, CT1, CT2, OperationModeEnum.DifferencesOfRelativeFrequencies).ToString();
+                            rHyp.dr_max = TwoDimensionalContingencyTable.Value<TwoDimensionalContingencyTable>(max_delegat, CT1, CT2, OperationModeEnum.DifferencesOfRelativeFrequencies).ToString();
                         }
                         catch (System.Exception e) // TODO: Ferda ma chyby ve vypoctech -> opravit! 
                         {
@@ -242,8 +242,14 @@ namespace FEplugin_cs
                                 if (lit.negation)
                                     l.quant = "¬";
                                 l.quant += lit.literalName;
+                                int counter = 0;
                                 foreach (string s in lit.categoriesNames)
+                                {
+                                    if (counter > 0)
+                                        l.value += ",";
                                     l.value += s;
+                                    counter++;
+                                }
                                 Lit_c.Add(l);
                             }
                         }
@@ -266,8 +272,14 @@ namespace FEplugin_cs
                                 if (lit.negation)
                                     l.quant = "¬";
                                 l.quant += lit.literalName;
+                                int counter = 0;
                                 foreach (string s in lit.categoriesNames)
+                                {
+                                    if (counter > 0)
+                                        l.value += ",";
                                     l.value += s;
+                                    counter++;
+                                }
                                 Lit_s1.Add(l);
                             }
                         }
@@ -290,8 +302,14 @@ namespace FEplugin_cs
                                 if (lit.negation)
                                     l.quant = "¬";
                                 l.quant += lit.literalName;
+                                int counter = 0;
                                 foreach (string s in lit.categoriesNames)
+                                {
+                                    if (counter > 0)
+                                        l.value += ",";
                                     l.value += s;
+                                    counter++;
+                                }
                                 Lit_s2.Add(l);
                             }
                         }
@@ -361,40 +379,40 @@ namespace FEplugin_cs
         public int[][] Tab2; // 2. kontingencni tabulka
 
         // kvantifikatory - set1
-        public double sum1 = 0;
-        public double min1 = 0;
-        public double max1 = 0;
-        public double chi_sq1 = 0;
-        public double fnc_s1 = 0;
-        public double fnc_r1 = 0;
-        public double h_c1 = 0;
-        public double h_r1 = 0;
-        public double h_c_r1 = 0;
-        public double mi1 = 0;
-        public double aic1 = 0;
-        public double kend1 = 0;
+        public string sum1 = "unknown";
+        public string min1 = "unknown";
+        public string max1 = "unknown";
+        public string chi_sq1 = "unknown";
+        public string fnc_s1 = "unknown";
+        public string fnc_r1 = "unknown";
+        public string h_c1 = "unknown";
+        public string h_r1 = "unknown";
+        public string h_c_r1 = "unknown";
+        public string mi1 = "unknown";
+        public string aic1 = "unknown";
+        public string kend1 = "unknown";
 
         // kvantifikatory - set2
-        public double sum2 = 0;
-        public double min2 = 0;
-        public double max2 = 0;
-        public double chi_sq2 = 0;
-        public double fnc_s2 = 0;
-        public double fnc_r2 = 0;
-        public double h_c2 = 0;
-        public double h_r2 = 0;
-        public double h_c_r2 = 0;
-        public double mi2 = 0;
-        public double aic2 = 0;
-        public double kend2 = 0;
+        public string sum2 = "unknown";
+        public string min2 = "unknown";
+        public string max2 = "unknown";
+        public string chi_sq2 = "unknown";
+        public string fnc_s2 = "unknown";
+        public string fnc_r2 = "unknown";
+        public string h_c2 = "unknown";
+        public string h_r2 = "unknown";
+        public string h_c_r2 = "unknown";
+        public string mi2 = "unknown";
+        public string aic2 = "unknown";
+        public string kend2 = "unknown";
 
         // kvantifikatory - rozdil set1 a set2
-        public double da_sum = 0;
-        public double da_min = 0;
-        public double da_max = 0;
-        public double dr_sum = 0;
-        public double dr_min = 0;
-        public double dr_max = 0;
+        public string da_sum = "unknown";
+        public string da_min = "unknown";
+        public string da_max = "unknown";
+        public string dr_sum = "unknown";
+        public string dr_min = "unknown";
+        public string dr_max = "unknown";
 
         public string row_attributes = "";  // reference (Antecedent)
         public string column_attributes = "";  // reference (Succedent)
@@ -413,23 +431,23 @@ namespace FEplugin_cs
             XML += "<hyp_sdkl id=\"" + id + "\" db_name=\"" + db_name + "\" matrix_name=\"" + matrix_name +
                    "\" task_name=\"" + task_name +
                 // hodnoty kvantifikatoru - set1
-                   "\" sum1=\"" + sum1.ToString() + "\" min1=\"" + min1.ToString() + "\" max1=\"" + max1.ToString() +
-                   "\" chi_sq1=\"" + chi_sq1.ToString() + "\" fnc_s1=\"" + fnc_s1.ToString() +
-                   "\" fnc_r1=\"" + fnc_r1.ToString() + "\" h_c1=\"" + h_c1.ToString() +
-                   "\" h_r1=\"" + h_r1.ToString() + "\" h_c_r1=\"" + h_c_r1.ToString() +
-                   "\" mi1=\"" + mi1.ToString() + "\" aic1=\"" + aic1.ToString() +
-                   "\" kend1=\"" + kend1.ToString() +
+                   "\" sum1=\"" + sum1 + "\" min1=\"" + min1 + "\" max1=\"" + max1 +
+                   "\" chi_sq1=\"" + chi_sq1 + "\" fnc_s1=\"" + fnc_s1 +
+                   "\" fnc_r1=\"" + fnc_r1 + "\" h_c1=\"" + h_c1 +
+                   "\" h_r1=\"" + h_r1 + "\" h_c_r1=\"" + h_c_r1 +
+                   "\" mi1=\"" + mi1 + "\" aic1=\"" + aic1 +
+                   "\" kend1=\"" + kend1 +
                 // hodnoty kvantifikatoru - set2
-                   "\" sum2=\"" + sum2.ToString() + "\" min2=\"" + min2.ToString() + "\" max2=\"" + max2.ToString() +
-                   "\" chi_sq2=\"" + chi_sq2.ToString() + "\" fnc_s2=\"" + fnc_s2.ToString() +
-                   "\" fnc_r2=\"" + fnc_r2.ToString() + "\" h_c2=\"" + h_c2.ToString() +
-                   "\" h_r2=\"" + h_r2.ToString() + "\" h_c_r2=\"" + h_c_r2.ToString() +
-                   "\" mi2=\"" + mi2.ToString() + "\" aic2=\"" + aic2.ToString() +
-                   "\" kend2=\"" + kend2.ToString() +
+                   "\" sum2=\"" + sum2 + "\" min2=\"" + min2 + "\" max2=\"" + max2 +
+                   "\" chi_sq2=\"" + chi_sq2 + "\" fnc_s2=\"" + fnc_s2 +
+                   "\" fnc_r2=\"" + fnc_r2 + "\" h_c2=\"" + h_c2 +
+                   "\" h_r2=\"" + h_r2 + "\" h_c_r2=\"" + h_c_r2 +
+                   "\" mi2=\"" + mi2 + "\" aic2=\"" + aic2 +
+                   "\" kend2=\"" + kend2 +
                 // hodnoty kvantifikatoru - rozdil set1 a set2
-                   "\" da_sum=\"" + da_sum.ToString() + "\" da_min=\"" + da_min.ToString() +
-                    "\" da_max=\"" + da_max.ToString() + "\" dr_sum=\"" + dr_sum.ToString() +
-                    "\" dr_min=\"" + dr_min.ToString() + "\" dr_max=\"" + dr_max.ToString() +
+                   "\" da_sum=\"" + da_sum + "\" da_min=\"" + da_min +
+                    "\" da_max=\"" + da_max + "\" dr_sum=\"" + dr_sum +
+                    "\" dr_min=\"" + dr_min + "\" dr_max=\"" + dr_max +
                 // cedenty
                    "\" row_attributes=\"" + row_attributes + "\" column_attributes=\"" + column_attributes +
                    "\" condition=\"" + condition +

@@ -99,21 +99,21 @@ namespace FEplugin_cs
                         rHyp.Tab = HypList[i].quantifierSetting.firstContingencyTableRows[0];
                         
 
-                        // hodnoty kvantifikatoru - prvni mnozina
+                        // hodnoty kvantifikatoru
                         try
                         {
-                            rHyp.sum = CT.SumOfValues;
-                            rHyp.min = CT.MinValue;
-                            rHyp.max = CT.MaxValue;
-                            rHyp.v = CT.VariationRatio;
-                            rHyp.nom_var = CT.NominalVariation;
-                            rHyp.dor_var = CT.DiscreteOrdinaryVariation;
-                            rHyp.avg_a = CT.ArithmeticAverage;
-                            rHyp.avg_g = CT.GeometricAverage;
-                            rHyp.var = CT.Variance;
-                            rHyp.st_dev = CT.StandardDeviation;
-                            rHyp.skew = CT.Skewness;
-                            rHyp.asym = CT.Asymentry;
+                            rHyp.sum = CT.SumOfValues.ToString();
+                            rHyp.min = CT.MinValue.ToString();
+                            rHyp.max = CT.MaxValue.ToString();
+                            rHyp.v = CT.VariationRatio.ToString();
+                            rHyp.nom_var = CT.NominalVariation.ToString();
+                            rHyp.dor_var = CT.DiscreteOrdinaryVariation.ToString();
+                            rHyp.avg_a = CT.ArithmeticAverage.ToString();
+                            rHyp.avg_g = CT.GeometricAverage.ToString();
+                            rHyp.var = CT.Variance.ToString();
+                            rHyp.st_dev = CT.StandardDeviation.ToString();
+                            rHyp.skew = CT.Skewness.ToString();
+                            rHyp.asym = CT.Asymentry.ToString();
                         }
                         catch (System.Exception e) // TODO: Ferda ma chyby ve vypoctech -> opravit! 
                         {
@@ -166,8 +166,14 @@ namespace FEplugin_cs
                                 if (lit.negation)
                                     l.quant = "¬";
                                 l.quant += lit.literalName;
+                                int counter = 0;
                                 foreach (string s in lit.categoriesNames)
+                                {
+                                    if (counter > 0)
+                                        l.value += ",";
                                     l.value += s;
+                                    counter++;
+                                }
                                 Lit_c.Add(l);
                             }
                         }
@@ -228,18 +234,18 @@ namespace FEplugin_cs
 
         public int[] Tab; // kontingencni tabulka
 
-        public double sum = 0;
-        public double min = 0;
-        public double max = 0;
-        public double v = 0;
-        public double nom_var = 0;
-        public double dor_var = 0;
-        public double avg_a = 0;
-        public double avg_g = 0;
-        public double var = 0;
-        public double st_dev = 0;
-        public double skew= 0;
-        public double asym = 0;
+        public string sum = "unknown";
+        public string min = "unknown";
+        public string max = "unknown";
+        public string v = "unknown";
+        public string nom_var = "unknown";
+        public string dor_var = "unknown";
+        public string avg_a = "unknown";
+        public string avg_g = "unknown";
+        public string var = "unknown";
+        public string st_dev = "unknown";
+        public string skew= "unknown";
+        public string asym = "unknown";
         
         public string attributes = "";  // reference (Antecedent)
         public string condition = "";   // reference
@@ -255,12 +261,12 @@ namespace FEplugin_cs
             XML += "<hyp_cf id=\"" + id + "\" db_name=\"" + db_name + "\" matrix_name=\"" + matrix_name +
                    "\" task_name=\"" + task_name +
                 // hodnoty kvantifikatoru
-                   "\" sum=\"" + sum.ToString() + "\" min=\"" + min.ToString() + "\" max=\"" + max.ToString() +
-                   "\" v=\"" + v.ToString() + "\" nom_var=\"" + nom_var.ToString() +
-                   "\" dor_var=\"" + dor_var.ToString() + "\" avg_a=\"" + avg_a.ToString() +
-                   "\" avg_g=\"" + avg_g.ToString() + "\" var=\"" + var.ToString() +
-                   "\" st_dev=\"" + st_dev.ToString() + "\" skew=\"" + skew.ToString() +
-                   "\" asym=\"" + asym.ToString() +
+                   "\" sum=\"" + sum + "\" min=\"" + min + "\" max=\"" + max +
+                   "\" v=\"" + v + "\" nom_var=\"" + nom_var +
+                   "\" dor_var=\"" + dor_var + "\" avg_a=\"" + avg_a +
+                   "\" avg_g=\"" + avg_g + "\" var=\"" + var +
+                   "\" st_dev=\"" + st_dev + "\" skew=\"" + skew +
+                   "\" asym=\"" + asym +
                 // cedenty
                    "\" attributes=\"" + attributes +
                    "\" condition=\"" + condition + "\">";
