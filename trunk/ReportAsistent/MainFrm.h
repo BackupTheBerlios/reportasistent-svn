@@ -63,9 +63,7 @@ protected:
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 public:
-	afx_msg BOOL OnHelpInfo(HELPINFO* pHelpInfo);
 public:
-	afx_msg void OnHelp();
 };
 
 /////////////////////////////////////////////////////////////////////////////

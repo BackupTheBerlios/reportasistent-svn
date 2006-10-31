@@ -9,6 +9,8 @@ HLP=Help.hlp
 Topics.rtf
 
 [MAP]
-IDH_CONNECTSOURCE=77003               ; Page about Connection of source metabase
+IDH_CONNECTSOURCE=131217        ; Page about Connection of source metabase
 IDH_CONTENTS=77001          ; Top page of help
 IDH_INSTAL=77002        ; Page about instalation of Report Asistent
+IDH_MAINWIN=131200
+IDH_TEXTELM=131202

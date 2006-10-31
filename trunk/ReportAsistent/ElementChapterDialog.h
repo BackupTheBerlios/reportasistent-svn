@@ -40,16 +40,12 @@ protected:
 
 	// Generated message map functions
 	//{{AFX_MSG(CElementChapterDialog)
+	afx_msg BOOL OnHelpInfo(HELPINFO* pHelpInfo);
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 public:
 	virtual void WinHelp(DWORD dwData, UINT nCmd = HELP_CONTEXT);
-public:
-//	afx_msg BOOL OnHelpInfo(HELPINFO* pHelpInfo);
-public:
-	afx_msg void OnHelp();
-public:
-	afx_msg BOOL OnHelpInfo(HELPINFO* pHelpInfo);
+
 };
 
 //{{AFX_INSERT_LOCATION}}

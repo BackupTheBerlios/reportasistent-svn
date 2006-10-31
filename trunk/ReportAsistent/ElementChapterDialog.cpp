@@ -54,10 +54,10 @@ void CElementChapterDialog::DoDataExchange(CDataExchange* pDX)
 
 BEGIN_MESSAGE_MAP(CElementChapterDialog, CDialog)
 	//{{AFX_MSG_MAP(CElementChapterDialog)
+	ON_WM_HELPINFO()
 	//}}AFX_MSG_MAP
-//	ON_WM_HELPINFO()
-ON_COMMAND(ID_HELP, &CElementChapterDialog::OnHelp)
-ON_WM_HELPINFO()
+
+
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -125,16 +125,23 @@ void CElementChapterDialog::WinHelp(DWORD dwData, UINT nCmd)
 }
 
 
-void CElementChapterDialog::OnHelp()
-{
-	WinHelp(77001,HELP_CONTEXT) ;
-}
+
 
 BOOL CElementChapterDialog::OnHelpInfo(HELPINFO* pHelpInfo)
 {
+	BOOL Res=CDialog::OnHelpInfo(pHelpInfo);
+
+
 	CString Pom;
 	Pom.Format("dwContextId: %d \niContextType: %d\n iCtrlId:%d\n ",pHelpInfo->dwContextId,pHelpInfo->iContextType, pHelpInfo->iCtrlId);
 	AfxMessageBox(Pom);
 
-	return CDialog::OnHelpInfo(pHelpInfo);
+	return Res;
 }
+
+//DEL void CElementChapterDialog::OnHelp() 
+//DEL {
+//DEL 	WinHelp(77001 ,HELP_CONTEXT) ; 
+//DEL 	
+//DEL }
+

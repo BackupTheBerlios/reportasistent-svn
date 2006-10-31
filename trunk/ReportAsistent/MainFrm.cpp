@@ -26,12 +26,9 @@ BEGIN_MESSAGE_MAP(CMainFrame, CFrameWnd)
 	ON_UPDATE_COMMAND_UI(ID_VIEW_ACTIVEELEMENTTOOLBAR, OnUpdateViewActiveelementtoolbar)
 	//}}AFX_MSG_MAP
    ON_COMMAND(ID_HELP_FINDER, CFrameWnd::OnHelpFinder)
-   ON_COMMAND(ID_HELP, CMainFrame::OnHelp)
+   ON_COMMAND(ID_HELP, CFrameWnd::OnHelp)
    ON_COMMAND(ID_CONTEXT_HELP, CFrameWnd::OnContextHelp)
    ON_COMMAND(ID_DEFAULT_HELP, CFrameWnd::OnHelpFinder)
-
-   ON_WM_HELPINFO()
-   ON_COMMAND(ID_HELP, &CMainFrame::OnHelp)
 END_MESSAGE_MAP()
 
 static UINT indicators[] =
@@ -449,6 +446,7 @@ void CMainFrame::OnUpdateViewActiveelementtoolbar(CCmdUI* pCmdUI)
 
 void CMainFrame::WinHelp(DWORD dwData, UINT nCmd) 
 {
+	//if (dwData > 0x20000) dwData -= 0x20000;
 	if (nCmd == HELP_CONTEXT)
 	{
 		CString Pom;
@@ -456,20 +454,23 @@ void CMainFrame::WinHelp(DWORD dwData, UINT nCmd)
 		AfxMessageBox( (LPCTSTR)Pom);
 	} 
 
+
 	CFrameWnd::WinHelp(dwData, nCmd);
 }
 
 
-BOOL CMainFrame::OnHelpInfo(HELPINFO* pHelpInfo)
-{
-	CString Pom;
-	Pom.Format("dwContextId: %d iContextType: %d iCtrlId %d ",pHelpInfo->dwContextId,pHelpInfo->iContextType, pHelpInfo->iCtrlId);
-	AfxMessageBox(Pom);
+//DEL BOOL CMainFrame::OnHelpInfo(HELPINFO* pHelpInfo)
+//DEL {
+//DEL 	CString Pom;
+//DEL 	Pom.Format("dwContextId: %d iContextType: %d iCtrlId %d ",pHelpInfo->dwContextId,pHelpInfo->iContextType, pHelpInfo->iCtrlId);
+//DEL 	AfxMessageBox(Pom);
+//DEL 
+//DEL 	return CFrameWnd::OnHelpInfo(pHelpInfo);
+//DEL }
 
-	return CFrameWnd::OnHelpInfo(pHelpInfo);
-}
 
-void CMainFrame::OnHelp()
-{
-	// TODO: Add your command handler code here
-}
+//DEL void CMainFrame::OnHelp() 
+//DEL {
+//DEL 	// TODO: Add your command handler code here
+//DEL 	
+//DEL }
