@@ -4,6 +4,7 @@
 
 #include <afx.h>
 #include <afxdb.h>
+#include <afxdlgs.h>
 #include <Shlwapi.h>
 
 #include "SockInterface.h"
@@ -117,6 +118,8 @@ hSource_t fNewSourceLM(PersistID_t * pPerzistID)
 	char buf[1001];
 	GetCurrentDirectory(1000, buf);
 
+#ifdef _DEBUG
+
 	// ladici (kody)-----
 //	CString hlaska = "Access Datasource: " + s;
 //	AfxMessageBox(hlaska);
@@ -132,10 +135,32 @@ hSource_t fNewSourceLM(PersistID_t * pPerzistID)
 	f.Write(src_enum, src_enum.GetLength());
 	f.Close();
 	// -----------
-	
+#endif
+
+	// vyber souboru s metabazi v OpenFileDialogu
+	CString filter = "LISp-Miner metabase (*.mdb)|*.mdb|All Files (*.*)|*.*||";
+	CFileDialog FD(TRUE,NULL,NULL,OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, filter);
+	if(FD.DoModal() != IDOK)
+	{
+		//dedek
+		SetCurrentDirectory(buf);
+
+		return NULL;
+	}
+
+	CString new_pid = FD.GetPathName();
+	/*CString hlaska = "File Path: " + new_pid;
+	AfxMessageBox(hlaska);*/
+
+	CString conn_str;
+	conn_str = "ODBC;DSN=";
+	conn_str += s;
+	conn_str += ";DBQ=";
+	conn_str += new_pid; //obsahuje cestu k souboru
+	conn_str += ";";
 
 	db = new CDatabase();
-	if (!db->Open(NULL, FALSE, TRUE, _T("ODBC;DSN=" + s), TRUE))
+	if (!db->Open(NULL, FALSE, TRUE, conn_str, TRUE))
 	{
 		//dedek
 		SetCurrentDirectory(buf);
@@ -147,11 +172,6 @@ hSource_t fNewSourceLM(PersistID_t * pPerzistID)
 	//dedek
 	SetCurrentDirectory(buf);
 
-	CString new_pid =  db->GetDatabaseName();
-
-	new_pid += ".mdb";
-
-	
 	* pPerzistID = new_pid.AllocSysString();
 	return db;
 }
@@ -215,7 +235,7 @@ BOOL fCloseSourceLM(hSource_t hSource)
 	delete db;
 
 	return TRUE;
-}
+};
 
 /*
 
