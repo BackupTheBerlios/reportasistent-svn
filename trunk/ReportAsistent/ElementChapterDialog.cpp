@@ -55,6 +55,9 @@ void CElementChapterDialog::DoDataExchange(CDataExchange* pDX)
 BEGIN_MESSAGE_MAP(CElementChapterDialog, CDialog)
 	//{{AFX_MSG_MAP(CElementChapterDialog)
 	//}}AFX_MSG_MAP
+//	ON_WM_HELPINFO()
+ON_COMMAND(ID_HELP, &CElementChapterDialog::OnHelp)
+ON_WM_HELPINFO()
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -106,4 +109,32 @@ void CElementChapterDialog::DDV_NonDuplicateID(CDataExchange *pDX, int nId, CStr
 
 	}
 
+}
+
+void CElementChapterDialog::WinHelp(DWORD dwData, UINT nCmd)
+{
+	if (nCmd == HELP_CONTEXT)
+	{
+		CString Pom;
+		Pom.Format("HELP_CONTEXT , %d", dwData) ;
+		AfxMessageBox( (LPCTSTR)Pom);
+	} 
+
+
+	CDialog::WinHelp(77001, nCmd);
+}
+
+
+void CElementChapterDialog::OnHelp()
+{
+	WinHelp(77001,HELP_CONTEXT) ;
+}
+
+BOOL CElementChapterDialog::OnHelpInfo(HELPINFO* pHelpInfo)
+{
+	CString Pom;
+	Pom.Format("dwContextId: %d \niContextType: %d\n iCtrlId:%d\n ",pHelpInfo->dwContextId,pHelpInfo->iContextType, pHelpInfo->iCtrlId);
+	AfxMessageBox(Pom);
+
+	return CDialog::OnHelpInfo(pHelpInfo);
 }
