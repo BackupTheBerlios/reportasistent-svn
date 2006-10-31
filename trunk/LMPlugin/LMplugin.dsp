@@ -181,7 +181,7 @@ SOURCE=.\TCategory_list.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\Tcategory_Recordset.cpp
+SOURCE=.\TCategory_Recordset.cpp
 # End Source File
 # Begin Source File
 

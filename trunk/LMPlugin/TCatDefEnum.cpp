@@ -1,6 +1,5 @@
 // TCatDefEnum.cpp : implementation file
 //
-
 #include "TCatDefEnum.h"
 
 #ifdef _DEBUG
@@ -32,14 +31,13 @@ TCatDefEnum::TCatDefEnum(CDatabase* pdb)
 	m_ValueSubTypeID2 = 0;
 	m_Name = _T("");
 	m_ShortName = _T("");
+	m_Cardinal = FALSE;
 	m_Ord = 0;
 	m_Notice = _T("");
-	m_Cardinal = FALSE;
 	m_nFields = 18;
 	//}}AFX_FIELD_INIT
 	m_nDefaultType = snapshot;
 }
-
 
 CString TCatDefEnum::GetDefaultSQL()
 {
@@ -65,9 +63,9 @@ void TCatDefEnum::DoFieldExchange(CFieldExchange* pFX)
 	RFX_Long(pFX, _T("[tsValueSubType].[ValueSubTypeID]"), m_ValueSubTypeID2);
 	RFX_Text(pFX, _T("[Name]"), m_Name);
 	RFX_Text(pFX, _T("[ShortName]"), m_ShortName);
+	RFX_Bool(pFX, _T("[Cardinal]"), m_Cardinal);
 	RFX_Long(pFX, _T("[Ord]"), m_Ord);
 	RFX_Text(pFX, _T("[Notice]"), m_Notice);
-	RFX_Bool(pFX, _T("[Cardinal]"), m_Cardinal);
 	//}}AFX_FIELD_MAP
 }
 

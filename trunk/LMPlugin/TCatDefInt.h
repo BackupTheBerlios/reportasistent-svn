@@ -1,14 +1,11 @@
-#if !defined(AFX_TCATDEFINT_H__C5318E11_E71B_4386_B4D7_E1E7822103DD__INCLUDED_)
-#define AFX_TCATDEFINT_H__C5318E11_E71B_4386_B4D7_E1E7822103DD__INCLUDED_
+#if !defined(AFX_TCATDEFINT_H__2A12DFE3_B911_4A97_BCFC_590E28ED3316__INCLUDED_)
+#define AFX_TCATDEFINT_H__2A12DFE3_B911_4A97_BCFC_590E28ED3316__INCLUDED_
 
 #if _MSC_VER > 1000
 #pragma once
 #endif // _MSC_VER > 1000
 // TCatDefInt.h : header file
 //
-#ifndef WINVER
-#define WINVER 0x0400
-#endif
 #include "afxdb.h"
 /////////////////////////////////////////////////////////////////////////////
 // TCatDefInt recordset
@@ -46,9 +43,9 @@ public:
 	long	m_ValueSubTypeID2;
 	CString	m_Name2;
 	CString	m_ShortName2;
+	BOOL	m_Cardinal;
 	long	m_Ord2;
 	CString	m_Notice2;
-	BOOL	m_Cardinal;
 	//}}AFX_FIELD
 
 
@@ -70,4 +67,4 @@ public:
 //{{AFX_INSERT_LOCATION}}
 // Microsoft Visual C++ will insert additional declarations immediately before the previous line.
 
-#endif // !defined(AFX_TCATDEFINT_H__C5318E11_E71B_4386_B4D7_E1E7822103DD__INCLUDED_)
+#endif // !defined(AFX_TCATDEFINT_H__2A12DFE3_B911_4A97_BCFC_590E28ED3316__INCLUDED_)

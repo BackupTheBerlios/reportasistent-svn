@@ -2,7 +2,7 @@
 // functions.h
 #include "functions.h"
 #include "Hyp_4ft_Recordset.h"
-#include "Tcategory_Recordset.h"
+#include "TCategory_Recordset.h"
 #include "TCatDefEnum.h"
 #include "TCatDefInt.h"
 #include "TCatOrder.h"
@@ -1446,7 +1446,7 @@ CString fLMCategory(void* hSource)
 	TCategory_Meta_Array list;
 	Category_Meta * ptcat;
 
-	Tcategory_Recordset rs ((CDatabase *) hSource);
+	TCategory_Recordset rs ((CDatabase *) hSource);
 	TCatDefEnum rs_def_enum ((CDatabase *) hSource);
 	TCatDefInt rs_def_int_l ((CDatabase *) hSource);
 	TCatDefInt rs_def_int_r ((CDatabase *) hSource);

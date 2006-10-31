@@ -2,13 +2,13 @@
 
 [General Info]
 Version=1
-LastClass=CMainFrame
-LastTemplate=CDialog
+LastClass=TCatDefEnum
+LastTemplate=CRecordset
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "ReportAsistent.h"
 LastPage=0
 
-ClassCount=26
+ClassCount=27
 Class1=CReportAsistentApp
 Class2=CSkeletonDoc
 Class3=CSkeletonView
@@ -16,47 +16,48 @@ Class4=CMainFrame
 
 ResourceCount=20
 Resource1=IDD_ABOUTBOX
-Resource2=IDD_TRANSFORMATIONS_DIALOG (English (U.S.))
+Resource2=IDD_ATTRIBUTE_LINK_TABLE_DIALOG (English (U.S.))
 Class5=CAboutDlg
-Resource3=IDD_DIALOG_CHAPTER (English (U.S.))
-Resource4=IDD_SOURCES_DIALOG (English (U.S.))
+Resource3=IDD_SIMPLE_FILTER_DIALOG (English (U.S.))
+Resource4=IDD_TRANSFORMATIONS_DIALOG (English (U.S.))
 Class6=CElementTextDialog
-Resource5=IDD_COMPLEX_FILTER_DIALOG (English (U.S.))
+Resource5=IDD_DIALOGTEXT (English (U.S.))
 Class7=CSimpleFilterDialog
-Resource6=IDD_GENERATE_DIALOG (English (U.S.))
+Resource6=IDD_DIALOG_PARAGRAPH (English (U.S.))
 Class8=CGenerateDialog
-Resource7=IDD_INCLUDE_DIALOG (English (U.S.))
+Resource7=IDD_GENERATE_DIALOG (English (U.S.))
 Class9=CSourcesDialog
-Resource8=IDD_ATTRIBUTE_LINK_DIALOG (English (U.S.))
+Resource8=IDD_SOURCES_DIALOG (English (U.S.))
 Class10=CActiveElementDialog
-Resource9=IDD_OPTIONS_DIALOG (English (U.S.))
+Resource9=IDD_COMPLEX_FILTER_DIALOG (English (U.S.))
 Class11=CTransformationsDialog
-Class12=Tcategory_Recordset
-Resource10=IDD_DIALOG_PARAGRAPH (English (U.S.))
+Class12=TCategory_Recordset
+Resource10=IDD_PROPERTY_EDITOR (English (U.S.))
 Class13=CAttributeLinkDialog
-Resource11=IDD_WAIT_DIALOG (English (U.S.))
+Resource11=IDD_DIALOG_REPORT (English (U.S.))
 Class14=CAttributeLinkTableDialog
-Resource12=IDD_ATTRIBUTE_LINK_TABLE_DIALOG (English (U.S.))
+Resource12=IDD_ABOUTBOX (English (U.S.))
 Class15=CElementParagraphDialog
 Class16=CElementChapterDialog
 Class17=CElementDialogBase
 Class18=CPropertyEditor
-Resource13=IDD_FILTER_AND_CONFIG_DIALOG (English (U.S.))
-Resource14=IDD_ABOUTBOX (English (U.S.))
+Resource13=IDD_ACTIVE_ELEMENT_DIALOG (English (U.S.))
+Resource14=IDD_FILTER_AND_CONFIG_DIALOG (English (U.S.))
 Class19=CWaitDialog
-Resource15=IDD_PROPERTY_EDITOR (English (U.S.))
+Resource15=IDD_OPTIONS_DIALOG (English (U.S.))
 Class20=CWaitAnimation
 Class21=CWordEventHandler
-Resource16=IDD_ACTIVE_ELEMENT_DIALOG (English (U.S.))
+Resource16=IDD_DIALOG_CHAPTER (English (U.S.))
 Class22=COptionsDialog
 Class23=CElementReportDialog
 Class24=CEToolBar
-Resource17=IDD_SIMPLE_FILTER_DIALOG (English (U.S.))
+Resource17=IDD_ATTRIBUTE_LINK_DIALOG (English (U.S.))
 Class25=CComplexFilterDialog
-Resource18=IDD_DIALOG_REPORT (English (U.S.))
-Resource19=IDD_DIALOGTEXT (English (U.S.))
+Resource18=IDD_INCLUDE_DIALOG (English (U.S.))
+Resource19=IDD_WAIT_DIALOG (English (U.S.))
 Class26=CAElFiltersConfigDialog
 Resource20=IDR_MAINFRAME (English (U.S.))
+Class27=TCatDefEnum
 
 [CLS:CReportAsistentApp]
 Type=0
@@ -91,7 +92,7 @@ Type=0
 HeaderFile=MainFrm.h
 ImplementationFile=MainFrm.cpp
 Filter=T
-LastObject=ID_HELP
+LastObject=CMainFrame
 BaseClass=CFrameWnd
 VirtualFilter=fWC
 
@@ -334,15 +335,6 @@ Control3=IDC_APPLY_BUTTON,button,1342242816
 Control4=IDC_TAB1,SysTabControl32,1342177280
 Control5=IDC_SWITCH_BUTTON,button,1342242816
 
-[CLS:Tcategory_Recordset]
-Type=0
-HeaderFile=\skola\sw projekt\dev\lmplugin\tcategory_recordset.h
-ImplementationFile=\skola\sw projekt\dev\lmplugin\tcategory_recordset.cpp
-BaseClass=CRecordset
-LastObject=Tcategory_Recordset
-Filter=N
-VirtualFilter=r
-
 [DB:Tcategory_Recordset]
 DB=1
 DBType=ODBC
@@ -462,9 +454,9 @@ Column12=[IsNULL], -7, 1
 Column13=[tsValueSubType].[ValueSubTypeID], 4, 4
 Column14=[Name], 12, 100
 Column15=[ShortName], 12, 40
-Column16=[Ord], 4, 4
-Column17=[Notice], 12, 510
-Column18=[Cardinal], -7, 1
+Column16=[Cardinal], -7, 1
+Column17=[Ord], 4, 4
+Column18=[Notice], 12, 510
 
 [DB:TCatDefInt]
 DB=1
@@ -495,9 +487,9 @@ Column22=[tsBracketType].[Notice], 12, 510
 Column23=[tsValueSubType].[ValueSubTypeID], 4, 4
 Column24=[tsValueSubType].[Name], 12, 100
 Column25=[tsValueSubType].[ShortName], 12, 40
-Column26=[tsValueSubType].[Ord], 4, 4
-Column27=[tsValueSubType].[Notice], 12, 510
-Column28=[Cardinal], -7, 1
+Column26=[Cardinal], -7, 1
+Column27=[tsValueSubType].[Ord], 4, 4
+Column28=[tsValueSubType].[Notice], 12, 510
 
 [CLS:CAttributeLinkDialog]
 Type=0
@@ -2021,4 +2013,82 @@ BaseClass=CDialog
 Filter=D
 LastObject=CAElFiltersConfigDialog
 VirtualFilter=dWC
+
+[CLS:TCategory_Recordset]
+Type=0
+HeaderFile=TCategory_Recordset.h
+ImplementationFile=TCategory_Recordset.cpp
+BaseClass=CRecordset
+Filter=N
+VirtualFilter=r
+LastObject=TCategory_Recordset
+
+[DB:TCategory_Recordset]
+DB=1
+DBType=ODBC
+ColumnCount=55
+Column1=[tmAttribute].[AttributeID], 4, 4
+Column2=[tmAttribute].[Name], 12, 510
+Column3=[tmAttribute].[MatrixID], 4, 4
+Column4=[AttributeSubTypeID], 4, 4
+Column5=[ValueSubTypeID], 4, 4
+Column6=[Derived], -7, 1
+Column7=[Formula], 12, 510
+Column8=[MCPosition], 4, 4
+Column9=[MCLength], 4, 4
+Column10=[MCDelimiter], 12, 510
+Column11=[PrimaryKeyPosition], 4, 4
+Column12=[ValueMin], 8, 8
+Column13=[ValueMax], 8, 8
+Column14=[ValueAvg], 8, 8
+Column15=[ValueModus], 8, 8
+Column16=[ValueVariability], 8, 8
+Column17=[tmAttribute].[Notice], 12, 510
+Column18=[tmAttribute].[wSavedCountUsed], 4, 4
+Column19=[CategoryID], 4, 4
+Column20=[tmCategory].[Name], 12, 510
+Column21=[tmCategory].[QuantityID], 4, 4
+Column22=[tmCategory].[CategorySubTypeID], 4, 4
+Column23=[tmCategory].[BoolTypeID], 4, 4
+Column24=[XCategory], -7, 1
+Column25=[IncludeNULL], -7, 1
+Column26=[tmCategory].[Ord], 4, 4
+Column27=[tmCategory].[Notice], 12, 510
+Column28=[tmCategory].[wSavedCountUsed], 4, 4
+Column29=[tmMatrix].[MatrixID], 4, 4
+Column30=[tmMatrix].[Name], 12, 510
+Column31=[Initialised], -7, 1
+Column32=[RecordCount], 4, 4
+Column33=[tmMatrix].[Notice], 12, 510
+Column34=[tmMatrix].[wSavedCountUsed], 4, 4
+Column35=[tmQuantity].[QuantityID], 4, 4
+Column36=[tmQuantity].[Name], 12, 510
+Column37=[tmQuantity].[ShortName], 12, 510
+Column38=[ShowName], -7, 1
+Column39=[tmQuantity].[AttributeID], 4, 4
+Column40=[ItemShift], 4, 4
+Column41=[ParentGroupID], 4, 4
+Column42=[tmQuantity].[wSavedCountUsed], 4, 4
+Column43=[wUpdateVer], 4, 4
+Column44=[UserID], 4, 4
+Column45=[tmQuantity].[Notice], 12, 510
+Column46=[tsBoolType].[BoolTypeID], 4, 4
+Column47=[tsBoolType].[Name], 12, 100
+Column48=[tsBoolType].[ShortName], 12, 40
+Column49=[tsBoolType].[Ord], 4, 4
+Column50=[tsBoolType].[Notice], 12, 510
+Column51=[tsCategorySubType].[CategorySubTypeID], 4, 4
+Column52=[tsCategorySubType].[Name], 12, 100
+Column53=[tsCategorySubType].[ShortName], 12, 40
+Column54=[tsCategorySubType].[Ord], 4, 4
+Column55=[tsCategorySubType].[Notice], 12, 510
+
+[CLS:TCatDefEnum]
+Type=0
+HeaderFile=TCatDefEnum.h
+ImplementationFile=TCatDefEnum.cpp
+BaseClass=CRecordset
+Filter=N
+VirtualFilter=r
+LastObject=TCatDefEnum
 
