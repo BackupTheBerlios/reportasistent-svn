@@ -4,6 +4,7 @@
 	Version="8,00"
 	Name="LMplugin"
 	ProjectGUID="{4461A8AE-027E-4899-8126-D4F4FAEB825C}"
+	RootNamespace="LMplugin"
 	Keyword="MFCProj"
 	>
 	<Platforms>
