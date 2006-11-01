@@ -2,7 +2,7 @@
 
 [General Info]
 Version=1
-LastClass=TCatDefEnum
+LastClass=TOrder_of_Categories
 LastTemplate=CRecordset
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "ReportAsistent.h"
@@ -16,48 +16,48 @@ Class4=CMainFrame
 
 ResourceCount=20
 Resource1=IDD_ABOUTBOX
-Resource2=IDD_ATTRIBUTE_LINK_TABLE_DIALOG (English (U.S.))
+Resource2=IDD_DIALOGTEXT (English (U.S.))
 Class5=CAboutDlg
-Resource3=IDD_ATTRIBUTE_LINK_DIALOG (English (U.S.))
-Resource4=IDD_TRANSFORMATIONS_DIALOG (English (U.S.))
+Resource3=IDD_OPTIONS_DIALOG (English (U.S.))
+Resource4=IDD_SOURCES_DIALOG (English (U.S.))
 Class6=CElementTextDialog
-Resource5=IDD_DIALOGTEXT (English (U.S.))
+Resource5=IDD_ATTRIBUTE_LINK_DIALOG (English (U.S.))
 Class7=CSimpleFilterDialog
-Resource6=IDD_DIALOG_PARAGRAPH (English (U.S.))
+Resource6=IDD_INCLUDE_DIALOG (English (U.S.))
 Class8=CGenerateDialog
-Resource7=IDD_GENERATE_DIALOG (English (U.S.))
+Resource7=IDD_DIALOG_REPORT (English (U.S.))
 Class9=CSourcesDialog
-Resource8=IDD_FILTER_AND_CONFIG_DIALOG (English (U.S.))
+Resource8=IDD_TRANSFORMATIONS_DIALOG (English (U.S.))
 Class10=CActiveElementDialog
-Resource9=IDD_ACTIVE_ELEMENT_DIALOG (English (U.S.))
+Resource9=IDD_ABOUTBOX (English (U.S.))
 Class11=CTransformationsDialog
 Class12=TCategory_Recordset
-Resource10=IDD_PROPERTY_EDITOR (English (U.S.))
+Resource10=IDD_GENERATE_DIALOG (English (U.S.))
 Class13=CAttributeLinkDialog
-Resource11=IDD_DIALOG_REPORT (English (U.S.))
+Resource11=IDD_DIALOG_CHAPTER (English (U.S.))
 Class14=CAttributeLinkTableDialog
-Resource12=IDD_SIMPLE_FILTER_DIALOG (English (U.S.))
+Resource12=IDD_COMPLEX_FILTER_DIALOG (English (U.S.))
 Class15=CElementParagraphDialog
 Class16=CElementChapterDialog
 Class17=CElementDialogBase
 Class18=CPropertyEditor
-Resource13=IDD_ABOUTBOX (English (U.S.))
-Resource14=IDD_COMPLEX_FILTER_DIALOG (English (U.S.))
+Resource13=IDD_PROPERTY_EDITOR (English (U.S.))
+Resource14=IDD_SIMPLE_FILTER_DIALOG (English (U.S.))
 Class19=CWaitDialog
-Resource15=IDD_OPTIONS_DIALOG (English (U.S.))
+Resource15=IDD_DIALOG_PARAGRAPH (English (U.S.))
 Class20=CWaitAnimation
 Class21=CWordEventHandler
-Resource16=IDD_DIALOG_CHAPTER (English (U.S.))
+Resource16=IDD_FILTER_AND_CONFIG_DIALOG (English (U.S.))
 Class22=COptionsDialog
 Class23=CElementReportDialog
 Class24=CEToolBar
-Resource17=IDD_SOURCES_DIALOG (English (U.S.))
+Resource17=IDD_ATTRIBUTE_LINK_TABLE_DIALOG (English (U.S.))
 Class25=CComplexFilterDialog
-Resource18=IDD_INCLUDE_DIALOG (English (U.S.))
-Resource19=IDD_WAIT_DIALOG (English (U.S.))
+Resource18=IDD_WAIT_DIALOG (English (U.S.))
+Resource19=IDD_ACTIVE_ELEMENT_DIALOG (English (U.S.))
 Class26=CAElFiltersConfigDialog
-Class27=TCatDefEnum
 Resource20=IDR_MAINFRAME (English (U.S.))
+Class27=TOrder_of_Categories
 
 [CLS:CReportAsistentApp]
 Type=0
@@ -2083,12 +2083,38 @@ Column53=[tsCategorySubType].[ShortName], 12, 40
 Column54=[tsCategorySubType].[Ord], 4, 4
 Column55=[tsCategorySubType].[Notice], 12, 510
 
-[CLS:TCatDefEnum]
+[CLS:TOrder_of_Categories]
 Type=0
-HeaderFile=TCatDefEnum.h
-ImplementationFile=TCatDefEnum.cpp
+HeaderFile=TOrder_of_Categories.h
+ImplementationFile=TOrder_of_Categories.cpp
 BaseClass=CRecordset
 Filter=N
 VirtualFilter=r
-LastObject=TCatDefEnum
+LastObject=TOrder_of_Categories
+
+[DB:TOrder_of_Categories]
+DB=1
+DBType=ODBC
+ColumnCount=21
+Column1=[CategoryID], 4, 4
+Column2=[tmCategory].[Name], 12, 510
+Column3=[tmCategory].[QuantityID], 4, 4
+Column4=[CategorySubTypeID], 4, 4
+Column5=[BoolTypeID], 4, 4
+Column6=[XCategory], -7, 1
+Column7=[IncludeNULL], -7, 1
+Column8=[Ord], 4, 4
+Column9=[tmCategory].[Notice], 12, 510
+Column10=[tmCategory].[wSavedCountUsed], 4, 4
+Column11=[tmQuantity].[QuantityID], 4, 4
+Column12=[tmQuantity].[Name], 12, 510
+Column13=[ShortName], 12, 510
+Column14=[ShowName], -7, 1
+Column15=[AttributeID], 4, 4
+Column16=[ItemShift], 4, 4
+Column17=[ParentGroupID], 4, 4
+Column18=[tmQuantity].[wSavedCountUsed], 4, 4
+Column19=[wUpdateVer], 4, 4
+Column20=[UserID], 4, 4
+Column21=[tmQuantity].[Notice], 12, 510
 
