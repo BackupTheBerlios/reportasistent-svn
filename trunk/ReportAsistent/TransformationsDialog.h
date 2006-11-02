@@ -92,6 +92,7 @@ private:
 
 
   virtual BOOL OnApply();
+  afx_msg void OnLbnSelchangeSelectedTransfsList();
 };
 
 //{{AFX_INSERT_LOCATION}}

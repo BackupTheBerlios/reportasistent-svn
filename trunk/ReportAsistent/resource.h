@@ -1,5 +1,5 @@
 //{{NO_DEPENDENCIES}}
-// Microsoft Developer Studio generated include file.
+// Microsoft Visual C++ generated include file.
 // Used by ReportAsistent.rc
 //
 #define IDD_ABOUTBOX                    100
@@ -63,6 +63,7 @@
 #define IDC_SUPPORTED_TRANSF_LIST       1016
 #define IDC_SELECTED_TRANSFS_LIST       1017
 #define IDC_ADD_BUTTON                  1018
+#define IDC_SUPPORTED_TRANSF_LIST2      1019
 #define IDC_MOVE_UP_BUTTON              1020
 #define IDC_MOVE_DOWN_BUTTON            1021
 #define IDC_TARGET_COMBO                1021

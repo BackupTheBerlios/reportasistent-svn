@@ -50,6 +50,7 @@ BEGIN_MESSAGE_MAP(CTransformationsDialog, CPropertyPage)
 	ON_BN_CLICKED(IDC_MOVE_DOWN_BUTTON, OnMoveDownButton)
 	ON_BN_CLICKED(IDC_CONFIGURE_BUTTON, OnConfigureButton)
 	//}}AFX_MSG_MAP
+	ON_LBN_SELCHANGE(IDC_SELECTED_TRANSFS_LIST, &CTransformationsDialog::OnLbnSelchangeSelectedTransfsList)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -658,4 +659,9 @@ void CTransformationsDialog::ConfigureTransformation(int transform_index)
 BOOL CTransformationsDialog::OnApply()
 {
   return SaveAll();
+}
+
+void CTransformationsDialog::OnLbnSelchangeSelectedTransfsList()
+{
+	// TODO: Add your control notification handler code here
 }

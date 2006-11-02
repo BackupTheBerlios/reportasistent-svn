@@ -228,13 +228,34 @@ void CAttributeLinkDialog::DDV_NonDuplicateID(CDataExchange *pDX, int nId, CStri
 		}
 
 		CSkeletonDoc * Doc = ((CReportAsistentApp *) AfxGetApp())->FirstDocumentInFirstTemplate();
-		if (m_OldID!=csIDEditValue &&  //Iva: if "==", then ID is in tree, but it's OK
-			Doc->IsIDInTree(csIDEditValue))
+		if (m_OldID!=csIDEditValue)  //Iva: if "==", then ID is in tree, but it's OK
 		{
-			SetDlgItemText(nId, m_OldID ); //Iva: return old value to edit box
-			AfxMessageBox(IDS_DUPLICATE_ELEMENT_ID);
-			//dedek: ?CReportAsistentApp::ReportError(IDS_DUPLICATE_ELEMENT_ID);?
-			pDX->Fail();
+			if (Doc->IsIDInTree(csIDEditValue))
+			{
+				SetDlgItemText(nId, m_OldID ); //Iva: return old value to edit box
+				AfxMessageBox(IDS_DUPLICATE_ELEMENT_ID);
+				//dedek: ?CReportAsistentApp::ReportError(IDS_DUPLICATE_ELEMENT_ID);?
+				pDX->Fail();
+			}
+			else
+			{
+				//Iva: I try to set ID to new value
+				try
+				{
+					 m_SelXMLElm->setAttribute("id", (LPCTSTR)csIDEditValue); 
+				}
+				catch(_com_error &e)
+				{
+					SetDlgItemText(nId, m_OldID ); //Iva: return old value to edit box
+					m_SelXMLElm->setAttribute("id", (LPCTSTR)m_OldID);
+					//AfxMessageBox(e.Description());
+					CReportAsistentApp::ReportError(IDS_INVALID_ELEMENT_ID,e.Description() );
+					pDX->Fail();
+				}
+				m_SelXMLElm->setAttribute("id", (LPCTSTR)m_OldID); 
+
+			}
+
 		}
 
 	}

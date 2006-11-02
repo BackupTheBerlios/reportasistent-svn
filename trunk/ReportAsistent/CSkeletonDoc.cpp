@@ -677,21 +677,25 @@ CElementManager::elId_t CSkeletonDoc::ElementIdFromCommandId(UINT nMessageID)
 void CSkeletonDoc::OnMmnewelement(UINT nMessageID) 
 {
 	CTreeCtrl & hTreeCtrl = GetFirstView()->GetTreeCtrl();
-	HTREEITEM hSelTreeItem = hTreeCtrl.GetSelectedItem();
-	if (hSelTreeItem == NULL) return;
+	HTREEITEM hSelTreeItem = hTreeCtrl.GetSelectedItem(); //Prvek, DO ktereho vkladam
+	BOOL bSuccess=false;
 
+	if (hSelTreeItem == NULL) return;
+	
+	//Prvek, DO ktereho vkladam
 	MSXML2::IXMLDOMElementPtr selected_element = ElementFromItemData(hTreeCtrl.GetItemData( hSelTreeItem ));	
 
+	//Typ prvku, ktery chci vlozit
 	CElementManager::elId_t el_id = ElementIdFromCommandId(nMessageID);
 	if (el_id == ELID_UNKNOWN) return;
-
 	
-	
+//1st step: Try to place element of el_id type directly to selected_element 
 	MSXML2::IXMLDOMElementPtr new_element = InsertNewElement(el_id, selected_element);
 	if (new_element != NULL) //tj. pridani se zdarilo
 	{
 		if (EditElement(new_element))
 		{
+			bSuccess=true;
 			CUT_Hint oHint(hSelTreeItem,new_element,TVI_LAST);
 			SetModifiedFlag();
 			UpdateAllViews(NULL,UT_INS, &oHint);
@@ -705,7 +709,25 @@ void CSkeletonDoc::OnMmnewelement(UINT nMessageID)
 		new_element.Release();
 	}
 
-	
+//2nd step: Searching for suitable intermediate elements
+	if (bSuccess==false)
+	{
+		/*switch (el_id)
+		{
+			case ELID_REPORT:
+					//first try to insert chapter 
+					
+
+				break;
+			case ELID_TEXT				
+			case ELID_PARAGRAPH		
+			case ELID_CHAPTER	
+			case ELID_INCLUDE		
+			case ELID_ATTR_LINK		
+			case ELID_ATTR_LINK_TABLE	
+		}*/
+
+	}
 	selected_element.Release();
 }
 
