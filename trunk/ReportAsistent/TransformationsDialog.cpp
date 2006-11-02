@@ -55,7 +55,7 @@ BEGIN_MESSAGE_MAP(CTransformationsDialog, CPropertyPage)
 	ON_BN_CLICKED(IDC_MOVE_DOWN_BUTTON, OnMoveDownButton)
 	ON_BN_CLICKED(IDC_CONFIGURE_BUTTON, OnConfigureButton)
 	//}}AFX_MSG_MAP
-	ON_LBN_SELCHANGE(IDC_SELECTED_TRANSFS_LIST, &CTransformationsDialog::OnLbnSelchangeSelectedTransfsList)
+	ON_LBN_SELCHANGE(IDC_SELECTED_TRANSFS_LIST, OnLbnSelchangeSelectedTransfsList)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
