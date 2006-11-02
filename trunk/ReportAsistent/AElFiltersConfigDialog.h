@@ -35,6 +35,7 @@ public:
 
 private:
 	MSXML2::IXMLDOMElementPtr & m_active_element;
+	MSXML2::IXMLDOMElementPtr m_cloned_active_element;
 
 // Implementation
 protected:
@@ -53,6 +54,10 @@ public:
 	virtual BOOL OnInitDialog();
 public:
 	afx_msg void OnBnClickedAddFilterButton();
+public:
+	MSXML2::IXMLDOMElementPtr & getActiveElement(void);
+public:
+	MSXML2::IXMLDOMElementPtr & getClonedActiveElement(void);
 };
 
 //{{AFX_INSERT_LOCATION}}

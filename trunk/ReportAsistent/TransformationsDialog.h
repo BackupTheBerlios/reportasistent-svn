@@ -18,7 +18,7 @@ class CTransformationsDialog : public CPropertyPage
 // Construction
 public:
 	BOOL SaveAll();
-	CTransformationsDialog(MSXML2::IXMLDOMElementPtr & active_element, CWnd* pParent = NULL);   // standard constructor
+	CTransformationsDialog(MSXML2::IXMLDOMElementPtr & active_element, MSXML2::IXMLDOMElementPtr & cloned_element, CWnd* pParent = NULL);   // standard constructor
 
 // Dialog Data
 	//{{AFX_DATA(CTransformationsDialog)
@@ -58,6 +58,7 @@ protected:
 	DECLARE_MESSAGE_MAP()
 private:
 	MSXML2::IXMLDOMElementPtr & m_active_element;
+	MSXML2::IXMLDOMElementPtr & m_cloned_active_element;
 	MSXML2::IXMLDOMElementPtr m_cloned_output_element;
 	//zmeny se provadeji v klonu, pokud uzivatel zmacken OK, puvodni element (m_active_element) se nahradi klonem
 

@@ -355,19 +355,25 @@ BOOL CSkeletonDoc::EditActiveElement(MSXML2::IXMLDOMElementPtr &element)
 	CSimpleFilterDialog simple_filter(element);
 	BOOL bSimpleFilter=true;
 
+	
+	MSXML2::IXMLDOMElementPtr a_el_clone;
+	CTransformationsDialog transforms_simple(element, a_el_clone);
+	CTransformationsDialog transforms_complex(filters.getActiveElement(), filters.getClonedActiveElement());
+
+
 	if (NULL != m.getActiveElementInfo(m.IdentifyElement(element))->getComplexFilterTransformation())
 	{
 		sheet.AddPage(& filters);
+		sheet.AddPage(& transforms_complex);
 		bSimpleFilter=false;
 	}
 	else
 	{
 		sheet.AddPage(& simple_filter);
+		sheet.AddPage(& transforms_simple);
 		bSimpleFilter=true;
 	}
 
-	CTransformationsDialog transforms(element);
-	sheet.AddPage(& transforms);
 
 //  CWaitDialog::prefered_parent = & sheet;
 	

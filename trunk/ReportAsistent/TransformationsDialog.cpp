@@ -17,8 +17,8 @@ static char THIS_FILE[] = __FILE__;
 // CTransformationsDialog dialog
 
 
-CTransformationsDialog::CTransformationsDialog(MSXML2::IXMLDOMElementPtr & active_element, CWnd* pParent /*=NULL*/)
-	: CPropertyPage(CTransformationsDialog::IDD/*, pParent*/), m_active_element(active_element)
+CTransformationsDialog::CTransformationsDialog(MSXML2::IXMLDOMElementPtr & active_element, MSXML2::IXMLDOMElementPtr & cloned_element, CWnd* pParent /*=NULL*/)
+: CPropertyPage(CTransformationsDialog::IDD/*, pParent*/), m_active_element(active_element), m_cloned_active_element(cloned_element)
 {
 	//{{AFX_DATA_INIT(CTransformationsDialog)
 		// NOTE: the ClassWizard will add member initialization here
@@ -27,8 +27,13 @@ CTransformationsDialog::CTransformationsDialog(MSXML2::IXMLDOMElementPtr & activ
 
 	srand( (unsigned)time( NULL ) );
 
+	if (m_cloned_active_element == NULL)
+		m_cloned_active_element = m_active_element->cloneNode(VARIANT_TRUE);
+
+
 	
-	m_cloned_output_element = m_active_element->selectSingleNode("output")->cloneNode(VARIANT_TRUE);
+	//dedek: neklonuje se, predelano, klonuje se uz ve fitrovacim dialogu (CAElFiltersConfigDialog)
+	m_cloned_output_element = m_cloned_active_element->selectSingleNode("output");//->cloneNode(VARIANT_TRUE);
 }
 
 
@@ -66,6 +71,7 @@ BOOL CTransformationsDialog::OnInitDialog()
 
 	
 	ASSERT(m_active_element != NULL);
+	ASSERT(m_cloned_active_element != NULL);
 
 	CElementManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
 	
@@ -87,7 +93,7 @@ BOOL CTransformationsDialog::OnInitDialog()
 
 
 	//nacti transformace vybrane v prvku
-	MSXML2::IXMLDOMNodeListPtr selected_transfs = m_active_element->selectNodes("output/transformation/@name");
+	MSXML2::IXMLDOMNodeListPtr selected_transfs = m_cloned_active_element->selectNodes("output/transformation/@name");
 
 	for (a = 0; a < selected_transfs->length; a++)
 	{
@@ -112,14 +118,31 @@ BOOL CTransformationsDialog::SaveAll()
 	ASSERT(m_cloned_output_element != NULL);
 
 //	AfxMessageBox(m_cloned_output_element->xml);
-	
+/*
+
 	m_active_element->replaceChild(
 		m_cloned_output_element,
 		m_active_element->selectSingleNode("output"));
 
 	m_cloned_output_element = m_active_element->selectSingleNode("output")->cloneNode(VARIANT_TRUE);
+*/
 
-  SetModified(FALSE);
+//	m_active_element
+
+/*
+	AfxMessageBox(m_cloned_output_element->xml);
+	AfxMessageBox(m_cloned_active_element->xml);
+	AfxMessageBox(m_active_element->parentNode->xml);
+*/
+
+	m_active_element->parentNode->replaceChild(m_cloned_active_element, m_active_element);
+
+	m_active_element = m_cloned_active_element;
+	m_cloned_active_element = m_active_element->cloneNode(VARIANT_TRUE);
+
+//	AfxMessageBox(m_active_element->parentNode->xml);
+
+	SetModified(FALSE);
 
 	return TRUE;
 }

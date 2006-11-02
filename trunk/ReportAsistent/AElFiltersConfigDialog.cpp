@@ -29,6 +29,11 @@ CAElFiltersConfigDialog::CAElFiltersConfigDialog(MSXML2::IXMLDOMElementPtr & act
 	m_OldID=(LPCTSTR) (_bstr_t)  varAtr;
 	if (varAtr.vt!=VT_NULL)
 		m_CF_IdEdit = m_OldID;
+
+
+	m_cloned_active_element = m_active_element->cloneNode(VARIANT_TRUE);
+
+//	AfxMessageBox(m_cloned_active_element->xml);
 }
 
 
@@ -135,4 +140,14 @@ void CAElFiltersConfigDialog::OnBnClickedAddFilterButton()
 {
 	CComplexFilterDialog dlg(m_active_element);
 	dlg.DoModal();
+}
+
+MSXML2::IXMLDOMElementPtr & CAElFiltersConfigDialog::getActiveElement(void)
+{
+	return m_active_element;
+}
+
+MSXML2::IXMLDOMElementPtr & CAElFiltersConfigDialog::getClonedActiveElement(void)
+{
+	return m_cloned_active_element;
 }
