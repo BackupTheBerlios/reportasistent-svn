@@ -231,7 +231,7 @@ void CSkeletonDoc::OnElementEdit()
 
 	if (EditElement(edited_element))
 	{
-		CUT_Hint oHint(sel_item,0,0);
+		CUT_Hint oHint(sel_item, edited_element, 0);
 		SetModifiedFlag();
 		UpdateAllViews(NULL,UT_EDIT, &oHint);
 	}
@@ -397,7 +397,7 @@ BOOL CSkeletonDoc::EditActiveElement(MSXML2::IXMLDOMElementPtr &element)
 
 //dedek: vrati TRUE pokud doslo ke zmene elementu
 //nenastuvuje ModifiedFlag, neprekresluje
-BOOL CSkeletonDoc::EditElement(MSXML2::IXMLDOMElementPtr selected_element)
+BOOL CSkeletonDoc::EditElement(MSXML2::IXMLDOMElementPtr & selected_element)
 {
 
 	if (selected_element == NULL) return FALSE;

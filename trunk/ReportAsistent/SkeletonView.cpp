@@ -210,6 +210,14 @@ void CSkeletonView::OnUpdate(CView* pSender, LPARAM lHint, CObject* pHint)
 			if (NULL != ((CUT_Hint*)pHint)->pTreeItem) 
 			{
 				CElementManager & OElementManager = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
+				
+				//dedek: pokud se cely element pri editaci vymeni
+				GetDocument()->DeleteItemData(pTreeCtrl.GetItemData(((CUT_Hint*)pHint)->pTreeItem));
+				pTreeCtrl.SetItemData(
+					((CUT_Hint*)pHint)->pTreeItem,
+					CSkeletonDoc::CreateItemData(((CUT_Hint*)pHint)->pElement));
+				//dedek: konec
+
 				MSXML2::IXMLDOMElementPtr edited_element = GetDocument()->ElementFromItemData(pTreeCtrl.GetItemData(((CUT_Hint*)pHint)->pTreeItem));
 				
 				pTreeCtrl.SetItemText(((CUT_Hint*)pHint)->pTreeItem, OElementManager.CreateElementCaption( edited_element));
