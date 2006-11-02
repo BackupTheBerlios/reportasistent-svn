@@ -19,6 +19,9 @@ static char THIS_FILE[] = __FILE__;
 
 CComplexFilterDialog::CComplexFilterDialog(MSXML2::IXMLDOMElementPtr & active_element, CWnd* pParent)	// nestandard constructor :-)
 : CDialog(CComplexFilterDialog::IDD, pParent), m_active_element(active_element), m_bSourceIsInit(FALSE)
+, m_nTopNValues(0)
+, m_nTopN(0) //hodnota se zadava v pres spin v init dilaog
+, m_nFilterTypeRadioGroup(0)
 {
 	//{{AFX_DATA_INIT(CComplexFilterDialog)
 		// NOTE: the ClassWizard will add member initialization here
@@ -38,6 +41,13 @@ void CComplexFilterDialog::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_DATA_SOURCE_COMBO, m_SourcesCombo);
 	DDX_Control(pDX, IDC_ATTRIBUTES_LIST, m_AttributesList);
 	DDX_Control(pDX, IDC_VALUES_LIST, m_ValuesList);
+	DDX_Control(pDX, IDC_TRESHOLD_EDIT, m_TresholdEdeit);
+
+	DDX_Radio(pDX, IDC_TRESHOLD_RADIO, m_nFilterTypeRadioGroup);
+	
+	DDX_Text(pDX, IDC_TOPN_EDIT, m_nTopNValues);
+	DDV_MinMaxUInt(pDX, m_nTopNValues, 0, 100);
+	DDX_Control(pDX, IDC_TOPN_SPIN, m_TopNSpin);
 }
 
 
@@ -52,6 +62,8 @@ BEGIN_MESSAGE_MAP(CComplexFilterDialog, CDialog)
 	ON_BN_CLICKED(IDC_ASCENDING_RADIO, OnBnClickedAscendingRadio)
 	ON_BN_CLICKED(IDC_DESCENDING_RADIO, OnBnClickedDescendingRadio)
 	ON_BN_CLICKED(IDC_NUMERIC_SORT_CHECK, OnBnClickedNumericSortCheck)
+//	ON_NOTIFY(UDN_DELTAPOS, IDC_TOPN_SPIN, OnDeltaposTopnSpin)
+ON_BN_CLICKED(IDOK, OnBnClickedOk)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -60,6 +72,11 @@ END_MESSAGE_MAP()
 BOOL CComplexFilterDialog::OnInitDialog()
 {
 	CDialog::OnInitDialog();
+
+	m_TopNSpin.SetRange(1, 100);
+	m_TopNSpin.SetPos(5);
+	m_TopNSpin.SetBase(1);
+	m_TopNSpin.SetBuddy(GetDlgItem(IDC_TOPN_EDIT));
 
 	
 	
@@ -332,4 +349,29 @@ void CComplexFilterDialog::FillValuesList(LPCTSTR cur_attr_str)
 void CComplexFilterDialog::OnBnClickedNumericSortCheck()
 {
 	FillValuesList();
+}
+
+//void CComplexFilterDialog::OnDeltaposTopnSpin(NMHDR *pNMHDR, LRESULT *pResult)
+//{
+//	LPNMUPDOWN pNMUpDown = reinterpret_cast<LPNMUPDOWN>(pNMHDR);
+//	// TODO: Add your control notification handler code here
+//
+//	/*
+//	UpdateData(TRUE);
+//	m_nTopNValues = pNMUpDown->iPos +50;
+//	UpdateData(FALSE);
+//*/
+//	
+//
+//	*pResult = 0;
+//}
+
+void CComplexFilterDialog::OnBnClickedOk()
+{
+	if (! UpdateData(TRUE)) return;
+
+	EndDialog(IDOK);
+	
+	// TODO: Add your control notification handler code here
+	//OnOK();
 }

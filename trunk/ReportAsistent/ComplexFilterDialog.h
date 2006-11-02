@@ -1,4 +1,5 @@
 #include "afxwin.h"
+#include "afxcmn.h"
 #if !defined(AFX_COMPLEXFILTERDIALOG_H__2CD50BAE_2DA0_4301_AEB9_05756F4ED841__INCLUDED_)
 #define AFX_COMPLEXFILTERDIALOG_H__2CD50BAE_2DA0_4301_AEB9_05756F4ED841__INCLUDED_
 
@@ -46,6 +47,7 @@ protected:
 public:
 	virtual BOOL OnInitDialog();
 private:
+	int m_nFilterTypeRadioGroup;
 	BOOL m_bSourceIsInit;
 	CComboBox m_SourcesCombo;
 	MSXML2::IXMLDOMElementPtr & m_active_element;
@@ -70,6 +72,16 @@ protected:
 	void FillValuesList(LPCTSTR cur_attr_str = NULL);
 public:
 	afx_msg void OnBnClickedNumericSortCheck();
+	CEdit m_TresholdEdeit;
+	unsigned int m_nTopNValues;
+public:
+//	afx_msg void OnDeltaposTopnSpin(NMHDR *pNMHDR, LRESULT *pResult);
+public:
+	unsigned int m_nTopN;
+public:
+	CSpinButtonCtrl m_TopNSpin;
+public:
+	afx_msg void OnBnClickedOk();
 };
 
 //{{AFX_INSERT_LOCATION}}

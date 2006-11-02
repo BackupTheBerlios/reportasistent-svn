@@ -44,6 +44,7 @@
 #define IDC_EDIT1                       1001
 #define IDC_DIALTEXT_EDIT               1001
 #define IDC_STATIC1                     1001
+#define IDC_TOPN_EDIT                   1001
 #define IDC_GENERATE_BUTTON             1002
 #define IDC_DATA_SOURCE_COMBO           1003
 #define IDC_ERROR_TEXT                  1003
@@ -106,9 +107,13 @@
 #define IDC_BUTTON3                     1047
 #define IDC_BUTTON4                     1048
 #define IDC_RADIO1                      1049
+#define IDC_TRESHOLD_RADIO              1049
 #define IDC_RADIO2                      1050
+#define IDC_FIXED_VAL_RADIO             1050
 #define IDC_RADIO3                      1051
+#define IDC_TOP_N_VAL_RADIO             1051
 #define IDC_EDIT2                       1052
+#define IDC_TRESHOLD_EDIT               1052
 #define IDC_ATTRLINK_ID_EDIT            1053
 #define IDC_ATTRLINKTABLE_ID_EDIT       1054
 #define IDC_INCLUDE_FILENAME_EDIT       1055
@@ -119,6 +124,7 @@
 #define IDC_ADD_FILTER_BUTTON2          1061
 #define IDC_SIMPLEFILTER_ID_EDIT        1061
 #define IDC_CF_ID_EDIT                  1062
+#define IDC_TOPN_SPIN                   1062
 #define ID_MMGENREP                     32771
 #define ID_MMSOURCES                    32772
 #define ID_ELEMENT_EDIT                 32780
@@ -162,7 +168,7 @@
 #define _APS_3D_CONTROLS                     1
 #define _APS_NEXT_RESOURCE_VALUE        172
 #define _APS_NEXT_COMMAND_VALUE         32794
-#define _APS_NEXT_CONTROL_VALUE         1062
+#define _APS_NEXT_CONTROL_VALUE         1063
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif
