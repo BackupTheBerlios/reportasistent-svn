@@ -138,7 +138,7 @@ void CAElFiltersConfigDialog::DDV_NonDuplicateID(CDataExchange *pDX, int nId, CS
 
 void CAElFiltersConfigDialog::OnBnClickedAddFilterButton()
 {
-	CComplexFilterDialog dlg(m_active_element);
+	CComplexFilterDialog dlg(m_cloned_active_element);
 	dlg.DoModal();
 }
 

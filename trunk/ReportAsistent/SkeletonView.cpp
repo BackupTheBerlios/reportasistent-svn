@@ -218,7 +218,8 @@ void CSkeletonView::OnUpdate(CView* pSender, LPARAM lHint, CObject* pHint)
 					CSkeletonDoc::CreateItemData(((CUT_Hint*)pHint)->pElement));
 				//dedek: konec
 
-				MSXML2::IXMLDOMElementPtr edited_element = GetDocument()->ElementFromItemData(pTreeCtrl.GetItemData(((CUT_Hint*)pHint)->pTreeItem));
+				//MSXML2::IXMLDOMElementPtr edited_element = GetDocument()->ElementFromItemData(pTreeCtrl.GetItemData(((CUT_Hint*)pHint)->pTreeItem));
+				MSXML2::IXMLDOMElementPtr edited_element = ((CUT_Hint*)pHint)->pElement;
 				
 				pTreeCtrl.SetItemText(((CUT_Hint*)pHint)->pTreeItem, OElementManager.CreateElementCaption( edited_element));
 			}	
