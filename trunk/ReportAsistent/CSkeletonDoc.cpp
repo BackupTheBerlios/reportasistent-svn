@@ -837,7 +837,7 @@ BOOL CSkeletonDoc::InitAndClearXmlDom()
 	hr= m_pXMLDom.CreateInstance(_T("Msxml2.DOMDocument"));
 	if (FAILED(hr)) 
 	{
-		CReportAsistentApp::ReportError(IDS_FAILED_CREATE_XML_DOM_INSTANCE);
+		CReportAsistentApp::ReportError(IDS_FAILED_CREATE_XML_DOM_INSTANCE, "Init new document failed.");
 		return FALSE;
 	}
 

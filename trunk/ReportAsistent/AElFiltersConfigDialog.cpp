@@ -49,6 +49,7 @@ BEGIN_MESSAGE_MAP(CAElFiltersConfigDialog, CDialog)
 	//{{AFX_MSG_MAP(CAElFiltersConfigDialog)
 		// NOTE: the ClassWizard will add message map macros here
 	//}}AFX_MSG_MAP
+	ON_BN_CLICKED(IDC_ADD_FILTER_BUTTON, OnBnClickedAddFilterButton)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -107,4 +108,10 @@ void CAElFiltersConfigDialog::DDV_NonDuplicateID(CDataExchange *pDX, int nId, CS
 
 	}
 
+}
+
+void CAElFiltersConfigDialog::OnBnClickedAddFilterButton()
+{
+	CComplexFilterDialog dlg(m_active_element);
+	dlg.DoModal();
 }

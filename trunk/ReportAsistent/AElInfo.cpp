@@ -20,7 +20,38 @@ static char THIS_FILE[]=__FILE__;
 
 CAElInfo::CAElInfo()
 {
-	pElementDefinitionDOM.CreateInstance("Msxml2.DOMDocument");
+	HRESULT hr;
+	hr = pElementDefinitionDOM.CreateInstance("Msxml2.DOMDocument");
+
+	if (hr != S_OK)
+	{
+		LPVOID lpMsgBuf;
+		FormatMessage( 
+			FORMAT_MESSAGE_ALLOCATE_BUFFER | 
+			FORMAT_MESSAGE_FROM_SYSTEM | 
+			FORMAT_MESSAGE_IGNORE_INSERTS,
+			NULL,
+//					n = GetLastError(),
+			hr,
+			MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), // Default language
+			(LPTSTR) &lpMsgBuf,
+			0,
+			NULL 
+		);
+		// Process any inserts in lpMsgBuf.
+		// ...
+		// Display the string.			
+		// CReportAsistentApp::ReportError(IDS_WB_WORD_LOADER_NOT_REGISTRED, (LPCTSTR) lpMsgBuf);
+		CReportAsistentApp::ReportError(IDS_FAILED_CREATE_XML_DOM_INSTANCE, (LPCTSTR) lpMsgBuf);
+
+		// Free the buffer.
+		LocalFree( lpMsgBuf );		
+		ExitProcess(-1);
+		return;
+	}
+
+
+
 	pElementDefinitionDOM->async = VARIANT_FALSE;
 
 	pFillElementAttributesDOM.CreateInstance("Msxml2.DOMDocument");
@@ -54,9 +85,8 @@ LPCTSTR CAElInfo::getElementLabel()
 }
 
 BOOL CAElInfo::LoadFromDir(LPCTSTR dir_path)
-{
-  
-  src_dir_path = dir_path;
+{  
+	src_dir_path = dir_path;
 	
 	//nacteni pElementDefinitionDOM
 	pElementDefinitionDOM->load((LPCTSTR) (src_dir_path + "\\element.xml"));

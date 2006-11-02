@@ -51,6 +51,8 @@ protected:
 //	virtual void PreInitDialog();
 public:
 	virtual BOOL OnInitDialog();
+public:
+	afx_msg void OnBnClickedAddFilterButton();
 };
 
 //{{AFX_INSERT_LOCATION}}

@@ -291,41 +291,51 @@ BOOL CWordManager::CreateVBRAInstance(_LMRA_XML_WordLoaderPtr & refLMRAInterface
 
 		CDirectoriesManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->DirectoriesManager;
 
-		// kody - smaz
-		//AfxMessageBox(m.getLMRA_WB_WordLoaderPath());
-
 		BOOL ret = CreateProcess(m.getLMRA_WB_WordLoaderPath(), " register", NULL, NULL, FALSE, NORMAL_PRIORITY_CLASS, NULL, NULL, & si, & pi);
 		if (! ret) 
 		{
-			CReportAsistentApp::ReportError(IDS_WB_WORD_LOADER_NOT_REGISTRED);
+			CReportAsistentApp::ReportError(IDS_WB_WORD_LOADER_NOT_REGISTRED, "LMRA_WordLoader execution failed.");
 			return FALSE;
 		}
 
-		// kody - smaz
-		//AfxMessageBox("registracni proces spusten");
-		
 		//pockame az spusteny process skonci
 		DWORD wait_ret= WaitForSingleObject(pi.hProcess, 5000);
  		CloseHandle(pi.hProcess);
 
 		if (wait_ret != WAIT_OBJECT_0)
 		{
-			CReportAsistentApp::ReportError(IDS_WB_WORD_LOADER_NOT_REGISTRED);
+			CReportAsistentApp::ReportError(IDS_WB_WORD_LOADER_NOT_REGISTRED, "LMRA_WordLoader execution exceeded timeout.");
 			return FALSE;
 		}
 	
-		// kody - smaz
-		//AfxMessageBox("registracni proces skoncil uspesne");
-
 		hr = refLMRAInterface.CreateInstance("LMRA_WordLoader.LMRA_XML_WordLoader");
 		if (S_OK != hr)
 		{
-			CReportAsistentApp::ReportError(IDS_WB_WORD_LOADER_NOT_REGISTRED);
+//			DWORD n;
+			LPVOID lpMsgBuf;
+			FormatMessage( 
+				FORMAT_MESSAGE_ALLOCATE_BUFFER | 
+				FORMAT_MESSAGE_FROM_SYSTEM | 
+				FORMAT_MESSAGE_IGNORE_INSERTS,
+				NULL,
+//					n = GetLastError(),
+				hr,
+				MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), // Default language
+				(LPTSTR) &lpMsgBuf,
+				0,
+				NULL 
+			);
+			// Process any inserts in lpMsgBuf.
+			// ...
+			// Display the string.			
+			CReportAsistentApp::ReportError(IDS_WB_WORD_LOADER_NOT_REGISTRED, (LPCTSTR) lpMsgBuf);
+
+			// Free the buffer.
+			LocalFree( lpMsgBuf );
+
 			return FALSE;
 		}
 	}
-	// kody - smaz
-	//AfxMessageBox("Netreba registrovat ActiveX");
 
 	return TRUE;
 }

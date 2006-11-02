@@ -3,7 +3,7 @@
 	ProjectType="Visual C++"
 	Version="8,00"
 	Name="ReportAsistent"
-	ProjectGUID="{CC6F4AD6-FBAB-425A-A5F9-721A639831DA}"
+	ProjectGUID="{5F34FD05-3DC1-4840-81A2-DF6BB08897BB}"
 	RootNamespace="ReportAsistent"
 	Keyword="MFCProj"
 	>
@@ -1118,7 +1118,15 @@
 			RelativePath="..\XML\visualization_options_DTD.xml"
 			>
 		</File>
+		<File
+			RelativePath="zlepseni_ovladani.txt"
+			>
+		</File>
 	</Files>
 	<Globals>
+		<Global
+			Name="RESOURCE_FILE"
+			Value="ReportAsistent.rc"
+		/>
 	</Globals>
 </VisualStudioProject>
