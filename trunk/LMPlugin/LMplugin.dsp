@@ -271,10 +271,6 @@ SOURCE=.\TLit_Scan_Recordset.cpp
 
 SOURCE=.\tmCategory_Recordset.cpp
 # End Source File
-# Begin Source File
-
-SOURCE=.\TOrder_of_Categories.cpp
-# End Source File
 # End Group
 # Begin Group "Header Files"
 
@@ -462,10 +458,6 @@ SOURCE=.\TLit_Scan_Recordset.h
 # Begin Source File
 
 SOURCE=.\tmCategory_Recordset.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\TOrder_of_Categories.h
 # End Source File
 # End Group
 # Begin Group "Resource Files"

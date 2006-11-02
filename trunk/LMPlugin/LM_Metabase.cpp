@@ -5,52 +5,88 @@
 #include "math.h"
 #include "Faktorial.h"
 
-CString format_cedent (TLitArray & antecedent)
+CString format_cedent (TLitArray & cedent)
 {
 	int i;
 	int cnt;
 	CString xml_string = "";
 	CString first;
 	CString last;
-	for (i = 0; i < antecedent.GetSize (); i++) 
+	for (i = 0; i < cedent.GetSize (); i++) 
 	{ 
-		if ((i == 0) || (antecedent.GetAt (i).quant != antecedent.GetAt (i - 1).quant)) 
+		if ((i == 0) || (cedent.GetAt (i).quant != cedent.GetAt (i - 1).quant)) 
 		{ 
-			xml_string = xml_string + "<ti_literal  id=\"" + antecedent.GetAt (i).id + 
-				"\"  quant=\"" + antecedent.GetAt (i).quant + 
+			xml_string = xml_string + "<ti_literal  id=\"" + cedent.GetAt (i).id + 
+				"\"  quant=\"" + cedent.GetAt (i).quant + 
 				"\"  value=\""; 
 			cnt = 0; 
-			if (antecedent.GetAt (i).coef_type == "int") 
+			if (cedent.GetAt (i).coef_type == "int"
+				||
+				cedent.GetAt (i).coef_type == "cut"
+				||
+				cedent.GetAt (i).coef_type == "lcut"
+				||
+				cedent.GetAt (i).coef_type == "rcut"
+				||
+				cedent.GetAt (i).coef_type == "intc") 
 			{ 
-				first = antecedent.GetAt (i).value; 
+				first = cedent.GetAt (i).value; 
 				last = first; 
 			} 
 		} 
 				
 		cnt++; 
-		if (antecedent.GetAt (i).coef_type == "int") 
+		if (cedent.GetAt (i).coef_type == "int"
+			||
+			cedent.GetAt (i).coef_type == "cut"
+			||
+			cedent.GetAt (i).coef_type == "lcut"
+			||
+			cedent.GetAt (i).coef_type == "rcut"
+			||
+			cedent.GetAt (i).coef_type == "intc") 
 		{ 
-			last = antecedent.GetAt (i).value; 
+			last = cedent.GetAt (i).value; 
 		} 
-		else if (	antecedent.GetAt (i).coef_type == "subset" 
+		else if (	cedent.GetAt (i).coef_type == "subset" 
 					|| 
-					antecedent.GetAt (i).coef_type == "one") 
-			xml_string = xml_string + antecedent.GetAt (i).value; 
+					cedent.GetAt (i).coef_type == "one"
+					||
+					cedent.GetAt (i).coef_type == "boolt"
+					||
+					cedent.GetAt (i).coef_type == "boolf"
+					||
+					cedent.GetAt (i).coef_type == "boola") 
+			xml_string = xml_string + cedent.GetAt (i).value; 
 		
 		
 		
-		if ((i < antecedent.GetSize () - 1) 
+		if ((i < cedent.GetSize () - 1) 
 			&& 
-			(antecedent.GetAt (i).quant == antecedent.GetAt (i + 1).quant))
+			(cedent.GetAt (i).quant == cedent.GetAt (i + 1).quant))
 		{ 
-			if (	antecedent.GetAt (i).coef_type == "subset" 
+			if (	cedent.GetAt (i).coef_type == "subset" 
 					|| 
-					antecedent.GetAt (i).coef_type == "one") 
+					cedent.GetAt (i).coef_type == "one"
+					||
+					cedent.GetAt (i).coef_type == "boolt"
+					||
+					cedent.GetAt (i).coef_type == "boolf"
+					||
+					cedent.GetAt (i).coef_type == "boola") 
 				xml_string += ", "; 
 		} 
 		else 
 		{ 
-			if (antecedent.GetAt (i).coef_type == "int") 
+			if (cedent.GetAt (i).coef_type == "int"
+				||
+				cedent.GetAt (i).coef_type == "cut"
+				||
+				cedent.GetAt (i).coef_type == "lcut"
+				||
+				cedent.GetAt (i).coef_type == "rcut"
+				||
+				cedent.GetAt (i).coef_type == "intc") 
 			{ 
 				if (cnt == 1) xml_string += first; 
 				else if (cnt == 2) xml_string = xml_string + first + ", " + last; 
@@ -650,57 +686,17 @@ CString Hyp_4ft_Meta::xml_convert ()
 	//beginning of ti_cedent elements
 	//Antecedent
 	xml_string = xml_string + "<ti_cedent  id=\"" + ant_id + "\"  type=\"Antecedent\"> ";
-	int i;
-    for (i = 0; i < antecedent.GetSize (); i++)
-	{
-		if ((i == 0) || (antecedent.GetAt (i).quant != antecedent.GetAt (i - 1).quant))
-			xml_string = xml_string + "<ti_literal  id=\"" + antecedent.GetAt (i).id +
-				"\"  quant=\"" + antecedent.GetAt (i).quant +
-				"\"  value=\"";
-		xml_string = xml_string + antecedent.GetAt (i).value;
-		if ((i < antecedent.GetSize () - 1)
-			&&
-			(antecedent.GetAt (i).quant == antecedent.GetAt (i + 1).quant))
-			xml_string += ", ";
-		else
-			xml_string += "\"/> ";
-	}
+	xml_string += format_cedent (antecedent);
 	xml_string = xml_string + "</ti_cedent> ";
 	
 	//Succedent
 	xml_string = xml_string + "<ti_cedent  id=\"" + suc_id + "\"  type=\"Succedent\"> ";
-    for (i = 0; i < succedent.GetSize (); i++)
-	{
-		if ((i == 0) || (succedent.GetAt (i).quant != succedent.GetAt (i - 1).quant))
-			xml_string = xml_string + "<ti_literal  id=\"" + succedent.GetAt (i).id +
-				"\"  quant=\"" + succedent.GetAt (i).quant +
-				"\"  value=\"";
-		xml_string = xml_string + succedent.GetAt (i).value;
-		if ((i < succedent.GetSize () - 1)
-			&&
-			(succedent.GetAt (i).quant == succedent.GetAt (i + 1).quant))
-			xml_string += ", ";
-		else
-			xml_string += "\"/> ";
-	}
+    xml_string += format_cedent (succedent);
 	xml_string = xml_string + "</ti_cedent> ";
 	
 	//Condition
 	xml_string = xml_string + "<ti_cedent  id=\"" + con_id + "\"  type=\"Condition\"> ";
-    for (i = 0; i < condition.GetSize (); i++)
-	{
-		if ((i == 0) || (condition.GetAt (i).quant != condition.GetAt (i - 1).quant))
-			xml_string = xml_string + "<ti_literal  id=\"" + condition.GetAt (i).id +
-				"\"  quant=\"" + condition.GetAt (i).quant +
-				"\"  value=\"";
-		xml_string = xml_string + condition.GetAt (i).value;
-		if ((i < condition.GetSize () - 1)
-			&&
-			(condition.GetAt (i).quant == condition.GetAt (i + 1).quant))
-			xml_string += ", ";
-		else
-			xml_string += "\"/> ";
-	}
+    xml_string += format_cedent (condition);
 	xml_string = xml_string + "</ti_cedent> ";
 		
 	return xml_string;

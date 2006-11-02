@@ -202,7 +202,6 @@ struct Hyp_tiLiteral
 	CString	id;
 	CString	quant;
 	CString	value;
-	CString type;
 	CString	coef_type;
 };
 
