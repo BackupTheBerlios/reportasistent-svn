@@ -19,6 +19,7 @@ class CComplexFilterDialog : public CDialog
 // Construction
 public:
 	CComplexFilterDialog(MSXML2::IXMLDOMElementPtr & active_element, CWnd* pParent = NULL);	// nestandard constructor :-)
+	CComplexFilterDialog(MSXML2::IXMLDOMElementPtr & active_element, MSXML2::IXMLDOMElementPtr currnet_attribute_filter, CWnd* pParent = NULL);
 	~CComplexFilterDialog();
 
 // Dialog Data
@@ -47,11 +48,15 @@ protected:
 public:
 	virtual BOOL OnInitDialog();
 private:
+	BOOL m_bNumericSort;
 	int m_nFilterTypeRadioGroup;
+	int m_nSortDirectionRadioGroup;
 	BOOL m_bSourceIsInit;
 	CComboBox m_SourcesCombo;
 	MSXML2::IXMLDOMElementPtr & m_active_element;
    	MSXML2::IXMLDOMElementPtr m_filter_DOM;	//data pouzita na naplneni list veiw
+
+	MSXML2::IXMLDOMElementPtr m_currnet_attribute_filter;
 
 
 	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
@@ -77,11 +82,13 @@ public:
 public:
 //	afx_msg void OnDeltaposTopnSpin(NMHDR *pNMHDR, LRESULT *pResult);
 public:
-	unsigned int m_nTopN;
-public:
 	CSpinButtonCtrl m_TopNSpin;
 public:
 	afx_msg void OnBnClickedOk();
+public:
+	afx_msg void OnLbnSelchangeValuesList();
+	void InitDialogFromXML(void);
+	void AppendFilter(void);
 };
 
 //{{AFX_INSERT_LOCATION}}

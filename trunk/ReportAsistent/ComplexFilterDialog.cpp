@@ -17,15 +17,32 @@ static char THIS_FILE[] = __FILE__;
 
 //IMPLEMENT_DYNCREATE(CComplexFilterDialog, CPropertyPage)
 
+CComplexFilterDialog::CComplexFilterDialog(MSXML2::IXMLDOMElementPtr & active_element, MSXML2::IXMLDOMElementPtr currnet_attribute_filter, CWnd* pParent)
+: m_active_element(active_element), m_currnet_attribute_filter(currnet_attribute_filter)
+{
+	//dedek: v tomhle kostruktoru se dialog inicilaizuje z currnet_attribute_filter elementu
+
+	InitDialogFromXML();
+}
+
+
 CComplexFilterDialog::CComplexFilterDialog(MSXML2::IXMLDOMElementPtr & active_element, CWnd* pParent)	// nestandard constructor :-)
 : CDialog(CComplexFilterDialog::IDD, pParent), m_active_element(active_element), m_bSourceIsInit(FALSE)
-, m_nTopNValues(0)
-, m_nTopN(0) //hodnota se zadava v pres spin v init dilaog
-, m_nFilterTypeRadioGroup(0)
+, m_nTopNValues(0) //hodnota se zadava v pres spin v init dilaog
+, m_nFilterTypeRadioGroup(1)
+, m_bNumericSort(FALSE)
+, m_nSortDirectionRadioGroup(0)
 {
 	//{{AFX_DATA_INIT(CComplexFilterDialog)
 		// NOTE: the ClassWizard will add member initialization here
 	//}}AFX_DATA_INIT
+
+	//dedek: v tomhle kostruktoru se dialog nastavi na vychozi hodnoty a vytvori se prazdny currnet_attribute_filter element
+
+	AppendFilter();
+	
+	
+	//InitDialogFromXML();
 }
 
 CComplexFilterDialog::~CComplexFilterDialog()
@@ -44,10 +61,13 @@ void CComplexFilterDialog::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_TRESHOLD_EDIT, m_TresholdEdeit);
 
 	DDX_Radio(pDX, IDC_TRESHOLD_RADIO, m_nFilterTypeRadioGroup);
+	DDX_Radio(pDX, IDC_ASCENDING_RADIO, m_nSortDirectionRadioGroup);
 	
 	DDX_Text(pDX, IDC_TOPN_EDIT, m_nTopNValues);
 	DDV_MinMaxUInt(pDX, m_nTopNValues, 0, 100);
 	DDX_Control(pDX, IDC_TOPN_SPIN, m_TopNSpin);
+
+	DDX_Check(pDX, IDC_NUMERIC_SORT_CHECK, m_bNumericSort);
 }
 
 
@@ -62,8 +82,8 @@ BEGIN_MESSAGE_MAP(CComplexFilterDialog, CDialog)
 	ON_BN_CLICKED(IDC_ASCENDING_RADIO, OnBnClickedAscendingRadio)
 	ON_BN_CLICKED(IDC_DESCENDING_RADIO, OnBnClickedDescendingRadio)
 	ON_BN_CLICKED(IDC_NUMERIC_SORT_CHECK, OnBnClickedNumericSortCheck)
-//	ON_NOTIFY(UDN_DELTAPOS, IDC_TOPN_SPIN, OnDeltaposTopnSpin)
-ON_BN_CLICKED(IDOK, OnBnClickedOk)
+	ON_BN_CLICKED(IDOK, OnBnClickedOk)
+	ON_LBN_SELCHANGE(IDC_VALUES_LIST, OnLbnSelchangeValuesList)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -129,6 +149,10 @@ void CComplexFilterDialog::OnSelchangeDataSourceCombo()
 	if (LoadSource(text))
 	{
 		UpDateDialog();
+	}
+	else
+	{
+		ClearAttributesList();
 	}
 
 
@@ -206,6 +230,9 @@ void CComplexFilterDialog::UpDateDialog()
 			new CString((LPCTSTR) attributes->item[a]->selectSingleNode("@name")->text));
 
 	}
+
+//dedek:	pride pridat: m_AttributesList.SelectString
+
 
 	attributes.Release();
 }
@@ -351,27 +378,112 @@ void CComplexFilterDialog::OnBnClickedNumericSortCheck()
 	FillValuesList();
 }
 
-//void CComplexFilterDialog::OnDeltaposTopnSpin(NMHDR *pNMHDR, LRESULT *pResult)
-//{
-//	LPNMUPDOWN pNMUpDown = reinterpret_cast<LPNMUPDOWN>(pNMHDR);
-//	// TODO: Add your control notification handler code here
-//
-//	/*
-//	UpdateData(TRUE);
-//	m_nTopNValues = pNMUpDown->iPos +50;
-//	UpdateData(FALSE);
-//*/
-//	
-//
-//	*pResult = 0;
-//}
 
 void CComplexFilterDialog::OnBnClickedOk()
 {
 	if (! UpdateData(TRUE)) return;
 
+	int sel = m_AttributesList.GetCurSel();
+	CString s = "";
+
+	if (sel == LB_ERR)
+	{
+		AfxMessageBox(IDS_COMPLEX_FILTER_SELECT_ATTR);
+		if (m_AttributesList.GetCount() > 0) m_AttributesList.GetText(0, s);
+		m_AttributesList.SelectString(-1, s);
+		m_AttributesList.SetFocus();
+		return;
+	}
+
+	MSXML2::IXMLDOMDocumentPtr doc = m_active_element->ownerDocument;
+
+	
+	//filter element
+	MSXML2::IXMLDOMElementPtr filter_element = doc->createElement("filter");
+	MSXML2::IXMLDOMAttributePtr type_attr = doc->createAttribute("type");
+	type_attr->value = "complex";
+	filter_element->setAttributeNode(type_attr);
+	type_attr.Release();
+
+	//attribute_filter element
+	MSXML2::IXMLDOMElementPtr attr_filter_element = doc->createElement("attribute_filter");
+	
+	//attr_name
+	MSXML2::IXMLDOMAttributePtr attr_name_attr = doc->createAttribute("attr_name");
+	m_AttributesList.GetText(sel, s);
+	attr_name_attr->value = (LPCTSTR) s;
+	attr_filter_element->setAttributeNode(attr_name_attr);
+
+	//numeric_sort
+	MSXML2::IXMLDOMAttributePtr numeric_sort_attr = doc->createAttribute("numeric_sort");
+	if (m_bNumericSort)
+		numeric_sort_attr->value = "true";
+	else
+		numeric_sort_attr->value = "false";
+	attr_filter_element->setAttributeNode(numeric_sort_attr);
+	
+	//sort_direction
+	MSXML2::IXMLDOMAttributePtr sort_direction_attr = doc->createAttribute("sort_direction");
+	if (m_nSortDirectionRadioGroup + IDC_ASCENDING_RADIO == IDC_DESCENDING_RADIO)
+		sort_direction_attr->value = "descending";
+	else
+		sort_direction_attr->value = "ascending";
+	attr_filter_element->setAttributeNode(sort_direction_attr);
+	
+	
+	//filter_type & filter_data
+	MSXML2::IXMLDOMAttributePtr filter_type_attr = doc->createAttribute("filter_type");
+	MSXML2::IXMLDOMAttributePtr filter_data_attr = doc->createAttribute("filter_data");
+	m_TresholdEdeit.GetWindowText(s);
+	switch (m_nFilterTypeRadioGroup + IDC_TRESHOLD_RADIO)
+	{
+	case IDC_TRESHOLD_RADIO:
+		filter_type_attr->value = "treshold";
+		filter_data_attr->value = (LPCTSTR) s;
+		break;
+	case IDC_FIXED_VAL_RADIO:
+		filter_type_attr->value = "fixed";
+		filter_data_attr->value = (LPCTSTR) s;
+		break;
+	case IDC_TOP_N_VAL_RADIO:
+		filter_type_attr->value = "top_n";
+		filter_data_attr->value = m_nTopNValues;
+		break;
+	}
+	attr_filter_element->setAttributeNode(filter_type_attr);
+	attr_filter_element->setAttributeNode(filter_data_attr);
+
+	filter_element->appendChild(attr_filter_element);
+
+	
+	//pracovni
+	m_active_element->replaceChild(
+		filter_element,
+		m_active_element->selectSingleNode("filter"));
+	
+
 	EndDialog(IDOK);
 	
 	// TODO: Add your control notification handler code here
 	//OnOK();
+}
+
+void CComplexFilterDialog::OnLbnSelchangeValuesList()
+{
+	int sel = m_ValuesList.GetCurSel();
+
+	if (sel == LB_ERR) return;
+
+	CString s;
+	m_ValuesList.GetText(sel, s);
+	m_TresholdEdeit.SetWindowText(s);
+}
+
+void CComplexFilterDialog::InitDialogFromXML(void)
+{
+
+}
+
+void CComplexFilterDialog::AppendFilter(void)
+{
 }

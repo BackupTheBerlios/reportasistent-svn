@@ -160,6 +160,7 @@
 #define IDS_GENERATING_FAILED           61222
 #define IDS_CONFIRM_THRAD_KILL          61400
 #define IDS_CONFIRM_APP_RESUME          61401
+#define IDS_COMPLEX_FILTER_SELECT_ATTR  61402
 
 // Next default values for new objects
 // 

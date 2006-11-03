@@ -870,6 +870,7 @@ STRINGTABLE
 BEGIN
     IDS_CONFIRM_THRAD_KILL  "Warning: Killing of working thread in the middle of its work may cause unpredictable problems in running of the application. The application could even fall down and destroy some your data or Windows resources.\n\nReally kill the thrad?"
     IDS_CONFIRM_APP_RESUME  "Warninig: Resuming the application will let the working thread still working in background. But the result of its work will be discarted. The application will run slower for a while, but you can save your work and exit it.\n\nReally resume the application?"
+    IDS_COMPLEX_FILTER_SELECT_ATTR "Please select attribute to filter."
 END
 
 #endif    // English (U.S.) resources

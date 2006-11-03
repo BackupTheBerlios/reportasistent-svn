@@ -29,11 +29,18 @@ to se deje vzdy, kdyz se cte plugin output, napr pri otevreni simple fiter -->
 <!ATTLIST attribute value CDATA #REQUIRED>
 <!ATTLIST attribute label CDATA #IMPLIED>
 
-<!ELEMENT filter (selection*) >
-<!ATTLIST filter type CDATA #REQUIRED>
+<!ELEMENT filter (selection* | attribute_filter*) >
+<!ATTLIST filter type (simple | complex) #REQUIRED>
 	
 <!ELEMENT selection EMPTY >
-<!ATTLIST selection id CDATA #REQUIRED>	<!-- odkaz na data ze zasuvky nikoli ID prvku - mozna prejmenovat --> 
+<!ATTLIST selection id CDATA #REQUIRED>	<!-- odkaz na data ze zasuvky nikoli ID prvku - mozna prejmenovat -->
+
+<!ELEMENT attribute_filter EMPTY>
+<!ATTLIST attribute_filter attr_name CDATA #REQUIRED>
+<!ATTLIST attribute_filter numeric_sort (true | false) #REQUIRED>
+<!ATTLIST attribute_filter sort_direction (ascending | descending) #REQUIRED>
+<!ATTLIST attribute_filter filter_type (treshold | fixed | top_n) #REQUIRED>
+<!ATTLIST attribute_filter filter_data CDATA #REQUIRED> <!-- treshold value or top_n value-->
 
 <!ELEMENT output (transformation* | (chapter | paragraph | graph | table | text | output)*) >
 
