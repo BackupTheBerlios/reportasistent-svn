@@ -712,11 +712,9 @@ void CSkeletonDoc::OnMmnewelement(UINT nMessageID)
 	HTREEITEM hInterItem2=NULL;
 	
 	//ladici
-	CString Pom;
-	Pom.Format("Dir:%d I1:%d I2:%d", OTrace.Direction, OTrace.Inter1, OTrace.Inter2);
-	AfxMessageBox(Pom);
-
-//	BOOL InsertNewElementAndUpdateTreeCtrl( BOOL bEdit,CElementManager::elId_t el_what_id, HTREEITEM hParentItem,HTREEITEM hInsertBefore); 
+	//CString Pom;
+	//Pom.Format("Dir:%d I1:%d I2:%d", OTrace.Direction, OTrace.Inter1, OTrace.Inter2);
+	//AfxMessageBox(Pom);
 
 	switch (OTrace.Direction)
 	{

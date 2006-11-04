@@ -22,6 +22,7 @@ public:
 // Dialog Data
 	//{{AFX_DATA(CElementParagraphDialog)
 	enum { IDD = IDD_DIALOG_PARAGRAPH };
+	CComboBox	m_StylesCombo;
 	CString	m_DialParagraphIDEditValue;
 	//}}AFX_DATA
 
@@ -35,11 +36,13 @@ public:
 
 // Implementation
 protected:
+	void FillStylesCombo();
 	CString m_OldID;
 
 	// Generated message map functions
 	//{{AFX_MSG(CElementParagraphDialog)
-		// NOTE: the ClassWizard will add member functions here
+	afx_msg void OnStylesRefreshButton();
+	virtual void OnOK();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };

@@ -9,8 +9,9 @@ V tomto souboru jsou navrhy na zprijemneni ovladani programu LM-RA:
 	- Attribute Link
 	- Include
   nebo jinych, aby to nekolidovalo s jiz zavedenymi
+	(Iva: odlozeno, vyzadovalo by to predelat dynamicke reseni toolbaru na staticke. a to je hodne prace)
 
-- HOTOVO: vytvorit specialni pripad pro vkladani prvku Text do Chapter - automaticky vlozi Paragraph a text do nej Text
+- (Iva:HOTOVO): vytvorit specialni pripad pro vkladani prvku Text do Chapter - automaticky vlozi Paragraph a text do nej Text
 
 2) Dialog vyberu transformaci pro aktivni prvky
    --------------------------------------------
@@ -45,6 +46,6 @@ NALEZENE BUGY V OVLADACICH PRVCICH
 1) v Attribute Link dialogu - nepamatuje si naposledy vybranou polozku 
 			    - pridat refresh obsahu pri otevreni dialogu
 
-2) V editoru kostry - pri kopirovani jednoho odstavce a vlozeni hned za sebe se generuji v opacnem poradi, nez jsou v kostre.
+2) (Iva: problem ODSTRANEN)V editoru kostry - pri kopirovani jednoho odstavce a vlozeni hned za sebe se generuji v opacnem poradi, nez jsou v kostre.
 
-3) v editoru kostry - nefunguje klavesova zkratka (Ctrl+M) na otevreni dialogu Data Sources
+3) (Iva: PRIDANO) v editoru kostry - nefunguje klavesova zkratka (Ctrl+M) na otevreni dialogu Data Sources

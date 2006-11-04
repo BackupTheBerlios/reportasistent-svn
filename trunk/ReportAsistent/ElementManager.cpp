@@ -388,77 +388,109 @@ CString CElementManager::CreateElementCaption(MSXML2::IXMLDOMElementPtr &pElemen
 	ASSERT(pElement != NULL);
 
 	elId_t element_id = IdentifyElement(pElement);
-	_bstr_t value;
-	_bstr_t attr;
-	_bstr_t target;
-	CString ret;
+	_bstr_t bsValue;
+	_bstr_t bsId;
+	_bstr_t bsAttr;
+	_bstr_t bsTarget;
+	CString sRet;
 
 //	AfxMessageBox(pElement->xml);
 //	AfxMessageBox(getElementName(element_id));
 
+	bsId = pElement->selectSingleNode("@id")->text;
 	
 	switch (element_id)
 	{
+
+	case  ELID_UNKNOWN:
+		return "Unknown element";
+		break;
 	
 	case  ELID_REPORT:
-		value = pElement->selectSingleNode("@title")->text;
-		if (value.length() == 0) return getElementName(element_id);
-		if (value.length() <=LENGTH_TREE_ITEM_NAME) 					 
+	case  ELID_CHAPTER:		
+		bsValue = pElement->selectSingleNode("@title")->text;
+		if (bsValue.length() == 0) 
 		{
-			ret="Report: ";
-			return ret += (LPCTSTR) value;
+			sRet.Format("%s: No name", (LPCTSTR)bsId);
+			return sRet;
+		}
+		if ((bsValue.length()+bsId.length()+2) <=LENGTH_TREE_ITEM_NAME) 					 
+		{
+			sRet.Format("%s: %s",(LPCTSTR)bsId,(LPCTSTR) bsValue);
+			return sRet;
 		}
 		else
 		{
-			ret.Format("Report: %.*s...", LENGTH_TREE_ITEM_NAME-3, (LPCTSTR) value);
-			return ret;
+			sRet.Format("%s: %.*s...",(LPCTSTR)bsId ,LENGTH_TREE_ITEM_NAME-3, (LPCTSTR) bsValue);
+			return sRet;
 		}
+		break;
 
-	case  ELID_CHAPTER:
-		value = pElement->selectSingleNode("@title")->text;
-		if (value.length() == 0) return "No name";
-		if (value.length() <=LENGTH_TREE_ITEM_NAME) 					 
-			return ret=(LPCTSTR) value;
-		else
-		{
-			ret.Format("%.*s...", LENGTH_TREE_ITEM_NAME-3, (LPCTSTR) value);
-			return ret;
-		}
-	
 	
 	case  ELID_TEXT:
-		if (pElement->text.length() == 0) return "Text - empty";
-		if (pElement->text.length() <= LENGTH_TREE_ITEM_NAME) 					 
-			return ret=(LPCTSTR) pElement->text;
+		if (pElement->text.length() == 0) 
+		{
+			sRet.Format("%s: Empty", (LPCTSTR)bsId);
+			return sRet;
+		}
+		if ((pElement->text.length()+bsId.length()+2) <= LENGTH_TREE_ITEM_NAME) 					 
+		{
+			sRet.Format("%s: %s",(LPCTSTR)bsId,(LPCTSTR) pElement->text);
+			return sRet;
+		}
 		else
 		{
-			ret.Format("%.*s...", LENGTH_TREE_ITEM_NAME-3, (LPCTSTR) pElement->text);			 
-			return ret;
+			sRet.Format("%s: %.*s...",(LPCTSTR)bsId ,LENGTH_TREE_ITEM_NAME-3, (LPCTSTR) bsValue);
+			return sRet;
 		}
-
+		break;
 	case  ELID_ATTR_LINK:
-			attr = pElement->selectSingleNode("@attr_name")->text;
-			target = pElement->selectSingleNode("@target")->text;
+			bsAttr = pElement->selectSingleNode("@attr_name")->text;
+			bsTarget = pElement->selectSingleNode("@target")->text;
 			
-			if ((attr.length() == 0) || (target.length() == 0)) return "Link: empty";
-			
-			ret.Format("Link: %s of %s", (LPCTSTR) attr, (LPCTSTR) target);			 
-			return ret;
-
+			if ((bsAttr.length() == 0) || (bsTarget.length() == 0)) 
+			{
+				sRet.Format("%s: Empty", (LPCTSTR)bsId);
+				return sRet;
+			}
+			else //Iva: length is probably reasonable, so check of length is missing
+			{
+				sRet.Format("%s: %s of %s", (LPCTSTR)bsId,(LPCTSTR) bsAttr, (LPCTSTR) bsTarget);			 
+				return sRet;
+			}
+			break;
 
 	case  ELID_PARAGRAPH:
+	case  ELID_ATTR_LINK_TABLE:
+		//Id is restricted, thus length is not checked.
+		return(LPCTSTR) bsId;
+		break;
+
 	case  ELID_INCLUDE:
-	case  ELID_UNKNOWN:
+		bsValue = pElement->selectSingleNode("@file")->text;
+		if (bsValue.length() == 0) 
+		{
+			sRet.Format("%s: No file", (LPCTSTR)bsId);
+			return sRet;
+		}
+		else
+		{
+			sRet.Format("%s: %s",(LPCTSTR)bsId,(LPCTSTR) bsValue);
+			return sRet;
+		}
+		break;
+
 	default:
 		if (isElementActive(element_id))
 		{
-//			ret.Format("%s: %s", (LPCTSTR) getElementName(element_id), (LPCTSTR) pElement->selectSingleNode("@id")->text);
-			return(LPCTSTR) pElement->selectSingleNode("@id")->text;
+			//Id is restricted, thus length is not checked.
+			return(LPCTSTR) bsId;
 		}
 		else
 		{
 			return (LPCTSTR) pElement->baseName;
 		}
+		break;
 	}
 
 	

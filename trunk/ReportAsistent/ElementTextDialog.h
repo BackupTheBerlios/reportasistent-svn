@@ -20,6 +20,7 @@ public:
 // Dialog Data
 	//{{AFX_DATA(CElementTextDialog)
 	enum { IDD = IDD_DIALOGTEXT };
+	CComboBox	m_StylesCombo;
 	CString	m_DialTextEditValue;
 	CString	m_DialTextIDEditValue;
 	//}}AFX_DATA
@@ -34,11 +35,14 @@ public:
 
 // Implementation
 protected:
+	void FillStylesCombo();
 	void DDV_NonDuplicateID(CDataExchange *pDX, int nId, CString csIDEditValue);
 	CString m_OldID;
 
 	// Generated message map functions
 	//{{AFX_MSG(CElementTextDialog)
+	afx_msg void OnStylesRefreshButton();
+	virtual void OnOK();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };

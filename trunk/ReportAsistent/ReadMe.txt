@@ -1,3 +1,6 @@
+Iva(4.11.): Styly do dialogu text a paragraph jsou pridany, ale nemuzu to otestovat, 
+protoze mi styly doma nebehaj. Muzete-li, zkuste to.
+
 dedek todo
 CComplexFilterDialog::LoadSource "predelat vyplnovani element attributes"    
 
@@ -9,9 +12,10 @@ Tak jestli o necem vite (iva, kody - je to v projektu ReportAsistent) zkuste opr
 DEDEK:
 V GUI chybi:
 
-dialog include
-styly v dialozich text, odstavec
-zmena id v dialozich pro attr_link, attr_link_table, include, AP - tam opatrne, nemuze obsahovat cokoliv je to XML ID
+dialog include (Iva:HOTOVO)
+styly v dialozich text, odstavec (Iva:HOTOVO)
+zmena id v dialozich:(Iva:HOTOVO)
+pro attr_link, attr_link_table, include, AP - tam opatrne, nemuze obsahovat cokoliv je to XML ID
 
 
 Kody:

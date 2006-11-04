@@ -37,6 +37,7 @@ void CElementParagraphDialog::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CElementParagraphDialog)
+	DDX_Control(pDX, IDC_STYLES_COMBO, m_StylesCombo);
 	DDX_Text(pDX, IDC_DIALPARAGRAPH_IDEDIT, m_DialParagraphIDEditValue);
 	//}}AFX_DATA_MAP
 	DDV_NonDuplicateID(pDX,IDC_DIALPARAGRAPH_IDEDIT, m_DialParagraphIDEditValue);
@@ -46,7 +47,7 @@ void CElementParagraphDialog::DoDataExchange(CDataExchange* pDX)
 
 BEGIN_MESSAGE_MAP(CElementParagraphDialog, CDialog)
 	//{{AFX_MSG_MAP(CElementParagraphDialog)
-		// NOTE: the ClassWizard will add message map macros here
+	ON_BN_CLICKED(IDC_STYLES_REFRESH_BUTTON, OnStylesRefreshButton)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -99,4 +100,71 @@ void CElementParagraphDialog::DDV_NonDuplicateID(CDataExchange *pDX, int nId, CS
 
 	}
 
+}
+
+void CElementParagraphDialog::FillStylesCombo()
+{
+	CWordManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->WordManager;
+
+	CStringTable & st = m.getWordParagraphStyles();
+
+	CString sel;
+	m_StylesCombo.GetWindowText(sel);
+	
+	//vymaze cele combo
+	m_StylesCombo.ResetContent();
+/*
+	for (int i=0; i < m_StylesCombo.GetCount(); i++)
+	{
+		m_StylesCombo.DeleteString(0);
+	}
+*/
+	//styl - neuveden
+	m_StylesCombo.AddString("");
+
+	for (int a=0; a < st.getCount(); a++)
+	{
+		m_StylesCombo.AddString(st.getItem(a));
+	}
+
+	if (CB_ERR == m_StylesCombo.SelectString(-1, sel))
+	{
+		CString s;
+		m_StylesCombo.GetLBText(0, s);
+		m_StylesCombo.SelectString(-1, s);
+	}
+
+
+}
+
+void CElementParagraphDialog::OnStylesRefreshButton() 
+{
+	CWordManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->WordManager;
+	m.LoadWordStyles();
+
+	FillStylesCombo();	
+}
+
+void CElementParagraphDialog::OnOK() 
+{
+	//style
+	
+	//vymaz attribut style z tagu
+	if (m_SelXMLElm->attributes->getNamedItem("style") != NULL)
+	{
+		m_SelXMLElm->attributes->removeNamedItem("style");
+	}
+
+	CString style_str;
+	m_StylesCombo.GetWindowText(style_str);
+
+	if (style_str.GetLength() != 0)
+	{
+		MSXML2::IXMLDOMAttributePtr s_atr = m_SelXMLElm->ownerDocument->createAttribute("style");
+		s_atr->text = (LPCTSTR) style_str;
+		m_SelXMLElm->setAttributeNode(s_atr);
+		s_atr.Release();
+	}
+	
+	CDialog::OnOK();
 }
