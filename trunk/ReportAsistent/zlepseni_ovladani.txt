@@ -10,7 +10,7 @@ V tomto souboru jsou navrhy na zprijemneni ovladani programu LM-RA:
 	- Include
   nebo jinych, aby to nekolidovalo s jiz zavedenymi
 
-- vytvorit specialni pripad pro vkladani prvku Text do Chapter - automaticky vlozi Paragraph a text do nej Text
+- HOTOVO: vytvorit specialni pripad pro vkladani prvku Text do Chapter - automaticky vlozi Paragraph a text do nej Text
 
 2) Dialog vyberu transformaci pro aktivni prvky
    --------------------------------------------
