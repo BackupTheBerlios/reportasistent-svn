@@ -72,6 +72,7 @@ public:
 
 // Implementation
 public:
+	void DeleteSelectedItem();
 	CImageList m_ImageList;
 	BOOL m_bDragging;
 	CImageList* m_pimagelist;

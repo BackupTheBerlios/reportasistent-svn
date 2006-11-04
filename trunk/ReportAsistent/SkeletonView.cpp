@@ -203,7 +203,8 @@ void CSkeletonView::OnUpdate(CView* pSender, LPARAM lHint, CObject* pHint)
 				HTREEITEM inserted_item = GetDocument()->InsertNodeToTreeCtrl(((CUT_Hint*)pHint)->pElement,((CUT_Hint*)pHint)->pTreeItem,pTreeCtrl,((CUT_Hint*)pHint)->pInsertAfter);
 			//Pridany prvek by mel byt zviditelnen = v rozbalenem seznamu, pokud neni videt
 				if (0!= pTreeCtrl.EnsureVisible(inserted_item))
-					pTreeCtrl.Expand(((CUT_Hint*)pHint)->pTreeItem,TVE_EXPAND);  
+					pTreeCtrl.Expand(((CUT_Hint*)pHint)->pTreeItem,TVE_EXPAND);
+				pTreeCtrl.SelectItem(inserted_item);
 			}
 		break;
 	case UT_EDIT:	
@@ -761,6 +762,20 @@ void CSkeletonView::OnEditCut()
 
 void CSkeletonView::OnMmdelete() 
 {
+	DeleteSelectedItem();	
+}
+
+void CSkeletonView::OnCaptureChanged(CWnd *pWnd) 
+{
+	// TODO: Add your message handler code here
+	
+	CTreeView::OnCaptureChanged(pWnd);
+}
+
+
+
+void CSkeletonView::DeleteSelectedItem()
+{
 
 	
 	HTREEITEM hSelTreeItem = GetTreeCtrl().GetSelectedItem();
@@ -784,14 +799,5 @@ void CSkeletonView::OnMmdelete()
 	CUT_Hint oHint(hSelTreeItem,0,0);
 	GetDocument()->SetModifiedFlag();
 	GetDocument()->UpdateAllViews(NULL,UT_DEL, &oHint);
-	
+
 }
-
-void CSkeletonView::OnCaptureChanged(CWnd *pWnd) 
-{
-	// TODO: Add your message handler code here
-	
-	CTreeView::OnCaptureChanged(pWnd);
-}
-
-

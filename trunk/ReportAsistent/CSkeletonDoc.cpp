@@ -20,6 +20,7 @@
 #include "ComplexFilterDialog.h"
 #include "WaitDialog.h"
 #include "AElFiltersConfigDialog.h"
+#include "InsertElementTrace.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -683,20 +684,174 @@ CElementManager::elId_t CSkeletonDoc::ElementIdFromCommandId(UINT nMessageID)
 void CSkeletonDoc::OnMmnewelement(UINT nMessageID) 
 {
 	CTreeCtrl & hTreeCtrl = GetFirstView()->GetTreeCtrl();
-	HTREEITEM hSelTreeItem = hTreeCtrl.GetSelectedItem(); //Prvek, DO ktereho vkladam
+	CElementManager & OElementManager = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;	
+
 	BOOL bSuccess=false;
 
-	if (hSelTreeItem == NULL) return;
 	
-	//Prvek, DO ktereho vkladam
+	//Selected item and it's element_id
+	HTREEITEM hSelTreeItem = hTreeCtrl.GetSelectedItem(); //Prvek, DO ktereho vkladam
+	HTREEITEM hOldSelTreeItem = hSelTreeItem; //Backup for need to return selection to original item
+	if (hSelTreeItem == NULL) return;
+
 	MSXML2::IXMLDOMElementPtr selected_element = ElementFromItemData(hTreeCtrl.GetItemData( hSelTreeItem ));	
+	CElementManager::elId_t el_where_id = OElementManager.IdentifyElement(selected_element);
+
+	//Parent item of selected item
+	HTREEITEM hParentItem = hTreeCtrl.GetParentItem(hSelTreeItem);
+
 
 	//Typ prvku, ktery chci vlozit
-	CElementManager::elId_t el_id = ElementIdFromCommandId(nMessageID);
-	if (el_id == ELID_UNKNOWN) return;
+	CElementManager::elId_t el_what_id = ElementIdFromCommandId(nMessageID);
+	if (el_what_id == ELID_UNKNOWN) return;
+
+//Find trace how to place el_what into el_where
+	CInsertElementTrace OTrace;
+	OTrace.FindTrace(el_what_id,el_where_id);
+	HTREEITEM hInterItem1=NULL;
+	HTREEITEM hInterItem2=NULL;
 	
-//1st step: Try to place element of el_id type directly to selected_element 
-	MSXML2::IXMLDOMElementPtr new_element = InsertNewElement(el_id, selected_element);
+	//ladici
+	CString Pom;
+	Pom.Format("Dir:%d I1:%d I2:%d", OTrace.Direction, OTrace.Inter1, OTrace.Inter2);
+	AfxMessageBox(Pom);
+
+//	BOOL InsertNewElementAndUpdateTreeCtrl( BOOL bEdit,CElementManager::elId_t el_what_id, HTREEITEM hParentItem,HTREEITEM hInsertBefore); 
+
+	switch (OTrace.Direction)
+	{
+		case IET_IN:
+			if (OTrace.Inter1 != ELID_UNKNOWN)
+				if (InsertNewElementAndUpdateTreeCtrl( false, OTrace.Inter1, hSelTreeItem, TVI_LAST) )
+				{
+					hInterItem1 =hSelTreeItem = hTreeCtrl.GetSelectedItem();
+				}
+				else 
+					return;
+			if (OTrace.Inter2 != ELID_UNKNOWN)
+				if (InsertNewElementAndUpdateTreeCtrl( false, OTrace.Inter2, hSelTreeItem, TVI_LAST) )
+					hInterItem2 =hSelTreeItem = hTreeCtrl.GetSelectedItem();
+				else 
+					return;
+			if (InsertNewElementAndUpdateTreeCtrl( true, el_what_id, hSelTreeItem, TVI_LAST) )
+				hSelTreeItem = hTreeCtrl.GetSelectedItem();
+			else 
+			{ //if user cancels item creation:
+				if (hInterItem2) 
+				{ //delete 2nd intermediate
+					hTreeCtrl.SelectItem(hInterItem2);
+					GetFirstView()->DeleteSelectedItem();
+				}
+				if (hInterItem1)
+				{//delete  1st intermediate
+					hTreeCtrl.SelectItem(hInterItem1);
+					GetFirstView()->DeleteSelectedItem();
+				}
+				//return selection to original item
+				hTreeCtrl.SelectItem(hOldSelTreeItem);
+				return;
+			}
+			break;
+		case IET_BEFORE:
+			if (OTrace.Inter1 != ELID_UNKNOWN)
+			{
+				//1st intermediate element- goes BEFORE selected
+				if (InsertNewElementAndUpdateTreeCtrl( false, OTrace.Inter1, hParentItem,hSelTreeItem) )
+					hInterItem1 =hSelTreeItem = hTreeCtrl.GetSelectedItem();
+				else 
+					return;
+				//2nd intermediate element
+				if (OTrace.Inter2 != ELID_UNKNOWN)
+					if (InsertNewElementAndUpdateTreeCtrl( false, OTrace.Inter2, hSelTreeItem, TVI_LAST) )
+						hInterItem2 =hSelTreeItem = hTreeCtrl.GetSelectedItem();
+					else 
+						return;
+				//if an intermediate exists, new goes IN it, not BEFORE selected.
+				if (InsertNewElementAndUpdateTreeCtrl( true, el_what_id, hSelTreeItem, TVI_LAST) )
+					hSelTreeItem = hTreeCtrl.GetSelectedItem();
+				else 
+				{ //if user cancels item creation:
+					if (hInterItem2) 
+					{ //delete 2nd  intermediate
+						hTreeCtrl.SelectItem(hInterItem2);
+						GetFirstView()->DeleteSelectedItem();
+					}
+					if (hInterItem1)
+					{//delete 1st intermediate
+						hTreeCtrl.SelectItem(hInterItem1);
+						GetFirstView()->DeleteSelectedItem();
+					}
+					//return selection to original item
+					hTreeCtrl.SelectItem(hOldSelTreeItem);
+					return;
+				}
+			}
+			else
+				//if no intermediate exists, new goes BEFORE selected.
+				if (InsertNewElementAndUpdateTreeCtrl( true, el_what_id, hParentItem,hSelTreeItem) )
+					hSelTreeItem = hTreeCtrl.GetSelectedItem();
+				else 
+					return;
+
+			break;
+
+		case IET_UP:
+			if (OTrace.Inter1 != ELID_UNKNOWN)
+			{
+				//1st intermediate element- goes BEFORE PARENT of selected
+				if (InsertNewElementAndUpdateTreeCtrl( false, OTrace.Inter1, hTreeCtrl.GetParentItem(hParentItem),hParentItem) )
+					hInterItem1 =hSelTreeItem = hTreeCtrl.GetSelectedItem();
+				else 
+					return;
+				//2nd intermediate element
+				if (OTrace.Inter2 != ELID_UNKNOWN)
+					if (InsertNewElementAndUpdateTreeCtrl( false, OTrace.Inter2, hSelTreeItem, TVI_LAST) )
+						hInterItem2 =hSelTreeItem = hTreeCtrl.GetSelectedItem();
+					else 
+						return;
+				//if an intermediate exists, new goes IN it, not BEFORE selected.
+				if (InsertNewElementAndUpdateTreeCtrl( true, el_what_id, hSelTreeItem, TVI_LAST) )
+					hSelTreeItem = hTreeCtrl.GetSelectedItem();
+				else 
+				{ //if user cancels item creation:
+					if (hInterItem2) 
+					{ //delete 2st intermediate
+						hTreeCtrl.SelectItem(hInterItem2);
+						GetFirstView()->DeleteSelectedItem();
+					}
+					if (hInterItem1)
+					{//delete 1nd intermediate
+						hTreeCtrl.SelectItem(hInterItem1);
+						GetFirstView()->DeleteSelectedItem();
+					}
+					//return selection to original item
+					hTreeCtrl.SelectItem(hOldSelTreeItem);
+					return;
+				}
+			}
+			else
+				//if no intermediate exists, new goes BEFORE PARENT of selected.
+				if (InsertNewElementAndUpdateTreeCtrl( true, el_what_id, hTreeCtrl.GetParentItem(hParentItem),hParentItem) )
+					hSelTreeItem = hTreeCtrl.GetSelectedItem();
+				else 
+					return;
+
+			break;
+
+		case IET_TOP:
+			//to position IET_TOP goes only element ELID_INCLUDE and it never needs an intermediate
+			ASSERT (OTrace.Inter1 == ELID_UNKNOWN);
+			ASSERT (OTrace.Inter2 == ELID_UNKNOWN);
+			if (InsertNewElementAndUpdateTreeCtrl( true, el_what_id, hTreeCtrl.GetRootItem( ), TVI_LAST) )
+				hSelTreeItem = hTreeCtrl.GetSelectedItem();
+			else 
+				return;
+			
+			break;
+	}
+/*
+
+	MSXML2::IXMLDOMElementPtr new_element = InsertNewElement(el_what_id, selected_element);
 	if (new_element != NULL) //tj. pridani se zdarilo
 	{
 		if (EditElement(new_element))
@@ -714,27 +869,7 @@ void CSkeletonDoc::OnMmnewelement(UINT nMessageID)
 
 		new_element.Release();
 	}
-
-//2nd step: Searching for suitable intermediate elements
-	if (bSuccess==false)
-	{
-		/*switch (el_id)
-		{
-			case ELID_REPORT:
-					//first try to insert chapter 
-					
-
-				break;
-			case ELID_TEXT				
-			case ELID_PARAGRAPH		
-			case ELID_CHAPTER	
-			case ELID_INCLUDE		
-			case ELID_ATTR_LINK		
-			case ELID_ATTR_LINK_TABLE	
-		}*/
-
-	}
-	selected_element.Release();
+	selected_element.Release();*/
 }
 
 void CSkeletonDoc::ChangeIDsInTree(MSXML2::IXMLDOMElementPtr pElm)
@@ -949,3 +1084,66 @@ BOOL CSkeletonDoc::IsIDInTree(CString Id, MSXML2::IXMLDOMElementPtr pTree)
 		}
 
 }
+
+BOOL CSkeletonDoc::InsertNewElementAndUpdateTreeCtrl( BOOL bEdit,CElementManager::elId_t el_what_id, HTREEITEM hParentItem,HTREEITEM hInsertBefore)
+{
+	BOOL bSuccess = false;
+	CTreeCtrl & hTreeCtrl = GetFirstView()->GetTreeCtrl();
+	MSXML2::IXMLDOMElementPtr parent_element = ElementFromItemData(hTreeCtrl.GetItemData( hParentItem ));	
+	CElementManager & OElementManager = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
+
+/*	CString Pom;
+	Pom.Format("Parent type: %d",OElementManager.IdentifyElement(parent_element));
+	AfxMessageBox(Pom);
+*/
+	if (hInsertBefore==TVI_LAST)
+	{
+		MSXML2::IXMLDOMElementPtr new_element = InsertNewElement(el_what_id, parent_element);
+		if (new_element != NULL) //tj. pridani se zdarilo
+		{
+			if(!bEdit || (bEdit && EditElement(new_element)) )
+			{
+				CUT_Hint oHint(hParentItem,new_element,TVI_LAST);
+				SetModifiedFlag();
+				UpdateAllViews(NULL,UT_INS, &oHint);
+				bSuccess=true;
+			}
+			else
+			{
+				//pokud editace neprobehla uspene, element se z kostry smaze
+			//	new_element->parentNode->removeChild(new_element);
+			}
+			new_element.Release();
+		}
+	}
+	else
+	{
+		MSXML2::IXMLDOMElementPtr pNewXMLElm = OElementManager.CreateEmptyElement(el_what_id);
+		MSXML2::IXMLDOMElementPtr insert_before_element = ElementFromItemData(hTreeCtrl.GetItemData( hInsertBefore ));	
+		if (OElementManager.CanInsertBefore(pNewXMLElm,insert_before_element))
+		{
+			MSXML2::IXMLDOMElementPtr new_element=parent_element->insertBefore(pNewXMLElm,(MSXML2::IXMLDOMElement*)insert_before_element);
+			if (new_element != NULL)
+			{
+				if(!bEdit || (bEdit && EditElement(new_element)) )
+				{
+
+					CUT_Hint oHint(hParentItem,pNewXMLElm,hTreeCtrl.GetPrevSiblingItem(hInsertBefore));
+					SetModifiedFlag();
+					UpdateAllViews(NULL,UT_INS, &oHint);			
+					bSuccess=true;
+				}
+			
+				else
+				{
+					//pokud editace neprobehla uspene, element se z kostry smaze
+					new_element->parentNode->removeChild(new_element);
+				}
+			}
+		}
+	}
+	parent_element.Release();
+
+	return bSuccess;
+}
+

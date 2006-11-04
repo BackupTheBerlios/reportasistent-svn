@@ -168,6 +168,10 @@ SOURCE=.\GenerateDialog.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\InsertElementTrace.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\MainFrm.cpp
 # End Source File
 # Begin Source File
@@ -302,6 +306,10 @@ SOURCE=.\EToolBar.h
 # Begin Source File
 
 SOURCE=.\GenerateDialog.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\InsertElementTrace.h
 # End Source File
 # Begin Source File
 

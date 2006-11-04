@@ -26,7 +26,7 @@ protected: // create from serialization only
 
 // Attributes
 public:
-
+	
 // Operations
 public:
 
@@ -43,7 +43,7 @@ public:
 // Implementation
 public:
 //	CSkeletonManager m_SkeletonManager;
-
+	BOOL InsertNewElementAndUpdateTreeCtrl( BOOL bEdit,CElementManager::elId_t el_what_id, HTREEITEM hParentItem,HTREEITEM hInsertAfter); 
 	void FillTreeControl(CTreeCtrl & tree_control);
 	virtual ~CSkeletonDoc();
 #ifdef _DEBUG

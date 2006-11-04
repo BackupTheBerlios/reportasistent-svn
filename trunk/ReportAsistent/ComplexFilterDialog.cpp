@@ -447,7 +447,7 @@ void CComplexFilterDialog::OnBnClickedOk()
 		break;
 	case IDC_TOP_N_VAL_RADIO:
 		filter_type_attr->value = "top_n";
-		filter_data_attr->value = m_nTopNValues;
+		//filter_data_attr->value = m_nTopNValues;
 		break;
 	}
 	attr_filter_element->setAttributeNode(filter_type_attr);
