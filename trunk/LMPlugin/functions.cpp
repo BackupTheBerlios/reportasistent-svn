@@ -1691,8 +1691,6 @@ CString fLM4fthyp(void * hSource)
 	TCoef_type_Recordset rs_coef_type ((CDatabase *) hSource);
 	Hyp_4ft_Meta * pthyp;
 	long h_id;
-//	long m_id;
-//	long t_id;
 	long l_id;
 	long c_id;
 	long ld_id;//store the tdCedentDID
@@ -1802,7 +1800,6 @@ CString fLM4fthyp(void * hSource)
 			if (ced_name == "Antecedent")
 			{
 				Hyp_tiLiteral x;
-//				pthyp->flag_a = TRUE;
 				id_hlp.Format ("%d", l_id);
 				x.id = "tiLit" + id_hlp + pthyp->id;
 				id_hlp.Format ("%d", c_id);
@@ -1816,7 +1813,6 @@ CString fLM4fthyp(void * hSource)
 			else if (ced_name == "Succedent")
 			{
 				Hyp_tiLiteral x;
-//				pthyp->flag_s = TRUE;
 				id_hlp.Format ("%d", l_id);
 				x.id = "tiLit" + id_hlp + pthyp->id;
 				id_hlp.Format ("%d", c_id);
@@ -1830,7 +1826,6 @@ CString fLM4fthyp(void * hSource)
 			else if (ced_name == "Condition")
 			{
 				Hyp_tiLiteral x;
-//				pthyp->flag_c = TRUE;
 				id_hlp.Format ("%d", l_id);
 				x.id = "tiLit" + id_hlp + pthyp->id;
 				id_hlp.Format ("%d", c_id);
@@ -1886,16 +1881,18 @@ CString fLMCFhyp(void* hSource)
 	CString db_name = ((CDatabase *) hSource)->GetDatabaseName ();
 	CString id_hlp;
 	CString hlp;
+	CString q_coef_type;
 
 	THyp_CF_Meta_Array list;
 	Hyp_CF_Recordset rs ((CDatabase *) hSource);
 	tiCFFrequencyI_Recordset rs_freq ((CDatabase *) hSource);
 	tmCategory_Recordset rs_attr ((CDatabase *) hSource);
 	TCondition_Recordset rs_cond ((CDatabase *) hSource);
+	TCoef_type_Recordset rs_coef_type ((CDatabase *) hSource);
 	Hyp_CF_Meta * pthyp;
 
 	long h_id;
-//	long l_id;
+	long ld_id;
 
 	CString neg_lit_smbl;
 
@@ -1996,6 +1993,28 @@ CString fLMCFhyp(void* hSource)
 					hlp.Replace (">", "&gt;");
 					hlp.Replace ("<", "&lt;");
 					lit.value = hlp;
+					ld_id = rs_cond.m_LiteralDID;
+					id_hlp.Format ("%d", ld_id);
+					//exactly one row expected to return by the following query:
+					q_coef_type = "SELECT * \
+									 FROM tdLiteralD, tsCoefficientType \
+									WHERE LiteralDID=" + id_hlp;
+					q_coef_type +=
+						" AND tdLiteralD.CoefficientTypeID=tsCoefficientType.CoefficientTypeID";
+					if (rs_coef_type.Open(AFX_DB_USE_DEFAULT_TYPE, q_coef_type))
+					{
+						while (!rs_coef_type.IsEOF())
+						{
+							hlp = rs_coef_type.m_ShortName;
+							hlp.Replace ("&", "&amp;");
+							hlp.Replace (">", "&gt;");
+							hlp.Replace ("<", "&lt;");
+							rs_coef_type.MoveNext ();
+						}
+						rs_coef_type.Close ();
+					}
+					else return "";
+					lit.coef_type = hlp;
 					pthyp->condition.Add (lit);
 					rs_cond.MoveNext();
 				}
@@ -2003,20 +2022,20 @@ CString fLMCFhyp(void* hSource)
 			}
 			else return "";
 
-			pthyp->asym = "0";
-			pthyp->avg_a = "0";
-			pthyp->avg_g = "0";
+			pthyp->asym = "Unknown";
+			pthyp->avg_a = "Unknown";
+			pthyp->avg_g = "Unknown";
 			pthyp->dor_var = pthyp->get_dor_var ();
 			hlp.Format ("%d", pthyp->get_max ());
 			pthyp->max = hlp;
 			pthyp->min = pthyp->get_min ();
 			pthyp->nom_var = pthyp->get_nom_var ();
-			pthyp->skew = "0";
-			pthyp->st_dev = "0";
+			pthyp->skew = "Unknown";
+			pthyp->st_dev = "Unknown";
 			hlp.Format ("%d", pthyp->get_sum ());
 			pthyp->sum = hlp;
-			pthyp->v = "0";
-			pthyp->var = "0";
+			pthyp->v = "Unknown";
+			pthyp->var = "Unknown";
 
 			list.Add (pthyp);
 			rs.MoveNext();
@@ -2168,19 +2187,19 @@ CString fLMSD4fthyp(void * hSource)
 					(pthyp->get_completeness (rs.m_FirstFreqA, rs.m_FirstFreqC));
 				pthyp->avg_diff1 = (LPCTSTR) (_bstr_t)
 					(pthyp->get_avg_diff (rs.m_FirstFreqA, rs.m_FirstFreqB, rs.m_FirstFreqC, rs.m_FirstFreqD));
-				pthyp->low_bnd_imp1 = (LPCTSTR) (_bstr_t)
+				pthyp->low_bnd_imp1 =
 					(pthyp->get_low_bnd_imp (rs.m_FirstFreqA, rs.m_FirstFreqB));
-				pthyp->up_bnd_imp1 = (LPCTSTR) (_bstr_t)
+				pthyp->up_bnd_imp1 =
 					(pthyp->get_up_bnd_imp (rs.m_FirstFreqA, rs.m_FirstFreqB));
-				pthyp->low_bnd_dbl_imp1 = (LPCTSTR) (_bstr_t)
+				pthyp->low_bnd_dbl_imp1 =
 					(pthyp->get_low_bnd_dbl_imp (rs.m_FirstFreqA, rs.m_FirstFreqB, rs.m_FirstFreqC));
-				pthyp->up_bnd_dbl_imp1 = (LPCTSTR) (_bstr_t)
+				pthyp->up_bnd_dbl_imp1 =
 					(pthyp->get_up_bnd_dbl_imp (rs.m_FirstFreqA, rs.m_FirstFreqB, rs.m_FirstFreqC));
-				pthyp->low_bnd_eq1 = (LPCTSTR) (_bstr_t)
+				pthyp->low_bnd_eq1 =
 					(pthyp->get_low_bnd_eq (rs.m_FirstFreqA, rs.m_FirstFreqB, rs.m_FirstFreqC, rs.m_FirstFreqD));
-				pthyp->up_bnd_eq1 = (LPCTSTR) (_bstr_t)
+				pthyp->up_bnd_eq1 =
 					(pthyp->get_up_bnd_eq (rs.m_FirstFreqA, rs.m_FirstFreqB, rs.m_FirstFreqC, rs.m_FirstFreqD));
-				pthyp->fisher1 = (LPCTSTR) (_bstr_t)
+				pthyp->fisher1 =
 					(pthyp->get_fisher (rs.m_FirstFreqA, rs.m_FirstFreqB, rs.m_FirstFreqC, rs.m_FirstFreqD));
 				pthyp->chi_sq1 = (LPCTSTR) (_bstr_t)
 					(pthyp->get_chi_sq (rs.m_FirstFreqA, rs.m_FirstFreqB, rs.m_FirstFreqC, rs.m_FirstFreqD));
@@ -2197,19 +2216,19 @@ CString fLMSD4fthyp(void * hSource)
 					(pthyp->get_completeness (rs.m_SecondFreqA, rs.m_SecondFreqC));
 				pthyp->avg_diff2 = (LPCTSTR) (_bstr_t)
 					(pthyp->get_avg_diff (rs.m_SecondFreqA, rs.m_SecondFreqB, rs.m_SecondFreqC, rs.m_SecondFreqD));
-				pthyp->low_bnd_imp2 = (LPCTSTR) (_bstr_t)
+				pthyp->low_bnd_imp2 =
 					(pthyp->get_low_bnd_imp (rs.m_SecondFreqA, rs.m_SecondFreqB));
-				pthyp->up_bnd_imp2 = (LPCTSTR) (_bstr_t)
+				pthyp->up_bnd_imp2 =
 					(pthyp->get_up_bnd_imp (rs.m_SecondFreqA, rs.m_SecondFreqB));
-				pthyp->low_bnd_dbl_imp2 = (LPCTSTR) (_bstr_t)
+				pthyp->low_bnd_dbl_imp2 =
 					(pthyp->get_low_bnd_dbl_imp (rs.m_SecondFreqA, rs.m_SecondFreqB, rs.m_SecondFreqC));
-				pthyp->up_bnd_dbl_imp2 = (LPCTSTR) (_bstr_t)
+				pthyp->up_bnd_dbl_imp2 =
 					(pthyp->get_up_bnd_dbl_imp (rs.m_SecondFreqA, rs.m_SecondFreqB, rs.m_SecondFreqC));
-				pthyp->low_bnd_eq2 = (LPCTSTR) (_bstr_t)
+				pthyp->low_bnd_eq2 =
 					(pthyp->get_low_bnd_eq (rs.m_SecondFreqA, rs.m_SecondFreqB, rs.m_SecondFreqC, rs.m_SecondFreqD));
-				pthyp->up_bnd_eq2 = (LPCTSTR) (_bstr_t)
+				pthyp->up_bnd_eq2 =
 					(pthyp->get_up_bnd_eq (rs.m_SecondFreqA, rs.m_SecondFreqB, rs.m_SecondFreqC, rs.m_SecondFreqD));
-				pthyp->fisher2 = (LPCTSTR) (_bstr_t)
+				pthyp->fisher2 =
 					(pthyp->get_fisher (rs.m_SecondFreqA, rs.m_SecondFreqB, rs.m_SecondFreqC, rs.m_SecondFreqD));
 				pthyp->chi_sq2 = (LPCTSTR) (_bstr_t)
 					(pthyp->get_chi_sq (rs.m_SecondFreqA, rs.m_SecondFreqB, rs.m_SecondFreqC, rs.m_SecondFreqD));
@@ -2345,7 +2364,9 @@ CString fLMSDCFhyp(void * hSource)
 	CString db_name = ((CDatabase *) hSource)->GetDatabaseName ();
 	CString id_hlp;
 	CString hlp;
-
+	CString q_coef_type;
+	
+	TCoef_type_Recordset rs_coef_type ((CDatabase *) hSource);
 	THyp_SDCF_Meta_Array list;
 	Hyp_SDCF_Recordset rs ((CDatabase *) hSource);
 	tiDCFrequencyI_Recordset rs_freq ((CDatabase *) hSource);
@@ -2354,7 +2375,7 @@ CString fLMSDCFhyp(void * hSource)
 	Hyp_SDCF_Meta * pthyp;
 
 	long h_id;
-//	long l_id;
+	long ld_id;
 
 	CString neg_lit_smbl;
 
@@ -2477,6 +2498,28 @@ CString fLMSDCFhyp(void * hSource)
 					hlp.Replace (">", "&gt;");
 					hlp.Replace ("<", "&lt;");
 					lit.value = hlp;
+					ld_id = rs_cond.m_LiteralDID;
+					id_hlp.Format ("%d", ld_id);
+					//exactly one row expected to return by the following query:
+					q_coef_type = "SELECT * \
+									 FROM tdLiteralD, tsCoefficientType \
+									WHERE LiteralDID=" + id_hlp;
+					q_coef_type +=
+						" AND tdLiteralD.CoefficientTypeID=tsCoefficientType.CoefficientTypeID";
+					if (rs_coef_type.Open(AFX_DB_USE_DEFAULT_TYPE, q_coef_type))
+					{
+						while (!rs_coef_type.IsEOF())
+						{
+							hlp = rs_coef_type.m_ShortName;
+							hlp.Replace ("&", "&amp;");
+							hlp.Replace (">", "&gt;");
+							hlp.Replace ("<", "&lt;");
+							rs_coef_type.MoveNext ();
+						}
+						rs_coef_type.Close ();
+					}
+					else return "";
+					lit.coef_type = hlp;
 					pthyp->condition.Add (lit);
 					rs_cond.MoveNext();
 				}
@@ -2515,6 +2558,28 @@ CString fLMSDCFhyp(void * hSource)
 					hlp.Replace (">", "&gt;");
 					hlp.Replace ("<", "&lt;");
 					lit.value = hlp;
+					ld_id = rs_cond.m_LiteralDID;
+					id_hlp.Format ("%d", ld_id);
+					//exactly one row expected to return by the following query:
+					q_coef_type = "SELECT * \
+									 FROM tdLiteralD, tsCoefficientType \
+									WHERE LiteralDID=" + id_hlp;
+					q_coef_type +=
+						" AND tdLiteralD.CoefficientTypeID=tsCoefficientType.CoefficientTypeID";
+					if (rs_coef_type.Open(AFX_DB_USE_DEFAULT_TYPE, q_coef_type))
+					{
+						while (!rs_coef_type.IsEOF())
+						{
+							hlp = rs_coef_type.m_ShortName;
+							hlp.Replace ("&", "&amp;");
+							hlp.Replace (">", "&gt;");
+							hlp.Replace ("<", "&lt;");
+							rs_coef_type.MoveNext ();
+						}
+						rs_coef_type.Close ();
+					}
+					else return "";
+					lit.coef_type = hlp;
 					pthyp->set1.Add (lit);
 					rs_cond.MoveNext();
 				}
@@ -2553,6 +2618,28 @@ CString fLMSDCFhyp(void * hSource)
 					hlp.Replace (">", "&gt;");
 					hlp.Replace ("<", "&lt;");
 					lit.value = hlp;
+					ld_id = rs_cond.m_LiteralDID;
+					id_hlp.Format ("%d", ld_id);
+					//exactly one row expected to return by the following query:
+					q_coef_type = "SELECT * \
+									 FROM tdLiteralD, tsCoefficientType \
+									WHERE LiteralDID=" + id_hlp;
+					q_coef_type +=
+						" AND tdLiteralD.CoefficientTypeID=tsCoefficientType.CoefficientTypeID";
+					if (rs_coef_type.Open(AFX_DB_USE_DEFAULT_TYPE, q_coef_type))
+					{
+						while (!rs_coef_type.IsEOF())
+						{
+							hlp = rs_coef_type.m_ShortName;
+							hlp.Replace ("&", "&amp;");
+							hlp.Replace (">", "&gt;");
+							hlp.Replace ("<", "&lt;");
+							rs_coef_type.MoveNext ();
+						}
+						rs_coef_type.Close ();
+					}
+					else return "";
+					lit.coef_type = hlp;
 					pthyp->set2.Add (lit);
 					rs_cond.MoveNext();
 				}
@@ -2561,37 +2648,37 @@ CString fLMSDCFhyp(void * hSource)
 			else return "";
 
 			//todo kvantifikatory
-			pthyp->asym1 = "0";
-			pthyp->avg_a1 = "0";
-			pthyp->avg_g1 = "0";
+			pthyp->asym1 = "Unknown";
+			pthyp->avg_a1 = "Unknown";
+			pthyp->avg_g1 = "Unknown";
 			pthyp->dor_var1 = pthyp->get_dor_var1 ();
 			hlp.Format ("%d", pthyp->get_max1 ());
 			pthyp->max1 = hlp;
 			
 			pthyp->min1 = pthyp->get_min1 ();
 			pthyp->nom_var1 = pthyp->get_nom_var1 ();
-			pthyp->skew1 = "0";
-			pthyp->st_dev1 = "0";
+			pthyp->skew1 = "Unknown";
+			pthyp->st_dev1 = "Unknown";
 			hlp.Format ("%d", pthyp->get_sum1 ());
 			pthyp->sum1 = hlp;
-			pthyp->v1 = "0";
-			pthyp->var1 = "0";
+			pthyp->v1 = "Unknown";
+			pthyp->var1 = "Unknown";
 
-			pthyp->asym2 = "0";
-			pthyp->avg_a2 = "0";
-			pthyp->avg_g2 = "0";
+			pthyp->asym2 = "Unknown";
+			pthyp->avg_a2 = "Unknown";
+			pthyp->avg_g2 = "Unknown";
 			pthyp->dor_var2 = pthyp->get_dor_var2 ();
 			hlp.Format ("%d", pthyp->get_max2 ());
 			pthyp->max2 = hlp;
 			
 			pthyp->min2 = pthyp->get_min2 ();
 			pthyp->nom_var2 = pthyp->get_nom_var2 ();
-			pthyp->skew2 = "0";
-			pthyp->st_dev2 = "0";
+			pthyp->skew2 = "Unknown";
+			pthyp->st_dev2 = "Unknown";
 			hlp.Format ("%d", pthyp->get_sum2 ());
 			pthyp->sum2 = hlp;
-			pthyp->v2 = "0";
-			pthyp->var2 = "0";
+			pthyp->v2 = "Unknown";
+			pthyp->var2 = "Unknown";
 			
             pthyp->da_sum = pthyp->get_da_sum ();
             pthyp->da_min = pthyp->get_da_min ();
@@ -2644,6 +2731,9 @@ CString fLMKLhyp(void* hSource)
 	CString db_name = ((CDatabase *) hSource)->GetDatabaseName ();
 	CString id_hlp;
 	CString hlp;
+	CString q_coef_type;
+	
+	TCoef_type_Recordset rs_coef_type ((CDatabase *) hSource);
 
 	THyp_KL_Meta_Array list;
 	Hyp_KL_Recordset rs ((CDatabase *) hSource);
@@ -2654,6 +2744,7 @@ CString fLMKLhyp(void* hSource)
 	Hyp_KL_Meta * pthyp;
 
 	long h_id;
+	long ld_id;
 	long row;
 
 	CString neg_lit_smbl;
@@ -2830,6 +2921,28 @@ CString fLMKLhyp(void* hSource)
 					hlp.Replace (">", "&gt;");
 					hlp.Replace ("<", "&lt;");
 					lit.value = hlp;
+					ld_id = rs_cond.m_LiteralDID;
+					id_hlp.Format ("%d", ld_id);
+					//exactly one row expected to return by the following query:
+					q_coef_type = "SELECT * \
+									 FROM tdLiteralD, tsCoefficientType \
+									WHERE LiteralDID=" + id_hlp;
+					q_coef_type +=
+						" AND tdLiteralD.CoefficientTypeID=tsCoefficientType.CoefficientTypeID";
+					if (rs_coef_type.Open(AFX_DB_USE_DEFAULT_TYPE, q_coef_type))
+					{
+						while (!rs_coef_type.IsEOF())
+						{
+							hlp = rs_coef_type.m_ShortName;
+							hlp.Replace ("&", "&amp;");
+							hlp.Replace (">", "&gt;");
+							hlp.Replace ("<", "&lt;");
+							rs_coef_type.MoveNext ();
+						}
+						rs_coef_type.Close ();
+					}
+					else return "";
+					lit.coef_type = hlp;
 					pthyp->condition.Add (lit);
 					rs_cond.MoveNext();
 				}
@@ -2905,7 +3018,9 @@ CString fLMSDKLhyp(void* hSource)
 	CString db_name = ((CDatabase *) hSource)->GetDatabaseName ();
 	CString id_hlp;
 	CString hlp;
-
+	CString q_coef_type;
+	
+	TCoef_type_Recordset rs_coef_type ((CDatabase *) hSource);
 	THyp_SDKL_Meta_Array list;
 	Hyp_SDKL_Recordset rs ((CDatabase *) hSource);
 	tiDKFrequencyI_Recordset rs_freq ((CDatabase *) hSource);
@@ -2915,6 +3030,7 @@ CString fLMSDKLhyp(void* hSource)
 	Hyp_SDKL_Meta * pthyp;
 
 	long h_id;
+	long ld_id;
 	long row;
 
 	CString neg_lit_smbl;
@@ -3124,6 +3240,28 @@ CString fLMSDKLhyp(void* hSource)
 					hlp.Replace (">", "&gt;");
 					hlp.Replace ("<", "&lt;");
 					lit.value = hlp;
+					ld_id = rs_cond.m_LiteralDID;
+					id_hlp.Format ("%d", ld_id);
+					//exactly one row expected to return by the following query:
+					q_coef_type = "SELECT * \
+									 FROM tdLiteralD, tsCoefficientType \
+									WHERE LiteralDID=" + id_hlp;
+					q_coef_type +=
+						" AND tdLiteralD.CoefficientTypeID=tsCoefficientType.CoefficientTypeID";
+					if (rs_coef_type.Open(AFX_DB_USE_DEFAULT_TYPE, q_coef_type))
+					{
+						while (!rs_coef_type.IsEOF())
+						{
+							hlp = rs_coef_type.m_ShortName;
+							hlp.Replace ("&", "&amp;");
+							hlp.Replace (">", "&gt;");
+							hlp.Replace ("<", "&lt;");
+							rs_coef_type.MoveNext ();
+						}
+						rs_coef_type.Close ();
+					}
+					else return "";
+					lit.coef_type = hlp;
 					pthyp->condition.Add (lit);
 					rs_cond.MoveNext();
 				}
@@ -3162,6 +3300,28 @@ CString fLMSDKLhyp(void* hSource)
 					hlp.Replace (">", "&gt;");
 					hlp.Replace ("<", "&lt;");
 					lit.value = hlp;
+					ld_id = rs_cond.m_LiteralDID;
+					id_hlp.Format ("%d", ld_id);
+					//exactly one row expected to return by the following query:
+					q_coef_type = "SELECT * \
+									 FROM tdLiteralD, tsCoefficientType \
+									WHERE LiteralDID=" + id_hlp;
+					q_coef_type +=
+						" AND tdLiteralD.CoefficientTypeID=tsCoefficientType.CoefficientTypeID";
+					if (rs_coef_type.Open(AFX_DB_USE_DEFAULT_TYPE, q_coef_type))
+					{
+						while (!rs_coef_type.IsEOF())
+						{
+							hlp = rs_coef_type.m_ShortName;
+							hlp.Replace ("&", "&amp;");
+							hlp.Replace (">", "&gt;");
+							hlp.Replace ("<", "&lt;");
+							rs_coef_type.MoveNext ();
+						}
+						rs_coef_type.Close ();
+					}
+					else return "";
+					lit.coef_type = hlp;
 					pthyp->set1.Add (lit);
 					rs_cond.MoveNext();
 				}
@@ -3200,6 +3360,28 @@ CString fLMSDKLhyp(void* hSource)
 					hlp.Replace (">", "&gt;");
 					hlp.Replace ("<", "&lt;");
 					lit.value = hlp;
+					ld_id = rs_cond.m_LiteralDID;
+					id_hlp.Format ("%d", ld_id);
+					//exactly one row expected to return by the following query:
+					q_coef_type = "SELECT * \
+									 FROM tdLiteralD, tsCoefficientType \
+									WHERE LiteralDID=" + id_hlp;
+					q_coef_type +=
+						" AND tdLiteralD.CoefficientTypeID=tsCoefficientType.CoefficientTypeID";
+					if (rs_coef_type.Open(AFX_DB_USE_DEFAULT_TYPE, q_coef_type))
+					{
+						while (!rs_coef_type.IsEOF())
+						{
+							hlp = rs_coef_type.m_ShortName;
+							hlp.Replace ("&", "&amp;");
+							hlp.Replace (">", "&gt;");
+							hlp.Replace ("<", "&lt;");
+							rs_coef_type.MoveNext ();
+						}
+						rs_coef_type.Close ();
+					}
+					else return "";
+					lit.coef_type = hlp;
 					pthyp->set2.Add (lit);
 					rs_cond.MoveNext();
 				}

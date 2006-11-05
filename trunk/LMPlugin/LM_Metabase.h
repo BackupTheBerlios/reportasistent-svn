@@ -224,13 +224,13 @@ public:
     double		support;
     double		completeness;
     double		avg_diff;
-    double		low_bnd_imp;
-    double		up_bnd_imp;
-    double		low_bnd_dbl_imp;
-    double		up_bnd_dbl_imp;
-    double		low_bnd_eq;
-    double		up_bnd_eq;
-    double		fisher;
+    CString		low_bnd_imp;
+    CString		up_bnd_imp;
+    CString		low_bnd_dbl_imp;
+    CString		up_bnd_dbl_imp;
+    CString		low_bnd_eq;
+    CString		up_bnd_eq;
+    CString		fisher;
     double		chi_sq;
     TLitArray	antecedent;
     TLitArray	succedent;
@@ -243,14 +243,14 @@ public:
 //	bool		flag_c;
 
 	CString		xml_convert ();
-	double		get_fisher ();
+	CString		get_fisher ();
 	double		get_chi_sq ();
-	double		get_low_bnd_imp ();
-	double		get_up_bnd_imp ();
-	double		get_low_bnd_dbl_imp ();
-	double		get_up_bnd_dbl_imp ();
-	double		get_low_bnd_eq ();
-	double		get_up_bnd_eq ();
+	CString		get_low_bnd_imp ();
+	CString		get_up_bnd_imp ();
+	CString		get_low_bnd_dbl_imp ();
+	CString		get_up_bnd_dbl_imp ();
+	CString		get_low_bnd_eq ();
+	CString		get_up_bnd_eq ();
 };
 
 typedef CArray <Hyp_4ft_Meta *, Hyp_4ft_Meta *> THyp_4ft_Meta_Array;
@@ -375,13 +375,13 @@ public:
 	double		get_support (long _a, long _b, long _c, long _d);
 	double		get_completeness (long _a, long _c);
 	double		get_avg_diff (long _a, long _b, long _c, long _d);
-	double		get_low_bnd_imp (long _a, long _b);
-	double		get_up_bnd_imp (long _a, long _b);
-	double		get_low_bnd_dbl_imp (long _a, long _b, long _c);
-	double		get_up_bnd_dbl_imp (long _a, long _b, long _c);
-	double		get_low_bnd_eq (long _a, long _b, long _c, long _d);
-	double		get_up_bnd_eq (long _a, long _b, long _c, long _d);
-	double		get_fisher (long _a, long _b, long _c, long _d);
+	CString		get_low_bnd_imp (long _a, long _b);
+	CString		get_up_bnd_imp (long _a, long _b);
+	CString		get_low_bnd_dbl_imp (long _a, long _b, long _c);
+	CString		get_up_bnd_dbl_imp (long _a, long _b, long _c);
+	CString		get_low_bnd_eq (long _a, long _b, long _c, long _d);
+	CString		get_up_bnd_eq (long _a, long _b, long _c, long _d);
+	CString		get_fisher (long _a, long _b, long _c, long _d);
 	double		get_chi_sq (long _a, long _b, long _c, long _d);
 	double		get_dr_sum (long _a, long _b, long _c, long _d,
 							long _e, long _f, long _g, long _h);
