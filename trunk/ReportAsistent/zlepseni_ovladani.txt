@@ -13,13 +13,19 @@ V tomto souboru jsou navrhy na zprijemneni ovladani programu LM-RA:
 
 - (Iva:HOTOVO): vytvorit specialni pripad pro vkladani prvku Text do Chapter - automaticky vlozi Paragraph a text do nej Text
 
+- pri pokusu o pretazeni tlacitka toolbaru aplikace spadne
+
+- vybrany Word styl u dialogu text a paragraph se zapomina
+
 2) Dialog vyberu transformaci pro aktivni prvky
    --------------------------------------------
 
-- Ze sloupce "Supported transformations" do sloupce "Selected transformations" se transformace presune (krome tlacitka ">>") take:
-	- oznacena polozka stiskem Enter
+- Ze sloupce "Supported transformations" do sloupce "Selected transformations" se 
+transformace presune (krome tlacitka ">>") take:
+	- oznacena polozka stiskem Enter (Iva: Ne, Enter standardne patri stisknuti tlacitka OK)
 	- dvojklik na vybranou polozku
-	- moznost oznaceni vice polozek seznamu a jejich preneseni do "Selected transformations" pomoci tlacitka ">>"	
+	- moznost oznaceni vice polozek seznamu a jejich preneseni 
+		do "Selected transformations" pomoci tlacitka ">>"	 (Iva: Hotovo)
 
 - Dialog nastaveni vizualizaci se pro oznacenou polozku ve sloupci "Selected transformations" otevre (krome tlacitka "Configure..") taky:
 	- oznacena polozka stiskem Enter

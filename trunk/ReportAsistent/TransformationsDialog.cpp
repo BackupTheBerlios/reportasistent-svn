@@ -54,8 +54,8 @@ BEGIN_MESSAGE_MAP(CTransformationsDialog, CPropertyPage)
 	ON_BN_CLICKED(IDC_MOVE_UP_BUTTON, OnMoveUpButton)
 	ON_BN_CLICKED(IDC_MOVE_DOWN_BUTTON, OnMoveDownButton)
 	ON_BN_CLICKED(IDC_CONFIGURE_BUTTON, OnConfigureButton)
+	ON_LBN_DBLCLK(IDC_SUPPORTED_TRANSF_LIST, OnDblclkSupportedTransfList)
 	//}}AFX_MSG_MAP
-	ON_LBN_SELCHANGE(IDC_SELECTED_TRANSFS_LIST, OnLbnSelchangeSelectedTransfsList)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -149,94 +149,27 @@ BOOL CTransformationsDialog::SaveAll()
 
 void CTransformationsDialog::OnAddButton() 
 {
-	CString selected_text;
-	int selected_item = m_SupportedList.GetCurSel();
-
-	if (selected_item == LB_ERR) return;
-	
-
-
-	m_SupportedList.GetText(selected_item, selected_text);
-	
-	int inserted_item = m_SelectedList.AddString(selected_text);
-	
-	
-	
-	//uprava xml
-
-	CElementManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
-
-	//vytvori ukazkovou transformaci
-	MSXML2::IXMLDOMElementPtr transf_elem = m_active_element->ownerDocument->createElement("transformation");
-	MSXML2::IXMLDOMAttributePtr name_attr_elem = m_active_element->ownerDocument->createAttribute("name");
-	MSXML2::IXMLDOMAttributePtr type_attr_elem = m_active_element->ownerDocument->createAttribute("type");
-	name_attr_elem->text = (LPCSTR) selected_text;
-	transf_elem->setAttributeNode(name_attr_elem);
-	name_attr_elem.Release();
-	
-	if (IsSelectedTransformationAttrLinkTable(inserted_item))
+	CElementManager & OElementManager = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;		
+	CAElInfo * info = OElementManager.getActiveElementInfo(OElementManager.IdentifyElement(m_active_element));
+	if ( MAX_TRANSFORMATION_COUNT < info->getTranformationsCount() )  
 	{
-
-		
-		type_attr_elem->text = "attr_link_table";
-		transf_elem->setAttributeNode(type_attr_elem);
-
-		MSXML2::IXMLDOMElementPtr attr_lt;
-		attr_lt = m.CreateEmptyElement(ELID_ATTR_LINK_TABLE);
-
-		CString new_id;
-		CString old_id = (LPCTSTR) (_bstr_t) attr_lt->getAttribute("id");
-		new_id.Format("%s_trsnsform%d", (LPCTSTR) old_id, rand());
-		attr_lt->setAttribute("id", (LPCTSTR) new_id);
-
-
-		transf_elem->appendChild(attr_lt);
-		
-		//nastav id stejne jako m_active_element
-		attr_lt->setAttribute("target", m_active_element->getAttribute("id"));
-		attr_lt.Release();
+		//Error  
+		return;
 	}
-	else	//selected_item neni attr_link_table
+	
+	int nSel = m_SupportedList.GetSelCount();
+	int SelItems[ MAX_TRANSFORMATION_COUNT ];
+	
+
+	int nRes = m_SupportedList.GetSelItems( MAX_TRANSFORMATION_COUNT, SelItems );
+	if (nRes == LB_ERR) return;
+	int I;
+
+	for (I=0;I<nSel;I++)
 	{
-		int element_id = m.IdentifyElement(m_active_element);
-		CAElInfo * element_info = m.getActiveElementInfo(element_id);
-
-		MSXML2::IXMLDOMNodePtr options_node = 
-			element_info->getTranformationOptionsDoc(
-				element_info->FindTransformationByName(selected_text));
-		
-		if (options_node == NULL)
-		{
-			type_attr_elem->text = "simple";
-			transf_elem->setAttributeNode(type_attr_elem);
-		}
-		else
-		{
-			type_attr_elem->text = "with_options";
-			transf_elem->setAttributeNode(type_attr_elem);
-			try
-			{
-				transf_elem->appendChild(
-					options_node->selectSingleNode("/visualization/visualization_values")->cloneNode(VARIANT_TRUE));
-			}
-			catch (_com_error &)
-			{
-				CReportAsistentApp::ReportError(IDS_TR_OPTIONS_ERROR, (LPCTSTR) selected_text,
-					"Tag visualization_values is missing");
-
-				m_SelectedList.DeleteString(inserted_item);
-				return ;
-			}
-		}
+		 
+		AddTransformation(SelItems[I]);
 	}
-
-	type_attr_elem.Release();
-
-	m_cloned_output_element->appendChild(transf_elem);
-	transf_elem.Release();
-
-  SetModified();
-
 }
 
 void CTransformationsDialog::OnRemoveButton() 
@@ -684,7 +617,106 @@ BOOL CTransformationsDialog::OnApply()
   return SaveAll();
 }
 
-void CTransformationsDialog::OnLbnSelchangeSelectedTransfsList()
+
+
+void CTransformationsDialog::OnDblclkSupportedTransfList() 
 {
-	// TODO: Add your control notification handler code here
+	int nSel = m_SupportedList.GetSelCount();
+	if (nSel > 1) return;
+	int SelItems[2];
+
+	int nRes = m_SupportedList.GetSelItems( 1, SelItems );
+	if (nRes == LB_ERR) return;
+	 
+	AddTransformation(SelItems[0]);
+
+	return;
+}
+
+void CTransformationsDialog::AddTransformation(int selected_item)
+{
+	
+
+	CString selected_text;
+
+	m_SupportedList.GetText(selected_item, selected_text);
+	
+	int inserted_item = m_SelectedList.AddString(selected_text);
+	
+	
+	
+	//uprava xml
+
+	CElementManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
+
+	//vytvori ukazkovou transformaci
+	MSXML2::IXMLDOMElementPtr transf_elem = m_active_element->ownerDocument->createElement("transformation");
+	MSXML2::IXMLDOMAttributePtr name_attr_elem = m_active_element->ownerDocument->createAttribute("name");
+	MSXML2::IXMLDOMAttributePtr type_attr_elem = m_active_element->ownerDocument->createAttribute("type");
+	name_attr_elem->text = (LPCSTR) selected_text;
+	transf_elem->setAttributeNode(name_attr_elem);
+	name_attr_elem.Release();
+	
+	if (IsSelectedTransformationAttrLinkTable(inserted_item))
+	{
+
+		
+		type_attr_elem->text = "attr_link_table";
+		transf_elem->setAttributeNode(type_attr_elem);
+
+		MSXML2::IXMLDOMElementPtr attr_lt;
+		attr_lt = m.CreateEmptyElement(ELID_ATTR_LINK_TABLE);
+
+		CString new_id;
+		CString old_id = (LPCTSTR) (_bstr_t) attr_lt->getAttribute("id");
+		new_id.Format("%s_trsnsform%d", (LPCTSTR) old_id, rand());
+		attr_lt->setAttribute("id", (LPCTSTR) new_id);
+
+
+		transf_elem->appendChild(attr_lt);
+		
+		//nastav id stejne jako m_active_element
+		attr_lt->setAttribute("target", m_active_element->getAttribute("id"));
+		attr_lt.Release();
+	}
+	else	//selected_item neni attr_link_table
+	{
+		int element_id = m.IdentifyElement(m_active_element);
+		CAElInfo * element_info = m.getActiveElementInfo(element_id);
+
+		MSXML2::IXMLDOMNodePtr options_node = 
+			element_info->getTranformationOptionsDoc(
+				element_info->FindTransformationByName(selected_text));
+		
+		if (options_node == NULL)
+		{
+			type_attr_elem->text = "simple";
+			transf_elem->setAttributeNode(type_attr_elem);
+		}
+		else
+		{
+			type_attr_elem->text = "with_options";
+			transf_elem->setAttributeNode(type_attr_elem);
+			try
+			{
+				transf_elem->appendChild(
+					options_node->selectSingleNode("/visualization/visualization_values")->cloneNode(VARIANT_TRUE));
+			}
+			catch (_com_error &)
+			{
+				CReportAsistentApp::ReportError(IDS_TR_OPTIONS_ERROR, (LPCTSTR) selected_text,
+					"Tag visualization_values is missing");
+
+				m_SelectedList.DeleteString(inserted_item);
+				return ;
+			}
+		}
+	}
+
+	type_attr_elem.Release();
+
+	m_cloned_output_element->appendChild(transf_elem);
+	transf_elem.Release();
+
+  SetModified();
 }

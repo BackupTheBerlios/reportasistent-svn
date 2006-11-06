@@ -1,40 +1,179 @@
 <?xml version="1.0" encoding="windows-1250"?>
+<!DOCTYPE report [
 
+<!ELEMENT report ( chapter | include )* >
+<!ATTLIST report title CDATA #REQUIRED >
+<!ATTLIST report subtitle CDATA #IMPLIED >
+<!ATTLIST report author CDATA #IMPLIED >
+<!ATTLIST report id CDATA #REQUIRED >
+
+<!ELEMENT chapter (paragraph | include | active_element | attr_link_table | chapter)*  > 
+<!ATTLIST chapter title CDATA #REQUIRED >
+<!ATTLIST chapter id CDATA #REQUIRED >
+
+<!ELEMENT active_element ( attributes, filter, output )>
+<!ATTLIST active_element type CDATA #REQUIRED >
+<!ATTLIST active_element source CDATA #REQUIRED >
+<!ATTLIST active_element id ID #REQUIRED >
+<!ATTLIST active_element label CDATA #REQUIRED >
+
+<!-- sem se ukladaji atributy, na ktere je mozno ukazat pomoci attr_link -->
+<!-- plni se automaticky pri zavolani metody CAElTransform::FillElementAttributes,
+to se deje vzdy, kdyz se cte plugin output, napr pri otevreni simple fiter -->
+<!ELEMENT attributes (element_attributes) >
+
+<!ELEMENT element_attributes (attribute*) >
+
+<!ELEMENT attribute EMPTY >
+<!ATTLIST attribute name CDATA #REQUIRED>
+<!ATTLIST attribute value CDATA #REQUIRED>
+<!ATTLIST attribute label CDATA #IMPLIED>
+
+<!ELEMENT filter (selection* | attribute_filter*) >
+<!ATTLIST filter type (simple | complex) #REQUIRED>
+	
+<!ELEMENT selection EMPTY >
+<!ATTLIST selection id CDATA #REQUIRED>	<!-- odkaz na data ze zasuvky nikoli ID prvku - mozna prejmenovat -->
+
+<!ELEMENT attribute_filter EMPTY>
+<!ATTLIST attribute_filter attr_name CDATA #REQUIRED>
+<!ATTLIST attribute_filter numeric_sort (true | false) #REQUIRED>
+<!ATTLIST attribute_filter sort_direction (ascending | descending) #REQUIRED>
+<!ATTLIST attribute_filter filter_type (treshold | fixed | top_n) #REQUIRED>
+<!ATTLIST attribute_filter filter_data CDATA #REQUIRED> <!-- treshold value or top_n value-->
+
+<!ELEMENT output (transformation* | (chapter | paragraph | graph | table | text | output)*) >
+
+<!ELEMENT transformation (attr_link_table | visualization_values)? >
+<!ATTLIST transformation type (attr_link_table | simple | with_options) #REQUIRED>
+<!ATTLIST transformation name CDATA #REQUIRED>
+
+<!ELEMENT visualization_values ((variable)*) >
+
+<!ELEMENT variable EMPTY >
+<!ATTLIST variable name CDATA #REQUIRED>
+<!ATTLIST variable value CDATA #REQUIRED> 
+
+	
+<!ELEMENT attr_link_table (link*) >
+<!ATTLIST attr_link_table target CDATA #REQUIRED>
+<!ATTLIST attr_link_table style CDATA #REQUIRED>
+<!ATTLIST attr_link_table id CDATA #REQUIRED >
+
+<!ELEMENT link EMPTY>
+<!ATTLIST link attr_name CDATA #REQUIRED>
+<!ATTLIST link caption CDATA #REQUIRED>
+
+
+<!ELEMENT include EMPTY >
+<!ATTLIST include file CDATA #REQUIRED >
+<!ATTLIST include id CDATA #REQUIRED >
+
+<!ELEMENT paragraph ( graph | table | text | attr_link)* >
+<!ATTLIST paragraph style CDATA #IMPLIED >
+<!ATTLIST paragraph id CDATA #REQUIRED >
+
+<!ELEMENT text ( #PCDATA | br | tab )* >
+<!ATTLIST text style CDATA #IMPLIED >
+<!ATTLIST text id CDATA #REQUIRED >
+
+<!ELEMENT tab EMPTY > <!-- do textu vlozi tabulator -->
+
+<!ELEMENT br EMPTY > <!-- do textu vlozi prechod na novy radek - nikoliv konec odstavce -->
+
+<!ELEMENT attr_link EMPTY >
+<!ATTLIST attr_link id CDATA #REQUIRED >
+<!ATTLIST attr_link target CDATA #REQUIRED >
+<!ATTLIST attr_link attr_name CDATA #REQUIRED >
+<!ATTLIST attr_link style CDATA #IMPLIED >
+
+
+<!ELEMENT graph ( categories? , chart+ ) >
+<!ATTLIST graph title CDATA #IMPLIED >
+<!ATTLIST graph charttype CDATA #REQUIRED >	<!-- napr: xlLine, xlPie, xlBarStacked -->
+	<!-- kompletni seznam pro OfficeXP k nalezeni na http://msdn.microsoft.com/library/en-us/vbagr10/html/grprocharttype.asp -->
+<!ATTLIST graph showlegend (true | false) "false" >
+<!ATTLIST graph height CDATA #IMPLIED >	<!-- nasobek sirky strnaky -->
+<!ATTLIST graph width CDATA #IMPLIED >	<!-- nasobek sirky strnaky -->	
+<!ATTLIST graph bgcolor CDATA #IMPLIED >	<!-- pouze kody #RRGGBB pojmenovane barvy nejsou podporovany -->	
+<!ATTLIST graph id CDATA #REQUIRED >
+
+
+<!ELEMENT categories ( category+ ) >
+<!ATTLIST categories id CDATA #REQUIRED >
+
+<!ELEMENT category EMPTY >
+<!ATTLIST category title CDATA #REQUIRED >
+<!ATTLIST category id CDATA #REQUIRED >
+
+<!ELEMENT chart ( value+ ) >
+<!ATTLIST chart title CDATA #IMPLIED >
+<!ATTLIST chart color CDATA #IMPLIED > <!-- pouze kody #RRGGBB pojmenovane barvy nejsou podporovany -->
+<!ATTLIST chart id CDATA #REQUIRED >
+
+<!ELEMENT value EMPTY >
+<!ATTLIST value value CDATA #REQUIRED >	<!-- cislo nebo cislo s procentama -->
+<!ATTLIST value color CDATA #IMPLIED > <!-- pouze kody #RRGGBB pojmenovane barvy nejsou podporovany -->
+<!ATTLIST value id CDATA #REQUIRED >
+
+<!ELEMENT table ( tr+ ) >
+<!ATTLIST table cols CDATA #REQUIRED >
+<!ATTLIST table rows CDATA #REQUIRED >
+<!ATTLIST table borderwidth CDATA "0" >	<!-- sirka cary napr: 0,25 0,50 0,75 1,00 1,50 2,25 3,00 4,50 6,00 -->
+<!ATTLIST table id CDATA #REQUIRED >
+
+<!ELEMENT tr ( td+ ) >
+<!ATTLIST tr id CDATA #REQUIRED >
+
+<!ELEMENT td ( text? ) >
+<!ATTLIST td colspan CDATA #IMPLIED >
+<!ATTLIST td rowspan CDATA #IMPLIED >
+<!ATTLIST td bgcolor CDATA #IMPLIED >	<!-- pouze kody #RRGGBB pojmenovane barvy nejsou podporovany -->
+<!ATTLIST td border_top CDATA #IMPLIED >	<!-- sirka cary napr: 0,25 0,50 0,75 1,00 1,50 2,25 3,00 4,50 6,00 -->
+<!ATTLIST td border_bottom CDATA #IMPLIED >	<!-- sirka cary napr: 0,25 0,50 0,75 1,00 1,50 2,25 3,00 4,50 6,00 -->
+<!ATTLIST td border_left CDATA #IMPLIED >	<!-- sirka cary napr: 0,25 0,50 0,75 1,00 1,50 2,25 3,00 4,50 6,00 -->
+<!ATTLIST td border_right CDATA #IMPLIED >	<!-- sirka cary napr: 0,25 0,50 0,75 1,00 1,50 2,25 3,00 4,50 6,00 -->
+
+
+
+<!ATTLIST td id CDATA #REQUIRED >
+
+
+]>
 <report title="Nadpis" subtitle="podnadpis" author="jmeno autora" id="report1">
 	<chapter title="nadpis kapitoly" id="ch_aktivni1">
 		<paragraph style="Normální" id="paragraph1">
 			<text id="text7" style="Silné">Nějaký text</text>
-			<attr_link id="attr_link1" target="" attr_name="" />
+			<attr_link id="attr_link1" target="" attr_name=""/>
 		</paragraph>
-		
 		<active_element type="hyp_4ft" source="" id="hyp_4ft1" label="">
 			<attributes>
 				<element_attributes>
-					<attribute name="id" value="" />
-					<attribute name="db_name" value="" />
-					<attribute name="matrix_name" value="" />
-					<attribute name="task_name" value="" />
-					<attribute name="a" value="" />
-					<attribute name="b" value="" />
-					<attribute name="c" value="" />
-					<attribute name="d" value="" />
-					<attribute name="conf" value="" />
-					<attribute name="d_conf" value="" />
-					<attribute name="e_conf" value="" />
-					<attribute name="support" value="" />
-					<attribute name="completeness" value="" />
-					<attribute name="avg_diff" value="" />
-					<attribute name="low_bnd_imp" value="" />
-					<attribute name="up_bnd_imp" value="" />
-					<attribute name="low_bnd_dbl_imp" value="" />
-					<attribute name="up_bnd_dbl_imp" value="" />
-					<attribute name="low_bnd_eq" value="" />
-					<attribute name="up_bnd_eq" value="" />
-					<attribute name="fisher" value="" />
-					<attribute name="chi_sq" value="" />
-					<attribute name="antecedent" value="" />
-					<attribute name="succedent" value="" />
-					<attribute name="condition" value="" />
+					<attribute name="id" value=""/>
+					<attribute name="db_name" value=""/>
+					<attribute name="matrix_name" value=""/>
+					<attribute name="task_name" value=""/>
+					<attribute name="a" value=""/>
+					<attribute name="b" value=""/>
+					<attribute name="c" value=""/>
+					<attribute name="d" value=""/>
+					<attribute name="conf" value=""/>
+					<attribute name="d_conf" value=""/>
+					<attribute name="e_conf" value=""/>
+					<attribute name="support" value=""/>
+					<attribute name="completeness" value=""/>
+					<attribute name="avg_diff" value=""/>
+					<attribute name="low_bnd_imp" value=""/>
+					<attribute name="up_bnd_imp" value=""/>
+					<attribute name="low_bnd_dbl_imp" value=""/>
+					<attribute name="up_bnd_dbl_imp" value=""/>
+					<attribute name="low_bnd_eq" value=""/>
+					<attribute name="up_bnd_eq" value=""/>
+					<attribute name="fisher" value=""/>
+					<attribute name="chi_sq" value=""/>
+					<attribute name="antecedent" value=""/>
+					<attribute name="succedent" value=""/>
+					<attribute name="condition" value=""/>
 				</element_attributes>
 			</attributes>
 			<filter type="simple">
@@ -42,7 +181,6 @@
 			<output>
 			</output>
 		</active_element>
-		
 		<active_element type="category" source="" id="category1" label="">
 			<attributes>
 				<element_attributes>
@@ -53,10 +191,14 @@
 			<output>
 			</output>
 		</active_element>
-
 		<attr_link_table id="attr_link_table1" target="" style="">
 		</attr_link_table>
-
 	</chapter>
-	<include file="" id="include1"/>
+	<include file="D:\Iva\Softwarak\Zkusebni PROGRAMY\SVN 2710\XML\include_doc.doc" id="include1"/>
 </report>
+<!-- please leave some free spaces directly at the end of this file
+- required for smooth drive of the RA application :-) 
+
+dedek
+
+-->

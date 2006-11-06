@@ -8,6 +8,9 @@
 // TransformationsDialog.h : header file
 //
 
+#if !defined
+#define MAX_TRANSFORMATION_COUNT  20
+#endif
 #include "PropertyEditor.h"
 
 /////////////////////////////////////////////////////////////////////////////
@@ -37,6 +40,7 @@ public:
 
 // Implementation
 protected:
+	void AddTransformation(int selected_item);
 	void ConfigureTransformation(int transform_index);
 	BOOL IsSelectedTransformationWithOptions(int transform_index);
 	BOOL IsSelectedTransformationAttrLinkTable(int transform_index);
@@ -46,7 +50,6 @@ protected:
 	//{{AFX_MSG(CTransformationsDialog)
 	virtual BOOL OnInitDialog();
 	virtual void OnOK();
-//	virtual void OnCancel();
 	afx_msg void OnAddButton();
 	afx_msg void OnRemoveButton();
 	afx_msg void OnMoveUpButton();
@@ -54,6 +57,7 @@ protected:
 	afx_msg void ConfigureAttrLinkTable();
 	afx_msg void OnAddAttrLinkTableButton();
 	afx_msg void OnConfigureButton();
+	afx_msg void OnDblclkSupportedTransfList();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 private:
@@ -93,7 +97,6 @@ private:
 
 
   virtual BOOL OnApply();
-  afx_msg void OnLbnSelchangeSelectedTransfsList();
 };
 
 //{{AFX_INSERT_LOCATION}}
