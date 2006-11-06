@@ -8,8 +8,12 @@
 // TransformationsDialog.h : header file
 //
 
-#if !defined
+#if !defined MAX_TRANSFORMATION_COUNT
 #define MAX_TRANSFORMATION_COUNT  20
+#endif
+
+#if !defined MAX_CHOSEN_TRANSFORMATION_COUNT
+#define MAX_CHOSEN_TRANSFORMATION_COUNT 20
 #endif
 #include "PropertyEditor.h"
 
@@ -40,7 +44,9 @@ public:
 
 // Implementation
 protected:
-	void AddTransformation(int selected_item);
+	void RemoveTransf(int selected_item);
+	void SelTransformConfigure(int cur_sel);
+	BOOL AddTransformation(int selected_item);
 	void ConfigureTransformation(int transform_index);
 	BOOL IsSelectedTransformationWithOptions(int transform_index);
 	BOOL IsSelectedTransformationAttrLinkTable(int transform_index);
@@ -54,10 +60,9 @@ protected:
 	afx_msg void OnRemoveButton();
 	afx_msg void OnMoveUpButton();
 	afx_msg void OnMoveDownButton();
-	afx_msg void ConfigureAttrLinkTable();
-	afx_msg void OnAddAttrLinkTableButton();
 	afx_msg void OnConfigureButton();
 	afx_msg void OnDblclkSupportedTransfList();
+	afx_msg void OnDblclkSelectedTransfsList();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 private:

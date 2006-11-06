@@ -55,6 +55,7 @@ BEGIN_MESSAGE_MAP(CTransformationsDialog, CPropertyPage)
 	ON_BN_CLICKED(IDC_MOVE_DOWN_BUTTON, OnMoveDownButton)
 	ON_BN_CLICKED(IDC_CONFIGURE_BUTTON, OnConfigureButton)
 	ON_LBN_DBLCLK(IDC_SUPPORTED_TRANSF_LIST, OnDblclkSupportedTransfList)
+	ON_LBN_DBLCLK(IDC_SELECTED_TRANSFS_LIST, OnDblclkSelectedTransfsList)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -168,25 +169,33 @@ void CTransformationsDialog::OnAddButton()
 	for (I=0;I<nSel;I++)
 	{
 		 
-		AddTransformation(SelItems[I]);
+		if (!AddTransformation(SelItems[I])) return;
 	}
 }
 
 void CTransformationsDialog::OnRemoveButton() 
 {
-	int selected_index = m_SelectedList.GetCurSel();
-	if (selected_index == LB_ERR) return;
+	CElementManager & OElementManager = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;		
+	CAElInfo * info = OElementManager.getActiveElementInfo(OElementManager.IdentifyElement(m_active_element));
+	if ( MAX_TRANSFORMATION_COUNT < info->getTranformationsCount() )  
+	{
+		//Error  
+		return;
+	}
+	
+	int nSel = m_SelectedList.GetSelCount();
+	int SelItems[ MAX_CHOSEN_TRANSFORMATION_COUNT ];
+	
 
-	m_SelectedList.DeleteString(selected_index);
+	int nRes = m_SelectedList.GetSelItems( MAX_CHOSEN_TRANSFORMATION_COUNT, SelItems );
+	if (nRes == LB_ERR) return;
+	int I;
 
-	//uprava xml
-	CString query_str;
-	query_str.Format("transformation[%d]", selected_index);
-
-	m_cloned_output_element->removeChild(
-		m_cloned_output_element->selectSingleNode((LPCTSTR) query_str));
-
-  SetModified();
+	for (I=nSel-1;I>=0;I--)
+	{
+		 
+		RemoveTransf(SelItems[I]);
+	}
 }
 
 void CTransformationsDialog::OnMoveUpButton() 
@@ -280,35 +289,22 @@ void CTransformationsDialog::ConfigureAttrLinkTable(MSXML2::IXMLDOMNodePtr & att
 
 void CTransformationsDialog::OnConfigureButton() 
 {
-	int cur_sel = m_SelectedList.GetCurSel();
-
-	if (cur_sel == LB_ERR) return;
-
-	if (IsSelectedTransformationAttrLinkTable(cur_sel))
+	CElementManager & OElementManager = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;		
+	CAElInfo * info = OElementManager.getActiveElementInfo(OElementManager.IdentifyElement(m_active_element));
+	if ( MAX_TRANSFORMATION_COUNT < info->getTranformationsCount() )  
 	{
-		CString query_str;
-		query_str.Format("transformation[%d]/attr_link_table", cur_sel);
-		ConfigureAttrLinkTable(m_cloned_output_element->selectSingleNode((LPCTSTR) query_str));
+		//Error  
 		return;
 	}
-	else if (IsSelectedTransformationWithOptions(cur_sel))
-	{
-		try
-		{
-			ConfigureTransformation(cur_sel);
-		}
-		catch (CString & msg)
-		{
-			CString tr_name;
-			m_SelectedList.GetText(cur_sel, tr_name);
+	
+	int nSel = m_SelectedList.GetSelCount();
+	int SelItems[ MAX_TRANSFORMATION_COUNT ];
+	
 
-			CReportAsistentApp::ReportError(IDS_TR_OPTIONS_ERROR,
-				(LPCTSTR) tr_name, (LPCTSTR) msg);
-				
-			return;
-		}
+	int nRes = m_SelectedList.GetSelItems( MAX_TRANSFORMATION_COUNT, SelItems );
+	if (nRes == LB_ERR || nRes < 1) return;
 
-	}
+	SelTransformConfigure(SelItems[0]);
 }
 
 BOOL CTransformationsDialog::IsSelectedTransformationWithOptions(int transform_index)
@@ -633,9 +629,17 @@ void CTransformationsDialog::OnDblclkSupportedTransfList()
 	return;
 }
 
-void CTransformationsDialog::AddTransformation(int selected_item)
+BOOL CTransformationsDialog::AddTransformation(int selected_item)
 {
-	
+	//Iva: check, whether the number of selected transformations is not too high	
+	CString Pom;
+	if (m_SelectedList.GetCount() >= MAX_CHOSEN_TRANSFORMATION_COUNT)
+	{
+		Pom.Format("%d", MAX_CHOSEN_TRANSFORMATION_COUNT);
+		CReportAsistentApp::ReportError(IDS_TOO_MANY_SELECTED_TRANSFORMATIONS, Pom);
+		return false;
+	}
+
 
 	CString selected_text;
 
@@ -708,7 +712,7 @@ void CTransformationsDialog::AddTransformation(int selected_item)
 					"Tag visualization_values is missing");
 
 				m_SelectedList.DeleteString(inserted_item);
-				return ;
+				return false;
 			}
 		}
 	}
@@ -719,4 +723,79 @@ void CTransformationsDialog::AddTransformation(int selected_item)
 	transf_elem.Release();
 
   SetModified();
+  return true;
 }
+
+void CTransformationsDialog::OnDblclkSelectedTransfsList() 
+{
+	int nSel = m_SelectedList.GetSelCount();
+	if (nSel > 1) return;
+	int SelItems[2];
+
+	int nRes = m_SelectedList.GetSelItems( 1, SelItems );
+	if (nRes == LB_ERR) return;
+	 
+	SelTransformConfigure(SelItems[0]);
+	return;
+	
+}
+
+void CTransformationsDialog::SelTransformConfigure(int cur_sel)
+{
+
+	if (cur_sel == LB_ERR) return;
+
+	if (IsSelectedTransformationAttrLinkTable(cur_sel))
+	{
+		CString query_str;
+		query_str.Format("transformation[%d]/attr_link_table", cur_sel);
+		ConfigureAttrLinkTable(m_cloned_output_element->selectSingleNode((LPCTSTR) query_str));
+		return;
+	}
+	else if (IsSelectedTransformationWithOptions(cur_sel))
+	{
+		try
+		{
+			ConfigureTransformation(cur_sel);
+		}
+		catch (CString & msg)
+		{
+			CString tr_name;
+			m_SelectedList.GetText(cur_sel, tr_name);
+
+			CReportAsistentApp::ReportError(IDS_TR_OPTIONS_ERROR,
+				(LPCTSTR) tr_name, (LPCTSTR) msg);
+				
+			return;
+		}
+
+	}
+}
+
+void CTransformationsDialog::RemoveTransf(int selected_item)
+{
+	m_SelectedList.DeleteString(selected_item);
+
+	//uprava xml
+	CString query_str;
+	query_str.Format("transformation[%d]", selected_item);
+
+	m_cloned_output_element->removeChild(
+		m_cloned_output_element->selectSingleNode((LPCTSTR) query_str));
+
+   SetModified();
+}
+
+//DEL void CTransformationsDialog::OnMmdelete() 
+//DEL {
+//DEL 	AfxMessageBox("Stisknuto Delete");
+//DEL 	
+//DEL }
+
+//DEL void CTransformationsDialog::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags) 
+//DEL {
+//DEL 	if (nChar == 83) AfxMessageBox("Stisknuto Delete");
+//DEL 
+//DEL 	AfxMessageBox("Stisknuto neco");
+//DEL 	CPropertyPage::OnKeyDown(nChar, nRepCnt, nFlags);
+//DEL }

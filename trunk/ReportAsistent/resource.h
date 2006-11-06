@@ -1,5 +1,5 @@
 //{{NO_DEPENDENCIES}}
-// Microsoft Visual C++ generated include file.
+// Microsoft Developer Studio generated include file.
 // Used by ReportAsistent.rc
 //
 #define IDD_ABOUTBOX                    100
@@ -161,6 +161,7 @@
 #define IDS_CONFIRM_THRAD_KILL          61400
 #define IDS_CONFIRM_APP_RESUME          61401
 #define IDS_COMPLEX_FILTER_SELECT_ATTR  61402
+#define IDS_TOO_MANY_SELECTED_TRANSFORMATIONS 61403
 
 // Next default values for new objects
 // 

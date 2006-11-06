@@ -179,7 +179,8 @@ BEGIN
                     LBS_NOINTEGRALHEIGHT | LBS_EXTENDEDSEL | WS_VSCROLL | 
                     WS_TABSTOP
     LISTBOX         IDC_SELECTED_TRANSFS_LIST,202,28,122,178,
-                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+                    LBS_NOINTEGRALHEIGHT | LBS_EXTENDEDSEL | WS_VSCROLL | 
+                    WS_TABSTOP
     LTEXT           "Supported transformations:",IDC_STATIC,29,20,85,8
     LTEXT           "Selected transformations:",IDC_STATIC,202,20,80,8
     PUSHBUTTON      ">>",IDC_ADD_BUTTON,157,91,38,14
@@ -933,6 +934,8 @@ BEGIN
     IDS_CONFIRM_THRAD_KILL  "Warning: Killing of working thread in the middle of its work may cause unpredictable problems in running of the application. The application could even fall down and destroy some your data or Windows resources.\n\nReally kill the thrad?"
     IDS_CONFIRM_APP_RESUME  "Warninig: Resuming the application will let the working thread still working in background. But the result of its work will be discarted. The application will run slower for a while, but you can save your work and exit it.\n\nReally resume the application?"
     IDS_COMPLEX_FILTER_SELECT_ATTR "Please select attribute to filter."
+    IDS_TOO_MANY_SELECTED_TRANSFORMATIONS 
+                            "The number of selected transformations is too high. "
 END
 
 #endif    // English (U.S.) resources

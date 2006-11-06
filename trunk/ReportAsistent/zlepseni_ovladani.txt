@@ -29,9 +29,10 @@ transformace presune (krome tlacitka ">>") take:
 
 - Dialog nastaveni vizualizaci se pro oznacenou polozku ve sloupci "Selected transformations" otevre (krome tlacitka "Configure..") taky:
 	- oznacena polozka stiskem Enter(Iva: NE, Enter standardne patri stisknuti tlacitka OK)
-	- dvojklik na vybranou polozku
+	- dvojklik na vybranou polozku (Iva:HOTOVO)
 
 - Vybrana polozka sloupce "Selected transformations" se z nej odstrani (krome tlacitka "<<") taky:
+	- moznost oznaceni vice polozek (Iva:HOTOVO)
 	- oznacena polozka stiskem klavesy "Delete"
 
 - Tlacitko Configure by mohlo byt zasednute a aktivovat se pouze je-li oznacena nejaka polozka ve sloupci "Selected transformations"
