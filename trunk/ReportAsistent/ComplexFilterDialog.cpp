@@ -442,7 +442,10 @@ void CComplexFilterDialog::InitDialogFromXML(void)
 			m_AttributesList.FindString(-1,	
 				m_filter_DOM->selectSingleNode((LPCTSTR) query)->text);
 	}
-	catch (...) {}
+	catch (...)
+	{
+		m_nSlectedAttrIndex = 0;
+	}
 
 	//numeric_sort
 	if ((_bstr_t) m_currnet_attribute_filter->getAttribute("numeric_sort") == (_bstr_t) "true")
