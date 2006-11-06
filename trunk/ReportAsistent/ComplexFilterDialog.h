@@ -87,8 +87,14 @@ public:
 	afx_msg void OnBnClickedOk();
 public:
 	afx_msg void OnLbnSelchangeValuesList();
+	
+private:
 	void InitDialogFromXML(void);
 	void AppendFilter(void);
+	MSXML2::IXMLDOMElementPtr CreateAttrFilterElement();
+
+	int m_nSlectedAttrIndex;
+	CString m_sTresholdOrFixedValue;
 };
 
 //{{AFX_INSERT_LOCATION}}

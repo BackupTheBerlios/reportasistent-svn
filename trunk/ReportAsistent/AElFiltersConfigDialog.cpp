@@ -67,10 +67,13 @@ BOOL CAElFiltersConfigDialog::OnInitDialog()
 {
 	CPropertyPage::OnInitDialog();
 
+	//nastav typ filtru na complex
+	m_cloned_active_element->selectSingleNode("filter/@type")->text = "complex";
 	
 	CDataSourcesManager & dm = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->DataSourcesManager;
 	CElementManager & em = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
 
+	//nacti zdroje
 	for (int a=0; a< dm.getSourcesCount(); a++)
 	{
 		if (em.isElementSupportedBySource(em.IdentifyElement(m_active_element), a))
@@ -81,6 +84,7 @@ BOOL CAElFiltersConfigDialog::OnInitDialog()
 
 	int sel = m_SourcesCombo.SelectString(-1, (_bstr_t) m_active_element->getAttribute("source"));
 	if (sel == CB_ERR) m_SourcesCombo.SelectString(-1, dm.getDefaultSource());
+
 
 	// TODO:  Add extra initialization here
 
@@ -140,6 +144,8 @@ void CAElFiltersConfigDialog::OnBnClickedAddFilterButton()
 {
 	CComplexFilterDialog dlg(m_cloned_active_element);
 	dlg.DoModal();
+
+	SetModified();
 }
 
 MSXML2::IXMLDOMElementPtr & CAElFiltersConfigDialog::getActiveElement(void)
@@ -150,4 +156,21 @@ MSXML2::IXMLDOMElementPtr & CAElFiltersConfigDialog::getActiveElement(void)
 MSXML2::IXMLDOMElementPtr & CAElFiltersConfigDialog::getClonedActiveElement(void)
 {
 	return m_cloned_active_element;
+}
+
+BOOL CAElFiltersConfigDialog::OnApply()
+{
+	m_active_element->parentNode->replaceChild(m_cloned_active_element, m_active_element);
+
+	m_active_element = m_cloned_active_element;
+	m_cloned_active_element = m_active_element->cloneNode(VARIANT_TRUE);	 
+
+	return TRUE; //zavola se SetModified(FALSE);
+}
+
+void CAElFiltersConfigDialog::OnOK()
+{
+	OnApply();
+
+	CPropertyPage::OnOK();
 }

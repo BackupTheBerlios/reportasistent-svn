@@ -41,6 +41,7 @@ BEGIN_MESSAGE_MAP(CSkeletonDoc, CDocument)
 	//}}AFX_MSG_MAP
 	ON_COMMAND_RANGE(ID_MMNEWSTATICFIRST, ID_MMNEWSTATICLAST, OnMmnewelement)
 	ON_COMMAND_RANGE(ID_MMNEWACTIVEFIRST, ID_MMNEWACTIVELAST, OnMmnewelement)
+	ON_COMMAND(ID_SHOW_XML, &CSkeletonDoc::OnShowXml)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -1145,3 +1146,19 @@ BOOL CSkeletonDoc::InsertNewElementAndUpdateTreeCtrl( BOOL bEdit,CElementManager
 	return bSuccess;
 }
 
+
+//dedek: ladici
+void CSkeletonDoc::OnShowXml()
+{
+#ifdef _DEBUG
+	CTreeCtrl & tree = GetFirstView()->GetTreeCtrl();
+
+	HTREEITEM sel_item = tree.GetSelectedItem();
+	if (sel_item  == NULL) return;
+
+	
+	MSXML2::IXMLDOMElementPtr edited_element = ElementFromItemData(tree.GetItemData(sel_item));
+
+	AfxMessageBox(edited_element->xml);
+#endif
+}

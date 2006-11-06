@@ -720,6 +720,7 @@ BEGIN
     "W",            ID_OPEN_WORD_EDITOR,    VIRTKEY, CONTROL, NOINVERT
     "X",            ID_EDIT_CUT,            VIRTKEY, CONTROL, NOINVERT
     "Z",            ID_EDIT_UNDO,           VIRTKEY, CONTROL, NOINVERT
+    "X",            ID_SHOW_XML,            VIRTKEY, CONTROL, ALT, NOINVERT
 END
 
 

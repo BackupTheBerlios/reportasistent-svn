@@ -3,7 +3,7 @@
 	ProjectType="Visual C++"
 	Version="8,00"
 	Name="ReportAsistent"
-	ProjectGUID="{5F34FD05-3DC1-4840-81A2-DF6BB08897BB}"
+	ProjectGUID="{5EB9A1CF-CDBB-464E-AD33-03378381DDD2}"
 	RootNamespace="ReportAsistent"
 	Keyword="MFCProj"
 	>
@@ -598,6 +598,26 @@
 				</FileConfiguration>
 			</File>
 			<File
+				RelativePath="InsertElementTrace.cpp"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+			</File>
+			<File
 				RelativePath="MainFrm.cpp"
 				>
 				<FileConfiguration
@@ -958,6 +978,10 @@
 			</File>
 			<File
 				RelativePath="GenerateDialog.h"
+				>
+			</File>
+			<File
+				RelativePath="InsertElementTrace.h"
 				>
 			</File>
 			<File

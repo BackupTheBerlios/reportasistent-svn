@@ -58,6 +58,10 @@ public:
 	MSXML2::IXMLDOMElementPtr & getActiveElement(void);
 public:
 	MSXML2::IXMLDOMElementPtr & getClonedActiveElement(void);
+public:
+	virtual BOOL OnApply();
+public:
+	virtual void OnOK();
 };
 
 //{{AFX_INSERT_LOCATION}}
