@@ -43,6 +43,7 @@ protected:
 	//{{AFX_MSG(CElementTextDialog)
 	afx_msg void OnStylesRefreshButton();
 	virtual void OnOK();
+	virtual BOOL OnInitDialog();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };

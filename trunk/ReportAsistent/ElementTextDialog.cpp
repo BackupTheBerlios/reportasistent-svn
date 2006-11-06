@@ -175,3 +175,22 @@ void CElementTextDialog::OnOK()
 	
 	CDialog::OnOK();
 }
+
+BOOL CElementTextDialog::OnInitDialog() 
+{
+	CDialog::OnInitDialog();
+	
+	FillStylesCombo();
+
+
+	//vyber style v comboboxu
+	_variant_t style = m_SelXMLElm->getAttribute("style");
+	if (style.vt != VT_NULL)
+	{
+		m_StylesCombo.SelectString(-1, (_bstr_t) style);
+	}
+
+		
+	return TRUE;  // return TRUE unless you set the focus to a control
+	              // EXCEPTION: OCX Property Pages should return FALSE
+}
