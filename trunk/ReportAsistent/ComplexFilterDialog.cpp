@@ -454,7 +454,31 @@ void CComplexFilterDialog::InitDialogFromXML(void)
 		m_bNumericSort = FALSE;
 
 	//sort_direction
+	if ((_bstr_t) m_currnet_attribute_filter->getAttribute("sort_direction") == (_bstr_t) "descending")
+		m_nSortDirectionRadioGroup = IDC_DESCENDING_RADIO - IDC_DESCENDING_RADIO;
+	else
+		m_nSortDirectionRadioGroup = IDC_ASCENDING_RADIO - IDC_DESCENDING_RADIO;
+
+
 	//filter_type & filter_data
+	if ((_bstr_t) m_currnet_attribute_filter->getAttribute("filter_type") == (_bstr_t) "treshold")
+	{
+		m_nFilterTypeRadioGroup = IDC_TRESHOLD_RADIO - IDC_TRESHOLD_RADIO;
+		m_sTresholdOrFixedValue = (LPCTSTR) (_bstr_t) m_currnet_attribute_filter->getAttribute("filter_data");
+
+	}
+	else
+	if ((_bstr_t) m_currnet_attribute_filter->getAttribute("filter_type") == (_bstr_t) "fixed")
+	{
+		m_nFilterTypeRadioGroup = IDC_FIXED_VAL_RADIO - IDC_TRESHOLD_RADIO;
+		m_sTresholdOrFixedValue = (LPCTSTR) (_bstr_t) m_currnet_attribute_filter->getAttribute("filter_data");
+	}
+	else
+	if ((_bstr_t) m_currnet_attribute_filter->getAttribute("filter_type") == (_bstr_t) "top_n")
+	{
+		m_nFilterTypeRadioGroup = IDC_TOP_N_VAL_RADIO - IDC_TRESHOLD_RADIO;
+		m_nTopNValues = m_currnet_attribute_filter->getAttribute("filter_data");
+	}
 
 	UpdateData(FALSE);
 }
