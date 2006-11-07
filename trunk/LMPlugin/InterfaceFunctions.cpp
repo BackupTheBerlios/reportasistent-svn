@@ -111,7 +111,11 @@ hSource_t fNewSourceLM(PersistID_t * pPerzistID)
 	CString s;
 
 
-	if (! pom.FindAccesDatasource(s)) return NULL;
+	if (! pom.FindAccesDatasource(s))
+	{
+		CLMSock::ReportError(1, "Required ODBC Microsoft Access driver (.mdb) not found on this computer.\nNew data source can not be created.");
+		return NULL;
+	}
 
 
 	//dedek: potreba pokud si chceme udrzet aktualni adresar

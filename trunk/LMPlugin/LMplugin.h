@@ -58,6 +58,10 @@ public:
   
   CString getAPList();	// vrati seznam vsech identifikatoru AP, ktere zasuvka podporuje
 
+// STATIC
+  static int ReportError(UINT nErrorID, const char* FormatString, ...);
+
+
 // FRIENDS
 
   friend BOOL performLM (void* hSource, const char* APName, BSTR* Result); // funkce perform zasuvky pro LM
