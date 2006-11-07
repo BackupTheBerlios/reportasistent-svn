@@ -39,8 +39,8 @@ to se deje vzdy, kdyz se cte plugin output, napr pri otevreni simple fiter -->
 <!ATTLIST attribute_filter attr_name CDATA #REQUIRED>
 <!ATTLIST attribute_filter numeric_sort (true | false) #REQUIRED>
 <!ATTLIST attribute_filter sort_direction (ascending | descending) #REQUIRED>
-<!ATTLIST attribute_filter filter_type (treshold | fixed | top_n) #REQUIRED>
-<!ATTLIST attribute_filter filter_data CDATA #REQUIRED> <!-- treshold value or top_n value-->
+<!ATTLIST attribute_filter filter_type (treshold | fixed | top-n) #REQUIRED>
+<!ATTLIST attribute_filter filter_data CDATA #REQUIRED> <!-- treshold value or top-n value-->
 
 <!ELEMENT output (transformation* | (chapter | paragraph | graph | table | text | output)*) >
 

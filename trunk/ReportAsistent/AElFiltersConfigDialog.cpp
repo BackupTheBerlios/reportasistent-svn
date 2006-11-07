@@ -47,6 +47,7 @@ void CAElFiltersConfigDialog::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_DATA_SOURCE_COMBO, m_SourcesCombo);
 	DDV_NonDuplicateID(pDX,IDC_CF_ID_EDIT, m_CF_IdEdit);
 
+	DDX_Control(pDX, IDC_FILTERS_LIST, m_FiltersList);
 }
 
 
@@ -55,6 +56,9 @@ BEGIN_MESSAGE_MAP(CAElFiltersConfigDialog, CDialog)
 		// NOTE: the ClassWizard will add message map macros here
 	//}}AFX_MSG_MAP
 	ON_BN_CLICKED(IDC_ADD_FILTER_BUTTON, OnBnClickedAddFilterButton)
+	ON_CBN_SELCHANGE(IDC_DATA_SOURCE_COMBO, OnCbnSelchangeDataSourceCombo)
+	ON_WM_CTLCOLOR()
+	ON_BN_CLICKED(IDC_CONFIGURE_FILTER_BUTTON, OnBnClickedConfigureFilterButton)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -85,8 +89,14 @@ BOOL CAElFiltersConfigDialog::OnInitDialog()
 	int sel = m_SourcesCombo.SelectString(-1, (_bstr_t) m_active_element->getAttribute("source"));
 	if (sel == CB_ERR) m_SourcesCombo.SelectString(-1, dm.getDefaultSource());
 
+	//nacti filtry
+	int c = -1;
+	c = m_FiltersList.InsertColumn(++c, "Attribute name", 0, 150);
+	c = m_FiltersList.InsertColumn(++c, "Filter type", 0, 100);
+	m_FiltersList.InsertColumn(++c, "Filter data", 0, 150);
 
-	// TODO:  Add extra initialization here
+	UpdateFiltersList();
+
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// EXCEPTION: OCX Property Pages should return FALSE
@@ -173,4 +183,46 @@ void CAElFiltersConfigDialog::OnOK()
 	OnApply();
 
 	CPropertyPage::OnOK();
+}
+
+void CAElFiltersConfigDialog::UpdateFiltersList(void)
+{
+	ASSERT(m_filter_DOM != NULL);
+
+	m_FiltersList.DeleteAllItems();
+
+	MSXML2::IXMLDOMNodeListPtr attr_filters =
+		m_cloned_active_element->selectNodes("filter/attribute_filter");
+
+	for (int a = 0; a < attr_filters->length; a++)
+	{
+		int i = m_FiltersList.InsertItem(a, attr_filters->item[a]->selectSingleNode("@attr_name")->text);
+
+		m_FiltersList.SetItemText(i, 1, attr_filters->item[a]->selectSingleNode("@filter_type")->text);
+		m_FiltersList.SetItemText(i, 2, attr_filters->item[a]->selectSingleNode("@filter_data")->text);
+	}
+}
+
+void CAElFiltersConfigDialog::OnCbnSelchangeDataSourceCombo()
+{
+	ASSERT(m_filter_DOM != NULL);
+	
+	UpdateFiltersList();
+	// TODO: Add your control notification handler code here
+}
+
+HBRUSH CAElFiltersConfigDialog::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
+{
+	HBRUSH hbr = CPropertyPage::OnCtlColor(pDC, pWnd, nCtlColor);
+
+	// TODO:  Change any attributes of the DC here
+
+	// TODO:  Return a different brush if the default is not desired
+	return hbr;
+}
+
+
+void CAElFiltersConfigDialog::OnBnClickedConfigureFilterButton()
+{
+	// TODO: Add your control notification handler code here
 }

@@ -474,7 +474,7 @@ void CComplexFilterDialog::InitDialogFromXML(void)
 		m_sTresholdOrFixedValue = (LPCTSTR) (_bstr_t) m_currnet_attribute_filter->getAttribute("filter_data");
 	}
 	else
-	if ((_bstr_t) m_currnet_attribute_filter->getAttribute("filter_type") == (_bstr_t) "top_n")
+	if ((_bstr_t) m_currnet_attribute_filter->getAttribute("filter_type") == (_bstr_t) "top-n")
 	{
 		m_nFilterTypeRadioGroup = IDC_TOP_N_VAL_RADIO - IDC_TRESHOLD_RADIO;
 		m_nTopNValues = m_currnet_attribute_filter->getAttribute("filter_data");
@@ -544,7 +544,7 @@ MSXML2::IXMLDOMElementPtr CComplexFilterDialog::CreateAttrFilterElement()
 		filter_data_attr->value = (LPCTSTR) m_sTresholdOrFixedValue;		
 		break;
 	case IDC_TOP_N_VAL_RADIO:
-		filter_type_attr->value = "top_n";
+		filter_type_attr->value = "top-n";
 		filter_data_attr->value = m_nTopNValues;
 		break;
 	}

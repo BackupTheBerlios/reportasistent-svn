@@ -1,4 +1,5 @@
 #include "afxwin.h"
+#include "afxcmn.h"
 #if !defined(AFX_AELFILTERSCONFIGDIALOG_H__BB057B90_DBD8_44C4_9138_DB1659AA5D98__INCLUDED_)
 #define AFX_AELFILTERSCONFIGDIALOG_H__BB057B90_DBD8_44C4_9138_DB1659AA5D98__INCLUDED_
 
@@ -36,6 +37,8 @@ public:
 private:
 	MSXML2::IXMLDOMElementPtr & m_active_element;
 	MSXML2::IXMLDOMElementPtr m_cloned_active_element;
+   	MSXML2::IXMLDOMElementPtr m_filter_DOM;	//plugin output
+
 
 // Implementation
 protected:
@@ -62,6 +65,14 @@ public:
 	virtual BOOL OnApply();
 public:
 	virtual void OnOK();
+	CListCtrl m_FiltersList;
+	void UpdateFiltersList(void);
+public:
+	afx_msg void OnCbnSelchangeDataSourceCombo();
+public:
+	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
+public:
+	afx_msg void OnBnClickedConfigureFilterButton();
 };
 
 //{{AFX_INSERT_LOCATION}}

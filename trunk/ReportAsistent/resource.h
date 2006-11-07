@@ -1,5 +1,5 @@
 //{{NO_DEPENDENCIES}}
-// Microsoft Developer Studio generated include file.
+// Microsoft Visual C++ generated include file.
 // Used by ReportAsistent.rc
 //
 #define IDD_ABOUTBOX                    100
@@ -123,6 +123,7 @@
 #define IDC_ADD_FILTER_BUTTON           1060
 #define IDC_ADD_FILTER_BUTTON2          1061
 #define IDC_SIMPLEFILTER_ID_EDIT        1061
+#define IDC_CONFIGURE_FILTER_BUTTON     1061
 #define IDC_CF_ID_EDIT                  1062
 #define IDC_TOPN_SPIN                   1062
 #define ID_MMGENREP                     32771
