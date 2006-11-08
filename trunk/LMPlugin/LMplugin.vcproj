@@ -4,6 +4,7 @@
 	Version="8,00"
 	Name="LMplugin"
 	ProjectGUID="{E1C956A1-DC0F-420C-BF09-714F0DC6EBF8}"
+	RootNamespace="LMplugin"
 	Keyword="MFCProj"
 	>
 	<Platforms>
@@ -1157,6 +1158,10 @@
 			</File>
 			<File
 				RelativePath="LM_Metabase.h"
+				>
+			</File>
+			<File
+				RelativePath=".\LMPlErrorMessages.h"
 				>
 			</File>
 			<File
