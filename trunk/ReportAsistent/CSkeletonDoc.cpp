@@ -41,7 +41,7 @@ BEGIN_MESSAGE_MAP(CSkeletonDoc, CDocument)
 	//}}AFX_MSG_MAP
 	ON_COMMAND_RANGE(ID_MMNEWSTATICFIRST, ID_MMNEWSTATICLAST, OnMmnewelement)
 	ON_COMMAND_RANGE(ID_MMNEWACTIVEFIRST, ID_MMNEWACTIVELAST, OnMmnewelement)
-	ON_COMMAND(ID_SHOW_XML, &CSkeletonDoc::OnShowXml)
+	ON_COMMAND(ID_SHOW_XML, OnShowXml)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
