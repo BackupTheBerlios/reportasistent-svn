@@ -265,12 +265,13 @@ void CSourcesDialog::OnEndlabeleditSourcesList(NMHDR* pNMHDR, LRESULT* pResult)
 	{
 	
 		CDataSourcesManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->DataSourcesManager;
-
-		m.setSourcePublicID(
+		
+		// kody: beru v potaz vysledek prejmenovani (muze selhat na duplicite)
+		BOOL result = m.setSourcePublicID(
 			m.FindSourceByPublicID(
 			m_SourcesList.GetItemText(pDispInfo->item.iItem, SRCL_NAME)), pDispInfo->item.pszText);
 			
-		*pResult = TRUE;	
+		*pResult = result;	
 	}
 
 	

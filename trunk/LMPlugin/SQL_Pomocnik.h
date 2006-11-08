@@ -148,6 +148,38 @@ public:
 				}
 			}
 
+			r = SQLDrivers(h, SQL_FETCH_NEXT, desc, sizeof desc, & desc_len, attr, sizeof attr, & attr_len);
+		}
+
+		
+		return FALSE;
+	}
+
+	// finds the ODBC driver for Microsoft Access
+	BOOL FindAccesDriver(CString & ret)
+	{
+		SQLRETURN r;
+		ret.Empty();
+
+		if (! handle_ok()) return FALSE;
+
+		SQLCHAR		desc[1000];
+		SQLCHAR		attr[1000];
+		SQLSMALLINT desc_len = sizeof desc;
+		SQLSMALLINT attr_len = sizeof attr;
+
+		r = SQLDrivers(h, SQL_FETCH_FIRST, desc, sizeof desc, & desc_len, attr, sizeof attr, & attr_len);
+
+		while ((r != SQL_NO_DATA) && (r != SQL_ERROR) && (r != SQL_INVALID_HANDLE))
+		{
+			//ten string "Microsoft Access Driver (*.mdb)" by se mel ulozit jinam (header nebo resources)..
+			//mozna pridat konfigurovatelnost
+			if (0 == strcmp((LPCTSTR) attr, "Microsoft Access Driver (*.mdb)"))
+			{
+				ret = attr;
+				return TRUE;
+			}
+
 			r = SQLDataSources(h, SQL_FETCH_NEXT, desc, sizeof desc, & desc_len, attr, sizeof attr, & attr_len);
 		}
 

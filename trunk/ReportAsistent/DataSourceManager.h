@@ -220,6 +220,9 @@ public:
 
 	// prejmenovani zdroje
 	BOOL setSourcePublicID(int source_index, public_source_id_t source_id); 
+
+	// test na duplicity v Public ID zdroju v SourcesTab (TRUE=bez duplicit)
+	BOOL checkSourcePublicIDdupl(int source_index, public_source_id_t source_id);
 	
 	// je zdroj pripojen?
 	BOOL isSourceConnected(int source_index);

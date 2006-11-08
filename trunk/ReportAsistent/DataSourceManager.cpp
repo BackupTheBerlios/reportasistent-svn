@@ -280,8 +280,11 @@ int CDataSourcesManager::initPlugsTab(LPCTSTR plugins_dir_path)
 	{
 		Found = FList.FindNextFile();
 		//printf("%s\n", FList.GetFileName());
-		
-		PlugsTab.Add(CPluginRec(FList.GetFileName()));
+		// kody - odstraneni ".dll" z nazvu pluginu
+		CString PluginName = FList.GetFileName();
+		PluginName.Replace(_T(".dll"), _T(""));
+
+		PlugsTab.Add(CPluginRec(PluginName));
 		i++;
 	}
 
@@ -674,13 +677,35 @@ BOOL CDataSourcesManager::setSourcePublicID(int source_index, public_source_id_t
 {
 	if(SourcesTab.GetUpperBound() >= source_index  &&  source_index>=0)
 	{
-		SourcesTab[source_index]->PublicID = source_id;
-		return TRUE;
+		if(checkSourcePublicIDdupl(source_index, source_id))
+		{
+			SourcesTab[source_index]->PublicID = source_id;
+			return TRUE;
+		}
+		else
+			CReportAsistentApp::ReportError(IDS_PUBLICID_DUPL, source_id);
 	}
 
 	return FALSE;
 }
 
+// checkSourcePublicIDdupl
+BOOL CDataSourcesManager::checkSourcePublicIDdupl(int source_index, public_source_id_t source_id)
+{
+	if(SourcesTab.GetUpperBound() >= source_index  &&  source_index>=0)
+	{
+		for(int i=0; i<getSourcesCount(); i++)
+		{
+			if(i != source_index)
+			{
+				if(SourcesTab[i]->PublicID == source_id)
+					return FALSE;
+			}
+		}
+	}
+
+	return TRUE;
+}
 
 // isSourceConnected
 BOOL CDataSourcesManager::isSourceConnected(int source_index)

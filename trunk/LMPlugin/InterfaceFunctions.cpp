@@ -12,6 +12,7 @@
 #include "SQL_pomocnik.h"
 #include "InterfaceFunctions.h"
 #include "LMPlugin.h"
+#include "LMPlErrorMessages.h"
 
 
 
@@ -108,15 +109,22 @@ hSource_t fNewSourceLM(PersistID_t * pPerzistID)
 	CDatabase * db;
 	SQL_Pomocnik pom;
 
+/*  Kody - misto "source" budeme radeji hledat Microsoft Access driver
 	CString s;
-
 
 	if (! pom.FindAccesDatasource(s))
 	{
-		CLMSock::ReportError(1, "Required ODBC Microsoft Access driver (.mdb) not found on this computer.\nNew data source can not be created.");
+		CLMSock::ReportError(1, LMERR_ACCESSDRV_NFOUND);
 		return NULL;
 	}
+*/
+	CString d;
 
+	if (! pom.FindAccesDriver(d))
+	{
+		CLMSock::ReportError(1, LMERR_ACCESSDRV_NFOUND);
+		return NULL;
+	}
 
 	//dedek: potreba pokud si chceme udrzet aktualni adresar
 	char buf[1001];
@@ -157,8 +165,10 @@ hSource_t fNewSourceLM(PersistID_t * pPerzistID)
 	AfxMessageBox(hlaska);*/
 
 	CString conn_str;
-	conn_str = "ODBC;DSN=";
-	conn_str += s;
+	//conn_str = "ODBC;DSN=";
+	//conn_str += s;
+	conn_str = "ODBC;DRIVER=";
+	conn_str += d;
 	conn_str += ";DBQ=";
 	conn_str += new_pid; //obsahuje cestu k souboru
 	conn_str += ";";

@@ -111,9 +111,9 @@ CString CLMSock::getAPList()
 int CLMSock::ReportError(UINT nErrorID, const char* FormatString, ...)
 {
 	CString sFormatStr = FormatString;
-
+	
 	va_list params;
-	va_start(params, nErrorID);
+	va_start(params, FormatString);
 
 	CString sMessgeText;
 	sMessgeText.FormatV(sFormatStr, params);
