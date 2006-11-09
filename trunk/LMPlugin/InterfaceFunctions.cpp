@@ -20,49 +20,6 @@
 
 BOOL performLM(hSource_t hSource, const char* APName, BSTR* Result)
 {
-	/*
-
-  //Dedovo pomocna zkusebni verze
-
-	CDatabase * db = (CDatabase *) hSource;
-
-	* result = NULL;
-
-	CtiHypothesis_Recordset rs(db);
-
-	if (rs.Open())
-	{
-
-		CString buf;
-		CString line;
-
-		// postupne tiskne nactene radky
-		while (!rs.IsEOF())
-		{
-			line.Format("ID: %5d Ord: %5d\tA: %5d\tB: %5d\tC: %5d\tD: %5d\tWeight: %f" EDIT_NEWLINE, 
-				rs.m_HypothesisID,
-				rs.m_Ord,
-				rs.m_FreqA,
-				rs.m_FreqB,
-				rs.m_FreqC,
-				rs.m_FreqD,
-				rs.m_Weight);
-
-			buf += line;
-			rs.MoveNext();
-		}
-
-		rs.Close();
-		
-		* result = buf.AllocSysString();
-		return TRUE;
-	}
-
-
-	return FALSE;
-	
-	
-	*/
 
   /****** dedek test2 *****
 
@@ -109,20 +66,16 @@ hSource_t fNewSourceLM(PersistID_t * pPerzistID)
 	CDatabase * db;
 	SQL_Pomocnik pom;
 
-/*  Kody - misto "source" budeme radeji hledat Microsoft Access driver
-	CString s;
+//  Kody - misto "source" budeme radeji hledat Microsoft Access driver
 
-	if (! pom.FindAccesDatasource(s))
-	{
-		CLMSock::ReportError(1, LMERR_ACCESSDRV_NFOUND);
-		return NULL;
-	}
-*/
 	CString d;
 
 	if (! pom.FindAccesDriver(d))
 	{
 		CLMSock::ReportError(1, LMERR_ACCESSDRV_NFOUND);
+
+		// kody - zalezi, zda povolime zkusit vybrat jiny driver. Je dale implementovano.
+		// pokud ano, return se musi smazat
 		return NULL;
 	}
 
@@ -131,10 +84,6 @@ hSource_t fNewSourceLM(PersistID_t * pPerzistID)
 	GetCurrentDirectory(1000, buf);
 
 #ifdef _DEBUG
-
-	// ladici (kody)-----
-//	CString hlaska = "Access Datasource: " + s;
-//	AfxMessageBox(hlaska);
 
 		// ulozeni seznamu vsech ODBC driveru a zdroju do souboru "drivers.txt"
 	CString drv_enum;
@@ -161,12 +110,8 @@ hSource_t fNewSourceLM(PersistID_t * pPerzistID)
 	}
 
 	CString new_pid = FD.GetPathName();
-	/*CString hlaska = "File Path: " + new_pid;
-	AfxMessageBox(hlaska);*/
-
 	CString conn_str;
-	//conn_str = "ODBC;DSN=";
-	//conn_str += s;
+
 	conn_str = "ODBC;DRIVER=";
 	conn_str += d;
 	conn_str += ";DBQ=";
@@ -174,15 +119,49 @@ hSource_t fNewSourceLM(PersistID_t * pPerzistID)
 	conn_str += ";";
 
 	db = new CDatabase();
-	if (!db->Open(NULL, FALSE, TRUE, conn_str, TRUE))
+	BOOL DBOpened = TRUE;
+	try
 	{
-		//dedek
-		SetCurrentDirectory(buf);
+		if (!db->Open(NULL, FALSE, TRUE, conn_str, TRUE))
+		{
+			//dedek
+			SetCurrentDirectory(buf);
 		
-		delete db;
-		return NULL;
+			delete db;
+			return NULL;
+		}
+	}
+	catch(CDBException * e)
+	{
+		DBOpened = FALSE;
+		e->Delete();
 	}
 
+	if(!DBOpened) // tries to open DB without specifying of DRIVER in connection string
+	{
+		conn_str = "ODBC;DBQ=";
+		conn_str += new_pid; //path to file with metabase
+		conn_str += ";";
+		try
+		{
+			if (!db->Open(NULL, FALSE, TRUE, conn_str, TRUE))
+			{
+				SetCurrentDirectory(buf);
+				delete db;
+				return NULL;
+			}
+		}
+		catch(CDBException * ex)
+		{
+			CLMSock::ReportError(2, LMERR_CANNOT_CREATE_SOURCE, new_pid, ex->m_strError);
+			ex->Delete();
+			SetCurrentDirectory(buf);
+			delete db;
+			return NULL;
+		}
+		
+	}
+	
 	//dedek
 	SetCurrentDirectory(buf);
 
@@ -196,8 +175,16 @@ hSource_t fNewSourceLM(PersistID_t * pPerzistID)
 hSource_t fOpenSourceLM(PersistID_t PerzistID)
 {
 	SQL_Pomocnik pom;
-	CString s;
-	if (! pom.FindAccesDatasource(s)) return NULL;
+	CString d;
+	if (! pom.FindAccesDriver(d))
+	{
+		
+		CLMSock::ReportError(1, LMERR_ACCESSDRV_NFOUND);
+
+		// kody - zalezi, zda povolime zkusit vybrat jiny driver. Je dale implementovano.
+		// pokud ano, return se musi smazat
+		return NULL;
+	}
 
 	CString file_path = PerzistID;
 
@@ -213,23 +200,52 @@ hSource_t fOpenSourceLM(PersistID_t PerzistID)
 
 
 	//	db.Open(NULL, FALSE, TRUE, _T("ODBC;DSN=" + s + ";DBQ=C:\\skola\\sw projekt\\STULONG.mdb;"), TRUE))
-	CString connn_str;
-	connn_str = "ODBC;DSN=";
-	connn_str += s;
-	connn_str += ";DBQ=";
-	connn_str += file_path; //obsahuje cestu k souboru
-	connn_str += ";";
+	CString conn_str;
+	conn_str = "ODBC;DRIVER=";
+	conn_str += d;
+	conn_str += ";DBQ=";
+	conn_str += file_path; //obsahuje cestu k souboru
+	conn_str += ";";
 
 	CDatabase * db;
 	
 	db = new CDatabase();
-
-
-
-	if (!db->Open(NULL, FALSE, TRUE, connn_str, TRUE))
+	BOOL DBOpened = TRUE;
+	try
 	{
-		delete db;
-		return NULL;
+		if (!db->Open(NULL, FALSE, TRUE, conn_str, TRUE))
+		{
+			delete db;
+			return NULL;
+		}
+	}
+	catch(CDBException * e)
+	{
+		DBOpened = FALSE;
+		e->Delete();
+	}
+
+	if(!DBOpened) // tries to open DB without specifying of DRIVER in connection string
+	{
+		conn_str = "ODBC;DBQ=";
+		conn_str += file_path; //path to file with metabase
+		conn_str += ";";
+		try
+		{
+			if (!db->Open(NULL, FALSE, TRUE, conn_str, TRUE))
+			{
+				delete db;
+				return NULL;
+			}
+		}
+		catch(CDBException * ex)
+		{
+			CLMSock::ReportError(3, LMERR_CANNOT_OPEN_SOURCE, file_path, ex->m_strError);
+			ex->Delete();
+			delete db;
+			return NULL;
+		}
+		
 	}
 	
 	return db;
@@ -251,64 +267,3 @@ BOOL fCloseSourceLM(hSource_t hSource)
 	return TRUE;
 };
 
-/*
-
-CSockInterface i =
-{
-	Perform, //	 hPerform;
-	NULL, //	 hGetAPList;
-	NewSource,
-	OpenSource,
-	CloseSource	 
-};
-
-
-BOOL Otestuj()
-{
-	hSource_t h;
-	PersistID_t pid;
-	BSTR result = NULL;
-
-
-
-	h = i.hNewSource(& pid);	
-	if (h == NULL) return FALSE;
-
-	
-	//BOOL Perform(hSource_t hSource, const char* AP, BSTR* result)
-	if (i.hPerform(h, NULL, & result))
-	{
-		CString r = result;
-		SysFreeString(result);
-		AfxMessageBox(r, 0, 0);
-	}
-
-	
-	if (! i.hCloseSource(h)) return FALSE;
-
-	
-
-	h = i.hOpenSource(pid);
-	if (h == NULL) return FALSE;
-
-
-	if (i.hPerform(h, NULL, & result))
-	{
-		CString r = result;
-		SysFreeString(result);
-		AfxMessageBox(r, 0, 0);
-	}
-
-	
-	if (! i.hCloseSource(h)) return FALSE;
-
-
-	SysFreeString(pid);
-
-	
-	return TRUE;
-}
-
-
-
-*/
