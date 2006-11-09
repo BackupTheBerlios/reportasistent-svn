@@ -41,6 +41,7 @@ void CTransformationsDialog::DoDataExchange(CDataExchange* pDX)
 {
 	CPropertyPage::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CTransformationsDialog)
+	DDX_Control(pDX, IDC_CONFIGURE_BUTTON, m_ConfigureButton);
 	DDX_Control(pDX, IDC_SUPPORTED_TRANSF_LIST, m_SupportedList);
 	DDX_Control(pDX, IDC_SELECTED_TRANSFS_LIST, m_SelectedList);
 	//}}AFX_DATA_MAP
@@ -56,6 +57,8 @@ BEGIN_MESSAGE_MAP(CTransformationsDialog, CPropertyPage)
 	ON_BN_CLICKED(IDC_CONFIGURE_BUTTON, OnConfigureButton)
 	ON_LBN_DBLCLK(IDC_SUPPORTED_TRANSF_LIST, OnDblclkSupportedTransfList)
 	ON_LBN_DBLCLK(IDC_SELECTED_TRANSFS_LIST, OnDblclkSelectedTransfsList)
+	ON_LBN_SELCHANGE(IDC_SELECTED_TRANSFS_LIST, OnSelchangeSelectedTransfsList)
+	ON_LBN_SELCANCEL(IDC_SELECTED_TRANSFS_LIST, OnSelcancelSelectedTransfsList)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -93,6 +96,7 @@ BOOL CTransformationsDialog::OnInitDialog()
 	}
 
 
+
 	//nacti transformace vybrane v prvku
 	MSXML2::IXMLDOMNodeListPtr selected_transfs = m_cloned_active_element->selectNodes("output/transformation/@name");
 
@@ -100,6 +104,11 @@ BOOL CTransformationsDialog::OnInitDialog()
 	{
 		m_SelectedList.AddString(selected_transfs->item[a]->text);
 	}
+
+	//When no item is selected in m_SelectedList, configuration button is disabled:
+	m_ConfigureButton.EnableWindow(false);
+
+
 
 
 		
@@ -216,7 +225,8 @@ void CTransformationsDialog::OnMoveUpButton()
 
 	m_SelectedList.InsertString(selected_index-1, selected_text);
 
-	m_SelectedList.SelectString(selected_index-2, selected_text);
+	m_SelectedList.SetSel(selected_index-1, true);
+
 
 
 	
@@ -251,8 +261,7 @@ void CTransformationsDialog::OnMoveDownButton()
 
 	m_SelectedList.InsertString(selected_index+1, selected_text);
 
-	m_SelectedList.SelectString(selected_index, selected_text);
-	
+	m_SelectedList.SetSel(selected_index+1, true);	
 	//uprava xml
 	CString query_str1;
 	CString query_str2;
@@ -636,7 +645,7 @@ BOOL CTransformationsDialog::AddTransformation(int selected_item)
 	if (m_SelectedList.GetCount() >= MAX_CHOSEN_TRANSFORMATION_COUNT)
 	{
 		Pom.Format("%d", MAX_CHOSEN_TRANSFORMATION_COUNT);
-		CReportAsistentApp::ReportError(IDS_TOO_MANY_SELECTED_TRANSFORMATIONS, Pom);
+		CReportAsistentApp::ReportError(IDS_TOO_MANY_SELECTED_ITEMS, Pom);
 		return false;
 	}
 
@@ -775,6 +784,11 @@ void CTransformationsDialog::SelTransformConfigure(int cur_sel)
 void CTransformationsDialog::RemoveTransf(int selected_item)
 {
 	m_SelectedList.DeleteString(selected_item);
+	if (m_SelectedList.GetCount() == 0)
+			m_ConfigureButton.EnableWindow(false);
+	else 
+		if (selected_item==0) m_SelectedList.SetSel(0,true);
+		else m_SelectedList.SetSel(selected_item-1,true);
 
 	//uprava xml
 	CString query_str;
@@ -799,3 +813,19 @@ void CTransformationsDialog::RemoveTransf(int selected_item)
 //DEL 	AfxMessageBox("Stisknuto neco");
 //DEL 	CPropertyPage::OnKeyDown(nChar, nRepCnt, nFlags);
 //DEL }
+
+void CTransformationsDialog::OnSelchangeSelectedTransfsList() 
+{
+	//AfxMessageBox("SelChange");
+	m_ConfigureButton.EnableWindow(true);
+
+	// TODO: Add your control notification handler code here
+	
+}
+
+void CTransformationsDialog::OnSelcancelSelectedTransfsList() 
+{
+	//AfxMessageBox("SelCancel");
+	m_ConfigureButton.EnableWindow(false);
+	
+}

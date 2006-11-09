@@ -165,6 +165,7 @@
 #define IDS_CONFIRM_APP_RESUME          61401
 #define IDS_COMPLEX_FILTER_SELECT_ATTR  61402
 #define IDS_TOO_MANY_SELECTED_TRANSFORMATIONS 61403
+#define IDS_TOO_MANY_SELECTED_ITEMS     61403
 
 // Next default values for new objects
 // 

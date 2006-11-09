@@ -35,14 +35,18 @@ transformace presune (krome tlacitka ">>") take:
 	- moznost oznaceni vice polozek (Iva:HOTOVO)
 	- oznacena polozka stiskem klavesy "Delete"
 
-- Tlacitko Configure by mohlo byt zasednute a aktivovat se pouze je-li oznacena nejaka polozka ve sloupci "Selected transformations"
+- Tlacitko Configure by mohlo byt zasednute a (Iva:HOTOVO)
+	aktivovat se pouze je-li oznacena nejaka polozka ve sloupci "Selected transformations"
 
-- zmena poradi polozek v seznamu "Selected transformations" by se mohla (krome tlacitek "move up" a "move down") provadet uchopenim polozky a pretahnuti mysi (jestli neni moc HC)
+- zmena poradi polozek v seznamu "Selected transformations" by se mohla 
+(krome tlacitek "move up" a "move down") provadet uchopenim polozky a 
+pretahnuti mysi (jestli neni moc HC)
 
 3) Attribute Link Table dialog
    ---------------------------
 
-- u operaci vyberu a premisteni polozek z "Element attributes" do "Selected attributes" a odstranovani ze "Selected attributes" plati totez jako v bode 2)
+- u operaci vyberu a premisteni polozek z "Element attributes" do (Iva:HOTOVO)
+"Selected attributes" a odstranovani ze "Selected attributes" plati totez jako v bode 2)
 
 
 

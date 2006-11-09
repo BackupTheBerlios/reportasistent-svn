@@ -30,6 +30,7 @@ public:
 // Dialog Data
 	//{{AFX_DATA(CTransformationsDialog)
 	enum { IDD = IDD_TRANSFORMATIONS_DIALOG };
+	CButton	m_ConfigureButton;
 	CListBox	m_SupportedList;
 	CListBox	m_SelectedList;
 	//}}AFX_DATA
@@ -63,6 +64,8 @@ protected:
 	afx_msg void OnConfigureButton();
 	afx_msg void OnDblclkSupportedTransfList();
 	afx_msg void OnDblclkSelectedTransfsList();
+	afx_msg void OnSelchangeSelectedTransfsList();
+	afx_msg void OnSelcancelSelectedTransfsList();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 private:

@@ -60,6 +60,7 @@ BEGIN_MESSAGE_MAP(CAttributeLinkTableDialog, CDialog)
 	ON_BN_CLICKED(IDC_EDIT_CAPTION_BUTTON, OnEditCaptionButton)
 	ON_BN_CLICKED(IDC_MOVE_UP_BUTTON, OnMoveUpButton)
 	ON_BN_CLICKED(IDC_MOVE_DOWN_BUTTON2, OnMoveDownButton)
+	ON_NOTIFY(NM_DBLCLK, IDC_ATTRIBUTES_LIST, OnDblclkAttributesList)
 	//}}AFX_MSG_MAP
 	ON_NOTIFY(LVN_DELETEITEM, IDC_ATTRIBUTES_LIST, OnLvnDeleteitemAttributesList)
 END_MESSAGE_MAP()
@@ -191,25 +192,16 @@ void CAttributeLinkTableDialog::OnRefreshButton()
 
 void CAttributeLinkTableDialog::OnAddButton() 
 {
+	int selected_item;
 	//najdi vybranou polozku v attribues listu
 	POSITION pos = m_AttributesList.GetFirstSelectedItemPosition();
-	if (pos == NULL) return;
-	int nItem = m_AttributesList.GetNextSelectedItem(pos);
+	while (pos != NULL) 
+	{
+		selected_item = m_AttributesList.GetNextSelectedItem(pos);
+		if (!AddAttribute(selected_item)) return;
+	}
 	
-	CString label = m_AttributesList.GetItemText(nItem, ATTRLIST_CL_NAME);
-	CString value = m_AttributesList.GetItemText(nItem, ATTRLIST_CL_VALUE);
-	// kody
-	CString name = * (CString*) m_AttributesList.GetItemData(nItem);
 
-
-	//vloz polozku na konec captions listu
-	int item = m_CaptionsList.InsertItem(m_CaptionsList.GetItemCount(), label);
-	m_CaptionsList.SetItemText(item, CAPTLIST_CL_NAME, name);
-	m_CaptionsList.SetItemText(item, CAPTLIST_CL_VALUE, value);
-
-	//edituj caption
-	m_CaptionsList.SetFocus();
-	m_CaptionsList.EditLabel(item);	
 }
 
 void CAttributeLinkTableDialog::OnEndlabeleditCaptionsList(NMHDR* pNMHDR, LRESULT* pResult) 
@@ -226,11 +218,19 @@ void CAttributeLinkTableDialog::OnEndlabeleditCaptionsList(NMHDR* pNMHDR, LRESUL
 
 void CAttributeLinkTableDialog::OnRemoveButton() 
 {
+	int selected_item[MAX_CHOSEN_ATTRIBUTES_COUNT];
+	int I=0;
 	POSITION pos = m_CaptionsList.GetFirstSelectedItemPosition();
-	if (pos == NULL) return;
-	int nItem = m_CaptionsList.GetNextSelectedItem(pos);
-
-	m_CaptionsList.DeleteItem(nItem);
+	while (pos != NULL ) 
+	{
+		selected_item[I] = m_CaptionsList.GetNextSelectedItem(pos);
+		I++;
+	}
+	while (I>=0)
+	{
+		RemoveAttribute(selected_item[I]);
+		I--;
+	}
 	
 }
 
@@ -381,4 +381,54 @@ void CAttributeLinkTableDialog::DDV_NonDuplicateID(CDataExchange *pDX, int nId, 
 
 	}
 
+}
+
+BOOL CAttributeLinkTableDialog::AddAttribute(int selected_item)
+{
+
+	CString Pom;
+	if (m_CaptionsList.GetItemCount() >= MAX_CHOSEN_ATTRIBUTES_COUNT)
+	{
+		Pom.Format("%d", MAX_CHOSEN_ATTRIBUTES_COUNT);
+		CReportAsistentApp::ReportError(IDS_TOO_MANY_SELECTED_ITEMS, Pom);
+		return false;
+	}
+
+	CString label = m_AttributesList.GetItemText(selected_item, ATTRLIST_CL_NAME);
+	CString value = m_AttributesList.GetItemText(selected_item, ATTRLIST_CL_VALUE);
+	// kody
+	CString name = * (CString*) m_AttributesList.GetItemData(selected_item);
+
+
+	//vloz polozku na konec captions listu
+	int item = m_CaptionsList.InsertItem(m_CaptionsList.GetItemCount(), label);
+	m_CaptionsList.SetItemText(item, CAPTLIST_CL_NAME, name);
+	m_CaptionsList.SetItemText(item, CAPTLIST_CL_VALUE, value);
+
+	//edituj caption
+	m_CaptionsList.SetFocus();
+	m_CaptionsList.EditLabel(item);	
+
+	return true;
+
+
+}
+
+void CAttributeLinkTableDialog::RemoveAttribute(int selected_item)
+{
+		m_CaptionsList.DeleteItem(selected_item);
+}
+
+
+
+void CAttributeLinkTableDialog::OnDblclkAttributesList(NMHDR* pNMHDR, LRESULT* pResult) 
+{
+	POSITION pos = m_AttributesList.GetFirstSelectedItemPosition();
+	if (pos != NULL) 
+	{
+		int selected_item = m_AttributesList.GetNextSelectedItem(pos);
+		AddAttribute(selected_item);
+	}
+		
+	*pResult = 0;
 }

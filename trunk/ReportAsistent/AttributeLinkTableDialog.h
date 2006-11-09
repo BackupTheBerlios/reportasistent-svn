@@ -8,6 +8,9 @@
 //
 
 #include "AttributeLinkDialogBase.h"
+#if!defined MAX_CHOSEN_ATTRIBUTES_COUNT
+#define MAX_CHOSEN_ATTRIBUTES_COUNT 50
+#endif
 
 /////////////////////////////////////////////////////////////////////////////
 // CAttributeLinkTableDialog dialog
@@ -39,6 +42,8 @@ public:
 
 // Implementation
 protected:
+	void RemoveAttribute(int selected_item);
+	BOOL AddAttribute(int selected_item);
 	void DDV_NonDuplicateID(CDataExchange *pDX, int nId, CString csIDEditValue);
 	CString m_OldID;
 
@@ -54,6 +59,7 @@ protected:
 	afx_msg void OnMoveUpButton();
 	afx_msg void OnMoveDownButton();
 	virtual void OnOK();
+	afx_msg void OnDblclkAttributesList(NMHDR* pNMHDR, LRESULT* pResult);
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 private:
