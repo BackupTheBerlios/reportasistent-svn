@@ -471,19 +471,16 @@ BOOL CDataSourcesManager::initSourcesTab(LPCTSTR config_file_path)
 BOOL CDataSourcesManager::saveSourcesTab()
 {
 	BOOL ret = TRUE;
-	
+
 	MSXML2::IXMLDOMDocumentPtr pXMLDom;
     pXMLDom.CreateInstance(_T("Msxml2.DOMDocument"));
-
 	
 	MSXML2::IXMLDOMElementPtr root_el;	// korenovy element
 	root_el = pXMLDom->createElement("SOURCES_LIST");
 	pXMLDom->appendChild(root_el);
 
-
 	MSXML2::IXMLDOMElementPtr source_el;	// source element
 	source_el = pXMLDom->createElement("SOURCE");
-
 	
 	//atributy
 	MSXML2::IXMLDOMAttributePtr attr;
@@ -500,8 +497,6 @@ BOOL CDataSourcesManager::saveSourcesTab()
 	source_el->setAttributeNode(attr);
 	attr.Release();
 
-
-
 	for (int a=0; a<getSourcesCount(); a++)
 	{
 		MSXML2::IXMLDOMElementPtr e = source_el->cloneNode(VARIANT_TRUE);
@@ -509,13 +504,11 @@ BOOL CDataSourcesManager::saveSourcesTab()
 		e->setAttribute("PUBLIC_ID", (LPCTSTR) getSourcePublicID(a));
 		e->setAttribute("PERZISTENT_ID", (LPCTSTR) getSourcePersistentID(a));
 		e->setAttribute("PLUGIN_ID", (LPCTSTR) getSourcePlugin(a));
-
 		root_el->appendChild(e);
 
 		e.Release();
 
 	}
-
 	source_el.Release();
 
 
@@ -524,24 +517,29 @@ BOOL CDataSourcesManager::saveSourcesTab()
 	MSXML2::IXMLDOMElementPtr default_source;
 	default_source = pXMLDom->createElement("DEFAULT_SOURCE");
 
-
 	MSXML2::IXMLDOMAttributePtr src_attr;	
 	src_attr = pXMLDom->createAttribute("PUBLIC_ID");
 	src_attr->value = (LPCTSTR) getDefaultSource();
 	default_source->setAttributeNode(src_attr);
 	src_attr.Release();
-
 	root_el->appendChild(default_source);
 
 	default_source.Release();
 
-
-
 	CDirectoriesManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->DirectoriesManager;
+	
+	// save list of data sources into config. file "ConfigDir/sources.xml"
+	try
+	{
+		ret = S_OK == pXMLDom->save((LPCTSTR) m.getSourcesConfigFilePath());
+	}
+	catch(...)
+	{
+		CReportAsistentApp::ReportError(IDS_DSLISTSAVE_ERR);
+	}
 
-	ret = S_OK == pXMLDom->save((LPCTSTR) m.getSourcesConfigFilePath());
+
 	root_el.Release();
-
 	return ret;
 }
 

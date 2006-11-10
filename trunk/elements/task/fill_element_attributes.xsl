@@ -153,7 +153,7 @@
 					</xsl:text>
 		
 		
-					<attribute name="{$label}" value="{.}" />
+					<attribute name="{name()}" value="{.}" label="{$label}" />
 	</xsl:template>
 	<!-- vypise vsechny atributy -->
 
