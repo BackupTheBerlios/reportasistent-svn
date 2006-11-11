@@ -2,6 +2,7 @@
 //
 
 #include "stdafx.h"
+
 #include "ReportAsistent.h"
 
 #include "MainFrm.h"
@@ -120,7 +121,8 @@ BOOL CReportAsistentApp::InitInstance()
 #endif
 
 	//dedek
-	CoInitialize(NULL);
+//	CoInitialize(NULL);
+	CoInitializeEx(NULL, COINIT_MULTITHREADED);
 //  AfxMessageBox("2");
 
 	CAboutDlg a_dlg;

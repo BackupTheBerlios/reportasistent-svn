@@ -60,7 +60,7 @@ public:
 	CWordManager();
 	virtual ~CWordManager();
 
-	void LoadWordStyles(LPCTSTR template_name = "normal.dot");
+	void LoadWordStyles(LPCTSTR template_name = NULL);
 protected:
 	void LoadWordTemplates(_LMRA_XML_WordLoaderPtr & WordLoader);
 	void LoadParagraphStyles(_LMRA_XML_WordLoaderPtr & WordLoader, LPCTSTR template_name);  // kody: kvuli novymu vlaknu a volani ze staticky metody presunuto z protected sem

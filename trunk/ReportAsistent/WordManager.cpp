@@ -63,6 +63,11 @@ void CWordManager::LoadWordStylesThreadFunction(LPARAM template_name, LPARAM pWo
 	
 	CWordManager * m = (CWordManager *) pWordManager;
 
+	m->LoadWordTemplates(m->m_WordLoader);
+	m->LoadParagraphStyles(m->m_WordLoader, (LPCTSTR) template_name);
+	m->LoadCharacterStyles(m->m_WordLoader, (LPCTSTR) template_name);
+
+/*
 	_LMRA_XML_WordLoaderPtr WordLoader;
 	
 	if (m->CreateVBRAInstance(WordLoader))
@@ -73,11 +78,20 @@ void CWordManager::LoadWordStylesThreadFunction(LPARAM template_name, LPARAM pWo
 
 		WordLoader.Release();
 	}	
+*/
 }
 
 
 void CWordManager::LoadWordStyles(LPCTSTR template_name)
 {
+	if (template_name == NULL)
+	{
+		template_name = "normal.dot";
+	}
+
+	if(! isInit()) 
+		if (! InitWordLoader()) return;
+
 	CWaitDialog d("Loading Word styles...");
 	d.DoThreadFunction(LoadWordStylesThreadFunction,
 						(LPARAM) template_name,
@@ -278,6 +292,12 @@ BOOL CWordManager::CreateVBRAInstance(_LMRA_XML_WordLoaderPtr & refLMRAInterface
 	
 	hr = refLMRAInterface.CreateInstance("LMRA_WordLoader.LMRA_XML_WordLoader");
 
+/*
+	if (hr == CO_E_NOTINITIALIZED)
+	{
+		CoInitializeEx()
+	}
+*/
 	if (S_OK != hr)
 	{
 				
