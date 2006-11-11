@@ -6,6 +6,7 @@
 #include "AElFiltersConfigDialog.h"
 #include "ComplexFilterDialog.h"
 #include "CSkeletonDoc.h"
+#include "APTransform.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -18,7 +19,7 @@ static char THIS_FILE[] = __FILE__;
 
 
 CAElFiltersConfigDialog::CAElFiltersConfigDialog(MSXML2::IXMLDOMElementPtr & active_element, CWnd* pParent)
-	: CPropertyPage(CAElFiltersConfigDialog::IDD), m_active_element(active_element)
+	: CPropertyPage(CAElFiltersConfigDialog::IDD), m_active_element(active_element), m_bSourceIsInit(FALSE)
 {
 	//{{AFX_DATA_INIT(CAElFiltersConfigDialog)
 	m_CF_IdEdit = _T("");
@@ -53,7 +54,9 @@ void CAElFiltersConfigDialog::DoDataExchange(CDataExchange* pDX)
 
 BEGIN_MESSAGE_MAP(CAElFiltersConfigDialog, CDialog)
 	//{{AFX_MSG_MAP(CAElFiltersConfigDialog)
-		// NOTE: the ClassWizard will add message map macros here
+	ON_BN_CLICKED(IDC_REMOVE_FILTER_BUTTON, OnRemoveFilterButton)
+	ON_BN_CLICKED(IDC_MOVE_UP_BUTTON, OnMoveUpButton)
+	ON_BN_CLICKED(IDC_MOVE_DOWN_BUTTON, OnMoveDownButton)
 	//}}AFX_MSG_MAP
 	ON_BN_CLICKED(IDC_ADD_FILTER_BUTTON, OnBnClickedAddFilterButton)
 	ON_CBN_SELCHANGE(IDC_DATA_SOURCE_COMBO, OnCbnSelchangeDataSourceCombo)
@@ -95,7 +98,9 @@ BOOL CAElFiltersConfigDialog::OnInitDialog()
 	c = m_FiltersList.InsertColumn(++c, "Filter type", 0, 100);
 	m_FiltersList.InsertColumn(++c, "Filter data", 0, 150);
 
-	UpdateFiltersList();
+	m_bSourceIsInit = FALSE;
+
+	//UpdateFiltersList();
 
 
 	return TRUE;  // return TRUE unless you set the focus to a control
@@ -150,10 +155,85 @@ void CAElFiltersConfigDialog::DDV_NonDuplicateID(CDataExchange *pDX, int nId, CS
 
 }
 
+void CAElFiltersConfigDialog::OnRemoveFilterButton() 
+{
+	int nItem = GetCurSelFiltersList();
+	if (nItem == -1) return;
+	
+	CString q;
+	q.Format("filter/attribute_filter[%d]", nItem);
+
+	m_cloned_active_element->selectSingleNode("filter")->removeChild(
+		m_cloned_active_element->selectSingleNode((LPCTSTR) q));
+
+	UpdateFiltersList();	
+	SetModified();
+}
+
+void CAElFiltersConfigDialog::OnMoveUpButton() 
+{
+	int nItem = GetCurSelFiltersList();
+	if (nItem <= 0) return;
+	
+	MSXML2::IXMLDOMNodePtr filter = m_cloned_active_element->selectSingleNode("filter");
+	
+	filter->insertBefore(
+		filter->removeChild(filter->childNodes->item[nItem]),
+		(MSXML2::IXMLDOMNode *) filter->childNodes->item[nItem-1]);
+
+	UpdateFiltersList();	
+	SetModified();
+}
+
+void CAElFiltersConfigDialog::OnMoveDownButton() 
+{
+	int nItem = GetCurSelFiltersList();
+	if (nItem == -1) return;
+	if (nItem >= m_FiltersList.GetItemCount()-1) return;
+	
+	MSXML2::IXMLDOMNodePtr filter = m_cloned_active_element->selectSingleNode("filter");
+	
+	if (nItem == m_FiltersList.GetItemCount()-2)
+	{
+		//preposledni
+		filter->appendChild(
+			filter->removeChild(filter->childNodes->item[nItem]));
+	}
+	else
+	{
+
+	filter->insertBefore(
+		filter->removeChild(filter->childNodes->item[nItem]),
+		(MSXML2::IXMLDOMNode *) filter->childNodes->item[nItem+2]);
+	}
+
+	UpdateFiltersList();	
+	SetModified();
+}
+
+void CAElFiltersConfigDialog::OnBnClickedConfigureFilterButton()
+{
+	int nItem = GetCurSelFiltersList();
+	if (nItem == -1) return;
+
+	CString q;
+	q.Format("filter/attribute_filter[%d]", nItem);
+
+	
+	CComplexFilterDialog dlg(m_cloned_active_element, m_filter_DOM, m_cloned_active_element->selectSingleNode((LPCTSTR) q));
+	if (IDOK == dlg.DoModal())
+	{
+		UpdateFiltersList();	
+		SetModified();
+	}
+}
+
 void CAElFiltersConfigDialog::OnBnClickedAddFilterButton()
 {
-	CComplexFilterDialog dlg(m_cloned_active_element);
+	CComplexFilterDialog dlg(m_cloned_active_element, m_filter_DOM);
 	dlg.DoModal();
+
+	UpdateFiltersList();
 
 	SetModified();
 }
@@ -196,7 +276,19 @@ void CAElFiltersConfigDialog::UpdateFiltersList(void)
 
 	for (int a = 0; a < attr_filters->length; a++)
 	{
-		int i = m_FiltersList.InsertItem(a, attr_filters->item[a]->selectSingleNode("@attr_name")->text);
+		CString q;
+		q.Format("/dialog_data/attributes/attribute[@name=\"%s\"]/@label", (LPCTSTR) attr_filters->item[a]->selectSingleNode("@attr_name")->text);
+		
+		
+		CString attr_label = "(n/a)";
+
+		try 
+		{
+			attr_label = (LPCTSTR) m_filter_DOM->selectSingleNode((LPCTSTR) q)->text;
+		}
+		catch (...) {}
+		
+		int i = m_FiltersList.InsertItem(a, attr_label);
 
 		m_FiltersList.SetItemText(i, 1, attr_filters->item[a]->selectSingleNode("@filter_type")->text);
 		m_FiltersList.SetItemText(i, 2, attr_filters->item[a]->selectSingleNode("@filter_data")->text);
@@ -205,9 +297,24 @@ void CAElFiltersConfigDialog::UpdateFiltersList(void)
 
 void CAElFiltersConfigDialog::OnCbnSelchangeDataSourceCombo()
 {
-	ASSERT(m_filter_DOM != NULL);
+	CString text;
+	m_SourcesCombo.GetWindowText(text);
+
+	m_cloned_active_element->setAttribute("source", (_bstr_t) text);
+
+	if (text.GetLength() == 0) return;
+
+	if (LoadSource(text))
+	{
+//		UpDateDialog();
+		UpdateFiltersList();
+	}
+	else
+	{
+//		ClearAttributesList();
+	}
+
 	
-	UpdateFiltersList();
 	// TODO: Add your control notification handler code here
 }
 
@@ -215,14 +322,79 @@ HBRUSH CAElFiltersConfigDialog::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 {
 	HBRUSH hbr = CPropertyPage::OnCtlColor(pDC, pWnd, nCtlColor);
 
-	// TODO:  Change any attributes of the DC here
+	//dedek: tohle se tady vola kvuli inicializaci filtru - kdyz se to delalo uz v init_dialog tak to padalo!!
+	if (! m_bSourceIsInit)
+	{
+		m_bSourceIsInit = TRUE;
+		OnCbnSelchangeDataSourceCombo();
+//		SetModified(FALSE);
+		Invalidate(FALSE);
+	}
 
 	// TODO:  Return a different brush if the default is not desired
 	return hbr;
 }
 
 
-void CAElFiltersConfigDialog::OnBnClickedConfigureFilterButton()
+
+BOOL CAElFiltersConfigDialog::LoadSource(public_source_id_t sId)
 {
-	// TODO: Add your control notification handler code here
+	CGeneralManager * m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager;
+
+    CAElInfo * element_info = m->ElementManager.getActiveElementInfo(
+								m->ElementManager.IdentifyElement(m_active_element));
+
+   	
+    MSXML2::IXMLDOMDocumentPtr plugout_doc;
+
+	//nacte data z plugin output
+	if (! m->DataSourcesManager.GetPluginOutput(sId, element_info->getElementName(), & plugout_doc))
+	{
+		CReportAsistentApp::ReportError(IDS_SIMPLE_FILTER_FAILED_SOURCE_LOAD, "Plugin output is empty.");
+		return FALSE;	
+	}
+
+#ifdef _DEBUG	
+    plugout_doc->save((LPCTSTR) (m->DirectoriesManager.getXMLFilesDirectory() + "/plug_out_example.xml"));
+#endif
+
+	
+    //ulozi element atributy
+	CAElTransform tr(m_active_element, (MSXML2::IXMLDOMNodePtr) plugout_doc);
+	tr.FillElementAttributes(0);
+
+
+    //transformace plugout na filter dom
+    MSXML2::IXMLDOMDocumentPtr filter_doc;
+    filter_doc.CreateInstance(_T("Msxml2.DOMDocument"));
+	filter_doc->async = VARIANT_FALSE; // default - true,
+	filter_doc->loadXML(
+		plugout_doc->transformNode(element_info->getComplexFilterTransformation()));
+
+    plugout_doc.Release();
+
+    if (filter_doc->documentElement != NULL)
+	{
+    	//ok data nactena
+
+#ifdef _DEBUG	
+    	filter_doc->save((LPCTSTR) (m->DirectoriesManager.getXMLFilesDirectory() + "/complex_filter_example.xml"));
+#endif
+        m_filter_DOM = filter_doc->documentElement;
+		filter_doc.Release();
+		return TRUE;
+	}
+
+    //problem, zdroj neprosel    
+   	CReportAsistentApp::ReportError(IDS_SIMPLE_FILTER_FAILED_SOURCE_LOAD, "Plugin output - document element is empty.");
+    return FALSE;
+}
+
+
+int CAElFiltersConfigDialog::GetCurSelFiltersList()
+{
+	POSITION pos = m_FiltersList.GetFirstSelectedItemPosition();
+	if (pos == NULL) return -1;
+
+	return m_FiltersList.GetNextSelectedItem(pos);
 }

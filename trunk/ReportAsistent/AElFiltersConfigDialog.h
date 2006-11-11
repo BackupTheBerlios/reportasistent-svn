@@ -35,9 +35,13 @@ public:
 
 
 private:
+	int GetCurSelFiltersList();
+	BOOL LoadSource(public_source_id_t sId);
 	MSXML2::IXMLDOMElementPtr & m_active_element;
 	MSXML2::IXMLDOMElementPtr m_cloned_active_element;
    	MSXML2::IXMLDOMElementPtr m_filter_DOM;	//plugin output
+
+	BOOL m_bSourceIsInit;
 
 
 // Implementation
@@ -45,7 +49,9 @@ protected:
 	void DDV_NonDuplicateID(CDataExchange *pDX, int nId, CString csIDEditValue);
 	// Generated message map functions
 	//{{AFX_MSG(CAElFiltersConfigDialog)
-		// NOTE: the ClassWizard will add member functions here
+	afx_msg void OnRemoveFilterButton();
+	afx_msg void OnMoveUpButton();
+	afx_msg void OnMoveDownButton();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 public:

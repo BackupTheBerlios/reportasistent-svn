@@ -18,8 +18,8 @@ class CComplexFilterDialog : public CDialog
 
 // Construction
 public:
-	CComplexFilterDialog(MSXML2::IXMLDOMElementPtr & active_element, CWnd* pParent = NULL);	// nestandard constructor :-)
-	CComplexFilterDialog(MSXML2::IXMLDOMElementPtr & active_element, MSXML2::IXMLDOMElementPtr currnet_attribute_filter, CWnd* pParent = NULL);
+	CComplexFilterDialog(MSXML2::IXMLDOMElementPtr & active_element, MSXML2::IXMLDOMElementPtr & filter_DOM, CWnd* pParent = NULL);	// nestandard constructor :-)
+	CComplexFilterDialog(MSXML2::IXMLDOMElementPtr & active_element, MSXML2::IXMLDOMElementPtr & filter_DOM, MSXML2::IXMLDOMElementPtr currnet_attribute_filter, CWnd* pParent = NULL);
 	~CComplexFilterDialog();
 
 // Dialog Data
@@ -54,15 +54,15 @@ private:
 	BOOL m_bSourceIsInit;
 	CComboBox m_SourcesCombo;
 	MSXML2::IXMLDOMElementPtr & m_active_element;
-   	MSXML2::IXMLDOMElementPtr m_filter_DOM;	//data pouzita na naplneni list veiw
+   	MSXML2::IXMLDOMElementPtr & m_filter_DOM;	//data pouzita na naplneni list veiw
 
 	MSXML2::IXMLDOMElementPtr m_currnet_attribute_filter;
 
 
-	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
-	afx_msg void OnSelchangeDataSourceCombo();
+//	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
+//	afx_msg void OnSelchangeDataSourceCombo();
+//    BOOL LoadSource(public_source_id_t sId);
 
-    BOOL LoadSource(public_source_id_t sId);
     void UpDateDialog();
 
 	CListBox m_AttributesList;

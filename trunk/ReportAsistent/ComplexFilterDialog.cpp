@@ -17,8 +17,17 @@ static char THIS_FILE[] = __FILE__;
 
 //IMPLEMENT_DYNCREATE(CComplexFilterDialog, CPropertyPage)
 
-CComplexFilterDialog::CComplexFilterDialog(MSXML2::IXMLDOMElementPtr & active_element, MSXML2::IXMLDOMElementPtr currnet_attribute_filter, CWnd* pParent)
-: m_active_element(active_element), m_currnet_attribute_filter(currnet_attribute_filter)
+CComplexFilterDialog::CComplexFilterDialog(
+		MSXML2::IXMLDOMElementPtr & active_element,
+		MSXML2::IXMLDOMElementPtr & filter_DOM,
+		MSXML2::IXMLDOMElementPtr currnet_attribute_filter,
+		CWnd* pParent)
+: CDialog(CComplexFilterDialog::IDD, pParent)
+, m_filter_DOM(filter_DOM)
+, m_active_element(active_element)
+, m_currnet_attribute_filter(currnet_attribute_filter)
+, m_bSourceIsInit(FALSE)
+, m_nTopNValues(5) //default hodnota
 {
 	//dedek: v tomhle kostruktoru se dialog inicilaizuje z currnet_attribute_filter elementu
 
@@ -26,9 +35,15 @@ CComplexFilterDialog::CComplexFilterDialog(MSXML2::IXMLDOMElementPtr & active_el
 }
 
 
-CComplexFilterDialog::CComplexFilterDialog(MSXML2::IXMLDOMElementPtr & active_element, CWnd* pParent)	// nestandard constructor :-)
-: CDialog(CComplexFilterDialog::IDD, pParent), m_active_element(active_element), m_bSourceIsInit(FALSE)
-, m_nTopNValues(0) //hodnota se zadava v pres spin v init dilaog
+CComplexFilterDialog::CComplexFilterDialog(
+		MSXML2::IXMLDOMElementPtr & active_element,
+		MSXML2::IXMLDOMElementPtr & filter_DOM,
+		CWnd* pParent)	// nestandard constructor :-)
+: CDialog(CComplexFilterDialog::IDD, pParent)
+, m_filter_DOM(filter_DOM)
+, m_active_element(active_element)
+, m_bSourceIsInit(FALSE)
+, m_nTopNValues(5) //default hodnota
 , m_nFilterTypeRadioGroup(1)
 , m_bNumericSort(FALSE)
 , m_nSortDirectionRadioGroup(0)
@@ -65,9 +80,9 @@ void CComplexFilterDialog::DoDataExchange(CDataExchange* pDX)
 	DDX_Radio(pDX, IDC_ASCENDING_RADIO, m_nSortDirectionRadioGroup);
 	
 	DDX_LBIndex(pDX, IDC_ATTRIBUTES_LIST, m_nSlectedAttrIndex);
-	DDX_Text(pDX, IDC_TOPN_EDIT, m_nTopNValues);
 	DDX_Text(pDX, IDC_TRESHOLD_EDIT, m_sTresholdOrFixedValue);
-	DDV_MinMaxUInt(pDX, m_nTopNValues, 0, 100);
+	DDX_Text(pDX, IDC_TOPN_EDIT, m_nTopNValues);
+	DDV_MinMaxUInt(pDX, m_nTopNValues, 1, 100);
 	DDX_Control(pDX, IDC_TOPN_SPIN, m_TopNSpin);
 
 	DDX_Check(pDX, IDC_NUMERIC_SORT_CHECK, m_bNumericSort);
@@ -78,8 +93,8 @@ BEGIN_MESSAGE_MAP(CComplexFilterDialog, CDialog)
 	//{{AFX_MSG_MAP(CComplexFilterDialog)
 		// NOTE: the ClassWizard will add message map macros here
 	//}}AFX_MSG_MAP
-	ON_WM_CTLCOLOR()
-	ON_CBN_SELCHANGE(IDC_DATA_SOURCE_COMBO, OnSelchangeDataSourceCombo)
+//	ON_WM_CTLCOLOR()
+//	ON_CBN_SELCHANGE(IDC_DATA_SOURCE_COMBO, OnSelchangeDataSourceCombo)
 	ON_LBN_SELCHANGE(IDC_ATTRIBUTES_LIST, OnLbnSelchangeAttributesList)
 	ON_WM_DESTROY()
 	ON_BN_CLICKED(IDC_ASCENDING_RADIO, OnBnClickedAscendingRadio)
@@ -97,15 +112,15 @@ BOOL CComplexFilterDialog::OnInitDialog()
 	CDialog::OnInitDialog();
 
 	m_TopNSpin.SetRange(1, 100);
-	m_TopNSpin.SetPos(5);
+//	m_TopNSpin.SetPos(5);
 	m_TopNSpin.SetBase(1);
 	m_TopNSpin.SetBuddy(GetDlgItem(IDC_TOPN_EDIT));
 
 	
-	
+/*	
 	CDataSourcesManager & dm = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->DataSourcesManager;
 	CElementManager & em = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
-
+	
 	for (int a=0; a< dm.getSourcesCount(); a++)
 	{
 		if (em.isElementSupportedBySource(em.IdentifyElement(m_active_element), a))
@@ -116,8 +131,8 @@ BOOL CComplexFilterDialog::OnInitDialog()
 
 	int sel = m_SourcesCombo.SelectString(-1, (_bstr_t) m_active_element->getAttribute("source"));
 	if (sel == CB_ERR) m_SourcesCombo.SelectString(-1, dm.getDefaultSource());
-	
-	
+*/	
+	UpDateDialog();
 	//InitDialogFromXML(); - vola se v update dialog
 
 
@@ -125,6 +140,7 @@ BOOL CComplexFilterDialog::OnInitDialog()
 	// EXCEPTION: OCX Property Pages should return FALSE
 }
 
+/*
 HBRUSH CComplexFilterDialog::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 {
 	HBRUSH hbr = CDialog::OnCtlColor(pDC, pWnd, nCtlColor);
@@ -163,7 +179,6 @@ void CComplexFilterDialog::OnSelchangeDataSourceCombo()
 
 //    SetModified();
 }
-
 
 BOOL CComplexFilterDialog::LoadSource(public_source_id_t sId)
 {
@@ -217,7 +232,7 @@ BOOL CComplexFilterDialog::LoadSource(public_source_id_t sId)
    	CReportAsistentApp::ReportError(IDS_SIMPLE_FILTER_FAILED_SOURCE_LOAD, "Plugin output - document element is empty.");
     return FALSE;
 }
-
+*/
 
 void CComplexFilterDialog::UpDateDialog()
 {
@@ -459,7 +474,7 @@ void CComplexFilterDialog::InitDialogFromXML(void)
 	else
 		m_nSortDirectionRadioGroup = IDC_ASCENDING_RADIO - IDC_DESCENDING_RADIO;
 
-
+	
 	//filter_type & filter_data
 	if ((_bstr_t) m_currnet_attribute_filter->getAttribute("filter_type") == (_bstr_t) "treshold")
 	{
@@ -477,10 +492,11 @@ void CComplexFilterDialog::InitDialogFromXML(void)
 	if ((_bstr_t) m_currnet_attribute_filter->getAttribute("filter_type") == (_bstr_t) "top-n")
 	{
 		m_nFilterTypeRadioGroup = IDC_TOP_N_VAL_RADIO - IDC_TRESHOLD_RADIO;
-	//	m_nTopNValues = m_currnet_attribute_filter->getAttribute("filter_data");
+		m_nTopNValues = (long) m_currnet_attribute_filter->getAttribute("filter_data");
 	}
 
 	UpdateData(FALSE);
+	OnLbnSelchangeAttributesList();
 }
 
 MSXML2::IXMLDOMElementPtr CComplexFilterDialog::CreateAttrFilterElement()
@@ -545,7 +561,7 @@ MSXML2::IXMLDOMElementPtr CComplexFilterDialog::CreateAttrFilterElement()
 		break;
 	case IDC_TOP_N_VAL_RADIO:
 		filter_type_attr->value = "top-n";
-//		filter_data_attr->value = m_nTopNValues;
+		filter_data_attr->value = (long) m_nTopNValues;
 		break;
 	}
 	attr_filter_element->setAttributeNode(filter_type_attr);

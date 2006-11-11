@@ -65,8 +65,11 @@ MSXML2::IXMLDOMDocumentFragmentPtr CAElTransform::DoAllTransnformations()
 	MSXML2::IXMLDOMDocumentFragmentPtr parent_frag =
 		m_active_element->ownerDocument->createDocumentFragment();
 	
-	//provede tranformace na kazdou polozku vybranou v simple filter
-	ProcessSimpleFlter( (MSXML2::IXMLDOMNodePtr) parent_frag );
+	if (m_plug_out != NULL)
+	{
+		//provede tranformace na kazdou polozku vybranou v simple filter
+		ProcessSimpleFlter( (MSXML2::IXMLDOMNodePtr) parent_frag );
+	}
 
 	FillElementAttributes(0);
 
@@ -284,6 +287,8 @@ void CAElTransform::ProcessSingleTransformation(
 //varati TRUE pokud processor.ProcessFilteredOut alespon jednou uspela, pokud je filter prazdy vrati FALSE
 BOOL CAElTransform::ProcessSimpleFlter(CFilterProcessor & processor, LPARAM user1, LPARAM user2)
 {
+	ASSERT(m_plug_out != NULL);
+	
 	MSXML2::IXMLDOMNodeListPtr selected_items;
 	selected_items = m_active_element->selectNodes("filter[@type='simple']/selection");
 
@@ -351,6 +356,10 @@ BOOL CAElTransform::ProcessFilteredOut(MSXML2::IXMLDOMNodePtr filtered_output_no
 //vrati TRUE, pokud se atributy podarilo naplnit
 BOOL CAElTransform::FillElementAttributes(int index_of_filtered_out)
 {
+	if (m_plug_out == NULL)
+	{
+		return FALSE;
+	}
 
 	return ProcessSimpleFlter(* this, FILTER_FILL_ELEMENT_ATTRIBUTES, index_of_filtered_out);
 }
