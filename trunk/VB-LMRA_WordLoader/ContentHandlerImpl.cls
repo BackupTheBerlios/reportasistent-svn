@@ -32,7 +32,6 @@ End Property
 
 
 
-
 Private Sub IVBSAXContentHandler_startElement(strNamespaceURI As String, strLocalName As String, strQName As String, ByVal oAttributes As MSXML2.IVBSAXAttributes)
     Dim i As Integer
     

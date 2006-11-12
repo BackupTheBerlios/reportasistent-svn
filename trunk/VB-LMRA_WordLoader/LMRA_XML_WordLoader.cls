@@ -380,6 +380,8 @@ Private Sub InitReaderWordLoader(ByRef reader As SAXXMLReader30, ByRef word_load
     Dim contentHandler As New ContentHandlerImpl 'Receives parsing events
     Dim errorHandler As New ErrorHandlerImpl     'Receive error events
     
+    Set word_loader.LMRA_loader = Me
+    
     Set contentHandler.word_loader = word_loader
     Set contentHandler.LMRA_loader = Me
     Set errorHandler.LMRA_loader = Me

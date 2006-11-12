@@ -353,6 +353,7 @@ End Sub
 Public Sub LoadInclude(oAttributes As MSXML2.IVBSAXAttributes)
     Dim cur_doc As Word.Document
     Dim open_doc As Word.Document
+    Dim file_name As String
     
     Set cur_doc = mWordApp.ActiveDocument
     
@@ -364,8 +365,10 @@ Public Sub LoadInclude(oAttributes As MSXML2.IVBSAXAttributes)
 '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         
     On Error GoTo FileError
+    file_name = oAttributes.getValueFromName("", "file")
+
     Set open_doc = mWordApp.Documents.Open( _
-        FileName:=oAttributes.getValueFromName("", "file"), _
+        FileName:=file_name, _
         ConfirmConversions:=False, _
         ReadOnly:=True, _
         AddToRecentFiles:=False, _
@@ -386,12 +389,21 @@ Public Sub LoadInclude(oAttributes As MSXML2.IVBSAXAttributes)
 FileError:
 
     mLMRA.strLastError = "Error in iclude file loading!" _
-        & vbNewLine & "filename: " & oAttributes.getValueFromName("", "file") & vbNewLine _
+        & vbNewLine & "filename: " & file_name & vbNewLine _
         & "file open directory: " & app.Path & vbNewLine
+        
+    
+    'zapise chybu primo do generovaneho dokumnetu
+    AddParagraph
+    AddText "Error in iclude file loading!" _
+        & vbNewLine & "filename: " & file_name & vbNewLine _
+        & "file open directory: " & app.Path & vbNewLine
+    AddParagraph
+    
     
    
     Err.Clear
-    Err.Raise vbObjectError + 1
+'    Err.Raise vbObjectError + 1
                     
 End Sub
 
