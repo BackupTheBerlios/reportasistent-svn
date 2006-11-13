@@ -595,23 +595,31 @@ void CComplexFilterDialog::AppendFilter(void)
 
 void CComplexFilterDialog::OnBnClickedRefreshResultsButton()
 {
-	MSXML2::IXMLDOMElementPtr data_clone = m_filter_DOM->cloneNode(VARIANT_TRUE);
+	//zaloha dat
+	MSXML2::IXMLDOMElementPtr values_clone = m_filter_DOM->selectSingleNode("/dialog_data/values")->cloneNode(VARIANT_TRUE);
 	
-//	CAElTransform::ApplySingleAttributeFilter(data_clone, CreateAttrFilterElement());
+	if (! UpdateData(TRUE)) return;
+	CAElTransform::ApplySingleAttributeFilter(m_filter_DOM, CreateAttrFilterElement());
+
+//	AfxMessageBox(m_filter_DOM->xml);
 
 	UpdateResult(m_filter_DOM);
+	
+	//obnova dat
+	m_filter_DOM->selectSingleNode("/dialog_data")->replaceChild(values_clone,
+		m_filter_DOM->selectSingleNode("/dialog_data/values"));
+		
 }
 
+
+
 void CComplexFilterDialog::UpdateResult(MSXML2::IXMLDOMElementPtr & filter_dom)
-{
-//	filter_dom->ownerDocument->save("pok.xml");
-	
-//	MSXML2::IXMLDOMNodeListPtr values_list = m_filter_DOM->selectNodes("/dialog_data/values/value");
+{	
 	MSXML2::IXMLDOMNodeListPtr values_list = filter_dom->selectNodes("/dialog_data/values/value");
 
-	//AfxMessageBox(values_list->);
+	
 
-
+	m_ResultList.DeleteAllItems();
 		
 	for (int i = 0; i < values_list->length; i++)
 	{
@@ -621,9 +629,10 @@ void CComplexFilterDialog::UpdateResult(MSXML2::IXMLDOMElementPtr & filter_dom)
 		for (int a = 0; a < m_AttributesList.GetCount(); a++)
 		{
 			CString q;
-			q.Format("@%s", (LPCTSTR) m_AttributesList.GetItemDataPtr(a));
+			q.Format("@%s", (LPCTSTR) * (CString *) m_AttributesList.GetItemDataPtr(a));
 			
-			m_ResultList.SetItemText(it, a, values_list->item[a]->selectSingleNode((LPCTSTR) q)->text);
+			m_ResultList.SetItemText(it, a, values_list->item[i]->selectSingleNode((LPCTSTR) q)->text);
 		}
 	}
 }
+

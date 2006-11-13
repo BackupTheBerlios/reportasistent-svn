@@ -283,6 +283,124 @@ void CAElTransform::ProcessSingleTransformation(
 	transformation_node.Release();
 }
 
+class CFilterSortItem
+{
+private:
+	LPCTSTR static attr_name;
+	CString static treshold_value;
+
+	static bool (* compare_function) (CString *, CString *);
+
+
+
+	//jedina datova polozka
+	MSXML2::IXMLDOMElementPtr data;
+
+public:
+	CFilterSortItem(MSXML2::IXMLDOMElementPtr d): data(d) {};
+	//	~CFilterSortItem() {};
+	MSXML2::IXMLDOMElementPtr GetData() {return data; };
+	void static PrepareRemoveIf(LPCTSTR _treshold_value) {treshold_value = _treshold_value;} ;
+
+	void static PrepareSort(LPCTSTR _attr_name, BOOL _numeric_sort, BOOL _descending_sort)
+	{
+		attr_name = _attr_name;
+
+		if (_numeric_sort)
+		{
+			if (_descending_sort) compare_function = CStrCompare::num_sort_desc;
+			else compare_function = CStrCompare::num_sort_asc;
+		}
+		else
+		{
+			if (_descending_sort) compare_function = CStrCompare::str_sort_desc;
+			else compare_function = CStrCompare::str_sort_asc;
+		}
+	};
+
+	bool operator < (CFilterSortItem s)
+	{
+		CString a = (LPCTSTR) (_bstr_t) data->getAttribute(attr_name);
+		CString b = (LPCTSTR) (_bstr_t) s.data->getAttribute(attr_name);
+
+		return compare_function(& a, & b);
+	};
+
+	bool static TresholdCompare(CFilterSortItem s)
+	{
+		CString a = (LPCTSTR) (_bstr_t) s.data->getAttribute(attr_name);
+
+		return compare_function(& treshold_value, & a);
+	};
+};
+
+LPCTSTR CFilterSortItem::attr_name;
+CString CFilterSortItem::treshold_value;
+bool (* CFilterSortItem::compare_function) (CString *, CString *);
+
+
+
+void CAElTransform::ApplyTresholdFilter(MSXML2::IXMLDOMElementPtr & filter_dom, LPCTSTR attr_name, BOOL numeric_sort, BOOL descending_sort, LPCTSTR treshold)
+{
+	MSXML2::IXMLDOMNodePtr parent = filter_dom->selectSingleNode("/dialog_data/values");
+	MSXML2::IXMLDOMNodeListPtr values_list = filter_dom->selectNodes("/dialog_data/values/value");
+
+	std::vector<CFilterSortItem> sort_helper;
+	std::vector<CFilterSortItem>::iterator treshold_end;
+
+	int a;
+	for (a = 0; a < values_list->length; a++)
+	{
+		sort_helper.push_back(CFilterSortItem(parent->removeChild(values_list->item[a])));		
+	}
+
+	CFilterSortItem::PrepareSort(attr_name, numeric_sort, descending_sort);
+	CFilterSortItem::PrepareRemoveIf(treshold);
+
+	treshold_end = remove_if(sort_helper.begin(), sort_helper.end(), CFilterSortItem::TresholdCompare);
+	sort_helper.erase(treshold_end, sort_helper.end());
+
+	sort(sort_helper.begin(), sort_helper.end());
+
+	for (a = 0; a < (int) sort_helper.size(); a++)
+	{		
+		parent->appendChild(sort_helper[a].GetData() );		
+	}
+}
+
+void CAElTransform::ApplyTopNFilter(MSXML2::IXMLDOMElementPtr & filter_dom, LPCTSTR attr_name, BOOL numeric_sort, BOOL descending_sort, int top_n)
+{
+	MSXML2::IXMLDOMNodePtr parent = filter_dom->selectSingleNode("/dialog_data/values");
+	MSXML2::IXMLDOMNodeListPtr values_list = filter_dom->selectNodes("/dialog_data/values/value");
+
+	std::vector<CFilterSortItem> sort_helper;
+
+	int a;
+	for (a = 0; a < values_list->length; a++)
+	{
+		sort_helper.push_back(CFilterSortItem(parent->removeChild(values_list->item[a])));		
+	}
+
+	CFilterSortItem::PrepareSort(attr_name, numeric_sort, descending_sort);
+	
+	if (values_list->length <= top_n)
+	{
+		sort(sort_helper.begin(), sort_helper.end());
+	}
+	else
+	{
+		partial_sort(sort_helper.begin(), sort_helper.begin() + top_n, sort_helper.end());
+	}
+
+	for (a = 0; a < top_n; a++)
+	{
+		if (a >= (int) sort_helper.size()) break;
+		
+		parent->appendChild(sort_helper[a].GetData() );		
+	}
+
+}
+
 void CAElTransform::ApplyFixedValueFilter(MSXML2::IXMLDOMElementPtr & filter_dom, LPCTSTR attr_name, BOOL num_compare, LPCTSTR fixed_value)
 {
 	MSXML2::IXMLDOMNodePtr parent = filter_dom->selectSingleNode("/dialog_data/values");
@@ -311,8 +429,6 @@ void CAElTransform::ApplyFixedValueFilter(MSXML2::IXMLDOMElementPtr & filter_dom
 
 		parent->removeChild(values_list->item[a]);
 	}
-
-
 }
 
 void CAElTransform::ApplySingleAttributeFilter(MSXML2::IXMLDOMElementPtr & filter_dom, MSXML2::IXMLDOMElementPtr attribute_filter)
@@ -325,6 +441,7 @@ void CAElTransform::ApplySingleAttributeFilter(MSXML2::IXMLDOMElementPtr & filte
 	
 	if (filter_type == "treshold")
 	{
+		ApplyTresholdFilter(filter_dom, attr_name, numeric_sort, descending_sort, compare_value);
 	}
 	else
 	if (filter_type == "fixed")
@@ -334,11 +451,11 @@ void CAElTransform::ApplySingleAttributeFilter(MSXML2::IXMLDOMElementPtr & filte
 	else
 	if (filter_type == "top-n")
 	{
+		ApplyTopNFilter(filter_dom, attr_name, numeric_sort, descending_sort, 
+			attribute_filter->getAttribute("filter_data"));
 	}
 
-	attribute_filter->getAttribute("filter_data");
-
-	
+	attribute_filter->getAttribute("filter_data");	
 }
 
 //varati TRUE pokud processor.ProcessFilteredOut alespon jednou uspela, pokud je filter prazdy vrati FALSE

@@ -38,6 +38,10 @@ private:
 	MSXML2::IXMLDOMDocumentPtr m_plug_out;
 
 void static ApplyFixedValueFilter(MSXML2::IXMLDOMElementPtr & filter_dom, LPCTSTR attr_name, BOOL num_compare, LPCTSTR fixed_value);
+void static ApplyTopNFilter(MSXML2::IXMLDOMElementPtr & filter_dom, LPCTSTR attr_name, BOOL numeric_sort, BOOL descending_sort, int top_n);
+void static ApplyTresholdFilter(MSXML2::IXMLDOMElementPtr & filter_dom, LPCTSTR attr_name, BOOL numeric_sort, BOOL descending_sort, LPCTSTR treshold);
+
+
 
 public:
 	void static ApplySingleAttributeFilter(MSXML2::IXMLDOMElementPtr & filter_dom, MSXML2::IXMLDOMElementPtr attribute_filter);
