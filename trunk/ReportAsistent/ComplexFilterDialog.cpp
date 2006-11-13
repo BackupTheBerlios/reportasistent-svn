@@ -78,7 +78,7 @@ void CComplexFilterDialog::DoDataExchange(CDataExchange* pDX)
 
 	DDX_Radio(pDX, IDC_TRESHOLD_RADIO, m_nFilterTypeRadioGroup);
 	DDX_Radio(pDX, IDC_ASCENDING_RADIO, m_nSortDirectionRadioGroup);
-	
+
 	DDX_LBIndex(pDX, IDC_ATTRIBUTES_LIST, m_nSlectedAttrIndex);
 	DDX_Text(pDX, IDC_TRESHOLD_EDIT, m_sTresholdOrFixedValue);
 	DDX_Text(pDX, IDC_TOPN_EDIT, m_nTopNValues);
@@ -86,6 +86,7 @@ void CComplexFilterDialog::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_TOPN_SPIN, m_TopNSpin);
 
 	DDX_Check(pDX, IDC_NUMERIC_SORT_CHECK, m_bNumericSort);
+	DDX_Control(pDX, IDC_RESULT_LIST, m_ResultList);
 }
 
 
@@ -102,6 +103,7 @@ BEGIN_MESSAGE_MAP(CComplexFilterDialog, CDialog)
 	ON_BN_CLICKED(IDC_NUMERIC_SORT_CHECK, OnBnClickedNumericSortCheck)
 	ON_BN_CLICKED(IDOK, OnBnClickedOk)
 	ON_LBN_SELCHANGE(IDC_VALUES_LIST, OnLbnSelchangeValuesList)
+	ON_BN_CLICKED(IDC_REFRESH_RESULTS_BUTTON, OnBnClickedRefreshResultsButton)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -244,7 +246,11 @@ void CComplexFilterDialog::UpDateDialog()
 
 	for (int a = 0; a < attributes->length; a++)
 	{
-		int i = m_AttributesList.AddString(attributes->item[a]->selectSingleNode("@label")->text);
+		CString label =  (LPCTSTR) attributes->item[a]->selectSingleNode("@label")->text;
+
+		m_ResultList.InsertColumn(a, label, 0, 50);
+
+		int i = m_AttributesList.AddString(label);
 
 		m_AttributesList.SetItemDataPtr(i, 
 			new CString((LPCTSTR) attributes->item[a]->selectSingleNode("@name")->text));
@@ -585,4 +591,39 @@ void CComplexFilterDialog::AppendFilter(void)
 {
 	m_currnet_attribute_filter = CreateAttrFilterElement();
 	m_active_element->selectSingleNode("filter")->appendChild(m_currnet_attribute_filter);	
+}
+
+void CComplexFilterDialog::OnBnClickedRefreshResultsButton()
+{
+	MSXML2::IXMLDOMElementPtr data_clone = m_filter_DOM->cloneNode(VARIANT_TRUE);
+	
+//	CAElTransform::ApplySingleAttributeFilter(data_clone, CreateAttrFilterElement());
+
+	UpdateResult(m_filter_DOM);
+}
+
+void CComplexFilterDialog::UpdateResult(MSXML2::IXMLDOMElementPtr & filter_dom)
+{
+//	filter_dom->ownerDocument->save("pok.xml");
+	
+//	MSXML2::IXMLDOMNodeListPtr values_list = m_filter_DOM->selectNodes("/dialog_data/values/value");
+	MSXML2::IXMLDOMNodeListPtr values_list = filter_dom->selectNodes("/dialog_data/values/value");
+
+	//AfxMessageBox(values_list->);
+
+
+		
+	for (int i = 0; i < values_list->length; i++)
+	{
+		//spoleham se na stejne poradi atributu v m_ResultList jako v m_AttributesList
+
+		int it = m_ResultList.InsertItem(i, "");
+		for (int a = 0; a < m_AttributesList.GetCount(); a++)
+		{
+			CString q;
+			q.Format("@%s", (LPCTSTR) m_AttributesList.GetItemDataPtr(a));
+			
+			m_ResultList.SetItemText(it, a, values_list->item[a]->selectSingleNode((LPCTSTR) q)->text);
+		}
+	}
 }

@@ -95,6 +95,11 @@ private:
 
 	int m_nSlectedAttrIndex;
 	CString m_sTresholdOrFixedValue;
+	afx_msg void OnBnClickedRefreshResultsButton();
+private:
+	void UpdateResult(MSXML2::IXMLDOMElementPtr & filter_dom);
+private:
+	CListCtrl m_ResultList;
 };
 
 //{{AFX_INSERT_LOCATION}}

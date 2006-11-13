@@ -283,6 +283,63 @@ void CAElTransform::ProcessSingleTransformation(
 	transformation_node.Release();
 }
 
+void CAElTransform::ApplyFixedValueFilter(MSXML2::IXMLDOMElementPtr & filter_dom, LPCTSTR attr_name, BOOL num_compare, LPCTSTR fixed_value)
+{
+	MSXML2::IXMLDOMNodePtr parent = filter_dom->selectSingleNode("/dialog_data/values");
+	MSXML2::IXMLDOMNodeListPtr values_list = filter_dom->selectNodes("/dialog_data/values/value");
+
+	CString s_fixed_value = fixed_value;
+
+	CString q;
+	q.Format("@%s", attr_name);
+
+	for (int a = 0; a < values_list->length; a++)
+	{
+		CString current_value = (LPCTSTR) values_list->item[a]->selectSingleNode((LPCTSTR) q)->text;
+		
+		
+		// zachovej hodnotu pokud !(a < b) && !(b < a)			...=> a == b
+		if (
+			(num_compare && (! CStrCompare::num_sort_desc(& s_fixed_value, & current_value) &&
+							 ! CStrCompare::num_sort_desc(& current_value, & s_fixed_value))) 
+				||
+			(! num_compare && (! CStrCompare::str_sort_desc(& s_fixed_value, & current_value) &&
+							 ! CStrCompare::str_sort_desc(& current_value, & s_fixed_value))))
+		{
+			continue;
+		}
+
+		parent->removeChild(values_list->item[a]);
+	}
+
+
+}
+
+void CAElTransform::ApplySingleAttributeFilter(MSXML2::IXMLDOMElementPtr & filter_dom, MSXML2::IXMLDOMElementPtr attribute_filter)
+{
+	CString attr_name = (LPCTSTR) (_bstr_t) attribute_filter->getAttribute("attr_name");
+	CString filter_type = (LPCTSTR) (_bstr_t) attribute_filter->getAttribute("filter_type");
+	CString compare_value = (LPCTSTR) (_bstr_t) attribute_filter->getAttribute("filter_data");
+	BOOL numeric_sort = ((_bstr_t) attribute_filter->getAttribute("numeric_sort") == (_bstr_t) "true");
+	BOOL descending_sort = ((_bstr_t) attribute_filter->getAttribute("sort_direction") == (_bstr_t) "descending");
+	
+	if (filter_type == "treshold")
+	{
+	}
+	else
+	if (filter_type == "fixed")
+	{
+		ApplyFixedValueFilter(filter_dom, attr_name, numeric_sort, compare_value);
+	}
+	else
+	if (filter_type == "top-n")
+	{
+	}
+
+	attribute_filter->getAttribute("filter_data");
+
+	
+}
 
 //varati TRUE pokud processor.ProcessFilteredOut alespon jednou uspela, pokud je filter prazdy vrati FALSE
 BOOL CAElTransform::ProcessSimpleFlter(CFilterProcessor & processor, LPARAM user1, LPARAM user2)

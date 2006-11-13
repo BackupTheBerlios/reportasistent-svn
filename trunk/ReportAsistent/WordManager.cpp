@@ -418,7 +418,7 @@ void CWordManager::WordEditShowMainWindow()
 	AfxGetApp()->GetMainWnd()->SetWindowPlacement(& m_origWINDOWPLACEMENT);
 }
 
-bool CStringTableImpl::num_sort_desc(CString * s1,  CString * s2)
+bool CStrCompare::num_sort_desc(CString * s1,  CString * s2)
 {
 	_variant_t v;
 	double d1, d2;
@@ -450,7 +450,7 @@ bool CStringTableImpl::num_sort_desc(CString * s1,  CString * s2)
 	else return false;
 }
 
-bool CStringTableImpl::num_sort_asc(CString * s1,  CString * s2)
+bool CStrCompare::num_sort_asc(CString * s1,  CString * s2)
 {
 	_variant_t v;
 	double d1, d2;
@@ -482,12 +482,12 @@ bool CStringTableImpl::num_sort_asc(CString * s1,  CString * s2)
 	else return false;
 }
 
-bool CStringTableImpl::str_sort_asc(CString * s1,  CString * s2)
+bool CStrCompare::str_sort_asc(CString * s1,  CString * s2)
 {
 	return *s1 < *s2;
 }
 
-bool CStringTableImpl::str_sort_desc(CString * s1,  CString * s2)
+bool CStrCompare::str_sort_desc(CString * s1,  CString * s2)
 {
 	return *s1 > *s2;
 }
@@ -495,17 +495,17 @@ bool CStringTableImpl::str_sort_desc(CString * s1,  CString * s2)
 void CStringTableImpl::SortNumeric(BOOL ascending)
 {
 	if (ascending)
-		std::sort(data.begin(), data.end(), num_sort_asc);
+		std::sort(data.begin(), data.end(), CStrCompare::num_sort_asc);
 	else
-		std::sort(data.begin(), data.end(), num_sort_desc);
+		std::sort(data.begin(), data.end(), CStrCompare::num_sort_desc);
 }
 
 void CStringTableImpl::Sort(BOOL ascending)
 {
 	if (ascending)
-		std::sort(data.begin(), data.end(), str_sort_asc);
+		std::sort(data.begin(), data.end(), CStrCompare::str_sort_asc);
 	else
-		std::sort(data.begin(), data.end(), str_sort_desc);
+		std::sort(data.begin(), data.end(), CStrCompare::str_sort_desc);
 }
 
 CString CWordManager::getLastProcessedId(void)

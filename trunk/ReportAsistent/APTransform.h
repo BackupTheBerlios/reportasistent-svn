@@ -37,6 +37,11 @@ private:
 	MSXML2::IXMLDOMElementPtr & m_active_element;
 	MSXML2::IXMLDOMDocumentPtr m_plug_out;
 
+void static ApplyFixedValueFilter(MSXML2::IXMLDOMElementPtr & filter_dom, LPCTSTR attr_name, BOOL num_compare, LPCTSTR fixed_value);
+
+public:
+	void static ApplySingleAttributeFilter(MSXML2::IXMLDOMElementPtr & filter_dom, MSXML2::IXMLDOMElementPtr attribute_filter);
+
 protected:
 	void FillElementAttributes(MSXML2::IXMLDOMNodePtr & output_node);
 	virtual BOOL ProcessFilteredOut(MSXML2::IXMLDOMNodePtr filtered_output_node, int node_order, LPARAM user1, LPARAM user2);

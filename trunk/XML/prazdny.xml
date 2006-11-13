@@ -149,31 +149,6 @@ to se deje vzdy, kdyz se cte plugin output, napr pri otevreni simple fiter -->
 		<active_element type="hyp_4ft" source="" id="hyp_4ft1" label="">
 			<attributes>
 				<element_attributes>
-					<attribute name="id" value=""/>
-					<attribute name="db_name" value=""/>
-					<attribute name="matrix_name" value=""/>
-					<attribute name="task_name" value=""/>
-					<attribute name="a" value=""/>
-					<attribute name="b" value=""/>
-					<attribute name="c" value=""/>
-					<attribute name="d" value=""/>
-					<attribute name="conf" value=""/>
-					<attribute name="d_conf" value=""/>
-					<attribute name="e_conf" value=""/>
-					<attribute name="support" value=""/>
-					<attribute name="completeness" value=""/>
-					<attribute name="avg_diff" value=""/>
-					<attribute name="low_bnd_imp" value=""/>
-					<attribute name="up_bnd_imp" value=""/>
-					<attribute name="low_bnd_dbl_imp" value=""/>
-					<attribute name="up_bnd_dbl_imp" value=""/>
-					<attribute name="low_bnd_eq" value=""/>
-					<attribute name="up_bnd_eq" value=""/>
-					<attribute name="fisher" value=""/>
-					<attribute name="chi_sq" value=""/>
-					<attribute name="antecedent" value=""/>
-					<attribute name="succedent" value=""/>
-					<attribute name="condition" value=""/>
 				</element_attributes>
 			</attributes>
 			<filter type="simple">
@@ -194,7 +169,7 @@ to se deje vzdy, kdyz se cte plugin output, napr pri otevreni simple fiter -->
 		<attr_link_table id="attr_link_table1" target="" style="">
 		</attr_link_table>
 	</chapter>
-	<include file="D:\Iva\Softwarak\Zkusebni PROGRAMY\SVN 2710\XML\include_doc.doc" id="include1"/>
+	<include file="..\XML\include_doc.doc" id="include1"/>
 </report>
 <!-- please leave some free spaces directly at the end of this file
 - required for smooth drive of the RA application :-) 

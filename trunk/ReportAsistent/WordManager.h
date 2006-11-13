@@ -38,15 +38,26 @@ public:
 
 	~CStringTableImpl();
 private:
+/*
 	bool static CStringTableImpl::str_sort_desc(CString * s1,  CString * s2);
 	bool static CStringTableImpl::str_sort_asc(CString * s1,  CString * s2);
 
 	bool static CStringTableImpl::num_sort_desc(CString * s1,  CString * s2);
 	bool static CStringTableImpl::num_sort_asc(CString * s1,  CString * s2);
-
+*/
 public:
 	void Sort(BOOL ascending = TRUE);
 	void SortNumeric(BOOL ascending = TRUE);
+};
+
+class CStrCompare
+{
+public:
+	bool static str_sort_desc(CString * s1,  CString * s2);
+	bool static str_sort_asc(CString * s1,  CString * s2);
+
+	bool static num_sort_desc(CString * s1,  CString * s2);
+	bool static num_sort_asc(CString * s1,  CString * s2);
 };
 
 
