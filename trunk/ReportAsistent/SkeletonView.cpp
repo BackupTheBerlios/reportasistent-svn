@@ -409,7 +409,8 @@ void CSkeletonView::OnEditCopy()
 						);
 	if (0==hgMemForXML) 
 	{
-		AfxMessageBox("Nepodarilo se alokovat dostatek pameti pro XML podstrom.",0,0);
+		CReportAsistentApp::ReportError(IDS_LACK_OF_GLOB_MEM_FOR_CLIPBOARD);
+		//CReportAsistentApp::ReportError();
 		return;
 	}
 
@@ -421,34 +422,37 @@ void CSkeletonView::OnEditCopy()
 	GlobalUnlock(hgMemForXML);
 	
 
+
 //Otevru clipboard a soupnu do nej XML
 	if (0==OpenClipboard()) 
 	{
-		AfxMessageBox("Clipboard pouziva nekdo jiny",0,0);
+		CReportAsistentApp::ReportError(IDS_CLIPBOARD_USED_BY_OTHER_APP);
 		return;
 	}
 	
+
 	CWnd * hOwner = GetClipboardOwner();
-	EmptyClipboard();
+	if (0==EmptyClipboard())
+	{
+		CReportAsistentApp::ReportError(IDS_CLIPBOARD_WAS_NOT_EMPTIED);
+	}
 	hOwner = GetClipboardOwner();
 
 	//??Jaky mam dat format??
 	if(0== SetClipboardData(CF_TEXT, // clipboard format - pripadne:CF_TEXT
 							hgMemForXML))   // data handle
 	{
-		AfxMessageBox("Umistit data do clipboardu se nepodarilo",0,0);
 		DWORD dErr = GetLastError();
-		ASSERT(0!=CloseClipboard());
+		CReportAsistentApp::ReportError(IDS_CLIPBOARD_PLACE_DATA_ERROR,dErr);
+		CloseClipboard();
 		return;
 
 	}
 
 //zavru clipboard
-	ASSERT(0!=CloseClipboard());
+	CloseClipboard();
 
-	//ASSERT(NULL==GlobalFree(hgMemForXML));   globalni pamet nesmim uvolnovat!! - ta uz nyni patri clipboardu
 	DWORD dErr = GetLastError();
-
 	return;
 	
 }
@@ -459,21 +463,26 @@ void CSkeletonView::OnEditPaste()
 
 	CTreeCtrl & rTreeCtrl = GetTreeCtrl();
 	MSXML2::IXMLDOMElementPtr SelXMLDomElement = GetDocument()->ElementFromItemData(rTreeCtrl.GetItemData(rTreeCtrl.GetSelectedItem()));
+	
+
 
 //Otevru clipboard a prectu z nej XML
 	if (0==OpenClipboard()) 
 	{
-		AfxMessageBox("Clipboard pouziva nekdo jiny",0,0);
+		CReportAsistentApp::ReportError(IDS_CLIPBOARD_USED_BY_OTHER_APP);
+
 		return;
 	}
+
+
 	LPCTSTR pMemForXML; //= (LPCTSTR)GetClipboardData(CF_TEXT);
 	HANDLE hMem=GetClipboardData(CF_TEXT);
 	pMemForXML = (LPCTSTR) GlobalLock(hMem);
 
 	if (NULL==pMemForXML) 
 	{
-		AfxMessageBox("Precist text z clipboardu se nepodarilo",0,0);
-		ASSERT(0!=CloseClipboard());
+		CReportAsistentApp::ReportError(IDS_NO_DATA_FROM_CLIPBOARD);
+		CloseClipboard();
 		return;
 	}
 
@@ -487,12 +496,12 @@ void CSkeletonView::OnEditPaste()
 	HRESULT hRes = pNewXMLDoc->loadXML(pMemForXML);
 	if (pNewXMLDoc->parseError->errorCode != S_OK)
 	{
-		AfxMessageBox(pNewXMLDoc->parseError->reason);
+		CReportAsistentApp::ReportError(IDS_PARSE_ERROR,pNewXMLDoc->parseError->reason);
 	}
 
 //zavru clipboard
 	GlobalUnlock(hMem);
-	ASSERT(0!=CloseClipboard());
+	CloseClipboard();
 
 //zmenim id vsech prvku
 	CElementManager & OElementManager = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
@@ -548,11 +557,11 @@ void CSkeletonView::OnEditPaste()
 		}
 		catch (_com_error &e)
 		{
+			//ladici
 			AfxMessageBox(e.Description());
 		}
 	}
 
-	//AfxMessageBox(IDS_INSERT_NEW_ELEMENT_WRONG_LOCATION,0,0); prepsano by dedek
 	CReportAsistentApp::ReportError(IDS_INSERT_NEW_ELEMENT_WRONG_LOCATION);
 
 	pNewXMLDoc.Release();	

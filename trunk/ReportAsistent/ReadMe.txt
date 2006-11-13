@@ -1,3 +1,11 @@
+Iva(12.11.)
+Clipboard pro kopirovani z kostry do kostry opraven. Poblem bylo ze jsem nevedela tuhle 
+ZASADNI vec:
+In the Release version of MFC, ASSERT does not evaluate the expression and thus will 
+not interrupt the program. If the expression must be evaluated regardless of 
+environment, use the VERIFY macro in place of ASSERT. !!!!!!!!!!!!!!!!!!!!!!
+
+
 Iva(4.11.): Styly do dialogu text a paragraph jsou pridany, ale nemuzu to otestovat, 
 protoze mi styly doma nebehaj. Muzete-li, zkuste to.
 

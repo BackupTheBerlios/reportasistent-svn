@@ -15,7 +15,7 @@ V tomto souboru jsou navrhy na zprijemneni ovladani programu LM-RA:
 
 - (Iva: problem ODSTRANEN) pri pokusu o pretazeni tlacitka toolbaru aplikace spadne
 
-- vybrany Word styl u dialogu text a paragraph se zapomina
+- vybrany Word styl u dialogu text a paragraph se zapomina (Iva: OPRAVENO)
 
 2) Dialog vyberu transformaci pro aktivni prvky
    --------------------------------------------
@@ -59,4 +59,4 @@ NALEZENE BUGY V OVLADACICH PRVCICH
 
 2) (Iva: problem ODSTRANEN)V editoru kostry - pri kopirovani jednoho odstavce a vlozeni hned za sebe se generuji v opacnem poradi, nez jsou v kostre.
 
-3) (Iva: PRIDANO) v editoru kostry - nefunguje klavesova zkratka (Ctrl+M) na otevreni dialogu Data Sources
+3) (Iva: PRIDANO)  v editoru kostry - nefunguje klavesova zkratka (Ctrl+M) na otevreni dialogu Data Sources

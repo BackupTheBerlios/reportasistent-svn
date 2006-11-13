@@ -1,5 +1,5 @@
 //{{NO_DEPENDENCIES}}
-// Microsoft Visual C++ generated include file.
+// Microsoft Developer Studio generated include file.
 // Used by ReportAsistent.rc
 //
 #define IDD_ABOUTBOX                    100
@@ -170,6 +170,12 @@
 #define IDS_COMPLEX_FILTER_SELECT_ATTR  61402
 #define IDS_TOO_MANY_SELECTED_TRANSFORMATIONS 61403
 #define IDS_TOO_MANY_SELECTED_ITEMS     61403
+#define IDS_LACK_OF_GLOB_MEM_FOR_CLIPBOARD 61404
+#define IDS_CLIPBOARD_USED_BY_OTHER_APP 61405
+#define IDS_CLIPBOARD_WAS_NOT_EMPTIED   61406
+#define IDS_CLIPBOARD_PLACE_DATA_ERROR  61407
+#define IDS_NO_DATA_FROM_CLIPBOARD      61408
+#define IDS_PARSE_ERROR                 61409
 
 // Next default values for new objects
 // 
