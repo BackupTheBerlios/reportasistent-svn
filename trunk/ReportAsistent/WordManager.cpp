@@ -57,28 +57,12 @@ CStringTableImpl::~CStringTableImpl()
 
 
 void CWordManager::LoadWordStylesThreadFunction(LPARAM template_name, LPARAM pWordManager)
-{
-	//dedek:	COM objekt nelze pouzit v jinem vlakne nez v tom, ktere ho vytvorilo.
-	//			Proto zde musim vytvorit novy COM objekt.
-	
+{	
 	CWordManager * m = (CWordManager *) pWordManager;
 
-	m->LoadWordTemplates(m->m_WordLoader);
-	m->LoadParagraphStyles(m->m_WordLoader, (LPCTSTR) template_name);
-	m->LoadCharacterStyles(m->m_WordLoader, (LPCTSTR) template_name);
-
-/*
-	_LMRA_XML_WordLoaderPtr WordLoader;
-	
-	if (m->CreateVBRAInstance(WordLoader))
-	{
-		m->LoadWordTemplates(WordLoader);
-		m->LoadParagraphStyles(WordLoader, (LPCTSTR) template_name);
-		m->LoadCharacterStyles(WordLoader, (LPCTSTR) template_name);
-
-		WordLoader.Release();
-	}	
-*/
+	m->LoadWordTemplates();
+	m->LoadParagraphStyles((LPCTSTR) template_name);
+	m->LoadCharacterStyles((LPCTSTR) template_name);
 }
 
 
@@ -101,9 +85,9 @@ void CWordManager::LoadWordStyles(LPCTSTR template_name)
 
 
 
-void CWordManager::LoadWordTemplates(_LMRA_XML_WordLoaderPtr & WordLoader)
+void CWordManager::LoadWordTemplates()
 {
-	SAFEARRAY * ret_array = WordLoader->EnumTemplates();
+	SAFEARRAY * ret_array = m_WordLoader->EnumTemplates();
 
 	LoadSafeArrayToStringTable(ret_array, m_WordTemplates);
 }
@@ -148,19 +132,18 @@ BOOL CWordManager::isInit()
 
 
 
-void CWordManager::LoadCharacterStyles(_LMRA_XML_WordLoaderPtr & WordLoader, LPCTSTR template_name)
+void CWordManager::LoadCharacterStyles(LPCTSTR template_name)
 {
-	SAFEARRAY * ret_array = WordLoader->EnumCharacterStyles(
+	SAFEARRAY * ret_array = m_WordLoader->EnumCharacterStyles(
 		(long) (getWordTemplates().FindStringNoCase(template_name)+1));
 
 	LoadSafeArrayToStringTable(ret_array, m_WordCharacterStyles);
 }
 
-void CWordManager::LoadParagraphStyles(_LMRA_XML_WordLoaderPtr & WordLoader, LPCTSTR template_name)
+void CWordManager::LoadParagraphStyles(LPCTSTR template_name)
 {
-	SAFEARRAY * ret_array = WordLoader->EnumParagraphStyles(
+	SAFEARRAY * ret_array = m_WordLoader->EnumParagraphStyles(
 		(long) (getWordTemplates().FindStringNoCase(template_name)+1));
-
 
 	LoadSafeArrayToStringTable(ret_array, m_WordParagraphStyles);
 }
