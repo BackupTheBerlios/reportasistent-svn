@@ -23,7 +23,7 @@ CComplexFilterDialog::CComplexFilterDialog(
 		MSXML2::IXMLDOMElementPtr currnet_attribute_filter,
 		CWnd* pParent)
 : CDialog(CComplexFilterDialog::IDD, pParent)
-, m_filter_DOM(filter_DOM)
+, CFilterResultImpl(filter_DOM)
 , m_active_element(active_element)
 , m_currnet_attribute_filter(currnet_attribute_filter)
 , m_bSourceIsInit(FALSE)
@@ -40,7 +40,7 @@ CComplexFilterDialog::CComplexFilterDialog(
 		MSXML2::IXMLDOMElementPtr & filter_DOM,
 		CWnd* pParent)	// nestandard constructor :-)
 : CDialog(CComplexFilterDialog::IDD, pParent)
-, m_filter_DOM(filter_DOM)
+, CFilterResultImpl(filter_DOM)
 , m_active_element(active_element)
 , m_bSourceIsInit(FALSE)
 , m_nTopNValues(5) //default hodnota
@@ -134,6 +134,8 @@ BOOL CComplexFilterDialog::OnInitDialog()
 	int sel = m_SourcesCombo.SelectString(-1, (_bstr_t) m_active_element->getAttribute("source"));
 	if (sel == CB_ERR) m_SourcesCombo.SelectString(-1, dm.getDefaultSource());
 */	
+	InitResultView();
+	
 	UpDateDialog();
 	//InitDialogFromXML(); - vola se v update dialog
 
@@ -242,25 +244,22 @@ void CComplexFilterDialog::UpDateDialog()
 
 	ClearAttributesList();
 	
-	MSXML2::IXMLDOMNodeListPtr attributes = m_filter_DOM->selectNodes("/dialog_data/attributes/attribute");
+//	MSXML2::IXMLDOMNodeListPtr attributes = m_filter_DOM->selectNodes("/dialog_data/attributes/attribute");
 
-	for (int a = 0; a < attributes->length; a++)
+	for (int a = 0; a < getAttributesCount(); a++)
 	{
-		CString label =  (LPCTSTR) attributes->item[a]->selectSingleNode("@label")->text;
-
-		m_ResultList.InsertColumn(a, label, 0, 50);
-
-		int i = m_AttributesList.AddString(label);
+		m_AttributesList.AddString(getAttributeLabel(a));
+/*
 
 		m_AttributesList.SetItemDataPtr(i, 
 			new CString((LPCTSTR) attributes->item[a]->selectSingleNode("@name")->text));
-
+*/
 	}
 
 //dedek:	pride pridat: m_AttributesList.SelectString
 
 
-	attributes.Release();
+//	attributes.Release();
 
 	InitDialogFromXML();
 }
@@ -271,16 +270,14 @@ void CComplexFilterDialog::OnLbnSelchangeAttributesList()
 	int cur_sel = m_AttributesList.GetCurSel();
 	if (cur_sel == LB_ERR) return;
 
-	CString * cur_str =	(CString *) m_AttributesList.GetItemDataPtr(cur_sel);
-
-	CString query_str;
-	query_str.Format("/dialog_data/attributes/attribute[@name=\"%s\"]", (LPCTSTR) * cur_str);
+	CString query_str, cur_str = getAttributeName(cur_sel);
+	query_str.Format("/dialog_data/attributes/attribute[@name=\"%s\"]", (LPCTSTR) cur_str);
 	MSXML2::IXMLDOMElementPtr attr_elem = m_filter_DOM->selectSingleNode((LPCTSTR) query_str);
 	SetSortButtons(attr_elem);
 	attr_elem.Release();
 
 
-	FillValuesList(* cur_str);
+	FillValuesList( cur_str);
 
 }
 
@@ -295,11 +292,11 @@ void CComplexFilterDialog::OnDestroy()
 
 void CComplexFilterDialog::ClearAttributesList(void)
 {
-	for (int a = 0; a < m_AttributesList.GetCount(); a++)
+/*	for (int a = 0; a < m_AttributesList.GetCount(); a++)
 	{
 		delete (CString *) m_AttributesList.GetItemDataPtr(a);
 	}
-
+*/
 	m_AttributesList.ResetContent();
 }
 
@@ -350,15 +347,17 @@ void CComplexFilterDialog::SetSortButtons(MSXML2::IXMLDOMElementPtr & attr_elem)
 void CComplexFilterDialog::FillValuesList(LPCTSTR cur_attr_str)
 {
 	m_ValuesList.ResetContent();
+
+	CString s;
 	
 	if (cur_attr_str == NULL)
 	{
 		int cur_sel = m_AttributesList.GetCurSel();
 		if (cur_sel == LB_ERR) return;
-		cur_attr_str = * (CString *) m_AttributesList.GetItemDataPtr(cur_sel);
+		cur_attr_str = s = getAttributeName(cur_sel);
 	}
 
-		CString query_str;
+	CString query_str;
 	query_str = "/dialog_data/values/value/@";
 	query_str += cur_attr_str;
 
@@ -526,7 +525,7 @@ MSXML2::IXMLDOMElementPtr CComplexFilterDialog::CreateAttrFilterElement()
 	attr_name_attr->value = (LPCTSTR) s;
 */
 	if (m_nSlectedAttrIndex >= 0) 
-		attr_name_attr->value = (LPCTSTR) * (CString *) m_AttributesList.GetItemDataPtr(m_nSlectedAttrIndex);
+		attr_name_attr->value = (LPCTSTR) getAttributeName(m_nSlectedAttrIndex);
 	else
 		attr_name_attr->value = "";
 
@@ -613,12 +612,61 @@ void CComplexFilterDialog::OnBnClickedRefreshResultsButton()
 
 
 
-void CComplexFilterDialog::UpdateResult(MSXML2::IXMLDOMElementPtr & filter_dom)
+
+int CFilterResultImpl::getAttributesCount()
+{
+	MSXML2::IXMLDOMNodeListPtr attributes = m_filter_DOM->selectNodes("/dialog_data/attributes/attribute");
+	
+	if (attributes != NULL)	return attributes->length;
+	
+	return 0;
+}
+
+CString CFilterResultImpl::getAttributeName(int index)
+{
+	ASSERT (index >= 0);
+	ASSERT (index < getAttributesCount());
+
+	CString q;
+	q.Format("/dialog_data/attributes/attribute[%d]/@name", index);
+	MSXML2::IXMLDOMNodePtr name = m_filter_DOM->selectSingleNode((LPCTSTR) q);
+
+	if (name != NULL) return CString((LPCTSTR) name->text);
+
+	return "";
+}
+
+CString CFilterResultImpl::getAttributeLabel(int index)
+{
+	CString q;
+	q.Format("/dialog_data/attributes/attribute[%d]/@label", index);
+	MSXML2::IXMLDOMNodePtr label = m_filter_DOM->selectSingleNode((LPCTSTR) q);
+
+	if (label != NULL) return CString((LPCTSTR) label->text);
+
+	return "";
+}
+
+
+void CFilterResultImpl::InitResultView()
+{
+	// Delete all of the columns.
+	int nColumnCount = m_ResultList.GetHeaderCtrl()->GetItemCount();
+	for (int i = 0; i < nColumnCount;i++)
+	{
+	   m_ResultList.DeleteColumn(0);
+	}
+
+	for (int a = 0; a < getAttributesCount(); a++)
+	{
+		m_ResultList.InsertColumn(a, getAttributeLabel(a), 0, 50);
+	}
+}
+
+void CFilterResultImpl::UpdateResult(MSXML2::IXMLDOMElementPtr & filter_dom)
 {	
 	MSXML2::IXMLDOMNodeListPtr values_list = filter_dom->selectNodes("/dialog_data/values/value");
-
 	
-
 	m_ResultList.DeleteAllItems();
 		
 	for (int i = 0; i < values_list->length; i++)
@@ -626,13 +674,14 @@ void CComplexFilterDialog::UpdateResult(MSXML2::IXMLDOMElementPtr & filter_dom)
 		//spoleham se na stejne poradi atributu v m_ResultList jako v m_AttributesList
 
 		int it = m_ResultList.InsertItem(i, "");
-		for (int a = 0; a < m_AttributesList.GetCount(); a++)
+		for (int a = 0; a < getAttributesCount(); a++)
 		{
 			CString q;
-			q.Format("@%s", (LPCTSTR) * (CString *) m_AttributesList.GetItemDataPtr(a));
+			q.Format("@%s", (LPCTSTR) getAttributeName(a));
 			
 			m_ResultList.SetItemText(it, a, values_list->item[i]->selectSingleNode((LPCTSTR) q)->text);
 		}
+
 	}
 }
 

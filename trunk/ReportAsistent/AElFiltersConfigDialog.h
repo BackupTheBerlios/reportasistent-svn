@@ -9,10 +9,12 @@
 // AElFiltersConfigDialog.h : header file
 //
 
+#include "complexfilterdialog.h"
+
 /////////////////////////////////////////////////////////////////////////////
 // CAElFiltersConfigDialog dialog
 
-class CAElFiltersConfigDialog : public CPropertyPage
+class CAElFiltersConfigDialog : public CPropertyPage, CFilterResultImpl
 {
 // Construction
 public:
@@ -79,6 +81,8 @@ public:
 	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
 public:
 	afx_msg void OnBnClickedConfigureFilterButton();
+protected:
+	void UpdateResult(void);
 };
 
 //{{AFX_INSERT_LOCATION}}

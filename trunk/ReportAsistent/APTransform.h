@@ -44,6 +44,7 @@ void static ApplyTresholdFilter(MSXML2::IXMLDOMElementPtr & filter_dom, LPCTSTR 
 
 
 public:
+	void ApplyAllAttributeFilters(MSXML2::IXMLDOMElementPtr & filter_dom);
 	void static ApplySingleAttributeFilter(MSXML2::IXMLDOMElementPtr & filter_dom, MSXML2::IXMLDOMElementPtr attribute_filter);
 
 protected:

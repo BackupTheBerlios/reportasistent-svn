@@ -431,6 +431,18 @@ void CAElTransform::ApplyFixedValueFilter(MSXML2::IXMLDOMElementPtr & filter_dom
 	}
 }
 
+void CAElTransform::ApplyAllAttributeFilters(MSXML2::IXMLDOMElementPtr & filter_dom)
+{
+	MSXML2::IXMLDOMNodeListPtr attr_filer_list = 
+		m_active_element->selectNodes("filter/attribute_filter");
+
+	for (int a = 0; a < attr_filer_list->length; a++)
+	{
+		ApplySingleAttributeFilter(filter_dom, attr_filer_list->item[a]);
+	}
+
+}
+
 void CAElTransform::ApplySingleAttributeFilter(MSXML2::IXMLDOMElementPtr & filter_dom, MSXML2::IXMLDOMElementPtr attribute_filter)
 {
 	CString attr_name = (LPCTSTR) (_bstr_t) attribute_filter->getAttribute("attr_name");

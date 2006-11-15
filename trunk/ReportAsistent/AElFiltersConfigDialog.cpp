@@ -20,6 +20,7 @@ static char THIS_FILE[] = __FILE__;
 
 CAElFiltersConfigDialog::CAElFiltersConfigDialog(MSXML2::IXMLDOMElementPtr & active_element, CWnd* pParent)
 	: CPropertyPage(CAElFiltersConfigDialog::IDD), m_active_element(active_element), m_bSourceIsInit(FALSE)
+	, CFilterResultImpl(m_filter_DOM)
 {
 	//{{AFX_DATA_INIT(CAElFiltersConfigDialog)
 	m_CF_IdEdit = _T("");
@@ -49,6 +50,8 @@ void CAElFiltersConfigDialog::DoDataExchange(CDataExchange* pDX)
 	DDV_NonDuplicateID(pDX,IDC_CF_ID_EDIT, m_CF_IdEdit);
 
 	DDX_Control(pDX, IDC_FILTERS_LIST, m_FiltersList);
+	DDX_Control(pDX, IDC_RESULT_LIST, m_ResultList);
+
 }
 
 
@@ -100,7 +103,7 @@ BOOL CAElFiltersConfigDialog::OnInitDialog()
 
 	m_bSourceIsInit = FALSE;
 
-	//UpdateFiltersList();
+	//UpdateFiltersList(); //az v ctlcolor 
 
 
 	return TRUE;  // return TRUE unless you set the focus to a control
@@ -166,7 +169,8 @@ void CAElFiltersConfigDialog::OnRemoveFilterButton()
 	m_cloned_active_element->selectSingleNode("filter")->removeChild(
 		m_cloned_active_element->selectSingleNode((LPCTSTR) q));
 
-	UpdateFiltersList();	
+	UpdateFiltersList();
+	UpdateResult();
 	SetModified();
 }
 
@@ -181,7 +185,8 @@ void CAElFiltersConfigDialog::OnMoveUpButton()
 		filter->removeChild(filter->childNodes->item[nItem]),
 		(MSXML2::IXMLDOMNode *) filter->childNodes->item[nItem-1]);
 
-	UpdateFiltersList();	
+	UpdateFiltersList();
+	UpdateResult();
 	SetModified();
 }
 
@@ -207,7 +212,8 @@ void CAElFiltersConfigDialog::OnMoveDownButton()
 		(MSXML2::IXMLDOMNode *) filter->childNodes->item[nItem+2]);
 	}
 
-	UpdateFiltersList();	
+	UpdateFiltersList();
+	UpdateResult();
 	SetModified();
 }
 
@@ -223,7 +229,8 @@ void CAElFiltersConfigDialog::OnBnClickedConfigureFilterButton()
 	CComplexFilterDialog dlg(m_cloned_active_element, m_filter_DOM, m_cloned_active_element->selectSingleNode((LPCTSTR) q));
 	if (IDOK == dlg.DoModal())
 	{
-		UpdateFiltersList();	
+		UpdateFiltersList();
+		UpdateResult();
 		SetModified();
 	}
 }
@@ -234,7 +241,7 @@ void CAElFiltersConfigDialog::OnBnClickedAddFilterButton()
 	dlg.DoModal();
 
 	UpdateFiltersList();
-
+	UpdateResult();
 	SetModified();
 }
 
@@ -307,7 +314,9 @@ void CAElFiltersConfigDialog::OnCbnSelchangeDataSourceCombo()
 	if (LoadSource(text))
 	{
 //		UpDateDialog();
+		InitResultView();
 		UpdateFiltersList();
+		UpdateResult();
 	}
 	else
 	{
@@ -397,4 +406,22 @@ int CAElFiltersConfigDialog::GetCurSelFiltersList()
 	if (pos == NULL) return -1;
 
 	return m_FiltersList.GetNextSelectedItem(pos);
+}
+
+void CAElFiltersConfigDialog::UpdateResult(void)
+{
+		//zaloha dat
+	MSXML2::IXMLDOMElementPtr values_clone = m_filter_DOM->selectSingleNode("/dialog_data/values")->cloneNode(VARIANT_TRUE);
+	
+	CAElTransform tr(m_cloned_active_element);
+	tr.ApplyAllAttributeFilters(m_filter_DOM);
+
+//	AfxMessageBox(m_filter_DOM->xml);
+
+	CFilterResultImpl::UpdateResult(m_filter_DOM);
+	
+	//obnova dat
+	m_filter_DOM->selectSingleNode("/dialog_data")->replaceChild(values_clone,
+		m_filter_DOM->selectSingleNode("/dialog_data/values"));
+		
 }

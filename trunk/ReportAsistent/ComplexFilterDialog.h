@@ -12,7 +12,24 @@
 /////////////////////////////////////////////////////////////////////////////
 // CComplexFilterDialog dialog
 
-class CComplexFilterDialog : public CDialog
+class CFilterResultImpl
+{
+protected:
+	int getAttributesCount();
+	CString getAttributeName(int index);
+	CString getAttributeLabel(int index);
+
+	CFilterResultImpl(MSXML2::IXMLDOMElementPtr & filter_DOM)  : m_filter_DOM(filter_DOM) {};
+
+	CListCtrl m_ResultList;
+  	MSXML2::IXMLDOMElementPtr & m_filter_DOM;	//data pouzita na naplneni list veiw
+
+	void InitResultView();
+	void UpdateResult(MSXML2::IXMLDOMElementPtr & filter_dom);
+};
+
+
+class CComplexFilterDialog : public CDialog, CFilterResultImpl
 {
 //	DECLARE_DYNCREATE(CComplexFilterDialog)
 
@@ -54,8 +71,7 @@ private:
 	BOOL m_bSourceIsInit;
 	CComboBox m_SourcesCombo;
 	MSXML2::IXMLDOMElementPtr & m_active_element;
-   	MSXML2::IXMLDOMElementPtr & m_filter_DOM;	//data pouzita na naplneni list veiw
-
+ 
 	MSXML2::IXMLDOMElementPtr m_currnet_attribute_filter;
 
 
@@ -97,9 +113,8 @@ private:
 	CString m_sTresholdOrFixedValue;
 	afx_msg void OnBnClickedRefreshResultsButton();
 private:
-	void UpdateResult(MSXML2::IXMLDOMElementPtr & filter_dom);
+//	void UpdateResult(MSXML2::IXMLDOMElementPtr & filter_dom);
 private:
-	CListCtrl m_ResultList;
 };
 
 //{{AFX_INSERT_LOCATION}}
