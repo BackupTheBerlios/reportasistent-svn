@@ -71,7 +71,6 @@ void CComplexFilterDialog::DoDataExchange(CDataExchange* pDX)
 	//{{AFX_DATA_MAP(CComplexFilterDialog)
 	// NOTE: the ClassWizard will add DDX and DDV calls here
 	//}}AFX_DATA_MAP
-	DDX_Control(pDX, IDC_DATA_SOURCE_COMBO, m_SourcesCombo);
 	DDX_Control(pDX, IDC_ATTRIBUTES_LIST, m_AttributesList);
 	DDX_Control(pDX, IDC_VALUES_LIST, m_ValuesList);
 	DDX_Control(pDX, IDC_TRESHOLD_EDIT, m_TresholdEdeit);
@@ -272,7 +271,7 @@ void CComplexFilterDialog::OnLbnSelchangeAttributesList()
 
 	CString query_str, cur_str = getAttributeName(cur_sel);
 	query_str.Format("/dialog_data/attributes/attribute[@name=\"%s\"]", (LPCTSTR) cur_str);
-	MSXML2::IXMLDOMElementPtr attr_elem = m_filter_DOM->selectSingleNode((LPCTSTR) query_str);
+	MSXML2::IXMLDOMElementPtr attr_elem = m_result_filter_DOM->selectSingleNode((LPCTSTR) query_str);
 	SetSortButtons(attr_elem);
 	attr_elem.Release();
 
@@ -361,7 +360,7 @@ void CComplexFilterDialog::FillValuesList(LPCTSTR cur_attr_str)
 	query_str = "/dialog_data/values/value/@";
 	query_str += cur_attr_str;
 
-	MSXML2::IXMLDOMNodeListPtr values = m_filter_DOM->selectNodes((LPCTSTR) query_str);
+	MSXML2::IXMLDOMNodeListPtr values = m_result_filter_DOM->selectNodes((LPCTSTR) query_str);
 
 	CStringTableImpl str_table;
 
@@ -460,7 +459,7 @@ void CComplexFilterDialog::InitDialogFromXML(void)
 	{
 		m_nSlectedAttrIndex =
 			m_AttributesList.FindString(-1,	
-				m_filter_DOM->selectSingleNode((LPCTSTR) query)->text);
+				m_result_filter_DOM->selectSingleNode((LPCTSTR) query)->text);
 	}
 	catch (...)
 	{
@@ -589,24 +588,24 @@ MSXML2::IXMLDOMElementPtr CComplexFilterDialog::CreateAttrFilterElement()
 void CComplexFilterDialog::AppendFilter(void)
 {
 	m_currnet_attribute_filter = CreateAttrFilterElement();
-	m_active_element->selectSingleNode("filter")->appendChild(m_currnet_attribute_filter);	
+	m_active_element->selectSingleNode("filter[@type=\"complex\"]")->appendChild(m_currnet_attribute_filter);	
 }
 
 void CComplexFilterDialog::OnBnClickedRefreshResultsButton()
 {
 	//zaloha dat
-	MSXML2::IXMLDOMElementPtr values_clone = m_filter_DOM->selectSingleNode("/dialog_data/values")->cloneNode(VARIANT_TRUE);
+	MSXML2::IXMLDOMElementPtr values_clone = m_result_filter_DOM->selectSingleNode("/dialog_data/values")->cloneNode(VARIANT_TRUE);
 	
 	if (! UpdateData(TRUE)) return;
-	CAElTransform::ApplySingleAttributeFilter(m_filter_DOM, CreateAttrFilterElement());
+	CAElTransform::ApplySingleAttributeFilter(m_result_filter_DOM, CreateAttrFilterElement());
 
 //	AfxMessageBox(m_filter_DOM->xml);
 
-	UpdateResult(m_filter_DOM);
+	UpdateResult(m_result_filter_DOM);
 	
 	//obnova dat
-	m_filter_DOM->selectSingleNode("/dialog_data")->replaceChild(values_clone,
-		m_filter_DOM->selectSingleNode("/dialog_data/values"));
+	m_result_filter_DOM->selectSingleNode("/dialog_data")->replaceChild(values_clone,
+		m_result_filter_DOM->selectSingleNode("/dialog_data/values"));
 		
 }
 
@@ -615,7 +614,7 @@ void CComplexFilterDialog::OnBnClickedRefreshResultsButton()
 
 int CFilterResultImpl::getAttributesCount()
 {
-	MSXML2::IXMLDOMNodeListPtr attributes = m_filter_DOM->selectNodes("/dialog_data/attributes/attribute");
+	MSXML2::IXMLDOMNodeListPtr attributes = m_result_filter_DOM->selectNodes("/dialog_data/attributes/attribute");
 	
 	if (attributes != NULL)	return attributes->length;
 	
@@ -629,7 +628,7 @@ CString CFilterResultImpl::getAttributeName(int index)
 
 	CString q;
 	q.Format("/dialog_data/attributes/attribute[%d]/@name", index);
-	MSXML2::IXMLDOMNodePtr name = m_filter_DOM->selectSingleNode((LPCTSTR) q);
+	MSXML2::IXMLDOMNodePtr name = m_result_filter_DOM->selectSingleNode((LPCTSTR) q);
 
 	if (name != NULL) return CString((LPCTSTR) name->text);
 
@@ -640,7 +639,7 @@ CString CFilterResultImpl::getAttributeLabel(int index)
 {
 	CString q;
 	q.Format("/dialog_data/attributes/attribute[%d]/@label", index);
-	MSXML2::IXMLDOMNodePtr label = m_filter_DOM->selectSingleNode((LPCTSTR) q);
+	MSXML2::IXMLDOMNodePtr label = m_result_filter_DOM->selectSingleNode((LPCTSTR) q);
 
 	if (label != NULL) return CString((LPCTSTR) label->text);
 
@@ -685,3 +684,19 @@ void CFilterResultImpl::UpdateResult(MSXML2::IXMLDOMElementPtr & filter_dom)
 	}
 }
 
+CAElDataShare::CAElDataShare(
+		MSXML2::IXMLDOMElementPtr & active_element,
+		MSXML2::IXMLDOMElementPtr & cloned_active_element,
+   		MSXML2::IXMLDOMElementPtr & filter_DOM)
+	: m_active_element(active_element)
+	, m_cloned_active_element(cloned_active_element)
+	, m_filter_DOM(filter_DOM)
+{
+}
+
+CAElDataShare::CAElDataShare(CAElDataShare & data_share)
+	: m_active_element(data_share.m_active_element)
+	, m_cloned_active_element(data_share.m_cloned_active_element)
+	, m_filter_DOM(data_share.m_filter_DOM)
+{
+}

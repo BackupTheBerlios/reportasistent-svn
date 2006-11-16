@@ -17,8 +17,9 @@ static char THIS_FILE[] = __FILE__;
 // CTransformationsDialog dialog
 
 
-CTransformationsDialog::CTransformationsDialog(MSXML2::IXMLDOMElementPtr & active_element, MSXML2::IXMLDOMElementPtr & cloned_element, CWnd* pParent /*=NULL*/)
-: CPropertyPage(CTransformationsDialog::IDD/*, pParent*/), m_active_element(active_element), m_cloned_active_element(cloned_element)
+CTransformationsDialog::CTransformationsDialog(CAElDataShare & data_share, CWnd* pParent /*=NULL*/)
+: CPropertyPage(CTransformationsDialog::IDD/*, pParent*/)
+, CAElDataShare(data_share)
 {
 	//{{AFX_DATA_INIT(CTransformationsDialog)
 		// NOTE: the ClassWizard will add member initialization here

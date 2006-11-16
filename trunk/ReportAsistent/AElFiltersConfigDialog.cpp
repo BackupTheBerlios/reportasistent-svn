@@ -18,24 +18,25 @@ static char THIS_FILE[] = __FILE__;
 // CAElFiltersConfigDialog dialog
 
 
-CAElFiltersConfigDialog::CAElFiltersConfigDialog(MSXML2::IXMLDOMElementPtr & active_element, MSXML2::IXMLDOMElementPtr & cloned_element, CWnd* pParent)
-	: CPropertyPage(CAElFiltersConfigDialog::IDD), m_active_element(active_element), m_bSourceIsInit(FALSE)
-	, CFilterResultImpl(m_filter_DOM), m_cloned_active_element(cloned_element)
-{
-	//{{AFX_DATA_INIT(CAElFiltersConfigDialog)
-	m_CF_IdEdit = _T("");
-	//}}AFX_DATA_INIT
-	
-	//Iva: Inicialisation of ID edit:
-	_variant_t varAtr=m_active_element->getAttribute("id");
-	m_OldID=(LPCTSTR) (_bstr_t)  varAtr;
-	if (varAtr.vt!=VT_NULL)
-		m_CF_IdEdit = m_OldID;
+CAElFiltersConfigDialog::CAElFiltersConfigDialog(CAElDataShare & data_share, CWnd* pParent)
+	: CPropertyPage(CAElFiltersConfigDialog::IDD)
+	, CAElDataShare(data_share)
+	, CFilterResultImpl(data_share.m_filter_DOM)
 
+{
 
 	m_cloned_active_element = m_active_element->cloneNode(VARIANT_TRUE);
 
-//	AfxMessageBox(m_cloned_active_element->xml);
+	if (m_cloned_active_element->selectSingleNode("filter[@type=\"complex\"]") != NULL) return;
+
+	MSXML2::IXMLDOMElementPtr new_filter = 
+		m_cloned_active_element->selectSingleNode("filter")->cloneNode(VARIANT_FALSE);
+	
+	new_filter->setAttribute("type", "complex");
+
+	m_cloned_active_element->insertBefore(new_filter, 
+		(MSXML2::IXMLDOMNode *) m_cloned_active_element->selectSingleNode("filter"));
+
 }
 
 
@@ -43,11 +44,11 @@ void CAElFiltersConfigDialog::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CAElFiltersConfigDialog)
-	DDX_Text(pDX, IDC_CF_ID_EDIT, m_CF_IdEdit);
-	DDV_MaxChars(pDX, m_CF_IdEdit, 50);
+//	DDX_Text(pDX, IDC_CF_ID_EDIT, m_CF_IdEdit);
+//	DDV_MaxChars(pDX, m_CF_IdEdit, 50);
 	//}}AFX_DATA_MAP
-	DDX_Control(pDX, IDC_DATA_SOURCE_COMBO, m_SourcesCombo);
-	DDV_NonDuplicateID(pDX,IDC_CF_ID_EDIT, m_CF_IdEdit);
+//	DDX_Control(pDX, IDC_DATA_SOURCE_COMBO, m_SourcesCombo);
+//	DDV_NonDuplicateID(pDX,IDC_CF_ID_EDIT, m_CF_IdEdit);
 
 	DDX_Control(pDX, IDC_FILTERS_LIST, m_FiltersList);
 	DDX_Control(pDX, IDC_RESULT_LIST, m_ResultList);
@@ -62,7 +63,7 @@ BEGIN_MESSAGE_MAP(CAElFiltersConfigDialog, CDialog)
 	ON_BN_CLICKED(IDC_MOVE_DOWN_BUTTON, OnMoveDownButton)
 	//}}AFX_MSG_MAP
 	ON_BN_CLICKED(IDC_ADD_FILTER_BUTTON, OnBnClickedAddFilterButton)
-	ON_CBN_SELCHANGE(IDC_DATA_SOURCE_COMBO, OnCbnSelchangeDataSourceCombo)
+//	ON_CBN_SELCHANGE(IDC_DATA_SOURCE_COMBO, OnCbnSelchangeDataSourceCombo)
 	ON_WM_CTLCOLOR()
 	ON_BN_CLICKED(IDC_CONFIGURE_FILTER_BUTTON, OnBnClickedConfigureFilterButton)
 END_MESSAGE_MAP()
@@ -76,40 +77,19 @@ END_MESSAGE_MAP()
 BOOL CAElFiltersConfigDialog::OnInitDialog()
 {
 	CPropertyPage::OnInitDialog();
-
-	//nastav typ filtru na complex
-	m_cloned_active_element->selectSingleNode("filter/@type")->text = "complex";
 	
-	CDataSourcesManager & dm = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->DataSourcesManager;
-	CElementManager & em = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
-
-	//nacti zdroje
-	for (int a=0; a< dm.getSourcesCount(); a++)
-	{
-		if (em.isElementSupportedBySource(em.IdentifyElement(m_active_element), a))
-		{
-			m_SourcesCombo.AddString(dm.getSourcePublicID(a));
-		}
-	}
-
-	int sel = m_SourcesCombo.SelectString(-1, (_bstr_t) m_active_element->getAttribute("source"));
-	if (sel == CB_ERR) m_SourcesCombo.SelectString(-1, dm.getDefaultSource());
-
 	//nacti filtry
 	int c = -1;
 	c = m_FiltersList.InsertColumn(++c, "Attribute name", 0, 150);
 	c = m_FiltersList.InsertColumn(++c, "Filter type", 0, 100);
 	m_FiltersList.InsertColumn(++c, "Filter data", 0, 150);
 
-	m_bSourceIsInit = FALSE;
-
-	//UpdateFiltersList(); //az v ctlcolor 
-
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// EXCEPTION: OCX Property Pages should return FALSE
 }
 
+/*
 void CAElFiltersConfigDialog::DDV_NonDuplicateID(CDataExchange *pDX, int nId, CString csIDEditValue)
 {
 	if (0!=pDX->m_bSaveAndValidate) //Iva: if it's end of dialog, not beginning
@@ -157,6 +137,7 @@ void CAElFiltersConfigDialog::DDV_NonDuplicateID(CDataExchange *pDX, int nId, CS
 	}
 
 }
+*/
 
 void CAElFiltersConfigDialog::OnRemoveFilterButton() 
 {
@@ -223,7 +204,7 @@ void CAElFiltersConfigDialog::OnBnClickedConfigureFilterButton()
 	if (nItem == -1) return;
 
 	CString q;
-	q.Format("filter/attribute_filter[%d]", nItem);
+	q.Format("filter[@type=\"complex\"]/attribute_filter[%d]", nItem);
 
 	
 	CComplexFilterDialog dlg(m_cloned_active_element, m_filter_DOM, m_cloned_active_element->selectSingleNode((LPCTSTR) q));
@@ -287,7 +268,7 @@ void CAElFiltersConfigDialog::UpdateFiltersList(void)
 	m_FiltersList.DeleteAllItems();
 
 	MSXML2::IXMLDOMNodeListPtr attr_filters =
-		m_cloned_active_element->selectNodes("filter/attribute_filter");
+		m_cloned_active_element->selectNodes("filter[@type=\"complex\"]/attribute_filter");
 
 	for (int a = 0; a < attr_filters->length; a++)
 	{
@@ -308,108 +289,6 @@ void CAElFiltersConfigDialog::UpdateFiltersList(void)
 		m_FiltersList.SetItemText(i, 1, attr_filters->item[a]->selectSingleNode("@filter_type")->text);
 		m_FiltersList.SetItemText(i, 2, attr_filters->item[a]->selectSingleNode("@filter_data")->text);
 	}
-}
-
-void CAElFiltersConfigDialog::OnCbnSelchangeDataSourceCombo()
-{
-	CString text;
-	m_SourcesCombo.GetWindowText(text);
-
-	m_cloned_active_element->setAttribute("source", (_bstr_t) text);
-
-	if (text.GetLength() == 0) return;
-
-	if (LoadSource(text))
-	{
-//		UpDateDialog();
-		InitResultView();
-		UpdateFiltersList();
-		UpdateResult();
-	}
-	else
-	{
-//		ClearAttributesList();
-	}
-
-	
-	// TODO: Add your control notification handler code here
-}
-
-HBRUSH CAElFiltersConfigDialog::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
-{
-	HBRUSH hbr = CPropertyPage::OnCtlColor(pDC, pWnd, nCtlColor);
-
-	//dedek: tohle se tady vola kvuli inicializaci filtru - kdyz se to delalo uz v init_dialog tak to padalo!!
-	if (! m_bSourceIsInit)
-	{
-		m_bSourceIsInit = TRUE;
-		OnCbnSelchangeDataSourceCombo();
-//		SetModified(FALSE);
-		Invalidate(FALSE);
-	}
-
-	// TODO:  Return a different brush if the default is not desired
-	return hbr;
-}
-
-
-
-BOOL CAElFiltersConfigDialog::LoadSource(public_source_id_t sId)
-{
-	CAElTransform tr(m_active_element);
-
-	return tr.LoadFilterDOM(sId, m_filter_DOM);
-/*
-	CGeneralManager * m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager;
-
-    CAElInfo * element_info = m->ElementManager.getActiveElementInfo(
-								m->ElementManager.IdentifyElement(m_active_element));
-
-   	
-    MSXML2::IXMLDOMDocumentPtr plugout_doc;
-
-	//nacte data z plugin output
-	if (! m->DataSourcesManager.GetPluginOutput(sId, element_info->getElementName(), & plugout_doc))
-	{
-		CReportAsistentApp::ReportError(IDS_SIMPLE_FILTER_FAILED_SOURCE_LOAD, "Plugin output is empty.");
-		return FALSE;	
-	}
-
-#ifdef _DEBUG	
-    plugout_doc->save((LPCTSTR) (m->DirectoriesManager.getXMLFilesDirectory() + "/plug_out_example.xml"));
-#endif
-
-	
-    //ulozi element atributy
-	CAElTransform tr(m_active_element, (MSXML2::IXMLDOMNodePtr) plugout_doc);
-	tr.FillElementAttributes(0);
-
-
-    //transformace plugout na filter dom
-    MSXML2::IXMLDOMDocumentPtr filter_doc;
-    filter_doc.CreateInstance(_T("Msxml2.DOMDocument"));
-	filter_doc->async = VARIANT_FALSE; // default - true,
-	filter_doc->loadXML(
-		plugout_doc->transformNode(element_info->getComplexFilterTransformation()));
-
-    plugout_doc.Release();
-
-    if (filter_doc->documentElement != NULL)
-	{
-    	//ok data nactena
-
-#ifdef _DEBUG	
-    	filter_doc->save((LPCTSTR) (m->DirectoriesManager.getXMLFilesDirectory() + "/complex_filter_example.xml"));
-#endif
-        m_filter_DOM = filter_doc->documentElement;
-		filter_doc.Release();
-		return TRUE;
-	}
-
-    //problem, zdroj neprosel    
-   	CReportAsistentApp::ReportError(IDS_SIMPLE_FILTER_FAILED_SOURCE_LOAD, "Plugin output - document element is empty.");
-    return FALSE;
-*/		
 }
 
 
@@ -436,4 +315,14 @@ void CAElFiltersConfigDialog::UpdateResult(void)
 	//obnova dat
 	m_filter_DOM->selectSingleNode("/dialog_data")->replaceChild(values_clone,
 		m_filter_DOM->selectSingleNode("/dialog_data/values"));
+}
+
+BOOL CAElFiltersConfigDialog::OnSetActive()
+{
+	UpdateFiltersList();
+
+	InitResultView();
+	UpdateResult();
+	
+	return CPropertyPage::OnSetActive();
 }

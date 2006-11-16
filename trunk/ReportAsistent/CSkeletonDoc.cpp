@@ -355,11 +355,14 @@ BOOL CSkeletonDoc::EditActiveElement(MSXML2::IXMLDOMElementPtr &element)
 
 //	CComplexFilterDialog cmpl_filter(element);
 	MSXML2::IXMLDOMElementPtr a_el_clone;
+	MSXML2::IXMLDOMElementPtr filter_dom;
 
-	CAElFiltersConfigDialog filters(element, a_el_clone);
-	CSimpleFilterDialog simple_filter(element, a_el_clone);
-	CTransformationsDialog transforms(element, a_el_clone);
-	CAElConfigDialog config(element, a_el_clone);
+	CAElDataShare ds(element, a_el_clone, filter_dom);
+
+	CAElFiltersConfigDialog filters(ds);
+	CSimpleFilterDialog simple_filter(ds);
+	CTransformationsDialog transforms(ds);
+	CAElConfigDialog config(ds);
 
 	sheet.AddPage(& config);
 	sheet.AddPage(& filters);
@@ -381,30 +384,12 @@ BOOL CSkeletonDoc::EditActiveElement(MSXML2::IXMLDOMElementPtr &element)
 	}
 */
 
-//  CWaitDialog::prefered_parent = & sheet;
-	
-
-
 
 	int Res = sheet.DoModal();
 
-	//dedek
-	BOOL bSimpleFilter = TRUE;
+	element->setAttribute("id", (LPCTSTR)config.m_sIdEdit);        
 
-	if (Res == IDOK)
-	{
-		//Zmenu Id soupnu do XMLDom stromu
-		if (bSimpleFilter) 
-			element->setAttribute("id", (LPCTSTR)((CSimpleFilterDialog*)sheet.GetPage(0))->m_SF_IdEdit );        
-		else
-			element->setAttribute("id", (LPCTSTR)((CAElFiltersConfigDialog*)sheet.GetPage(0))->m_CF_IdEdit );        
-
-	}
-
-	return IDOK == Res;
-
-			
-//		ConfigureFilter(element);
+	return IDOK == Res;			
 }
 
 

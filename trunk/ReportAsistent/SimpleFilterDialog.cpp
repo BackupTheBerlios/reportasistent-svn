@@ -17,79 +17,51 @@ static char THIS_FILE[] = __FILE__;
 // CSimpleFilterDialog dialog
 
 
-CSimpleFilterDialog::CSimpleFilterDialog(MSXML2::IXMLDOMElementPtr & active_element, MSXML2::IXMLDOMElementPtr & cloned_element, CWnd* pParent)
-: CPropertyPage(CSimpleFilterDialog::IDD), m_active_element(active_element), m_cloned_active_element(cloned_element)
-, m_bSourceIsInit(FALSE)
+CSimpleFilterDialog::CSimpleFilterDialog(CAElDataShare & data_share, CWnd* pParent)
+: CPropertyPage(CSimpleFilterDialog::IDD)
+, CAElDataShare(data_share)
+, CFilterResultImpl(data_share.m_filter_DOM)
+, m_bSimpleFilterDisabled(TRUE)
 {
-	//{{AFX_DATA_INIT(CSimpleFilterDialog)
-	m_SF_IdEdit = _T("");
-	//}}AFX_DATA_INIT
 
+	if (m_cloned_active_element->selectSingleNode("filter[@type=\"simple\"]") == NULL)
+	{
+		MSXML2::IXMLDOMElementPtr new_filter = 
+			m_cloned_active_element->selectSingleNode("filter")->cloneNode(VARIANT_FALSE);
+	
+		new_filter->setAttribute("type", "simple");
+		
+		m_cloned_active_element->insertBefore(new_filter, 
+			(MSXML2::IXMLDOMNode *) m_cloned_active_element->selectSingleNode("filter"));
+	}
 
-
-
-	//necte tranformaci, ktera pripravi data pro vytvoreni dialogu
-//	m_filter_transform.CreateInstance(_T("Msxml2.DOMDocument"));
-//	m_filter_transform->async = VARIANT_FALSE; // default - true,
-	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!111
-	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!111
-	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!111
-	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!111
-	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!111
-	//predelat pres directory manager,ruzne pro ruzne typy prvku
-//	m_filter_transform->load(_T("../XML/4ft_hyp2filterdlg.xsl"));
-	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!111
-	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!111
-	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!111
-	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!111	
-
-
-//	filter_transform.Release();
-
-	//Iva: Inicialisation 
-	//Id:
-	_variant_t varAtr=m_active_element->getAttribute("id");
-	m_OldID=(LPCTSTR) (_bstr_t)  varAtr;
-	if (varAtr.vt!=VT_NULL)
-		m_SF_IdEdit = m_OldID;
-
+	m_bSimpleFilterDisabled = 
+		m_cloned_active_element->
+			selectNodes("filter[@type=\"simple\"]/selection")->length == 0;
 }
 
 CSimpleFilterDialog::~CSimpleFilterDialog()
 {
-	if (m_filter_DOM != NULL) m_filter_DOM.Release();
-//	if (m_filter_transform != NULL) m_filter_transform.Release();
-
-	//ladici:
-//	CAElTransform tr(m_active_element);
-//	tr.FillElementAttributes(0);
 }
 
 
 void CSimpleFilterDialog::DoDataExchange(CDataExchange* pDX)
 {
-  CPropertyPage::DoDataExchange(pDX);
+	CPropertyPage::DoDataExchange(pDX);
+	
 	//{{AFX_DATA_MAP(CSimpleFilterDialog)
-	DDX_Control(pDX, IDC_DATA_SOURCE_COMBO, m_SourcesCombo);
-	DDX_Control(pDX, IDC_FILTER_LIST, m_FilterList);
-	DDX_Text(pDX, IDC_SIMPLEFILTER_ID_EDIT, m_SF_IdEdit);
-	DDV_MaxChars(pDX, m_SF_IdEdit, 50);
+	DDX_Control(pDX, IDC_FILTER_LIST, m_ResultList);
+	DDX_Check(pDX, IDC_SIMPLE_FILTER_DISABLED_CHECK, m_bSimpleFilterDisabled);
 	//}}AFX_DATA_MAP
-	DDV_NonDuplicateID(pDX,IDC_SIMPLEFILTER_ID_EDIT, m_SF_IdEdit);
-
 }
 
 
 BEGIN_MESSAGE_MAP(CSimpleFilterDialog, CPropertyPage)
 	//{{AFX_MSG_MAP(CSimpleFilterDialog)
 	ON_NOTIFY(LVN_DELETEITEM, IDC_FILTER_LIST, OnDeleteitemFilterList)
-	ON_CBN_SELCHANGE(IDC_DATA_SOURCE_COMBO, OnSelchangeDataSourceCombo)
+	ON_NOTIFY(NM_CLICK, IDC_FILTER_LIST, OnNMClickFilterList)
 	//}}AFX_MSG_MAP
-//  ON_WM_ENTERIDLE()
-//ON_WM_ACTIVATE()
-ON_WM_CTLCOLOR()
-//ON_NOTIFY(LVN_ODSTATECHANGED, IDC_FILTER_LIST, &CSimpleFilterDialog::OnLvnOdstatechangedFilterList)
-ON_NOTIFY(NM_CLICK, IDC_FILTER_LIST, OnNMClickFilterList)
+	ON_BN_CLICKED(IDC_SIMPLE_FILTER_DISABLED_CHECK, &CSimpleFilterDialog::OnSimpleFilterDisabledCheck)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -99,27 +71,9 @@ BOOL CSimpleFilterDialog::OnInitDialog()
 {
 	CPropertyPage::OnInitDialog();
 
-	CDataSourcesManager & dm = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->DataSourcesManager;
-	CElementManager & em = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
+	 
+	OnSimpleFilterDisabledCheck();
 
-	for (int a=0; a< dm.getSourcesCount(); a++)
-	{
-		if (em.isElementSupportedBySource(em.IdentifyElement(m_active_element), a))
-		{
-			m_SourcesCombo.AddString(dm.getSourcePublicID(a));
-		}
-	}
-
-
-
-	int sel = m_SourcesCombo.SelectString(-1, (_bstr_t) m_active_element->getAttribute("source"));
-	if (sel == CB_ERR) m_SourcesCombo.SelectString(-1, dm.getDefaultSource());
-
-
-	//ve VS2005 nefungovalo, preneseno do OnCtlColor
-	//OnSelchangeDataSourceCombo();
-	m_bSourceIsInit = FALSE;
-	  
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 	              // EXCEPTION: OCX Property Pages should return FALSE
@@ -136,180 +90,33 @@ void CSimpleFilterDialog::OnDeleteitemFilterList(NMHDR* pNMHDR, LRESULT* pResult
 	*pResult = 0;
 }
 
-BOOL CSimpleFilterDialog::LoadSource(public_source_id_t sId)
+
+void CSimpleFilterDialog::UpdateSelection()
 {
-	CAElTransform tr(m_active_element);
+	MSXML2::IXMLDOMNodeListPtr sel_ids = m_cloned_active_element->
+		selectNodes("filter[@type='simple']/selection/@id");
 
-	return tr.LoadFilterDOM(sId, m_filter_DOM);
+	LVFINDINFO fi;
+	ZeroMemory(& fi, sizeof fi);
+	fi.flags = LVFI_STRING;
 
-/*	
-	//inicializace
-	MSXML2::IXMLDOMDocumentPtr filter_doc;
-	MSXML2::IXMLDOMDocumentPtr filter_doc2;
-	filter_doc2.CreateInstance(_T("Msxml2.DOMDocument"));
-	filter_doc2->async = VARIANT_FALSE; // default - true,
-
-	CGeneralManager * m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager;
-
-	CAElInfo * element_info = m->ElementManager.getActiveElementInfo(
-								m->ElementManager.IdentifyElement(m_active_element));
-
-
-
-	//nacte data z plugin output
-
-	if (! m->DataSourcesManager.GetPluginOutput(sId, (_bstr_t) element_info->getElementName(), & filter_doc)) 
+	for (int a = 0; a < sel_ids->length; a++)
 	{
-		if (filter_doc != NULL)
-		{
-			filter_doc.Release();
-		}
-		CReportAsistentApp::ReportError(IDS_SIMPLE_FILTER_FAILED_SOURCE_LOAD, "Plugin output is empty.");
-		return FALSE;	
+		CString s = (LPCTSTR) sel_ids->item[a]->text;
+		fi.psz = s;
+	
+		int item = m_ResultList.FindItem(& fi);
+		if (item != -1)
+			m_ResultList.SetItemState(item, LVIS_SELECTED, LVIS_SELECTED);
 	}
-
-
-#ifdef _DEBUG	
-	//dadici - kdykoliv smazat nebo zakomentovat
-	CDirectoriesManager & dm = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->DirectoriesManager;
-	filter_doc->save((LPCTSTR) (dm.getXMLFilesDirectory() + "/plug_out_example.xml"));
-#endif
-
-
-	//ulozi element atributy
-	CAElTransform tr(m_active_element, (MSXML2::IXMLDOMNodePtr) filter_doc);
-	tr.FillElementAttributes(0);
-
-	
-	//transformuje data z plugin output a vysledek nacte do m_filter_dom	
-	filter_doc2->loadXML(
-		filter_doc->transformNode(element_info->getSimpleFilterTransformation()));
-
-	
-#ifdef _DEBUG	
-	//dadici - kdykoliv smazat nebo zakomentovat
-	filter_doc->save((LPCTSTR) (dm.getXMLFilesDirectory() + "/simple_filter_example.xml"));
-#endif
-
-	
-	//pridat AddRef ?
-	if (filter_doc2->documentElement != NULL)
-	{
-		m_filter_DOM = filter_doc2->documentElement;
-		filter_doc2.Release();
-		filter_doc.Release();
-		return TRUE;
-	}
-
-	filter_doc.Release();
-	CReportAsistentApp::ReportError(IDS_SIMPLE_FILTER_FAILED_SOURCE_LOAD, "Plugin output - document element is empty.");
-	return FALSE;	
-*/
 }
 
-void CSimpleFilterDialog::UpDateDialog()
-{
-	int a,b;
 
-	m_FilterList.DeleteAllItems();
-
-	
-	// Delete all of the columns.
-	int nColumnCount = m_FilterList.GetHeaderCtrl()->GetItemCount();
-	for (int i=0;i < nColumnCount;i++)
-	{
-		m_FilterList.DeleteColumn(0);
-	}
-	
-	
-	MSXML2::IXMLDOMNodeListPtr attr_list = m_filter_DOM->selectNodes("/dialog_data/attributes/attribute");
-
-	
-	//vyrobime sloupce
-	for (a=0; a<attr_list->length; a++)
-	{
-		MSXML2::IXMLDOMElementPtr attr = attr_list->item[a];
-
-		m_FilterList.InsertColumn(a, (_bstr_t) attr->getAttribute("name"), LVCFMT_LEFT, 75);
-
-	}
-
-	//naplnime list hodnotama
-	MSXML2::IXMLDOMNodeListPtr value_list = m_filter_DOM->selectNodes("/dialog_data/values/value");
-
-	int item = 0;
-
-	for (b=0; b<value_list->length; b++)
-	{
-		MSXML2::IXMLDOMElementPtr value = value_list->item[b];
-
-
-		//pro kazdy sloupec ulozime hodnotu
-		for (a=0; a<attr_list->length; a++)
-		{
-			MSXML2::IXMLDOMElementPtr attr = attr_list->item[a];
-
-			if (a == 0)
-			{
-				item = m_FilterList.InsertItem(b, (_bstr_t) value->getAttribute(
-					(_bstr_t) attr->getAttribute("name")));
-
-			}
-			else
-			{	
-				m_FilterList.SetItemText(item, a, (_bstr_t) value->getAttribute(
-					(_bstr_t) attr->getAttribute("name")));
-			}
-
-		}
-
-		_bstr_t id = value->getAttribute("id");
-		m_FilterList.SetItemData(item, (DWORD) new CString((BSTR) id));
-
-		//selsected polozky
-
-		CString patern = "filter[@type='simple']/selection[@id='";
-		patern += (LPCTSTR) id;
-		patern += "']";
-
-		MSXML2::IXMLDOMNodePtr select = m_active_element->selectSingleNode((LPCTSTR) patern);
-
-		if (select != NULL)
-			m_FilterList.SetItemState(item, LVIS_SELECTED, LVIS_SELECTED);
-
-	}
-
-}
-
-void CSimpleFilterDialog::OnSelchangeDataSourceCombo() 
-{	
-	CString text;
-	m_SourcesCombo.GetWindowText(text);
-
-	if (text.GetLength() == 0) return;
-
-	if (LoadSource(text))
-	{
-		UpDateDialog();
-	}
-	else
-	{
-		m_FilterList.DeleteAllItems();
-	}
-
-    SetModified();
-/*
-	else
-	{
-		AfxMessageBox(IDS_SIMPLE_FILTER_FAILED_SOURCE_LOAD);
-		presunuto do LoadSource
-	}
-*/
-}
 
 
 BOOL CSimpleFilterDialog::SaveAll()
 {
+/*
 	POSITION pos = m_FilterList.GetFirstSelectedItemPosition(); 
 
 //dedek:	umoznime i prazdny fiter
@@ -319,10 +126,7 @@ BOOL CSimpleFilterDialog::SaveAll()
 		AfxMessageBox(IDS_SIMPLE_FILTER_EMPTY_SELECTION);
 		return FALSE;
 	}
-*/
-	CString source;
-	m_SourcesCombo.GetWindowText(source);
-	m_active_element->setAttribute("source", (LPCTSTR) source);
+
 	
 	//okopiruje vzorovy element selection
 	MSXML2::IXMLDOMElementPtr selection_elem = m_active_element->ownerDocument->createElement("selection");
@@ -348,31 +152,11 @@ BOOL CSimpleFilterDialog::SaveAll()
 	}
 
 	selection_elem.Release();
-
+*/
 	return TRUE;
 }
 
 
-
-
-HBRUSH CSimpleFilterDialog::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
-{
-  HBRUSH hbr = CPropertyPage::OnCtlColor(pDC, pWnd, nCtlColor);
-
-  //dedek: tohle se tady vola kvuli inicializaci filtru - kdyz se to delalo uz v init_dialog tak to padalo!!
-  if (! m_bSourceIsInit)
-  {
-    m_bSourceIsInit = TRUE;
-    OnSelchangeDataSourceCombo();
-    SetModified(FALSE);
-    Invalidate(FALSE);
-  }
-
-  // TODO:  Change any attributes of the DC here
-
-  // TODO:  Return a different brush if the default is not desired
-  return hbr;
-}
 
 
 BOOL CSimpleFilterDialog::OnApply()
@@ -404,50 +188,26 @@ void CSimpleFilterDialog::OnNMClickFilterList(NMHDR *pNMHDR, LRESULT *pResult)
   *pResult = 0;
 }
 
-void CSimpleFilterDialog::DDV_NonDuplicateID(CDataExchange *pDX, int nId, CString csIDEditValue)
+
+BOOL CSimpleFilterDialog::OnSetActive()
 {
-	if (0!=pDX->m_bSaveAndValidate) //Iva: if it's end of dialog, not beginning
+	InitResultView();
+	UpdateResult(m_filter_DOM);
+	UpdateSelection();
+
+	return CPropertyPage::OnSetActive();
+}
+
+void CSimpleFilterDialog::OnSimpleFilterDisabledCheck()
+{
+	UpdateData();
+
+	if (m_bSimpleFilterDisabled)
 	{
-
-		if (""==csIDEditValue) //Iva: ID can't be empty string
-		{
-			SetDlgItemText(nId, m_OldID );
-			//dedek: ?CReportAsistentApp::ReportError?
-			AfxMessageBox(IDS_INVALID_ELEMENT_ID);
-			pDX->Fail();
-		}
-
-		CSkeletonDoc * Doc = ((CReportAsistentApp *) AfxGetApp())->FirstDocumentInFirstTemplate();
-		if (m_OldID!=csIDEditValue)  //Iva: if "==", then ID is in tree, but it's OK
-		{
-			if (Doc->IsIDInTree(csIDEditValue))
-			{
-				SetDlgItemText(nId, m_OldID ); //Iva: return old value to edit box
-				AfxMessageBox(IDS_DUPLICATE_ELEMENT_ID);
-				//dedek: ?CReportAsistentApp::ReportError(IDS_DUPLICATE_ELEMENT_ID);?
-				pDX->Fail();
-			}
-			else
-			{
-				//Iva: I try to set ID to new value
-				try
-				{
-					m_active_element->setAttribute("id", (LPCTSTR)csIDEditValue); 
-				}
-				catch(_com_error &e)
-				{
-					SetDlgItemText(nId, m_OldID ); //Iva: return old value to edit box
-					m_active_element->setAttribute("id", (LPCTSTR)m_OldID);
-					//AfxMessageBox(e.Description());
-					CReportAsistentApp::ReportError(IDS_INVALID_ELEMENT_ID,e.Description() );
-					pDX->Fail();
-				}
-				m_active_element->setAttribute("id", (LPCTSTR)m_OldID); 
-
-			}
-
-		}
-
+		m_ResultList.EnableWindow(FALSE);
 	}
-
+	else
+	{
+		m_ResultList.EnableWindow(TRUE);
+	}
 }

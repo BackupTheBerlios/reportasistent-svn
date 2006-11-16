@@ -152,7 +152,10 @@ to se deje vzdy, kdyz se cte plugin output, napr pri otevreni simple fiter -->
 				</element_attributes>
 			</attributes>
 			<filter type="simple">
-			</filter>
+        <selection id="hyp4ft14"/>
+        <selection id="hyp4ft17"/>
+        <selection id="hyp4ft1"/>
+      </filter>
 			<output>
 			</output>
 		</active_element>

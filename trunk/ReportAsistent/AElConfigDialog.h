@@ -1,18 +1,21 @@
 #pragma once
+#include "afxwin.h"
 
+#include "complexfilterdialog.h"
 
 // CAElConfigDialog dialog
 
-class CAElConfigDialog : public CPropertyPage
+class CAElConfigDialog : public CPropertyPage, CAElDataShare
 {
 	DECLARE_DYNAMIC(CAElConfigDialog)
 
+
 private:
-	MSXML2::IXMLDOMElementPtr & m_active_element;
-	MSXML2::IXMLDOMElementPtr & m_cloned_active_element;
+	BOOL m_bSourceIsInit;
+	CComboBox m_SourcesCombo;
 
 public:
-	CAElConfigDialog(MSXML2::IXMLDOMElementPtr & active_element, MSXML2::IXMLDOMElementPtr & cloned_element);
+	CAElConfigDialog(CAElDataShare & data_share);
 	virtual ~CAElConfigDialog();
 
 // Dialog Data
@@ -21,5 +24,17 @@ public:
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
 
+	BOOL LoadSource(public_source_id_t sId);
+	void DDV_NonDuplicateID(CDataExchange *pDX, int nId, CString csIDEditValue);
+
+
+
 	DECLARE_MESSAGE_MAP()
+public:
+	virtual BOOL OnInitDialog();
+	afx_msg void OnCbnSelchangeDataSourceCombo();
+	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
+
+	CString m_sIdEdit;
+	CString m_OldID;
 };

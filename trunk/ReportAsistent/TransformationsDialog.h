@@ -17,15 +17,18 @@
 #endif
 #include "PropertyEditor.h"
 
+#include "complexfilterdialog.h"
+
+
 /////////////////////////////////////////////////////////////////////////////
 // CTransformationsDialog dialog
 
-class CTransformationsDialog : public CPropertyPage
+class CTransformationsDialog : public CPropertyPage, CAElDataShare
 {
 // Construction
 public:
 	BOOL SaveAll();
-	CTransformationsDialog(MSXML2::IXMLDOMElementPtr & active_element, MSXML2::IXMLDOMElementPtr & cloned_element, CWnd* pParent = NULL);   // standard constructor
+	CTransformationsDialog(CAElDataShare & data_share, CWnd* pParent = NULL);   // standard constructor
 
 // Dialog Data
 	//{{AFX_DATA(CTransformationsDialog)
@@ -69,8 +72,6 @@ protected:
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 private:
-	MSXML2::IXMLDOMElementPtr & m_active_element;
-	MSXML2::IXMLDOMElementPtr & m_cloned_active_element;
 	MSXML2::IXMLDOMElementPtr m_cloned_output_element;
 	//zmeny se provadeji v klonu, pokud uzivatel zmacken OK, puvodni element (m_active_element) se nahradi klonem
 

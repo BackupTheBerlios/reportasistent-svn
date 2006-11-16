@@ -11,7 +11,7 @@
 <!ATTLIST chapter title CDATA #REQUIRED >
 <!ATTLIST chapter id CDATA #REQUIRED >
 
-<!ELEMENT active_element ( attributes, filter, output )>
+<!ELEMENT active_element ( attributes, filter, filter?, output )>
 <!ATTLIST active_element type CDATA #REQUIRED >
 <!ATTLIST active_element source CDATA #REQUIRED >
 <!ATTLIST active_element id ID #REQUIRED >

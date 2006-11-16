@@ -23,20 +23,20 @@
 //v konstruktoru dostane odkaz na prvek kostry active_element
 //pri IDOK zmeni simple filter tag v tomto prvku podle volby uzivatele
 
-class CSimpleFilterDialog : public CPropertyPage
-{
-// Construction
+#include "complexfilterdialog.h"
+
+
+class CSimpleFilterDialog : public CPropertyPage, CAElDataShare, CFilterResultImpl
+{	
+	// Construction
 public:
 	BOOL SaveAll();
-	CSimpleFilterDialog(MSXML2::IXMLDOMElementPtr & active_element, MSXML2::IXMLDOMElementPtr & cloned_element, CWnd* pParent = NULL);	// nestandard constructor :-)
+	CSimpleFilterDialog(CAElDataShare & data_share, CWnd* pParent = NULL);	// nestandard constructor :-)
 	~CSimpleFilterDialog();
 
 // Dialog Data
 	//{{AFX_DATA(CSimpleFilterDialog)
 	enum { IDD = IDD_SIMPLE_FILTER_DIALOG };
-	CComboBox	m_SourcesCombo;
-	CListCtrl	m_FilterList;
-	CString	m_SF_IdEdit;
 	//}}AFX_DATA
 
 
@@ -49,38 +49,23 @@ public:
 
 // Implementation
 protected:
-	CString m_OldID;
-	void DDV_NonDuplicateID(CDataExchange *pDX, int nId, CString csIDEditValue);
 
-	void UpDateDialog();
-	BOOL LoadSource(public_source_id_t sId);
+	void UpdateSelection();
 
 	// Generated message map functions
 	//{{AFX_MSG(CSimpleFilterDialog)
 	virtual BOOL OnInitDialog();
-//	virtual void OnOK();
 	afx_msg void OnDeleteitemFilterList(NMHDR* pNMHDR, LRESULT* pResult);
-	afx_msg void OnSelchangeDataSourceCombo();
-//	virtual void OnCancel();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
-private:
-	MSXML2::IXMLDOMElementPtr & m_active_element;
-	MSXML2::IXMLDOMElementPtr & m_cloned_active_element;
-//	MSXML2::MSXML2::IXMLDOMDocument2Ptr m_filter_dom;	
-	MSXML2::IXMLDOMElementPtr m_filter_DOM;	//data pouzita na naplneni list veiw
-//	MSXML2::IXMLDOMDocumentPtr m_filter_transform;
 
-//  afx_msg void OnEnterIdle(UINT nWhy, CWnd* pWho);
 private:
-  BOOL m_bSourceIsInit;
-//  virtual BOOL OnSetActive();
-//  afx_msg void OnActivate(UINT nState, CWnd* pWndOther, BOOL bMinimized);
-  afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
   virtual BOOL OnApply();
   virtual void OnOK();
-//  afx_msg void OnLvnOdstatechangedFilterList(NMHDR *pNMHDR, LRESULT *pResult);
   afx_msg void OnNMClickFilterList(NMHDR *pNMHDR, LRESULT *pResult);
+  virtual BOOL OnSetActive();
+  BOOL m_bSimpleFilterDisabled;
+  afx_msg void OnSimpleFilterDisabledCheck();
 };
 
 //{{AFX_INSERT_LOCATION}}

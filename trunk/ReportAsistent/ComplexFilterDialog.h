@@ -12,6 +12,21 @@
 /////////////////////////////////////////////////////////////////////////////
 // CComplexFilterDialog dialog
 
+class CAElDataShare
+{
+public:
+	CAElDataShare(
+		MSXML2::IXMLDOMElementPtr & active_element,
+		MSXML2::IXMLDOMElementPtr & cloned_active_element,
+   		MSXML2::IXMLDOMElementPtr & filter_DOM);
+
+	CAElDataShare(CAElDataShare & data_share);
+
+	MSXML2::IXMLDOMElementPtr & m_active_element;
+	MSXML2::IXMLDOMElementPtr & m_cloned_active_element;
+   	MSXML2::IXMLDOMElementPtr & m_filter_DOM;
+};
+
 class CFilterResultImpl
 {
 protected:
@@ -19,10 +34,10 @@ protected:
 	CString getAttributeName(int index);
 	CString getAttributeLabel(int index);
 
-	CFilterResultImpl(MSXML2::IXMLDOMElementPtr & filter_DOM)  : m_filter_DOM(filter_DOM) {};
+	CFilterResultImpl(MSXML2::IXMLDOMElementPtr & filter_DOM)  : m_result_filter_DOM(filter_DOM) {};
 
+  	MSXML2::IXMLDOMElementPtr & m_result_filter_DOM;	//data pouzita na naplneni list veiw
 	CListCtrl m_ResultList;
-  	MSXML2::IXMLDOMElementPtr & m_filter_DOM;	//data pouzita na naplneni list veiw
 
 	void InitResultView();
 	void UpdateResult(MSXML2::IXMLDOMElementPtr & filter_dom);
