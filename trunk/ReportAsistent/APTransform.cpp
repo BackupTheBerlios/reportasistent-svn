@@ -67,6 +67,8 @@ MSXML2::IXMLDOMDocumentFragmentPtr CAElTransform::DoAllTransnformations()
 	
 	if (m_plug_out != NULL)
 	{
+		TransformCmplexFilterToSimple();
+
 		//provede tranformace na kazdou polozku vybranou v simple filter
 		ProcessSimpleFlter( (MSXML2::IXMLDOMNodePtr) parent_frag );
 	}
@@ -413,7 +415,16 @@ void CAElTransform::ApplyFixedValueFilter(MSXML2::IXMLDOMElementPtr & filter_dom
 
 	for (int a = 0; a < values_list->length; a++)
 	{
-		CString current_value = (LPCTSTR) values_list->item[a]->selectSingleNode((LPCTSTR) q)->text;
+		CString current_value;
+
+		try
+		{
+			current_value = (LPCTSTR) values_list->item[a]->selectSingleNode((LPCTSTR) q)->text;
+		}
+		catch (...)
+		{
+			continue;
+		}
 		
 		
 		// zachovej hodnotu pokud !(a < b) && !(b < a)			...=> a == b
@@ -428,6 +439,98 @@ void CAElTransform::ApplyFixedValueFilter(MSXML2::IXMLDOMElementPtr & filter_dom
 		}
 
 		parent->removeChild(values_list->item[a]);
+	}
+}
+
+BOOL CAElTransform::LoadFilterDOM(public_source_id_t sId, MSXML2::IXMLDOMElementPtr & filter_DOM)
+{
+	CGeneralManager * m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager;
+
+    CAElInfo * element_info = m->ElementManager.getActiveElementInfo(
+								m->ElementManager.IdentifyElement(m_active_element));
+
+   	
+    MSXML2::IXMLDOMDocumentPtr plugout_doc;
+
+	//nacte data z plugin output
+	if (! m->DataSourcesManager.GetPluginOutput(sId, element_info->getElementName(), & plugout_doc))
+	{
+		CReportAsistentApp::ReportError(IDS_SIMPLE_FILTER_FAILED_SOURCE_LOAD, "Plugin output is empty.");
+		return FALSE;	
+	}
+
+#ifdef _DEBUG	
+    plugout_doc->save((LPCTSTR) (m->DirectoriesManager.getXMLFilesDirectory() + "/plug_out_example.xml"));
+#endif
+
+	
+    //ulozi element atributy
+//	CAElTransform tr(m_active_element, (MSXML2::IXMLDOMNodePtr) plugout_doc);
+	FillElementAttributes(0);
+
+
+    //transformace plugout na filter dom
+    MSXML2::IXMLDOMDocumentPtr filter_doc;
+    filter_doc.CreateInstance(_T("Msxml2.DOMDocument"));
+	filter_doc->async = VARIANT_FALSE; // default - true,
+	filter_doc->loadXML(
+		plugout_doc->transformNode(element_info->getComplexFilterTransformation()));
+
+    plugout_doc.Release();
+
+    if (filter_doc->documentElement != NULL)
+	{
+    	//ok data nactena
+
+#ifdef _DEBUG	
+    	filter_doc->save((LPCTSTR) (m->DirectoriesManager.getXMLFilesDirectory() + "/complex_filter_example.xml"));
+#endif
+        filter_DOM = filter_doc->documentElement;
+		filter_doc.Release();
+		return TRUE;
+	}
+
+    //problem, zdroj neprosel    
+   	CReportAsistentApp::ReportError(IDS_SIMPLE_FILTER_FAILED_SOURCE_LOAD, "Plugin output - document element is empty.");
+    return FALSE;
+}
+
+
+void CAElTransform::TransformCmplexFilterToSimple()
+{
+	int a;
+
+	MSXML2::IXMLDOMNodePtr filter_type = m_active_element->selectSingleNode("filter/@type");
+
+	if ((filter_type == NULL) || (filter_type->text != _bstr_t("complex"))) return;
+
+	filter_type->text = "simple";
+
+	MSXML2::IXMLDOMElementPtr filter_dom;
+	if (! LoadFilterDOM(m_active_element->getAttribute("source"), filter_dom)) return;
+
+	ApplyAllAttributeFilters(filter_dom);
+
+	//vymaz vnitrek filtru
+	MSXML2::IXMLDOMNodePtr filter_node = m_active_element->selectSingleNode("filter");
+	while (filter_node->firstChild != NULL)
+	{
+		filter_node->removeChild(filter_node->firstChild);
+	}
+//	AfxMessageBox(filter_node->xml);
+
+	
+	//vloz obsah simple fitru
+	MSXML2::IXMLDOMElementPtr selection_el = m_active_element->ownerDocument->createElement("selection");
+	MSXML2::IXMLDOMAttributePtr id_attr = m_active_element->ownerDocument->createAttribute("id");
+	selection_el->setAttributeNode(id_attr);
+	id_attr.Release();
+
+	MSXML2::IXMLDOMNodeListPtr value_ids = filter_dom->selectNodes("/dialog_data/values/value/@id");
+	for (a = 0; a < value_ids->length; a++)
+	{
+		selection_el->setAttribute("id", value_ids->item[a]->text);
+		filter_node->appendChild(selection_el->cloneNode(VARIANT_TRUE));
 	}
 }
 
@@ -547,7 +650,15 @@ BOOL CAElTransform::FillElementAttributes(int index_of_filtered_out)
 		return FALSE;
 	}
 
-	return ProcessSimpleFlter(* this, FILTER_FILL_ELEMENT_ATTRIBUTES, index_of_filtered_out);
+	//transformace complex fitru na obyc
+	MSXML2::IXMLDOMNodePtr filter_backup =  m_active_element->selectSingleNode("filter")->cloneNode(VARIANT_TRUE);
+	
+	TransformCmplexFilterToSimple();
+	BOOL ret = ProcessSimpleFlter(* this, FILTER_FILL_ELEMENT_ATTRIBUTES, index_of_filtered_out);
+	
+	m_active_element->replaceChild(filter_backup, m_active_element->selectSingleNode("filter"));
+
+	return ret;
 }
 
 

@@ -18,9 +18,9 @@ static char THIS_FILE[] = __FILE__;
 // CAElFiltersConfigDialog dialog
 
 
-CAElFiltersConfigDialog::CAElFiltersConfigDialog(MSXML2::IXMLDOMElementPtr & active_element, CWnd* pParent)
+CAElFiltersConfigDialog::CAElFiltersConfigDialog(MSXML2::IXMLDOMElementPtr & active_element, MSXML2::IXMLDOMElementPtr & cloned_element, CWnd* pParent)
 	: CPropertyPage(CAElFiltersConfigDialog::IDD), m_active_element(active_element), m_bSourceIsInit(FALSE)
-	, CFilterResultImpl(m_filter_DOM)
+	, CFilterResultImpl(m_filter_DOM), m_cloned_active_element(cloned_element)
 {
 	//{{AFX_DATA_INIT(CAElFiltersConfigDialog)
 	m_CF_IdEdit = _T("");
@@ -260,8 +260,16 @@ BOOL CAElFiltersConfigDialog::OnApply()
 	m_active_element->parentNode->replaceChild(m_cloned_active_element, m_active_element);
 
 	m_active_element = m_cloned_active_element;
-	m_cloned_active_element = m_active_element->cloneNode(VARIANT_TRUE);	 
+	m_cloned_active_element = m_active_element->cloneNode(VARIANT_TRUE);
 
+/*
+	AfxMessageBox(m_active_element->xml);
+	
+	CAElTransform tr(m_active_element);
+	tr.TransformCmplexFilterToSimple();
+
+	AfxMessageBox(m_active_element->xml);
+*/
 	return TRUE; //zavola se SetModified(FALSE);
 }
 
@@ -348,6 +356,10 @@ HBRUSH CAElFiltersConfigDialog::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 
 BOOL CAElFiltersConfigDialog::LoadSource(public_source_id_t sId)
 {
+	CAElTransform tr(m_active_element);
+
+	return tr.LoadFilterDOM(sId, m_filter_DOM);
+/*
 	CGeneralManager * m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager;
 
     CAElInfo * element_info = m->ElementManager.getActiveElementInfo(
@@ -397,6 +409,7 @@ BOOL CAElFiltersConfigDialog::LoadSource(public_source_id_t sId)
     //problem, zdroj neprosel    
    	CReportAsistentApp::ReportError(IDS_SIMPLE_FILTER_FAILED_SOURCE_LOAD, "Plugin output - document element is empty.");
     return FALSE;
+*/		
 }
 
 
@@ -423,5 +436,4 @@ void CAElFiltersConfigDialog::UpdateResult(void)
 	//obnova dat
 	m_filter_DOM->selectSingleNode("/dialog_data")->replaceChild(values_clone,
 		m_filter_DOM->selectSingleNode("/dialog_data/values"));
-		
 }

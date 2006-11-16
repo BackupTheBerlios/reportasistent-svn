@@ -14,6 +14,9 @@ static char THIS_FILE[] = __FILE__;
 /////////////////////////////////////////////////////////////////////////////
 // CActiveElementDialog dialog
 
+//dedek: tenhle soubor se vubec nepoziva :-)
+#ifdef AELDIALOG
+
 
 CActiveElementDialog::CActiveElementDialog(MSXML2::IXMLDOMElementPtr & active_element, CWnd* pParent /*=NULL*/)
 	: CDialog(CActiveElementDialog::IDD, pParent), m_TransformationsDialog(active_element, active_element), m_SimpleFilterDialog(active_element)
@@ -153,3 +156,6 @@ void CActiveElementDialog::OnCancel()
 	if (m_bApplyPerformed) CDialog::OnOK();
 	else CDialog::OnCancel();
 }
+
+
+#endif

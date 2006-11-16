@@ -80,7 +80,7 @@ protected:
 	BOOL OpenSkeletonFile(LPCTSTR file_name);
 	void TransformAttrLinks(MSXML2::IXMLDOMElementPtr & element);
 	static CElementManager::elId_t ElementIdFromCommandId(UINT command);
-	void ConfigureFilter(MSXML2::IXMLDOMElementPtr & active_element);
+//	void ConfigureFilter(MSXML2::IXMLDOMElementPtr & active_element);
 	BOOL EditElement(MSXML2::IXMLDOMElementPtr & selected_element);
 	MSXML2::IXMLDOMElementPtr InsertNewElement(CElementManager::elId_t elementID, MSXML2::IXMLDOMElementPtr & parent_element);
 	MSXML2::IXMLDOMElementPtr InsertNewElement(LPCTSTR element_name, MSXML2::IXMLDOMElementPtr & parent_element);

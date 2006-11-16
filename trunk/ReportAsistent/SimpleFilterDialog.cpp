@@ -17,8 +17,8 @@ static char THIS_FILE[] = __FILE__;
 // CSimpleFilterDialog dialog
 
 
-CSimpleFilterDialog::CSimpleFilterDialog(MSXML2::IXMLDOMElementPtr & active_element, CWnd* pParent)
-: CPropertyPage(CSimpleFilterDialog::IDD), m_active_element(active_element)
+CSimpleFilterDialog::CSimpleFilterDialog(MSXML2::IXMLDOMElementPtr & active_element, MSXML2::IXMLDOMElementPtr & cloned_element, CWnd* pParent)
+: CPropertyPage(CSimpleFilterDialog::IDD), m_active_element(active_element), m_cloned_active_element(cloned_element)
 , m_bSourceIsInit(FALSE)
 {
 	//{{AFX_DATA_INIT(CSimpleFilterDialog)
@@ -138,7 +138,11 @@ void CSimpleFilterDialog::OnDeleteitemFilterList(NMHDR* pNMHDR, LRESULT* pResult
 
 BOOL CSimpleFilterDialog::LoadSource(public_source_id_t sId)
 {
-	
+	CAElTransform tr(m_active_element);
+
+	return tr.LoadFilterDOM(sId, m_filter_DOM);
+
+/*	
 	//inicializace
 	MSXML2::IXMLDOMDocumentPtr filter_doc;
 	MSXML2::IXMLDOMDocumentPtr filter_doc2;
@@ -200,6 +204,7 @@ BOOL CSimpleFilterDialog::LoadSource(public_source_id_t sId)
 	filter_doc.Release();
 	CReportAsistentApp::ReportError(IDS_SIMPLE_FILTER_FAILED_SOURCE_LOAD, "Plugin output - document element is empty.");
 	return FALSE;	
+*/
 }
 
 void CSimpleFilterDialog::UpDateDialog()

@@ -28,7 +28,7 @@ class CSimpleFilterDialog : public CPropertyPage
 // Construction
 public:
 	BOOL SaveAll();
-	CSimpleFilterDialog(MSXML2::IXMLDOMElementPtr & active_element, CWnd* pParent = NULL);	// nestandard constructor :-)
+	CSimpleFilterDialog(MSXML2::IXMLDOMElementPtr & active_element, MSXML2::IXMLDOMElementPtr & cloned_element, CWnd* pParent = NULL);	// nestandard constructor :-)
 	~CSimpleFilterDialog();
 
 // Dialog Data
@@ -66,6 +66,7 @@ protected:
 	DECLARE_MESSAGE_MAP()
 private:
 	MSXML2::IXMLDOMElementPtr & m_active_element;
+	MSXML2::IXMLDOMElementPtr & m_cloned_active_element;
 //	MSXML2::MSXML2::IXMLDOMDocument2Ptr m_filter_dom;	
 	MSXML2::IXMLDOMElementPtr m_filter_DOM;	//data pouzita na naplneni list veiw
 //	MSXML2::IXMLDOMDocumentPtr m_filter_transform;

@@ -19,7 +19,7 @@ class CAElFiltersConfigDialog : public CPropertyPage, CFilterResultImpl
 // Construction
 public:
 //	CAElFiltersConfigDialog(CWnd* pParent = NULL);   // standard constructor
-	CAElFiltersConfigDialog(MSXML2::IXMLDOMElementPtr & active_element, CWnd* pParent = NULL);	// nestandard constructor :-)
+	CAElFiltersConfigDialog(MSXML2::IXMLDOMElementPtr & active_element, MSXML2::IXMLDOMElementPtr & cloned_element, CWnd* pParent = NULL);	// nestandard constructor :-)
 
 // Dialog Data
 	//{{AFX_DATA(CAElFiltersConfigDialog)
@@ -40,7 +40,7 @@ private:
 	int GetCurSelFiltersList();
 	BOOL LoadSource(public_source_id_t sId);
 	MSXML2::IXMLDOMElementPtr & m_active_element;
-	MSXML2::IXMLDOMElementPtr m_cloned_active_element;
+	MSXML2::IXMLDOMElementPtr & m_cloned_active_element;
    	MSXML2::IXMLDOMElementPtr m_filter_DOM;	//plugin output
 
 	BOOL m_bSourceIsInit;

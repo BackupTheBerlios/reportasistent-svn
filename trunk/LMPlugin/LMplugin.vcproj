@@ -3,8 +3,7 @@
 	ProjectType="Visual C++"
 	Version="8,00"
 	Name="LMplugin"
-	ProjectGUID="{E1C956A1-DC0F-420C-BF09-714F0DC6EBF8}"
-	RootNamespace="LMplugin"
+	ProjectGUID="{1A0F1945-B8F3-4A36-8127-0EB74A0D1A03}"
 	Keyword="MFCProj"
 	>
 	<Platforms>
@@ -1161,7 +1160,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\LMPlErrorMessages.h"
+				RelativePath="LMPlErrorMessages.h"
 				>
 			</File>
 			<File

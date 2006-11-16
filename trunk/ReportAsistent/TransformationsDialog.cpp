@@ -25,7 +25,7 @@ CTransformationsDialog::CTransformationsDialog(MSXML2::IXMLDOMElementPtr & activ
 	//}}AFX_DATA_INIT
 
 
-	srand( (unsigned)time( NULL ) );
+//	srand( (unsigned)time( NULL ) );
 
 	if (m_cloned_active_element == NULL)
 		m_cloned_active_element = m_active_element->cloneNode(VARIANT_TRUE);
@@ -680,11 +680,12 @@ BOOL CTransformationsDialog::AddTransformation(int selected_item)
 		MSXML2::IXMLDOMElementPtr attr_lt;
 		attr_lt = m.CreateEmptyElement(ELID_ATTR_LINK_TABLE);
 
+/*
 		CString new_id;
 		CString old_id = (LPCTSTR) (_bstr_t) attr_lt->getAttribute("id");
 		new_id.Format("%s_trsnsform%d", (LPCTSTR) old_id, rand());
 		attr_lt->setAttribute("id", (LPCTSTR) new_id);
-
+*/
 
 		transf_elem->appendChild(attr_lt);
 		

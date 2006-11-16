@@ -10,6 +10,8 @@ Iva(4.11.): Styly do dialogu text a paragraph jsou pridany, ale nemuzu to otesto
 protoze mi styly doma nebehaj. Muzete-li, zkuste to.
 
 dedek todo
+BOOL CAElTransform::ProcessSimpleFlter(CFilterProcessor & processor, LPARAM user1, LPARAM user2)
+	-prepsat chybovou hlasku
 CComplexFilterDialog::LoadSource "predelat vyplnovani element attributes"    
 
 

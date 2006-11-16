@@ -21,6 +21,7 @@
 #include "WaitDialog.h"
 #include "AElFiltersConfigDialog.h"
 #include "InsertElementTrace.h"
+#include "AElConfigDialog.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -353,16 +354,19 @@ BOOL CSkeletonDoc::EditActiveElement(MSXML2::IXMLDOMElementPtr &element)
 	CPropertySheet sheet((LPCTSTR) (_bstr_t) element->getAttribute("id"), AfxGetMainWnd());
 
 //	CComplexFilterDialog cmpl_filter(element);
-	CAElFiltersConfigDialog filters(element);
-	CSimpleFilterDialog simple_filter(element);
-	BOOL bSimpleFilter=true;
-
-	
 	MSXML2::IXMLDOMElementPtr a_el_clone;
-	CTransformationsDialog transforms_simple(element, a_el_clone);
-	CTransformationsDialog transforms_complex(filters.getActiveElement(), filters.getClonedActiveElement());
 
+	CAElFiltersConfigDialog filters(element, a_el_clone);
+	CSimpleFilterDialog simple_filter(element, a_el_clone);
+	CTransformationsDialog transforms(element, a_el_clone);
+	CAElConfigDialog config(element, a_el_clone);
 
+	sheet.AddPage(& config);
+	sheet.AddPage(& filters);
+	sheet.AddPage(& simple_filter);	
+	sheet.AddPage(& transforms);
+	
+/*	
 	if (NULL != m.getActiveElementInfo(m.IdentifyElement(element))->getComplexFilterTransformation())
 	{
 		sheet.AddPage(& filters);
@@ -375,11 +379,18 @@ BOOL CSkeletonDoc::EditActiveElement(MSXML2::IXMLDOMElementPtr &element)
 		sheet.AddPage(& transforms_simple);
 		bSimpleFilter=true;
 	}
-
+*/
 
 //  CWaitDialog::prefered_parent = & sheet;
 	
+
+
+
 	int Res = sheet.DoModal();
+
+	//dedek
+	BOOL bSimpleFilter = TRUE;
+
 	if (Res == IDOK)
 	{
 		//Zmenu Id soupnu do XMLDom stromu
@@ -556,19 +567,6 @@ BOOL CSkeletonDoc::EditElement(MSXML2::IXMLDOMElementPtr & selected_element)
 	return FALSE;	
 }
 
-void CSkeletonDoc::ConfigureFilter(MSXML2::IXMLDOMElementPtr &active_element)
-{
-	//sem prijdou i jiny fitry
-	
-	//dialog prepise active_element podle uzivatelovy volby
-	CSimpleFilterDialog dlg(active_element, /*
-		GetPluginOutput((_bstr_t) active_element->getAttribute("source"),
-						(_bstr_t) active_element->getAttribute("type")),*/
-		AfxGetMainWnd());
-
-	int nResponse = dlg.DoModal();	
-
-}
 
 void CSkeletonDoc::DeleteItemData(LPARAM data)
 {

@@ -3,8 +3,7 @@
 	ProjectType="Visual C++"
 	Version="8,00"
 	Name="ReportAsistent"
-	ProjectGUID="{5EB9A1CF-CDBB-464E-AD33-03378381DDD2}"
-	RootNamespace="ReportAsistent"
+	ProjectGUID="{90C458DC-66FA-4E07-BE70-D45A00A9B323}"
 	Keyword="MFCProj"
 	>
 	<Platforms>
@@ -236,6 +235,10 @@
 						PreprocessorDefinitions=""
 					/>
 				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\AElConfigDialog.cpp"
+				>
 			</File>
 			<File
 				RelativePath="AElFiltersConfigDialog.cpp"
@@ -906,6 +909,10 @@
 			>
 			<File
 				RelativePath="ActiveElementDialog.h"
+				>
+			</File>
+			<File
+				RelativePath=".\AElConfigDialog.h"
 				>
 			</File>
 			<File

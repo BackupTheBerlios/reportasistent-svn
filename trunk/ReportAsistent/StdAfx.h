@@ -39,6 +39,7 @@
 
 //potreba pro WordLoader z VisualBasicu
 #import "../VB-LMRA_WordLoader/LMRA_WordLoader.exe" named_guids
+#include <afxdlgs.h>
 using namespace LMRA_WordLoader;
 // vlozi namespace LMRA_WordLoader;
 
