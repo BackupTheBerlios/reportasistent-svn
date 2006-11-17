@@ -9,7 +9,7 @@ V tomto souboru jsou jako makra vsechny chybove zpravy (formatovaci retezce) pro
 // ==============================================================
 
 // LMP001 - Microsoft Access driver not found
-#define LMERR_ACCESSDRV_NFOUND "Required ODBC Microsoft Access driver (.mdb) not found on this computer.\nNew data source can not be created."
+#define LMERR_ACCESSDRV_NFOUND "Required ODBC Microsoft Access driver (*.mdb) not found on this computer.\nNew data source can not be created."
 
 // LMP002 - Data source can not be created for another reason
 #define LMERR_CANNOT_CREATE_SOURCE "Data source with persist ID \"%s\" can't be created. Reason: %s"

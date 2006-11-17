@@ -40,6 +40,7 @@
 #include "Hyp_SDKL_Recordset.h"
 #include "tiDKFrequencyI_Recordset.h"
 #include "TCoef_type_Recordset.h"
+#include "ODBCINST.H"
 
 //dedek: docasne
 /*****/
@@ -50,6 +51,72 @@
 #import <msxml3.dll>
 using namespace MSXML2;
 //vlozi namespace MSXML2;
+CString Get_4ftAR2NL (long hypno, CString db_name)
+{
+	CString hlp;
+	hlp.Format ("%d", hypno);
+
+	CString DSN = "__LM_ReportAssistant_help_temp_" + hlp;
+
+	CString source_db = "DBQ=" + db_name + "\0\0";
+
+	CString _4ftAR2NL_output;
+
+	CString _4ftAR2NL_exe = "C:\\skola\\sw projekt\\dev\\4ftAR2NL\\bin\\4ftAR2NL.exe";
+	_4ftAR2NL_exe += " -DSN=";
+	_4ftAR2NL_exe += DSN;
+	_4ftAR2NL_exe += " -hypno=";
+	_4ftAR2NL_exe += hlp;
+
+	STARTUPINFO si;
+	ZeroMemory(& si, sizeof si);
+	
+	PROCESS_INFORMATION pi;
+	ZeroMemory(& pi, sizeof pi);
+
+	LPDWORD exit_code = 0;//unsucessfull !!!!!!!!!!!zkontrolovat
+
+	//create the temporary datasource
+	//osetrit!!!!!!!!!!!!!!!
+	SQLConfigDataSource (NULL, ODBC_ADD_DSN, "Microsoft Access Driver (*.mdb)\0",
+		"DSN=" + DSN + "\0 " + source_db);
+
+	//run the 4ftAR2NL application
+	if (!CreateProcess(NULL, (char *) (LPCTSTR) _4ftAR2NL_exe,
+		NULL, NULL, FALSE, CREATE_NO_WINDOW, NULL, NULL, & si, & pi)) 
+	{
+		//nahlas chybu
+		return "";//!!!!!pozor na to, co vracet
+	}
+	if (WaitForSingleObject(pi.hProcess, 60000) != WAIT_OBJECT_0)
+	{
+		//nahlas chybu
+		return "";//!!!!!pozor na to, co vracet
+	}
+	if (!GetExitCodeProcess (pi.hProcess, exit_code))
+	{
+		//nahlas chybu
+		return "";//!!!!!pozor na to, co vracet
+	}
+	if (!CloseHandle(pi.hProcess))
+	{
+		//nahlas chybu
+		return "";//!!!!!pozor na to, co vracet
+	}
+
+	//zkontroluj exit_code
+
+	//nacti vysledky if uspesny...'''\
+
+
+	//remove the temporary datasource
+	//osetrit!!!!!!!!!!!!!!!
+	SQLConfigDataSource (NULL, ODBC_REMOVE_DSN, "Microsoft Access Driver (*.mdb)\0",
+		"DSN=" + DSN + "\0\0");
+
+	return _4ftAR2NL_output;
+}
+
 
 CString Get_DTD ()
 {
