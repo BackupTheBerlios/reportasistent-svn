@@ -88,3 +88,8 @@ CString CDirectoriesManager::getExeFileDirectory()
 {
 	return exe_dir;
 }
+
+CString CDirectoriesManager::getWordStylesConfigFilePath(void)
+{
+	return application_root_path + "\\ReportAsistent\\ConfigDir\\word_styles.xml";
+}

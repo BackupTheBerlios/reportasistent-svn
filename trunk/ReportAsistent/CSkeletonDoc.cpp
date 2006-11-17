@@ -1145,3 +1145,34 @@ void CSkeletonDoc::OnShowXml()
 	AfxMessageBox(edited_element->xml);
 #endif
 }
+
+// renames (to new_publicID) ID of data source in each active element, which has current value of source old_publicID
+BOOL CSkeletonDoc::updateAElSourcePublicID(LPCTSTR old_publicID, LPCTSTR new_publicID)
+{
+	CString old_id;
+	old_id = old_publicID;
+
+	CString new_id;
+	new_id = new_publicID;
+
+	CString query;
+	query.Format("//active_element[@source=\"%s\"]/@source", old_id);
+
+	MSXML2::IXMLDOMDocumentPtr pXMLDoc;
+	MSXML2::IXMLDOMNodeListPtr pList;
+	MSXML2::IXMLDOMAttributePtr pAttr;
+	
+	pXMLDoc = m_pXMLDom;
+
+	if(pXMLDoc == NULL)
+		return FALSE;
+
+	pList = pXMLDoc->selectNodes((_bstr_t) query);
+	for (int i=0; i<pList->length; i++)
+	{
+		pAttr = pList->item[i];
+		pAttr->Puttext((_bstr_t) new_id);
+	}
+
+	return TRUE;
+}

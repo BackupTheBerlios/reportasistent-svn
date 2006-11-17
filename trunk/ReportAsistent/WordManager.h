@@ -48,6 +48,11 @@ private:
 public:
 	void Sort(BOOL ascending = TRUE);
 	void SortNumeric(BOOL ascending = TRUE);
+	// loads items (values) from XML DOM Node - elements with type <item value="(new item)">
+	BOOL loadItemsFromXML(MSXML2::IXMLDOMNodeListPtr & pNodeList);
+public:
+	// returns a xml string with all items : <item value="(item)"/>
+	CString getItemsInXML(void);
 };
 
 class CStrCompare
@@ -68,7 +73,7 @@ public:
 	void OpenWordEditor();
 	void GenerateXMLString(_bstr_t XML_str);
 	BOOL InitWordLoader();
-	CWordManager();
+	CWordManager(CDirectoriesManager & m);
 	virtual ~CWordManager();
 
 	void LoadWordStyles(LPCTSTR template_name = NULL);
@@ -110,6 +115,12 @@ public:
   CString getLastProcessedId(void);
   CString getLastError(void);
   
+  // loads lists of Word styles from configuration XML file
+
+private:
+	BOOL loadStylesFromXML(LPCTSTR XMLFilePath);
+	// saves a list of Word styles to configutation XML file
+	BOOL saveStylesToXML(LPCTSTR file_path);
 };
 
 #endif // !defined(AFX_WORDMANAGER_H__2A5B5F90_FAA9_46F2_BC25_BE144CE6ADF6__INCLUDED_)

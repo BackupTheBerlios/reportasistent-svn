@@ -59,6 +59,7 @@ public:
 	CWordManager WordManager;
 
 	CGeneralManager() : 
+		WordManager(DirectoriesManager),  // kody - pridano kvuli nacitani stylu ze souboru
 		DataSourcesManager(DirectoriesManager),
 		ElementManager(DirectoriesManager),
 		m_strLanguage("en")

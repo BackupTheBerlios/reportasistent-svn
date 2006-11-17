@@ -27,6 +27,9 @@ public:
 private:
 	CString application_root_path;
 	CString exe_dir;
+
+public:
+	CString getWordStylesConfigFilePath(void);
 };
 
 #endif // !defined(AFX_DIRECTORIESMANAGER_H__230CE075_CAD7_4653_B7B5_39D4A6DC3DDD__INCLUDED_)

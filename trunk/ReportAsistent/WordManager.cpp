@@ -93,13 +93,20 @@ void CWordManager::LoadWordTemplates()
 }
 
 
-CWordManager::CWordManager()
+CWordManager::CWordManager(CDirectoriesManager & m)
 : m_pEventHandler(NULL)
 {
 	//ladici:
 	//LoadWordTemplates();
 	//LoadWordStyles("normal.dot");
 
+	// kody
+	try	{ loadStylesFromXML(m.getWordStylesConfigFilePath());}
+	catch(...)
+	{
+		// todo - doplnit chybovou hlasku
+		AfxMessageBox("Chyba pri nacitani Wordovskych stylu z XML");
+	}
 }
 
 
@@ -109,6 +116,18 @@ CWordManager::~CWordManager()
 	{
 		DisconnectWordEventHandler();
 		m_WordLoader.Release();
+	}
+
+	// kody - ulozeni Wordovskejch stylu do XML
+	CDirectoriesManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->DirectoriesManager;
+	try
+	{
+		saveStylesToXML((LPCTSTR) m.getWordStylesConfigFilePath());
+	}
+	catch(...)
+	{
+		// TODO: chybova hlaska
+		AfxMessageBox("Chyba - ukladani Word stylu");
 	}
 }
 
@@ -491,12 +510,162 @@ void CStringTableImpl::Sort(BOOL ascending)
 		std::sort(data.begin(), data.end(), CStrCompare::str_sort_desc);
 }
 
+// loads items (values) from XML DOM Node - elements with type <item value="(new item)">
+BOOL CStringTableImpl::loadItemsFromXML(MSXML2::IXMLDOMNodeListPtr & pNodeList)
+{
+	Clear();  // smazani puvodniho obsahu
+	
+	MSXML2::IXMLDOMElementPtr pChild = NULL;
+	_variant_t  Atr_val;	// textova hodnota atributu
+
+	while((pChild = pNodeList->nextNode()) != NULL)
+	{
+		if(pChild->baseName == (_bstr_t) "item")  // definice jedne polozky
+		{
+			Atr_val = pChild->getAttribute("value");
+			if(Atr_val.vt != VT_NULL)
+			{
+				CString new_item = Atr_val;
+				Add(new_item);
+			}
+		}
+	}
+
+	return TRUE;
+}
+
+
 CString CWordManager::getLastProcessedId(void)
 {
   return (CString) (LPCTSTR) m_WordLoader->GetstrLastProcessedId();
 }
 
+// returns a xml string with all items : <item value="(item)"/>
+CString CStringTableImpl::getItemsInXML(void)
+{
+	CString result = "";
+	for(int i=0; i<getCount(); i++)
+	{
+		result += "<item value=\"";
+		result += getItem(i);
+		result += "\" />";
+	}
+	return result;
+}
+
+
 CString CWordManager::getLastError(void)
 {
   return (CString) (LPCTSTR) m_WordLoader->GetstrLastError();
+}
+
+// loads lists of Word styles from configuration XML file
+BOOL CWordManager::loadStylesFromXML(LPCTSTR XMLFilePath)
+{
+	CString FName;	// jmeno (cesta) ke konfig. souboru
+	FName = XMLFilePath;
+
+	MSXML2::IXMLDOMDocumentPtr pXMLDom;  // koren XML stromu
+	MSXML2::IXMLDOMElementPtr pNode;	// korenovy element
+	MSXML2::IXMLDOMNodeListPtr pChildren;  // seznam podelementu korenoveho elementu
+	MSXML2::IXMLDOMNodeListPtr pChildrenItems;  // seznam podelementu elementu - vstupuje do funkce pro nacitani StringTable
+	MSXML2::IXMLDOMElementPtr pChild;	//  podelement korenoveho elementu
+
+	int i = 0;	// indexova promenna
+	_variant_t  Atr_val;	// textova hodnota atributu
+	HRESULT hr;
+    
+      //Vytvori COM objekt (resp. instanci objektu)
+    hr = pXMLDom.CreateInstance(_T("Msxml2.DOMDocument"));
+    if (FAILED(hr)) 
+       return FALSE;
+    pXMLDom->async = VARIANT_FALSE;
+   
+       //nacti DOM ze souboru
+    if ( pXMLDom->load((LPCTSTR) FName) == VARIANT_TRUE)
+	{
+		pNode = pXMLDom->GetdocumentElement();
+		if (pNode != NULL)
+		{
+			if (pNode->baseName == (_bstr_t) "word_styles") // spravny nazev korenoveho elementu
+			{
+				pChildren = pNode->childNodes;	// ziskani seznamu potomku
+				pChild = NULL;
+				while((pChild = pChildren->nextNode()) != NULL)  // zpracovavaji se potomci
+				{
+					pChildrenItems = pChild->childNodes;
+					if (pChild->baseName == (_bstr_t) "templates")
+						m_WordTemplates.loadItemsFromXML(pChildrenItems);
+
+					else if (pChild->baseName == (_bstr_t) "paragraph_styles")
+						m_WordParagraphStyles.loadItemsFromXML(pChildrenItems);
+
+					else if (pChild->baseName == (_bstr_t) "character_styles")
+						m_WordCharacterStyles.loadItemsFromXML(pChildrenItems);
+					
+				}
+			}
+		}
+	}
+
+	pXMLDom.Release();
+
+	return TRUE;
+}
+
+
+
+// saves a list of Word styles to configutation XML file
+BOOL CWordManager::saveStylesToXML(LPCTSTR file_path)
+{
+	CString XMLString = "";
+	XMLString += "<word_styles>";
+		XMLString += "<templates>";
+			XMLString += m_WordTemplates.getItemsInXML();
+		XMLString += "</templates>";
+
+		XMLString += "<paragraph_styles>";
+			XMLString += m_WordParagraphStyles.getItemsInXML();
+		XMLString += "</paragraph_styles>";
+
+		XMLString += "<character_styles>";
+			XMLString += m_WordCharacterStyles.getItemsInXML();
+		XMLString += "</character_styles>";
+	XMLString += "</word_styles>";
+
+	CString FName;	// jmeno (cesta) ke konfig. souboru
+	FName = file_path;
+
+	MSXML2::IXMLDOMDocumentPtr pXMLDom;  // koren XML stromu
+	HRESULT hr;
+    
+      //Vytvori COM objekt (resp. instanci objektu)
+    hr = pXMLDom.CreateInstance(_T("Msxml2.DOMDocument"));
+    if (FAILED(hr)) 
+       return FALSE;
+    pXMLDom->async = VARIANT_FALSE;
+   
+       //nacti DOM ze stringu
+    if ( pXMLDom->loadXML((_bstr_t) XMLString) != VARIANT_TRUE)
+	{
+		pXMLDom.Release();
+		return FALSE;
+	}
+	
+	BOOL ret = FALSE;
+
+	try
+	{
+		ret = S_OK == pXMLDom->save((LPCTSTR) FName);
+	}
+	catch(...)
+	{
+		// TODO: doplnit chybovou hlasku 
+		//CReportAsistentApp::ReportError();
+		AfxMessageBox("Chyba pri ukladani Word stylu do XML");
+	}
+	
+	pXMLDom.Release();
+
+	return ret;
 }

@@ -104,6 +104,9 @@ public:
 
 public:
 	afx_msg void OnShowXml();
+public:
+	// renames (to new_publicID) ID of data source in each active element, which has current value of source old_publicID
+	BOOL updateAElSourcePublicID(LPCTSTR old_publicID, LPCTSTR new_publicID);
 };
 
 /////////////////////////////////////////////////////////////////////////////

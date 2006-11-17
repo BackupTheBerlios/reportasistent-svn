@@ -6,6 +6,7 @@
 #include "ReportAsistent.h"
 #include "DataSourceManager.h"
 #include "WaitDialog.h"
+#include "CSkeletonDoc.h"
 
 #ifdef _DEBUG
 #undef THIS_FILE
@@ -673,11 +674,23 @@ source_handle_t CDataSourcesManager::getSourceHandle(int source_index)
 // setSourcePublicID
 BOOL CDataSourcesManager::setSourcePublicID(int source_index, public_source_id_t source_id)
 {
+	public_source_id_t old_ID;  // previous source name
 	if(SourcesTab.GetUpperBound() >= source_index  &&  source_index>=0)
 	{
 		if(checkSourcePublicIDdupl(source_index, source_id))
 		{
+			old_ID = SourcesTab[source_index]->PublicID;
+			// setting the new name
 			SourcesTab[source_index]->PublicID = source_id;
+			// updating source name for active elements in skeleton
+			CSkeletonDoc * Doc = ((CReportAsistentApp *) AfxGetApp())->FirstDocumentInFirstTemplate();
+			try{Doc->updateAElSourcePublicID(old_ID, source_id); }
+			catch(...)
+			{
+				AfxMessageBox("chyba - update public ID v kostre"); // TODO chybova hlaska
+			}
+
+
 			return TRUE;
 		}
 		else
