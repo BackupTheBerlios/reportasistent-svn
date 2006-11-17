@@ -3,14 +3,20 @@
 [OPTIONS]
 LCID=0x409 0x0 0x0 ; Angliètina (Spojené státy)
 REPORT=Yes
-HLP=Help.hlp
+HLP=ReportAsistent.hlp
 
 [FILES]
 Topics.rtf
 
 [MAP]
+IDH_ATRLINKELM=131223             ; Page about static element attribute link
+IDH_ATRLINKTABLEELM=131224          ; Page about static element attribute link table
 IDH_CONNECTSOURCE=131217        ; Page about Connection of source metabase
 IDH_CONTENTS=77001          ; Top page of help
+IDH_CHAPTERELM=131226             ; Page about static element chapter
+IDH_INCLUDEELM=131242             ; Page about static element include
 IDH_INSTAL=77002        ; Page about instalation of Report Asistent
-IDH_MAINWIN=131200
-IDH_TEXTELM=131202
+IDH_MAINWIN=131200          ; Page describing the main window of Report Asistent
+IDH_PARAGRAPHELM=131225               ; Page about static element paragraph
+IDH_REPORTELM=131238            ; Page about static element report
+IDH_TEXTELM=131202          ; Page about static element text
