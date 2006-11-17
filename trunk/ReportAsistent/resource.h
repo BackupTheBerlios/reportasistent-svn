@@ -169,6 +169,8 @@
 #define IDS_PUBLICID_DUPL               61223
 #define IDS_DSLISTSAVE_ERR              61224
 #define IDS_STRING61225                 61225
+#define IDS_STYLLISTLOAD_ERR            61225
+#define IDS_STYLLISTSAVE_ERR            61226
 #define IDS_CONFIRM_THRAD_KILL          61400
 #define IDS_CONFIRM_APP_RESUME          61401
 #define IDS_COMPLEX_FILTER_SELECT_ATTR  61402

@@ -687,7 +687,9 @@ BOOL CDataSourcesManager::setSourcePublicID(int source_index, public_source_id_t
 			try{Doc->updateAElSourcePublicID(old_ID, source_id); }
 			catch(...)
 			{
-				AfxMessageBox("chyba - update public ID v kostre"); // TODO chybova hlaska
+#ifdef _DEBUG
+				AfxMessageBox("chyba - update public ID v kostre"); 
+#endif
 			}
 
 

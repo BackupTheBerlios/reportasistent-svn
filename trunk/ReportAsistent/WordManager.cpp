@@ -99,14 +99,17 @@ CWordManager::CWordManager(CDirectoriesManager & m)
 	//ladici:
 	//LoadWordTemplates();
 	//LoadWordStyles("normal.dot");
+	
+	BOOL res = FALSE;
 
 	// kody
-	try	{ loadStylesFromXML(m.getWordStylesConfigFilePath());}
+	try	{res = loadStylesFromXML(m.getWordStylesConfigFilePath());}
 	catch(...)
 	{
-		// todo - doplnit chybovou hlasku
-		AfxMessageBox("Chyba pri nacitani Wordovskych stylu z XML");
+		res = FALSE;
 	}
+	if(!res)
+		CReportAsistentApp::ReportError(IDS_STYLLISTLOAD_ERR);
 }
 
 
@@ -120,15 +123,20 @@ CWordManager::~CWordManager()
 
 	// kody - ulozeni Wordovskejch stylu do XML
 	CDirectoriesManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->DirectoriesManager;
+	
+	BOOL res = FALSE;
+	
 	try
 	{
-		saveStylesToXML((LPCTSTR) m.getWordStylesConfigFilePath());
+		res = saveStylesToXML((LPCTSTR) m.getWordStylesConfigFilePath());
 	}
 	catch(...)
 	{
-		// TODO: chybova hlaska
-		AfxMessageBox("Chyba - ukladani Word stylu");
+		res = FALSE;
 	}
+
+	if(!res)
+		CReportAsistentApp::ReportError(IDS_STYLLISTSAVE_ERR);
 }
 
 BOOL CWordManager::InitWordLoader()
@@ -660,9 +668,7 @@ BOOL CWordManager::saveStylesToXML(LPCTSTR file_path)
 	}
 	catch(...)
 	{
-		// TODO: doplnit chybovou hlasku 
-		//CReportAsistentApp::ReportError();
-		AfxMessageBox("Chyba pri ukladani Word stylu do XML");
+		ret = FALSE;
 	}
 	
 	pXMLDom.Release();
