@@ -8,6 +8,7 @@
 
   <!ELEMENT analyzed_data EMPTY>
   <!ATTLIST analyzed_data id ID #REQUIRED
+			  db_name CDATA #REQUIRED
                           matrix_name CDATA #REQUIRED
                           record_count CDATA #REQUIRED
                           integer_count CDATA #REQUIRED
@@ -18,6 +19,7 @@
   
   <!ELEMENT column EMPTY>
   <!ATTLIST column id ID #REQUIRED
+		   db_name CDATA #REQUIRED
                    matrix_name CDATA #REQUIRED
                    column_name CDATA #REQUIRED
                    value_type CDATA #REQUIRED
