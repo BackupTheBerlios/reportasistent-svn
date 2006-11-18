@@ -175,6 +175,40 @@
                     succedent IDREF #IMPLIED
                     condition IDREF #IMPLIED>   <!--antecedent,succedent,condition: references to ti_cedent -->
 
+  <!ELEMENT hyp_4ft_ar2nl (sentences?)>
+  <!ATTLIST hyp_4ft_ar2nl
+                    id ID #REQUIRED
+                    db_name CDATA #REQUIRED
+                    matrix_name CDATA #REQUIRED
+                    task_name CDATA #REQUIRED
+                    a CDATA #REQUIRED
+                    b CDATA #REQUIRED
+                    c CDATA #REQUIRED
+                    d CDATA #REQUIRED
+  
+                    conf CDATA #REQUIRED
+                    d_conf CDATA #REQUIRED
+                    e_conf CDATA #REQUIRED
+                    support CDATA #REQUIRED
+                    completeness CDATA #REQUIRED
+                    avg_diff CDATA #REQUIRED
+                    low_bnd_imp CDATA #REQUIRED
+                    up_bnd_imp CDATA #REQUIRED
+                    low_bnd_dbl_imp CDATA #REQUIRED
+                    up_bnd_dbl_imp CDATA #REQUIRED
+                    low_bnd_eq CDATA #REQUIRED
+                    up_bnd_eq CDATA #REQUIRED
+                    fisher CDATA #REQUIRED
+                    chi_sq CDATA #REQUIRED
+  
+                    antecedent IDREF #IMPLIED
+                    succedent IDREF #IMPLIED
+                    condition IDREF #IMPLIED>   <!--antecedent,succedent,condition: references to ti_cedent -->
+
+<!ELEMENT sentences (sentence*)>
+
+<!ELEMENT sentence (#PCDATA)>
+
 <!-- SD-4FT hypothesis-->
 
 <!ELEMENT hyp_sd4ft EMPTY>
