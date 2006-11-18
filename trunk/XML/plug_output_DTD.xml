@@ -1,12 +1,30 @@
 <?xml version="1.0" encoding="windows-1250" ?>
 <!DOCTYPE active_list[
   
-<!ELEMENT active_list ((hyp_4ft*, hyp_sd4ft*, hyp_kl*, hyp_sdkl*, hyp_cf*, hyp_sdcf*, category*, ti_cedent*, ti_attribute*, attribute*, bool_cedent*, CF_cedent*, KL_cedent*, hyp_kl*, task*, quantifier*, ferda_box*)*)>
+<!ELEMENT active_list ((analyzed_data*, column*, hyp_4ft*, hyp_4ft_ar2nl*, hyp_sd4ft*, hyp_kl*, hyp_sdkl*, hyp_cf*, hyp_sdcf*, category*, ti_cedent*, ti_attribute*, attribute*, bool_cedent*, CF_cedent*, KL_cedent*, hyp_kl*, task*, quantifier*, ferda_box*)*)>
 
 
 <!-- Active elements "Analyzed data" -->
 
+  <!ELEMENT analyzed_data EMPTY>
+  <!ATTLIST analyzed_data id ID #REQUIRED
+                          matrix_name CDATA #REQUIRED
+                          record_count CDATA #REQUIRED
+                          integer_count CDATA #REQUIRED
+                          float_count CDATA #REQUIRED
+                          string_count CDATA #REQUIRED
+                          boolean_count CDATA #REQUIRED
+                          date_count CDATA #REQUIRED>
   
+  <!ELEMENT column EMPTY>
+  <!ATTLIST column id ID #REQUIRED
+                   matrix_name CDATA #REQUIRED
+                   column_name CDATA #REQUIRED
+                   value_type CDATA #REQUIRED
+                   primary_key_position CDATA #REQUIRED
+                   min CDATA #REQUIRED
+                   max CDATA #REQUIRED
+                   avg CDATA #REQUIRED>
 
 <!-- Active elements "Task" -->
 
