@@ -15,6 +15,14 @@
 
 CString fFECategory(void* hSource);
 
+// --- AP Column (sloupec)
+
+CString fFEColumn(void* hSource);
+
+// --- AP Data matrix
+
+CString fFEData_matrix(void* hSource);
+
 
 // --- AP Hypotezy
 

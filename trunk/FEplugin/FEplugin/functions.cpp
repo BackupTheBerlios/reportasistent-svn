@@ -13,7 +13,7 @@ using namespace MSXML2;
 //vlozi namespace MSXML2;
 */
 
-
+// ========= AP Analyzovana data =============
 
 // --- AP Kategorie
 
@@ -26,7 +26,28 @@ CString fFECategory(void* hSource)
 }
 
 
-// --- AP Hypotezy
+// --- AP Column (sloupec)
+
+CString fFEColumn(void* hSource)
+{
+	int indexSrc = ((int) hSource) - 1; 
+	System::String^ ColList = FEplugin_cs::AP_FEColumn::getList(indexSrc);
+	CString resultStr = (CString) ColList;
+	return resultStr;
+}
+
+
+// --- AP Data matrix
+
+CString fFEData_matrix(void* hSource)
+{
+	int indexSrc = ((int) hSource) - 1; 
+	System::String^ MatList = FEplugin_cs::AP_FEData_matrix::getList(indexSrc);
+	CString resultStr = (CString) MatList;
+	return resultStr;
+}
+
+// ========= AP Hypotezy =============
 
 	// 4ft
 

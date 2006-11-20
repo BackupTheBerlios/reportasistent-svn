@@ -21,6 +21,7 @@
             <attribute name="db_name" label="Database" />
             <attribute name="matrix_name" label="Data matrix" />
             <attribute name="column_name" label="Column name"/>
+            <attribute name="value_type" label="Data type"/>
             <attribute name="primary_key_position" label="Primary key"/>
             <attribute name="min" label="Min" numeric_sort="true"/>
             <attribute name="max" label="Max" numeric_sort="true"/>
@@ -32,6 +33,7 @@
             <attribute name="db_name" label="Databáze" />
             <attribute name="matrix_name" label="Datová matice" />
             <attribute name="column_name" label="Jméno sloupce"/>
+            <attribute name="value_type" label="Datový typ"/>
             <attribute name="primary_key_position" label="Primární klíè"/>
             <attribute name="min" label="Min" numeric_sort="true"/>
             <attribute name="max" label="Max" numeric_sort="true"/>

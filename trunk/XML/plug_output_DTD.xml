@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="windows-1250" ?>
 <!DOCTYPE active_list[
   
-<!ELEMENT active_list ((analyzed_data*, column*, hyp_4ft*, hyp_4ft_ar2nl*, hyp_sd4ft*, hyp_kl*, hyp_sdkl*, hyp_cf*, hyp_sdcf*, category*, ti_cedent*, ti_attribute*, attribute*, bool_cedent*, CF_cedent*, KL_cedent*, hyp_kl*, task*, quantifier*, ferda_box*)*)>
+<!ELEMENT active_list ((data_matrix*, column*, hyp_4ft*, hyp_4ft_ar2nl*, hyp_sd4ft*, hyp_kl*, hyp_sdkl*, hyp_cf*, hyp_sdcf*, category*, ti_cedent*, ti_attribute*, attribute*, bool_cedent*, CF_cedent*, KL_cedent*, hyp_kl*, task*, quantifier*, ferda_box*)*)>
 
 
 <!-- Active elements "Analyzed data" -->
 
-  <!ELEMENT analyzed_data EMPTY>
-  <!ATTLIST analyzed_data id ID #REQUIRED
+  <!ELEMENT data_matrix EMPTY>
+  <!ATTLIST data_matrix id ID #REQUIRED
 			  db_name CDATA #REQUIRED
                           matrix_name CDATA #REQUIRED
                           record_count CDATA #REQUIRED

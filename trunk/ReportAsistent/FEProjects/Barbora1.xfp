@@ -489,7 +489,7 @@
           <PropertyName>OdbcConnectionString</PropertyName>
           <Value xsi:type="StringValueT">
             <Value>
-              <stringValue>DSN=Barbora fn;Persist security info=false</stringValue>
+              <stringValue>DSN=Bara1;Persist security info=false</stringValue>
             </Value>
           </Value>
         </PropertySet>

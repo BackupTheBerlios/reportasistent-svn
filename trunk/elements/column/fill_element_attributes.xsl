@@ -60,6 +60,10 @@
 								<xsl:text>Jméno sloupce</xsl:text>
 							</xsl:when>
 							
+							<xsl:when test="name()='value_type'">
+								<xsl:text>Datový typ</xsl:text>
+							</xsl:when>
+							
 							<xsl:when test="name()='primary_key_position'">
 								<xsl:text>Primární klíè</xsl:text>
 							</xsl:when>
@@ -98,6 +102,10 @@
               <xsl:when test="name()='column_name'">
                 <xsl:text>Column name</xsl:text>
               </xsl:when>
+              
+              				<xsl:when test="name()='value_type'">
+								<xsl:text>Data type</xsl:text>
+							</xsl:when>
 
               <xsl:when test="name()='primary_key_position'">
                 <xsl:text>Primary key</xsl:text>

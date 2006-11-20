@@ -72,11 +72,18 @@ CFESock::CFESock()
 	APTable[12].AP_ID = "task";
 	APTable[12].pFn = & fFETask;
 
-	// AP Task
+	// AP Ferda box
 
 	APTable[13].AP_ID = "ferda_box";
 	APTable[13].pFn = & fFEferda_box;
 
+	// AP Column
+	APTable[14].AP_ID = "column";
+	APTable[14].pFn = & fFEColumn;
+
+	// AP Data matrix
+	APTable[15].AP_ID = "data_matrix";
+	APTable[15].pFn = & fFEData_matrix;
 }
 
 
