@@ -1693,7 +1693,7 @@ CString Hyp_KL_Meta::get_chi_sq ()
 	int nRk;
 	int nSl;
 
-	if ( sum == 0) return "";//to check
+	if ( sum == 0) return "Unknown";
 
 	for (i = 0; i < table.GetSize () ; i++)
 	{
@@ -1717,7 +1717,7 @@ CString Hyp_KL_Meta::get_chi_sq ()
 CString Hyp_KL_Meta::get_fnc_s ()
 {
 	int nTotalSum = get_sum ();
-	if ( nTotalSum == 0) return "";//to check
+	if ( nTotalSum == 0) return "Unknown";
 
 	double dSum = 0;
 	int i;
@@ -1740,7 +1740,7 @@ CString Hyp_KL_Meta::get_fnc_s ()
 CString Hyp_KL_Meta::get_fnc_r ()
 {
 	int nTotalSum= get_sum();
-	if ( nTotalSum == 0) return "";//to check
+	if ( nTotalSum == 0) return "Unknown";
 
 	double dSum= 0;
 	int i;
@@ -1858,17 +1858,15 @@ double Hyp_KL_Meta::get_h_c_r ()
 
 CString Hyp_KL_Meta::get_mi ()
 {
+	if (get_sum () == 0) return "Unknown";
 	double dHC = get_h_c ();
-//	if ( _isnan( dHC)) return "";//to check
 
 	double dHR = get_h_r ();
-//	if ( _isnan( dHR)) return "";//to check
 
 	double dHCR = get_h_c_r ();
-//	if ( _isnan( dHCR)) "";//to check
 
 	double dMin = dHC < dHR ? dHC : dHR;
-	if (dMin == 0) return "";//to check
+	if (dMin == 0) return "Unknown";
 
 	double dICR = (dHC - dHCR)/dMin;
 
@@ -1878,7 +1876,7 @@ CString Hyp_KL_Meta::get_mi ()
 CString Hyp_KL_Meta::get_aic ()
 {
 	double dSum = get_sum ();
-	if ( dSum == 0) return "";//to check
+	if ( dSum == 0) return "Unknown";
 
 	double dNl= 0.0;
 	int j;
@@ -1899,7 +1897,7 @@ CString Hyp_KL_Meta::get_aic ()
 
 	double dDelitel = dSum * log( dSum) - dNl;
 
-	if (dDelitel == 0) return "";//to check
+	if (dDelitel == 0) return "Unknown";
 
 	double dNk = 0.0;
 	for (i= 0; i < table.GetSize (); i++)
@@ -1937,7 +1935,7 @@ CString Hyp_KL_Meta::get_aic ()
 CString Hyp_KL_Meta::get_kend ()
 {
 	double dSum = get_sum ();
-	if (dSum == 0) return "";//to check
+	if (dSum == 0) return "Unknown";
 
 	double dNk2 = 0;
 	int i;

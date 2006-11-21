@@ -3025,10 +3025,20 @@ CString fLMKLhyp(void* hSource)
             pthyp->chi_sq = pthyp->get_chi_sq ();
             pthyp->fnc_s = pthyp->get_fnc_s ();
             pthyp->fnc_r = pthyp->get_fnc_r ();
-            pthyp->h_c = (LPCTSTR) (_bstr_t) pthyp->get_h_c ();
-            pthyp->h_r = (LPCTSTR) (_bstr_t) pthyp->get_h_r ();
-            pthyp->h_c_r = (LPCTSTR) (_bstr_t) pthyp->get_h_c_r ();
             pthyp->mi = pthyp->get_mi ();
+			if (pthyp->mi == "Unknown")
+			{
+				pthyp->h_c = "Unknown";
+				pthyp->h_r = "Unknown";
+				pthyp->h_c_r = "Unknown";
+
+			}
+			else
+			{
+				pthyp->h_c = (LPCTSTR) (_bstr_t) pthyp->get_h_c ();
+				pthyp->h_r = (LPCTSTR) (_bstr_t) pthyp->get_h_r ();
+				pthyp->h_c_r = (LPCTSTR) (_bstr_t) pthyp->get_h_c_r ();
+			}
             pthyp->aic = pthyp->get_aic ();
             pthyp->kend = pthyp->get_kend (); 
 
