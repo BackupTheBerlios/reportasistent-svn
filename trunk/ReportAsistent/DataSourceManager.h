@@ -160,6 +160,7 @@ private:
 
 public:
 	BOOL isElementSupportedByPlugin(int plugin_index, LPCTSTR element_name);
+	BOOL isElementSupportedByPlugin(LPCTSTR plugin_name, LPCTSTR element_name);
 	void setDefaultSource(public_source_id_t source);
 	public_source_id_t getDefaultSource();
 	BOOL isPluginValid(int plugin_index);
@@ -273,6 +274,8 @@ public:
   // alternativa
 	BOOL CallPerformProc(int source_index, char* element_id, BSTR* Result);
 */
+public:
+	BOOL defaultSourceDefined(void);
 };
 
 

@@ -684,6 +684,10 @@ BOOL CDataSourcesManager::setSourcePublicID(int source_index, public_source_id_t
 			SourcesTab[source_index]->PublicID = source_id;
 			// updating source name for active elements in skeleton
 			CSkeletonDoc * Doc = ((CReportAsistentApp *) AfxGetApp())->FirstDocumentInFirstTemplate();
+
+			// smaz
+			int sirotku_opraveno = Doc->changeOrphansDataSourceToDefault();
+
 			try{Doc->updateAElSourcePublicID(old_ID, source_id); }
 			catch(...)
 			{
@@ -915,7 +919,7 @@ BOOL CDataSourcesManager::CloseSource(int source_index)
 
 
 // FindSourceByPublicID
-int CDataSourcesManager::FindSourceByPublicID(public_source_id_t id) //vrati index odpovidajiciho zdroje
+int CDataSourcesManager::FindSourceByPublicID(public_source_id_t id) //vrati index odpovidajiciho zdroje nebo -1 (zdroj nenalezen)
 {
 	int Index = -1;	// index zdroje
 	for(int i=0; i<=SourcesTab.GetUpperBound(); i++)
@@ -1196,4 +1200,21 @@ BOOL CDataSourcesManager::isElementSupportedByPlugin(int plugin_index, LPCTSTR e
 
 	ael_list.Release();
 	return FALSE;
+}
+
+BOOL CDataSourcesManager::isElementSupportedByPlugin(LPCTSTR plugin_name, LPCTSTR element_name)
+{
+	int index = FindPluginByPluginName(plugin_name);
+	if(index >= 0 && index < getPlugsCount())
+		return isElementSupportedByPlugin(index, element_name);
+
+	return FALSE;
+}
+
+BOOL CDataSourcesManager::defaultSourceDefined(void)
+{
+	if(getDefaultSource() == "")
+		return FALSE;
+
+	return TRUE;
 }

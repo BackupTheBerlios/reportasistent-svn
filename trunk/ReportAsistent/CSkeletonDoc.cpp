@@ -1156,6 +1156,7 @@ BOOL CSkeletonDoc::updateAElSourcePublicID(LPCTSTR old_publicID, LPCTSTR new_pub
 	new_id = new_publicID;
 
 	CString query;
+
 	query.Format("//active_element[@source=\"%s\"]/@source", old_id);
 
 	MSXML2::IXMLDOMDocumentPtr pXMLDoc;
@@ -1175,4 +1176,100 @@ BOOL CSkeletonDoc::updateAElSourcePublicID(LPCTSTR old_publicID, LPCTSTR new_pub
 	}
 
 	return TRUE;
+}
+
+// makes a list of "orphans" active elements in skeleton to pOrpList paramter, returns a number of orphans found
+int CSkeletonDoc::findOrphans(MSXML2::IXMLDOMNodeListPtr & pOrpList)
+{
+	MSXML2::IXMLDOMNodeListPtr pAEls; // list of all active elements in skeleton
+	MSXML2::IXMLDOMDocumentPtr pXMLDoc;
+	MSXML2::IXMLDOMElementPtr pEl;
+
+	// data sources manager
+	CDataSourcesManager & DSM = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->DataSourcesManager;
+
+	pXMLDoc = m_pXMLDom;
+	
+	pAEls = pXMLDoc->selectNodes("//active_element");
+	if(pAEls == NULL)
+		return 0;
+
+	CString query;
+	CString condition;
+	int counter = 0;
+	
+	while ((pEl = pAEls->nextNode()) != NULL) // loop over all active elements
+	{
+		_variant_t vAttr = pEl->getAttribute("source");
+		CString sourceID = (LPCTSTR) (_bstr_t) vAttr;  // public ID of data source connected with given active element
+
+		// test - data source exists in sources tab and is valid source
+		if(!DSM.isSourceValid(DSM.FindSourceByPublicID((public_source_id_t) sourceID)))
+		{
+			// source is not in sources tab or is invalid -> active element is "orphan"
+			if(counter>0)
+				condition += " or ";
+			condition += "(@id = \"";
+			condition += (LPCTSTR) (_bstr_t) pEl->getAttribute("id");
+			condition += "\")";
+			counter++;
+		}
+	}
+
+	// test - string "condition" is non empty -> some orphans were found
+	if(!condition.IsEmpty())
+	{
+		query.Format("//active_element[%s]", condition);
+		pOrpList = pXMLDoc->selectNodes((_bstr_t) query);
+		return pOrpList->length;
+	}
+
+	return 0;
+}
+
+// finds list of all "orphans active elements" in skeleton and if supported, changes their datasources to default source. Returns number of updated elements 
+int CSkeletonDoc::changeOrphansDataSourceToDefault(void)
+{
+	// Data sources manager
+	CDataSourcesManager & DSM = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->DataSourcesManager;
+	
+	// test - default source is defined
+	if(!DSM.defaultSourceDefined())
+		return 0;
+
+	// publicID of default data source
+	public_source_id_t default_source = DSM.getDefaultSource();
+
+	// plugin index of default source
+	plugin_id_t plug_id = DSM.getSourcePlugin(DSM.FindSourceByPublicID(default_source));
+
+	// find list of all "orphan active elements"
+	MSXML2::IXMLDOMNodeListPtr pOrp;
+	findOrphans(pOrp);
+
+	int counter = 0;
+	MSXML2::IXMLDOMElementPtr pEl;
+	MSXML2::IXMLDOMAttributePtr pAtr;
+	
+	if(pOrp == NULL)
+		return 0;
+
+	while ((pEl = pOrp->nextNode()) != NULL)
+	{
+		// type of active element
+		CString type = (LPCTSTR) (_bstr_t) pEl->getAttribute("type");
+
+		// test - type supported by default data source
+		if(DSM.isElementSupportedByPlugin(plug_id, type))
+		{
+			// change source (attribute "source") to default_source
+			_variant_t new_value = (_variant_t) default_source;
+
+			if(pEl->setAttribute("source", new_value) == S_OK)
+				counter++;
+			
+		}
+	}
+	
+	return counter;
 }

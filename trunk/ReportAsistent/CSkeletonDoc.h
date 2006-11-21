@@ -107,6 +107,12 @@ public:
 public:
 	// renames (to new_publicID) ID of data source in each active element, which has current value of source old_publicID
 	BOOL updateAElSourcePublicID(LPCTSTR old_publicID, LPCTSTR new_publicID);
+public:
+	// makes a list of "orphans" active elements in skeleton to pOrpList paramter, returns a number of orphans found
+	int findOrphans(MSXML2::IXMLDOMNodeListPtr & pOrpList);
+public:
+	// finds list of all "orphans active elements" in skeleton and if supported, changes their datasources to default source. Returns number of updated elements 
+	int changeOrphansDataSourceToDefault(void);
 };
 
 /////////////////////////////////////////////////////////////////////////////
