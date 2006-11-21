@@ -466,7 +466,7 @@ BOOL CAElTransform::LoadFilterDOM(public_source_id_t sId, MSXML2::IXMLDOMElement
 	
     //ulozi element atributy
 //	CAElTransform tr(m_active_element, (MSXML2::IXMLDOMNodePtr) plugout_doc);
-	FillElementAttributes(0);
+//	FillElementAttributes(0);
 
 
     //transformace plugout na filter dom
@@ -500,11 +500,24 @@ void CAElTransform::TransformCmplexFilterToSimple()
 {
 	int a;
 
-	MSXML2::IXMLDOMNodePtr filter_type = m_active_element->selectSingleNode("filter/@type");
+	MSXML2::IXMLDOMNodePtr simple_filter = m_active_element->selectSingleNode("filter[@type='simple']");
+	MSXML2::IXMLDOMNodePtr complex_filter = m_active_element->selectSingleNode("filter[@type='complex']");
 
-	if ((filter_type == NULL) || (filter_type->text != _bstr_t("complex"))) return;
+	if (simple_filter == NULL)
+	{
+		//vytvori prazdny simple filter
+		MSXML2::IXMLDOMAttributePtr atr = m_active_element->ownerDocument->createAttribute("type");
+		atr->text = "simple";
+		MSXML2::IXMLDOMElementPtr el = m_active_element->ownerDocument->createAttribute("filter");
+		el->setAttributeNode(atr);
+		m_active_element->insertBefore(el, (MSXML2::IXMLDOMNode *) complex_filter);
+		simple_filter = el;
+	}
 
-	filter_type->text = "simple";
+	//pokud je simple fiter neprazdny tak nic
+	if (simple_filter->firstChild != NULL) return;
+
+	if ((complex_filter == NULL) || (complex_filter->firstChild == NULL)) return;
 
 	MSXML2::IXMLDOMElementPtr filter_dom;
 	if (! LoadFilterDOM(
@@ -517,13 +530,14 @@ void CAElTransform::TransformCmplexFilterToSimple()
 	ApplyAllAttributeFilters(filter_dom);
 
 	//vymaz vnitrek filtru
+/*
 	MSXML2::IXMLDOMNodePtr filter_node = m_active_element->selectSingleNode("filter");
 	while (filter_node->firstChild != NULL)
 	{
 		filter_node->removeChild(filter_node->firstChild);
 	}
 //	AfxMessageBox(filter_node->xml);
-
+*/
 	
 	//vloz obsah simple fitru
 	MSXML2::IXMLDOMElementPtr selection_el = m_active_element->ownerDocument->createElement("selection");
@@ -535,7 +549,7 @@ void CAElTransform::TransformCmplexFilterToSimple()
 	for (a = 0; a < value_ids->length; a++)
 	{
 		selection_el->setAttribute("id", value_ids->item[a]->text);
-		filter_node->appendChild(selection_el->cloneNode(VARIANT_TRUE));
+		simple_filter->appendChild(selection_el->cloneNode(VARIANT_TRUE));
 	}
 }
 
@@ -605,9 +619,13 @@ BOOL CAElTransform::ProcessSimpleFlter(CFilterProcessor & processor, LPARAM user
 		
 		if (node_to_transform == NULL)
 		{
+
+#ifdef _DEBUG
 			CString errs = "Warovani: Volba v simple filtru je neplatna.\n\nSelect string:\n";
 			errs += select;
 			AfxMessageBox(errs);
+#endif
+
 		}
 		else
 		{
@@ -656,12 +674,23 @@ BOOL CAElTransform::FillElementAttributes(int index_of_filtered_out)
 	}
 
 	//transformace complex fitru na obyc
-	MSXML2::IXMLDOMNodePtr filter_backup =  m_active_element->selectSingleNode("filter")->cloneNode(VARIANT_TRUE);
+	MSXML2::IXMLDOMNodePtr filter_backup;
+	try
+	{
+		filter_backup =  m_active_element->selectSingleNode("filter[type='simple']")->cloneNode(VARIANT_TRUE);
+	}
+	catch (...)
+	{
+		filter_backup = NULL;
+	}
 	
 	TransformCmplexFilterToSimple();
 	BOOL ret = ProcessSimpleFlter(* this, FILTER_FILL_ELEMENT_ATTRIBUTES, index_of_filtered_out);
 	
-	m_active_element->replaceChild(filter_backup, m_active_element->selectSingleNode("filter"));
+	if (filter_backup != NULL)
+	{
+		m_active_element->replaceChild(filter_backup, m_active_element->selectSingleNode("filter[type='simple']"));
+	}
 
 	return ret;
 }

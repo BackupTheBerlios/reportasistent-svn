@@ -30,7 +30,6 @@ class CSimpleFilterDialog : public CPropertyPage, CAElDataShare, CFilterResultIm
 {	
 	// Construction
 public:
-	BOOL SaveAll();
 	CSimpleFilterDialog(CAElDataShare & data_share, CWnd* pParent = NULL);	// nestandard constructor :-)
 	~CSimpleFilterDialog();
 
@@ -61,7 +60,6 @@ protected:
 
 private:
   virtual BOOL OnApply();
-  virtual void OnOK();
   afx_msg void OnNMClickFilterList(NMHDR *pNMHDR, LRESULT *pResult);
   virtual BOOL OnSetActive();
   BOOL m_bSimpleFilterDisabled;

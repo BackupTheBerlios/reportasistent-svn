@@ -39,4 +39,6 @@ public:
 	CString m_OldID;
 public:
 	afx_msg void OnEnChangeIdEdit();
+public:
+	virtual BOOL OnApply();
 };

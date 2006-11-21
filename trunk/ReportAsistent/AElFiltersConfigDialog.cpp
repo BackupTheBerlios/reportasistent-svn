@@ -238,27 +238,9 @@ MSXML2::IXMLDOMElementPtr & CAElFiltersConfigDialog::getClonedActiveElement(void
 
 BOOL CAElFiltersConfigDialog::OnApply()
 {
-	m_active_element->parentNode->replaceChild(m_cloned_active_element, m_active_element);
+	ApplyChanges();
 
-	m_active_element = m_cloned_active_element;
-	m_cloned_active_element = m_active_element->cloneNode(VARIANT_TRUE);
-
-/*
-	AfxMessageBox(m_active_element->xml);
-	
-	CAElTransform tr(m_active_element);
-	tr.TransformCmplexFilterToSimple();
-
-	AfxMessageBox(m_active_element->xml);
-*/
 	return TRUE; //zavola se SetModified(FALSE);
-}
-
-void CAElFiltersConfigDialog::OnOK()
-{
-	OnApply();
-
-	CPropertyPage::OnOK();
 }
 
 void CAElFiltersConfigDialog::UpdateFiltersList(void)

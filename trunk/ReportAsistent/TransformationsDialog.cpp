@@ -117,46 +117,6 @@ BOOL CTransformationsDialog::OnInitDialog()
 	              // EXCEPTION: OCX Property Pages should return FALSE
 }
 
-void CTransformationsDialog::OnOK() 
-{
-  OnApply();
-}
-
-
-BOOL CTransformationsDialog::SaveAll()
-{
-	ASSERT(m_active_element != NULL);
-	ASSERT(m_cloned_output_element != NULL);
-
-//	AfxMessageBox(m_cloned_output_element->xml);
-/*
-
-	m_active_element->replaceChild(
-		m_cloned_output_element,
-		m_active_element->selectSingleNode("output"));
-
-	m_cloned_output_element = m_active_element->selectSingleNode("output")->cloneNode(VARIANT_TRUE);
-*/
-
-//	m_active_element
-
-/*
-	AfxMessageBox(m_cloned_output_element->xml);
-	AfxMessageBox(m_cloned_active_element->xml);
-	AfxMessageBox(m_active_element->parentNode->xml);
-*/
-
-	m_active_element->parentNode->replaceChild(m_cloned_active_element, m_active_element);
-
-	m_active_element = m_cloned_active_element;
-	m_cloned_active_element = m_active_element->cloneNode(VARIANT_TRUE);
-
-//	AfxMessageBox(m_active_element->parentNode->xml);
-
-	SetModified(FALSE);
-
-	return TRUE;
-}
 
 void CTransformationsDialog::OnAddButton() 
 {
@@ -620,7 +580,9 @@ void CTransformationsDialog::ConfigureTransformation(int transform_index)
 
 BOOL CTransformationsDialog::OnApply()
 {
-  return SaveAll();
+	ApplyChanges();
+
+	return TRUE;
 }
 
 

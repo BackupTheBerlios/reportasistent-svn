@@ -109,71 +109,10 @@ void CSimpleFilterDialog::UpdateSelection()
 	}
 }
 
-
-
-
-BOOL CSimpleFilterDialog::SaveAll()
-{
-/*
-	POSITION pos = m_FilterList.GetFirstSelectedItemPosition(); 
-
-//dedek:	umoznime i prazdny fiter
-/*		
-	if (pos == NULL)
-	{
-		AfxMessageBox(IDS_SIMPLE_FILTER_EMPTY_SELECTION);
-		return FALSE;
-	}
-
-	
-	//okopiruje vzorovy element selection
-	MSXML2::IXMLDOMElementPtr selection_elem = m_active_element->ownerDocument->createElement("selection");
-	MSXML2::IXMLDOMAttributePtr id_attr = m_active_element->ownerDocument->createAttribute("id");
-	selection_elem->setAttributeNode(id_attr);
-	id_attr.Release();
-	
-	//vymaze vsechny selection
-	MSXML2::IXMLDOMNodeListPtr list = m_active_element->selectNodes("filter[@type='simple']/selection");
-	MSXML2::IXMLDOMSelection * sel;
-	list.QueryInterface(__uuidof(MSXML2::IXMLDOMSelection), &sel);
-	sel->removeAll();
-	sel->Release();
-
-	MSXML2::IXMLDOMNodePtr filter = m_active_element->selectSingleNode("filter[@type='simple']");
-	
-	while (pos)
-	{
-		int nItem = m_FilterList.GetNextSelectedItem(pos);
-
-		selection_elem->setAttribute("id", (LPCTSTR) * (CString *) m_FilterList.GetItemData(nItem));
-		filter->appendChild(selection_elem->cloneNode(VARIANT_FALSE));
-	}
-
-	selection_elem.Release();
-*/
-	return TRUE;
-}
-
-
-
-
 BOOL CSimpleFilterDialog::OnApply()
 {
-  if (SaveAll())
-  {
-    SetModified(FALSE);
-    return TRUE;
-  }
-
-  return FALSE;
-}
-
-
-void CSimpleFilterDialog::OnOK()
-{
-  OnApply();
-
-  CPropertyPage::OnOK();
+	ApplyChanges();
+	return TRUE;
 }
 
 

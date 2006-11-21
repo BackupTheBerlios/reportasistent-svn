@@ -14,6 +14,9 @@
 
 class CAElDataShare
 {
+protected:
+	void ApplyChanges();
+
 public:
 	CAElDataShare(
 		MSXML2::IXMLDOMElementPtr & active_element,
@@ -130,6 +133,7 @@ private:
 private:
 //	void UpdateResult(MSXML2::IXMLDOMElementPtr & filter_dom);
 private:
+	afx_msg void OnBnClickedFilterTypeRadio();
 };
 
 //{{AFX_INSERT_LOCATION}}

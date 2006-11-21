@@ -175,3 +175,10 @@ void CAElConfigDialog::OnEnChangeIdEdit()
 
 	// TODO:  Add your control notification handler code here
 }
+
+BOOL CAElConfigDialog::OnApply()
+{
+	ApplyChanges();
+
+	return TRUE;
+}

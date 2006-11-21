@@ -103,6 +103,9 @@ BEGIN_MESSAGE_MAP(CComplexFilterDialog, CDialog)
 	ON_BN_CLICKED(IDOK, OnBnClickedOk)
 	ON_LBN_SELCHANGE(IDC_VALUES_LIST, OnLbnSelchangeValuesList)
 	ON_BN_CLICKED(IDC_REFRESH_RESULTS_BUTTON, OnBnClickedRefreshResultsButton)
+	ON_BN_CLICKED(IDC_TRESHOLD_RADIO, OnBnClickedFilterTypeRadio)
+	ON_BN_CLICKED(IDC_FIXED_VAL_RADIO, OnBnClickedFilterTypeRadio)
+	ON_BN_CLICKED(IDC_TOP_N_VAL_RADIO, OnBnClickedFilterTypeRadio)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -277,7 +280,7 @@ void CComplexFilterDialog::OnLbnSelchangeAttributesList()
 
 
 	FillValuesList( cur_str);
-
+	OnBnClickedRefreshResultsButton();
 }
 
 void CComplexFilterDialog::OnDestroy()
@@ -302,11 +305,15 @@ void CComplexFilterDialog::ClearAttributesList(void)
 void CComplexFilterDialog::OnBnClickedAscendingRadio()
 {
 	FillValuesList();
+
+	OnBnClickedRefreshResultsButton();
 }
 
 void CComplexFilterDialog::OnBnClickedDescendingRadio()
 {
 	FillValuesList();
+
+	OnBnClickedRefreshResultsButton();
 }
 
 void CComplexFilterDialog::SetSortButtons(MSXML2::IXMLDOMElementPtr & attr_elem)
@@ -402,6 +409,8 @@ void CComplexFilterDialog::FillValuesList(LPCTSTR cur_attr_str)
 void CComplexFilterDialog::OnBnClickedNumericSortCheck()
 {
 	FillValuesList();
+
+	OnBnClickedRefreshResultsButton();
 }
 
 
@@ -442,6 +451,8 @@ void CComplexFilterDialog::OnLbnSelchangeValuesList()
 	CString s;
 	m_ValuesList.GetText(sel, s);
 	m_TresholdEdeit.SetWindowText(s);
+
+	OnBnClickedRefreshResultsButton();
 }
 
 void CComplexFilterDialog::InitDialogFromXML(void)
@@ -699,4 +710,22 @@ CAElDataShare::CAElDataShare(CAElDataShare & data_share)
 	, m_cloned_active_element(data_share.m_cloned_active_element)
 	, m_filter_DOM(data_share.m_filter_DOM)
 {
+}
+
+
+void CAElDataShare::ApplyChanges()
+{
+	ASSERT(m_active_element != NULL);
+	ASSERT(m_cloned_active_element != NULL);
+	ASSERT(m_active_element->parentNode != NULL);
+
+	m_active_element->parentNode->replaceChild(m_cloned_active_element, m_active_element);
+
+	m_active_element = m_cloned_active_element;
+	m_cloned_active_element = m_active_element->cloneNode(VARIANT_TRUE);
+}
+
+void CComplexFilterDialog::OnBnClickedFilterTypeRadio()
+{
+	OnBnClickedRefreshResultsButton();
 }

@@ -27,7 +27,6 @@ class CTransformationsDialog : public CPropertyPage, CAElDataShare
 {
 // Construction
 public:
-	BOOL SaveAll();
 	CTransformationsDialog(CAElDataShare & data_share, CWnd* pParent = NULL);   // standard constructor
 
 // Dialog Data
@@ -59,7 +58,6 @@ protected:
 	// Generated message map functions
 	//{{AFX_MSG(CTransformationsDialog)
 	virtual BOOL OnInitDialog();
-	virtual void OnOK();
 	afx_msg void OnAddButton();
 	afx_msg void OnRemoveButton();
 	afx_msg void OnMoveUpButton();

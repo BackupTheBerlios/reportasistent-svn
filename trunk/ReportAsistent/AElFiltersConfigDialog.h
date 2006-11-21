@@ -53,7 +53,6 @@ protected:
 
 	virtual BOOL OnInitDialog();
 	virtual BOOL OnApply();
-	virtual void OnOK();
 
 	void UpdateFiltersList(void);
 	void UpdateResult(void);
