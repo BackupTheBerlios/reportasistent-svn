@@ -66,6 +66,14 @@ private:
   virtual BOOL OnSetActive();
   BOOL m_bSimpleFilterDisabled;
   afx_msg void OnSimpleFilterDisabledCheck();
+protected:
+	void SetDisabledCheck(void);
+public:
+	virtual BOOL OnKillActive();
+protected:
+	void SaveSelection(void);
+	void CheckSimpleFilterDisabled(void);
+	void UpdateSimpleView(void);
 };
 
 //{{AFX_INSERT_LOCATION}}

@@ -37,4 +37,6 @@ public:
 
 	CString m_sIdEdit;
 	CString m_OldID;
+public:
+	afx_msg void OnEnChangeIdEdit();
 };

@@ -35,9 +35,7 @@ CSimpleFilterDialog::CSimpleFilterDialog(CAElDataShare & data_share, CWnd* pPare
 			(MSXML2::IXMLDOMNode *) m_cloned_active_element->selectSingleNode("filter"));
 	}
 
-	m_bSimpleFilterDisabled = 
-		m_cloned_active_element->
-			selectNodes("filter[@type=\"simple\"]/selection")->length == 0;
+	SetDisabledCheck();
 }
 
 CSimpleFilterDialog::~CSimpleFilterDialog()
@@ -61,7 +59,7 @@ BEGIN_MESSAGE_MAP(CSimpleFilterDialog, CPropertyPage)
 	ON_NOTIFY(LVN_DELETEITEM, IDC_FILTER_LIST, OnDeleteitemFilterList)
 	ON_NOTIFY(NM_CLICK, IDC_FILTER_LIST, OnNMClickFilterList)
 	//}}AFX_MSG_MAP
-	ON_BN_CLICKED(IDC_SIMPLE_FILTER_DISABLED_CHECK, &CSimpleFilterDialog::OnSimpleFilterDisabledCheck)
+	ON_BN_CLICKED(IDC_SIMPLE_FILTER_DISABLED_CHECK, OnSimpleFilterDisabledCheck)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -72,7 +70,7 @@ BOOL CSimpleFilterDialog::OnInitDialog()
 	CPropertyPage::OnInitDialog();
 
 	 
-	OnSimpleFilterDisabledCheck();
+	CheckSimpleFilterDisabled();
 
 
 	return TRUE;  // return TRUE unless you set the focus to a control
@@ -192,22 +190,109 @@ void CSimpleFilterDialog::OnNMClickFilterList(NMHDR *pNMHDR, LRESULT *pResult)
 BOOL CSimpleFilterDialog::OnSetActive()
 {
 	InitResultView();
-	UpdateResult(m_filter_DOM);
-	UpdateSelection();
+	UpdateSimpleView();
+	SetDisabledCheck();
+	UpdateData(FALSE);
+	CheckSimpleFilterDisabled();
+	
+	if (! m_bSimpleFilterDisabled) UpdateSelection();
 
 	return CPropertyPage::OnSetActive();
 }
 
-void CSimpleFilterDialog::OnSimpleFilterDisabledCheck()
+void CSimpleFilterDialog::CheckSimpleFilterDisabled()
 {
 	UpdateData();
 
 	if (m_bSimpleFilterDisabled)
 	{
 		m_ResultList.EnableWindow(FALSE);
+
+		//vycisti simple fiter tag
+
+		MSXML2::IXMLDOMNodePtr simple_filter = m_cloned_active_element->selectSingleNode("filter[@type=\"simple\"]");
+		while (simple_filter->firstChild != NULL)
+		{
+			simple_filter->removeChild(simple_filter->firstChild);
+		}
+
+		//zrusi vybrane polozky		
+		UpdateSimpleView();
 	}
 	else
 	{
 		m_ResultList.EnableWindow(TRUE);
 	}
+}
+
+
+void CSimpleFilterDialog::OnSimpleFilterDisabledCheck()
+{
+	CheckSimpleFilterDisabled();
+	SetModified();
+}
+
+void CSimpleFilterDialog::SetDisabledCheck(void)
+{
+	m_bSimpleFilterDisabled = 
+		m_cloned_active_element->
+			selectNodes("filter[@type=\"simple\"]/selection")->length == 0;
+}
+
+
+
+BOOL CSimpleFilterDialog::OnKillActive()
+{
+	SaveSelection();
+
+	return CPropertyPage::OnKillActive();
+}
+
+void CSimpleFilterDialog::SaveSelection(void)
+{
+	POSITION pos = m_ResultList.GetFirstSelectedItemPosition(); 
+
+	
+	//okopiruje vzorovy element selection
+	MSXML2::IXMLDOMElementPtr selection_elem = m_active_element->ownerDocument->createElement("selection");
+	MSXML2::IXMLDOMAttributePtr id_attr = m_active_element->ownerDocument->createAttribute("id");
+	selection_elem->setAttributeNode(id_attr);
+	id_attr.Release();
+	
+	//vymaze vsechny selection
+	MSXML2::IXMLDOMNodeListPtr list = m_cloned_active_element->selectNodes("filter[@type='simple']/selection");
+	MSXML2::IXMLDOMSelection * sel;
+	list.QueryInterface(__uuidof(MSXML2::IXMLDOMSelection), &sel);
+	sel->removeAll();
+	sel->Release();
+
+	MSXML2::IXMLDOMNodePtr filter = m_cloned_active_element->selectSingleNode("filter[@type='simple']");
+	
+	while (pos)
+	{
+		int nItem = m_ResultList.GetNextSelectedItem(pos);
+
+		selection_elem->setAttribute("id", (LPCTSTR) m_ResultList.GetItemText(nItem, 0));
+		filter->appendChild(selection_elem->cloneNode(VARIANT_FALSE));
+	}
+
+	selection_elem.Release();
+
+}
+
+
+void CSimpleFilterDialog::UpdateSimpleView(void)
+{
+	//zaloha dat
+	MSXML2::IXMLDOMElementPtr values_clone = m_filter_DOM->selectSingleNode("/dialog_data/values")->cloneNode(VARIANT_TRUE);
+	
+	CAElTransform at(m_cloned_active_element);
+	at.ApplyAllAttributeFilters(m_filter_DOM);
+
+	UpdateResult(m_filter_DOM);
+
+
+	//obnova dat
+	m_filter_DOM->selectSingleNode("/dialog_data")->replaceChild(values_clone,
+		m_filter_DOM->selectSingleNode("/dialog_data/values"));
 }

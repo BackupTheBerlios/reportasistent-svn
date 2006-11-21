@@ -94,6 +94,7 @@ void CAElConfigDialog::DoDataExchange(CDataExchange* pDX)
 BEGIN_MESSAGE_MAP(CAElConfigDialog, CPropertyPage)
 	ON_CBN_SELCHANGE(IDC_DATA_SOURCE_COMBO, &CAElConfigDialog::OnCbnSelchangeDataSourceCombo)
 	ON_WM_CTLCOLOR()
+	ON_EN_CHANGE(IDC_ID_EDIT, &CAElConfigDialog::OnEnChangeIdEdit)
 END_MESSAGE_MAP()
 
 
@@ -155,10 +156,22 @@ HBRUSH CAElConfigDialog::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 	{
 		m_bSourceIsInit = TRUE;
 		OnCbnSelchangeDataSourceCombo();
+		SetModified(FALSE);
 		Invalidate(FALSE);
 	}
 
 
 	// TODO:  Return a different brush if the default is not desired
 	return hbr;
+}
+
+void CAElConfigDialog::OnEnChangeIdEdit()
+{
+	SetModified();
+	// TODO:  If this is a RICHEDIT control, the control will not
+	// send this notification unless you override the __super::OnInitDialog()
+	// function and call CRichEditCtrl().SetEventMask()
+	// with the ENM_CHANGE flag ORed into the mask.
+
+	// TODO:  Add your control notification handler code here
 }
