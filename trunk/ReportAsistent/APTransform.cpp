@@ -359,10 +359,10 @@ void CAElTransform::ApplyTresholdFilter(MSXML2::IXMLDOMElementPtr & filter_dom, 
 	CFilterSortItem::PrepareSort(attr_name, numeric_sort, descending_sort);
 	CFilterSortItem::PrepareRemoveIf(treshold);
 
-	treshold_end = remove_if(sort_helper.begin(), sort_helper.end(), CFilterSortItem::TresholdCompare);
+	treshold_end = std::remove_if(sort_helper.begin(), sort_helper.end(), CFilterSortItem::TresholdCompare);
 	sort_helper.erase(treshold_end, sort_helper.end());
 
-	sort(sort_helper.begin(), sort_helper.end());
+	std::sort(sort_helper.begin(), sort_helper.end());
 
 	for (a = 0; a < (int) sort_helper.size(); a++)
 	{		
@@ -387,11 +387,11 @@ void CAElTransform::ApplyTopNFilter(MSXML2::IXMLDOMElementPtr & filter_dom, LPCT
 	
 	if (values_list->length <= top_n)
 	{
-		sort(sort_helper.begin(), sort_helper.end());
+		std::sort(sort_helper.begin(), sort_helper.end());
 	}
 	else
 	{
-		partial_sort(sort_helper.begin(), sort_helper.begin() + top_n, sort_helper.end());
+		std::partial_sort(sort_helper.begin(), sort_helper.begin() + top_n, sort_helper.end());
 	}
 
 	for (a = 0; a < top_n; a++)
@@ -507,7 +507,12 @@ void CAElTransform::TransformCmplexFilterToSimple()
 	filter_type->text = "simple";
 
 	MSXML2::IXMLDOMElementPtr filter_dom;
-	if (! LoadFilterDOM(m_active_element->getAttribute("source"), filter_dom)) return;
+	if (! LoadFilterDOM(
+			(LPCTSTR) (_bstr_t) m_active_element->getAttribute("source"),
+			filter_dom))
+	{
+		return;
+	}
 
 	ApplyAllAttributeFilters(filter_dom);
 
@@ -567,7 +572,7 @@ void CAElTransform::ApplySingleAttributeFilter(MSXML2::IXMLDOMElementPtr & filte
 	if (filter_type == "top-n")
 	{
 		ApplyTopNFilter(filter_dom, attr_name, numeric_sort, descending_sort, 
-			attribute_filter->getAttribute("filter_data"));
+			(long) attribute_filter->getAttribute("filter_data"));
 	}
 
 	attribute_filter->getAttribute("filter_data");	

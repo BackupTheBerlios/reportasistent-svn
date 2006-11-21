@@ -92,7 +92,7 @@ void CAElConfigDialog::DoDataExchange(CDataExchange* pDX)
 
 
 BEGIN_MESSAGE_MAP(CAElConfigDialog, CPropertyPage)
-	ON_CBN_SELCHANGE(IDC_DATA_SOURCE_COMBO, &CAElConfigDialog::OnCbnSelchangeDataSourceCombo)
+	ON_CBN_SELCHANGE(IDC_DATA_SOURCE_COMBO, OnCbnSelchangeDataSourceCombo)
 	ON_WM_CTLCOLOR()
 	ON_EN_CHANGE(IDC_ID_EDIT, &CAElConfigDialog::OnEnChangeIdEdit)
 END_MESSAGE_MAP()

@@ -533,7 +533,7 @@ BOOL CStringTableImpl::loadItemsFromXML(MSXML2::IXMLDOMNodeListPtr & pNodeList)
 			Atr_val = pChild->getAttribute("value");
 			if(Atr_val.vt != VT_NULL)
 			{
-				CString new_item = Atr_val;
+				CString new_item = (LPCTSTR) (_bstr_t) Atr_val;
 				Add(new_item);
 			}
 		}
