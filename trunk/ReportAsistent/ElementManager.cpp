@@ -237,6 +237,23 @@ MSXML2::IXMLDOMElementPtr CElementManager::CreateEmptyElement(CElementManager::e
 	return ret;
 }
 
+BOOL CElementManager::isActiveElementOrphan(MSXML2::IXMLDOMElementPtr & element)
+{	
+	ASSERT(isElementActive(IdentifyElement(element)));
+
+	CDataSourcesManager & DSM = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->DataSourcesManager;
+			
+	CString sourceID = (LPCTSTR) (_bstr_t) element->getAttribute("source");  // public ID of data source connected with given active element
+
+	// test - data source exists in sources tab and is valid source
+	if(!DSM.isSourceValid(DSM.FindSourceByPublicID((public_source_id_t) sourceID)))
+	{
+		return TRUE;
+	}
+
+	return FALSE;	
+}
+
 BOOL CElementManager::isElementActive(elId_t elementId)
 {
 	return (elementId >= getFirstActiveElementID()) && (elementId <= getLastElementId());
@@ -265,7 +282,9 @@ BOOL CElementManager::CanInsertChildHere(MSXML2::IXMLDOMElementPtr &child, MSXML
 	catch (_com_error & e)
 	{
 		//AfxMessageBox(child->xml);
-		AfxMessageBox(e.Description());
+#ifdef _DEBUG
+		AfxMessageBox(e.ErrorMessage());
+#endif
 		return FALSE;
 	}
 
@@ -521,7 +540,9 @@ BOOL CElementManager::CanInsertBefore(MSXML2::IXMLDOMElementPtr &pToInsert, MSXM
 	catch (_com_error & e)
 	{
 		//AfxMessageBox(child->xml);
-		AfxMessageBox(e.Description());
+#ifdef _DEBUG
+		AfxMessageBox(e.ErrorMessage());
+#endif
 		return FALSE;
 	}
 

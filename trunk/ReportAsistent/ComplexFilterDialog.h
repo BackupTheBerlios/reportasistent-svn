@@ -17,11 +17,16 @@ class CAElDataShare
 protected:
 	void ApplyChanges();
 
+	BOOL & m_bApplyButtonUsed;
+
 public:
+	BOOL ApplyButtonUsed() {return m_bApplyButtonUsed; };
+
 	CAElDataShare(
 		MSXML2::IXMLDOMElementPtr & active_element,
 		MSXML2::IXMLDOMElementPtr & cloned_active_element,
-   		MSXML2::IXMLDOMElementPtr & filter_DOM);
+   		MSXML2::IXMLDOMElementPtr & filter_DOM,
+		BOOL & bApplyButtonUsed);
 
 	CAElDataShare(CAElDataShare & data_share);
 

@@ -357,7 +357,9 @@ BOOL CSkeletonDoc::EditActiveElement(MSXML2::IXMLDOMElementPtr &element)
 	MSXML2::IXMLDOMElementPtr a_el_clone;
 	MSXML2::IXMLDOMElementPtr filter_dom;
 
-	CAElDataShare ds(element, a_el_clone, filter_dom);
+	BOOL bApplyButtonUsed = FALSE;
+
+	CAElDataShare ds(element, a_el_clone, filter_dom, bApplyButtonUsed);
 
 	CAElFiltersConfigDialog filters(ds);
 	CSimpleFilterDialog simple_filter(ds);
@@ -387,9 +389,15 @@ BOOL CSkeletonDoc::EditActiveElement(MSXML2::IXMLDOMElementPtr &element)
 
 	int Res = sheet.DoModal();
 
-	element->setAttribute("id", (LPCTSTR)config.m_sIdEdit);        
 
-	return IDOK == Res;			
+	if ((Res == IDOK) || bApplyButtonUsed)
+	{
+		element->setAttribute("id", (LPCTSTR)config.m_sIdEdit);        
+		return TRUE;			
+
+	}
+
+	return FALSE;			
 }
 
 

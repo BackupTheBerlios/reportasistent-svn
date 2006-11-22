@@ -73,6 +73,7 @@ public:
 	CAElInfo * getActiveElementInfo(elId_t id);
 	BOOL isElementSupportedBySource(elId_t element_id, int source_index);
 	BOOL CanInsertChildHere(MSXML2::IXMLDOMElementPtr & child, MSXML2::IXMLDOMElementPtr & parent);
+	BOOL isActiveElementOrphan(MSXML2::IXMLDOMElementPtr & element);
 	BOOL isElementActive(elId_t elementId);
 	MSXML2::IXMLDOMElementPtr CreateEmptyElement(CElementManager::elId_t id);
 	elId_t ElementIdFromName(LPCTSTR el_name);

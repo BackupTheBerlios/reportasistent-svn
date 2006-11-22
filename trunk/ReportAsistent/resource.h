@@ -144,6 +144,7 @@
 #define ID_VIEW_STATICELEMENTSTOOLBAR   32792
 #define ID_HLP_TOPICS                   32793
 #define ID_SHOW_XML                     32794
+#define ID_SIGN_ORPHANS                 32796
 #define ID_MMNEWSTATICFIRST             39001
 #define ID_MMNEWSTATICLAST              39009
 #define ID_MMNEWACTIVEFIRST             39010
@@ -189,7 +190,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
 #define _APS_NEXT_RESOURCE_VALUE        173
-#define _APS_NEXT_COMMAND_VALUE         32796
+#define _APS_NEXT_COMMAND_VALUE         32798
 #define _APS_NEXT_CONTROL_VALUE         1064
 #define _APS_NEXT_SYMED_VALUE           101
 #endif

@@ -35,6 +35,7 @@ BEGIN_MESSAGE_MAP(CSkeletonView, CTreeView)
 	ON_COMMAND(ID_MMDELETE, OnMmdelete)
 	ON_WM_CAPTURECHANGED()
 	//}}AFX_MSG_MAP
+	ON_COMMAND(ID_SIGN_ORPHANS, OnSignOrphans)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -100,6 +101,9 @@ void CSkeletonView::OnInitialUpdate()
 	CElementManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
 	
 	m.FillImageList( m_ImageList);
+
+	//sirotci
+	m_ImageList.SetOverlayImage(0, 1);
 
 
 	GetTreeCtrl().SetImageList(&m_ImageList, TVSIL_NORMAL);
@@ -792,7 +796,7 @@ void CSkeletonView::DeleteSelectedItem()
 	//dedek:
 	if (hSelTreeItem == NULL) return;
 
-	MSXML2::IXMLDOMElementPtr selected_element = GetDocument()->ElementFromItemData(GetTreeCtrl().GetItemData( hSelTreeItem ));
+	MSXML2::IXMLDOMElementPtr selected_element = CSkeletonDoc::ElementFromItemData(GetTreeCtrl().GetItemData( hSelTreeItem ));
 	
 	MSXML2::IXMLDOMElementPtr parent_element= selected_element->parentNode;
 	
@@ -809,4 +813,56 @@ void CSkeletonView::DeleteSelectedItem()
 	GetDocument()->SetModifiedFlag();
 	GetDocument()->UpdateAllViews(NULL,UT_DEL, &oHint);
 
+}
+
+
+void CSkeletonView::SignSingleOrphan(HTREEITEM item)
+{
+	CTreeCtrl & tree_ctrl = GetTreeCtrl();
+
+	CElementManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
+
+	MSXML2::IXMLDOMElementPtr elem = CSkeletonDoc::ElementFromItemData(tree_ctrl.GetItemData(item));
+
+	if (m.isElementActive(m.IdentifyElement(elem)))
+	{
+		if (m.isActiveElementOrphan(elem))
+		{
+			tree_ctrl.SetItemState(item, TVIS_BOLD, TVIS_BOLD);
+			tree_ctrl.SetItemState(item, INDEXTOOVERLAYMASK(1), TVIS_OVERLAYMASK);
+		}
+		else
+		{
+			tree_ctrl.SetItemState(item, 0, TVIS_BOLD | TVIS_OVERLAYMASK);
+		}
+	}
+
+	if (tree_ctrl.ItemHasChildren(item))
+	{
+		HTREEITEM hNextItem;
+		HTREEITEM hChildItem = tree_ctrl.GetChildItem(item);
+		
+		while (hChildItem != NULL)
+		{
+			//rekurze
+			SignSingleOrphan(hChildItem);
+
+			hNextItem = tree_ctrl.GetNextItem(hChildItem, TVGN_NEXT);
+			hChildItem = hNextItem;
+		}
+   }
+}
+
+
+void CSkeletonView::SignOrphans(void)
+{
+	CTreeCtrl & tree_ctrl = GetTreeCtrl();
+
+	SignSingleOrphan(tree_ctrl.GetRootItem());
+
+}
+
+void CSkeletonView::OnSignOrphans()
+{
+	SignOrphans();
 }

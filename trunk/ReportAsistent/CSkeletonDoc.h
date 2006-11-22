@@ -55,7 +55,7 @@ protected:
 
 // Generated message map functions
 public:
-	MSXML2::IXMLDOMElement * ElementFromItemData(LPARAM item_data);
+	static MSXML2::IXMLDOMElement * ElementFromItemData(LPARAM item_data);
 protected:
 	CSkeletonView * GetFirstView();
 	//{{AFX_MSG(CSkeletonDoc)

@@ -104,6 +104,13 @@ protected:
 	afx_msg void OnCaptureChanged(CWnd *pWnd);
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
+
+	void SignSingleOrphan(HTREEITEM item);
+public:
+
+	void SignOrphans(void);
+public:
+	afx_msg void OnSignOrphans();
 };
 
 #ifndef _DEBUG  // debug version in SkeletonView.cpp

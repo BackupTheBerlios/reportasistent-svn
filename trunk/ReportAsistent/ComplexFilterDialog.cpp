@@ -698,10 +698,12 @@ void CFilterResultImpl::UpdateResult(MSXML2::IXMLDOMElementPtr & filter_dom)
 CAElDataShare::CAElDataShare(
 		MSXML2::IXMLDOMElementPtr & active_element,
 		MSXML2::IXMLDOMElementPtr & cloned_active_element,
-   		MSXML2::IXMLDOMElementPtr & filter_DOM)
+   		MSXML2::IXMLDOMElementPtr & filter_DOM,
+		BOOL & bApplyButtonUsed)
 	: m_active_element(active_element)
 	, m_cloned_active_element(cloned_active_element)
 	, m_filter_DOM(filter_DOM)
+	, m_bApplyButtonUsed(bApplyButtonUsed)
 {
 }
 
@@ -709,6 +711,7 @@ CAElDataShare::CAElDataShare(CAElDataShare & data_share)
 	: m_active_element(data_share.m_active_element)
 	, m_cloned_active_element(data_share.m_cloned_active_element)
 	, m_filter_DOM(data_share.m_filter_DOM)
+	, m_bApplyButtonUsed(data_share.m_bApplyButtonUsed)
 {
 }
 
@@ -717,12 +720,17 @@ void CAElDataShare::ApplyChanges()
 {
 	ASSERT(m_active_element != NULL);
 	ASSERT(m_cloned_active_element != NULL);
-	ASSERT(m_active_element->parentNode != NULL);
+	
+	
+	//dedek: kvuli mnoha aply funkcim po sobe - padalo
+	if(m_active_element->parentNode == NULL) return;
 
 	m_active_element->parentNode->replaceChild(m_cloned_active_element, m_active_element);
 
 	m_active_element = m_cloned_active_element;
 	m_cloned_active_element = m_active_element->cloneNode(VARIANT_TRUE);
+
+	m_bApplyButtonUsed = TRUE;
 }
 
 void CComplexFilterDialog::OnBnClickedFilterTypeRadio()
