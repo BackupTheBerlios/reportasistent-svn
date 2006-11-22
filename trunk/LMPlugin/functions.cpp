@@ -58,7 +58,9 @@ CString Get_4ftAR2NL (long hypno, CString db_name)
 
 	CString DSN = "__LM_ReportAssistant_help_temp_" + hlp;
 
-	CString source_db = "DBQ=" + db_name + "\0\0";
+	CString source_db = "DBQ=" + db_name + " ";
+
+	CString config = "DSN=" + DSN + "\\0 " + source_db;
 
 	CString _4ftAR2NL_output;
 
@@ -78,8 +80,7 @@ CString Get_4ftAR2NL (long hypno, CString db_name)
 
 	//create the temporary datasource
 	//osetrit!!!!!!!!!!!!!!!
-	SQLConfigDataSource (NULL, ODBC_ADD_DSN, "Microsoft Access Driver (*.mdb)\0",
-		"DSN=" + DSN + "\0 " + source_db);
+	SQLConfigDataSource (NULL, ODBC_ADD_DSN, "Microsoft Access Driver (*.mdb)\0", config);
 
 	//run the 4ftAR2NL application
 	if (!CreateProcess(NULL, (char *) (LPCTSTR) _4ftAR2NL_exe,
@@ -1748,7 +1749,7 @@ CString fLMCategory(void* hSource)
 
 // --- AP 4ft-hypothese
 
-CString fLM4fthyp(void * hSource)
+CString fLM4fthyp_hlp(void * hSource, bool ar2nl)
 {
 	CString buf;
 	CString db_name = ((CDatabase *) hSource)->GetDatabaseName ();
@@ -1833,6 +1834,7 @@ CString fLM4fthyp(void * hSource)
 			{
 				pthyp = new (Hyp_4ft_Meta);
 //				pthyp->flag_a = pthyp->flag_s = pthyp->flag_c = FALSE;
+				pthyp->ar2nl_sentences = "";
 				id_hlp.Format ("%d", h_id);
 				pthyp->id = "hyp4ft" + id_hlp;
 				pthyp->db_name = db_name;
@@ -1856,6 +1858,8 @@ CString fLM4fthyp(void * hSource)
 				pthyp->up_bnd_eq = pthyp->get_up_bnd_eq ();
 				pthyp->fisher = pthyp->get_fisher ();
 				pthyp->chi_sq = pthyp->get_chi_sq ();
+
+				if (ar2nl) pthyp->ar2nl_sentences = Get_4ftAR2NL (h_id, db_name);
 
 				pthyp->ant_id = "ant" + pthyp->id;
 				pthyp->suc_id = "suc" + pthyp->id;
@@ -1938,6 +1942,16 @@ CString fLM4fthyp(void * hSource)
 	list.RemoveAll ();
 
 	return buf;
+}
+
+CString fLM4fthyp (void * hSource)
+{
+	return fLM4fthyp_hlp (hSource, false);
+}
+
+CString fLM4fthyp_ar2nl(void* hSource)
+{
+	return fLM4fthyp_hlp (hSource, true);
 }
 
 // --- AP CF-hypothese

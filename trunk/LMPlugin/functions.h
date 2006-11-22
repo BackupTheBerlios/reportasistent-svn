@@ -72,4 +72,6 @@ CString fLMKLhyp(void * hSource);
 
 CString fLMSDKLhyp(void * hSource);
 
+CString fLM4fthyp_ar2nl(void* hSource);
+
 #endif /* _FUNCTIONS*/

@@ -238,6 +238,7 @@ public:
 	CString		ant_id;
 	CString		suc_id;
 	CString		con_id;
+	CString		ar2nl_sentences;
 //	bool		flag_a;
 //	bool		flag_s;
 //	bool		flag_c;

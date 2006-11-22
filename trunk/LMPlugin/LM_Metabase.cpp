@@ -644,6 +644,11 @@ CString Hyp_4ft_Meta::xml_convert ()
 	xml_string = xml_string + " antecedent=\"" + ant_id + "\" ";
 	xml_string = xml_string + " succedent=\"" + suc_id + "\" ";
 	xml_string = xml_string + " condition=\"" + con_id + "\"";
+	if (ar2nl_sentences != "")
+	{
+		xml_string = xml_string + " ";
+		xml_string = xml_string + ar2nl_sentences + " ";
+	}
 	xml_string += "/>  ";
 	//end of hyp_4ft element
 
