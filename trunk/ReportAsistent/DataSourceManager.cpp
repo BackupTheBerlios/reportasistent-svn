@@ -677,6 +677,9 @@ BOOL CDataSourcesManager::setSourcePublicID(int source_index, public_source_id_t
 	public_source_id_t old_ID;  // previous source name
 	if(SourcesTab.GetUpperBound() >= source_index  &&  source_index>=0)
 	{
+		if((CString) source_id == "") // public ID of data source mustn't be an empty string
+			return FALSE;
+		
 		if(checkSourcePublicIDdupl(source_index, source_id))
 		{
 			old_ID = SourcesTab[source_index]->PublicID;
@@ -686,7 +689,7 @@ BOOL CDataSourcesManager::setSourcePublicID(int source_index, public_source_id_t
 			CSkeletonDoc * Doc = ((CReportAsistentApp *) AfxGetApp())->FirstDocumentInFirstTemplate();
 
 			// smaz
-			int sirotku_opraveno = Doc->changeOrphansDataSourceToDefault();
+			//int sirotku_opraveno = Doc->changeOrphansDataSourceToDefault();
 
 			try{Doc->updateAElSourcePublicID(old_ID, source_id); }
 			catch(...)
