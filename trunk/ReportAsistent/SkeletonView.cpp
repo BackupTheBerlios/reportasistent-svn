@@ -36,6 +36,7 @@ BEGIN_MESSAGE_MAP(CSkeletonView, CTreeView)
 	ON_WM_CAPTURECHANGED()
 	//}}AFX_MSG_MAP
 	ON_COMMAND(ID_SIGN_ORPHANS, OnSignOrphans)
+	ON_COMMAND(ID_DELETE_ORPHANS, OnDeleteOrphans)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -816,20 +817,35 @@ void CSkeletonView::DeleteSelectedItem()
 }
 
 
-void CSkeletonView::SignSingleOrphan(HTREEITEM item)
+void CSkeletonView::ResolveSingleOrphan(HTREEITEM item, LPARAM mode)
 {
 	CTreeCtrl & tree_ctrl = GetTreeCtrl();
 
 	CElementManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
 
 	MSXML2::IXMLDOMElementPtr elem = CSkeletonDoc::ElementFromItemData(tree_ctrl.GetItemData(item));
+	MSXML2::IXMLDOMElementPtr pParent;
 
 	if (m.isElementActive(m.IdentifyElement(elem)))
 	{
 		if (m.isActiveElementOrphan(elem))
-		{
-			tree_ctrl.SetItemState(item, TVIS_BOLD, TVIS_BOLD);
-			tree_ctrl.SetItemState(item, INDEXTOOVERLAYMASK(1), TVIS_OVERLAYMASK);
+		{	
+			switch(mode)
+			{
+			// deleting orphans
+			case ORP_DELETE:
+				tree_ctrl.DeleteItem(item);
+				pParent = elem->GetparentNode();
+				if(pParent != NULL)
+					pParent->removeChild(elem);
+				break;
+			
+				// signing orphans
+			case ORP_SIGN:
+				tree_ctrl.SetItemState(item, TVIS_BOLD, TVIS_BOLD);
+				tree_ctrl.SetItemState(item, INDEXTOOVERLAYMASK(1), TVIS_OVERLAYMASK);
+				break;
+			}
 		}
 		else
 		{
@@ -845,24 +861,30 @@ void CSkeletonView::SignSingleOrphan(HTREEITEM item)
 		while (hChildItem != NULL)
 		{
 			//rekurze
-			SignSingleOrphan(hChildItem);
-
 			hNextItem = tree_ctrl.GetNextItem(hChildItem, TVGN_NEXT);
+
+			ResolveSingleOrphan(hChildItem, mode);
+
 			hChildItem = hNextItem;
 		}
    }
 }
 
 
-void CSkeletonView::SignOrphans(void)
+void CSkeletonView::ResolveOrphans(LPARAM mode)
 {
 	CTreeCtrl & tree_ctrl = GetTreeCtrl();
 
-	SignSingleOrphan(tree_ctrl.GetRootItem());
+	ResolveSingleOrphan(tree_ctrl.GetRootItem(), mode);
 
 }
 
 void CSkeletonView::OnSignOrphans()
 {
-	SignOrphans();
+	ResolveOrphans(ORP_SIGN);
+}
+
+void CSkeletonView::OnDeleteOrphans()
+{
+	ResolveOrphans(ORP_DELETE);
 }

@@ -113,6 +113,8 @@ public:
 public:
 	// finds list of all "orphans active elements" in skeleton and if supported, changes their datasources to default source. Returns number of updated elements 
 	int changeOrphansDataSourceToDefault(void);
+public:
+	afx_msg void OnResetOrphans();
 };
 
 /////////////////////////////////////////////////////////////////////////////

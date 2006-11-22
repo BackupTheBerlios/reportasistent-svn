@@ -9,6 +9,17 @@
 #pragma once
 #endif // _MSC_VER > 1000
 
+
+//Kody:  definition of constants for ResolveOrphans() and ResolveSingleOrphan(), its mode parameter
+	// delete orphans
+#ifndef ORP_DELETE
+	#define ORP_DELETE 1
+#endif
+	// sign orphans
+#ifndef ORP_SIGN
+	#define ORP_SIGN 2
+#endif
+
 //Iva: Definition of constants for OnUpdate(), its lHint parameter
 #ifndef UT_DEL
 	#define UT_DEL 1
@@ -19,6 +30,7 @@
 #ifndef UT_EDIT
 	#define UT_EDIT 3
 #endif
+
 
 //Iva: Definition of class for OnUpdate(), its pHint parameter
 class CUT_Hint : public CObject
@@ -105,12 +117,14 @@ protected:
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 
-	void SignSingleOrphan(HTREEITEM item);
+	void ResolveSingleOrphan(HTREEITEM item, LPARAM mode);
 public:
 
-	void SignOrphans(void);
+	void ResolveOrphans(LPARAM mode);
 public:
 	afx_msg void OnSignOrphans();
+public:
+	afx_msg void OnDeleteOrphans();
 };
 
 #ifndef _DEBUG  // debug version in SkeletonView.cpp

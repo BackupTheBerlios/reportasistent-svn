@@ -1,0 +1,67 @@
+Øešení sirotkù v LM-RA
+----------------------
+(sepsal Kody, 22.11.2006)
+
+
+Na øešení sirotkù jsou pøipraveny tyto funkce:
+
+1. void CSkeletonView::ResolveOrphans(LPARAM mode)
+   ===============================================
+
+ A) mode = ORP_DELETE
+
+   - vymaže sirotky ze CSkeletonView (Tree control) a zároveò CSkeletonDoc (XML DOM reprezentace kostry) 
+   - k dispozici akcelerátor ID_DELETE_ORPHANS (Alt+Ctrl+D) - zachycuje ho CSkeletonView::OnDeleteOrphans()
+   
+ B) mode = ORP_SIGN
+
+   - oznaèí sirotky v Tree control kostry (tuèný nápis + otazníèek pøes ikonku)
+   - k dispozici akcelerátor ID_SIGN_ORPHANS (Alt+Ctrl+O) - zachycuje ho CSkeletonView::OnSignOrphans()
+
+Akcelerátory jsou zatím spíše kvùli ladìní, ale mùžou zùstat pokud napøíklad operace budou moci být vyvolány výbìrem položky nìkde v menu.
+
+
+2. int CSkeletonDoc::changeOrphansDataSourceToDefault(void)
+   ========================================================
+
+  Funkce projde kostru (jen XML DOM, Tree control se nemìní tak se ho to netýka) a pokusí se u sirotkù zmìnit datový zdroj na defaultní (pokud je def. zdroj od zásuvky, která daný AP podporuje). 
+Vrátí poèet opravených sirotkù.
+
+poznámka Kody: Chtìlo by to buï hned po ní zavolat 1B) na opravení kostry - nìkteøí sirotci se opraví. Nebo to zavolat už na konci tý funkce, ale nemùžu pøijít na to, jak se z CSkeletonDoc dostanu na Tree control s kostrou ... 
+
+
+
+Strategie práce se sirotky:
+==========================
+
+3. sirotci by mìli být v kostøe poøád viditelní - pøidat volání 1B do všech funkcí, které mohou vést ke vzniku sirotkù a dále radìji do všech funkcí, kde se pøekresluje èást kostra. Samozøejmì se funkce zavolá i pøi startu programu a prvním naplnìní kostry.
+Sirotek mùže vzniknout:
+
+ - odebrání datového zdroje (ne pøi pøejmenování zdroje - to je ošetøeno)
+ - kopírování èásti kostry (mùže být pøeneseno pøes clipboard z jiné kostry)
+
+(možná jsou i další situace - pøemýšlejte)
+
+
+4. vyvolání operace uživatelem
+   ===========================
+
+- uživatel mùže dát pokyn ke
+
+  A) smazání všech sirotkù - vyvolá se 1A
+  B) zmìnì (kde to jde) na defaultní zdroj - vyvolá se 2
+
+Bylo by dobré na tyto operace vytvoøit položky v menu
+
+
+5. Vyøešení sirotkù tìsnì pøed generováním
+   =======================================
+
+Tìsnì pøed generováním (napø. na zaèátku fce Generate() ) se provede "vyøešení sirotkù". Volba operace pøi øešení sirotkù se pøidá do dialogu "options" (aspoò tam nìco pøibude :-)
+
+Možnosti:
+
+   A) ignorace - sirotci se ignorují
+   B) smazání - zavolá se 1A
+   C) pokus o pøenastavení zdroje na defaultní - zavolá se 2 (kde se nepovede, tam zùstane prvek sirotkem a dále se ignoruje)
+
