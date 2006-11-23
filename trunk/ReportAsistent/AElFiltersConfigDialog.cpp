@@ -228,9 +228,9 @@ BOOL CAElFiltersConfigDialog::OnApply()
 
 void CAElFiltersConfigDialog::UpdateFiltersList(void)
 {
-	ASSERT(m_filter_DOM != NULL);
-
 	m_FiltersList.DeleteAllItems();
+
+	if(m_filter_DOM == NULL) return;
 
 	MSXML2::IXMLDOMNodeListPtr attr_filters =
 		m_cloned_active_element->selectNodes("filter[@type=\"complex\"]/attribute_filter");
@@ -267,7 +267,9 @@ int CAElFiltersConfigDialog::GetCurSelFiltersList()
 
 void CAElFiltersConfigDialog::UpdateResult(void)
 {
-		//zaloha dat
+	if (m_filter_DOM == NULL) return;
+	
+	//zaloha dat
 	MSXML2::IXMLDOMElementPtr values_clone = m_filter_DOM->selectSingleNode("/dialog_data/values")->cloneNode(VARIANT_TRUE);
 	
 	CAElTransform tr(m_cloned_active_element);

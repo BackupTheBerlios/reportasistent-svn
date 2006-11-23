@@ -625,6 +625,8 @@ void CComplexFilterDialog::OnBnClickedRefreshResultsButton()
 
 int CFilterResultImpl::getAttributesCount()
 {
+	if (m_result_filter_DOM == NULL) return 0;
+
 	MSXML2::IXMLDOMNodeListPtr attributes = m_result_filter_DOM->selectNodes("/dialog_data/attributes/attribute");
 	
 	if (attributes != NULL)	return attributes->length;

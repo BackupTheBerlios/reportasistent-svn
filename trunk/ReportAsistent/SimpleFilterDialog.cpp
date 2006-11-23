@@ -225,6 +225,8 @@ void CSimpleFilterDialog::SaveSelection(void)
 
 void CSimpleFilterDialog::UpdateSimpleView(void)
 {
+	if (m_filter_DOM == NULL) return;
+
 	//zaloha dat
 	MSXML2::IXMLDOMElementPtr values_clone = m_filter_DOM->selectSingleNode("/dialog_data/values")->cloneNode(VARIANT_TRUE);
 	
