@@ -41,6 +41,8 @@ private:
 
 // Implementation
 protected:
+	void ConfigureFilter();
+	void AddFilter();
 	// Generated message map functions
 	//{{AFX_MSG(CAElFiltersConfigDialog)
 	afx_msg void OnRemoveFilterButton();
@@ -48,6 +50,7 @@ protected:
 	afx_msg void OnMoveDownButton();
 	afx_msg void OnBnClickedAddFilterButton();
 	afx_msg void OnBnClickedConfigureFilterButton();
+	afx_msg void OnDblclkFiltersList(NMHDR* pNMHDR, LRESULT* pResult);
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 

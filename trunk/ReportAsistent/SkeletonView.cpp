@@ -85,7 +85,7 @@ void CSkeletonView::OnInitialUpdate()
 	UINT cis = GetTreeCtrl().GetIndent(); //default: 19
 	GetTreeCtrl().SetIndent(25);
 	cis = GetTreeCtrl().GetItemHeight(); //default: 16
-	GetTreeCtrl().SetItemHeight(20 );
+	GetTreeCtrl().SetItemHeight(20);
 
 
 

@@ -2,7 +2,7 @@
 
 [General Info]
 Version=1
-LastClass=CAboutDlg
+LastClass=COptionsDialog
 LastTemplate=CRecordset
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "ReportAsistent.h"
@@ -16,48 +16,48 @@ Class4=CMainFrame
 
 ResourceCount=21
 Resource1=IDD_ABOUTBOX
-Resource2=IDD_DIALOGTEXT (English (U.S.))
+Resource2=IDD_DIALOG_CHAPTER (English (U.S.))
 Class5=CAboutDlg
-Resource3=IDD_WAIT_DIALOG (English (U.S.))
-Resource4=IDD_PROPERTY_EDITOR (English (U.S.))
+Resource3=IDD_ACTIVE_ELEMENT_DIALOG (English (U.S.))
+Resource4=IDD_FILTER_AND_CONFIG_DIALOG (English (U.S.))
 Class6=CElementTextDialog
-Resource5=IDD_DIALOG_REPORT (English (U.S.))
+Resource5=IDD_GENERATE_DIALOG (English (U.S.))
 Class7=CSimpleFilterDialog
-Resource6=IDD_AEL_CONFIG_DIALOG
+Resource6=IDD_SOURCES_DIALOG (English (U.S.))
 Class8=CGenerateDialog
-Resource7=IDD_COMPLEX_FILTER_DIALOG (English (U.S.))
+Resource7=IDD_TRANSFORMATIONS_DIALOG (English (U.S.))
 Class9=CSourcesDialog
-Resource8=IDD_TRANSFORMATIONS_DIALOG (English (U.S.))
+Resource8=IDD_DIALOGTEXT (English (U.S.))
 Class10=CActiveElementDialog
-Resource9=IDD_FILTER_AND_CONFIG_DIALOG (English (U.S.))
+Resource9=IDD_PROPERTY_EDITOR (English (U.S.))
 Class11=CTransformationsDialog
 Class12=TCategory_Recordset
-Resource10=IDD_DIALOG_CHAPTER (English (U.S.))
+Resource10=IDD_COMPLEX_FILTER_DIALOG (English (U.S.))
 Class13=CAttributeLinkDialog
-Resource11=IDD_ACTIVE_ELEMENT_DIALOG (English (U.S.))
+Resource11=IDD_OPTIONS_DIALOG (English (U.S.))
 Class14=CAttributeLinkTableDialog
-Resource12=IDD_SIMPLE_FILTER_DIALOG (English (U.S.))
+Resource12=IDD_DIALOG_PARAGRAPH (English (U.S.))
 Class15=CElementParagraphDialog
 Class16=CElementChapterDialog
 Class17=CElementDialogBase
 Class18=CPropertyEditor
-Resource13=IDD_GENERATE_DIALOG (English (U.S.))
-Resource14=IDD_SOURCES_DIALOG (English (U.S.))
+Resource13=IDD_ATTRIBUTE_LINK_DIALOG (English (U.S.))
+Resource14=IDD_WAIT_DIALOG (English (U.S.))
 Class19=CWaitDialog
-Resource15=IDD_OPTIONS_DIALOG (English (U.S.))
+Resource15=IDD_INCLUDE_DIALOG (English (U.S.))
 Class20=CWaitAnimation
 Class21=CWordEventHandler
-Resource16=IDD_ATTRIBUTE_LINK_DIALOG (English (U.S.))
+Resource16=IDD_ABOUTBOX (English (U.S.))
 Class22=COptionsDialog
 Class23=CElementReportDialog
 Class24=CEToolBar
-Resource17=IDD_INCLUDE_DIALOG (English (U.S.))
+Resource17=IDD_AEL_CONFIG_DIALOG
 Class25=CComplexFilterDialog
-Resource18=IDD_DIALOG_PARAGRAPH (English (U.S.))
+Resource18=IDD_DIALOG_REPORT (English (U.S.))
 Resource19=IDD_ATTRIBUTE_LINK_TABLE_DIALOG (English (U.S.))
 Class26=CAElFiltersConfigDialog
 Class27=TOrder_of_Categories
-Resource20=IDD_ABOUTBOX (English (U.S.))
+Resource20=IDD_SIMPLE_FILTER_DIALOG (English (U.S.))
 Resource21=IDR_MAINFRAME (English (U.S.))
 
 [CLS:CReportAsistentApp]
@@ -240,7 +240,7 @@ Control1=IDC_STATIC,static,1342308352
 [DLG:IDD_DIALOGTEXT (English (U.S.))]
 Type=1
 Class=CElementTextDialog
-ControlCount=9
+ControlCount=10
 Control1=IDOK,button,1342242817
 Control2=IDCANCEL,button,1342242816
 Control3=IDC_DIALTEXT_EDIT,edit,1350631492
@@ -250,6 +250,7 @@ Control6=IDC_STATIC,static,1342308352
 Control7=IDC_STYLES_COMBO,combobox,1344340227
 Control8=IDC_STATIC,static,1342308352
 Control9=IDC_STYLES_REFRESH_BUTTON,button,1342242816
+Control10=ID_HELP,button,1342242816
 
 [CLS:CSimpleFilterDialog]
 Type=0
@@ -653,7 +654,7 @@ Column39=[tmQuantity].[Notice], 12, 510
 [DLG:IDD_ATTRIBUTE_LINK_TABLE_DIALOG (English (U.S.))]
 Type=1
 Class=CAttributeLinkTableDialog
-ControlCount=18
+ControlCount=19
 Control1=IDOK,button,1342242817
 Control2=IDCANCEL,button,1342242816
 Control3=IDC_TARGET_COMBO,combobox,1344340227
@@ -672,11 +673,12 @@ Control15=IDC_STYLE_COMBO,combobox,1344340227
 Control16=IDC_STATIC,static,1342308352
 Control17=IDC_STATIC,static,1342308352
 Control18=IDC_ATTRLINKTABLE_ID_EDIT,edit,1350631568
+Control19=ID_HELP,button,1342242816
 
 [DLG:IDD_ATTRIBUTE_LINK_DIALOG (English (U.S.))]
 Type=1
 Class=CAttributeLinkDialog
-ControlCount=12
+ControlCount=13
 Control1=IDOK,button,1342242817
 Control2=IDCANCEL,button,1342242816
 Control3=IDC_TARGET_COMBO,combobox,1344340227
@@ -689,11 +691,12 @@ Control9=IDC_STATIC,static,1342308352
 Control10=IDC_STYLES_REFRESH_BUTTON,button,1342242816
 Control11=IDC_STATIC,static,1342308352
 Control12=IDC_ATTRLINK_ID_EDIT,edit,1350631568
+Control13=ID_HELP,button,1342242816
 
 [DLG:IDD_SOURCES_DIALOG (English (U.S.))]
 Type=1
 Class=CSourcesDialog
-ControlCount=11
+ControlCount=12
 Control1=IDC_STATIC,static,1342308352
 Control2=IDC_PLUGINS_COMBO,combobox,1344340227
 Control3=IDC_STATIC,button,1342177287
@@ -705,6 +708,7 @@ Control8=IDC_REMOVE_BUTTON,button,1342242816
 Control9=IDC_RENAME_BUTTON,button,1342242816
 Control10=IDC_SET_DEFAULT_BUTTON,button,1342242816
 Control11=IDC_STATIC,button,1342177287
+Control12=ID_HELP,button,1342242816
 
 [DB:Bool_Cedent_Recordset]
 DB=1
@@ -813,7 +817,7 @@ Column99=[tsTaskSubType].[Notice], 12, 510
 [DLG:IDD_DIALOG_PARAGRAPH (English (U.S.))]
 Type=1
 Class=CElementParagraphDialog
-ControlCount=7
+ControlCount=8
 Control1=IDOK,button,1342242817
 Control2=IDCANCEL,button,1342242816
 Control3=IDC_STATIC,static,1342308352
@@ -821,6 +825,7 @@ Control4=IDC_DIALPARAGRAPH_IDEDIT,edit,1350631568
 Control5=IDC_STYLES_COMBO,combobox,1344340227
 Control6=IDC_STATIC,static,1342308352
 Control7=IDC_STYLES_REFRESH_BUTTON,button,1342242816
+Control8=ID_HELP,button,1342242816
 
 [CLS:CElementParagraphDialog]
 Type=0
@@ -834,13 +839,14 @@ VirtualFilter=dWC
 [DLG:IDD_DIALOG_CHAPTER (English (U.S.))]
 Type=1
 Class=CElementChapterDialog
-ControlCount=6
+ControlCount=7
 Control1=IDOK,button,1342242817
 Control2=IDCANCEL,button,1342242816
 Control3=IDC_STATIC,static,1342308352
 Control4=IDC_DIALCHAPTER_IDEDIT,edit,1350631568
 Control5=IDC_STATIC,static,1342308352
 Control6=IDC_DIALCHAPTER_TITLEEDIT,edit,1350631552
+Control7=ID_HELP,button,1342242816
 
 [CLS:CElementChapterDialog]
 Type=0
@@ -1179,12 +1185,13 @@ Column42=[tsTaskSubType].[Notice], 12, 510
 [DLG:IDD_PROPERTY_EDITOR (English (U.S.))]
 Type=1
 Class=CPropertyEditor
-ControlCount=5
+ControlCount=6
 Control1=IDOK,button,1342242817
 Control2=IDCANCEL,button,1342242816
 Control3=IDC_SCROLLBAR1,scrollbar,1342177281
 Control4=IDC_STATIC1,static,1342177287
 Control5=IDC_ERROR_TEXT,static,1342308352
+Control6=ID_HELP,button,1342242816
 
 [CLS:CPropertyEditor]
 Type=0
@@ -1886,12 +1893,13 @@ LastObject=CWordEventHandler
 [DLG:IDD_OPTIONS_DIALOG (English (U.S.))]
 Type=1
 Class=COptionsDialog
-ControlCount=5
+ControlCount=6
 Control1=IDOK,button,1342242817
 Control2=IDCANCEL,button,1342242816
 Control3=IDC_STATIC,button,1342177287
 Control4=IDC_CZECH_RADIO,button,1342177289
 Control5=IDC_ENGLISH_RADIO,button,1342177289
+Control6=ID_HELP,button,1342242816
 
 [CLS:COptionsDialog]
 Type=0
@@ -1904,7 +1912,7 @@ VirtualFilter=dWC
 [DLG:IDD_DIALOG_REPORT (English (U.S.))]
 Type=1
 Class=CElementReportDialog
-ControlCount=10
+ControlCount=11
 Control1=IDOK,button,1342242817
 Control2=IDCANCEL,button,1342242816
 Control3=IDC_STATIC,static,1342308352
@@ -1915,6 +1923,7 @@ Control7=IDC_DIALREPORT_SUBTITLEEDIT,edit,1350631552
 Control8=IDC_STATIC,static,1342308352
 Control9=IDC_STATIC,static,1342308352
 Control10=IDC_DIALREPORT_AUTHOREDIT,edit,1350631552
+Control11=ID_HELP,button,1342242816
 
 [CLS:CElementReportDialog]
 Type=0
@@ -1937,7 +1946,7 @@ LastObject=CEToolBar
 [DLG:IDD_COMPLEX_FILTER_DIALOG (English (U.S.))]
 Type=1
 Class=CComplexFilterDialog
-ControlCount=21
+ControlCount=23
 Control1=IDC_ATTRIBUTES_LIST,listbox,1353777409
 Control2=IDC_STATIC,static,1342308352
 Control3=IDC_VALUES_LIST,listbox,1353777409
@@ -1959,6 +1968,8 @@ Control18=IDC_STATIC,static,1342308352
 Control19=IDC_TOPN_EDIT,edit,1350639744
 Control20=IDC_TOPN_SPIN,msctls_updown32,1342177330
 Control21=IDC_REFRESH_RESULTS_BUTTON,button,1342242816
+Control22=ID_HELP,button,1342242816
+Control23=IDC_STATIC,static,1342308352
 
 [CLS:CComplexFilterDialog]
 Type=0
@@ -1992,7 +2003,7 @@ Column17=[tsCoefficientType].[Notice], 12, 510
 [DLG:IDD_INCLUDE_DIALOG (English (U.S.))]
 Type=1
 Class=?
-ControlCount=7
+ControlCount=8
 Control1=IDOK,button,1342242817
 Control2=IDCANCEL,button,1342242816
 Control3=IDC_STATIC,static,1342308352
@@ -2000,6 +2011,7 @@ Control4=IDC_INCLUDE_ID_EDIT,edit,1350631568
 Control5=IDC_INCLUDE_FILENAME_EDIT,edit,1350631552
 Control6=IDC_BROWSE_BUTTON,button,1342242816
 Control7=IDC_STATIC,static,1342308352
+Control8=ID_HELP,button,1342242816
 
 [DLG:IDD_FILTER_AND_CONFIG_DIALOG (English (U.S.))]
 Type=1
@@ -2021,7 +2033,7 @@ HeaderFile=AElFiltersConfigDialog.h
 ImplementationFile=AElFiltersConfigDialog.cpp
 BaseClass=CDialog
 Filter=D
-LastObject=CAElFiltersConfigDialog
+LastObject=IDC_RESULT_LIST
 VirtualFilter=dWC
 
 [CLS:TCategory_Recordset]

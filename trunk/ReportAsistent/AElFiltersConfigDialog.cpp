@@ -61,6 +61,7 @@ BEGIN_MESSAGE_MAP(CAElFiltersConfigDialog, CDialog)
 	ON_BN_CLICKED(IDC_REMOVE_FILTER_BUTTON, OnRemoveFilterButton)
 	ON_BN_CLICKED(IDC_MOVE_UP_BUTTON, OnMoveUpButton)
 	ON_BN_CLICKED(IDC_MOVE_DOWN_BUTTON, OnMoveDownButton)
+	ON_NOTIFY(NM_DBLCLK, IDC_FILTERS_LIST, OnDblclkFiltersList)
 	//}}AFX_MSG_MAP
 	ON_BN_CLICKED(IDC_ADD_FILTER_BUTTON, OnBnClickedAddFilterButton)
 //	ON_CBN_SELCHANGE(IDC_DATA_SOURCE_COMBO, OnCbnSelchangeDataSourceCombo)
@@ -200,30 +201,12 @@ void CAElFiltersConfigDialog::OnMoveDownButton()
 
 void CAElFiltersConfigDialog::OnBnClickedConfigureFilterButton()
 {
-	int nItem = GetCurSelFiltersList();
-	if (nItem == -1) return;
-
-	CString q;
-	q.Format("filter[@type=\"complex\"]/attribute_filter[%d]", nItem);
-
-	
-	CComplexFilterDialog dlg(m_cloned_active_element, m_filter_DOM, m_cloned_active_element->selectSingleNode((LPCTSTR) q));
-	if (IDOK == dlg.DoModal())
-	{
-		UpdateFiltersList();
-		UpdateResult();
-		SetModified();
-	}
+	ConfigureFilter();
 }
 
 void CAElFiltersConfigDialog::OnBnClickedAddFilterButton()
 {
-	CComplexFilterDialog dlg(m_cloned_active_element, m_filter_DOM);
-	dlg.DoModal();
-
-	UpdateFiltersList();
-	UpdateResult();
-	SetModified();
+	AddFilter();
 }
 
 MSXML2::IXMLDOMElementPtr & CAElFiltersConfigDialog::getActiveElement(void)
@@ -307,4 +290,39 @@ BOOL CAElFiltersConfigDialog::OnSetActive()
 	UpdateResult();
 	
 	return CPropertyPage::OnSetActive();
+}
+
+void CAElFiltersConfigDialog::OnDblclkFiltersList(NMHDR* pNMHDR, LRESULT* pResult) 
+{
+	ConfigureFilter();
+	
+	*pResult = 0;
+}
+
+void CAElFiltersConfigDialog::AddFilter()
+{
+	CComplexFilterDialog dlg(m_cloned_active_element, m_filter_DOM);
+	dlg.DoModal();
+
+	UpdateFiltersList();
+	UpdateResult();
+	SetModified();
+}
+
+void CAElFiltersConfigDialog::ConfigureFilter()
+{
+	int nItem = GetCurSelFiltersList();
+	if (nItem == -1) return;
+
+	CString q;
+	q.Format("filter[@type=\"complex\"]/attribute_filter[%d]", nItem);
+
+	
+	CComplexFilterDialog dlg(m_cloned_active_element, m_filter_DOM, m_cloned_active_element->selectSingleNode((LPCTSTR) q));
+	if (IDOK == dlg.DoModal())
+	{
+		UpdateFiltersList();
+		UpdateResult();
+		SetModified();
+	}
 }

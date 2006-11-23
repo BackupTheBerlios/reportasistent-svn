@@ -38,6 +38,7 @@ public:
 
 // Implementation
 protected:
+	void SetDefault();
 
 	// Generated message map functions
 	//{{AFX_MSG(CSourcesDialog)
@@ -49,6 +50,7 @@ protected:
 	afx_msg void OnRenameButton();
 	afx_msg void OnEndlabeleditSourcesList(NMHDR* pNMHDR, LRESULT* pResult);
 	afx_msg void OnSetDefaultButton();
+	afx_msg void OnDblclkSourcesList(NMHDR* pNMHDR, LRESULT* pResult);
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };

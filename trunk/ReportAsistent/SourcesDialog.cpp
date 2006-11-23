@@ -43,6 +43,7 @@ BEGIN_MESSAGE_MAP(CSourcesDialog, CDialog)
 	ON_BN_CLICKED(IDC_RENAME_BUTTON, OnRenameButton)
 	ON_NOTIFY(LVN_ENDLABELEDIT, IDC_SOURCES_LIST, OnEndlabeleditSourcesList)
 	ON_BN_CLICKED(IDC_SET_DEFAULT_BUTTON, OnSetDefaultButton)
+	ON_NOTIFY(NM_DBLCLK, IDC_SOURCES_LIST, OnDblclkSourcesList)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -279,7 +280,19 @@ void CSourcesDialog::OnEndlabeleditSourcesList(NMHDR* pNMHDR, LRESULT* pResult)
 
 void CSourcesDialog::OnSetDefaultButton() 
 {
-	//nalezeni selected source
+	SetDefault();
+}
+
+void CSourcesDialog::OnDblclkSourcesList(NMHDR* pNMHDR, LRESULT* pResult) 
+{
+	SetDefault();
+	
+	*pResult = 0;
+}
+
+void CSourcesDialog::SetDefault()
+{
+//nalezeni selected source
 	POSITION pos = m_SourcesList.GetFirstSelectedItemPosition();
 	if (pos == NULL) return;
 	int nItem = m_SourcesList.GetNextSelectedItem(pos);
@@ -288,5 +301,5 @@ void CSourcesDialog::OnSetDefaultButton()
 	
 	m.setDefaultSource(m_SourcesList.GetItemText(nItem, 0));
 
-	UpDateList();	
+	UpDateList();
 }
