@@ -17,6 +17,7 @@ CAElConfigDialog::CAElConfigDialog(CAElDataShare & data_share)
 	, CAElDataShare(data_share)
 	, m_bSourceIsInit(FALSE)
 	, m_sIdEdit("")
+	, CFilterResultImpl(data_share.m_filter_DOM)
 {
 
 	//Iva: Inicialisation 
@@ -84,6 +85,7 @@ void CAElConfigDialog::DDV_NonDuplicateID(CDataExchange *pDX, int nId, CString c
 void CAElConfigDialog::DoDataExchange(CDataExchange* pDX)
 {
 	CPropertyPage::DoDataExchange(pDX);
+	DDX_Control(pDX, IDC_RESULT_LIST, m_ResultList);
 	DDX_Control(pDX, IDC_DATA_SOURCE_COMBO, m_SourcesCombo);
 	DDX_Text(pDX, IDC_ID_EDIT, m_sIdEdit);
 	DDV_NonDuplicateID(pDX, IDC_ID_EDIT, m_sIdEdit);
@@ -128,6 +130,25 @@ BOOL CAElConfigDialog::OnInitDialog()
 
 	int sel = m_SourcesCombo.SelectString(-1, (_bstr_t) m_active_element->getAttribute("source"));
 	if (sel == CB_ERR) m_SourcesCombo.SelectString(-1, dm.getDefaultSource());
+	
+	CFont f;
+	f.CreateFont(
+	   12,                        // nHeight
+	   0,                         // nWidth
+	   0,                         // nEscapement
+	   0,                         // nOrientation
+	   FW_NORMAL,                 // nWeight
+	   FALSE,                     // bItalic
+	   FALSE,                     // bUnderline
+	   0,                         // cStrikeOut
+	   ANSI_CHARSET,              // nCharSet
+	   OUT_DEFAULT_PRECIS,        // nOutPrecision
+	   CLIP_DEFAULT_PRECIS,       // nClipPrecision
+	   DEFAULT_QUALITY,           // nQuality
+	   DEFAULT_PITCH | FF_SWISS,  // nPitchAndFamily
+	   "Arial");                 // lpszFacename
+	
+	GetDlgItem(IDC_NO_FILTERS)->SetFont(& f, FALSE);
 
 
 	return TRUE;  // return TRUE unless you set the focus to a control
@@ -148,7 +169,7 @@ void CAElConfigDialog::OnCbnSelchangeDataSourceCombo()
 
 HBRUSH CAElConfigDialog::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 {
-	HBRUSH hbr = CPropertyPage::OnCtlColor(pDC, pWnd, nCtlColor);
+//	HBRUSH hbr = CPropertyPage::OnCtlColor(pDC, pWnd, nCtlColor);
 
 	// TODO:  Change any attributes of the DC here
 
@@ -158,11 +179,18 @@ HBRUSH CAElConfigDialog::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 		OnCbnSelchangeDataSourceCombo();
 		SetModified(FALSE);
 		Invalidate(FALSE);
+		OnSetActive();
+	}
+
+	if (pWnd->GetDlgCtrlID() == IDC_NO_FILTERS)
+	{		
+		pDC->SetTextColor(RGB(255, 0, 0));
+		return (HBRUSH) GetStockObject(WHITE_BRUSH);
 	}
 
 
 	// TODO:  Return a different brush if the default is not desired
-	return hbr;
+	return CPropertyPage::OnCtlColor(pDC, pWnd, nCtlColor);
 }
 
 void CAElConfigDialog::OnEnChangeIdEdit()
@@ -183,4 +211,48 @@ BOOL CAElConfigDialog::OnApply()
 	ApplyChanges();
 
 	return TRUE;
+}
+
+BOOL CAElConfigDialog::OnSetActive()
+{
+	if (! m_bSourceIsInit) return CPropertyPage::OnSetActive();
+
+	InitResultView();
+
+	MSXML2::IXMLDOMNodePtr simple_f = m_cloned_active_element->selectSingleNode("filter[@type='simple']");
+	MSXML2::IXMLDOMNodePtr complex_f = m_cloned_active_element->selectSingleNode("filter[@type='complex']");
+
+	if ((simple_f->firstChild == NULL) && (complex_f->firstChild == NULL))
+	{
+		GetDlgItem(IDC_NO_FILTERS)->ShowWindow(SW_SHOW);
+		GetDlgItem(IDC_NO_FLTER_FRAME)->ShowWindow(SW_SHOW);
+		m_ResultList.DeleteAllItems();
+		m_ResultList.EnableWindow(FALSE);
+		
+		return CPropertyPage::OnSetActive();
+	}
+
+	GetDlgItem(IDC_NO_FILTERS)->ShowWindow(SW_HIDE);
+	GetDlgItem(IDC_NO_FLTER_FRAME)->ShowWindow(SW_HIDE);
+	m_ResultList.EnableWindow();
+	
+
+	//zaloha dat
+	MSXML2::IXMLDOMElementPtr values_clone = m_filter_DOM->selectSingleNode("/dialog_data/values")->cloneNode(VARIANT_TRUE);
+	
+//	simple_f = simple_f->cloneNode(VARIANT_TRUE);
+
+	CAElTransform tr(m_cloned_active_element);
+
+//	AfxMessageBox(simple_f->xml);
+
+	tr.ApplyAllFilters(m_filter_DOM);
+
+	CFilterResultImpl::UpdateResult(m_filter_DOM);
+	
+	//obnova dat
+	m_filter_DOM->selectSingleNode("/dialog_data")->replaceChild(values_clone,
+		m_filter_DOM->selectSingleNode("/dialog_data/values"));
+
+	return CPropertyPage::OnSetActive();
 }

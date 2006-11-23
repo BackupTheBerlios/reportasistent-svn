@@ -5,7 +5,7 @@
 
 // CAElConfigDialog dialog
 
-class CAElConfigDialog : public CPropertyPage, CAElDataShare
+class CAElConfigDialog : public CPropertyPage, CAElDataShare, CFilterResultImpl
 {
 	DECLARE_DYNAMIC(CAElConfigDialog)
 
@@ -41,4 +41,6 @@ public:
 	afx_msg void OnEnChangeIdEdit();
 public:
 	virtual BOOL OnApply();
+public:
+	virtual BOOL OnSetActive();
 };

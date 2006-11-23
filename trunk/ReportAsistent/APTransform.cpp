@@ -553,6 +553,43 @@ void CAElTransform::TransformCmplexFilterToSimple()
 	}
 }
 
+void CAElTransform::ApplyAllFilters(MSXML2::IXMLDOMElementPtr & filter_dom)
+{
+	MSXML2::IXMLDOMNodePtr simple_filter_clone = 
+		m_active_element->selectSingleNode("filter[@type='simple']")->cloneNode(VARIANT_TRUE);
+
+	TransformCmplexFilterToSimple();
+
+	MSXML2::IXMLDOMNodePtr values_node = filter_dom->selectSingleNode("/dialog_data/values");
+	MSXML2::IXMLDOMNodePtr simple_filter = m_active_element->selectSingleNode("filter[@type='simple']");
+	MSXML2::IXMLDOMNodeListPtr simple_filter_ids = simple_filter->selectNodes("selection/@id");
+
+
+//	AfxMessageBox(simple_filter->xml);
+
+	for (int val = values_node->childNodes->length-1; val >= 0; val--)
+	{
+		BOOL remove_val = TRUE;
+		for (int id = 0; id < simple_filter_ids->length; id++)
+		{
+			if (values_node->childNodes->item[val]->selectSingleNode("@id")->text 
+					== 
+				simple_filter_ids->item[id]->text)
+			{
+				remove_val = FALSE;
+				break;
+			}			
+		}
+
+		if (remove_val) values_node->removeChild(values_node->childNodes->item[val]);
+	}
+
+	
+
+	m_active_element->replaceChild(simple_filter_clone, simple_filter);
+
+}
+
 void CAElTransform::ApplyAllAttributeFilters(MSXML2::IXMLDOMElementPtr & filter_dom)
 {
 	MSXML2::IXMLDOMNodeListPtr attr_filer_list = 

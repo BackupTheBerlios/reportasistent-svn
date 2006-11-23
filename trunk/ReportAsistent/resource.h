@@ -1,5 +1,5 @@
 //{{NO_DEPENDENCIES}}
-// Microsoft Developer Studio generated include file.
+// Microsoft Visual C++ generated include file.
 // Used by ReportAsistent.rc
 //
 #define IDD_ABOUTBOX                    100
@@ -132,6 +132,8 @@
 #define IDC_REMOVE_FILTER_BUTTON        1063
 #define IDC_CHECK1                      1063
 #define IDC_SIMPLE_FILTER_DISABLED_CHECK 1063
+#define IDC_NO_FILTERS                  1064
+#define IDC_NO_FLTER_FRAME              1065
 #define ID_MMGENREP                     32771
 #define ID_MMSOURCES                    32772
 #define ID_ELEMENT_EDIT                 32780
@@ -193,7 +195,7 @@
 #define _APS_3D_CONTROLS                     1
 #define _APS_NEXT_RESOURCE_VALUE        173
 #define _APS_NEXT_COMMAND_VALUE         32803
-#define _APS_NEXT_CONTROL_VALUE         1064
+#define _APS_NEXT_CONTROL_VALUE         1066
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

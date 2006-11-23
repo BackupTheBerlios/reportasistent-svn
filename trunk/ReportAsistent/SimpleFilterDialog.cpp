@@ -70,7 +70,7 @@ BOOL CSimpleFilterDialog::OnInitDialog()
 	CPropertyPage::OnInitDialog();
 
 	 
-	CheckSimpleFilterDisabled();
+//	CheckSimpleFilterDisabled();
 
 
 	return TRUE;  // return TRUE unless you set the focus to a control
@@ -176,6 +176,9 @@ void CSimpleFilterDialog::SetDisabledCheck(void)
 	m_bSimpleFilterDisabled = 
 		m_cloned_active_element->
 			selectNodes("filter[@type=\"simple\"]/selection")->length == 0;
+
+	//AfxMessageBox(m_cloned_active_element->selectSingleNode("filter[@type=\"simple\"]")->xml);
+
 }
 
 
