@@ -788,14 +788,9 @@ void CSkeletonView::OnCaptureChanged(CWnd *pWnd)
 
 
 
-void CSkeletonView::DeleteSelectedItem()
+void CSkeletonView::DeleteItem(HTREEITEM hSelTreeItem)
 {
-
-	
-	HTREEITEM hSelTreeItem = GetTreeCtrl().GetSelectedItem();
-
-	//dedek:
-	if (hSelTreeItem == NULL) return;
+	ASSERT(hSelTreeItem != NULL);
 
 	MSXML2::IXMLDOMElementPtr selected_element = CSkeletonDoc::ElementFromItemData(GetTreeCtrl().GetItemData( hSelTreeItem ));
 	
@@ -813,7 +808,13 @@ void CSkeletonView::DeleteSelectedItem()
 	CUT_Hint oHint(hSelTreeItem,0,0);
 	GetDocument()->SetModifiedFlag();
 	GetDocument()->UpdateAllViews(NULL,UT_DEL, &oHint);
+}
 
+void CSkeletonView::DeleteSelectedItem()
+{
+	HTREEITEM hSelTreeItem = GetTreeCtrl().GetSelectedItem();
+	if (hSelTreeItem == NULL) return;
+	DeleteItem(hSelTreeItem);
 }
 
 
@@ -834,10 +835,14 @@ void CSkeletonView::ResolveSingleOrphan(HTREEITEM item, LPARAM mode)
 			{
 			// deleting orphans
 			case ORP_DELETE:
+				//dedek:
+				DeleteItem(item);
+/*
 				tree_ctrl.DeleteItem(item);
 				pParent = elem->GetparentNode();
 				if(pParent != NULL)
 					pParent->removeChild(elem);
+*/
 				break;
 			
 				// signing orphans

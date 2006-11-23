@@ -393,7 +393,8 @@ BOOL CSkeletonDoc::EditActiveElement(MSXML2::IXMLDOMElementPtr &element)
 
 	if ((Res == IDOK) || bApplyButtonUsed)
 	{
-		element->setAttribute("id", (LPCTSTR)config.m_sIdEdit);        
+		//dedek: presunuto do CAElConfigDialog::OnApply
+		//element->setAttribute("id", (LPCTSTR)config.m_sIdEdit);        
 		return TRUE;			
 
 	}

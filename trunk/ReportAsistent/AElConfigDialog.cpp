@@ -178,6 +178,8 @@ void CAElConfigDialog::OnEnChangeIdEdit()
 
 BOOL CAElConfigDialog::OnApply()
 {
+	m_cloned_active_element->setAttribute("id", (LPCTSTR) m_sIdEdit);        
+
 	ApplyChanges();
 
 	return TRUE;

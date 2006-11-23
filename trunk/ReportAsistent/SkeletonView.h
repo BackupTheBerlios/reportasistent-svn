@@ -83,6 +83,10 @@ public:
 
 
 // Implementation
+	
+protected:
+	void DeleteItem(HTREEITEM hSelTreeItem);
+
 public:
 	void DeleteSelectedItem();
 	CImageList m_ImageList;

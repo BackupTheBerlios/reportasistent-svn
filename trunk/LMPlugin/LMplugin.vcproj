@@ -4,6 +4,7 @@
 	Version="8,00"
 	Name="LMplugin"
 	ProjectGUID="{1A0F1945-B8F3-4A36-8127-0EB74A0D1A03}"
+	RootNamespace="LMplugin"
 	Keyword="MFCProj"
 	>
 	<Platforms>
@@ -779,6 +780,10 @@
 				</FileConfiguration>
 			</File>
 			<File
+				RelativePath=".\TData_Matrix_Recordset.cpp"
+				>
+			</File>
+			<File
 				RelativePath="TDCQuantifier_Recordset.cpp"
 				>
 				<FileConfiguration
@@ -1225,6 +1230,10 @@
 			</File>
 			<File
 				RelativePath="TCondition_Recordset.h"
+				>
+			</File>
+			<File
+				RelativePath=".\TData_Matrix_Recordset.h"
 				>
 			</File>
 			<File
