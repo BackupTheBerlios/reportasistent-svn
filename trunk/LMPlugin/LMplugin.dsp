@@ -209,6 +209,10 @@ SOURCE=.\TCondition_Recordset.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\TData_Matrix_Recordset.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\TDCQuantifier_Recordset.cpp
 # End Source File
 # Begin Source File
@@ -398,6 +402,10 @@ SOURCE=.\TCoef_type_Recordset.h
 # Begin Source File
 
 SOURCE=.\TCondition_Recordset.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\TData_Matrix_Recordset.h
 # End Source File
 # Begin Source File
 

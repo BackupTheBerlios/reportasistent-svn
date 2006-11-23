@@ -74,4 +74,8 @@ CString fLMSDKLhyp(void * hSource);
 
 CString fLM4fthyp_ar2nl(void* hSource);
 
+// --- AP Analyzed data matrix
+
+CString fLMdata_matrix (void* hSource);
+
 #endif /* _FUNCTIONS*/

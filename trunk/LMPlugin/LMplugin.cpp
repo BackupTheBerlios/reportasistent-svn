@@ -65,6 +65,9 @@ CLMSock::CLMSock()
 
 	APTable[13].AP_ID = "hyp_4ft_ar2nl";
 	APTable[13].pFn = & fLM4fthyp_ar2nl;
+
+	APTable[14].AP_ID = "data_matrix";
+	APTable[14].pFn = & fLMdata_matrix;
 }
 
 

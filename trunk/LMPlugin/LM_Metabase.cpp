@@ -2968,3 +2968,33 @@ CString Hyp_SDKL_Meta::get_dr_max ()
 		}
 	return (LPCTSTR) (_bstr_t) max;
 }
+
+CString Data_Matrix_Meta::xml_convert ()
+{
+	CString xml_string;
+
+	db_name.Replace ("&", "&amp;");
+	id.Replace ("&", "&amp;");
+	matrix_name.Replace ("&", "&amp;");
+
+	db_name.Replace ("<", "&lt;");
+	id.Replace ("<", "&lt;");
+	matrix_name.Replace ("<", "&lt;");
+
+	db_name.Replace (">", "&gt;");
+	id.Replace (">", "&gt;");
+	matrix_name.Replace (">", "&gt;");
+
+	//beginning of the data_matrix element
+	xml_string = " <data_matrix id=\"" + id + "\" db_name=\"" + db_name + "\" ";
+	xml_string = xml_string + "matrix_name=\"" + matrix_name + "\" ";
+	xml_string = xml_string + "record_count=\"" + (LPCSTR) (_bstr_t) record_count + "\" ";
+	xml_string = xml_string + "integer_count=\"" + (LPCSTR) (_bstr_t) integer_count + "\" ";
+	xml_string = xml_string + "float_count=\"" + (LPCSTR) (_bstr_t) float_count + "\" ";
+	xml_string = xml_string + "string_count=\"" + (LPCSTR) (_bstr_t) string_count + "\" ";
+	xml_string = xml_string + "boolean_count=\"" + (LPCSTR) (_bstr_t) boolean_count + "\" ";
+	xml_string = xml_string + "date_count=\"" + (LPCSTR) (_bstr_t) date_count + "\" ";
+	xml_string = xml_string + "/>";
+
+	return xml_string;
+}

@@ -41,6 +41,7 @@
 #include "tiDKFrequencyI_Recordset.h"
 #include "TCoef_type_Recordset.h"
 #include "ODBCINST.H"
+#include "TData_Matrix_Recordset.h"
 
 //dedek: docasne
 /*****/
@@ -56,11 +57,14 @@ CString Get_4ftAR2NL (long hypno, CString db_name)
 	CString hlp;
 	hlp.Format ("%d", hypno);
 
-	CString DSN = "__LM_ReportAssistant_help_temp_" + hlp;
+	char * config;
+	config = new char [1024];
 
-	CString source_db = "DBQ=" + db_name + " ";
+	CString DSN = "LMxRepAssistxtempx" + hlp;
 
-	CString config = "DSN=" + DSN + "\\0 " + source_db;
+//	CString source_db = "DBQ=" + db_name + " ";
+
+//	CString config = "DSN=" + DSN + "\\0 " + source_db;
 
 	CString _4ftAR2NL_output;
 
@@ -70,6 +74,13 @@ CString Get_4ftAR2NL (long hypno, CString db_name)
 	_4ftAR2NL_exe += " -hypno=";
 	_4ftAR2NL_exe += hlp;
 
+	char * _db_name;
+	_db_name = new char [1024];
+	strcpy (_db_name, (LPCSTR) (db_name + ".mdb"));
+
+	sprintf(config, "DSN=%s$ DESCRIPTION=Temporary ODBC$ DBQ=%s$ FIL=MicrosoftAccess$ DEFAULTDIR= ",
+		(LPCSTR) ("LMxRepAssistxtempx" + hlp), _db_name);
+
 	STARTUPINFO si;
 	ZeroMemory(& si, sizeof si);
 	
@@ -78,17 +89,39 @@ CString Get_4ftAR2NL (long hypno, CString db_name)
 
 	LPDWORD exit_code = 0;//unsucessfull !!!!!!!!!!!zkontrolovat
 
+	unsigned int len = strlen (config);
+
+	unsigned int i;//iteration variable
+
+	for (i = 0; i < len; i++)
+	{
+		if (config [i] == '$') config [i] = '\0';
+	}
+
 	//create the temporary datasource
-	//osetrit!!!!!!!!!!!!!!!
-	SQLConfigDataSource (NULL, ODBC_ADD_DSN, "Microsoft Access Driver (*.mdb)\0", config);
+	if (FALSE == SQLConfigDataSource (NULL, ODBC_ADD_DSN, "Microsoft Access Driver (*.mdb)\0", (LPCSTR) config))
+	{
+		delete [] config;
+		delete [] _db_name;
+		return "";//nahlas chybu
+	}
+	delete [] config;
+	delete [] _db_name;
+
+	char * process;
+	process = new char [MAX_PATH];
+	strcpy (process, (LPCSTR) _4ftAR2NL_exe);
+
 
 	//run the 4ftAR2NL application
-	if (!CreateProcess(NULL, (char *) (LPCTSTR) _4ftAR2NL_exe,
+	if (!CreateProcess(NULL, process,
 		NULL, NULL, FALSE, CREATE_NO_WINDOW, NULL, NULL, & si, & pi)) 
 	{
 		//nahlas chybu
+		delete [] process;
 		return "";//!!!!!pozor na to, co vracet
 	}
+	delete [] process;
 	if (WaitForSingleObject(pi.hProcess, 60000) != WAIT_OBJECT_0)
 	{
 		//nahlas chybu
@@ -3573,5 +3606,87 @@ CString fLMSDKLhyp(void* hSource)
 	}
 	list.RemoveAll ();
 
+	return buf;
+}
+
+CString fLMdata_matrix (void* hSource)
+{
+	CString buf = "";
+	CString hlp;
+	CString db_name = ((CDatabase *) hSource)->GetDatabaseName ();
+
+	long matrix_id = -1;
+	long matrix_id_tst = 0;
+
+	TData_Matrix_Recordset rs ((CDatabase *) hSource);
+
+	Data_Matrix_Meta * ptatt;
+	TData_Matrix_Meta_Array list;
+
+	LPCTSTR q =
+		"SELECT * \
+		 FROM tmAttribute, tmMatrix, tsValueSubType \
+		 WHERE tmAttribute.MatrixID=tmMatrix.MatrixID \
+			AND tmAttribute.ValueSubTypeID=tsValueSubType.ValueSubTypeID";
+	if (rs.Open(AFX_DB_USE_DEFAULT_TYPE, q))
+	{
+		//iteration on query results
+		while (!rs.IsEOF())
+		{
+			matrix_id_tst = rs.m_MatrixID;
+			if (matrix_id != matrix_id_tst)
+			{
+				hlp.Format ("%d", matrix_id_tst);
+				ptatt = new (Data_Matrix_Meta);
+				ptatt->db_name = db_name;
+				ptatt->id = "table" + hlp;
+				ptatt->matrix_name = rs.m_Name2;
+				ptatt->record_count = rs.m_RecordCount;
+				ptatt->integer_count = 0;
+				ptatt->float_count = 0;
+				ptatt->string_count = 0;
+				ptatt->boolean_count = 0;
+				ptatt->date_count = 0;
+				list.Add (ptatt);
+			}
+			
+			if (rs.m_ShortName == "long") ptatt->integer_count++;
+			else if (rs.m_ShortName == "float") ptatt->float_count++;
+			else if (rs.m_ShortName == "string") ptatt->string_count++;
+			else if (rs.m_ShortName == "bool") ptatt->boolean_count++;
+			else if (rs.m_ShortName == "date") ptatt->date_count++;
+
+			matrix_id = matrix_id_tst;
+			rs.MoveNext();
+		}
+		rs.Close();
+	}
+	else return "";
+
+	//creation of xml string
+	//load DTD
+	buf = Get_DTD ();
+	//create xml data
+	buf = buf + " <active_list> ";
+	int i;
+    for (i = 0; i < list.GetSize (); i++)
+	{
+		buf = buf + list.GetAt (i)->xml_convert ();
+	}
+	buf += " </active_list>";
+	//just for test - creates a xml file with all attributes
+/*	FILE * f = fopen ("test.xml", "w");
+	fprintf (f, "%s", buf);
+	fclose (f);
+
+
+	AfxMessageBox(buf);
+*/
+	for (i = 0; i < list.GetSize (); i++)
+	{
+		delete (list.GetAt (i));
+	}
+	list.RemoveAll ();
+	
 	return buf;
 }

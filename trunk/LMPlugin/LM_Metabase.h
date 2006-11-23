@@ -623,3 +623,21 @@ private:
 };
 
 typedef CArray <Hyp_SDKL_Meta *, Hyp_SDKL_Meta *> THyp_SDKL_Meta_Array;
+
+class Data_Matrix_Meta
+{
+public:
+	CString id;
+	CString db_name;
+	CString matrix_name;
+	long	record_count;
+	long	integer_count;
+	long	float_count;
+	long	string_count;
+	long	boolean_count;
+	long	date_count;
+
+	CString	xml_convert ();
+};
+
+typedef CArray <Data_Matrix_Meta *, Data_Matrix_Meta *> TData_Matrix_Meta_Array;
