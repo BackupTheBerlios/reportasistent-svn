@@ -60,7 +60,6 @@ CAElInfo::CAElInfo()
 
 CAElInfo::~CAElInfo()
 {
-	if (pSimpleFilterDOM != NULL) pSimpleFilterDOM.Release();
 	if (pComplexFilterDOM != NULL) pComplexFilterDOM.Release();
 	if (pElementDefinitionDOM != NULL) pElementDefinitionDOM.Release();
 	if (pFillElementAttributesDOM != NULL) 	pFillElementAttributesDOM.Release();
@@ -110,8 +109,10 @@ BOOL CAElInfo::LoadFromDir(LPCTSTR dir_path)
 			 }
 			 options_find.Close();
 */	
-	//nacteni pSimpleFilterDOM
 	CFileFind exists_file_find;
+
+	//nacteni pSimpleFilterDOM
+/*
 	if (exists_file_find.FindFile(src_dir_path + "\\simple_filter.xsl"))
 	{
 		pSimpleFilterDOM.CreateInstance("Msxml2.DOMDocument");
@@ -127,6 +128,8 @@ BOOL CAElInfo::LoadFromDir(LPCTSTR dir_path)
 		}
 	}
 	exists_file_find.Close();
+*/
+
 	//nacteni pComplexFilterDOM
 	if (exists_file_find.FindFile(src_dir_path + "\\complex_filter.xsl"))
 	{
@@ -145,7 +148,7 @@ BOOL CAElInfo::LoadFromDir(LPCTSTR dir_path)
 		}
 	}
 
-	if ((pComplexFilterDOM == NULL) && (pSimpleFilterDOM == NULL))
+	if (pComplexFilterDOM == NULL)
 	{
 		//nepodarilo se nacist zadny filter, prvek pridan do databaze AP
 		CReportAsistentApp::ReportError(IDS_AEL_NOFILTER, dir_path);
@@ -216,14 +219,6 @@ MSXML2::IXMLDOMNodePtr CAElInfo::getComplexFilterTransformation()
 	setLanguageInTransformation(pComplexFilterDOM);
 
 	return pComplexFilterDOM;
-}
-
-MSXML2::IXMLDOMNodePtr CAElInfo::getSimpleFilterTransformation()
-{
-	// kody: nastaveni jazyka transformace
-	setLanguageInTransformation(pSimpleFilterDOM);
-
-	return pSimpleFilterDOM;
 }
 
 

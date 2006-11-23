@@ -1,3 +1,4 @@
+#include "afxwin.h"
 #if !defined(AFX_OPTIONSDIALOG_H__EF3E84D5_FE81_4C44_BB14_EF8285E3132C__INCLUDED_)
 #define AFX_OPTIONSDIALOG_H__EF3E84D5_FE81_4C44_BB14_EF8285E3132C__INCLUDED_
 
@@ -39,6 +40,8 @@ protected:
 	virtual void OnOK();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
+public:
+	CComboBox m_WordTemplateCombo;
 };
 
 //{{AFX_INSERT_LOCATION}}
