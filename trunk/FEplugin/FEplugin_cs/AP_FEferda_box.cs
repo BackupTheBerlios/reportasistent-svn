@@ -229,7 +229,7 @@ namespace FEplugin_cs
 
 
 
-#if (LADENI)
+#if (DEBUG)
             // vypsani pripadne chybove hlasky:
             if (!String.IsNullOrEmpty(ErrStr))  // LADICI
                 MessageBox.Show("Pri nacitani Tasku doslo k chybam:\n" + ErrStr, "Chyba", MessageBoxButtons.OK, MessageBoxIcon.Error);

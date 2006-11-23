@@ -10,21 +10,21 @@ using namespace System;
 using namespace FEplugin_cs;
  
 
-// =========== GLOBALNI PROMENNE =================
+// =========== GLOBAL VARIABLES =================
 
-CFESock FESock;
-CSockInterface SockInterfaceFE;  // rozhrani zasuvky
+CFESock FESock; /// Global instance of CFESock structure
+CSockInterface SockInterfaceFE;  /// Interface structure of FEplugin
 
 
 // =========== class CFESock =====================
 
-// -- konstruktor
+// -- construktor
 
 CFESock::CFESock()
 {
 	APCount = _FE_AP_COUNT;
 	
-	// naplneni tabulky APTable
+	// filling the table APTable
 
 	APTable[0].AP_ID = "attribute";
 	APTable[0].pFn = & fFEAttribute;
@@ -41,7 +41,7 @@ CFESock::CFESock()
 	APTable[4].AP_ID = "CF_cedent";
 	APTable[4].pFn = & fFECF_cedent;
 
-	// AP hypotezy
+	// AP hypotheses
 
 	APTable[5].AP_ID = "hyp_4ft";	//  4FT
 	APTable[5].pFn = & fFE4fthyp;
@@ -62,7 +62,7 @@ CFESock::CFESock()
 	APTable[10].AP_ID = "hyp_sdcf";	// SD-CF
 	APTable[10].pFn = & fFEsdcfhyp;
 
-	// AP Kvantifikator
+	// AP Quantifier
 
 	APTable[11].AP_ID = "quantifier";
 	APTable[11].pFn = & fFEQuantifier;
@@ -102,10 +102,10 @@ pFn_t CFESock::getFnAddress(CString APName)
 
 
 // ---
-/* vrati seznam vsech ID aktivnich prvku, ktere zasuvka podporuje v tomto XML formatu: 
+/* returns list of all active elements IDs supported by FEplugin in XML string with structure: 
 <LIST>
-    <APID NAME="jmeno identifikatoru AP 1"/>
-	<APID NAME="jmeno identifikatoru AP 2"/>
+    <APID NAME="active element ID 1"/>
+	<APID NAME="active element ID 2"/>
 	...
 </LIST>
 
@@ -142,8 +142,8 @@ CSockInterface* initSock()
 	SockInterfaceFE.hOpenSource = & fOpenSourceFE;
 	SockInterfaceFE.hCloseSource = & fCloseSourceFE;
 
-	// inicializace Ferdovske zasuvky
-	if(! FEplugin_cs::FEplugin_init::initialize())  // inicializace neuspela
+	// inicialization of FEplugin
+	if(! FEplugin_cs::FEplugin_init::initialize())  // initialization failed
 		return NULL;
 
 	

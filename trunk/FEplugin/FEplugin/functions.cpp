@@ -1,4 +1,4 @@
-// implementace funkci pro vyrizeni pozadavku na AP v zasuvce pro Ferdu
+// implementation of functions, which evaluate a queries about active element in FEplugin
 // functions.h
 #include <stdafx.h>
 
@@ -7,15 +7,9 @@
 using namespace FEplugin_cs;
 
 
-/*
-#import <msxml3.dll>
-using namespace MSXML2;
-//vlozi namespace MSXML2;
-*/
+// ========= AP Analyzed data =============
 
-// ========= AP Analyzovana data =============
-
-// --- AP Kategorie
+// --- AP Category
 
 CString fFECategory(void* hSource)
 {
@@ -26,7 +20,7 @@ CString fFECategory(void* hSource)
 }
 
 
-// --- AP Column (sloupec)
+// --- AP Column 
 
 CString fFEColumn(void* hSource)
 {
@@ -47,7 +41,7 @@ CString fFEData_matrix(void* hSource)
 	return resultStr;
 }
 
-// ========= AP Hypotezy =============
+// ========= AP Hypotheses =============
 
 	// 4ft
 
@@ -109,8 +103,10 @@ CString fFEsdcfhyp(void * hSource)
 	return resultStr;
 }
 
+// ========= AP Attributes, cedents =============
 
-// --- AP Atribut
+
+// --- AP Attribute
 
 CString fFEAttribute(void* hSource)
 {
@@ -121,7 +117,7 @@ CString fFEAttribute(void* hSource)
 }
 
 
-// --- AP Boolsky cedent
+// --- AP Boolean cedent
 
 CString fFEBool_cedent(void* hSource)
 {
@@ -151,7 +147,9 @@ CString fFECF_cedent(void* hSource)
 	return resultStr;
 }
 
-// --- AP Kvantifikator
+// ========= AP Quantifier =============
+
+// --- AP Quantifier
 
 CString fFEQuantifier(void* hSource)
 {
@@ -160,6 +158,9 @@ CString fFEQuantifier(void* hSource)
 	CString resultStr = (CString) QantList;
 	return resultStr;
 }
+
+
+// ========= AP Task =============
 
 // --- AP Task
 
@@ -171,7 +172,9 @@ CString fFETask(void* hSource)
 	return resultStr;
 }
 
-// --- AP Ferdovska krabicka
+// ========= AP Ferda Data Miner box =============
+
+// --- AP Ferda Data Miner box
 
 CString fFEferda_box(void* hSource)
 {

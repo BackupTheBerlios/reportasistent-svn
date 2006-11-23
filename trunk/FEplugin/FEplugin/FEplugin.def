@@ -1,4 +1,4 @@
 LIBRARY   FEplugin
-DESCRIPTION "Zasuvny modul aplikace LM - Report Asistent, zasuvka pro podporu Ferdy"
+DESCRIPTION "Plugin of application LM - Report Asistent, supporting of Ferda Data Miner program"
 EXPORTS
    initSock    @1

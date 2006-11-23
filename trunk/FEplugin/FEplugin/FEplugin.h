@@ -14,67 +14,87 @@
 
 
 
-// !!! zde definujte pocet AP, ktere tato zasuvka podporuje
+// !!! here define number of active elements supported by plugin !!!!!
+
 #define _FE_AP_COUNT 16
 
 
-// =========== TYPY ===============================
-
+// =========== TYPES ===============================
+/**
+*Pointer to function which evaluates a query about active element with given type
+*@see CFESock#Item_t 
+*/
 typedef CString (* pFn_t) (void*);
-  // ukazatel na funkci, ktera vyridi pozadavek na AP urciteho typu
+ 
 
 
 
-// =========== TRIDY ==============================
+// =========== CLASSES ==============================
 
 // ------------ class CFESock
-/*
-tato trida vytvori a spravuje v zasuvce pro FE tabulku podporovanych AP a funkci, ktere je vyrizuji
-poskytuje:
-- pocet AP, ktere zasuvka podporuje
-- seznam vsech AP, ktere zasuvka podporuje
-- funkci perform() : adresu funkce, ktera vyrizuje zadost o AP s danym ID
-*/
 
+/**
+*This class creates and manages in FEplugin a table of supported active elements and functions, which evaluates a queries about active elements
+*it offers:
+*<ul>
+*	<li>number of active elements supported by FEplugin</li>
+*	<li>list of active elements supported by FEplugin</li>
+*	<li>function perform() : adress of function, which evaluates queries about active elements with given ID</li>
+*</ul>
+*/
 class CFESock {
 
-// TYPY
+// TYPES
+/**
+*Item of table of supported active elements names and pointers to functions, which evaluates queries about them
+*/
+  typedef struct Item_t
+  {	
 
-  typedef struct Item_t {	// polozka tabulky nazvu podporovanych AP a ukazatelu na funkce, ktere je obslouzi
-	  CString AP_ID;	// ID aktivniho prvku
-	  pFn_t   pFn;		// uk. na funkci ktera ho obslouzi
+	  CString AP_ID;  /// ID of active element
+
+	  pFn_t   pFn; /// Pointer to function which resolves a query about given active element
   };
 
 // DATA
 
-  int APCount;	// pocet AP, ktere zasuvka podporuje
+  int APCount; ///Number of active elements supported by FEplugin
 
-  Item_t APTable[_FE_AP_COUNT];	// tabulka AP a funkci
+  Item_t APTable[_FE_AP_COUNT];	 ///Table of active elements and functions
 
-// METODY
+// METHODS
 
-  pFn_t getFnAddress(CString APName);	// vrati adresu funkce obsluhujici AP s AP_ID=APName nebo NULL (neexistuje-li)
+  /**
+  *Returns address of function (evaluating active element with ID=APName) or NULL (if it does not exist)
+  *@return Address of function (evaluating active element with ID=APName) or NULL (if it does not exist)
+  *@param APName ID of active element
+  */
+  pFn_t getFnAddress(CString APName);	
 
 public:
   
-  CFESock();	// konstruktor
+  CFESock();
   
-  CString getAPList();	// vrati seznam vsech identifikatoru AP, ktere zasuvka podporuje
+  /**
+  *Returns a list of identifiers of all active element IDs supported by FEplugin.
+  *@return XML string with list of active element IDs
+  */
+  CString getAPList();
 
 // FRIENDS
 
-  friend BOOL performFE (void* hSource, const char* APName, BSTR* Result); // funkce perform zasuvky pro FE
+  friend BOOL performFE (void* hSource, const char* APName, BSTR* Result); // "perform" function of FEplugin
 };
 
 
 
 
 
-// =========== GLOBALNI PROMENNE ==================
+// =========== GLOBAL VARIABLES ==================
 
 
-extern CFESock FESock;
-extern CSockInterface SockInterfaceFE;  // rozhrani zasuvky
+extern CFESock FESock; 
+extern CSockInterface SockInterfaceFE;  
 
 
 
@@ -82,9 +102,24 @@ extern CSockInterface SockInterfaceFE;  // rozhrani zasuvky
 
 /////////////////////////////////////////
 /////// initSock
-// inicializuje globalni instanci SockInterface a vrati volajicimu (jadru) pointer na ni
 
-//__declspec(dllexport)
+/**
+*
+*Initializes a global instance of SockInterface, is called by LM-Report Asistent kernell
+*<br>
+*Each plugin MUST contain an initialization function 
+*<code>
+*  CSockInterface* initSock()
+*</code>
+*
+*which creates and initializes an instance of CSockInterface structure. This function must be accessible for LM-RA kernell
+*(exported from DLL)
+*While start of LM-Report Asistent, kernell connects plugins by calling initSock() in each DLL found in "Plugin" directory.
+*If initSock() is not found, plugin is signed as invalid
+*
+*@see CSockInterface CSockInterface 
+*@return pointer to initialized CSockInterface structure
+*/
 CSockInterface* initSock();
 
 

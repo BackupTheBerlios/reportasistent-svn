@@ -18,18 +18,18 @@ using namespace FEplugin_cs;
 
 BOOL performFE(hSource_t hSource, const char* APName, BSTR* Result)
 {	
-	CString CStrResult; // mezivysledek CString
-	pFn_t pFn = FESock.getFnAddress(APName);	// ukazatel na funkci, ktera vyridi pozadavek
-	if (pFn == NULL) // chyba - neexistuje funkce vyrizujici tento AP
+	CString CStrResult; // result CString
+	pFn_t pFn = FESock.getFnAddress(APName);	// pointer to function which evaluates the query
+	if (pFn == NULL) // error - function evaluating querries about this active element doesn't exist
 		return FALSE;
 
-	// zmena adresare na domovsky LMRA
+	// change actual directory on home LMRA dir
 	DirManager::SetHomeLMRA_dir();
 
 	CStrResult = pFn(hSource);
 	*Result =  CStrResult.AllocSysString();
 	
-	// zmena adresare na puvodni
+	// revert actual directory
 	DirManager::SetHomePrevious_dir();
 
 	return TRUE;
@@ -45,13 +45,13 @@ BSTR getAPListFE()
 }
 
 
-///// funkce rozhrani pro praci se zdroji
+///// operations with data sources functions
 
 // ---------- fNewSourceFE
 
 hSource_t fNewSourceFE(PersistID_t * pPerzistID)
 {	
-	// dialog pro otevreni souboru -> vybrani souboru (Ferda Project - "*.xfp" ) noveho zdroje
+	// open file dialog -> selecting the file (Ferda Project - "*.xfp" ) of new data source
 	System::String^ perzist = FEPom::OpenXfpFile();
 
 	CString s = (CString) perzist;
@@ -63,7 +63,7 @@ hSource_t fNewSourceFE(PersistID_t * pPerzistID)
 		if(index != -1)
 			return (hSource_t) (index + 1);
 	}
-	MessageBox::Show("Data source (Perzist ID: " + perzist + ") could not be open.", "ReportAsistent - FE plugin");
+	// MessageBox::Show("Data source (Perzist ID: " + perzist + ") could not be open.", "ReportAsistent - FE plugin");
 	return NULL;
 
 
@@ -84,7 +84,7 @@ hSource_t fOpenSourceFE(PersistID_t PerzistID)
 		if(index != -1)
 		   return (hSource_t) (index + 1);
 	}
-	MessageBox::Show("Data source (Perzist ID: " + perzist + ") could not be open.", "ReportAsistent - FE plugin");
+	//MessageBox::Show("Data source (Perzist ID: " + perzist + ") could not be open.", "ReportAsistent - FE plugin");
 	return NULL;
 
 }
@@ -94,7 +94,7 @@ hSource_t fOpenSourceFE(PersistID_t PerzistID)
 
 BOOL fCloseSourceFE(hSource_t hSource)
 {
-	int index = ((int) hSource) - 1;  // index prislusneho CFEsource v CFEsourcesTab
+	int index = ((int) hSource) - 1;  // index of CFEsource in CFEsourcesTab
 
 	return CFEsourcesTab::CloseSource(index);
 }

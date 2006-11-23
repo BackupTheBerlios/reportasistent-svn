@@ -1,4 +1,4 @@
-// Funkce pro vyrizeni pozadavku na AP v zasuvce pro Ferdu
+// Functions of FEplugin, which evaluates queries about active elements (AP)
 // functions.h
 
 #ifndef _FUNCTIONS_FE
@@ -8,58 +8,58 @@
 
 #include <afx.h>
 
-// ===== FUNKCE ========
+// ===== FUNCTIONS ========
 
 
-// --- AP Kategorie
+// --- AP Category
 
-CString fFECategory(void* hSource);
+CString fFECategory(void* hSource);  /// Function resolving query of LM-RA kernell about active element "Category" (ID="category")
 
-// --- AP Column (sloupec)
+// --- AP Column
 
-CString fFEColumn(void* hSource);
+CString fFEColumn(void* hSource); /// Function resolving query of LM-RA kernell about active element "Column of data matrix" (ID="column")
 
 // --- AP Data matrix
 
-CString fFEData_matrix(void* hSource);
+CString fFEData_matrix(void* hSource);/// Function resolving query of LM-RA kernell about active element "Data matrix" (ID="data_matrix")
 
 
-// --- AP Hypotezy
+// --- AP "Hypotheses"
 
-CString fFE4fthyp(void* hSource);  // 4ft-hypoteza
-CString fFEsd4fthyp(void* hSource);  // SD-4ft-hypoteza
-CString fFEklhyp(void* hSource);  // KL-hypoteza
-CString fFEsdklhyp(void* hSource);  // SD-KL-hypoteza
-CString fFEcfhyp(void* hSource);  // CF-hypoteza
-CString fFEsdcfhyp(void* hSource);  // SD-CF-hypoteza
+CString fFE4fthyp(void* hSource);  /// Function resolving query of LM-RA kernell about active element "4ft-hypothesis" (ID="hyp_4ft") 
+CString fFEsd4fthyp(void* hSource);  /// Function resolving query of LM-RA kernell about active element "SD-4ft-hypothesis" (ID="hyp_sd4ft")
+CString fFEklhyp(void* hSource);  /// Function resolving query of LM-RA kernell about active element "KL-hypothesis" (ID="hyp_kl")
+CString fFEsdklhyp(void* hSource);  /// Function resolving query of LM-RA kernell about active element "SD-KL-hypothesis" (ID="hyp_sdkl")
+CString fFEcfhyp(void* hSource);  /// Function resolving query of LM-RA kernell about active element "CF-hypothesis" (ID="hyp_cf")
+CString fFEsdcfhyp(void* hSource);  /// Function resolving query of LM-RA kernell about active element "SD-CF-hypothesis" (ID="hyp_sdcf")
 
-// --- AP Atribut
+// --- AP Attribute
 
-CString fFEAttribute(void* hSource);
+CString fFEAttribute(void* hSource); /// Function resolving query of LM-RA kernell about active element "Attribute" (ID="attribute")
 
-// --- AP Boolsky cedent
+// --- AP Boolean cedent
 
-CString fFEBool_cedent(void* hSource);
+CString fFEBool_cedent(void* hSource); /// Function resolving query of LM-RA kernell about active element "Boolean cedent" (ID="bool_cedent")
 
 // --- AP KL cedent
 
-CString fFEKL_cedent(void* hSource);
+CString fFEKL_cedent(void* hSource); /// Function resolving query of LM-RA kernell about active element "KL cedent" (ID="KL_cedent")
 
 // --- AP CF cedent
 
-CString fFECF_cedent(void* hSource);
+CString fFECF_cedent(void* hSource); /// Function resolving query of LM-RA kernell about active element "CF cedent" (ID="CF_cedent")
 
-// --- AP Kvantifikator
+// --- AP Quantifier
 
-CString fFEQuantifier(void* hSource);
+CString fFEQuantifier(void* hSource); /// Function resolving query of LM-RA kernell about active element "Quantifier" (ID="quantifier")
 
 // --- AP Task
 
-CString fFETask(void* hSource);
+CString fFETask(void* hSource); /// Function resolving query of LM-RA kernell about active element "Task" (ID="task")
 
-// --- AP Ferdovska krabicka
+// --- AP Ferda Data Miner box
 
-CString fFEferda_box(void* hSource);
+CString fFEferda_box(void* hSource); /// Function resolving query of LM-RA kernell about active element "Ferda Data Miner box" (ID="ferda_box")
 
 
 #endif /* _FUNCTIONS*/
