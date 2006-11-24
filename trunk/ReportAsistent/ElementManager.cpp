@@ -167,10 +167,12 @@ CElementManager::elId_t CElementManager::ElementIdFromName(LPCTSTR el_name)
 MSXML2::IXMLDOMElementPtr CElementManager::CreateEmptyElement(CElementManager::elId_t id)
 {
 	CSkeletonDoc * doc = ((CReportAsistentApp *) AfxGetApp())->FirstDocumentInFirstTemplate();
+	
+	MSXML2::IXMLDOMElementPtr ret;
 
 	if (isElementActive(id))
 	{
-		MSXML2::IXMLDOMElementPtr ret = getActiveElementInfo(id)->CreateEmptyElement();
+		ret = getActiveElementInfo(id)->CreateEmptyElement();
 		//nastav unikatni id parametr
 		if (doc != NULL)
 			ret->setAttribute("id", (LPCTSTR) doc->CreateNewID(id));
@@ -185,39 +187,13 @@ MSXML2::IXMLDOMElementPtr CElementManager::CreateEmptyElement(CElementManager::e
 	element_example.CreateInstance(_T("Msxml2.DOMDocument"));	
 	element_example->async = VARIANT_FALSE; // default - true,
 
-	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
-	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
-	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
-	//predelat pres directory manager
-	//element_example->load((LPCTSTR) _T("../XML/prazdny2.xml"));
-	//dedek predelano nize
-	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
-	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
-	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
-	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
-
 	LoadXMLDOMFromResource(IDR_STATIC_ELEMENTS, element_example);
-//	element_example->load((LPCTSTR) (m.getXMLFilesDirectory() + "/prazdny2.xml"));
 
-
-	CString select;
-
-/*	if (isElementActive(id))
-	{
-		//priklad: select = "//active_element[@type = 'hyp_4ft']"
-		select = "//active_element[@type = '";
-		select += getElementName(id);
-		select += "']";
-	}
-	else */
-	{
-		//priklad: select = "//text"
-		select = "//";
-		select += getElementName(id);
-	}
+	CString select = "//";
+	select += getElementName(id);
 	
 	
-	MSXML2::IXMLDOMElementPtr ret = element_example->selectSingleNode((LPCTSTR) select);
+	ret = element_example->selectSingleNode((LPCTSTR) select);
 	if (ret == NULL) 
 	{
 
@@ -237,11 +213,6 @@ MSXML2::IXMLDOMElementPtr CElementManager::CreateEmptyElement(CElementManager::e
 
 	element_example.Release();
 
-/*	
-	m_skeleton->documentElement->appendChild(element_example->selectSingleNode("//active_element[@type = 'hyp_4ft']"));
-
-	element_example.Release();
-*/
 	return ret;
 }
 
