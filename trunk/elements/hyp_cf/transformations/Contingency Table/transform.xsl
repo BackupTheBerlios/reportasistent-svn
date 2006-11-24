@@ -169,84 +169,117 @@
 				<xsl:otherwise>100</xsl:otherwise>
 			</xsl:choose>
 		</xsl:variable>
-		
-		
 
-		<paragraph>
-		
-			
-			<!-- Create element "table"-->
-			<xsl:element name="table" >
-			    <xsl:attribute name="id"><xsl:value-of select="$id_base"/>table1</xsl:attribute>
-			    <xsl:attribute name="cols"><xsl:value-of select="$pocet_sloupcu" /></xsl:attribute>
-			    <xsl:attribute name="rows"><xsl:value-of select="$pocet_radku" /></xsl:attribute>
-				
-				<xsl:variable name="attr_id" select="@attributes" />
-				<xsl:variable name="attr_name" select="key('key_ti_attribute',@attributes)/@quant" />
+    <xsl:variable name="color_norm_factor">
+      <xsl:choose>
+        <xsl:when test="$TypeOfValues='abs'">
+          <xsl:value-of select="$sum_of_values"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select="$norm_factor"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
 
-				
-				<xsl:for-each select="r">
-					
-					<xsl:variable name="pocet_polozek" select="count(c)"/>  <!-- pocet datovych polozek v tabulce-->
-					
-					<!-- Horisontal table-->
-					
-					<xsl:if test="$TablePosition='Horisontal'">
-						<tr id="{$id_base}r1">
-							<td id="{$id_base}r1d0" bgcolor="{$border_color}" border_left="{$bord_out}" border_right="{$bord_frm}" border_top="{$bord_out}" border_bottom="{$bord_frm}">
-								<text id="{$id_base}r1d0text"><xsl:value-of select="$label_cat" /> - <xsl:value-of select="$attr_name" /></text> 
-							</td>
-							
-							
-							
-							<xsl:for-each select="key('key_ti_attribute',$attr_id)/ti_category">
-								<xsl:element name="td">
-									<xsl:attribute name="id">
-										<xsl:value-of select="$id_base" />r1d<xsl:value-of select="position()" />
-									</xsl:attribute>
-									<xsl:attribute name="bgcolor">
-										<xsl:value-of select="$border_color" />
-									</xsl:attribute>
-									<xsl:attribute name="border_right">
-										<xsl:choose>
-											<xsl:when test="$pocet_polozek=position()"><xsl:value-of select="$bord_out"/></xsl:when>
-											<xsl:otherwise><xsl:value-of select="$bord_in"/></xsl:otherwise>
-										</xsl:choose>
-									</xsl:attribute>
-									<xsl:attribute name="border_top"><xsl:value-of select="$bord_out"/></xsl:attribute>
-									<xsl:attribute name="border_bottom"><xsl:value-of select="$bord_frm"/></xsl:attribute>
-									
-									<text id="{$id_base}r1d{position()}text"><xsl:value-of select="@value" /></text> 
-								</xsl:element>
-							</xsl:for-each>
-							
-							<xsl:if test="$SumShow='true' and $TypeOfValues='abs'">
-								<td id="{$id_base}r1d_sum" bgcolor="{$border_color}" border_left="{$bord_frm}" border_right="{$bord_out}" border_top="{$bord_out}" border_bottom="{$bord_frm}">
-									<text id="{$id_base}r1d_sum_text"><xsl:value-of select="$label_sum" /></text> 
-								</td>
-							</xsl:if>
-						</tr>
-						
-						<tr id="{$id_base}r2">
-							<td id="{$id_base}r2d0" bgcolor="{$border_color}" border_left="{$bord_out}" border_right="{$bord_frm}" border_bottom="{$bord_out}">
-								<text id="{$id_base}r1d0text">
-									<xsl:value-of select="$label_freq" />
-									<xsl:if test="$TypeOfValues!='abs'">
-										<xsl:text> (%)</xsl:text>
-									</xsl:if>
-								</text> 
-							</td>
-							
-							
-							
-							<xsl:for-each select="c">
+
+
+    <paragraph>
+
+
+      <!-- Create element "table"-->
+      <xsl:element name="table" >
+        <xsl:attribute name="id">
+          <xsl:value-of select="$id_base"/>table1
+        </xsl:attribute>
+        <xsl:attribute name="cols">
+          <xsl:value-of select="$pocet_sloupcu" />
+        </xsl:attribute>
+        <xsl:attribute name="rows">
+          <xsl:value-of select="$pocet_radku" />
+        </xsl:attribute>
+
+        <xsl:variable name="attr_id" select="@attributes" />
+        <xsl:variable name="attr_name" select="key('key_ti_attribute',@attributes)/@quant" />
+
+
+        <xsl:for-each select="r">
+
+          <xsl:variable name="pocet_polozek" select="count(c)"/>
+          <!-- pocet datovych polozek v tabulce-->
+
+          <!-- Horisontal table-->
+
+          <xsl:if test="$TablePosition='Horisontal'">
+            <tr id="{$id_base}r1">
+              <td id="{$id_base}r1d0" bgcolor="{$border_color}" border_left="{$bord_out}" border_right="{$bord_frm}" border_top="{$bord_out}" border_bottom="{$bord_frm}">
+                <text id="{$id_base}r1d0text">
+                  <xsl:value-of select="$label_cat" /> - <xsl:value-of select="$attr_name" />
+                </text>
+              </td>
+
+
+
+              <xsl:for-each select="key('key_ti_attribute',$attr_id)/ti_category">
+                <xsl:element name="td">
+                  <xsl:attribute name="id">
+                    <xsl:value-of select="$id_base" />r1d<xsl:value-of select="position()" />
+                  </xsl:attribute>
+                  <xsl:attribute name="bgcolor">
+                    <xsl:value-of select="$border_color" />
+                  </xsl:attribute>
+                  <xsl:attribute name="border_right">
+                    <xsl:choose>
+                      <xsl:when test="$pocet_polozek=position()">
+                        <xsl:value-of select="$bord_out"/>
+                      </xsl:when>
+                      <xsl:otherwise>
+                        <xsl:value-of select="$bord_in"/>
+                      </xsl:otherwise>
+                    </xsl:choose>
+                  </xsl:attribute>
+                  <xsl:attribute name="border_top">
+                    <xsl:value-of select="$bord_out"/>
+                  </xsl:attribute>
+                  <xsl:attribute name="border_bottom">
+                    <xsl:value-of select="$bord_frm"/>
+                  </xsl:attribute>
+
+                  <text id="{$id_base}r1d{position()}text">
+                    <xsl:value-of select="@value" />
+                  </text>
+                </xsl:element>
+              </xsl:for-each>
+
+              <xsl:if test="$SumShow='true' and $TypeOfValues='abs'">
+                <td id="{$id_base}r1d_sum" bgcolor="{$border_color}" border_left="{$bord_frm}" border_right="{$bord_out}" border_top="{$bord_out}" border_bottom="{$bord_frm}">
+                  <text id="{$id_base}r1d_sum_text">
+                    <xsl:value-of select="$label_sum" />
+                  </text>
+                </td>
+              </xsl:if>
+            </tr>
+
+            <tr id="{$id_base}r2">
+              <td id="{$id_base}r2d0" bgcolor="{$border_color}" border_left="{$bord_out}" border_right="{$bord_frm}" border_bottom="{$bord_out}">
+                <text id="{$id_base}r1d0text">
+                  <xsl:value-of select="$label_freq" />
+                  <xsl:if test="$TypeOfValues!='abs'">
+                    <xsl:text> (%)</xsl:text>
+                  </xsl:if>
+                </text>
+              </td>
+
+
+
+              <xsl:for-each select="c">
 								<xsl:element name="td">
 									<xsl:attribute name="id">
 										<xsl:value-of select="$id_base" />r2d<xsl:value-of select="position()" />
 									</xsl:attribute>
+                  
 									<xsl:if test="$ColorHighlighting='true'">
 										<xsl:attribute name="bgcolor">
-											<xsl:value-of select="dedek:RGB(number(@val), number($sum_of_values))" />
+											<xsl:value-of select="dedek:RGB(number(@val), number($color_norm_factor))" />
 										</xsl:attribute>
 									</xsl:if>
 									
@@ -259,8 +292,8 @@
 									<xsl:attribute name="border_bottom"><xsl:value-of select="$bord_out"/></xsl:attribute>
 									
 									<xsl:variable name="hodnota">
-										<xsl:value-of select="dedek:normalize_value(number(@val), number($norm_factor))" />
-									</xsl:variable>
+                    <xsl:value-of select="dedek:normalize_value(number(@val), number($norm_factor))" />
+                  </xsl:variable>
 									
 									<text id="{$id_base}r1d{position()}text"><xsl:value-of select="$hodnota"/></text> 
 									
@@ -330,7 +363,7 @@
 									</xsl:attribute>
 									<xsl:if test="$ColorHighlighting='true'">
 										<xsl:attribute name="bgcolor">
-											<xsl:value-of select="dedek:RGB(number(@val), number($sum_of_values))" />
+											<xsl:value-of select="dedek:RGB(number(@val), number($color_norm_factor))" />
 										</xsl:attribute>
 									</xsl:if>
 									

@@ -19,14 +19,14 @@
           <!-- english -->
           <xsl:when test="$lng='en'">
             <attribute name="box_type" label="Box type" />
-            <attribute name="box_name" label="User name" />
+            <attribute name="user_name" label="User name" />
             <attribute name="user_hint" label="User hint" />
           </xsl:when>
 
           <!-- cesky-->
           <xsl:when test="$lng='cz'">
             <attribute name="box_type" label="Typ krabièky" />
-            <attribute name="box_name" label="Uživatelský název krabièky" />
+            <attribute name="user_name" label="Uživatelský název krabièky" />
             <attribute name="user_hint" label="Poznámka" />
           </xsl:when>
         </xsl:choose>
