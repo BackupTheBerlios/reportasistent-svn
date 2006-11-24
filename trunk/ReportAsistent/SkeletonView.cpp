@@ -78,14 +78,17 @@ void CSkeletonView::OnInitialUpdate()
 //Iva: Uprava stylu TreeCtrl
 	long        lStyleOld;
 
+
 	lStyleOld = GetWindowLong(m_hWnd, GWL_STYLE);
-	lStyleOld |= TVS_HASBUTTONS |TVS_HASLINES|TVS_LINESATROOT|TVS_SHOWSELALWAYS;
+
+	if (((CReportAsistentApp *)AfxGetApp())->m_bTreeHasButtons) lStyleOld |= TVS_HASBUTTONS;
+	if (((CReportAsistentApp *)AfxGetApp())->m_bTreeHasLines) lStyleOld |= TVS_HASLINES;
+
+	lStyleOld |= TVS_LINESATROOT|TVS_SHOWSELALWAYS;
 
 	SetWindowLong(m_hWnd, GWL_STYLE, lStyleOld);
-	UINT cis = GetTreeCtrl().GetIndent(); //default: 19
-	GetTreeCtrl().SetIndent(25);
-	cis = GetTreeCtrl().GetItemHeight(); //default: 16
-	GetTreeCtrl().SetItemHeight(20);
+	GetTreeCtrl().SetIndent(((CReportAsistentApp *)AfxGetApp())->m_iTreeItemIndent);//default: 19 
+	GetTreeCtrl().SetItemHeight(((CReportAsistentApp *)AfxGetApp())->m_iTreeItemHeight);//default: 16
 
 
 

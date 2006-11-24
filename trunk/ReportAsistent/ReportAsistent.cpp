@@ -68,6 +68,11 @@ protected:
 // CReportAsistentApp construction
 
 CReportAsistentApp::CReportAsistentApp()
+: m_bIdInItemName(0)
+, m_iTreeItemHeight(0)
+, m_iTreeItemIndent(0)
+, m_bTreeHasLines(0)
+, m_bTreeHasButtons(0)
 {
 	// TODO: add construction code here,
 	// Place all significant initialization in InitInstance
@@ -144,11 +149,15 @@ BOOL CReportAsistentApp::InitInstance()
 
 	LoadStdProfileSettings();  // Load standard INI file options (including MRU)
 
-
-	//dedek
-	//zapis do windows registry
+	//Dedek: write to windows registry
 	AfxGetApp()->WriteProfileString("Settings", "ApplicationRoot", 
 		m_pGeneralManager->DirectoriesManager.getApplicationRoot());
+	//Iva: write to windows registry
+	 m_bIdInItemName = GetProfileInt("Settings", "bIdInItemName", 1);
+	 m_iTreeItemHeight = GetProfileInt("Settings", "TreeItemHeight",20);
+	 m_iTreeItemIndent= GetProfileInt("Settings", "TreeItemIndent",25);
+	 m_bTreeHasLines = GetProfileInt("Settings","bTreeHasLines",1);
+	 m_bTreeHasButtons = GetProfileInt("Settings","bTreeHasButtons",1);
 
 
 	// Register the application's document templates.  Document templates
@@ -225,10 +234,20 @@ void CReportAsistentApp::OnAppAbout()
 
 int CReportAsistentApp::ExitInstance() 
 {
-	// TODO: Add your specialized code here and/or call the base class
 
-	//pridal honza
+	//Dedek:
 	delete m_pGeneralManager;
+
+	//Iva: Save information to registry
+	/*int iIdInItemName = m_bIdInItemName;
+	int iTreeHasLines = m_bTreeHasLines
+	int iTreeHasLines = m_bTreeHasLines;*/
+	 WriteProfileInt("Settings", "bIdInItemName", m_bIdInItemName);
+	 WriteProfileInt("Settings", "TreeItemHeight",m_iTreeItemHeight);
+	 WriteProfileInt("Settings", "TreeItemIndent",m_iTreeItemIndent );
+	 WriteProfileInt("Settings","bTreeHasLines", m_bTreeHasLines);
+	 WriteProfileInt("Settings","bTreeHasButtons",m_bTreeHasLines);
+
 
 	
 	return CWinApp::ExitInstance();

@@ -21,7 +21,7 @@
 #define NUM_PICTURES_TREECTRL 6
 #endif
 
-// Delka nazvu prvku typu text v TreeCtrl
+// Delka nazvu prvku v TreeCtrl
 #if !defined LENGTH_TREE_ITEM_NAME
 #define LENGTH_TREE_ITEM_NAME 40	//dedek: prepsal z 10 na 15, 40
 #endif
@@ -112,6 +112,12 @@ public:
 	afx_msg void OnHlpTopics();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
+public:
+	BOOL m_bIdInItemName; // 0/1.. whether or not to show id at the Tree item name
+	int m_iTreeItemHeight;
+	int m_iTreeItemIndent;
+	BOOL m_bTreeHasLines;
+	BOOL m_bTreeHasButtons;
 };
 
 

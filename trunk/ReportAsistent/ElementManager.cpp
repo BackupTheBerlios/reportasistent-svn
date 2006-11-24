@@ -396,6 +396,7 @@ CString CElementManager::CreateElementCaption(MSXML2::IXMLDOMElementPtr &pElemen
 //	AfxMessageBox(pElement->xml);
 //	AfxMessageBox(getElementName(element_id));
 
+
 	if (element_id != ELID_UNKNOWN)
 		bsId = pElement->selectSingleNode("@id")->text;
 	
@@ -411,18 +412,18 @@ CString CElementManager::CreateElementCaption(MSXML2::IXMLDOMElementPtr &pElemen
 		bsValue = pElement->selectSingleNode("@title")->text;
 		if (bsValue.length() == 0) 
 		{
-			sRet.Format("%s: No name", (LPCTSTR)bsId);
-			return sRet;
+			sRet.Format("No name");
+			break;
 		}
 		if ((bsValue.length()+bsId.length()+2) <=LENGTH_TREE_ITEM_NAME) 					 
 		{
-			sRet.Format("%s: %s",(LPCTSTR)bsId,(LPCTSTR) bsValue);
-			return sRet;
+			sRet.Format("%s",(LPCTSTR) bsValue);
+			break;
 		}
 		else
 		{
-			sRet.Format("%s: %.*s...",(LPCTSTR)bsId ,LENGTH_TREE_ITEM_NAME-3, (LPCTSTR) bsValue);
-			return sRet;
+			sRet.Format("%.*s...",LENGTH_TREE_ITEM_NAME-3, (LPCTSTR) bsValue);
+			break;
 		}
 		break;
 
@@ -430,18 +431,18 @@ CString CElementManager::CreateElementCaption(MSXML2::IXMLDOMElementPtr &pElemen
 	case  ELID_TEXT:
 		if (pElement->text.length() == 0) 
 		{
-			sRet.Format("%s: Empty", (LPCTSTR)bsId);
-			return sRet;
+			sRet.Format("Empty");
+			break;
 		}
 		if ((pElement->text.length()+bsId.length()+2) <= LENGTH_TREE_ITEM_NAME) 					 
 		{
-			sRet.Format("%s: %s",(LPCTSTR)bsId,(LPCTSTR) pElement->text);
-			return sRet;
+			sRet.Format("%s",(LPCTSTR) pElement->text);
+			break;
 		}
 		else
 		{
-			sRet.Format("%s: %.*s...",(LPCTSTR)bsId ,LENGTH_TREE_ITEM_NAME-3, (LPCTSTR) bsValue);
-			return sRet;
+			sRet.Format("%.*s...",LENGTH_TREE_ITEM_NAME-3, (LPCTSTR) bsValue);
+			break;
 		}
 		break;
 	case  ELID_ATTR_LINK:
@@ -450,13 +451,13 @@ CString CElementManager::CreateElementCaption(MSXML2::IXMLDOMElementPtr &pElemen
 			
 			if ((bsAttr.length() == 0) || (bsTarget.length() == 0)) 
 			{
-				sRet.Format("%s: Empty", (LPCTSTR)bsId);
-				return sRet;
+				sRet.Format("Empty");
+				break;
 			}
 			else //Iva: length is probably reasonable, so check of length is missing
 			{
-				sRet.Format("%s: %s of %s", (LPCTSTR)bsId,(LPCTSTR) bsAttr, (LPCTSTR) bsTarget);			 
-				return sRet;
+				sRet.Format("%s of %s", (LPCTSTR) bsAttr, (LPCTSTR) bsTarget);			 
+				break;
 			}
 			break;
 
@@ -470,13 +471,13 @@ CString CElementManager::CreateElementCaption(MSXML2::IXMLDOMElementPtr &pElemen
 		bsValue = pElement->selectSingleNode("@file")->text;
 		if (bsValue.length() == 0) 
 		{
-			sRet.Format("%s: No file", (LPCTSTR)bsId);
-			return sRet;
+			sRet.Format("No file");
+			break;
 		}
 		else
 		{
-			sRet.Format("%s: %s",(LPCTSTR)bsId,(LPCTSTR) bsValue);
-			return sRet;
+			sRet.Format("%s",(LPCTSTR) bsValue);
+			break;
 		}
 		break;
 
@@ -492,7 +493,14 @@ CString CElementManager::CreateElementCaption(MSXML2::IXMLDOMElementPtr &pElemen
 		}
 		break;
 	}
+	CString sRet2;
+	if 	(((CReportAsistentApp *)AfxGetApp())->m_bIdInItemName)
+	{
+		sRet2.Format("%s: %s",(LPCTSTR)bsId, sRet); 
+		sRet=sRet2;
+	}
 
+	return sRet;
 	
 	//dedek: sem by se program nemel dostat
 	ASSERT(FALSE);
