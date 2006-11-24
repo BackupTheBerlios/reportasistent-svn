@@ -85,6 +85,8 @@ LPCTSTR CAElInfo::getElementLabel()
 
 BOOL CAElInfo::LoadFromDir(LPCTSTR dir_path)
 {  
+	CElementManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
+
 	src_dir_path = dir_path;
 	
 	//nacteni pElementDefinitionDOM
@@ -96,6 +98,22 @@ BOOL CAElInfo::LoadFromDir(LPCTSTR dir_path)
 
 		return FALSE;
 	}
+
+
+	//validace element.xml
+	try
+	{
+		m.ValidateActiveElement(pElementDefinitionDOM->documentElement);
+	}
+	catch (MSXML2::IXMLDOMParseErrorPtr err)
+	{
+		CReportAsistentApp::ReportError(IDS_AEL_LOAD_FAILED, dir_path, "element.xml",
+			(LPCTSTR) err->reason);
+
+		return FALSE;
+	}
+
+
 
 /*	
 			 CFileFind options_find;

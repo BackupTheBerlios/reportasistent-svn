@@ -33,6 +33,8 @@
 #define IDR_SKELETON_DTD                160
 #define IDR_VISUALIZATION_OPTIONS_DTD   162
 #define IDD_WAIT_DIALOG                 163
+#define IDR_SKELETON_DTD1               163
+#define IDR_STATIC_ELEMENTS             163
 #define IDD_OPTIONS_DIALOG              164
 #define IDD_DIALOG_REPORT               166
 #define IDD_COMPLEX_FILTER_DIALOG       168
@@ -195,7 +197,7 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
-#define _APS_NEXT_RESOURCE_VALUE        173
+#define _APS_NEXT_RESOURCE_VALUE        174
 #define _APS_NEXT_COMMAND_VALUE         32803
 #define _APS_NEXT_CONTROL_VALUE         1067
 #define _APS_NEXT_SYMED_VALUE           101

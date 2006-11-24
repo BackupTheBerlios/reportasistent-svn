@@ -769,6 +769,7 @@ END
 
 IDR_SKELETON_DTD        XML                     "..\\xml\\skeleton_DTD.xml"
 IDR_VISUALIZATION_OPTIONS_DTD XML                     "..\\xml\\visualization_options_DTD.xml"
+IDR_STATIC_ELEMENTS     XML                     "..\\xml\\static_elements.xml"
 
 /////////////////////////////////////////////////////////////////////////////
 //

@@ -57,6 +57,7 @@ private:
 public:
 	static void LoadXMLDOMFromResource(UINT nResourceID, MSXML2::IXMLDOMDocumentPtr &dom);
 	static void LoadSkeletonDTD(MSXML2::IXMLDOMDocumentPtr & dom);
+	void ValidateActiveElement(MSXML2::IXMLDOMElementPtr & a_element);
 	static BOOL ValidateVisualizationOtions(MSXML2::IXMLDOMDocumentPtr &vo_dom, CString & err_msg);
 
 	MSXML2::IXMLDOMDocumentPtr TransformAttrLinkTableNoReplaceSource(MSXML2::IXMLDOMElementPtr & element);
@@ -88,6 +89,8 @@ public:
 	LPCTSTR getElementLabel(elId_t elementID);	//vrati label elementu s id elementID
 	elId_t IdentifyElement(MSXML2::IXMLDOMElementPtr & element);	//identifikuje element - vrati id
 	elId_t getLastElementId();	//vrati posledni id ~ pocet znamych elementu
+
+	void Init(CDirectoriesManager & m);
 
 	CElementManager(CDirectoriesManager & m);
 	~CElementManager();

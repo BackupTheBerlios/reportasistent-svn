@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="windows-1250"?>
+
+<report>
+	
+	<chapter title="Chapter title" id="chapter1" />
+
+	<paragraph style="" id="paragraph1" />
+	
+	<text id="text1">Some text</text>
+	
+	<include file="../XML/include_doc.doc" id="include1"/>
+
+	<attr_link id="attr_link1" target="" attr_name="" />
+
+	<attr_link_table id="attr_link_table1" target="" style="">
+	</attr_link_table>
+
+
+</report>
+
+<!-- please leave some free spaces directly at the end of this file
+- required for smooth drive of the RA application :-) 
+
+dedek
+
+-->
+
+
+
+

@@ -1146,6 +1146,10 @@
 			>
 		</File>
 		<File
+			RelativePath="..\XML\static_elements.xml"
+			>
+		</File>
+		<File
 			RelativePath="..\XML\visualization_options_DTD.xml"
 			>
 		</File>

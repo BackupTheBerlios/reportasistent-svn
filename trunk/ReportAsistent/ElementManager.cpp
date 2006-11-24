@@ -123,13 +123,16 @@ CElementManager::elId_t CElementManager::IdentifyElement(MSXML2::IXMLDOMElementP
 }
 
 
+void CElementManager::Init(CDirectoriesManager & m)
+{
+	LoadActiveElements(m.getElementsDirectory());
+	LoadAttrLinkTableStyles(m.getAttrLinkTableStylesDirectory());
+}
+
 
 CElementManager::CElementManager(CDirectoriesManager & m)
 {
 //  AfxMessageBox(m.getElementsDirectory());
-
-  LoadActiveElements(m.getElementsDirectory());
-	LoadAttrLinkTableStyles(m.getAttrLinkTableStylesDirectory());
 }
 
 CElementManager::~CElementManager()
@@ -169,7 +172,8 @@ MSXML2::IXMLDOMElementPtr CElementManager::CreateEmptyElement(CElementManager::e
 	{
 		MSXML2::IXMLDOMElementPtr ret = getActiveElementInfo(id)->CreateEmptyElement();
 		//nastav unikatni id parametr
-		ret->setAttribute("id", (LPCTSTR) doc->CreateNewID(id));
+		if (doc != NULL)
+			ret->setAttribute("id", (LPCTSTR) doc->CreateNewID(id));
 
 		return ret;
 
@@ -192,8 +196,8 @@ MSXML2::IXMLDOMElementPtr CElementManager::CreateEmptyElement(CElementManager::e
 	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
 	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
 
-	CDirectoriesManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->DirectoriesManager;
-	element_example->load((LPCTSTR) (m.getXMLFilesDirectory() + "/prazdny2.xml"));
+	LoadXMLDOMFromResource(IDR_STATIC_ELEMENTS, element_example);
+//	element_example->load((LPCTSTR) (m.getXMLFilesDirectory() + "/prazdny2.xml"));
 
 
 	CString select;
@@ -216,14 +220,18 @@ MSXML2::IXMLDOMElementPtr CElementManager::CreateEmptyElement(CElementManager::e
 	MSXML2::IXMLDOMElementPtr ret = element_example->selectSingleNode((LPCTSTR) select);
 	if (ret == NULL) 
 	{
+
+#ifdef _DEBUG
 		AfxMessageBox("Nezdarilo se najit odpovidajici xml prvek v souboru praznych prvku.");
+#endif
 		element_example.Release();
 		return NULL;
 	}
 	
 	
 	//nastav unikatni id parametr
-	ret->setAttribute("id", (LPCTSTR) doc->CreateNewID(id));
+	if (doc != NULL)
+		ret->setAttribute("id", (LPCTSTR) doc->CreateNewID(id));
 
 
 
@@ -417,7 +425,8 @@ CString CElementManager::CreateElementCaption(MSXML2::IXMLDOMElementPtr &pElemen
 //	AfxMessageBox(pElement->xml);
 //	AfxMessageBox(getElementName(element_id));
 
-	bsId = pElement->selectSingleNode("@id")->text;
+	if (element_id != ELID_UNKNOWN)
+		bsId = pElement->selectSingleNode("@id")->text;
 	
 	switch (element_id)
 	{
@@ -780,6 +789,33 @@ BOOL CElementManager::ValidateVisualizationOtions(MSXML2::IXMLDOMDocumentPtr &vo
 	validator.Release();
 
   return FALSE;
+}
+
+void CElementManager::ValidateActiveElement(MSXML2::IXMLDOMElementPtr & a_element)
+{
+	ASSERT (a_element != NULL);
+
+	BOOL ret = FALSE;
+
+	MSXML2::IXMLDOMDocumentPtr DTD_doc;
+	DTD_doc.CreateInstance(_T("Msxml2.DOMDocument"));
+	DTD_doc->async = VARIANT_FALSE;
+
+	LoadSkeletonDTD(DTD_doc);
+
+	MSXML2::IXMLDOMElementPtr chapter = CreateEmptyElement(ELID_CHAPTER);
+	chapter->appendChild(a_element->cloneNode(VARIANT_TRUE));
+	DTD_doc->documentElement->appendChild(chapter);
+
+
+	MSXML2::IXMLDOMDocument2Ptr validator = DTD_doc;
+	MSXML2::IXMLDOMParseErrorPtr err = validator->validate();
+
+	DTD_doc.Release();
+	chapter.Release();
+	validator.Release();
+
+	if (err->errorCode != S_OK) throw err;
 }
 
 void CElementManager::LoadSkeletonDTD(MSXML2::IXMLDOMDocumentPtr &dom)

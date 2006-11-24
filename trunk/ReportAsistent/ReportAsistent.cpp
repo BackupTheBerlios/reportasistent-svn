@@ -132,6 +132,8 @@ BOOL CReportAsistentApp::InitInstance()
 
 	//dedek
 	m_pGeneralManager = new CGeneralManager();
+	m_pGeneralManager->ElementManager.Init(m_pGeneralManager->DirectoriesManager);
+
 
 
 
@@ -237,6 +239,9 @@ int CReportAsistentApp::ExitInstance()
 CSkeletonDoc * CReportAsistentApp::FirstDocumentInFirstTemplate()
 {
 	POSITION pos = GetFirstDocTemplatePosition();
+
+	if (pos == NULL) return NULL;
+
 	CDocTemplate * t = GetNextDocTemplate(pos);
 
 	pos = t->GetFirstDocPosition();
