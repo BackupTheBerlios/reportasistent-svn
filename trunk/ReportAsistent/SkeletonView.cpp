@@ -179,28 +179,39 @@ void CSkeletonView::OnUpdate(CView* pSender, LPARAM lHint, CObject* pHint)
 	//a na misto kam bylo pridano by bylo nutne znovu se prolistovat
 
 	//neni-li specifikovana akce nebo k ni chybi parametry, necham cely strom jenom premalovat
-	if (lHint == 0) return;
-	if (pHint == NULL) return;
+	if (lHint == 0)
+	{
+		InvalidateRect(NULL);
+		return;
+	}
 
 	CTreeCtrl & pTreeCtrl = GetTreeCtrl();
-		/*
-		ASSERT(FALSE);
-		//dedek: zuseno, nepouziva se
-		
-		MSXML2::IXMLDOMElement * new_element = (MSXML2::IXMLDOMElement *) lHint;
-
-
-		GetDocument()->InsertNodeToTreeCtrl((MSXML2::IXMLDOMElementPtr) new_element, tree.GetSelectedItem(), tree);
-
-	 
-		//Deda: Naplneni TreeCtrl
-			GetDocument()->FillTreeControl(GetTreeCtrl());
-		*/
-	
 
 	//Iva: New version
 	switch (lHint)
 	{
+	case UT_SETTINGS: //settings of TreeCtrl have changed
+		long        lStyleOld;
+
+		lStyleOld = GetWindowLong(m_hWnd, GWL_STYLE);
+
+		if (((CReportAsistentApp *)AfxGetApp())->m_bTreeHasButtons) lStyleOld |= TVS_HASBUTTONS;
+			else lStyleOld &= ~ TVS_HASBUTTONS;
+		if (((CReportAsistentApp *)AfxGetApp())->m_bTreeHasLines) lStyleOld |= TVS_HASLINES;
+			else lStyleOld &= ~ TVS_HASLINES;
+
+		//lStyleOld |= TVS_LINESATROOT|TVS_SHOWSELALWAYS;
+
+		SetWindowLong(m_hWnd, GWL_STYLE, lStyleOld);
+		GetTreeCtrl().SetIndent(((CReportAsistentApp *)AfxGetApp())->m_iTreeItemIndent);//default: 19 
+		GetTreeCtrl().SetItemHeight(((CReportAsistentApp *)AfxGetApp())->m_iTreeItemHeight);//default: 16
+
+		UpdateAllItemTexts(GetTreeCtrl().GetRootItem());
+		
+	//	GetDocument()->FillTreeControl(GetTreeCtrl());
+
+		break;
+
 	case UT_DEL:
 		if (NULL != ((CUT_Hint*)pHint)->pTreeItem)
 				pTreeCtrl.DeleteItem( ((CUT_Hint*)pHint)->pTreeItem);	
@@ -895,4 +906,21 @@ void CSkeletonView::OnSignOrphans()
 void CSkeletonView::OnDeleteOrphans()
 {
 	ResolveOrphans(ORP_DELETE);
+}
+
+void CSkeletonView::UpdateAllItemTexts(HTREEITEM pItem)
+{
+	CTreeCtrl & pTreeCtrl=GetTreeCtrl();
+	CElementManager & OElementManager = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
+
+	MSXML2::IXMLDOMElementPtr pElm = CSkeletonDoc::ElementFromItemData( pTreeCtrl.GetItemData(pItem));
+	pTreeCtrl.SetItemText(pItem, OElementManager.CreateElementCaption(pElm));
+
+	HTREEITEM pNextItem;
+	if (pNextItem = pTreeCtrl.GetChildItem(pItem))
+		UpdateAllItemTexts(pNextItem);
+
+	pNextItem = pItem;
+	while (pNextItem = pTreeCtrl.GetNextSiblingItem(pNextItem))
+		UpdateAllItemTexts(pNextItem);
 }

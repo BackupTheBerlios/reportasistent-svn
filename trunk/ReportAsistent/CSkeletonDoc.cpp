@@ -44,6 +44,8 @@ BEGIN_MESSAGE_MAP(CSkeletonDoc, CDocument)
 	ON_COMMAND_RANGE(ID_MMNEWACTIVEFIRST, ID_MMNEWACTIVELAST, OnMmnewelement)
 	ON_COMMAND(ID_SHOW_XML, OnShowXml)
 	ON_COMMAND(ID_RESET_ORPHANS, OnResetOrphans)
+	ON_COMMAND(ID_DELETE_ORPHANS, OnDelOrphans)
+
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -1287,4 +1289,11 @@ int CSkeletonDoc::changeOrphansDataSourceToDefault(void)
 void CSkeletonDoc::OnResetOrphans()
 {
 	changeOrphansDataSourceToDefault();
+}
+
+
+void CSkeletonDoc::OnDelOrphans() 
+{
+	
+	GetFirstView()->ResolveOrphans(ORP_DELETE);
 }

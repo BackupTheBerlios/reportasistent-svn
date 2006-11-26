@@ -30,6 +30,10 @@
 #ifndef UT_EDIT
 	#define UT_EDIT 3
 #endif
+#ifndef UT_SETTINGS
+	#define UT_SETTINGS 4
+#endif
+
 
 
 //Iva: Definition of class for OnUpdate(), its pHint parameter
@@ -105,6 +109,7 @@ protected:
 
 // Generated message map functions
 protected:
+	void UpdateAllItemTexts(HTREEITEM pItem);
 	//{{AFX_MSG(CSkeletonView)
 	afx_msg void OnDeleteitem(NMHDR* pNMHDR, LRESULT* pResult);
 	afx_msg void OnLButtonDblClk(UINT nFlags, CPoint point);

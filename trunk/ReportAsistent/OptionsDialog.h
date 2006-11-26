@@ -20,7 +20,11 @@ public:
 // Dialog Data
 	//{{AFX_DATA(COptionsDialog)
 	enum { IDD = IDD_OPTIONS_DIALOG };
-		// NOTE: the ClassWizard will add data members here
+	CButton	m_IdInTreeCheckBox;
+	CButton	m_ButtonsCheckBox;
+	CButton	m_LinesCheckBox;
+	CEdit	m_IndentEdit;
+	CEdit	m_HeightEdit;
 	//}}AFX_DATA
 
 

@@ -1,5 +1,5 @@
 //{{NO_DEPENDENCIES}}
-// Microsoft Visual C++ generated include file.
+// Microsoft Developer Studio generated include file.
 // Used by ReportAsistent.rc
 //
 #define IDD_ABOUTBOX                    100
@@ -113,12 +113,16 @@
 #define IDC_BUTTON4                     1048
 #define IDC_RADIO1                      1049
 #define IDC_TRESHOLD_RADIO              1049
+#define IDC_IGNORE_RADIO                1049
 #define IDC_RADIO2                      1050
 #define IDC_FIXED_VAL_RADIO             1050
+#define IDC_DELETE_RADIO                1050
 #define IDC_RADIO3                      1051
 #define IDC_TOP_N_VAL_RADIO             1051
+#define IDC_SET_DEFAULT_RADIO           1051
 #define IDC_EDIT2                       1052
 #define IDC_TRESHOLD_EDIT               1052
+#define IDC_TREE_ITEM_INDENT            1052
 #define IDC_ATTRLINK_ID_EDIT            1053
 #define IDC_ATTRLINKTABLE_ID_EDIT       1054
 #define IDC_INCLUDE_FILENAME_EDIT       1055
@@ -136,12 +140,15 @@
 #define IDC_REMOVE_FILTER_BUTTON        1063
 #define IDC_CHECK1                      1063
 #define IDC_SIMPLE_FILTER_DISABLED_CHECK 1063
+#define IDC_SHOW_ID_IN_TREE             1063
 #define IDC_NO_FILTERS                  1064
 #define IDC_NO_FLTER_FRAME              1065
 #define IDC_COMBO1                      1066
 #define IDC_WORD_TEMPLATE_COMBO         1066
 #define IDC_CHECK2                      1067
+#define IDC_TREE_HAS_BUTTONS            1067
 #define IDC_CHECK3                      1068
+#define IDC_TREE_HAS_LINES              1068
 #define ID_MMGENREP                     32771
 #define ID_MMSOURCES                    32772
 #define ID_ELEMENT_EDIT                 32780
@@ -202,8 +209,8 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
 #define _APS_NEXT_RESOURCE_VALUE        174
-#define _APS_NEXT_COMMAND_VALUE         32803
-#define _APS_NEXT_CONTROL_VALUE         1068
+#define _APS_NEXT_COMMAND_VALUE         32802
+#define _APS_NEXT_CONTROL_VALUE         1070
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

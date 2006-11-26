@@ -61,6 +61,7 @@ protected:
 	//{{AFX_MSG(CSkeletonDoc)
 	afx_msg void OnElementEdit();
 	afx_msg void OnMmgenrep();
+	afx_msg void OnDelOrphans();
 	//}}AFX_MSG
 	afx_msg void OnMmnewelement(UINT nMessageID);
 	DECLARE_MESSAGE_MAP()

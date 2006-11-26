@@ -282,7 +282,11 @@ void CReportAsistentApp::OnFileOptions()
 {
 	COptionsDialog dlg(AfxGetMainWnd());
 
-	dlg.DoModal();
+	if (IDOK == dlg.DoModal())
+	{
+		FirstDocumentInFirstTemplate()->SetModifiedFlag();
+		FirstDocumentInFirstTemplate()->UpdateAllViews(NULL,0);
+	}
 	
 }
 

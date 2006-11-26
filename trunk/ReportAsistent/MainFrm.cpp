@@ -102,7 +102,7 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 
 //Iva: Dynamicky pridam do menu seznam prvku ke vlozeni do kostry
 	CMenu * hMainMenu = /*AfxGetApp()->GetMainWnd()->*/GetMenu();
-	CMenu * hNewMenu = hMainMenu->GetSubMenu(1/*Edit*/)->GetSubMenu(7/*New*/);
+	CMenu * hNewMenu = hMainMenu->GetSubMenu(1/*Edit*/)->GetSubMenu(5/*New*/);
 	char Textik [20]="";
 	/*	hNewMenu->GetMenuString(0,Textik,19,MF_BYPOSITION);
 		AfxMessageBox(Textik,0,0);*/

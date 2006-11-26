@@ -474,6 +474,10 @@ SOURCE=..\XML\skeleton_DTD.xml
 # End Source File
 # Begin Source File
 
+SOURCE=..\XML\static_elements.xml
+# End Source File
+# Begin Source File
+
 SOURCE=..\XML\visualization_options_DTD.xml
 # End Source File
 # Begin Source File

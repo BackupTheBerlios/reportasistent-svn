@@ -261,3 +261,5 @@ void CAttributeLinkDialog::DDV_NonDuplicateID(CDataExchange *pDX, int nId, CStri
 	}
 
 }
+
+
