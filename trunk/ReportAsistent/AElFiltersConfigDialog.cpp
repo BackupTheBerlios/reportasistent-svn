@@ -78,7 +78,9 @@ END_MESSAGE_MAP()
 BOOL CAElFiltersConfigDialog::OnInitDialog()
 {
 	CPropertyPage::OnInitDialog();
-	
+
+	m_FiltersList.SetExtendedStyle(LVS_EX_FULLROWSELECT);
+
 	//nacti filtry
 	int c = -1;
 	c = m_FiltersList.InsertColumn(++c, "Attribute name", 0, 150);

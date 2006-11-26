@@ -115,6 +115,8 @@ BOOL CComplexFilterDialog::OnInitDialog()
 {
 	CDialog::OnInitDialog();
 
+
+
 	m_TopNSpin.SetRange(1, 100);
 //	m_TopNSpin.SetPos(5);
 	m_TopNSpin.SetBase(1);
@@ -662,6 +664,8 @@ CString CFilterResultImpl::getAttributeLabel(int index)
 
 void CFilterResultImpl::InitResultView()
 {
+	m_ResultList.SetExtendedStyle(LVS_EX_FULLROWSELECT);
+
 	// Delete all of the columns.
 	int nColumnCount = m_ResultList.GetHeaderCtrl()->GetItemCount();
 	for (int i = 0; i < nColumnCount;i++)
@@ -673,6 +677,7 @@ void CFilterResultImpl::InitResultView()
 	{
 		m_ResultList.InsertColumn(a, getAttributeLabel(a), 0, 50);
 	}
+
 }
 
 void CFilterResultImpl::UpdateResult(MSXML2::IXMLDOMElementPtr & filter_dom)

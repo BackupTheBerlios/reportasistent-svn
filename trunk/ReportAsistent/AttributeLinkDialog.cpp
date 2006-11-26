@@ -81,6 +81,7 @@ BOOL CAttributeLinkDialog::OnInitDialog()
 	
 	
 	//najdi vybranou polozku
+
 	LVFINDINFO info;
 	ZeroMemory(& info, sizeof info);
 

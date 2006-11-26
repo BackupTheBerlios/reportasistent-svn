@@ -28,6 +28,8 @@ CAttributeLinkDialogBase::CAttributeLinkDialogBase(MSXML2::IXMLDOMElementPtr & e
 void CAttributeLinkDialogBase::InitBaseDialog(CListCtrl & AttributesList, CComboBox & TargetCombo)
 {
 	ASSERT(m_SelXMLElm != NULL);
+	
+	AttributesList.SetExtendedStyle(LVS_EX_FULLROWSELECT);
 
 	FillTargets(TargetCombo);
 	if (CB_ERR == TargetCombo.SelectString(-1, (_bstr_t) m_SelXMLElm->getAttribute("target")))

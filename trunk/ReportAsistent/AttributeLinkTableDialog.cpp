@@ -78,7 +78,6 @@ BOOL CAttributeLinkTableDialog::OnInitDialog()
 
 	if (! m_bShowTarget) m_TargetCombo.EnableWindow(FALSE);
 	
-	// TODO: Add extra initialization here
 	InitBaseDialog(m_AttributesList, m_TargetCombo);
 
 
@@ -91,6 +90,8 @@ BOOL CAttributeLinkTableDialog::OnInitDialog()
 
 
 	//napln CaptionsList hodnotami
+	m_CaptionsList.SetExtendedStyle(LVS_EX_FULLROWSELECT);
+
 	MSXML2::IXMLDOMNodeListPtr links = m_SelXMLElm->selectNodes("link");
 
 	CString target_id;

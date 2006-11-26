@@ -70,6 +70,9 @@ BOOL CSourcesDialog::OnInitDialog()
 	
 	int a;
 
+	m_SourcesList.SetExtendedStyle(LVS_EX_FULLROWSELECT);
+	
+
 	for (a=0; a<LENGTH(header_captions); a++)
 	{
 		m_SourcesList.InsertColumn(a, header_captions[a], LVCFMT_LEFT, 100);
