@@ -200,9 +200,6 @@ SOURCE=.\SimpleFilterDialog.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\SkeletonSettingsManager.cpp
-# End Source File
-# Begin Source File
 
 SOURCE=.\SkeletonView.cpp
 # End Source File
@@ -350,10 +347,6 @@ SOURCE=.\SimpleFilterDialog.h
 # Begin Source File
 
 SOURCE=.\SkeletonManager.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\SkeletonSettingsManager.h
 # End Source File
 # Begin Source File
 
