@@ -1298,7 +1298,7 @@ void CSkeletonDoc::OnDelOrphans()
 	GetFirstView()->ResolveOrphans(ORP_DELETE);
 }
 
-LPCTSTR CSkeletonDoc::GetReportSettings(LPCTSTR attribute)
+CString CSkeletonDoc::GetReportSettings(LPCTSTR attribute)
 {
 	CElementManager & OElementManager = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
 	MSXML2::IXMLDOMElementPtr pTopElement;
@@ -1306,12 +1306,12 @@ LPCTSTR CSkeletonDoc::GetReportSettings(LPCTSTR attribute)
 	pTopElement = m_pXMLDom->GetdocumentElement();
 	CElementManager::elId_t el_id = OElementManager.IdentifyElement(pTopElement);
 
-	if (el_id != ELID_REPORT) return NULL;
-
+	if (el_id != ELID_REPORT) return "";
+	
 	_variant_t varAtr=pTopElement->getAttribute(attribute);
-	if (varAtr.vt==VT_NULL) return NULL;
-
-	return (LPCTSTR) (_bstr_t)  varAtr;
+	if (varAtr.vt==VT_NULL) return "";
+	CString pom = (LPCTSTR) (_bstr_t)varAtr;
+	return pom;
 }
 
 BOOL CSkeletonDoc::SetReportSettings(LPCTSTR attribute, LPCTSTR value)

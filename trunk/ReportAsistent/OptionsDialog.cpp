@@ -57,7 +57,7 @@ BOOL COptionsDialog::OnInitDialog()
 	CReportAsistentApp * App = ((CReportAsistentApp *) AfxGetApp());
 
 	//Set Language radio buttons
-	CString lang = App->FirstDocumentInFirstTemplate()->GetReportSettings("language");
+	//CString lang = App->FirstDocumentInFirstTemplate()->GetReportSettings("language");
 	if (m->getLanguage() == CString("cz"))
 		CheckRadioButton(IDC_CZECH_RADIO, IDC_ENGLISH_RADIO, IDC_CZECH_RADIO);
 	else
@@ -83,7 +83,6 @@ BOOL COptionsDialog::OnInitDialog()
 
 	//Set orphans radio buttons:
 	CString OrphSol = App->FirstDocumentInFirstTemplate()->GetReportSettings("orphans_solution");
-	AfxMessageBox(OrphSol);
 	if (OrphSol== CString("ignore"))
 			CheckRadioButton( IDC_IGNORE_RADIO , IDC_SET_DEFAULT_RADIO, IDC_IGNORE_RADIO );
 	else		

@@ -116,7 +116,7 @@ public:
 	int changeOrphansDataSourceToDefault(void);
 public:
 	BOOL SetReportSettings(LPCTSTR attribute, LPCTSTR value);
-	LPCTSTR GetReportSettings(LPCTSTR attribute);
+	CString GetReportSettings(LPCTSTR attribute);
 	afx_msg void OnResetOrphans();
 };
 
