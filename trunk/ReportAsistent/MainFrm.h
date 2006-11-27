@@ -61,6 +61,7 @@ protected:
 	afx_msg void OnViewActiveelementtoolbar();
 	afx_msg void OnUpdateViewActiveelementtoolbar(CCmdUI* pCmdUI);
 	afx_msg void OnWordEditorEditActiveElement();
+	afx_msg void OnClose();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 public:

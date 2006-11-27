@@ -50,6 +50,7 @@ End Property
 
 Public Sub ActivateWordEditor()
     If Not mWordEditor Is Nothing Then
+        mWordEditor.Visible = True
         mWordEditor.Activate
     End If
 End Sub
@@ -72,32 +73,20 @@ End Sub
 Private Sub evWordApp_Quit()
     Set mWordEditor = Nothing
     
+    ActivateParentTask
+    
     RaiseEvent WordQuit
 End Sub
 
-Private Sub ActivateParentTask()
-    'On Error Resume Next
-    'Tasks("LMRA_WordLoader").Activate False
+Public Sub ActiveElementSelected(ByVal el_name As String)
+    ActivateParentTask
     
-    
-    RaiseEvent PrepareParentTaskActivation
-    
-    
-    If Tasks.Exists(mstrParentTaskName) Then
-        Tasks(mstrParentTaskName).Activate False
-    Else
-        MsgBox "Task not exist: " & mstrParentTaskName
-    End If
-    
+    RaiseEvent ActiveElementSelected(el_name)
 End Sub
 
 Public Sub CommandEvent(ByVal button_tag As String)
-    'MsgBox button_tag
-    'mWordEditor.Visible = False
-    
     ActivateParentTask
-    
-        
+           
     Select Case button_tag
         Case "Options"
             RaiseEvent SetOptions
@@ -108,8 +97,6 @@ Public Sub CommandEvent(ByVal button_tag As String)
         Case "Data Sources"
             RaiseEvent SetSources
     End Select
-    
-    'mWordEditor.Visible = True
 End Sub
 
 Private Sub AddButtonToBar(ByRef bar As Office.CommandBar, ByVal caption As String, ByVal faceid)
@@ -179,19 +166,10 @@ Private Sub CreateRAToolbar(WordApp As Word.Application)
     bar.Visible = True
 End Sub
 
-
-Public Sub ActiveElementSelected(ByVal el_name As String)
-'    MsgBox "element: " & el_name
-    ActivateParentTask
-    
-    RaiseEvent ActiveElementSelected(el_name)
-End Sub
-
-
-
-
 Public Sub OpenWordEditor()
     If Not mWordEditor Is Nothing Then
+        mWordEditor.Visible = True
+        ActivateWordEditor
         Exit Sub
     End If
        
@@ -213,6 +191,24 @@ Public Sub OpenWordEditor()
     mWordEditor.Visible = True
 End Sub
 
+Private Sub ActivateParentTask()
+    'On Error Resume Next
+    'Tasks("LMRA_WordLoader").Activate False
+    
+    
+    RaiseEvent PrepareParentTaskActivation
+    
+    
+    If Tasks.Exists(mstrParentTaskName) Then
+        Tasks(mstrParentTaskName).Activate False
+        
+        If Not mWordEditor Is Nothing Then
+            'mWordEditor.Visible = False
+        End If
+    Else
+        MsgBox "Task not exist: " & mstrParentTaskName
+    End If
+End Sub
 
 Public Property Get strLastProcessedId() As String
     strLastProcessedId = mstrLastId

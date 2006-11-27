@@ -196,6 +196,7 @@ int CStringTable::FindString(LPCTSTR str)
 	return -1;
 }
 
+
 void CWordManager::GenerateXMLStringToWordEditor(_bstr_t XML_str)
 {
 	if (! isInit()) 
@@ -412,14 +413,15 @@ int CWordManager::LoadSafeArrayToStringTable(SAFEARRAY *sarray, CStringTableImpl
 
 BOOL CWordManager::isWordEditorActive()
 {
-	return m_WordLoader->GetisWordEditorActive() == VARIANT_FALSE;
+	if (! isInit()) return FALSE;
+	return m_WordLoader->GetisWordEditorActive() == VARIANT_TRUE;
 }
 
 
 
 void CWordManager::WordEditHideMainWindow()
 {
-	if (isWordEditorActive())
+	if (! isWordEditorActive())
 	{
 	
 		ZeroMemory(& m_origWINDOWPLACEMENT, sizeof m_origWINDOWPLACEMENT);
@@ -435,11 +437,17 @@ void CWordManager::WordEditHideMainWindow()
 	newpl.flags = WPF_SETMINPOSITION;
 	newpl.showCmd = SW_MINIMIZE; //SW_SHOWMINIMIZED
 
-//	AfxGetApp()->GetMainWnd()->SetWindowPlacement(& newpl);
+	AfxGetApp()->GetMainWnd()->SetWindowPlacement(& newpl);
 //	AfxGetApp()->GetMainWnd()->EnableWindow(FALSE);
 
 	
-//	AfxGetApp()->GetMainWnd()->ShowWindow(SW_HIDE);
+
+	if (isInit())
+	{
+		m_WordLoader->ActivateWordEditor();
+	}
+	
+	AfxGetApp()->GetMainWnd()->ShowWindow(SW_HIDE);
 }
 
 void CWordManager::PrepareParentTaskActivation()
@@ -449,6 +457,7 @@ void CWordManager::PrepareParentTaskActivation()
 	AfxGetApp()->GetMainWnd()->ShowWindow(SW_SHOW);
 	SetWordEditorParentTaskName();
 }
+
 
 void CWordManager::WordEditShowMainWindow()
 {

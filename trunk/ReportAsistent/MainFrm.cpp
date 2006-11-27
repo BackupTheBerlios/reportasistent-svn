@@ -28,6 +28,7 @@ BEGIN_MESSAGE_MAP(CMainFrame, CFrameWnd)
 	ON_COMMAND(ID_VIEW_ACTIVEELEMENTTOOLBAR, OnViewActiveelementtoolbar)
 	ON_UPDATE_COMMAND_UI(ID_VIEW_ACTIVEELEMENTTOOLBAR, OnUpdateViewActiveelementtoolbar)
 	ON_COMMAND(ID_WORD_EDITOR_EDIT_ACTIVE_ELEMENT, OnWordEditorEditActiveElement)
+	ON_WM_CLOSE()
 	//}}AFX_MSG_MAP
    ON_COMMAND(ID_HELP_FINDER, CFrameWnd::OnHelpFinder)
    ON_COMMAND(ID_HELP, CFrameWnd::OnHelp)
@@ -532,4 +533,19 @@ void CMainFrame::OnWordEditorEditActiveElement()
 	active_element.Release();
 	doc.Release();
 /****/	
+}
+
+void CMainFrame::OnClose() 
+{
+	CWordManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->WordManager;
+
+	if (m.isWordEditorActive())
+	{
+		//AfxMessageBox(IDS_CLOSE_WORD_FIRST, MB_ICONINFORMATION);
+		m.OpenWordEditor();
+	}
+	else
+	{
+		CFrameWnd::OnClose();
+	}
 }

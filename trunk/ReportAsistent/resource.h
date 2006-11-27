@@ -198,6 +198,7 @@
 #define IDS_NO_DATA_FROM_CLIPBOARD      61408
 #define IDS_PARSE_ERROR                 61409
 #define IDS_SETTINGS_ERR                61410
+#define IDS_CLOSE_WORD_FIRST            61411
 
 // Next default values for new objects
 // 

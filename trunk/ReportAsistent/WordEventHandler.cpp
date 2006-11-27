@@ -49,8 +49,8 @@ END_MESSAGE_MAP()
 BEGIN_DISPATCH_MAP(CWordEventHandler, CCmdTarget)
 	//{{AFX_DISPATCH_MAP(CWordEventHandler)
 	DISP_FUNCTION(CWordEventHandler, "ActiveElementSelected", onActiveElementSelected, VT_EMPTY, VTS_BSTR)
-	DISP_FUNCTION(CWordEventHandler, "SetOptions", onSetOptions, VT_EMPTY, VTS_NONE)
 	DISP_FUNCTION(CWordEventHandler, "SetSources", onSetSources, VT_EMPTY, VTS_NONE)
+	DISP_FUNCTION(CWordEventHandler, "SetOptions", onSetOptions, VT_EMPTY, VTS_NONE)
 	DISP_FUNCTION(CWordEventHandler, "SkeletonEditor", onSkeletonEditor, VT_EMPTY, VTS_NONE)
 	DISP_FUNCTION(CWordEventHandler, "WordQuit", onWordQuit, VT_EMPTY, VTS_NONE)
 	DISP_FUNCTION(CWordEventHandler, "PrepareParentTaskActivation", onPrepareParentTaskActivation, VT_EMPTY, VTS_NONE)
@@ -73,6 +73,7 @@ void CWordEventHandler::onActiveElementSelected(LPCTSTR strElementName)
 	m_strLastElementName = strElementName;
 
 	AfxGetApp()->GetMainWnd()->SendMessage(WM_COMMAND, ID_WORD_EDITOR_EDIT_ACTIVE_ELEMENT);
+	((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->WordManager.OpenWordEditor();
 
 //	 ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->WordManager.OpenWordEditor();
 	
