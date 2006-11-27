@@ -135,6 +135,7 @@
 #define IDC_CHECK1                      1063
 #define IDC_SIMPLE_FILTER_DISABLED_CHECK 1063
 #define IDC_SHOW_ID_IN_TREE             1063
+#define IDC_NEW_WORD_CHECK              1063
 #define IDC_NO_FILTERS                  1064
 #define IDC_NO_FLTER_FRAME              1065
 #define IDC_WORD_TEMPLATE_COMBO         1066

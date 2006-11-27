@@ -21,7 +21,7 @@ public:
 // Dialog Data
 	//{{AFX_DATA(CGenerateDialog)
 	enum { IDD = IDD_GENERATE_DIALOG };
-		// NOTE: the ClassWizard will add data members here
+	BOOL	m_bNewWordChecked;
 	//}}AFX_DATA
 
 

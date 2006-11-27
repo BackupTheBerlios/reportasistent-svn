@@ -20,7 +20,7 @@ CGenerateDialog::CGenerateDialog(CSkeletonDoc & DocumentToGenerate, CWnd* pParen
 	: CDialog(CGenerateDialog::IDD, pParent), m_SkeletonDocument(DocumentToGenerate)
 {
 	//{{AFX_DATA_INIT(CGenerateDialog)
-		// NOTE: the ClassWizard will add member initialization here
+	m_bNewWordChecked = TRUE;
 	//}}AFX_DATA_INIT
 }
 
@@ -29,7 +29,7 @@ void CGenerateDialog::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CGenerateDialog)
-		// NOTE: the ClassWizard will add DDX and DDV calls here
+	DDX_Check(pDX, IDC_NEW_WORD_CHECK, m_bNewWordChecked);
 	//}}AFX_DATA_MAP
 }
 
