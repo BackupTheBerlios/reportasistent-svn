@@ -10,94 +10,96 @@ using Ferda.ModulesManager;
 using Ferda.Modules;
 using Ferda.Modules.Helpers;
 using Ferda.Modules.Quantifiers;
-//using Ferda.FrontEnd;
 
 namespace FEplugin_cs
 {
 
-    // ==================== Aktivni prvek Uloha (Task) ================================
+    // ==================== Active element "Ferda Data Miner box" ================================
 
+    /// <summary>
+    /// Implementation of active element "Ferda Data Miner box"
+    /// </summary>
     public class AP_FEferda_box
     {
         /// <summary>
-        /// Implementation of Active element "ferda_box"
+        /// Returns XML string with all occurences of Active element "Ferda Data Miner box".
         /// </summary>
-        /// <param name="index">index of data source in data sources tab </param>
-        /// <returns>Returns XML string with all occurences of Active element type "ferda_box" (all types of task) from data source with given index</returns>
+        /// <param name="index">index of data source in FEplugin data sources table</param>
+        /// <returns>XML string</returns>
         public static string getList(int index)
         {
-            string resultString = ""; // vysledny XML string
-            string ErrStr = "";  // zaznamy o chybach
+            string resultString = ""; // result XML string
+            string ErrStr = "";  // error reports
             //int counterID = 0;
 
-            // nacteni DTD do resultStringu
+            // loading DTD to resultString
             try { resultString = XMLHelper.loadDTD(); }
             catch (Exception e)
             {
 #if (LADENI)
-                MessageBox.Show("Chyba pri nacitani DTD: " + e.Message);
+                MessageBox.Show("error while loading DTD: " + e.Message);
 #endif
                 return resultString;
             }
 
             
 
-            bool nactena_lokalizace = false;
+            //bool localization = false;
             //XmlDocument lokalizaceDoc = new XmlDocument(); // XML dokument s nactenou lokalizaci
-            XmlNamespaceManager NS_manager; // NameSpace manager XML dokumentu
+            //XmlNamespaceManager NS_manager; // NameSpace manager XML dokumentu
 
-            string XPathQuery = "";     // XPath dotaz
-            #region nacteni XML s jazykovou lokalizaci z konfiguracniho souboru
+            //string XPathQuery = "";     // XPath dotaz
+            //#region nacteni XML s jazykovou lokalizaci z konfiguracniho file
 
-            try 
-            {
-                string FEBoxesDirPath = DirManager.get_FerdaBoxes_dir();
-                if (String.IsNullOrEmpty(FEBoxesDirPath))  // nenalezena cesta k adresari s XML Boxes konfig. soubory
-                    throw new Exception("Nenalezena cesta k adresari s konfig. souborem Boxu");
+            //try 
+            //{
+            //    string FEBoxesDirPath = DirManager.get_FerdaBoxes_dir();
+            //    if (String.IsNullOrEmpty(FEBoxesDirPath))  // nenalezena cesta k adresari s XML Boxes konfig. soubory
+            //        throw new Exception("Nenalezena cesta k adresari s konfig. souborem Boxu");
 
-                string path = DirManager.get_FerdaBoxes_dir() + @"\boxesLocalization.en-US.xml";  // anglicka lokalizace
+            //    string path = DirManager.get_FerdaBoxes_dir() + @"\boxesLocalization.en-US.xml";  // anglicka lokalizace
 
-                //lokalizaceDoc.Load(path);
+            //    //lokalizaceDoc.Load(path);
 
-                nactena_lokalizace = true;
-            }
-            catch(Exception)
-            {
-                nactena_lokalizace = false;
-            }
-            #endregion
+            //    localization = true;
+            //}
+            //catch(Exception)
+            //{
+            //    localization = false;
+            //}
+            //#endregion
             
 
-            // korenovy element
+            // root element
             resultString += "<active_list>";
 
 
-            // nalezeni vsech boxu v archivu
+            // searching all boxes in archive
             IBoxModule[] Boxes = (CFEsourcesTab.Sources[index] as CFEsource).PM.Archive.Boxes;
            
-            #region Cylkus - zpracovani kazdeho Boxu z archivu
+            #region Loop - processing each box
 
             foreach (IBoxModule box in Boxes)
             {
-                // record pro Box
+                // record for Box
                 Rec_ferda_box rBox = new Rec_ferda_box();
 
-                // seznam recordu - properties Boxu
+                // list of records - properties of Boxes
                 List<Rec_febox_property> lBoxProperties = new List<Rec_febox_property>();
 
                 try
                 {
-                    // nastaveni ID
+                    // setting ID
                     rBox.id = "box" + box.ProjectIdentifier.ToString();
                     
-                    // nalezeni typu krabicky
+                    // searching box type
                     rBox.box_type = box.MadeInCreator.Identifier;
 
-                    //zjisteni lokalizovaneho typu krabicky
+                    //searching lokalizovaneho type of krabicky
                     rBox.box_type = box.MadeInCreator.Label;
 
                         //// zkusim zjistit Label z lokalizace
-                        //if (nactena_lokalizace)
+                        //if (localization)
                         //{
                         //    try
                         //    {
@@ -117,23 +119,23 @@ namespace FEplugin_cs
                         //    catch (Exception) { }
                         //}
 
-                    // nalezeni uzivatelskeho jmena krabicky
+                    // searching box user name
                     rBox.user_name = box.UserName;
                     if (string.IsNullOrEmpty(box.UserName))
                         rBox.user_name = "";
                     
-                    // nalezeni uzivatelskeho popisku krabicky - neni povinne!
+                    // searching user lable of box - not mandatory!
                     rBox.user_hint = box.UserHint;
                     if (string.IsNullOrEmpty(box.UserHint))
                         rBox.user_hint = "";
 
 
-                    #region vyplneni seznamu vsech properties krabicky
+                    #region filling up the list of all box properties
 
-                    // nalezeni informaci vsech properties krabicky
+                    // searching information of all box properties
                     PropertyInfo[] prinfos = box.MadeInCreator.Properties;
 
-                    // cyklus pres vsechny properties
+                    // Loop over all properties
                     foreach (PropertyInfo prinf in prinfos)
                     {
                         try
@@ -141,8 +143,8 @@ namespace FEplugin_cs
                             Rec_febox_property rProp = new Rec_febox_property();
                             rProp.name = prinf.name;
     
-                                // PREDELAT, jde-li lepe
-                            string type_name = box.GetPropertyOther(prinf.name).ToString(); // jmeno typu vlastnosti
+                                
+                            string type_name = box.GetPropertyOther(prinf.name).ToString(); // name of property type
 
                             switch (type_name)
                             {
@@ -199,7 +201,7 @@ namespace FEplugin_cs
                                     }
                             }
                             
-                            // pridani property do seznamu
+                            // adding property to list
                             lBoxProperties.Add(rProp);
                         }
                         catch(Exception){}
@@ -208,7 +210,7 @@ namespace FEplugin_cs
 
                     #endregion
 
-                    // pridani tasku do XML
+                    // adding property to XML
                     if (lBoxProperties.Count == 0)
                         resultString += rBox.ToXML();
                     else
@@ -223,18 +225,18 @@ namespace FEplugin_cs
             #endregion
             
 
-            // korenovy element
+            // root element
  
            resultString += "</active_list>";
 
 
 
-#if (DEBUG)
-            // vypsani pripadne chybove hlasky:
-            if (!String.IsNullOrEmpty(ErrStr))  // LADICI
+#if (LADENI)
+            // generating of error report:
+            if (!String.IsNullOrEmpty(ErrStr))
                 MessageBox.Show("Pri nacitani Tasku doslo k chybam:\n" + ErrStr, "Chyba", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-            // Kody - ulozeni vystupu do souboru "XMLTaskExample.xml" v adresari 
+            // Kody - saving output to file "XMLTaskExample.xml" in XML directory
             XMLHelper.saveXMLexample(resultString, "../XML/XMLBoxExample.xml");
 #endif
 
@@ -243,20 +245,43 @@ namespace FEplugin_cs
 
     }
 
-    #region --- Recordy  ---
+    #region --- Records  ---
 
+    /// <summary>
+    /// Record for one Ferda Data Miner box.
+    /// </summary>
     public class Rec_ferda_box
     {
         #region DATA
-        public string id = "";    // ID boxu
-        public string box_type = "unknown";   // typ krabicky
-        public string user_name = "unknown"; // uzivatelsky nazev krabicky
-        public string user_hint = "unknown";   // uzivatelsky popis krabicky
+
+        /// <summary>
+        /// ID of box
+        /// </summary>
+        public string id = "";
+
+        /// <summary>
+        /// Type of box
+        /// </summary>
+        public string box_type = "unknown";
+
+        /// <summary>
+        /// User label of box
+        /// </summary>
+        public string user_name = "unknown";
+
+        /// <summary>
+        /// User hint to box
+        /// </summary>
+        public string user_hint = "unknown";
 
         #endregion
 
         #region METHODS
-        // prevod recordu na XML string
+
+        /// <summary>
+        /// Creating XML string from record.
+        /// </summary>
+        /// <returns>XML string</returns>
         public string ToXML()
         {
             user_name = XMLHelper.replaceXMLsign(user_name);
@@ -270,6 +295,11 @@ namespace FEplugin_cs
             return XML;
         }
 
+        /// <summary>
+        /// Creating XML string from record.
+        /// </summary>
+        /// <param name="properties">list of records with Ferda boxes</param>
+        /// <returns>XML string</returns>
         public string ToXML(List<Rec_febox_property> properties)
         {
             string XML = "";
@@ -288,16 +318,31 @@ namespace FEplugin_cs
         #endregion
     }
 
+    /// <summary>
+    /// Record for one property of Ferda box.
+    /// </summary>
     public class Rec_febox_property
     {
         #region DATA
-        public string name = "unknown";   // nazev property
-        public string value = "unknown"; // hodnota property
+
+        /// <summary>
+        /// Name of property
+        /// </summary>
+        public string name = "unknown";
+
+        /// <summary>
+        /// Value of property
+        /// </summary>
+        public string value = "unknown";
 
         #endregion
 
         #region METHODS
-        // prevod recordu na XML string
+
+        /// <summary>
+        /// Creating XML string from record.
+        /// </summary>
+        /// <returns>XML string</returns>
         public string ToXML()
         {
             name = XMLHelper.replaceXMLsign(name);

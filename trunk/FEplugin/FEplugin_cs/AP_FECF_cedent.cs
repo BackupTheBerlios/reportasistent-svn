@@ -9,39 +9,47 @@ using Ferda.ModulesManager;
 using Ferda.Modules;
 using Ferda.Modules.Helpers;
 using Ferda.Modules.Quantifiers;
-//using Ferda.FrontEnd;
+
 
 namespace FEplugin_cs
 {
-    // ==================== Aktivni prvek CF cedent ================================
+    // ==================== Active element "CF cedent" ================================
 
+    /// <summary>
+    /// Implementation of active element "CF cedent" (ID="CF_cedent")
+    /// </summary>
     public class AP_FECF_cedent
     {
+        /// <summary>
+        /// Returns XML string with all occurences of Active element "CF cedent".
+        /// </summary>
+        /// <param name="index">index of data source in FEplugin data sources table</param>
+        /// <returns>XML string</returns>
         public static string getList(int index)
         {
-            string resultString = ""; // vysledny XML string
-            string ErrStr = "";  // zaznamy o chybach
+            string resultString = ""; // result XML string
+            string ErrStr = "";  // error reports
             int counterID = 0;
 
-            // nacteni DTD do resultStringu
+            // loading DTD to resultString
             try { resultString = XMLHelper.loadDTD(); }
             catch (Exception e)
             {
 #if (LADENI)
-                MessageBox.Show("Chyba pri nacitani DTD: " + e.Message);
+                MessageBox.Show("error while loading DTD: " + e.Message);
 #endif
                 return resultString;
             }
 
-            // korenovy element
+            // root element
             resultString += "<active_list>";
 
-            string[] BoxTypes = { "LISpMinerTasks.CFTask", "LISpMinerTasks.SDCFTask" }; // typy krabicek (uloh), pro ktere se hledaji CFske cedenty
+            string[] BoxTypes = { "LISpMinerTasks.CFTask", "LISpMinerTasks.SDCFTask" }; // typy boxes (uloh), pro ktere se hledaji CFske cedents
 
-            // nalezeni vsech boxu uloh
+            // searching all boxes of tasks
             IBoxModule[] TaskBoxes = BoxesHelper.ListBoxesWithID(CFEsourcesTab.Sources[index] as CFEsource, BoxTypes);
 
-            #region Cyklus - zpracovani vsech nalezenych uloh
+            #region Loop - processing of each task found
 
             foreach (IBoxModule box in TaskBoxes)
             {
@@ -50,27 +58,27 @@ namespace FEplugin_cs
 
                 try
                 {
-                    // nastaveni ID
+                    // setting ID
                     rCFCedent.id = "cfcdnt" + box.ProjectIdentifier.ToString() + "_";
 
-                    // nalezeni jmena datoveho zdroje (databaze)
+                    // searching data source name (database)
                     IBoxModule[] db_names = BoxesHelper.ListAncestBoxesWithID(box, "DataMiningCommon.Database");
-                    if (db_names.GetLength(0) != 1)  // byl nalezen pocet datovych zdroju ruzny od jedne
-                        throw new System.Exception("bylo nalezeno " + db_names.GetLength(0).ToString() + " databazi");
+                    if (db_names.GetLength(0) != 1)  // searched more than one data source or neither one
+                        throw new System.Exception("found " + db_names.GetLength(0).ToString() + " databases");
                     rCFCedent.db_name = db_names[0].GetPropertyString("DatabaseName");
 
-                    // nalezeni jmena datove matice
+                    // searching data matrix name
                     IBoxModule[] matrix_names = BoxesHelper.ListAncestBoxesWithID(box, "DataMiningCommon.DataMatrix");
-                    if (matrix_names.GetLength(0) != 1)  // byl nalezen pocet datovych matic ruzny od jedne
-                        throw new System.Exception("bylo nalezeno " + matrix_names.GetLength(0).ToString() + " datovych matic");
+                    if (matrix_names.GetLength(0) != 1)  // searched more than one data source or neither one
+                        throw new System.Exception("found " + matrix_names.GetLength(0).ToString() + " data matrixes");
                     rCFCedent.matrix_name = matrix_names[0].GetPropertyString("Name");
 
-                    // nalezeni jmena ulohy
+                    // searching task name
                     rCFCedent.task_name = box.UserName;
 
-                    // zpracovani jednotlivych typu tasku
+                    // processing of several type of Task
                     string id = rCFCedent.id;
-                    switch (box.MadeInCreator.Identifier) // vsechny pripustne typy uloh
+                    switch (box.MadeInCreator.Identifier) // all available task types
                     {
                         case "LISpMinerTasks.CFTask":
                             rCFCedent.task_type = "CF Task";
@@ -78,7 +86,7 @@ namespace FEplugin_cs
                             // Antecedent
                             rCFCedent.id = id + counterID.ToString();
                             counterID++;
-                            // Kodym - vyber jednu z nasledujicich moznosti (ZJISTI)
+                            // Kodym - choose one of following possibilities (ZJISTI)
                             //rCFCedent.cedent_type = CedentEnum.Antecedent.ToString();
                             rCFCedent.cedent_type = "Attributes";
                             resultString += getOneItemXML(box, rCFCedent, "AntecedentSetting");
@@ -90,7 +98,7 @@ namespace FEplugin_cs
                             // Anecedent
                             rCFCedent.id = id + counterID.ToString();
                             counterID++;
-                            // Kodym - vyber jednu z nasledujicich moznosti (ZJISTI)
+                            // Kodym - choose one of following possibilities (ZJISTI)
                             //rCFCedent.cedent_type = CedentEnum.Antecedent.ToString();
                             rCFCedent.cedent_type = "Attributes";
                             resultString += getOneItemXML(box, rCFCedent, "AntecedentSetting");
@@ -107,59 +115,64 @@ namespace FEplugin_cs
 
             #endregion
 
-            // korenovy element
+            // root element
             resultString += "</active_list>";
 
 #if (LADENI)
-            // Kody - ulozeni vystupu do souboru "XMLCF_cedentExample.xml" v adresari 
+            // Kody - storing output to file "XMLCF_cedentExample.xml" in directory 
             XMLHelper.saveXMLexample(resultString, "../XML/XMLCF_cedentExample.xml");
 
             if (ErrStr != "") // LADICI
-                MessageBox.Show("Chyby pri generovani seznamu CF cedentu:\n" + ErrStr);
+                MessageBox.Show("Chyby pri generating seznamu CF cedent:\n" + ErrStr);
 #endif
 
             return resultString;
         }
 
+        /// <summary>
+        /// Generates one CF cedent to XML string.
+        /// </summary>
+        /// <param name="subcedents">boxes with parcial cedents</param>
+        /// <returns>XML string</returns>
         private static string getOneCedentXML(IBoxModule[] subcedents)
         {
             string XML = "";
 
-            #region cyklus - zpracovani vsech dilcich cedentu
+            #region Loop - processing of each parcial cedent
 
-            foreach (IBoxModule box in subcedents)  // musi byt boxy s ID = "DataMiningCommon.CategorialPartialCedentSetting"
+            foreach (IBoxModule box in subcedents)  // must be boxes with ID = "DataMiningCommon.CategorialPartialCedentSetting"
             {
                 Rec_sub_CF_cedent rSCFC = new Rec_sub_CF_cedent();
-                // nastaveni atributu "name"
+                // setting attribute "name"
                 rSCFC.name = box.UserName;
-                // nastaveni atributu "length"
+                // setting attribute "length"
                 rSCFC.length = box.GetPropertyLong("MinLen").ToString() + " - " + box.GetPropertyLong("MaxLen").ToString();
                 
-                // nalezeni vsech CF literalu (= atributu!)
+                // searching each CF literal (= attribute!)
                 string[] AttrIDs = { "DataMiningCommon.Attributes.Attribute",
                                          "DataMiningCommon.Attributes.EquifrequencyIntervalsAttribute",
                                          "DataMiningCommon.Attributes.EquidistantIntervalsAttribute",
                                          "DataMiningCommon.Attributes.EachValueOneCategoryAttribute" };
                 IBoxModule[] attributes = BoxesHelper.ListDirectAncestBoxesWithID(box, AttrIDs);
 
-                // nastaveni atributu "literal_cnt" (pocet dilcich literalu)
+                // setting attribute "literal_cnt" (literals count)
                 rSCFC.literal_cnt = attributes.Length;
                 List<Rec_CF_literal> rLiterals = new List<Rec_CF_literal>();
 
-                #region Cyklus - zpracovani vsech CF-literalu (atributu)
+                #region Loop - processing of each CF-literal (attribute)
 
                 foreach (IBoxModule attrBox in attributes)
                 {
                     Rec_CF_literal rLiteral = new Rec_CF_literal();
-                    // nastaveni atributu "underlying_attribute"
+                    // setting attribute "underlying_attribute"
                     rLiteral.underlying_attribute = attrBox.GetPropertyString("NameInLiterals");
-                    // nastaveni atributu "category_cnt"
+                    // setting attribute "category_cnt"
                     rLiteral.category_cnt = attrBox.GetPropertyLong("CountOfCategories");
                     rLiterals.Add(rLiteral);
                 }
                 #endregion
 
-                // pridani dilciho cedentu (a jeho literalu) do vysledneho XML stringu
+                // adding parcial cedent (and its literals) to result XML string
                 XML += rSCFC.ToXML(rLiterals);
             }
             #endregion
@@ -167,13 +180,20 @@ namespace FEplugin_cs
             return XML;
         }
 
+        /// <summary>
+        /// generates one item (parcial cedent) to XML string
+        /// </summary>
+        /// <param name="box">box of parcial cedent</param>
+        /// <param name="rCFCedent">record with CF cedent</param>
+        /// <param name="CedentType">cedent type</param>
+        /// <returns>XML string</returns>
         private static string getOneItemXML(IBoxModule box, Rec_CF_cedent rCFCedent, string CedentType)
         {
             string resultStr = "";
             IBoxModule[] SubCedents = box.GetConnections(CedentType);
-            // nastaveni atributu "sub_cedent_cnt" (pocet dilcich cedentu)
+            // setting attribute "sub_cedent_cnt" (count of parcial cedents)
             rCFCedent.sub_cedent_cnt = SubCedents.Length;
-            // pridani CFskeho cedentu do XML
+            // adding CF cedent to XML
             if (rCFCedent.sub_cedent_cnt > 0)
                 resultStr = rCFCedent.ToXML(getOneCedentXML(SubCedents));
 
@@ -181,16 +201,19 @@ namespace FEplugin_cs
         }
     }
 
-    #region --- Recordy ---
+    #region --- Records ---
 
+    /// <summary>
+    /// Record of one CF cedent.
+    /// </summary>
     public class Rec_CF_cedent
     {
         #region DATA
 
         public string id = "";
-        public string db_name = "";
-        public string matrix_name = "";
-        public string task_name = "";
+        public string db_name="unknown";
+        public string matrix_name = "unknown";
+        public string task_name = "unknown";
         public string task_type = "";
         public string cedent_type = "";
         public long sub_cedent_cnt = 0;
@@ -198,6 +221,10 @@ namespace FEplugin_cs
 
         #region METHODS
 
+        /// <summary>
+        /// Creating XML string from record.
+        /// </summary>
+        /// <returns>XML string</returns>
         public string ToXML()
         {
             string XML = "";
@@ -214,6 +241,11 @@ namespace FEplugin_cs
             return XML;
         }
 
+        /// <summary>
+        /// Creating XML string from record.
+        /// </summary>
+        /// <param name="SubelementsXMLstring">XML string with generated subelements (content of element)</param>
+        /// <returns>XML string</returns>
         public string ToXML(string SubelementsXMLstring)
         {
             string XML = "";
@@ -236,7 +268,7 @@ namespace FEplugin_cs
                        "\" task_name=\"" + task_name + "\" task_type=\"" + task_type +
                        "\" cedent_type=\"" + cedent_type +
                        "\" sub_cedent_cnt=\"" + sub_cedent_cnt.ToString() + "\">";
-                // vlozeni XML stringu - obsah elementu
+                // inserting XML string - element content
                 XML += SubelementsXMLstring + "</CF_cedent>";
             }
 
@@ -245,17 +277,24 @@ namespace FEplugin_cs
         #endregion
     }
 
+    /// <summary>
+    /// Record of one CF subcedent.
+    /// </summary>
     public class Rec_sub_CF_cedent
     {
         #region DATA
 
-        public string name = "";
+        public string name = "unknown";
         public long literal_cnt = 0;
         public string length = "";
         #endregion
 
         #region METHODS
 
+        /// <summary>
+        /// Creating XML string from record.
+        /// </summary>
+        /// <returns>XML string</returns>
         public string ToXML()
         {
             string XML = "";
@@ -267,6 +306,11 @@ namespace FEplugin_cs
             return XML;
         }
 
+        /// <summary>
+        /// Creating XML string from record.
+        /// </summary>
+        /// <param name="CF_Literals">list of CF literals (subelements)</param>
+        /// <returns>XML string</returns>
         public string ToXML(List<Rec_CF_literal> CF_Literals)
         {
             string XML = "";
@@ -276,7 +320,7 @@ namespace FEplugin_cs
             XML += "<sub_CF_cedent name=\"" + name + "\" literal_cnt=\"" + literal_cnt.ToString() +
                    "\" length=\"" + length + "\">";
 
-            // pridani vsech podelementu - literalu
+            // adding each subelement - literal
             foreach (Rec_CF_literal Lit in CF_Literals)
                 XML += Lit.ToXML();
 
@@ -286,6 +330,9 @@ namespace FEplugin_cs
         #endregion
     }
 
+    /// <summary>
+    /// Record of one CF literal.
+    /// </summary>
     public class Rec_CF_literal
     {
         #region DATA
@@ -296,6 +343,10 @@ namespace FEplugin_cs
 
         #region METHODS
 
+        /// <summary>
+        /// Creating XML string from record.
+        /// </summary>
+        /// <returns>XML string</returns>
         public string ToXML()
         {
 

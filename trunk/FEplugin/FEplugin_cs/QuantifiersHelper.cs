@@ -7,12 +7,11 @@ using System.Windows.Forms;
 using Ferda;
 using Ferda.ProjectManager;
 using Ferda.ModulesManager;
-//using Ferda.FrontEnd;
 
 namespace FEplugin_cs
 {
     /// <summary>
-    /// Implementation of some FFT/SDFFT/KL/SDKL/CF/SDCF quantifiers
+    /// Implementation of some FFT/SDFFT/KL/SDKL/CF/SDCF quantifiers.
     /// </summary>
     public class QuantifiersHelper
     {

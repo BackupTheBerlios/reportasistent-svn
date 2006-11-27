@@ -9,83 +9,86 @@ using Ferda.ModulesManager;
 using Ferda.Modules;
 using Ferda.Modules.Helpers;
 using Ferda.Modules.Quantifiers;
-//using Ferda.FrontEnd;
+
 
 namespace FEplugin_cs
 {
 
-    // ==================== Aktivni prvek KL-hypoteza ================================
+    // ==================== Active element "KL hypothesis" ================================
 
+    /// <summary>
+    /// Implementation of active element "KL hypothesis" (ID="hyp_kl")
+    /// </summary>
     public class AP_FEklhyp
     {
         /// <summary>
-        /// Implementation of Active element "KL hypothesis"
+        /// Returns XML string with all occurences of Active element "KL hypothesis".
         /// </summary>
-        /// <param name="index">index of data source in data sources tab </param>
-        /// <returns>Returns XML string with all occurences of Active element type "KL hypothesis" from data source with given index</returns>
+        /// <param name="index">index of data source in FEplugin data sources table</param>
+        /// <returns>XML string</returns>
         public static string getList(int index)
         {
-            string resultString = ""; // vysledny XML string
+            string resultString = ""; // result XML string
 
-            // nacteni DTD do resultStringu
+            // loading DTD to resultString
             try { resultString = XMLHelper.loadDTD(); }
             catch (Exception e)
             {
 #if (LADENI)
-                MessageBox.Show("Chyba pri nacitani DTD: " + e.Message);
+                MessageBox.Show("error while loading DTD: " + e.Message);
 #endif
                 return resultString;
             }
 
-            // korenovy element
+            // root element
             resultString += "<active_list>";
 
-            string PropName = "Hypotheses";  // nazev Property, ktera obsahuje seznam hypotez
-            // nalezeni vsech krabicek KL-uloh
+            string PropName = "Hypotheses";  // name of property which contain a list of hypotheses
+            // searching all boxes KL-uloh
             IBoxModule[] TaskBoxes = BoxesHelper.ListBoxesWithID(CFEsourcesTab.Sources[index] as CFEsource, "LISpMinerTasks.KLTask");
 
-            // zpracovani kazde krabicky - ziskani z ni vsechny KL-hypotezy
-            string ErrStr = ""; // zaznam o chybach
+            // processing of each box - searching all KL-hypotheses
+            string ErrStr = ""; // error report
 
-            string matrix_name = "";   // jmeno analyzovane matice
-            string db_name = "";    // jmeno analyzovane databaze
-            string task_name = "";  // jmeno ulohy - dano uzivatelskym nazvem krabicky FFTTast
+            string matrix_name = "unknown";   // analyzed data matrix name
+            string db_name="unknown";    // analyzed database name
+            string task_name = "unknown";  // task name - given with user name of box FFTTast
 
 
-            #region Cyklus - zpracovani vsech KL-Tasku z pole TaskBoxes
+            #region Loop - processing of each KL-Task from array TaskBoxes
 
             foreach (IBoxModule box in TaskBoxes)
             {
                 try
                 {
-                    // nalezeni jmena datoveho zdroje (databaze)
+                    // searching data source name (database)
                     IBoxModule[] db_names = BoxesHelper.ListAncestBoxesWithID(box, "DataMiningCommon.Database");
-                    if (db_names.GetLength(0) != 1)  // byl nalezen pocet datovych zdroju ruzny od jedne
-                        throw new System.Exception("bylo nalezeno " + db_names.GetLength(0).ToString() + " databazi");
+                    if (db_names.GetLength(0) != 1)  // searched more than one data source or neither one
+                        throw new System.Exception("found " + db_names.GetLength(0).ToString() + " databases");
                     db_name = (db_names[0].GetPropertyOther("DatabaseName") as StringT).stringValue;
 
-                    // nalezeni jmena datove matice
+                    // searching data matrix name
                     IBoxModule[] matrix_names = BoxesHelper.ListAncestBoxesWithID(box, "DataMiningCommon.DataMatrix");
-                    if (matrix_names.GetLength(0) != 1)  // byl nalezen pocet datovych matic ruzny od jedne
-                        throw new System.Exception("bylo nalezeno " + matrix_names.GetLength(0).ToString() + " datovych matic");
+                    if (matrix_names.GetLength(0) != 1)  // searched more than one data source or neither one
+                        throw new System.Exception("found " + matrix_names.GetLength(0).ToString() + " data matrixes");
                     matrix_name = (matrix_names[0].GetPropertyOther("Name") as StringT).stringValue;
 
-                    // nalezeni jmena ulohy
+                    // searching task name
                     task_name = box.UserName;
 
-                    // nalezeni seznamu vsech hypotez v tomto Tasku
+                    // searching the list of all hypotheses in this task
                     HypothesesT HypT = box.GetPropertyOther(PropName) as HypothesesT;
                     HypothesisStruct[] HypList = HypT.hypothesesValue.Clone() as HypothesisStruct[];
 
-                    // recordy pro ukladani vysledku
-                    Rec_hyp_KL rHyp = new Rec_hyp_KL();   // KL hypoteza
+                    // records for storing the results
+                    Rec_hyp_KL rHyp = new Rec_hyp_KL();   // KL hypothesis
                     Rec_ti_attribute rAnt = new Rec_ti_attribute();  // Antecedent (Row attributes)
                     Rec_ti_attribute rSuc = new Rec_ti_attribute();  // Succedent (Column attributes)
                     Rec_ti_cedent rCon = new Rec_ti_cedent();  // condition
 
 
-                    #region Cyklus - zpracovani vsech hypotez jedne krabicky KLTask
-                    // cyklus pres vsechny hypotezy
+                    #region Loop - processing of each hypotheses jedne krabicky KLTask
+                    // Loop over all hypotheses
                     for (int i = 0; i < HypList.GetLength(0); i++)
                     {
                         #region element hyp_KL
@@ -101,7 +104,7 @@ namespace FEplugin_cs
                         rHyp.Tab = HypList[i].quantifierSetting.firstContingencyTableRows;
 
 
-                        // hodnoty kvantifikatoru - prvni mnozina
+                        // values of quantifiers - first set
                         try
                         {
                             rHyp.sum = CT.SumOfValues.ToString();
@@ -117,7 +120,7 @@ namespace FEplugin_cs
                             //rHyp.aic = CT.???;  TODO
                             rHyp.kend = TwoDimensionalContingencyTable.KendalValue(CT).ToString();
                         }
-                        catch (System.Exception e) // TODO: Ferda ma chyby ve vypoctech -> opravit! 
+                        catch (System.Exception e) // There are some errors in Ferda quantifier values! 
                         {
                             ErrStr += "Box ProjectIdentifier=" + box.ProjectIdentifier.ToString() + ": chyba pri vypoctu kvantifikatoru: " + e.Message + "\n";
                         }
@@ -131,8 +134,8 @@ namespace FEplugin_cs
 
                         rAnt.id = rHyp.row_attributes;
                         rAnt.type = "Row attributes";
-                        rAnt.quant = "";   // smazani predchozi hodnoty
-                        // kategorie
+                        rAnt.quant = "";   // deleting previous value
+                        // category
                         List<Rec_ti_category> Cat_a = new List<Rec_ti_category>();
                         foreach (LiteralStruct lit in HypList[i].literals)
                         {
@@ -155,8 +158,8 @@ namespace FEplugin_cs
 
                         rSuc.id = rHyp.column_attributes;
                         rSuc.type = "Column attributes";
-                        rSuc.quant = "";   // smazani predchozi hodnoty
-                        // kategorie
+                        rSuc.quant = "";   // deleting previous value
+                        // category
                         List<Rec_ti_category> Cat_s = new List<Rec_ti_category>();
                         foreach (LiteralStruct lit in HypList[i].literals)
                         {
@@ -179,8 +182,8 @@ namespace FEplugin_cs
 
                         rCon.id = "con" + rHyp.id;
                         rCon.type = "Condition";
-                        // literaly
-                        int litCounter = 0;  // pocitadlo literalu teto hypotezy
+                        // literals
+                        int litCounter = 0;  // counter of literals of this hypotheses
                         List<Rec_ti_literal> Lit_c = new List<Rec_ti_literal>();
                         foreach (BooleanLiteralStruct lit in HypList[i].booleanLiterals)
                         {
@@ -207,16 +210,16 @@ namespace FEplugin_cs
                         #endregion
 
 
-                        #region Vypsani jedne hypotezy do XML stringu
+                        #region Generating of one hypotheses to XML string
 
                         string oneHypString = "";
-                        // vypsani hypotezy do XML
+                        // generating hypotheses to XML
                         oneHypString += rHyp.ToXML();
-                        // vypsani Row attributes (Antecedentu) do XML
+                        // generating Row attributes (Antecedent) to XML
                         oneHypString += rAnt.ToXML(Cat_a);
-                        // vypsani Column attributes (Succedentu) do XML
+                        // generating Column attributes (Succedent) to XML
                         oneHypString += rSuc.ToXML(Cat_s);
-                        // vypsani Condition do XML
+                        // generating Condition to XML
                         oneHypString += rCon.ToXML(Lit_c);
 
 
@@ -235,15 +238,15 @@ namespace FEplugin_cs
             #endregion
 
             
-             // korenovy element
+             // root element
             resultString += "</active_list>";
             
 #if (LADENI)            
-            // vypsani pripadne chybove hlasky:
+            // generating of error message:
             if (!String.IsNullOrEmpty(ErrStr))  // LADICI
-                MessageBox.Show("Pri nacitani KL hypotez doslo k chybam:\n" + ErrStr, "Chyba", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Pri nacitani KL hypotheses doslo k chybam:\n" + ErrStr, "Chyba", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-            // LADICI - Kody - ulozeni vystupu do souboru "XMLsd4fthypExample.xml" v adresari 
+            // LADICI - Kody - storing output to file "XMLsd4fthypExample.xml" in directory 
             XMLHelper.saveXMLexample(resultString, "../XML/XMLKLhypExample.xml");
 #endif
 
@@ -251,17 +254,21 @@ namespace FEplugin_cs
         }
     }
 
-    #region --- Recordy  ---
+    #region --- Records  ---
 
+    /// <summary>
+    /// Record for one KL hypothesis
+    /// </summary>
     public class Rec_hyp_KL
     {
         #region DATA
-        public string id = "";    // ID 4ft-hypotezy
-        public string db_name = "";   // jmeno databaze
-        public string matrix_name = ""; // jmeno datove matice
-        public string task_name = "";   // jmeno ulohy
 
-        public int[][] Tab; // kontingencni tabulka
+        public string id = ""; // ID 
+        public string db_name="unknown";   // database name
+        public string matrix_name = "unknown"; // data matrix name
+        public string task_name = "unknown";   // task name
+
+        public int[][] Tab; // contingency table
 
         public string sum = "unknown";
         public string min = "unknown";
@@ -283,27 +290,31 @@ namespace FEplugin_cs
         #endregion
 
         #region METHODS
-        // prevod recordu na XML string
+
+        /// <summary>
+        /// Creating XML string from record.
+        /// </summary>
+        /// <returns>XML string</returns>
         public string ToXML()
         {
             string XML = "";
 
             XML += "<hyp_kl id=\"" + id + "\" db_name=\"" + db_name + "\" matrix_name=\"" + matrix_name +
                    "\" task_name=\"" + task_name +
-                // hodnoty kvantifikatoru
+                // values of quantifiers
                    "\" sum=\"" + sum + "\" min=\"" + min + "\" max=\"" + max +
                    "\" chi_sq=\"" + chi_sq + "\" fnc_s=\"" + fnc_s +
                    "\" fnc_r=\"" + fnc_r + "\" h_c=\"" + h_c +
                    "\" h_r=\"" + h_r + "\" h_c_r=\"" + h_c_r +
                    "\" mi=\"" + mi + "\" aic=\"" + aic +
                    "\" kend=\"" + kend +
-                // cedenty
+                // cedents
                    "\" row_attributes=\"" + row_attributes + "\" column_attributes=\"" + column_attributes +
                    "\" condition=\"" + condition + "\">";
 
-            // vygenerovani podelementu - ciselnych hodnot kontingencni tabulky
+            // generating subelements - number values of contingency table
             XML += "<tab>";
-            /* Asi blba verze - prohozeny radky a sloupce
+            /* Asi blba verze - prohozeny radky a column
              * 
             int radku = Tab[0].GetLength(0);
             int sloupcu = Tab.GetLength(0);
@@ -336,7 +347,7 @@ namespace FEplugin_cs
         #endregion
     }
 
-    // Rec_ti_cedent & Rec_ti_literal implementovany u AP 4ft-hypoteza
+    // Rec_ti_cedent & Rec_ti_literal implemented by AP 4ft-hypothesis
 
     #endregion
 }

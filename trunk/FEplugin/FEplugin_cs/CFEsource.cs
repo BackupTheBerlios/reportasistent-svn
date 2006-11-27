@@ -9,38 +9,51 @@ using System.Reflection;
 using Ferda;
 using Ferda.ProjectManager;
 using Ferda.ModulesManager;
-//using Ferda.FrontEnd;
 
-
+// This modul contain classes which ensure operations with FEplugin data sources
 
 
 namespace FEplugin_cs
 {
+    /// <summary>
+    /// This class contains information about one FEplugin data source.
+    /// </summary>
     public class CFEsource
     {
         
-        ///////// DATA /////////
-        private string SourcePath;   // cesta k souboru s projektem Ferda Dataminer (.XFP)
-        public ProjectManager PM;    // instance tridy ProjectManager
+        ///////// DATA FIELDS /////////
 
-        ///////// METODY ///////
+        /// <summary>
+        /// Path to file with Ferda DataMiner (.XFP) project
+        /// </summary>
+        private string SourcePath;
 
-        // konstruktor
-        public CFEsource(string path)   // path = cesta k souboru s projektem
+        /// <summary>
+        /// Instance of class ProjectManager.
+        /// </summary>
+        public ProjectManager PM;
+
+        ///////// METHODS ///////
+
+        /// <summary>
+        /// Construction of one FEplugin data source.
+        /// </summary>
+        /// <param name="path">Path to file with Ferda project</param>
+        public CFEsource(string path)
         {
-            // inicializace SourcePath
+            // initialization of SourcePath
             SourcePath = path;
             
-            // inicializace PM
+            // initialization of PM
             try
             {
-                // zmena aktualniho adresare na domovsky Ferda FrontEnd
+                // changing current directory to Ferda FrontEnd directory
                 DirManager.SetHomeFerdaFrontEnd_dir();
 
-                // inicializace polozky PM
+                // initialization of PM
                 PM = new ProjectManager(new string[0], FEplugin_globals.IceConfig.ProjectManagerOptions);
 
-                // nahrani projektu
+                // loading the project
                 if (LoadProject() == false)
                     throw new FE_error("FEP005", "Perzist ID: " + SourcePath + "\n\nReason: project can't be loaded");
             }
@@ -56,14 +69,17 @@ namespace FEplugin_cs
             }
             finally 
             {
-                // zmena aktualniho adresare zpet
+                // changing actual directory to previous
                 DirManager.SetHomePrevious_dir();
             }
 
 
         }
 
-        // zruseni PM (ProjectManagera)
+        
+        /// <summary>
+        /// Destruction of PM (ProjectManager).
+        /// </summary>
         public void DestroyPM()
         {
             try
@@ -76,8 +92,11 @@ namespace FEplugin_cs
             }
         }
 
-        // nahrani projektu
-        private bool LoadProject()  // cesta souboru projektu v polozce SourcePath
+        /// <summary>
+        /// Loading the Ferda DataMiner project
+        /// </summary>
+        /// <returns></returns>
+        private bool LoadProject()  // path to file with project is stored in SourcePath field
         {
             System.IO.FileStream fs;
             try
@@ -86,8 +105,8 @@ namespace FEplugin_cs
             }
             catch (System.FieldAccessException e)
             {
-                Console.WriteLine("\nVyjimka: " + e.Message);
-                Console.WriteLine("Soubor " + SourcePath + " nebyl nalezen\n");
+                Console.WriteLine("\nException: " + e.Message);
+                Console.WriteLine("File " + SourcePath + " not found\n");
                 return false;
             }
 
@@ -97,7 +116,7 @@ namespace FEplugin_cs
             }
             catch (System.Exception e)
             {
-                Console.WriteLine("\nVyjimka: " + e.Message);
+                Console.WriteLine("\nException: " + e.Message);
                 return false;
             }
             finally
@@ -107,43 +126,70 @@ namespace FEplugin_cs
 
             return true;
         }
-
-
     }
 
+    /// <summary>
+    /// This class contains table of FEplugin data sources
+    /// </summary>
     public class CFEsourcesTab
     {
-        // pole vytvorenych zdroju
-        public static ArrayList Sources;
+        /// <summary>
+        /// Array of created FEplugin data sources.
+        /// </summary>
+        private static ArrayList sources;
+
+        /// <summary>
+        /// Array of created FEplugin data sources.
+        /// </summary>
+        public static ArrayList Sources
+        {
+            get { return sources; }
+        }
         
-        // pocitadlo vytvorenych zdroju
-        public static int SrcCount;
+        /// <summary>
+        /// Counter of created FEplugin data sources.
+        /// </summary>
+        private static int SrcCount;
 
-        // pocitadlo vytvorenych otevrenych zdroju
-        public static int OpenSrcCount;
+        /// <summary>
+        /// Counter of opened FEplugin data sources.
+        /// </summary>
+        private static int OpenSrcCount;
 
+        /// <summary>
+        /// Array of created FEplugin data sources.
+        /// </summary>
+        /// <returns>content of "sources" data field</returns>
         public static CFEsource[] getSources()
         {
-            CFEsource[] resultArray = (CFEsource[]) Sources.ToArray(typeof(CFEsource));
+            CFEsource[] resultArray = (CFEsource[]) sources.ToArray(typeof(CFEsource));
             return resultArray;
         }
 
-        // staticky konstruktor
+        // static construktor
         static CFEsourcesTab()
         {
-            Sources = new ArrayList();
+            sources = new ArrayList();
             SrcCount = 0;
             OpenSrcCount = 0;
         }
 
         // pridani noveho zdroje (otevre dialog pro vyber zdroje, pote ho otevre a vrati handle (index) )
-        public static int NewSource(string PersistID)
+        /// <summary>
+        /// Creating new data source.
+        /// Creates and openes source and returns handle on it.
+        /// <b>notice: </b>when IceGridNode is not set as system service and some other FEplugin data source is already opened,
+        /// then new data source can not be created.
+        /// </summary>
+        /// <param name="PersistID">Perzist ID of new source (path to Ferda project (.xfp) file)</param>
+        /// <returns>Handle to newly created and opened data source.</returns>
+        public static Int32 NewSource(string PersistID)
         {
-            // pokus o vytvoreni nove instance tridy CFEsource
+            // tries to create an instance of CFEsource class
             CFEsource NS;
             try
             {
-                // test, jestli IceGridNode je nainstalovano jako sluzba. Pokud ne a je jiz otevren jiny zdroj, nemuze byt otevren dalsi
+                // test, if IceGridNode is set as system service. If not and some other source is opened, new source can not be created.
                 if (FEplugin_globals.IceConfig_initialized)
                 {
                     if (FEplugin_globals.IceConfig.ProjectManagerOptions.IceGridAsService == false && OpenSrcCount >= 1)
@@ -153,7 +199,7 @@ namespace FEplugin_cs
                 }
                 
                 NS = new CFEsource(PersistID);
-                int index = Sources.Add(NS);
+                int index = sources.Add(NS);
                 SrcCount++;
                 OpenSrcCount++;
                 return index;
@@ -172,14 +218,18 @@ namespace FEplugin_cs
 
         }
 
-        // uzavreni zdroje (zrusi ProjectManager)
+        /// <summary>
+        /// Closes opened data source (destructs ProjectManager)
+        /// </summary>
+        /// <param name="index">index of data source in data sources table</param>
+        /// <returns></returns>
         public static bool CloseSource(int index)
         {
             try
             {
-                if (index >= 0 && index < Sources.Count)
+                if (index >= 0 && index < sources.Count)
                 {
-                    ((CFEsource)Sources[index]).PM.DestroyProjectManager();
+                    ((CFEsource)sources[index]).PM.DestroyProjectManager();
                 }
             }
             catch (SystemException e)
@@ -188,7 +238,7 @@ namespace FEplugin_cs
                 FE_err_msg.show_err_msg(err);
                 return false;
             }
-            catch (Ice.NoEndpointException) // ztrata icegridnode, zdroj lze normalne uzavrit
+            catch (Ice.NoEndpointException) // lost of icegridnode, source can't be closed normally
             {
                 OpenSrcCount--;
                 return true;
@@ -209,12 +259,17 @@ namespace FEplugin_cs
     }
 
 
-    // trida pomocnych funkci pro Ferdovskou zasuvku
+    /// <summary>
+    /// Class contains helpers functions for FEplugin
+    /// </summary>
     public class FEPom
     {
+        /// <summary>
+        /// Displays an "open file dialog" - choosing the path to Ferda (.xfp) project file.
+        /// </summary>
+        /// <returns>Path to selected file</returns>
         public static string OpenXfpFile()
         {
-            /* funkce otevre OpenFileDialog a vrati retezec vybraneho souboru*/
             OpenFileDialog ofd = new OpenFileDialog();
 
             ofd.InitialDirectory = ".\\";
@@ -226,10 +281,6 @@ namespace FEplugin_cs
                 return ofd.FileName;
             return ofd.FileName;
         }
-
-        public static string Test = "Testovaci retezec";
    
     }
-
-
 }

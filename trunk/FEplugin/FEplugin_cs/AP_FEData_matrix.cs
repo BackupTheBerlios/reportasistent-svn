@@ -9,63 +9,72 @@ using Ferda.ModulesManager;
 using Ferda.Modules;
 using Ferda.Modules.Helpers;
 using Ferda.Modules.Quantifiers;
-//using Ferda.FrontEnd;
+
 
 namespace FEplugin_cs
 {
-    // ==================== Aktivni prvek Data matrix ================================
-    
+    // ==================== Active element "Data matrix" ================================
+
+    /// <summary>
+    /// Implementation of active element "Data matrix" (ID="data_matrix")
+    /// </summary>
     public class AP_FEData_matrix
     {
+
+        /// <summary>
+        /// Returns XML string with all occurences of Active element "Data matrix".
+        /// </summary>
+        /// <param name="index">index of data source in FEplugin data sources table</param>
+        /// <returns>XML string</returns>
         public static string getList(int index)
         {
-            string resultString = ""; // vysledny XML string
-            string ErrStr = "";  // zaznamy o chybach
+            string resultString = ""; // result XML string
+            string ErrStr = "";  // error reports
 
-            // nacteni DTD do resultStringu
+            // loading DTD to resultString
             try { resultString = XMLHelper.loadDTD(); }
             catch (Exception e)
             {
 #if (LADENI)
-                MessageBox.Show("Chyba pri nacitani DTD: " + e.Message);
+                MessageBox.Show("error while loading DTD: " + e.Message);
 #endif
                 return resultString;
             }
 
-            // korenovy element
+            // root element
             resultString += "<active_list>";
 
 
-            // zpracovani kazde krabicky "Data matrix"
+            // processing of each box "Data matrix"
 
-            #region   nalezeni a zpracovani vsech krabicek Column (DataMiningCommon.DataMatrix)
+            #region   searching a processing of each boxes Column (DataMiningCommon.DataMatrix)
 
             IBoxModule[] MatrBoxes = BoxesHelper.ListBoxesWithID(CFEsourcesTab.Sources[index] as CFEsource, "DataMiningCommon.DataMatrix");
 
             
-            // zpracovani kazde krabicky Column
+            // processing of each box Column
             foreach (IBoxModule MBox in MatrBoxes)
             {
                 try
                 {
                     Rec_data_matrix rMatrix = new Rec_data_matrix(); // zaznam o datove matici
 
-                    // nalezeni ID
+                    // searching ID
                     rMatrix.id = "matrix" + MBox.ProjectIdentifier.ToString();
 
-                    // nalezeni jmena datoveho zdroje (databaze)
+                    // searching data source name (database)
                     IBoxModule[] db_names = BoxesHelper.ListAncestBoxesWithID(MBox, "DataMiningCommon.Database");
-                    if (db_names.GetLength(0) != 1)  // byl nalezen pocet datovych zdroju ruzny od jedne
-                        throw new System.Exception("bylo nalezeno " + db_names.GetLength(0).ToString() + " databazi");
+                    if (db_names.GetLength(0) != 1)  // searched more than one data source or neither one
+                        throw new System.Exception("found " + db_names.GetLength(0).ToString() + " databases");
                     rMatrix.db_name = (db_names[0].GetPropertyOther("DatabaseName") as StringT).stringValue;
 
-                    // nalezeni jmena datove matice
+                    // searching data matrix name
                     rMatrix.matrix_name = MBox.GetPropertyString("Name");
 
-                    // zjisteni poctu zaznamu
+                    // searching records count
                     rMatrix.record_count = MBox.GetPropertyLong("RecordCount").ToString();
 
-                    // pridani polozky do XML
+                    // adding item to XML
                     resultString += rMatrix.ToXML();
                  
                 }
@@ -80,20 +89,23 @@ namespace FEplugin_cs
 
             resultString += "</active_list>";
 
-#if (DEBUG)
-            // Kody - ulozeni vystupu do souboru "XMLData_matrixExample.xml" v adresari 
+#if (LADENI)
+            // Kody - storing output to file "XMLData_matrixExample.xml" in directory 
             XMLHelper.saveXMLexample(resultString, "../XML/XMLData_matrixExample.xml");
 
-            if (ErrStr != "") // LADICI
-                MessageBox.Show("Chyby pri generovani seznamu Boolskych cedentu:\n" + ErrStr);
+            if (ErrStr != "")
+                MessageBox.Show("Chyby pri generating seznamu Boolskych cedent:\n" + ErrStr);
 #endif
 
             return resultString;
         }
     }
 
-    #region --- Recordy ---
+    #region --- Records ---
 
+    /// <summary>
+    /// Record of one data matrix.
+    /// </summary>
     public class Rec_data_matrix
     {
         #region DATA
@@ -112,6 +124,10 @@ namespace FEplugin_cs
 
         #region METHODS
 
+        /// <summary>
+        /// Creating XML string from record.
+        /// </summary>
+        /// <returns>XML string</returns>
         public string ToXML()
         {
             id = XMLHelper.replaceXMLsign(id);

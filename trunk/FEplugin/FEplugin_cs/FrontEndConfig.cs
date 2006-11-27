@@ -59,7 +59,7 @@ namespace FEplugin_cs
         public static FrontEndConfig Load()
         {
             
-            // cesta a nazev souboru FrontEndConfig
+            // cesta a nazev file FrontEndConfig
             string str = DirManager.get_FerdaFrontEnd_dir() + @"\FrontEndConfig.xml";
 
             System.IO.FileStream fs;

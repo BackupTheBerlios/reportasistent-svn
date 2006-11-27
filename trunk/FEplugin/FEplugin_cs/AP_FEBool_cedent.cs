@@ -9,166 +9,174 @@ using Ferda.ModulesManager;
 using Ferda.Modules;
 using Ferda.Modules.Helpers;
 using Ferda.Modules.Quantifiers;
-//using Ferda.FrontEnd;
+
 
 namespace FEplugin_cs
 {
-    // ==================== Aktivni prvek Boolsky cedent ================================
+    // ==================== Active element "Boolean cedent" ================================
 
+    /// <summary>
+    /// Implementation of active element "Boolean cedent" (ID="bool_cedent")
+    /// </summary>
     public class AP_FEBool_cedent
     {
+        /// <summary>
+        /// Returns XML string with all occurences of Active element "Boolean cedent".
+        /// </summary>
+        /// <param name="index">index of data source in FEplugin data sources table</param>
+        /// <returns>XML string</returns>
         public static string getList(int index)
         {
-            string resultString = ""; // vysledny XML string
-            string ErrStr = "";  // zaznamy o chybach
+            string resultString = ""; // result XML string
+            string ErrStr = "";  // error reports
             int counterID = 0;
 
-            // nacteni DTD do resultStringu
+            // loading DTD to resultString
             try { resultString = XMLHelper.loadDTD(); }
             catch (Exception e)
             {
 #if (LADENI)
-                MessageBox.Show("Chyba pri nacitani DTD: " + e.Message);
+                MessageBox.Show("error while loading DTD: " + e.Message);
 #endif
                 return resultString;
             }
 
-            // korenovy element
+            // root element
             resultString += "<active_list>";
 
-            List<TaskTypeStruct> TypyTasku = new List<TaskTypeStruct>();
-            CedentTypeStruct[] TypyCedentu4FT = {new CedentTypeStruct("Antecedent", "AntecedentSetting"), new CedentTypeStruct("Succedent", "SuccedentSetting"), new CedentTypeStruct("Condition", "ConditionSetting")};
-            CedentTypeStruct[] TypyCedentuSD4FT = {new CedentTypeStruct("Antecedent", "AntecedentSetting"), new CedentTypeStruct("Succedent", "SuccedentSetting"), new CedentTypeStruct("Condition", "ConditionSetting"), new CedentTypeStruct("FirstSet", "Cedent1"), new CedentTypeStruct("SecondSet", "Cedent2")};
-            CedentTypeStruct[] TypyCedentuKL = {new CedentTypeStruct("Condition", "ConditionSetting")};
-            CedentTypeStruct[] TypyCedentuSDKL = {new CedentTypeStruct("Condition", "ConditionSetting"), new CedentTypeStruct("FirstSet", "Cedent1"), new CedentTypeStruct("SecondSet", "Cedent2")};
-            CedentTypeStruct[] TypyCedentuCF = {new CedentTypeStruct("Condition", "ConditionSetting")};
-            CedentTypeStruct[] TypyCedentuSDCF = {new CedentTypeStruct("Condition", "ConditionSetting"), new CedentTypeStruct("FirstSet", "Cedent1"), new CedentTypeStruct("SecondSet", "Cedent2")};
-            TypyTasku.Add(new TaskTypeStruct("LISpMinerTasks.FFTTask", "4FT Task", TypyCedentu4FT));
-            TypyTasku.Add(new TaskTypeStruct("LISpMinerTasks.SDFFTTask", "SD-4FT Task", TypyCedentuSD4FT));
-            TypyTasku.Add(new TaskTypeStruct("LISpMinerTasks.KLTask", "KL Task", TypyCedentuKL));
-            TypyTasku.Add(new TaskTypeStruct("LISpMinerTasks.SDKLTask", "SD-KL Task", TypyCedentuSDKL));
-            TypyTasku.Add(new TaskTypeStruct("LISpMinerTasks.CFTask", "CF Task", TypyCedentuCF));
-            TypyTasku.Add(new TaskTypeStruct("LISpMinerTasks.SDCFTask", "SD-CF Task", TypyCedentuSDCF));
+            List<TaskTypeStruct> TypyTask = new List<TaskTypeStruct>();
+            CedentTypeStruct[] Typycedent4FT = {new CedentTypeStruct("Antecedent", "AntecedentSetting"), new CedentTypeStruct("Succedent", "SuccedentSetting"), new CedentTypeStruct("Condition", "ConditionSetting")};
+            CedentTypeStruct[] TypycedentSD4FT = {new CedentTypeStruct("Antecedent", "AntecedentSetting"), new CedentTypeStruct("Succedent", "SuccedentSetting"), new CedentTypeStruct("Condition", "ConditionSetting"), new CedentTypeStruct("FirstSet", "Cedent1"), new CedentTypeStruct("SecondSet", "Cedent2")};
+            CedentTypeStruct[] TypycedentKL = {new CedentTypeStruct("Condition", "ConditionSetting")};
+            CedentTypeStruct[] TypycedentSDKL = {new CedentTypeStruct("Condition", "ConditionSetting"), new CedentTypeStruct("FirstSet", "Cedent1"), new CedentTypeStruct("SecondSet", "Cedent2")};
+            CedentTypeStruct[] TypycedentCF = {new CedentTypeStruct("Condition", "ConditionSetting")};
+            CedentTypeStruct[] TypycedentSDCF = {new CedentTypeStruct("Condition", "ConditionSetting"), new CedentTypeStruct("FirstSet", "Cedent1"), new CedentTypeStruct("SecondSet", "Cedent2")};
+            TypyTask.Add(new TaskTypeStruct("LISpMinerTasks.FFTTask", "4FT Task", Typycedent4FT));
+            TypyTask.Add(new TaskTypeStruct("LISpMinerTasks.SDFFTTask", "SD-4FT Task", TypycedentSD4FT));
+            TypyTask.Add(new TaskTypeStruct("LISpMinerTasks.KLTask", "KL Task", TypycedentKL));
+            TypyTask.Add(new TaskTypeStruct("LISpMinerTasks.SDKLTask", "SD-KL Task", TypycedentSDKL));
+            TypyTask.Add(new TaskTypeStruct("LISpMinerTasks.CFTask", "CF Task", TypycedentCF));
+            TypyTask.Add(new TaskTypeStruct("LISpMinerTasks.SDCFTask", "SD-CF Task", TypycedentSDCF));
 
-            #region Cyklus - zpracovani vsech typu tasku
+            #region Loop - processing of each type of Task
 
-            foreach (TaskTypeStruct TT in TypyTasku)
+            foreach (TaskTypeStruct TT in TypyTask)
             {
 
-                // nalezeni vsech boxu uloh
+                // searching all boxes of tasks
                 IBoxModule[] TaskBoxes = BoxesHelper.ListBoxesWithID(CFEsourcesTab.Sources[index] as CFEsource, TT.TaskTypeID);
 
-                #region Cyklus - zpracovani vsech nalezenych Tasku
+                #region Loop - processing of each found Task
 
                 foreach (IBoxModule box in TaskBoxes)
                 {
 
-                    #region Cyklus - zpracovani vsech typu cedentu daneho tasku
+                    #region Loop - processing of each type of cedent of given Task
 
                     counterID = 0;
-                    foreach (CedentTypeStruct TypCedentu in TT.Cedents)
+                    foreach (CedentTypeStruct Typcedent in TT.Cedents)
                     {
                         Rec_bool_cedent rBoolCedent = new Rec_bool_cedent();
-                        // nastaveni ID
+                        // setting ID
                         string id = "cdnt" + box.ProjectIdentifier.ToString() + "_";
 
 
                         try
                         {
-                            // nalezeni jmena datoveho zdroje (databaze)
+                            // searching data source name (database)
                             IBoxModule[] db_names = BoxesHelper.ListAncestBoxesWithID(box, "DataMiningCommon.Database");
-                            if (db_names.GetLength(0) != 1)  // byl nalezen pocet datovych zdroju ruzny od jedne
-                                throw new System.Exception("bylo nalezeno " + db_names.GetLength(0).ToString() + " databazi");
+                            if (db_names.GetLength(0) != 1)  // searched more than one data source or neither one
+                                throw new System.Exception("found " + db_names.GetLength(0).ToString() + " databases");
                             rBoolCedent.db_name = db_names[0].GetPropertyString("DatabaseName");
 
-                            // nalezeni jmena datove matice
+                            // searching data matrix name
                             IBoxModule[] matrix_names = BoxesHelper.ListAncestBoxesWithID(box, "DataMiningCommon.DataMatrix");
-                            if (matrix_names.GetLength(0) != 1)  // byl nalezen pocet datovych matic ruzny od jedne
-                                throw new System.Exception("bylo nalezeno " + matrix_names.GetLength(0).ToString() + " datovych matic");
+                            if (matrix_names.GetLength(0) != 1)  // searched more than one data source or neither one
+                                throw new System.Exception("found " + matrix_names.GetLength(0).ToString() + " data matrixes");
                             rBoolCedent.matrix_name = matrix_names[0].GetPropertyString("Name");
 
-                            // nalezeni jmena ulohy
+                            // searching task name
                             rBoolCedent.task_name = box.UserName;
 
 
-                            // vyplneni "task_type"
+                            // filling the "task_type"
                             rBoolCedent.task_type = TT.TaskTypeLabel;
 
-                            // vyplneni "cedent_type"
-                            rBoolCedent.cedent_type = TypCedentu.CedentTypeLabel;
+                            // filling the "cedent_type"
+                            rBoolCedent.cedent_type = Typcedent.CedentTypeLabel;
 
-                            // nalezeni vsech dilcich cedentu
-                            IBoxModule[] Subcedenty = box.GetConnections(TypCedentu.CedentTypeID);
+                            // searching all parcial cedent
+                            IBoxModule[] Subcedents = box.GetConnections(Typcedent.CedentTypeID);
 
-                            foreach (IBoxModule Subcedent in Subcedenty)
+                            foreach (IBoxModule Subcedent in Subcedents)
                             {
                                 Rec_bool_cedent rBoolCedent1 = rBoolCedent;
 
-                                // vyplneni ID
+                                // filling the ID
                                 rBoolCedent1.id = id + counterID.ToString();
                                 counterID++;
 
-                                // nastaveni "name"
+                                // setting "name"
                                 rBoolCedent1.name = Subcedent.UserName;
-                                // nastaveni "length"
+                                // setting "length"
                                 rBoolCedent1.length = Subcedent.GetPropertyLong("MinLen").ToString() + " - " + Subcedent.GetPropertyLong("MaxLen").ToString();
-                                // nalezeni vsech literalu
+                                // searching all literals
                                 IBoxModule[] literals = BoxesHelper.ListDirectAncestBoxesWithID(Subcedent, "DataMiningCommon.LiteralSetting");
-                                // nastaveni atributu "literal_cnt" (pocet dilcich literalu)
+                                // setting attribute "literal_cnt" (count of literals of parcial cedent)
                                 rBoolCedent1.literal_cnt = literals.Length;
 
                                 List<Rec_literal> rLiterals = new List<Rec_literal>();
 
-                                #region cyklus - zpracovani vsech literalu dilciho cedentu
+                                #region Loop - processing of each literal of parcial cedent
 
                                 foreach (IBoxModule litBox in literals)
                                 {
                                     Rec_literal rLiteral = new Rec_literal();
-                                    // nastaveni atributu "literal_type" {Basic/Remaining}
+                                    // setting attribute "literal_type" {Basic/Remaining}
                                     rLiteral.literal_type = litBox.GetPropertyString("LiteralType");
-                                    // nastaveni atributu "gace" {Positive/Negative/Both}
+                                    // setting attribute "gace" {Positive/Negative/Both}
                                     rLiteral.gace = litBox.GetPropertyString("GaceType");
 
-                                    // nalezeni atomu
+                                    // searching atom
                                     IBoxModule[] atoms = BoxesHelper.ListDirectAncestBoxesWithID(litBox, "DataMiningCommon.AtomSetting");
-                                    if (atoms.Length != 1) // mel by byt nalezen prave jeden atom
+                                    if (atoms.Length != 1) // just one atom should be found
                                     {
-                                        ErrStr += "Literal ID=" + litBox.ProjectIdentifier.ToString() + " : nalezeno " + atoms.Length.ToString() + " atomu\n";
-                                        continue; // zpracovani dalsiho literalu
+                                        ErrStr += "Literal ID=" + litBox.ProjectIdentifier.ToString() + " : nalezeno " + atoms.Length.ToString() + " atom\n";
+                                        continue; // processing of next literal
                                     }
                                     IBoxModule atomBox = atoms[0].Clone();
 
-                                    // nastaveni atributu "coefficient_type" {Interval/Subset/Cut/....}
+                                    // setting attribute "coefficient_type" {Interval/Subset/Cut/....}
                                     rLiteral.coefficient_type = atomBox.GetPropertyString("CoefficientType");
-                                    // nastaveni atributu "length"
+                                    // setting attribute "length"
                                     rLiteral.length = atomBox.GetPropertyLong("MinLen").ToString() + " - " + atomBox.GetPropertyLong("MaxLen").ToString();
 
-                                    // nalezeni atributu
+                                    // searching attribute
                                     string[] AttrIDs = { "DataMiningCommon.Attributes.Attribute",
                                          "DataMiningCommon.Attributes.EquifrequencyIntervalsAttribute",
                                          "DataMiningCommon.Attributes.EquidistantIntervalsAttribute",
                                          "DataMiningCommon.Attributes.EachValueOneCategoryAttribute" };
                                     IBoxModule[] attributes = BoxesHelper.ListDirectAncestBoxesWithID(atomBox, AttrIDs);
-                                    if (attributes.Length != 1) // mel by byt nalezen prave jeden atribut
+                                    if (attributes.Length != 1) //just one attribute should be found
                                     {
-                                        ErrStr += "Literal ID=" + litBox.ProjectIdentifier.ToString() + " : nalezeno " + attributes.Length.ToString() + " atributu\n";
-                                        continue; // zpracovani dalsiho literalu
+                                        ErrStr += "Literal ID=" + litBox.ProjectIdentifier.ToString() + " : nalezeno " + attributes.Length.ToString() + " attribute\n";
+                                        continue; // processing of next literal
                                     }
                                     IBoxModule attrBox = attributes[0].Clone();
 
-                                    // nastaveni atributu "underlying_attribute"
+                                    // setting attribute "underlying_attribute"
                                     rLiteral.underlying_attribute = attrBox.GetPropertyString("NameInLiterals");
-                                    // nastaveni atributu "category_cnt"
+                                    // setting attribute "category_cnt"
                                     rLiteral.category_cnt = attrBox.GetPropertyLong("CountOfCategories");
-                                    // nastaveni atributu "missing_type"
+                                    // setting attribute "missing_type"
                                     rLiteral.missing_type = attrBox.GetPropertyString("IncludeNullCategory");
 
-                                    // pridani literalu do seznamu
+                                    // adding literal to list
                                     rLiterals.Add(rLiteral);
                                 }
                                 #endregion
 
-                                // vypsani boolskeho cedentu do XML
+                                // generating boolean cedent to XML
                                 resultString += rBoolCedent1.ToXML(rLiterals);
 
 
@@ -188,15 +196,15 @@ namespace FEplugin_cs
                 #endregion
             }
             #endregion
-            // korenovy element
+            // root element
             resultString += "</active_list>";
 
 #if (LADENI)
-            // Kody - ulozeni vystupu do souboru "XMLBool_cedentExample.xml" v adresari 
+            // Kody - storing output to file "XMLBool_cedentExample.xml" in directory 
             XMLHelper.saveXMLexample(resultString, "../XML/XMLBool_cedentExample.xml");
 
             if (ErrStr != "") // LADICI
-                MessageBox.Show("Chyby pri generovani seznamu Boolskych cedentu:\n" + ErrStr);
+                MessageBox.Show("Chyby pri generating seznamu Boolskych cedent:\n" + ErrStr);
 #endif
 
             return resultString;
@@ -204,7 +212,9 @@ namespace FEplugin_cs
 
         
 
-        // pomocna struktura - vsechny typy Tasku zpracovavane v cyklu v getList() a k nim potrebne polozky
+        /// <summary>
+        /// Helping structure - all types of tasks processed in loop in getList() and it's items.
+        /// </summary>
         struct TaskTypeStruct
         {
             public string TaskTypeID;
@@ -220,7 +230,9 @@ namespace FEplugin_cs
             }
         }
 
-        // pomocna struktura - vsechny typy Tasku zpracovavane v cyklu v getList() a k nim potrebne polozky
+        /// <summary>
+        /// Helping structure - all types of cedents processed in loop in getList() and it's items.
+        /// </summary>
         public struct CedentTypeStruct
         {
             public string CedentTypeLabel;
@@ -235,25 +247,33 @@ namespace FEplugin_cs
         }
     }
    
-    #region --- Recordy ---
+    #region --- Records ---
 
+    /// <summary>
+    /// Record of one boolean cedent.
+    /// </summary>
     public class Rec_bool_cedent
     {
         #region DATA
 
         public string id = "";
-        public string name = "";
-        public string db_name = "";
-        public string matrix_name = "";
-        public string task_name = "";
-        public string task_type = "";
-        public string cedent_type = "";
+        public string name = "unknown";
+        public string db_name="unknown";
+        public string matrix_name = "unknown";
+        public string task_name = "unknown";
+        public string task_type = "unknown";
+        public string cedent_type = "unknown";
         public long literal_cnt = 0;
-        public string length = "";
+        public string length = "unknown";
         #endregion
 
         #region METHODS
 
+        /// <summary>
+        /// Creating XML string from record.
+        /// </summary>
+        /// <param name="Literals">list of literals (subelements)</param>
+        /// <returns>XML string</returns>
         public string ToXML(List<Rec_literal> Literals)
         {
             string XML = "";
@@ -269,7 +289,7 @@ namespace FEplugin_cs
                    "\" literal_cnt=\"" + literal_cnt.ToString() +
                    "\" length=\"" + length + "\">";
 
-            // pridani vsech podelementu - literalu
+            // adding each subelement - literal
             foreach (Rec_literal Lit in Literals)
                 XML += Lit.ToXML();
 
@@ -281,25 +301,31 @@ namespace FEplugin_cs
     }
 
 
+    /// <summary>
+    /// Record of one literal.
+    /// </summary>
     public class Rec_literal
     {
         #region DATA
 
-        public string underlying_attribute = "";
+        public string underlying_attribute = "unknown";
         public long category_cnt = 0;
-        public string missing_type = "";
-        public string coefficient_type = "";
-        public string length = "";
-        public string gace = "";
-        public string literal_type = "";
-        public string equivalence_class = "";
+        public string missing_type = "unknown";
+        public string coefficient_type = "unknown";
+        public string length = "unknown";
+        public string gace = "unknown";
+        public string literal_type = "unknown";
+        public string equivalence_class = "unknown";
         #endregion
 
         #region METHODS
 
+        /// <summary>
+        /// Creating XML string from record.
+        /// </summary>
+        /// <returns>XML string</returns>
         public string ToXML()
         {
-            
             string XML = "";
             underlying_attribute = XMLHelper.replaceXMLsign(underlying_attribute);
             missing_type = XMLHelper.replaceXMLsign(missing_type);

@@ -9,49 +9,52 @@ using Ferda.ModulesManager;
 using Ferda.Modules;
 using Ferda.Modules.Helpers;
 using Ferda.Modules.Quantifiers;
-//using Ferda.FrontEnd;
+
 
 namespace FEplugin_cs
 {
 
-    // ==================== Aktivni prvek SD-KL-hypoteza ================================
+    // ==================== Active element "SD-KL hypothesis" ================================
 
+    /// <summary>
+    /// Implementation of Active element "SD-KL hypothesis" (ID="hyp_sdkl")
+    /// </summary>
     public class AP_FEsdklhyp
     {
         /// <summary>
-        /// Implementation of Active element "SD-KL hypothesis"
+        /// Returns XML string with all occurences of Active element "SD-KL hypothesis".
         /// </summary>
-        /// <param name="index">index of data source in data sources tab </param>
-        /// <returns>Returns XML string with all occurences of Active element type "SD-KL hypothesis" from data source with given index</returns>
+        /// <param name="index">index of data source in FEplugin data sources table</param>
+        /// <returns>XML string</returns>
         public static string getList(int index)
         {
-            string resultString = ""; // vysledny XML string
+            string resultString = ""; // result XML string
 
-            // nacteni DTD do resultStringu
+            // loading DTD to resultString
             try { resultString = XMLHelper.loadDTD(); }
             catch (Exception e)
             {
 #if (LADENI)
-                MessageBox.Show("Chyba pri nacitani DTD: " + e.Message);
+                MessageBox.Show("error while loading DTD: " + e.Message);
 #endif
                 return resultString;
             }
 
-            // korenovy element
+            // root element
             resultString += "<active_list>";
 
-            string PropName = "Hypotheses";  // nazev Property, ktera obsahuje seznam hypotez
-            // nalezeni vsech krabicek SD-KL-uloh
+            string PropName = "Hypotheses";  // name of property which contain a list of hypotheses
+            // searching all boxes SD-KL-tasks
             IBoxModule[] TaskBoxes = BoxesHelper.ListBoxesWithID(CFEsourcesTab.Sources[index] as CFEsource, "LISpMinerTasks.SDKLTask");
 
-            // zpracovani kazde krabicky - ziskani z ni vsechny KL-hypotezy
-            string ErrStr = ""; // zaznam o chybach
+            // processing of each box -  searching all KL-hypotheses
+            string ErrStr = ""; // error report
 
-            string matrix_name = "";   // jmeno analyzovane matice
-            string db_name = "";    // jmeno analyzovane databaze
-            string task_name = "";  // jmeno ulohy - dano uzivatelskym nazvem krabicky FFTTast
+            string matrix_name = "unknown";   // analyzed data matrix name
+            string db_name="unknown";    // analyzed database name
+            string task_name = "unknown";  // task name - given with user name of box FFTTast
 
-            // vytvoreni delegatu funkci kvantifikatoru
+            // creatind delegates for functions of quantifiers
             // "sum of values"
             ContingencyTable.QuantifierValue<TwoDimensionalContingencyTable> sum_delegat = new ContingencyTable.QuantifierValue<TwoDimensionalContingencyTable>(TwoDimensionalContingencyTable.GetSumOfValues);
             // "min value"
@@ -61,33 +64,33 @@ namespace FEplugin_cs
                 
 
 
-            #region Cyklus - zpracovani vsech KL-Tasku z pole TaskBoxes
+            #region Loop - processing of each KL-Task from array TaskBoxes
 
             foreach (IBoxModule box in TaskBoxes)
             {
                 try
                 {
-                    // nalezeni jmena datoveho zdroje (databaze)
+                    // searching data source name (database)
                     IBoxModule[] db_names = BoxesHelper.ListAncestBoxesWithID(box, "DataMiningCommon.Database");
-                    if (db_names.GetLength(0) != 1)  // byl nalezen pocet datovych zdroju ruzny od jedne
-                        throw new System.Exception("bylo nalezeno " + db_names.GetLength(0).ToString() + " databazi");
+                    if (db_names.GetLength(0) != 1)  // searched more than one data source or neither one
+                        throw new System.Exception("found " + db_names.GetLength(0).ToString() + " databases");
                     db_name = (db_names[0].GetPropertyOther("DatabaseName") as StringT).stringValue;
 
-                    // nalezeni jmena datove matice
+                    // searching data matrix name
                     IBoxModule[] matrix_names = BoxesHelper.ListAncestBoxesWithID(box, "DataMiningCommon.DataMatrix");
-                    if (matrix_names.GetLength(0) != 1)  // byl nalezen pocet datovych matic ruzny od jedne
-                        throw new System.Exception("bylo nalezeno " + matrix_names.GetLength(0).ToString() + " datovych matic");
+                    if (matrix_names.GetLength(0) != 1)  // searched more than one data source or neither one
+                        throw new System.Exception("found " + matrix_names.GetLength(0).ToString() + " data matrixes");
                     matrix_name = (matrix_names[0].GetPropertyOther("Name") as StringT).stringValue;
 
-                    // nalezeni jmena ulohy
+                    // searching task name
                     task_name = box.UserName;
 
-                    // nalezeni seznamu vsech hypotez v tomto Tasku
+                    // searching the list of all hypotheses in this task
                     HypothesesT HypT = box.GetPropertyOther(PropName) as HypothesesT;
                     HypothesisStruct[] HypList = HypT.hypothesesValue.Clone() as HypothesisStruct[];
 
-                    // recordy pro ukladani vysledku
-                    Rec_hyp_SDKL rHyp = new Rec_hyp_SDKL();   // SD-KL hypoteza
+                    // records for storing the results
+                    Rec_hyp_SDKL rHyp = new Rec_hyp_SDKL();   // SD-KL hypothesis
                     Rec_ti_attribute rAnt = new Rec_ti_attribute();  // Antecedent (Row attributes)
                     Rec_ti_attribute rSuc = new Rec_ti_attribute();  // Succedent (Column attributes)
                     Rec_ti_cedent rCon = new Rec_ti_cedent();  // condition
@@ -95,8 +98,8 @@ namespace FEplugin_cs
                     Rec_ti_cedent rSet2 = new Rec_ti_cedent();  // set 2
 
 
-                    #region Cyklus - zpracovani vsech hypotez jedne krabicky SDKLTask
-                    // cyklus pres vsechny hypotezy
+                    #region Loop - processing of each hypotheses jedne krabicky SDKLTask
+                    // Loop over all hypotheses
                     for (int i = 0; i < HypList.GetLength(0); i++)
                     {
                         #region element hyp_SDKL
@@ -116,7 +119,7 @@ namespace FEplugin_cs
                         rHyp.Tab2 = HypList[i].quantifierSetting.secondContingencyTableRows;
 
 
-                        // hodnoty kvantifikatoru - set1
+                        // values of quantifiers - set1
                         try
                         {
                             rHyp.sum1 = CT1.SumOfValues.ToString();
@@ -134,9 +137,9 @@ namespace FEplugin_cs
                         }
                         catch (System.Exception e) // TODO: Ferda ma chyby ve vypoctech -> opravit! 
                         {
-                            ErrStr += "Box ProjectIdentifier=" + box.ProjectIdentifier.ToString() + ": chyba pri vypoctu kvantifikatoru: " + e.Message + "\n";
+                            ErrStr += "Box ProjectIdentifier=" + box.ProjectIdentifier.ToString() + ": chyba pri vypoctu quantifier: " + e.Message + "\n";
                         }
-                        // hodnoty kvantifikatoru - set2
+                        // values of quantifiers - set2
                         try
                         {
                             rHyp.sum2 = CT2.SumOfValues.ToString();
@@ -152,11 +155,11 @@ namespace FEplugin_cs
                             //rHyp.aic = CT.???;  TODO
                             rHyp.kend2 = TwoDimensionalContingencyTable.KendalValue(CT2).ToString();
                         }
-                        catch (System.Exception e) // TODO: Ferda ma chyby ve vypoctech -> opravit! 
+                        catch (System.Exception e) // Ferda ma chyby ve vypoctech! 
                         {
-                            ErrStr += "Box ProjectIdentifier=" + box.ProjectIdentifier.ToString() + ": chyba pri vypoctu kvantifikatoru: " + e.Message + "\n";
+                            ErrStr += "Box ProjectIdentifier=" + box.ProjectIdentifier.ToString() + ": chyba pri vypoctu quantifier: " + e.Message + "\n";
                         }
-                        // hodnoty kvantifikatoru - rozdil set1 a set2
+                        // values of quantifiers - diffrent of set1 a set2
                         try
                         {
                             rHyp.da_sum = TwoDimensionalContingencyTable.Value<TwoDimensionalContingencyTable>(sum_delegat, CT1, CT2, OperationModeEnum.DifferencesOfAbsoluteFrequencies).ToString();
@@ -166,9 +169,9 @@ namespace FEplugin_cs
                             rHyp.dr_min = TwoDimensionalContingencyTable.Value<TwoDimensionalContingencyTable>(min_delegat, CT1, CT2, OperationModeEnum.DifferencesOfRelativeFrequencies).ToString();
                             rHyp.dr_max = TwoDimensionalContingencyTable.Value<TwoDimensionalContingencyTable>(max_delegat, CT1, CT2, OperationModeEnum.DifferencesOfRelativeFrequencies).ToString();
                         }
-                        catch (System.Exception e) // TODO: Ferda ma chyby ve vypoctech -> opravit! 
+                        catch (System.Exception e) // Ferda ma chyby ve vypoctech! 
                         {
-                            ErrStr += "Box ProjectIdentifier=" + box.ProjectIdentifier.ToString() + ": chyba pri vypoctu kvantifikatoru: " + e.Message + "\n";
+                            ErrStr += "Box ProjectIdentifier=" + box.ProjectIdentifier.ToString() + ": chyba pri vypoctu quantifier: " + e.Message + "\n";
                         }
 
 
@@ -181,8 +184,8 @@ namespace FEplugin_cs
 
                         rAnt.id = rHyp.row_attributes;
                         rAnt.type = "Row attributes";
-                        rAnt.quant = "";   // smazani predchozi hodnoty
-                        // kategorie
+                        rAnt.quant = "";   // deleting previous value
+                        // category
                         List<Rec_ti_category> Cat_a = new List<Rec_ti_category>();
                         foreach (LiteralStruct lit in HypList[i].literals)
                         {
@@ -195,7 +198,6 @@ namespace FEplugin_cs
                                     C.value = s;
                                     Cat_a.Add(C);
                                 }
-                                // ??? k cemu je polozka LitralStruct.categoriesValues ?
                             }
                         }
 
@@ -205,8 +207,8 @@ namespace FEplugin_cs
 
                         rSuc.id = rHyp.column_attributes;
                         rSuc.type = "Column attributes";
-                        rSuc.quant = "";   // smazani predchozi hodnoty
-                        // kategorie
+                        rSuc.quant = "";   // deleting previous value
+                        // category
                         List<Rec_ti_category> Cat_s = new List<Rec_ti_category>();
                         foreach (LiteralStruct lit in HypList[i].literals)
                         {
@@ -219,7 +221,6 @@ namespace FEplugin_cs
                                     C.value = s;
                                     Cat_s.Add(C);
                                 }
-                                // ??? k cemu je polozka LitralStruct.categoriesValues ?
                             }
                         }
 
@@ -229,8 +230,8 @@ namespace FEplugin_cs
 
                         rCon.id = "con" + rHyp.id;
                         rCon.type = "Condition";
-                        // literaly
-                        int litCounter = 0;  // pocitadlo literalu teto hypotezy
+                        // literals
+                        int litCounter = 0;  // counter of literals of this hypothesis
                         List<Rec_ti_literal> Lit_c = new List<Rec_ti_literal>();
                         foreach (BooleanLiteralStruct lit in HypList[i].booleanLiterals)
                         {
@@ -260,7 +261,7 @@ namespace FEplugin_cs
 
                         rSet1.id = rHyp.set1;
                         rSet1.type = "First Set";
-                        // literaly
+                        // literals
                         List<Rec_ti_literal> Lit_s1 = new List<Rec_ti_literal>();
                         foreach (BooleanLiteralStruct lit in HypList[i].booleanLiterals)
                         {
@@ -290,7 +291,7 @@ namespace FEplugin_cs
 
                         rSet2.id = rHyp.set2;
                         rSet2.type = "Second Set";
-                        // literaly
+                        // literals
                         List<Rec_ti_literal> Lit_s2 = new List<Rec_ti_literal>();
                         foreach (BooleanLiteralStruct lit in HypList[i].booleanLiterals)
                         {
@@ -317,20 +318,20 @@ namespace FEplugin_cs
                         #endregion
 
 
-                        #region Vypsani jedne hypotezy do XML stringu
+                        #region Generating of one hypothesis to XML string
 
                         string oneHypString = "";
-                        // vypsani hypotezy do XML
+                        // generating hypotheses to XML
                         oneHypString += rHyp.ToXML();
-                        // vypsani Row attributes (Antecedentu) do XML
+                        // generating Row attributes (Antecedent) to XML
                         oneHypString += rAnt.ToXML(Cat_a);
-                        // vypsani Column attributes (Succedentu) do XML
+                        // generating Column attributes (Succedent) to XML
                         oneHypString += rSuc.ToXML(Cat_s);
-                        // vypsani Condition do XML
+                        // generating Condition to XML
                         oneHypString += rCon.ToXML(Lit_c);
-                        // vypsani Set1 do XML
+                        // generating Set1 to XML
                         oneHypString += rSet1.ToXML(Lit_s1);
-                        // vypsani Set2 do XML
+                        // generating Set2 to XML
                         oneHypString += rSet2.ToXML(Lit_s2);
 
 
@@ -349,15 +350,15 @@ namespace FEplugin_cs
             #endregion
 
             
-            // korenovy element
+            // root element
             resultString += "</active_list>";
             
 #if (LADENI)            
-            // vypsani pripadne chybove hlasky:
+            // generating of error message:
             if (!String.IsNullOrEmpty(ErrStr))  // LADICI
-                MessageBox.Show("Pri nacitani SD-KL hypotez doslo k chybam:\n" + ErrStr, "Chyba", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Pri nacitani SD-KL hypotheses doslo k chybam:\n" + ErrStr, "Chyba", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-            // LADICI - Kody - ulozeni vystupu do souboru "XMLsd4fthypExample.xml" v adresari 
+            // LADICI - Kody - storing output to file "XMLsd4fthypExample.xml" in directory 
             XMLHelper.saveXMLexample(resultString, "../XML/XMLsdKLhypExample.xml");
 #endif
 
@@ -365,20 +366,23 @@ namespace FEplugin_cs
         }
     }
 
-    #region --- Recordy  ---
+    #region --- Records  ---
 
+    /// <summary>
+    /// Record for one SDKL hypothesis
+    /// </summary>
     public class Rec_hyp_SDKL
     {
         #region DATA
-        public string id = "";    // ID 4ft-hypotezy
-        public string db_name = "";   // jmeno databaze
-        public string matrix_name = ""; // jmeno datove matice
-        public string task_name = "";   // jmeno ulohy
+        public string id = "";    // ID 4ft-hypotheses
+        public string db_name = "unkonown";   // database name
+        public string matrix_name = "unkonown"; // data matrix name
+        public string task_name = "unkonown";   // task name
 
-        public int[][] Tab1; // 1. kontingencni tabulka
-        public int[][] Tab2; // 2. kontingencni tabulka
+        public int[][] Tab1; // 1. contingency table
+        public int[][] Tab2; // 2. contingency table
 
-        // kvantifikatory - set1
+        // quantifiers - set1
         public string sum1 = "unknown";
         public string min1 = "unknown";
         public string max1 = "unknown";
@@ -392,7 +396,7 @@ namespace FEplugin_cs
         public string aic1 = "unknown";
         public string kend1 = "unknown";
 
-        // kvantifikatory - set2
+        // quantifiers - set2
         public string sum2 = "unknown";
         public string min2 = "unknown";
         public string max2 = "unknown";
@@ -406,7 +410,7 @@ namespace FEplugin_cs
         public string aic2 = "unknown";
         public string kend2 = "unknown";
 
-        // kvantifikatory - rozdil set1 a set2
+        // quantifiers - diffrent of set1 and set2
         public string da_sum = "unknown";
         public string da_min = "unknown";
         public string da_max = "unknown";
@@ -423,39 +427,43 @@ namespace FEplugin_cs
         #endregion
 
         #region METHODS
-        // prevod recordu na XML string
+
+        /// <summary>
+        /// Creating XML string from record.
+        /// </summary>
+        /// <returns>XML string</returns>
         public string ToXML()
         {
             string XML = "";
 
             XML += "<hyp_sdkl id=\"" + id + "\" db_name=\"" + db_name + "\" matrix_name=\"" + matrix_name +
                    "\" task_name=\"" + task_name +
-                // hodnoty kvantifikatoru - set1
+                // values of quantifiers - set1
                    "\" sum1=\"" + sum1 + "\" min1=\"" + min1 + "\" max1=\"" + max1 +
                    "\" chi_sq1=\"" + chi_sq1 + "\" fnc_s1=\"" + fnc_s1 +
                    "\" fnc_r1=\"" + fnc_r1 + "\" h_c1=\"" + h_c1 +
                    "\" h_r1=\"" + h_r1 + "\" h_c_r1=\"" + h_c_r1 +
                    "\" mi1=\"" + mi1 + "\" aic1=\"" + aic1 +
                    "\" kend1=\"" + kend1 +
-                // hodnoty kvantifikatoru - set2
+                // values of quantifiers - set2
                    "\" sum2=\"" + sum2 + "\" min2=\"" + min2 + "\" max2=\"" + max2 +
                    "\" chi_sq2=\"" + chi_sq2 + "\" fnc_s2=\"" + fnc_s2 +
                    "\" fnc_r2=\"" + fnc_r2 + "\" h_c2=\"" + h_c2 +
                    "\" h_r2=\"" + h_r2 + "\" h_c_r2=\"" + h_c_r2 +
                    "\" mi2=\"" + mi2 + "\" aic2=\"" + aic2 +
                    "\" kend2=\"" + kend2 +
-                // hodnoty kvantifikatoru - rozdil set1 a set2
+                // values of quantifiers - diffrent of set1 a set2
                    "\" da_sum=\"" + da_sum + "\" da_min=\"" + da_min +
                     "\" da_max=\"" + da_max + "\" dr_sum=\"" + dr_sum +
                     "\" dr_min=\"" + dr_min + "\" dr_max=\"" + dr_max +
-                // cedenty
+                // cedents
                    "\" row_attributes=\"" + row_attributes + "\" column_attributes=\"" + column_attributes +
                    "\" condition=\"" + condition +
                    "\" set1=\"" + set1 +
                    "\" set2=\"" + set2 + "\">";
 
-            // vygenerovani podelementu - ciselnych hodnot kontingencni tabulky
-                // 1. tabulka
+            // generating subelements - number values of contingency table
+                // 1. table
             XML += "<tab>";
             foreach (int[] radek in Tab1)
             {
@@ -468,7 +476,7 @@ namespace FEplugin_cs
             }
             XML += "</tab>";
 
-                // 2. tabulka
+                // 2. table
             XML += "<tab>";
             foreach (int[] radek in Tab2)
             {
@@ -489,7 +497,7 @@ namespace FEplugin_cs
         #endregion
     }
 
-    // Rec_ti_cedent & Rec_ti_literal implementovany u AP 4ft-hypoteza
+    // Rec_ti_cedent & Rec_ti_literal implemented by AP_hypothesis_common
 
     #endregion
 }

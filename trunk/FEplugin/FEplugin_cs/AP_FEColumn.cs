@@ -9,78 +9,86 @@ using Ferda.ModulesManager;
 using Ferda.Modules;
 using Ferda.Modules.Helpers;
 using Ferda.Modules.Quantifiers;
-//using Ferda.FrontEnd;
+
 
 namespace FEplugin_cs
 {
-    // ==================== Aktivni prvek Column (sloupec datove matice) ================================
+    // ==================== Active element "Column" (Column of data matrix) ================================
     
+    /// <summary>
+    /// Implementation of active element "Column" (ID="column")
+    /// </summary>
     public class AP_FEColumn
     {
+        /// <summary>
+        /// Returns XML string with all occurences of Active element "Column".
+        /// </summary>
+        /// <param name="index">index of data source in FEplugin data sources table</param>
+        /// <returns>XML string</returns>
         public static string getList(int index)
         {
-            string resultString = ""; // vysledny XML string
-            string ErrStr = "";  // zaznamy o chybach
+            string resultString = ""; // result XML string
+            string ErrStr = "";  // error reports
 
-            // nacteni DTD do resultStringu
+            // loading DTD to resultString
             try { resultString = XMLHelper.loadDTD(); }
             catch (Exception e)
             {
 #if (LADENI)
-                MessageBox.Show("Chyba pri nacitani DTD: " + e.Message);
+                MessageBox.Show("error while loading DTD: " + e.Message);
 #endif
                 return resultString;
             }
 
-            // korenovy element
+            // root element
             resultString += "<active_list>";
 
 
-            // zpracovani kazde krabicky Column
+            // processing of each box Column
 
-            #region   nalezeni a zpracovani vsech krabicek Column (DataMiningCommon.Column)
+            #region   searching a processing of each boxes Column (DataMiningCommon.Column)
 
             IBoxModule[] AttrBoxes = BoxesHelper.ListBoxesWithID(CFEsourcesTab.Sources[index] as CFEsource, "DataMiningCommon.Column");
 
             
-            // zpracovani kazde krabicky Column
+            // processing of each box Column
             foreach (IBoxModule ABox in AttrBoxes)
             {
                 try
                 {
                     Rec_column rColumn = new Rec_column(); // zaznam o novem sloupci
 
-                    // nalezeni ID
+                    // searching ID
                     rColumn.id = "column" + ABox.ProjectIdentifier.ToString();
 
-                    // nalezeni jmena datoveho zdroje (databaze)
+                    // searching data source name (database)
                     IBoxModule[] db_names = BoxesHelper.ListAncestBoxesWithID(ABox, "DataMiningCommon.Database");
-                    if (db_names.GetLength(0) != 1)  // byl nalezen pocet datovych zdroju ruzny od jedne
-                        throw new System.Exception("bylo nalezeno " + db_names.GetLength(0).ToString() + " databazi");
+                    if (db_names.GetLength(0) != 1)  // searched more than one data source or neither one
+                        throw new System.Exception("found " + db_names.GetLength(0).ToString() + " databases");
                     rColumn.db_name = (db_names[0].GetPropertyOther("DatabaseName") as StringT).stringValue;
 
-                    // nalezeni jmena datove matice
+                    // searching data matrix name
                     IBoxModule[] matrix_names = BoxesHelper.ListAncestBoxesWithID(ABox, "DataMiningCommon.DataMatrix");
-                    if (matrix_names.GetLength(0) != 1)  // byl nalezen pocet datovych matic ruzny od jedne
-                        throw new System.Exception("bylo nalezeno " + matrix_names.GetLength(0).ToString() + " datovych matic");
+                    if (matrix_names.GetLength(0) != 1)  // searched more than one data source or neither one
+                        throw new System.Exception("found " + matrix_names.GetLength(0).ToString() + " data matrixes");
                     rColumn.matrix_name = (matrix_names[0].GetPropertyOther("Name") as StringT).stringValue;
 
-                    // zjisteni jmena sloupce
+                    // searching name of column
                     rColumn.column_name = ABox.GetPropertyString("Name");
 
-                    // zjisteni typu hodnot
+                    // searching type of values
                     rColumn.value_type = ABox.GetPropertyString("ValueSubType");
 
-                    // zjisteni Min
+                    // searching Min
                     rColumn.min = ABox.GetPropertyString("ValueMin");
 
-                    // zjisteni Max
+                    // searching Max
                     rColumn.max = ABox.GetPropertyString("ValueMax");
 
-                    // zjisteni Avg
+                    // searching Avg
                     rColumn.avg = ABox.GetPropertyString("ValueAverage");
 
-                    // pridani polozky do XML
+                    // adding item to XML
                     resultString += rColumn.ToXML();
                  
                 }
@@ -95,20 +103,23 @@ namespace FEplugin_cs
 
             resultString += "</active_list>";
 
-#if (DEBUG)
-            // Kody - ulozeni vystupu do souboru "XMLColumnExample.xml" v adresari 
+#if (LADENI)
+            // Kody - storing output to file "XMLColumnExample.xml" in directory 
             XMLHelper.saveXMLexample(resultString, "../XML/XMLColumnExample.xml");
 
-            if (ErrStr != "") // LADICI
-                MessageBox.Show("Chyby pri generovani seznamu Boolskych cedentu:\n" + ErrStr);
+            if (ErrStr != "")
+                MessageBox.Show("Chyby pri generating seznamu Boolskych cedent:\n" + ErrStr);
 #endif
 
             return resultString;
         }
     }
 
-    #region --- Recordy ---
+    #region --- Records ---
 
+    /// <summary>
+    /// Record of one column (of data matrix).
+    /// </summary>
     public class Rec_column
     {
         #region DATA
@@ -127,6 +138,10 @@ namespace FEplugin_cs
 
         #region METHODS
 
+        /// <summary>
+        /// Creating XML string from record.
+        /// </summary>
+        /// <returns>XML string</returns>
         public string ToXML()
         {
             id = XMLHelper.replaceXMLsign(id);

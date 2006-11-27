@@ -20,6 +20,11 @@
 	#define ORP_SIGN 2
 #endif
 
+// sign orphans
+#ifndef ORP_UNSIGN
+	#define ORP_UNSIGN 3
+#endif
+
 //Iva: Definition of constants for OnUpdate(), its lHint parameter
 #ifndef UT_DEL
 	#define UT_DEL 1

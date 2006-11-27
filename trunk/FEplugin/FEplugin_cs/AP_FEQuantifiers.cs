@@ -9,115 +9,118 @@ using Ferda.ModulesManager;
 using Ferda.Modules;
 using Ferda.Modules.Helpers;
 using Ferda.Modules.Quantifiers;
-//using Ferda.FrontEnd;
+
 
 namespace FEplugin_cs
 {
 
-    // ==================== Aktivni prvek Kvantifikator ================================
+    // ==================== Active element "Quantifier" ================================
 
+    /// <summary>
+    /// Implementation of active element "Quantifier" (ID="quantifier")
+    /// </summary>
     public class AP_FEQuantifier
     {
         /// <summary>
-        /// Implementation of Active element "Quantifier"
+        /// Returns XML string with all occurences of Active element "Quantifier".
         /// </summary>
-        /// <param name="index">index of data source in data sources tab </param>
-        /// <returns>Returns XML string with all occurences of Active element type "Quantifier" from data source with given index</returns>
+        /// <param name="index">index of data source in FEplugin data sources table</param>
+        /// <returns>XML string</returns>
         public static string getList(int index)
         {
-            string resultString = ""; // vysledny XML string
-            string ErrStr = ""; // zaznam o chybach
+            string resultString = ""; // result XML string
+            string ErrStr = ""; // error report
 
-            // nacteni DTD do resultStringu
+            // loading DTD to resultString
             try { resultString = XMLHelper.loadDTD(); }
             catch (Exception e)
             {
 #if (LADENI)
-                MessageBox.Show("Chyba pri nacitani DTD: " + e.Message);
+                MessageBox.Show("error while loading DTD: " + e.Message);
 #endif
                 return resultString;
             }
             
-            // korenovy element
+            // root element
             resultString += "<active_list>";
 
-            List<TaskTypeStruct> TypyTasku = new List<TaskTypeStruct>();
-            TypyTasku.Add(new TaskTypeStruct("LISpMinerTasks.FFTTask", "FFTQuantifier", "4FT"));
-            TypyTasku.Add(new TaskTypeStruct("LISpMinerTasks.SDFFTTask", "SDFFTQuantifier", "SD-4FT"));
-            TypyTasku.Add(new TaskTypeStruct("LISpMinerTasks.KLTask", "KLQuantifier", "KL"));
-            TypyTasku.Add(new TaskTypeStruct("LISpMinerTasks.SDKLTask", "SDKLQuantifier", "SD-KL"));
-            TypyTasku.Add(new TaskTypeStruct("LISpMinerTasks.CFTask", "CFQuantifier", "CF"));
-            TypyTasku.Add(new TaskTypeStruct("LISpMinerTasks.SDCFTask", "SDCFQuantifier", "SD-CF"));
+            List<TaskTypeStruct> TypyTask = new List<TaskTypeStruct>();
+            TypyTask.Add(new TaskTypeStruct("LISpMinerTasks.FFTTask", "FFTQuantifier", "4FT"));
+            TypyTask.Add(new TaskTypeStruct("LISpMinerTasks.SDFFTTask", "SDFFTQuantifier", "SD-4FT"));
+            TypyTask.Add(new TaskTypeStruct("LISpMinerTasks.KLTask", "KLQuantifier", "KL"));
+            TypyTask.Add(new TaskTypeStruct("LISpMinerTasks.SDKLTask", "SDKLQuantifier", "SD-KL"));
+            TypyTask.Add(new TaskTypeStruct("LISpMinerTasks.CFTask", "CFQuantifier", "CF"));
+            TypyTask.Add(new TaskTypeStruct("LISpMinerTasks.SDCFTask", "SDCFQuantifier", "SD-CF"));
 
-            #region Cyklus pres vsechny typy Tasku
+            #region Loop over all Task types
 
-            foreach (TaskTypeStruct TTS in TypyTasku)
+            foreach (TaskTypeStruct TTS in TypyTask)
             {
-                // nalezeni vsech boxu Tasku daneho typu
+                // searching all Task boxes with given type
                 IBoxModule[] TaskBoxes = BoxesHelper.ListBoxesWithID(CFEsourcesTab.Sources[index] as CFEsource, TTS.TaskBoxType);
-                #region Cylkus - zpracovani kazdeho Tasku daneho typu
+                #region Loop - processing of each Task with given type
 
                 foreach (IBoxModule box in TaskBoxes)
                 {
-                    // record pro novy kvantfikator
+                    // record of basic quantifier
                     Rec_quantifier rQuant = new Rec_quantifier();
 
-                    // vyplneni ID kvantifikatoru
+                    // fillinf ID of quantifier
                     string id = "quant" + box.ProjectIdentifier;
 
                     try
                     {
-                        // nalezeni jmena datoveho zdroje (databaze) - neni povinne!
+                        // searching data source name (database) - not mandatory!
                         IBoxModule[] db_names = BoxesHelper.ListAncestBoxesWithID(box, "DataMiningCommon.Database");
-                        if (db_names.GetLength(0) == 1)  // byl nalezen pocet datovych zdroju ruzny od jedne
+                        if (db_names.GetLength(0) == 1)  // searched more than one data source or neither one
                             rQuant.db_name = (db_names[0].GetPropertyOther("DatabaseName") as StringT).stringValue;
 
-                        // nalezeni jmena datove matice - neni povinne!
+                        // searching data matrix name - not mandatory!
                         IBoxModule[] matrix_names = BoxesHelper.ListAncestBoxesWithID(box, "DataMiningCommon.DataMatrix");
-                        if (matrix_names.GetLength(0) == 1)  // byl nalezen pocet datovych matic ruzny od jedne
+                        if (matrix_names.GetLength(0) == 1)  // searched more than one data source or neither one
                             rQuant.matrix_name = (matrix_names[0].GetPropertyOther("Name") as StringT).stringValue;
 
-                        // nalezeni jmena ulohy
+                        // searching task name
                         rQuant.task_name = box.UserName;
 
-                        // vyplneni typu kvantifikatoru (ulohy)
+                        // filling the type of quantifier (task)
                         rQuant.task_type = TTS.TypeString;
 
-                        // nalezeni vsech boxu - Zakladnich kvantifikatoru daneho tasku
+                        // searching all boxes - basic quantifiers of given Task
                         IBoxModule[] BasicQuantsBoxes = box.GetConnections(TTS.QuantSocketName);
 
-                        #region Cyklus - pres vsechny zakladni kvantifikatory
+                        #region Loop - over all basic quantifiers
 
-                        int bq_num = 0;  // pomocna promenna - kvuli generovani ID
+                        int bq_num = 0;  // helping variable - due to generating ID
                         foreach (IBoxModule BQB in BasicQuantsBoxes)
                         {
                             Rec_quantifier rQuant1 = rQuant;
 
-                            // nastaveni ID
+                            // setting ID
                             rQuant1.id = id + "_" + bq_num.ToString();
                             bq_num++;
 
-                            // vyplneni polozky "name"
+                            // filling the item "name"
                             rQuant1.name = BQB.UserName;
 
-                            // vyplneni polozky "type"
+                            // filling the item "type"
                             if (BQB.MadeInCreator.Identifier.IndexOf("Functional") != -1)
                                 rQuant1.type = "Functional";
                             else if (BQB.MadeInCreator.Identifier.IndexOf("Aggregation") != -1)
                                 rQuant1.type = "Aggregation";
 
-                            // nalezeni vsech polozek zakladniho kvantifikatoru a jejich hodnot
+                            // searching all items of basic quantifier and its values
                             List<Rec_quant_item> QItems = new List<Rec_quant_item>();
 
                             PropertyInfo[] PI = BQB.MadeInCreator.Properties;
                             foreach (PropertyInfo pi in PI)
                             {
-                                // nova polozka nastaveni
+                                // new item setting
                                 Rec_quant_item item = new Rec_quant_item();
-                                // vyplneni polozek
+                                // filling the items
                                 item.name = pi.name; // "name"
 
-                                // TODO: zatim nevim, jestli lze tohle udelat lepe. Mozna predelat
+                                
                                 if (pi.typeClassIceId.IndexOf("Double") != -1)
                                     item.value = BQB.GetPropertyDouble(pi.name).ToString();
                                 else if (pi.typeClassIceId.IndexOf("String") != -1)
@@ -141,7 +144,7 @@ namespace FEplugin_cs
                         #endregion
 
 
-                            // pridani kvantifikatoru do XML
+                            // adding quantifier to XML
                             resultString += rQuant1.ToXML(QItems);
                         }
                     }
@@ -156,15 +159,15 @@ namespace FEplugin_cs
 
             #endregion
 
-            // korenovy element
+            // root element
             resultString += "</active_list>";
 
 #if (LADENI)
-            // vypsani pripadne chybove hlasky:
+            // generating of error message:
             if (!String.IsNullOrEmpty(ErrStr))  // LADICI
-                MessageBox.Show("Pri nacitani Kvantifikatoru doslo k chybam:\n" + ErrStr, "Chyba", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Pri nacitani quantifier doslo k chybam:\n" + ErrStr, "Chyba", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-            // Kody - ulozeni vystupu do souboru "XMLQuantExample.xml" v adresari 
+            // Kody - storing output to file "XMLQuantExample.xml" in directory 
             XMLHelper.saveXMLexample(resultString, "../XML/XMLQuantExample.xml");
 #endif
 
@@ -173,7 +176,9 @@ namespace FEplugin_cs
 
         
         
-        // pomocna struktura - vsechny typy Tasku zpracovavane v cyklu v getList() a k nim potrebne polozky
+        /// <summary>
+        /// helping structure - all types of Task processed in loop in getList() and their items
+        /// </summary>
         struct TaskTypeStruct
         {
             public string TaskBoxType;
@@ -189,25 +194,32 @@ namespace FEplugin_cs
         }
     }
 
-    #region --- Recordy  ---
+    #region --- Records  ---
 
+    /// <summary>
+    /// Record for one basic quantifier
+    /// </summary>
     public class Rec_quantifier
     {
         #region DATA
-        public string id = "";    // ID kvantifikatoru
-        public string db_name = "unknown";   // jmeno databaze
-        public string matrix_name = "unknown"; // jmeno datove matice
-        public string task_name = "unknown";   // jmeno ulohy
-        public string task_type = "unknown";   // typ ulohy
-        public string name = "unknown";   // jmeno (typ) zakladniho kvantifikatoru
-        public string type = "unknown";   // typ kvantifikatoru (4FT, KL, ... )
+        public string id = "";    // ID quantifier
+        public string db_name = "unknown";   // database name
+        public string matrix_name = "unknown"; // data matrix name
+        public string task_name = "unknown";   // task name
+        public string task_type = "unknown";   // task type
+        public string name = "unknown";   // name of (typ) basic quantifier
+        public string type = "unknown";   // type of quantifier (4FT, KL, ... )
         
         
         
         #endregion
 
         #region METHODS
-        // prevod recordu na XML string
+
+        /// <summary>
+        /// Creating XML string from record.
+        /// </summary>
+        /// <returns>XML string</returns>
         public string ToXML()
         {
             string XML = "";
@@ -218,6 +230,11 @@ namespace FEplugin_cs
             return XML;
         }
 
+        /// <summary>
+        /// Creating XML string from record.
+        /// </summary>
+        /// <param name="items">list of records with basic quantifiers</param>
+        /// <returns>XML string</returns>
         public string ToXML(List<Rec_quant_item> items)
         {
             string XML = "";
@@ -226,7 +243,7 @@ namespace FEplugin_cs
                    "\" task_name=\"" + task_name + "\" task_type=\"" + task_type +
                    "\" name=\"" + name + "\" type=\"" + type + "\">";
 
-            // vygenerovani podelementu - vsechny polozky
+            // generating subelements - all items
             foreach (Rec_quant_item item in items)
                 XML += item.ToXML();
             
@@ -237,16 +254,31 @@ namespace FEplugin_cs
         #endregion
     }
 
+    /// <summary>
+    /// Record for one basic quantifier item (i.e. parameter and its value)
+    /// </summary>
     public class Rec_quant_item
         {
         #region DATA
-        public string name = "";    // nazev polozky zakladniho kvantifikatoru (napr. parametr)
-        public string value = "";   // hodnota polozky
+
+        /// <summary>
+            /// Name of item of basic quantifier (i.e. parameter)
+        /// </summary>
+        public string name = "unknown"; 
+
+        /// <summary>
+        /// Value of item
+        /// </summary>
+        public string value = "unknown";
                 
         #endregion
 
         #region METHODS
-        // prevod recordu na XML string
+
+        /// <summary>
+        /// Creating XML string from record.
+        /// </summary>
+        /// <returns>XML string</returns>
         public string ToXML()
         {
             string XML = "";

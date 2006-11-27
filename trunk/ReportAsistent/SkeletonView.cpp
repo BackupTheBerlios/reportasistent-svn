@@ -864,6 +864,13 @@ void CSkeletonView::ResolveSingleOrphan(HTREEITEM item, LPARAM mode)
 				tree_ctrl.SetItemState(item, TVIS_BOLD, TVIS_BOLD);
 				tree_ctrl.SetItemState(item, INDEXTOOVERLAYMASK(1), TVIS_OVERLAYMASK);
 				break;
+			
+
+				// unsigning orphans
+			case ORP_UNSIGN:
+				tree_ctrl.SetItemState(item, 0, TVIS_BOLD);
+				tree_ctrl.SetItemState(item, 0, TVIS_OVERLAYMASK);
+				break;
 			}
 		}
 		else

@@ -7,13 +7,29 @@ using System.Windows.Forms;
 using Ferda;
 using Ferda.ProjectManager;
 using Ferda.ModulesManager;
-//using Ferda.FrontEnd;
+
+
+// This module contains BoxesHelper class - class which performs some helping operations about work with Ferda boxes in FEplugin
 
 namespace FEplugin_cs
 {
+    /// <summary>
+    /// Class which performs some helping operations about work with Ferda boxes in FEplugin.
+    /// Particularly these operations are:
+    /// <ul>
+    ///     <li>Finding all boxes with given box type in Ferda Archive</li>
+    ///     <li>Finding all ancestors (all boxes box) with given box type in Ferda Archive tree structure</li>
+    ///     <li>Finding all direct ancestors (all boxes box) with given box type in Ferda Archive tree structure</li>
+    /// </ul>
+    /// </summary>
     public class BoxesHelper
     {
-        // z daneho zdroje ziska vsechny krabicky s danym identifikatorem
+        /// <summary>
+        /// Finding all boxes with given box type in Ferda Archive (all boxes Ferda data source)
+        /// </summary>
+        /// <param name="Source">data source</param>
+        /// <param name="ID">type of searched boxes (string identifier)</param>
+        /// <returns>Array of all found boxes</returns>
         public static IBoxModule[] ListBoxesWithID(CFEsource Source, string ID)
         {
             ArrayList MyBoxes = new ArrayList();
@@ -27,7 +43,12 @@ namespace FEplugin_cs
             return resultArray;
         }
 
-
+        /// <summary>
+        /// Finding all boxes with given list of box types in Ferda Archive (all boxes Ferda data source)
+        /// </summary>
+        /// <param name="Source">data source</param>
+        /// <param name="ID">list with types of searched boxes (string identifiers)</param>
+        /// <returns>Array of all found boxes</returns>
         public static IBoxModule[] ListBoxesWithID(CFEsource Source, string[] ID)
         {
             ArrayList MyBoxes = new ArrayList();
@@ -46,23 +67,28 @@ namespace FEplugin_cs
 
         // ----------------------------------------
 
-        // vrati vsechny predchudce (ve strome) krabicky Box typu ID
+        /// <summary>
+        /// Finding all ancestors (all boxes box) with given box type in Ferda Archive tree structure
+        /// </summary>
+        /// <param name="Box">Box in archive, for which function searches the ancestors</param>
+        /// <param name="ID">type of searched boxes (string identifier)</param>
+        /// <returns></returns>
         public static IBoxModule[] ListAncestBoxesWithID(IBoxModule Box, string ID)
         {
             ArrayList MyBoxes = new ArrayList();
             IBoxModule[] Ancestors = Box.ConnectionsFrom().ToArray();
             foreach (IBoxModule b in Ancestors)
             {
-                if (b.MadeInCreator.Identifier == ID)  // tento predek je hledaneho typu
+                if (b.MadeInCreator.Identifier == ID)  // this ancestor has desired type
                     MyBoxes.Add(b);
-                else  // predek neni hledaneho typu, hledame mezi jeho predky
+                else  // ancestor doesn't have desired type. Further we searche among it's ancestors (recurse)
                 {
-                    IBoxModule[] b_ancestors = ListAncestBoxesWithID(b, ID);  // rekurze
+                    IBoxModule[] b_ancestors = ListAncestBoxesWithID(b, ID);  // recurse
                     foreach (IBoxModule bb in b_ancestors)
                         MyBoxes.Add(bb);
                 }
             }
-            // vyrazeni duplicit
+            // eliminating the duplicites
             MyBoxes.Sort();
             IBoxModule[] SortedBoxes = (IBoxModule[])MyBoxes.ToArray(typeof(IBoxModule));
             ArrayList MyUniqueBoxes = new ArrayList();
@@ -78,7 +104,12 @@ namespace FEplugin_cs
 
         // ----------------------------------------
 
-        // vrati vsechny bezprostredni predchudce (ve strome) krabicky Box typu ID
+        /// <summary>
+        /// Finding all direct ancestors (all boxes box) with given box type in Ferda Archive tree structure
+        /// </summary>
+        /// <param name="Box">Box in archive, for which function searches the ancestors</param>
+        /// <param name="ID">type of searched boxes (string identifier)</param>
+        /// <returns></returns>
         public static IBoxModule[] ListDirectAncestBoxesWithID(IBoxModule Box, string ID)
         {
             ArrayList MyBoxes = new ArrayList();
@@ -92,7 +123,12 @@ namespace FEplugin_cs
             return (MyBoxes.ToArray(typeof(IBoxModule)) as IBoxModule[]);
         }
 
-
+        /// <summary>
+        /// Finding all direct ancestors (all boxes box) with given box type in Ferda Archive tree structure
+        /// </summary>
+        /// <param name="Box">Box in archive, for which function searches the ancestors</param>
+        /// <param name="ID">list with types of searched boxes (string identifiers)</param>
+        /// <returns></returns>
         public static IBoxModule[] ListDirectAncestBoxesWithID(IBoxModule Box, string[] IDs)
         {
             ArrayList MyBoxes = new ArrayList();
@@ -111,13 +147,18 @@ namespace FEplugin_cs
 
         // ----------------------------------------
 
+        /// <summary>
+        /// Helper function. Writing out the list of all boxes in archive to console 
+        /// </summary>
+        /// <param name="zdroj">data source</param>
+        /// <param name="ID">type of box</param>
         public static void VypisKrabky(int zdroj, string ID)
         {
             IBoxModule[] seznam = ListBoxesWithID((CFEsourcesTab.getSources())[0], ID);
-            Console.WriteLine("Bylo nalezeno {0} krabicek s ID={1}\n", seznam.Length.ToString(), ID);
+            Console.WriteLine("{0} of boxes with ID={1} was found\n", seznam.Length.ToString(), ID);
 
-            // vypsani vsech krabicek
-            Console.WriteLine("\nSeznam vsech krabicek:\n");
+            // writing out all boxes
+            Console.WriteLine("\nList of all boxes:\n");
             foreach (IBoxModule box in (CFEsourcesTab.getSources())[0].PM.Archive.Boxes)
                 Console.WriteLine("Box:   " + box.MadeInCreator.Identifier + "  name:  " + box.ProjectIdentifier.ToString());
         }

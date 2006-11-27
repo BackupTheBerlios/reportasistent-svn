@@ -9,99 +9,102 @@ using Ferda.ModulesManager;
 using Ferda.Modules;
 using Ferda.Modules.Helpers;
 using Ferda.Modules.Quantifiers;
-//using Ferda.FrontEnd;
+
 
 namespace FEplugin_cs
 {
 
-    // ==================== Aktivni prvek Uloha (Task) ================================
+    // ==================== Active element Task ================================
 
+    /// <summary>
+    /// Implementation of Active element "Task" (ID="task")
+    /// </summary>
     public class AP_FETask
     {
         /// <summary>
-        /// Implementation of Active element "Task"
+        /// Returns XML string with all occurences of Active element "Task" (all types of tasks).
         /// </summary>
-        /// <param name="index">index of data source in data sources tab </param>
-        /// <returns>Returns XML string with all occurences of Active element type "Task" (all types of task) from data source with given index</returns>
+        /// <param name="index">index of data source in FEplugin data sources table</param>
+        /// <returns>XML string</returns>
         public static string getList(int index)
         {
-            string resultString = ""; // vysledny XML string
-            string ErrStr = "";  // zaznamy o chybach
+            string resultString = ""; // result XML string
+            string ErrStr = "";  // error reports
             //int counterID = 0;
 
-            // nacteni DTD do resultStringu
+            // loading DTD to resultString
             try { resultString = XMLHelper.loadDTD(); }
             catch (Exception e)
             {
 #if (LADENI)
-                MessageBox.Show("Chyba pri nacitani DTD: " + e.Message);
+                MessageBox.Show("error while loading DTD: " + e.Message);
 #endif
                 return resultString;
             }
 
-            // korenovy element
+            // root element
             resultString += "<active_list>";
 
 
-            List<TaskTypeStruct> TypyTasku = new List<TaskTypeStruct>();
-            TypyTasku.Add(new TaskTypeStruct("LISpMinerTasks.FFTTask", "4FT Task"));
-            TypyTasku.Add(new TaskTypeStruct("LISpMinerTasks.SDFFTTask", "SD-4FT Task"));
-            TypyTasku.Add(new TaskTypeStruct("LISpMinerTasks.KLTask", "KL Task"));
-            TypyTasku.Add(new TaskTypeStruct("LISpMinerTasks.SDKLTask", "SD-KL Task"));
-            TypyTasku.Add(new TaskTypeStruct("LISpMinerTasks.CFTask", "CF Task"));
-            TypyTasku.Add(new TaskTypeStruct("LISpMinerTasks.SDCFTask", "SD-CF Task"));
+            List<TaskTypeStruct> TypyTask = new List<TaskTypeStruct>();
+            TypyTask.Add(new TaskTypeStruct("LISpMinerTasks.FFTTask", "4FT Task"));
+            TypyTask.Add(new TaskTypeStruct("LISpMinerTasks.SDFFTTask", "SD-4FT Task"));
+            TypyTask.Add(new TaskTypeStruct("LISpMinerTasks.KLTask", "KL Task"));
+            TypyTask.Add(new TaskTypeStruct("LISpMinerTasks.SDKLTask", "SD-KL Task"));
+            TypyTask.Add(new TaskTypeStruct("LISpMinerTasks.CFTask", "CF Task"));
+            TypyTask.Add(new TaskTypeStruct("LISpMinerTasks.SDCFTask", "SD-CF Task"));
 
-            #region Cyklus pres vsechny typy Tasku
+            #region Loop over all Task types
 
-            foreach (TaskTypeStruct TTS in TypyTasku)
+            foreach (TaskTypeStruct TTS in TypyTask)
             {
-                // nalezeni vsech boxu Tasku daneho typu
+                // searching all boxes Task with given type
                 IBoxModule[] TaskBoxes = BoxesHelper.ListBoxesWithID(CFEsourcesTab.Sources[index] as CFEsource, TTS.TaskBoxType);
                
-                #region Cylkus - zpracovani kazdeho Tasku daneho typu
+                #region Loop - processing of each Task with given type
 
                 foreach (IBoxModule box in TaskBoxes)
                 { 
-                    // record pro Task
+                    // record of Task
                     Rec_task rTask = new Rec_task();
 
                     try
                     {
-                        // nastaveni ID
+                        // setting ID
                         rTask.id = "task" + box.ProjectIdentifier.ToString();
                         
-                        // nalezeni jmena datoveho zdroje (databaze) - neni povinne!
+                        // searching data source name (database) - not mandatory!
                         IBoxModule[] db_names = BoxesHelper.ListAncestBoxesWithID(box, "DataMiningCommon.Database");
-                        if (db_names.GetLength(0) == 1)  // byl nalezen pocet datovych zdroju ruzny od jedne
+                        if (db_names.GetLength(0) == 1)  // searched more than one data source or neither one
                             rTask.db_name = db_names[0].GetPropertyString("DatabaseName");
 
-                        // nalezeni jmena datove matice - neni povinne!
+                        // searching data matrix name - not mandatory!
                         IBoxModule[] matrix_names = BoxesHelper.ListAncestBoxesWithID(box, "DataMiningCommon.DataMatrix");
-                        if (matrix_names.GetLength(0) == 1)  // byl nalezen pocet datovych matic ruzny od jedne
+                        if (matrix_names.GetLength(0) == 1)  // searched more than one data source or neither one
                             rTask.matrix_name = matrix_names[0].GetPropertyString("Name");
 
-                        // nalezeni jmena ulohy
+                        // searching task name
                         rTask.task_name = box.UserName;
 
-                        // vyplneni "task_type"
+                        // filling the "task_type"
                         rTask.task_type = TTS.TypeString;
 
-                        // vyplneni "gen_state"
+                        // filling the "gen_state"
                         rTask.gen_state = box.GetPropertyString("GenerationState");
 
-                        // vyplneni "gen_total_time"
+                        // filling the "gen_total_time"
                         rTask.gen_total_time = box.GetPropertyTime("GenerationTotalTime").ToString();
 
-                        // vyplneni "gen_start_time"
+                        // filling the "gen_start_time"
                         rTask.gen_start_time = box.GetPropertyDateTime("GenerationStartTime").ToString();
 
-                        // vyplneni "num_hyp"
+                        // filling the "num_hyp"
                         rTask.num_hyp = box.GetPropertyLong("GenerationNrOfHypotheses");
 
-                        // vyplneni "num_tests"
+                        // filling the "num_tests"
                         rTask.num_tests = box.GetPropertyLong("GenerationNrOfTests");
 
-                        // pridani tasku do XML
+                        // adding Task to XML
                         resultString += rTask.ToXML();
                     }
                     catch (System.Exception e)
@@ -116,15 +119,15 @@ namespace FEplugin_cs
 
             #endregion
 
-            // korenovy element
+            // root element
             resultString += "</active_list>";
 
 #if (LADENI)
-            // vypsani pripadne chybove hlasky:
+            // generating of error message:
             if (!String.IsNullOrEmpty(ErrStr))  // LADICI
-                MessageBox.Show("Pri nacitani Tasku doslo k chybam:\n" + ErrStr, "Chyba", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Pri nacitani Task doslo k chybam:\n" + ErrStr, "Chyba", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-            // Kody - ulozeni vystupu do souboru "XMLTaskExample.xml" v adresari 
+            // Kody - storing output to file "XMLTaskExample.xml" in directory 
             XMLHelper.saveXMLexample(resultString, "../XML/XMLTaskExample.xml");
 #endif
 
@@ -133,7 +136,7 @@ namespace FEplugin_cs
         }
 
 
-        // pomocna struktura - vsechny typy Tasku zpracovavane v cyklu v getList() a k nim potrebne polozky
+        // pomocna struktura - vsechny typy Task zpracovavane v cyklu v getList() a k nim potrebne item
         struct TaskTypeStruct
         {
             public string TaskBoxType;
@@ -147,27 +150,33 @@ namespace FEplugin_cs
         }
     }
 
-    #region --- Recordy  ---
+    #region --- Records  ---
 
+    /// <summary>
+    /// Record of one Task.
+    /// </summary>
     public class Rec_task
     {
         #region DATA
-        public string id = "";    // ID tasku
-        public string db_name = "unknown";   // jmeno databaze
-        public string matrix_name = "unknown"; // jmeno datove matice
-        public string task_name = "unknown";   // jmeno ulohy
-        public string task_type = "unknown";   // typ ulohy (4FT, KL, ... )
-        public string gen_state = "unknown";   // stav ulohy (spustena ano/ne ...)
+        public string id = "";    // ID Task
+        public string db_name = "unknown";   // database name
+        public string matrix_name = "unknown"; // data matrix name
+        public string task_name = "unknown";   // task name
+        public string task_type = "unknown";   // task type (4FT, KL, ... )
+        public string gen_state = "unknown";   // stav task (spustena ano/ne ...)
         public string gen_total_time = "unknown";   // celkovy cas vypoctu 
         public string gen_start_time = "unknown";   // cas zacatku vypoctu 
-        public long num_hyp = 0; // pocet nalezenych platnych hypotez
+        public long num_hyp = 0; // pocet nalezenych platnych hypotheses
         public long num_tests = 0; //pocet porovnani behem vypoctu
 
 
         #endregion
 
         #region METHODS
-        // prevod recordu na XML string
+        /// <summary>
+        /// Generates XML string from record.
+        /// </summary>
+        /// <returns>XML string</returns>
         public string ToXML()
         {
             string XML = "";

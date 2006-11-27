@@ -9,74 +9,81 @@ using Ferda.ModulesManager;
 using Ferda.Modules;
 using Ferda.Modules.Helpers;
 using Ferda.Modules.Quantifiers;
-//using Ferda.FrontEnd;
+
 
 namespace FEplugin_cs
 {
-    // ==================== Aktivni prvek Kategorie ================================
-    
+    // ==================== Active element "Category" ================================
+    /// <summary>
+    /// Implementation of active element "Category" (ID="category")
+    /// </summary>
     public class AP_FECategory
     {
+        /// <summary>
+        /// Returns XML string with all occurences of Active element "Category".
+        /// </summary>
+        /// <param name="index">index of data source in FEplugin data sources table</param>
+        /// <returns>XML string</returns>
         public static string getList(int index)
         {
-            string resultString = ""; // vysledny XML string
-            string ErrStr = "";  // zaznamy o chybach
+            string resultString = ""; // result XML string
+            string ErrStr = "";  // error reports
 
-            // nacteni DTD do resultStringu
+            // loading DTD to resultString
             try { resultString = XMLHelper.loadDTD(); }
             catch (Exception e)
             {
 #if (LADENI)
-                MessageBox.Show("Chyba pri nacitani DTD: " + e.Message);
+                MessageBox.Show("error while loading DTD: " + e.Message);
 #endif
                 return resultString;
             }
 
-            // korenovy element
+            // root element
             resultString += "<active_list>";
 
 
-            // zpracovani kazde krabicky - ziskani z ni vsechny kategorie
+            // processing of each box - searching all category
 
-            #region   nalezeni a zpracovani vsech krabicek Atributu (DataMiningCommon.Attributes.Attribute)
+            #region   searching and processing of each boxes of attributes (DataMiningCommon.Attributes.Attribute)
 
             IBoxModule[] AttrBoxes = BoxesHelper.ListBoxesWithID(CFEsourcesTab.Sources[index] as CFEsource, "DataMiningCommon.Attributes.Attribute");
 
-            string db_name = "";
-            string matrix_name = "";
-            string attr_name = "";
+            string db_name="unknown";
+            string matrix_name = "unknown";
+            string attr_name = "unknown";
             int cat_id_counter = 0;
 
-            // zpracovani kazde krabicky - ziskani z ni vsechny Kategorie
+            // processing of each box - searching all category
             foreach (IBoxModule ABox in AttrBoxes)
             {
                 try
                 {
-                    List<Rec_category> rCats = new List<Rec_category>();  // seznam vsech kategorii daneho atributu
+                    List<Rec_category> rCats = new List<Rec_category>();  // seznam vsech category of given attribute
                     cat_id_counter = 1;
 
-                    // zjisteni jmena atributu (v literalu)
+                    // searching name of attribute (in literal)
                     attr_name = ABox.GetPropertyString("NameInLiterals");
 
-                    // nalezeni jmena datoveho zdroje (databaze)
+                    // searching data source name (database)
                     IBoxModule[] db_names = BoxesHelper.ListAncestBoxesWithID(ABox, "DataMiningCommon.Database");
-                    if (db_names.GetLength(0) != 1)  // byl nalezen pocet datovych zdroju ruzny od jedne
-                        throw new System.Exception("bylo nalezeno " + db_names.GetLength(0).ToString() + " databazi");
+                    if (db_names.GetLength(0) != 1)  // searched more than one data source or neither one
+                        throw new System.Exception("found " + db_names.GetLength(0).ToString() + " databases");
                     db_name = (db_names[0].GetPropertyOther("DatabaseName") as StringT).stringValue;
 
-                    // nalezeni jmena datove matice
+                    // searching data matrix name
                     IBoxModule[] matrix_names = BoxesHelper.ListAncestBoxesWithID(ABox, "DataMiningCommon.DataMatrix");
-                    if (matrix_names.GetLength(0) != 1)  // byl nalezen pocet datovych matic ruzny od jedne
-                        throw new System.Exception("bylo nalezeno " + matrix_names.GetLength(0).ToString() + " datovych matic");
+                    if (matrix_names.GetLength(0) != 1)  // searched more than one data source or neither one
+                        throw new System.Exception("found " + matrix_names.GetLength(0).ToString() + " data matrixes");
                     matrix_name = (matrix_names[0].GetPropertyOther("Name") as StringT).stringValue;
 
 
 
-                    // nalezeni seznamu kategorii daneho atributu
-                    List<Rec_ctgr> cat_list = new List<Rec_ctgr>(); // seznam kategorii
+                    // searching list of categories of given attribute
+                    List<Rec_ctgr> cat_list = new List<Rec_ctgr>(); // list of categories
                     CategoriesStruct cat_str = (ABox.GetPropertyOther("Categories") as CategoriesT).categoriesValue;
 
-                    #region Zpracovani kategorii typu Interval
+                    #region processing of category type of Interval
 
                     // long intervals
                     foreach (string key in cat_str.longIntervals.Keys)
@@ -89,8 +96,8 @@ namespace FEplugin_cs
                         rCat.attr_name = attr_name;
                         rCat.ctgr_name = key;
                         rCat.ctgr_type = "Interval";
-                        rCat.ctgr_freq = "N/A";     // TODO: doimplementovat, pujde-li
-                        rCat.bool_type = "No boolean"; // TODO: co to je? Dodelat.
+                        rCat.ctgr_freq = "N/A";     // TODO: if possible
+                        rCat.bool_type = "No boolean"; // TODO: What is this?
                         rCat.def_length = cat_str.longIntervals[key].GetLength(0);
 
                         List<Rec_ctgr_def> ctgr_defs = new List<Rec_ctgr_def>();
@@ -127,7 +134,7 @@ namespace FEplugin_cs
                             }
                             ctgr_defs.Add(ctgr_def);
                         }
-                        // vypsani jedne kategorie do XML
+                        // Generating of one category to XML
                         string OneCatString = "";
                         if (ctgr_defs.Count == 0)
                             OneCatString += rCat.ToXML();
@@ -148,8 +155,8 @@ namespace FEplugin_cs
                         rCat.attr_name = attr_name;
                         rCat.ctgr_name = key;
                         rCat.ctgr_type = "Interval";
-                        rCat.ctgr_freq = "N/A";     // TODO: doimplementovat, pujde-li
-                        rCat.bool_type = "No boolean"; // TODO: co to je? Dodelat.
+                        rCat.ctgr_freq = "N/A";     // TODO: if possible
+                        rCat.bool_type = "No boolean"; // TODO: What is this?
                         rCat.def_length = cat_str.floatIntervals[key].GetLength(0);
 
                         List<Rec_ctgr_def> ctgr_defs = new List<Rec_ctgr_def>();
@@ -186,7 +193,7 @@ namespace FEplugin_cs
                             }
                             ctgr_defs.Add(ctgr_def);
                         }
-                        // vypsani jedne kategorie do XML
+                        // Generating of one category to XML
                         string OneCatString = "";
                         if (ctgr_defs.Count == 0)
                             OneCatString += rCat.ToXML();
@@ -207,8 +214,8 @@ namespace FEplugin_cs
                         rCat.attr_name = attr_name;
                         rCat.ctgr_name = key;
                         rCat.ctgr_type = "Interval";
-                        rCat.ctgr_freq = "N/A";     // TODO: doimplementovat, pujde-li
-                        rCat.bool_type = "No boolean"; // TODO: co to je? Dodelat.
+                        rCat.ctgr_freq = "N/A";     // TODO: implement if possible
+                        rCat.bool_type = "No boolean"; // TODO: what is this?
                         rCat.def_length = cat_str.floatIntervals[key].GetLength(0);
 
                         List<Rec_ctgr_def> ctgr_defs = new List<Rec_ctgr_def>();
@@ -245,7 +252,7 @@ namespace FEplugin_cs
                             }
                             ctgr_defs.Add(ctgr_def);
                         }
-                        // vypsani jedne kategorie do XML
+                        // Generating of one category to XML
                         string OneCatString = "";
                         if (ctgr_defs.Count == 0)
                             OneCatString += rCat.ToXML();
@@ -267,8 +274,8 @@ namespace FEplugin_cs
                         rCat.attr_name = attr_name;
                         rCat.ctgr_name = key;
                         rCat.ctgr_type = "Enumeration";
-                        rCat.ctgr_freq = "N/A";     // TODO: doimplementovat, pujde-li
-                        rCat.bool_type = "No boolean"; // TODO: co to je? Dodelat.
+                        rCat.ctgr_freq = "N/A";     // TODO: if possible
+                        rCat.bool_type = "No boolean"; // TODO: What is this?
                         rCat.def_length = cat_str.enums[key].GetLength(0);
 
                         List<Rec_ctgr_def> ctgr_defs = new List<Rec_ctgr_def>();
@@ -278,7 +285,7 @@ namespace FEplugin_cs
                             ctgr_def.definition = enu;
                             ctgr_defs.Add(ctgr_def);
                         }
-                        // vypsani jedne kategorie do XML
+                        // Generating of one category to XML
                         string OneCatString = "";
                         if (ctgr_defs.Count == 0)
                             OneCatString += rCat.ToXML();
@@ -300,37 +307,44 @@ namespace FEplugin_cs
             resultString += "</active_list>";
 
 #if (LADENI)
-            // Kody - ulozeni vystupu do souboru "XMLAttrExample.xml" v adresari 
+            // Kody - storing output to file "XMLAttrExample.xml" in directory 
             XMLHelper.saveXMLexample(resultString, "../XML/XMLCatExample.xml");
 
             if (ErrStr != "") // LADICI
-                MessageBox.Show("Chyby pri generovani seznamu Boolskych cedentu:\n" + ErrStr);
+                MessageBox.Show("Chyby pri generating seznamu Boolskych cedent:\n" + ErrStr);
 #endif
 
             return resultString;
         }
     }
 
-    #region --- Recordy ---
+    #region --- Records ---
 
+    /// <summary>
+    /// Record of one category.
+    /// </summary>
     public class Rec_category
     {
         #region DATA
 
         public string id = "";
-        public string db_name = "";
-        public string matrix_name = "";
-        public string attr_name = "";
-        public string ctgr_name = "";
-        public string ctgr_type = "";
-        public string ctgr_freq = "";
-        public string bool_type = "";
+        public string db_name="unknown";
+        public string matrix_name = "unknown";
+        public string attr_name = "unknown";
+        public string ctgr_name = "unknown";
+        public string ctgr_type = "unknown";
+        public string ctgr_freq = "unknown";
+        public string bool_type = "unknown";
         public long def_length = 0;
 
         #endregion
 
         #region METHODS
 
+        /// <summary>
+        /// Creating XML string from record.
+        /// </summary>
+        /// <returns>XML string</returns>
         public string ToXML()
         {
             id = XMLHelper.replaceXMLsign(id);
@@ -351,6 +365,11 @@ namespace FEplugin_cs
             return XML;
         }
 
+        /// <summary>
+        /// Creating XML string from record.
+        /// </summary>
+        /// <param name="Cat_defs">list of definitions of categories</param>
+        /// <returns>XML string</returns>
         public string ToXML(List<Rec_ctgr_def> Cat_defs)
         {
             id = XMLHelper.replaceXMLsign(id);
@@ -368,7 +387,7 @@ namespace FEplugin_cs
                    "\" attr_name=\"" + attr_name + "\" ctgr_name=\"" + ctgr_name + "\" ctgr_type=\"" + ctgr_type +
                    "\" ctgr_freq=\"" + ctgr_freq + "\" bool_type=\"" + bool_type +
                    "\" def_length=\"" + def_length.ToString() + "\">";
-            // vygenerovani vsech podelementu - ctgr_def
+            // generating each subelement - ctgr_def
             if (Cat_defs.Count > 0)
             {
                 foreach (Rec_ctgr_def ctgr_def in Cat_defs)
@@ -381,19 +400,25 @@ namespace FEplugin_cs
         #endregion
     }
 
+    /// <summary>
+    /// Record of one category definition.
+    /// </summary>
     public class Rec_ctgr_def
     {
         #region DATA
 
-        public string definition = "";
+        public string definition = "unknown";
 
         #endregion
 
         #region METHODS
 
+        /// <summary>
+        /// Creating XML string from record.
+        /// </summary>
+        /// <returns>XML string</returns>
         public string ToXML()
         {
-            // nahrazeni znaku "<", ">" v retezcich (kvuli XML)
             definition = XMLHelper.replaceXMLsign(definition);
             string XML = "";
             XML += "<ctgr_def definition=\"" + definition + "\"/>";
@@ -401,5 +426,6 @@ namespace FEplugin_cs
         }
         #endregion
     }
-    #endregion
+    
+#endregion
 }

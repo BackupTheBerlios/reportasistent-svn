@@ -9,13 +9,15 @@ using Ferda.ModulesManager;
 using Ferda.Modules;
 using Ferda.Modules.Helpers;
 using Ferda.Modules.Quantifiers;
-//using Ferda.FrontEnd;
 
 namespace FEplugin_cs
 {
 
-    // ==================== Aktivni prvek CF-hypoteza ================================
+    // ==================== Active element "CF hypothesis" ================================
 
+    /// <summary>
+    /// Implementation of active element "CF hypothesis" (ID="hyp_cf")
+    /// </summary>
     public class AP_FEcfhyp
     {
         /// <summary>
@@ -25,66 +27,66 @@ namespace FEplugin_cs
         /// <returns>Returns XML string with all occurences of Active element type "CF hypothesis" from data source with given index</returns>
         public static string getList(int index)
         {
-            string resultString = ""; // vysledny XML string
+            string resultString = ""; // result XML string
 
-            // nacteni DTD do resultStringu
+            // loading DTD to resultString
             try { resultString = XMLHelper.loadDTD(); }
             catch (Exception e)
             {
 #if (LADENI)
-                MessageBox.Show("Chyba pri nacitani DTD: " + e.Message);
+                MessageBox.Show("error while loading DTD: " + e.Message);
 #endif
                 return resultString;
             }
 
-            // korenovy element
+            // root element
             resultString += "<active_list>";
 
-            string PropName = "Hypotheses";  // nazev Property, ktera obsahuje seznam hypotez
-            // nalezeni vsech krabicek CF-uloh
+            string PropName = "Hypotheses";  // name of property which contain a list of hypotheses
+            // searching all boxes CF-task
             IBoxModule[] TaskBoxes = BoxesHelper.ListBoxesWithID(CFEsourcesTab.Sources[index] as CFEsource, "LISpMinerTasks.CFTask");
 
-            // zpracovani kazde krabicky - ziskani z ni vsechny CF-hypotezy
-            string ErrStr = ""; // zaznam o chybach
+            // processing of each box - searching all CF-hypotheses
+            string ErrStr = ""; // error report
 
-            string matrix_name = "";   // jmeno analyzovane matice
-            string db_name = "";    // jmeno analyzovane databaze
-            string task_name = "";  // jmeno ulohy - dano uzivatelskym nazvem krabicky FFTTast
+            string matrix_name = "unknown";   // analyzed data matrix name
+            string db_name="unknown";    // analyzed database name
+            string task_name = "unknown";  // task name - given by user name of box FFTTast
 
             
-            #region Cyklus - zpracovani vsech CF-Tasku z pole TaskBoxes
+            #region Loop - processing of each CF-Tasku from array TaskBoxes
 
             foreach (IBoxModule box in TaskBoxes)
             {
                 try
                 {
-                    // nalezeni jmena datoveho zdroje (databaze)
+                    // searching data source name (database)
                     IBoxModule[] db_names = BoxesHelper.ListAncestBoxesWithID(box, "DataMiningCommon.Database");
-                    if (db_names.GetLength(0) != 1)  // byl nalezen pocet datovych zdroju ruzny od jedne
-                        throw new System.Exception("bylo nalezeno " + db_names.GetLength(0).ToString() + " databazi");
+                    if (db_names.GetLength(0) != 1)  // searched more than one data source or neither one
+                        throw new System.Exception("found " + db_names.GetLength(0).ToString() + " databases");
                     db_name = (db_names[0].GetPropertyOther("DatabaseName") as StringT).stringValue;
 
-                    // nalezeni jmena datove matice
+                    // searching data matrix name
                     IBoxModule[] matrix_names = BoxesHelper.ListAncestBoxesWithID(box, "DataMiningCommon.DataMatrix");
-                    if (matrix_names.GetLength(0) != 1)  // byl nalezen pocet datovych matic ruzny od jedne
-                        throw new System.Exception("bylo nalezeno " + matrix_names.GetLength(0).ToString() + " datovych matic");
+                    if (matrix_names.GetLength(0) != 1)  // searched more than one data source or neither one
+                        throw new System.Exception("found " + matrix_names.GetLength(0).ToString() + " data matrixes");
                     matrix_name = (matrix_names[0].GetPropertyOther("Name") as StringT).stringValue;
 
-                    // nalezeni jmena ulohy
+                    // searching task name
                     task_name = box.UserName;
 
-                    // nalezeni seznamu vsech hypotez v tomto Tasku
+                    // searching the list of all hypotheses in this task
                     HypothesesT HypT = box.GetPropertyOther(PropName) as HypothesesT;
                     HypothesisStruct[] HypList = HypT.hypothesesValue.Clone() as HypothesisStruct[];
 
-                    // recordy pro ukladani vysledku
-                    Rec_hyp_cf rHyp = new Rec_hyp_cf();   // CF hypoteza
+                    // records for storing the results
+                    Rec_hyp_cf rHyp = new Rec_hyp_cf();   // CF hypothesis
                     Rec_ti_attribute rAnt = new Rec_ti_attribute();  // Antecedent (Attributes)
                     Rec_ti_cedent rCon = new Rec_ti_cedent();  // condition
              
 
-                    #region Cyklus - zpracovani vsech hypotez jedne krabicky CFTask
-                    // cyklus pres vsechny hypotezy
+                    #region Loop - processing of each hypotheses jedne krabicky CFTask
+                    // Loop over all hypotheses
                     for (int i = 0; i < HypList.GetLength(0); i++)
                     {
                         #region element hyp_cf
@@ -99,7 +101,7 @@ namespace FEplugin_cs
                         rHyp.Tab = HypList[i].quantifierSetting.firstContingencyTableRows[0];
                         
 
-                        // hodnoty kvantifikatoru
+                        // values of quantifiers
                         try
                         {
                             rHyp.sum = CT.SumOfValues.ToString();
@@ -115,23 +117,20 @@ namespace FEplugin_cs
                             rHyp.skew = CT.Skewness.ToString();
                             rHyp.asym = CT.Asymentry.ToString();
                         }
-                        catch (System.Exception e) // TODO: Ferda ma chyby ve vypoctech -> opravit! 
+                        catch (System.Exception e) // !!There are some errors in Ferda quantifier values! !
                         {
                             ErrStr += "Box ProjectIdentifier=" + box.ProjectIdentifier.ToString() + ": chyba pri vypoctu kvantifikatoru: " + e.Message + "\n";
                         }
                         
                         
-                        
-
                         #endregion
-
 
                         #region element ti_attribute  Attributes (Antecedent)
 
                         rAnt.id = rHyp.attributes;
                         rAnt.type = "Attributes";
-                        rAnt.quant = "";   // smazani predchozi hodnoty
-                        // kategorie
+                        rAnt.quant = "";   // deleting previous value
+                        // category
                         List<Rec_ti_category> Cat_a = new List<Rec_ti_category>();
                         foreach (LiteralStruct lit in HypList[i].literals)
                         {
@@ -143,18 +142,17 @@ namespace FEplugin_cs
                                     Rec_ti_category C = new Rec_ti_category();
                                     C.value = s;
                                     Cat_a.Add(C);
-                                }
-                                // ??? k cemu je polozka LitralStruct.categoriesValues ?
+                                }                                
                             }
                         }
 
                         #endregion
 
                         #region element ti_cedent (Condition)
-                        int litCounter = 0;  // pocitadlo literalu tohoto cedentu
+                        int litCounter = 0;  // counter of literals of this cedent
                         rCon.id = "con" + rHyp.id;
                         rCon.type = "Condition";
-                        // literaly
+                        // literals
                         List<Rec_ti_literal> Lit_c = new List<Rec_ti_literal>();
                         foreach (BooleanLiteralStruct lit in HypList[i].booleanLiterals)
                         {
@@ -179,20 +177,17 @@ namespace FEplugin_cs
                         }
 
                         #endregion
-
                        
-                        #region Vypsani jedne hypotezy do XML stringu
+                        #region Generating of one hypotheses to XML string
 
                         string oneHypString = "";
-                        // vypsani hypotezy do XML
+                        // generating hypotheses to XML
                         oneHypString += rHyp.ToXML();
-                        // vypsani Attributes (Antecedentu) do XML
+                        // generating Attributes (Antecedent) to XML
                         oneHypString += rAnt.ToXML(Cat_a);
-                        // vypsani Condition do XML
+                        // generating Condition to XML
                         oneHypString += rCon.ToXML(Lit_c);
                         
-
-
                         resultString += oneHypString;
 
                         #endregion
@@ -206,15 +201,15 @@ namespace FEplugin_cs
             }
             #endregion
 
-            // korenovy element
+            // root element
             resultString += "</active_list>";
 
 #if (LADENI)
-            // vypsani pripadne chybove hlasky:
+            // generating of error message:
             if (!String.IsNullOrEmpty(ErrStr))  // LADICI
-                MessageBox.Show("Pri nacitani CF hypotez doslo k chybam:\n" + ErrStr, "Chyba", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Pri nacitani CF hypotheses doslo k chybam:\n" + ErrStr, "Chyba", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-            // LADICI - Kody - ulozeni vystupu do souboru "XMLsd4fthypExample.xml" v adresari 
+            // LADICI - Kody - storing output to file "XMLsd4fthypExample.xml" in directory 
             XMLHelper.saveXMLexample(resultString, "../XML/XMLcfhypExample.xml");
 #endif
 
@@ -222,17 +217,20 @@ namespace FEplugin_cs
         }
     }
 
-    #region --- Recordy  ---
+    #region --- Records  ---
 
+    /// <summary>
+    /// Record of one CF hypothesis
+    /// </summary>
     public class Rec_hyp_cf
     {
         #region DATA
-        public string id = "";    // ID 4ft-hypotezy
-        public string db_name = "";   // jmeno databaze
-        public string matrix_name = ""; // jmeno datove matice
-        public string task_name = "";   // jmeno ulohy
+        public string id = "";    // ID 4ft-hypothesis
+        public string db_name="unknown";   // database name
+        public string matrix_name = "unknown"; // data matrix name
+        public string task_name = "unknown";   // task name
 
-        public int[] Tab; // kontingencni tabulka
+        public int[] Tab; // contingency table
 
         public string sum = "unknown";
         public string min = "unknown";
@@ -253,25 +251,36 @@ namespace FEplugin_cs
         #endregion
 
         #region METHODS
-        // prevod recordu na XML string
+
+        /// <summary>
+        /// Creating XML string from record.
+        /// </summary>
+        /// <returns>XML string</returns>
         public string ToXML()
         {
             string XML = "";
 
+            id = XMLHelper.replaceXMLsign(id);
+            db_name = XMLHelper.replaceXMLsign(db_name);
+            matrix_name = XMLHelper.replaceXMLsign(matrix_name);
+            task_name = XMLHelper.replaceXMLsign(task_name);
+            
+
+
             XML += "<hyp_cf id=\"" + id + "\" db_name=\"" + db_name + "\" matrix_name=\"" + matrix_name +
                    "\" task_name=\"" + task_name +
-                // hodnoty kvantifikatoru
+                // values of quantifiers
                    "\" sum=\"" + sum + "\" min=\"" + min + "\" max=\"" + max +
                    "\" v=\"" + v + "\" nom_var=\"" + nom_var +
                    "\" dor_var=\"" + dor_var + "\" avg_a=\"" + avg_a +
                    "\" avg_g=\"" + avg_g + "\" var=\"" + var +
                    "\" st_dev=\"" + st_dev + "\" skew=\"" + skew +
                    "\" asym=\"" + asym +
-                // cedenty
+                // cedents
                    "\" attributes=\"" + attributes +
                    "\" condition=\"" + condition + "\">";
 
-            // vygenerovani podelementu - ciselnych hodnot kontingencni tabulky
+            // generating subelements - number values of contingency table
             XML += "<r>";
             foreach (int num in Tab)
                 XML += "<c val=\"" + num.ToString() + "\"/>";
@@ -285,7 +294,7 @@ namespace FEplugin_cs
         #endregion
     }
 
-    // Rec_ti_cedent & Rec_ti_literal implementovany u AP 4ft-hypoteza
+    // Rec_ti_cedent & Rec_ti_literal implemented by AP 4ft-hypothesis
 
     #endregion
 }

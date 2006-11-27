@@ -4,18 +4,24 @@ using System.Windows.Forms;
 using Ferda;
 using Ferda.ProjectManager;
 using Ferda.ModulesManager;
-//using Ferda.FrontEnd;
 using System.IO;
 using System;
 
 namespace FEplugin_cs
 {
+    /// <summary>
+    /// Class contains tools, which are helpful with XML operations used in FEplugin.
+    /// </summary>
     public class XMLHelper
     {
-        public static string loadDTD()  // vrati DTD aktivnich prvku
+        /// <summary>
+        /// Loads a DTD for validation of FEplugin output corectness
+        /// </summary>
+        /// <returns>String with DTD</returns>
+        public static string loadDTD()
         {
             string DTD = "";
-            string path = "../XML/plug_output_DTD.xml";   // relativni cesta k DTD souboru
+            string path = "../XML/plug_output_DTD.xml";   // relative path to DTD file
 
             if (!File.Exists(path))
             {
@@ -39,7 +45,13 @@ namespace FEplugin_cs
 
         }
 
-        public static void saveXMLexample(string XML, string path)  // ulozi XML string do souboru path
+        
+        /// <summary>
+        /// Stores XML string in file.
+        /// </summary>
+        /// <param name="XML">XMP string.</param>
+        /// <param name="path">Path to file where XML string will be saved.</param>
+        public static void saveXMLexample(string XML, string path)
         {
             try
             {
@@ -54,8 +66,14 @@ namespace FEplugin_cs
                 MessageBox.Show(e.Message);
             }
         }
-
-        public static string replaceXMLsign(string str) // v retezci str nahradi xml znaky ("&" => "&amp;" , "<" => "&lt;" , ">" => "&gt;")
+        
+        
+        /// <summary>
+        /// Replacing of signes in XML string ("&" => "&amp;" , "<" => "&lt;" , ">" => "&gt;")
+        /// </summary>
+        /// <param name="str">String where signes will be replaced.</param>
+        /// <returns>String with replaced signs.</returns>
+        public static string replaceXMLsign(string str) 
         {
             str = str.Replace("&", "&amp;");
             str = str.Replace("<", "&lt;");

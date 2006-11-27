@@ -9,39 +9,48 @@ using Ferda.ModulesManager;
 using Ferda.Modules;
 using Ferda.Modules.Helpers;
 using Ferda.Modules.Quantifiers;
-//using Ferda.FrontEnd;
+
 
 namespace FEplugin_cs
 {
-    // ==================== Aktivni prvek KL cedent ================================
+    // ==================== Active element "KL cedent" ================================
 
+    /// <summary>
+    /// Implementation of active element "KL cedent" (ID="KL_cedent")
+    /// </summary>
     public class AP_FEKL_cedent
     {
+
+        /// <summary>
+        /// Returns XML string with all occurences of Active element "KL cedent".
+        /// </summary>
+        /// <param name="index">index of data source in FEplugin data sources table</param>
+        /// <returns>XML string</returns>
         public static string getList(int index)
         {
-            string resultString = ""; // vysledny XML string
-            string ErrStr = "";  // zaznamy o chybach
+            string resultString = ""; // result XML string
+            string ErrStr = "";  // error reports
             int counterID = 0;
 
-            // nacteni DTD do resultStringu
+            // loading DTD to resultString
             try { resultString = XMLHelper.loadDTD(); }
             catch (Exception e)
             {
 #if (LADENI)
-                MessageBox.Show("Chyba pri nacitani DTD: " + e.Message);
+                MessageBox.Show("error while loading DTD: " + e.Message);
 #endif
                 return resultString;
             }
 
-            // korenovy element
+            // root element
             resultString += "<active_list>";
 
-            string[] BoxTypes = { "LISpMinerTasks.KLTask", "LISpMinerTasks.SDKLTask" }; // typy krabicek (uloh), pro ktere se hledaji KLske cedenty
+            string[] BoxTypes = { "LISpMinerTasks.KLTask", "LISpMinerTasks.SDKLTask" }; // types of boxes (tasks) for which are searched KL cedents
 
-            // nalezeni vsech boxu uloh
+            // searching all boxes of tasks
             IBoxModule[] TaskBoxes = BoxesHelper.ListBoxesWithID(CFEsourcesTab.Sources[index] as CFEsource, BoxTypes);
 
-            #region Cyklus - zpracovani vsech nalezenych uloh
+            #region Loop - processing of each tasks found
 
             foreach (IBoxModule box in TaskBoxes)
             {
@@ -50,27 +59,27 @@ namespace FEplugin_cs
 
                 try
                 {
-                    // nastaveni ID
+                    // setting ID
                     rKLCedent.id = "klcdnt" + box.ProjectIdentifier.ToString() + "_";
 
-                    // nalezeni jmena datoveho zdroje (databaze)
+                    // searching data source name (database)
                     IBoxModule[] db_names = BoxesHelper.ListAncestBoxesWithID(box, "DataMiningCommon.Database");
-                    if (db_names.GetLength(0) != 1)  // byl nalezen pocet datovych zdroju ruzny od jedne
-                        throw new System.Exception("bylo nalezeno " + db_names.GetLength(0).ToString() + " databazi");
+                    if (db_names.GetLength(0) != 1)  // searched more than one data source or neither one
+                        throw new System.Exception("found " + db_names.GetLength(0).ToString() + " databases");
                     rKLCedent.db_name = db_names[0].GetPropertyString("DatabaseName");
 
-                    // nalezeni jmena datove matice
+                    // searching data matrix name
                     IBoxModule[] matrix_names = BoxesHelper.ListAncestBoxesWithID(box, "DataMiningCommon.DataMatrix");
-                    if (matrix_names.GetLength(0) != 1)  // byl nalezen pocet datovych matic ruzny od jedne
-                        throw new System.Exception("bylo nalezeno " + matrix_names.GetLength(0).ToString() + " datovych matic");
+                    if (matrix_names.GetLength(0) != 1)  // searched more than one data source or neither one
+                        throw new System.Exception("found " + matrix_names.GetLength(0).ToString() + " data matrixes");
                     rKLCedent.matrix_name = matrix_names[0].GetPropertyString("Name");
 
-                    // nalezeni jmena ulohy
+                    // searching task name
                     rKLCedent.task_name = box.UserName;
 
-                    // zpracovani jednotlivych typu tasku
+                    // processing of several Task types
                     string id = rKLCedent.id;
-                    switch (box.MadeInCreator.Identifier) // vsechny pripustne typy uloh
+                    switch (box.MadeInCreator.Identifier) // all available task types
                     {
                         case "LISpMinerTasks.KLTask":
                             rKLCedent.task_type = "KL Task";
@@ -78,17 +87,13 @@ namespace FEplugin_cs
                             // Antecedent
                             rKLCedent.id = id + counterID.ToString();
                             counterID++;
-                            // Kodym - vyber jednu z nasledujicich moznosti (ZJISTI)
-                            //rKLCedent.cedent_type = CedentEnum.Antecedent.ToString();
                             rKLCedent.cedent_type = "Row attributes";
                             resultString += getOneItemXML(box, rKLCedent, "AntecedentSetting");
 
                             // Succedent
                             rKLCedent.id = id + counterID.ToString();
                             counterID++;
-                            // Kodym - vyber jednu z nasledujicich moznosti (ZJISTI)
                             rKLCedent.cedent_type = "Column attributes";
-                            //rKLCedent.cedent_type = CedentEnum.Succedent.ToString();
                             resultString += getOneItemXML(box, rKLCedent, "SuccedentSetting");
                             break;
 
@@ -98,7 +103,6 @@ namespace FEplugin_cs
                             // Anecedent
                             rKLCedent.id = id + counterID.ToString();
                             counterID++;
-                            // Kodym - vyber jednu z nasledujicich moznosti (ZJISTI)
                             //rKLCedent.cedent_type = CedentEnum.Antecedent.ToString();
                             rKLCedent.cedent_type = "Row attributes";
                             resultString += getOneItemXML(box, rKLCedent, "AntecedentSetting");
@@ -106,7 +110,6 @@ namespace FEplugin_cs
                             // Succedent
                             rKLCedent.id = id + counterID.ToString();
                             counterID++;
-                            // Kodym - vyber jednu z nasledujicich moznosti (ZJISTI)
                             rKLCedent.cedent_type = "Column attributes";
                             //rKLCedent.cedent_type = CedentEnum.Succedent.ToString();
                             resultString += getOneItemXML(box, rKLCedent, "SuccedentSetting");
@@ -123,58 +126,63 @@ namespace FEplugin_cs
 
             #endregion
 
-            // korenovy element
+            // root element
             resultString += "</active_list>";
 
 #if (LADENI)
-            // Kody - ulozeni vystupu do souboru "XMLKL_cedentExample.xml" v adresari 
+            // Kody - storing output to file "XMLKL_cedentExample.xml" in directory 
             XMLHelper.saveXMLexample(resultString, "../XML/XMLKL_cedentExample.xml");
 
             if (ErrStr != "") // LADICI
-                MessageBox.Show("Chyby pri generovani seznamu KL cedentu:\n" + ErrStr);
+                MessageBox.Show("Chyby pri generating seznamu KL cedent:\n" + ErrStr);
 #endif
 
             return resultString;
         }
 
+        /// <summary>
+        /// generates one cedent to XML string
+        /// </summary>
+        /// <param name="subcedents">boxes with subcedents</param>
+        /// <returns>XML string</returns>
         private static string getOneCedentXML(IBoxModule[] subcedents)
         {
             string XML = "";
 
-            #region cyklus - zpracovani vsech dilcich cedentu
+            #region Loop - processing of each partial cedent
 
-            foreach (IBoxModule box in subcedents)  // musi byt boxy s ID = "DataMiningCommon.CategorialPartialCedentSetting"
+            foreach (IBoxModule box in subcedents)  // must be boxes with ID = "DataMiningCommon.CategorialPartialCedentSetting"
             {
                 Rec_sub_KL_cedent rSKLC = new Rec_sub_KL_cedent();
-                // nastaveni atributu "name"
+                // setting attribute "name"
                 rSKLC.name = box.UserName;
-                // nastaveni atributu "length"
+                // setting attribute "length"
                 rSKLC.length = box.GetPropertyLong("MinLen").ToString() + " - " + box.GetPropertyLong("MaxLen").ToString();
                 
-                // nalezeni vsech KL literalu (= atributu!)
+                // searching each KL literal (= attributes!)
                 string[] AttrIDs = { "DataMiningCommon.Attributes.Attribute",
                                          "DataMiningCommon.Attributes.EquifrequencyIntervalsAttribute",
                                          "DataMiningCommon.Attributes.EquidistantIntervalsAttribute",
                                          "DataMiningCommon.Attributes.EachValueOneCategoryAttribute" };
                 IBoxModule[] attributes = BoxesHelper.ListDirectAncestBoxesWithID(box, AttrIDs);
                 
-                // nastaveni atributu "literal_cnt" (pocet dilcich literalu)
+                // setting attribute "literal_cnt" (literals count)
                 rSKLC.literal_cnt = attributes.Length;
                 List<Rec_KL_literal> rLiterals = new List<Rec_KL_literal>();
 
-                #region Cyklus - zpracovani vsech KL-literalu (atributu)
+                #region Loop - processing of each KL-literal (attribute)
 
                 foreach (IBoxModule attrBox in attributes)
                 {
                     Rec_KL_literal rLiteral = new Rec_KL_literal();
-                    // nastaveni atributu "underlying_attribute"
+                    // setting "underlying_attribute"
                     rLiteral.underlying_attribute = attrBox.GetPropertyString("NameInLiterals");
-                    // nastaveni atributu "category_cnt"
+                    // setting "category_cnt"
                     rLiteral.category_cnt = attrBox.GetPropertyLong("CountOfCategories");
                     rLiterals.Add(rLiteral);
                 }
                 #endregion
-                // pridani dilciho cedentu (a jeho literalu) do vysledneho XML stringu
+                // adding cedent to XML string
                 XML += rSKLC.ToXML(rLiterals);
             }
             #endregion
@@ -182,13 +190,20 @@ namespace FEplugin_cs
             return XML;
         }
 
+        /// <summary>
+        /// generates one cedent to XML string
+        /// </summary>
+        /// <param name="box">cedent box</param>
+        /// <param name="rKLCedent">cedent record</param>
+        /// <param name="CedentType">cedent type</param>
+        /// <returns>XML string</returns>
         private static string getOneItemXML(IBoxModule box, Rec_KL_cedent rKLCedent, string CedentType)
         {
             string resultStr = "";
             IBoxModule[] SubCedents = box.GetConnections(CedentType);
-            // nastaveni atributu "sub_cedent_cnt" (pocet dilcich cedentu)
+            
             rKLCedent.sub_cedent_cnt = SubCedents.Length;
-            // pridani KLskeho cedentu do XML
+            // adding KL cedent to XML
             if (rKLCedent.sub_cedent_cnt > 0)
                 resultStr = rKLCedent.ToXML(getOneCedentXML(SubCedents));
 
@@ -196,23 +211,30 @@ namespace FEplugin_cs
         }
     }
 
-    #region --- Recordy ---
+    #region --- Records ---
 
+    /// <summary>
+    /// Record of one KL cedent.
+    /// </summary>
     public class Rec_KL_cedent
     {
         #region DATA
 
         public string id = "";
-        public string db_name = "";
-        public string matrix_name = "";
-        public string task_name = "";
-        public string task_type = "";
-        public string cedent_type = "";
+        public string db_name="unknown";
+        public string matrix_name = "unknown";
+        public string task_name = "unknown";
+        public string task_type = "unknown";
+        public string cedent_type = "unknown";
         public long sub_cedent_cnt = 0;
         #endregion
 
         #region METHODS
 
+        /// <summary>
+        /// Creating XML string from record.
+        /// </summary>
+        /// <returns>XML string</returns>
         public string ToXML()
         {
             string XML = "";
@@ -229,6 +251,11 @@ namespace FEplugin_cs
             return XML;
         }
 
+        /// <summary>
+        /// Creating XML string from record.
+        /// </summary>
+        /// <param name="SubelementsXMLstring">XML string with generated subelements (content of element)</param>
+        /// <returns>XML string</returns>
         public string ToXML(string SubelementsXMLstring)
         {
             string XML = "";
@@ -251,7 +278,7 @@ namespace FEplugin_cs
                        "\" task_name=\"" + task_name + "\" task_type=\"" + task_type +
                        "\" cedent_type=\"" + cedent_type +
                        "\" sub_cedent_cnt=\"" + sub_cedent_cnt.ToString() + "\">";
-                // vlozeni XML stringu - obsah elementu
+                // inserting XML string - element content
                 XML += SubelementsXMLstring + "</KL_cedent>";
             }
 
@@ -260,17 +287,24 @@ namespace FEplugin_cs
         #endregion
     }
 
+    /// <summary>
+    /// Record of one KL subcedent.
+    /// </summary>
     public class Rec_sub_KL_cedent
     {
         #region DATA
 
-        public string name = "";
+        public string name = "unknown";
         public long literal_cnt = 0;
-        public string length = "";
+        public string length = "unknown";
         #endregion
 
         #region METHODS
 
+        /// <summary>
+        /// Creating XML string from record.
+        /// </summary>
+        /// <returns>XML string</returns>
         public string ToXML()
         {
             string XML = "";
@@ -282,6 +316,11 @@ namespace FEplugin_cs
             return XML;
         }
 
+        /// <summary>
+        /// Creating XML string from record.
+        /// </summary>
+        /// <param name="KL_Literals">list of KL literals (subelements)</param>
+        /// <returns>XML string</returns>
         public string ToXML(List<Rec_KL_literal> KL_Literals)
         {
             string XML = "";
@@ -291,7 +330,7 @@ namespace FEplugin_cs
             XML += "<sub_KL_cedent name=\"" + name + "\" literal_cnt=\"" + literal_cnt.ToString() +
                    "\" length=\"" + length + "\">";
 
-            // pridani vsech podelementu - literalu
+            // adding each subelement - literal
             foreach (Rec_KL_literal Lit in KL_Literals)
                 XML += Lit.ToXML();
 
@@ -301,16 +340,23 @@ namespace FEplugin_cs
         #endregion
     }
 
+    /// <summary>
+    /// Record of one KL literal.
+    /// </summary>
     public class Rec_KL_literal
     {
         #region DATA
 
-        public string underlying_attribute = "";
+        public string underlying_attribute = "unknown";
         public long category_cnt = 0;
         #endregion
 
         #region METHODS
 
+        /// <summary>
+        /// Creating XML string from record.
+        /// </summary>
+        /// <returns>XML string</returns>
         public string ToXML()
         {
 

@@ -10,48 +10,66 @@ using Ferda;
 using Ferda.ProjectManager;
 using Ferda.ModulesManager;
 
-//Tento modul obsahuje tridy: - "FEPlugin_init": provede ve svem statickem konstruktoru potrebne veci v inicializaci Ferdovske zasuvky 
-//                            - "FEPlugin_init": zjistovani a nastavovani cest k dulezitym adresarum
+//This modul contain classes: - "FEPlugin_init": in static constructor of this class important initialization operations of FEplugin are performed 
+//                            - "DirManager": finding and setting of paths to important directories
+//                            - "FEplugin_globals": class with global objects used in FEplugin
 
 
 
 namespace FEplugin_cs
 {
-    // hlavni inicializacni trida FE Pluginu
+    /// <summary>
+    /// Class which takes care of FEplugin initialization.
+    /// </summary>
     public class FEplugin_init
     {
+        /// <summary>
+        /// Indication of successful initialization.
+        /// </summary>
+        static bool success;
         
-
-        static bool success;    // priznak uspesne inicializace
-        
-        // inicializacni funkce
+        /// <summary>
+        /// Initialization function.
+        /// </summary>
+        /// <returns>Sign of success of initialization operation.</returns>
         public static bool initialize()
         {
             return success;
         }
 
-        // staticky konstruktor - provede inicializaci
+        /// <summary>
+        /// Static constructor - performs the initialization (global objects).
+        /// Presence of Ferda libraries is checked and missing libraries are found in Ferda install directory and copied
+        /// into LM-RA directory.
+        /// Here is a list of required Ferda libraries:
+        /// <ul>
+        ///     <li>FerdaProjectManager.dll</li>
+        ///     <li>FerdaBoxInterfaces.dll</li>
+        ///     <li>FerdaBoxInterfaces.dll</li>
+        ///     <li>FerdaBase.dll</li>
+        ///     <li>FerdaHelpers.dll</li>
+        /// </ul>
+        /// </summary>
         static FEplugin_init()
-        {
-            
+        {   
             success = true;
             
             try
             {
-                #region kontrola pripadne nacteni nejnovejsich ferdovskych knihoven
+                #region Controling of presence of required Ferda DataMiner libraries and copying them if they are missing
 
                 string app_file = Assembly.GetExecutingAssembly().FullName;
-                string app_dir = Assembly.GetExecutingAssembly().Location;  // adresar, kam se knihovny kopiruji
+                string app_dir = Assembly.GetExecutingAssembly().Location;  // directory where libraries are copied to
                 app_dir = app_dir.Replace(@"\FEplugin_cs.dll", "");
 
-                string lib_dir = DirManager.get_FerdaFrontEnd_dir(); // adresar, kde jsou knihovny ulozeny
+                string lib_dir = DirManager.get_FerdaFrontEnd_dir(); // directory, where the libraries are placed (Ferda FrontEnd dir)
 
                 if (String.IsNullOrEmpty(lib_dir))
                     throw new FE_error("FEP001");
 
                 
 
-                    // knihovny Ferdy potrebne pro FE Plugin
+                    // libraries required for FEplugin FE Plugin
                 string[] Libraries = new string[] { //"FerdaProjectManager.dll",
                                                     "FerdaModulesManager.dll",
                                                     "FerdaBoxInterfaces.dll",
@@ -71,18 +89,18 @@ namespace FEplugin_cs
                         if (File.Exists(target_name))
                         {
                             target_time = File.GetLastWriteTime(target_name);
-                            if (target_time.CompareTo(source_time) < 0)  // prekopirovani souboru
+                            if (target_time.CompareTo(source_time) < 0)  // copying the file
                                 File.Copy(source_name, target_name);
                         }
                         else
                             File.Copy(source_name, target_name);
                     }
-                    else  // soubor source_name nebyl nalezen
+                    else  // file with name "source_name" wasn't found
                     {
                         throw new FE_error("FEP003", source_name);
                     }
                     
-                    // inicializace globalnich objektu
+                    // initialization of global objects
                     FEplugin_globals.init();
                     if (FEplugin_globals.IceConfig_initialized == false)
                         throw new FE_error("FEP002");
@@ -96,27 +114,42 @@ namespace FEplugin_cs
                 FE_err_msg.show_err_msg(e);
                 success = false;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 success = false;
             }
         }
     }
 
-    // trida pro zjistovani a nastavovani cest k adresarum
+    /// <summary>
+    /// Clas which searches and sets paths to important directories used in FEplugin.
+    /// </summary>
     public class DirManager
     {
-        static string LMRA_dir;     // adresar, kde je soubor ReportAsistent.exe
-        static string FerdaFrontEnd_dir;     // adresar, kde je Ferda FrontEnd
-        static string FerdaBoxes_dir;   // adresar, kde jsou informace o Ferdovskych Boxech
+        /// <summary>
+        /// Path to directory where ReportAsistent.exe file is placed (LM-RA install directory).
+        /// </summary>
+        static string LMRA_dir;
+
+        /// <summary>
+        /// Path to directory, where Ferda FrontEnd is installed.
+        /// </summary>
+        static string FerdaFrontEnd_dir;
+
+        /// <summary>
+        /// Path to directory, where are stored information about Ferda boxes installed in ferda DataMiner.
+        /// </summary>
+        static string FerdaBoxes_dir;
         static string Previous_dir;
 
 
-        // staticky construktor
+        /// <summary>
+        /// Statical constructor - initialization of static data fields.
+        /// </summary>
         static DirManager()
         {
             
-            // nalezeni klice LMRA adresare v registru
+            // searching the key in registry - path to LM-RA home directory
             RegistryKey regkey;
             regkey = Registry.CurrentUser.OpenSubKey(@"Software\LISp-Miner\ReportAsistent\Settings");
             if (regkey == null)
@@ -128,7 +161,7 @@ namespace FEplugin_cs
                     LMRA_dir = "";
             }
 
-            // nalezeni klice v registru pro ziskani adresaru FerdaFrontEnd a FerdaBoxes
+            // searching the keys in registry -paths to FerdaFrontEnd and FerdaBoxes directories
             RegistryKey regkey2;
             regkey2 = Registry.CurrentUser.OpenSubKey(@"Software\Ferda DataMiner");
             if (regkey2 == null)
@@ -155,67 +188,124 @@ namespace FEplugin_cs
 
             Previous_dir = Directory.GetCurrentDirectory();
 
-            // prekopirovani aktualnich verzi Ferdovskych knihoven do aplikacniho adresare
-
-
-
         }
 
-        // nastavi jako aktualni adresar LMRA_dir a do Previous_dir uchova aktualni adresar
+        
+        /// <summary>
+        /// Sets the path stored in LMRA_dir field as "current directory" and stores the actual "current directory" into Previous_dir field
+        /// </summary>
         public static void SetHomeLMRA_dir()  
         {
-            Previous_dir = Directory.GetCurrentDirectory();
-            Directory.SetCurrentDirectory(LMRA_dir);
+            try
+            {
+                Previous_dir = Directory.GetCurrentDirectory();
+                Directory.SetCurrentDirectory(LMRA_dir);
+            }
+            catch (Exception)
+            {
+#if (LADICI)
+                MessageBox.Show("DirManager.SetHomeLMRA_dir(): exception");
+#endif
+            }
 
         }
 
-        // nastavi jako aktualni adresar FerdaFrontEnd_dir a do Previous_dir uchova aktualni adresar
+        
+        /// <summary>
+        /// Sets the path stored in FerdaFrontEnd_dir field as "current directory" and stores the actual "current directory" into Previous_dir field
+        /// </summary>
         public static void SetHomeFerdaFrontEnd_dir()  
         {
-            Previous_dir = Directory.GetCurrentDirectory();
-            Directory.SetCurrentDirectory(FerdaFrontEnd_dir);
-
+            try
+            {
+                Previous_dir = Directory.GetCurrentDirectory();
+                Directory.SetCurrentDirectory(FerdaFrontEnd_dir);
+            }
+            catch (Exception)
+            {
+#if (LADICI)
+                MessageBox.Show("DirManager.SetHomeFerdaFrontEnd_dir(): exception");
+#endif
+            }
         }
 
-        // nastavi jako aktualni puvodni adresar (obsah Previous_dir)
+        
+        /// <summary>
+        /// Reverts the value of current directory to previous (content of Previous_dir field).
+        /// </summary>
         public static void SetHomePrevious_dir() 
         {
-            Directory.SetCurrentDirectory(Previous_dir);
+            try
+            {
+                Directory.SetCurrentDirectory(Previous_dir);
+            }
+            catch (Exception)
+            {
+#if (LADICI)
+                MessageBox.Show("DirManager.SetHomePrevious_dir(): exception");
+#endif
+            }
         }
 
 
-        // vrati cestu do adresare, kde je FerdaFrontEnd
+        
+        /// <summary>
+        /// Returns path to Ferda FrontEnd install directory.
+        /// </summary>
+        /// <returns>value of FerdaFrontEnd_dir field</returns>
         public static string get_FerdaFrontEnd_dir()
         {
             return FerdaFrontEnd_dir;
         }
 
-        // vrati cestu do adresare, kde je FerdaBoxes
+        
+        /// <summary>
+        /// Returns path to directory, where information about Ferda Boxes are stored.
+        /// </summary>
+        /// <returns>value of FerdaBoxes_dir field</returns>
         public static string get_FerdaBoxes_dir()
         {
             return FerdaBoxes_dir;
         }
 
-        // vrati cestu do adresare, kde je ReportAsistent.exe
+
+     
+        /// <summary>
+        /// Returns path to LM-RA install directory.
+        /// </summary>
+        /// <returns>value of LMRA_dir field</returns>
         public static string get_LMRA_dir()
         {
             return LMRA_dir;
         }
     }
 
-    // trida s globalne pouzivanymi objekty v FE pluginu
+    /// <summary>
+    /// Class which contains global objects used in FEplugin.
+    /// </summary>
     public class FEplugin_globals
     {
-        static FrontEndConfig iceConfig;
+        /// <summary>
+        /// Structure with ICE configuration.
+        /// </summary>
+        private static FrontEndConfig iceConfig;
 
-        static bool iceConfig_initialized;  // priznak, zda byl iceConfig inicializovan spravne
+        /// <summary>
+        /// Indicates if iceConfig was successfuly initialized
+        /// </summary>
+        private static bool iceConfig_initialized; 
 
+        /// <summary>
+        /// Indicates if iceConfig was successfuly initialized
+        /// </summary>
         public static bool IceConfig_initialized
         {
             get { return iceConfig_initialized; }
         }
 
-        // properties
+        /// <summary>
+        /// Structure with ICE configuration.
+        /// </summary>
         public static FrontEndConfig IceConfig
         {
             get 
@@ -224,11 +314,13 @@ namespace FEplugin_cs
             }
         }
 
-        // staticky konstruktor
+        /// <summary>
+        /// Static construktor - loading of iceConfig
+        /// </summary>
         static FEplugin_globals()
         {
             
-            #region nacteni iceConfig
+            #region loading of iceConfig
             try
             {
                 FEplugin_globals.iceConfig = FrontEndConfig.Load();
@@ -244,14 +336,16 @@ namespace FEplugin_cs
             }
             catch (FE_error e)
             {
-                if(e.code == "FEP002")  // spatna inicializace iceConfig
+                if(e.code == "FEP002")  // initialization of iceConfig failed
                     iceConfig_initialized = false;
             }
             
             #endregion
         }
 
-        // inicializace globalnich objektu
+        /// <summary>
+        /// Initialization of FEplugin global objects.
+        /// </summary>
         public static void init() { }
 
     }

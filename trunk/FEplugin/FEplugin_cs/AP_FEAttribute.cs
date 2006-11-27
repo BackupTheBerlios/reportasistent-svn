@@ -9,83 +9,91 @@ using Ferda.ModulesManager;
 using Ferda.Modules;
 using Ferda.Modules.Helpers;
 using Ferda.Modules.Quantifiers;
-//using Ferda.FrontEnd;
+
 
 namespace FEplugin_cs
 {
-    // ==================== Aktivni prvek Atribut ================================
+    // ==================== Active element "Attribute" ================================
 
+    /// <summary>
+    /// Implementation of active element "Attribute" (ID="attribute")
+    /// </summary>
     public class AP_FEAttribute
-    {      
+    {
+        /// <summary>
+        /// Returns XML string with all occurences of Active element "Attribute".
+        /// </summary>
+        /// <param name="index">index of data source in FEplugin data sources table</param>
+        /// <returns>XML string</returns>
         public static string getList(int index)
         {
-            string resultString = ""; // vysledny XML string
+            string resultString = ""; // result XML string
 
-            // nacteni DTD do resultStringu
+            // loading DTD to resultString
             try { resultString = XMLHelper.loadDTD(); }
             catch (Exception e)
             {
 #if (LADENI)
-                MessageBox.Show("Chyba pri nacitani DTD: " + e.Message);
+                MessageBox.Show("error while loading DTD: " + e.Message);
 #endif
                 return resultString;
             }
 
-            // korenovy element
+            // root element
             resultString += "<active_list>";
-            string ErrStr = ""; // zaznam o chybach
+            string ErrStr = ""; // error report
 
 
-            #region  A) nalezeni vsech krabicek Atributu (DataMiningCommon.Attributes.Attribute)
+            #region  A) searching all boxes - Attributes (DataMiningCommon.Attributes.Attribute)
 
             IBoxModule[] AttrBoxes = BoxesHelper.ListBoxesWithID(CFEsourcesTab.Sources[index] as CFEsource, "DataMiningCommon.Attributes.Attribute");
 
-            // zpracovani kazde krabicky - ziskani z ni vsechny Atributy
+            // processing of each box - searching all Attributes
             foreach (IBoxModule ABox in AttrBoxes)
             {
                 try
                 {
                     Rec_attribute rAttr = new Rec_attribute();
 
-                    // nastaveni ID atributu
+                    // setting ID attribute
                     rAttr.id = "Attr" + ABox.ProjectIdentifier.ToString();
 
-                    // zjisteni jmena literalu
+                    // searching name of literal
                     rAttr.attr_name = ABox.GetPropertyString("NameInLiterals");
 
-                    // nalezeni jmena datoveho zdroje (databaze)
+                    // searching data source name (database)
                     IBoxModule[] db_names = BoxesHelper.ListAncestBoxesWithID(ABox, "DataMiningCommon.Database");
-                    if (db_names.GetLength(0) != 1)  // byl nalezen pocet datovych zdroju ruzny od jedne
-                        throw new System.Exception("bylo nalezeno " + db_names.GetLength(0).ToString() + " databazi");
+                    if (db_names.GetLength(0) != 1)  // searched more than one data source or neither one
+                        throw new System.Exception("found " + db_names.GetLength(0).ToString() + " databases");
                     rAttr.db_name = (db_names[0].GetPropertyOther("DatabaseName") as StringT).stringValue;
 
-                    // nalezeni jmena datove matice
+                    // searching data matrix name
                     IBoxModule[] matrix_names = BoxesHelper.ListAncestBoxesWithID(ABox, "DataMiningCommon.DataMatrix");
-                    if (matrix_names.GetLength(0) != 1)  // byl nalezen pocet datovych matic ruzny od jedne
-                        throw new System.Exception("bylo nalezeno " + matrix_names.GetLength(0).ToString() + " datovych matic");
+                    if (matrix_names.GetLength(0) != 1)  // searched more than one data source or neither one
+                        throw new System.Exception("found " + matrix_names.GetLength(0).ToString() + " data matrixes");
                     rAttr.matrix_name = (matrix_names[0].GetPropertyOther("Name") as StringT).stringValue;
 
 
-                    // nalezeni jmena zdrojoveho sloupce nebo zpusobu odvozeni
+                    // searching name of source column or manner of derivation
                     IBoxModule[] col_names = BoxesHelper.ListDirectAncestBoxesWithID(ABox, "DataMiningCommon.Column");
-                    if (col_names.GetLength(0) != 1 && col_names.GetLength(0) != 0)  // byl nalezen chybny pocet zdrojovych sloupcu
-                        throw new System.Exception("bylo nalezeno " + col_names.GetLength(0).ToString() + " zdrojovych sloupcu");
+                    if (col_names.GetLength(0) != 1 && col_names.GetLength(0) != 0)  // incorrect number of source columns found
+                        throw new System.Exception("found " + col_names.GetLength(0).ToString() + " zdrojovych sloupcu");
                     if (col_names.GetLength(0) == 1)
                         rAttr.creation = col_names[0].GetPropertyString("Name");
 
                     IBoxModule[] dercol_names = BoxesHelper.ListDirectAncestBoxesWithID(ABox, "DataMiningCommon.DerivedColumn");
-                    if (dercol_names.GetLength(0) != 1 && dercol_names.GetLength(0) != 0)  // byl nalezen chybny pocet zdrojovych sloupcu
-                        throw new System.Exception("bylo nalezeno " + dercol_names.GetLength(0).ToString() + " zdrojovych odvozenych sloupcu");
+                    if (dercol_names.GetLength(0) != 1 && dercol_names.GetLength(0) != 0)  // incorrect number of source columns found
+                        throw new System.Exception("found " + dercol_names.GetLength(0).ToString() + " zdrojovych odvozenych sloupcu");
                     if (dercol_names.GetLength(0) == 1)
                         rAttr.creation = dercol_names[0].GetPropertyString("Formula");
 
 
-                    // nalezeni poctu kategorii
+                    // searching number of categories
                     rAttr.ctgr_count = ABox.GetPropertyLong("CountOfCategories");
 
-                    // zjisteni kategorie "chybejici hodnota"
+                    // searching the category "missisng value"
                     string nul_cat = ABox.GetPropertyString("IncludeNullCategory");
-                    List<Rec_missing_value> MisVal_list = new List<Rec_missing_value>();  // pole recordu chybejicich hodnot
+                    List<Rec_missing_value> MisVal_list = new List<Rec_missing_value>();  // array of records with missing values
                     if (!String.IsNullOrEmpty(nul_cat))
                     {
                         Rec_missing_value MisVal = new Rec_missing_value();
@@ -93,15 +101,17 @@ namespace FEplugin_cs
                         MisVal_list.Add(MisVal);
                     }
 
-                    // nalezeni nazvu kategorii a jejich frekvenci
-                    List<Rec_ctgr> cat_list = new List<Rec_ctgr>(); // seznam kategorii
+                    // searching category names and their frequencies
+                    List<Rec_ctgr> cat_list = new List<Rec_ctgr>(); // list of categories
                     CategoriesStruct cat_str = (ABox.GetPropertyOther("Categories") as CategoriesT).categoriesValue;
 
                     // long intervals
                     foreach (string key in cat_str.longIntervals.Keys)
                     {
                         Rec_ctgr new_li = new Rec_ctgr();
-                        new_li.freq = "N/A";  // Not Available - TODO (doimplementovat, bude-li mozno)
+                        new_li.freq = "N/A";  // Not Available - TODO (if possible)
+                        //KODY 27.11.2006 - not possible to gain attribute frequencies directly from Ferda. Can be resolved via creating CF task
+
                         new_li.name = key;
                         cat_list.Add(new_li);
                     }
@@ -109,7 +119,7 @@ namespace FEplugin_cs
                     foreach (string key in cat_str.floatIntervals.Keys)
                     {
                         Rec_ctgr new_li = new Rec_ctgr();
-                        new_li.freq = "N/A";  // Not Available - TODO (doimplementovat, bude-li mozno)
+                        new_li.freq = "N/A";  // Not Available - TODO (if possible)
                         new_li.name = key;
                         cat_list.Add(new_li);
                     }
@@ -117,7 +127,7 @@ namespace FEplugin_cs
                     foreach (string key in cat_str.dateTimeIntervals.Keys)
                     {
                         Rec_ctgr new_li = new Rec_ctgr();
-                        new_li.freq = "N/A";  // Not Available - TODO (doimplementovat, bude-li mozno)
+                        new_li.freq = "N/A";  // Not Available - TODO (if possible)
                         new_li.name = key;
                         cat_list.Add(new_li);
                     }
@@ -125,17 +135,17 @@ namespace FEplugin_cs
                     foreach (string key in cat_str.enums.Keys)
                     {
                         Rec_ctgr new_li = new Rec_ctgr();
-                        new_li.freq = "N/A";  // Not Available - TODO (doimplementovat, bude-li mozno)
+                        new_li.freq = "N/A";  // Not Available - TODO (if possible)
                         new_li.name = key;
                         cat_list.Add(new_li);
                     }
 
 
 
-                    #region Vypsani jednoho Atributu do XML stringu
+                    #region Generating of one attribute to XML string
 
                     string oneAttrString = "";
-                    // vypsani hypotezy do XML
+                    // generating hypotheses to XML
 
                     if (MisVal_list.Count == 0 && cat_list.Count == 0)
                         oneAttrString += rAttr.ToXML();
@@ -155,39 +165,46 @@ namespace FEplugin_cs
 
             #endregion
 
-            // korenovy element
+            // root element
             resultString += "</active_list>";
 
 #if (LADENI)
-            // vypsani pripadne chybove hlasky:
+            // generating of error message:
             if (!String.IsNullOrEmpty(ErrStr))
-                MessageBox.Show("Pri nacitani kategorii doslo k chybam:\n" + ErrStr, "Chyba", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Pri nacitani category doslo k chybam:\n" + ErrStr, "Chyba", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
 
-            // Kody - ulozeni vystupu do souboru "XMLAttrExample.xml" v adresari 
+            // Kody - storing output to file "XMLAttrExample.xml" in directory 
             XMLHelper.saveXMLexample(resultString, "../XML/XMLAttrExample.xml");
 #endif
 
             return resultString;
-        }  // TODO: atributy v krabickach EachValueOneCategory, Equidistant, Equifrequency???
+        }  // TODO: Attributes v krabickach EachValueOneCategory, Equidistant, Equifrequency???
     }
    
-    #region --- Recordy ---
+    #region --- Records ---
 
+    /// <summary>
+    /// Record of one Attribute.
+    /// </summary>
     public class Rec_attribute
     {
         #region DATA
 
         public string id = "";
-        public string db_name = "";
-        public string matrix_name = "";
-        public string attr_name = "";
-        public string creation = "";
+        public string db_name="unknown";
+        public string matrix_name = "unknown";
+        public string attr_name = "unknown";
+        public string creation = "unknown";
         public long ctgr_count = 0;
         #endregion
 
         #region METHODS
 
+        /// <summary>
+        /// Creating XML string from record.
+        /// </summary>
+        /// <returns>XML string</returns>
         public string ToXML()
         {
             string XML = "";
@@ -198,6 +215,12 @@ namespace FEplugin_cs
             return XML;
         }
 
+        /// <summary>
+        /// Creating XML string from record.
+        /// </summary>
+        /// <param name="Categories">list of attribute categories</param>
+        /// <param name="MissingValue">list of missing value categories</param>
+        /// <returns>XML string</returns>
         public string ToXML(List<Rec_ctgr> Categories, List<Rec_missing_value> MissingValue)
         {
             string XML = "";
@@ -205,13 +228,13 @@ namespace FEplugin_cs
             XML += "<attribute id=\"" + id + "\" db_name=\"" + db_name + "\" matrix_name=\"" + matrix_name +
                    "\" attr_name=\"" + attr_name + "\" creation=\"" + creation +
                    "\" ctgr_count=\"" + ctgr_count.ToString() + "\">";
-            // vygenerovani vsech podelementu - ctgr
+            // generating each subelement - ctgr
             if (Categories.Count > 0)
             {
                 foreach (Rec_ctgr ctgr in Categories)
                     XML += ctgr.ToXML();
             }
-            // vygenerovani vsech podelementu - missing_value
+            // generating each subelement - missing_value
             if (MissingValue.Count > 0)
             {
                 foreach(Rec_missing_value mv in MissingValue)    
@@ -223,22 +246,28 @@ namespace FEplugin_cs
         #endregion
     }
 
+    /// <summary>
+    /// Record of one Attribute category.
+    /// </summary>
     public class Rec_ctgr
     {
         #region DATA
 
-        public string name = "";
-        public string freq = "";
+        public string name = "unknown";
+        public string freq = "unknown";
         #endregion
 
         #region METHODS
 
+        /// <summary>
+        /// Creating XML string from record.
+        /// </summary>
+        /// <returns>XML string</returns>
         public string ToXML()
         {
-            // nahrazeni znaku "<", ">" v retezcich (kvuli XML)
-            name = name.Replace("&", "&amp;");
-            name = name.Replace("<", "&lt;");
-            name = name.Replace(">", "&gt;");
+            name = XMLHelper.replaceXMLsign(name);
+            freq = XMLHelper.replaceXMLsign(freq);
+
             string XML = "";
             XML += "<ctgr name=\"" + name + "\" freq=\"" + freq + "\"/>";
             return XML;
@@ -246,21 +275,26 @@ namespace FEplugin_cs
         #endregion
     }
 
+    /// <summary>
+    /// Record of missing value category.
+    /// </summary>
     public class Rec_missing_value
     {
         #region DATA
 
-        public string name = "";
+        public string name = "unknown";
         #endregion
 
         #region METHODS
 
+        /// <summary>
+        /// Creating XML string from record.
+        /// </summary>
+        /// <returns>XML string</returns>
         public string ToXML()
         {
-            // nahrazeni znaku "<", ">" v retezcich (kvuli XML)
-            name = name.Replace("&", "&amp;");
-            name = name.Replace("<", "&lt;");
-            name = name.Replace(">", "&gt;");
+            name = XMLHelper.replaceXMLsign(name);
+
             string XML = "";
             XML += "<missing_value name=\"" + name + "\"/>";
             return XML;
