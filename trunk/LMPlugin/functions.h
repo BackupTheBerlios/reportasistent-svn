@@ -78,4 +78,6 @@ CString fLM4fthyp_ar2nl(void* hSource);
 
 CString fLMdata_matrix (void* hSource);
 
+CString fLMcolumn (void* hSource);
+
 #endif /* _FUNCTIONS*/

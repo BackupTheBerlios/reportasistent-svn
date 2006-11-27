@@ -641,3 +641,21 @@ public:
 };
 
 typedef CArray <Data_Matrix_Meta *, Data_Matrix_Meta *> TData_Matrix_Meta_Array;
+
+class Column_Meta
+{
+public:
+	CString id;
+	CString db_name;
+	CString matrix_name;
+    CString column_name;
+    CString value_type;
+    CString primary_key_position;
+    CString min;
+    CString max;
+    CString avg;
+
+	CString	xml_convert ();
+};
+
+typedef CArray <Column_Meta *, Column_Meta *> TColumn_Meta_Array;

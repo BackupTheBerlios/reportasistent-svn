@@ -2998,3 +2998,39 @@ CString Data_Matrix_Meta::xml_convert ()
 
 	return xml_string;
 }
+
+CString Column_Meta::xml_convert ()
+{
+	CString xml_string;
+
+	db_name.Replace ("&", "&amp;");
+	id.Replace ("&", "&amp;");
+	matrix_name.Replace ("&", "&amp;");
+	column_name.Replace ("&", "&amp;");
+	value_type.Replace ("&", "&amp;");
+
+	db_name.Replace ("<", "&lt;");
+	id.Replace ("<", "&lt;");
+	matrix_name.Replace ("<", "&lt;");
+	column_name.Replace ("<", "&lt;");
+	value_type.Replace ("<", "&lt;");
+
+	db_name.Replace (">", "&gt;");
+	id.Replace (">", "&gt;");
+	matrix_name.Replace (">", "&gt;");
+	column_name.Replace (">", "&gt;");
+	value_type.Replace (">", "&gt;");
+
+	//beginning of the column element
+	xml_string = " <column id=\"" + id + "\" db_name=\"" + db_name + "\" ";
+	xml_string = xml_string + "matrix_name=\"" + matrix_name + "\" ";
+	xml_string = xml_string + "column_name=\"" + (LPCSTR) (_bstr_t) column_name + "\" ";
+	xml_string = xml_string + "value_type=\"" + (LPCSTR) (_bstr_t) value_type + "\" ";
+	xml_string = xml_string + "primary_key_position=\"" + (LPCSTR) (_bstr_t) primary_key_position + "\" ";
+	xml_string = xml_string + "min=\"" + (LPCSTR) (_bstr_t) min + "\" ";
+	xml_string = xml_string + "max=\"" + (LPCSTR) (_bstr_t) max + "\" ";
+	xml_string = xml_string + "avg=\"" + (LPCSTR) (_bstr_t) avg + "\" ";
+	xml_string = xml_string + "/>";
+
+	return xml_string;
+}

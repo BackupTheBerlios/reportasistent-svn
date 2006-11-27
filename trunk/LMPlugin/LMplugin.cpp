@@ -68,6 +68,9 @@ CLMSock::CLMSock()
 
 	APTable[14].AP_ID = "data_matrix";
 	APTable[14].pFn = & fLMdata_matrix;
+
+	APTable[15].AP_ID = "column";
+	APTable[15].pFn = & fLMcolumn;
 }
 
 

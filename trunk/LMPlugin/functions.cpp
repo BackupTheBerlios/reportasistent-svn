@@ -42,6 +42,7 @@
 #include "TCoef_type_Recordset.h"
 #include "ODBCINST.H"
 #include "TData_Matrix_Recordset.h"
+#include "TColumn_Recordset.h"
 
 //dedek: docasne
 /*****/
@@ -3657,6 +3658,79 @@ CString fLMdata_matrix (void* hSource)
 			else if (rs.m_ShortName == "date") ptatt->date_count++;
 
 			matrix_id = matrix_id_tst;
+			rs.MoveNext();
+		}
+		rs.Close();
+	}
+	else return "";
+
+	//creation of xml string
+	//load DTD
+	buf = Get_DTD ();
+	//create xml data
+	buf = buf + " <active_list> ";
+	int i;
+    for (i = 0; i < list.GetSize (); i++)
+	{
+		buf = buf + list.GetAt (i)->xml_convert ();
+	}
+	buf += " </active_list>";
+	//just for test - creates a xml file with all attributes
+/*	FILE * f = fopen ("test.xml", "w");
+	fprintf (f, "%s", buf);
+	fclose (f);
+
+
+	AfxMessageBox(buf);
+*/
+	for (i = 0; i < list.GetSize (); i++)
+	{
+		delete (list.GetAt (i));
+	}
+	list.RemoveAll ();
+	
+	return buf;
+}
+
+CString fLMcolumn(void* hSource)
+{
+	CString buf = "";
+	CString hlp;
+	CString db_name = ((CDatabase *) hSource)->GetDatabaseName ();
+	CString qcat;
+
+	long count = 0;
+
+	TColumn_Recordset rs ((CDatabase *) hSource);
+
+	Column_Meta * ptatt;
+	TColumn_Meta_Array list;
+
+	CString q =
+		"SELECT * \
+		 FROM tmAttribute, tmMatrix, tsAttributeSubType, tsValueSubType \
+		 WHERE tmAttribute.MatrixID=tmMatrix.MatrixID \
+			AND tmAttribute.AttributeSubTypeID=tsAttributeSubType.AttributeSubTypeID \
+			AND tsAttributeSubType.ShortName=";
+	q +=									 "'DB'";
+	q += "AND tmAttribute.ValueSubTypeID=tsValueSubType.ValueSubTypeID";
+	if (rs.Open(AFX_DB_USE_DEFAULT_TYPE, q))
+	{
+		//iteration on query results
+		while (!rs.IsEOF())
+		{
+			ptatt = new (Column_Meta);
+			ptatt->column_name = rs.m_Name;
+			ptatt->db_name = db_name;
+			ptatt->matrix_name = rs.m_Name2;
+			hlp.Format ("%d", rs.m_AttributeID);
+			ptatt->id = "col" + hlp;
+			ptatt->value_type = rs.m_Name4;
+			ptatt->primary_key_position.Format("%d", rs.m_PrimaryKeyPosition);
+			ptatt->avg = (LPCSTR) (_bstr_t) rs.m_ValueAvg;
+			ptatt->min = (LPCSTR) (_bstr_t) rs.m_ValueMin;
+			ptatt->max = (LPCSTR) (_bstr_t) rs.m_ValueMax;
+			list.Add (ptatt);
 			rs.MoveNext();
 		}
 		rs.Close();
