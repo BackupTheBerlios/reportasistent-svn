@@ -42,6 +42,7 @@ void COptionsDialog::DoDataExchange(CDataExchange* pDX)
 
 BEGIN_MESSAGE_MAP(COptionsDialog, CDialog)
 	//{{AFX_MSG_MAP(COptionsDialog)
+	ON_BN_CLICKED(IDC_TEMPLATES_REFRESH_BUTTON, OnTemplatesRefreshButton)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -61,6 +62,8 @@ BOOL COptionsDialog::OnInitDialog()
 		CheckRadioButton(IDC_CZECH_RADIO, IDC_ENGLISH_RADIO, IDC_CZECH_RADIO);
 	else
 		CheckRadioButton(IDC_CZECH_RADIO, IDC_ENGLISH_RADIO, IDC_ENGLISH_RADIO);
+	
+	FillTemplatesCombo();
 	
 	//Set Tree Items
 	//Height edit
@@ -156,4 +159,41 @@ void COptionsDialog::OnOK()
 
 
 	CDialog::OnOK();
+}
+
+void COptionsDialog::FillTemplatesCombo()
+{
+	CWordManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->WordManager;
+
+	CStringTable & st = m.getWordTemplates();
+
+	CString sel;
+	m_WordTemplateCombo.GetWindowText(sel);
+	
+	//vymaze cele combo
+	m_WordTemplateCombo.ResetContent();
+	
+	for (int a=0; a < st.getCount(); a++)
+	{
+		m_WordTemplateCombo.AddString(st.getItem(a));
+	}
+
+	if ((CB_ERR == m_WordTemplateCombo.SelectString(-1, sel)) && 
+		(m_WordTemplateCombo.GetCount() > 0))
+	{
+		//vyber prvni
+		CString s;
+		m_WordTemplateCombo.GetLBText(0, s);
+		m_WordTemplateCombo.SelectString(-1, s);
+	}
+}
+
+
+
+void COptionsDialog::OnTemplatesRefreshButton() 
+{
+	CWordManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->WordManager;
+	m.LoadWordStylesAndTempates();
+
+	FillTemplatesCombo();
 }

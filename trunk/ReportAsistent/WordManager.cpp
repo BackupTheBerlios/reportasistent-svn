@@ -66,7 +66,7 @@ void CWordManager::LoadWordStylesThreadFunction(LPARAM template_name, LPARAM pWo
 }
 
 
-void CWordManager::LoadWordStyles(LPCTSTR template_name)
+void CWordManager::LoadWordStylesAndTempates(LPCTSTR template_name)
 {
 	if (template_name == NULL)
 	{
@@ -216,6 +216,9 @@ void CWordManager::GenerateXMLString(_bstr_t XML_str)
 		if (! InitWordLoader()) return;
 	}
 
+//	m_WordLoader->PutstrDefaultWordTemplate((LPCTSTR) "D:\\Documents and Settings\\Dedek\\Data aplikací\\Microsoft\\Šablony\\honza_template.dot");
+		
+	
 	m_WordLoader->LoadFromString(XML_str);
 }
 

@@ -38,10 +38,13 @@ public:
 // Implementation
 protected:
 
+	void FillTemplatesCombo();
+
 	// Generated message map functions
 	//{{AFX_MSG(COptionsDialog)
 	virtual BOOL OnInitDialog();
 	virtual void OnOK();
+	afx_msg void OnTemplatesRefreshButton();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 public:

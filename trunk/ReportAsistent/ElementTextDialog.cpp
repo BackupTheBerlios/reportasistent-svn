@@ -112,7 +112,7 @@ void CElementTextDialog::DDV_NonDuplicateID(CDataExchange *pDX, int nId, CString
 void CElementTextDialog::OnStylesRefreshButton() 
 {
 	CWordManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->WordManager;
-	m.LoadWordStyles();
+	m.LoadWordStylesAndTempates();
 
 	FillStylesCombo();	
 }

@@ -144,6 +144,7 @@
 #define IDC_IGNORE_RADIO                1069
 #define IDC_DELETE_RADIO                1070
 #define IDC_SET_DEFAULT_RADIO           1071
+#define IDC_TEMPLATES_REFRESH_BUTTON    1072
 #define ID_MMGENREP                     32771
 #define ID_MMSOURCES                    32772
 #define ID_ELEMENT_EDIT                 32780
@@ -208,7 +209,7 @@
 #define _APS_3D_CONTROLS                     1
 #define _APS_NEXT_RESOURCE_VALUE        174
 #define _APS_NEXT_COMMAND_VALUE         32802
-#define _APS_NEXT_CONTROL_VALUE         1072
+#define _APS_NEXT_CONTROL_VALUE         1073
 #define _APS_NEXT_SYMED_VALUE           102
 #endif
 #endif

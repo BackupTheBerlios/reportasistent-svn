@@ -78,7 +78,7 @@ public:
 	CWordManager(CDirectoriesManager & m);
 	virtual ~CWordManager();
 
-	void LoadWordStyles(LPCTSTR template_name = NULL);
+	void LoadWordStylesAndTempates(LPCTSTR template_name = NULL);
 protected:
 	void LoadWordTemplates();
 	void LoadParagraphStyles(LPCTSTR template_name);  // kody: kvuli novymu vlaknu a volani ze staticky metody presunuto z protected sem

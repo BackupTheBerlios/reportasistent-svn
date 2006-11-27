@@ -140,7 +140,7 @@ void CElementParagraphDialog::FillStylesCombo()
 void CElementParagraphDialog::OnStylesRefreshButton() 
 {
 	CWordManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->WordManager;
-	m.LoadWordStyles();
+	m.LoadWordStylesAndTempates();
 
 	FillStylesCombo();	
 }

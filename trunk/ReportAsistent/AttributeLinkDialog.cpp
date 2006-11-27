@@ -166,7 +166,7 @@ void CAttributeLinkDialog::OnRefreshButton()
 void CAttributeLinkDialog::OnStylesRefreshButton() 
 {
 	CWordManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->WordManager;
-	m.LoadWordStyles();
+	m.LoadWordStylesAndTempates();
 
 	FillStylesCombo();	
 }

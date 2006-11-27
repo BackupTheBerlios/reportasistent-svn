@@ -56,7 +56,7 @@ Public Sub SetAndClearDocument(doc As Word.Document)
 End Sub
 
 
-Public Sub NewDocument()
+Public Sub NewDocument(ByVal strWordTemplate As String)
     Dim D As Word.Document
     
     
@@ -64,7 +64,7 @@ Public Sub NewDocument()
     
     mWordApp.Visible = True
     
-    Set D = mWordApp.Documents.Add("Normal.dot")
+    Set D = mWordApp.Documents.Add(strWordTemplate)
     
     D.Select
      

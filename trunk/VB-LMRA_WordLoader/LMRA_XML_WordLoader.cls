@@ -10,7 +10,7 @@ Attribute VB_Name = "LMRA_XML_WordLoader"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = True
 Attribute VB_PredeclaredId = False
-Attribute VB_Exposed = True
+Attribute VB_Exposed = False
 Option Explicit
 
 Private WithEvents evWordApp As Word.Application
@@ -24,6 +24,7 @@ Dim mWordEvents As New Collection
 Dim ButtonEvent 'As cbAElButtonEvents   'pouziva se jete pro cbCommandEvents
 Dim mWordEditor As Word.Application
 Dim mstrParentTaskName As String
+Dim mstrDefaultWordTemplate As String
 
 
 
@@ -37,6 +38,14 @@ Public Event PrepareParentTaskActivation()
 
 Public Property Let strParentTaskName(ByVal strName As String)
     mstrParentTaskName = strName
+End Property
+
+Public Property Let strDefaultWordTemplate(ByVal strTemplate As String)
+    mstrDefaultWordTemplate = strTemplate
+End Property
+
+Public Property Get strDefaultWordTemplate() As String
+    strDefaultWordTemplate = mstrDefaultWordTemplate
 End Property
 
 
@@ -69,6 +78,10 @@ Public Sub AddActiveElement(ByVal strType As String, ByVal strLabel As String, B
     mActiveElemetns.Add AEl
 End Sub
 
+
+Private Sub Class_Initialize()
+    strDefaultWordTemplate = "Normal.dot"
+End Sub
 
 Private Sub evWordApp_Quit()
     Set mWordEditor = Nothing
@@ -182,7 +195,7 @@ Public Sub OpenWordEditor()
     Set evWordApp = mWordEditor
     'MsgBox "tool bar loading"
     
-    mWordEditor.Documents.Add.Select
+    mWordEditor.Documents.Add(strDefaultWordTemplate).Select
         
     CreateRAToolbar mWordEditor
     'MsgBox "tool bar added"
@@ -356,16 +369,17 @@ Public Sub LoadFromStringToWordEditor(ByVal strXMLSource As String)
         OpenWordEditor
     End If
     
-    If Not mWordEditor.Selection Is Nothing Then
-        Dim reader As New SAXXMLReader30             'Reads the XML document
-        Dim word_loader As New WordLoader
-        InitReaderWordLoader reader, word_loader
-        
-        word_loader.SetWordApplication mWordEditor
-        reader.parse strXMLSource
-                
+    If mWordEditor.Selection Is Nothing Then
+        mWordEditor.Documents.Add(strDefaultWordTemplate).Select
     End If
-
+        
+    Dim reader As New SAXXMLReader30             'Reads the XML document
+    Dim word_loader As New WordLoader
+    InitReaderWordLoader reader, word_loader
+        
+    word_loader.SetWordApplication mWordEditor
+    reader.parse strXMLSource
+                
 End Sub
 
 Public Sub LoadFromString(ByVal strXMLSource As String)
@@ -374,8 +388,8 @@ Public Sub LoadFromString(ByVal strXMLSource As String)
     
     InitReaderWordLoader reader, word_loader
 
-    word_loader.NewDocument
-       
+    word_loader.NewDocument mstrDefaultWordTemplate
+           
     reader.parse strXMLSource
     
 
@@ -405,7 +419,7 @@ Public Sub LoadFromFile(ByVal strFileName As String)
     
     InitReaderWordLoader reader, word_loader
 
-    word_loader.NewDocument
+    word_loader.NewDocument "Normal.dot"
     
     reader.parseURL (strFileName)           'Parse the document
     
