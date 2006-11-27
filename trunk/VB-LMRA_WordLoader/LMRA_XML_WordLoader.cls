@@ -33,6 +33,7 @@ Public Event SetSources()
 Public Event SetOptions()
 Public Event SkeletonEditor()
 Public Event WordQuit()
+Public Event PrepareParentTaskActivation()
 
 Public Property Let strParentTaskName(ByVal strName As String)
     mstrParentTaskName = strName
@@ -46,6 +47,12 @@ Public Property Get isWordEditorActive() As Boolean
         isWordEditorActive = True
     End If
 End Property
+
+Public Sub ActivateWordEditor()
+    If Not mWordEditor Is Nothing Then
+        mWordEditor.Activate
+    End If
+End Sub
 
 Public Sub AddActiveElement(ByVal strType As String, ByVal strLabel As String, ByVal strIamgePath As String)
 
@@ -71,6 +78,11 @@ End Sub
 Private Sub ActivateParentTask()
     'On Error Resume Next
     'Tasks("LMRA_WordLoader").Activate False
+    
+    
+    RaiseEvent PrepareParentTaskActivation
+    
+    
     If Tasks.Exists(mstrParentTaskName) Then
         Tasks(mstrParentTaskName).Activate False
     Else

@@ -237,22 +237,26 @@ BOOL CAElConfigDialog::OnSetActive()
 	m_ResultList.EnableWindow();
 	
 
-	//zaloha dat
-	MSXML2::IXMLDOMElementPtr values_clone = m_filter_DOM->selectSingleNode("/dialog_data/values")->cloneNode(VARIANT_TRUE);
-	
-//	simple_f = simple_f->cloneNode(VARIANT_TRUE);
+	if (m_filter_DOM != NULL)
+	{
+		
+		//zaloha dat
+		MSXML2::IXMLDOMElementPtr values_clone = m_filter_DOM->selectSingleNode("/dialog_data/values")->cloneNode(VARIANT_TRUE);
+		
+	//	simple_f = simple_f->cloneNode(VARIANT_TRUE);
 
-	CAElTransform tr(m_cloned_active_element);
+		CAElTransform tr(m_cloned_active_element);
 
-//	AfxMessageBox(simple_f->xml);
+	//	AfxMessageBox(simple_f->xml);
 
-	tr.ApplyAllFilters(m_filter_DOM);
+		tr.ApplyAllFilters(m_filter_DOM);
 
-	CFilterResultImpl::UpdateResult(m_filter_DOM);
-	
-	//obnova dat
-	m_filter_DOM->selectSingleNode("/dialog_data")->replaceChild(values_clone,
-		m_filter_DOM->selectSingleNode("/dialog_data/values"));
+		CFilterResultImpl::UpdateResult(m_filter_DOM);
+		
+		//obnova dat
+		m_filter_DOM->selectSingleNode("/dialog_data")->replaceChild(values_clone,
+			m_filter_DOM->selectSingleNode("/dialog_data/values"));
+	}
 
 	return CPropertyPage::OnSetActive();
 }

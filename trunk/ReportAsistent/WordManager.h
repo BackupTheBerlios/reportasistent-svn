@@ -70,6 +70,8 @@ public:
 class CWordManager  
 {
 public:
+	LPCTSTR getLastElementName();
+
 	void OpenWordEditor();
 	void GenerateXMLString(_bstr_t XML_str);
 	BOOL InitWordLoader();
@@ -85,8 +87,10 @@ protected:
 	void static CWordManager::LoadWordStylesThreadFunction(LPARAM template_name, LPARAM pWordManager);
 	
 public:
+	void PrepareParentTaskActivation();
 	void WordEditShowMainWindow();
 	void WordEditHideMainWindow();
+	BOOL CWordManager::isWordEditorActive();
 	void SetWordEditorParentTaskName();
 	void GenerateXMLStringToWordEditor(_bstr_t XML_str);
 	CStringTable & getWordTemplates() { return m_WordTemplates; };
@@ -112,6 +116,7 @@ protected:
 	//void LoadCharacterStyles(LPCTSTR template_name);
 	BOOL isInit();
 public:
+	void ActivateWordEditor();
   CString getLastProcessedId(void);
   CString getLastError(void);
   

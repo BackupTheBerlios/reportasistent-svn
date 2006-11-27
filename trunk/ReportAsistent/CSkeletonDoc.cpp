@@ -354,7 +354,7 @@ BOOL CSkeletonDoc::EditActiveElement(MSXML2::IXMLDOMElementPtr &element)
 
 	CElementManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
 
-	CPropertySheet sheet((LPCTSTR) (_bstr_t) element->getAttribute("id"), AfxGetMainWnd());
+	CPropertySheet sheet((LPCTSTR) (_bstr_t) element->getAttribute("id"), NULL);
 
 //	CComplexFilterDialog cmpl_filter(element);
 	MSXML2::IXMLDOMElementPtr a_el_clone;

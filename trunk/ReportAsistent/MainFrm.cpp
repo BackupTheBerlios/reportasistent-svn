@@ -3,6 +3,8 @@
 
 #include "stdafx.h"
 #include "ReportAsistent.h"
+#include "CSkeletonDoc.h"
+#include "APTransform.h"
 
 #include "MainFrm.h"
 
@@ -11,6 +13,7 @@
 #undef THIS_FILE
 static char THIS_FILE[] = __FILE__;
 #endif
+
 
 /////////////////////////////////////////////////////////////////////////////
 // CMainFrame
@@ -24,6 +27,7 @@ BEGIN_MESSAGE_MAP(CMainFrame, CFrameWnd)
 	ON_COMMAND(ID_VIEW_STATICELEMENTSTOOLBAR, OnViewStaticelementstoolbar)
 	ON_COMMAND(ID_VIEW_ACTIVEELEMENTTOOLBAR, OnViewActiveelementtoolbar)
 	ON_UPDATE_COMMAND_UI(ID_VIEW_ACTIVEELEMENTTOOLBAR, OnUpdateViewActiveelementtoolbar)
+	ON_COMMAND(ID_WORD_EDITOR_EDIT_ACTIVE_ELEMENT, OnWordEditorEditActiveElement)
 	//}}AFX_MSG_MAP
    ON_COMMAND(ID_HELP_FINDER, CFrameWnd::OnHelpFinder)
    ON_COMMAND(ID_HELP, CFrameWnd::OnHelp)
@@ -474,3 +478,58 @@ void CMainFrame::WinHelp(DWORD dwData, UINT nCmd)
 //DEL 	// TODO: Add your command handler code here
 //DEL 	
 //DEL }
+
+
+
+void CMainFrame::OnWordEditorEditActiveElement() 
+{
+/****/
+	
+	CElementManager & em = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
+	CWordManager & wm = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->WordManager;
+	LPCTSTR strElementName = wm.getLastElementName();
+
+	//load element
+	int element_index = em.ElementIdFromName(strElementName);
+	MSXML2::IXMLDOMElementPtr active_element = 
+		em.CreateEmptyElement(element_index);
+
+	
+	//load document
+	MSXML2::IXMLDOMDocument2Ptr doc;
+	doc.CreateInstance(_T("Msxml2.DOMDocument"));
+	em.LoadSkeletonDTD((MSXML2::IXMLDOMDocumentPtr &) doc);
+	
+	//insert element to chapter and document
+	doc->documentElement->
+		appendChild(em.CreateEmptyElement(ELID_CHAPTER))->
+			appendChild(active_element);
+
+
+	//configure by dilaog
+	if (CSkeletonDoc::EditActiveElement(active_element))
+	{
+		//transform and generate
+		CAElTransform transform(active_element);
+
+		transform.DoAllTransnformations();
+
+#ifdef _DEBUG
+		MSXML2::IXMLDOMParseErrorPtr err = doc->validate();
+
+		if (err->errorCode != S_OK)
+		{
+			AfxMessageBox(err->reason);
+			AfxMessageBox(active_element->selectSingleNode("output")->xml);
+		}
+#endif
+	
+		wm.GenerateXMLStringToWordEditor(active_element->xml);
+	}
+
+	
+	
+	active_element.Release();
+	doc.Release();
+/****/	
+}

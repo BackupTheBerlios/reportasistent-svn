@@ -73,6 +73,7 @@ CReportAsistentApp::CReportAsistentApp()
 , m_iTreeItemIndent(0)
 , m_bTreeHasLines(0)
 , m_bTreeHasButtons(0)
+, m_bWordPluginMode(FALSE)
 {
 	// TODO: add construction code here,
 	// Place all significant initialization in InitInstance
@@ -293,6 +294,7 @@ void CReportAsistentApp::OnFileOptions()
 //dedek otevre word v RA edit modu
 void CReportAsistentApp::OnOpenWordEditor() 
 {
+	m_bWordPluginMode = TRUE;
 	m_pGeneralManager->WordManager.OpenWordEditor();
 }
 

@@ -118,6 +118,9 @@ public:
 	int m_iTreeItemIndent;
 	BOOL m_bTreeHasLines;
 	BOOL m_bTreeHasButtons;
+
+
+	BOOL m_bWordPluginMode;
 };
 
 

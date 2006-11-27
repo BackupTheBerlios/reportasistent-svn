@@ -233,10 +233,17 @@ BOOL CWordManager::InitWordEventHandler()
 
 void CWordManager::DisconnectWordEventHandler()
 {
-	LPUNKNOWN p_unk = m_pEventHandler->GetIDispatch(FALSE);
-
-	AfxConnectionUnadvise(m_WordLoader.GetInterfacePtr(), 
+	try
+	{
+		LPUNKNOWN p_unk = m_pEventHandler->GetIDispatch(FALSE);
+		AfxConnectionUnadvise(m_WordLoader.GetInterfacePtr(), 
 			DIID___LMRA_XML_WordLoader, p_unk, FALSE, m_dwEventHandlerCookie);
+	}
+	catch (...)
+	{
+
+	}
+
 
 	
 	if(m_pEventHandler != NULL)
@@ -254,6 +261,11 @@ void CWordManager::SetWordEditorParentTaskName()
 	CString wdCaption;
 	AfxGetApp()->GetMainWnd()->GetWindowText(wdCaption);
 	m_WordLoader->PutstrParentTaskName((LPCTSTR) wdCaption);
+}
+
+LPCTSTR CWordManager::getLastElementName()
+{
+	return m_pEventHandler->m_strLastElementName;
 }
 
 void CWordManager::OpenWordEditor()
@@ -398,10 +410,16 @@ int CWordManager::LoadSafeArrayToStringTable(SAFEARRAY *sarray, CStringTableImpl
 	return u_bound - l_bound +1;
 }
 
+BOOL CWordManager::isWordEditorActive()
+{
+	return m_WordLoader->GetisWordEditorActive() == VARIANT_FALSE;
+}
+
+
 
 void CWordManager::WordEditHideMainWindow()
 {
-	if (m_WordLoader->GetisWordEditorActive() == VARIANT_FALSE)
+	if (isWordEditorActive())
 	{
 	
 		ZeroMemory(& m_origWINDOWPLACEMENT, sizeof m_origWINDOWPLACEMENT);
@@ -417,9 +435,19 @@ void CWordManager::WordEditHideMainWindow()
 	newpl.flags = WPF_SETMINPOSITION;
 	newpl.showCmd = SW_MINIMIZE; //SW_SHOWMINIMIZED
 
-	AfxGetApp()->GetMainWnd()->SetWindowPlacement(& newpl);
+//	AfxGetApp()->GetMainWnd()->SetWindowPlacement(& newpl);
 //	AfxGetApp()->GetMainWnd()->EnableWindow(FALSE);
 
+	
+//	AfxGetApp()->GetMainWnd()->ShowWindow(SW_HIDE);
+}
+
+void CWordManager::PrepareParentTaskActivation()
+{
+	((CReportAsistentApp *) AfxGetApp())->m_bWordPluginMode = FALSE;
+
+	AfxGetApp()->GetMainWnd()->ShowWindow(SW_SHOW);
+	SetWordEditorParentTaskName();
 }
 
 void CWordManager::WordEditShowMainWindow()
@@ -674,4 +702,11 @@ BOOL CWordManager::saveStylesToXML(LPCTSTR file_path)
 	pXMLDom.Release();
 
 	return ret;
+}
+
+void CWordManager::ActivateWordEditor()
+{
+	ASSERT(isInit());
+
+	m_WordLoader->ActivateWordEditor();
 }

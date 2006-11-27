@@ -158,6 +158,7 @@
 #define ID_SIGN_ORPHANS                 32796
 #define ID_DELETE_ORPHANS               32798
 #define ID_RESET_ORPHANS                32800
+#define ID_WORD_EDITOR_EDIT_ACTIVE_ELEMENT 32801
 #define ID_MMNEWSTATICFIRST             39001
 #define ID_MMNEWSTATICLAST              39009
 #define ID_MMNEWACTIVEFIRST             39010
@@ -206,6 +207,6 @@
 #define _APS_NEXT_RESOURCE_VALUE        174
 #define _APS_NEXT_COMMAND_VALUE         32802
 #define _APS_NEXT_CONTROL_VALUE         1072
-#define _APS_NEXT_SYMED_VALUE           101
+#define _APS_NEXT_SYMED_VALUE           102
 #endif
 #endif

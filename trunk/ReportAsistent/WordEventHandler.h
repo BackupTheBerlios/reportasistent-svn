@@ -20,6 +20,7 @@ class CWordEventHandler : public CCmdTarget
 
 // Attributes
 public:
+	CString m_strLastElementName;
 
 // Operations
 public:
@@ -50,6 +51,7 @@ protected:
 	afx_msg void onSetSources();
 	afx_msg void onSkeletonEditor();
 	afx_msg void onWordQuit();
+	afx_msg void onPrepareParentTaskActivation();
 	//}}AFX_DISPATCH
 	DECLARE_DISPATCH_MAP()
 	DECLARE_INTERFACE_MAP()
