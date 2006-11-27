@@ -361,8 +361,8 @@ BEGIN
     DEFPUSHBUTTON   "OK",IDOK,99,233,50,14
     PUSHBUTTON      "Cancel",IDCANCEL,157,233,50,14
     GROUPBOX        "Output language",IDC_STATIC,6,8,160,47
-    CONTROL         "Czech",IDC_CZECH_RADIO,"Button",BS_AUTORADIOBUTTON,16,
-                    19,36,10
+    CONTROL         "Czech",IDC_CZECH_RADIO,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,16,19,36,10
     CONTROL         "English",IDC_ENGLISH_RADIO,"Button",BS_AUTORADIOBUTTON,
                     16,33,39,10
     PUSHBUTTON      "Help",ID_HELP,213,233,50,14
@@ -386,8 +386,8 @@ BEGIN
                     ES_AUTOHSCROLL | ES_NUMBER
     GROUPBOX        "Generation options",IDC_STATIC,183,7,161,148
     LTEXT           "Solve orphans:",IDC_STATIC,193,20,106,9
-    CONTROL         "Ignore",IDC_IGNORE_RADIO,"Button",BS_AUTORADIOBUTTON,
-                    198,30,36,10
+    CONTROL         "Ignore",IDC_IGNORE_RADIO,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,198,30,36,10
     CONTROL         "Delete",IDC_DELETE_RADIO,"Button",BS_AUTORADIOBUTTON,
                     198,42,37,10
     CONTROL         "Set default source",IDC_SET_DEFAULT_RADIO,"Button",
@@ -1021,7 +1021,7 @@ BEGIN
     IDS_COMPLEX_FILTER_SELECT_ATTR "Please select attribute to filter."
     IDS_TOO_MANY_SELECTED_ITEMS "The number of selected items is too high. "
     IDS_LACK_OF_GLOB_MEM_FOR_CLIPBOARD 
-                            "Nepodarilo se alokovat dostatek globalni pameti pro XML podstrom."
+                            "Not enough local memory for part of skeleton."
     IDS_CLIPBOARD_USED_BY_OTHER_APP 
                             "Clipboard is currently used by other application."
     IDS_CLIPBOARD_WAS_NOT_EMPTIED 
@@ -1034,6 +1034,7 @@ STRINGTABLE DISCARDABLE
 BEGIN
     IDS_NO_DATA_FROM_CLIPBOARD "No data were obtained from clipboard."
     IDS_PARSE_ERROR         "Parse error."
+    IDS_SETTINGS_ERR        "Applying of setting was not successful.\nReason: ""%s""."
 END
 
 STRINGTABLE DISCARDABLE 

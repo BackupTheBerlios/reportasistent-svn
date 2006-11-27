@@ -307,7 +307,3 @@ void CReportAsistentApp::OnHlpTopics()
 
 
 
-//DEL void CReportAsistentApp::OnHelp() 
-//DEL {
-//DEL 	WinHelp(IDH_CONTENTS, HELP_CONTEXT);//Displays Help Topics dialog box, according to "mapped ID"	
-//DEL }

@@ -56,6 +56,7 @@ BOOL COptionsDialog::OnInitDialog()
 	CReportAsistentApp * App = ((CReportAsistentApp *) AfxGetApp());
 
 	//Set Language radio buttons
+	CString lang = App->FirstDocumentInFirstTemplate()->GetReportSettings("language");
 	if (m->getLanguage() == CString("cz"))
 		CheckRadioButton(IDC_CZECH_RADIO, IDC_ENGLISH_RADIO, IDC_CZECH_RADIO);
 	else
@@ -77,9 +78,25 @@ BOOL COptionsDialog::OnInitDialog()
 	m_IdInTreeCheckBox.SetCheck( App->m_bIdInItemName);
 	m_ButtonsCheckBox.SetCheck( App->m_bTreeHasButtons);
 
-	//Set orphans solution:
+	//Set orphans radio buttons:
+	CString OrphSol = App->FirstDocumentInFirstTemplate()->GetReportSettings("orphans_solution");
+	AfxMessageBox(OrphSol);
+	if (OrphSol== CString("ignore"))
+			CheckRadioButton( IDC_IGNORE_RADIO , IDC_SET_DEFAULT_RADIO, IDC_IGNORE_RADIO );
+	else		
+		if (OrphSol== CString("delete"))
+			CheckRadioButton( IDC_IGNORE_RADIO , IDC_SET_DEFAULT_RADIO, IDC_DELETE_RADIO );
+		else
+			if (OrphSol== CString("set_default"))
+				CheckRadioButton( IDC_IGNORE_RADIO , IDC_SET_DEFAULT_RADIO, IDC_SET_DEFAULT_RADIO );
+			else
+			{
+				CheckRadioButton( IDC_IGNORE_RADIO , IDC_SET_DEFAULT_RADIO, IDC_IGNORE_RADIO );
+				App->FirstDocumentInFirstTemplate()->SetReportSettings("orphans_solution","ignore");
+			}
+
 	
-	//CheckRadioButton( int nIDFirstButton, int nIDLastButton, int nIDCheckButton );
+
 
 
 
@@ -117,6 +134,21 @@ void COptionsDialog::OnOK()
 	App->m_bTreeHasLines = m_LinesCheckBox.GetCheck();
 	App->m_bIdInItemName = m_IdInTreeCheckBox.GetCheck();
 	App->m_bTreeHasButtons = m_ButtonsCheckBox.GetCheck();
+
+	//Get orphans radio buttons:
+	//CString OrphSol = App->FirstDocumentInFirstTemplate()->GetReportSettings("orphans_solution");
+	switch (GetCheckedRadioButton(IDC_IGNORE_RADIO,  IDC_SET_DEFAULT_RADIO))
+	{
+		case IDC_IGNORE_RADIO:
+			App->FirstDocumentInFirstTemplate()->SetReportSettings("orphans_solution","ignore");
+			break;
+		case IDC_DELETE_RADIO:
+			App->FirstDocumentInFirstTemplate()->SetReportSettings("orphans_solution","delete");
+			break;
+		case IDC_SET_DEFAULT_RADIO:
+			App->FirstDocumentInFirstTemplate()->SetReportSettings("orphans_solution","set_default");
+			break;
+	}
 
 	//Apply changes
 	App->FirstDocumentInFirstTemplate()->SetModifiedFlag();

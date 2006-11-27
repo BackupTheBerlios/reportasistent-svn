@@ -111,15 +111,9 @@
 #define IDC_BUTTON2                     1046
 #define IDC_BUTTON3                     1047
 #define IDC_BUTTON4                     1048
-#define IDC_RADIO1                      1049
 #define IDC_TRESHOLD_RADIO              1049
-#define IDC_IGNORE_RADIO                1049
-#define IDC_RADIO2                      1050
 #define IDC_FIXED_VAL_RADIO             1050
-#define IDC_DELETE_RADIO                1050
-#define IDC_RADIO3                      1051
 #define IDC_TOP_N_VAL_RADIO             1051
-#define IDC_SET_DEFAULT_RADIO           1051
 #define IDC_EDIT2                       1052
 #define IDC_TRESHOLD_EDIT               1052
 #define IDC_TREE_ITEM_INDENT            1052
@@ -143,12 +137,12 @@
 #define IDC_SHOW_ID_IN_TREE             1063
 #define IDC_NO_FILTERS                  1064
 #define IDC_NO_FLTER_FRAME              1065
-#define IDC_COMBO1                      1066
 #define IDC_WORD_TEMPLATE_COMBO         1066
-#define IDC_CHECK2                      1067
 #define IDC_TREE_HAS_BUTTONS            1067
-#define IDC_CHECK3                      1068
 #define IDC_TREE_HAS_LINES              1068
+#define IDC_IGNORE_RADIO                1069
+#define IDC_DELETE_RADIO                1070
+#define IDC_SET_DEFAULT_RADIO           1071
 #define ID_MMGENREP                     32771
 #define ID_MMSOURCES                    32772
 #define ID_ELEMENT_EDIT                 32780
@@ -202,6 +196,7 @@
 #define IDS_CLIPBOARD_PLACE_DATA_ERROR  61407
 #define IDS_NO_DATA_FROM_CLIPBOARD      61408
 #define IDS_PARSE_ERROR                 61409
+#define IDS_SETTINGS_ERR                61410
 
 // Next default values for new objects
 // 
@@ -210,7 +205,7 @@
 #define _APS_3D_CONTROLS                     1
 #define _APS_NEXT_RESOURCE_VALUE        174
 #define _APS_NEXT_COMMAND_VALUE         32802
-#define _APS_NEXT_CONTROL_VALUE         1070
+#define _APS_NEXT_CONTROL_VALUE         1072
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

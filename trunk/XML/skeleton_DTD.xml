@@ -6,6 +6,8 @@
 <!ATTLIST report subtitle CDATA #IMPLIED >
 <!ATTLIST report author CDATA #IMPLIED >
 <!ATTLIST report id CDATA #REQUIRED >
+<!ATTLIST report language CDATA #IMPLIED >
+<!ATTLIST report orphans_solution CDATA #IMPLIED >
 
 <!ELEMENT chapter (paragraph | include | active_element | attr_link_table | chapter)*  > 
 <!ATTLIST chapter title CDATA #REQUIRED >
