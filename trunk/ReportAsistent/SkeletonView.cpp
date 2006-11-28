@@ -219,6 +219,8 @@ void CSkeletonView::OnUpdate(CView* pSender, LPARAM lHint, CObject* pHint)
 	case UT_INS:
 			if ((NULL != ((CUT_Hint*)pHint)->pTreeItem) && (NULL != ((CUT_Hint*)pHint)->pElement))
 			{	
+				ASSERT(((CUT_Hint*)pHint)->pElement->parentNode != NULL);
+
 				HTREEITEM inserted_item = GetDocument()->InsertNodeToTreeCtrl(((CUT_Hint*)pHint)->pElement,((CUT_Hint*)pHint)->pTreeItem,pTreeCtrl,((CUT_Hint*)pHint)->pInsertAfter);
 			//Pridany prvek by mel byt zviditelnen = v rozbalenem seznamu, pokud neni videt
 				if (0!= pTreeCtrl.EnsureVisible(inserted_item))

@@ -28,9 +28,12 @@ CTransformationsDialog::CTransformationsDialog(CAElDataShare & data_share, CWnd*
 
 //	srand( (unsigned)time( NULL ) );
 
+/*
 	if (m_cloned_active_element == NULL)
 		m_cloned_active_element = m_active_element->cloneNode(VARIANT_TRUE);
+*/
 
+	ASSERT(m_cloned_active_element != NULL);
 
 	
 	//dedek: neklonuje se, predelano, klonuje se uz ve fitrovacim dialogu (CAElFiltersConfigDialog)
@@ -141,6 +144,7 @@ void CTransformationsDialog::OnAddButton()
 		 
 		if (!AddTransformation(SelItems[I])) return;
 	}
+
 }
 
 void CTransformationsDialog::OnRemoveButton() 
@@ -792,4 +796,20 @@ void CTransformationsDialog::OnSelcancelSelectedTransfsList()
 	//AfxMessageBox("SelCancel");
 	m_ConfigureButton.EnableWindow(false);
 	
+}
+
+BOOL CTransformationsDialog::OnKillActive()
+{
+	m_cloned_active_element->replaceChild(
+		m_cloned_output_element,
+		m_cloned_active_element->selectSingleNode("output"));//->cloneNode(VARIANT_TRUE);
+
+	return CPropertyPage::OnKillActive();
+}
+
+BOOL CTransformationsDialog::OnSetActive()
+{
+	m_cloned_output_element = m_cloned_active_element->selectSingleNode("output");//->cloneNode(VARIANT_TRUE);
+
+	return CPropertyPage::OnSetActive();
 }

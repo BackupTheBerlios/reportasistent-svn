@@ -104,6 +104,8 @@ private:
 
 
   virtual BOOL OnApply();
+  virtual BOOL OnKillActive();
+  virtual BOOL OnSetActive();
 };
 
 //{{AFX_INSERT_LOCATION}}

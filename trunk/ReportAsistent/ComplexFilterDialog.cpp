@@ -730,13 +730,16 @@ void CAElDataShare::ApplyChanges()
 	
 	
 	//dedek: kvuli mnoha aply funkcim po sobe - padalo
-	if(m_active_element->parentNode == NULL) return;
+	ASSERT(m_active_element->parentNode != NULL);
+
+//	if(m_active_element->parentNode == NULL) return;
 
 	m_active_element->parentNode->replaceChild(m_cloned_active_element, m_active_element);
 
 	m_active_element = m_cloned_active_element;
 	m_cloned_active_element = m_active_element->cloneNode(VARIANT_TRUE);
 
+	ASSERT(m_active_element->parentNode != NULL);
 	m_bApplyButtonUsed = TRUE;
 }
 

@@ -392,11 +392,14 @@ BOOL CSkeletonDoc::EditActiveElement(MSXML2::IXMLDOMElementPtr &element)
 
 	int Res = sheet.DoModal();
 
+	
+	ASSERT(element->parentNode != NULL);
 
 	if ((Res == IDOK) || bApplyButtonUsed)
 	{
 		//dedek: presunuto do CAElConfigDialog::OnApply
 		//element->setAttribute("id", (LPCTSTR)config.m_sIdEdit);        
+		
 		return TRUE;			
 
 	}
@@ -1100,6 +1103,9 @@ BOOL CSkeletonDoc::InsertNewElementAndUpdateTreeCtrl( BOOL bEdit,CElementManager
 			{
 				CUT_Hint oHint(hParentItem,new_element,TVI_LAST);
 				SetModifiedFlag();
+
+				ASSERT(oHint.pElement->parentNode != NULL);
+
 				UpdateAllViews(NULL,UT_INS, &oHint);
 				bSuccess=true;
 			}
@@ -1120,10 +1126,15 @@ BOOL CSkeletonDoc::InsertNewElementAndUpdateTreeCtrl( BOOL bEdit,CElementManager
 			MSXML2::IXMLDOMElementPtr new_element=parent_element->insertBefore(pNewXMLElm,(MSXML2::IXMLDOMElement*)insert_before_element);
 			if (new_element != NULL)
 			{
+				
 				if(!bEdit || (bEdit && EditElement(new_element)) )
 				{
 					CUT_Hint oHint(hParentItem,new_element,hTreeCtrl.GetPrevSiblingItem(hInsertBefore));
 					SetModifiedFlag();
+					
+					//dedek: tady to pada :-)
+					ASSERT(oHint.pElement->parentNode != NULL);
+
 					UpdateAllViews(NULL,UT_INS, &oHint);			
 					bSuccess=true;
 				}

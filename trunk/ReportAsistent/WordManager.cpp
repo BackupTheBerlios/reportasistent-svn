@@ -211,11 +211,13 @@ void CWordManager::GenerateXMLStringToWordEditor(_bstr_t XML_str)
 
 void CWordManager::GenerateXMLString(_bstr_t XML_str)
 {
+	
 	if (! isInit()) 
 	{
 		if (! InitWordLoader()) return;
 	}
 
+	AfxMessageBox("is_init");
 //	m_WordLoader->PutstrDefaultWordTemplate((LPCTSTR) "D:\\Documents and Settings\\Dedek\\Data aplikací\\Microsoft\\Šablony\\honza_template.dot");
 		
 	
