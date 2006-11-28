@@ -106,7 +106,7 @@
   
   <visualization_values>
       <variable name="SumShow" value="false" />
-      <variable name="ShowLegend" value="true"/>
+      <variable name="ShowLegend" value="false"/>
       <variable name="TabLegend" value="Tab. "/>
       <variable name="ColorHighlighting" value="false"/>
       <variable name="BorderHighlight" value="true"/>

@@ -99,7 +99,7 @@
   <!--default values of variables-->
   
   <visualization_values>
-      <variable name="ShowLegend" value="true"/>
+      <variable name="ShowLegend" value="false"/>
       <variable name="TabLegend" value="Tab. "/>
       <variable name="BorderHighlight" value="true"/>
       <variable name="BorderColor" value="#eeeeee"/>

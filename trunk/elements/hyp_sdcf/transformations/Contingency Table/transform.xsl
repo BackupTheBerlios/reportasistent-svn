@@ -208,6 +208,28 @@
 				<xsl:otherwise>100</xsl:otherwise>
 			</xsl:choose>
 		</xsl:variable>
+
+    <xsl:variable name="color_norm_factor_set1">
+      <xsl:choose>
+        <xsl:when test="$TypeOfValues='abs'">
+          <xsl:value-of select="$sum_of_values_set1"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select="$norm_factor_set1"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+
+    <xsl:variable name="color_norm_factor_set2">
+      <xsl:choose>
+        <xsl:when test="$TypeOfValues='abs'">
+          <xsl:value-of select="$sum_of_values_set2"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select="$norm_factor_set2"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
 		
 		
 
@@ -277,8 +299,20 @@
 						  		<xsl:otherwise>100</xsl:otherwise>
 						  	</xsl:choose>
 						  </xsl:variable>
-						  
-						  <xsl:variable name="sum_of_values">
+
+                <xsl:variable name="color_norm_factor">
+                  <xsl:choose>
+                    <xsl:when test="$cislo_radku='1'">
+                      <xsl:value-of select="$color_norm_factor_set1"/>
+                    </xsl:when>
+                    <xsl:when test="$cislo_radku='2'">
+                      <xsl:value-of select="$color_norm_factor_set2"/>
+                    </xsl:when>
+                    <xsl:otherwise>100</xsl:otherwise>
+                  </xsl:choose>
+                </xsl:variable>
+
+                <xsl:variable name="sum_of_values">
 						  	<xsl:choose>
 						  		<xsl:when test="$cislo_radku='1'"><xsl:value-of select="$sum_of_values_set1"/></xsl:when>
 						  		<xsl:when test="$cislo_radku='2'"><xsl:value-of select="$sum_of_values_set2"/></xsl:when>
@@ -324,7 +358,8 @@
 										</xsl:attribute>
 										<xsl:if test="$ColorHighlighting='true'">
 											<xsl:attribute name="bgcolor">
-												<xsl:value-of select="dedek:RGB(number(@val), number($sum_of_values))" />
+												<xsl:value-of select="dedek:RGB(number(@val), number($color_norm_factor))" />
+                        <!--param. 2 byl $sum_of_values-->
 											</xsl:attribute>
 										</xsl:if>
 										
@@ -461,7 +496,8 @@
 											</xsl:attribute>
 											<xsl:if test="$ColorHighlighting='true'">
 												<xsl:attribute name="bgcolor">
-													<xsl:value-of select="dedek:RGB(number(@val), number($sum_of_values_set1))" />
+													<xsl:value-of select="dedek:RGB(number(@val), number($color_norm_factor_set1))" />
+                          <!--param. 2 byl $sum_of_values_set1-->
 												</xsl:attribute>
 											</xsl:if>
 											
@@ -495,7 +531,8 @@
 											
 											<xsl:if test="$ColorHighlighting='true'">
 												<xsl:attribute name="bgcolor">
-													<xsl:value-of select="dedek:RGB(number($val), number($sum_of_values_set2))" />
+													<xsl:value-of select="dedek:RGB(number($val), number($color_norm_factor_set2))" />
+                          <!--param. 2 byl $sum_of_values_set2-->
 												</xsl:attribute>
 											</xsl:if>
 											

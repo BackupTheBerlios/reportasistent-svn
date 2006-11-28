@@ -337,6 +337,17 @@
 									<xsl:otherwise>100</xsl:otherwise>
 								</xsl:choose>
 							</xsl:variable>
+
+              <xsl:variable name="color_norm_factor_set1">
+                <xsl:choose>
+                  <xsl:when test="$TypeOfValues='abs'">
+                    <xsl:value-of select="$sum_of_values_set1"/>
+                  </xsl:when>
+                  <xsl:otherwise>
+                    <xsl:value-of select="$norm_factor_set1"/>
+                  </xsl:otherwise>
+                </xsl:choose>
+              </xsl:variable>
 							
 							<xsl:element name="td">
 								<xsl:attribute name="id">
@@ -345,7 +356,8 @@
 								
 								<xsl:if test="$ColorHighlighting='true'">
 									<xsl:attribute name="bgcolor">
-										<xsl:value-of select="dedek:RGB(number(@val), number($sum_of_values_set1))" />
+										<xsl:value-of select="dedek:RGB(number(@val), number($color_norm_factor_set1))" />
+                    <!--2. parametr byl $sum_of_values_set1-->
 									</xsl:attribute>
 								</xsl:if>
 								
@@ -375,11 +387,12 @@
 										<xsl:value-of select="$id_base"/>r<xsl:value-of select="$row_number"/><xsl:text>d_sumset1</xsl:text>
 									</xsl:attribute>
 									
-									<xsl:if test="$ColorHighlighting='true'">
+									<!-- Kody - policka se souctem se nehighlightuji
+                  <xsl:if test="$ColorHighlighting='true'">
 										<xsl:attribute name="bgcolor">
 											<xsl:value-of select="dedek:RGB(number($row_values_sum_set1), number($sum_of_values_set1))" />
 										</xsl:attribute>
-									</xsl:if>
+									</xsl:if>-->
 									
 									<xsl:attribute name="border_left"><xsl:value-of select="$bord_frm"/></xsl:attribute>
 									<xsl:attribute name="border_right"><xsl:value-of select="$bord_out"/></xsl:attribute>
@@ -444,6 +457,17 @@
 									<xsl:otherwise>100</xsl:otherwise>
 								</xsl:choose>
 							</xsl:variable>
+
+              <xsl:variable name="color_norm_factor_set2">
+                <xsl:choose>
+                  <xsl:when test="$TypeOfValues='abs'">
+                    <xsl:value-of select="$sum_of_values_set2"/>
+                  </xsl:when>
+                  <xsl:otherwise>
+                    <xsl:value-of select="$norm_factor_set2"/>
+                  </xsl:otherwise>
+                </xsl:choose>
+              </xsl:variable>
 							
 							<xsl:element name="td">
 								<xsl:attribute name="id">
@@ -452,7 +476,8 @@
 								
 								<xsl:if test="$ColorHighlighting='true'">
 									<xsl:attribute name="bgcolor">
-										<xsl:value-of select="dedek:RGB(number(@val), number($sum_of_values_set2))" />
+										<xsl:value-of select="dedek:RGB(number(@val), number($color_norm_factor_set2))" />
+                    <!--param. 2 byl $sum_of_values_set2-->
 									</xsl:attribute>
 								</xsl:if>
 								
@@ -482,11 +507,12 @@
 										<xsl:value-of select="$id_base"/>r<xsl:value-of select="$row_number"/><xsl:text>d_sumset2</xsl:text>
 									</xsl:attribute>
 									
-									<xsl:if test="$ColorHighlighting='true'">
+									<!--kody - policka se souctem se nehighlightuji 
+                  <xsl:if test="$ColorHighlighting='true'">
 										<xsl:attribute name="bgcolor">
 											<xsl:value-of select="dedek:RGB(number($row_values_sum_set2), number($sum_of_values_set2))" />
 										</xsl:attribute>
-									</xsl:if>
+									</xsl:if>-->
 									
 									<xsl:attribute name="border_left"><xsl:value-of select="$bord_frm"/></xsl:attribute>
 									<xsl:attribute name="border_right"><xsl:value-of select="$bord_out"/></xsl:attribute>
@@ -533,11 +559,12 @@
 									<xsl:value-of select="$id_base" />r_sum_d<xsl:value-of select="$col_number_set1" /><xsl:text>_set1</xsl:text>
 								</xsl:attribute>
 								
-								<xsl:if test="$ColorHighlighting='true'">
+								<!--kody - policka se souctem se nehighlightuji 
+                <xsl:if test="$ColorHighlighting='true'">
 									<xsl:attribute name="bgcolor">
 										<xsl:value-of select="dedek:RGB(number($sum_of_column_set1), number($sum_of_values_set1))" />
 									</xsl:attribute>
-								</xsl:if>
+								</xsl:if>-->
 								
 								<xsl:attribute name="border_top"><xsl:value-of select="$bord_frm"/></xsl:attribute>
 								<xsl:attribute name="border_right"><xsl:value-of select="$bord_in"/></xsl:attribute>
@@ -579,11 +606,12 @@
 									<xsl:value-of select="$id_base" />r_sum_d<xsl:value-of select="$col_number_set2" /><xsl:text>_set2</xsl:text>
 								</xsl:attribute>
 								
-								<xsl:if test="$ColorHighlighting='true'">
+								<!--kody - policka se souctem se nehighlightuji 
+                <xsl:if test="$ColorHighlighting='true'">
 									<xsl:attribute name="bgcolor">
 										<xsl:value-of select="dedek:RGB(number($sum_of_column_set2), number($sum_of_values_set2))" />
 									</xsl:attribute>
-								</xsl:if>
+								</xsl:if>-->
 								
 								<xsl:attribute name="border_top"><xsl:value-of select="$bord_frm"/></xsl:attribute>
 								<xsl:attribute name="border_right"><xsl:value-of select="$bord_in"/></xsl:attribute>

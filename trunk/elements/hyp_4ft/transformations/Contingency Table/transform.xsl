@@ -301,11 +301,11 @@
 					<xsl:if test="$ShowSumField='true'">
 						<xsl:element name="td">
 							<xsl:attribute name="id"><xsl:value-of select="$id_base"/>r2d4</xsl:attribute>
-							<xsl:if test="$ColorHighlighting='true'">
+							<!--<xsl:if test="$ColorHighlighting='true'">
 								<xsl:attribute name="bgcolor">
 									<xsl:value-of select="dedek:RGB(number($r1) , number($total))" />
 								</xsl:attribute>
-							</xsl:if>
+							</xsl:if>-->
 							<xsl:attribute name="border_left"><xsl:value-of select="$bord_frm"/></xsl:attribute>
 							<xsl:attribute name="border_right"><xsl:value-of select="$bord_out"/></xsl:attribute>
 							<xsl:attribute name="border_bottom"><xsl:value-of select="$bord_in"/></xsl:attribute>
@@ -349,11 +349,11 @@
 					<xsl:if test="$ShowSumField='true'">
 						<xsl:element name="td">
 							<xsl:attribute name="id"><xsl:value-of select="$id_base"/>r3d4</xsl:attribute>
-							<xsl:if test="$ColorHighlighting='true'">
+							<!--<xsl:if test="$ColorHighlighting='true'">
 								<xsl:attribute name="bgcolor">
 									<xsl:value-of select="dedek:RGB(number($r2) , number($total))" />
 								</xsl:attribute>
-							</xsl:if>
+							</xsl:if>-->
 							<xsl:attribute name="border_left"><xsl:value-of select="$bord_frm"/></xsl:attribute>
 							<xsl:attribute name="border_right"><xsl:value-of select="$bord_out"/></xsl:attribute>
 							<xsl:attribute name="border_bottom"><xsl:value-of select="$bord_frm"/></xsl:attribute>
@@ -371,11 +371,11 @@
 						
 						<xsl:element name="td">
 							<xsl:attribute name="id"><xsl:value-of select="$id_base"/>r4d2</xsl:attribute>
-							<xsl:if test="$ColorHighlighting='true'">
+							<!--<xsl:if test="$ColorHighlighting='true'">
 								<xsl:attribute name="bgcolor">
 									<xsl:value-of select="dedek:RGB(number($c1) , number($total))" />
 								</xsl:attribute>
-							</xsl:if>
+							</xsl:if>-->
 							<xsl:attribute name="border_right"><xsl:value-of select="$bord_in"/></xsl:attribute>
 							<xsl:attribute name="border_bottom"><xsl:value-of select="$bord_out"/></xsl:attribute>
 							<xsl:attribute name="border_top"><xsl:value-of select="$bord_frm"/></xsl:attribute>
@@ -384,11 +384,11 @@
 						
 						<xsl:element name="td">
 							<xsl:attribute name="id"><xsl:value-of select="$id_base"/>r4d3</xsl:attribute>
-							<xsl:if test="$ColorHighlighting='true'">
+							<!--<xsl:if test="$ColorHighlighting='true'">
 								<xsl:attribute name="bgcolor">
 									<xsl:value-of select="dedek:RGB(number($c2) , number($total))" />
 								</xsl:attribute>
-							</xsl:if>
+							</xsl:if>-->
 							<xsl:attribute name="border_right"><xsl:value-of select="$bord_frm"/></xsl:attribute>
 							<xsl:attribute name="border_bottom"><xsl:value-of select="$bord_out"/></xsl:attribute>
 							<xsl:attribute name="border_top"><xsl:value-of select="$bord_frm"/></xsl:attribute>
@@ -397,11 +397,11 @@
 						
 						<xsl:element name="td">
 							<xsl:attribute name="id"><xsl:value-of select="$id_base"/>r4d4</xsl:attribute>
-							<xsl:if test="$ColorHighlighting='true'">
-							<xsl:attribute name="bgcolor">
+							<!--<xsl:if test="$ColorHighlighting='true'">
+							  <xsl:attribute name="bgcolor">
 									<xsl:value-of select="dedek:RGB(0 , number($total))" />
 								</xsl:attribute>
-							</xsl:if>
+							</xsl:if>-->
 							<xsl:attribute name="border_right"><xsl:value-of select="$bord_out"/></xsl:attribute>
 							<xsl:attribute name="border_bottom"><xsl:value-of select="$bord_out"/></xsl:attribute>
 							<xsl:attribute name="border_top"><xsl:value-of select="$bord_frm"/></xsl:attribute>
