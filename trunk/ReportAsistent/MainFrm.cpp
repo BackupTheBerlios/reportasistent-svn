@@ -507,7 +507,7 @@ void CMainFrame::OnWordEditorEditActiveElement()
 			appendChild(active_element);
 
 
-	//configure by dilaog
+	//configure by dialog
 	if (CSkeletonDoc::EditActiveElement(active_element))
 	{
 		//transform and generate

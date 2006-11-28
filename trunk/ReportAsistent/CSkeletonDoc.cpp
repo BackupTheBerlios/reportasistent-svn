@@ -843,7 +843,7 @@ void CSkeletonDoc::OnMmnewelement(UINT nMessageID)
 			
 			break;
 	}
-/*
+/* Stara verze - ke smazani
 
 	MSXML2::IXMLDOMElementPtr new_element = InsertNewElement(el_what_id, selected_element);
 	if (new_element != NULL) //tj. pridani se zdarilo
@@ -1084,6 +1084,7 @@ BOOL CSkeletonDoc::InsertNewElementAndUpdateTreeCtrl( BOOL bEdit,CElementManager
 	BOOL bSuccess = false;
 	CTreeCtrl & hTreeCtrl = GetFirstView()->GetTreeCtrl();
 	MSXML2::IXMLDOMElementPtr parent_element = ElementFromItemData(hTreeCtrl.GetItemData( hParentItem ));	
+
 	CElementManager & OElementManager = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
 
 /*	CString Pom;
@@ -1121,8 +1122,7 @@ BOOL CSkeletonDoc::InsertNewElementAndUpdateTreeCtrl( BOOL bEdit,CElementManager
 			{
 				if(!bEdit || (bEdit && EditElement(new_element)) )
 				{
-
-					CUT_Hint oHint(hParentItem,pNewXMLElm,hTreeCtrl.GetPrevSiblingItem(hInsertBefore));
+					CUT_Hint oHint(hParentItem,new_element,hTreeCtrl.GetPrevSiblingItem(hInsertBefore));
 					SetModifiedFlag();
 					UpdateAllViews(NULL,UT_INS, &oHint);			
 					bSuccess=true;

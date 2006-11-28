@@ -3,8 +3,7 @@
 	ProjectType="Visual C++"
 	Version="8,00"
 	Name="LMplugin"
-	ProjectGUID="{D85E24FE-7917-408F-9411-EEC835F17DA9}"
-	RootNamespace="LMplugin"
+	ProjectGUID="{7463CE53-73A6-45C6-972A-A0C2C6C29BA7}"
 	Keyword="MFCProj"
 	>
 	<Platforms>
@@ -760,6 +759,26 @@
 				</FileConfiguration>
 			</File>
 			<File
+				RelativePath="TColumn_Recordset.cpp"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+			</File>
+			<File
 				RelativePath="TCondition_Recordset.cpp"
 				>
 				<FileConfiguration
@@ -780,8 +799,24 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\TData_Matrix_Recordset.cpp"
+				RelativePath="TData_Matrix_Recordset.cpp"
 				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="TDCQuantifier_Recordset.cpp"
@@ -1229,11 +1264,15 @@
 				>
 			</File>
 			<File
+				RelativePath="TColumn_Recordset.h"
+				>
+			</File>
+			<File
 				RelativePath="TCondition_Recordset.h"
 				>
 			</File>
 			<File
-				RelativePath=".\TData_Matrix_Recordset.h"
+				RelativePath="TData_Matrix_Recordset.h"
 				>
 			</File>
 			<File

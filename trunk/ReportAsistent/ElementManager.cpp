@@ -512,7 +512,8 @@ BOOL CElementManager::CanInsertBefore(MSXML2::IXMLDOMElementPtr &pToInsert, MSXM
 	MSXML2::IXMLDOMNodePtr pInserted;
 	MSXML2::IXMLDOMElementPtr pParent=pTarget->GetparentNode();
 	MSXML2::IXMLDOMParseErrorPtr err;
-	
+
+
 	//zkusi ho pridat a kdyz to projde tak ho zase vynda :-)
 	try
 	{
@@ -527,12 +528,12 @@ BOOL CElementManager::CanInsertBefore(MSXML2::IXMLDOMElementPtr &pToInsert, MSXM
 	}
 	catch (_com_error & e)
 	{
-		//AfxMessageBox(child->xml);
 #ifdef _DEBUG
 		AfxMessageBox(e.ErrorMessage());
 #endif
 		return FALSE;
 	}
+
 
 	pParent->removeChild(pInserted);
 
