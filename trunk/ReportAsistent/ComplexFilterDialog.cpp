@@ -686,6 +686,7 @@ void CFilterResultImpl::UpdateResult(MSXML2::IXMLDOMElementPtr & filter_dom)
 	
 	m_ResultList.DeleteAllItems();
 		
+	m_ResultList.SetItemCount(values_list->length);
 	for (int i = 0; i < values_list->length; i++)
 	{
 		//spoleham se na stejne poradi atributu v m_ResultList jako v m_AttributesList

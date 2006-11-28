@@ -7,6 +7,8 @@
 #include "WordManager.h"
 #include "WaitDialog.h"
 
+//#define GETTIMELOAD
+
 #ifdef _DEBUG
 #undef THIS_FILE
 static char THIS_FILE[]=__FILE__;
@@ -144,9 +146,17 @@ BOOL CWordManager::InitWordLoader()
 	if (CreateVBRAInstance(m_WordLoader))
 	{
 
+#ifdef GETTIMELOAD
+		AfxMessageBox("instance ok");
+#endif
+		
 		FillActiveElements();
+
+#ifdef GETTIMELOAD
+		AfxMessageBox("icons ok");
+#endif
 	
-		return InitWordEventHandler();
+		return InitWordEventHandler();		
 	}
 
 	return FALSE;
@@ -217,7 +227,9 @@ void CWordManager::GenerateXMLString(_bstr_t XML_str)
 		if (! InitWordLoader()) return;
 	}
 
+#ifdef GETTIMELOAD
 	AfxMessageBox("is_init");
+#endif
 //	m_WordLoader->PutstrDefaultWordTemplate((LPCTSTR) "D:\\Documents and Settings\\Dedek\\Data aplikací\\Microsoft\\Šablony\\honza_template.dot");
 		
 	
@@ -226,6 +238,10 @@ void CWordManager::GenerateXMLString(_bstr_t XML_str)
 
 BOOL CWordManager::InitWordEventHandler()
 {
+#ifdef GETTIMELOAD
+	AfxMessageBox("handler begin");
+#endif
+	
 	m_pEventHandler = new CWordEventHandler();
 
 	LPUNKNOWN p_unk = m_pEventHandler->GetIDispatch(FALSE);
