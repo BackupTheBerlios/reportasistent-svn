@@ -1,5 +1,5 @@
 //{{NO_DEPENDENCIES}}
-// Microsoft Developer Studio generated include file.
+// Microsoft Visual C++ generated include file.
 // Used by ReportAsistent.rc
 //
 #define IDD_ABOUTBOX                    100
@@ -139,12 +139,14 @@
 #define IDC_NO_FILTERS                  1064
 #define IDC_NO_FLTER_FRAME              1065
 #define IDC_WORD_TEMPLATE_COMBO         1066
+#define IDC_WORD_TEMPLATE_EDIT          1066
 #define IDC_TREE_HAS_BUTTONS            1067
 #define IDC_TREE_HAS_LINES              1068
 #define IDC_IGNORE_RADIO                1069
 #define IDC_DELETE_RADIO                1070
 #define IDC_SET_DEFAULT_RADIO           1071
 #define IDC_TEMPLATES_REFRESH_BUTTON    1072
+#define IDC_TEMPLATE_BROWSE_BOTTON      1072
 #define ID_MMGENREP                     32771
 #define ID_MMSOURCES                    32772
 #define ID_ELEMENT_EDIT                 32780
