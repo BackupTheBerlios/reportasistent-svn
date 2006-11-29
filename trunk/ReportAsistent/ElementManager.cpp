@@ -258,7 +258,7 @@ BOOL CElementManager::CanInsertChildHere(MSXML2::IXMLDOMElementPtr &child, MSXML
 		doc2->Release();
 
 	}
-	catch (_com_error & e)
+	catch (_com_error e)
 	{
 		//AfxMessageBox(child->xml);
 #ifdef _DEBUG
@@ -526,7 +526,7 @@ BOOL CElementManager::CanInsertBefore(MSXML2::IXMLDOMElementPtr &pToInsert, MSXM
 		doc2->Release();
 
 	}
-	catch (_com_error & e)
+	catch (_com_error e)
 	{
 #ifdef _DEBUG
 		AfxMessageBox(e.ErrorMessage());

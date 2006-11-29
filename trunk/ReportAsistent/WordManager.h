@@ -97,6 +97,9 @@ public:
 	CStringTable & getWordParagraphStyles() { return m_WordParagraphStyles; };
 	CStringTable & getWordCharacterStyles() { return m_WordCharacterStyles; };
 
+	void setWordTemplate(LPCTSTR word_template) {m_WordTemplate = word_template; };
+	LPCTSTR getWordTemplate() {return m_WordTemplate; };
+
 private:
 	WINDOWPLACEMENT m_origWINDOWPLACEMENT;
 	static int LoadSafeArrayToStringTable(SAFEARRAY * sarray, CStringTableImpl & st);
@@ -108,6 +111,8 @@ private:
 	CStringTableImpl m_WordTemplates;
 	CStringTableImpl m_WordParagraphStyles;
 	CStringTableImpl m_WordCharacterStyles;
+
+	CString m_WordTemplate;
 protected:
 	void FillActiveElements();
 	void DisconnectWordEventHandler();
@@ -121,6 +126,7 @@ public:
   CString getLastError(void);
   
   // loads lists of Word styles from configuration XML file
+	void WordEditorInsertActiveElement(void);
 
 private:
 	BOOL loadStylesFromXML(LPCTSTR XMLFilePath);

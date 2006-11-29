@@ -19,8 +19,10 @@ static char THIS_FILE[] = __FILE__;
 CGenerateDialog::CGenerateDialog(CSkeletonDoc & DocumentToGenerate, CWnd* pParent /*=NULL*/)
 	: CDialog(CGenerateDialog::IDD, pParent), m_SkeletonDocument(DocumentToGenerate)
 {
+	CWordManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->WordManager;
+	m_bNewWordChecked  = ! m.isWordEditorActive();
+
 	//{{AFX_DATA_INIT(CGenerateDialog)
-	m_bNewWordChecked = TRUE;
 	//}}AFX_DATA_INIT
 }
 
@@ -45,7 +47,21 @@ END_MESSAGE_MAP()
 
 void CGenerateDialog::OnGenerateButton() 
 {
-	m_SkeletonDocument.Generate();
+	UpdateData();
+	
+	m_SkeletonDocument.Generate(m_bNewWordChecked);
 	
 	EndDialog(IDOK);
 }
+
+BOOL CGenerateDialog::OnInitDialog()
+{
+	CDialog::OnInitDialog();
+
+	GetDlgItem(IDC_NEW_WORD_CHECK)->EnableWindow(! m_bNewWordChecked);
+
+	return TRUE;  // return TRUE unless you set the focus to a control
+	// EXCEPTION: OCX Property Pages should return FALSE
+}
+
+

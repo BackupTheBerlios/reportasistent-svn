@@ -12,6 +12,7 @@
 class CDirectoriesManager  
 {
 public:
+	CString getWordTemplateDirectory();
 	CString getExeFileDirectory();
 	CString getApplicationRoot();
 	CString getAttrLinkTableStylesDirectory();

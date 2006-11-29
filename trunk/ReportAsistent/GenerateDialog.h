@@ -42,6 +42,7 @@ protected:
 	DECLARE_MESSAGE_MAP()
 private:
 	CSkeletonDoc & m_SkeletonDocument;
+	virtual BOOL OnInitDialog();
 };
 
 //{{AFX_INSERT_LOCATION}}

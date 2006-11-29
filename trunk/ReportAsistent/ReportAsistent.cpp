@@ -151,7 +151,7 @@ BOOL CReportAsistentApp::InitInstance()
 	LoadStdProfileSettings();  // Load standard INI file options (including MRU)
 
 	//Dedek: write to windows registry
-	AfxGetApp()->WriteProfileString("Settings", "ApplicationRoot", 
+	WriteProfileString("Settings", "ApplicationRoot", 
 		m_pGeneralManager->DirectoriesManager.getApplicationRoot());
 	//Iva: write to windows registry
 	 m_bIdInItemName = GetProfileInt("Settings", "bIdInItemName", 1);
@@ -159,6 +159,10 @@ BOOL CReportAsistentApp::InitInstance()
 	 m_iTreeItemIndent= GetProfileInt("Settings", "TreeItemIndent",25);
 	 m_bTreeHasLines = GetProfileInt("Settings","bTreeHasLines",1);
 	 m_bTreeHasButtons = GetProfileInt("Settings","bTreeHasButtons",1);
+
+	 m_pGeneralManager->WordManager.setWordTemplate(
+		 GetProfileString("Settings", "WordTemplate", 
+			m_pGeneralManager->DirectoriesManager.getWordTemplateDirectory() + "\\prozatimni.dot"));
 
 
 	// Register the application's document templates.  Document templates
@@ -235,10 +239,6 @@ void CReportAsistentApp::OnAppAbout()
 
 int CReportAsistentApp::ExitInstance() 
 {
-
-	//Dedek:
-	delete m_pGeneralManager;
-
 	//Iva: Save information to registry
 	/*int iIdInItemName = m_bIdInItemName;
 	int iTreeHasLines = m_bTreeHasLines
@@ -249,6 +249,10 @@ int CReportAsistentApp::ExitInstance()
 	 WriteProfileInt("Settings","bTreeHasLines", m_bTreeHasLines);
 	 WriteProfileInt("Settings","bTreeHasButtons",m_bTreeHasLines);
 
+	 WriteProfileString("Settings", "WordTemplate", m_pGeneralManager->WordManager.getWordTemplate());
+
+	//Dedek:
+	delete m_pGeneralManager;
 
 	
 	return CWinApp::ExitInstance();

@@ -84,6 +84,11 @@ CString CDirectoriesManager::getApplicationRoot()
 	return application_root_path + "\\ReportAsistent";
 }
 
+CString CDirectoriesManager::getWordTemplateDirectory()
+{
+	return application_root_path + "\\Word";
+}
+
 CString CDirectoriesManager::getExeFileDirectory()
 {
 	return exe_dir;

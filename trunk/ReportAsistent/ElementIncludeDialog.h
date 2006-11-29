@@ -34,6 +34,8 @@ public:
 	//}}AFX_VIRTUAL
 
 // Implementation
+public:
+	void static DDV_ValidFileName(CDataExchange *pDX, int nIdc, CString csFileName, CString csOldFileName);
 protected:
 	CString m_OldFileName;
 	void DDV_ValidFileName(CDataExchange *pDX, int nIdc, CString csFileName);

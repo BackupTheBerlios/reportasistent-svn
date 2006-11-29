@@ -586,7 +586,7 @@ LPARAM CSkeletonDoc::CreateItemData(MSXML2::IXMLDOMElementPtr & element)
 }
 
 
-void CSkeletonDoc::Generate()
+void CSkeletonDoc::Generate(BOOL new_word)
 {
 	MSXML2::IXMLDOMElementPtr doc_element;
 	
@@ -612,7 +612,10 @@ void CSkeletonDoc::Generate()
   
   try
   {
-	  m.GenerateXMLString(doc_element->xml);
+	  if (new_word)
+		m.GenerateXMLString(doc_element->xml);
+	  else
+		m.GenerateXMLStringToWordEditor(doc_element->xml);
   }
   catch (_com_error e)
   {

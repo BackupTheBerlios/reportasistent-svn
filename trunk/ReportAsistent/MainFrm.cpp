@@ -484,55 +484,9 @@ void CMainFrame::WinHelp(DWORD dwData, UINT nCmd)
 
 void CMainFrame::OnWordEditorEditActiveElement() 
 {
-/****/
-	
-	CElementManager & em = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
 	CWordManager & wm = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->WordManager;
-	LPCTSTR strElementName = wm.getLastElementName();
-
-	//load element
-	int element_index = em.ElementIdFromName(strElementName);
-	MSXML2::IXMLDOMElementPtr active_element = 
-		em.CreateEmptyElement(element_index);
-
 	
-	//load document
-	MSXML2::IXMLDOMDocument2Ptr doc;
-	doc.CreateInstance(_T("Msxml2.DOMDocument"));
-	em.LoadSkeletonDTD((MSXML2::IXMLDOMDocumentPtr &) doc);
-	
-	//insert element to chapter and document
-	doc->documentElement->
-		appendChild(em.CreateEmptyElement(ELID_CHAPTER))->
-			appendChild(active_element);
-
-
-	//configure by dialog
-	if (CSkeletonDoc::EditActiveElement(active_element))
-	{
-		//transform and generate
-		CAElTransform transform(active_element);
-
-		transform.DoAllTransnformations();
-
-#ifdef _DEBUG
-		MSXML2::IXMLDOMParseErrorPtr err = doc->validate();
-
-		if (err->errorCode != S_OK)
-		{
-			AfxMessageBox(err->reason);
-			AfxMessageBox(active_element->selectSingleNode("output")->xml);
-		}
-#endif
-	
-		wm.GenerateXMLStringToWordEditor(active_element->xml);
-	}
-
-	
-	
-	active_element.Release();
-	doc.Release();
-/****/	
+	wm.WordEditorInsertActiveElement();
 }
 
 void CMainFrame::OnClose() 

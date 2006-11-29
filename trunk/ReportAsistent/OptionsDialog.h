@@ -38,17 +38,16 @@ public:
 // Implementation
 protected:
 
-	void FillTemplatesCombo();
-
 	// Generated message map functions
 	//{{AFX_MSG(COptionsDialog)
 	virtual BOOL OnInitDialog();
 	virtual void OnOK();
-	afx_msg void OnTemplatesRefreshButton();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 public:
-	CComboBox m_WordTemplateCombo;
+	CString m_strWordTemplate;
+public:
+	afx_msg void OnBnClickedTemplateBrowseBotton();
 };
 
 //{{AFX_INSERT_LOCATION}}

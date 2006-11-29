@@ -6,6 +6,7 @@
 #include "OptionsDialog.h"
 #include "CSkeletonDoc.h"
 #include "SkeletonView.h"
+#include "ElementIncludeDialog.h"
 #include <Shlwapi.h>
 
 #ifdef _DEBUG
@@ -23,12 +24,19 @@ COptionsDialog::COptionsDialog(CWnd* pParent /*=NULL*/)
 {
 	//{{AFX_DATA_INIT(COptionsDialog)
 	//}}AFX_DATA_INIT
+
+	CWordManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->WordManager;
+	m_strWordTemplate= m.getWordTemplate();
 }
 
 
 void COptionsDialog::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
+
+	CWordManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->WordManager;
+
+	
 	//{{AFX_DATA_MAP(COptionsDialog)
 	DDX_Control(pDX, IDC_SHOW_ID_IN_TREE, m_IdInTreeCheckBox);
 	DDX_Control(pDX, IDC_TREE_HAS_BUTTONS, m_ButtonsCheckBox);
@@ -36,14 +44,16 @@ void COptionsDialog::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_TREE_ITEM_INDENT, m_IndentEdit);
 	DDX_Control(pDX, IDC_TREE_ITEM_HEIGHT, m_HeightEdit);
 	//}}AFX_DATA_MAP
-	DDX_Control(pDX, IDC_WORD_TEMPLATE_COMBO, m_WordTemplateCombo);
+	DDX_Text(pDX, IDC_WORD_TEMPLATE_EDIT, m_strWordTemplate);
+	
+	CElementIncludeDialog::DDV_ValidFileName(pDX, IDC_WORD_TEMPLATE_EDIT, m_strWordTemplate, m.getWordTemplate());
 }
 
 
 BEGIN_MESSAGE_MAP(COptionsDialog, CDialog)
 	//{{AFX_MSG_MAP(COptionsDialog)
-	ON_BN_CLICKED(IDC_TEMPLATES_REFRESH_BUTTON, OnTemplatesRefreshButton)
 	//}}AFX_MSG_MAP
+	ON_BN_CLICKED(IDC_TEMPLATE_BROWSE_BOTTON, OnBnClickedTemplateBrowseBotton)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -62,9 +72,7 @@ BOOL COptionsDialog::OnInitDialog()
 		CheckRadioButton(IDC_CZECH_RADIO, IDC_ENGLISH_RADIO, IDC_CZECH_RADIO);
 	else
 		CheckRadioButton(IDC_CZECH_RADIO, IDC_ENGLISH_RADIO, IDC_ENGLISH_RADIO);
-	
-	FillTemplatesCombo();
-	
+		
 	//Set Tree Items
 	//Height edit
 	CString Pom;
@@ -108,10 +116,15 @@ BOOL COptionsDialog::OnInitDialog()
 
 void COptionsDialog::OnOK() 
 {
+	UpdateData();
+
 	CGeneralManager * m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager;
 	CString Pom;
 	int iPom;
 	CReportAsistentApp * App = ((CReportAsistentApp *) AfxGetApp());
+
+	//dedek: WordTemplate
+	m->WordManager.setWordTemplate(m_strWordTemplate);
 
 	//Get Language radio buttons
 
@@ -157,42 +170,24 @@ void COptionsDialog::OnOK()
 	App->FirstDocumentInFirstTemplate()->UpdateAllViews(NULL, UT_SETTINGS);
 
 
+
 	CDialog::OnOK();
 }
 
-void COptionsDialog::FillTemplatesCombo()
+void COptionsDialog::OnBnClickedTemplateBrowseBotton()
 {
-	CWordManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->WordManager;
+	CString cur_template;
+	GetDlgItemText(IDC_WORD_TEMPLATE_EDIT, cur_template);
 
-	CStringTable & st = m.getWordTemplates();
+	CFileDialog OFileDlg(	TRUE, //"open file" type
+							_T("dot"), // default ending for given names without extension
+							cur_template,
+							OFN_HIDEREADONLY|OFN_PATHMUSTEXIST,
+							_T("MS Word Templates (*.dot)|*.dot||"));
 
-	CString sel;
-	m_WordTemplateCombo.GetWindowText(sel);
-	
-	//vymaze cele combo
-	m_WordTemplateCombo.ResetContent();
-	
-	for (int a=0; a < st.getCount(); a++)
+	if( OFileDlg.DoModal()==IDOK )
 	{
-		m_WordTemplateCombo.AddString(st.getItem(a));
+		m_strWordTemplate = OFileDlg.GetPathName();
+		UpdateData(FALSE);
 	}
-
-	if ((CB_ERR == m_WordTemplateCombo.SelectString(-1, sel)) && 
-		(m_WordTemplateCombo.GetCount() > 0))
-	{
-		//vyber prvni
-		CString s;
-		m_WordTemplateCombo.GetLBText(0, s);
-		m_WordTemplateCombo.SelectString(-1, s);
-	}
-}
-
-
-
-void COptionsDialog::OnTemplatesRefreshButton() 
-{
-	CWordManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->WordManager;
-	m.LoadWordStylesAndTempates();
-
-	FillTemplatesCombo();
 }

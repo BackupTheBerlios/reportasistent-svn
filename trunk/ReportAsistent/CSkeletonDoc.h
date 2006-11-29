@@ -96,7 +96,7 @@ public:
 	BOOL IsIDInTree(CString Id);
 	BOOL IsDescendantOfElement(MSXML2::IXMLDOMElementPtr pDescendantXMLElm,MSXML2::IXMLDOMElementPtr pAncestorXMLElm);
 	void ChangeIDsInTree(MSXML2::IXMLDOMElementPtr pXMLElm);
-	void Generate();
+	void Generate(BOOL new_word);
 	CString CreateNewID(CElementManager::elId_t element_type);
 	static void DeleteItemData(LPARAM data);
 

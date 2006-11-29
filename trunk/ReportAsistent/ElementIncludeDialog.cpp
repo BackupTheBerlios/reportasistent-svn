@@ -68,8 +68,11 @@ END_MESSAGE_MAP()
 
 void CElementIncludeDialog::DDV_NonDuplicateID(CDataExchange *pDX, int nId, CString csIDEditValue)
 {
+
 	if (0!=pDX->m_bSaveAndValidate) //Iva: if it's end of dialog, not beginning
 	{
+		//dedek
+		pDX->PrepareEditCtrl(nId);
 
 		if (""==csIDEditValue) //Iva: ID can't be empty string
 		{
@@ -127,21 +130,25 @@ void CElementIncludeDialog::OnBrowse()
 		SetDlgItemText( IDC_INCLUDE_FILENAME_EDIT, OFileDlg.GetPathName() );	
 }
 
-void CElementIncludeDialog::DDV_ValidFileName(CDataExchange *pDX, int nIdc, CString csFileName)
+void CElementIncludeDialog::DDV_ValidFileName(CDataExchange *pDX, int nIdc, CString csFileName, CString csOldFileName)
 {
 	CFileStatus status;
 
 	
 	if (0!=pDX->m_bSaveAndValidate) //Iva: if it's end of dialog, not beginning
 	{
-		pDX->PrepareEditCtrl(IDC_INCLUDE_ID_EDIT);	
-		pDX->PrepareEditCtrl(IDC_INCLUDE_FILENAME_EDIT);
+		pDX->PrepareEditCtrl(nIdc);
 
 		if( FALSE == CFile::GetStatus( (LPCTSTR) csFileName, status ) ) //Iva: If file with such name does not exist
 		{
-			SetDlgItemText(nIdc, m_OldFileName ); //Iva: return old value to edit box
+			pDX->m_pDlgWnd->SetDlgItemText(nIdc, csOldFileName ); //Iva: return old value to edit box
 			CReportAsistentApp::ReportError(IDS_INVALID_FILE_NAME);
 			pDX->Fail();
 		}
 	}
+}
+
+void CElementIncludeDialog::DDV_ValidFileName(CDataExchange *pDX, int nIdc, CString csFileName)
+{
+	DDV_ValidFileName(pDX, nIdc, csFileName, m_OldFileName);
 }
