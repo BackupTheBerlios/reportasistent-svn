@@ -45,12 +45,16 @@
 class CUT_Hint : public CObject
 {
 public:
+	int iMarkOrphans;
+	BOOL bNewItemTexts;
 	HTREEITEM pTreeItem;
 	MSXML2::IXMLDOMElementPtr pElement;
 	HTREEITEM pInsertAfter;
 
 	CUT_Hint()
 	{
+		bNewItemTexts=false;
+		iMarkOrphans = 0; // 0:no change, 1:mark orphans, 2:unmark orphans
 		pTreeItem = NULL;
 		pElement= NULL;
 		pInsertAfter= TVI_LAST;

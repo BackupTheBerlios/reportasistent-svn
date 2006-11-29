@@ -159,6 +159,7 @@ BOOL CReportAsistentApp::InitInstance()
 	 m_iTreeItemIndent= GetProfileInt("Settings", "TreeItemIndent",25);
 	 m_bTreeHasLines = GetProfileInt("Settings","bTreeHasLines",1);
 	 m_bTreeHasButtons = GetProfileInt("Settings","bTreeHasButtons",1);
+	 m_bMarkOrphans = GetProfileInt("Settings","bMarkOrphans",0);
 
 	 m_pGeneralManager->WordManager.setWordTemplate(
 		 GetProfileString("Settings", "WordTemplate", 
@@ -248,6 +249,7 @@ int CReportAsistentApp::ExitInstance()
 	 WriteProfileInt("Settings", "TreeItemIndent",m_iTreeItemIndent );
 	 WriteProfileInt("Settings","bTreeHasLines", m_bTreeHasLines);
 	 WriteProfileInt("Settings","bTreeHasButtons",m_bTreeHasLines);
+	 WriteProfileInt("Settings","bMarkOrphans",m_bMarkOrphans);
 
 	 WriteProfileString("Settings", "WordTemplate", m_pGeneralManager->WordManager.getWordTemplate());
 

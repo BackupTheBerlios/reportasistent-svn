@@ -113,6 +113,7 @@ public:
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 public:
+	BOOL m_bMarkOrphans;
 	BOOL m_bIdInItemName; // 0/1.. whether or not to show id at the Tree item name
 	int m_iTreeItemHeight;
 	int m_iTreeItemIndent;

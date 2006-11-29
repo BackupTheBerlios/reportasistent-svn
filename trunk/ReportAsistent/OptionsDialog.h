@@ -20,6 +20,7 @@ public:
 // Dialog Data
 	//{{AFX_DATA(COptionsDialog)
 	enum { IDD = IDD_OPTIONS_DIALOG };
+	CButton	m_MarkOrphansCheckBox;
 	CButton	m_IdInTreeCheckBox;
 	CButton	m_ButtonsCheckBox;
 	CButton	m_LinesCheckBox;

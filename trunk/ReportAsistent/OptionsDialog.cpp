@@ -38,6 +38,7 @@ void COptionsDialog::DoDataExchange(CDataExchange* pDX)
 
 	
 	//{{AFX_DATA_MAP(COptionsDialog)
+	DDX_Control(pDX, IDC_MARK_ORPHANS, m_MarkOrphansCheckBox);
 	DDX_Control(pDX, IDC_SHOW_ID_IN_TREE, m_IdInTreeCheckBox);
 	DDX_Control(pDX, IDC_TREE_HAS_BUTTONS, m_ButtonsCheckBox);
 	DDX_Control(pDX, IDC_TREE_HAS_LINES, m_LinesCheckBox);
@@ -104,6 +105,9 @@ BOOL COptionsDialog::OnInitDialog()
 				CheckRadioButton( IDC_IGNORE_RADIO , IDC_SET_DEFAULT_RADIO, IDC_IGNORE_RADIO );
 				App->FirstDocumentInFirstTemplate()->SetReportSettings("orphans_solution","ignore");
 			}
+	//set mark orphans
+	m_MarkOrphansCheckBox.SetCheck( App->m_bMarkOrphans);
+
 
 	
 
@@ -121,6 +125,7 @@ void COptionsDialog::OnOK()
 	CGeneralManager * m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager;
 	CString Pom;
 	int iPom;
+	CUT_Hint oHint;
 	CReportAsistentApp * App = ((CReportAsistentApp *) AfxGetApp());
 
 	//dedek: WordTemplate
@@ -151,7 +156,7 @@ void COptionsDialog::OnOK()
 	App->m_bTreeHasButtons = m_ButtonsCheckBox.GetCheck();
 
 	//Get orphans radio buttons:
-	//CString OrphSol = App->FirstDocumentInFirstTemplate()->GetReportSettings("orphans_solution");
+	CString OrphSol = App->FirstDocumentInFirstTemplate()->GetReportSettings("orphans_solution");
 	switch (GetCheckedRadioButton(IDC_IGNORE_RADIO,  IDC_SET_DEFAULT_RADIO))
 	{
 		case IDC_IGNORE_RADIO:
@@ -165,9 +170,16 @@ void COptionsDialog::OnOK()
 			break;
 	}
 
+	//get mark orphans
+	BOOL bChecked = App->m_bMarkOrphans;
+	App->m_bMarkOrphans = m_MarkOrphansCheckBox.GetCheck();
+	if (bChecked ==App->m_bMarkOrphans) oHint.iMarkOrphans = 0;
+	else if (bChecked == 0) oHint.iMarkOrphans = 1;
+			else oHint.iMarkOrphans = 2;
+
 	//Apply changes
 	App->FirstDocumentInFirstTemplate()->SetModifiedFlag();
-	App->FirstDocumentInFirstTemplate()->UpdateAllViews(NULL, UT_SETTINGS);
+	App->FirstDocumentInFirstTemplate()->UpdateAllViews(NULL, UT_SETTINGS, &oHint);
 
 
 
