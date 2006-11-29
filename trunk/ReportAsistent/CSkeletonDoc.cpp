@@ -240,6 +240,7 @@ void CSkeletonDoc::OnElementEdit()
 		CUT_Hint oHint(sel_item, edited_element, 0);
 		SetModifiedFlag();
 		UpdateAllViews(NULL,UT_EDIT, &oHint);
+		SetModifiedFlag();
 	}
 
 }

@@ -38,7 +38,9 @@
 #ifndef UT_SETTINGS
 	#define UT_SETTINGS 4
 #endif
-
+#ifndef UT_SOURCES
+	#define UT_SOURCES 5
+#endif
 
 
 //Iva: Definition of class for OnUpdate(), its pHint parameter
@@ -54,7 +56,7 @@ public:
 	CUT_Hint()
 	{
 		bNewItemTexts=false;
-		iMarkOrphans = 0; // 0:no change, 1:mark orphans, 2:unmark orphans
+		iMarkOrphans = 0; // 0:no change, 2:mark orphans, 3:unmark orphans
 		pTreeItem = NULL;
 		pElement= NULL;
 		pInsertAfter= TVI_LAST;

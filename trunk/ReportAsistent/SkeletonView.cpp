@@ -115,6 +115,10 @@ void CSkeletonView::OnInitialUpdate()
 	//Iva: zde bude naplneni TreeCtrl ( fce CSkeletonDocument->FillTreeCtrl(pTree) )
 	GetDocument()->FillTreeControl(GetTreeCtrl());
 
+	if (((CReportAsistentApp *)AfxGetApp())->m_bMarkOrphans)
+		ResolveOrphans(ORP_SIGN);
+
+
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -190,6 +194,11 @@ void CSkeletonView::OnUpdate(CView* pSender, LPARAM lHint, CObject* pHint)
 	//Iva: New version
 	switch (lHint)
 	{
+
+	case UT_SOURCES:
+		if (((CReportAsistentApp *)AfxGetApp())->m_bMarkOrphans)
+			ResolveOrphans(ORP_SIGN);
+		break;
 	case UT_SETTINGS: //settings of TreeCtrl have changed
 		long        lStyleOld;
 
@@ -207,6 +216,12 @@ void CSkeletonView::OnUpdate(CView* pSender, LPARAM lHint, CObject* pHint)
 		GetTreeCtrl().SetItemHeight(((CReportAsistentApp *)AfxGetApp())->m_iTreeItemHeight);//default: 16
 
 		UpdateAllItemTexts(GetTreeCtrl().GetRootItem());
+
+		if (((CUT_Hint*)pHint))
+		{
+			if (((CUT_Hint*)pHint)->iMarkOrphans != 0) 
+				ResolveOrphans(((CUT_Hint*)pHint)->iMarkOrphans);
+		}
 		
 	//	GetDocument()->FillTreeControl(GetTreeCtrl());
 
@@ -227,6 +242,11 @@ void CSkeletonView::OnUpdate(CView* pSender, LPARAM lHint, CObject* pHint)
 					pTreeCtrl.Expand(((CUT_Hint*)pHint)->pTreeItem,TVE_EXPAND);
 				pTreeCtrl.SelectItem(inserted_item);
 			}
+
+			//Mark orphans, if necessary
+			if (((CReportAsistentApp *)AfxGetApp())->m_bMarkOrphans)
+			ResolveOrphans(ORP_SIGN);
+
 		break;
 	case UT_EDIT:	
 			if (NULL != ((CUT_Hint*)pHint)->pTreeItem) 
@@ -244,7 +264,12 @@ void CSkeletonView::OnUpdate(CView* pSender, LPARAM lHint, CObject* pHint)
 				MSXML2::IXMLDOMElementPtr edited_element = ((CUT_Hint*)pHint)->pElement;
 				
 				pTreeCtrl.SetItemText(((CUT_Hint*)pHint)->pTreeItem, OElementManager.CreateElementCaption( edited_element));
-			}	
+			}
+			
+			//Mark orphans, if necessary
+			if (((CReportAsistentApp *)AfxGetApp())->m_bMarkOrphans)
+			ResolveOrphans(ORP_SIGN);
+
 				//Zde by mohlo byt InvalidateRect !!!
 		break;
 	default: //new creation of tree

@@ -51,6 +51,7 @@ protected:
 	afx_msg void OnEndlabeleditSourcesList(NMHDR* pNMHDR, LRESULT* pResult);
 	afx_msg void OnSetDefaultButton();
 	afx_msg void OnDblclkSourcesList(NMHDR* pNMHDR, LRESULT* pResult);
+	afx_msg void OnClose();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };

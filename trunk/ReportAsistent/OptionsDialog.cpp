@@ -174,8 +174,8 @@ void COptionsDialog::OnOK()
 	BOOL bChecked = App->m_bMarkOrphans;
 	App->m_bMarkOrphans = m_MarkOrphansCheckBox.GetCheck();
 	if (bChecked ==App->m_bMarkOrphans) oHint.iMarkOrphans = 0;
-	else if (bChecked == 0) oHint.iMarkOrphans = 1;
-			else oHint.iMarkOrphans = 2;
+	else if (bChecked == 0) oHint.iMarkOrphans = ORP_SIGN;
+			else oHint.iMarkOrphans = ORP_UNSIGN;
 
 	//Apply changes
 	App->FirstDocumentInFirstTemplate()->SetModifiedFlag();

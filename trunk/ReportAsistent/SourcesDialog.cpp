@@ -4,6 +4,8 @@
 #include "stdafx.h"
 #include "ReportAsistent.h"
 #include "SourcesDialog.h"
+#include "SkeletonView.h"
+#include "CSkeletonDoc.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -44,6 +46,7 @@ BEGIN_MESSAGE_MAP(CSourcesDialog, CDialog)
 	ON_NOTIFY(LVN_ENDLABELEDIT, IDC_SOURCES_LIST, OnEndlabeleditSourcesList)
 	ON_BN_CLICKED(IDC_SET_DEFAULT_BUTTON, OnSetDefaultButton)
 	ON_NOTIFY(NM_DBLCLK, IDC_SOURCES_LIST, OnDblclkSourcesList)
+	ON_WM_CLOSE()
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -221,10 +224,10 @@ void CSourcesDialog::OnCloseButton()
 
 	
 	m.CloseSource(m.FindSourceByPublicID(source));
-
-
 	
 	UpDateList();
+
+
 	
 }
 
@@ -305,4 +308,15 @@ void CSourcesDialog::SetDefault()
 	m.setDefaultSource(m_SourcesList.GetItemText(nItem, 0));
 
 	UpDateList();
+}
+
+void CSourcesDialog::OnClose() 
+{
+	//update skeleton: some elements might become orphans
+	CReportAsistentApp * App = ((CReportAsistentApp *) AfxGetApp());
+
+	App->FirstDocumentInFirstTemplate()->SetModifiedFlag();
+	App->FirstDocumentInFirstTemplate()->UpdateAllViews(NULL, UT_SOURCES);
+	
+	CDialog::OnClose();
 }
