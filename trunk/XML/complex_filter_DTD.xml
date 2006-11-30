@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="windows-1250" ?>
+<!DOCTYPE dialog_data[
+
+  <!ELEMENT dialog_data (attributes, values)>
+  <!ELEMENT attributes (attribute*)>
+  <!ELEMENT values (value*)>
+  <!ELEMENT value EMPTY>
+  <!ELEMENT attribute EMPTY>
+
+  <!ATTLIST attribute
+    name CDATA #REQUIRED
+    label CDATA #REQUIRED
+
+    numeric_sort (true | false) #IMPLIED
+    default_sort_direction (ascending | descending) #IMPLIED
+  >
+  
+]>
+
+<dialog_data>
+  <attributes>
+  </attributes>
+  <values>
+  </values>
+</dialog_data>

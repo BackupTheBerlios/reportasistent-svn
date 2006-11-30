@@ -36,6 +36,8 @@
 #define IDR_SKELETON_DTD1               163
 #define IDR_STATIC_ELEMENTS             163
 #define IDD_OPTIONS_DIALOG              164
+#define IDR_FILL_ELEMENT_ATTRIBUTES_DTD 164
+#define IDR_COMPLEX_FILTER_DTD          165
 #define IDD_DIALOG_REPORT               166
 #define IDD_COMPLEX_FILTER_DIALOG       168
 #define IDD_INCLUDE_DIALOG              170

@@ -347,8 +347,7 @@ BEGIN
     CONTROL         "Set default source",IDC_SET_DEFAULT_RADIO,"Button",BS_AUTORADIOBUTTON,198,54,73,10
     PUSHBUTTON      "&Browse...",IDC_TEMPLATE_BROWSE_BOTTON,127,73,41,14
     EDITTEXT        IDC_WORD_TEMPLATE_EDIT,7,73,117,14,ES_AUTOHSCROLL
-    CONTROL         "Mark orphans in skeleton",IDC_MARK_ORPHANS,"Button",
-                    BS_AUTOCHECKBOX | WS_TABSTOP,200,75,100,10
+    CONTROL         "Mark orphans in skeleton",IDC_MARK_ORPHANS,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,200,75,100,10
 END
 
 IDD_DIALOG_REPORT DIALOG  0, 0, 250, 113
@@ -792,6 +791,8 @@ END
 IDR_SKELETON_DTD        XML                     "..\\xml\\skeleton_DTD.xml"
 IDR_VISUALIZATION_OPTIONS_DTD XML                     "..\\xml\\visualization_options_DTD.xml"
 IDR_STATIC_ELEMENTS     XML                     "..\\xml\\static_elements.xml"
+IDR_FILL_ELEMENT_ATTRIBUTES_DTD XML                     "..\\xml\\fill_element_attributes_DTD.xml"
+IDR_COMPLEX_FILTER_DTD  XML                     "..\\xml\\complex_filter_DTD.xml"
 
 /////////////////////////////////////////////////////////////////////////////
 //

@@ -1146,6 +1146,14 @@
 			</File>
 		</Filter>
 		<File
+			RelativePath="..\XML\complex_filter_DTD.xml"
+			>
+		</File>
+		<File
+			RelativePath="..\XML\fill_element_attributes_DTD.xml"
+			>
+		</File>
+		<File
 			RelativePath="IvaUzitKonstrukce.txt"
 			>
 		</File>

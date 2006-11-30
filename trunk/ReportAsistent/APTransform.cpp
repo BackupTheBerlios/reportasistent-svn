@@ -572,7 +572,9 @@ void CAElTransform::ApplyAllFilters(MSXML2::IXMLDOMElementPtr & filter_dom)
 		BOOL remove_val = TRUE;
 		for (int id = 0; id < simple_filter_ids->length; id++)
 		{
-			if (values_node->childNodes->item[val]->selectSingleNode("@id")->text 
+			MSXML2::IXMLDOMNodePtr id_attr = values_node->childNodes->item[val]->selectSingleNode("@id");
+			if (id_attr == NULL) continue;
+			if (id_attr->text 
 					== 
 				simple_filter_ids->item[id]->text)
 			{

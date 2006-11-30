@@ -697,7 +697,11 @@ void CFilterResultImpl::UpdateResult(MSXML2::IXMLDOMElementPtr & filter_dom)
 			CString q;
 			q.Format("@%s", (LPCTSTR) getAttributeName(a));
 			
-			m_ResultList.SetItemText(it, a, values_list->item[i]->selectSingleNode((LPCTSTR) q)->text);
+			MSXML2::IXMLDOMNodePtr value_attr = values_list->item[i]->selectSingleNode((LPCTSTR) q);
+			if (value_attr != NULL)
+				m_ResultList.SetItemText(it, a, value_attr->text);
+			else
+				m_ResultList.SetItemText(it, a, "?");
 		}
 
 	}

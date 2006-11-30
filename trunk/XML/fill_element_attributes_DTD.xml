@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="windows-1250" ?>
+<!DOCTYPE element_attributes[
+
+  <!ELEMENT element_attributes (attribute*)>
+  <!ELEMENT attribute EMPTY>
+  <!ATTLIST attribute
+    name CDATA #REQUIRED  			  
+    value CDATA #REQUIRED  			  
+    label CDATA #REQUIRED
+  >
+]>
+
+<element_attributes/>
+
+
+<!-- please leave some free spaces directly at the end of this file
+- required for smooth drive of the RA application :-) 
+
+dedek
+
+-->
+
+
+
+
+
+
