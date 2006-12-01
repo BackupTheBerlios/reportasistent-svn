@@ -117,9 +117,23 @@ CString Get_4ftAR2NL (long hypno, CString db_name)
 	strcpy (params, (LPCSTR) _4ftAR2NL_params);
 
 
+/***************************************************************/
+//verze dedek	
+	CString p2 = _4ftAR2NL_exe;
+	p2 += " ";
+	p2 += _4ftAR2NL_params;
+
+
+
+	//run the 4ftAR2NL application
+	if (!CreateProcess(NULL, p2.GetBuffer(),
+		NULL, NULL, FALSE, NORMAL_PRIORITY_CLASS, NULL, NULL, & si, & pi)) 
+/***************************************************************
+
 	//run the 4ftAR2NL application
 	if (!CreateProcess(process, params,
 		NULL, NULL, FALSE, NORMAL_PRIORITY_CLASS, NULL, NULL, & si, & pi)) 
+/***************************************************************/
 	{
 		//nahlas chybu
 		delete [] process;
