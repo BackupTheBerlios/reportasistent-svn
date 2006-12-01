@@ -69,6 +69,7 @@ CString Get_4ftAR2NL (long hypno, CString db_name)
 
 	CString _4ftAR2NL_output;
 
+//	CString _4ftAR2NL_exe = "D:\\ar2nl\\LispMiner\\4ftAR2NL\\bin\\4ftAR2NL.exe";
 	CString _4ftAR2NL_exe = "C:\\skola\\sw projekt\\dev\\4ftAR2NL\\bin\\4ftAR2NL.exe";
 	CString _4ftAR2NL_params = " -DSN=";
 	_4ftAR2NL_params += DSN;
@@ -119,8 +120,9 @@ CString Get_4ftAR2NL (long hypno, CString db_name)
 
 /***************************************************************/
 //verze dedek	
-	CString p2 = _4ftAR2NL_exe;
-	p2 += " ";
+	CString p2 = "\"";
+	p2 += _4ftAR2NL_exe;
+	p2 += "\" ";
 	p2 += _4ftAR2NL_params;
 
 
