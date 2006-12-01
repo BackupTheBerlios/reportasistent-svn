@@ -59,6 +59,10 @@ public:
 	static void LoadSkeletonDTD(MSXML2::IXMLDOMDocumentPtr & dom);
 	void ValidateActiveElement(MSXML2::IXMLDOMElementPtr & a_element);
 	static BOOL ValidateVisualizationOtions(MSXML2::IXMLDOMDocumentPtr &vo_dom, CString & err_msg);
+	static BOOL ValidateFillElementAttributes(MSXML2::IXMLDOMDocumentPtr &vo_dom, CString & err_msg);
+	static BOOL ValidateComplexFilter(MSXML2::IXMLDOMDocumentPtr &vo_dom, CString & err_msg);
+
+
 
 	MSXML2::IXMLDOMDocumentPtr TransformAttrLinkTableNoReplaceSource(MSXML2::IXMLDOMElementPtr & element);
 	MSXML2::IXMLDOMDocument * getAttrLinkTableStyleDomByName(LPCTSTR style_name);

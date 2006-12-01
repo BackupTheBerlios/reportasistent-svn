@@ -93,9 +93,6 @@ BOOL CAttributeLinkDialog::OnInitDialog()
 
 	//vyber vybranou
 	m_AttributesList.SetItemState(item, LVIS_SELECTED, LVIS_SELECTED);
-
-	// kody - pridan refresh pri kazdem otevreni dialogu
-	OnRefreshButton();
 	
 	return TRUE;  // return TRUE unless you set the focus to a control
 	              // EXCEPTION: OCX Property Pages should return FALSE

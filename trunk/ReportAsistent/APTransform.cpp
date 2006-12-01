@@ -473,28 +473,42 @@ BOOL CAElTransform::LoadFilterDOM(public_source_id_t sId, MSXML2::IXMLDOMElement
     MSXML2::IXMLDOMDocumentPtr filter_doc;
     filter_doc.CreateInstance(_T("Msxml2.DOMDocument"));
 	filter_doc->async = VARIANT_FALSE; // default - true,
+	
 	filter_doc->loadXML(
 		plugout_doc->transformNode(element_info->getComplexFilterTransformation()));
 
     plugout_doc.Release();
 
-    if (filter_doc->documentElement != NULL)
+	if (filter_doc->parseError->errorCode != S_OK)
 	{
-    	//ok data nactena
-
-#ifdef _DEBUG	
-    	filter_doc->save((LPCTSTR) (m->DirectoriesManager.getXMLFilesDirectory() + "/complex_filter_example.xml"));
-#endif
-        filter_DOM = filter_doc->documentElement;
-		filter_doc.Release();
-		return TRUE;
+   		CReportAsistentApp::ReportError(IDS_COMPLEX_FILTER_OUTPUT_INVALID, 
+			element_info->getElementLabel(), (LPCTSTR) filter_doc->parseError->reason);
+		return FALSE;
 	}
 
-    //problem, zdroj neprosel    
-   	CReportAsistentApp::ReportError(IDS_SIMPLE_FILTER_FAILED_SOURCE_LOAD, "Plugin output - document element is empty.");
-    return FALSE;
-}
+	CString err;
+	if (! m->ElementManager.ValidateComplexFilter(filter_doc, err))
+	{
+   		CReportAsistentApp::ReportError(IDS_COMPLEX_FILTER_OUTPUT_INVALID, 
+			element_info->getElementLabel(), (LPCTSTR) err);
+		return FALSE;
+	}
+	
+	
+	if (filter_doc->documentElement == NULL)
+	{
+   		CReportAsistentApp::ReportError(IDS_SIMPLE_FILTER_FAILED_SOURCE_LOAD, "Document element of \"complex_filter.xsl\" transformation result is empty.");
+		return FALSE;
+	}
 
+#ifdef _DEBUG	
+   	filter_doc->save((LPCTSTR) (m->DirectoriesManager.getXMLFilesDirectory() + "/complex_filter_example.xml"));
+#endif
+    
+	filter_DOM = filter_doc->documentElement;
+	filter_doc.Release();
+	return TRUE;
+}
 
 void CAElTransform::TransformCmplexFilterToSimple()
 {
@@ -767,6 +781,17 @@ void CAElTransform::FillElementAttributes(MSXML2::IXMLDOMNodePtr &output_node)
 	CDirectoriesManager & dm = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->DirectoriesManager;
 	attributes_DOM->save((LPCTSTR) (dm.getXMLFilesDirectory() + "/fill_element_attributes_example.xml"));
 #endif
+
+	CString err;
+	if (! m.ValidateFillElementAttributes(attributes_DOM, err))
+	{
+		CReportAsistentApp::ReportError(IDS_ELEMENT_ATTRIBUTES_FAILED_LOAD,
+			(LPCTSTR) m_active_element->selectSingleNode("@id")->text,
+			(LPCTSTR) err);
+		attributes_DOM.Release();
+		return;
+	}
+
 
 /*********/	
 	

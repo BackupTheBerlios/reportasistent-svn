@@ -48,6 +48,7 @@ void CAttributeLinkDialogBase::InitBaseDialog(CListCtrl & AttributesList, CCombo
 	TargetCombo.GetWindowText(target_id);
 	FillAttributesList(AttributesList, target_id);
 
+	OnRefresh(AttributesList, target_id);
 }
 
 

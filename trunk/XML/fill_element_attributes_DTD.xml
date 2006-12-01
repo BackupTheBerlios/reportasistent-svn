@@ -6,7 +6,7 @@
   <!ATTLIST attribute
     name CDATA #REQUIRED  			  
     value CDATA #REQUIRED  			  
-    label CDATA #REQUIRED
+    label CDATA #IMPLIED
   >
 ]>
 

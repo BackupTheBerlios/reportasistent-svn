@@ -716,6 +716,86 @@ void CElementManager::LoadXMLDOMFromResource(UINT nResourceID, MSXML2::IXMLDOMDo
 
 }
 
+BOOL CElementManager::ValidateComplexFilter(MSXML2::IXMLDOMDocumentPtr &vo_dom, CString & err_msg)
+{
+	MSXML2::IXMLDOMDocumentPtr validator;
+	validator.CreateInstance(_T("Msxml2.DOMDocument"));
+	validator->async = VARIANT_FALSE;
+
+	LoadXMLDOMFromResource(IDR_COMPLEX_FILTER_DTD, validator);
+
+	if (validator->parseError->errorCode != S_OK) return TRUE;
+
+	MSXML2::IXMLDOMNodePtr clone = vo_dom->documentElement->cloneNode(VARIANT_TRUE);
+
+	try
+	{
+		validator->replaceChild(clone,	validator->documentElement);
+	}
+	catch (_com_error e)
+	{
+		err_msg = (LPCTSTR) e.ErrorMessage();
+		return FALSE;
+	}
+
+	//odstranit values - nikdy nebudou validni
+	MSXML2::IXMLDOMNodeListPtr values = validator->selectNodes("/dialog_data/values/value");
+	if (values != NULL)
+	{
+		((MSXML2::IXMLDOMSelectionPtr) values)->removeAll();
+	}
+
+	MSXML2::IXMLDOMParseErrorPtr err = 
+		((MSXML2::IXMLDOMDocument2Ptr) validator)->validate();
+
+	if (err->errorCode == S_OK)
+	{
+		err_msg = "";
+		return TRUE;
+	}
+
+
+	err_msg = (LPCTSTR) err->reason;
+	return FALSE;
+}
+
+
+BOOL CElementManager::ValidateFillElementAttributes(MSXML2::IXMLDOMDocumentPtr &vo_dom, CString & err_msg)
+{
+	MSXML2::IXMLDOMDocumentPtr attributes_DOM;
+	attributes_DOM.CreateInstance(_T("Msxml2.DOMDocument"));
+	attributes_DOM->async = VARIANT_FALSE;
+
+	LoadXMLDOMFromResource(IDR_FILL_ELEMENT_ATTRIBUTES_DTD, attributes_DOM);
+
+	if (attributes_DOM->parseError->errorCode != S_OK) return TRUE;
+
+	MSXML2::IXMLDOMNodePtr clone = vo_dom->documentElement->cloneNode(VARIANT_TRUE);
+
+	try
+	{
+		attributes_DOM->replaceChild(clone,	attributes_DOM->documentElement);
+	}
+	catch (_com_error e)
+	{
+		err_msg = (LPCTSTR) e.ErrorMessage();
+		return FALSE;
+	}
+
+	MSXML2::IXMLDOMParseErrorPtr err = 
+		((MSXML2::IXMLDOMDocument2Ptr) attributes_DOM)->validate();
+
+	if (err->errorCode == S_OK)
+	{
+		err_msg = "";
+		return TRUE;
+	}
+
+
+	err_msg = (LPCTSTR) err->reason;
+	return FALSE;
+}
+
 
 BOOL CElementManager::ValidateVisualizationOtions(MSXML2::IXMLDOMDocumentPtr &vo_dom, CString & err_msg)
 {
@@ -737,20 +817,16 @@ BOOL CElementManager::ValidateVisualizationOtions(MSXML2::IXMLDOMDocumentPtr &vo
   AfxMessageBox(validator->xml);
 */
 	try
-  {
-    validator->replaceChild(
-	  	clone,
-		  validator->documentElement);
-  }
-  catch (_com_error e)
-  {
-    err_msg = (LPCTSTR) e.ErrorMessage();
-	  validator.Release();
+	{
+		validator->replaceChild(clone,	validator->documentElement);
+	}
+	catch (_com_error e)
+	{
+		err_msg = (LPCTSTR) e.ErrorMessage();
+		validator.Release();
 
-    return FALSE;
-  }
-
-//  AfxMessageBox("tady");
+		return FALSE;
+	}
 
 	MSXML2::IXMLDOMParseErrorPtr err = 
 		((MSXML2::IXMLDOMDocument2Ptr) validator)->validate();
