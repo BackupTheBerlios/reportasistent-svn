@@ -70,10 +70,10 @@ CString Get_4ftAR2NL (long hypno, CString db_name)
 	CString _4ftAR2NL_output;
 
 	CString _4ftAR2NL_exe = "C:\\skola\\sw projekt\\dev\\4ftAR2NL\\bin\\4ftAR2NL.exe";
-	_4ftAR2NL_exe += " -DSN=";
-	_4ftAR2NL_exe += DSN;
-	_4ftAR2NL_exe += " -hypno=";
-	_4ftAR2NL_exe += hlp;
+	CString _4ftAR2NL_params = " -DSN=";
+	_4ftAR2NL_params += DSN;
+	_4ftAR2NL_params += " -hypno=";
+	_4ftAR2NL_params += hlp;
 
 	char * _db_name;
 	_db_name = new char [1024];
@@ -88,7 +88,7 @@ CString Get_4ftAR2NL (long hypno, CString db_name)
 	PROCESS_INFORMATION pi;
 	ZeroMemory(& pi, sizeof pi);
 
-	LPDWORD exit_code = 0;//unsucessfull !!!!!!!!!!!zkontrolovat
+	DWORD exit_code = 0;//unsucessfull !!!!!!!!!!!zkontrolovat
 
 	unsigned int len = strlen (config);
 
@@ -110,30 +110,51 @@ CString Get_4ftAR2NL (long hypno, CString db_name)
 	delete [] _db_name;
 
 	char * process;
+	char * params;
 	process = new char [MAX_PATH];
+	params = new char [MAX_PATH];
 	strcpy (process, (LPCSTR) _4ftAR2NL_exe);
+	strcpy (params, (LPCSTR) _4ftAR2NL_params);
 
 
 	//run the 4ftAR2NL application
-	if (!CreateProcess(NULL, process,
-		NULL, NULL, FALSE, CREATE_NO_WINDOW, NULL, NULL, & si, & pi)) 
+	if (!CreateProcess(process, params,
+		NULL, NULL, FALSE, NORMAL_PRIORITY_CLASS, NULL, NULL, & si, & pi)) 
 	{
 		//nahlas chybu
 		delete [] process;
+		delete [] params;
+		SQLConfigDataSource (NULL, ODBC_REMOVE_DSN, "Microsoft Access Driver (*.mdb)\0",
+			"DSN=" + DSN + "\0\0");
 		return "";//!!!!!pozor na to, co vracet
 	}
 	delete [] process;
-	if (WaitForSingleObject(pi.hProcess, 60000) != WAIT_OBJECT_0)
+	delete [] params;
+/*	if (WaitForSingleObject(pi.hProcess, 60000) != WAIT_OBJECT_0)
 	{
 		//nahlas chybu
 		return "";//!!!!!pozor na to, co vracet
 	}
-	if (!GetExitCodeProcess (pi.hProcess, exit_code))
+*/	
+	int cnt = 0;
+	if (!GetExitCodeProcess (pi.hProcess, &exit_code))
 	{
 		//nahlas chybu
 		return "";//!!!!!pozor na to, co vracet
 	}
-	if (!CloseHandle(pi.hProcess))
+	while (exit_code == STILL_ACTIVE)
+	{
+		if (!GetExitCodeProcess (pi.hProcess, &exit_code))
+		{
+			//nahlas chybu
+			return "";//!!!!!pozor na to, co vracet
+		}
+		Sleep (500);
+		cnt += 500;
+		if (cnt > 60000) exit_code = 0;
+	}
+	
+	if (!CloseHandle(pi.hProcess) || !CloseHandle(pi.hThread))
 	{
 		//nahlas chybu
 		return "";//!!!!!pozor na to, co vracet
