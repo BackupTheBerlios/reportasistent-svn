@@ -1304,6 +1304,11 @@ int CSkeletonDoc::changeOrphansDataSourceToDefault(void)
 void CSkeletonDoc::OnResetOrphans()
 {
 	changeOrphansDataSourceToDefault();
+	
+	//refresh of orphans' marks
+	SetModifiedFlag();
+	UpdateAllViews(NULL, UT_SOURCES);
+
 }
 
 

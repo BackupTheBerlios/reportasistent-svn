@@ -117,6 +117,7 @@ void CSkeletonView::OnInitialUpdate()
 
 	if (((CReportAsistentApp *)AfxGetApp())->m_bMarkOrphans)
 		ResolveOrphans(ORP_SIGN);
+	else ResolveOrphans(ORP_UNSIGN);
 
 
 }
@@ -198,6 +199,7 @@ void CSkeletonView::OnUpdate(CView* pSender, LPARAM lHint, CObject* pHint)
 	case UT_SOURCES:
 		if (((CReportAsistentApp *)AfxGetApp())->m_bMarkOrphans)
 			ResolveOrphans(ORP_SIGN);
+		else ResolveOrphans(ORP_UNSIGN);
 		break;
 	case UT_SETTINGS: //settings of TreeCtrl have changed
 		long        lStyleOld;
@@ -246,6 +248,7 @@ void CSkeletonView::OnUpdate(CView* pSender, LPARAM lHint, CObject* pHint)
 			//Mark orphans, if necessary
 			if (((CReportAsistentApp *)AfxGetApp())->m_bMarkOrphans)
 			ResolveOrphans(ORP_SIGN);
+			else ResolveOrphans(ORP_UNSIGN);
 
 		break;
 	case UT_EDIT:	
@@ -269,6 +272,7 @@ void CSkeletonView::OnUpdate(CView* pSender, LPARAM lHint, CObject* pHint)
 			//Mark orphans, if necessary
 			if (((CReportAsistentApp *)AfxGetApp())->m_bMarkOrphans)
 			ResolveOrphans(ORP_SIGN);
+			else ResolveOrphans(ORP_UNSIGN);
 
 				//Zde by mohlo byt InvalidateRect !!!
 		break;

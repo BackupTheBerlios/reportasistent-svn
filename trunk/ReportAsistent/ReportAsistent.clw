@@ -2,156 +2,576 @@
 
 [General Info]
 Version=1
-LastClass=COptionsDialog
-LastTemplate=CRecordset
+LastClass=CTransformationsDialog
+LastTemplate=CDialog
 NewFileInclude1=#include "stdafx.h"
-NewFileInclude2=#include "ReportAsistent.h"
+NewFileInclude2=#include "reportasistent.h"
 LastPage=0
 
-ClassCount=27
-Class1=CReportAsistentApp
-Class2=CSkeletonDoc
-Class3=CSkeletonView
-Class4=CMainFrame
+ClassCount=26
+Class1=CActiveElementDialog
+Class2=CAElFiltersConfigDialog
+Class3=CAttributeLinkDialog
+Class4=CAttributeLinkTableDialog
+Class5=CComplexFilterDialog
+Class6=CSkeletonDoc
+Class7=CElementChapterDialog
+Class8=CElementIncludeDialog
+Class9=CElementParagraphDialog
+Class10=CElementReportDialog
+Class11=CElementTextDialog
+Class12=CEToolBar
+Class13=CGenerateDialog
+Class14=CHListBox
+Class15=CMainFrame
+Class16=COptionsDialog
+Class17=CPropertyEditor
+Class18=CReportAsistentApp
+Class19=CAboutDlg
+Class20=CSimpleFilterDialog
+Class21=CSkeletonView
+Class22=CSourcesDialog
+Class23=CTransformationsDialog
+Class24=CWaitAnimation
+Class25=CWaitDialog
+Class26=CWordEventHandler
 
-ResourceCount=21
-Resource1=IDD_ABOUTBOX
-Resource2=IDD_DIALOG_CHAPTER (English (U.S.))
-Class5=CAboutDlg
-Resource3=IDD_INCLUDE_DIALOG (English (U.S.))
-Resource4=IDD_DIALOG_PARAGRAPH (English (U.S.))
-Class6=CElementTextDialog
-Resource5=IDD_ABOUTBOX (English (U.S.))
-Class7=CSimpleFilterDialog
-Resource6=IDD_FILTER_AND_CONFIG_DIALOG (English (U.S.))
-Class8=CGenerateDialog
-Resource7=IDD_AEL_CONFIG_DIALOG
-Class9=CSourcesDialog
-Resource8=IDD_GENERATE_DIALOG (English (U.S.))
-Class10=CActiveElementDialog
-Resource9=IDD_TRANSFORMATIONS_DIALOG (English (U.S.))
-Class11=CTransformationsDialog
-Class12=TCategory_Recordset
-Resource10=IDD_WAIT_DIALOG (English (U.S.))
-Class13=CAttributeLinkDialog
-Resource11=IDD_COMPLEX_FILTER_DIALOG (English (U.S.))
-Class14=CAttributeLinkTableDialog
-Resource12=IDD_SOURCES_DIALOG (English (U.S.))
-Class15=CElementParagraphDialog
-Class16=CElementChapterDialog
-Class17=CElementDialogBase
-Class18=CPropertyEditor
-Resource13=IDD_ATTRIBUTE_LINK_TABLE_DIALOG (English (U.S.))
-Resource14=IDD_SIMPLE_FILTER_DIALOG (English (U.S.))
-Class19=CWaitDialog
-Resource15=IDD_ACTIVE_ELEMENT_DIALOG (English (U.S.))
-Class20=CWaitAnimation
-Class21=CWordEventHandler
-Resource16=IDD_PROPERTY_EDITOR (English (U.S.))
-Class22=COptionsDialog
-Class23=CElementReportDialog
-Class24=CEToolBar
-Resource17=IDD_ATTRIBUTE_LINK_DIALOG (English (U.S.))
-Class25=CComplexFilterDialog
-Resource18=IDD_DIALOG_REPORT (English (U.S.))
-Resource19=IDD_OPTIONS_DIALOG (English (U.S.))
-Class26=CAElFiltersConfigDialog
-Class27=TOrder_of_Categories
-Resource20=IDD_DIALOGTEXT (English (U.S.))
-Resource21=IDR_MAINFRAME (English (U.S.))
+ResourceCount=20
+Resource1=IDD_INCLUDE_DIALOG (English (U.S.))
+Resource2=IDD_SIMPLE_FILTER_DIALOG (English (U.S.))
+Resource3=IDD_SOURCES_DIALOG (English (U.S.))
+Resource4=IDD_WAIT_DIALOG (English (U.S.))
+Resource5=IDD_COMPLEX_FILTER_DIALOG (English (U.S.))
+Resource6=IDD_ATTRIBUTE_LINK_TABLE_DIALOG (English (U.S.))
+Resource7=IDD_OPTIONS_DIALOG (English (U.S.))
+Resource8=IDD_PROPERTY_EDITOR (English (U.S.))
+Resource9=IDD_DIALOGTEXT (English (U.S.))
+Resource10=IDD_AEL_CONFIG_DIALOG
+Resource11=IDD_DIALOG_CHAPTER (English (U.S.))
+Resource12=IDD_TRANSFORMATIONS_DIALOG (English (U.S.))
+Resource13=IDD_ACTIVE_ELEMENT_DIALOG (English (U.S.))
+Resource14=IDD_GENERATE_DIALOG (English (U.S.))
+Resource15=IDD_DIALOG_PARAGRAPH (English (U.S.))
+Resource16=IDD_DIALOG_REPORT (English (U.S.))
+Resource17=IDD_FILTER_AND_CONFIG_DIALOG (English (U.S.))
+Resource18=IDD_ABOUTBOX (English (U.S.))
+Resource19=IDD_ATTRIBUTE_LINK_DIALOG (English (U.S.))
+Resource20=IDR_MAINFRAME (English (U.S.))
 
-[CLS:CReportAsistentApp]
+[CLS:CActiveElementDialog]
 Type=0
-HeaderFile=ReportAsistent.h
-ImplementationFile=ReportAsistent.cpp
-Filter=N
-LastObject=ID_HELP
-BaseClass=CWinApp
-VirtualFilter=AC
+BaseClass=CDialog
+HeaderFile=ActiveElementDialog.h
+ImplementationFile=ActiveElementDialog.cpp
+
+[CLS:CAElFiltersConfigDialog]
+Type=0
+BaseClass=CDialog
+HeaderFile=AElFiltersConfigDialog.h
+ImplementationFile=AElFiltersConfigDialog.cpp
+
+[CLS:CAttributeLinkDialog]
+Type=0
+BaseClass=CDialog
+HeaderFile=AttributeLinkDialog.h
+ImplementationFile=AttributeLinkDialog.cpp
+
+[CLS:CAttributeLinkTableDialog]
+Type=0
+BaseClass=CDialog
+HeaderFile=AttributeLinkTableDialog.h
+ImplementationFile=AttributeLinkTableDialog.cpp
+
+[CLS:CComplexFilterDialog]
+Type=0
+BaseClass=CDialog
+HeaderFile=ComplexFilterDialog.h
+ImplementationFile=ComplexFilterDialog.cpp
 
 [CLS:CSkeletonDoc]
 Type=0
+BaseClass=CDocument
 HeaderFile=CSkeletonDoc.h
 ImplementationFile=CSkeletonDoc.cpp
-Filter=N
-BaseClass=CDocument
-VirtualFilter=DC
-LastObject=CSkeletonDoc
 
-[CLS:CSkeletonView]
+[CLS:CElementChapterDialog]
 Type=0
-HeaderFile=SkeletonView.h
-ImplementationFile=SkeletonView.cpp
-Filter=C
-BaseClass=CTreeView
-VirtualFilter=VWC
-LastObject=CSkeletonView
+BaseClass=CDialog
+HeaderFile=ElementChapterDialog.h
+ImplementationFile=ElementChapterDialog.cpp
 
+[CLS:CElementIncludeDialog]
+Type=0
+BaseClass=CDialog
+HeaderFile=ElementIncludeDialog.h
+ImplementationFile=ElementIncludeDialog.cpp
+
+[CLS:CElementParagraphDialog]
+Type=0
+BaseClass=CDialog
+HeaderFile=ElementParagraphDialog.h
+ImplementationFile=ElementParagraphDialog.cpp
+
+[CLS:CElementReportDialog]
+Type=0
+BaseClass=CDialog
+HeaderFile=ElementReportDialog.h
+ImplementationFile=ElementReportDialog.cpp
+
+[CLS:CElementTextDialog]
+Type=0
+BaseClass=CDialog
+HeaderFile=ElementTextDialog.h
+ImplementationFile=ElementTextDialog.cpp
+
+[CLS:CEToolBar]
+Type=0
+BaseClass=CToolBar
+HeaderFile=EToolBar.h
+ImplementationFile=EToolBar.cpp
+
+[CLS:CGenerateDialog]
+Type=0
+BaseClass=CDialog
+HeaderFile=GenerateDialog.h
+ImplementationFile=GenerateDialog.cpp
+
+[CLS:CHListBox]
+Type=0
+BaseClass=CListBox
+HeaderFile=HListBox.h
+ImplementationFile=HListBox.cpp
+LastObject=IDC_SUPPORTED_TRANSF_LIST
 
 [CLS:CMainFrame]
 Type=0
+BaseClass=CFrameWnd
 HeaderFile=MainFrm.h
 ImplementationFile=MainFrm.cpp
-Filter=T
-LastObject=CMainFrame
-BaseClass=CFrameWnd
-VirtualFilter=fWC
 
+[CLS:COptionsDialog]
+Type=0
+BaseClass=CDialog
+HeaderFile=OptionsDialog.h
+ImplementationFile=OptionsDialog.cpp
 
+[CLS:CPropertyEditor]
+Type=0
+BaseClass=CDialog
+HeaderFile=PropertyEditor.h
+ImplementationFile=PropertyEditor.cpp
 
+[CLS:CReportAsistentApp]
+Type=0
+BaseClass=CWinApp
+HeaderFile=ReportAsistent.h
+ImplementationFile=ReportAsistent.cpp
 
 [CLS:CAboutDlg]
 Type=0
+BaseClass=CDialog
 HeaderFile=ReportAsistent.cpp
 ImplementationFile=ReportAsistent.cpp
-Filter=D
 LastObject=CAboutDlg
+
+[CLS:CSimpleFilterDialog]
+Type=0
+BaseClass=CPropertyPage
+HeaderFile=SimpleFilterDialog.h
+ImplementationFile=SimpleFilterDialog.cpp
+
+[CLS:CSkeletonView]
+Type=0
+BaseClass=CTreeView
+HeaderFile=SkeletonView.h
+ImplementationFile=SkeletonView.cpp
+
+[CLS:CSourcesDialog]
+Type=0
+BaseClass=CDialog
+HeaderFile=SourcesDialog.h
+ImplementationFile=SourcesDialog.cpp
+
+[CLS:CTransformationsDialog]
+Type=0
+BaseClass=CPropertyPage
+HeaderFile=TransformationsDialog.h
+ImplementationFile=TransformationsDialog.cpp
+
+[CLS:CWaitAnimation]
+Type=0
+BaseClass=CStatic
+HeaderFile=WaitAnimation.h
+ImplementationFile=WaitAnimation.cpp
+
+[CLS:CWaitDialog]
+Type=0
+BaseClass=CDialog
+HeaderFile=WaitDialog.h
+ImplementationFile=WaitDialog.cpp
+
+[CLS:CWordEventHandler]
+Type=0
+BaseClass=CCmdTarget
+HeaderFile=WordEventHandler.h
+ImplementationFile=WordEventHandler.cpp
+
+[DLG:IDD_ACTIVE_ELEMENT_DIALOG]
+Type=1
+Class=CActiveElementDialog
+
+[DLG:IDD_FILTER_AND_CONFIG_DIALOG]
+Type=1
+Class=CAElFiltersConfigDialog
+
+[DLG:IDD_ATTRIBUTE_LINK_DIALOG]
+Type=1
+Class=CAttributeLinkDialog
+
+[DLG:IDD_ATTRIBUTE_LINK_TABLE_DIALOG]
+Type=1
+Class=CAttributeLinkTableDialog
+
+[DLG:IDD_COMPLEX_FILTER_DIALOG]
+Type=1
+Class=CComplexFilterDialog
+
+[DLG:IDD_DIALOG_CHAPTER]
+Type=1
+Class=CElementChapterDialog
+
+[DLG:IDD_INCLUDE_DIALOG]
+Type=1
+Class=CElementIncludeDialog
+
+[DLG:IDD_DIALOG_PARAGRAPH]
+Type=1
+Class=CElementParagraphDialog
+
+[DLG:IDD_DIALOG_REPORT]
+Type=1
+Class=CElementReportDialog
+
+[DLG:IDD_DIALOGTEXT]
+Type=1
+Class=CElementTextDialog
+
+[DLG:IDD_GENERATE_DIALOG]
+Type=1
+Class=CGenerateDialog
+
+[DLG:IDD_OPTIONS_DIALOG]
+Type=1
+Class=COptionsDialog
+
+[DLG:IDD_PROPERTY_EDITOR]
+Type=1
+Class=CPropertyEditor
 
 [DLG:IDD_ABOUTBOX]
 Type=1
-ControlCount=4
-Control1=IDC_STATIC,static,1342177283
-Control2=IDC_STATIC,static,1342308352
-Control3=IDC_STATIC,static,1342308352
-Control4=IDOK,button,1342373889
 Class=CAboutDlg
 
-[MNU:IDR_MAINFRAME]
+[DLG:IDD_SIMPLE_FILTER_DIALOG]
 Type=1
-Class=CMainFrame
-Command3=ID_FILE_SAVE
-Command4=ID_FILE_SAVE_AS
-Command5=ID_FILE_MRU_FILE1
-Command6=ID_APP_EXIT
-Command10=ID_EDIT_PASTE
-Command11=ID_VIEW_TOOLBAR
-Command12=ID_VIEW_STATUS_BAR
-Command13=ID_APP_ABOUT
-CommandCount=13
-Command1=ID_FILE_NEW
-Command2=ID_FILE_OPEN
-Command7=ID_EDIT_UNDO
-Command8=ID_EDIT_CUT
-Command9=ID_EDIT_COPY
+Class=CSimpleFilterDialog
 
-[ACL:IDR_MAINFRAME]
+[DLG:IDD_SOURCES_DIALOG]
 Type=1
-Class=CMainFrame
-Command1=ID_FILE_NEW
-Command2=ID_FILE_OPEN
-Command3=ID_FILE_SAVE
-Command5=ID_EDIT_CUT
-Command6=ID_EDIT_COPY
-Command7=ID_EDIT_PASTE
-Command8=ID_EDIT_UNDO
-Command9=ID_EDIT_CUT
-Command10=ID_EDIT_COPY
-Command11=ID_EDIT_PASTE
-Command12=ID_NEXT_PANE
-CommandCount=13
-Command4=ID_EDIT_UNDO
-Command13=ID_PREV_PANE
+Class=CSourcesDialog
 
+[DLG:IDD_TRANSFORMATIONS_DIALOG]
+Type=1
+Class=CTransformationsDialog
+
+[DLG:IDD_WAIT_DIALOG]
+Type=1
+Class=CWaitDialog
+
+[DLG:IDD_AEL_CONFIG_DIALOG]
+Type=1
+Class=?
+ControlCount=8
+Control1=IDC_STATIC,static,1342308352
+Control2=IDC_DATA_SOURCE_COMBO,combobox,1344340227
+Control3=IDC_STATIC,static,1342308352
+Control4=IDC_ID_EDIT,edit,1350631568
+Control5=IDC_RESULT_LIST,SysListView32,1350633473
+Control6=IDC_STATIC,static,1342308352
+Control7=IDC_NO_FILTERS,static,1342308353
+Control8=IDC_NO_FLTER_FRAME,static,1342177287
+
+[DLG:IDD_SOURCES_DIALOG (English (U.S.))]
+Type=1
+Class=?
+ControlCount=12
+Control1=IDC_STATIC,static,1342308352
+Control2=IDC_PLUGINS_COMBO,combobox,1344340227
+Control3=IDC_STATIC,button,1342177287
+Control4=IDC_ADD_SOURCE_BUTTON,button,1342242816
+Control5=IDC_SOURCES_LIST,SysListView32,1350631941
+Control6=IDC_OPEN_BUTTON,button,1342242816
+Control7=IDC_CLOSE_BUTTON,button,1342242816
+Control8=IDC_REMOVE_BUTTON,button,1342242816
+Control9=IDC_RENAME_BUTTON,button,1342242816
+Control10=IDC_SET_DEFAULT_BUTTON,button,1342242816
+Control11=IDC_STATIC,button,1342177287
+Control12=ID_HELP,button,1342242816
+
+[DLG:IDD_ATTRIBUTE_LINK_DIALOG (English (U.S.))]
+Type=1
+Class=?
+ControlCount=13
+Control1=IDOK,button,1342242817
+Control2=IDCANCEL,button,1342242816
+Control3=IDC_TARGET_COMBO,combobox,1344340227
+Control4=IDC_STATIC,static,1342308352
+Control5=IDC_ATTRIBUTES_LIST,SysListView32,1350631437
+Control6=IDC_STATIC,static,1342308352
+Control7=IDC_REFRESH_BUTTON,button,1342242816
+Control8=IDC_STYLES_COMBO,combobox,1344340227
+Control9=IDC_STATIC,static,1342308352
+Control10=IDC_STYLES_REFRESH_BUTTON,button,1342242816
+Control11=IDC_STATIC,static,1342308352
+Control12=IDC_ATTRLINK_ID_EDIT,edit,1350631568
+Control13=ID_HELP,button,1342242816
+
+[DLG:IDD_ATTRIBUTE_LINK_TABLE_DIALOG (English (U.S.))]
+Type=1
+Class=?
+ControlCount=19
+Control1=IDOK,button,1342242817
+Control2=IDCANCEL,button,1342242816
+Control3=IDC_TARGET_COMBO,combobox,1344340227
+Control4=IDC_STATIC,static,1342308352
+Control5=IDC_ATTRIBUTES_LIST,SysListView32,1350631433
+Control6=IDC_STATIC,static,1342308352
+Control7=IDC_REFRESH_BUTTON,button,1342242816
+Control8=IDC_CAPTIONS_LIST,SysListView32,1350631945
+Control9=IDC_ADD_BUTTON,button,1342242816
+Control10=IDC_REMOVE_BUTTON,button,1342242816
+Control11=IDC_STATIC,static,1342308352
+Control12=IDC_MOVE_UP_BUTTON,button,1342242816
+Control13=IDC_MOVE_DOWN_BUTTON2,button,1342242816
+Control14=IDC_EDIT_CAPTION_BUTTON,button,1342242816
+Control15=IDC_STYLE_COMBO,combobox,1344340227
+Control16=IDC_STATIC,static,1342308352
+Control17=IDC_STATIC,static,1342308352
+Control18=IDC_ATTRLINKTABLE_ID_EDIT,edit,1350631568
+Control19=ID_HELP,button,1342242816
+
+[DLG:IDD_SIMPLE_FILTER_DIALOG (English (U.S.))]
+Type=1
+Class=?
+ControlCount=2
+Control1=IDC_FILTER_LIST,SysListView32,1350631433
+Control2=IDC_SIMPLE_FILTER_DISABLED_CHECK,button,1342242819
+
+[DLG:IDD_TRANSFORMATIONS_DIALOG (English (U.S.))]
+Type=1
+Class=CTransformationsDialog
+ControlCount=10
+Control1=IDC_SUPPORTED_TRANSF_LIST,listbox,1352730883
+Control2=IDC_SELECTED_TRANSFS_LIST,listbox,1352730881
+Control3=IDC_STATIC,static,1342308352
+Control4=IDC_STATIC,static,1342308352
+Control5=IDC_ADD_BUTTON,button,1342242816
+Control6=IDC_REMOVE_BUTTON,button,1342242816
+Control7=IDC_MOVE_UP_BUTTON,button,1342242816
+Control8=IDC_MOVE_DOWN_BUTTON,button,1342242816
+Control9=IDC_STATIC,static,1082130446
+Control10=IDC_CONFIGURE_BUTTON,button,1342242816
+
+[DLG:IDD_DIALOGTEXT (English (U.S.))]
+Type=1
+Class=?
+ControlCount=10
+Control1=IDOK,button,1342242817
+Control2=IDCANCEL,button,1342242816
+Control3=IDC_DIALTEXT_EDIT,edit,1350631492
+Control4=IDC_STATIC,static,1342308352
+Control5=IDC_DIALTEXT_IDEDIT,edit,1350631568
+Control6=IDC_STATIC,static,1342308352
+Control7=IDC_STYLES_COMBO,combobox,1344340227
+Control8=IDC_STATIC,static,1342308352
+Control9=IDC_STYLES_REFRESH_BUTTON,button,1342242816
+Control10=ID_HELP,button,1342242816
+
+[DLG:IDD_ABOUTBOX (English (U.S.))]
+Type=1
+Class=?
+ControlCount=4
+Control1=IDC_STATIC,static,1342177283
+Control2=IDC_STATIC,static,1342308480
+Control3=IDC_STATIC,static,1342308352
+Control4=IDOK,button,1342373889
+
+[DLG:IDR_MAINFRAME (English (U.S.))]
+Type=1
+Class=?
+ControlCount=1
+Control1=IDC_STATIC,static,1342308352
+
+[DLG:IDD_GENERATE_DIALOG (English (U.S.))]
+Type=1
+Class=?
+ControlCount=2
+Control1=IDC_GENERATE_BUTTON,button,1342251009
+Control2=IDC_NEW_WORD_CHECK,button,1476460547
+
+[DLG:IDD_ACTIVE_ELEMENT_DIALOG (English (U.S.))]
+Type=1
+Class=?
+ControlCount=5
+Control1=IDOK,button,1342242817
+Control2=IDCANCEL,button,1342242816
+Control3=IDC_APPLY_BUTTON,button,1342242816
+Control4=IDC_TAB1,SysTabControl32,1342177280
+Control5=IDC_SWITCH_BUTTON,button,1342242816
+
+[DLG:IDD_DIALOG_PARAGRAPH (English (U.S.))]
+Type=1
+Class=?
+ControlCount=8
+Control1=IDOK,button,1342242817
+Control2=IDCANCEL,button,1342242816
+Control3=IDC_STATIC,static,1342308352
+Control4=IDC_DIALPARAGRAPH_IDEDIT,edit,1350631568
+Control5=IDC_STYLES_COMBO,combobox,1344340227
+Control6=IDC_STATIC,static,1342308352
+Control7=IDC_STYLES_REFRESH_BUTTON,button,1342242816
+Control8=ID_HELP,button,1342242816
+
+[DLG:IDD_DIALOG_CHAPTER (English (U.S.))]
+Type=1
+Class=?
+ControlCount=7
+Control1=IDOK,button,1342242817
+Control2=IDCANCEL,button,1342242816
+Control3=IDC_STATIC,static,1342308352
+Control4=IDC_DIALCHAPTER_IDEDIT,edit,1350631568
+Control5=IDC_STATIC,static,1342308352
+Control6=IDC_DIALCHAPTER_TITLEEDIT,edit,1350631552
+Control7=ID_HELP,button,1342242816
+
+[DLG:IDD_PROPERTY_EDITOR (English (U.S.))]
+Type=1
+Class=?
+ControlCount=6
+Control1=IDOK,button,1342242817
+Control2=IDCANCEL,button,1342242816
+Control3=IDC_SCROLLBAR1,scrollbar,1342177281
+Control4=IDC_STATIC1,static,1342177287
+Control5=IDC_ERROR_TEXT,static,1342308352
+Control6=ID_HELP,button,1342242816
+
+[DLG:IDD_WAIT_DIALOG (English (U.S.))]
+Type=1
+Class=?
+ControlCount=5
+Control1=IDC_REASON_TEXT,static,1342308352
+Control2=IDC_WAIT_ANIMATION,static,1342308352
+Control3=IDC_EXIT_BUTTON,button,1073807360
+Control4=IDC_RESUME_APP_BUTTON,button,1342242816
+Control5=IDC_KILL_THREAD_BUTTON,button,1342242816
+
+[DLG:IDD_OPTIONS_DIALOG (English (U.S.))]
+Type=1
+Class=?
+ControlCount=23
+Control1=IDOK,button,1342242817
+Control2=IDCANCEL,button,1342242816
+Control3=IDC_STATIC,button,1342177287
+Control4=IDC_CZECH_RADIO,button,1342308361
+Control5=IDC_ENGLISH_RADIO,button,1342177289
+Control6=ID_HELP,button,1342242816
+Control7=IDC_STATIC,static,1342308352
+Control8=IDC_STATIC,button,1342177287
+Control9=IDC_TREE_ITEM_HEIGHT,edit,1350639746
+Control10=IDC_STATIC,static,1342308352
+Control11=IDC_STATIC,static,1342308352
+Control12=IDC_SHOW_ID_IN_TREE,button,1342242819
+Control13=IDC_TREE_HAS_BUTTONS,button,1342242819
+Control14=IDC_TREE_HAS_LINES,button,1342242819
+Control15=IDC_TREE_ITEM_INDENT,edit,1350639746
+Control16=IDC_STATIC,button,1342177287
+Control17=IDC_STATIC,static,1342308352
+Control18=IDC_IGNORE_RADIO,button,1342308361
+Control19=IDC_DELETE_RADIO,button,1342177289
+Control20=IDC_SET_DEFAULT_RADIO,button,1342177289
+Control21=IDC_TEMPLATE_BROWSE_BOTTON,button,1342242816
+Control22=IDC_WORD_TEMPLATE_EDIT,edit,1350631552
+Control23=IDC_MARK_ORPHANS,button,1342242819
+
+[DLG:IDD_DIALOG_REPORT (English (U.S.))]
+Type=1
+Class=?
+ControlCount=11
+Control1=IDOK,button,1342242817
+Control2=IDCANCEL,button,1342242816
+Control3=IDC_STATIC,static,1342308352
+Control4=IDC_DIALREPORT_IDEDIT,edit,1350631568
+Control5=IDC_STATIC,static,1342308352
+Control6=IDC_DIALREPORT_TITLEEDIT,edit,1350631552
+Control7=IDC_DIALREPORT_SUBTITLEEDIT,edit,1350631552
+Control8=IDC_STATIC,static,1342308352
+Control9=IDC_STATIC,static,1342308352
+Control10=IDC_DIALREPORT_AUTHOREDIT,edit,1350631552
+Control11=ID_HELP,button,1342242816
+
+[DLG:IDD_COMPLEX_FILTER_DIALOG (English (U.S.))]
+Type=1
+Class=?
+ControlCount=22
+Control1=IDC_ATTRIBUTES_LIST,listbox,1353777409
+Control2=IDC_STATIC,static,1342308352
+Control3=IDC_VALUES_LIST,listbox,1353777409
+Control4=IDC_STATIC,static,1342308352
+Control5=IDC_STATIC,button,1342177287
+Control6=IDC_ASCENDING_RADIO,button,1342373897
+Control7=IDC_DESCENDING_RADIO,button,1342242825
+Control8=IDC_NUMERIC_SORT_CHECK,button,1342242819
+Control9=IDC_TRESHOLD_RADIO,button,1342308361
+Control10=IDC_FIXED_VAL_RADIO,button,1342177289
+Control11=IDC_TOP_N_VAL_RADIO,button,1342177289
+Control12=IDC_STATIC,button,1342177287
+Control13=IDC_TRESHOLD_EDIT,edit,1350631552
+Control14=IDC_STATIC,static,1342308352
+Control15=IDOK,button,1342242817
+Control16=IDCANCEL,button,1342242816
+Control17=IDC_RESULT_LIST,SysListView32,1350633473
+Control18=IDC_STATIC,static,1342308352
+Control19=IDC_TOPN_EDIT,edit,1350639744
+Control20=IDC_TOPN_SPIN,msctls_updown32,1342177330
+Control21=IDC_REFRESH_RESULTS_BUTTON,button,1342242816
+Control22=ID_HELP,button,1342242816
+
+[DLG:IDD_INCLUDE_DIALOG (English (U.S.))]
+Type=1
+Class=?
+ControlCount=8
+Control1=IDOK,button,1342242817
+Control2=IDCANCEL,button,1342242816
+Control3=IDC_STATIC,static,1342308352
+Control4=IDC_INCLUDE_ID_EDIT,edit,1350631568
+Control5=IDC_INCLUDE_FILENAME_EDIT,edit,1350631552
+Control6=IDC_BROWSE_BUTTON,button,1342242816
+Control7=IDC_STATIC,static,1342308352
+Control8=ID_HELP,button,1342242816
+
+[DLG:IDD_FILTER_AND_CONFIG_DIALOG (English (U.S.))]
+Type=1
+Class=?
+ControlCount=9
+Control1=IDC_STATIC,button,1342177287
+Control2=IDC_ADD_FILTER_BUTTON,button,1342242816
+Control3=IDC_CONFIGURE_FILTER_BUTTON,button,1342242816
+Control4=IDC_MOVE_UP_BUTTON,button,1342242816
+Control5=IDC_MOVE_DOWN_BUTTON,button,1342242816
+Control6=IDC_RESULT_LIST,SysListView32,1350633473
+Control7=IDC_FILTERS_LIST,SysListView32,1350633473
+Control8=IDC_STATIC,static,1342308352
+Control9=IDC_REMOVE_FILTER_BUTTON,button,1342242816
 
 [TB:IDR_MAINFRAME (English (U.S.))]
 Type=1
@@ -168,7 +588,7 @@ CommandCount=8
 
 [MNU:IDR_MAINFRAME (English (U.S.))]
 Type=1
-Class=CMainFrame
+Class=?
 Command1=ID_FILE_NEW
 Command2=ID_FILE_OPEN
 Command3=ID_FILE_SAVE
@@ -221,1990 +641,4 @@ Command21=ID_OPEN_WORD_EDITOR
 Command22=ID_EDIT_CUT
 Command23=ID_SHOW_XML
 CommandCount=23
-
-[DLG:IDD_ABOUTBOX (English (U.S.))]
-Type=1
-Class=CAboutDlg
-ControlCount=4
-Control1=IDC_STATIC,static,1342177283
-Control2=IDC_STATIC,static,1342308480
-Control3=IDC_STATIC,static,1342308352
-Control4=IDOK,button,1342373889
-
-[DLG:IDR_MAINFRAME (English (U.S.))]
-Type=1
-Class=?
-ControlCount=1
-Control1=IDC_STATIC,static,1342308352
-
-[DLG:IDD_DIALOGTEXT (English (U.S.))]
-Type=1
-Class=CElementTextDialog
-ControlCount=10
-Control1=IDOK,button,1342242817
-Control2=IDCANCEL,button,1342242816
-Control3=IDC_DIALTEXT_EDIT,edit,1350631492
-Control4=IDC_STATIC,static,1342308352
-Control5=IDC_DIALTEXT_IDEDIT,edit,1350631568
-Control6=IDC_STATIC,static,1342308352
-Control7=IDC_STYLES_COMBO,combobox,1344340227
-Control8=IDC_STATIC,static,1342308352
-Control9=IDC_STYLES_REFRESH_BUTTON,button,1342242816
-Control10=ID_HELP,button,1342242816
-
-[CLS:CSimpleFilterDialog]
-Type=0
-HeaderFile=SimpleFilterDialog.h
-ImplementationFile=SimpleFilterDialog.cpp
-BaseClass=CPropertyPage
-Filter=N
-LastObject=IDC_FILTER_LIST
-VirtualFilter=dWC
-
-[DLG:IDD_GENERATE_DIALOG (English (U.S.))]
-Type=1
-Class=CGenerateDialog
-ControlCount=2
-Control1=IDC_GENERATE_BUTTON,button,1342251009
-Control2=IDC_NEW_WORD_CHECK,button,1476460547
-
-[CLS:CGenerateDialog]
-Type=0
-HeaderFile=GenerateDialog.h
-ImplementationFile=GenerateDialog.cpp
-BaseClass=CDialog
-Filter=D
-LastObject=CGenerateDialog
-VirtualFilter=dWC
-
-[CLS:CSourcesDialog]
-Type=0
-HeaderFile=SourcesDialog.h
-ImplementationFile=SourcesDialog.cpp
-BaseClass=CDialog
-Filter=D
-LastObject=ID_HELP
-VirtualFilter=dWC
-
-[CLS:CElementTextDialog]
-Type=0
-HeaderFile=elementtextdialog.h
-ImplementationFile=elementtextdialog.cpp
-BaseClass=CDialog
-Filter=D
-VirtualFilter=dWC
-LastObject=CElementTextDialog
-
-[CLS:CActiveElementDialog]
-Type=0
-HeaderFile=ActiveElementDialog.h
-ImplementationFile=ActiveElementDialog.cpp
-BaseClass=CDialog
-Filter=D
-LastObject=CActiveElementDialog
-VirtualFilter=dWC
-
-[CLS:CTransformationsDialog]
-Type=0
-HeaderFile=TransformationsDialog.h
-ImplementationFile=TransformationsDialog.cpp
-BaseClass=CPropertyPage
-Filter=D
-LastObject=CTransformationsDialog
-VirtualFilter=dWC
-
-[DLG:IDD_TRANSFORMATIONS_DIALOG (English (U.S.))]
-Type=1
-Class=CTransformationsDialog
-ControlCount=10
-Control1=IDC_SUPPORTED_TRANSF_LIST,listbox,1352730883
-Control2=IDC_SELECTED_TRANSFS_LIST,listbox,1352730881
-Control3=IDC_STATIC,static,1342308352
-Control4=IDC_STATIC,static,1342308352
-Control5=IDC_ADD_BUTTON,button,1342242816
-Control6=IDC_REMOVE_BUTTON,button,1342242816
-Control7=IDC_MOVE_UP_BUTTON,button,1342242816
-Control8=IDC_MOVE_DOWN_BUTTON,button,1342242816
-Control9=IDC_STATIC,static,1082130446
-Control10=IDC_CONFIGURE_BUTTON,button,1342242816
-
-[DLG:IDD_SIMPLE_FILTER_DIALOG (English (U.S.))]
-Type=1
-Class=CSimpleFilterDialog
-ControlCount=2
-Control1=IDC_FILTER_LIST,SysListView32,1350631433
-Control2=IDC_SIMPLE_FILTER_DISABLED_CHECK,button,1342242819
-
-[DLG:IDD_ACTIVE_ELEMENT_DIALOG (English (U.S.))]
-Type=1
-Class=CActiveElementDialog
-ControlCount=5
-Control1=IDOK,button,1342242817
-Control2=IDCANCEL,button,1342242816
-Control3=IDC_APPLY_BUTTON,button,1342242816
-Control4=IDC_TAB1,SysTabControl32,1342177280
-Control5=IDC_SWITCH_BUTTON,button,1342242816
-
-[DB:Tcategory_Recordset]
-DB=1
-DBType=ODBC
-ColumnCount=55
-Column1=[tmAttribute].[AttributeID], 4, 4
-Column2=[tmAttribute].[Name], 12, 100
-Column3=[tmAttribute].[MatrixID], 4, 4
-Column4=[AttributeSubTypeID], 4, 4
-Column5=[ValueSubTypeID], 4, 4
-Column6=[Derived], -7, 1
-Column7=[Formula], 12, 510
-Column8=[MCPosition], 4, 4
-Column9=[MCLength], 4, 4
-Column10=[MCDelimiter], 12, 510
-Column11=[PrimaryKeyPosition], 4, 4
-Column12=[ValueMin], 8, 8
-Column13=[ValueMax], 8, 8
-Column14=[ValueAvg], 8, 8
-Column15=[ValueModus], 8, 8
-Column16=[ValueVariability], 8, 8
-Column17=[tmAttribute].[Notice], 12, 510
-Column18=[tmAttribute].[wSavedCountUsed], 4, 4
-Column19=[CategoryID], 4, 4
-Column20=[tmCategory].[Name], 12, 100
-Column21=[tmCategory].[QuantityID], 4, 4
-Column22=[tmCategory].[CategorySubTypeID], 4, 4
-Column23=[tmCategory].[BoolTypeID], 4, 4
-Column24=[XCategory], -7, 1
-Column25=[IncludeNULL], -7, 1
-Column26=[tmCategory].[Ord], 4, 4
-Column27=[tmCategory].[Notice], 12, 510
-Column28=[tmCategory].[wSavedCountUsed], 4, 4
-Column29=[tmMatrix].[MatrixID], 4, 4
-Column30=[tmMatrix].[Name], 12, 100
-Column31=[Initialised], -7, 1
-Column32=[RecordCount], 4, 4
-Column33=[tmMatrix].[Notice], 12, 510
-Column34=[tmMatrix].[wSavedCountUsed], 4, 4
-Column35=[tmQuantity].[QuantityID], 4, 4
-Column36=[tmQuantity].[Name], 12, 100
-Column37=[tmQuantity].[ShortName], 12, 510
-Column38=[ShowName], -7, 1
-Column39=[tmQuantity].[AttributeID], 4, 4
-Column40=[ItemShift], 4, 4
-Column41=[ParentGroupID], 4, 4
-Column42=[tmQuantity].[wSavedCountUsed], 4, 4
-Column43=[wUpdateVer], 4, 4
-Column44=[UserID], 4, 4
-Column45=[tmQuantity].[Notice], 12, 510
-Column46=[tsBoolType].[BoolTypeID], 4, 4
-Column47=[tsBoolType].[Name], 12, 100
-Column48=[tsBoolType].[ShortName], 12, 40
-Column49=[tsBoolType].[Ord], 4, 4
-Column50=[tsBoolType].[Notice], 12, 510
-Column51=[tsCategorySubType].[CategorySubTypeID], 4, 4
-Column52=[tsCategorySubType].[Name], 12, 100
-Column53=[tsCategorySubType].[ShortName], 12, 40
-Column54=[tsCategorySubType].[Ord], 4, 4
-Column55=[tsCategorySubType].[Notice], 12, 510
-
-[DB:TCatDef]
-DB=1
-DBType=ODBC
-ColumnCount=35
-Column1=[tmCategory].[CategoryID], 4, 4
-Column2=[tmCategory].[Name], 12, 100
-Column3=[QuantityID], 4, 4
-Column4=[CategorySubTypeID], 4, 4
-Column5=[BoolTypeID], 4, 4
-Column6=[XCategory], -7, 1
-Column7=[IncludeNULL], -7, 1
-Column8=[tmCategory].[Ord], 4, 4
-Column9=[tmCategory].[Notice], 12, 510
-Column10=[wSavedCountUsed], 4, 4
-Column11=[CategoryEnumValueID], 4, 4
-Column12=[tmCategoryEnumValue].[CategoryID], 4, 4
-Column13=[tmCategoryEnumValue].[ValueID], 4, 4
-Column14=[IntervalID], 4, 4
-Column15=[tmInterval].[CategoryID], 4, 4
-Column16=[FromValueID], 4, 4
-Column17=[ToValueID], 4, 4
-Column18=[LeftBracketTypeID], 4, 4
-Column19=[RightBracketTypeID], 4, 4
-Column20=[tmValue].[ValueID], 4, 4
-Column21=[ValueSubTypeID], 4, 4
-Column22=[ValueLong], 4, 4
-Column23=[ValueFloat], 8, 8
-Column24=[ValueString], 12, 510
-Column25=[ValueBool], -7, 1
-Column26=[ValueDate], 11, 16
-Column27=[InfinityTypeID], 4, 4
-Column28=[IsNULL], -7, 1
-Column29=[BracketTypeID], 4, 4
-Column30=[tsBracketType].[Name], 12, 100
-Column31=[ShortName], 12, 40
-Column32=[tsBracketType].[Ord], 4, 4
-Column33=[LeftBracket], 12, 100
-Column34=[RightBracket], 12, 100
-Column35=[tsBracketType].[Notice], 12, 510
-
-[DB:TCatDefEnum]
-DB=1
-DBType=ODBC
-ColumnCount=18
-Column1=[CategoryEnumValueID], 4, 4
-Column2=[CategoryID], 4, 4
-Column3=[tmCategoryEnumValue].[ValueID], 4, 4
-Column4=[tmValue].[ValueID], 4, 4
-Column5=[tmValue].[ValueSubTypeID], 4, 4
-Column6=[ValueLong], 4, 4
-Column7=[ValueFloat], 8, 8
-Column8=[ValueString], 12, 510
-Column9=[ValueBool], -7, 1
-Column10=[ValueDate], 11, 16
-Column11=[InfinityTypeID], 4, 4
-Column12=[IsNULL], -7, 1
-Column13=[tsValueSubType].[ValueSubTypeID], 4, 4
-Column14=[Name], 12, 100
-Column15=[ShortName], 12, 40
-Column16=[Cardinal], -7, 1
-Column17=[Ord], 4, 4
-Column18=[Notice], 12, 510
-
-[DB:TCatDefInt]
-DB=1
-DBType=ODBC
-ColumnCount=28
-Column1=[IntervalID], 4, 4
-Column2=[CategoryID], 4, 4
-Column3=[FromValueID], 4, 4
-Column4=[ToValueID], 4, 4
-Column5=[LeftBracketTypeID], 4, 4
-Column6=[RightBracketTypeID], 4, 4
-Column7=[ValueID], 4, 4
-Column8=[tmValue].[ValueSubTypeID], 4, 4
-Column9=[ValueLong], 4, 4
-Column10=[ValueFloat], 8, 8
-Column11=[ValueString], 12, 510
-Column12=[ValueBool], -7, 1
-Column13=[ValueDate], 11, 16
-Column14=[InfinityTypeID], 4, 4
-Column15=[IsNULL], -7, 1
-Column16=[BracketTypeID], 4, 4
-Column17=[tsBracketType].[Name], 12, 100
-Column18=[tsBracketType].[ShortName], 12, 40
-Column19=[tsBracketType].[Ord], 4, 4
-Column20=[LeftBracket], 12, 100
-Column21=[RightBracket], 12, 100
-Column22=[tsBracketType].[Notice], 12, 510
-Column23=[tsValueSubType].[ValueSubTypeID], 4, 4
-Column24=[tsValueSubType].[Name], 12, 100
-Column25=[tsValueSubType].[ShortName], 12, 40
-Column26=[Cardinal], -7, 1
-Column27=[tsValueSubType].[Ord], 4, 4
-Column28=[tsValueSubType].[Notice], 12, 510
-
-[CLS:CAttributeLinkDialog]
-Type=0
-HeaderFile=AttributeLinkDialog.h
-ImplementationFile=AttributeLinkDialog.cpp
-BaseClass=CDialog
-Filter=N
-LastObject=CAttributeLinkDialog
-VirtualFilter=dWC
-
-[CLS:CAttributeLinkTableDialog]
-Type=0
-HeaderFile=AttributeLinkTableDialog.h
-ImplementationFile=AttributeLinkTableDialog.cpp
-BaseClass=CDialog
-Filter=D
-LastObject=CAttributeLinkTableDialog
-VirtualFilter=dWC
-
-[DB:TAttribute]
-DB=1
-DBType=ODBC
-ColumnCount=50
-Column1=[tmAttribute].[AttributeID], 4, 4
-Column2=[tmAttribute].[Name], 12, 100
-Column3=[tmAttribute].[MatrixID], 4, 4
-Column4=[tmAttribute].[AttributeSubTypeID], 4, 4
-Column5=[ValueSubTypeID], 4, 4
-Column6=[Derived], -7, 1
-Column7=[Formula], 12, 510
-Column8=[MCPosition], 4, 4
-Column9=[MCLength], 4, 4
-Column10=[MCDelimiter], 12, 510
-Column11=[PrimaryKeyPosition], 4, 4
-Column12=[ValueMin], 8, 8
-Column13=[ValueMax], 8, 8
-Column14=[ValueAvg], 8, 8
-Column15=[ValueModus], 8, 8
-Column16=[ValueVariability], 8, 8
-Column17=[tmAttribute].[Notice], 12, 510
-Column18=[tmAttribute].[wSavedCountUsed], 4, 4
-Column19=[CategoryID], 4, 4
-Column20=[tmCategory].[Name], 12, 100
-Column21=[tmCategory].[QuantityID], 4, 4
-Column22=[CategorySubTypeID], 4, 4
-Column23=[BoolTypeID], 4, 4
-Column24=[XCategory], -7, 1
-Column25=[IncludeNULL], -7, 1
-Column26=[tmCategory].[Ord], 4, 4
-Column27=[tmCategory].[Notice], 12, 510
-Column28=[tmCategory].[wSavedCountUsed], 4, 4
-Column29=[tmMatrix].[MatrixID], 4, 4
-Column30=[tmMatrix].[Name], 12, 100
-Column31=[Initialised], -7, 1
-Column32=[RecordCount], 4, 4
-Column33=[tmMatrix].[Notice], 12, 510
-Column34=[tmMatrix].[wSavedCountUsed], 4, 4
-Column35=[tmQuantity].[QuantityID], 4, 4
-Column36=[tmQuantity].[Name], 12, 100
-Column37=[tmQuantity].[ShortName], 12, 510
-Column38=[ShowName], -7, 1
-Column39=[tmQuantity].[AttributeID], 4, 4
-Column40=[ItemShift], 4, 4
-Column41=[ParentGroupID], 4, 4
-Column42=[tmQuantity].[wSavedCountUsed], 4, 4
-Column43=[wUpdateVer], 4, 4
-Column44=[UserID], 4, 4
-Column45=[tmQuantity].[Notice], 12, 510
-Column46=[tsAttributeSubType].[AttributeSubTypeID], 4, 4
-Column47=[tsAttributeSubType].[Name], 12, 510
-Column48=[tsAttributeSubType].[ShortName], 12, 510
-Column49=[tsAttributeSubType].[Ord], 4, 4
-Column50=[tsAttributeSubType].[Notice], 12, 510
-
-[DB:TAttribute_Recordset]
-DB=1
-DBType=ODBC
-ColumnCount=29
-Column1=[AttributeID], 4, 4
-Column2=[tmAttribute].[Name], 12, 100
-Column3=[tmAttribute].[MatrixID], 4, 4
-Column4=[tmAttribute].[AttributeSubTypeID], 4, 4
-Column5=[ValueSubTypeID], 4, 4
-Column6=[Derived], -7, 1
-Column7=[Formula], 12, 510
-Column8=[MCPosition], 4, 4
-Column9=[MCLength], 4, 4
-Column10=[MCDelimiter], 12, 510
-Column11=[PrimaryKeyPosition], 4, 4
-Column12=[ValueMin], 8, 8
-Column13=[ValueMax], 8, 8
-Column14=[ValueAvg], 8, 8
-Column15=[ValueModus], 8, 8
-Column16=[ValueVariability], 8, 8
-Column17=[tmAttribute].[Notice], 12, 510
-Column18=[tmAttribute].[wSavedCountUsed], 4, 4
-Column19=[tmMatrix].[MatrixID], 4, 4
-Column20=[tmMatrix].[Name], 12, 100
-Column21=[Initialised], -7, 1
-Column22=[RecordCount], 4, 4
-Column23=[tmMatrix].[Notice], 12, 510
-Column24=[tmMatrix].[wSavedCountUsed], 4, 4
-Column25=[tsAttributeSubType].[AttributeSubTypeID], 4, 4
-Column26=[tsAttributeSubType].[Name], 12, 510
-Column27=[ShortName], 12, 510
-Column28=[Ord], 4, 4
-Column29=[tsAttributeSubType].[Notice], 12, 510
-
-[DB:TCategory_list]
-DB=1
-DBType=ODBC
-ColumnCount=39
-Column1=[tmAttribute].[AttributeID], 4, 4
-Column2=[tmAttribute].[Name], 12, 100
-Column3=[MatrixID], 4, 4
-Column4=[AttributeSubTypeID], 4, 4
-Column5=[ValueSubTypeID], 4, 4
-Column6=[Derived], -7, 1
-Column7=[Formula], 12, 510
-Column8=[MCPosition], 4, 4
-Column9=[MCLength], 4, 4
-Column10=[MCDelimiter], 12, 510
-Column11=[PrimaryKeyPosition], 4, 4
-Column12=[ValueMin], 8, 8
-Column13=[ValueMax], 8, 8
-Column14=[ValueAvg], 8, 8
-Column15=[ValueModus], 8, 8
-Column16=[ValueVariability], 8, 8
-Column17=[tmAttribute].[Notice], 12, 510
-Column18=[tmAttribute].[wSavedCountUsed], 4, 4
-Column19=[CategoryID], 4, 4
-Column20=[tmCategory].[Name], 12, 100
-Column21=[tmCategory].[QuantityID], 4, 4
-Column22=[CategorySubTypeID], 4, 4
-Column23=[BoolTypeID], 4, 4
-Column24=[XCategory], -7, 1
-Column25=[IncludeNULL], -7, 1
-Column26=[Ord], 4, 4
-Column27=[tmCategory].[Notice], 12, 510
-Column28=[tmCategory].[wSavedCountUsed], 4, 4
-Column29=[tmQuantity].[QuantityID], 4, 4
-Column30=[tmQuantity].[Name], 12, 100
-Column31=[ShortName], 12, 510
-Column32=[ShowName], -7, 1
-Column33=[tmQuantity].[AttributeID], 4, 4
-Column34=[ItemShift], 4, 4
-Column35=[ParentGroupID], 4, 4
-Column36=[tmQuantity].[wSavedCountUsed], 4, 4
-Column37=[wUpdateVer], 4, 4
-Column38=[UserID], 4, 4
-Column39=[tmQuantity].[Notice], 12, 510
-
-[DLG:IDD_ATTRIBUTE_LINK_TABLE_DIALOG (English (U.S.))]
-Type=1
-Class=CAttributeLinkTableDialog
-ControlCount=19
-Control1=IDOK,button,1342242817
-Control2=IDCANCEL,button,1342242816
-Control3=IDC_TARGET_COMBO,combobox,1344340227
-Control4=IDC_STATIC,static,1342308352
-Control5=IDC_ATTRIBUTES_LIST,SysListView32,1350631433
-Control6=IDC_STATIC,static,1342308352
-Control7=IDC_REFRESH_BUTTON,button,1342242816
-Control8=IDC_CAPTIONS_LIST,SysListView32,1350631945
-Control9=IDC_ADD_BUTTON,button,1342242816
-Control10=IDC_REMOVE_BUTTON,button,1342242816
-Control11=IDC_STATIC,static,1342308352
-Control12=IDC_MOVE_UP_BUTTON,button,1342242816
-Control13=IDC_MOVE_DOWN_BUTTON2,button,1342242816
-Control14=IDC_EDIT_CAPTION_BUTTON,button,1342242816
-Control15=IDC_STYLE_COMBO,combobox,1344340227
-Control16=IDC_STATIC,static,1342308352
-Control17=IDC_STATIC,static,1342308352
-Control18=IDC_ATTRLINKTABLE_ID_EDIT,edit,1350631568
-Control19=ID_HELP,button,1342242816
-
-[DLG:IDD_ATTRIBUTE_LINK_DIALOG (English (U.S.))]
-Type=1
-Class=CAttributeLinkDialog
-ControlCount=13
-Control1=IDOK,button,1342242817
-Control2=IDCANCEL,button,1342242816
-Control3=IDC_TARGET_COMBO,combobox,1344340227
-Control4=IDC_STATIC,static,1342308352
-Control5=IDC_ATTRIBUTES_LIST,SysListView32,1350631437
-Control6=IDC_STATIC,static,1342308352
-Control7=IDC_REFRESH_BUTTON,button,1342242816
-Control8=IDC_STYLES_COMBO,combobox,1344340227
-Control9=IDC_STATIC,static,1342308352
-Control10=IDC_STYLES_REFRESH_BUTTON,button,1342242816
-Control11=IDC_STATIC,static,1342308352
-Control12=IDC_ATTRLINK_ID_EDIT,edit,1350631568
-Control13=ID_HELP,button,1342242816
-
-[DLG:IDD_SOURCES_DIALOG (English (U.S.))]
-Type=1
-Class=CSourcesDialog
-ControlCount=12
-Control1=IDC_STATIC,static,1342308352
-Control2=IDC_PLUGINS_COMBO,combobox,1344340227
-Control3=IDC_STATIC,button,1342177287
-Control4=IDC_ADD_SOURCE_BUTTON,button,1342242816
-Control5=IDC_SOURCES_LIST,SysListView32,1350631941
-Control6=IDC_OPEN_BUTTON,button,1342242816
-Control7=IDC_CLOSE_BUTTON,button,1342242816
-Control8=IDC_REMOVE_BUTTON,button,1342242816
-Control9=IDC_RENAME_BUTTON,button,1342242816
-Control10=IDC_SET_DEFAULT_BUTTON,button,1342242816
-Control11=IDC_STATIC,button,1342177287
-Control12=ID_HELP,button,1342242816
-
-[DB:Bool_Cedent_Recordset]
-DB=1
-DBType=ODBC
-ColumnCount=99
-Column1=[taTask].[TaskID], 4, 4
-Column2=[taTask].[Name], 12, 510
-Column3=[taTask].[TaskSubTypeID], 4, 4
-Column4=[TaskGroupID], 4, 4
-Column5=[taTask].[UserID], 4, 4
-Column6=[taTask].[MatrixID], 4, 4
-Column7=[ParamBASE], 4, 4
-Column8=[ParamBASERelativ], -7, 1
-Column9=[ReadOnly], -7, 1
-Column10=[HypothesisGenerated], -7, 1
-Column11=[GenerationInterrupted], -7, 1
-Column12=[GenerationNrOfTests], 4, 4
-Column13=[GenerationStartTime], 11, 16
-Column14=[GenerationTotalTime], 4, 4
-Column15=[taTask].[Notice], 12, 510
-Column16=[tdCedentD].[CedentDID], 4, 4
-Column17=[tdCedentD].[TaskID], 4, 4
-Column18=[tdCedentD].[CedentTypeID], 4, 4
-Column19=[tdCedentD].[Name], 12, 510
-Column20=[tdCedentD].[Ord], 4, 4
-Column21=[tdCedentD].[MinLen], 4, 4
-Column22=[tdCedentD].[MaxLen], 4, 4
-Column23=[tdCedentD].[Notice], 12, 510
-Column24=[tdEquivalenceClass].[EquivalenceClassID], 4, 4
-Column25=[tdEquivalenceClass].[Name], 12, 100
-Column26=[tdEquivalenceClass].[CedentDID], 4, 4
-Column27=[tdEquivalenceClass].[Notice], 12, 510
-Column28=[LiteralDID], 4, 4
-Column29=[tdLiteralD].[CedentDID], 4, 4
-Column30=[tdLiteralD].[QuantityID], 4, 4
-Column31=[CategoryID], 4, 4
-Column32=[tdLiteralD].[LiteralTypeID], 4, 4
-Column33=[tdLiteralD].[GaceTypeID], 4, 4
-Column34=[tdLiteralD].[EquivalenceClassID], 4, 4
-Column35=[tdLiteralD].[CoefficientTypeID], 4, 4
-Column36=[tdLiteralD].[MinLen], 4, 4
-Column37=[tdLiteralD].[MaxLen], 4, 4
-Column38=[tdLiteralD].[Ord], 4, 4
-Column39=[tdLiteralD].[Notice], 12, 510
-Column40=[tmAttribute].[AttributeID], 4, 4
-Column41=[tmAttribute].[Name], 12, 100
-Column42=[tmAttribute].[MatrixID], 4, 4
-Column43=[AttributeSubTypeID], 4, 4
-Column44=[ValueSubTypeID], 4, 4
-Column45=[Derived], -7, 1
-Column46=[Formula], 12, 510
-Column47=[MCPosition], 4, 4
-Column48=[MCLength], 4, 4
-Column49=[MCDelimiter], 12, 510
-Column50=[PrimaryKeyPosition], 4, 4
-Column51=[ValueMin], 8, 8
-Column52=[ValueMax], 8, 8
-Column53=[ValueAvg], 8, 8
-Column54=[ValueModus], 8, 8
-Column55=[ValueVariability], 8, 8
-Column56=[tmAttribute].[Notice], 12, 510
-Column57=[tmAttribute].[wSavedCountUsed], 4, 4
-Column58=[tmMatrix].[MatrixID], 4, 4
-Column59=[tmMatrix].[Name], 12, 100
-Column60=[Initialised], -7, 1
-Column61=[RecordCount], 4, 4
-Column62=[tmMatrix].[Notice], 12, 510
-Column63=[tmMatrix].[wSavedCountUsed], 4, 4
-Column64=[tmQuantity].[QuantityID], 4, 4
-Column65=[tmQuantity].[Name], 12, 100
-Column66=[tmQuantity].[ShortName], 12, 510
-Column67=[ShowName], -7, 1
-Column68=[tmQuantity].[AttributeID], 4, 4
-Column69=[ItemShift], 4, 4
-Column70=[ParentGroupID], 4, 4
-Column71=[tmQuantity].[wSavedCountUsed], 4, 4
-Column72=[wUpdateVer], 4, 4
-Column73=[tmQuantity].[UserID], 4, 4
-Column74=[tmQuantity].[Notice], 12, 510
-Column75=[tsCedentType].[CedentTypeID], 4, 4
-Column76=[tsCedentType].[Name], 12, 100
-Column77=[tsCedentType].[ShortName], 12, 40
-Column78=[tsCedentType].[Ord], 4, 4
-Column79=[tsCedentType].[Notice], 12, 510
-Column80=[tsCoefficientType].[CoefficientTypeID], 4, 4
-Column81=[tsCoefficientType].[Name], 12, 100
-Column82=[tsCoefficientType].[ShortName], 12, 40
-Column83=[tsCoefficientType].[Ord], 4, 4
-Column84=[tsCoefficientType].[Notice], 12, 510
-Column85=[tsGaceType].[GaceTypeID], 4, 4
-Column86=[tsGaceType].[Name], 12, 100
-Column87=[tsGaceType].[ShortName], 12, 40
-Column88=[tsGaceType].[Ord], 4, 4
-Column89=[tsGaceType].[Notice], 12, 510
-Column90=[tsLiteralType].[LiteralTypeID], 4, 4
-Column91=[tsLiteralType].[Name], 12, 100
-Column92=[tsLiteralType].[ShortName], 12, 40
-Column93=[tsLiteralType].[Ord], 4, 4
-Column94=[tsLiteralType].[Notice], 12, 510
-Column95=[tsTaskSubType].[TaskSubTypeID], 4, 4
-Column96=[tsTaskSubType].[Name], 12, 100
-Column97=[tsTaskSubType].[ShortName], 12, 40
-Column98=[tsTaskSubType].[Ord], 4, 4
-Column99=[tsTaskSubType].[Notice], 12, 510
-
-[DLG:IDD_DIALOG_PARAGRAPH (English (U.S.))]
-Type=1
-Class=CElementParagraphDialog
-ControlCount=8
-Control1=IDOK,button,1342242817
-Control2=IDCANCEL,button,1342242816
-Control3=IDC_STATIC,static,1342308352
-Control4=IDC_DIALPARAGRAPH_IDEDIT,edit,1350631568
-Control5=IDC_STYLES_COMBO,combobox,1344340227
-Control6=IDC_STATIC,static,1342308352
-Control7=IDC_STYLES_REFRESH_BUTTON,button,1342242816
-Control8=ID_HELP,button,1342242816
-
-[CLS:CElementParagraphDialog]
-Type=0
-HeaderFile=ElementParagraphDialog.h
-ImplementationFile=ElementParagraphDialog.cpp
-BaseClass=CDialog
-Filter=D
-LastObject=IDC_STYLES_COMBO
-VirtualFilter=dWC
-
-[DLG:IDD_DIALOG_CHAPTER (English (U.S.))]
-Type=1
-Class=CElementChapterDialog
-ControlCount=7
-Control1=IDOK,button,1342242817
-Control2=IDCANCEL,button,1342242816
-Control3=IDC_STATIC,static,1342308352
-Control4=IDC_DIALCHAPTER_IDEDIT,edit,1350631568
-Control5=IDC_STATIC,static,1342308352
-Control6=IDC_DIALCHAPTER_TITLEEDIT,edit,1350631552
-Control7=ID_HELP,button,1342242816
-
-[CLS:CElementChapterDialog]
-Type=0
-HeaderFile=ElementChapterDialog.h
-ImplementationFile=ElementChapterDialog.cpp
-BaseClass=CDialog
-Filter=D
-VirtualFilter=dWC
-LastObject=CElementChapterDialog
-
-[CLS:CElementDialogBase]
-Type=0
-HeaderFile=ElementDialogBase.h
-ImplementationFile=ElementDialogBase.cpp
-BaseClass=CDialog
-Filter=D
-
-[DB:TEmpty_Cedents_Recordset]
-DB=1
-DBType=ODBC
-ColumnCount=39
-Column1=[taTask].[TaskID], 4, 4
-Column2=[taTask].[Name], 12, 510
-Column3=[taTask].[TaskSubTypeID], 4, 4
-Column4=[TaskGroupID], 4, 4
-Column5=[UserID], 4, 4
-Column6=[taTask].[MatrixID], 4, 4
-Column7=[ParamBASE], 4, 4
-Column8=[ParamBASERelativ], -7, 1
-Column9=[ReadOnly], -7, 1
-Column10=[HypothesisGenerated], -7, 1
-Column11=[GenerationInterrupted], -7, 1
-Column12=[GenerationNrOfTests], 4, 4
-Column13=[GenerationStartTime], 11, 16
-Column14=[GenerationTotalTime], 4, 4
-Column15=[taTask].[Notice], 12, 510
-Column16=[CedentDID], 4, 4
-Column17=[tdCedentD].[TaskID], 4, 4
-Column18=[tdCedentD].[CedentTypeID], 4, 4
-Column19=[tdCedentD].[Name], 12, 510
-Column20=[tdCedentD].[Ord], 4, 4
-Column21=[MinLen], 4, 4
-Column22=[MaxLen], 4, 4
-Column23=[tdCedentD].[Notice], 12, 510
-Column24=[tmMatrix].[MatrixID], 4, 4
-Column25=[tmMatrix].[Name], 12, 100
-Column26=[Initialised], -7, 1
-Column27=[RecordCount], 4, 4
-Column28=[tmMatrix].[Notice], 12, 510
-Column29=[wSavedCountUsed], 4, 4
-Column30=[tsCedentType].[CedentTypeID], 4, 4
-Column31=[tsCedentType].[Name], 12, 100
-Column32=[tsCedentType].[ShortName], 12, 40
-Column33=[tsCedentType].[Ord], 4, 4
-Column34=[tsCedentType].[Notice], 12, 510
-Column35=[tsTaskSubType].[TaskSubTypeID], 4, 4
-Column36=[tsTaskSubType].[Name], 12, 100
-Column37=[tsTaskSubType].[ShortName], 12, 40
-Column38=[tsTaskSubType].[Ord], 4, 4
-Column39=[tsTaskSubType].[Notice], 12, 510
-
-[DB:TLit_Scan_Recordset]
-DB=1
-DBType=ODBC
-ColumnCount=12
-Column1=[LiteralDID], 4, 4
-Column2=[CedentDID], 4, 4
-Column3=[QuantityID], 4, 4
-Column4=[CategoryID], 4, 4
-Column5=[LiteralTypeID], 4, 4
-Column6=[GaceTypeID], 4, 4
-Column7=[EquivalenceClassID], 4, 4
-Column8=[CoefficientTypeID], 4, 4
-Column9=[MinLen], 4, 4
-Column10=[MaxLen], 4, 4
-Column11=[Ord], 4, 4
-Column12=[Notice], 12, 510
-
-[DB:CF_Cedent_Recordset]
-DB=1
-DBType=ODBC
-ColumnCount=39
-Column1=[taTask].[TaskID], 4, 4
-Column2=[taTask].[Name], 12, 510
-Column3=[taTask].[TaskSubTypeID], 4, 4
-Column4=[TaskGroupID], 4, 4
-Column5=[UserID], 4, 4
-Column6=[taTask].[MatrixID], 4, 4
-Column7=[ParamBASE], 4, 4
-Column8=[ParamBASERelativ], -7, 1
-Column9=[ReadOnly], -7, 1
-Column10=[HypothesisGenerated], -7, 1
-Column11=[GenerationInterrupted], -7, 1
-Column12=[GenerationNrOfTests], 4, 4
-Column13=[GenerationStartTime], 11, 16
-Column14=[GenerationTotalTime], 4, 4
-Column15=[taTask].[Notice], 12, 510
-Column16=[CFCedentDID], 4, 4
-Column17=[tdCFCedentD].[TaskID], 4, 4
-Column18=[tdCFCedentD].[Name], 12, 510
-Column19=[tdCFCedentD].[CedentTypeID], 4, 4
-Column20=[MinLen], 4, 4
-Column21=[MaxLen], 4, 4
-Column22=[tdCFCedentD].[Notice], 12, 510
-Column23=[tdCFCedentD].[Ord], 4, 4
-Column24=[tmMatrix].[MatrixID], 4, 4
-Column25=[tmMatrix].[Name], 12, 100
-Column26=[Initialised], -7, 1
-Column27=[RecordCount], 4, 4
-Column28=[tmMatrix].[Notice], 12, 510
-Column29=[wSavedCountUsed], 4, 4
-Column30=[tsCedentType].[CedentTypeID], 4, 4
-Column31=[tsCedentType].[Name], 12, 100
-Column32=[tsCedentType].[ShortName], 12, 40
-Column33=[tsCedentType].[Ord], 4, 4
-Column34=[tsCedentType].[Notice], 12, 510
-Column35=[tsTaskSubType].[TaskSubTypeID], 4, 4
-Column36=[tsTaskSubType].[Name], 12, 100
-Column37=[tsTaskSubType].[ShortName], 12, 40
-Column38=[tsTaskSubType].[Ord], 4, 4
-Column39=[tsTaskSubType].[Notice], 12, 510
-
-[DB:TCFLiteral]
-DB=1
-DBType=ODBC
-ColumnCount=34
-Column1=[CFLiteralDID], 4, 4
-Column2=[CFCedentDID], 4, 4
-Column3=[tdCFLiteralD].[QuantityID], 4, 4
-Column4=[Ord], 4, 4
-Column5=[tdCFLiteralD].[Notice], 12, 510
-Column6=[tmAttribute].[AttributeID], 4, 4
-Column7=[tmAttribute].[Name], 12, 100
-Column8=[MatrixID], 4, 4
-Column9=[AttributeSubTypeID], 4, 4
-Column10=[ValueSubTypeID], 4, 4
-Column11=[Derived], -7, 1
-Column12=[Formula], 12, 510
-Column13=[MCPosition], 4, 4
-Column14=[MCLength], 4, 4
-Column15=[MCDelimiter], 12, 510
-Column16=[PrimaryKeyPosition], 4, 4
-Column17=[ValueMin], 8, 8
-Column18=[ValueMax], 8, 8
-Column19=[ValueAvg], 8, 8
-Column20=[ValueModus], 8, 8
-Column21=[ValueVariability], 8, 8
-Column22=[tmAttribute].[Notice], 12, 510
-Column23=[tmAttribute].[wSavedCountUsed], 4, 4
-Column24=[tmQuantity].[QuantityID], 4, 4
-Column25=[tmQuantity].[Name], 12, 100
-Column26=[ShortName], 12, 510
-Column27=[ShowName], -7, 1
-Column28=[tmQuantity].[AttributeID], 4, 4
-Column29=[ItemShift], 4, 4
-Column30=[ParentGroupID], 4, 4
-Column31=[tmQuantity].[wSavedCountUsed], 4, 4
-Column32=[wUpdateVer], 4, 4
-Column33=[UserID], 4, 4
-Column34=[tmQuantity].[Notice], 12, 510
-
-[DB:KL_Cedent_Recordset]
-DB=1
-DBType=ODBC
-ColumnCount=39
-Column1=[taTask].[TaskID], 4, 4
-Column2=[taTask].[Name], 12, 510
-Column3=[taTask].[TaskSubTypeID], 4, 4
-Column4=[TaskGroupID], 4, 4
-Column5=[UserID], 4, 4
-Column6=[taTask].[MatrixID], 4, 4
-Column7=[ParamBASE], 4, 4
-Column8=[ParamBASERelativ], -7, 1
-Column9=[ReadOnly], -7, 1
-Column10=[HypothesisGenerated], -7, 1
-Column11=[GenerationInterrupted], -7, 1
-Column12=[GenerationNrOfTests], 4, 4
-Column13=[GenerationStartTime], 11, 16
-Column14=[GenerationTotalTime], 4, 4
-Column15=[taTask].[Notice], 12, 510
-Column16=[KLCedentDID], 4, 4
-Column17=[tdKLCedentD].[TaskID], 4, 4
-Column18=[tdKLCedentD].[Name], 12, 510
-Column19=[tdKLCedentD].[CedentTypeID], 4, 4
-Column20=[MinLen], 4, 4
-Column21=[MaxLen], 4, 4
-Column22=[tdKLCedentD].[Notice], 12, 510
-Column23=[tdKLCedentD].[Ord], 4, 4
-Column24=[tmMatrix].[MatrixID], 4, 4
-Column25=[tmMatrix].[Name], 12, 100
-Column26=[Initialised], -7, 1
-Column27=[RecordCount], 4, 4
-Column28=[tmMatrix].[Notice], 12, 510
-Column29=[wSavedCountUsed], 4, 4
-Column30=[tsCedentType].[CedentTypeID], 4, 4
-Column31=[tsCedentType].[Name], 12, 100
-Column32=[tsCedentType].[ShortName], 12, 40
-Column33=[tsCedentType].[Ord], 4, 4
-Column34=[tsCedentType].[Notice], 12, 510
-Column35=[tsTaskSubType].[TaskSubTypeID], 4, 4
-Column36=[tsTaskSubType].[Name], 12, 100
-Column37=[tsTaskSubType].[ShortName], 12, 40
-Column38=[tsTaskSubType].[Ord], 4, 4
-Column39=[tsTaskSubType].[Notice], 12, 510
-
-[DB:TKLLiteral]
-DB=1
-DBType=ODBC
-ColumnCount=34
-Column1=[KLLiteralDID], 4, 4
-Column2=[KLCedentDID], 4, 4
-Column3=[tdKLLiteralD].[QuantityID], 4, 4
-Column4=[Ord], 4, 4
-Column5=[tdKLLiteralD].[Notice], 12, 510
-Column6=[tmAttribute].[AttributeID], 4, 4
-Column7=[tmAttribute].[Name], 12, 100
-Column8=[MatrixID], 4, 4
-Column9=[AttributeSubTypeID], 4, 4
-Column10=[ValueSubTypeID], 4, 4
-Column11=[Derived], -7, 1
-Column12=[Formula], 12, 510
-Column13=[MCPosition], 4, 4
-Column14=[MCLength], 4, 4
-Column15=[MCDelimiter], 12, 510
-Column16=[PrimaryKeyPosition], 4, 4
-Column17=[ValueMin], 8, 8
-Column18=[ValueMax], 8, 8
-Column19=[ValueAvg], 8, 8
-Column20=[ValueModus], 8, 8
-Column21=[ValueVariability], 8, 8
-Column22=[tmAttribute].[Notice], 12, 510
-Column23=[tmAttribute].[wSavedCountUsed], 4, 4
-Column24=[tmQuantity].[QuantityID], 4, 4
-Column25=[tmQuantity].[Name], 12, 100
-Column26=[ShortName], 12, 510
-Column27=[ShowName], -7, 1
-Column28=[tmQuantity].[AttributeID], 4, 4
-Column29=[ItemShift], 4, 4
-Column30=[ParentGroupID], 4, 4
-Column31=[tmQuantity].[wSavedCountUsed], 4, 4
-Column32=[wUpdateVer], 4, 4
-Column33=[UserID], 4, 4
-Column34=[tmQuantity].[Notice], 12, 510
-
-[DB:Task_Recordset]
-DB=1
-DBType=ODBC
-ColumnCount=26
-Column1=[TaskID], 4, 4
-Column2=[taTask].[Name], 12, 510
-Column3=[taTask].[TaskSubTypeID], 4, 4
-Column4=[TaskGroupID], 4, 4
-Column5=[UserID], 4, 4
-Column6=[taTask].[MatrixID], 4, 4
-Column7=[ParamBASE], 4, 4
-Column8=[ParamBASERelativ], -7, 1
-Column9=[ReadOnly], -7, 1
-Column10=[HypothesisGenerated], -7, 1
-Column11=[GenerationInterrupted], -7, 1
-Column12=[GenerationNrOfTests], 4, 4
-Column13=[GenerationStartTime], 11, 16
-Column14=[GenerationTotalTime], 4, 4
-Column15=[taTask].[Notice], 12, 510
-Column16=[tmMatrix].[MatrixID], 4, 4
-Column17=[tmMatrix].[Name], 12, 100
-Column18=[Initialised], -7, 1
-Column19=[RecordCount], 4, 4
-Column20=[tmMatrix].[Notice], 12, 510
-Column21=[wSavedCountUsed], 4, 4
-Column22=[tsTaskSubType].[TaskSubTypeID], 4, 4
-Column23=[tsTaskSubType].[Name], 12, 100
-Column24=[ShortName], 12, 40
-Column25=[Ord], 4, 4
-Column26=[tsTaskSubType].[Notice], 12, 510
-
-[DB:tiHypothesis_Recordset]
-DB=1
-DBType=ODBC
-ColumnCount=8
-Column1=[HypothesisID], 4, 4
-Column2=[TaskID], 4, 4
-Column3=[FreqA], 4, 4
-Column4=[FreqB], 4, 4
-Column5=[FreqC], 4, 4
-Column6=[FreqD], 4, 4
-Column7=[Weight], 8, 8
-Column8=[Ord], 4, 4
-
-[DB:TFTQuantifier_Recordset]
-DB=1
-DBType=ODBC
-ColumnCount=42
-Column1=[taTask].[TaskID], 4, 4
-Column2=[taTask].[Name], 12, 510
-Column3=[taTask].[TaskSubTypeID], 4, 4
-Column4=[TaskGroupID], 4, 4
-Column5=[UserID], 4, 4
-Column6=[taTask].[MatrixID], 4, 4
-Column7=[ParamBASE], 4, 4
-Column8=[ParamBASERelativ], -7, 1
-Column9=[ReadOnly], -7, 1
-Column10=[HypothesisGenerated], -7, 1
-Column11=[GenerationInterrupted], -7, 1
-Column12=[GenerationNrOfTests], 4, 4
-Column13=[GenerationStartTime], 11, 16
-Column14=[GenerationTotalTime], 4, 4
-Column15=[taTask].[Notice], 12, 510
-Column16=[FTQuantifierID], 4, 4
-Column17=[tdFTQuantifier].[TaskID], 4, 4
-Column18=[FTQuantifierTypeID], 4, 4
-Column19=[ParamP], 8, 8
-Column20=[ParamAlfa], 8, 8
-Column21=[ParamBeta], 8, 8
-Column22=[ParamDelta], 8, 8
-Column23=[tdFTQuantifier].[Ord], 4, 4
-Column24=[tdFTQuantifier].[Notice], 12, 510
-Column25=[ParamRelativ], -7, 1
-Column26=[tmMatrix].[MatrixID], 4, 4
-Column27=[tmMatrix].[Name], 12, 100
-Column28=[Initialised], -7, 1
-Column29=[RecordCount], 4, 4
-Column30=[tmMatrix].[Notice], 12, 510
-Column31=[wSavedCountUsed], 4, 4
-Column32=[QuantifierTypeID], 4, 4
-Column33=[tsQuantifierType].[Name], 12, 100
-Column34=[tsQuantifierType].[ShortName], 12, 40
-Column35=[UsedParams], 12, 100
-Column36=[tsQuantifierType].[Ord], 4, 4
-Column37=[tsQuantifierType].[Notice], 12, 510
-Column38=[tsTaskSubType].[TaskSubTypeID], 4, 4
-Column39=[tsTaskSubType].[Name], 12, 100
-Column40=[tsTaskSubType].[ShortName], 12, 40
-Column41=[tsTaskSubType].[Ord], 4, 4
-Column42=[tsTaskSubType].[Notice], 12, 510
-
-[DLG:IDD_PROPERTY_EDITOR (English (U.S.))]
-Type=1
-Class=CPropertyEditor
-ControlCount=6
-Control1=IDOK,button,1342242817
-Control2=IDCANCEL,button,1342242816
-Control3=IDC_SCROLLBAR1,scrollbar,1342177281
-Control4=IDC_STATIC1,static,1342177287
-Control5=IDC_ERROR_TEXT,static,1342308352
-Control6=ID_HELP,button,1342242816
-
-[CLS:CPropertyEditor]
-Type=0
-HeaderFile=PropertyEditor.h
-ImplementationFile=PropertyEditor.cpp
-BaseClass=CDialog
-Filter=D
-LastObject=CPropertyEditor
-VirtualFilter=dWC
-
-[DB:TCFQuantifier_Recordset]
-DB=1
-DBType=ODBC
-ColumnCount=53
-Column1=[taTask].[TaskID], 4, 4
-Column2=[taTask].[Name], 12, 510
-Column3=[taTask].[TaskSubTypeID], 4, 4
-Column4=[TaskGroupID], 4, 4
-Column5=[UserID], 4, 4
-Column6=[taTask].[MatrixID], 4, 4
-Column7=[ParamBASE], 4, 4
-Column8=[ParamBASERelativ], -7, 1
-Column9=[ReadOnly], -7, 1
-Column10=[HypothesisGenerated], -7, 1
-Column11=[GenerationInterrupted], -7, 1
-Column12=[GenerationNrOfTests], 4, 4
-Column13=[GenerationStartTime], 11, 16
-Column14=[GenerationTotalTime], 4, 4
-Column15=[taTask].[Notice], 12, 510
-Column16=[CFQuantifierID], 4, 4
-Column17=[tdCFQuantifier].[TaskID], 4, 4
-Column18=[tdCFQuantifier].[CFQuantifierTypeID], 4, 4
-Column19=[FromCol], 4, 4
-Column20=[ToCol], 4, 4
-Column21=[tdCFQuantifier].[CompareTypeID], 4, 4
-Column22=[ValuePar], 8, 8
-Column23=[tdCFQuantifier].[CFQuantifierValueTypeID], 4, 4
-Column24=[Threshold], 8, 8
-Column25=[Formula], -1, 2147483646
-Column26=[tdCFQuantifier].[Ord], 4, 4
-Column27=[tdCFQuantifier].[Notice], 12, 510
-Column28=[tmMatrix].[MatrixID], 4, 4
-Column29=[tmMatrix].[Name], 12, 100
-Column30=[Initialised], -7, 1
-Column31=[RecordCount], 4, 4
-Column32=[tmMatrix].[Notice], 12, 510
-Column33=[wSavedCountUsed], 4, 4
-Column34=[tsCFQuantifierType].[CFQuantifierTypeID], 4, 4
-Column35=[tsCFQuantifierType].[Name], 12, 100
-Column36=[tsCFQuantifierType].[ShortName], 12, 40
-Column37=[tsCFQuantifierType].[Ord], 4, 4
-Column38=[tsCFQuantifierType].[Notice], 12, 510
-Column39=[tsCFQuantifierValueType].[CFQuantifierValueTypeID], 4, 4
-Column40=[tsCFQuantifierValueType].[Name], 12, 100
-Column41=[tsCFQuantifierValueType].[ShortName], 12, 40
-Column42=[tsCFQuantifierValueType].[Ord], 4, 4
-Column43=[tsCFQuantifierValueType].[Notice], 12, 510
-Column44=[tsCompareType].[CompareTypeID], 4, 4
-Column45=[tsCompareType].[Name], 12, 100
-Column46=[tsCompareType].[ShortName], 12, 40
-Column47=[tsCompareType].[Ord], 4, 4
-Column48=[tsCompareType].[Notice], 12, 510
-Column49=[tsTaskSubType].[TaskSubTypeID], 4, 4
-Column50=[tsTaskSubType].[Name], 12, 100
-Column51=[tsTaskSubType].[ShortName], 12, 40
-Column52=[tsTaskSubType].[Ord], 4, 4
-Column53=[tsTaskSubType].[Notice], 12, 510
-
-[DB:TKLQuantifier_Recordset]
-DB=1
-DBType=ODBC
-ColumnCount=56
-Column1=[taTask].[TaskID], 4, 4
-Column2=[taTask].[Name], 12, 510
-Column3=[taTask].[TaskSubTypeID], 4, 4
-Column4=[TaskGroupID], 4, 4
-Column5=[UserID], 4, 4
-Column6=[taTask].[MatrixID], 4, 4
-Column7=[ParamBASE], 4, 4
-Column8=[ParamBASERelativ], -7, 1
-Column9=[ReadOnly], -7, 1
-Column10=[HypothesisGenerated], -7, 1
-Column11=[GenerationInterrupted], -7, 1
-Column12=[GenerationNrOfTests], 4, 4
-Column13=[GenerationStartTime], 11, 16
-Column14=[GenerationTotalTime], 4, 4
-Column15=[taTask].[Notice], 12, 510
-Column16=[KLQuantifierID], 4, 4
-Column17=[tdKLQuantifier].[TaskID], 4, 4
-Column18=[tdKLQuantifier].[KLQuantifierTypeID], 4, 4
-Column19=[FromRow], 4, 4
-Column20=[FromCol], 4, 4
-Column21=[ToRow], 4, 4
-Column22=[ToCol], 4, 4
-Column23=[tdKLQuantifier].[CompareTypeID], 4, 4
-Column24=[ValuePar], 8, 8
-Column25=[tdKLQuantifier].[KLQuantifierValueTypeID], 4, 4
-Column26=[Threshold], 8, 8
-Column27=[Formula], -1, 2147483646
-Column28=[tdKLQuantifier].[Ord], 4, 4
-Column29=[KendalAbsValueTauB], -7, 1
-Column30=[tdKLQuantifier].[Notice], 12, 510
-Column31=[tmMatrix].[MatrixID], 4, 4
-Column32=[tmMatrix].[Name], 12, 100
-Column33=[Initialised], -7, 1
-Column34=[RecordCount], 4, 4
-Column35=[tmMatrix].[Notice], 12, 510
-Column36=[wSavedCountUsed], 4, 4
-Column37=[tsCompareType].[CompareTypeID], 4, 4
-Column38=[tsCompareType].[Name], 12, 100
-Column39=[tsCompareType].[ShortName], 12, 40
-Column40=[tsCompareType].[Ord], 4, 4
-Column41=[tsCompareType].[Notice], 12, 510
-Column42=[tsKLQuantifierType].[KLQuantifierTypeID], 4, 4
-Column43=[tsKLQuantifierType].[Name], 12, 100
-Column44=[tsKLQuantifierType].[ShortName], 12, 40
-Column45=[tsKLQuantifierType].[Ord], 4, 4
-Column46=[tsKLQuantifierType].[Notice], 12, 510
-Column47=[tsKLQuantifierValueType].[KLQuantifierValueTypeID], 4, 4
-Column48=[tsKLQuantifierValueType].[Name], 12, 100
-Column49=[tsKLQuantifierValueType].[ShortName], 12, 40
-Column50=[tsKLQuantifierValueType].[Ord], 4, 4
-Column51=[tsKLQuantifierValueType].[Notice], 12, 510
-Column52=[tsTaskSubType].[TaskSubTypeID], 4, 4
-Column53=[tsTaskSubType].[Name], 12, 100
-Column54=[tsTaskSubType].[ShortName], 12, 40
-Column55=[tsTaskSubType].[Ord], 4, 4
-Column56=[tsTaskSubType].[Notice], 12, 510
-
-[DB:TDFQuantifier_Recordset]
-DB=1
-DBType=ODBC
-ColumnCount=59
-Column1=[taTask].[TaskID], 4, 4
-Column2=[taTask].[Name], 12, 510
-Column3=[taTask].[TaskSubTypeID], 4, 4
-Column4=[TaskGroupID], 4, 4
-Column5=[UserID], 4, 4
-Column6=[taTask].[MatrixID], 4, 4
-Column7=[ParamBASE], 4, 4
-Column8=[ParamBASERelativ], -7, 1
-Column9=[ReadOnly], -7, 1
-Column10=[HypothesisGenerated], -7, 1
-Column11=[GenerationInterrupted], -7, 1
-Column12=[GenerationNrOfTests], 4, 4
-Column13=[GenerationStartTime], 11, 16
-Column14=[GenerationTotalTime], 4, 4
-Column15=[taTask].[Notice], 12, 510
-Column16=[DFQuantifierID], 4, 4
-Column17=[tdDFQuantifier].[TaskID], 4, 4
-Column18=[tdDFQuantifier].[DFQuantifierTypeID], 4, 4
-Column19=[tdDFQuantifier].[SDQuantifierSourceTypeID], 4, 4
-Column20=[ParamP], 8, 8
-Column21=[ParamAlfa], 8, 8
-Column22=[ParamBeta], 8, 8
-Column23=[ParamDelta], 8, 8
-Column24=[tdDFQuantifier].[CompareTypeID], 4, 4
-Column25=[ValuePar], 8, 8
-Column26=[tdDFQuantifier].[DFQuantifierValueTypeID], 4, 4
-Column27=[tdDFQuantifier].[Ord], 4, 4
-Column28=[tdDFQuantifier].[Notice], 12, 510
-Column29=[tmMatrix].[MatrixID], 4, 4
-Column30=[tmMatrix].[Name], 12, 100
-Column31=[Initialised], -7, 1
-Column32=[RecordCount], 4, 4
-Column33=[tmMatrix].[Notice], 12, 510
-Column34=[wSavedCountUsed], 4, 4
-Column35=[tsCompareType].[CompareTypeID], 4, 4
-Column36=[tsCompareType].[Name], 12, 100
-Column37=[tsCompareType].[ShortName], 12, 40
-Column38=[tsCompareType].[Ord], 4, 4
-Column39=[tsCompareType].[Notice], 12, 510
-Column40=[tsDFQuantifierType].[DFQuantifierTypeID], 4, 4
-Column41=[tsDFQuantifierType].[Name], 12, 100
-Column42=[tsDFQuantifierType].[ShortName], 12, 40
-Column43=[tsDFQuantifierType].[Ord], 4, 4
-Column44=[tsDFQuantifierType].[Notice], 12, 510
-Column45=[tsDFQuantifierValueType].[DFQuantifierValueTypeID], 4, 4
-Column46=[tsDFQuantifierValueType].[Name], 12, 100
-Column47=[tsDFQuantifierValueType].[ShortName], 12, 40
-Column48=[tsDFQuantifierValueType].[Ord], 4, 4
-Column49=[tsDFQuantifierValueType].[Notice], 12, 510
-Column50=[tsSDQuantifierSourceType].[SDQuantifierSourceTypeID], 4, 4
-Column51=[tsSDQuantifierSourceType].[Name], 12, 100
-Column52=[tsSDQuantifierSourceType].[ShortName], 12, 40
-Column53=[tsSDQuantifierSourceType].[Ord], 4, 4
-Column54=[tsSDQuantifierSourceType].[Notice], 12, 510
-Column55=[tsTaskSubType].[TaskSubTypeID], 4, 4
-Column56=[tsTaskSubType].[Name], 12, 100
-Column57=[tsTaskSubType].[ShortName], 12, 40
-Column58=[tsTaskSubType].[Ord], 4, 4
-Column59=[tsTaskSubType].[Notice], 12, 510
-
-[DB:TDCQuantifier_Recordset]
-DB=1
-DBType=ODBC
-ColumnCount=59
-Column1=[taTask].[TaskID], 4, 4
-Column2=[taTask].[Name], 12, 510
-Column3=[taTask].[TaskSubTypeID], 4, 4
-Column4=[TaskGroupID], 4, 4
-Column5=[UserID], 4, 4
-Column6=[taTask].[MatrixID], 4, 4
-Column7=[ParamBASE], 4, 4
-Column8=[ParamBASERelativ], -7, 1
-Column9=[ReadOnly], -7, 1
-Column10=[HypothesisGenerated], -7, 1
-Column11=[GenerationInterrupted], -7, 1
-Column12=[GenerationNrOfTests], 4, 4
-Column13=[GenerationStartTime], 11, 16
-Column14=[GenerationTotalTime], 4, 4
-Column15=[taTask].[Notice], 12, 510
-Column16=[DCQuantifierID], 4, 4
-Column17=[tdDCQuantifier].[TaskID], 4, 4
-Column18=[tdDCQuantifier].[DCQuantifierTypeID], 4, 4
-Column19=[tdDCQuantifier].[SDQuantifierSourceTypeID], 4, 4
-Column20=[FromCol], 4, 4
-Column21=[ToCol], 4, 4
-Column22=[tdDCQuantifier].[CompareTypeID], 4, 4
-Column23=[ValuePar], 8, 8
-Column24=[tdDCQuantifier].[DCQuantifierValueTypeID], 4, 4
-Column25=[Threshold], 8, 8
-Column26=[Formula], -1, 2147483646
-Column27=[tdDCQuantifier].[Ord], 4, 4
-Column28=[tdDCQuantifier].[Notice], 12, 510
-Column29=[tmMatrix].[MatrixID], 4, 4
-Column30=[tmMatrix].[Name], 12, 100
-Column31=[Initialised], -7, 1
-Column32=[RecordCount], 4, 4
-Column33=[tmMatrix].[Notice], 12, 510
-Column34=[wSavedCountUsed], 4, 4
-Column35=[tsCompareType].[CompareTypeID], 4, 4
-Column36=[tsCompareType].[Name], 12, 100
-Column37=[tsCompareType].[ShortName], 12, 40
-Column38=[tsCompareType].[Ord], 4, 4
-Column39=[tsCompareType].[Notice], 12, 510
-Column40=[tsDCQuantifierType].[DCQuantifierTypeID], 4, 4
-Column41=[tsDCQuantifierType].[Name], 12, 510
-Column42=[tsDCQuantifierType].[ShortName], 12, 510
-Column43=[tsDCQuantifierType].[Ord], 4, 4
-Column44=[tsDCQuantifierType].[Notice], 12, 510
-Column45=[tsDCQuantifierValueType].[DCQuantifierValueTypeID], 4, 4
-Column46=[tsDCQuantifierValueType].[Name], 12, 510
-Column47=[tsDCQuantifierValueType].[ShortName], 12, 510
-Column48=[tsDCQuantifierValueType].[Ord], 4, 4
-Column49=[tsDCQuantifierValueType].[Notice], 12, 510
-Column50=[tsSDQuantifierSourceType].[SDQuantifierSourceTypeID], 4, 4
-Column51=[tsSDQuantifierSourceType].[Name], 12, 100
-Column52=[tsSDQuantifierSourceType].[ShortName], 12, 40
-Column53=[tsSDQuantifierSourceType].[Ord], 4, 4
-Column54=[tsSDQuantifierSourceType].[Notice], 12, 510
-Column55=[tsTaskSubType].[TaskSubTypeID], 4, 4
-Column56=[tsTaskSubType].[Name], 12, 100
-Column57=[tsTaskSubType].[ShortName], 12, 40
-Column58=[tsTaskSubType].[Ord], 4, 4
-Column59=[tsTaskSubType].[Notice], 12, 510
-
-[DB:TDKQuantifier_Recordset]
-DB=1
-DBType=ODBC
-ColumnCount=62
-Column1=[taTask].[TaskID], 4, 4
-Column2=[taTask].[Name], 12, 510
-Column3=[taTask].[TaskSubTypeID], 4, 4
-Column4=[TaskGroupID], 4, 4
-Column5=[UserID], 4, 4
-Column6=[taTask].[MatrixID], 4, 4
-Column7=[ParamBASE], 4, 4
-Column8=[ParamBASERelativ], -7, 1
-Column9=[ReadOnly], -7, 1
-Column10=[HypothesisGenerated], -7, 1
-Column11=[GenerationInterrupted], -7, 1
-Column12=[GenerationNrOfTests], 4, 4
-Column13=[GenerationStartTime], 11, 16
-Column14=[GenerationTotalTime], 4, 4
-Column15=[taTask].[Notice], 12, 510
-Column16=[DKQuantifierID], 4, 4
-Column17=[tdDKQuantifier].[TaskID], 4, 4
-Column18=[tdDKQuantifier].[DKQuantifierTypeID], 4, 4
-Column19=[tdDKQuantifier].[SDQuantifierSourceTypeID], 4, 4
-Column20=[FromRow], 4, 4
-Column21=[FromCol], 4, 4
-Column22=[ToRow], 4, 4
-Column23=[ToCol], 4, 4
-Column24=[tdDKQuantifier].[CompareTypeID], 4, 4
-Column25=[ValuePar], 8, 8
-Column26=[tdDKQuantifier].[DKQuantifierValueTypeID], 4, 4
-Column27=[Threshold], 8, 8
-Column28=[Formula], -1, 2147483646
-Column29=[tdDKQuantifier].[Ord], 4, 4
-Column30=[tdDKQuantifier].[Notice], 12, 510
-Column31=[KendalAbsValueTauB], -7, 1
-Column32=[tmMatrix].[MatrixID], 4, 4
-Column33=[tmMatrix].[Name], 12, 100
-Column34=[Initialised], -7, 1
-Column35=[RecordCount], 4, 4
-Column36=[tmMatrix].[Notice], 12, 510
-Column37=[wSavedCountUsed], 4, 4
-Column38=[tsCompareType].[CompareTypeID], 4, 4
-Column39=[tsCompareType].[Name], 12, 100
-Column40=[tsCompareType].[ShortName], 12, 40
-Column41=[tsCompareType].[Ord], 4, 4
-Column42=[tsCompareType].[Notice], 12, 510
-Column43=[tsDKQuantifierType].[DKQuantifierTypeID], 4, 4
-Column44=[tsDKQuantifierType].[Name], 12, 100
-Column45=[tsDKQuantifierType].[ShortName], 12, 40
-Column46=[tsDKQuantifierType].[Ord], 4, 4
-Column47=[tsDKQuantifierType].[Notice], 12, 510
-Column48=[tsDKQuantifierValueType].[DKQuantifierValueTypeID], 4, 4
-Column49=[tsDKQuantifierValueType].[Name], 12, 100
-Column50=[tsDKQuantifierValueType].[ShortName], 12, 40
-Column51=[tsDKQuantifierValueType].[Ord], 4, 4
-Column52=[tsDKQuantifierValueType].[Notice], 12, 510
-Column53=[tsSDQuantifierSourceType].[SDQuantifierSourceTypeID], 4, 4
-Column54=[tsSDQuantifierSourceType].[Name], 12, 100
-Column55=[tsSDQuantifierSourceType].[ShortName], 12, 40
-Column56=[tsSDQuantifierSourceType].[Ord], 4, 4
-Column57=[tsSDQuantifierSourceType].[Notice], 12, 510
-Column58=[tsTaskSubType].[TaskSubTypeID], 4, 4
-Column59=[tsTaskSubType].[Name], 12, 100
-Column60=[tsTaskSubType].[ShortName], 12, 40
-Column61=[tsTaskSubType].[Ord], 4, 4
-Column62=[tsTaskSubType].[Notice], 12, 510
-
-[DB:Hyp_4ft_Recordset]
-DB=1
-DBType=ODBC
-ColumnCount=71
-Column1=[taTask].[TaskID], 4, 4
-Column2=[taTask].[Name], 12, 510
-Column3=[taTask].[TaskSubTypeID], 4, 4
-Column4=[TaskGroupID], 4, 4
-Column5=[taTask].[UserID], 4, 4
-Column6=[taTask].[MatrixID], 4, 4
-Column7=[ParamBASE], 4, 4
-Column8=[ParamBASERelativ], -7, 1
-Column9=[ReadOnly], -7, 1
-Column10=[HypothesisGenerated], -7, 1
-Column11=[GenerationInterrupted], -7, 1
-Column12=[GenerationNrOfTests], 4, 4
-Column13=[GenerationStartTime], 11, 16
-Column14=[GenerationTotalTime], 4, 4
-Column15=[taTask].[Notice], 12, 510
-Column16=[CoefficientID], 4, 4
-Column17=[tiCoefficient].[LiteralIID], 4, 4
-Column18=[tiCoefficient].[CategoryID], 4, 4
-Column19=[tiCoefficient].[TaskID], 4, 4
-Column20=[tiHypothesis].[HypothesisID], 4, 4
-Column21=[tiHypothesis].[TaskID], 4, 4
-Column22=[FreqA], 4, 4
-Column23=[FreqB], 4, 4
-Column24=[FreqC], 4, 4
-Column25=[FreqD], 4, 4
-Column26=[Weight], 8, 8
-Column27=[tiHypothesis].[Ord], 4, 4
-Column28=[tiLiteralI].[LiteralIID], 4, 4
-Column29=[tiLiteralI].[HypothesisID], 4, 4
-Column30=[tiLiteralI].[CedentTypeID], 4, 4
-Column31=[LiteralDID], 4, 4
-Column32=[ChildIndex], 4, 4
-Column33=[Negation], -7, 1
-Column34=[tiLiteralI].[TaskID], 4, 4
-Column35=[tmCategory].[CategoryID], 4, 4
-Column36=[tmCategory].[Name], 12, 100
-Column37=[tmCategory].[QuantityID], 4, 4
-Column38=[CategorySubTypeID], 4, 4
-Column39=[BoolTypeID], 4, 4
-Column40=[XCategory], -7, 1
-Column41=[IncludeNULL], -7, 1
-Column42=[tmCategory].[Ord], 4, 4
-Column43=[tmCategory].[Notice], 12, 510
-Column44=[tmCategory].[wSavedCountUsed], 4, 4
-Column45=[tmMatrix].[MatrixID], 4, 4
-Column46=[tmMatrix].[Name], 12, 100
-Column47=[Initialised], -7, 1
-Column48=[RecordCount], 4, 4
-Column49=[tmMatrix].[Notice], 12, 510
-Column50=[tmMatrix].[wSavedCountUsed], 4, 4
-Column51=[tmQuantity].[QuantityID], 4, 4
-Column52=[tmQuantity].[Name], 12, 100
-Column53=[tmQuantity].[ShortName], 12, 510
-Column54=[ShowName], -7, 1
-Column55=[AttributeID], 4, 4
-Column56=[ItemShift], 4, 4
-Column57=[ParentGroupID], 4, 4
-Column58=[tmQuantity].[wSavedCountUsed], 4, 4
-Column59=[wUpdateVer], 4, 4
-Column60=[tmQuantity].[UserID], 4, 4
-Column61=[tmQuantity].[Notice], 12, 510
-Column62=[tsCedentType].[CedentTypeID], 4, 4
-Column63=[tsCedentType].[Name], 12, 100
-Column64=[tsCedentType].[ShortName], 12, 40
-Column65=[tsCedentType].[Ord], 4, 4
-Column66=[tsCedentType].[Notice], 12, 510
-Column67=[tsTaskSubType].[TaskSubTypeID], 4, 4
-Column68=[tsTaskSubType].[Name], 12, 100
-Column69=[tsTaskSubType].[ShortName], 12, 40
-Column70=[tsTaskSubType].[Ord], 4, 4
-Column71=[tsTaskSubType].[Notice], 12, 510
-
-[DLG:IDD_WAIT_DIALOG (English (U.S.))]
-Type=1
-Class=CWaitDialog
-ControlCount=5
-Control1=IDC_REASON_TEXT,static,1342308352
-Control2=IDC_WAIT_ANIMATION,static,1342308352
-Control3=IDC_EXIT_BUTTON,button,1073807360
-Control4=IDC_RESUME_APP_BUTTON,button,1342242816
-Control5=IDC_KILL_THREAD_BUTTON,button,1342242816
-
-[CLS:CWaitDialog]
-Type=0
-HeaderFile=WaitDialog.h
-ImplementationFile=WaitDialog.cpp
-BaseClass=CDialog
-Filter=D
-LastObject=CWaitDialog
-VirtualFilter=dWC
-
-[DB:tiHypothesisCF_Recordset]
-DB=1
-DBType=ODBC
-ColumnCount=6
-Column1=[HypothesisCFID], 4, 4
-Column2=[HypothesisID], 4, 4
-Column3=[TaskID], 4, 4
-Column4=[Cols], 4, 4
-Column5=[CFLiteralDID], 4, 4
-Column6=[QuantityUpdateVer], 4, 4
-
-[DB:Hyp_CF_Recordset]
-DB=1
-DBType=ODBC
-ColumnCount=43
-Column1=[taTask].[TaskID], 4, 4
-Column2=[taTask].[Name], 12, 510
-Column3=[TaskSubTypeID], 4, 4
-Column4=[TaskGroupID], 4, 4
-Column5=[taTask].[UserID], 4, 4
-Column6=[taTask].[MatrixID], 4, 4
-Column7=[ParamBASE], 4, 4
-Column8=[ParamBASERelativ], -7, 1
-Column9=[ReadOnly], -7, 1
-Column10=[HypothesisGenerated], -7, 1
-Column11=[GenerationInterrupted], -7, 1
-Column12=[GenerationNrOfTests], 4, 4
-Column13=[GenerationStartTime], 11, 16
-Column14=[GenerationTotalTime], 4, 4
-Column15=[taTask].[Notice], 12, 510
-Column16=[tdCFLiteralD].[CFLiteralDID], 4, 4
-Column17=[CFCedentDID], 4, 4
-Column18=[tdCFLiteralD].[QuantityID], 4, 4
-Column19=[Ord], 4, 4
-Column20=[tdCFLiteralD].[Notice], 12, 510
-Column21=[HypothesisCFID], 4, 4
-Column22=[HypothesisID], 4, 4
-Column23=[tiHypothesisCF].[TaskID], 4, 4
-Column24=[Cols], 4, 4
-Column25=[tiHypothesisCF].[CFLiteralDID], 4, 4
-Column26=[QuantityUpdateVer], 4, 4
-Column27=[tmMatrix].[MatrixID], 4, 4
-Column28=[tmMatrix].[Name], 12, 100
-Column29=[Initialised], -7, 1
-Column30=[RecordCount], 4, 4
-Column31=[tmMatrix].[Notice], 12, 510
-Column32=[tmMatrix].[wSavedCountUsed], 4, 4
-Column33=[tmQuantity].[QuantityID], 4, 4
-Column34=[tmQuantity].[Name], 12, 100
-Column35=[ShortName], 12, 510
-Column36=[ShowName], -7, 1
-Column37=[AttributeID], 4, 4
-Column38=[ItemShift], 4, 4
-Column39=[ParentGroupID], 4, 4
-Column40=[tmQuantity].[wSavedCountUsed], 4, 4
-Column41=[wUpdateVer], 4, 4
-Column42=[tmQuantity].[UserID], 4, 4
-Column43=[tmQuantity].[Notice], 12, 510
-
-[DB:tiCFFrequencyI_Recordset]
-DB=1
-DBType=ODBC
-ColumnCount=5
-Column1=[CFFrequencyIID], 4, 4
-Column2=[HypothesisCFID], 4, 4
-Column3=[Col], 4, 4
-Column4=[Frequency], 4, 4
-Column5=[TaskID], 4, 4
-
-[DB:tmCategory_Recordset]
-DB=1
-DBType=ODBC
-ColumnCount=10
-Column1=[CategoryID], 4, 4
-Column2=[Name], 12, 100
-Column3=[QuantityID], 4, 4
-Column4=[CategorySubTypeID], 4, 4
-Column5=[BoolTypeID], 4, 4
-Column6=[XCategory], -7, 1
-Column7=[IncludeNULL], -7, 1
-Column8=[Ord], 4, 4
-Column9=[Notice], 12, 510
-Column10=[wSavedCountUsed], 4, 4
-
-[DB:TCondition_Recordset]
-DB=1
-DBType=ODBC
-ColumnCount=32
-Column1=[CoefficientID], 4, 4
-Column2=[tiCoefficient].[LiteralIID], 4, 4
-Column3=[tiCoefficient].[CategoryID], 4, 4
-Column4=[tiCoefficient].[TaskID], 4, 4
-Column5=[tiLiteralI].[LiteralIID], 4, 4
-Column6=[HypothesisID], 4, 4
-Column7=[CedentTypeID], 4, 4
-Column8=[LiteralDID], 4, 4
-Column9=[ChildIndex], 4, 4
-Column10=[Negation], -7, 1
-Column11=[tiLiteralI].[TaskID], 4, 4
-Column12=[tmCategory].[CategoryID], 4, 4
-Column13=[tmCategory].[Name], 12, 100
-Column14=[tmCategory].[QuantityID], 4, 4
-Column15=[CategorySubTypeID], 4, 4
-Column16=[BoolTypeID], 4, 4
-Column17=[XCategory], -7, 1
-Column18=[IncludeNULL], -7, 1
-Column19=[Ord], 4, 4
-Column20=[tmCategory].[Notice], 12, 510
-Column21=[tmCategory].[wSavedCountUsed], 4, 4
-Column22=[tmQuantity].[QuantityID], 4, 4
-Column23=[tmQuantity].[Name], 12, 100
-Column24=[ShortName], 12, 510
-Column25=[ShowName], -7, 1
-Column26=[AttributeID], 4, 4
-Column27=[ItemShift], 4, 4
-Column28=[ParentGroupID], 4, 4
-Column29=[tmQuantity].[wSavedCountUsed], 4, 4
-Column30=[wUpdateVer], 4, 4
-Column31=[UserID], 4, 4
-Column32=[tmQuantity].[Notice], 12, 510
-Column33=[ShowName], -7, 1
-Column34=[AttributeID], 4, 4
-Column35=[ItemShift], 4, 4
-Column36=[ParentGroupID], 4, 4
-Column37=[tmQuantity].[wSavedCountUsed], 4, 4
-Column38=[wUpdateVer], 4, 4
-Column39=[UserID], 4, 4
-Column40=[tmQuantity].[Notice], 12, 510
-
-[DB:Hyp_SD4ft_Recordset]
-DB=1
-DBType=ODBC
-ColumnCount=69
-Column1=[taTask].[TaskID], 4, 4
-Column2=[taTask].[Name], 12, 510
-Column3=[TaskSubTypeID], 4, 4
-Column4=[TaskGroupID], 4, 4
-Column5=[taTask].[UserID], 4, 4
-Column6=[taTask].[MatrixID], 4, 4
-Column7=[ParamBASE], 4, 4
-Column8=[ParamBASERelativ], -7, 1
-Column9=[ReadOnly], -7, 1
-Column10=[HypothesisGenerated], -7, 1
-Column11=[GenerationInterrupted], -7, 1
-Column12=[GenerationNrOfTests], 4, 4
-Column13=[GenerationStartTime], 11, 16
-Column14=[GenerationTotalTime], 4, 4
-Column15=[taTask].[Notice], 12, 510
-Column16=[CoefficientID], 4, 4
-Column17=[tiCoefficient].[LiteralIID], 4, 4
-Column18=[tiCoefficient].[CategoryID], 4, 4
-Column19=[tiCoefficient].[TaskID], 4, 4
-Column20=[HypothesisDFID], 4, 4
-Column21=[tiHypothesisDF].[HypothesisID], 4, 4
-Column22=[tiHypothesisDF].[TaskID], 4, 4
-Column23=[FirstFreqA], 4, 4
-Column24=[FirstFreqB], 4, 4
-Column25=[FirstFreqC], 4, 4
-Column26=[FirstFreqD], 4, 4
-Column27=[SecondFreqA], 4, 4
-Column28=[SecondFreqB], 4, 4
-Column29=[SecondFreqC], 4, 4
-Column30=[SecondFreqD], 4, 4
-Column31=[tiLiteralI].[LiteralIID], 4, 4
-Column32=[tiLiteralI].[HypothesisID], 4, 4
-Column33=[tiLiteralI].[CedentTypeID], 4, 4
-Column34=[LiteralDID], 4, 4
-Column35=[ChildIndex], 4, 4
-Column36=[Negation], -7, 1
-Column37=[tiLiteralI].[TaskID], 4, 4
-Column38=[tmCategory].[CategoryID], 4, 4
-Column39=[tmCategory].[Name], 12, 100
-Column40=[tmCategory].[QuantityID], 4, 4
-Column41=[CategorySubTypeID], 4, 4
-Column42=[BoolTypeID], 4, 4
-Column43=[XCategory], -7, 1
-Column44=[IncludeNULL], -7, 1
-Column45=[tmCategory].[Ord], 4, 4
-Column46=[tmCategory].[Notice], 12, 510
-Column47=[tmCategory].[wSavedCountUsed], 4, 4
-Column48=[tmMatrix].[MatrixID], 4, 4
-Column49=[tmMatrix].[Name], 12, 100
-Column50=[Initialised], -7, 1
-Column51=[RecordCount], 4, 4
-Column52=[tmMatrix].[Notice], 12, 510
-Column53=[tmMatrix].[wSavedCountUsed], 4, 4
-Column54=[tmQuantity].[QuantityID], 4, 4
-Column55=[tmQuantity].[Name], 12, 100
-Column56=[tmQuantity].[ShortName], 12, 510
-Column57=[ShowName], -7, 1
-Column58=[AttributeID], 4, 4
-Column59=[ItemShift], 4, 4
-Column60=[ParentGroupID], 4, 4
-Column61=[tmQuantity].[wSavedCountUsed], 4, 4
-Column62=[wUpdateVer], 4, 4
-Column63=[tmQuantity].[UserID], 4, 4
-Column64=[tmQuantity].[Notice], 12, 510
-Column65=[tsCedentType].[CedentTypeID], 4, 4
-Column66=[tsCedentType].[Name], 12, 100
-Column67=[tsCedentType].[ShortName], 12, 40
-Column68=[tsCedentType].[Ord], 4, 4
-Column69=[tsCedentType].[Notice], 12, 510
-
-[DB:Hyp_SDCF_Recordset]
-DB=1
-DBType=ODBC
-ColumnCount=43
-Column1=[taTask].[TaskID], 4, 4
-Column2=[taTask].[Name], 12, 510
-Column3=[TaskSubTypeID], 4, 4
-Column4=[TaskGroupID], 4, 4
-Column5=[taTask].[UserID], 4, 4
-Column6=[taTask].[MatrixID], 4, 4
-Column7=[ParamBASE], 4, 4
-Column8=[ParamBASERelativ], -7, 1
-Column9=[ReadOnly], -7, 1
-Column10=[HypothesisGenerated], -7, 1
-Column11=[GenerationInterrupted], -7, 1
-Column12=[GenerationNrOfTests], 4, 4
-Column13=[GenerationStartTime], 11, 16
-Column14=[GenerationTotalTime], 4, 4
-Column15=[taTask].[Notice], 12, 510
-Column16=[tdCFLiteralD].[CFLiteralDID], 4, 4
-Column17=[CFCedentDID], 4, 4
-Column18=[tdCFLiteralD].[QuantityID], 4, 4
-Column19=[Ord], 4, 4
-Column20=[tdCFLiteralD].[Notice], 12, 510
-Column21=[HypothesisDCID], 4, 4
-Column22=[HypothesisID], 4, 4
-Column23=[tiHypothesisDC].[TaskID], 4, 4
-Column24=[Cols], 4, 4
-Column25=[tiHypothesisDC].[CFLiteralDID], 4, 4
-Column26=[QuantityUpdateVer], 4, 4
-Column27=[tmMatrix].[MatrixID], 4, 4
-Column28=[tmMatrix].[Name], 12, 100
-Column29=[Initialised], -7, 1
-Column30=[RecordCount], 4, 4
-Column31=[tmMatrix].[Notice], 12, 510
-Column32=[tmMatrix].[wSavedCountUsed], 4, 4
-Column33=[tmQuantity].[QuantityID], 4, 4
-Column34=[tmQuantity].[Name], 12, 100
-Column35=[ShortName], 12, 510
-Column36=[ShowName], -7, 1
-Column37=[AttributeID], 4, 4
-Column38=[ItemShift], 4, 4
-Column39=[ParentGroupID], 4, 4
-Column40=[tmQuantity].[wSavedCountUsed], 4, 4
-Column41=[wUpdateVer], 4, 4
-Column42=[tmQuantity].[UserID], 4, 4
-Column43=[tmQuantity].[Notice], 12, 510
-
-[DB:tiDCFrequencyI_Recordset]
-DB=1
-DBType=ODBC
-ColumnCount=6
-Column1=[DCFrequencyIID], 4, 4
-Column2=[HypothesisDCID], 4, 4
-Column3=[CedentTypeID], 4, 4
-Column4=[TaskID], 4, 4
-Column5=[Col], 4, 4
-Column6=[Frequency], 4, 4
-
-[CLS:CWaitAnimation]
-Type=0
-HeaderFile=WaitAnimation.h
-ImplementationFile=WaitAnimation.cpp
-BaseClass=CStatic
-Filter=W
-VirtualFilter=WC
-
-[CLS:CWordEventHandler]
-Type=0
-HeaderFile=WordEventHandler.h
-ImplementationFile=WordEventHandler.cpp
-BaseClass=CCmdTarget
-Filter=N
-VirtualFilter=C
-LastObject=CWordEventHandler
-
-[DLG:IDD_OPTIONS_DIALOG (English (U.S.))]
-Type=1
-Class=COptionsDialog
-ControlCount=23
-Control1=IDOK,button,1342242817
-Control2=IDCANCEL,button,1342242816
-Control3=IDC_STATIC,button,1342177287
-Control4=IDC_CZECH_RADIO,button,1342308361
-Control5=IDC_ENGLISH_RADIO,button,1342177289
-Control6=ID_HELP,button,1342242816
-Control7=IDC_STATIC,static,1342308352
-Control8=IDC_STATIC,button,1342177287
-Control9=IDC_TREE_ITEM_HEIGHT,edit,1350639746
-Control10=IDC_STATIC,static,1342308352
-Control11=IDC_STATIC,static,1342308352
-Control12=IDC_SHOW_ID_IN_TREE,button,1342242819
-Control13=IDC_TREE_HAS_BUTTONS,button,1342242819
-Control14=IDC_TREE_HAS_LINES,button,1342242819
-Control15=IDC_TREE_ITEM_INDENT,edit,1350639746
-Control16=IDC_STATIC,button,1342177287
-Control17=IDC_STATIC,static,1342308352
-Control18=IDC_IGNORE_RADIO,button,1342308361
-Control19=IDC_DELETE_RADIO,button,1342177289
-Control20=IDC_SET_DEFAULT_RADIO,button,1342177289
-Control21=IDC_TEMPLATE_BROWSE_BOTTON,button,1342242816
-Control22=IDC_WORD_TEMPLATE_EDIT,edit,1350631552
-Control23=IDC_MARK_ORPHANS,button,1342242819
-
-[CLS:COptionsDialog]
-Type=0
-HeaderFile=OptionsDialog.h
-ImplementationFile=OptionsDialog.cpp
-BaseClass=CDialog
-Filter=D
-VirtualFilter=dWC
-LastObject=COptionsDialog
-
-[DLG:IDD_DIALOG_REPORT (English (U.S.))]
-Type=1
-Class=CElementReportDialog
-ControlCount=11
-Control1=IDOK,button,1342242817
-Control2=IDCANCEL,button,1342242816
-Control3=IDC_STATIC,static,1342308352
-Control4=IDC_DIALREPORT_IDEDIT,edit,1350631568
-Control5=IDC_STATIC,static,1342308352
-Control6=IDC_DIALREPORT_TITLEEDIT,edit,1350631552
-Control7=IDC_DIALREPORT_SUBTITLEEDIT,edit,1350631552
-Control8=IDC_STATIC,static,1342308352
-Control9=IDC_STATIC,static,1342308352
-Control10=IDC_DIALREPORT_AUTHOREDIT,edit,1350631552
-Control11=ID_HELP,button,1342242816
-
-[CLS:CElementReportDialog]
-Type=0
-HeaderFile=ElementReportDialog.h
-ImplementationFile=ElementReportDialog.cpp
-BaseClass=CDialog
-Filter=D
-LastObject=CElementReportDialog
-VirtualFilter=dWC
-
-[CLS:CEToolBar]
-Type=0
-HeaderFile=EToolBar.h
-ImplementationFile=EToolBar.cpp
-BaseClass=CToolBarCtrl
-Filter=W
-VirtualFilter=YWC
-LastObject=CEToolBar
-
-[DLG:IDD_COMPLEX_FILTER_DIALOG (English (U.S.))]
-Type=1
-Class=CComplexFilterDialog
-ControlCount=23
-Control1=IDC_ATTRIBUTES_LIST,listbox,1353777409
-Control2=IDC_STATIC,static,1342308352
-Control3=IDC_VALUES_LIST,listbox,1353777409
-Control4=IDC_STATIC,static,1342308352
-Control5=IDC_STATIC,button,1342177287
-Control6=IDC_ASCENDING_RADIO,button,1342373897
-Control7=IDC_DESCENDING_RADIO,button,1342242825
-Control8=IDC_NUMERIC_SORT_CHECK,button,1342242819
-Control9=IDC_TRESHOLD_RADIO,button,1342308361
-Control10=IDC_FIXED_VAL_RADIO,button,1342177289
-Control11=IDC_TOP_N_VAL_RADIO,button,1342177289
-Control12=IDC_STATIC,button,1342177287
-Control13=IDC_TRESHOLD_EDIT,edit,1350631552
-Control14=IDC_STATIC,static,1342308352
-Control15=IDOK,button,1342242817
-Control16=IDCANCEL,button,1342242816
-Control17=IDC_RESULT_LIST,SysListView32,1350633473
-Control18=IDC_STATIC,static,1342308352
-Control19=IDC_TOPN_EDIT,edit,1350639744
-Control20=IDC_TOPN_SPIN,msctls_updown32,1342177330
-Control21=IDC_REFRESH_RESULTS_BUTTON,button,1342242816
-Control22=ID_HELP,button,1342242816
-Control23=IDC_STATIC,static,1342308352
-
-[CLS:CComplexFilterDialog]
-Type=0
-HeaderFile=ComplexFilterDialog.h
-ImplementationFile=ComplexFilterDialog.cpp
-BaseClass=CPropertyPage
-Filter=D
-LastObject=IDC_RESULT_LIST
-
-[DB:TCoef_type_Recordset]
-DB=1
-DBType=ODBC
-ColumnCount=17
-Column1=[LiteralDID], 4, 4
-Column2=[CedentDID], 4, 4
-Column3=[QuantityID], 4, 4
-Column4=[CategoryID], 4, 4
-Column5=[LiteralTypeID], 4, 4
-Column6=[GaceTypeID], 4, 4
-Column7=[EquivalenceClassID], 4, 4
-Column8=[tdLiteralD].[CoefficientTypeID], 4, 4
-Column9=[MinLen], 4, 4
-Column10=[MaxLen], 4, 4
-Column11=[tdLiteralD].[Ord], 4, 4
-Column12=[tdLiteralD].[Notice], 12, 510
-Column13=[tsCoefficientType].[CoefficientTypeID], 4, 4
-Column14=[Name], 12, 100
-Column15=[ShortName], 12, 40
-Column16=[tsCoefficientType].[Ord], 4, 4
-Column17=[tsCoefficientType].[Notice], 12, 510
-
-[DLG:IDD_INCLUDE_DIALOG (English (U.S.))]
-Type=1
-Class=?
-ControlCount=8
-Control1=IDOK,button,1342242817
-Control2=IDCANCEL,button,1342242816
-Control3=IDC_STATIC,static,1342308352
-Control4=IDC_INCLUDE_ID_EDIT,edit,1350631568
-Control5=IDC_INCLUDE_FILENAME_EDIT,edit,1350631552
-Control6=IDC_BROWSE_BUTTON,button,1342242816
-Control7=IDC_STATIC,static,1342308352
-Control8=ID_HELP,button,1342242816
-
-[DLG:IDD_FILTER_AND_CONFIG_DIALOG (English (U.S.))]
-Type=1
-Class=CAElFiltersConfigDialog
-ControlCount=9
-Control1=IDC_STATIC,button,1342177287
-Control2=IDC_ADD_FILTER_BUTTON,button,1342242816
-Control3=IDC_CONFIGURE_FILTER_BUTTON,button,1342242816
-Control4=IDC_MOVE_UP_BUTTON,button,1342242816
-Control5=IDC_MOVE_DOWN_BUTTON,button,1342242816
-Control6=IDC_RESULT_LIST,SysListView32,1350633473
-Control7=IDC_FILTERS_LIST,SysListView32,1350633473
-Control8=IDC_STATIC,static,1342308352
-Control9=IDC_REMOVE_FILTER_BUTTON,button,1342242816
-
-[CLS:CAElFiltersConfigDialog]
-Type=0
-HeaderFile=AElFiltersConfigDialog.h
-ImplementationFile=AElFiltersConfigDialog.cpp
-BaseClass=CDialog
-Filter=D
-LastObject=IDC_RESULT_LIST
-VirtualFilter=dWC
-
-[CLS:TCategory_Recordset]
-Type=0
-HeaderFile=TCategory_Recordset.h
-ImplementationFile=TCategory_Recordset.cpp
-BaseClass=CRecordset
-Filter=N
-VirtualFilter=r
-LastObject=TCategory_Recordset
-
-[DB:TCategory_Recordset]
-DB=1
-DBType=ODBC
-ColumnCount=55
-Column1=[tmAttribute].[AttributeID], 4, 4
-Column2=[tmAttribute].[Name], 12, 510
-Column3=[tmAttribute].[MatrixID], 4, 4
-Column4=[AttributeSubTypeID], 4, 4
-Column5=[ValueSubTypeID], 4, 4
-Column6=[Derived], -7, 1
-Column7=[Formula], 12, 510
-Column8=[MCPosition], 4, 4
-Column9=[MCLength], 4, 4
-Column10=[MCDelimiter], 12, 510
-Column11=[PrimaryKeyPosition], 4, 4
-Column12=[ValueMin], 8, 8
-Column13=[ValueMax], 8, 8
-Column14=[ValueAvg], 8, 8
-Column15=[ValueModus], 8, 8
-Column16=[ValueVariability], 8, 8
-Column17=[tmAttribute].[Notice], 12, 510
-Column18=[tmAttribute].[wSavedCountUsed], 4, 4
-Column19=[CategoryID], 4, 4
-Column20=[tmCategory].[Name], 12, 510
-Column21=[tmCategory].[QuantityID], 4, 4
-Column22=[tmCategory].[CategorySubTypeID], 4, 4
-Column23=[tmCategory].[BoolTypeID], 4, 4
-Column24=[XCategory], -7, 1
-Column25=[IncludeNULL], -7, 1
-Column26=[tmCategory].[Ord], 4, 4
-Column27=[tmCategory].[Notice], 12, 510
-Column28=[tmCategory].[wSavedCountUsed], 4, 4
-Column29=[tmMatrix].[MatrixID], 4, 4
-Column30=[tmMatrix].[Name], 12, 510
-Column31=[Initialised], -7, 1
-Column32=[RecordCount], 4, 4
-Column33=[tmMatrix].[Notice], 12, 510
-Column34=[tmMatrix].[wSavedCountUsed], 4, 4
-Column35=[tmQuantity].[QuantityID], 4, 4
-Column36=[tmQuantity].[Name], 12, 510
-Column37=[tmQuantity].[ShortName], 12, 510
-Column38=[ShowName], -7, 1
-Column39=[tmQuantity].[AttributeID], 4, 4
-Column40=[ItemShift], 4, 4
-Column41=[ParentGroupID], 4, 4
-Column42=[tmQuantity].[wSavedCountUsed], 4, 4
-Column43=[wUpdateVer], 4, 4
-Column44=[UserID], 4, 4
-Column45=[tmQuantity].[Notice], 12, 510
-Column46=[tsBoolType].[BoolTypeID], 4, 4
-Column47=[tsBoolType].[Name], 12, 100
-Column48=[tsBoolType].[ShortName], 12, 40
-Column49=[tsBoolType].[Ord], 4, 4
-Column50=[tsBoolType].[Notice], 12, 510
-Column51=[tsCategorySubType].[CategorySubTypeID], 4, 4
-Column52=[tsCategorySubType].[Name], 12, 100
-Column53=[tsCategorySubType].[ShortName], 12, 40
-Column54=[tsCategorySubType].[Ord], 4, 4
-Column55=[tsCategorySubType].[Notice], 12, 510
-
-[CLS:TOrder_of_Categories]
-Type=0
-HeaderFile=TOrder_of_Categories.h
-ImplementationFile=TOrder_of_Categories.cpp
-BaseClass=CRecordset
-Filter=N
-VirtualFilter=r
-LastObject=TOrder_of_Categories
-
-[DB:TOrder_of_Categories]
-DB=1
-DBType=ODBC
-ColumnCount=21
-Column1=[CategoryID], 4, 4
-Column2=[tmCategory].[Name], 12, 510
-Column3=[tmCategory].[QuantityID], 4, 4
-Column4=[CategorySubTypeID], 4, 4
-Column5=[BoolTypeID], 4, 4
-Column6=[XCategory], -7, 1
-Column7=[IncludeNULL], -7, 1
-Column8=[Ord], 4, 4
-Column9=[tmCategory].[Notice], 12, 510
-Column10=[tmCategory].[wSavedCountUsed], 4, 4
-Column11=[tmQuantity].[QuantityID], 4, 4
-Column12=[tmQuantity].[Name], 12, 510
-Column13=[ShortName], 12, 510
-Column14=[ShowName], -7, 1
-Column15=[AttributeID], 4, 4
-Column16=[ItemShift], 4, 4
-Column17=[ParentGroupID], 4, 4
-Column18=[tmQuantity].[wSavedCountUsed], 4, 4
-Column19=[wUpdateVer], 4, 4
-Column20=[UserID], 4, 4
-Column21=[tmQuantity].[Notice], 12, 510
-
-[DLG:IDD_AEL_CONFIG_DIALOG]
-Type=1
-Class=?
-ControlCount=8
-Control1=IDC_STATIC,static,1342308352
-Control2=IDC_DATA_SOURCE_COMBO,combobox,1344340227
-Control3=IDC_STATIC,static,1342308352
-Control4=IDC_ID_EDIT,edit,1350631568
-Control5=IDC_RESULT_LIST,SysListView32,1350633473
-Control6=IDC_STATIC,static,1342308352
-Control7=IDC_NO_FILTERS,static,1342308353
-Control8=IDC_NO_FLTER_FRAME,static,1342177287
-
-[DB:TData_Matrix_Recordset]
-DB=1
-DBType=ODBC
-ColumnCount=30
-Column1=[AttributeID], 4, 4
-Column2=[tmAttribute].[Name], 12, 510
-Column3=[tmAttribute].[MatrixID], 4, 4
-Column4=[AttributeSubTypeID], 4, 4
-Column5=[tmAttribute].[ValueSubTypeID], 4, 4
-Column6=[Derived], -7, 1
-Column7=[Formula], 12, 510
-Column8=[MCPosition], 4, 4
-Column9=[MCLength], 4, 4
-Column10=[MCDelimiter], 12, 510
-Column11=[PrimaryKeyPosition], 4, 4
-Column12=[ValueMin], 8, 8
-Column13=[ValueMax], 8, 8
-Column14=[ValueAvg], 8, 8
-Column15=[ValueModus], 8, 8
-Column16=[ValueVariability], 8, 8
-Column17=[tmAttribute].[Notice], 12, 510
-Column18=[tmAttribute].[wSavedCountUsed], 4, 4
-Column19=[tmMatrix].[MatrixID], 4, 4
-Column20=[tmMatrix].[Name], 12, 510
-Column21=[Initialised], -7, 1
-Column22=[RecordCount], 4, 4
-Column23=[tmMatrix].[Notice], 12, 510
-Column24=[tmMatrix].[wSavedCountUsed], 4, 4
-Column25=[tsValueSubType].[ValueSubTypeID], 4, 4
-Column26=[tsValueSubType].[Name], 12, 100
-Column27=[ShortName], 12, 40
-Column28=[Cardinal], -7, 1
-Column29=[Ord], 4, 4
-Column30=[tsValueSubType].[Notice], 12, 510
 

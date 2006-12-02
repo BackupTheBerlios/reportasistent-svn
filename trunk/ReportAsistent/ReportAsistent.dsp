@@ -200,7 +200,6 @@ SOURCE=.\SimpleFilterDialog.cpp
 # End Source File
 # Begin Source File
 
-
 SOURCE=.\SkeletonView.cpp
 # End Source File
 # Begin Source File
@@ -457,6 +456,14 @@ SOURCE=.\res\unknowni.bmp
 SOURCE=.\res\visualization_options_DTD.xml
 # End Source File
 # End Group
+# Begin Source File
+
+SOURCE=..\XML\complex_filter_DTD.xml
+# End Source File
+# Begin Source File
+
+SOURCE=..\XML\fill_element_attributes_DTD.xml
+# End Source File
 # Begin Source File
 
 SOURCE=.\IvaUzitKonstrukce.txt

@@ -1,5 +1,6 @@
 #include "afxwin.h"
 #include "afxcmn.h"
+#include "HListBox.h"
 #if !defined(AFX_COMPLEXFILTERDIALOG_H__2CD50BAE_2DA0_4301_AEB9_05756F4ED841__INCLUDED_)
 #define AFX_COMPLEXFILTERDIALOG_H__2CD50BAE_2DA0_4301_AEB9_05756F4ED841__INCLUDED_
 
@@ -104,8 +105,8 @@ private:
 
     void UpDateDialog();
 
-	CListBox m_AttributesList;
-	CListBox m_ValuesList;
+	CHListBox m_AttributesList;
+	CHListBox m_ValuesList;
 	afx_msg void OnLbnSelchangeAttributesList();
 	afx_msg void OnDestroy();
 	void ClearAttributesList(void);

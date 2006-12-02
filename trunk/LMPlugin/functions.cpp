@@ -128,8 +128,8 @@ CString Get_4ftAR2NL (long hypno, CString db_name)
 
 
 	//run the 4ftAR2NL application
-	if (!CreateProcess(NULL, p2.GetBuffer(),
-		NULL, NULL, FALSE, NORMAL_PRIORITY_CLASS, NULL, NULL, & si, & pi)) 
+/*	if (!CreateProcess(NULL, p2.GetBuffer(),
+		NULL, NULL, FALSE, NORMAL_PRIORITY_CLASS, NULL, NULL, & si, & pi)) */
 /***************************************************************
 
 	//run the 4ftAR2NL application

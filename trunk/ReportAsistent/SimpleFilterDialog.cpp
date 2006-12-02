@@ -58,6 +58,7 @@ BEGIN_MESSAGE_MAP(CSimpleFilterDialog, CPropertyPage)
 	//{{AFX_MSG_MAP(CSimpleFilterDialog)
 	ON_NOTIFY(LVN_DELETEITEM, IDC_FILTER_LIST, OnDeleteitemFilterList)
 	ON_NOTIFY(NM_CLICK, IDC_FILTER_LIST, OnNMClickFilterList)
+	ON_NOTIFY(HDN_ITEMCLICK, 0, OnItemclickFilterList)
 	//}}AFX_MSG_MAP
 	ON_BN_CLICKED(IDC_SIMPLE_FILTER_DISABLED_CHECK, OnSimpleFilterDisabledCheck)
 END_MESSAGE_MAP()
@@ -240,3 +241,47 @@ void CSimpleFilterDialog::UpdateSimpleView(void)
 	m_filter_DOM->selectSingleNode("/dialog_data")->replaceChild(values_clone,
 		m_filter_DOM->selectSingleNode("/dialog_data/values"));
 }
+
+void CSimpleFilterDialog::OnItemclickFilterList(NMHDR* pNMHDR, LRESULT* pResult) 
+{
+	NMLISTVIEW *pLV = (NMLISTVIEW *) pNMHDR;
+	AfxMessageBox("Pozor");
+/*	m_ResultList.SortItems(SortFunc, pLV->iItem);*/
+	
+	*pResult = 0;
+}
+
+
+int CSimpleFilterDialog::SortFunc(LPARAM lParam1, LPARAM lParam2, LPARAM lParamSort)
+{
+ 
+ 	int nRetVal=0;
+ /*
+ 	CString pData1 = (LPCTSTR)lParam1;
+ 	CString pData2 = (LPCTSTR)lParam2;
+ 
+ 
+ 	switch(lParamSort)
+ 	{
+ 	case 0:	// Last Name
+ 		nRetVal = strcmp(pData1->pszLastName,
+                                  pData2->pszLastName);
+ 		break;
+ 
+ 	case 1:	// First Name
+ 		nRetVal = strcmp(pData1->pszFirstName,
+                                  pData2->pszFirstName);
+ 		break;
+ 
+ 	case 2: // Term
+ 		nRetVal = strcmp(pData1->pszTerm, pData2->pszTerm);
+ 		break;
+ 
+ 	default:
+ 		break;
+ 	}
+ */
+ 	return nRetVal;
+}
+
+

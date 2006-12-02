@@ -33,8 +33,8 @@ public:
 	//{{AFX_DATA(CTransformationsDialog)
 	enum { IDD = IDD_TRANSFORMATIONS_DIALOG };
 	CButton	m_ConfigureButton;
-	CListBox	m_SupportedList;
-	CListBox	m_SelectedList;
+	CHListBox	m_SupportedList;
+	CHListBox	m_SelectedList;
 	//}}AFX_DATA
 
 
