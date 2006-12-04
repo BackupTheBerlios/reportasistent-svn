@@ -131,10 +131,10 @@ BOOL CReportAsistentApp::InitInstance()
 	CoInitializeEx(NULL, COINIT_MULTITHREADED);
 //  AfxMessageBox("2");
 
-	CAboutDlg a_dlg;
-	a_dlg.Create(IDD_ABOUTBOX);
-	a_dlg.ShowWindow(SW_SHOW);
-	a_dlg.UpdateWindow();
+	CStartDialog s_dlg;
+	s_dlg.Create(IDD_START_DIALOG);
+	s_dlg.ShowWindow(SW_SHOW);
+	s_dlg.UpdateWindow();
 
 	//dedek
 	m_pGeneralManager = new CGeneralManager();
@@ -192,7 +192,7 @@ BOOL CReportAsistentApp::InitInstance()
 //  AfxMessageBox("3");
 	
 //	Sleep(5000);
-	a_dlg.ShowWindow(SW_HIDE);
+	s_dlg.ShowWindow(SW_HIDE);
 
   // The one and only window has been initialized, so show and update it.
 	m_pMainWnd->ShowWindow(SW_SHOW);
@@ -315,3 +315,29 @@ void CReportAsistentApp::OnHlpTopics()
 
 
 
+
+// CStartDialog dialog
+
+IMPLEMENT_DYNAMIC(CStartDialog, CDialog)
+
+CStartDialog::CStartDialog(CWnd* pParent /*=NULL*/)
+	: CDialog(CStartDialog::IDD, pParent)
+{
+
+}
+
+CStartDialog::~CStartDialog()
+{
+}
+
+void CStartDialog::DoDataExchange(CDataExchange* pDX)
+{
+	CDialog::DoDataExchange(pDX);
+}
+
+
+BEGIN_MESSAGE_MAP(CStartDialog, CDialog)
+END_MESSAGE_MAP()
+
+
+// CStartDialog message handlers

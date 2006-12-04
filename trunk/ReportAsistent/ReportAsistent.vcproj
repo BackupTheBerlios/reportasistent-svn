@@ -4,6 +4,7 @@
 	Version="8,00"
 	Name="ReportAsistent"
 	ProjectGUID="{8EEEE400-8239-465B-982A-7CAC44EA7521}"
+	RootNamespace="ReportAsistent"
 	Keyword="MFCProj"
 	>
 	<Platforms>
@@ -617,6 +618,10 @@
 				</FileConfiguration>
 			</File>
 			<File
+				RelativePath=".\HListBox.cpp"
+				>
+			</File>
+			<File
 				RelativePath="InsertElementTrace.cpp"
 				>
 				<FileConfiguration
@@ -1001,6 +1006,10 @@
 			</File>
 			<File
 				RelativePath="GenerateDialog.h"
+				>
+			</File>
+			<File
+				RelativePath=".\HListBox.h"
 				>
 			</File>
 			<File
