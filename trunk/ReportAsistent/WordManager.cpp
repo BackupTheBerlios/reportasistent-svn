@@ -304,6 +304,7 @@ LPCTSTR CWordManager::getLastElementName()
 	return m_pEventHandler->m_strLastElementName;
 }
 
+
 void CWordManager::OpenWordEditor()
 {
 	if (! isInit()) 

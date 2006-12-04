@@ -163,7 +163,7 @@ BOOL CReportAsistentApp::InitInstance()
 
 	 m_pGeneralManager->WordManager.setWordTemplate(
 		 GetProfileString("Settings", "WordTemplate", 
-			m_pGeneralManager->DirectoriesManager.getWordTemplateDirectory() + "\\prozatimni.dot"));
+			m_pGeneralManager->DirectoriesManager.getWordTemplateDirectory() + "\\ReportAsistent.dot"));
 
 
 	// Register the application's document templates.  Document templates

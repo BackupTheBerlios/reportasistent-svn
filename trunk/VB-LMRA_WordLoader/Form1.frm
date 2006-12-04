@@ -193,7 +193,8 @@ End Sub
 Private Sub cmdXMLStringProcess_Click()
     Err.Clear
     On Error Resume Next
-    mLMRA.LoadFromStringToWordEditor (txtXMLString)
+    mLMRA.strDefaultWordTemplate = "ahoj.dot"
+    mLMRA.LoadFromString (txtXMLString)
     
     txtOutput.text = txtOutput.text & vbNewLine & mLMRA.strLastError & vbNewLine & mLMRA.strLastProcessedId
     

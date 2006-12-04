@@ -195,7 +195,10 @@ Public Sub OpenWordEditor()
     Set evWordApp = mWordEditor
     'MsgBox "tool bar loading"
     
-    mWordEditor.Documents.Add(strDefaultWordTemplate).Select
+    On Error Resume Next
+    mWordEditor.Documents.Add( _
+        Template:=strDefaultWordTemplate).Select
+    On Error GoTo 0
         
     CreateRAToolbar mWordEditor
     'MsgBox "tool bar added"
@@ -341,7 +344,13 @@ Public Sub LoadFromStringToWordEditor(ByVal strXMLSource As String)
     End If
     
     If mWordEditor.Selection Is Nothing Then
-        mWordEditor.Documents.Add(strDefaultWordTemplate).Select
+        On Error Resume Next
+        mWordEditor.Documents.Add(Template:=strDefaultWordTemplate).Select
+        On Error GoTo 0
+        
+        If mWordEditor.Selection Is Nothing Then
+            mWordEditor.Documents.Add.Select
+        End If
     End If
         
     Dim reader As New SAXXMLReader30             'Reads the XML document

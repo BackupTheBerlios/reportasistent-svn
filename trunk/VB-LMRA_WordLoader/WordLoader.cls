@@ -64,7 +64,14 @@ Public Sub NewDocument(ByVal strWordTemplate As String)
     
     mWordApp.Visible = True
     
-    Set D = mWordApp.Documents.Add(strWordTemplate)
+    On Error Resume Next
+        Set D = mWordApp.Documents.Add(Template:=strWordTemplate)
+    On Error GoTo 0
+    
+    If D Is Nothing Then
+        Set D = mWordApp.Documents.Add
+    End If
+    
     
     D.Select
      
