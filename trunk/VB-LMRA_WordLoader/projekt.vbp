@@ -42,7 +42,7 @@ UnroundedFP=0
 StartMode=1
 Unattended=0
 Retained=0
-ThreadPerObject=0
+ThreadPerObject=-1
 MaxNumberOfThreads=1
 
 [MS Transaction Server]

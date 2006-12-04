@@ -162,6 +162,7 @@ End Sub
 
 Private Sub cmdOpenEditor_Click()
     mLMRA.strParentTaskName = caption
+    mLMRA.strDefaultWordTemplate = "D:\Sources\MyProjects\LM_Report_Asistent\svn\Word\ReportAsistent.dot"
     
     If Not mLMRA.isWordEditorActive Then
         mLMRA.AddActiveElement "category", "Category", "D:\Sources\MyProjects\LM_Report_Asistent\svn\elements\hyp_4ft\icon.bmp"
@@ -193,7 +194,7 @@ End Sub
 Private Sub cmdXMLStringProcess_Click()
     Err.Clear
     On Error Resume Next
-    mLMRA.strDefaultWordTemplate = "ahoj.dot"
+    mLMRA.strDefaultWordTemplate = "D:\Sources\MyProjects\LM_Report_Asistent\svn\Word\ReportAsistent.dot"
     mLMRA.LoadFromString (txtXMLString)
     
     txtOutput.text = txtOutput.text & vbNewLine & mLMRA.strLastError & vbNewLine & mLMRA.strLastProcessedId

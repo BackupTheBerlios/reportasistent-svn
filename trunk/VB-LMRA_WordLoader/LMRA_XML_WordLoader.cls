@@ -1,6 +1,6 @@
 VERSION 1.0 CLASS
 BEGIN
-  MultiUse = -1  'True
+  MultiUse = 0   'False
   Persistable = 0  'NotPersistable
   DataBindingBehavior = 0  'vbNone
   DataSourceBehavior  = 0  'vbNone
@@ -83,10 +83,15 @@ Private Sub Class_Initialize()
     strDefaultWordTemplate = "Normal.dot"
 End Sub
 
+Private Sub evWordApp_DocumentBeforeClose(ByVal Doc As Word.Document, Cancel As Boolean)
+    'dulezite jinak se to na koci prace vzdycky pta jestli ulozit - zmena je toolbar
+    Doc.AttachedTemplate.Saved = True
+End Sub
+
 Private Sub evWordApp_Quit()
-    Set mWordEditor = Nothing
-    
     ActivateParentTask
+    
+    Set mWordEditor = Nothing
     
     RaiseEvent WordQuit
 End Sub
@@ -177,6 +182,8 @@ Private Sub CreateRAToolbar(WordApp As Word.Application)
     'bar.Left = 30
     bar.width = 0
     bar.Visible = True
+    
+    'bar.s
 End Sub
 
 Public Sub OpenWordEditor()
@@ -213,14 +220,14 @@ Private Sub ActivateParentTask()
     
     
     RaiseEvent PrepareParentTaskActivation
-    
-    
-    If Tasks.Exists(mstrParentTaskName) Then
-        Tasks(mstrParentTaskName).Activate False
         
-        If Not mWordEditor Is Nothing Then
-            'mWordEditor.Visible = False
-        End If
+    If mWordEditor Is Nothing Then
+        Exit Sub
+    End If
+   
+    
+    If mWordEditor.Tasks.Exists(mstrParentTaskName) Then
+        mWordEditor.Tasks(mstrParentTaskName).Activate False
     Else
         MsgBox "Task not exist: " & mstrParentTaskName
     End If
