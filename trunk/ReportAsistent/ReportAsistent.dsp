@@ -180,6 +180,10 @@ SOURCE=.\InsertElementTrace.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\ListSort.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\MainFrm.cpp
 # End Source File
 # Begin Source File
@@ -209,6 +213,10 @@ SOURCE=.\SkeletonView.cpp
 # Begin Source File
 
 SOURCE=.\SourcesDialog.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\StartDialog.cpp
 # End Source File
 # Begin Source File
 
@@ -329,6 +337,10 @@ SOURCE=.\InsertElementTrace.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\ListSort.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\MainFrm.h
 # End Source File
 # Begin Source File
@@ -362,6 +374,10 @@ SOURCE=.\SkeletonView.h
 # Begin Source File
 
 SOURCE=.\SourcesDialog.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\StartDialog.h
 # End Source File
 # Begin Source File
 

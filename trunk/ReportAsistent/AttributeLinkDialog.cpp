@@ -25,12 +25,13 @@ CAttributeLinkDialog::CAttributeLinkDialog(MSXML2::IXMLDOMElementPtr & edited_el
 	m_AttrLink_IdEdit = _T("");
 	//}}AFX_DATA_INIT
 
-	//Iva: Initialisation of variables of the dialog		
+	//Iva: Initialization of variables of the dialog		
 	//Id
 	_variant_t varAtr=m_SelXMLElm->getAttribute("id");
 	m_OldID=(LPCTSTR) (_bstr_t)  varAtr;
 	if (varAtr.vt!=VT_NULL)
 		m_AttrLink_IdEdit = m_OldID;
+
 }
 
 

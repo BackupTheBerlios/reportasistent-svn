@@ -10,6 +10,7 @@
 #include "SkeletonView.h"
 #include "SourcesDialog.h"
 #include "OptionsDialog.h"
+#include "StartDialog.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -316,28 +317,3 @@ void CReportAsistentApp::OnHlpTopics()
 
 
 
-// CStartDialog dialog
-
-IMPLEMENT_DYNAMIC(CStartDialog, CDialog)
-
-CStartDialog::CStartDialog(CWnd* pParent /*=NULL*/)
-	: CDialog(CStartDialog::IDD, pParent)
-{
-
-}
-
-CStartDialog::~CStartDialog()
-{
-}
-
-void CStartDialog::DoDataExchange(CDataExchange* pDX)
-{
-	CDialog::DoDataExchange(pDX);
-}
-
-
-BEGIN_MESSAGE_MAP(CStartDialog, CDialog)
-END_MESSAGE_MAP()
-
-
-// CStartDialog message handlers

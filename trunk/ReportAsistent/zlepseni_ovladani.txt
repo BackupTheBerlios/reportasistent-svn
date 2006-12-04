@@ -1,5 +1,7 @@
 V tomto souboru jsou navrhy na zprijemneni ovladani programu LM-RA:
 
+* nastaveni sirky sloupce CListCtrl na delku nejdelsi polozky, ze by to nebylo uplne marny
+
 1) editor kostry
    -------------
 - zavedeni klavesovych zkratek pro vkladani statickych prvku do kostry, napr:

@@ -8,6 +8,7 @@
 //
 
 #include "AttributeLinkDialogBase.h"
+#include "ListSort.h"	// Added by ClassView
 
 /////////////////////////////////////////////////////////////////////////////
 // CAttributeLinkDialog dialog
@@ -40,6 +41,7 @@ public:
 
 // Implementation
 protected:
+	//CListSort m_ListSort_AttrList(m_AttributesList,2);
 	void DDV_NonDuplicateID(CDataExchange *pDX, int nId, CString csIDEditValue);
 	CString m_OldID;
 	void FillStylesCombo();

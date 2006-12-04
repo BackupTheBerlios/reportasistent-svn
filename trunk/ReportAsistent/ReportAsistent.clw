@@ -2,13 +2,13 @@
 
 [General Info]
 Version=1
-LastClass=CTransformationsDialog
+LastClass=CAttributeLinkDialog
 LastTemplate=CDialog
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "reportasistent.h"
 LastPage=0
 
-ClassCount=26
+ClassCount=27
 Class1=CActiveElementDialog
 Class2=CAElFiltersConfigDialog
 Class3=CAttributeLinkDialog
@@ -31,32 +31,35 @@ Class19=CAboutDlg
 Class20=CSimpleFilterDialog
 Class21=CSkeletonView
 Class22=CSourcesDialog
-Class23=CTransformationsDialog
-Class24=CWaitAnimation
-Class25=CWaitDialog
-Class26=CWordEventHandler
+Class23=CStartDialog
+Class24=CTransformationsDialog
+Class25=CWaitAnimation
+Class26=CWaitDialog
+Class27=CWordEventHandler
 
-ResourceCount=20
-Resource1=IDD_WAIT_DIALOG (English (U.S.))
-Resource2=IDD_ATTRIBUTE_LINK_TABLE_DIALOG (English (U.S.))
-Resource3=IDD_AEL_CONFIG_DIALOG
-Resource4=IDD_ACTIVE_ELEMENT_DIALOG (English (U.S.))
-Resource5=IDD_PROPERTY_EDITOR (English (U.S.))
-Resource6=IDD_ATTRIBUTE_LINK_DIALOG (English (U.S.))
-Resource7=IDD_DIALOG_PARAGRAPH (English (U.S.))
-Resource8=IDD_GENERATE_DIALOG (English (U.S.))
-Resource9=IDD_TRANSFORMATIONS_DIALOG (English (U.S.))
-Resource10=IDD_ABOUTBOX (English (U.S.))
-Resource11=IDD_FILTER_AND_CONFIG_DIALOG (English (U.S.))
-Resource12=IDD_SIMPLE_FILTER_DIALOG (English (U.S.))
-Resource13=IDD_COMPLEX_FILTER_DIALOG (English (U.S.))
+ResourceCount=22
+Resource1=IDD_INCLUDE_DIALOG (English (U.S.))
+Resource2=IDD_AEL_CONFIG_DIALOG
+Resource3=IDD_START_DIALOG (English (U.S.))
+Resource4=IDD_GENERATE_DIALOG (English (U.S.))
+Resource5=IDD_AEL_CONFIG_DIALOG (English (U.S.))
+Resource6=IDD_DIALOG_PARAGRAPH (English (U.S.))
+Resource7=IDD_ACTIVE_ELEMENT_DIALOG (English (U.S.))
+Resource8=IDD_DIALOG_CHAPTER (English (U.S.))
+Resource9=IDD_SIMPLE_FILTER_DIALOG (English (U.S.))
+Resource10=IDD_TRANSFORMATIONS_DIALOG (English (U.S.))
+Resource11=IDD_ATTRIBUTE_LINK_TABLE_DIALOG (English (U.S.))
+Resource12=IDD_ABOUTBOX (English (U.S.))
+Resource13=IDD_DIALOGTEXT (English (U.S.))
 Resource14=IDD_DIALOG_REPORT (English (U.S.))
-Resource15=IDD_INCLUDE_DIALOG (English (U.S.))
-Resource16=IDD_DIALOG_CHAPTER (English (U.S.))
+Resource15=IDD_COMPLEX_FILTER_DIALOG (English (U.S.))
+Resource16=IDD_PROPERTY_EDITOR (English (U.S.))
 Resource17=IDD_OPTIONS_DIALOG (English (U.S.))
-Resource18=IDD_DIALOGTEXT (English (U.S.))
-Resource19=IDD_SOURCES_DIALOG (English (U.S.))
-Resource20=IDR_MAINFRAME (English (U.S.))
+Resource18=IDD_FILTER_AND_CONFIG_DIALOG (English (U.S.))
+Resource19=IDD_ATTRIBUTE_LINK_DIALOG (English (U.S.))
+Resource20=IDD_SOURCES_DIALOG (English (U.S.))
+Resource21=IDD_WAIT_DIALOG (English (U.S.))
+Resource22=IDR_MAINFRAME (English (U.S.))
 
 [CLS:CActiveElementDialog]
 Type=0
@@ -75,6 +78,7 @@ Type=0
 BaseClass=CDialog
 HeaderFile=AttributeLinkDialog.h
 ImplementationFile=AttributeLinkDialog.cpp
+LastObject=CAttributeLinkDialog
 
 [CLS:CAttributeLinkTableDialog]
 Type=0
@@ -141,7 +145,6 @@ Type=0
 BaseClass=CListBox
 HeaderFile=HListBox.h
 ImplementationFile=HListBox.cpp
-LastObject=IDC_SUPPORTED_TRANSF_LIST
 
 [CLS:CMainFrame]
 Type=0
@@ -191,6 +194,12 @@ Type=0
 BaseClass=CDialog
 HeaderFile=SourcesDialog.h
 ImplementationFile=SourcesDialog.cpp
+
+[CLS:CStartDialog]
+Type=0
+BaseClass=CDialog
+HeaderFile=StartDialog.h
+ImplementationFile=StartDialog.cpp
 
 [CLS:CTransformationsDialog]
 Type=0
@@ -369,7 +378,7 @@ Control2=IDC_SIMPLE_FILTER_DISABLED_CHECK,button,1342242819
 
 [DLG:IDD_TRANSFORMATIONS_DIALOG (English (U.S.))]
 Type=1
-Class=CTransformationsDialog
+Class=?
 ControlCount=10
 Control1=IDC_SUPPORTED_TRANSF_LIST,listbox,1352730883
 Control2=IDC_SELECTED_TRANSFS_LIST,listbox,1352730881
@@ -573,6 +582,14 @@ Control7=IDC_FILTERS_LIST,SysListView32,1350633473
 Control8=IDC_STATIC,static,1342308352
 Control9=IDC_REMOVE_FILTER_BUTTON,button,1342242816
 
+[DLG:IDD_START_DIALOG (English (U.S.))]
+Type=1
+Class=?
+ControlCount=3
+Control1=IDC_STATIC,static,1342177283
+Control2=IDC_STATIC,static,1342308480
+Control3=IDC_STATIC,static,1342308352
+
 [TB:IDR_MAINFRAME (English (U.S.))]
 Type=1
 Class=?
@@ -641,4 +658,17 @@ Command21=ID_OPEN_WORD_EDITOR
 Command22=ID_EDIT_CUT
 Command23=ID_SHOW_XML
 CommandCount=23
+
+[DLG:IDD_AEL_CONFIG_DIALOG (English (U.S.))]
+Type=1
+Class=?
+ControlCount=8
+Control1=IDC_STATIC,static,1342308352
+Control2=IDC_DATA_SOURCE_COMBO,combobox,1344340227
+Control3=IDC_STATIC,static,1342308352
+Control4=IDC_ID_EDIT,edit,1350631568
+Control5=IDC_RESULT_LIST,SysListView32,1350633473
+Control6=IDC_STATIC,static,1342308352
+Control7=IDC_NO_FILTERS,static,1342308353
+Control8=IDC_NO_FLTER_FRAME,static,1342177287
 

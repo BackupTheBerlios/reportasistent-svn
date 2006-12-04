@@ -3,6 +3,7 @@
 
 #if !defined(AFX_REPORTASISTENT_H__B8BFBABC_4887_44AF_92CC_FD8D82E85539__INCLUDED_)
 #define AFX_REPORTASISTENT_H__B8BFBABC_4887_44AF_92CC_FD8D82E85539__INCLUDED_
+#endif
 
 #if _MSC_VER > 1000
 #pragma once
@@ -125,34 +126,3 @@ public:
 };
 
 
-/////////////////////////////////////////////////////////////////////////////
-
-//{{AFX_INSERT_LOCATION}}
-// Microsoft Visual C++ will insert additional declarations immediately before the previous line.
-
-#endif // !defined(AFX_REPORTASISTENT_H__B8BFBABC_4887_44AF_92CC_FD8D82E85539__INCLUDED_)
-#pragma once
-
-
-// CStartDialog dialog
-
-/** CStartDialog is a class for the dialog, that is shown at 
-the startup of LM-RA application, before the main window of 
-the application is initialized.*/
-
-class CStartDialog : public CDialog
-{
-	DECLARE_DYNAMIC(CStartDialog)
-
-public:
-	CStartDialog(CWnd* pParent = NULL);   // standard constructor
-	virtual ~CStartDialog();
-
-// Dialog Data
-	enum { IDD = IDD_START_DIALOG };
-
-protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
-
-	DECLARE_MESSAGE_MAP()
-};
