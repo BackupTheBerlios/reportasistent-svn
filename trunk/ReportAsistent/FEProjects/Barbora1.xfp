@@ -194,29 +194,29 @@
         <PositionSet>
           <BoxProjectIdentifier>0</BoxProjectIdentifier>
           <Position>
-            <X>22</X>
-            <Y>108</Y>
+            <X>172</X>
+            <Y>261</Y>
           </Position>
         </PositionSet>
         <PositionSet>
           <BoxProjectIdentifier>2</BoxProjectIdentifier>
           <Position>
-            <X>311</X>
-            <Y>159</Y>
+            <X>355</X>
+            <Y>160</Y>
           </Position>
         </PositionSet>
         <PositionSet>
           <BoxProjectIdentifier>3</BoxProjectIdentifier>
           <Position>
-            <X>255</X>
-            <Y>84</Y>
+            <X>299</X>
+            <Y>85</Y>
           </Position>
         </PositionSet>
         <PositionSet>
           <BoxProjectIdentifier>4</BoxProjectIdentifier>
           <Position>
-            <X>423</X>
-            <Y>69</Y>
+            <X>388</X>
+            <Y>97</Y>
           </Position>
         </PositionSet>
         <PositionSet>
@@ -236,15 +236,15 @@
         <PositionSet>
           <BoxProjectIdentifier>9</BoxProjectIdentifier>
           <Position>
-            <X>430</X>
-            <Y>219</Y>
+            <X>407</X>
+            <Y>8</Y>
           </Position>
         </PositionSet>
         <PositionSet>
           <BoxProjectIdentifier>10</BoxProjectIdentifier>
           <Position>
-            <X>437</X>
-            <Y>9</Y>
+            <X>481</X>
+            <Y>5</Y>
           </Position>
         </PositionSet>
         <PositionSet>
@@ -257,29 +257,29 @@
         <PositionSet>
           <BoxProjectIdentifier>17</BoxProjectIdentifier>
           <Position>
-            <X>131</X>
-            <Y>98</Y>
+            <X>224</X>
+            <Y>102</Y>
           </Position>
         </PositionSet>
         <PositionSet>
           <BoxProjectIdentifier>21</BoxProjectIdentifier>
           <Position>
-            <X>680</X>
-            <Y>234</Y>
+            <X>694</X>
+            <Y>161</Y>
           </Position>
         </PositionSet>
         <PositionSet>
           <BoxProjectIdentifier>22</BoxProjectIdentifier>
           <Position>
-            <X>576</X>
-            <Y>72</Y>
+            <X>498</X>
+            <Y>73</Y>
           </Position>
         </PositionSet>
         <PositionSet>
           <BoxProjectIdentifier>23</BoxProjectIdentifier>
           <Position>
-            <X>577</X>
-            <Y>126</Y>
+            <X>515</X>
+            <Y>168</Y>
           </Position>
         </PositionSet>
         <PositionSet>
@@ -292,8 +292,8 @@
         <PositionSet>
           <BoxProjectIdentifier>42</BoxProjectIdentifier>
           <Position>
-            <X>325</X>
-            <Y>346</Y>
+            <X>369</X>
+            <Y>347</Y>
           </Position>
         </PositionSet>
         <PositionSet>
@@ -313,8 +313,8 @@
         <PositionSet>
           <BoxProjectIdentifier>46</BoxProjectIdentifier>
           <Position>
-            <X>324</X>
-            <Y>470</Y>
+            <X>368</X>
+            <Y>471</Y>
           </Position>
         </PositionSet>
         <PositionSet>
@@ -334,8 +334,8 @@
         <PositionSet>
           <BoxProjectIdentifier>52</BoxProjectIdentifier>
           <Position>
-            <X>76</X>
-            <Y>404</Y>
+            <X>120</X>
+            <Y>405</Y>
           </Position>
         </PositionSet>
       </PositionSets>

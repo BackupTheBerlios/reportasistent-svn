@@ -194,7 +194,9 @@ int CListSort::GetItemPosition(LVITEM *pItem, LONG lParamSort)
 
 	int max = m_pWnd->GetItemCount();
 
-	for(int i = 0; i < max; i++)
+	int i = 0;
+
+	for(i = 0; i < max; i++)
 	{
 		int x = Compare(reinterpret_cast<LONG>(&sortItem), m_pWnd->GetItemData(i), lParamSort);
 		if(x <= 0)

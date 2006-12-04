@@ -78,8 +78,9 @@
 <xsl:variable name="NotAntecedentLabel">¬ antecedent</xsl:variable>
 <xsl:variable name="NotSuccedentLabel">¬ succedent</xsl:variable>
 
-
-
+  <!--specialni promenna - SpecialString ... pokud je hodnota AntecedentLabel ... NotSuccedentLabel nastavena na tuto
+  hodnotu, nahradi se prislusnou hodnotou skutecneho cedentu-->
+  <xsl:variable name="SpecialString">***</xsl:variable>
 
 
 <!-- nastaveni jazykovych popisku (labelu) -->
@@ -124,6 +125,31 @@
 				<xsl:otherwise>3</xsl:otherwise>
 			</xsl:choose>
 		</xsl:variable>
+
+    <!--hodnoty cedentu-->
+    <xsl:variable name="antecedent_str">
+      <xsl:for-each select="id(@antecedent)/ti_literal">
+        <xsl:if test="position()!=1">
+          <xsl:text disable-output-escaping="no"> &amp; </xsl:text>
+        </xsl:if>
+        <xsl:value-of select="@quant"/>
+        <xsl:text disable-output-escaping="yes">(</xsl:text>
+        <xsl:value-of select="@value"/>
+        <xsl:text disable-output-escaping="yes">)</xsl:text>
+      </xsl:for-each>
+    </xsl:variable>
+
+    <xsl:variable name="not_antecedent_str">
+      <xsl:for-each select="id(@antecedent)/ti_literal">
+        <xsl:if test="position()!=1">
+          <xsl:text disable-output-escaping="no"> &amp; </xsl:text>
+        </xsl:if>
+        <xsl:value-of select="@quant"/>
+        <xsl:text disable-output-escaping="yes">(</xsl:text>
+        <xsl:value-of select="@value"/>
+        <xsl:text disable-output-escaping="yes">)</xsl:text>
+      </xsl:for-each>
+    </xsl:variable>
 		
 		
 		<!-- nastaveni tloustky ohraniceni-->
@@ -237,7 +263,8 @@
 		</xsl:choose>
 	</xsl:variable>
 
-		
+    <!--Kody - pokud je hodnota $AntecedentLabel, $SuccedentLabel, $Not.... nastavena na $SpecialString, vlozi se na misto ni skutecna hodnota prislusneho cedentu-->	
+    
 		
 
 
@@ -270,7 +297,16 @@
 				
 				<tr id="{$id_base}r2">
 					<td id="{$id_base}r2d1" bgcolor="{$border_color}"  border_left="{$bord_out}" border_right="{$bord_frm}" border_bottom="{$bord_in}">
-						<text id="{$id_base}r2d1text"><xsl:value-of select="$AntecedentLabel"/></text> 
+            <text id="{$id_base}r2d1text">
+              <xsl:choose>
+                <xsl:when test="$AntecedentLabel=$SpecialString">
+                  <xsl:value-of select="$antecedent_str" />
+                </xsl:when>
+                <xsl:otherwise>
+                  <xsl:value-of select="$AntecedentLabel"/>
+                </xsl:otherwise>
+              </xsl:choose>
+            </text> 
 					</td>
 					
 					<xsl:element name="td">
