@@ -161,7 +161,7 @@ void CWaitDialog::DoThreadFunctionImpl(void *f)
 	m_pThreadPramas->pUserFunction = f;
 	m_pWorkerThread = AfxBeginThread(
 		ThreadControllingFunction, m_pThreadPramas, 
-		THREAD_PRIORITY_HIGHEST, 0, CREATE_SUSPENDED);
+		THREAD_PRIORITY_ABOVE_NORMAL, 0, CREATE_SUSPENDED);
 
 	DoModal();
 }

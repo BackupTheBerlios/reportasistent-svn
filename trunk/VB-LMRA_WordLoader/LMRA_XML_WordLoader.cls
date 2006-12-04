@@ -10,7 +10,7 @@ Attribute VB_Name = "LMRA_XML_WordLoader"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = True
 Attribute VB_PredeclaredId = False
-Attribute VB_Exposed = False
+Attribute VB_Exposed = True
 Option Explicit
 
 Private WithEvents evWordApp As Word.Application
@@ -262,93 +262,64 @@ Public Function EnumTemplates() As String()
     EnumTemplates = ret
 End Function
 
-'vraci pole stringu
-Public Function EnumParagraphStyles(ByVal template_id) As String()
-    Dim ret() As String
-
-    If mWordForInfo Is Nothing Then
-        Set mWordForInfo = CreateObject("Word.Application")
-    End If
-    
-    Dim template_doc As Word.Document
-    On Error GoTo end_ret
-    Set template_doc = mWordForInfo.Templates(template_id).OpenAsDocument
-    
-    Dim s As Word.style
-    Dim n As Integer
-    
-    'zjistuime, kolik je character stylu
-    n = -1
-    For Each s In template_doc.Styles
-        If s.Type = wdStyleTypeParagraph Then
-            n = n + 1
-        End If
-    Next s
-    
-    
-    
-    ReDim ret(0 To n)
-    
-    'ulozime charcter styly do pole
-    n = 0
-    For Each s In template_doc.Styles
-        If s.Type = wdStyleTypeParagraph Then
-            ret(n) = s.NameLocal
-            n = n + 1
-        End If
-    Next s
-    
- 
-    template_doc.Close
-    
-end_ret:
-    EnumParagraphStyles = ret
-
-End Function
-
-'vraci pole stringu
-Public Function EnumCharacterStyles(ByVal template_id) As String()
-    Dim ret() As String
-
+'x() as String ...... x je pole stringu
+Public Function EnumWordStyles(ByVal template_file As String, ByRef char_s() As String, ByRef paragr_s() As String) As Boolean
     If mWordForInfo Is Nothing Then
         Set mWordForInfo = CreateObject("Word.Application")
     End If
     
     Dim template_doc As Word.Document
     
-    On Error GoTo end_ret
-    Set template_doc = mWordForInfo.Templates(template_id).OpenAsDocument
+    On Error Resume Next
+    
+    Set template_doc = mWordForInfo.Documents.Open( _
+        FileName:=template_file, ReadOnly:=True)
+    
+    On Error GoTo 0
+    
+    If template_doc Is Nothing Then
+        EnumWordStyles = False
+        Exit Function
+    End If
     
     Dim s As Word.style
-    Dim n As Integer
+    Dim ch, para As Integer
     
-    'zjistuime, kolik je character stylu
-    n = -1
+    'zjistuime, kolik je stylu
+    ch = -1
+    para = -1
     For Each s In template_doc.Styles
         If s.Type = wdStyleTypeCharacter Then
-            n = n + 1
+            ch = ch + 1
+        End If
+        
+        If s.Type = wdStyleTypeParagraph Then
+            para = para + 1
         End If
     Next s
+       
+    ReDim char_s(0 To ch)
+    ReDim paragr_s(0 To para)
     
-    
-    
-    ReDim ret(0 To n)
-    
-    'ulozime charcter styly do pole
-    n = 0
+    'ulozime styly do pole
+    ch = 0
+    para = 0
     For Each s In template_doc.Styles
         If s.Type = wdStyleTypeCharacter Then
-            ret(n) = s.NameLocal
-            n = n + 1
+            char_s(ch) = s.NameLocal
+            ch = ch + 1
+        End If
+        
+        If s.Type = wdStyleTypeParagraph Then
+            paragr_s(para) = s.NameLocal
+            para = para + 1
         End If
     Next s
     
  
     template_doc.Close
-    
-end_ret:
-    EnumCharacterStyles = ret
-
+        
+    EnumWordStyles = True
 End Function
 
 

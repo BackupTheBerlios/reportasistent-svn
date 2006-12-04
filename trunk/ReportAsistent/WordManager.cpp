@@ -66,9 +66,8 @@ void CWordManager::LoadWordStylesThreadFunction(LPARAM template_name, LPARAM pWo
 {	
 	CWordManager * m = (CWordManager *) pWordManager;
 
-	m->LoadWordTemplates();
-	m->LoadParagraphStyles((LPCTSTR) template_name);
-	m->LoadCharacterStyles((LPCTSTR) template_name);
+//	m->LoadWordTemplates();
+	m->LoadWordStyles((LPCTSTR) template_name);
 }
 
 
@@ -76,7 +75,7 @@ void CWordManager::LoadWordStylesAndTempates(LPCTSTR template_name)
 {
 	if (template_name == NULL)
 	{
-		template_name = "normal.dot";
+		template_name = getWordTemplate();
 	}
 
 	if(! isInit()) 
@@ -173,21 +172,31 @@ BOOL CWordManager::isInit()
 
 
 
-void CWordManager::LoadCharacterStyles(LPCTSTR template_name)
+void CWordManager::LoadWordStyles(LPCTSTR template_name)
 {
-	SAFEARRAY * ret_array = m_WordLoader->EnumCharacterStyles(
-		(long) (getWordTemplates().FindStringNoCase(template_name)+1));
+/***
 
-	LoadSafeArrayToStringTable(ret_array, m_WordCharacterStyles);
+	SAFEARRAYBOUND rgsabound[1];
+	rgsabound[0].lLbound = 0;
+	rgsabound[0].cElements = 0;
+
+	SAFEARRAY * char_s = SafeArrayCreate(VT_BSTR, 1, rgsabound);
+	SAFEARRAY * para_s = SafeArrayCreate(VT_BSTR, 1, rgsabound);
+/****/
+	SAFEARRAY * char_s = NULL;
+	SAFEARRAY * para_s = NULL;
+/***/	
+	
+	if (VARIANT_FALSE == 
+		m_WordLoader->EnumWordStyles(template_name, & char_s, & para_s))
+	{
+		CReportAsistentApp::ReportError(IDS_WORD_STYLES_LOAD_FAILED, template_name);
+	}
+
+	LoadSafeArrayToStringTable(char_s, m_WordCharacterStyles);
+	LoadSafeArrayToStringTable(para_s, m_WordParagraphStyles);
 }
 
-void CWordManager::LoadParagraphStyles(LPCTSTR template_name)
-{
-	SAFEARRAY * ret_array = m_WordLoader->EnumParagraphStyles(
-		(long) (getWordTemplates().FindStringNoCase(template_name)+1));
-
-	LoadSafeArrayToStringTable(ret_array, m_WordParagraphStyles);
-}
 
 int CStringTable::FindStringNoCase(LPCTSTR str)
 {
@@ -218,8 +227,9 @@ void CWordManager::GenerateXMLStringToWordEditor(_bstr_t XML_str)
 		if (! InitWordLoader()) return;
 	}
 
+	
+	m_WordLoader->PutstrDefaultWordTemplate(getWordTemplate());			
 	m_WordLoader->LoadFromStringToWordEditor(XML_str);
-
 }
 
 
@@ -234,9 +244,9 @@ void CWordManager::GenerateXMLString(_bstr_t XML_str)
 #ifdef GETTIMELOAD
 	AfxMessageBox("is_init");
 #endif
-//	m_WordLoader->PutstrDefaultWordTemplate((LPCTSTR) "D:\\Documents and Settings\\Dedek\\Data aplikací\\Microsoft\\Šablony\\honza_template.dot");
-		
+
 	
+	m_WordLoader->PutstrDefaultWordTemplate(getWordTemplate());			
 	m_WordLoader->LoadFromString(XML_str);
 }
 
@@ -305,6 +315,8 @@ void CWordManager::OpenWordEditor()
 
 
 	SetWordEditorParentTaskName();
+	m_WordLoader->PutstrDefaultWordTemplate(getWordTemplate());			
+
 
 	try
 	{

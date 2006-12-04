@@ -171,7 +171,7 @@ END
 IDD_ATTRIBUTE_LINK_TABLE_DIALOG DIALOGEX 0, 0, 517, 201
 STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Dialog"
-FONT 8, "MS Sans Serif"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
 BEGIN
     DEFPUSHBUTTON   "OK",IDOK,175,180,50,14
     PUSHBUTTON      "Cancel",IDCANCEL,250,180,50,14
@@ -459,7 +459,7 @@ END
 IDD_INCLUDE_DIALOG DIALOGEX 0, 0, 255, 97
 STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Dialog"
-FONT 8, "MS Sans Serif"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
 BEGIN
     DEFPUSHBUTTON   "OK",IDOK,42,75,50,14
     PUSHBUTTON      "Cancel",IDCANCEL,102,75,50,14
@@ -1022,6 +1022,8 @@ BEGIN
     IDS_STYLLISTSAVE_ERR    "List of Word styles can't be saved."
     IDS_COMPLEX_FILTER_OUTPUT_INVALID 
                             "Result of transformation ""complex_filter.xsl"" of active element ""%s"" is not valid.\nReason: %s"
+    IDS_WORD_STYLES_LOAD_FAILED 
+                            "Failed to load Word styles form template file: ""%s""."
 END
 
 STRINGTABLE DISCARDABLE 

@@ -119,30 +119,34 @@ Private Sub cmdEnumTest_Click()
     txtOutput.text = txtOutput.text & vbNewLine & vbNewLine & "tmplates:"
     
     Dim obj As New LMRA_XML_WordLoader
-    Dim strings() As String
+    Dim ch() As String
+    Dim para() As String
+    Dim tmpl() As String
     Dim s
     
     
-    strings = obj.EnumTemplates
-    For Each s In strings
+    tmpl = obj.EnumTemplates
+    For Each s In tmpl
         txtOutput.text = txtOutput.text & vbNewLine & s
     Next
     
-    
-    txtOutput.text = txtOutput.text & vbNewLine & vbNewLine & "pragraph styles:"
-    
-    strings = obj.EnumParagraphStyles(txtFilePath.text)
-    For Each s In strings
-        txtOutput.text = txtOutput.text & vbNewLine & s
-    Next
+    If obj.EnumWordStyles(txtFilePath.text, ch, para) Then
     
     
-    txtOutput.text = txtOutput.text & vbNewLine & vbNewLine & "character styles:"
+        txtOutput.text = txtOutput.text & vbNewLine & vbNewLine & "pragraph styles:"
+        
+        For Each s In para
+            txtOutput.text = txtOutput.text & vbNewLine & s
+        Next
     
-    strings = obj.EnumCharacterStyles(txtFilePath.text)
-    For Each s In strings
-        txtOutput.text = txtOutput.text & vbNewLine & s
-    Next
+    
+        txtOutput.text = txtOutput.text & vbNewLine & vbNewLine & "character styles:"
+    
+        For Each s In ch
+            txtOutput.text = txtOutput.text & vbNewLine & s
+        Next
+        
+    End If
     
     
     

@@ -682,6 +682,9 @@ void CFilterResultImpl::InitResultView()
 
 void CFilterResultImpl::UpdateResult(MSXML2::IXMLDOMElementPtr & filter_dom)
 {	
+	SetCursor(LoadCursor(NULL, IDC_WAIT));
+
+
 	MSXML2::IXMLDOMNodeListPtr values_list = filter_dom->selectNodes("/dialog_data/values/value");
 	
 	m_ResultList.DeleteAllItems();

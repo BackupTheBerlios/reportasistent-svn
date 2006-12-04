@@ -81,8 +81,8 @@ public:
 	void LoadWordStylesAndTempates(LPCTSTR template_name = NULL);
 protected:
 	void LoadWordTemplates();
-	void LoadParagraphStyles(LPCTSTR template_name);  // kody: kvuli novymu vlaknu a volani ze staticky metody presunuto z protected sem
-	void LoadCharacterStyles(LPCTSTR template_name);
+	void LoadWordStyles(LPCTSTR template_name);
+
 	// kody: funkce pro vlakno
 	void static CWordManager::LoadWordStylesThreadFunction(LPARAM template_name, LPARAM pWordManager);
 	

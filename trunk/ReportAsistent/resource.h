@@ -1,5 +1,5 @@
 //{{NO_DEPENDENCIES}}
-// Microsoft Visual C++ generated include file.
+// Microsoft Developer Studio generated include file.
 // Used by ReportAsistent.rc
 //
 #define IDD_ABOUTBOX                    100
@@ -194,6 +194,7 @@
 #define IDS_STYLLISTLOAD_ERR            61225
 #define IDS_STYLLISTSAVE_ERR            61226
 #define IDS_COMPLEX_FILTER_OUTPUT_INVALID 61227
+#define IDS_WORD_STYLES_LOAD_FAILED     61228
 #define IDS_CONFIRM_THRAD_KILL          61400
 #define IDS_CONFIRM_APP_RESUME          61401
 #define IDS_COMPLEX_FILTER_SELECT_ATTR  61402
