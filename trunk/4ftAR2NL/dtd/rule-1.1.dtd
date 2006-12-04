@@ -1,0 +1,38 @@
+<!-- Rule DTD 1.1 -->
+
+<!-- This is DTD for asociation rule fo the LISp-Miner system.
+     Please use the following formal public identifier to identify it:
+     
+     "-//LISp-Miner//DTD Rule 1.1//EN"
+     
+     and this DOCTYPE declaration:
+     
+     <!DOCTYPE rule PUBLIC "-//LISp-Miner//DTD Rule 1.1//EN"
+	"http://lispminer.vse.cz/dtd/rule-1.1.dtd">
+
+--> 
+
+<!ELEMENT rule (cedent+,parameters?)>
+<!ATTLIST rule id         CDATA  #REQUIRED
+               quantifier (AAI|FUI|DFUI)   #REQUIRED>
+
+<!ELEMENT cedent (literal+)>
+<!ATTLIST cedent type (A|S|C) #REQUIRED>
+
+<!ELEMENT literal (coefficient)>
+<!ATTLIST literal quantity        CDATA  #REQUIRED
+		  minlen          CDATA  #REQUIRED
+                  maxlen          CDATA  #REQUIRED
+                  attribute       CDATA  #REQUIRED
+                  coefftype (subset|one)  #REQUIRED>
+
+<!ELEMENT coefficient (value)>
+
+<!ELEMENT value (#PCDATA)>
+<!ATTLIST value category CDATA #REQUIRED>
+
+<!ELEMENT parameters (param+)>
+
+<!ELEMENT param EMPTY>
+<!ATTLIST param name  CDATA #REQUIRED
+                value CDATA #REQUIRED>

@@ -43,6 +43,7 @@
 #include "ODBCINST.H"
 #include "TData_Matrix_Recordset.h"
 #include "TColumn_Recordset.h"
+#include "direct.h"
 
 //dedek: docasne
 /*****/
@@ -53,6 +54,31 @@
 #import <msxml3.dll>
 using namespace MSXML2;
 //vlozi namespace MSXML2;
+
+CString Get_4ftar2nl_output ()
+{
+	TCHAR module_path[MAX_PATH];
+	GetModuleFileName(NULL, module_path, MAX_PATH);
+
+	//postupne odpare z module_path poslednni dve lomitka
+	PathFindFileName(module_path)[-1] = 0;
+	PathFindFileName(module_path)[-1] = 0;
+	PathFindFileName(module_path)[-1] = 0;
+
+	CString file_path = module_path;
+	file_path += "\\4ftar2nl\\otput\\output12.xml";
+	
+	CString buf;
+	CFile f(file_path, CFile::modeRead);
+	int size = (int) f.GetLength();
+	LPTSTR ps = buf.GetBuffer(size);
+	f.Read(ps, size);
+	f.Close();
+	ps[size] = 0; //data nactena ze souboru se jete musi ukoncit nulou aby reprezentovala validni string
+	buf.ReleaseBuffer(); //od teto chvile je ps neplatny a nemelo by se do nej zapisovat
+	return buf;
+}
+
 CString Get_4ftAR2NL (long hypno, CString db_name)
 {
 	CString hlp;
@@ -70,7 +96,8 @@ CString Get_4ftAR2NL (long hypno, CString db_name)
 	CString _4ftAR2NL_output;
 
 //	CString _4ftAR2NL_exe = "D:\\ar2nl\\LispMiner\\4ftAR2NL\\bin\\4ftAR2NL.exe";
-	CString _4ftAR2NL_exe = "C:\\skola\\sw projekt\\dev\\4ftAR2NL\\bin\\4ftAR2NL.exe";
+	CString _4ftAR2NL_exe_path = "C:\\skola\\sw projekt\\dev\\4ftAR2NL\\bin";
+	CString _4ftAR2NL_exe = "4ftar2nl.exe";
 	CString _4ftAR2NL_params = " -DSN=";
 	_4ftAR2NL_params += DSN;
 	_4ftAR2NL_params += " -hypno=";
@@ -85,6 +112,7 @@ CString Get_4ftAR2NL (long hypno, CString db_name)
 
 	STARTUPINFO si;
 	ZeroMemory(& si, sizeof si);
+	si.cb = sizeof si;
 	
 	PROCESS_INFORMATION pi;
 	ZeroMemory(& pi, sizeof pi);
@@ -110,6 +138,12 @@ CString Get_4ftAR2NL (long hypno, CString db_name)
 	delete [] config;
 	delete [] _db_name;
 
+	//change the working directory
+	if (_chdir ((LPCSTR) _4ftAR2NL_exe_path) != 0)
+	{
+		return "";//+nahlas chybu
+	}
+
 	char * process;
 	char * params;
 	process = new char [MAX_PATH];
@@ -119,17 +153,16 @@ CString Get_4ftAR2NL (long hypno, CString db_name)
 
 
 /***************************************************************/
-//verze dedek	
-	CString p2 = "\"";
-	p2 += _4ftAR2NL_exe;
-	p2 += "\" ";
+//verze dedek
+//	CString p2 = "\"";
+	CString p2 = _4ftAR2NL_exe;
+//	p2 += "\" ";
+	p2 += " ";
 	p2 += _4ftAR2NL_params;
 
-
-
 	//run the 4ftAR2NL application
-/*	if (!CreateProcess(NULL, p2.GetBuffer(),
-		NULL, NULL, FALSE, NORMAL_PRIORITY_CLASS, NULL, NULL, & si, & pi)) */
+	if (!CreateProcess(NULL, p2.GetBuffer(0),
+		NULL, NULL, FALSE, CREATE_NO_WINDOW, NULL, NULL, & si, & pi)) 
 /***************************************************************
 
 	//run the 4ftAR2NL application
@@ -176,15 +209,17 @@ CString Get_4ftAR2NL (long hypno, CString db_name)
 		return "";//!!!!!pozor na to, co vracet
 	}
 
-	//zkontroluj exit_code
+	if (exit_code != 0)//pozor, jeste zkontrolovat, co vraci, kdyz je neuspesny!!!!
 
-	//nacti vysledky if uspesny...'''\
-
+	_4ftAR2NL_output = Get_4ftar2nl_output ();
 
 	//remove the temporary datasource
-	//osetrit!!!!!!!!!!!!!!!
-	SQLConfigDataSource (NULL, ODBC_REMOVE_DSN, "Microsoft Access Driver (*.mdb)\0",
-		"DSN=" + DSN + "\0\0");
+	if (FALSE == SQLConfigDataSource (NULL, ODBC_REMOVE_DSN, "Microsoft Access Driver (*.mdb)\0",
+		"DSN=" + DSN + "\0\0"))
+	{
+		//nahlas chybu
+		return "";
+	}
 
 	return _4ftAR2NL_output;
 }
@@ -1998,7 +2033,7 @@ CString fLM4fthyp_hlp(void * hSource, bool ar2nl)
 	int i;
     for (i = 0; i < list.GetSize (); i++)
 	{
-		buf = buf + list.GetAt (i)->xml_convert ();
+		buf = buf + list.GetAt (i)->xml_convert (ar2nl);
 	}
 	buf += " </active_list>";
 	//just for test - creates a xml file with all hypothesis

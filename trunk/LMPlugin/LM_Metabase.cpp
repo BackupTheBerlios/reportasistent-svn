@@ -594,7 +594,7 @@ CString Category_Meta::xml_convert ()
 	return xml_string;
 }
 
-CString Hyp_4ft_Meta::xml_convert ()
+CString Hyp_4ft_Meta::xml_convert (bool ar2nl)
 {
 	CString xml_string;
 	CString hlp;
@@ -644,7 +644,7 @@ CString Hyp_4ft_Meta::xml_convert ()
 	xml_string = xml_string + " antecedent=\"" + ant_id + "\" ";
 	xml_string = xml_string + " succedent=\"" + suc_id + "\" ";
 	xml_string = xml_string + " condition=\"" + con_id + "\"";
-	if (ar2nl_sentences != "")
+	if (ar2nl)
 	{
 		xml_string = xml_string + " ";
 		xml_string = xml_string + ar2nl_sentences + " ";

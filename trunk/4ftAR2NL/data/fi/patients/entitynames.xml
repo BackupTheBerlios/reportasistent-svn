@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE entitynames PUBLIC "-//LISp-Miner//DTD AR2NL 1.2//EN"
+	"http://lispminer.vse.cz/dtd/ar2nl-1.2.dtd">
+
+<entitynames>
+
+<enamedata id="ent1" symbol="E">
+  <word pattern="n1" class="nominal">potilas</word>
+</enamedata>
+
+<enamedata id="ent2" symbol="Epers">hän</enamedata>
+
+<enamedata id="ent3" symbol="Eptc0">
+  <word pattern="n2" class="nominal">joka</word>
+</enamedata>
+
+<enamedata id="ent4" symbol="EG">ma</enamedata>
+
+</entitynames>

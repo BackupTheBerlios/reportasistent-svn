@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<foreach>
+   <number to="1">
+     <val>1</val>
+   </number>
+   <number to="2">
+     <val>1</val>
+     <val>2</val>
+   </number>
+   <number to="3">
+     <val>1</val>
+     <val>2</val>
+     <val>3</val>
+   </number>
+   <number to="4">
+     <val>1</val>
+     <val>2</val>
+     <val>3</val>
+     <val>4</val>
+   </number>
+   <number to="5">
+     <val>1</val>
+     <val>2</val>
+     <val>3</val>
+     <val>4</val>
+     <val>5</val>
+   </number>
+   <number to="6">
+     <val>1</val>
+     <val>2</val>
+     <val>3</val>
+     <val>4</val>
+     <val>5</val>
+     <val>6</val>
+   </number>
+   <number to="7">
+     <val>1</val>
+     <val>2</val>
+     <val>3</val>
+     <val>4</val>
+     <val>5</val>
+     <val>6</val>
+     <val>7</val>
+   </number>
+   <number to="8">
+     <val>1</val>
+     <val>2</val>
+     <val>3</val>
+     <val>4</val>
+     <val>5</val>
+     <val>6</val>
+     <val>7</val>
+     <val>8</val>
+   </number>
+   <number to="9">
+     <val>1</val>
+     <val>2</val>
+     <val>3</val>
+     <val>4</val>
+     <val>5</val>
+     <val>6</val>
+     <val>7</val>
+     <val>8</val>
+     <val>9</val>
+   </number>
+   <number to="10">
+     <val>1</val>
+     <val>2</val>
+     <val>3</val>
+     <val>4</val>
+     <val>5</val>
+     <val>6</val>
+     <val>7</val>
+     <val>8</val>
+     <val>9</val>
+     <val>10</val>
+   </number>
+</foreach>

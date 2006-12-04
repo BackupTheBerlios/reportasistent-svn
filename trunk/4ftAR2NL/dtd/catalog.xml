@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="public">
+
+<!-- XML Catalog data for AR2NL -->
+
+<public publicId="-//LISp-Miner//DTD AR2NL 1.2//EN"
+	uri="ar2nl-1.2.dtd"/>
+
+<public publicId="-//LISp-Miner//DTD Rule 1.0//EN"
+	uri="rule-1.0.dtd"/>
+
+</catalog>

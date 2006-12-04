@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE formulationpatterns PUBLIC "-//LISp-Miner//DTD AR2NL 1.1//EN"
+	"http://lispminer.vse.cz/dtd/ar2nl-1.1.dtd">
+
+<formulationpatterns>
+
+<fp id="fp1" quantifier="FUI" numofant="1+" numofsuc="1+">
+  <fpa symbol="X"/> <ename symbol="Eptc0" case="2" number="pl"/>
+  <ename symbol="E" case="2" number="pl"/>
+  potvrzuje tuto závislost: jestliže <floatslot id="1" role="A" occno="first"/>
+  <ename symbol="E"/>
+  <literal role="A" typeofphrase="V"/>, pak
+  <floatslot id="1" role="S" occno="first"/>
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal role="S" typeofphrase="V"/>.
+</fp>
+
+<fp id="fp2" quantifier="FUI" numofant="1+" numofsuc="1+">
+  <fpa symbol="Y"/>
+  <floatslot id="1" role="S" occno="first"/>
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal role="S" typeofphrase="V"/>.
+  <fpa symbol="Z"/>
+</fp>
+
+<fp id="fp3" quantifier="FUI" numofant="1+" numofsuc="1+">
+  <fpa symbol="Y" case="1" number="pl"/>
+  <floatslot id="1" role="S" occno="first"/>
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal role="S" typeofphrase="V" number="pl"/>.
+  <fpa symbol="Z"/>
+</fp>
+
+<fp id="fp4" quantifier="FUI" numofant="1+" numofsuc="1+">
+  <fpa symbol="X"/>
+  <fpa symbol="Y" case="2" number="pl"/>
+  <floatslot id="1" role="S" occno="first"/>
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal role="S" typeofphrase="V" number="qpl"/>.
+</fp>
+
+<fp id="fp5" quantifier="FUI" numofant="1+" numofsuc="1+">
+  <fpa symbol="X"/>
+  <fpa symbol="Y" case="2" number="pl"/> vykazuje
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal role="S" typeofphrase="N" case="4"/>.
+</fp>
+
+<fp id="fp6" quantifier="FUI" numofant="1+" numofsuc="1+">
+  Pro <fpa symbol="Y" case="4" number="pl"/> je charakteristické, že
+  <floatslot id="1" role="S" occno="first"/>
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal role="S" typeofphrase="V" number="pl"/>.
+  (<fpa symbol="Z"/>)
+</fp>
+
+<fp id="fp7" quantifier="FUI" numofant="2+" numofsuc="1+">
+  Kombinace <literal role="A" typeofphrase="N" case="2"/> a
+  <literal role="A" typeofphrase="N" case="2"/> implikuje
+  <literal role="S" typeofphrase="N" case="4"/>.
+  <fpa symbol="Z"/>
+</fp>
+
+
+<!-- formulation patterns for Above Average -->
+
+<fp id="fp10" quantifier="AAI" numofant="1+" numofsuc="1+">
+  Frekvence <literal role="S" typeofphrase="N" case="2"/>
+  je o <param name="P"/> % vyšší mezi <fpa symbol="Y" case="7" number="pl"/>
+  než v celé kolekci. (<param name="B"/> <ename symbol="E" case="2" number="pl"/>
+  splňuje všechny uvedené podmínky.)
+</fp>
+
+</formulationpatterns>

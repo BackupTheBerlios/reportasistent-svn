@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<sentences>
+  <sentence>
+  Frekvence
+  <word class="nominal" pattern="f1" case="2">spotřeba</word> 0–5 kostek cukru denně
+  je o
+  60.8
+  % vyšší mezi
+  
+  
+  <word class="nominal" pattern="m1" case="7" number="pl">pacient</word>
+
+  ,
+  
+  <word class="nominal" pattern="a1rma" number="pl">který</word>
+
+  
+  <word class="verb" pattern="v1" number="pl">pije</word> 1–2 šálky kávy denně
+  ,
+
+  než v celé kolekci. Platí pro
+  101
+  
+  <word class="nominal" pattern="m1" case="2" number="pl">pacient</word>
+
+  
+  <word class="nominal" pattern="a1rma" number="pl">který</word>
+
+  splňuji tyto podmínky:
+  
+  <word class="nominal" pattern="m1" case="1" number="sg">pacient</word>
+
+  <word class="verb" pattern="vp1">absolvoval</word> vysokou školu
+  .
+</sentence>
+  <sentence>
+  Frekvence
+  <word class="nominal" pattern="f1" case="2">spotřeba</word> 0–5 kostek cukru denně
+  je o
+  60.8
+  % vyšší mezi
+  
+  
+  <word class="nominal" pattern="m1" case="7" number="pl">pacient</word>
+
+  se <word class="nominal" pattern="f1" case="7">spotřeba</word> 1–2 šálky kávy
+        denně
+
+  než v celé kolekci. Platí pro
+  101
+  
+  <word class="nominal" pattern="m1" case="2" number="pl">pacient</word>
+
+  
+  <word class="nominal" pattern="a1rma" number="pl">který</word>
+
+  splňuji tyto podmínky:
+  
+  <word class="nominal" pattern="m1" case="1" number="sg">pacient</word>
+
+  <word class="verb" pattern="vp1">absolvoval</word> vysokou školu
+  .
+</sentence>
+  <sentence>
+  Frekvence
+  <word class="nominal" pattern="f1" case="2">spotřeba</word> 0–5 kostek cukru denně
+  je o
+  60.8
+  % vyšší mezi
+  
+  
+  <word class="nominal" pattern="m1" case="7" number="pl">pacient</word>
+
+  <word case="7" number="pl" class="nominal" pattern="a2ma">pijící</word> 1–2 šálky kávy denně
+
+  než v celé kolekci. Platí pro
+  101
+  
+  <word class="nominal" pattern="m1" case="2" number="pl">pacient</word>
+
+  
+  <word class="nominal" pattern="a1rma" number="pl">který</word>
+
+  splňuji tyto podmínky:
+  
+  <word class="nominal" pattern="m1" case="1" number="sg">pacient</word>
+
+  <word class="verb" pattern="vp1">absolvoval</word> vysokou školu
+  .
+</sentence>
+  <sentence>
+  Frekvence
+  <word class="nominal" pattern="f1" case="2">spotřeba</word> 0–5 kostek cukru denně
+  je o
+  60.8
+  % vyšší mezi
+  
+  <literal/>
+  
+  <word class="nominal" pattern="m1" case="7" number="pl">pacient</word>
+
+
+  než v celé kolekci. Platí pro
+  101
+  
+  <word class="nominal" pattern="m1" case="2" number="pl">pacient</word>
+
+  
+  <word class="nominal" pattern="a1rma" number="pl">který</word>
+
+  splňuji tyto podmínky:
+  
+  <word class="nominal" pattern="m1" case="1" number="sg">pacient</word>
+
+  <word class="verb" pattern="vp1">absolvoval</word> vysokou školu
+  .
+</sentence>
+  <sentence>
+  Frekvence
+  
+  <word class="nominal" pattern="m1" case="2" number="pl">pacient</word>
+
+  ,
+  
+  <word class="nominal" pattern="a1rma" number="pl">který</word>
+
+  <word class="verb" pattern="v1" number="pl">konzumuje</word> 0–5 kostek cukru denně
+  je o
+  60.8
+  % vyšší mezi
+  
+  
+  <word class="nominal" pattern="m1" case="7" number="pl">pacient</word>
+
+  ,
+  
+  <word class="nominal" pattern="a1rma" number="pl">který</word>
+
+  
+  <word class="verb" pattern="v1" number="pl">pije</word> 1–2 šálky kávy denně
+  ,
+
+  než v celé kolekci. Platí pro
+  101
+  
+  <word class="nominal" pattern="m1" case="2" number="pl">pacient</word>
+
+  
+  <word class="nominal" pattern="a1rma" number="pl">který</word>
+
+  splňuji tyto podmínky:
+  
+  <word class="nominal" pattern="m1" case="1" number="sg">pacient</word>
+
+  <word class="verb" pattern="vp1">absolvoval</word> vysokou školu
+  .
+</sentence>
+  <sentence>
+  Frekvence
+  
+  <word class="nominal" pattern="m1" case="2" number="pl">pacient</word>
+
+  ,
+  
+  <word class="nominal" pattern="a1rma" number="pl">který</word>
+
+  <word class="verb" pattern="v1" number="pl">konzumuje</word> 0–5 kostek cukru denně
+  je o
+  60.8
+  % vyšší mezi
+  
+  
+  <word class="nominal" pattern="m1" case="7" number="pl">pacient</word>
+
+  se <word class="nominal" pattern="f1" case="7">spotřeba</word> 1–2 šálky kávy
+        denně
+
+  než v celé kolekci. Platí pro
+  101
+  
+  <word class="nominal" pattern="m1" case="2" number="pl">pacient</word>
+
+  
+  <word class="nominal" pattern="a1rma" number="pl">který</word>
+
+  splňuji tyto podmínky:
+  
+  <word class="nominal" pattern="m1" case="1" number="sg">pacient</word>
+
+  <word class="verb" pattern="vp1">absolvoval</word> vysokou školu
+  .
+</sentence>
+  <sentence>
+  Frekvence
+  
+  <word class="nominal" pattern="m1" case="2" number="pl">pacient</word>
+
+  ,
+  
+  <word class="nominal" pattern="a1rma" number="pl">který</word>
+
+  <word class="verb" pattern="v1" number="pl">konzumuje</word> 0–5 kostek cukru denně
+  je o
+  60.8
+  % vyšší mezi
+  
+  
+  <word class="nominal" pattern="m1" case="7" number="pl">pacient</word>
+
+  <word case="7" number="pl" class="nominal" pattern="a2ma">pijící</word> 1–2 šálky kávy denně
+
+  než v celé kolekci. Platí pro
+  101
+  
+  <word class="nominal" pattern="m1" case="2" number="pl">pacient</word>
+
+  
+  <word class="nominal" pattern="a1rma" number="pl">který</word>
+
+  splňuji tyto podmínky:
+  
+  <word class="nominal" pattern="m1" case="1" number="sg">pacient</word>
+
+  <word class="verb" pattern="vp1">absolvoval</word> vysokou školu
+  .
+</sentence>
+  <sentence>
+  Frekvence
+  
+  <word class="nominal" pattern="m1" case="2" number="pl">pacient</word>
+
+  ,
+  
+  <word class="nominal" pattern="a1rma" number="pl">který</word>
+
+  <word class="verb" pattern="v1" number="pl">konzumuje</word> 0–5 kostek cukru denně
+  je o
+  60.8
+  % vyšší mezi
+  
+  <literal/>
+  
+  <word class="nominal" pattern="m1" case="7" number="pl">pacient</word>
+
+
+  než v celé kolekci. Platí pro
+  101
+  
+  <word class="nominal" pattern="m1" case="2" number="pl">pacient</word>
+
+  
+  <word class="nominal" pattern="a1rma" number="pl">který</word>
+
+  splňuji tyto podmínky:
+  
+  <word class="nominal" pattern="m1" case="1" number="sg">pacient</word>
+
+  <word class="verb" pattern="vp1">absolvoval</word> vysokou školu
+  .
+</sentence>
+</sentences>

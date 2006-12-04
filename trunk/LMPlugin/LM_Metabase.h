@@ -243,7 +243,7 @@ public:
 //	bool		flag_s;
 //	bool		flag_c;
 
-	CString		xml_convert ();
+	CString		xml_convert (bool ar2nl);
 	CString		get_fisher ();
 	double		get_chi_sq ();
 	CString		get_low_bnd_imp ();

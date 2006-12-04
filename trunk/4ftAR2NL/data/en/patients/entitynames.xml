@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE entitynames PUBLIC "-//LISp-Miner//DTD AR2NL 1.2//EN"
+	"http://lispminer.vse.cz/dtd/ar2nl-1.2.dtd">
+
+<entitynames>
+
+<!-- The name of described entity (e.g. "patient"). -->
+
+<enamedata id="ent1" symbol="E">
+  <word pattern="n1" class="nominal">patient</word>
+</enamedata>
+
+<!-- The pronoun that refers to describing entity (e.g. „he“). -->
+
+<enamedata id="ent2" symbol="Epers">he</enamedata>
+
+<!-- Indefinite article -->
+
+<enamedata id="ent3" symbol="Eindefart">a</enamedata>
+
+<!-- Definite article -->
+
+<enamedata id="ent4" symbol="Edefart">the</enamedata>
+
+</entitynames>

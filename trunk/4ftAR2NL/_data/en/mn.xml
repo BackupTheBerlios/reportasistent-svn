@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mnpatterns PUBLIC "-//LISp-Miner//DTD AR2NL 1.2//EN"
+	"http://lispminer.vse.cz/dtd/ar2nl-1.2.dtd">
+
+<mnpatterns>
+
+<pattern name="a1">
+  <example>a</example>
+  <endsegment number="sg">a</endsegment>
+  <endsegment number="pl"></endsegment>
+</pattern>
+<pattern name="n1">
+  <example>patient</example>
+  <endsegment number="sg"></endsegment>
+  <endsegment number="pl">s</endsegment>
+</pattern>
+<pattern name="n1y">
+  <example>country</example>
+  <endsegment number="sg">y</endsegment>
+  <endsegment number="pl">ies</endsegment>
+</pattern>
+<pattern name="p0">
+  <example>having</example>
+  <endsegment number="sg"></endsegment>
+  <endsegment number="pl"></endsegment>
+</pattern>
+<pattern name="ppm">
+  <example>his - their</example>
+  <endsegment number="sg">his</endsegment>
+  <endsegment number="pl">their</endsegment>
+</pattern>
+
+</mnpatterns>

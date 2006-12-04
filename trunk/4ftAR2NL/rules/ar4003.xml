@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE rule PUBLIC "-//LISp-Miner//DTD Rule 1.0//EN"
+	"http://lispminer.vse.cz/dtd/rule-1.0.dtd">
+
+<rule id="4003" quantifier="FUI">
+	<cedent type="A">
+		<literal quantity="V02_Acts_of_interference" minlen="1" maxlen="1" coefftype="subset" attribute="V02_Acts_of_interference">
+			<coefficient>
+				<value category="0">0</value>
+			</coefficient>
+		</literal>
+	</cedent>
+	<cedent type="S">
+		<literal quantity="C03_interference" minlen="1" maxlen="1" coefftype="subset" attribute="C03_interference">
+			<coefficient>
+				<value category="&lt;0;0.3)">0..0.3</value>
+			</coefficient>
+		</literal>
+	</cedent>
+	<cedent type="C">
+	</cedent>
+	<parameters>
+		<param name="P" value="100.0"/>
+		<param name="B" value="38"/>
+		<param name="T" value="38"/>
+	</parameters>
+</rule>

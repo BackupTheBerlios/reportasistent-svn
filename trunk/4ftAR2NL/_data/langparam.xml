@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE langparameters PUBLIC "-//LISp-Miner//DTD AR2NL 1.1//EN"
+"http://lispminer.vse.cz/dtd/ar2nl-1.1.dtd">
+<langparameters>
+  <!-- conjunction "and" -->
+
+  <langparam name="conjunction" value="ja" />
+
+  <!-- creation of participle (posible values: "L" or "R") -->
+
+  <langparam name="participle.position" value="L" />
+
+  <!-- symbol for decimal point -->
+
+  <langparam name="decimal.point.symbol" value="," />
+</langparameters>
