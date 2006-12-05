@@ -166,8 +166,9 @@ BOOL CWordManager::InitWordLoader()
 }
 
 BOOL CWordManager::isInit()
-{
-	return m_WordLoader != NULL;
+{	
+	return (m_WordLoader != NULL) && 
+		(AfxIsValidAddress(*(void**) m_WordLoader.GetInterfacePtr(), sizeof(void*), FALSE));
 }
 
 
@@ -187,10 +188,16 @@ void CWordManager::LoadWordStyles(LPCTSTR template_name)
 	SAFEARRAY * para_s = NULL;
 /***/	
 	
-	if (VARIANT_FALSE == 
-		m_WordLoader->EnumWordStyles(template_name, & char_s, & para_s))
+	try
 	{
-		CReportAsistentApp::ReportError(IDS_WORD_STYLES_LOAD_FAILED, template_name);
+		if (VARIANT_FALSE == m_WordLoader->EnumWordStyles(template_name, & char_s, & para_s))
+		{
+			CReportAsistentApp::ReportError(IDS_WORD_STYLES_LOAD_FAILED, template_name);
+		}
+	}
+	catch(...)
+	{
+		return;
 	}
 
 	LoadSafeArrayToStringTable(char_s, m_WordCharacterStyles);
@@ -271,13 +278,23 @@ void CWordManager::DisconnectWordEventHandler()
 {
 	try
 	{
-		LPUNKNOWN p_unk = m_pEventHandler->GetIDispatch(FALSE);
-		AfxConnectionUnadvise(m_WordLoader.GetInterfacePtr(), 
-			DIID___LMRA_XML_WordLoader, p_unk, FALSE, m_dwEventHandlerCookie);
+		if ((m_pEventHandler != NULL) && 
+			(AfxIsValidAddress(*(void**) m_pEventHandler, sizeof(void*), FALSE) &&
+			(AfxIsValidAddress(m_pEventHandler, m_pEventHandler->GetRuntimeClass()->m_nObjectSize, FALSE))))
+		{
+		
+			LPUNKNOWN p_unk = m_pEventHandler->GetIDispatch(FALSE);
+			AfxConnectionUnadvise(m_WordLoader.GetInterfacePtr(), 
+				DIID___LMRA_XML_WordLoader, p_unk, FALSE, m_dwEventHandlerCookie);
+		}
+		else
+		{
+			m_pEventHandler = NULL;
+		}
 	}
 	catch (...)
 	{
-
+		m_pEventHandler = NULL;
 	}
 
 
@@ -452,7 +469,15 @@ int CWordManager::LoadSafeArrayToStringTable(SAFEARRAY *sarray, CStringTableImpl
 BOOL CWordManager::isWordEditorActive()
 {
 	if (! isInit()) return FALSE;
-	return m_WordLoader->GetisWordEditorActive() == VARIANT_TRUE;
+	
+	try
+	{
+		return m_WordLoader->GetisWordEditorActive() == VARIANT_TRUE;
+	}
+	catch (...)
+	{
+		return FALSE;
+	}
 }
 
 

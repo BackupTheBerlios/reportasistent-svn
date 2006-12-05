@@ -2,7 +2,7 @@
 <!DOCTYPE dialog_data[
 
   <!ELEMENT dialog_data (attributes, values)>
-  <!ELEMENT attributes (attribute*)>
+  <!ELEMENT attributes (attribute+)>
   <!ELEMENT values (value*)>
   <!ELEMENT value EMPTY>
   <!ELEMENT attribute EMPTY>
@@ -19,6 +19,7 @@
 
 <dialog_data>
   <attributes>
+    <attribute name="" label =""/>
   </attributes>
   <values>
   </values>
