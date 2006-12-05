@@ -694,8 +694,16 @@ MSXML2::IXMLDOMDocumentPtr CElementManager::TransformAttrLinkTableNoReplaceSourc
 	transformed_table.CreateInstance(_T("Msxml2.DOMDocument"));	
 	transformed_table->async = VARIANT_FALSE;
 	
-	transformed_table->loadXML(
-		element->transformNode(getAttrLinkTableStyleDomByName(style_str)));
+	if (getAttrLinkTableStyleDomByName(style_str) != NULL)
+	{
+		transformed_table->loadXML(
+			element->transformNode(getAttrLinkTableStyleDomByName(style_str)));
+	}
+	else
+	{
+		transformed_table.Release();
+		return NULL;
+	}
 
 	return transformed_table;
 }

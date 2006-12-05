@@ -606,6 +606,8 @@ void CComplexFilterDialog::AppendFilter(void)
 
 void CComplexFilterDialog::OnBnClickedRefreshResultsButton()
 {
+	if (m_result_filter_DOM == NULL) return;
+
 	//zaloha dat
 	MSXML2::IXMLDOMElementPtr values_clone = m_result_filter_DOM->selectSingleNode("/dialog_data/values")->cloneNode(VARIANT_TRUE);
 	
@@ -684,11 +686,12 @@ void CFilterResultImpl::UpdateResult(MSXML2::IXMLDOMElementPtr & filter_dom)
 {	
 	SetCursor(LoadCursor(NULL, IDC_WAIT));
 
+	m_ResultList.DeleteAllItems();
+
+	if (filter_dom == NULL) return;
 
 	MSXML2::IXMLDOMNodeListPtr values_list = filter_dom->selectNodes("/dialog_data/values/value");
-	
-	m_ResultList.DeleteAllItems();
-		
+			
 	m_ResultList.SetItemCount(values_list->length);
 	for (int i = 0; i < values_list->length; i++)
 	{
