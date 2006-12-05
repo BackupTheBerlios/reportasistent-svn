@@ -1,1 +1,1 @@
-<SOURCES_LIST><SOURCE PUBLIC_ID="LMStulong" PERZISTENT_ID="LMMetabase\LMStulong.mdb" PLUGIN_ID="LMplugin"/><DEFAULT_SOURCE PUBLIC_ID="LMStulong"/></SOURCES_LIST>
+<SOURCES_LIST><SOURCE PUBLIC_ID="LMStulong" PERZISTENT_ID="LMMetabase\LMStulong.mdb" PLUGIN_ID="LMplugin"/><SOURCE PUBLIC_ID="new_LMplugin_source_2" PERZISTENT_ID="D:\lmra\ReportAsistent\LMMetabase\LMEmpty2.mdb" PLUGIN_ID="LMplugin"/><DEFAULT_SOURCE PUBLIC_ID="new_LMplugin_source_2"/></SOURCES_LIST>

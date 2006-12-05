@@ -49,6 +49,10 @@ public:
 	CString m_strWordTemplate;
 public:
 	afx_msg void OnBnClickedTemplateBrowseBotton();
+public:
+	afx_msg void OnEnChangeTreeItemNameLength();
+public:
+	CEdit m_NameLengthEdit;
 };
 
 //{{AFX_INSERT_LOCATION}}

@@ -36,7 +36,7 @@ void COptionsDialog::DoDataExchange(CDataExchange* pDX)
 
 	CWordManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->WordManager;
 
-	
+
 	//{{AFX_DATA_MAP(COptionsDialog)
 	DDX_Control(pDX, IDC_MARK_ORPHANS, m_MarkOrphansCheckBox);
 	DDX_Control(pDX, IDC_SHOW_ID_IN_TREE, m_IdInTreeCheckBox);
@@ -46,8 +46,9 @@ void COptionsDialog::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_TREE_ITEM_HEIGHT, m_HeightEdit);
 	//}}AFX_DATA_MAP
 	DDX_Text(pDX, IDC_WORD_TEMPLATE_EDIT, m_strWordTemplate);
-	
+
 	CElementIncludeDialog::DDV_ValidFileName(pDX, IDC_WORD_TEMPLATE_EDIT, m_strWordTemplate, m.getWordTemplate());
+	DDX_Control(pDX, IDC_TREE_ITEM_NAME_LENGTH, m_NameLengthEdit);
 }
 
 
@@ -89,6 +90,11 @@ BOOL COptionsDialog::OnInitDialog()
 	m_LinesCheckBox.SetCheck( App->m_bTreeHasLines);
 	m_IdInTreeCheckBox.SetCheck( App->m_bIdInItemName);
 	m_ButtonsCheckBox.SetCheck( App->m_bTreeHasButtons);
+
+	//Name Length Edit
+	Pom.Format("%d",App->m_iTreeItemNameLength);
+	m_NameLengthEdit.SetWindowText(Pom);
+	m_NameLengthEdit.SetLimitText(3);
 
 	//Set orphans radio buttons:
 	CString OrphSol = App->FirstDocumentInFirstTemplate()->GetReportSettings("orphans_solution");
@@ -155,6 +161,13 @@ void COptionsDialog::OnOK()
 	App->m_bIdInItemName = m_IdInTreeCheckBox.GetCheck();
 	App->m_bTreeHasButtons = m_ButtonsCheckBox.GetCheck();
 
+	//Name Length Edit
+	m_NameLengthEdit.GetWindowText(Pom);
+	iPom =StrToInt((LPCTSTR)Pom);
+	if ((iPom > 5) && (iPom<= 999))
+		App->m_iTreeItemNameLength = iPom;
+
+
 	//Get orphans radio buttons:
 	CString OrphSol = App->FirstDocumentInFirstTemplate()->GetReportSettings("orphans_solution");
 	switch (GetCheckedRadioButton(IDC_IGNORE_RADIO,  IDC_SET_DEFAULT_RADIO))
@@ -203,3 +216,5 @@ void COptionsDialog::OnBnClickedTemplateBrowseBotton()
 		UpdateData(FALSE);
 	}
 }
+
+

@@ -75,6 +75,7 @@ CReportAsistentApp::CReportAsistentApp()
 , m_bTreeHasLines(0)
 , m_bTreeHasButtons(0)
 , m_bWordPluginMode(FALSE)
+, m_iTreeItemNameLength(0)
 {
 	// TODO: add construction code here,
 	// Place all significant initialization in InitInstance
@@ -154,13 +155,17 @@ BOOL CReportAsistentApp::InitInstance()
 	//Dedek: write to windows registry
 	WriteProfileString("Settings", "ApplicationRoot", 
 		m_pGeneralManager->DirectoriesManager.getApplicationRoot());
-	//Iva: write to windows registry
+	//Iva: read from windows registry
 	 m_bIdInItemName = GetProfileInt("Settings", "bIdInItemName", 1);
 	 m_iTreeItemHeight = GetProfileInt("Settings", "TreeItemHeight",20);
 	 m_iTreeItemIndent= GetProfileInt("Settings", "TreeItemIndent",25);
 	 m_bTreeHasLines = GetProfileInt("Settings","bTreeHasLines",1);
 	 m_bTreeHasButtons = GetProfileInt("Settings","bTreeHasButtons",1);
 	 m_bMarkOrphans = GetProfileInt("Settings","bMarkOrphans",0);
+	 m_iTreeItemNameLength = GetProfileInt("Settings","TreeItemNameLength",30);
+	 //CString Pom;
+	 //Pom.Format("%d",m_iTreeItemNameLength);
+	 //AfxMessageBox(Pom);
 
 	 m_pGeneralManager->WordManager.setWordTemplate(
 		 GetProfileString("Settings", "WordTemplate", 
@@ -251,6 +256,7 @@ int CReportAsistentApp::ExitInstance()
 	 WriteProfileInt("Settings","bTreeHasLines", m_bTreeHasLines);
 	 WriteProfileInt("Settings","bTreeHasButtons",m_bTreeHasLines);
 	 WriteProfileInt("Settings","bMarkOrphans",m_bMarkOrphans);
+	 WriteProfileInt("Settings","TreeItemNameLength",m_iTreeItemNameLength);
 
 	 WriteProfileString("Settings", "WordTemplate", m_pGeneralManager->WordManager.getWordTemplate());
 

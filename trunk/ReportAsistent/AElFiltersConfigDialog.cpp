@@ -156,6 +156,8 @@ void CAElFiltersConfigDialog::OnRemoveFilterButton()
 	UpdateFiltersList();
 	UpdateResult();
 	SetModified();
+	//if (nItem>=1)
+	//	m_FiltersList.setSetSelectionMark(nItem-1);
 }
 
 void CAElFiltersConfigDialog::OnMoveUpButton() 

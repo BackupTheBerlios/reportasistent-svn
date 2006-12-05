@@ -123,6 +123,8 @@ public:
 
 
 	BOOL m_bWordPluginMode;
+public:
+	int m_iTreeItemNameLength;
 };
 
 

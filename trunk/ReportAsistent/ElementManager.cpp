@@ -386,6 +386,9 @@ CString CElementManager::CreateElementCaption(MSXML2::IXMLDOMElementPtr &pElemen
 {
 	ASSERT(pElement != NULL);
 
+	CReportAsistentApp * App = ((CReportAsistentApp *) AfxGetApp());
+
+
 	elId_t element_id = IdentifyElement(pElement);
 	_bstr_t bsValue;
 	_bstr_t bsId;
@@ -415,33 +418,36 @@ CString CElementManager::CreateElementCaption(MSXML2::IXMLDOMElementPtr &pElemen
 			sRet.Format("No name");
 			break;
 		}
-		if ((bsValue.length()+bsId.length()+2) <=LENGTH_TREE_ITEM_NAME) 					 
+		if ((bsValue.length()+bsId.length()+2) <=App->m_iTreeItemNameLength) 					 
 		{
 			sRet.Format("%s",(LPCTSTR) bsValue);
 			break;
 		}
 		else
 		{
-			sRet.Format("%.*s...",LENGTH_TREE_ITEM_NAME-3, (LPCTSTR) bsValue);
+			sRet.Format("%.*s...",App->m_iTreeItemNameLength -3, (LPCTSTR) bsValue);
 			break;
 		}
 		break;
 
 	
 	case  ELID_TEXT:
+
 		if (pElement->text.length() == 0) 
 		{
 			sRet.Format("Empty");
 			break;
 		}
-		if ((pElement->text.length()+bsId.length()+2) <= LENGTH_TREE_ITEM_NAME) 					 
+		if ((pElement->text.length()+bsId.length()+2) <= App->m_iTreeItemNameLength) 					 
 		{
 			sRet.Format("%s",(LPCTSTR) pElement->text);
 			break;
 		}
 		else
 		{
-			sRet.Format("%.*s...",LENGTH_TREE_ITEM_NAME-3, (LPCTSTR) bsValue);
+			CString Pom = (LPCTSTR) pElement->text;
+			Pom = Pom.Right((App->m_iTreeItemNameLength-5)/2);
+			sRet.Format("%.*s ... %.*s",(App->m_iTreeItemNameLength-5)/2, (LPCTSTR) pElement->text,(App->m_iTreeItemNameLength-5)/2, (LPCTSTR) Pom);
 			break;
 		}
 		break;
