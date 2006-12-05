@@ -599,20 +599,34 @@ CString Hyp_4ft_Meta::xml_convert (bool ar2nl)
 	CString xml_string;
 	CString hlp;
 
+	ar2nl_sentences.Replace ("<sentences>", "_xRePAssi_x1");
+	ar2nl_sentences.Replace ("</sentences>", "_xRePAssi_x2");
+	ar2nl_sentences.Replace ("<sentence>", "_xRePAssi_x3");
+	ar2nl_sentences.Replace ("</sentence>", "_xRePAssi_x4");
+
 	db_name.Replace ("&", "&amp;");
 	matrix_name.Replace ("&", "&amp;");
 	task_name.Replace ("&", "&amp;");
+	ar2nl_sentences.Replace ("&", "&amp;");
 
 	db_name.Replace ("<", "&lt;");
 	matrix_name.Replace ("<", "&lt;");
 	task_name.Replace ("<", "&lt;");
+	ar2nl_sentences.Replace ("<", "&lt;");
 
 	db_name.Replace (">", "&gt;");
 	matrix_name.Replace (">", "&gt;");
 	task_name.Replace (">", "&gt;");
+	ar2nl_sentences.Replace (">", "&gt;");
+	
+	ar2nl_sentences.Replace ("_xRePAssi_x1", "<sentences>");
+	ar2nl_sentences.Replace ("_xRePAssi_x2", "</sentences>");
+	ar2nl_sentences.Replace ("_xRePAssi_x3", "<sentence>");
+	ar2nl_sentences.Replace ("_xRePAssi_x4", "</sentence>");
 
 	//beginning of the hyp_4ft element
-	xml_string = " <hyp_4ft id=\"" + id + "\" db_name=\"" + db_name + "\" ";
+	if (!ar2nl) xml_string = " <hyp_4ft id=\"" + id + "\" db_name=\"" + db_name + "\" ";
+	else xml_string = " <hyp_4ft_ar2nl id=\"" + id + "\" db_name=\"" + db_name + "\" ";
 	xml_string = xml_string + "matrix_name=\"" + matrix_name + "\" ";
 	xml_string = xml_string + "task_name=\"" + task_name + "\" ";
 	xml_string = xml_string + "a=\"";

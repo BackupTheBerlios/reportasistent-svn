@@ -66,7 +66,7 @@ CString Get_4ftar2nl_output ()
 	PathFindFileName(module_path)[-1] = 0;
 
 	CString file_path = module_path;
-	file_path += "\\4ftar2nl\\otput\\output12.xml";
+	file_path += "\\4ftar2nl\\output\\output12.xml";
 	
 	CString buf;
 	CFile f(file_path, CFile::modeRead);
@@ -210,8 +210,14 @@ CString Get_4ftAR2NL (long hypno, CString db_name)
 	}
 
 	if (exit_code != 0)//pozor, jeste zkontrolovat, co vraci, kdyz je neuspesny!!!!
-
+	{
+		//nahlas chybu
+		return "";
+	}
+//osetrit
 	_4ftAR2NL_output = Get_4ftar2nl_output ();
+	int pos = _4ftAR2NL_output.Find ("?>");
+	_4ftAR2NL_output = _4ftAR2NL_output.Mid (pos + 3);
 
 	//remove the temporary datasource
 	if (FALSE == SQLConfigDataSource (NULL, ODBC_REMOVE_DSN, "Microsoft Access Driver (*.mdb)\0",
@@ -1942,7 +1948,8 @@ CString fLM4fthyp_hlp(void * hSource, bool ar2nl)
 //				pthyp->flag_a = pthyp->flag_s = pthyp->flag_c = FALSE;
 				pthyp->ar2nl_sentences = "";
 				id_hlp.Format ("%d", h_id);
-				pthyp->id = "hyp4ft" + id_hlp;
+				if (!ar2nl) pthyp->id = "hyp4ft" + id_hlp;
+				else pthyp->id = "hyp4ftar2nl" + id_hlp;
 				pthyp->db_name = db_name;
 				pthyp->matrix_name = rs.m_Name3;
 				pthyp->task_name = rs.m_Name;
@@ -2036,10 +2043,13 @@ CString fLM4fthyp_hlp(void * hSource, bool ar2nl)
 		buf = buf + list.GetAt (i)->xml_convert (ar2nl);
 	}
 	buf += " </active_list>";
+/*	int pos = buf.Find ("]>");
+	AfxMessageBox (buf.Mid (pos));
 	//just for test - creates a xml file with all hypothesis
-/*	FILE * f = fopen ("test.xml", "w");
+*-/	FILE * f = fopen ("test.rtf", "w");
 	fprintf (f, "%s", buf);
 	fclose (f);
+	fflush (f);
 */
 	for (i = 0; i < list.GetSize (); i++)
 	{
