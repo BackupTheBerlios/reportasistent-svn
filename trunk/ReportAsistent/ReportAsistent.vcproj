@@ -3,8 +3,7 @@
 	ProjectType="Visual C++"
 	Version="8,00"
 	Name="ReportAsistent"
-	ProjectGUID="{8EEEE400-8239-465B-982A-7CAC44EA7521}"
-	RootNamespace="ReportAsistent"
+	ProjectGUID="{134B822C-6BE4-47E4-B2F4-057F3D001E70}"
 	Keyword="MFCProj"
 	>
 	<Platforms>
@@ -618,11 +617,47 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\HListBox.cpp"
+				RelativePath="HListBox.cpp"
 				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="InsertElementTrace.cpp"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="ListSort.cpp"
 				>
 				<FileConfiguration
 					Name="Debug|Win32"
@@ -783,6 +818,26 @@
 			</File>
 			<File
 				RelativePath="SourcesDialog.cpp"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="StartDialog.cpp"
 				>
 				<FileConfiguration
 					Name="Debug|Win32"
@@ -1009,11 +1064,15 @@
 				>
 			</File>
 			<File
-				RelativePath=".\HListBox.h"
+				RelativePath="HListBox.h"
 				>
 			</File>
 			<File
 				RelativePath="InsertElementTrace.h"
+				>
+			</File>
+			<File
+				RelativePath="ListSort.h"
 				>
 			</File>
 			<File
@@ -1050,6 +1109,10 @@
 			</File>
 			<File
 				RelativePath="SourcesDialog.h"
+				>
+			</File>
+			<File
+				RelativePath="StartDialog.h"
 				>
 			</File>
 			<File
@@ -1192,9 +1255,5 @@
 		</File>
 	</Files>
 	<Globals>
-		<Global
-			Name="RESOURCE_FILE"
-			Value="ReportAsistent.rc"
-		/>
 	</Globals>
 </VisualStudioProject>
