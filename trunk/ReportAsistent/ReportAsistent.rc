@@ -795,6 +795,8 @@ BEGIN
                             "Result of transformation ""complex_filter.xsl"" of active element ""%s"" is not valid.\nReason: %s"
     IDS_WORD_STYLES_LOAD_FAILED 
                             "Failed to load Word styles form template file: ""%s""."
+    IDS_LMRA_WORLOADER_CONNECTON_FAILED 
+                            "Failed to connect LMRA-WordLoader\nReason: %s"
 END
 
 STRINGTABLE 

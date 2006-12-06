@@ -104,6 +104,9 @@ CWordManager::CWordManager(CDirectoriesManager & m)
 	//ladici:
 	//LoadWordTemplates();
 	//LoadWordStyles("normal.dot");
+
+	ZeroMemory(& m_origWINDOWPLACEMENT, sizeof m_origWINDOWPLACEMENT);
+
 	
 	BOOL res = FALSE;
 
@@ -120,7 +123,7 @@ CWordManager::CWordManager(CDirectoriesManager & m)
 
 CWordManager::~CWordManager()
 {
-	if (m_WordLoader != NULL) 
+	if (isInit() != NULL) 
 	{
 		DisconnectWordEventHandler();
 		m_WordLoader.Release();
@@ -167,8 +170,21 @@ BOOL CWordManager::InitWordLoader()
 
 BOOL CWordManager::isInit()
 {	
-	return (m_WordLoader != NULL) && 
-		(AfxIsValidAddress(*(void**) m_WordLoader.GetInterfacePtr(), sizeof(void*), FALSE));
+	try
+	{
+		if ((m_WordLoader != NULL) && AfxIsValidAddress(*(void**) m_WordLoader.GetInterfacePtr(), sizeof(void*), FALSE)) 
+		{
+			m_WordLoader->GetstrLastError();
+			return TRUE;
+		}
+	}
+	catch (...)
+	{
+		m_WordLoader = NULL;
+		return FALSE;
+	}
+
+	return FALSE;
 }
 
 
@@ -278,7 +294,8 @@ void CWordManager::DisconnectWordEventHandler()
 {
 	try
 	{
-		if ((m_pEventHandler != NULL) && 
+		if ((m_WordLoader != NULL) && 
+			(m_pEventHandler != NULL) && 
 			(AfxIsValidAddress(*(void**) m_pEventHandler, sizeof(void*), FALSE) &&
 			(AfxIsValidAddress(m_pEventHandler, m_pEventHandler->GetRuntimeClass()->m_nObjectSize, FALSE))))
 		{
@@ -329,21 +346,22 @@ void CWordManager::OpenWordEditor()
 		if (! InitWordLoader()) return;
 	}
 
-	WordEditHideMainWindow();
-
-
-	SetWordEditorParentTaskName();
-	m_WordLoader->PutstrDefaultWordTemplate(getWordTemplate());			
 
 
 	try
 	{
+		WordEditHideMainWindow();
+
+
+		SetWordEditorParentTaskName();
+		m_WordLoader->PutstrDefaultWordTemplate(getWordTemplate());			
 		m_WordLoader->OpenWordEditor();
 	}
 	catch (_com_error e)
 	{
-		//ladici
-		AfxMessageBox(e.Description());
+		m_WordLoader = NULL;
+		WordEditShowMainWindow();
+		CReportAsistentApp::ReportError(IDS_LMRA_WORLOADER_CONNECTON_FAILED, (LPCTSTR) e.ErrorMessage());			
 	}
 }
 
@@ -484,7 +502,7 @@ BOOL CWordManager::isWordEditorActive()
 
 void CWordManager::WordEditHideMainWindow()
 {
-	if (! isWordEditorActive())
+	if (! isWordEditorActive() && (m_origWINDOWPLACEMENT.length == 0))
 	{
 	
 		ZeroMemory(& m_origWINDOWPLACEMENT, sizeof m_origWINDOWPLACEMENT);
@@ -506,7 +524,16 @@ void CWordManager::WordEditHideMainWindow()
 
 	if (isInit())
 	{
-		m_WordLoader->ActivateWordEditor();
+		try
+		{
+			m_WordLoader->ActivateWordEditor();
+		}
+		catch (_com_error e)
+		{
+			WordEditShowMainWindow();
+
+			throw e;
+		}
 	}
 	
 #ifdef HIDE_RA_FROM_WORD
@@ -654,7 +681,14 @@ BOOL CStringTableImpl::loadItemsFromXML(MSXML2::IXMLDOMNodeListPtr & pNodeList)
 
 CString CWordManager::getLastProcessedId(void)
 {
-  return (CString) (LPCTSTR) m_WordLoader->GetstrLastProcessedId();
+	try
+	{
+		return (CString) (LPCTSTR) m_WordLoader->GetstrLastProcessedId();
+	}
+	catch (...)
+	{
+		return "";
+	}
 }
 
 // returns a xml string with all items : <item value="(item)"/>
@@ -673,7 +707,14 @@ CString CStringTableImpl::getItemsInXML(void)
 
 CString CWordManager::getLastError(void)
 {
-  return (CString) (LPCTSTR) m_WordLoader->GetstrLastError();
+	try
+	{
+		return (CString) (LPCTSTR) m_WordLoader->GetstrLastError();
+	}
+	catch (_com_error e)
+	{
+		return (CString) (LPCTSTR) e.ErrorMessage();
+	}
 }
 
 // loads lists of Word styles from configuration XML file
