@@ -660,10 +660,10 @@ CString Hyp_4ft_Meta::xml_convert (bool ar2nl)
 	xml_string = xml_string + " condition=\"" + con_id + "\"";
 	if (ar2nl)
 	{
-		xml_string = xml_string + " ";
-		xml_string = xml_string + ar2nl_sentences + " ";
+		xml_string = xml_string + "> ";
+		xml_string = xml_string + ar2nl_sentences + "</hyp_4ft_ar2nl> ";
 	}
-	xml_string += "/>  ";
+	else xml_string += "/>  ";
 	//end of hyp_4ft element
 
 	//beginning of ti_cedent elements

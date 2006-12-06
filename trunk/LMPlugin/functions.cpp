@@ -96,7 +96,17 @@ CString Get_4ftAR2NL (long hypno, CString db_name)
 	CString _4ftAR2NL_output;
 
 //	CString _4ftAR2NL_exe = "D:\\ar2nl\\LispMiner\\4ftAR2NL\\bin\\4ftAR2NL.exe";
-	CString _4ftAR2NL_exe_path = "C:\\skola\\sw projekt\\dev\\4ftAR2NL\\bin";
+	TCHAR module_path[MAX_PATH];
+	GetModuleFileName(NULL, module_path, MAX_PATH);
+
+	//postupne odpare z module_path poslednni dve lomitka
+	PathFindFileName(module_path)[-1] = 0;
+	PathFindFileName(module_path)[-1] = 0;
+	PathFindFileName(module_path)[-1] = 0;
+
+//	CString _4ftAR2NL_exe_path = "C:\\skola\\sw projekt\\dev\\4ftAR2NL\\bin";
+	CString _4ftAR2NL_exe_path = module_path;
+	_4ftAR2NL_exe_path += "\\4ftAR2NL\\bin";
 	CString _4ftAR2NL_exe = "4ftar2nl.exe";
 	CString _4ftAR2NL_params = " -DSN=";
 	_4ftAR2NL_params += DSN;
@@ -160,6 +170,21 @@ CString Get_4ftAR2NL (long hypno, CString db_name)
 	p2 += " ";
 	p2 += _4ftAR2NL_params;
 
+	CFileStatus status;
+	CString file_path = module_path;
+	file_path += "\\4ftar2nl\\output\\output12.xml";
+	CTime last_modif_time;
+	CFile f (file_path, CFile::modeRead);
+	bool file_exists;
+	if(f.GetStatus (status))
+	{
+		file_exists = true;
+		last_modif_time = status.m_mtime;
+	}
+	else file_exists = false;
+	f.Close ();
+
+
 	//run the 4ftAR2NL application
 	if (!CreateProcess(NULL, p2.GetBuffer(0),
 		NULL, NULL, FALSE, CREATE_NO_WINDOW, NULL, NULL, & si, & pi)) 
@@ -173,8 +198,10 @@ CString Get_4ftAR2NL (long hypno, CString db_name)
 		//nahlas chybu
 		delete [] process;
 		delete [] params;
-		SQLConfigDataSource (NULL, ODBC_REMOVE_DSN, "Microsoft Access Driver (*.mdb)\0",
-			"DSN=" + DSN + "\0\0");
+		if (FALSE == SQLConfigDataSource (NULL, ODBC_REMOVE_DSN,
+			"Microsoft Access Driver (*.mdb)\0", "DSN=" + DSN + "\0\0"))
+			//nahlas chybu - temp
+			AfxMessageBox("chyba");
 		return "";//!!!!!pozor na to, co vracet
 	}
 	delete [] process;
@@ -214,10 +241,31 @@ CString Get_4ftAR2NL (long hypno, CString db_name)
 		//nahlas chybu
 		return "";
 	}
-//osetrit
-	_4ftAR2NL_output = Get_4ftar2nl_output ();
-	int pos = _4ftAR2NL_output.Find ("?>");
-	_4ftAR2NL_output = _4ftAR2NL_output.Mid (pos + 3);
+	
+	CFile f1 (file_path, CFile::modeRead);
+	if (f1.GetStatus (status))
+	{
+		if (file_exists && status.m_mtime == last_modif_time) return "";
+	}
+	else
+	{
+		//nahlas chybu
+		f1.Close ();
+		return "";
+	}
+	f1.Close ();
+
+	try
+	{
+		_4ftAR2NL_output = Get_4ftar2nl_output ();
+		int pos = _4ftAR2NL_output.Find ("?>");
+		_4ftAR2NL_output = _4ftAR2NL_output.Mid (pos + 3);
+	}
+	catch (...)
+	{
+		//nahlas chybu
+		return "";
+	}
 
 	//remove the temporary datasource
 	if (FALSE == SQLConfigDataSource (NULL, ODBC_REMOVE_DSN, "Microsoft Access Driver (*.mdb)\0",
