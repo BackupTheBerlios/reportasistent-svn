@@ -38,6 +38,9 @@
                 default_sort_direction="ascending"     -->
 
         <!-- nezavisle na jazyce -->
+        <attribute name="antecedent" label="Antecedent" />
+        <attribute name="succedent" label="Succedent"/>
+        <attribute name="condition"  label="Condition"/>
         <attribute name="a" label="a" numeric_sort="true" default_sort_direction="descending"/>
         <attribute name="b" label="b" numeric_sort="true" default_sort_direction="descending"/>
         <attribute name="c" label="c" numeric_sort="true" default_sort_direction="descending"/>
@@ -56,9 +59,6 @@
         <attribute name="up_bnd_eq" label="Upper bound equivalence" numeric_sort="true" default_sort_direction="descending"/>
         <attribute name="fisher" label="Fisher test" numeric_sort="true" />
         <attribute name="chi_sq" label="Chi-square test" numeric_sort="true" />
-        <attribute name="antecedent" label="Antecedent" />
-        <attribute name="succedent" label="Succedent"/>
-        <attribute name="condition"  label="Condition"/>
       </attributes>
 
       <values>

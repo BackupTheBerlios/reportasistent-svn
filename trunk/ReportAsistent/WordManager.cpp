@@ -679,6 +679,7 @@ CString CWordManager::getLastError(void)
 // loads lists of Word styles from configuration XML file
 BOOL CWordManager::loadStylesFromXML(LPCTSTR XMLFilePath)
 {
+	BOOL result = FALSE;	// return value
 	CString FName;	// jmeno (cesta) ke konfig. souboru
 	FName = XMLFilePath;
 
@@ -721,13 +722,14 @@ BOOL CWordManager::loadStylesFromXML(LPCTSTR XMLFilePath)
 						m_WordCharacterStyles.loadItemsFromXML(pChildrenItems);
 					
 				}
+				result = TRUE;
 			}
 		}
 	}
 
 	pXMLDom.Release();
 
-	return TRUE;
+	return result;
 }
 
 
