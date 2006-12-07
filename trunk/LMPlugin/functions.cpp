@@ -68,14 +68,31 @@ CString Get_4ftar2nl_output ()
 	CString file_path = module_path;
 	file_path += "\\4ftar2nl\\output\\output12.xml";
 	
-	CString buf;
-	CFile f(file_path, CFile::modeRead);
-	int size = (int) f.GetLength();
-	LPTSTR ps = buf.GetBuffer(size);
-	f.Read(ps, size);
-	f.Close();
-	ps[size] = 0; //data nactena ze souboru se jete musi ukoncit nulou aby reprezentovala validni string
-	buf.ReleaseBuffer(); //od teto chvile je ps neplatny a nemelo by se do nej zapisovat
+	CString buf = "";
+	//CFile f(file_path, CFile::modeRead);
+	//int size = (int) f.GetLength();
+	//LPTSTR ps = buf.GetBuffer(size);
+	//f.Read(ps, size);
+	//f.Close();
+	//ps[size] = 0; //data nactena ze souboru se jete musi ukoncit nulou aby reprezentovala validni string
+	//buf.ReleaseBuffer(); //od teto chvile je ps neplatny a nemelo by se do nej zapisovat
+
+	// kody - nacitani a serializace vystupu AR2NL pres XML DOM
+	MSXML2::IXMLDOMDocumentPtr dom;
+	dom.CreateInstance(_T("Msxml2.DOMDocument"));
+	dom->async = VARIANT_FALSE; // default - true,
+
+	if (dom->load((LPCTSTR) file_path)!=VARIANT_TRUE)
+	{
+		return buf;
+	}
+
+	MSXML2::IXMLDOMElementPtr el_hyp = dom->GetdocumentElement();
+	if (el_hyp != NULL)
+		buf = (CString) (LPCTSTR) el_hyp->Getxml();
+
+	dom.Release();
+
 	return buf;
 }
 
@@ -259,7 +276,8 @@ CString Get_4ftAR2NL (long hypno, CString db_name)
 	{
 		_4ftAR2NL_output = Get_4ftar2nl_output ();
 		int pos = _4ftAR2NL_output.Find ("?>");
-		_4ftAR2NL_output = _4ftAR2NL_output.Mid (pos + 3);
+		if (pos != -1)
+			_4ftAR2NL_output = _4ftAR2NL_output.Mid (pos + 3);
 	}
 	catch (...)
 	{
