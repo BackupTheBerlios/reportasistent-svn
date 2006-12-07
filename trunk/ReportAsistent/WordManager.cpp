@@ -178,8 +178,15 @@ BOOL CWordManager::isInit()
 			return TRUE;
 		}
 	}
+	catch (_com_error e)
+	{
+		CReportAsistentApp::ReportError(IDS_LMRA_WORLOADER_CONNECTON_FAILED, (LPCTSTR) e.ErrorMessage());			
+		m_WordLoader = NULL;
+		return FALSE;
+	}
 	catch (...)
 	{
+		CReportAsistentApp::ReportError(IDS_LMRA_WORLOADER_CONNECTON_FAILED, "unknown error");			
 		m_WordLoader = NULL;
 		return FALSE;
 	}
