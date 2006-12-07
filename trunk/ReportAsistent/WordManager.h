@@ -121,7 +121,6 @@ protected:
 	//void LoadCharacterStyles(LPCTSTR template_name);
 	BOOL isInit();
 public:
-	void ActivateWordEditor();
   CString getLastProcessedId(void);
   CString getLastError(void);
   

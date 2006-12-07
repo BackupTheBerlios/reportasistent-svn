@@ -208,11 +208,32 @@ HTREEITEM CSkeletonDoc::InsertNodeToTreeCtrl(MSXML2::IXMLDOMElementPtr pElement,
 //pridal honza
 BOOL CSkeletonDoc::OnSaveDocument(LPCTSTR lpszPathName) 
 {
-	m_pXMLDom->save(lpszPathName);
+	HRESULT hr = S_OK;
 
-	SetModifiedFlag(FALSE);
+	try
+	{
+		hr = m_pXMLDom->save(lpszPathName);
+	}
+	catch (_com_error e)
+	{
+		CReportAsistentApp::ReportError(IDS_SAVE_FILE_FAILED, lpszPathName, (LPCTSTR) e.ErrorMessage());
+		hr = S_OK +1;
+	}
+	catch (...)
+	{
+		hr = S_OK +1;
+	}
+
+	if (hr == S_OK) 
+	{
+		SetModifiedFlag(FALSE);
+		return TRUE;	
+	}
 	
-	return TRUE;	//CDocument::OnSaveDocument(lpszPathName); - nepouzivat prepise nam soubor vyse
+	CReportAsistentApp::ReportError(IDS_SAVE_FILE_FAILED, lpszPathName, (LPCTSTR) "unknown error");
+	return FALSE;	
+	
+	//CDocument::OnSaveDocument(lpszPathName); - nepouzivat prepise nam soubor vyse
 }
 
 
@@ -602,7 +623,6 @@ void CSkeletonDoc::Generate(BOOL new_word)
 
 	
 
-//	doc_element->save("../out.xml");
 
 	
 //generovani do Wordu

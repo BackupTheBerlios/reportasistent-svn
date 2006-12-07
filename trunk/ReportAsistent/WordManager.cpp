@@ -835,13 +835,6 @@ BOOL CWordManager::saveStylesToXML(LPCTSTR file_path)
 	return ret;
 }
 
-void CWordManager::ActivateWordEditor()
-{
-	ASSERT(isInit());
-
-	m_WordLoader->ActivateWordEditor();
-}
-
 void CWordManager::WordEditorInsertActiveElement(void)
 {
 /****/

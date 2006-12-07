@@ -459,9 +459,11 @@ BOOL CAElTransform::LoadFilterDOM(public_source_id_t sId, MSXML2::IXMLDOMElement
 		return FALSE;	
 	}
 
-#ifdef _DEBUG	
-    plugout_doc->save((LPCTSTR) (m->DirectoriesManager.getXMLFilesDirectory() + "/plug_out_example.xml"));
-#endif
+    try
+	{
+		plugout_doc->save((LPCTSTR) (m->DirectoriesManager.getXMLFilesDirectory() + "/plug_out_example.xml"));
+	}
+	catch (...) {}
 
 	
     //ulozi element atributy
@@ -501,9 +503,11 @@ BOOL CAElTransform::LoadFilterDOM(public_source_id_t sId, MSXML2::IXMLDOMElement
 		return FALSE;
 	}
 
-#ifdef _DEBUG	
-   	filter_doc->save((LPCTSTR) (m->DirectoriesManager.getXMLFilesDirectory() + "/complex_filter_example.xml"));
-#endif
+   	try
+	{
+		filter_doc->save((LPCTSTR) (m->DirectoriesManager.getXMLFilesDirectory() + "/complex_filter_example.xml"));
+	}
+	catch (...) {}
     
 	filter_DOM = filter_doc->documentElement;
 	filter_doc.Release();
@@ -776,11 +780,12 @@ void CAElTransform::FillElementAttributes(MSXML2::IXMLDOMNodePtr &output_node)
 		return;
 	}
 
-#ifdef _DEBUG	
-	//ladici
 	CDirectoriesManager & dm = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->DirectoriesManager;
-	attributes_DOM->save((LPCTSTR) (dm.getXMLFilesDirectory() + "/fill_element_attributes_example.xml"));
-#endif
+	try
+	{
+		attributes_DOM->save((LPCTSTR) (dm.getXMLFilesDirectory() + "/fill_element_attributes_example.xml"));
+	}
+	catch (...) {}
 
 	CString err;
 	if (! m.ValidateFillElementAttributes(attributes_DOM, err))
