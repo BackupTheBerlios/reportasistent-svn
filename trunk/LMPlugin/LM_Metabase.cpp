@@ -603,6 +603,8 @@ CString Hyp_4ft_Meta::xml_convert (bool ar2nl)
 	ar2nl_sentences.Replace ("</sentences>", "_xRePAssi_x2");
 	ar2nl_sentences.Replace ("<sentence>", "_xRePAssi_x3");
 	ar2nl_sentences.Replace ("</sentence>", "_xRePAssi_x4");
+	ar2nl_sentences.Replace ("<sentence/>", "_xRePAssi_x5");
+	ar2nl_sentences.Replace ("<sentences/>", "_xRePAssi_x6");
 
 	db_name.Replace ("&", "&amp;");
 	matrix_name.Replace ("&", "&amp;");
@@ -623,6 +625,8 @@ CString Hyp_4ft_Meta::xml_convert (bool ar2nl)
 	ar2nl_sentences.Replace ("_xRePAssi_x2", "</sentences>");
 	ar2nl_sentences.Replace ("_xRePAssi_x3", "<sentence>");
 	ar2nl_sentences.Replace ("_xRePAssi_x4", "</sentence>");
+	ar2nl_sentences.Replace ("_xRePAssi_x5", "<sentence/>");
+	ar2nl_sentences.Replace ("_xRePAssi_x6", "<sentences/>");
 
 	//beginning of the hyp_4ft element
 	if (!ar2nl) xml_string = " <hyp_4ft id=\"" + id + "\" db_name=\"" + db_name + "\" ";

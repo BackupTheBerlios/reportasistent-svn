@@ -2198,11 +2198,13 @@ CString fLMCFhyp(void* hSource)
 				//iteration on query results
 				while (!rs_attr.IsEOF())
 				{
+					if (rs_attr.m_XCategory) goto next_attr_cf;
 					hlp = rs_attr.m_Name;
 					hlp.Replace ("&", "&amp;");
 					hlp.Replace (">", "&gt;");
 					hlp.Replace ("<", "&lt;");
 					pthyp->attributes.Add (hlp);
+next_attr_cf:
 					rs_attr.MoveNext();
 				}
 				rs_attr.Close();
@@ -2701,11 +2703,13 @@ CString fLMSDCFhyp(void * hSource)
 				//iteration on query results
 				while (!rs_attr.IsEOF())
 				{
+					if (rs_attr.m_XCategory) goto next_attr_sdcf;
 					hlp = rs_attr.m_Name;
 					hlp.Replace ("&", "&amp;");
 					hlp.Replace (">", "&gt;");
 					hlp.Replace ("<", "&lt;");
 					pthyp->attributes.Add (hlp);
+next_attr_sdcf:
 					rs_attr.MoveNext();
 				}
 				rs_attr.Close();
@@ -3102,11 +3106,13 @@ CString fLMKLhyp(void* hSource)
 				//iteration on query results
 				while (!rs_attr.IsEOF())
 				{
+					if (rs_attr.m_XCategory) goto next_col_kl;
 					hlp = rs_attr.m_Name;
 					hlp.Replace ("&", "&amp;");
 					hlp.Replace (">", "&gt;");
 					hlp.Replace ("<", "&lt;");
 					pthyp->column_attributes.Add (hlp);
+next_col_kl:
 					rs_attr.MoveNext();
 				}
 				rs_attr.Close();
@@ -3126,11 +3132,13 @@ CString fLMKLhyp(void* hSource)
 				//iteration on query results
 				while (!rs_attr.IsEOF())
 				{
+					if (rs_attr.m_XCategory) goto next_row_kl;
 					hlp = rs_attr.m_Name;
 					hlp.Replace ("&", "&amp;");
 					hlp.Replace (">", "&gt;");
 					hlp.Replace ("<", "&lt;");
 					pthyp->row_attributes.Add (hlp);
+next_row_kl:
 					rs_attr.MoveNext();
 				}
 				rs_attr.Close();
@@ -3429,11 +3437,13 @@ CString fLMSDKLhyp(void* hSource)
 				//iteration on query results
 				while (!rs_attr.IsEOF())
 				{
+					if (rs_attr.m_XCategory) goto next_col_sdkl;
 					hlp = rs_attr.m_Name;
 					hlp.Replace ("&", "&amp;");
 					hlp.Replace (">", "&gt;");
 					hlp.Replace ("<", "&lt;");
 					pthyp->column_attributes.Add (hlp);
+next_col_sdkl:
 					rs_attr.MoveNext();
 				}
 				rs_attr.Close();
@@ -3453,11 +3463,13 @@ CString fLMSDKLhyp(void* hSource)
 				//iteration on query results
 				while (!rs_attr.IsEOF())
 				{
+					if (rs_attr.m_XCategory) goto next_row_sdkl;
 					hlp = rs_attr.m_Name;
 					hlp.Replace ("&", "&amp;");
 					hlp.Replace (">", "&gt;");
 					hlp.Replace ("<", "&lt;");
 					pthyp->row_attributes.Add (hlp);
+next_row_sdkl:
 					rs_attr.MoveNext();
 				}
 				rs_attr.Close();
