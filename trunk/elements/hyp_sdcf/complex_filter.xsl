@@ -5,7 +5,7 @@
       version="1.0">
 
   <!-- nastaveni jazyka (defaultne cz) -->
-  <xsl:variable name="lng">en</xsl:variable>
+  <xsl:variable name="lng">cz</xsl:variable>
 
 
   <xsl:template match="/active_list">
@@ -30,6 +30,12 @@
             <attribute name="task_name" label="Jméno úlohy" />
           </xsl:when>
         </xsl:choose>
+
+        <!-- nezavisle na jazyce -->
+        <attribute name="attributes" label="Attributes" />
+        <attribute name="condition"  label="Condition"/>
+        <attribute name="set1"  label="First set"/>
+        <attribute name="set2"  label="Second set"/>
 
         <!-- vychozi hodnoty:
                 numeric_sort="false"
@@ -109,10 +115,6 @@
         <attribute name="dr_min" label="D%-Min" numeric_sort="true" default_sort_direction="descending"/>
         <attribute name="dr_max" label="D%-Max" numeric_sort="true" default_sort_direction="descending"/>
 
-        <attribute name="attributes" label="Attributes" />
-        <attribute name="condition"  label="Condition"/>
-        <attribute name="set1"  label="First set"/>
-        <attribute name="set2"  label="Second set"/>
       </attributes>
 
       <values>

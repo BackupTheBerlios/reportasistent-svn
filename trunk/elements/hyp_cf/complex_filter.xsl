@@ -33,6 +33,10 @@
           </xsl:when>
         </xsl:choose>
 
+        <!-- nezavisle na jazyce -->
+        <attribute name="attributes" label="Attributes" />
+        <attribute name="condition"  label="Condition"/>
+
         <!-- vychozi hodnoty:
                 numeric_sort="false"
                 default_sort_direction="ascending"     -->
@@ -44,7 +48,7 @@
         <attribute name="v" label="Variation ratio" numeric_sort="true" default_sort_direction="descending"/>
         <attribute name="nom_var" label="Nominal variation" numeric_sort="true" default_sort_direction="descending"/>
         <attribute name="dor_var" label="Discrete ordinary variation" numeric_sort="true" default_sort_direction="descending"/>
-        
+
         <xsl:choose>
 
           <!-- english -->
@@ -67,9 +71,8 @@
             <attribute name="asym" label="Koeficient asymetrie kardinálních hodnot" numeric_sort="true" default_sort_direction="descending"/>
           </xsl:when>
         </xsl:choose>
-        
-        <attribute name="attributes" label="Attributes" />
-        <attribute name="condition"  label="Condition"/>
+
+
       </attributes>
 
       <values>

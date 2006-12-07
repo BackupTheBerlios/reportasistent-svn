@@ -31,6 +31,11 @@
           </xsl:when>
         </xsl:choose>
 
+        <!-- nezavisle na jazyce -->
+        <attribute name="row_attributes" label="Row attributes" />
+        <attribute name="column_attributes" label="Column attributes"/>
+        <attribute name="condition"  label="Condition"/>
+
         <!-- vychozi hodnoty:
                 numeric_sort="false"
                 default_sort_direction="ascending"     -->
@@ -50,9 +55,7 @@
         <attribute name="aic" label="Asymetric information coefficient AIC(R,C)" numeric_sort="true" default_sort_direction="descending"/>
         <attribute name="kend" label="Kendall coefficient" numeric_sort="true" default_sort_direction="descending"/>
 
-        <attribute name="row_attributes" label="Row attributes" />
-        <attribute name="column_attributes" label="Column attributes"/>
-        <attribute name="condition"  label="Condition"/>
+        
       </attributes>
 
       <values>

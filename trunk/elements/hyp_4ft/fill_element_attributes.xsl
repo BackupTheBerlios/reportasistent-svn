@@ -163,22 +163,37 @@
 	<!-- naplni hodnotu cedentu-->
 	<xsl:template match="@antecedent | @succedent | @condition">
 	
-					<!-- zapise: <attribute name="{name()}" value="-->
+					<!-- zapise: <attribute name="{name()}" value="" label=""-->
 
-					<xsl:text disable-output-escaping="yes">
-					&lt;attribute name="</xsl:text>
+    <!--label polozky-->
+    <xsl:variable name="label">
+      <xsl:choose>
+        <xsl:when test="name()='antecedent'">
+          <xsl:text>Antecedent</xsl:text>
+        </xsl:when>
+        <xsl:when test="name()='succedent'">
+          <xsl:text>Succedent</xsl:text>
+        </xsl:when>
+        <xsl:when test="name()='condition'">
+          <xsl:text>Condition</xsl:text>
+        </xsl:when>
+        <xsl:otherwise>BooleanCedent</xsl:otherwise>
+        <!--otherwise by nemelo nastat-->
+      </xsl:choose>
+    </xsl:variable>
 
-					<xsl:value-of select="name()"/>
-					
-					<xsl:text disable-output-escaping="yes">" value="</xsl:text>
-		
-		
-
-					<!-- zapise hodnotu cedentu -->
-					<xsl:apply-templates select="id(.)" mode="values"/>
-
-
-					<xsl:text disable-output-escaping="yes">" /&gt;</xsl:text>
+    <xsl:element name="attribute">
+      <xsl:attribute name="name">
+        <xsl:value-of select="name()"/>
+      </xsl:attribute>
+      <xsl:attribute name="value">
+        <!-- zapise hodnotu cedentu -->
+        <xsl:apply-templates select="id(.)" mode="values"/>
+      </xsl:attribute>
+      <xsl:attribute name="label">
+        <xsl:value-of select="$label"/>
+      </xsl:attribute>
+    </xsl:element>
 
 	</xsl:template>
 	

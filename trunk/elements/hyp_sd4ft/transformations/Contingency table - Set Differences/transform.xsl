@@ -76,7 +76,9 @@
 <xsl:variable name="NotSuccedentLabel">¬ succedent</xsl:variable>
 
 
-
+  <!--specialni promenna - SpecialString ... pokud je hodnota AntecedentLabel ... NotSuccedentLabel nastavena na tuto
+  hodnotu, nahradi se prislusnou hodnotou skutecneho cedentu-->
+  <xsl:variable name="SpecialString">***</xsl:variable>
 
 
 <!-- nastaveni jazykovych popisku (labelu) -->
@@ -110,7 +112,44 @@
 	
 		
 		<xsl:variable name="rozmer_tabulky">3</xsl:variable>
-		
+
+
+    <!--hodnoty cedentu-->
+    <xsl:variable name="antecedent_str">
+      <xsl:for-each select="id(@antecedent)/ti_literal">
+        <xsl:if test="position()!=1">
+          <xsl:text disable-output-escaping="no"> &amp; </xsl:text>
+        </xsl:if>
+        <xsl:value-of select="@quant"/>
+        <xsl:text disable-output-escaping="yes">(</xsl:text>
+        <xsl:value-of select="@value"/>
+        <xsl:text disable-output-escaping="yes">)</xsl:text>
+      </xsl:for-each>
+      <xsl:if test="count(id(@antecedent)/ti_literal)=0">
+        <xsl:choose>
+          <xsl:when test="$lng='cz'">bez omezení</xsl:when>
+          <xsl:otherwise>no restriction</xsl:otherwise>
+        </xsl:choose>
+      </xsl:if>
+    </xsl:variable>
+
+    <xsl:variable name="succedent_str">
+      <xsl:for-each select="id(@succedent)/ti_literal">
+        <xsl:if test="position()!=1">
+          <xsl:text disable-output-escaping="no"> &amp; </xsl:text>
+        </xsl:if>
+        <xsl:value-of select="@quant"/>
+        <xsl:text disable-output-escaping="yes">(</xsl:text>
+        <xsl:value-of select="@value"/>
+        <xsl:text disable-output-escaping="yes">)</xsl:text>
+      </xsl:for-each>
+      <xsl:if test="count(id(@succedent)/ti_literal)=0">
+        <xsl:choose>
+          <xsl:when test="$lng='cz'">bez omezení</xsl:when>
+          <xsl:otherwise>no restriction</xsl:otherwise>
+        </xsl:choose>
+      </xsl:if>
+    </xsl:variable>
 		
 		<!-- nastaveni tloustky ohraniceni-->
 		
@@ -213,10 +252,59 @@
 			<xsl:otherwise><xsl:value-of select="dedek:hodnota(number($D), number(1))" /></xsl:otherwise>
 		</xsl:choose>
 	</xsl:variable>
-	
 
 
-		<paragraph>
+
+    <!--Skutecne labely - popisky v tabulce-->
+    <xsl:variable name="a_label">
+      <xsl:choose>
+        <xsl:when test="$AntecedentLabel=$SpecialString">
+          <xsl:value-of select="$antecedent_str" />
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select="$AntecedentLabel"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+
+    <xsl:variable name="na_label">
+      <xsl:choose>
+        <xsl:when test="$NotAntecedentLabel=$SpecialString">
+          <xsl:text>NOT </xsl:text>
+          <xsl:value-of select="$antecedent_str" />
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select="$NotAntecedentLabel"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+
+    <xsl:variable name="s_label">
+      <xsl:choose>
+        <xsl:when test="$SuccedentLabel=$SpecialString">
+          <xsl:value-of select="$succedent_str" />
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select="$SuccedentLabel"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+
+    <xsl:variable name="ns_label">
+      <xsl:choose>
+        <xsl:when test="$NotSuccedentLabel=$SpecialString">
+          <xsl:text>NOT </xsl:text>
+          <xsl:value-of select="$succedent_str" />
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select="$NotSuccedentLabel"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+
+
+
+    <paragraph>
 			<xsl:element name="table" >
 			    <xsl:attribute name="id"><xsl:value-of select="$id_base"/>table1</xsl:attribute>
 			    <xsl:attribute name="cols"><xsl:value-of select="$rozmer_tabulky" /></xsl:attribute>
@@ -229,17 +317,17 @@
 					</td>
 					
 					<td id="{$id_base}r1d2" bgcolor="{$border_color}" border_top="{$bord_out}"  border_right="{$bord_in}" border_bottom="{$bord_frm}">
-						<text id="{$id_base}r1d2text"><xsl:value-of select="$SuccedentLabel"/></text> 
+						<text id="{$id_base}r1d2text"><xsl:value-of select="$s_label"/></text> 
 					</td>
 					
 					<td id="{$id_base}r1d3" bgcolor="{$border_color}" border_top="{$bord_out}"  border_right="{$bord_out}" border_bottom="{$bord_frm}">
-						<text id="{$id_base}r1d3text"><xsl:value-of select="$NotSuccedentLabel"/></text> 
+						<text id="{$id_base}r1d3text"><xsl:value-of select="$ns_label"/></text> 
 					</td>
 				</tr>
 				
 				<tr id="{$id_base}r2">
 					<td id="{$id_base}r2d1" bgcolor="{$border_color}"  border_left="{$bord_out}" border_right="{$bord_frm}" border_bottom="{$bord_in}">
-						<text id="{$id_base}r2d1text"><xsl:value-of select="$AntecedentLabel"/></text> 
+						<text id="{$id_base}r2d1text"><xsl:value-of select="$a_label"/></text> 
 					</td>
 					
 					<xsl:element name="td">
@@ -261,7 +349,7 @@
 				<tr id="{$id_base}r3">
 					
 					<td id="{$id_base}r3d1" bgcolor="{$border_color}" border_left="{$bord_out}" border_right="{$bord_frm}" border_bottom="{$bord_out}">
-						<text id="{$id_base}r3d1text"><xsl:value-of select="$NotAntecedentLabel"/></text> 
+						<text id="{$id_base}r3d1text"><xsl:value-of select="$na_label"/></text> 
 					</td>
 					
 					<xsl:element name="td">

@@ -6,7 +6,9 @@
       xmlns:dedek="http://reportasistent.com/dedek_namespace"
       version="1.0">
 
-      
+
+  <!-- nastaveni jazyka (defaultne cestina)-->
+  <xsl:variable name="lng">cz</xsl:variable>
 	
 	
 	<!-- Promenne - nastaveni vizualizaci-->
@@ -47,12 +49,15 @@
 
 
 </msxsl:script>
-	
-	
-	
-	
 
-	<xsl:template match="hyp_sd4ft"> <!-- nezpomen prepsat na match="/hyp_4ft" - odebrat lomitko -->
+
+  <!--specialni promenna - SpecialString ... pokud je hodnota AntecedentLabel ... NotSuccedentLabel nastavena na tuto
+  hodnotu, nahradi se prislusnou hodnotou skutecneho cedentu-->
+  <xsl:variable name="SpecialString">***</xsl:variable>
+
+
+
+  <xsl:template match="hyp_sd4ft"> <!-- nezpomen prepsat na match="/hyp_4ft" - odebrat lomitko -->
 
 
 	<!-- hodnoty cisel, souctu a maxima-->
@@ -171,27 +176,112 @@
 	</xsl:variable>
 
 
-	
-	<xsl:if test="$FirstSetShow='true' or $SecondSetShow='true'">
+    <!--hodnoty cedentu-->
+    <xsl:variable name="antecedent_str">
+      <xsl:for-each select="id(@antecedent)/ti_literal">
+        <xsl:if test="position()!=1">
+          <xsl:text disable-output-escaping="no"> &amp; </xsl:text>
+        </xsl:if>
+        <xsl:value-of select="@quant"/>
+        <xsl:text disable-output-escaping="yes">(</xsl:text>
+        <xsl:value-of select="@value"/>
+        <xsl:text disable-output-escaping="yes">)</xsl:text>
+      </xsl:for-each>
+      <xsl:if test="count(id(@antecedent)/ti_literal)=0">
+        <xsl:choose>
+          <xsl:when test="$lng='cz'">bez omezení</xsl:when>
+          <xsl:otherwise>no restriction</xsl:otherwise>
+        </xsl:choose>
+      </xsl:if>
+    </xsl:variable>
+
+    <xsl:variable name="succedent_str">
+      <xsl:for-each select="id(@succedent)/ti_literal">
+        <xsl:if test="position()!=1">
+          <xsl:text disable-output-escaping="no"> &amp; </xsl:text>
+        </xsl:if>
+        <xsl:value-of select="@quant"/>
+        <xsl:text disable-output-escaping="yes">(</xsl:text>
+        <xsl:value-of select="@value"/>
+        <xsl:text disable-output-escaping="yes">)</xsl:text>
+      </xsl:for-each>
+      <xsl:if test="count(id(@succedent)/ti_literal)=0">
+        <xsl:choose>
+          <xsl:when test="$lng='cz'">bez omezení</xsl:when>
+          <xsl:otherwise>no restriction</xsl:otherwise>
+        </xsl:choose>
+      </xsl:if>
+    </xsl:variable>
+
+    <!--skutecne labely - popisky grafu-->
+    <xsl:variable name="a_label">
+      <xsl:choose>
+        <xsl:when test="$AntecedentLabel=$SpecialString">
+          <xsl:value-of select="$antecedent_str" />
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select="$AntecedentLabel"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+
+    <xsl:variable name="na_label">
+      <xsl:choose>
+        <xsl:when test="$NotAntecedentLabel=$SpecialString">
+          <xsl:text>NOT </xsl:text>
+          <xsl:value-of select="$antecedent_str" />
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select="$NotAntecedentLabel"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+
+    <xsl:variable name="s_label">
+      <xsl:choose>
+        <xsl:when test="$SuccedentLabel=$SpecialString">
+          <xsl:value-of select="$succedent_str" />
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select="$SuccedentLabel"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+
+    <xsl:variable name="ns_label">
+      <xsl:choose>
+        <xsl:when test="$NotSuccedentLabel=$SpecialString">
+          <xsl:text>NOT </xsl:text>
+          <xsl:value-of select="$succedent_str" />
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select="$NotSuccedentLabel"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+
+
+
+    <xsl:if test="$FirstSetShow='true' or $SecondSetShow='true'">
 		
 		<paragraph>
 		    	
 			<graph title="{$GraphTitle}" showlegend="{$LegendShow}" charttype="{$GraphType}" height="{$GraphHeight}" width="{$GraphWidth}" id="{@id}_4ftgraph_1">
 				<categories id="categories1_1">
 					<xsl:if test="$FirstSetShow='true'">				
-						<category title="{$SuccedentLabel}" id="category1_1"></category>
-						<category title="{$NotSuccedentLabel}" id="category2_1"></category>
+						<category title="{$s_label}" id="category1_1"></category>
+						<category title="{$ns_label}" id="category2_1"></category>
 						<xsl:if test="$SecondSetShow='true'">			
 							<category title="" id="category_mezera"/>
 						</xsl:if>
 					</xsl:if>
 					<xsl:if test="$SecondSetShow='true'">				
-						<category title="{$SuccedentLabel}" id="category1_2"></category>
-						<category title="{$NotSuccedentLabel}" id="category2_2"></category>
+						<category title="{$s_label}" id="category1_2"></category>
+						<category title="{$ns_label}" id="category2_2"></category>
 					</xsl:if>
 				</categories>
 
-				<chart title="{$NotAntecedentLabel}" id="chart1_1" color="{$Chart1Color}">
+				<chart title="{$na_label}" id="chart1_1" color="{$Chart1Color}">
 					<xsl:if test="$FirstSetShow='true'">			
 						<value value="{$c}" id="value3_1"></value>
 						<value value="{$d}" id="value4_1"></value>
@@ -205,7 +295,7 @@
 					</xsl:if>
 				</chart>
 				
-				<chart title="{$AntecedentLabel}" id="chart2_1" color="{$Chart2Color}">
+				<chart title="{$a_label}" id="chart2_1" color="{$Chart2Color}">
 					<xsl:if test="$FirstSetShow='true'">			
 						<value value="{$a}" id="value1_1"></value>
 						<value value="{$b}" id="value2_1"></value>

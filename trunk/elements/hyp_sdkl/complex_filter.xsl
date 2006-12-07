@@ -31,6 +31,13 @@
           </xsl:when>
         </xsl:choose>
 
+        <!-- nezavisle na jazyce -->
+        <attribute name="row_attributes" label="Row attributes" />
+        <attribute name="column_attributes" label="Column attributes"/>
+        <attribute name="condition"  label="Condition"/>
+        <attribute name="set1"  label="First set"/>
+        <attribute name="set2"  label="Second set"/>
+        
         <!-- vychozi hodnoty:
                 numeric_sort="false"
                 default_sort_direction="ascending"     -->
@@ -69,11 +76,7 @@
         <attribute name="dr_min" label="D%-Min" numeric_sort="true" default_sort_direction="descending"/>
         <attribute name="dr_max" label="D%-Max" numeric_sort="true" default_sort_direction="descending"/>
 
-        <attribute name="row_attributes" label="Row attributes" />
-        <attribute name="column_attributes" label="Column attributes"/>
-        <attribute name="condition"  label="Condition"/>
-        <attribute name="set1"  label="First set"/>
-        <attribute name="set2"  label="Second set"/>
+        
       </attributes>
 
       <values>

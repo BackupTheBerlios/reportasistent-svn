@@ -215,8 +215,10 @@
 	<!-- zpracovani cedentu-->
 	
 	<xsl:template match="@attributes | @condition">
-		
-		<xsl:apply-templates select="id(.)" mode="values" />		
+
+    <xsl:apply-templates select="id(.)" mode="values">
+      <xsl:with-param name="cedent_type" select="name()"/>
+    </xsl:apply-templates>		
 
 	</xsl:template>
 	
@@ -226,22 +228,42 @@
 	
 
 	<!-- boolske literaly -> cedent -->
-	<xsl:template match="ti_cedent" mode="values">		
+	<xsl:template match="ti_cedent" mode="values">
+    <xsl:param name="cedent_type"/>
+
+    <xsl:variable name="label">
+      <xsl:choose>
+        <xsl:when test="$cedent_type='condition'">Condition</xsl:when>
+        <xsl:otherwise>BooleanCedent</xsl:otherwise>
+        <!--otherwise by nemelo nastat-->
+      </xsl:choose>
+    </xsl:variable>
+    
     	<xsl:variable name="hodnota_cedentu">
     		<xsl:apply-templates select="ti_literal" mode="values"/>
     	</xsl:variable>
     	<xsl:text disable-output-escaping="yes">
 					</xsl:text>		
-    	<attribute name="{@type}" value="{$hodnota_cedentu}" />	
+    	<attribute name="{$cedent_type}" value="{$hodnota_cedentu}" label="{$label}" />	
 	</xsl:template>
 	
 	
 	
 	<!-- kategorialni cedent -->
 	<xsl:template match="ti_attribute" mode="values">
+    <xsl:param name="cedent_type"/>
+
+    <xsl:variable name="label">
+      <xsl:choose>
+        <xsl:when test="$cedent_type='attributes'">Attributes</xsl:when>
+        <xsl:otherwise>CategorialCedent</xsl:otherwise>
+        <!--otherwise by nemelo nastat-->
+      </xsl:choose>
+    </xsl:variable>
+    
 		<xsl:text disable-output-escaping="yes">
 					</xsl:text>		
-    	<attribute name="{@type}" value="{@quant}" />
+    	<attribute name="{$cedent_type}" value="{@quant}" label="{$label}" />
 	</xsl:template>
 	
 

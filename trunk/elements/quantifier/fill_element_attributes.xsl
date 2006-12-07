@@ -39,7 +39,7 @@
 
 	
 	
-	<!-- vypise vsechny atributy krome ID-->
+	<!-- vypise vsechny atributy-->
 	<xsl:template match="@*">
 		<xsl:param name="name_prefix" /> 
 		<xsl:param name="label_prefix" />
@@ -148,12 +148,6 @@
 	</xsl:template>
 	<!-- vypise vsechny atributy -->
 
-	
-	
-	<!--atribut ID se ignoruje-->
-	<xsl:template match="@id">
-	</xsl:template>
-	
 
 
 

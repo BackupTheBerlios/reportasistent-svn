@@ -38,6 +38,10 @@
                 default_sort_direction="ascending"     -->
 
         <!-- nezavisle na jazyce -->
+        <attribute name="antecedent" label="Antecedent" />
+        <attribute name="succedent" label="Succedent"/>
+        <attribute name="condition"  label="Condition"/>
+        
         <attribute name="a" label="a" numeric_sort="true" default_sort_direction="descending"/>
         <attribute name="b" label="b" numeric_sort="true" default_sort_direction="descending"/>
         <attribute name="c" label="c" numeric_sort="true" default_sort_direction="descending"/>
@@ -46,7 +50,7 @@
         <attribute name="f" label="f" numeric_sort="true" default_sort_direction="descending"/>
         <attribute name="g" label="g" numeric_sort="true" default_sort_direction="descending"/>
         <attribute name="h" label="h" numeric_sort="true" default_sort_direction="descending"/>
-        
+
         <attribute name="conf1" label="Confidence 1" numeric_sort="true" default_sort_direction="descending"/>
         <attribute name="d_conf1" label="D-Confidence 1" numeric_sort="true" default_sort_direction="descending"/>
         <attribute name="e_conf1" label="E-Confidence 1" numeric_sort="true" default_sort_direction="descending"/>
@@ -83,9 +87,6 @@
         <attribute name="df_fue" label="Df-FUE" numeric_sort="true" default_sort_direction="descending"/>
         <attribute name="df_avg" label="Df-Avg" numeric_sort="true" default_sort_direction="descending"/>
         
-        <attribute name="antecedent" label="Antecedent" />
-        <attribute name="succedent" label="Succedent"/>
-        <attribute name="condition"  label="Condition"/>
 
         <xsl:choose>
 
