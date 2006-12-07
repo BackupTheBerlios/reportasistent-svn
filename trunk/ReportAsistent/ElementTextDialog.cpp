@@ -12,6 +12,10 @@
 static char THIS_FILE[] = __FILE__;
 #endif
 
+
+#ifndef MAX_TEXT_LENGTH
+#define MAX_TEXT_LENGTH 2000
+#endif
 /////////////////////////////////////////////////////////////////////////////
 // CElementTextDialog dialog
 
@@ -20,7 +24,6 @@ CElementTextDialog::CElementTextDialog(MSXML2::IXMLDOMElementPtr & SelXMLElm,CWn
 	: CDialog(CElementTextDialog::IDD, pParent), m_SelXMLElm(SelXMLElm)
 {
 	//{{AFX_DATA_INIT(CElementTextDialog)
-	m_DialTextEditValue = _T("");
 	m_DialTextIDEditValue = _T("");
 	//}}AFX_DATA_INIT
 
@@ -30,9 +33,6 @@ CElementTextDialog::CElementTextDialog(MSXML2::IXMLDOMElementPtr & SelXMLElm,CWn
 	m_OldID=(LPCTSTR) (_bstr_t)  varAtr;
 	if (varAtr.vt!=VT_NULL)
 		m_DialTextIDEditValue = m_OldID;
-	//Text
-	m_DialTextEditValue = (LPCTSTR) (_bstr_t)  m_SelXMLElm->text;
-
 }
 
 
@@ -40,9 +40,8 @@ void CElementTextDialog::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CElementTextDialog)
+	DDX_Control(pDX, IDC_DIALTEXT_EDIT, m_REdit);
 	DDX_Control(pDX, IDC_STYLES_COMBO, m_StylesCombo);
-	DDX_Text(pDX, IDC_DIALTEXT_EDIT, m_DialTextEditValue);
-	DDV_MaxChars(pDX, m_DialTextEditValue, 1000);
 	DDX_Text(pDX, IDC_DIALTEXT_IDEDIT, m_DialTextIDEditValue);
 	DDV_MaxChars(pDX, m_DialTextIDEditValue, 50);
 	//}}AFX_DATA_MAP
@@ -172,7 +171,12 @@ void CElementTextDialog::OnOK()
 		m_SelXMLElm->setAttributeNode(s_atr);
 		s_atr.Release();
 	}
-	
+
+	//Text from Rich Edit is saved to the skeleton:
+	CString pom;
+	m_REdit.GetWindowText(pom);
+	m_SelXMLElm->text = (LPCTSTR)pom;
+
 	CDialog::OnOK();
 }
 
@@ -183,12 +187,25 @@ BOOL CElementTextDialog::OnInitDialog()
 	FillStylesCombo();
 
 
-	//vyber style v comboboxu
+	//Choose style in combobox m_StylesCombo
 	_variant_t style = m_SelXMLElm->getAttribute("style");
 	if (style.vt != VT_NULL)
 	{
 		m_StylesCombo.SelectString(-1, (_bstr_t) style);
 	}
+
+
+	//Set settings of RichEditCtrl
+	CReportAsistentApp * App = ((CReportAsistentApp *) AfxGetApp());
+	CHARFORMAT  cf;
+	m_REdit.GetDefaultCharFormat(cf);
+	cf.yHeight =App->m_iTextEditSize;
+	cf.dwMask=CFM_SIZE;
+	cf.cbSize=sizeof(cf);
+	int Res = m_REdit.SetDefaultCharFormat(cf);	
+
+	//Put text of the element into RichEditCtrl
+	m_REdit.SetWindowText((LPCTSTR) (_bstr_t)  m_SelXMLElm->text);
 
 		
 	return TRUE;  // return TRUE unless you set the focus to a control

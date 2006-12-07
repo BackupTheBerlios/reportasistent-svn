@@ -55,7 +55,6 @@ protected:
 	//{{AFX_MSG(CSimpleFilterDialog)
 	virtual BOOL OnInitDialog();
 	afx_msg void OnDeleteitemFilterList(NMHDR* pNMHDR, LRESULT* pResult);
-	afx_msg void OnItemclickFilterList(NMHDR* pNMHDR, LRESULT* pResult);
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 
@@ -63,17 +62,18 @@ private:
   virtual BOOL OnApply();
   afx_msg void OnNMClickFilterList(NMHDR *pNMHDR, LRESULT *pResult);
   virtual BOOL OnSetActive();
-  BOOL m_bSimpleFilterDisabled;
+ 
   afx_msg void OnSimpleFilterDisabledCheck();
 protected:
 	void SetDisabledCheck(void);
 public:
-	int SortFunc(LPARAM lParam1, LPARAM lParam2, LPARAM lParamSort);
 	virtual BOOL OnKillActive();
 protected:
+
 	void SaveSelection(void);
 	void CheckSimpleFilterDisabled(void);
 	void UpdateSimpleView(void);
+	BOOL m_bSimpleFilterDisabled;
 };
 
 //{{AFX_INSERT_LOCATION}}

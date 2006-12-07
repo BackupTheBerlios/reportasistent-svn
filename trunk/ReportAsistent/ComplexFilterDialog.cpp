@@ -626,6 +626,8 @@ void CComplexFilterDialog::OnBnClickedRefreshResultsButton()
 
 
 
+//******************************************************************************
+
 
 int CFilterResultImpl::getAttributesCount()
 {
@@ -679,6 +681,7 @@ void CFilterResultImpl::InitResultView()
 	{
 		m_ResultList.InsertColumn(a, getAttributeLabel(a), 0, 50);
 	}
+
 
 }
 

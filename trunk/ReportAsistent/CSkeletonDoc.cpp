@@ -446,8 +446,6 @@ BOOL CSkeletonDoc::EditElement(MSXML2::IXMLDOMElementPtr & selected_element)
 			//Zmeny z dialogu soupnu do XMLDom stromu
 				//Id:
 				selected_element->setAttribute("id",(LPCTSTR) OElementTextDialog.m_DialTextIDEditValue);		
-				//Title:
-				selected_element->text=(LPCTSTR) OElementTextDialog.m_DialTextEditValue;
 			}
 			//dedek: ma vratit TRUE pokud doslo ke zmene elementu, tedy spravne je to takhle:
 			return Res == IDOK;

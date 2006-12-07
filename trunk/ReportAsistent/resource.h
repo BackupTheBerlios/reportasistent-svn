@@ -1,5 +1,5 @@
 //{{NO_DEPENDENCIES}}
-// Microsoft Visual C++ generated include file.
+// Microsoft Developer Studio generated include file.
 // Used by ReportAsistent.rc
 //
 #define IDD_ABOUTBOX                    100
@@ -58,6 +58,7 @@
 #define IDC_TREE_ITEM_NAME_LENGTH       1002
 #define IDC_DATA_SOURCE_COMBO           1003
 #define IDC_ERROR_TEXT                  1003
+#define IDC_TEXT_EDIT_SIZE              1003
 #define IDC_PLUGINS_COMBO               1004
 #define IDC_ADD_SOURCE_BUTTON           1006
 #define IDC_SOURCES_LIST                1007
@@ -220,7 +221,7 @@
 #define _APS_3D_CONTROLS                     1
 #define _APS_NEXT_RESOURCE_VALUE        174
 #define _APS_NEXT_COMMAND_VALUE         32802
-#define _APS_NEXT_CONTROL_VALUE         1076
+#define _APS_NEXT_CONTROL_VALUE         1078
 #define _APS_NEXT_SYMED_VALUE           102
 #endif
 #endif

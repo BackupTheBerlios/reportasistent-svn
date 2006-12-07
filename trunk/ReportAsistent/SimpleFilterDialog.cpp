@@ -58,7 +58,6 @@ BEGIN_MESSAGE_MAP(CSimpleFilterDialog, CPropertyPage)
 	//{{AFX_MSG_MAP(CSimpleFilterDialog)
 	ON_NOTIFY(LVN_DELETEITEM, IDC_FILTER_LIST, OnDeleteitemFilterList)
 	ON_NOTIFY(NM_CLICK, IDC_FILTER_LIST, OnNMClickFilterList)
-	ON_NOTIFY(HDN_ITEMCLICK, 0, OnItemclickFilterList)
 	//}}AFX_MSG_MAP
 	ON_BN_CLICKED(IDC_SIMPLE_FILTER_DISABLED_CHECK, OnSimpleFilterDisabledCheck)
 END_MESSAGE_MAP()
@@ -242,46 +241,50 @@ void CSimpleFilterDialog::UpdateSimpleView(void)
 		m_filter_DOM->selectSingleNode("/dialog_data/values"));
 }
 
-void CSimpleFilterDialog::OnItemclickFilterList(NMHDR* pNMHDR, LRESULT* pResult) 
-{
-	NMLISTVIEW *pLV = (NMLISTVIEW *) pNMHDR;
-	AfxMessageBox("Pozor");
-/*	m_ResultList.SortItems(SortFunc, pLV->iItem);*/
-	
-	*pResult = 0;
-}
+//DEL void CSimpleFilterDialog::OnItemclickFilterList(NMHDR* pNMHDR, LRESULT* pResult) 
+//DEL {
+//DEL 	NMLISTVIEW *pLV = (NMLISTVIEW *) pNMHDR;
+//DEL 	AfxMessageBox("Pozor");
+//DEL 
+//DEL 	m_ResultList.SortItems((PFNLVCOMPARE)SortFunc, pLV->iItem);
+//DEL 	
+//DEL 	*pResult = 0;
+//DEL }
 
 
-int CSimpleFilterDialog::SortFunc(LPARAM lParam1, LPARAM lParam2, LPARAM lParamSort)
-{
- 
- 	int nRetVal=0;
- /*
- 	CString pData1 = (LPCTSTR)lParam1;
- 	CString pData2 = (LPCTSTR)lParam2;
- 
- 
- 	switch(lParamSort)
- 	{
- 	case 0:	// Last Name
- 		nRetVal = strcmp(pData1->pszLastName,
-                                  pData2->pszLastName);
- 		break;
- 
- 	case 1:	// First Name
- 		nRetVal = strcmp(pData1->pszFirstName,
-                                  pData2->pszFirstName);
- 		break;
- 
- 	case 2: // Term
- 		nRetVal = strcmp(pData1->pszTerm, pData2->pszTerm);
- 		break;
- 
- 	default:
- 		break;
- 	}
- */
- 	return nRetVal;
-}
+//DEL int CALLBACK CSimpleFilterDialog::SortFunc(LPARAM lParam1, LPARAM lParam2, LPARAM lParamSort)
+//DEL {
+//DEL  
+//DEL  	int nRetVal=0;
+//DEL 
+//DEL 	if (!(lParam1 && lParam2)) return 1;
+//DEL 
+//DEL  	CString pData1 = ((LVITEM*)lParam1)->pszText;
+//DEL  	CString pData2 = ((LVITEM*)lParam2)->pszText;
+//DEL  
+//DEL 	AfxMessageBox(pData1);
+//DEL  /*
+//DEL  	switch(lParamSort)
+//DEL  	{
+//DEL  	case 0:	// Last Name
+//DEL  		nRetVal = strcmp(pData1->pszLastName,
+//DEL                                   pData2->pszLastName);
+//DEL  		break;
+//DEL  
+//DEL  	case 1:	// First Name
+//DEL  		nRetVal = strcmp(pData1->pszFirstName,
+//DEL                                   pData2->pszFirstName);
+//DEL  		break;
+//DEL  
+//DEL  	case 2: // Term
+//DEL  		nRetVal = strcmp(pData1->pszTerm, pData2->pszTerm);
+//DEL  		break;
+//DEL  
+//DEL  	default:
+//DEL  		break;
+//DEL  	}*/
+//DEL 
+//DEL  	return nRetVal;
+//DEL }
 
 

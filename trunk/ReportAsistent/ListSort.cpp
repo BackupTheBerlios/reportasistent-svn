@@ -49,6 +49,7 @@ static char THIS_FILE[] = __FILE__;
 //
 // RETURNS: N/A
 //*****************************************************************************
+
 CListSort::CListSort(CListCtrl * pWnd, const int nCol)
 {
 	m_pWnd = pWnd;

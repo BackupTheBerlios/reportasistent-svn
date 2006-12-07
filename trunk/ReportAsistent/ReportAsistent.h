@@ -124,6 +124,7 @@ public:
 
 	BOOL m_bWordPluginMode;
 public:
+	int m_iTextEditSize;
 	int m_iTreeItemNameLength;
 };
 

@@ -38,6 +38,7 @@ void COptionsDialog::DoDataExchange(CDataExchange* pDX)
 
 
 	//{{AFX_DATA_MAP(COptionsDialog)
+	DDX_Control(pDX, IDC_TEXT_EDIT_SIZE, m_TextEditSize);
 	DDX_Control(pDX, IDC_MARK_ORPHANS, m_MarkOrphansCheckBox);
 	DDX_Control(pDX, IDC_SHOW_ID_IN_TREE, m_IdInTreeCheckBox);
 	DDX_Control(pDX, IDC_TREE_HAS_BUTTONS, m_ButtonsCheckBox);
@@ -95,6 +96,11 @@ BOOL COptionsDialog::OnInitDialog()
 	Pom.Format("%d",App->m_iTreeItemNameLength);
 	m_NameLengthEdit.SetWindowText(Pom);
 	m_NameLengthEdit.SetLimitText(3);
+
+	// Size of text in TextEdit in Text Element dialog
+	Pom.Format("%d",App->m_iTextEditSize);
+	m_TextEditSize.SetWindowText(Pom);
+	m_TextEditSize.SetLimitText(3);
 
 	//Set orphans radio buttons:
 	CString OrphSol = App->FirstDocumentInFirstTemplate()->GetReportSettings("orphans_solution");
@@ -167,6 +173,11 @@ void COptionsDialog::OnOK()
 	if ((iPom > 5) && (iPom<= 999))
 		App->m_iTreeItemNameLength = iPom;
 
+	//TextEdit size Edit
+	m_TextEditSize.GetWindowText(Pom);
+	iPom =StrToInt((LPCTSTR)Pom);
+	if ((iPom > 80) && (iPom<= 300))
+	App->m_iTextEditSize = iPom;
 
 	//Get orphans radio buttons:
 	CString OrphSol = App->FirstDocumentInFirstTemplate()->GetReportSettings("orphans_solution");

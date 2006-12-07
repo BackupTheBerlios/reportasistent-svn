@@ -50,6 +50,8 @@ protected:
 
 	void InitResultView();
 	void UpdateResult(MSXML2::IXMLDOMElementPtr & filter_dom);
+
+
 };
 
 

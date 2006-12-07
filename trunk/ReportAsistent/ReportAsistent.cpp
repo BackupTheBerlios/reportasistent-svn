@@ -138,6 +138,9 @@ BOOL CReportAsistentApp::InitInstance()
 	s_dlg.ShowWindow(SW_SHOW);
 	s_dlg.UpdateWindow();
 
+	//Iva: initialization of RichEditCtrl
+	AfxInitRichEdit();
+
 	//dedek
 	m_pGeneralManager = new CGeneralManager();
 	m_pGeneralManager->ElementManager.Init(m_pGeneralManager->DirectoriesManager);
@@ -163,6 +166,8 @@ BOOL CReportAsistentApp::InitInstance()
 	 m_bTreeHasButtons = GetProfileInt("Settings","bTreeHasButtons",1);
 	 m_bMarkOrphans = GetProfileInt("Settings","bMarkOrphans",0);
 	 m_iTreeItemNameLength = GetProfileInt("Settings","TreeItemNameLength",30);
+	 m_iTextEditSize = GetProfileInt("Settings","TextEditSize",165);
+
 	 //CString Pom;
 	 //Pom.Format("%d",m_iTreeItemNameLength);
 	 //AfxMessageBox(Pom);
@@ -257,6 +262,7 @@ int CReportAsistentApp::ExitInstance()
 	 WriteProfileInt("Settings","bTreeHasButtons",m_bTreeHasLines);
 	 WriteProfileInt("Settings","bMarkOrphans",m_bMarkOrphans);
 	 WriteProfileInt("Settings","TreeItemNameLength",m_iTreeItemNameLength);
+	 WriteProfileInt("Settings","TextEditSize",m_iTextEditSize);
 
 	 WriteProfileString("Settings", "WordTemplate", m_pGeneralManager->WordManager.getWordTemplate());
 

@@ -20,8 +20,8 @@ public:
 // Dialog Data
 	//{{AFX_DATA(CElementTextDialog)
 	enum { IDD = IDD_DIALOGTEXT };
+	CRichEditCtrl	m_REdit;
 	CComboBox	m_StylesCombo;
-	CString	m_DialTextEditValue;
 	CString	m_DialTextIDEditValue;
 	//}}AFX_DATA
 
