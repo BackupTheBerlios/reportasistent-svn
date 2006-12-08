@@ -44,6 +44,7 @@
 #include "TData_Matrix_Recordset.h"
 #include "TColumn_Recordset.h"
 #include "direct.h"
+#include "math.h"
 
 //dedek: docasne
 /*****/
@@ -864,8 +865,16 @@ CString fLMTask (void* hSource)
 {
 	CString buf = "";
 	CString hlp;
+	CString hlp1;
 	CString db_name = ((CDatabase *) hSource)->GetDatabaseName ();
 	CString q_hyp;
+
+	int hours;
+	int minutes;
+	int seconds;
+	double secf;
+	long up;
+	long down;
 
 	TTask_Meta_Array list;
 	Task_Meta * pttask;
@@ -887,8 +896,27 @@ CString fLMTask (void* hSource)
 		{
 			pttask = new (Task_Meta);
 			pttask->db_name = db_name;
-			pttask->gen_start_time = rs.m_GenerationStartTime.Format ("%A, %d.%B %Y");
-			pttask->gen_total_time.Format ("%d", rs.m_GenerationTotalTime);
+			pttask->gen_start_time = rs.m_GenerationStartTime.Format ("%c");
+
+			secf = rs.m_GenerationTotalTime / 1000;
+			up = (long) ceil (secf);
+			down = (long) floor (secf);
+			if ((up - secf) < 0.5) seconds = up;
+			else seconds = down;
+			hours = (int) floor (seconds / 3600);
+			seconds = seconds - hours * 3600;
+			minutes = (int) floor (seconds / 60);
+			seconds = seconds - minutes * 60;
+			hlp1.Format ("%d", hours);
+			hlp = hlp1 + "h ";
+			hlp1.Format ("%d", minutes);
+			hlp += hlp1;
+			hlp += "min ";
+			hlp1.Format ("%d", seconds);
+			hlp += hlp1;
+			hlp += "sec";
+			pttask->gen_total_time = hlp;
+
 			hlp.Format ("%d", rs.m_TaskID);
 			pttask->id = "Task" + hlp;
 			pttask->matrix_name = rs.m_Name2;
@@ -1014,6 +1042,10 @@ CString fLMKLCedent (void* hSource)
 				ptklcdnt->task_name = rs.m_Name;
 				ptklcdnt->task_type = rs.m_Name5;
 				ptklcdnt->cedent_type = rs.m_Name4;
+				if (ptklcdnt->cedent_type == "Antecedent")
+					ptklcdnt->cedent_type = "Row attributes";
+				else if (ptklcdnt->cedent_type == "Succedent")
+					ptklcdnt->cedent_type = "Column attributes";
 				list.Add (ptklcdnt);
 			}
 			if (c_id != c_id_tst) //new sub cedent
@@ -1171,7 +1203,8 @@ CString fLMCFCedent (void* hSource)
 				ptcfcdnt->matrix_name = rs.m_Name3;
 				ptcfcdnt->task_name = rs.m_Name;
 				ptcfcdnt->task_type = rs.m_Name5;
-				ptcfcdnt->cedent_type = rs.m_Name4;
+//				ptcfcdnt->cedent_type = rs.m_Name4;
+				ptcfcdnt->cedent_type = "Attributes";
 				list.Add (ptcfcdnt);
 			}
 			if (c_id != c_id_tst) //new sub cedent
