@@ -212,6 +212,10 @@ SOURCE=.\SkeletonView.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\SListCtrl.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\SourcesDialog.cpp
 # End Source File
 # Begin Source File
@@ -370,6 +374,10 @@ SOURCE=.\SkeletonManager.h
 # Begin Source File
 
 SOURCE=.\SkeletonView.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\SListCtrl.h
 # End Source File
 # Begin Source File
 
