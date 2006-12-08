@@ -903,13 +903,13 @@ CString fLMTask (void* hSource)
 			down = (long) floor (secf);
 			if ((up - secf) < 0.5) seconds = up;
 			else seconds = down;
-			hours = (int) floor (seconds / 3600);
+			hours = (int) floor (float(seconds / 3600));
 //dedek moznosti jsou:
 //			hours = seconds / 3600;
 //			hours = (int) floor (seconds / 3600.0);
 
 			seconds = seconds - hours * 3600;
-			minutes = (int) floor (seconds / 60);
+			minutes = (int) floor (float(seconds / 60));
 			seconds = seconds - minutes * 60;
 			hlp1.Format ("%d", hours);
 			hlp = hlp1 + "h ";

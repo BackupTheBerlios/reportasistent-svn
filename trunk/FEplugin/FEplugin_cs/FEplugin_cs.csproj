@@ -35,11 +35,7 @@
       <HintPath>..\..\..\Ferda\Ferda_checkout\bin\FrontEnd\FerdaBase.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="FerdaHelpers, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\FerdaDataminer\FrontEnd\FerdaHelpers.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
+    <Reference Include="FerdaHelpers, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="FerdaModulesManager, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="FerdaProjectManager, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -48,7 +44,7 @@
     </Reference>
     <Reference Include="icecs, Version=3.0.1.0, Culture=neutral, PublicKeyToken=1f998c50fec78381">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Ferda\Ferda_checkout\bin\FrontEnd\icecs.dll</HintPath>
+      <HintPath>..\..\ReportAsistent\Debug\icecs.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />

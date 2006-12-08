@@ -136,10 +136,20 @@ namespace FEplugin_cs
         }
 
 
-        // pomocna struktura - vsechny typy Task zpracovavane v cyklu v getList() a k nim potrebne item
+        
+        /// <summary>
+        /// Helping structure - all the task types processed in loop in getList() method
+        /// </summary>
         struct TaskTypeStruct
         {
+            /// <summary>
+            /// Type (name) of box representing given task type
+            /// </summary>
             public string TaskBoxType;
+            
+            /// <summary>
+            /// String label with task type
+            /// </summary>
             public string TypeString;
 
             public TaskTypeStruct(string TBT, string TS)
