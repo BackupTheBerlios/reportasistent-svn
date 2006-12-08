@@ -23,7 +23,7 @@
             <attribute name="db_name" label="Database" />
             <attribute name="matrix_name" label="Data matrix" />
             <attribute name="task_name" label="Task name" />
-            <attribute name="sentences_count" label="Sentences count" />
+            <attribute name="sentences_count" label="Sentences count" numeric_sort="true" default_sort_direction="descending" />
           </xsl:when>
 
           <!-- english-->
@@ -31,7 +31,7 @@
             <attribute name="db_name" label="Databáze" />
             <attribute name="matrix_name" label="Datová matice" />
             <attribute name="task_name" label="Jméno úlohy" />
-            <attribute name="sentences_count" label="Nalezených vìt" />
+            <attribute name="sentences_count" label="Nalezených vìt" numeric_sort="true" default_sort_direction="descending" />
           </xsl:when>
         </xsl:choose>
 
