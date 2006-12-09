@@ -897,28 +897,26 @@ CString fLMTask (void* hSource)
 			pttask = new (Task_Meta);
 			pttask->db_name = db_name;
 			pttask->gen_start_time = rs.m_GenerationStartTime.Format ("%c");
+			pttask->gen_start_time.Replace ("/", ".");
 
 			secf = rs.m_GenerationTotalTime / 1000;
 			up = (long) ceil (secf);
 			down = (long) floor (secf);
 			if ((up - secf) < 0.5) seconds = up;
 			else seconds = down;
-			hours = (int) floor (float(seconds / 3600));
-//dedek moznosti jsou:
-//			hours = seconds / 3600;
-//			hours = (int) floor (seconds / 3600.0);
-
+			hours = seconds / 3600;
 			seconds = seconds - hours * 3600;
 			minutes = (int) floor (float(seconds / 60));
 			seconds = seconds - minutes * 60;
 			hlp1.Format ("%d", hours);
-			hlp = hlp1 + "h ";
+			hlp = hlp1 + ":";
 			hlp1.Format ("%d", minutes);
+			if (hlp1.GetLength () == 1) hlp1 = "0" + hlp1;
 			hlp += hlp1;
-			hlp += "min ";
+			hlp += ":";
 			hlp1.Format ("%d", seconds);
+			if (hlp1.GetLength () == 1) hlp1 = "0" + hlp1;
 			hlp += hlp1;
-			hlp += "sec";
 			pttask->gen_total_time = hlp;
 
 			hlp.Format ("%d", rs.m_TaskID);
