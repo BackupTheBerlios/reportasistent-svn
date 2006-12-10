@@ -118,18 +118,18 @@ BOOL APBuf::setBuffer(BSTR str, MSXML2::IXMLDOMDocumentPtr & xml)
 	xml->async = VARIANT_FALSE; // default - true,
 	//vytvoreni XML DOM z nacteneho XML stringu
 
-#ifdef _DEBUG
 	CDirectoriesManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->DirectoriesManager;
 	CString str_b = str;
 	CFile f;
 	f.Open(m.getXMLFilesDirectory() + "\\plug_out_example1.xml", CFile::modeWrite |CFile::modeCreate);
 	f.Write((LPCTSTR) str_b, str_b.GetLength());
 	f.Close();
-#endif
+
 
 	HRESULT hRes=xml->loadXML(str);
 	if (xml->parseError->errorCode != S_OK)
 	{
+		if ((str == NULL) || (* str == 0)) return FALSE;
 
 		CReportAsistentApp::ReportError(IDS_SIMPLE_FILTER_FAILED_SOURCE_LOAD, (LPCTSTR) xml->parseError->reason);
 
@@ -334,7 +334,7 @@ int CDataSourcesManager::initPlugsTab(LPCTSTR plugins_dir_path)
 				// Process any inserts in lpMsgBuf.
 				// ...
 				// Display the string.
-				MessageBox( NULL, (LPCTSTR)lpMsgBuf, "Error", MB_OK | MB_ICONINFORMATION );
+				MessageBox( NULL, (LPCTSTR)lpMsgBuf, PlugsTab[j].PluginName, MB_OK | MB_ICONINFORMATION );
 				// Free the buffer.
 				LocalFree( lpMsgBuf );
 			
