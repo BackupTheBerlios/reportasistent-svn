@@ -92,25 +92,6 @@ void CSkeletonView::OnInitialUpdate()
 
 
 
-//Iva: Natahnu obrazky pro TreeCtrl
-
-	
-
-	m_ImageList.Create(16, 16,  //rozmery obrazku k nacteni do ImageListu
-						ILC_MASK|ILC_COLOR8,  
-						NUM_PICTURES_TREECTRL, //pocatecni pocet obrazku v ImageListu..viz Stdafx.h
-						10);//o kolik obrazku se ImageList muze zvetsit.. ??
-
-	
-	CElementManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
-	
-	m.FillImageList( m_ImageList);
-
-	//sirotci
-	m_ImageList.SetOverlayImage(0, 1);
-
-
-	GetTreeCtrl().SetImageList(&m_ImageList, TVSIL_NORMAL);
 
 	//Iva: zde bude naplneni TreeCtrl ( fce CSkeletonDocument->FillTreeCtrl(pTree) )
 	GetDocument()->FillTreeControl(GetTreeCtrl());
@@ -965,4 +946,36 @@ void CSkeletonView::UpdateAllItemTexts(HTREEITEM pItem)
 	pNextItem = pItem;
 	while (pNextItem = pTreeCtrl.GetNextSiblingItem(pNextItem))
 		UpdateAllItemTexts(pNextItem);
+}
+
+BOOL CSkeletonView::Create(LPCTSTR lpszClassName, LPCTSTR lpszWindowName, DWORD dwStyle, const RECT& rect, CWnd* pParentWnd, UINT nID, CCreateContext* pContext) 
+{
+	// TODO: Add your specialized code here and/or call the base class
+	
+	if (CWnd::Create(lpszClassName, lpszWindowName, dwStyle, rect, pParentWnd, nID, pContext))
+	{
+		//Iva: Natahnu obrazky pro TreeCtrl
+
+		
+
+		m_ImageList.Create(16, 16,  //rozmery obrazku k nacteni do ImageListu
+							ILC_MASK|ILC_COLOR8,  
+							NUM_PICTURES_TREECTRL, //pocatecni pocet obrazku v ImageListu..viz Stdafx.h
+							10);//o kolik obrazku se ImageList muze zvetsit.. ??
+
+		
+		CElementManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
+		
+		m.FillImageList( m_ImageList);
+
+		//sirotci
+		m_ImageList.SetOverlayImage(0, 1);
+
+
+		GetTreeCtrl().SetImageList(&m_ImageList, TVSIL_NORMAL);
+
+		return TRUE;
+	}
+
+	return FALSE;
 }

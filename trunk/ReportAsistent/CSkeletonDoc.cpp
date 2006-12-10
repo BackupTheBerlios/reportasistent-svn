@@ -13,7 +13,6 @@
 #include "ElementParagraphDialog.h"
 #include "ElementChapterDialog.h"
 #include "ElementReportDialog.h"
-#include "ActiveElementDialog.h"
 #include "AttributeLinkDialog.h"
 #include "AttributeLinkTableDialog.h"
 #include "ElementIncludeDialog.h"
@@ -22,6 +21,7 @@
 #include "AElFiltersConfigDialog.h"
 #include "InsertElementTrace.h"
 #include "AElConfigDialog.h"
+#include "TransformationsDialog.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW

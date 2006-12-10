@@ -12,6 +12,7 @@ protoze mi styly doma nebehaj. Muzete-li, zkuste to.
 dedek todo
 BOOL CAElTransform::ProcessSimpleFlter(CFilterProcessor & processor, LPARAM user1, LPARAM user2)
 	-prepsat chybovou hlasku
+	-OK je jen v debug verzi
 CComplexFilterDialog::LoadSource "predelat vyplnovani element attributes"    
 
 
@@ -208,11 +209,14 @@ dedek TODO:
 
 otestovat zabijeni vlaken a hlavne resume application v jednotlivych situacich
 
+otestovat: co kdyz se transformace jmenuje stejne jako * attrlink table *
+-na to prdim
+
 coz takhle nejak inteligentne usporadat AP?
+-orovo - kody
 
 zdokumentovat chybovou hlasku o neplatne volbe simple filtru pri generovani
-
-otestovat: co kdyz se transformace jmenuje stejne jako * attrlink table *
+-hotovo - hlaska jen debug
 
 mazat captions_list pri zmene targetu v attr_link_table
 -hotovo
