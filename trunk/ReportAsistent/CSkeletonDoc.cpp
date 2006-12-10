@@ -187,7 +187,9 @@ HTREEITEM CSkeletonDoc::InsertNodeToTreeCtrl(MSXML2::IXMLDOMElementPtr pElement,
 
 	
 	//u kterych elementu nebude videt vnitrek
-	if (m.isElementActive(el_id) || (el_id == ELID_ATTR_LINK_TABLE)) return hTreeItem;
+	if (m.isElementActive(el_id) || 
+		(el_id == ELID_ATTR_LINK_TABLE) ||
+		(el_id == ELID_UNKNOWN)) return hTreeItem;
 	
 	
 	//rekurnetne projede deti;
