@@ -177,6 +177,9 @@ void CSimpleFilterDialog::SetDisabledCheck(void)
 		m_cloned_active_element->
 			selectNodes("filter[@type=\"simple\"]/selection")->length == 0;
 
+	m_bSimpleFilterDisabled = 
+		(m_bSimpleFilterDisabled || (m_filter_DOM == NULL));
+
 	//AfxMessageBox(m_cloned_active_element->selectSingleNode("filter[@type=\"simple\"]")->xml);
 
 }

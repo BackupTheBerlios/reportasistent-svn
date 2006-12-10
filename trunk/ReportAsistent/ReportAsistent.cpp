@@ -107,7 +107,7 @@ int CReportAsistentApp::ReportError(UINT nResourceErrorStringID, ...)
 	CString sOutputText;
 	sOutputText.Format("Program error: ERR%03d\n\n%s", nResourceErrorStringID-FIRST_ERR_STR_ID, (LPCTSTR) sMessgeText);
 
-	return AfxMessageBox(sOutputText);
+	return AfxMessageBox(sOutputText, MB_OK | MB_HELP);
 }
 
 BOOL CReportAsistentApp::InitInstance()

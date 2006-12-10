@@ -107,8 +107,14 @@ END_MESSAGE_MAP()
 BOOL CAElConfigDialog::LoadSource(public_source_id_t sId)
 {
 	CAElTransform tr(m_active_element);
+	
+	if (tr.LoadFilterDOM(sId, m_filter_DOM))
+	{
+		return TRUE;
+	}
 
-	return tr.LoadFilterDOM(sId, m_filter_DOM);
+	m_filter_DOM = NULL;
+	return FALSE;
 }
 
 
@@ -167,6 +173,8 @@ void CAElConfigDialog::OnCbnSelchangeDataSourceCombo()
 	OnSetActive();
 
 	SetModified();
+
+	Invalidate(FALSE);
 }
 
 HBRUSH CAElConfigDialog::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
