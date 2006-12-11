@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "LMReportAsistent1.0_full", "Setup_LMRA1.0_full.vdproj", "{4B31D530-353B-440B-8E4F-FFC734ADA29B}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "LMReportAsistent1.0_lite", "Setup_LMRA1.0_lite.vdproj", "{4927E44B-7FCA-414A-B1BF-7789624CF23B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Default = Debug|Default
+		Release|Default = Release|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4B31D530-353B-440B-8E4F-FFC734ADA29B}.Debug|Default.ActiveCfg = Debug
+		{4B31D530-353B-440B-8E4F-FFC734ADA29B}.Debug|Default.Build.0 = Debug
+		{4B31D530-353B-440B-8E4F-FFC734ADA29B}.Release|Default.ActiveCfg = Release
+		{4B31D530-353B-440B-8E4F-FFC734ADA29B}.Release|Default.Build.0 = Release
+		{4927E44B-7FCA-414A-B1BF-7789624CF23B}.Debug|Default.ActiveCfg = Debug
+		{4927E44B-7FCA-414A-B1BF-7789624CF23B}.Debug|Default.Build.0 = Debug
+		{4927E44B-7FCA-414A-B1BF-7789624CF23B}.Release|Default.ActiveCfg = Release
+		{4927E44B-7FCA-414A-B1BF-7789624CF23B}.Release|Default.Build.0 = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
