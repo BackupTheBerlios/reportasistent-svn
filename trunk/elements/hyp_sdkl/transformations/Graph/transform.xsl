@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="windows-1250" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:msxsl="urn:schemas-microsoft-com:xslt" xmlns:dedek="http://reportasistent.com/dedek_namespace" version="1.0">
    
    
@@ -109,7 +109,7 @@
        	                    <xsl:when test="$ValuesType='rel_sum'"><xsl:value-of select="$sum_of_values_set2" /></xsl:when>
        	                    <xsl:when test="$ValuesType='rel_max'"><xsl:value-of select="$max_value_set2" /></xsl:when>
        	                    <xsl:when test="$ValuesType='rel_row'"><xsl:value-of select="$row_values_sum_set2" /></xsl:when>
-       	                    <xsl:when test="$ValuesType='rel_col'"><xsl:value-of select="sum(key('key_hyp_sdkl',$id_base)/tab[position()=1]/r/c[position()=$col_number_set2]/@val)" /></xsl:when>
+       	                    <xsl:when test="$ValuesType='rel_col'"><xsl:value-of select="sum(key('key_hyp_sdkl',$id_base)/tab[position()=2]/r/c[position()=$col_number_set2]/@val)" /></xsl:when>
        	                    <xsl:otherwise>100</xsl:otherwise>
        	                 </xsl:choose>
        	              	</xsl:variable>			

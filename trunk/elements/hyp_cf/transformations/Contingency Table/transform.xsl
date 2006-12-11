@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="windows-1250" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 
 <xsl:stylesheet 
       xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
@@ -75,7 +75,7 @@
 
 <xsl:variable name="label_sum">   <!-- label v tabulce v kolonkach souctu-->
 	<xsl:choose>
-		<xsl:when test="$lng='cz'">součet</xsl:when>
+		<xsl:when test="$lng='cz'">souÄŤet</xsl:when>
 		<xsl:when test="$lng='en'">sum</xsl:when>
 		<xsl:otherwise>sum</xsl:otherwise>
 	</xsl:choose>
@@ -321,10 +321,10 @@
 							<td id="{$id_base}r1d2" bgcolor="{$border_color}" border_right="{$bord_out}" border_top="{$bord_out}" border_bottom="{$bord_frm}">
 								<text id="{$id_base}r1d2text">
 									<xsl:value-of select="$label_freq" />
-									<xsl:if test="$TypeOfValues='Relative'">
-										<xsl:text> (%)</xsl:text>
-									</xsl:if>
-								</text> 
+                  <xsl:if test="$TypeOfValues!='abs'">
+                              <xsl:text> (%)</xsl:text>
+                  </xsl:if>
+                </text> 
 							</td>							
 						</tr>
 						
