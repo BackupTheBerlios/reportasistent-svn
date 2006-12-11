@@ -132,7 +132,12 @@ BOOL COptionsDialog::OnInitDialog()
 
 void COptionsDialog::OnOK() 
 {
-	UpdateData();
+	if (!UpdateData(TRUE))
+	{
+		TRACE0("UpdateData failed during dialog termination.\n");
+		// the UpdateData routine will set focus to correct item
+		return;
+	}
 
 	CGeneralManager * m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager;
 	CString Pom;
@@ -206,8 +211,7 @@ void COptionsDialog::OnOK()
 	App->FirstDocumentInFirstTemplate()->UpdateAllViews(NULL, UT_SETTINGS, &oHint);
 
 
-
-	CDialog::OnOK();
+	EndDialog(IDOK);
 }
 
 void COptionsDialog::OnBnClickedTemplateBrowseBotton()
