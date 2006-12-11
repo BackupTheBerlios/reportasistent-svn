@@ -121,11 +121,6 @@ BOOL COptionsDialog::OnInitDialog()
 	m_MarkOrphansCheckBox.SetCheck( App->m_bMarkOrphans);
 
 
-	
-
-
-
-
 	return TRUE;  // return TRUE unless you set the focus to a control
 	              // EXCEPTION: OCX Property Pages should return FALSE
 }
@@ -205,6 +200,10 @@ void COptionsDialog::OnOK()
 	if (bChecked ==App->m_bMarkOrphans) oHint.iMarkOrphans = 0;
 	else if (bChecked == 0) oHint.iMarkOrphans = ORP_SIGN;
 			else oHint.iMarkOrphans = ORP_UNSIGN;
+
+	//dedek: jazyk
+	App->FirstDocumentInFirstTemplate()->SetReportSettings("language", m->getLanguage());
+
 
 	//Apply changes
 	App->FirstDocumentInFirstTemplate()->SetModifiedFlag();

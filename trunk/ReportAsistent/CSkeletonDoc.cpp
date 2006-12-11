@@ -1009,6 +1009,13 @@ BOOL CSkeletonDoc::OpenSkeletonFile(LPCTSTR file_name)
 	}
 
 	open_doc.Release();
+
+	//languagre
+	CReportAsistentApp * App = ((CReportAsistentApp *) AfxGetApp());
+	App->m_pGeneralManager->setLanguage(
+		App->FirstDocumentInFirstTemplate()->GetReportSettings("language"));
+
+
 	return ret;
 }
 

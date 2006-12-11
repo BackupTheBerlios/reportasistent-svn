@@ -19,7 +19,6 @@
 #define IDD_GENERATE_DIALOG             144
 #define IDD_SOURCES_DIALOG              145
 #define IDD_ECTIVE_ELEMENT_DIALOG       147
-#define IDD_ACTIVE_ELEMENT_DIALOG       147
 #define IDD_TRANSFORMATIONS_DIALOG      148
 #define IDB_TRANSFORMATIONS_LOGO        150
 #define IDD_ATTRIBUTE_LINK_DIALOG       151
@@ -66,12 +65,9 @@
 #define IDC_OPEN_BUTTON                 1008
 #define IDC_DISCONNECT_BUTTON           1009
 #define IDC_CLOSE_BUTTON                1009
-#define IDC_TAB1                        1009
 #define IDC_REMOVE_BUTTON               1010
-#define IDC_APPLY_BUTTON                1010
 #define IDC_RENAME_BUTTON               1011
 #define IDC_SET_DEFAULT_BUTTON          1012
-#define IDC_SWITCH_BUTTON               1015
 #define IDC_SUPPORTED_TRANSF_LIST       1016
 #define IDC_SELECTED_TRANSFS_LIST       1017
 #define IDC_ADD_BUTTON                  1018

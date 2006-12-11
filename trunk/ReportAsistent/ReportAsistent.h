@@ -74,7 +74,7 @@ public:
 
 	void setLanguage(LPCTSTR lng)
 	{
-		ASSERT((lng == CString("en")) || (lng == CString("cz")));
+		if((lng != CString("en")) && (lng != CString("cz"))) return;
 
 		m_strLanguage = lng;
 	};

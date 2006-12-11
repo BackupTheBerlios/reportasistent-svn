@@ -3,7 +3,7 @@
 	ProjectType="Visual C++"
 	Version="8,00"
 	Name="ReportAsistent"
-	ProjectGUID="{87D6E746-32DE-41DE-95DE-FF85891EE405}"
+	ProjectGUID="{3932F059-917B-4635-8CD1-02946875B678}"
 	Keyword="MFCProj"
 	>
 	<Platforms>
@@ -216,26 +216,6 @@
 			Name="Source Files"
 			Filter="cpp;c;cxx;rc;def;r;odl;idl;hpj;bat"
 			>
-			<File
-				RelativePath="ActiveElementDialog.cpp"
-				>
-				<FileConfiguration
-					Name="Debug|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						PreprocessorDefinitions=""
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Release|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						PreprocessorDefinitions=""
-					/>
-				</FileConfiguration>
-			</File>
 			<File
 				RelativePath="AElConfigDialog.cpp"
 				>
@@ -983,10 +963,6 @@
 			Name="Header Files"
 			Filter="h;hpp;hxx;hm;inl"
 			>
-			<File
-				RelativePath="ActiveElementDialog.h"
-				>
-			</File>
 			<File
 				RelativePath="AElConfigDialog.h"
 				>
