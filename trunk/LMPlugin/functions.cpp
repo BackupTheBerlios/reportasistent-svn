@@ -45,6 +45,10 @@
 #include "TColumn_Recordset.h"
 #include "direct.h"
 #include "math.h"
+#include "LMPlErrorMessages.h"
+#include "LMPlugin.h"
+
+bool ar2nl_err = false;
 
 //dedek: docasne
 /*****/
@@ -145,7 +149,7 @@ CString Get_4ftAR2NL (long hypno, CString db_name)
 	PROCESS_INFORMATION pi;
 	ZeroMemory(& pi, sizeof pi);
 
-	DWORD exit_code = 0;//unsucessfull !!!!!!!!!!!zkontrolovat
+	DWORD exit_code = 1;//0 = successful
 
 	unsigned int len = strlen (config);
 
@@ -161,7 +165,9 @@ CString Get_4ftAR2NL (long hypno, CString db_name)
 	{
 		delete [] config;
 		delete [] _db_name;
-		return "";//nahlas chybu
+		CLMSock::ReportError (4, LMERR_CANNOT_CREATE_ODBC);
+		ar2nl_err = true;
+		return "";
 	}
 	delete [] config;
 	delete [] _db_name;
@@ -169,7 +175,12 @@ CString Get_4ftAR2NL (long hypno, CString db_name)
 	//change the working directory
 	if (_chdir ((LPCSTR) _4ftAR2NL_exe_path) != 0)
 	{
-		return "";//+nahlas chybu
+		CLMSock::ReportError
+			(6, LMERR_CANNOT_FIND_AR2NL_EXE_PATH, (LPCSTR) _4ftAR2NL_exe_path);
+		SQLConfigDataSource (NULL, ODBC_REMOVE_DSN, "Microsoft Access Driver (*.mdb)\0",
+			"DSN=" + DSN + "\0\0");
+		ar2nl_err = true;
+		return "";
 	}
 
 	char * process;
@@ -192,35 +203,58 @@ CString Get_4ftAR2NL (long hypno, CString db_name)
 	CString file_path = module_path;
 	file_path += "\\4ftar2nl\\output\\output12.xml";
 	CTime last_modif_time;
-	CFile f (file_path, CFile::modeRead);
 	bool file_exists;
-	if(f.GetStatus (status))
+	try
 	{
-		file_exists = true;
-		last_modif_time = status.m_mtime;
+		CFile f (file_path, CFile::modeRead);
+		if(f.GetStatus (status))
+		{
+			file_exists = true;
+			last_modif_time = status.m_mtime;
+		}
+		else file_exists = false;
+		f.Close ();
 	}
-	else file_exists = false;
-	f.Close ();
-
-
-	//run the 4ftAR2NL application
-	if (!CreateProcess(NULL, p2.GetBuffer(0),
-		NULL, NULL, FALSE, CREATE_NO_WINDOW, NULL, NULL, & si, & pi)) 
-/***************************************************************
-
-	//run the 4ftAR2NL application
-	if (!CreateProcess(process, params,
-		NULL, NULL, FALSE, NORMAL_PRIORITY_CLASS, NULL, NULL, & si, & pi)) 
-/***************************************************************/
+	catch (...)
 	{
-		//nahlas chybu
+		file_exists = false;
+	}
+
+	try
+	{
+		//run the 4ftAR2NL application
+		if (!CreateProcess(NULL, p2.GetBuffer(0),
+			NULL, NULL, FALSE, CREATE_NO_WINDOW, NULL, NULL, & si, & pi)) 
+	/***************************************************************
+
+		//run the 4ftAR2NL application
+		if (!CreateProcess(process, params,
+			NULL, NULL, FALSE, NORMAL_PRIORITY_CLASS, NULL, NULL, & si, & pi)) 
+	/***************************************************************/
+		{
+			//nahlas chybu
+			delete [] process;
+			delete [] params;
+			if (FALSE == SQLConfigDataSource (NULL, ODBC_REMOVE_DSN,
+				"Microsoft Access Driver (*.mdb)\0", "DSN=" + DSN + "\0\0"))
+				CLMSock::ReportError (7, LMERR_AR2NL_EXE_FAIL,
+					_4ftAR2NL_exe_path + "\\" + p2.GetBuffer(0));
+			SQLConfigDataSource (NULL, ODBC_REMOVE_DSN, "Microsoft Access Driver (*.mdb)\0",
+				"DSN=" + DSN + "\0\0");
+			ar2nl_err = true;
+			return "";//!!!!!pozor na to, co vracet
+		}
+	}
+	catch (...)
+	{
 		delete [] process;
 		delete [] params;
-		if (FALSE == SQLConfigDataSource (NULL, ODBC_REMOVE_DSN,
-			"Microsoft Access Driver (*.mdb)\0", "DSN=" + DSN + "\0\0"))
-			//nahlas chybu - temp
-			AfxMessageBox("chyba");
-		return "";//!!!!!pozor na to, co vracet
+		CLMSock::ReportError (7, LMERR_AR2NL_EXE_FAIL,
+			_4ftAR2NL_exe_path + "\\" + p2.GetBuffer(0));
+		SQLConfigDataSource (NULL, ODBC_REMOVE_DSN, "Microsoft Access Driver (*.mdb)\0",
+			"DSN=" + DSN + "\0\0");
+		ar2nl_err = true;
+		return "";
 	}
 	delete [] process;
 	delete [] params;
@@ -231,47 +265,92 @@ CString Get_4ftAR2NL (long hypno, CString db_name)
 	}
 */	
 	int cnt = 0;
-	if (!GetExitCodeProcess (pi.hProcess, &exit_code))
-	{
-		//nahlas chybu
-		return "";//!!!!!pozor na to, co vracet
-	}
-	while (exit_code == STILL_ACTIVE)
+	try
 	{
 		if (!GetExitCodeProcess (pi.hProcess, &exit_code))
 		{
-			//nahlas chybu
-			return "";//!!!!!pozor na to, co vracet
+			CLMSock::ReportError (8, LMERR_AR2NL_EXIT_FAIL);
+			SQLConfigDataSource (NULL, ODBC_REMOVE_DSN, "Microsoft Access Driver (*.mdb)\0",
+				"DSN=" + DSN + "\0\0");
+			ar2nl_err = true;
+			return "";
 		}
-		Sleep (500);
-		cnt += 500;
-		if (cnt > 60000) exit_code = 0;
+		while (exit_code == STILL_ACTIVE)
+		{
+			if (!GetExitCodeProcess (pi.hProcess, &exit_code))
+			{
+				CLMSock::ReportError (8, LMERR_AR2NL_EXIT_FAIL);
+				SQLConfigDataSource (NULL, ODBC_REMOVE_DSN, "Microsoft Access Driver (*.mdb)\0",
+					"DSN=" + DSN + "\0\0");
+				ar2nl_err = true;
+				return "";
+			}
+			Sleep (500);
+			cnt += 500;
+			if (cnt > 60000) exit_code = 0;
+		}
+	}
+	catch (...)
+	{
+		CLMSock::ReportError (8, LMERR_AR2NL_EXIT_FAIL);
+		SQLConfigDataSource (NULL, ODBC_REMOVE_DSN, "Microsoft Access Driver (*.mdb)\0",
+			"DSN=" + DSN + "\0\0");
+		ar2nl_err = true;
+		return "";
 	}
 	
-	if (!CloseHandle(pi.hProcess) || !CloseHandle(pi.hThread))
+	try
 	{
-		//nahlas chybu
-		return "";//!!!!!pozor na to, co vracet
+		if (!CloseHandle(pi.hProcess) || !CloseHandle(pi.hThread))
+		{
+			SQLConfigDataSource (NULL, ODBC_REMOVE_DSN, "Microsoft Access Driver (*.mdb)\0",
+			"DSN=" + DSN + "\0\0");
+			ar2nl_err = true;
+			return "";
+		}
+	}
+	catch (...)
+	{
+		SQLConfigDataSource (NULL, ODBC_REMOVE_DSN, "Microsoft Access Driver (*.mdb)\0",
+			"DSN=" + DSN + "\0\0");
+		ar2nl_err = true;
+		return "";
 	}
 
-	if (exit_code != 0)//pozor, jeste zkontrolovat, co vraci, kdyz je neuspesny!!!!
+	if (exit_code != 0)
 	{
-		//nahlas chybu
+		SQLConfigDataSource (NULL, ODBC_REMOVE_DSN, "Microsoft Access Driver (*.mdb)\0",
+			"DSN=" + DSN + "\0\0");
 		return "";
 	}
 	
-	CFile f1 (file_path, CFile::modeRead);
-	if (f1.GetStatus (status))
+	try
 	{
-		if (file_exists && status.m_mtime == last_modif_time) return "";
-	}
-	else
-	{
-		//nahlas chybu
+		CFile f1 (file_path, CFile::modeRead);
+		if (f1.GetStatus (status))
+		{
+			if (file_exists && status.m_mtime == last_modif_time)
+			{
+				SQLConfigDataSource (NULL, ODBC_REMOVE_DSN, "Microsoft Access Driver (*.mdb)\0",
+					"DSN=" + DSN + "\0\0");
+				return "";
+			}
+		}
+		else
+		{
+			f1.Close ();
+			SQLConfigDataSource (NULL, ODBC_REMOVE_DSN, "Microsoft Access Driver (*.mdb)\0",
+				"DSN=" + DSN + "\0\0");
+			return "";
+		}
 		f1.Close ();
+	}
+	catch (...)
+	{
+		SQLConfigDataSource (NULL, ODBC_REMOVE_DSN, "Microsoft Access Driver (*.mdb)\0",
+			"DSN=" + DSN + "\0\0");
 		return "";
 	}
-	f1.Close ();
 
 	try
 	{
@@ -282,16 +361,18 @@ CString Get_4ftAR2NL (long hypno, CString db_name)
 	}
 	catch (...)
 	{
-		//nahlas chybu
+		CLMSock::ReportError (9, LMERR_CANNOT_READ_AR2NL_OUTPUT);
+		SQLConfigDataSource (NULL, ODBC_REMOVE_DSN, "Microsoft Access Driver (*.mdb)\0",
+			"DSN=" + DSN + "\0\0");
+		ar2nl_err = true;
 		return "";
 	}
 
 	//remove the temporary datasource
 	if (FALSE == SQLConfigDataSource (NULL, ODBC_REMOVE_DSN, "Microsoft Access Driver (*.mdb)\0",
-		"DSN=" + DSN + "\0\0"))
+					"DSN=" + DSN + "\0\0"))
 	{
-		//nahlas chybu
-		return "";
+//		CLMSock::ReportError (5, LMERR_CANNOT_REMOVE_ODBC);
 	}
 
 	return _4ftAR2NL_output;
@@ -1759,7 +1840,7 @@ CString fLMCategory(void* hSource)
 	catch (CDBException* e)
 	{
 		exc = true;
-		AfxMessageBox("Bad metabase version.");
+		CLMSock::ReportError (11, LMERR_BAD_MDB_VERSION);
 		e->Delete ();
 	}
 	if (exc) return "";
@@ -1794,7 +1875,7 @@ CString fLMCategory(void* hSource)
 				catch (CDBException* e)
 				{
 					exc = true;
-					AfxMessageBox("Bad metabase version.");
+					CLMSock::ReportError (11, LMERR_BAD_MDB_VERSION);
 					e->Delete ();
 				}
 				if (exc) return "";
@@ -1848,7 +1929,7 @@ CString fLMCategory(void* hSource)
 				catch (CDBException* e)
 				{
 					exc = true;
-					AfxMessageBox("Bad metabase version.");
+					CLMSock::ReportError (11, LMERR_BAD_MDB_VERSION);
 					e->Delete ();
 				}
 				if (exc) return "";
@@ -1933,7 +2014,15 @@ CString fLMCategory(void* hSource)
 
 	//creation of xml string
 	//load DTD
-	buf = Get_DTD ();
+	try
+	{
+		buf = Get_DTD ();
+	}
+	catch (...)
+	{
+		CLMSock::ReportError (12, LMERR_DTD_ERROR);
+		return "";
+	}
 	//create xml data
 	buf = buf + " <active_list> ";
 	int i;
@@ -2073,7 +2162,13 @@ CString fLM4fthyp_hlp(void * hSource, bool ar2nl)
 				pthyp->fisher = pthyp->get_fisher ();
 				pthyp->chi_sq = pthyp->get_chi_sq ();
 
+				ar2nl_err = false;
 				if (ar2nl) pthyp->ar2nl_sentences = Get_4ftAR2NL (h_id, db_name);
+				if (ar2nl_err)
+				{
+					CLMSock::ReportError (10, LMERR_AR2NL_ERR);
+					return "";
+				}
 
 				pthyp->ant_id = "ant" + pthyp->id;
 				pthyp->suc_id = "suc" + pthyp->id;
@@ -3823,7 +3918,8 @@ CString fLMdata_matrix (void* hSource)
 		"SELECT * \
 		 FROM tmAttribute, tmMatrix, tsValueSubType \
 		 WHERE tmAttribute.MatrixID=tmMatrix.MatrixID \
-			AND tmAttribute.ValueSubTypeID=tsValueSubType.ValueSubTypeID";
+			AND tmAttribute.ValueSubTypeID=tsValueSubType.ValueSubTypeID \
+		 ORDER BY tmAttribute.MatrixID";
 	if (rs.Open(AFX_DB_USE_DEFAULT_TYPE, q))
 	{
 		//iteration on query results
