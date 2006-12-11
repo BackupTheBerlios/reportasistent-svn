@@ -801,7 +801,8 @@ int CDataSourcesManager::ConnectNewSource(plugin_id_t plugin)   //pres zasuvku p
 	PersistID_t NewSourcePerzistID = NULL;	// vrati zasuvka - perzistentni ID noveho zdroje
 	hSource_t   NewSourceHandler;		// handler na novy zdroj
 		// zavolani funkce zasuvky v novem vlakne
-	CWaitDialog d("Creating new data source");
+	CString dialog_message = "Creating new data source\n\nPlugin: " + plugin;
+	CWaitDialog d(dialog_message);
 	d.DoThreadFunction(  ConnectNewSourceThreadFunction,
 						(LPARAM) PlugsTab[i].SockInterface->hNewSource,
 						(LPARAM) & NewSourcePerzistID,
@@ -892,7 +893,7 @@ BOOL CDataSourcesManager::ConnectSource(int source_index)
 	PersistID_t PID = (SourcesTab[SI]->PerzistID).AllocSysString();
 			// zavolani funkce zasuvky v novem vlakne
 	hSource_t SourceH;
-	CString DlgText = "Connecting data source:\n\n" + SourcesTab[SI]->PublicID;
+	CString DlgText = "Connecting data source:\n\n" + SourcesTab[SI]->PublicID + "\n\n(Plugin: " + PlugsTab[SourcesTab[SI]->PluginIndex].PluginName + ")";
 	CWaitDialog d((LPCTSTR) DlgText);
 	d.DoThreadFunction(  ConnectSourceThreadFunction,
 						(LPARAM) PlugsTab[i].SockInterface->hOpenSource,

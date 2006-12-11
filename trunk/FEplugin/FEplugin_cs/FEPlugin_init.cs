@@ -127,7 +127,7 @@ namespace FEplugin_cs
     public class DirManager
     {
         /// <summary>
-        /// Path to directory where ReportAsistent.exe file is placed (LM-RA install directory).
+        /// Path to LM-Report Asistent application root directory (value in registry key HKCU\Software\LISp-Miner\ReportAsistent\Settings\ApplicationRoot).
         /// </summary>
         static string LMRA_dir;
 
@@ -271,7 +271,7 @@ namespace FEplugin_cs
 
      
         /// <summary>
-        /// Returns path to LM-RA install directory.
+        /// Returns path to LM-RA root directory.
         /// </summary>
         /// <returns>value of LMRA_dir field</returns>
         public static string get_LMRA_dir()

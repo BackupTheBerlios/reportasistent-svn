@@ -52,8 +52,11 @@ namespace FEplugin_cs
 
                 // initialization of PM
                 PM = new ProjectManager(new string[0], FEplugin_globals.IceConfig.ProjectManagerOptions);
+                DirManager.SetHomePrevious_dir();
+
 
                 // loading the project
+                DirManager.SetHomeLMRA_dir();
                 if (LoadProject() == false)
                     throw new FE_error("FEP005", "Perzist ID: " + SourcePath + "\n\nReason: project can't be loaded");
             }
@@ -185,10 +188,19 @@ namespace FEplugin_cs
         /// <returns>Handle to newly created and opened data source.</returns>
         public static Int32 NewSource(string PersistID)
         {
+           
+            DirManager.SetHomeLMRA_dir(); // due to relative paths of pesist IDs
+            
             // tries to create an instance of CFEsource class
             CFEsource NS;
             try
             {
+                // controll if the file with FE project exists
+                if (!File.Exists(PersistID))
+                {
+                    throw new FE_error("FEP005", "Perzist ID: " + PersistID + "\n\nReason: project can't be loaded, file can't be found on given path");
+                }
+                
                 // test, if IceGridNode is set as system service. If not and some other source is opened, new source can not be created.
                 if (FEplugin_globals.IceConfig_initialized)
                 {
@@ -197,7 +209,7 @@ namespace FEplugin_cs
                         throw new FE_error("FEP006");
                     }
                 }
-                
+
                 NS = new CFEsource(PersistID);
                 int index = sources.Add(NS);
                 SrcCount++;
@@ -214,6 +226,10 @@ namespace FEplugin_cs
                 FE_error err = new FE_error("FEP005", "Reason: " + e.Message);
                 FE_err_msg.show_err_msg(err);
                 return -1;
+            }
+            finally 
+            {
+                DirManager.SetHomePrevious_dir();
             }
 
         }

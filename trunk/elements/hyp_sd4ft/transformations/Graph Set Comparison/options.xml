@@ -41,10 +41,10 @@
     <color_option variable_name="Chart2Color" title="Chart 2 color - (#RRGGBB)" />  
 
     <!-- setting of graph width (compared to page width)-->
-    <number_option variable_name="GraphWidth" title="Graph width (to page wigth) - (editable)" num_type="float" dec="2" min_value="0" max_value="1"/>
+    <number_option variable_name="GraphWidth" title="Graph width (to page width) - (editable)" num_type="float" dec="2" min_value="0" max_value="1"/>
 
     <!-- setting of graph height (compared to page width)-->
-    <number_option variable_name="GraphHeight" title="Graph height (to page wigth) - (editable)" num_type="float" dec="2" min_value="0" max_value="5"/>
+    <number_option variable_name="GraphHeight" title="Graph height (to page width) - (editable)" num_type="float" dec="2" min_value="0" max_value="5"/>
     
     
   </visualization_options>
