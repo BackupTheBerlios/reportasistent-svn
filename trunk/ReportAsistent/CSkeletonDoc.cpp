@@ -728,7 +728,7 @@ void CSkeletonDoc::OnMmnewelement(UINT nMessageID)
 	CElementManager::elId_t el_what_id = ElementIdFromCommandId(nMessageID);
 	if (el_what_id == ELID_UNKNOWN) return;
 
-//Find trace how to place el_what into el_where
+	//Find trace how to place el_what into el_where
 	CInsertElementTrace OTrace;
 	OTrace.FindTrace(el_what_id,el_where_id);
 	HTREEITEM hInterItem1=NULL;
@@ -1143,7 +1143,8 @@ BOOL CSkeletonDoc::InsertNewElementAndUpdateTreeCtrl( BOOL bEdit,CElementManager
 			else
 			{
 				//pokud editace neprobehla uspene, element se z kostry smaze
-			//	new_element->parentNode->removeChild(new_element);
+				MSXML2::IXMLDOMElementPtr pomParent = new_element->parentNode;
+				pomParent->removeChild(new_element);
 			}
 			new_element.Release();
 		}
