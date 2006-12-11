@@ -140,7 +140,7 @@ Private Sub AddTitle(text As String)
 End Sub
 
 Public Sub EndTableColumn()
-    If Not mWordApp.Selection.Cells(1).Next Is Nothing Then
+    If Not mWordApp.Selection.Cells.Item(1).Next Is Nothing Then
         mWordApp.Selection.MoveRight Unit:=wdCell ', Count:=cs - 1, Extend:=wdExtend
     End If
     
@@ -222,11 +222,11 @@ Public Sub LoadTableColumn(oAttributes As MSXML2.IVBSAXAttributes)
     On Error GoTo 0
     
     If cs > 1 Or rs > 1 Then
-        Set fc = mWordApp.Selection.Cells(1)
+        Set fc = mWordApp.Selection.Cells.Item(1)
         
         mWordApp.Selection.MoveRight Unit:=wdCell, Count:=cs - 1
         mWordApp.Selection.MoveDown Unit:=wdLine, Count:=rs - 1
-        Set pom_c = mWordApp.Selection.Cells(1)
+        Set pom_c = mWordApp.Selection.Cells.Item(1)
         fc.Select
         fc.Merge pom_c
         fc.Select
@@ -242,10 +242,10 @@ Public Sub LoadTableColumn(oAttributes As MSXML2.IVBSAXAttributes)
     
     On Error GoTo 0
     
-    If Not bTop = "" Then SetCellBorder mWordApp.Selection.Cells(1).Borders(wdBorderTop), bTop
-    If Not bBottom = "" Then SetCellBorder mWordApp.Selection.Cells(1).Borders(wdBorderBottom), bBottom
-    If Not bLeft = "" Then SetCellBorder mWordApp.Selection.Cells(1).Borders(wdBorderLeft), bLeft
-    If Not bRight = "" Then SetCellBorder mWordApp.Selection.Cells(1).Borders(wdBorderRight), bRight
+    If Not bTop = "" Then SetCellBorder mWordApp.Selection.Cells.Item(1).Borders(wdBorderTop), bTop
+    If Not bBottom = "" Then SetCellBorder mWordApp.Selection.Cells.Item(1).Borders(wdBorderBottom), bBottom
+    If Not bLeft = "" Then SetCellBorder mWordApp.Selection.Cells.Item(1).Borders(wdBorderLeft), bLeft
+    If Not bRight = "" Then SetCellBorder mWordApp.Selection.Cells.Item(1).Borders(wdBorderRight), bRight
     
     
     On Error GoTo EndSub
@@ -253,7 +253,7 @@ Public Sub LoadTableColumn(oAttributes As MSXML2.IVBSAXAttributes)
     hex_bg = oAttributes.getValueFromName("", "bgcolor")
     
             
-    mWordApp.Selection.Cells(1).Shading.BackgroundPatternColor = HTMLRGB_2_VBRGB(hex_bg)
+    mWordApp.Selection.Cells.Item(1).Shading.BackgroundPatternColor = HTMLRGB_2_VBRGB(hex_bg)
     
            
 EndSub:
@@ -268,7 +268,7 @@ Public Sub EndTable()
     'mTable.Columns(1).AutoFit
     'mTable.Rows.Alignment = mTable.Rows.Alignment
 
-    mWordApp.ActiveDocument.range(mTable.range.End, mTable.range.End).Select
+    mWordApp.ActiveDocument.Range(mTable.Range.End, mTable.Range.End).Select
 End Sub
 
 Public Static Function CountBorderLineWidth(ByVal width As Double) As Word.WdLineWidth
@@ -300,7 +300,7 @@ Public Sub LoadTable(oAttributes As MSXML2.IVBSAXAttributes)
     Dim bw As Double
     
     Set mTable = mWordApp.ActiveDocument.Tables.Add( _
-        range:=mWordApp.Selection.range, _
+        Range:=mWordApp.Selection.Range, _
         NumRows:=oAttributes.getValueFromName("", "rows"), _
         NumColumns:=oAttributes.getValueFromName("", "cols"))
         
@@ -365,7 +365,7 @@ Public Sub LoadInclude(oAttributes As MSXML2.IVBSAXAttributes)
     Set cur_doc = mWordApp.ActiveDocument
     
 '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-'!!!!!!!!!!nastavuje pocatek relativnicj cest!!!!!!!!
+'!!!!!!!!!!nastavuje pocatek relativnich cest!!!!!!!!
 '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     mWordApp.ChangeFileOpenDirectory app.Path
 '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -426,13 +426,13 @@ Public Sub LoadChart(oAttributes As MSXML2.IVBSAXAttributes)
     On Error GoTo NoTitle
     
     title = oAttributes.getValueFromName("", "title")
-    mGraph.Application.DataSheet.Cells(mintGraphCharts + 1, 1) = title
+    mGraph.Application.DataSheet.Cells.Item(mintGraphCharts + 1, 1) = title
     
     
 NoTitle:
     On Error GoTo EndSub
     'pokud neni titulek, aby se vytvorila series ktere se pak priradi barva
-    mGraph.Application.DataSheet.Cells(mintGraphCharts + 1, 2) = 0
+    mGraph.Application.DataSheet.Cells.Item(mintGraphCharts + 1, 2) = 0
     
     color = oAttributes.getValueFromName("", "color")
     mGraph.SeriesCollection(mintGraphCharts).Interior.color = HTMLRGB_2_VBRGB(color)
@@ -448,7 +448,7 @@ Public Sub LoadChartValue(oAttributes As MSXML2.IVBSAXAttributes)
     Dim color As String
     
     val = oAttributes.getValueFromName("", "value")
-    mGraph.Application.DataSheet.Cells(mintGraphCharts + 1, mintLastGraphCell) = val
+    mGraph.Application.DataSheet.Cells.Item(mintGraphCharts + 1, mintLastGraphCell) = val
     
     On Error GoTo EndSub
     
@@ -474,7 +474,7 @@ Public Sub LoadGraphCategory(oAttributes As MSXML2.IVBSAXAttributes)
     Dim title As String
     
     title = oAttributes.getValueFromName("", "title")
-    mGraph.Application.DataSheet.Cells(1, mintLastGraphCell) = title
+    mGraph.Application.DataSheet.Cells.Item(1, mintLastGraphCell) = title
     
     mintLastGraphCell = mintLastGraphCell + 1
 End Sub

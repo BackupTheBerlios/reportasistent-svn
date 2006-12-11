@@ -83,9 +83,9 @@ Private Sub Class_Initialize()
     strDefaultWordTemplate = "Normal.dot"
 End Sub
 
-Private Sub evWordApp_DocumentBeforeClose(ByVal Doc As Word.Document, Cancel As Boolean)
+Private Sub evWordApp_DocumentBeforeClose(ByVal doc As Word.Document, Cancel As Boolean)
     'dulezite jinak se to na koci prace vzdycky pta jestli ulozit - zmena je toolbar
-    Doc.AttachedTemplate.Saved = True
+    doc.AttachedTemplate.Saved = True
 End Sub
 
 Private Sub evWordApp_Quit()
@@ -379,9 +379,6 @@ Public Sub LoadFromString(ByVal strXMLSource As String)
            
     reader.parse strXMLSource
     
-
-'    RaiseEvent HonzaEvent("DDccDDkonec*")
-
 End Sub
 
 

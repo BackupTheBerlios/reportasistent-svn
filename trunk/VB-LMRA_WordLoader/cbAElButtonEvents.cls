@@ -11,6 +11,8 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
+'poziva se pro chytani eventu od tlacitek aktivnich prvku
+
 Option Explicit
 
 Public WithEvents cbBtn As Office.CommandBarButton

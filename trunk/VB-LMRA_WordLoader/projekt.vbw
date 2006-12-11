@@ -3,6 +3,6 @@ ContentHandlerImpl = 80, 73, 627, 533, C
 ErrorHandlerImpl = 44, 44, 591, 504, C
 WordLoader = 64, 43, 678, 504, C
 MainModule = 22, 12, 636, 473, C
-LMRA_XML_WordLoader = 7, 1, 890, 781, Z
+LMRA_XML_WordLoader = 7, 1, 890, 781, C
 cbAElButtonEvents = 88, 88, 657, 548, C
 cbCommandEvents = 132, 132, 688, 578, C
