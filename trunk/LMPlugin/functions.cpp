@@ -442,6 +442,9 @@ CString fLMQuantifier (void* hSource)
 	Quantifier_Meta * ptquant;
 	quant_item item;
 
+	BOOL result;
+	bool exc = false;
+
 	TFTQuantifier_Recordset rs ((CDatabase *) hSource);
 	TCFQuantifier_Recordset rsCF ((CDatabase *) hSource);
 	TKLQuantifier_Recordset rsKL ((CDatabase *) hSource);
@@ -456,7 +459,19 @@ CString fLMQuantifier (void* hSource)
 				   AND tdFTQuantifier.TaskID=taTask.TaskID \
 				   AND tsQuantifierType.QuantifierTypeID=tdFTQuantifier.FTQuantifierTypeID";
 
-	if (rs.Open(AFX_DB_USE_DEFAULT_TYPE, q))
+	try
+	{
+		result = rs.Open(AFX_DB_USE_DEFAULT_TYPE, q);
+	}
+	catch (CDBException* e)
+	{
+		exc = true;
+		CLMSock::ReportError (11, LMERR_BAD_MDB_VERSION);
+		e->Delete ();
+	}
+	if (exc) return "";
+	
+	if (result)
 	{
 		//iteration on query results
 		while (!rs.IsEOF())
@@ -467,7 +482,7 @@ CString fLMQuantifier (void* hSource)
 			ptquant->name = rs.m_Name3;
 			ptquant->task_name = rs.m_Name;
 			ptquant->task_type = rs.m_Name4;
-			ptquant->type = "";
+			ptquant->type = "N/A";
 			hlp.Format ("%d", rs.m_FTQuantifierID);
 			hlp = "quantFT" + hlp;
 			ptquant->id = hlp;
@@ -630,7 +645,19 @@ CString fLMQuantifier (void* hSource)
 		   AND tsCFQuantifierValueType.CFQuantifierValueTypeID=tdCFQuantifier.CFQuantifierValueTypeID \
 		   AND tsCompareType.CompareTypeID=tdCFQuantifier.CompareTypeID";
 
-	if (rsCF.Open(AFX_DB_USE_DEFAULT_TYPE, q))
+	try
+	{
+		result = rsCF.Open(AFX_DB_USE_DEFAULT_TYPE, q);
+	}
+	catch (CDBException* e)
+	{
+		exc = true;
+		CLMSock::ReportError (11, LMERR_BAD_MDB_VERSION);
+		e->Delete ();
+	}
+	if (exc) return "";
+	
+	if (result)
 	{
 		//iteration on query results
 		while (!rsCF.IsEOF())
@@ -641,7 +668,7 @@ CString fLMQuantifier (void* hSource)
 			ptquant->name = rsCF.m_Name3;
 			ptquant->task_name = rsCF.m_Name;
 			ptquant->task_type = rsCF.m_Name6;
-			ptquant->type = "";
+			ptquant->type = "N/A";
 			hlp.Format ("%d", rsCF.m_CFQuantifierID);
 			hlp = "quantCF" + hlp;
 			ptquant->id = hlp;
@@ -683,7 +710,19 @@ CString fLMQuantifier (void* hSource)
 		   AND tsKLQuantifierValueType.KLQuantifierValueTypeID=tdKLQuantifier.KLQuantifierValueTypeID \
 		   AND tsCompareType.CompareTypeID=tdKLQuantifier.CompareTypeID";
 
-	if (rsKL.Open(AFX_DB_USE_DEFAULT_TYPE, q))
+	try
+	{
+		result = rsKL.Open(AFX_DB_USE_DEFAULT_TYPE, q);
+	}
+	catch (CDBException* e)
+	{
+		exc = true;
+		CLMSock::ReportError (11, LMERR_BAD_MDB_VERSION);
+		e->Delete ();
+	}
+	if (exc) return "";
+	
+	if (result)
 	{
 		//iteration on query results
 		while (!rsKL.IsEOF())
@@ -694,7 +733,7 @@ CString fLMQuantifier (void* hSource)
 			ptquant->name = rsKL.m_Name4;
 			ptquant->task_name = rsKL.m_Name;
 			ptquant->task_type = rsKL.m_Name6;
-			ptquant->type = "";
+			ptquant->type = "N/A";
 			hlp.Format ("%d", rsKL.m_KLQuantifierID);
 			hlp = "quantKL" + hlp;
 			ptquant->id = hlp;
@@ -746,7 +785,19 @@ CString fLMQuantifier (void* hSource)
 		   AND tsCompareType.CompareTypeID=tdDFQuantifier.CompareTypeID \
 		   AND tsSDQuantifierSourceType.SDQuantifierSourceTypeID=tdDFQuantifier.SDQuantifierSourceTypeID";
 
-	if (rsDF.Open(AFX_DB_USE_DEFAULT_TYPE, q))
+	try
+	{
+		result = rsDF.Open(AFX_DB_USE_DEFAULT_TYPE, q);
+	}
+	catch (CDBException* e)
+	{
+		exc = true;
+		CLMSock::ReportError (11, LMERR_BAD_MDB_VERSION);
+		e->Delete ();
+	}
+	if (exc) return "";
+	
+	if (result)
 	{
 		//iteration on query results
 		while (!rsDF.IsEOF())
@@ -757,7 +808,7 @@ CString fLMQuantifier (void* hSource)
 			ptquant->name = rsDF.m_Name4;
 			ptquant->task_name = rsDF.m_Name;
 			ptquant->task_type = rsDF.m_Name7;
-			ptquant->type = "";
+			ptquant->type = "N/A";
 			hlp.Format ("%d", rsDF.m_DFQuantifierID);
 			hlp = "quantDF" + hlp;
 			ptquant->id = hlp;
@@ -797,7 +848,19 @@ CString fLMQuantifier (void* hSource)
 		   AND tsCompareType.CompareTypeID=tdDCQuantifier.CompareTypeID \
 		   AND tsSDQuantifierSourceType.SDQuantifierSourceTypeID=tdDCQuantifier.SDQuantifierSourceTypeID";
 
-	if (rsDC.Open(AFX_DB_USE_DEFAULT_TYPE, q))
+	try
+	{
+		result = rsDC.Open(AFX_DB_USE_DEFAULT_TYPE, q);
+	}
+	catch (CDBException* e)
+	{
+		exc = true;
+		CLMSock::ReportError (11, LMERR_BAD_MDB_VERSION);
+		e->Delete ();
+	}
+	if (exc) return "";
+	
+	if (result)
 	{
 		//iteration on query results
 		while (!rsDC.IsEOF())
@@ -808,7 +871,7 @@ CString fLMQuantifier (void* hSource)
 			ptquant->name = rsDC.m_Name4;
 			ptquant->task_name = rsDC.m_Name;
 			ptquant->task_type = rsDC.m_Name7;
-			ptquant->type = "";
+			ptquant->type = "N/A";
 			hlp.Format ("%d", rsDC.m_DCQuantifierID);
 			hlp = "quantDC" + hlp;
 			ptquant->id = hlp;
@@ -856,7 +919,19 @@ CString fLMQuantifier (void* hSource)
 		   AND tsCompareType.CompareTypeID=tdDKQuantifier.CompareTypeID \
 		   AND tsSDQuantifierSourceType.SDQuantifierSourceTypeID=tdDKQuantifier.SDQuantifierSourceTypeID";
 
-	if (rsDK.Open(AFX_DB_USE_DEFAULT_TYPE, q))
+	try
+	{
+		result = rsDK.Open(AFX_DB_USE_DEFAULT_TYPE, q);
+	}
+	catch (CDBException* e)
+	{
+		exc = true;
+		CLMSock::ReportError (11, LMERR_BAD_MDB_VERSION);
+		e->Delete ();
+	}
+	if (exc) return "";
+	
+	if (result)
 	{
 		//iteration on query results
 		while (!rsDK.IsEOF())
@@ -867,7 +942,7 @@ CString fLMQuantifier (void* hSource)
 			ptquant->name = rsDK.m_Name4;
 			ptquant->task_name = rsDK.m_Name;
 			ptquant->task_type = rsDK.m_Name7;
-			ptquant->type = "";
+			ptquant->type = "N/A";
 			hlp.Format ("%d", rsDK.m_DKQuantifierID);
 			hlp = "quantDK" + hlp;
 			ptquant->id = hlp;
@@ -913,7 +988,15 @@ CString fLMQuantifier (void* hSource)
 
 	//creation of xml string
 	//load DTD
-	buf = Get_DTD ();
+	try
+	{
+		buf = Get_DTD ();
+	}
+	catch (...)
+	{
+		CLMSock::ReportError (12, LMERR_DTD_ERROR);
+		return "";
+	}
 	//create xml data
 	buf = buf + " <active_list> ";
 	int i;
@@ -957,6 +1040,9 @@ CString fLMTask (void* hSource)
 	long up;
 	long down;
 
+	BOOL result;
+	bool exc = false;
+
 	TTask_Meta_Array list;
 	Task_Meta * pttask;
 	
@@ -970,7 +1056,19 @@ CString fLMTask (void* hSource)
 				 WHERE taTask.MatrixID=tmMatrix.MatrixID \
 				   AND taTask.TaskSubTypeID=tsTaskSubType.TaskSubTypeID";
 
-	if (rs.Open(AFX_DB_USE_DEFAULT_TYPE, q))
+	try
+	{
+		result = rs.Open(AFX_DB_USE_DEFAULT_TYPE, q);
+	}
+	catch (CDBException* e)
+	{
+		exc = true;
+		CLMSock::ReportError (11, LMERR_BAD_MDB_VERSION);
+		e->Delete ();
+	}
+	if (exc) return "";
+	
+	if (result)
 	{
 		//iteration on query results
 		while (!rs.IsEOF())
@@ -1009,7 +1107,19 @@ CString fLMTask (void* hSource)
 			q_hyp = "SELECT * \
 					 FROM tiHypothesis \
 					 WHERE TaskID=" + hlp;
-			if (rs_hyp.Open (AFX_DB_USE_DEFAULT_TYPE, q_hyp))
+			try
+			{
+				result = rs_hyp.Open (AFX_DB_USE_DEFAULT_TYPE, q_hyp);
+			}
+			catch (CDBException* e)
+			{
+				exc = true;
+				CLMSock::ReportError (11, LMERR_BAD_MDB_VERSION);
+				e->Delete ();
+			}
+			if (exc) return "";
+			
+			if (result)
 			{
 				hyp_cnt = 0;
 				while (!rs_hyp.IsEOF())
@@ -1043,7 +1153,15 @@ CString fLMTask (void* hSource)
 
 	//creation of xml string
 	//load DTD
-	buf = Get_DTD ();
+	try
+	{
+		buf = Get_DTD ();
+	}
+	catch (...)
+	{
+		CLMSock::ReportError (12, LMERR_DTD_ERROR);
+		return "";
+	}
 	//create xml data
 	buf = buf + " <active_list> ";
 	int i;
@@ -1086,6 +1204,9 @@ CString fLMKLCedent (void* hSource)
 	long c_id_tst = 0; //test, wheather the new sub cedent appears
 	long c = 0; //counter
 
+	BOOL result;
+	bool exc = false;
+
 
 	KL_Cedent_Recordset rs ((CDatabase *) hSource);
 	TKLLiteral rs_lit ((CDatabase *) hSource);
@@ -1106,7 +1227,19 @@ CString fLMKLCedent (void* hSource)
 			AND taTask.TaskSubTypeID=tsTaskSubType.TaskSubTypeID \
 		 ORDER BY taTask.TaskID, tdKLCedentD.CedentTypeID";
 
-	if (rs.Open(AFX_DB_USE_DEFAULT_TYPE, q))
+	try
+	{
+		result = rs.Open(AFX_DB_USE_DEFAULT_TYPE, q);
+	}
+	catch (CDBException* e)
+	{
+		exc = true;
+		CLMSock::ReportError (11, LMERR_BAD_MDB_VERSION);
+		e->Delete ();
+	}
+	if (exc) return "";
+	
+	if (result)
 	{
 		//iteration on query results
 		while (!rs.IsEOF())
@@ -1155,7 +1288,19 @@ CString fLMKLCedent (void* hSource)
 					 WHERE tdKLLiteralD.KLCedentDID=" + hlp +
 					"	AND tmQuantity.QuantityID=tdKLLiteralD.QuantityID \
 						AND tmQuantity.AttributeID=tmAttribute.AttributeID";
-				if (rs_lit.Open(AFX_DB_USE_DEFAULT_TYPE, q_lit))
+				try
+				{
+					result = rs_lit.Open(AFX_DB_USE_DEFAULT_TYPE, q_lit);
+				}
+				catch (CDBException* e)
+				{
+					exc = true;
+					CLMSock::ReportError (11, LMERR_BAD_MDB_VERSION);
+					e->Delete ();
+				}
+				if (exc) return "";
+				
+				if (result)
 				{
 					//iteration on query results
 					while (!rs_lit.IsEOF())
@@ -1168,7 +1313,19 @@ CString fLMKLCedent (void* hSource)
 							"SELECT * \
 							 FROM tmCategory \
 							 WHERE tmCategory.QuantityID=" + hlp;
-						if (rs_cat.Open(AFX_DB_USE_DEFAULT_TYPE, q_cat))
+						try
+						{
+							result = rs_cat.Open(AFX_DB_USE_DEFAULT_TYPE, q_cat);
+						}
+						catch (CDBException* e)
+						{
+							exc = true;
+							CLMSock::ReportError (11, LMERR_BAD_MDB_VERSION);
+							e->Delete ();
+						}
+						if (exc) return "";
+						
+						if (result)
 						{
 							c = 0;
 							//iteration on query results
@@ -1198,7 +1355,15 @@ CString fLMKLCedent (void* hSource)
 
 	//creation of xml string
 	//load DTD
-	buf = Get_DTD ();
+	try
+	{
+		buf = Get_DTD ();
+	}
+	catch (...)
+	{
+		CLMSock::ReportError (12, LMERR_DTD_ERROR);
+		return "";
+	}
 	//create xml data
 	buf = buf + " <active_list> ";
 	int i;
@@ -1248,6 +1413,9 @@ CString fLMCFCedent (void* hSource)
 	long c_id_tst = 0; //test, wheather the new sub cedent appears
 	long c = 0; //counter
 
+	BOOL result;
+	bool exc = false;
+
 
 	CF_Cedent_Recordset rs ((CDatabase *) hSource);
 	TCFLiteral rs_lit ((CDatabase *) hSource);
@@ -1268,7 +1436,19 @@ CString fLMCFCedent (void* hSource)
 			AND taTask.TaskSubTypeID=tsTaskSubType.TaskSubTypeID \
 		 ORDER BY taTask.TaskID, tdCFCedentD.CedentTypeID";
 
-	if (rs.Open(AFX_DB_USE_DEFAULT_TYPE, q))
+	try
+	{
+		result = rs.Open(AFX_DB_USE_DEFAULT_TYPE, q);
+	}
+	catch (CDBException* e)
+	{
+		exc = true;
+		CLMSock::ReportError (11, LMERR_BAD_MDB_VERSION);
+		e->Delete ();
+	}
+	if (exc) return "";
+	
+	if (result)
 	{
 		//iteration on query results
 		while (!rs.IsEOF())
@@ -1314,7 +1494,19 @@ CString fLMCFCedent (void* hSource)
 					 WHERE tdCFLiteralD.CFCedentDID=" + hlp +
 					"	AND tmQuantity.QuantityID=tdCFLiteralD.QuantityID \
 						AND tmQuantity.AttributeID=tmAttribute.AttributeID";
-				if (rs_lit.Open(AFX_DB_USE_DEFAULT_TYPE, q_lit))
+				try
+				{
+					result = rs_lit.Open(AFX_DB_USE_DEFAULT_TYPE, q_lit);
+				}
+				catch (CDBException* e)
+				{
+					exc = true;
+					CLMSock::ReportError (11, LMERR_BAD_MDB_VERSION);
+					e->Delete ();
+				}
+				if (exc) return "";
+				
+				if (result)
 				{
 					//iteration on query results
 					while (!rs_lit.IsEOF())
@@ -1327,7 +1519,19 @@ CString fLMCFCedent (void* hSource)
 							"SELECT * \
 							 FROM tmCategory \
 							 WHERE tmCategory.QuantityID=" + hlp;
-						if (rs_cat.Open(AFX_DB_USE_DEFAULT_TYPE, q_cat))
+						try
+						{
+							result = rs_cat.Open(AFX_DB_USE_DEFAULT_TYPE, q_cat);
+						}
+						catch (CDBException* e)
+						{
+							exc = true;
+							CLMSock::ReportError (11, LMERR_BAD_MDB_VERSION);
+							e->Delete ();
+						}
+						if (exc) return "";
+						
+						if (result)
 						{
 							c = 0;
 							//iteration on query results
@@ -1357,7 +1561,15 @@ CString fLMCFCedent (void* hSource)
 
 	//creation of xml string
 	//load DTD
-	buf = Get_DTD ();
+	try
+	{
+		buf = Get_DTD ();
+	}
+	catch (...)
+	{
+		CLMSock::ReportError (12, LMERR_DTD_ERROR);
+		return "";
+	}
 	//create xml data
 	buf = buf + " <active_list> ";
 	int i;
@@ -1410,6 +1622,8 @@ CString fLMBoolCedent (void* hSource)
 //	long indx; //help variable
 //	long y; //help variable
 
+	BOOL result;
+	bool exc = false;
 	BOOL missing_type = FALSE;
 
 	TBool_Cedent_Meta_Array list;
@@ -1450,7 +1664,19 @@ CString fLMBoolCedent (void* hSource)
 		 AND tdCedentD.TaskID=taTask.TaskID \
 		 AND taTask.MatrixID=tmMatrix.MatrixID";
 
-	if (rs.Open(AFX_DB_USE_DEFAULT_TYPE, q))
+	try
+	{
+		result = rs.Open(AFX_DB_USE_DEFAULT_TYPE, q);
+	}
+	catch (CDBException* e)
+	{
+		exc = true;
+		CLMSock::ReportError (11, LMERR_BAD_MDB_VERSION);
+		e->Delete ();
+	}
+	if (exc) return "";
+	
+	if (result)
 	{
 		//iteration on query results
 		while (!rs.IsEOF())
@@ -1503,7 +1729,19 @@ CString fLMBoolCedent (void* hSource)
 							 FROM tmCategory \
 							 WHERE CategoryID=" + hlp;
 					//find one category value
-					if (rs_cat.Open(AFX_DB_USE_DEFAULT_TYPE, q_cat))
+					try
+					{
+						result = rs_cat.Open(AFX_DB_USE_DEFAULT_TYPE, q_cat);
+					}
+					catch (CDBException* e)
+					{
+						exc = true;
+						CLMSock::ReportError (11, LMERR_BAD_MDB_VERSION);
+						e->Delete ();
+					}
+					if (exc) return "";
+					
+					if (result)
 					{
 						//iteration on query results - one row
 						while (!rs_cat.IsEOF())
@@ -1541,7 +1779,19 @@ CString fLMBoolCedent (void* hSource)
 					WHERE CedentDID=" + hlp;
 				//find all equivalence classes
 				hlp = "";
-				if (rs_eq.Open(AFX_DB_USE_DEFAULT_TYPE, q_eq))
+				try
+				{
+					result = rs_eq.Open(AFX_DB_USE_DEFAULT_TYPE, q_eq);
+				}
+				catch (CDBException* e)
+				{
+					exc = true;
+					CLMSock::ReportError (11, LMERR_BAD_MDB_VERSION);
+					e->Delete ();
+				}
+				if (exc) return "";
+				
+				if (result)
 				{
 					c = 0;
 					//iteration on query results
@@ -1565,7 +1815,19 @@ CString fLMBoolCedent (void* hSource)
 						WHERE QuantityID=" + hlp;
 				//find categories and missing values
 				missing_type = FALSE;
-				if (rs_cat.Open(AFX_DB_USE_DEFAULT_TYPE, q_cat))
+				try
+				{
+					result = rs_cat.Open(AFX_DB_USE_DEFAULT_TYPE, q_cat);
+				}
+				catch (CDBException* e)
+				{
+					exc = true;
+					CLMSock::ReportError (11, LMERR_BAD_MDB_VERSION);
+					e->Delete ();
+				}
+				if (exc) return "";
+				
+				if (result)
 				{
 					c = 0;
 					//iteration on query results
@@ -1592,7 +1854,19 @@ CString fLMBoolCedent (void* hSource)
 	}
 	else return "";
 	//add empty subcedents
-	if (rs_em.Open(AFX_DB_USE_DEFAULT_TYPE, q_em))
+	try
+	{
+		result = rs_em.Open(AFX_DB_USE_DEFAULT_TYPE, q_em);
+	}
+	catch (CDBException* e)
+	{
+		exc = true;
+		CLMSock::ReportError (11, LMERR_BAD_MDB_VERSION);
+		e->Delete ();
+	}
+	if (exc) return "";
+	
+	if (result)
 	{
 		//iteration on query results
 		while (!rs_em.IsEOF())
@@ -1600,7 +1874,19 @@ CString fLMBoolCedent (void* hSource)
 			hlp.Format ("%d", rs_em.m_CedentDID);
 			q_lit = "SELECT * FROM tdLiteralD WHERE CedentDID=" + hlp;
 			c = 0;
-			if (rs_lit.Open (AFX_DB_USE_DEFAULT_TYPE, q_lit))
+			try
+			{
+				result = rs_lit.Open (AFX_DB_USE_DEFAULT_TYPE, q_lit);
+			}
+			catch (CDBException* e)
+			{
+				exc = true;
+				CLMSock::ReportError (11, LMERR_BAD_MDB_VERSION);
+				e->Delete ();
+			}
+			if (exc) return "";
+			
+			if (result)
 			{
 				while (!rs_lit.IsEOF ())
 				{
@@ -1660,7 +1946,15 @@ CString fLMBoolCedent (void* hSource)
 
 	//creation of xml string
 	//load DTD
-	buf = Get_DTD ();
+	try
+	{
+		buf = Get_DTD ();
+	}
+	catch (...)
+	{
+		CLMSock::ReportError (12, LMERR_DTD_ERROR);
+		return "";
+	}
 	//create xml data
 	buf = buf + " <active_list> ";
 	int i;
@@ -1698,6 +1992,9 @@ CString fLMAttribute(void* hSource)
 
 	long count = 0;
 
+	BOOL result;
+	bool exc = false;
+
 	TAttribute_Recordset rs ((CDatabase *) hSource);
 	TCategory_list rscat ((CDatabase *) hSource);
 
@@ -1711,7 +2008,19 @@ CString fLMAttribute(void* hSource)
 		 FROM tmAttribute, tmMatrix, tsAttributeSubType \
 		 WHERE tmAttribute.MatrixID=tmMatrix.MatrixID \
 			AND tmAttribute.AttributeSubTypeID=tsAttributeSubType.AttributeSubTypeID";
-	if (rs.Open(AFX_DB_USE_DEFAULT_TYPE, q))
+	try
+	{
+		result = rs.Open(AFX_DB_USE_DEFAULT_TYPE, q);
+	}
+	catch (CDBException* e)
+	{
+		exc = true;
+		CLMSock::ReportError (11, LMERR_BAD_MDB_VERSION);
+		e->Delete ();
+	}
+	if (exc) return "";
+	
+	if (result)
 	{
 		//iteration on query results
 		while (!rs.IsEOF())
@@ -1733,7 +2042,19 @@ CString fLMAttribute(void* hSource)
 				 WHERE tmAttribute.AttributeID=" + hlp + " \
 					AND tmAttribute.AttributeID=tmQuantity.AttributeID \
 					AND tmQuantity.QuantityID=tmCategory.QuantityID";
-			if (rscat.Open(AFX_DB_USE_DEFAULT_TYPE, qcat))
+			try
+			{
+				result = rscat.Open(AFX_DB_USE_DEFAULT_TYPE, qcat);
+			}
+			catch (CDBException* e)
+			{
+				exc = true;
+				CLMSock::ReportError (11, LMERR_BAD_MDB_VERSION);
+				e->Delete ();
+			}
+			if (exc) return "";
+			
+			if (result)
 			{
 				while (!rscat.IsEOF ())
 				{
@@ -1764,7 +2085,15 @@ CString fLMAttribute(void* hSource)
 
 	//creation of xml string
 	//load DTD
-	buf = Get_DTD ();
+	try
+	{
+		buf = Get_DTD ();
+	}
+	catch (...)
+	{
+		CLMSock::ReportError (12, LMERR_DTD_ERROR);
+		return "";
+	}
 	//create xml data
 	buf = buf + " <active_list> ";
 	int i;
@@ -2066,6 +2395,9 @@ CString fLM4fthyp_hlp(void * hSource, bool ar2nl)
 	long ld_id;//store the tdCedentDID
 	long h_id_tst = 0;//test variable - values from previous iteration
 
+	BOOL result;
+	bool exc = false;
+
 	BOOL neg_lit;
 	CString neg_lit_smbl;
 	
@@ -2091,7 +2423,19 @@ CString fLM4fthyp_hlp(void * hSource, bool ar2nl)
 						  tiLiteralI.CedentTypeID, tmQuantity.QuantityID, \
 						  tmCategory.Ord";
 	//load data from metabase
-	if (rs.Open(AFX_DB_USE_DEFAULT_TYPE, q))
+	try
+	{
+		result = rs.Open(AFX_DB_USE_DEFAULT_TYPE, q);
+	}
+	catch (CDBException* e)
+	{
+		exc = true;
+		CLMSock::ReportError (11, LMERR_BAD_MDB_VERSION);
+		e->Delete ();
+	}
+	if (exc) return "";
+	
+	if (result)
 	{
 		//iteration on query results
 		while (!rs.IsEOF())
@@ -2108,7 +2452,19 @@ CString fLM4fthyp_hlp(void * hSource, bool ar2nl)
 						  WHERE LiteralDID=" + id_hlp;
 			q_coef_type +=
 				" AND tdLiteralD.CoefficientTypeID=tsCoefficientType.CoefficientTypeID";
-			if (rs_coef_type.Open(AFX_DB_USE_DEFAULT_TYPE, q_coef_type))
+			try
+			{
+				result = rs_coef_type.Open(AFX_DB_USE_DEFAULT_TYPE, q_coef_type);
+			}
+			catch (CDBException* e)
+			{
+				exc = true;
+				CLMSock::ReportError (11, LMERR_BAD_MDB_VERSION);
+				e->Delete ();
+			}
+			if (exc) return "";
+			
+			if (result)
 			{
 				while (!rs_coef_type.IsEOF())
 				{
@@ -2229,7 +2585,15 @@ CString fLM4fthyp_hlp(void * hSource, bool ar2nl)
 	
   
 	//load DTD
-	buf = Get_DTD ();
+	try
+	{
+		buf = Get_DTD ();
+	}
+	catch (...)
+	{
+		CLMSock::ReportError (12, LMERR_DTD_ERROR);
+		return "";
+	}
 
 	//create xml data
 	buf = buf + " <active_list> ";
@@ -2287,6 +2651,9 @@ CString fLMCFhyp(void* hSource)
 	long h_id;
 	long ld_id;
 
+	BOOL result;
+	bool exc = false;;
+
 	CString neg_lit_smbl;
 
 	CString q_name;
@@ -2301,7 +2668,19 @@ CString fLMCFhyp(void* hSource)
 				   AND tiHypothesisCF.CFLiteralDID=tdCFLiteralD.CFLiteralDID \
 				   AND tdCFLiteralD.QuantityID=tmQuantity.QuantityID";
 	//load data from metabase
-	if (rs.Open(AFX_DB_USE_DEFAULT_TYPE, q))
+	try
+	{
+		result = rs.Open(AFX_DB_USE_DEFAULT_TYPE, q);
+	}
+	catch (CDBException* e)
+	{
+		exc = true;
+		CLMSock::ReportError (11, LMERR_BAD_MDB_VERSION);
+		e->Delete ();
+	}
+	if (exc) return "";
+	
+	if (result)
 	{
 		//iteration on query results
 		while (!rs.IsEOF())
@@ -2324,7 +2703,19 @@ CString fLMCFhyp(void* hSource)
 							  FROM tiCFFrequencyI \
 							  WHERE tiCFFrequencyI.HypothesisCFID=" + id_hlp +
 							" ORDER BY Col";			
-			if (rs_freq.Open(AFX_DB_USE_DEFAULT_TYPE, q_freq))
+			try
+			{
+				result = rs_freq.Open(AFX_DB_USE_DEFAULT_TYPE, q_freq);
+			}
+			catch (CDBException* e)
+			{
+				exc = true;
+				CLMSock::ReportError (11, LMERR_BAD_MDB_VERSION);
+				e->Delete ();
+			}
+			if (exc) return "";
+			
+			if (result)
 			{
 				//iteration on query results
 				while (!rs_freq.IsEOF())
@@ -2341,7 +2732,19 @@ CString fLMCFhyp(void* hSource)
 							  FROM tmCategory \
 							  WHERE tmCategory.QuantityID=" + id_hlp;
 			q_attr += " ORDER BY Ord";
-			if (rs_attr.Open(AFX_DB_USE_DEFAULT_TYPE, q_attr))
+			try
+			{
+				result = rs_attr.Open(AFX_DB_USE_DEFAULT_TYPE, q_attr);
+			}
+			catch (CDBException* e)
+			{
+				exc = true;
+				CLMSock::ReportError (11, LMERR_BAD_MDB_VERSION);
+				e->Delete ();
+			}
+			if (exc) return "";
+			
+			if (result)
 			{
 				//iteration on query results
 				while (!rs_attr.IsEOF())
@@ -2367,7 +2770,19 @@ next_attr_cf:
 								AND tmCategory.QuantityID=tmQuantity.QuantityID \
 								AND tiLiteralI.HypothesisID=" + id_hlp +
 							" ORDER BY tmQuantity.QuantityID, tmCategory.Ord";
-			if (rs_cond.Open(AFX_DB_USE_DEFAULT_TYPE, q_cond))
+			try
+			{
+				result = rs_cond.Open(AFX_DB_USE_DEFAULT_TYPE, q_cond);
+			}
+			catch (CDBException* e)
+			{
+				exc = true;
+				CLMSock::ReportError (11, LMERR_BAD_MDB_VERSION);
+				e->Delete ();
+			}
+			if (exc) return "";
+			
+			if (result)
 			{
 				//iteration on query results
 				while (!rs_cond.IsEOF())
@@ -2396,7 +2811,19 @@ next_attr_cf:
 									WHERE LiteralDID=" + id_hlp;
 					q_coef_type +=
 						" AND tdLiteralD.CoefficientTypeID=tsCoefficientType.CoefficientTypeID";
-					if (rs_coef_type.Open(AFX_DB_USE_DEFAULT_TYPE, q_coef_type))
+					try
+					{
+						result = rs_coef_type.Open(AFX_DB_USE_DEFAULT_TYPE, q_coef_type);
+					}
+					catch (CDBException* e)
+					{
+						exc = true;
+						CLMSock::ReportError (11, LMERR_BAD_MDB_VERSION);
+						e->Delete ();
+					}
+					if (exc) return "";
+					
+					if (result)
 					{
 						while (!rs_coef_type.IsEOF())
 						{
@@ -2443,7 +2870,15 @@ next_attr_cf:
 	
   
 	//load DTD
-	buf = Get_DTD ();
+	try
+	{
+		buf = Get_DTD ();
+	}
+	catch (...)
+	{
+		CLMSock::ReportError (12, LMERR_DTD_ERROR);
+		return "";
+	}
 
 	//create xml data
 	buf = buf + " <active_list> ";
@@ -2490,6 +2925,9 @@ CString fLMSD4fthyp(void * hSource)
 	long ld_id;//store the tdCedentDID
 //	long ld_id_tst = -1;//tests, whether the new tdCedentDID appears
 
+	BOOL result;
+	bool exc = false;
+
 	BOOL neg_lit;
 	CString neg_lit_smbl;
 	
@@ -2512,7 +2950,19 @@ CString fLMSD4fthyp(void * hSource)
 						  tiLiteralI.CedentTypeID, tmQuantity.QuantityID, \
 						  tmCategory.Ord";
 	//load data from metabase
-	if (rs.Open(AFX_DB_USE_DEFAULT_TYPE, q))
+	try
+	{
+		result = rs.Open(AFX_DB_USE_DEFAULT_TYPE, q);
+	}
+	catch (CDBException* e)
+	{
+		exc = true;
+		CLMSock::ReportError (11, LMERR_BAD_MDB_VERSION);
+		e->Delete ();
+	}
+	if (exc) return "";
+	
+	if (result)
 	{
 		//iteration on query results
 		while (!rs.IsEOF())
@@ -2529,7 +2979,19 @@ CString fLMSD4fthyp(void * hSource)
 						  WHERE LiteralDID=" + id_hlp;
 			q_coef_type +=
 				" AND tdLiteralD.CoefficientTypeID=tsCoefficientType.CoefficientTypeID";
-			if (rs_coef_type.Open(AFX_DB_USE_DEFAULT_TYPE, q_coef_type))
+			try
+			{
+				result = rs_coef_type.Open(AFX_DB_USE_DEFAULT_TYPE, q_coef_type);
+			}
+			catch (CDBException* e)
+			{
+				exc = true;
+				CLMSock::ReportError (11, LMERR_BAD_MDB_VERSION);
+				e->Delete ();
+			}
+			if (exc) return "";
+			
+			if (result)
 			{
 				while (!rs_coef_type.IsEOF())
 				{
@@ -2727,7 +3189,15 @@ CString fLMSD4fthyp(void * hSource)
 	
   
 	//load DTD
-	buf = Get_DTD ();
+	try
+	{
+		buf = Get_DTD ();
+	}
+	catch (...)
+	{
+		CLMSock::ReportError (12, LMERR_DTD_ERROR);
+		return "";
+	}
 
 	//create xml data
 	buf = buf + " <active_list> ";
@@ -2772,6 +3242,9 @@ CString fLMSDCFhyp(void * hSource)
 	long h_id;
 	long ld_id;
 
+	BOOL result;
+	bool exc = false;
+
 	CString neg_lit_smbl;
 
 	CString q_name;
@@ -2786,7 +3259,19 @@ CString fLMSDCFhyp(void * hSource)
 				   AND tiHypothesisDC.CFLiteralDID=tdCFLiteralD.CFLiteralDID \
 				   AND tdCFLiteralD.QuantityID=tmQuantity.QuantityID";
 	//load data from metabase
-	if (rs.Open(AFX_DB_USE_DEFAULT_TYPE, q))
+	try
+	{
+		result = rs.Open(AFX_DB_USE_DEFAULT_TYPE, q);
+	}
+	catch (CDBException* e)
+	{
+		exc = true;
+		CLMSock::ReportError (11, LMERR_BAD_MDB_VERSION);
+		e->Delete ();
+	}
+	if (exc) return "";
+	
+	if (result)
 	{
 		//iteration on query results
 		while (!rs.IsEOF())
@@ -2812,7 +3297,19 @@ CString fLMSDCFhyp(void * hSource)
 							  WHERE tiDCFrequencyI.CedentTypeID = 5 \
 							    AND tiDCFrequencyI.HypothesisDCID=" + id_hlp +
 							" ORDER BY Col";						
-			if (rs_freq.Open(AFX_DB_USE_DEFAULT_TYPE, q_freq))
+			try
+			{
+				result = rs_freq.Open(AFX_DB_USE_DEFAULT_TYPE, q_freq);
+			}
+			catch (CDBException* e)
+			{
+				exc = true;
+				CLMSock::ReportError (11, LMERR_BAD_MDB_VERSION);
+				e->Delete ();
+			}
+			if (exc) return "";
+			
+			if (result)
 			{
 				//iteration on query results
 				while (!rs_freq.IsEOF())
@@ -2829,7 +3326,19 @@ CString fLMSDCFhyp(void * hSource)
 					  WHERE tiDCFrequencyI.CedentTypeID = 6 \
 					    AND tiDCFrequencyI.HypothesisDCID=" + id_hlp +
 					" ORDER BY Col";						
-			if (rs_freq.Open(AFX_DB_USE_DEFAULT_TYPE, q_freq))
+			try
+			{
+				result = rs_freq.Open(AFX_DB_USE_DEFAULT_TYPE, q_freq);
+			}
+			catch (CDBException* e)
+			{
+				exc = true;
+				CLMSock::ReportError (11, LMERR_BAD_MDB_VERSION);
+				e->Delete ();
+			}
+			if (exc) return "";
+			
+			if (result)
 			{
 				//iteration on query results
 				while (!rs_freq.IsEOF())
@@ -2846,7 +3355,19 @@ CString fLMSDCFhyp(void * hSource)
 							  FROM tmCategory \
 							  WHERE tmCategory.QuantityID=" + id_hlp;
 			q_attr += " ORDER BY Ord";
-			if (rs_attr.Open(AFX_DB_USE_DEFAULT_TYPE, q_attr))
+			try
+			{
+				result = rs_attr.Open(AFX_DB_USE_DEFAULT_TYPE, q_attr);
+			}
+			catch (CDBException* e)
+			{
+				exc = true;
+				CLMSock::ReportError (11, LMERR_BAD_MDB_VERSION);
+				e->Delete ();
+			}
+			if (exc) return "";
+			
+			if (result)
 			{
 				//iteration on query results
 				while (!rs_attr.IsEOF())
@@ -2874,7 +3395,19 @@ next_attr_sdcf:
 								AND tmCategory.QuantityID=tmQuantity.QuantityID \
 								AND tiLiteralI.HypothesisID=" + id_hlp +
 							" ORDER BY tmQuantity.QuantityID, tmCategory.Ord";
-			if (rs_cond.Open(AFX_DB_USE_DEFAULT_TYPE, q_cond))
+			try
+			{
+				result = rs_cond.Open(AFX_DB_USE_DEFAULT_TYPE, q_cond);
+			}
+			catch (CDBException* e)
+			{
+				exc = true;
+				CLMSock::ReportError (11, LMERR_BAD_MDB_VERSION);
+				e->Delete ();
+			}
+			if (exc) return "";
+			
+			if (result)
 			{
 				//iteration on query results
 				while (!rs_cond.IsEOF())
@@ -2903,7 +3436,19 @@ next_attr_sdcf:
 									WHERE LiteralDID=" + id_hlp;
 					q_coef_type +=
 						" AND tdLiteralD.CoefficientTypeID=tsCoefficientType.CoefficientTypeID";
-					if (rs_coef_type.Open(AFX_DB_USE_DEFAULT_TYPE, q_coef_type))
+					try
+					{
+						result = rs_coef_type.Open(AFX_DB_USE_DEFAULT_TYPE, q_coef_type);
+					}
+					catch (CDBException* e)
+					{
+						exc = true;
+						CLMSock::ReportError (11, LMERR_BAD_MDB_VERSION);
+						e->Delete ();
+					}
+					if (exc) return "";
+					
+					if (result)
 					{
 						while (!rs_coef_type.IsEOF())
 						{
@@ -2934,7 +3479,19 @@ next_attr_sdcf:
 						AND tmCategory.QuantityID=tmQuantity.QuantityID \
 						AND tiLiteralI.HypothesisID=" + id_hlp +
 					" ORDER BY tmQuantity.QuantityID, tmCategory.Ord";
-			if (rs_cond.Open(AFX_DB_USE_DEFAULT_TYPE, q_cond))
+			try
+			{
+				result = rs_cond.Open(AFX_DB_USE_DEFAULT_TYPE, q_cond);
+			}
+			catch (CDBException* e)
+			{
+				exc = true;
+				CLMSock::ReportError (11, LMERR_BAD_MDB_VERSION);
+				e->Delete ();
+			}
+			if (exc) return "";
+			
+			if (result)
 			{
 				//iteration on query results
 				while (!rs_cond.IsEOF())
@@ -2963,7 +3520,19 @@ next_attr_sdcf:
 									WHERE LiteralDID=" + id_hlp;
 					q_coef_type +=
 						" AND tdLiteralD.CoefficientTypeID=tsCoefficientType.CoefficientTypeID";
-					if (rs_coef_type.Open(AFX_DB_USE_DEFAULT_TYPE, q_coef_type))
+					try
+					{
+						result = rs_coef_type.Open(AFX_DB_USE_DEFAULT_TYPE, q_coef_type);
+					}
+					catch (CDBException* e)
+					{
+						exc = true;
+						CLMSock::ReportError (11, LMERR_BAD_MDB_VERSION);
+						e->Delete ();
+					}
+					if (exc) return "";
+					
+					if (result)
 					{
 						while (!rs_coef_type.IsEOF())
 						{
@@ -2994,7 +3563,19 @@ next_attr_sdcf:
 						AND tmCategory.QuantityID=tmQuantity.QuantityID \
 						AND tiLiteralI.HypothesisID=" + id_hlp +
 					" ORDER BY tmQuantity.QuantityID, tmCategory.Ord";
-			if (rs_cond.Open(AFX_DB_USE_DEFAULT_TYPE, q_cond))
+			try
+			{
+				result = rs_cond.Open(AFX_DB_USE_DEFAULT_TYPE, q_cond);
+			}
+			catch (CDBException* e)
+			{
+				exc = true;
+				CLMSock::ReportError (11, LMERR_BAD_MDB_VERSION);
+				e->Delete ();
+			}
+			if (exc) return "";
+			
+			if (result)
 			{
 				//iteration on query results
 				while (!rs_cond.IsEOF())
@@ -3023,7 +3604,19 @@ next_attr_sdcf:
 									WHERE LiteralDID=" + id_hlp;
 					q_coef_type +=
 						" AND tdLiteralD.CoefficientTypeID=tsCoefficientType.CoefficientTypeID";
-					if (rs_coef_type.Open(AFX_DB_USE_DEFAULT_TYPE, q_coef_type))
+					try
+					{
+						result = rs_coef_type.Open(AFX_DB_USE_DEFAULT_TYPE, q_coef_type);
+					}
+					catch (CDBException* e)
+					{
+						exc = true;
+						CLMSock::ReportError (11, LMERR_BAD_MDB_VERSION);
+						e->Delete ();
+					}
+					if (exc) return "";
+					
+					if (result)
 					{
 						while (!rs_coef_type.IsEOF())
 						{
@@ -3092,7 +3685,15 @@ next_attr_sdcf:
 	else return "";
 
 	//load DTD
-	buf = Get_DTD ();
+	try
+	{
+		buf = Get_DTD ();
+	}
+	catch (...)
+	{
+		CLMSock::ReportError (12, LMERR_DTD_ERROR);
+		return "";
+	}
 
 	//create xml data
 	buf = buf + " <active_list> ";
@@ -3144,6 +3745,9 @@ CString fLMKLhyp(void* hSource)
 	long ld_id;
 	long row;
 
+	BOOL result;
+	bool exc = false;
+
 	CString neg_lit_smbl;
 
 	CString q_name;
@@ -3158,7 +3762,19 @@ CString fLMKLhyp(void* hSource)
 				 WHERE taTask.TaskID=tiHypothesisKL.TaskID \
 				   AND taTask.MatrixID=tmMatrix.MatrixID";
 	//load data from metabase
-	if (rs.Open(AFX_DB_USE_DEFAULT_TYPE, q))
+	try
+	{
+		result = rs.Open(AFX_DB_USE_DEFAULT_TYPE, q);
+	}
+	catch (CDBException* e)
+	{
+		exc = true;
+		CLMSock::ReportError (11, LMERR_BAD_MDB_VERSION);
+		e->Delete ();
+	}
+	if (exc) return "";
+	
+	if (result)
 	{
 		//iteration on query results
 		while (!rs.IsEOF())
@@ -3178,7 +3794,19 @@ CString fLMKLhyp(void* hSource)
 							   WHERE tdKLLiteralD.QuantityID=tmQuantity.QuantityID \
 							     AND tdKLLiteralD.KLLiteralDID=" + id_hlp;
 			//single row returned expected
-			if (rs_quant.Open(AFX_DB_USE_DEFAULT_TYPE, q_quant))
+			try
+			{
+				result = rs_quant.Open(AFX_DB_USE_DEFAULT_TYPE, q_quant);
+			}
+			catch (CDBException* e)
+			{
+				exc = true;
+				CLMSock::ReportError (11, LMERR_BAD_MDB_VERSION);
+				e->Delete ();
+			}
+			if (exc) return "";
+			
+			if (result)
 			{
 				//iteration on query results
 				while (!rs_quant.IsEOF())
@@ -3197,7 +3825,19 @@ CString fLMKLhyp(void* hSource)
 					   WHERE tdKLLiteralD.QuantityID=tmQuantity.QuantityID \
 					     AND tdKLLiteralD.KLLiteralDID=" + id_hlp;
 			//single row returned expected
-			if (rs_quant.Open(AFX_DB_USE_DEFAULT_TYPE, q_quant))
+			try
+			{
+				result = rs_quant.Open(AFX_DB_USE_DEFAULT_TYPE, q_quant);
+			}
+			catch (CDBException* e)
+			{
+				exc = true;
+				CLMSock::ReportError (11, LMERR_BAD_MDB_VERSION);
+				e->Delete ();
+			}
+			if (exc) return "";
+			
+			if (result)
 			{
 				//iteration on query results
 				while (!rs_quant.IsEOF())
@@ -3219,7 +3859,19 @@ CString fLMKLhyp(void* hSource)
 							  FROM tiKLFrequencyI \
 							  WHERE tiKLFrequencyI.HypothesisKLID=" + id_hlp +
 							" ORDER BY Row, Col";			
-			if (rs_freq.Open(AFX_DB_USE_DEFAULT_TYPE, q_freq))
+			try
+			{
+				result = rs_freq.Open(AFX_DB_USE_DEFAULT_TYPE, q_freq);
+			}
+			catch (CDBException* e)
+			{
+				exc = true;
+				CLMSock::ReportError (11, LMERR_BAD_MDB_VERSION);
+				e->Delete ();
+			}
+			if (exc) return "";
+			
+			if (result)
 			{
 				//iteration on query results
 				row_freq_hlp = new (Cint_Array);
@@ -3249,7 +3901,19 @@ CString fLMKLhyp(void* hSource)
 							    AND tmCategory.QuantityID=tmQuantity.QuantityID \
 							    AND tdKLLiteralD.KLLiteralDID=" + id_hlp;
 			q_attr += " ORDER BY tmCategory.Ord";
-			if (rs_attr.Open(AFX_DB_USE_DEFAULT_TYPE, q_attr))
+			try
+			{
+				result = rs_attr.Open(AFX_DB_USE_DEFAULT_TYPE, q_attr);
+			}
+			catch (CDBException* e)
+			{
+				exc = true;
+				CLMSock::ReportError (11, LMERR_BAD_MDB_VERSION);
+				e->Delete ();
+			}
+			if (exc) return "";
+			
+			if (result)
 			{
 				//iteration on query results
 				while (!rs_attr.IsEOF())
@@ -3275,7 +3939,19 @@ next_col_kl:
 					    AND tmCategory.QuantityID=tmQuantity.QuantityID \
 					    AND tdKLLiteralD.KLLiteralDID=" + id_hlp;
 			q_attr += " ORDER BY tmCategory.Ord";
-			if (rs_attr.Open(AFX_DB_USE_DEFAULT_TYPE, q_attr))
+			try
+			{
+				result = rs_attr.Open(AFX_DB_USE_DEFAULT_TYPE, q_attr);
+			}
+			catch (CDBException* e)
+			{
+				exc = true;
+				CLMSock::ReportError (11, LMERR_BAD_MDB_VERSION);
+				e->Delete ();
+			}
+			if (exc) return "";
+	
+			if (result)
 			{
 				//iteration on query results
 				while (!rs_attr.IsEOF())
@@ -3301,7 +3977,19 @@ next_row_kl:
 								AND tmCategory.QuantityID=tmQuantity.QuantityID \
 								AND tiLiteralI.HypothesisID=" + id_hlp +
 							" ORDER BY tmQuantity.QuantityID, tmCategory.Ord";
-			if (rs_cond.Open(AFX_DB_USE_DEFAULT_TYPE, q_cond))
+			try
+			{
+				result = rs_cond.Open(AFX_DB_USE_DEFAULT_TYPE, q_cond);
+			}
+			catch (CDBException* e)
+			{
+				exc = true;
+				CLMSock::ReportError (11, LMERR_BAD_MDB_VERSION);
+				e->Delete ();
+			}
+			if (exc) return "";
+			
+			if (result)
 			{
 				//iteration on query results
 				while (!rs_cond.IsEOF())
@@ -3330,7 +4018,19 @@ next_row_kl:
 									WHERE LiteralDID=" + id_hlp;
 					q_coef_type +=
 						" AND tdLiteralD.CoefficientTypeID=tsCoefficientType.CoefficientTypeID";
-					if (rs_coef_type.Open(AFX_DB_USE_DEFAULT_TYPE, q_coef_type))
+					try
+					{
+						result = rs_coef_type.Open(AFX_DB_USE_DEFAULT_TYPE, q_coef_type);
+					}
+					catch (CDBException* e)
+					{
+						exc = true;
+						CLMSock::ReportError (11, LMERR_BAD_MDB_VERSION);
+						e->Delete ();
+					}
+					if (exc) return "";
+					
+					if (result)
 					{
 						while (!rs_coef_type.IsEOF())
 						{
@@ -3387,7 +4087,15 @@ next_row_kl:
 	
   
 	//load DTD
-	buf = Get_DTD ();
+	try
+	{
+		buf = Get_DTD ();
+	}
+	catch (...)
+	{
+		CLMSock::ReportError (12, LMERR_DTD_ERROR);
+		return "";
+	}
 
 	//create xml data
 	buf = buf + " <active_list> ";
@@ -3444,6 +4152,9 @@ CString fLMSDKLhyp(void* hSource)
 	long ld_id;
 	long row;
 
+	BOOL result;
+	bool exc = false;
+
 	CString neg_lit_smbl;
 
 	CString q_name;
@@ -3458,7 +4169,19 @@ CString fLMSDKLhyp(void* hSource)
 				 WHERE taTask.TaskID=tiHypothesisDK.TaskID \
 				   AND taTask.MatrixID=tmMatrix.MatrixID";
 	//load data from metabase
-	if (rs.Open(AFX_DB_USE_DEFAULT_TYPE, q))
+	try
+	{
+		result = rs.Open(AFX_DB_USE_DEFAULT_TYPE, q);
+	}
+	catch (CDBException* e)
+	{
+		exc = true;
+		CLMSock::ReportError (11, LMERR_BAD_MDB_VERSION);
+		e->Delete ();
+	}
+	if (exc) return "";
+	
+	if (result)
 	{
 		//iteration on query results
 		while (!rs.IsEOF())
@@ -3478,7 +4201,19 @@ CString fLMSDKLhyp(void* hSource)
 							   WHERE tdKLLiteralD.QuantityID=tmQuantity.QuantityID \
 							     AND tdKLLiteralD.KLLiteralDID=" + id_hlp;
 			//single row returned expected
-			if (rs_quant.Open(AFX_DB_USE_DEFAULT_TYPE, q_quant))
+			try
+			{
+				result = rs_quant.Open(AFX_DB_USE_DEFAULT_TYPE, q_quant);
+			}
+			catch (CDBException* e)
+			{
+				exc = true;
+				CLMSock::ReportError (11, LMERR_BAD_MDB_VERSION);
+				e->Delete ();
+			}
+			if (exc) return "";
+			
+			if (result)
 			{
 				//iteration on query results
 				while (!rs_quant.IsEOF())
@@ -3497,7 +4232,19 @@ CString fLMSDKLhyp(void* hSource)
 					   WHERE tdKLLiteralD.QuantityID=tmQuantity.QuantityID \
 					     AND tdKLLiteralD.KLLiteralDID=" + id_hlp;
 			//single row returned expected
-			if (rs_quant.Open(AFX_DB_USE_DEFAULT_TYPE, q_quant))
+			try
+			{
+				result = rs_quant.Open(AFX_DB_USE_DEFAULT_TYPE, q_quant);
+			}
+			catch (CDBException* e)
+			{
+				exc = true;
+				CLMSock::ReportError (11, LMERR_BAD_MDB_VERSION);
+				e->Delete ();
+			}
+			if (exc) return "";
+			
+			if (result)
 			{
 				//iteration on query results
 				while (!rs_quant.IsEOF())
@@ -3522,7 +4269,19 @@ CString fLMSDKLhyp(void* hSource)
 							  WHERE HypothesisDKID=" + id_hlp +
 							 "  AND CedentTypeID=5 \
 							  ORDER BY Row, Col";			
-			if (rs_freq.Open(AFX_DB_USE_DEFAULT_TYPE, q_freq))
+			try
+			{
+				result = rs_freq.Open(AFX_DB_USE_DEFAULT_TYPE, q_freq);
+			}
+			catch (CDBException* e)
+			{
+				exc = true;
+				CLMSock::ReportError (11, LMERR_BAD_MDB_VERSION);
+				e->Delete ();
+			}
+			if (exc) return "";
+			
+			if (result)
 			{
 				//iteration on query results
 				row_freq_hlp = new (Cint_Array);
@@ -3550,7 +4309,19 @@ CString fLMSDKLhyp(void* hSource)
 					  WHERE HypothesisDKID=" + id_hlp +
 					 "  AND CedentTypeID=6 \
 					  ORDER BY Row, Col";			
-			if (rs_freq.Open(AFX_DB_USE_DEFAULT_TYPE, q_freq))
+			try
+			{
+				result = rs_freq.Open(AFX_DB_USE_DEFAULT_TYPE, q_freq);
+			}
+			catch (CDBException* e)
+			{
+				exc = true;
+				CLMSock::ReportError (11, LMERR_BAD_MDB_VERSION);
+				e->Delete ();
+			}
+			if (exc) return "";
+			
+			if (result)
 			{
 				//iteration on query results
 				row_freq_hlp = new (Cint_Array);
@@ -3580,7 +4351,19 @@ CString fLMSDKLhyp(void* hSource)
 							    AND tmCategory.QuantityID=tmQuantity.QuantityID \
 							    AND tdKLLiteralD.KLLiteralDID=" + id_hlp;
 			q_attr += " ORDER BY tmCategory.Ord";
-			if (rs_attr.Open(AFX_DB_USE_DEFAULT_TYPE, q_attr))
+			try
+			{
+				result = rs_attr.Open(AFX_DB_USE_DEFAULT_TYPE, q_attr);
+			}
+			catch (CDBException* e)
+			{
+				exc = true;
+				CLMSock::ReportError (11, LMERR_BAD_MDB_VERSION);
+				e->Delete ();
+			}
+			if (exc) return "";
+			
+			if (result)
 			{
 				//iteration on query results
 				while (!rs_attr.IsEOF())
@@ -3606,7 +4389,19 @@ next_col_sdkl:
 					    AND tmCategory.QuantityID=tmQuantity.QuantityID \
 					    AND tdKLLiteralD.KLLiteralDID=" + id_hlp;
 			q_attr += " ORDER BY tmCategory.Ord";
-			if (rs_attr.Open(AFX_DB_USE_DEFAULT_TYPE, q_attr))
+			try
+			{
+				result = rs_attr.Open(AFX_DB_USE_DEFAULT_TYPE, q_attr);
+			}
+			catch (CDBException* e)
+			{
+				exc = true;
+				CLMSock::ReportError (11, LMERR_BAD_MDB_VERSION);
+				e->Delete ();
+			}
+			if (exc) return "";
+			
+			if (result)
 			{
 				//iteration on query results
 				while (!rs_attr.IsEOF())
@@ -3634,7 +4429,19 @@ next_row_sdkl:
 								AND tmCategory.QuantityID=tmQuantity.QuantityID \
 								AND tiLiteralI.HypothesisID=" + id_hlp +
 							" ORDER BY tmQuantity.QuantityID, tmCategory.Ord";
-			if (rs_cond.Open(AFX_DB_USE_DEFAULT_TYPE, q_cond))
+			try
+			{
+				result = rs_cond.Open(AFX_DB_USE_DEFAULT_TYPE, q_cond);
+			}
+			catch (CDBException* e)
+			{
+				exc = true;
+				CLMSock::ReportError (11, LMERR_BAD_MDB_VERSION);
+				e->Delete ();
+			}
+			if (exc) return "";
+			
+			if (result)
 			{
 				//iteration on query results
 				while (!rs_cond.IsEOF())
@@ -3663,7 +4470,19 @@ next_row_sdkl:
 									WHERE LiteralDID=" + id_hlp;
 					q_coef_type +=
 						" AND tdLiteralD.CoefficientTypeID=tsCoefficientType.CoefficientTypeID";
-					if (rs_coef_type.Open(AFX_DB_USE_DEFAULT_TYPE, q_coef_type))
+					try
+					{
+						result = rs_coef_type.Open(AFX_DB_USE_DEFAULT_TYPE, q_coef_type);
+					}
+					catch (CDBException* e)
+					{
+						exc = true;
+						CLMSock::ReportError (11, LMERR_BAD_MDB_VERSION);
+						e->Delete ();
+					}
+					if (exc) return "";
+					
+					if (result)
 					{
 						while (!rs_coef_type.IsEOF())
 						{
@@ -3694,7 +4513,19 @@ next_row_sdkl:
 						AND tmCategory.QuantityID=tmQuantity.QuantityID \
 						AND tiLiteralI.HypothesisID=" + id_hlp +
 					" ORDER BY tmQuantity.QuantityID, tmCategory.Ord";
-			if (rs_cond.Open(AFX_DB_USE_DEFAULT_TYPE, q_cond))
+			try
+			{
+				result = rs_cond.Open(AFX_DB_USE_DEFAULT_TYPE, q_cond);
+			}
+			catch (CDBException* e)
+			{
+				exc = true;
+				CLMSock::ReportError (11, LMERR_BAD_MDB_VERSION);
+				e->Delete ();
+			}
+			if (exc) return "";
+			
+			if (result)
 			{
 				//iteration on query results
 				while (!rs_cond.IsEOF())
@@ -3723,7 +4554,19 @@ next_row_sdkl:
 									WHERE LiteralDID=" + id_hlp;
 					q_coef_type +=
 						" AND tdLiteralD.CoefficientTypeID=tsCoefficientType.CoefficientTypeID";
-					if (rs_coef_type.Open(AFX_DB_USE_DEFAULT_TYPE, q_coef_type))
+					try
+					{
+						result = rs_coef_type.Open(AFX_DB_USE_DEFAULT_TYPE, q_coef_type);
+					}
+					catch (CDBException* e)
+					{
+						exc = true;
+						CLMSock::ReportError (11, LMERR_BAD_MDB_VERSION);
+						e->Delete ();
+					}
+					if (exc) return "";
+					
+					if (result)
 					{
 						while (!rs_coef_type.IsEOF())
 						{
@@ -3754,7 +4597,19 @@ next_row_sdkl:
 						AND tmCategory.QuantityID=tmQuantity.QuantityID \
 						AND tiLiteralI.HypothesisID=" + id_hlp +
 					" ORDER BY tmQuantity.QuantityID, tmCategory.Ord";
-			if (rs_cond.Open(AFX_DB_USE_DEFAULT_TYPE, q_cond))
+			try
+			{
+				result = rs_cond.Open(AFX_DB_USE_DEFAULT_TYPE, q_cond);
+			}
+			catch (CDBException* e)
+			{
+				exc = true;
+				CLMSock::ReportError (11, LMERR_BAD_MDB_VERSION);
+				e->Delete ();
+			}
+			if (exc) return "";
+			
+			if (result)
 			{
 				//iteration on query results
 				while (!rs_cond.IsEOF())
@@ -3783,7 +4638,19 @@ next_row_sdkl:
 									WHERE LiteralDID=" + id_hlp;
 					q_coef_type +=
 						" AND tdLiteralD.CoefficientTypeID=tsCoefficientType.CoefficientTypeID";
-					if (rs_coef_type.Open(AFX_DB_USE_DEFAULT_TYPE, q_coef_type))
+					try
+					{
+						result = rs_coef_type.Open(AFX_DB_USE_DEFAULT_TYPE, q_coef_type);
+					}
+					catch (CDBException* e)
+					{
+						exc = true;
+						CLMSock::ReportError (11, LMERR_BAD_MDB_VERSION);
+						e->Delete ();
+					}
+					if (exc) return "";
+					
+					if (result)
 					{
 						while (!rs_coef_type.IsEOF())
 						{
@@ -3852,7 +4719,15 @@ next_row_sdkl:
 	
   
 	//load DTD
-	buf = Get_DTD ();
+	try
+	{
+		buf = Get_DTD ();
+	}
+	catch (...)
+	{
+		CLMSock::ReportError (12, LMERR_DTD_ERROR);
+		return "";
+	}
 
 	//create xml data
 	buf = buf + " <active_list> ";
@@ -3909,6 +4784,9 @@ CString fLMdata_matrix (void* hSource)
 	long matrix_id = -1;
 	long matrix_id_tst = 0;
 
+	BOOL result;
+	bool exc = false;
+
 	TData_Matrix_Recordset rs ((CDatabase *) hSource);
 
 	Data_Matrix_Meta * ptatt;
@@ -3920,7 +4798,19 @@ CString fLMdata_matrix (void* hSource)
 		 WHERE tmAttribute.MatrixID=tmMatrix.MatrixID \
 			AND tmAttribute.ValueSubTypeID=tsValueSubType.ValueSubTypeID \
 		 ORDER BY tmAttribute.MatrixID";
-	if (rs.Open(AFX_DB_USE_DEFAULT_TYPE, q))
+	try
+	{
+		result = rs.Open(AFX_DB_USE_DEFAULT_TYPE, q);
+	}
+	catch (CDBException* e)
+	{
+		exc = true;
+		CLMSock::ReportError (11, LMERR_BAD_MDB_VERSION);
+		e->Delete ();
+	}
+	if (exc) return "";
+	
+	if (result)
 	{
 		//iteration on query results
 		while (!rs.IsEOF())
@@ -3957,7 +4847,15 @@ CString fLMdata_matrix (void* hSource)
 
 	//creation of xml string
 	//load DTD
-	buf = Get_DTD ();
+	try
+	{
+		buf = Get_DTD ();
+	}
+	catch (...)
+	{
+		CLMSock::ReportError (12, LMERR_DTD_ERROR);
+		return "";
+	}
 	//create xml data
 	buf = buf + " <active_list> ";
 	int i;
@@ -3991,6 +4889,8 @@ CString fLMcolumn(void* hSource)
 	CString qcat;
 
 	long count = 0;
+	BOOL result;
+	bool exc = false;
 
 	TColumn_Recordset rs ((CDatabase *) hSource);
 
@@ -4005,7 +4905,19 @@ CString fLMcolumn(void* hSource)
 			AND tsAttributeSubType.ShortName=";
 	q +=									 "'DB'";
 	q += "AND tmAttribute.ValueSubTypeID=tsValueSubType.ValueSubTypeID";
-	if (rs.Open(AFX_DB_USE_DEFAULT_TYPE, q))
+	try
+	{
+		result = rs.Open(AFX_DB_USE_DEFAULT_TYPE, q);
+	}
+	catch (CDBException* e)
+	{
+		exc = true;
+		CLMSock::ReportError (11, LMERR_BAD_MDB_VERSION);
+		e->Delete ();
+	}
+	if (exc) return "";
+	
+	if (result)
 	{
 		//iteration on query results
 		while (!rs.IsEOF())
@@ -4030,7 +4942,15 @@ CString fLMcolumn(void* hSource)
 
 	//creation of xml string
 	//load DTD
-	buf = Get_DTD ();
+	try
+	{
+		buf = Get_DTD ();
+	}
+	catch (...)
+	{
+		CLMSock::ReportError (12, LMERR_DTD_ERROR);
+		return "";
+	}
 	//create xml data
 	buf = buf + " <active_list> ";
 	int i;
