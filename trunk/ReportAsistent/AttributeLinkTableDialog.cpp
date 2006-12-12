@@ -84,9 +84,9 @@ BOOL CAttributeLinkTableDialog::OnInitDialog()
 	//dedek: inicialozuj CaptionsList
 	CRect r;
 	m_CaptionsList.GetWindowRect(& r);
-	m_CaptionsList.InsertColumn(CAPTLIST_CL_CAPTION, "caption", LVCFMT_LEFT, r.Width()/3);
-	m_CaptionsList.InsertColumn(CAPTLIST_CL_VALUE, "value", LVCFMT_LEFT, r.Width()/3);
-	m_CaptionsList.InsertColumn(CAPTLIST_CL_NAME, "name", LVCFMT_LEFT, r.Width()/3);
+	m_CaptionsList.InsertColumn(CAPTLIST_CL_CAPTION, "caption", LVCFMT_LEFT, r.Width()/3 -3);
+	m_CaptionsList.InsertColumn(CAPTLIST_CL_VALUE, "value", LVCFMT_LEFT, r.Width()/3 -3);
+	m_CaptionsList.InsertColumn(CAPTLIST_CL_NAME, "name", LVCFMT_LEFT, r.Width()/3 -3);
 
 
 	//napln CaptionsList hodnotami

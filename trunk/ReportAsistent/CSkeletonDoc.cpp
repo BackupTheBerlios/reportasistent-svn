@@ -611,6 +611,24 @@ LPARAM CSkeletonDoc::CreateItemData(MSXML2::IXMLDOMElementPtr & element)
 void CSkeletonDoc::Generate(BOOL new_word)
 {
 	MSXML2::IXMLDOMElementPtr doc_element;
+
+	CReportAsistentApp * App = ((CReportAsistentApp *) AfxGetApp());
+
+	CString solutin = App->FirstDocumentInFirstTemplate()->GetReportSettings("orphans_solution");
+
+	try
+	{
+		if (solutin == "delete")
+		{
+			GetFirstView()->ResolveOrphans(ORP_DELETE);
+		}
+
+		if (solutin == "set_default")
+		{
+			changeOrphansDataSourceToDefault();
+		}
+	}
+	catch (...) {}
 	
 
 #ifdef DONT_CLONE_REPORT_BEFORE_GENERATE
