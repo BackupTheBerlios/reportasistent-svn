@@ -607,7 +607,7 @@ void CTransformationsDialog::OnDblclkSupportedTransfList()
 
 BOOL CTransformationsDialog::AddTransformation(int selected_item)
 {
-	//Iva: check, whether the number of selected transformations is not too high	
+	//Iva: check, whether the number of selected transformations=visualizations is not too high	
 	CString Pom;
 	if (m_SelectedList.GetCount() >= MAX_CHOSEN_TRANSFORMATION_COUNT)
 	{

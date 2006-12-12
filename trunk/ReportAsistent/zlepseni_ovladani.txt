@@ -22,7 +22,7 @@ V tomto souboru jsou navrhy na zprijemneni ovladani programu LM-RA:
 2) Dialog vyberu transformaci pro aktivni prvky
    --------------------------------------------
 
-- Ze sloupce "Supported transformations" do sloupce "Selected transformations" se 
+- Ze sloupce "Supported visualizations" do sloupce "Selected visualizations" se 
 transformace presune (krome tlacitka ">>") take:
 	- oznacena polozka stiskem Enter (Iva: NE, Enter standardne patri stisknuti tlacitka OK)
 	- dvojklik na vybranou polozku (Iva: HOTOVO)

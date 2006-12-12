@@ -168,13 +168,13 @@ END
 
 IDD_TRANSFORMATIONS_DIALOG DIALOGEX 0, 0, 490, 280
 STYLE DS_SETFONT | WS_CHILD | WS_CAPTION
-CAPTION "Transformations"
+CAPTION "Visualizations"
 FONT 8, "MS Sans Serif", 0, 0, 0x1
 BEGIN
     LISTBOX         IDC_SUPPORTED_TRANSF_LIST,29,28,133,178,LBS_SORT | LBS_NOINTEGRALHEIGHT | LBS_EXTENDEDSEL | WS_VSCROLL | WS_TABSTOP
     LISTBOX         IDC_SELECTED_TRANSFS_LIST,224,28,133,178,LBS_NOINTEGRALHEIGHT | LBS_EXTENDEDSEL | WS_VSCROLL | WS_TABSTOP
-    LTEXT           "Supported transformations:",IDC_STATIC,29,20,85,8
-    LTEXT           "Selected transformations:",IDC_STATIC,224,20,80,8
+    LTEXT           "Supported visualizations:",IDC_STATIC,29,20,85,8
+    LTEXT           "Selected visualizations:",IDC_STATIC,224,20,80,8
     PUSHBUTTON      ">>",IDC_ADD_BUTTON,173,91,38,14
     PUSHBUTTON      "<<",IDC_REMOVE_BUTTON,173,109,38,14
     PUSHBUTTON      "move &up",IDC_MOVE_UP_BUTTON,379,91,45,14
@@ -798,11 +798,11 @@ END
 STRINGTABLE 
 BEGIN
     IDS_AEL_TRANSFORTION_LOAD_FAILED 
-                            "Active element ""%s"" failed to load transformation ""%s"" (file %s).\nParse error: %s"
+                            "Active element ""%s"" failed to load visualizations ""%s"" (file %s).\nParse error: %s"
     IDS_AEL_LOAD_FAILED     "Failed to load active element form directory %s\nfile: %s\nParse error: %s"
-    IDS_TR_OPTIONS_ERROR    "Error in transformation ""%s"" options definition.\nDescription: %s"
+    IDS_TR_OPTIONS_ERROR    "Error in visualizations ""%s"" options definition.\nDescription: %s"
     IDS_WRONG_ELEMENT_TRANSFORMATION 
-                            "Transformation ""%s"" of active element ""%s"" not found.\nProcessed active element id: %s"
+                            "Visualization ""%s"" of active element ""%s"" not found.\nProcessed active element id: %s"
     IDS_AEL_NOFILTER        "Warning: Active element ""%s"" was not loaded because ""complex_filter.xsl"" file not found."
     IDS_INVALID_FILE_NAME   "Given file name or path is invalid."
     IDS_GENERATING_FAILED   "Generating of the report failed.\nLast processed element id: %s\nReason: %s"
@@ -811,7 +811,7 @@ BEGIN
     IDS_STYLLISTLOAD_ERR    "List of Word styles can't be loaded."
     IDS_STYLLISTSAVE_ERR    "List of Word styles can't be saved."
     IDS_COMPLEX_FILTER_OUTPUT_INVALID 
-                            "Result of transformation ""complex_filter.xsl"" of active element ""%s"" is not valid.\nReason: %s"
+                            "Result of visualizations ""complex_filter.xsl"" of active element ""%s"" is not valid.\nReason: %s"
     IDS_WORD_STYLES_LOAD_FAILED 
                             "Failed to load Word styles form template file: ""%s""."
     IDS_LMRA_WORLOADER_CONNECTON_FAILED 
