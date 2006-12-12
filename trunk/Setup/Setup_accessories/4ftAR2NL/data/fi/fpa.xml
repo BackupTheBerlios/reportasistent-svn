@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE auxiliarysymbols PUBLIC "-//LISp-Miner//DTD AR2NL 1.2//EN"
+	"http://lispminer.vse.cz/dtd/ar2nl-1.2.dtd">
+
+<auxiliarysymbols>
+
+<fpadata id="fpa1" symbol="X" numofant="1+" numofsuc="1+">
+  <param name="P"/> % (eli <param name="B"/>) kaikkiaan
+  <param name="T"/>:sta
+</fpadata>
+
+<fpadata id="fpa2" symbol="X" numofant="1+" numofsuc="1+">
+  <param name="B"/> potilasta (eli <param name="P"/> %) kaikkiaan
+  <param name="T"/>:sta
+</fpadata>
+
+<fpadata id="fpa3" symbol="X" numofant="1+" numofsuc="1+">
+  <param name="B"/> potilasta eli <param name="P"/> % kaikkiaan
+  <param name="T"/>:sta
+</fpadata>
+
+<fpadata id="fpa4" symbol="Y" numofant="1+" numofsuc="1+">
+  <ename symbol="E" case="_" number="_"/>, <ename symbol="Eptc0" number="_"/> 
+  <literal role="A" typeofphrase="V" number="_"/>, 
+</fpadata>
+
+<fpadata id="fpa5" symbol="Y" numofant="1+" numofsuc="1+">
+  <ename symbol="E" number="pl"/>, joilla on
+  <literal role="A" typeofphrase="N"/>,
+</fpadata>
+
+<!-- <fpadata id="fpa6" symbol="Y" numofant="1+" numofsuc="1+">
+  fpa6<literal role="A" typeofphrase="R" number="pl"/>
+  <ename symbol="E" number="pl"/>
+</fpadata> -->  
+
+<fpadata id="fpa7" symbol="Y" numofant="2" numofsuc="1+">
+  <literal role="A" typeofphrase="R" number="pl" case="_"/>, 
+  <literal role="A" typeofphrase="R" number="pl" case="_"/>
+  <ename symbol="E" number="pl"/>
+  
+</fpadata>
+
+
+<!-- <fpadata id="fpa8" symbol="Y" numofant="2+" numofsuc="1+">
+  <literal role="A" typeofphrase="R" number="pl" case="_"/>
+  <ename symbol="E" number="pl"/>, joilla on
+  <literal role="A" typeofphrase="NA" number="pl" case="_"/>,
+</fpadata>  -->
+
+<!-- <fpadata id="fpa9" symbol="Y" numofant="1+" numofsuc="1+">
+  fpa9<literal role="A" typeofphrase="L" number="_" case="_"/>
+  <ename symbol="E"/>
+</fpadata> --> 
+
+<fpadata id="fpa10" symbol="Z" numofant="1+" numofsuc="1+">
+  <choosetext>
+    <variant>Tämän</variant>
+    <variant>Tämän hypoteesin</variant>
+    <variant>Tämän säännön</variant>
+  </choosetext>
+  toteuttaa <fpa symbol="X"/> havainnoidusta <ename symbol="E" case="ela" number="sg"/>.
+</fpadata>
+
+</auxiliarysymbols>

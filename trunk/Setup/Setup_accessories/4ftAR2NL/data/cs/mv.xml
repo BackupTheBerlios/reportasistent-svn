@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mvpatterns PUBLIC "-//LISp-Miner//DTD AR2NL 1.2//EN"
+	"http://lispminer.vse.cz/dtd/ar2nl-1.2.dtd">
+
+<mvpatterns>
+
+<pattern name="v1">
+  <example>pije</example>
+  <base>e</base>
+  <pl>í</pl>
+  <qpl>e</qpl>
+  <ptc>ící</ptc>
+  <ptcpattern>a2</ptcpattern>
+</pattern>
+
+<pattern name="v2">
+  <example>kouří</example>
+  <base></base>
+  <pl></pl>
+  <qpl></qpl>
+  <ptc>cí</ptc>
+  <ptcpattern>a2</ptcpattern>
+</pattern>
+
+<pattern name="v3">
+  <example>má, dělá</example>
+  <base>á</base>
+  <pl>ají</pl>
+  <qpl>á</qpl>
+  <ptc>ající</ptc>
+  <ptcpattern></ptcpattern>
+</pattern>
+
+<pattern name="vi01">
+  <example>myslí, podílí</example>
+  <base>í</base>
+  <pl>í</pl>
+  <qpl>elo</qpl>
+  <ptc>ející</ptc>
+  <ptcpattern>a2</ptcpattern>
+</pattern>
+
+<pattern name="vp1">
+  <example>absolvoval</example>
+  <base>l</base>
+  <pl>li</pl>
+  <qpl>lo</qpl>
+  <ptc recommended="no">vší</ptc>
+  <ptcpattern>a2</ptcpattern>
+</pattern>
+
+<pattern name="vp2">
+  <example>neuvedl</example>
+  <base>l</base>
+  <pl>li</pl>
+  <qpl>lo</qpl>
+  <ptc recommended="no">ší</ptc>
+  <ptcpattern>a2</ptcpattern>
+</pattern>
+
+<pattern name="vx1">
+  <example>je (být)</example>
+  <base>e</base>
+  <pl>sou</pl>
+  <qpl>e</qpl>
+  <ptc></ptc>
+  <ptcpattern></ptcpattern>
+</pattern>
+
+</mvpatterns>

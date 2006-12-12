@@ -1,0 +1,2357 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE elementaryexpressions PUBLIC "-//LISp-Miner//DTD AR2NL 1.2//EN"
+"http://lispminer.vse.cz/dtd/ar2nl-1.2.dtd">
+<elementaryexpressions>
+  <expression id="ex1">
+    <mbattribute>AKTPOZAM</mbattribute>
+
+    <meaning>Activity After a Job</meaning>
+
+    <APinv>aktiivinen vapaa-ajalla</APinv>
+
+    <NPinv>aktiivisuus vapaa-ajalla</NPinv>
+
+    <VPinv><word class="verb"
+    pattern="aa">harrastaa</word></VPinv>
+
+    <categories>
+      <category>
+        <value>1</value>
+
+        <meaning>he mainly sits</meaning>
+
+        <adjphrase relposition="R">vapaa-ajalla enimmäkseen <word
+        class="nominal" pattern="va">istuva</word></adjphrase>
+
+        <nounphrase>istuminen vapaa-ajalla</nounphrase>
+
+        <NAF></NAF>
+	
+        <verbphrase><ptcfloatslot id="f1"/> enimmäkseen <word class="verb" pattern="uu">istuu</word>
+        <ptcfloat id="f1">vapaa-ajalla</ptcfloat></verbphrase>
+      </category>
+
+      <category>
+        <value>2</value>
+
+        <meaning>moderate activity</meaning>
+
+        <adjphrase relposition="R">kohtuullisen <APinv></APinv></adjphrase>
+
+        <nounphrase>kohtuullinen <NPinv></NPinv></nounphrase>
+
+        <NAF><nounphrase case="nom"></nounphrase></NAF>
+
+        <verbphrase><ptcfloatslot id="f1"/><VPinv></VPinv> 
+	<ptcfloat id="f1">kohtuullisesti liikuntaa vapaa-ajallaan</ptcfloat></verbphrase>
+      </category>
+
+      <category>
+        <value>3</value>
+
+        <meaning>great activity</meaning>
+
+        <adjphrase relposition="R">hyvin <APinv></APinv></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase><ptcfloatslot id="f1"/><VPinv></VPinv> 
+	<ptcfloat id="f1">säännöllisesti liikuntaa vapaa-ajallaan</ptcfloat></verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex2">
+    <mbattribute>ALKOHOL</mbattribute>
+
+    <meaning>Alcohol</meaning>
+
+    <APinv></APinv>
+
+    <NPinv>alkoholin <word class="nominal"
+    pattern="n4">juominen</word></NPinv>
+
+    <VPinv><word class="verb" pattern="juo">juo</word> alkoholia</VPinv>
+
+    <categories>
+      <category>
+        <value>1</value>
+
+        <meaning>no</meaning>
+
+        <adjphrase relposition="R">alkoholia <word class="nominal"
+        pattern="ton">juomaton</word></adjphrase>
+
+        <nounphrase>alkoholin juomattomuus</nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase><word class="verb" pattern="ei">ei</word> juo
+        alkoholia</verbphrase>
+      </category>
+
+      <category>
+        <value>2</value>
+
+        <meaning>occasionally</meaning>
+
+        <adjphrase relposition="R">alkoholia satunnaisesti <word
+        class="nominal" pattern="va">juova</word></adjphrase>
+
+        <nounphrase><word class="nominal" pattern="n4">satunnainen</word>
+        <NPinv></NPinv></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase><ptcfloatslot id="f1"/><VPinv></VPinv> 
+	<ptcfloat id="f1">satunnaisesti</ptcfloat></verbphrase>
+      </category>
+
+      <category>
+        <value>3</value>
+
+        <meaning>regularly</meaning>
+
+        <adjphrase relposition="R">alkoholia säännöllisesti <word
+        class="nominal" pattern="va">juova</word></adjphrase>
+
+        <nounphrase><word class="nominal" pattern="n4">säännöllinen</word>
+        <NPinv></NPinv></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase><ptcfloatslot id="f1"/><VPinv> </VPinv> 
+	<ptcfloat id="f1">säännöllisesti</ptcfloat></verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex3">
+    <mbattribute>ARCUS</mbattribute>
+
+    <meaning>Arcus Senilis</meaning>
+
+    <APinv></APinv>
+
+    <NPinv></NPinv>
+
+    <VPinv></VPinv>
+
+    <categories>
+      <category>
+        <value>1</value>
+
+        <meaning>yes</meaning>
+
+        <adjphrase relposition="R"></adjphrase>
+
+        <nounphrase>vanhuudenkaari</nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>2</value>
+
+        <meaning>no</meaning>
+
+        <adjphrase relposition="R"></adjphrase>
+
+        <nounphrase>vanhuudenkaarettomuus</nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex4">
+    <mbattribute>BMI</mbattribute>
+
+    <meaning>BMI</meaning>
+
+    <APinv></APinv>
+
+    <NPinv>painoisuus</NPinv>
+
+    <VPinv><word class="verb" pattern="on">on</word></VPinv>
+
+    <categories>
+      <category>
+        <value>25..30</value>
+
+        <meaning>Overweight &lt;25; 30)</meaning>
+
+        <adjphrase relposition="R"></adjphrase>
+
+        <nounphrase>yli<NPinv></NPinv></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase><VPinv></VPinv> <word class="nominal"
+        pattern="nen">ylipainoinen</word></verbphrase>
+      </category>
+
+      <category>
+        <value>15..18.5</value>
+
+        <meaning>Underweight &lt;15; 18,5)</meaning>
+
+        <adjphrase relposition="R"></adjphrase>
+
+        <nounphrase>ali<NPinv></NPinv></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase><VPinv></VPinv> <word class="nominal"
+        pattern="nen">alipainoinen</word></verbphrase>
+      </category>
+
+      <category>
+        <value>18.5..20</value>
+
+        <meaning>Normal &lt;18.5; 25)</meaning>
+
+        <adjphrase relposition="R"></adjphrase>
+
+        <nounphrase>normaali<NPinv></NPinv></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase><VPinv></VPinv> <word class="nominal"
+        pattern="nen">normaalipainoinen</word></verbphrase>
+      </category>
+
+      <category>
+        <value>30..35</value>
+
+        <meaning>Obese &lt;30; 45&gt;</meaning>
+
+        <adjphrase relposition="R"></adjphrase>
+
+        <nounphrase>huomattava yli<NPinv></NPinv></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase><VPinv></VPinv> huomattavasti <word class="nominal"
+        pattern="nen">ylipainoinen</word></verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex5">
+    <mbattribute>BOLDK</mbattribute>
+
+    <meaning>Lower Limbs Pain</meaning>
+
+    <APinv></APinv>
+
+    <NPinv></NPinv>
+
+    <VPinv></VPinv>
+
+    <categories>
+      <category>
+        <value>2</value>
+
+        <meaning>non-ischaemic</meaning>
+
+        <adjphrase relposition="R">alaraajojen verenkiertohäiriöistä <word
+        class="nominal" pattern="ton2">kärsimätön</word></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase><word class="verb" pattern="v1n">ei</word> kärsi
+        alaraajojen verenkiertohäiriöistä</verbphrase>
+      </category>
+
+      <category>
+        <value>3</value>
+
+        <meaning>claudication</meaning>
+
+        <adjphrase relposition="R"><word class="nominal"
+        pattern="va">ontuva</word></adjphrase>
+
+        <nounphrase>ontuminen</nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase><word class="verb" pattern="uu">ontuu</word></verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex6">
+    <mbattribute>BOLHR</mbattribute>
+
+    <meaning>Chest Pain</meaning>
+
+    <APinv></APinv>
+
+    <NPinv></NPinv>
+
+    <VPinv></VPinv>
+
+    <categories>
+      <category>
+        <value>2</value>
+
+        <meaning>non-ischaemic</meaning>
+
+        <adjphrase relposition="R"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase><word class="verb" pattern="ei">ei</word> kärsi
+        iskeemisistä rintakivuista</verbphrase>
+      </category>
+
+      <category>
+        <value>3</value>
+
+        <meaning>positive questionnaire for angina pectoris</meaning>
+
+        <adjphrase relposition="R"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase><word class="nominal" pattern="nut">ilmoittanut</word>
+        rasitusrintakivun oireista</verbphrase>
+      </category>
+
+      <category>
+        <value>4</value>
+
+        <meaning>other pains</meaning>
+
+        <adjphrase relposition="R">muista rintakivuista <word class="nominal"
+        pattern="vä">kärsivä</word></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase><word class="nominal" pattern="ii">kärsii</word> muista
+        rintakivuista</verbphrase>
+      </category>
+
+      <category>
+        <value>5</value>
+
+        <meaning>possible myocardical infarction</meaning>
+
+        <adjphrase relposition="R"><word class="nominal"
+        pattern="nut">saanut</word> mahdollisesti sydäninfarktin</adjphrase>
+
+        <nounphrase>mahdollinen sydäninfarkti</nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex7">
+    <mbattribute>BYVKURAK</mbattribute>
+
+    <meaning>Ex-Smoker</meaning>
+
+    <APinv></APinv>
+
+    <NPinv></NPinv>
+
+    <VPinv><word class="verb" pattern="ei">ei</word> ole tupakoinut</VPinv>
+
+    <categories>
+      <category>
+        <value>11</value>
+
+        <meaning>less than 1 year</meaning>
+
+        <adjphrase relposition="R"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+      </category>
+
+      <category>
+        <value>12</value>
+
+        <meaning>more than 1 year</meaning>
+
+        <adjphrase relposition="R"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase><VPinv></VPinv> yli vuoteen</verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex8">
+    <mbattribute>CAJ</mbattribute>
+
+    <meaning>Tea/Day</meaning>
+
+    <APinv><word class="nominal" pattern="va">juova</word></APinv>
+
+    <NPinv>teen <word class="nominal" pattern="n4">juominen</word></NPinv>
+
+    <VPinv><word class="verb" pattern="juo">juo</word></VPinv>
+
+    <categories>
+      <category>
+        <value>4</value>
+
+        <meaning>he does not drink</meaning>
+
+        <adjphrase relposition="R">teetä <word class="nominal"
+        pattern="ton">juomaton</word></adjphrase>
+
+        <nounphrase>teen juomattomuus</nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase><word class="verb" pattern="ei">ei</word> juo
+        teetä</verbphrase>
+      </category>
+
+      <category>
+        <value>5</value>
+
+        <meaning>1–2 cups</meaning>
+
+        <adjphrase relposition="R">yhden tai kaksi kuppia teetä päivässä
+        <APinv></APinv></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase><ptcfloatslot id="f1"/><VPinv></VPinv> <ptcfloat id="f1">
+	yhden tai kaksi kuppia teetä päivässä</ptcfloat></verbphrase>
+      </category>
+
+      <category>
+        <value>6</value>
+
+        <meaning>3 and more cups</meaning>
+
+        <adjphrase relposition="R">yli kolme kuppia teetä päivässä
+        <APinv></APinv></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase><ptcfloatslot id="f1"/><VPinv></VPinv> <ptcfloat id="f1">
+	yli kolme kuppia teetä päivässä</ptcfloat></verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex9">
+    <mbattribute>CUKR</mbattribute>
+
+    <meaning>Sugar/Day</meaning>
+
+    <categories>
+      <category>
+        <value>all</value>
+
+        <meaning>used for all values</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase>sokerin <word class="nominal" pattern="tus">kulutus</word>
+        <param name="N" /> palaa päivässä</nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase><word class="verb" pattern="aa">kuluttaa</word> <param
+        name="N" /> palaa sokeria päivässä</verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex10">
+    <mbattribute>DIAST1</mbattribute>
+
+    <meaning>Diastolic 1 (mmHg)</meaning>
+
+    <categories>
+      <category>
+        <value>all</value>
+
+        <meaning>used for all values</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase>diastolinen verenpaine (mittaus 1) <param name="N" />
+        mmHg</nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase><word class="verb" pattern="sai">sai</word> ensimmäisessä
+        diastolisen verenpaineen mittauksessa arvon <param name="N" />
+        mmHg</verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex11">
+    <mbattribute>DIAST2</mbattribute>
+
+    <meaning>Diastolic 2 (mmHg)</meaning>
+
+    <categories>
+      <category>
+        <value>all</value>
+
+        <meaning>used for all values</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase>diastolinen verenpaine (mittaus 2) <param name="N" />
+        mmHg</nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase><word class="verb" pattern="sai">sai</word> toisessa
+        diastolisen verenpaineen mittauksessa arvon <param name="N" />
+        mmHg</verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex12">
+    <mbattribute>DOBAKOUR</mbattribute>
+
+    <meaning>Duration Of Smoking</meaning>
+
+    <APinv></APinv>
+
+    <NPinv>tupakoinnin <word class="nominal" pattern="f1">kesto</word></NPinv>
+
+    <VPinv><word class="verb" pattern="on">on</word> <word class="verb"
+    pattern="nut">tupakoinut</word></VPinv>
+
+    <categories>
+      <category>
+        <value>7</value>
+
+        <meaning>up to 5 years</meaning>
+
+        <adjphrase relposition="R"></adjphrase>
+
+        <nounphrase><NPinv></NPinv> alle 5 vuotta</nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase><VPinv></VPinv> alle 5 vuotta</verbphrase>
+      </category>
+
+      <category>
+        <value>8</value>
+
+        <meaning>6–10 years</meaning>
+
+        <adjphrase relposition="R"></adjphrase>
+
+        <nounphrase><NPinv></NPinv> kuudesta kymmeneen vuotta</nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase><VPinv></VPinv> kuudesta kymmeneen vuotta</verbphrase>
+      </category>
+
+      <category>
+        <value>9</value>
+
+        <meaning>11–20 years</meaning>
+
+        <adjphrase relposition="R"></adjphrase>
+
+        <nounphrase><NPinv></NPinv> yhdestätoista kahteenkymmeneen
+        vuotta</nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase><VPinv></VPinv> yhdestätoista kahteenkymmeneen
+        vuotta</verbphrase>
+      </category>
+
+      <category>
+        <value>10</value>
+
+        <meaning>21 and more years</meaning>
+
+        <adjphrase relposition="R"></adjphrase>
+
+        <nounphrase><NPinv></NPinv> yli 21 vuotta</nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase><VPinv></VPinv> yli 21 vuotta</verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex13">
+    <mbattribute>DOPRATRV</mbattribute>
+
+    <meaning>Duration Of the Way To Work</meaning>
+
+    <APinv></APinv>
+
+    <NPinv>työmatkan kesto</NPinv>
+
+    <VPinv><word class="verb" pattern="ää">käyttää</word> aikaa
+    työmatkaansa</VPinv>
+
+    <categories>
+      <category>
+        <value>5</value>
+
+        <meaning>app. 1/2 an hour</meaning>
+
+        <adjphrase relposition="R"></adjphrase>
+
+        <nounphrase><NPinv></NPinv> noin puoli tuntia</nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase><VPinv></VPinv> puoli tuntia</verbphrase>
+      </category>
+
+      <category>
+        <value>6</value>
+
+        <meaning>app. 1 hour</meaning>
+
+        <adjphrase relposition="R"></adjphrase>
+
+        <nounphrase><NPinv></NPinv> noin tunnin</nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase><VPinv></VPinv> noin tunnin</verbphrase>
+      </category>
+
+      <category>
+        <value>7</value>
+
+        <meaning>app. 2 hours</meaning>
+
+        <adjphrase relposition="R"></adjphrase>
+
+        <nounphrase><NPinv></NPinv> noin kaksi tuntia</nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase><VPinv></VPinv> noin kaksi tuntia</verbphrase>
+      </category>
+
+      <category>
+        <value>8</value>
+
+        <meaning>more than 2 hours</meaning>
+
+        <adjphrase relposition="R"></adjphrase>
+
+        <nounphrase><NPinv></NPinv> yli kaksi tuntia</nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase><VPinv></VPinv> yli kaksi tuntia</verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex14">
+    <mbattribute>DOPRAVA</mbattribute>
+
+    <meaning>He gets to work</meaning>
+
+    <APinv></APinv>
+
+    <NPinv></NPinv>
+
+    <VPinv><word class="verb" pattern="ee">menee</word> </VPinv>
+
+    <categories>
+      <category>
+        <value>1</value>
+
+        <meaning>on foot</meaning>
+
+        <adjphrase relposition="R"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase><VPinv></VPinv> kävellen töihin</verbphrase>
+      </category>
+
+      <category>
+        <value>2</value>
+
+        <meaning>by bike</meaning>
+
+        <adjphrase relposition="R"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase><VPinv></VPinv> pyörällä töihin</verbphrase>
+      </category>
+
+      <category>
+        <value>3</value>
+
+        <meaning>by public transport</meaning>
+
+        <adjphrase relposition="R"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+        <verbphrase><ptcfloatslot id="f1"/> <VPinv></VPinv> <ptcfloat id="f1">julkisella kulkuneuvolla töihin</ptcfloat></verbphrase>
+      </category>
+
+      <category>
+        <value>4</value>
+
+        <meaning>by car</meaning>
+
+        <adjphrase relposition="R"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase><VPinv></VPinv> omalla autolla</verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex15">
+    <mbattribute>DUSNOST</mbattribute>
+
+    <meaning>Asthma</meaning>
+
+    <APinv></APinv>
+
+    <NPinv>asteen astma</NPinv>
+
+    <VPinv></VPinv>
+
+    <categories>
+      <category>
+        <value>2</value>
+
+        <meaning>grade I</meaning>
+
+        <adjphrase relposition="R"></adjphrase>
+
+        <nounphrase>I <NPinv></NPinv></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>3</value>
+
+        <meaning>grade II</meaning>
+
+        <adjphrase relposition="R"></adjphrase>
+
+        <nounphrase>II <NPinv></NPinv></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>4</value>
+
+        <meaning>grade III</meaning>
+
+        <adjphrase relposition="R"></adjphrase>
+
+        <nounphrase>III <NPinv></NPinv></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>6</value>
+
+        <meaning>grade IV</meaning>
+
+        <adjphrase relposition="R"></adjphrase>
+
+        <nounphrase>IV <NPinv></NPinv></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex16">
+    <mbattribute>FREKV</mbattribute>
+
+    <meaning>Alcohol Freqency</meaning>
+
+    <APinv>alkoholia <word class="nominal"
+    pattern="vä">käyttävä</word></APinv>
+
+    <NPinv></NPinv>
+
+    <VPinv><word class="verb" pattern="ää">käyttää</word> alkoholia</VPinv>
+
+    <categories>
+      <category>
+        <value>4</value>
+
+        <meaning>once a month</meaning>
+
+        <adjphrase relposition="R">kerran kuussa <APinv></APinv></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase><VPinv></VPinv> kerran kuukaudessa</verbphrase>
+      </category>
+
+      <category>
+        <value>5</value>
+
+        <meaning>once a week</meaning>
+
+        <adjphrase relposition="R">kerran viikossa <APinv></APinv></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase><VPinv></VPinv> kerran viikossa</verbphrase>
+      </category>
+
+      <category>
+        <value>6</value>
+
+        <meaning>few times a week</meaning>
+
+        <adjphrase relposition="R">usean kerran viikossa
+        <APinv></APinv></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase><VPinv></VPinv> useita kertoja viikossa</verbphrase>
+      </category>
+
+      <category>
+        <value>7</value>
+
+        <meaning>daily</meaning>
+
+        <adjphrase relposition="R">päivittäin <APinv></APinv></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase><VPinv></VPinv> päivittäin</verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex17">
+    <mbattribute>CHLST</mbattribute>
+
+    <meaning>Cholesterol (mg%)</meaning>
+
+    <categories>
+      <category>
+        <value>all</value>
+
+        <meaning>used for all values</meaning>
+
+        <adjphrase relposition="L">kolesterolin mittauksessa arvon väliltä
+        <param name="N" /> <word class="nominal"
+        pattern="nut">saanut</word></adjphrase>
+
+        <nounphrase><word class="nominal" pattern="m2">kolesteroli</word>
+        <param name="N" /> mmg</nounphrase>
+
+        <NAF><nounphrase case="nom"></nounphrase></NAF>
+
+        <verbphrase><word class="verb" pattern="sai">sai</word> kolesterolin
+        mittauksessa arvon väliltä <param name="N" /> mmg</verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex18">
+    <mbattribute>KAVA</mbattribute>
+
+    <meaning>Coffee/Day</meaning>
+
+    <APinv><word class="nominal" pattern="va">juova</word></APinv>
+
+    <NPinv>kahvin <word class="nominal" pattern="n4">juominen</word></NPinv>
+
+    <VPinv><word class="verb" pattern="juo">juo</word> kahvia</VPinv>
+
+    <categories>
+      <category>
+        <value>1</value>
+
+        <meaning>he does not drink</meaning>
+
+        <adjphrase relposition="R">kahvia <word class="nominal"
+        pattern="ton">juomaton</word></adjphrase>
+
+        <nounphrase>kahvin juomattomuus</nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase><word class="verb" pattern="ei">ei</word> juo
+        teetä</verbphrase>
+      </category>
+
+      <category>
+        <value>2</value>
+
+        <meaning>1–2 cups</meaning>
+
+        <adjphrase relposition="R">yksi tai kaksi kuppia kahvia päivässä
+        <APinv></APinv></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase><VPinv></VPinv> yhden tai kaksi kuppia
+        päivässä</verbphrase>
+      </category>
+
+      <category>
+        <value>3</value>
+
+        <meaning>3 and more cups</meaning>
+
+        <adjphrase relposition="R">yli kolme kuppia kahvia päivässä
+        <APinv></APinv></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase><VPinv></VPinv> yli kolme kuppia päivässä</verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex19">
+    <mbattribute>KOURENI</mbattribute>
+
+    <meaning>Smoking</meaning>
+
+    <APinv><word class="nominal" pattern="va">polttava</word></APinv>
+
+    <NPinv></NPinv>
+
+    <VPinv><word class="verb" pattern="aa">polttaa</word></VPinv>
+
+    <categories>
+      <category>
+        <value>1</value>
+
+        <meaning>non smoker</meaning>
+
+        <adjphrase relposition="R"><word class="nominal"
+        pattern="ton">tupakoimaton</word></adjphrase>
+
+        <nounphrase>tupakoimattomuus</nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase><word class="verb" pattern="ei">ei</word>
+        tupakoi</verbphrase>
+      </category>
+
+      <category>
+        <value>2</value>
+
+        <meaning>1–4 cigarettes/day</meaning>
+
+        <adjphrase relposition="R">1-4 savuketta päivässä
+        <APinv></APinv></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase><VPinv></VPinv> 1-4 savuketta päivässä</verbphrase>
+      </category>
+
+      <category>
+        <value>3</value>
+
+        <meaning>5–14 cigarettes/day</meaning>
+
+        <adjphrase relposition="R">5-14 savuketta päivässä
+        <APinv></APinv></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase><VPinv></VPinv> 5-14 savuketta päivässä</verbphrase>
+      </category>
+
+      <category>
+        <value>4</value>
+
+        <meaning>15–20 cigarettes/day</meaning>
+
+        <adjphrase relposition="R">15-20 savuketta päivässä
+        <APinv></APinv></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase><VPinv></VPinv> 15-20 savuketta päivässä</verbphrase>
+      </category>
+
+      <category>
+        <value>5</value>
+
+        <meaning>21+ cigarettes/day</meaning>
+
+        <adjphrase relposition="R">yli 21 savuketta päivässä
+        <APinv></APinv></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase><VPinv></VPinv> yli 21 savuketta päivässä</verbphrase>
+      </category>
+
+      <category>
+        <value>6</value>
+
+        <meaning>cigars or pipes</meaning>
+
+        <adjphrase relposition="R">sikareita tai piippua
+        <APinv></APinv></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase><VPinv></VPinv> piippua tai sikareita</verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex20">
+    <mbattribute>LIHMN</mbattribute>
+
+    <meaning>Liquors/Day</meaning>
+
+    <APinv><word class="nominal" pattern="va">juova</word></APinv>
+
+    <NPinv><word class="nominal" pattern="tus">kulutus</word></NPinv>
+
+    <VPinv><word class="verb" pattern="juo">juo</word> väkeviä
+    alkoholijuomia</VPinv>
+
+    <categories>
+      <category>
+        <value>7</value>
+
+        <meaning>he does not drink</meaning>
+
+        <adjphrase relposition="R">väkeviä alkoholijuomia <word
+        class="nominal" pattern="ton">juomaton</word></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase><word class="verb" pattern="ei">ei</word> juo väkeviä
+        alkoholijuomia</verbphrase>
+      </category>
+
+      <category>
+        <value>8</value>
+
+        <meaning>up to 100 cc</meaning>
+
+        <adjphrase relposition="R">väkeviä alkoholijuomia korkeintaan 100 cc
+        päivässä <APinv></APinv></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase><VPinv></VPinv> korkeintaan 100 cc päivässä</verbphrase>
+      </category>
+
+      <category>
+        <value>9</value>
+
+        <meaning>more than 100 cc</meaning>
+
+        <adjphrase relposition="R">väkeviä alkoholijuomia yli 100 cc päivässä
+        <APinv></APinv></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase><VPinv></VPinv> yli 100 cc päivässä</verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex21">
+    <mbattribute>LIHOV</mbattribute>
+
+    <meaning>Liquors</meaning>
+
+    <APinv><word class="nominal" pattern="va">juova</word></APinv>
+
+    <NPinv></NPinv>
+
+    <VPinv><word class="verb" pattern="juo">juo</word> väkeviä
+    alkoholijuomia</VPinv>
+
+    <categories>
+      <category>
+        <value>12</value>
+
+        <meaning>yes</meaning>
+
+        <adjphrase relposition="R">väkeviä alkoholijuomia
+        <APinv></APinv></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase><VPinv></VPinv></verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex22">
+    <mbattribute>MOC</mbattribute>
+
+    <meaning>Urine</meaning>
+
+    <APinv></APinv>
+
+    <NPinv></NPinv>
+
+    <VPinv><word class="verb" pattern="on">on</word> <word class="verb"
+    pattern="nut">saanut</word></VPinv>
+
+    <categories>
+      <category>
+        <value>2</value>
+
+        <meaning>sugar positive</meaning>
+
+        <adjphrase relposition="R"></adjphrase>
+
+        <nounphrase>sokeria virtsassa</nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase><VPinv></VPinv> positiivisen tuloksen virtsan
+        sokerikokeessa</verbphrase>
+      </category>
+
+      <category>
+        <value>3</value>
+
+        <meaning>albumen positive</meaning>
+
+        <adjphrase relposition="R"></adjphrase>
+
+        <nounphrase>valkuaisainetta virtsassa</nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase><VPinv></VPinv> positiviisen tuloksen virtsan
+        valkuaisainekokeessa</verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex23">
+    <mbattribute>PIVO10</mbattribute>
+
+    <meaning>Beer 10°</meaning>
+
+    <APinv><word class="nominal" pattern="va">juova</word></APinv>
+
+    <NPinv></NPinv>
+
+    <VPinv><word class="verb" pattern="juo">juo</word></VPinv>
+
+    <categories>
+      <category>
+        <value>9</value>
+
+        <meaning>yes</meaning>
+
+        <adjphrase relposition="R">10° olutta <APinv></APinv></adjphrase>
+
+        <nounphrase>10° oluen juonti</nounphrase>
+
+        <NAF><nounphrase case="nom"></nounphrase></NAF>
+
+        <verbphrase><VPinv></VPinv> 10° olutta</verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex24">
+    <mbattribute>PIVO12</mbattribute>
+
+    <meaning>Beer 12°</meaning>
+
+    <APinv><word class="nominal" pattern="va">juova</word></APinv>
+
+    <NPinv></NPinv>
+
+    <VPinv><word class="verb" pattern="juo">juo</word></VPinv>
+
+    <categories>
+      <category>
+        <value>10</value>
+
+        <meaning>yes</meaning>
+
+        <adjphrase relposition="R">12° olutta <APinv></APinv></adjphrase>
+
+        <nounphrase>12° oluen juonti</nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase><VPinv></VPinv> 12° olutta</verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex25">
+    <mbattribute>PIVO7</mbattribute>
+
+    <meaning>Beer 7°</meaning>
+
+    <APinv><word class="nominal" pattern="va">juova</word></APinv>
+
+    <NPinv></NPinv>
+
+    <VPinv><word class="verb" pattern="juo">juo</word></VPinv>
+
+    <categories>
+      <category>
+        <value>8</value>
+
+        <meaning>yes</meaning>
+
+        <adjphrase relposition="R">7° olutta <APinv></APinv></adjphrase>
+
+        <nounphrase>7° oluen juonti</nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase><VPinv></VPinv> 7° olutta</verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex26">
+    <mbattribute>PIVOMN</mbattribute>
+
+    <meaning>Beer/Day</meaning>
+
+    <APinv>olutta päivässä <word class="nominal"
+    pattern="va">juova</word></APinv>
+
+    <NPinv><word class="nominal" pattern="tus">kulutus</word></NPinv>
+
+    <VPinv><word class="verb" pattern="juo">juo</word> olutta päivässä</VPinv>
+
+    <categories>
+      <category>
+        <value>1</value>
+
+        <meaning>he does not drink</meaning>
+
+        <adjphrase relposition="R">olutta <word class="nominal"
+        pattern="ton">juomaton</word></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase><word class="verb" pattern="ei">ei</word> juo
+        olutta</verbphrase>
+      </category>
+
+      <category>
+        <value>2</value>
+
+        <meaning>up to 1 litre</meaning>
+
+        <adjphrase relposition="R">alle litran <APinv></APinv></adjphrase>
+
+        <nounphrase><NPinv></NPinv> alle litran olutta päivässä</nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase><VPinv></VPinv> alle litran</verbphrase>
+      </category>
+
+      <category>
+        <value>3</value>
+
+        <meaning>more than 1 litre</meaning>
+
+        <adjphrase relposition="R">yli litran <APinv></APinv></adjphrase>
+
+        <nounphrase><NPinv></NPinv> yli litran olutta päivässä</nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase><VPinv></VPinv> yli litran</verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex27">
+    <mbattribute>PUVSKUP</mbattribute>
+
+    <meaning>Group</meaning>
+
+    <APinv></APinv>
+
+    <NPinv></NPinv>
+
+    <VPinv><word class="verb" pattern="uu">kuuluu</word> potilaiden</VPinv>
+
+    <categories>
+      <category>
+        <value>1</value>
+
+        <meaning>NG – Normal Group</meaning>
+
+        <adjphrase relposition="R"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase><VPinv></VPinv> normaaliryhmään</verbphrase>
+      </category>
+
+      <category>
+        <value>2</value>
+
+        <meaning>NSG – Normal Studied Group</meaning>
+
+        <adjphrase relposition="R"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase><VPinv></VPinv> normaaliin seurantaryhmään</verbphrase>
+      </category>
+
+      <category>
+        <value>5</value>
+
+        <meaning>PG – Pathology Group</meaning>
+
+        <adjphrase relposition="R"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase><VPinv></VPinv> patologiseen ryhmään</verbphrase>
+      </category>
+
+      <category>
+        <value>3</value>
+
+        <meaning>RGI – Risk Group Intervened</meaning>
+
+        <adjphrase relposition="R"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase><VPinv></VPinv> sairastuneeseen riskiryhmään</verbphrase>
+      </category>
+
+      <category>
+        <value>4</value>
+
+        <meaning>RGC – Risk Group Control</meaning>
+
+        <adjphrase relposition="R"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase><VPinv></VPinv> kontrolliriskiryhmään</verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex28">
+    <mbattribute>PUVSKUP</mbattribute>
+
+    <meaning>Group (RG)</meaning>
+
+    <APinv></APinv>
+
+    <NPinv></NPinv>
+
+    <VPinv><word class="verb" pattern="uu">kuuluu</word> potilaiden</VPinv>
+
+    <categories>
+      <category>
+        <value>3..4</value>
+
+        <meaning>RG – Risk Group</meaning>
+
+        <adjphrase relposition="R">riskiryhmään <word class="nominal"
+        pattern="va">kuuluva</word></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase><VPinv></VPinv> riskiryhmään</verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex29">
+    <mbattribute>SOUCKUR</mbattribute>
+
+    <meaning>Souckur</meaning>
+
+    <APinv></APinv>
+
+    <NPinv></NPinv>
+
+    <VPinv></VPinv>
+
+    <categories>
+      <category>
+        <value>1</value>
+
+        <meaning>1</meaning>
+
+        <adjphrase relposition="R"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>2</value>
+
+        <meaning>2</meaning>
+
+        <adjphrase relposition="R"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>3</value>
+
+        <meaning>3</meaning>
+
+        <adjphrase relposition="R"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>4</value>
+
+        <meaning>4</meaning>
+
+        <adjphrase relposition="R"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>5</value>
+
+        <meaning>5</meaning>
+
+        <adjphrase relposition="R"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>6</value>
+
+        <meaning>6</meaning>
+
+        <adjphrase relposition="R"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>8</value>
+
+        <meaning>8</meaning>
+
+        <adjphrase relposition="R"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>9</value>
+
+        <meaning>9</meaning>
+
+        <adjphrase relposition="R"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex30">
+    <mbattribute>STAV</mbattribute>
+
+    <meaning>Marital Status</meaning>
+
+    <APinv></APinv>
+
+    <NPinv>siviilisääty</NPinv>
+
+    <VPinv><word class="verb" pattern="on">on</word>
+    siiviilisäädyltään</VPinv>
+
+    <categories>
+      <category>
+        <value>2</value>
+
+        <meaning>divorced</meaning>
+
+        <adjphrase relposition="R"><word class="nominal"
+        pattern="nut">eronnut</word></adjphrase>
+
+        <nounphrase><NPinv></NPinv> eronnut</nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase><VPinv></VPinv> eronnut</verbphrase>
+      </category>
+
+      <category>
+        <value>3</value>
+
+        <meaning>single</meaning>
+
+        <adjphrase relposition="R"><word class="nominal"
+        pattern="ton">naimaton</word></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase><VPinv></VPinv> naimaton</verbphrase>
+      </category>
+
+      <category>
+        <value>4</value>
+
+        <meaning>widower</meaning>
+
+        <adjphrase relposition="R"><word class="nominal"
+        pattern="ki">leski</word></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase><VPinv></VPinv> leski</verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex31">
+    <mbattribute>SUBSC</mbattribute>
+
+    <meaning>Skinfold Subscapularis (mm)</meaning>
+
+    <categories>
+      <category>
+        <value>all</value>
+
+        <meaning>used for all values</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase>rasvakerroksen paksuus (Subscapular) <param name="N" />
+        mm</nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex32">
+    <mbattribute>SYST1</mbattribute>
+
+    <meaning>Systolic 1 (mmHg)</meaning>
+
+    <categories>
+      <category>
+        <value>all</value>
+
+        <meaning>used for all values</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase>systolinen verenpaine (mittaus 1) <param name="N" />
+        mmHg</nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase><word class="verb" pattern="sai">sai</word> ensimmäisessä
+        systolisen verenpaineen mittauksessa arvon <param name="N" />
+        mmHg</verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex33">
+    <mbattribute>SYST2</mbattribute>
+
+    <meaning>Systolic 2 (mmHg)</meaning>
+
+    <categories>
+      <category>
+        <value>all</value>
+
+        <meaning>used for all values</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase>systolinen verenpaine (mittaus 2) <param name="N" />
+        mmHg</nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase><word class="verb" pattern="v10">sai</word> toisessa
+        systolisen verenpaineen mittauksessa arvon <param name="N" />
+        mmHg</verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex34">
+    <mbattribute>TECHAST</mbattribute>
+
+    <meaning>Techast</meaning>
+
+    <APinv></APinv>
+
+    <NPinv></NPinv>
+
+    <VPinv></VPinv>
+
+    <categories>
+      <category>
+        <value>1</value>
+
+        <meaning>1.000</meaning>
+
+        <adjphrase relposition="R"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>2</value>
+
+        <meaning>2.000</meaning>
+
+        <adjphrase relposition="R"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>3</value>
+
+        <meaning>3.000</meaning>
+
+        <adjphrase relposition="R"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>4</value>
+
+        <meaning>4.000</meaning>
+
+        <adjphrase relposition="R"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>9</value>
+
+        <meaning>9.000</meaning>
+
+        <adjphrase relposition="R"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex35">
+    <mbattribute>TELAKTZA</mbattribute>
+
+    <meaning>Activity In a Job</meaning>
+
+    <APinv></APinv>
+
+    <NPinv></NPinv>
+
+    <VPinv><word class="verb" pattern="uu">istuu</word></VPinv>
+
+    <categories>
+      <category>
+        <value>1</value>
+
+        <meaning>he mainly sits</meaning>
+
+        <adjphrase relposition="R"></adjphrase>
+
+        <nounphrase>istumatyö</nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase><ptcfloatslot id="f1"/> enimmäkseen <VPinv></VPinv> <ptcfloat id="f1">työssään</ptcfloat>  </verbphrase>
+      </category>
+
+      <category>
+        <value>2</value>
+
+        <meaning>he mainly stands</meaning>
+
+        <adjphrase relposition="R"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase>enimmäkseen <word class="verb" pattern="oo">seisoo</word>
+        työssään </verbphrase>
+      </category>
+
+      <category>
+        <value>3</value>
+
+        <meaning>he mainly walks</meaning>
+
+        <adjphrase relposition="R"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase>enimmäkseen <word class="verb" pattern="ee">kävelee</word>
+        työssään </verbphrase>
+      </category>
+
+      <category>
+        <value>4</value>
+
+        <meaning>he carries heavy loads</meaning>
+
+        <adjphrase relposition="R"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase><word class="verb" pattern="aa">kantaa</word> painavia
+        taakkoja </verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex36">
+    <mbattribute>TRIC</mbattribute>
+
+    <meaning>Skinfold Triceps (mm)</meaning>
+
+    <categories>
+      <category>
+        <value>all</value>
+
+        <meaning>used for all values</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase>rasvakerroksen paksuus (Triceps) <param name="N" />
+        mm</nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex37">
+    <mbattribute>TRIGL</mbattribute>
+
+    <meaning>Triglycerides (mg%)</meaning>
+
+    <categories>
+      <category>
+        <value>all</value>
+
+        <meaning>used for all values</meaning>
+
+        <adjphrase relposition="L">triglyseridin mittauksessa arvon väliltä
+        <param name="N" /> <word class="nominal"
+        pattern="nut">saanut</word></adjphrase>
+
+        <nounphrase><word class="nominal" pattern="m2">triglyseridi</word>
+        <param name="N" /> mm</nounphrase>
+
+        <NAF><nounphrase case="nom"></nounphrase></NAF>
+
+        <verbphrase><word class="verb" pattern="sai">sai</word> triglyseridin
+        mittauksessa arvon väliltä <param name="N" /> mm</verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex38">
+    <mbattribute>VAHA</mbattribute>
+
+    <meaning>Weight (kg)</meaning>
+
+    <categories>
+      <category>
+        <value>all</value>
+
+        <meaning>used for all values</meaning>
+
+        <adjphrase relposition="R"><param name="N" /> kg <word class="nominal"
+        pattern="va">painava</word></adjphrase>
+
+        <nounphrase>paino <param name="N" /> kg</nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex39">
+    <mbattribute>VEK</mbattribute>
+
+    <meaning>Age</meaning>
+
+    <categories>
+      <category>
+        <value>all</value>
+
+        <meaning>used for all values</meaning>
+
+        <adjphrase relposition="R"> <param name="N" /> vuotta
+        vanha</adjphrase>
+
+        <nounphrase>ikä <param name="N" /> vuotta</nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex40">
+    <mbattribute>VINO</mbattribute>
+
+    <meaning>Vine</meaning>
+
+    <APinv></APinv>
+
+    <NPinv></NPinv>
+
+    <VPinv></VPinv>
+
+    <categories>
+      <category>
+        <value>11</value>
+
+        <meaning>yes</meaning>
+
+        <adjphrase relposition="R">viiniä <word class="nominal"
+        pattern="va">juova</word></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase><word class="verb" pattern="juo">juo</word> viiniä
+        </verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex41">
+    <mbattribute>VINOMN</mbattribute>
+
+    <meaning>Vine/Day</meaning>
+
+    <APinv></APinv>
+
+    <NPinv>viinin <word class="nominal" pattern="f1">kulutus</word></NPinv>
+
+    <VPinv><word class="verb" pattern="v1">juo</word></VPinv>
+
+    <categories>
+      <category>
+        <value>4</value>
+
+        <meaning>he does not drink</meaning>
+
+        <adjphrase relposition="R">viiniä <word class="nominal"
+        pattern="ton">juomaton</word></adjphrase>
+
+        <nounphrase>viinin juomattomuus</nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase><word class="verb" pattern="ei">ei</word> <word
+        class="verb" pattern="juo">juo</word> viiniä</verbphrase>
+      </category>
+
+      <category>
+        <value>5</value>
+
+        <meaning>up to 1/2 litre</meaning>
+
+        <adjphrase relposition="R"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>6</value>
+
+        <meaning>more than 1/2 litre</meaning>
+
+        <adjphrase relposition="R"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex42">
+    <mbattribute>VYSKA</mbattribute>
+
+    <meaning>Height (cm)</meaning>
+
+    <categories>
+      <category>
+        <value>all</value>
+
+        <meaning>used for all values</meaning>
+
+        <adjphrase relposition="R"> <param name="N" /> cm pitkä</adjphrase>
+
+        <nounphrase>pituus <param name="N" /> cm</nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex43">
+    <mbattribute>VZDELANI</mbattribute>
+
+    <meaning>Education</meaning>
+
+    <APinv><word class="nominal" pattern="tu">koulutettu</word></APinv>
+
+    <NPinv><word class="nominal" pattern="fi">koulutus</word></NPinv>
+
+    <VPinv><word class="verb" pattern="on">on</word> <word class="verb"
+    pattern="nut">suorittanut</word> </VPinv>
+
+    <categories>
+      <category>
+        <value>1</value>
+
+        <meaning>basic school</meaning>
+
+        <adjphrase relposition="R"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase><VPinv></VPinv> peruskoulun </verbphrase>
+      </category>
+
+      <category>
+        <value>2</value>
+
+        <meaning>apprentice school</meaning>
+
+        <adjphrase relposition="R"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase><VPinv></VPinv> oppisopimustutkinnon</verbphrase>
+      </category>
+
+      <category>
+        <value>3</value>
+
+        <meaning>secondary school</meaning>
+
+        <adjphrase relposition="R"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase><VPinv></VPinv> opistotasoisen tutkinnon</verbphrase>
+      </category>
+
+      <category>
+        <value>4</value>
+
+        <meaning>university</meaning>
+
+        <adjphrase relposition="R">korkea<APinv></APinv></adjphrase>
+
+        <nounphrase>korkea<NPinv></NPinv></nounphrase>
+
+        <NAF><nounphrase case="nom"></nounphrase></NAF>
+
+        <verbphrase><VPinv></VPinv> korkeakoulututkinnon</verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex44">
+    <mbattribute>XANTH</mbattribute>
+
+    <meaning>Xanthelasma</meaning>
+
+    <APinv></APinv>
+
+    <NPinv></NPinv>
+
+    <VPinv></VPinv>
+
+    <categories>
+      <category>
+        <value>1</value>
+
+        <meaning>yes</meaning>
+
+        <adjphrase relposition="R"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>2</value>
+
+        <meaning>no</meaning>
+
+        <adjphrase relposition="R"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex45">
+    <mbattribute>XTEND</mbattribute>
+
+    <meaning>X Tendinosum</meaning>
+
+    <APinv></APinv>
+
+    <NPinv></NPinv>
+
+    <VPinv></VPinv>
+
+    <categories>
+      <category>
+        <value>2</value>
+
+        <meaning>no</meaning>
+
+        <adjphrase relposition="R"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex46">
+    <mbattribute>XTUB</mbattribute>
+
+    <meaning>X Tuberosum</meaning>
+
+    <APinv></APinv>
+
+    <NPinv></NPinv>
+
+    <VPinv></VPinv>
+
+    <categories>
+      <category>
+        <value>2</value>
+
+        <meaning>no</meaning>
+
+        <adjphrase relposition="R"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex47">
+    <mbattribute>ZODPOV</mbattribute>
+
+    <meaning>Responsibility In a Work</meaning>
+
+    <APinv><word class="nominal" pattern="vä">työskentelevä</word></APinv>
+
+    <NPinv></NPinv>
+
+    <VPinv><word class="verb" pattern="ee">työskentelee</word></VPinv>
+
+    <categories>
+      <category>
+        <value>1</value>
+
+        <meaning>managerial worker</meaning>
+
+        <adjphrase relposition="R"></adjphrase>
+
+        <nounphrase>työ johtotehtävissä</nounphrase>
+
+        <NAF><nounphrase case="nom"></nounphrase></NAF>
+
+        <verbphrase><ptcfloat id="f1"><VPinv></VPinv></ptcfloat> johtotehtävissä <ptcfloatslot id="f1"/></verbphrase>
+      </category>
+
+      <category>
+        <value>2</value>
+
+        <meaning>partly independent worker</meaning>
+
+        <adjphrase relposition="R"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>3</value>
+
+        <meaning>others</meaning>
+
+        <adjphrase relposition="R"></adjphrase>
+
+        <nounphrase>suoritusportaan työtehtävä</nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase><word class="verb" pattern="ee">työskentelee</word>
+        suoritusportaan työtehtävissä</verbphrase>
+      </category>
+
+      <category>
+        <value>4</value>
+
+        <meaning>pensioner because of ICHS</meaning>
+
+        <adjphrase relposition="R"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>5</value>
+
+        <meaning>pensioner - other reason</meaning>
+
+        <adjphrase relposition="R"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+    </categories>
+  </expression>
+</elementaryexpressions>

@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<sentences>
+  <sentence>
+  Frekvence
+  <literal mbattribute="CUKR" value="0..5" role="S" typeofphrase="N" case="2"><word class="nominal" pattern="f1">spotřeba</word> <param name="N"/> kostek cukru denně</literal>
+  je o
+  <param name="P"/>
+  % vyšší mezi
+  
+  
+  <word pattern="m1" class="nominal" case="7" number="pl">pacient</word>
+
+  ,
+  
+  <word pattern="a1rma" class="nominal" number="pl">který</word>
+
+  <floatslot id="1" role="A" occno="first"/>
+  <literal mbattribute="KAVA" value="1" role="A" typeofphrase="V" number="pl"><word class="verb" pattern="v1">nepije</word>
+        kávu</literal>
+  ,
+
+  než v celé kolekci. Platí pro
+  <param name="B"/>
+  
+  <word pattern="m1" class="nominal" case="2" number="pl">pacient</word>
+
+  
+  <word pattern="a1rma" class="nominal" number="pl">který</word>
+
+  splňuji tyto podmínky:
+  
+  <word pattern="m1" class="nominal" case="1" number="sg">pacient</word>
+
+  <literal mbattribute="KONSKUP" value="3" role="C" typeofphrase="V"><word class="verb" pattern="v2">patří</word> do Rizikové skupiny intervenovaných
+        pacientů</literal>
+  .
+</sentence>
+  <sentence>
+  Frekvence
+  <literal mbattribute="CUKR" value="0..5" role="S" typeofphrase="N" case="2"><word class="nominal" pattern="f1">spotřeba</word> <param name="N"/> kostek cukru denně</literal>
+  je o
+  <param name="P"/>
+  % vyšší mezi
+  
+  
+  <word pattern="m1" class="nominal" case="7" number="pl">pacient</word>
+
+  <literal mbattribute="KAVA" value="1" role="A" typeofphrase="NA"/>
+
+  než v celé kolekci. Platí pro
+  <param name="B"/>
+  
+  <word pattern="m1" class="nominal" case="2" number="pl">pacient</word>
+
+  
+  <word pattern="a1rma" class="nominal" number="pl">který</word>
+
+  splňuji tyto podmínky:
+  
+  <word pattern="m1" class="nominal" case="1" number="sg">pacient</word>
+
+  <literal mbattribute="KONSKUP" value="3" role="C" typeofphrase="V"><word class="verb" pattern="v2">patří</word> do Rizikové skupiny intervenovaných
+        pacientů</literal>
+  .
+</sentence>
+  <sentence>
+  Frekvence
+  <literal mbattribute="CUKR" value="0..5" role="S" typeofphrase="N" case="2"><word class="nominal" pattern="f1">spotřeba</word> <param name="N"/> kostek cukru denně</literal>
+  je o
+  <param name="P"/>
+  % vyšší mezi
+  
+  
+  <word pattern="m1" class="nominal" case="7" number="pl">pacient</word>
+
+  <literal mbattribute="KAVA" value="1" role="A" typeofphrase="R" number="pl" case="7" vderivation="ptc"><word class="verb" pattern="v1">nepije</word>
+        kávu</literal>
+
+  než v celé kolekci. Platí pro
+  <param name="B"/>
+  
+  <word pattern="m1" class="nominal" case="2" number="pl">pacient</word>
+
+  
+  <word pattern="a1rma" class="nominal" number="pl">který</word>
+
+  splňuji tyto podmínky:
+  
+  <word pattern="m1" class="nominal" case="1" number="sg">pacient</word>
+
+  <literal mbattribute="KONSKUP" value="3" role="C" typeofphrase="V"><word class="verb" pattern="v2">patří</word> do Rizikové skupiny intervenovaných
+        pacientů</literal>
+  .
+</sentence>
+  <sentence>
+  Frekvence
+  <literal mbattribute="CUKR" value="0..5" role="S" typeofphrase="N" case="2"><word class="nominal" pattern="f1">spotřeba</word> <param name="N"/> kostek cukru denně</literal>
+  je o
+  <param name="P"/>
+  % vyšší mezi
+  
+  <literal mbattribute="KAVA" value="1" role="A" typeofphrase="L" number="pl" case="7"/>
+  
+  <word pattern="m1" class="nominal" case="7" number="pl">pacient</word>
+
+
+  než v celé kolekci. Platí pro
+  <param name="B"/>
+  
+  <word pattern="m1" class="nominal" case="2" number="pl">pacient</word>
+
+  
+  <word pattern="a1rma" class="nominal" number="pl">který</word>
+
+  splňuji tyto podmínky:
+  
+  <word pattern="m1" class="nominal" case="1" number="sg">pacient</word>
+
+  <literal mbattribute="KONSKUP" value="3" role="C" typeofphrase="V"><word class="verb" pattern="v2">patří</word> do Rizikové skupiny intervenovaných
+        pacientů</literal>
+  .
+</sentence>
+  <sentence>
+  Frekvence
+  
+  <word pattern="m1" class="nominal" case="2" number="pl">pacient</word>
+
+  ,
+  
+  <word pattern="a1rma" class="nominal" number="pl">který</word>
+
+  <literal mbattribute="CUKR" value="0..5" role="S" typeofphrase="V" number="pl"><word class="verb" pattern="v1">konzumuje</word> <param name="N"/> kostek cukru denně</literal>
+  je o
+  <param name="P"/>
+  % vyšší mezi
+  
+  
+  <word pattern="m1" class="nominal" case="7" number="pl">pacient</word>
+
+  ,
+  
+  <word pattern="a1rma" class="nominal" number="pl">který</word>
+
+  <floatslot id="1" role="A" occno="first"/>
+  <literal mbattribute="KAVA" value="1" role="A" typeofphrase="V" number="pl"><word class="verb" pattern="v1">nepije</word>
+        kávu</literal>
+  ,
+
+  než v celé kolekci. Platí pro
+  <param name="B"/>
+  
+  <word pattern="m1" class="nominal" case="2" number="pl">pacient</word>
+
+  
+  <word pattern="a1rma" class="nominal" number="pl">který</word>
+
+  splňuji tyto podmínky:
+  
+  <word pattern="m1" class="nominal" case="1" number="sg">pacient</word>
+
+  <literal mbattribute="KONSKUP" value="3" role="C" typeofphrase="V"><word class="verb" pattern="v2">patří</word> do Rizikové skupiny intervenovaných
+        pacientů</literal>
+  .
+</sentence>
+  <sentence>
+  Frekvence
+  
+  <word pattern="m1" class="nominal" case="2" number="pl">pacient</word>
+
+  ,
+  
+  <word pattern="a1rma" class="nominal" number="pl">který</word>
+
+  <literal mbattribute="CUKR" value="0..5" role="S" typeofphrase="V" number="pl"><word class="verb" pattern="v1">konzumuje</word> <param name="N"/> kostek cukru denně</literal>
+  je o
+  <param name="P"/>
+  % vyšší mezi
+  
+  
+  <word pattern="m1" class="nominal" case="7" number="pl">pacient</word>
+
+  <literal mbattribute="KAVA" value="1" role="A" typeofphrase="NA"/>
+
+  než v celé kolekci. Platí pro
+  <param name="B"/>
+  
+  <word pattern="m1" class="nominal" case="2" number="pl">pacient</word>
+
+  
+  <word pattern="a1rma" class="nominal" number="pl">který</word>
+
+  splňuji tyto podmínky:
+  
+  <word pattern="m1" class="nominal" case="1" number="sg">pacient</word>
+
+  <literal mbattribute="KONSKUP" value="3" role="C" typeofphrase="V"><word class="verb" pattern="v2">patří</word> do Rizikové skupiny intervenovaných
+        pacientů</literal>
+  .
+</sentence>
+  <sentence>
+  Frekvence
+  
+  <word pattern="m1" class="nominal" case="2" number="pl">pacient</word>
+
+  ,
+  
+  <word pattern="a1rma" class="nominal" number="pl">který</word>
+
+  <literal mbattribute="CUKR" value="0..5" role="S" typeofphrase="V" number="pl"><word class="verb" pattern="v1">konzumuje</word> <param name="N"/> kostek cukru denně</literal>
+  je o
+  <param name="P"/>
+  % vyšší mezi
+  
+  
+  <word pattern="m1" class="nominal" case="7" number="pl">pacient</word>
+
+  <literal mbattribute="KAVA" value="1" role="A" typeofphrase="R" number="pl" case="7" vderivation="ptc"><word class="verb" pattern="v1">nepije</word>
+        kávu</literal>
+
+  než v celé kolekci. Platí pro
+  <param name="B"/>
+  
+  <word pattern="m1" class="nominal" case="2" number="pl">pacient</word>
+
+  
+  <word pattern="a1rma" class="nominal" number="pl">který</word>
+
+  splňuji tyto podmínky:
+  
+  <word pattern="m1" class="nominal" case="1" number="sg">pacient</word>
+
+  <literal mbattribute="KONSKUP" value="3" role="C" typeofphrase="V"><word class="verb" pattern="v2">patří</word> do Rizikové skupiny intervenovaných
+        pacientů</literal>
+  .
+</sentence>
+  <sentence>
+  Frekvence
+  
+  <word pattern="m1" class="nominal" case="2" number="pl">pacient</word>
+
+  ,
+  
+  <word pattern="a1rma" class="nominal" number="pl">který</word>
+
+  <literal mbattribute="CUKR" value="0..5" role="S" typeofphrase="V" number="pl"><word class="verb" pattern="v1">konzumuje</word> <param name="N"/> kostek cukru denně</literal>
+  je o
+  <param name="P"/>
+  % vyšší mezi
+  
+  <literal mbattribute="KAVA" value="1" role="A" typeofphrase="L" number="pl" case="7"/>
+  
+  <word pattern="m1" class="nominal" case="7" number="pl">pacient</word>
+
+
+  než v celé kolekci. Platí pro
+  <param name="B"/>
+  
+  <word pattern="m1" class="nominal" case="2" number="pl">pacient</word>
+
+  
+  <word pattern="a1rma" class="nominal" number="pl">který</word>
+
+  splňuji tyto podmínky:
+  
+  <word pattern="m1" class="nominal" case="1" number="sg">pacient</word>
+
+  <literal mbattribute="KONSKUP" value="3" role="C" typeofphrase="V"><word class="verb" pattern="v2">patří</word> do Rizikové skupiny intervenovaných
+        pacientů</literal>
+  .
+</sentence>
+</sentences>

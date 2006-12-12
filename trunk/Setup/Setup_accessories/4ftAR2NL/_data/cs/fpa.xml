@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE auxiliarysymbols PUBLIC "-//LISp-Miner//DTD AR2NL 1.2//EN"
+	"http://lispminer.vse.cz/dtd/ar2nl-1.2.dtd">
+
+<auxiliarysymbols>
+
+<fpadata id="fpa1" symbol="X" numofant="1+" numofsuc="1+">
+  <param name="P"/> % (konkrétně <param name="B"/>) z celkového počtu
+  <param name="T"/>
+</fpadata>
+
+<fpadata id="fpa2" symbol="X" numofant="1+" numofsuc="1+">
+  <param name="B"/> (tj. <param name="P"/> %) z celkového počtu
+  <param name="T"/>
+</fpadata>
+
+<fpadata id="fpa3" symbol="X" numofant="1+" numofsuc="1+">
+  <param name="B"/>, tj. <param name="P"/> % z celkového počtu
+  <param name="T"/>
+</fpadata>
+
+<fpadata id="fpa4" symbol="Y" numofant="1+" numofsuc="1+">
+  <ename symbol="E"/>,
+  <ename symbol="Erel" number="_"/>
+  <floatslot id="1" role="A" occno="first"/>
+  <literal role="A" typeofphrase="V" number="_"/>,
+</fpadata>
+
+<fpadata id="fpa5" symbol="Y" numofant="1+" numofsuc="1+">
+  <ename symbol="E"/>
+  <literal role="A" typeofphrase="NA"/>
+</fpadata>
+
+<fpadata id="fpa7" symbol="Y" numofant="1+" numofsuc="1+">
+  <ename symbol="E"/>
+  <literal role="A" typeofphrase="R" case="_" number="_"/>
+</fpadata>
+
+<fpadata id="fpa8" symbol="Y" numofant="2+" numofsuc="1+">
+  <ename symbol="E"/>
+  <literal role="A" typeofphrase="NA"/>
+  <literal role="A" typeofphrase="R" case="_" number="_"/>
+</fpadata>
+
+<fpadata id="fpa9" symbol="Y" numofant="2+" numofsuc="1+">
+  <literal role="A" typeofphrase="L" case="_" number="_"/>
+  <ename symbol="E"/>
+  <literal role="A" typeofphrase="R" case="_" number="_"/>
+</fpadata>
+
+<fpadata id="fpa10" symbol="Y" numofant="2+" numofsuc="1+">
+  <literal role="A" typeofphrase="L" case="_" number="_"/>
+  <ename symbol="E"/>
+  <literal role="A" typeofphrase="NA"/>
+</fpadata>
+
+<fpadata id="fpa11" symbol="Y" numofant="1+" numofsuc="1+">
+  <literal role="A" typeofphrase="L" case="_" number="_"/>
+  <ename symbol="E"/>
+</fpadata>
+
+<fpadata id="fpa12" symbol="Z" numofant="1+" numofsuc="1+">
+  <choosetext>
+    <variant>Tento fakt</variant>
+    <variant>Tuto hypotézu</variant>
+    <variant>Toto pravidlo</variant>
+	<variant>Toto tvrzení</variant>
+  </choosetext>
+  potvrzuje <fpa symbol="X"/> <ename symbol="Eptc0" case="2" number="pl"/>
+  <ename symbol="E" case="2" number="pl"/>.
+</fpadata>
+
+<fpadata id="fpa23" symbol="Y" numofant="2+" numofsuc="1+">
+  <ename symbol="E"/>
+  <literal role="A" typeofphrase="NA"/>,
+  <ename symbol="Erel" number="_"/>
+  <floatslot id="1" role="A" occno="last"/>
+  <literal role="A" typeofphrase="V" number="_"/>
+</fpadata>
+
+<fpadata id="fpa24" symbol="C" numofant="1+" numofsuc="1+" numofcon="1+">
+<choosetext>
+  <variant>Tvrzení</variant>
+  <variant>Hypotéza</variant>
+  <variant>Tento fakt</variant>
+</choosetext>
+platí
+<choosetext>
+ <variant>za těchto podmínek:</variant>
+ <variant>v případě, že</variant>
+ <variant>, když</variant>
+</choosetext>
+ <ename symbol="E" case="1" number="sg"/>
+ <literal role="C" typeofphrase="V"/>.
+</fpadata>
+
+
+</auxiliarysymbols>

@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mvpatterns PUBLIC "-//LISp-Miner//DTD AR2NL 1.2//EN"
+	"http://lispminer.vse.cz/dtd/ar2nl-1.2.dtd">
+
+<mvpatterns>
+<!-- first participial form (active) -->
+<pattern name="aa">
+  <example>polttaa</example>
+  <base>a</base>
+  <pl>vat</pl>
+  <ptc>va</ptc>
+</pattern>
+<pattern name="ee">
+  <example>työskentelee-menee</example>
+  <base>e</base>
+  <pl>vät</pl>
+  <ptc>vä</ptc>
+  <ptcpattern>vä</ptcpattern>
+</pattern>
+<pattern name="ii">
+  <example>kärsii</example>
+  <base>i</base>
+  <pl>vät</pl>
+  <ptc>vä</ptc>
+  <ptcpattern>vä</ptcpattern>
+</pattern>
+<pattern name="oo">
+  <example>seisoo</example>
+  <base>o</base>
+  <pl>vat</pl>
+  <ptc>va</ptc>
+  <ptcpattern>va</ptcpattern>
+</pattern>
+<pattern name="uu">
+  <example>ontuu-kuuluu-istuu</example>
+  <base>u</base>
+  <pl>vat</pl>
+  <ptc>va</ptc>
+  <ptcpattern>va</ptcpattern>
+</pattern>
+<pattern name="yy">
+  <example>kysyy</example>
+  <base>y</base>
+  <pl>vät</pl>
+  <ptc>vä</ptc>
+  <ptcpattern>vä</ptcpattern>
+</pattern>
+<pattern name="ää">
+  <example>käyttää</example>
+  <base>ä</base>
+  <pl>vät</pl>
+  <ptc>vä</ptc>
+  <ptcpattern>vä</ptcpattern>
+</pattern>
+
+<pattern name="koi">
+  <example>tupakoi</example>
+  <base></base>
+  <pl>vat</pl>
+  <ptc>va</ptc>
+</pattern>
+<pattern name="on">
+  <example>on</example>
+  <base>n</base>
+  <pl>vat</pl>
+  <ptc>leva</ptc>
+</pattern>
+
+<!-- first participial form (passive) -->
+<pattern name="vs">
+  <example>suorittaa</example>
+  <base>a</base>
+  <pl>vat</pl>
+  <ptc>nut</ptc>
+</pattern>
+
+<pattern name="nut">
+  <example>tupakoinut</example>
+  <base>nut</base>
+  <pl>neet</pl>
+  <ptc>va</ptc>
+</pattern>
+
+<!-- short verbs -->
+<pattern name="sai">
+  <example>sai</example>
+  <base>i</base>
+  <pl>ivat</pl>
+  <ptc>anut</ptc>
+  <ptcpattern>nut</ptcpattern>
+</pattern>
+<pattern name="juo">
+  <example>juo</example>
+  <base></base>
+  <pl>vat</pl>
+  <ptc>ov</ptc>
+</pattern>
+
+<!-- negative -->
+<pattern name="ei">
+  <example>ei</example>
+  <base></base>
+  <pl>vät</pl>
+  <ptc></ptc>
+</pattern>
+
+
+</mvpatterns>

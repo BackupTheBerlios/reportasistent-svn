@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE rule PUBLIC "-//LISp-Miner//DTD Rule 1.0//EN"
+	"http://lispminer.vse.cz/dtd/rule-1.0.dtd">
+
+<rule id="31" quantifier="FUI">
+	<cedent type="A">
+	</cedent>
+	<cedent type="S">
+		<literal quantity="Status" minlen="1" maxlen="1" coefftype="subset" attribute="status">
+			<coefficient>
+				<value category="Good">A..C</value>
+			</coefficient>
+		</literal>
+	</cedent>
+	<cedent type="C">
+	</cedent>
+	<parameters>
+		<param name="P" value="88.2"/>
+		<param name="B" value="5454"/>
+		<param name="T" value="6181"/>
+	</parameters>
+</rule>

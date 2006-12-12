@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mnpatterns PUBLIC "-//LISp-Miner//DTD AR2NL 1.1//EN"
+	"http://lispminer.vse.cz/dtd/ar2nl-1.1.dtd">
+
+<mnpatterns>
+
+<pattern name="a1f">
+  <example>která</example>
+  <endsegment case="1" number="sg">á</endsegment>
+  <endsegment case="2" number="sg">é</endsegment>
+  <endsegment case="3" number="sg">é</endsegment>
+  <endsegment case="4" number="sg">ou</endsegment>
+  <endsegment case="6" number="sg">é</endsegment>
+  <endsegment case="7" number="sg">ou</endsegment>
+  <endsegment case="1" number="pl">é</endsegment>
+  <endsegment case="2" number="pl">ých</endsegment>
+  <endsegment case="3" number="pl">ým</endsegment>
+  <endsegment case="4" number="pl">é</endsegment>
+  <endsegment case="6" number="pl">ých</endsegment>
+  <endsegment case="7" number="pl">ými</endsegment>
+</pattern>
+<pattern name="a1ma">
+  <example>mladý</example>
+  <endsegment case="1" number="sg">ý</endsegment>
+  <endsegment case="2" number="sg">ého</endsegment>
+  <endsegment case="3" number="sg">ému</endsegment>
+  <endsegment case="4" number="sg">ého</endsegment>
+  <endsegment case="6" number="sg">ém</endsegment>
+  <endsegment case="7" number="sg">ým</endsegment>
+  <endsegment case="1" number="pl">í</endsegment>
+  <endsegment case="2" number="pl">ých</endsegment>
+  <endsegment case="3" number="pl">ým</endsegment>
+  <endsegment case="4" number="pl">é</endsegment>
+  <endsegment case="6" number="pl">ých</endsegment>
+  <endsegment case="7" number="pl">ými</endsegment>
+</pattern>
+<pattern name="a1mar">
+  <example>starý - změna r na ř</example>
+  <endsegment case="1" number="sg">rý</endsegment>
+  <endsegment case="2" number="sg">rého</endsegment>
+  <endsegment case="3" number="sg">rému</endsegment>
+  <endsegment case="4" number="sg">rého</endsegment>
+  <endsegment case="6" number="sg">rém</endsegment>
+  <endsegment case="7" number="sg">rým</endsegment>
+  <endsegment case="1" number="pl">ří</endsegment>
+  <endsegment case="2" number="pl">rých</endsegment>
+  <endsegment case="3" number="pl">rým</endsegment>
+  <endsegment case="4" number="pl">ré</endsegment>
+  <endsegment case="6" number="pl">rých</endsegment>
+  <endsegment case="7" number="pl">rými</endsegment>
+</pattern>
+<pattern name="a1mak">
+  <example>mladý - životný, změna k na c</example>
+  <endsegment case="1" number="sg">ký</endsegment>
+  <endsegment case="2" number="sg">kého</endsegment>
+  <endsegment case="3" number="sg">kému</endsegment>
+  <endsegment case="4" number="sg">kého</endsegment>
+  <endsegment case="6" number="sg">kém</endsegment>
+  <endsegment case="7" number="sg">kým</endsegment>
+  <endsegment case="1" number="pl">cí</endsegment>
+  <endsegment case="2" number="pl">kých</endsegment>
+  <endsegment case="3" number="pl">kým</endsegment>
+  <endsegment case="4" number="pl">ké</endsegment>
+  <endsegment case="6" number="pl">kých</endsegment>
+  <endsegment case="7" number="pl">kými</endsegment>
+</pattern>
+<pattern name="a1mi">
+  <example>mladý - neživotný</example>
+  <endsegment case="1" number="sg">ý</endsegment>
+  <endsegment case="2" number="sg">ého</endsegment>
+  <endsegment case="3" number="sg">ému</endsegment>
+  <endsegment case="4" number="sg">ý</endsegment>
+  <endsegment case="6" number="sg">ém</endsegment>
+  <endsegment case="7" number="sg">ým</endsegment>
+  <endsegment case="1" number="pl">é</endsegment>
+  <endsegment case="2" number="pl">ých</endsegment>
+  <endsegment case="3" number="pl">ým</endsegment>
+  <endsegment case="4" number="pl">é</endsegment>
+  <endsegment case="6" number="pl">ých</endsegment>
+  <endsegment case="7" number="pl">ými</endsegment>
+</pattern>
+<pattern name="a1n">
+  <example>které</example>
+  <endsegment case="1" number="sg">é</endsegment>
+  <endsegment case="2" number="sg">ého</endsegment>
+  <endsegment case="3" number="sg">ému</endsegment>
+  <endsegment case="4" number="sg">é</endsegment>
+  <endsegment case="6" number="sg">ém</endsegment>
+  <endsegment case="7" number="sg">ým</endsegment>
+  <endsegment case="1" number="pl">ý</endsegment>
+  <endsegment case="2" number="pl">ých</endsegment>
+  <endsegment case="3" number="pl">ým</endsegment>
+  <endsegment case="4" number="pl">á</endsegment>
+  <endsegment case="6" number="pl">ých</endsegment>
+  <endsegment case="7" number="pl">ými</endsegment>
+</pattern>
+<pattern name="a1rma">
+  <example>který</example>
+  <endsegment case="1" number="sg">rý</endsegment>
+  <endsegment case="2" number="sg">rého</endsegment>
+  <endsegment case="3" number="sg">rému</endsegment>
+  <endsegment case="4" number="sg">rého</endsegment>
+  <endsegment case="6" number="sg">rém</endsegment>
+  <endsegment case="7" number="sg">rým</endsegment>
+  <endsegment case="1" number="pl">ří</endsegment>
+  <endsegment case="2" number="pl">rých</endsegment>
+  <endsegment case="3" number="pl">rým</endsegment>
+  <endsegment case="4" number="pl">ré</endsegment>
+  <endsegment case="6" number="pl">rých</endsegment>
+  <endsegment case="7" number="pl">rými</endsegment>
+</pattern>
+<pattern name="a2ma">
+  <example>vykazující, jarní - rod mužský, životný</example>
+  <endsegment case="1" number="sg"></endsegment>
+  <endsegment case="2" number="sg">ho</endsegment>
+  <endsegment case="3" number="sg">mu</endsegment>
+  <endsegment case="4" number="sg">ho</endsegment>
+  <endsegment case="6" number="sg">m</endsegment>
+  <endsegment case="7" number="sg">m</endsegment>
+  <endsegment case="1" number="pl"></endsegment>
+  <endsegment case="2" number="pl">ch</endsegment>
+  <endsegment case="3" number="pl">m</endsegment>
+  <endsegment case="4" number="pl"></endsegment>
+  <endsegment case="6" number="pl">ch</endsegment>
+  <endsegment case="7" number="pl">mi</endsegment>
+</pattern>
+<pattern name="a2mi">
+  <example>vykazující, jarní - rod mužský, neživotný</example>
+  <endsegment case="1" number="sg"></endsegment>
+  <endsegment case="2" number="sg">ho</endsegment>
+  <endsegment case="3" number="sg">mu</endsegment>
+  <endsegment case="4" number="sg"></endsegment>
+  <endsegment case="6" number="sg">m</endsegment>
+  <endsegment case="7" number="sg">m</endsegment>
+  <endsegment case="1" number="pl"></endsegment>
+  <endsegment case="2" number="pl">ch</endsegment>
+  <endsegment case="3" number="pl">m</endsegment>
+  <endsegment case="4" number="pl"></endsegment>
+  <endsegment case="6" number="pl">ch</endsegment>
+  <endsegment case="7" number="pl">mi</endsegment>
+</pattern>
+<pattern name="a2n">
+  <example>jarní pro střední rod</example>
+  <endsegment case="1" number="sg"></endsegment>
+  <endsegment case="2" number="sg">ho</endsegment>
+  <endsegment case="3" number="sg">mu</endsegment>
+  <endsegment case="4" number="sg"></endsegment>
+  <endsegment case="6" number="sg">m</endsegment>
+  <endsegment case="7" number="sg">m</endsegment>
+  <endsegment case="1" number="pl"></endsegment>
+  <endsegment case="2" number="pl">ch</endsegment>
+  <endsegment case="3" number="pl">m</endsegment>
+  <endsegment case="4" number="pl"></endsegment>
+  <endsegment case="6" number="pl">ch</endsegment>
+  <endsegment case="7" number="pl">mi</endsegment>
+</pattern>
+<pattern name="f1">
+  <example>žena</example>
+  <endsegment case="1" number="sg">a</endsegment>
+  <endsegment case="2" number="sg">y</endsegment>
+  <endsegment case="3" number="sg">ě</endsegment>
+  <endsegment case="4" number="sg">u</endsegment>
+  <endsegment case="6" number="sg">ě</endsegment>
+  <endsegment case="7" number="sg">ou</endsegment>
+  <endsegment case="1" number="pl">y</endsegment>
+  <endsegment case="2" number="pl"></endsegment>
+  <endsegment case="3" number="pl">ám</endsegment>
+  <endsegment case="4" number="pl">y</endsegment>
+  <endsegment case="6" number="pl">ách</endsegment>
+  <endsegment case="7" number="pl">ami</endsegment>
+</pattern>
+<pattern name="f2">
+  <example>růže</example>
+  <endsegment case="1" number="sg">e</endsegment>
+  <endsegment case="2" number="sg">e</endsegment>
+  <endsegment case="3" number="sg">i</endsegment>
+  <endsegment case="4" number="sg">i</endsegment>
+  <endsegment case="6" number="sg">i</endsegment>
+  <endsegment case="7" number="sg">í</endsegment>
+  <endsegment case="1" number="pl">e</endsegment>
+  <endsegment case="2" number="pl">í</endsegment>
+  <endsegment case="3" number="pl">ím</endsegment>
+  <endsegment case="4" number="pl">e</endsegment>
+  <endsegment case="6" number="pl">ích</endsegment>
+  <endsegment case="7" number="pl">emi</endsegment>
+</pattern>
+<pattern name="f3">
+  <example>píseň</example>
+  <endsegment case="1" number="sg">eň</endsegment>
+  <endsegment case="2" number="sg">ně</endsegment>
+  <endsegment case="3" number="sg">ni</endsegment>
+  <endsegment case="4" number="sg">eň</endsegment>
+  <endsegment case="6" number="sg">ni</endsegment>
+  <endsegment case="7" number="sg">ní</endsegment>
+  <endsegment case="1" number="pl">ně</endsegment>
+  <endsegment case="2" number="pl">ní</endsegment>
+  <endsegment case="3" number="pl">ním</endsegment>
+  <endsegment case="4" number="pl">ně</endsegment>
+  <endsegment case="6" number="pl">ních</endsegment>
+  <endsegment case="7" number="pl">němi</endsegment>
+</pattern>
+<pattern name="f4">
+  <example>kost</example>
+  <endsegment case="1" number="sg"></endsegment>
+  <endsegment case="2" number="sg">i</endsegment>
+  <endsegment case="3" number="sg">i</endsegment>
+  <endsegment case="4" number="sg"></endsegment>
+  <endsegment case="6" number="sg">i</endsegment>
+  <endsegment case="7" number="sg">í</endsegment>
+  <endsegment case="1" number="pl">i</endsegment>
+  <endsegment case="2" number="pl">í</endsegment>
+  <endsegment case="3" number="pl">em</endsegment>
+  <endsegment case="4" number="pl">i</endsegment>
+  <endsegment case="6" number="pl">ech</endsegment>
+  <endsegment case="7" number="pl">mi</endsegment>
+</pattern>
+<pattern name="m1">
+  <example>pacient, pán</example>
+  <endsegment case="1" number="sg"></endsegment>
+  <endsegment case="2" number="sg">a</endsegment>
+  <endsegment case="3" number="sg">ovi</endsegment>
+  <endsegment case="4" number="sg">a</endsegment>
+  <endsegment case="6" number="sg">ovi</endsegment>
+  <endsegment case="7" number="sg">em</endsegment>
+  <endsegment case="1" number="pl">i</endsegment>
+  <endsegment case="2" number="pl">ů</endsegment>
+  <endsegment case="3" number="pl">ům</endsegment>
+  <endsegment case="4" number="pl">y</endsegment>
+  <endsegment case="6" number="pl">ech</endsegment>
+  <endsegment case="7" number="pl">y</endsegment>
+</pattern>
+<pattern name="m2">
+  <example>hrad</example>
+  <endsegment case="1" number="sg"></endsegment>
+  <endsegment case="2" number="sg">u</endsegment>
+  <endsegment case="3" number="sg">u</endsegment>
+  <endsegment case="4" number="sg"></endsegment>
+  <endsegment case="6" number="sg">ě</endsegment>
+  <endsegment case="7" number="sg">em</endsegment>
+  <endsegment case="1" number="pl">y</endsegment>
+  <endsegment case="2" number="pl">ů</endsegment>
+  <endsegment case="3" number="pl">ům</endsegment>
+  <endsegment case="4" number="pl">y</endsegment>
+  <endsegment case="6" number="pl">ech</endsegment>
+  <endsegment case="7" number="pl">y</endsegment>
+</pattern>
+<pattern name="m2x">
+  <example>stav</example>
+  <endsegment case="1" number="sg"></endsegment>
+  <endsegment case="2" number="sg">u</endsegment>
+  <endsegment case="3" number="sg">u</endsegment>
+  <endsegment case="4" number="sg"></endsegment>
+  <endsegment case="6" number="sg">u</endsegment>
+  <endsegment case="7" number="sg">em</endsegment>
+  <endsegment case="1" number="pl">y</endsegment>
+  <endsegment case="2" number="pl">ů</endsegment>
+  <endsegment case="3" number="pl">ům</endsegment>
+  <endsegment case="4" number="pl">y</endsegment>
+  <endsegment case="6" number="pl">ech</endsegment>
+  <endsegment case="7" number="pl">y</endsegment>
+</pattern>
+<pattern name="m3">
+  <example>muž</example>
+  <endsegment case="1" number="sg"></endsegment>
+  <endsegment case="2" number="sg">e</endsegment>
+  <endsegment case="3" number="sg">ovi</endsegment>
+  <endsegment case="4" number="sg">e</endsegment>
+  <endsegment case="6" number="sg">ovi</endsegment>
+  <endsegment case="7" number="sg">em</endsegment>
+  <endsegment case="1" number="pl">i</endsegment>
+  <endsegment case="2" number="pl">ů</endsegment>
+  <endsegment case="3" number="pl">ům</endsegment>
+  <endsegment case="4" number="pl">e</endsegment>
+  <endsegment case="6" number="pl">ích</endsegment>
+  <endsegment case="7" number="pl">i</endsegment>
+</pattern>
+<pattern name="m4">
+  <example>stroj</example>
+  <endsegment case="1" number="sg"></endsegment>
+  <endsegment case="2" number="sg">e</endsegment>
+  <endsegment case="3" number="sg">i</endsegment>
+  <endsegment case="4" number="sg"></endsegment>
+  <endsegment case="6" number="sg">i</endsegment>
+  <endsegment case="7" number="sg">em</endsegment>
+  <endsegment case="1" number="pl">e</endsegment>
+  <endsegment case="2" number="pl">ů</endsegment>
+  <endsegment case="3" number="pl">ům</endsegment>
+  <endsegment case="4" number="pl">e</endsegment>
+  <endsegment case="6" number="pl">ích</endsegment>
+  <endsegment case="7" number="pl">i</endsegment>
+</pattern>
+<pattern name="m5">
+  <example>předseda</example>
+  <endsegment case="1" number="sg">a</endsegment>
+  <endsegment case="2" number="sg">y</endsegment>
+  <endsegment case="3" number="sg">ovi</endsegment>
+  <endsegment case="4" number="sg">u</endsegment>
+  <endsegment case="6" number="sg">ovi</endsegment>
+  <endsegment case="7" number="sg">ou</endsegment>
+  <endsegment case="1" number="pl">ové</endsegment>
+  <endsegment case="2" number="pl">ů</endsegment>
+  <endsegment case="3" number="pl">ům</endsegment>
+  <endsegment case="4" number="pl">y</endsegment>
+  <endsegment case="6" number="pl">ech</endsegment>
+  <endsegment case="7" number="pl">y</endsegment>
+</pattern>
+<pattern name="m6">
+  <example>soudce</example>
+  <endsegment case="1" number="sg">e</endsegment>
+  <endsegment case="2" number="sg">e</endsegment>
+  <endsegment case="3" number="sg">i</endsegment>
+  <endsegment case="4" number="sg">e</endsegment>
+  <endsegment case="6" number="sg">i</endsegment>
+  <endsegment case="7" number="sg">em</endsegment>
+  <endsegment case="1" number="pl">i</endsegment>
+  <endsegment case="2" number="pl">ů</endsegment>
+  <endsegment case="3" number="pl">ům</endsegment>
+  <endsegment case="4" number="pl">e</endsegment>
+  <endsegment case="6" number="pl">ích</endsegment>
+  <endsegment case="7" number="pl">i</endsegment>
+</pattern>
+<pattern name="n1">
+  <example>město</example>
+  <endsegment case="1" number="sg">o</endsegment>
+  <endsegment case="2" number="sg">a</endsegment>
+  <endsegment case="3" number="sg">u</endsegment>
+  <endsegment case="4" number="sg">o</endsegment>
+  <endsegment case="6" number="sg">ě</endsegment>
+  <endsegment case="7" number="sg">em</endsegment>
+  <endsegment case="1" number="pl">a</endsegment>
+  <endsegment case="2" number="pl"></endsegment>
+  <endsegment case="3" number="pl">ům</endsegment>
+  <endsegment case="4" number="pl">a</endsegment>
+  <endsegment case="6" number="pl">ech</endsegment>
+  <endsegment case="7" number="pl">y</endsegment>
+</pattern>
+<pattern name="n2">
+  <example>moře</example>
+  <endsegment case="1" number="sg">e</endsegment>
+  <endsegment case="2" number="sg">e</endsegment>
+  <endsegment case="3" number="sg">i</endsegment>
+  <endsegment case="4" number="sg">e</endsegment>
+  <endsegment case="6" number="sg">i</endsegment>
+  <endsegment case="7" number="sg">em</endsegment>
+  <endsegment case="1" number="pl">e</endsegment>
+  <endsegment case="2" number="pl">í</endsegment>
+  <endsegment case="3" number="pl">ím</endsegment>
+  <endsegment case="4" number="pl">e</endsegment>
+  <endsegment case="6" number="pl">ích</endsegment>
+  <endsegment case="7" number="pl">i</endsegment>
+</pattern>
+<pattern name="n3">
+  <example>kuře</example>
+  <endsegment case="1" number="sg">e</endsegment>
+  <endsegment case="2" number="sg">ete</endsegment>
+  <endsegment case="3" number="sg">eti</endsegment>
+  <endsegment case="4" number="sg">e</endsegment>
+  <endsegment case="6" number="sg">eti</endsegment>
+  <endsegment case="7" number="sg">etem</endsegment>
+  <endsegment case="1" number="pl">ata</endsegment>
+  <endsegment case="2" number="pl">at</endsegment>
+  <endsegment case="3" number="pl">atům</endsegment>
+  <endsegment case="4" number="pl">ata</endsegment>
+  <endsegment case="6" number="pl">atech</endsegment>
+  <endsegment case="7" number="pl">aty</endsegment>
+</pattern>
+<pattern name="n4">
+  <example>stavení</example>
+  <endsegment case="1" number="sg"></endsegment>
+  <endsegment case="2" number="sg"></endsegment>
+  <endsegment case="3" number="sg"></endsegment>
+  <endsegment case="4" number="sg"></endsegment>
+  <endsegment case="6" number="sg"></endsegment>
+  <endsegment case="7" number="sg">m</endsegment>
+  <endsegment case="1" number="pl"></endsegment>
+  <endsegment case="2" number="pl"></endsegment>
+  <endsegment case="3" number="pl">m</endsegment>
+  <endsegment case="4" number="pl"></endsegment>
+  <endsegment case="6" number="pl">ch</endsegment>
+  <endsegment case="7" number="pl">mi</endsegment>
+</pattern>
+<pattern name="p1ma">
+  <example>ten</example>
+  <endsegment case="1" number="sg">en</endsegment>
+  <endsegment case="2" number="sg">oho</endsegment>
+  <endsegment case="3" number="sg">omu</endsegment>
+  <endsegment case="4" number="sg">oho</endsegment>
+  <endsegment case="6" number="sg">om</endsegment>
+  <endsegment case="7" number="sg">ím</endsegment>
+  <endsegment case="1" number="pl">i</endsegment>
+  <endsegment case="2" number="pl">ěch</endsegment>
+  <endsegment case="3" number="pl">ěm</endsegment>
+  <endsegment case="4" number="pl">y</endsegment>
+  <endsegment case="6" number="pl">ěch</endsegment>
+  <endsegment case="7" number="pl">ěmi</endsegment>
+</pattern>
+
+</mnpatterns>

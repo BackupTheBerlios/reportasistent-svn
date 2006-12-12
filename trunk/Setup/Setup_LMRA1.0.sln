@@ -5,6 +5,8 @@ Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "LMReportAsistent1.0_full", 
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "LMReportAsistent1.0_lite", "Setup_LMRA1.0_lite.vdproj", "{4927E44B-7FCA-414A-B1BF-7789624CF23B}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "MergeModule_AR2NL", "MergeModule_AR2NL.vdproj", "{E86504D2-C987-4450-956F-1AE9678D713A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Default = Debug|Default
@@ -19,6 +21,10 @@ Global
 		{4927E44B-7FCA-414A-B1BF-7789624CF23B}.Debug|Default.Build.0 = Debug
 		{4927E44B-7FCA-414A-B1BF-7789624CF23B}.Release|Default.ActiveCfg = Release
 		{4927E44B-7FCA-414A-B1BF-7789624CF23B}.Release|Default.Build.0 = Release
+		{E86504D2-C987-4450-956F-1AE9678D713A}.Debug|Default.ActiveCfg = Debug
+		{E86504D2-C987-4450-956F-1AE9678D713A}.Debug|Default.Build.0 = Debug
+		{E86504D2-C987-4450-956F-1AE9678D713A}.Release|Default.ActiveCfg = Release
+		{E86504D2-C987-4450-956F-1AE9678D713A}.Release|Default.Build.0 = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

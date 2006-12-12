@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<sentences>
+  <sentence>
+  Frekvence
+  <word class="nominal" pattern="f1" case="2">spotřeba</word> 0–5 kostek cukru denně
+  je o
+  70.7
+  % vyšší mezi
+  
+  
+  <word class="nominal" pattern="m1" case="7" number="pl">pacient</word>
+
+  ,
+  
+  <word class="nominal" pattern="a1rma" number="pl">který</word>
+
+  
+  <word class="verb" pattern="v1" number="pl">nepije</word>
+        kávu
+  ,
+
+  než v celé kolekci. Platí pro
+  87
+  
+  <word class="nominal" pattern="m1" case="2" number="pl">pacient</word>
+
+  
+  <word class="nominal" pattern="a1rma" number="pl">který</word>
+
+  splňuji tyto podmínky:
+  
+  <word class="nominal" pattern="m1" case="1" number="sg">pacient</word>
+
+  <word class="verb" pattern="v2">patří</word> do Rizikové skupiny intervenovaných
+        pacientů
+  .
+</sentence>
+  <sentence>
+  Frekvence
+  <word class="nominal" pattern="f1" case="2">spotřeba</word> 0–5 kostek cukru denně
+  je o
+  70.7
+  % vyšší mezi
+  
+  
+  <word class="nominal" pattern="m1" case="7" number="pl">pacient</word>
+
+  <literal/>
+
+  než v celé kolekci. Platí pro
+  87
+  
+  <word class="nominal" pattern="m1" case="2" number="pl">pacient</word>
+
+  
+  <word class="nominal" pattern="a1rma" number="pl">který</word>
+
+  splňuji tyto podmínky:
+  
+  <word class="nominal" pattern="m1" case="1" number="sg">pacient</word>
+
+  <word class="verb" pattern="v2">patří</word> do Rizikové skupiny intervenovaných
+        pacientů
+  .
+</sentence>
+  <sentence>
+  Frekvence
+  <word class="nominal" pattern="f1" case="2">spotřeba</word> 0–5 kostek cukru denně
+  je o
+  70.7
+  % vyšší mezi
+  
+  
+  <word class="nominal" pattern="m1" case="7" number="pl">pacient</word>
+
+  <word case="7" number="pl" class="nominal" pattern="a2ma">nepijící</word>
+        kávu
+
+  než v celé kolekci. Platí pro
+  87
+  
+  <word class="nominal" pattern="m1" case="2" number="pl">pacient</word>
+
+  
+  <word class="nominal" pattern="a1rma" number="pl">který</word>
+
+  splňuji tyto podmínky:
+  
+  <word class="nominal" pattern="m1" case="1" number="sg">pacient</word>
+
+  <word class="verb" pattern="v2">patří</word> do Rizikové skupiny intervenovaných
+        pacientů
+  .
+</sentence>
+  <sentence>
+  Frekvence
+  <word class="nominal" pattern="f1" case="2">spotřeba</word> 0–5 kostek cukru denně
+  je o
+  70.7
+  % vyšší mezi
+  
+  <literal/>
+  
+  <word class="nominal" pattern="m1" case="7" number="pl">pacient</word>
+
+
+  než v celé kolekci. Platí pro
+  87
+  
+  <word class="nominal" pattern="m1" case="2" number="pl">pacient</word>
+
+  
+  <word class="nominal" pattern="a1rma" number="pl">který</word>
+
+  splňuji tyto podmínky:
+  
+  <word class="nominal" pattern="m1" case="1" number="sg">pacient</word>
+
+  <word class="verb" pattern="v2">patří</word> do Rizikové skupiny intervenovaných
+        pacientů
+  .
+</sentence>
+  <sentence>
+  Frekvence
+  
+  <word class="nominal" pattern="m1" case="2" number="pl">pacient</word>
+
+  ,
+  
+  <word class="nominal" pattern="a1rma" number="pl">který</word>
+
+  <word class="verb" pattern="v1" number="pl">konzumuje</word> 0–5 kostek cukru denně
+  je o
+  70.7
+  % vyšší mezi
+  
+  
+  <word class="nominal" pattern="m1" case="7" number="pl">pacient</word>
+
+  ,
+  
+  <word class="nominal" pattern="a1rma" number="pl">který</word>
+
+  
+  <word class="verb" pattern="v1" number="pl">nepije</word>
+        kávu
+  ,
+
+  než v celé kolekci. Platí pro
+  87
+  
+  <word class="nominal" pattern="m1" case="2" number="pl">pacient</word>
+
+  
+  <word class="nominal" pattern="a1rma" number="pl">který</word>
+
+  splňuji tyto podmínky:
+  
+  <word class="nominal" pattern="m1" case="1" number="sg">pacient</word>
+
+  <word class="verb" pattern="v2">patří</word> do Rizikové skupiny intervenovaných
+        pacientů
+  .
+</sentence>
+  <sentence>
+  Frekvence
+  
+  <word class="nominal" pattern="m1" case="2" number="pl">pacient</word>
+
+  ,
+  
+  <word class="nominal" pattern="a1rma" number="pl">který</word>
+
+  <word class="verb" pattern="v1" number="pl">konzumuje</word> 0–5 kostek cukru denně
+  je o
+  70.7
+  % vyšší mezi
+  
+  
+  <word class="nominal" pattern="m1" case="7" number="pl">pacient</word>
+
+  <literal/>
+
+  než v celé kolekci. Platí pro
+  87
+  
+  <word class="nominal" pattern="m1" case="2" number="pl">pacient</word>
+
+  
+  <word class="nominal" pattern="a1rma" number="pl">který</word>
+
+  splňuji tyto podmínky:
+  
+  <word class="nominal" pattern="m1" case="1" number="sg">pacient</word>
+
+  <word class="verb" pattern="v2">patří</word> do Rizikové skupiny intervenovaných
+        pacientů
+  .
+</sentence>
+  <sentence>
+  Frekvence
+  
+  <word class="nominal" pattern="m1" case="2" number="pl">pacient</word>
+
+  ,
+  
+  <word class="nominal" pattern="a1rma" number="pl">který</word>
+
+  <word class="verb" pattern="v1" number="pl">konzumuje</word> 0–5 kostek cukru denně
+  je o
+  70.7
+  % vyšší mezi
+  
+  
+  <word class="nominal" pattern="m1" case="7" number="pl">pacient</word>
+
+  <word case="7" number="pl" class="nominal" pattern="a2ma">nepijící</word>
+        kávu
+
+  než v celé kolekci. Platí pro
+  87
+  
+  <word class="nominal" pattern="m1" case="2" number="pl">pacient</word>
+
+  
+  <word class="nominal" pattern="a1rma" number="pl">který</word>
+
+  splňuji tyto podmínky:
+  
+  <word class="nominal" pattern="m1" case="1" number="sg">pacient</word>
+
+  <word class="verb" pattern="v2">patří</word> do Rizikové skupiny intervenovaných
+        pacientů
+  .
+</sentence>
+  <sentence>
+  Frekvence
+  
+  <word class="nominal" pattern="m1" case="2" number="pl">pacient</word>
+
+  ,
+  
+  <word class="nominal" pattern="a1rma" number="pl">který</word>
+
+  <word class="verb" pattern="v1" number="pl">konzumuje</word> 0–5 kostek cukru denně
+  je o
+  70.7
+  % vyšší mezi
+  
+  <literal/>
+  
+  <word class="nominal" pattern="m1" case="7" number="pl">pacient</word>
+
+
+  než v celé kolekci. Platí pro
+  87
+  
+  <word class="nominal" pattern="m1" case="2" number="pl">pacient</word>
+
+  
+  <word class="nominal" pattern="a1rma" number="pl">který</word>
+
+  splňuji tyto podmínky:
+  
+  <word class="nominal" pattern="m1" case="1" number="sg">pacient</word>
+
+  <word class="verb" pattern="v2">patří</word> do Rizikové skupiny intervenovaných
+        pacientů
+  .
+</sentence>
+</sentences>

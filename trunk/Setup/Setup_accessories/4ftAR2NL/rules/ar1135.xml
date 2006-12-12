@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE rule PUBLIC "-//LISp-Miner//DTD Rule 1.0//EN"
+	"http://lispminer.vse.cz/dtd/rule-1.0.dtd">
+
+<rule id="1135" quantifier="AAI">
+	<cedent type="A">
+		<literal quantity="Caj" minlen="1" maxlen="1" coefftype="subset" attribute="CAJ">
+			<coefficient>
+				<value category="4">4</value>
+			</coefficient>
+		</literal>
+	</cedent>
+	<cedent type="S">
+		<literal quantity="Cukr" minlen="1" maxlen="1" coefftype="subset" attribute="CUKR">
+			<coefficient>
+				<value category="&lt;0;5)">0..5</value>
+			</coefficient>
+		</literal>
+	</cedent>
+	<cedent type="C">
+		<literal quantity="Vzdelani" minlen="1" maxlen="1" coefftype="subset" attribute="VZDELANI">
+			<coefficient>
+				<value category="2">2</value>
+			</coefficient>
+		</literal>
+	</cedent>
+	<parameters>
+		<param name="P" value="68.9"/>
+		<param name="B" value="93"/>
+		<param name="T" value="135"/>
+	</parameters>
+</rule>

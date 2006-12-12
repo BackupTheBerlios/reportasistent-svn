@@ -1,0 +1,19 @@
+AR2NL system - news and release notes
+
+
+January 30, 2004, Version 1.1.2
+- Correction of the sQL query in ARule.selectQuantifier().
+
+
+January 22, 2004, Version 1.1.1
+- The comparison of specific strings in the metabase is now case-insensitive.
+
+
+November 30, 2004, Version 1.1
+- New data file "langparam.xml".
+- Correction of the SQL query in ARule.selectQuantifier() (new table tdFTQuantifier in the matabase).
+- New entity "EPtcPatternSuffix" in "entitynames.xml".
+
+
+November 2, 2004, Version 1.0
+- First stable version.

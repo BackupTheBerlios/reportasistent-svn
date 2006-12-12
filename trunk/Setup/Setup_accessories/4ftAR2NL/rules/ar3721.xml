@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE rule PUBLIC "-//LISp-Miner//DTD Rule 1.0//EN"
+	"http://lispminer.vse.cz/dtd/rule-1.0.dtd">
+
+<rule id="3721" quantifier="DFUI">
+	<cedent type="A">
+		<literal quantity="Caj" minlen="1" maxlen="1" coefftype="subset" attribute="CAJ">
+			<coefficient>
+				<value category="5">5</value>
+			</coefficient>
+		</literal>
+	</cedent>
+	<cedent type="S">
+		<literal quantity="Vino" minlen="1" maxlen="1" coefftype="subset" attribute="VINO">
+			<coefficient>
+				<value category="11">11</value>
+			</coefficient>
+		</literal>
+		<literal quantity="Pivo10" minlen="1" maxlen="1" coefftype="subset" attribute="PIVO10">
+			<coefficient>
+				<value category="9">9</value>
+			</coefficient>
+		</literal>
+	</cedent>
+	<cedent type="C">
+		<literal quantity="Konskup" minlen="1" maxlen="1" coefftype="subset" attribute="KONSKUP">
+			<coefficient>
+				<value category="6">6</value>
+			</coefficient>
+		</literal>
+		<literal quantity="Aktpozam" minlen="1" maxlen="1" coefftype="subset" attribute="AKTPOZAM">
+			<coefficient>
+				<value category="2">2</value>
+			</coefficient>
+		</literal>
+	</cedent>
+	<parameters>
+		<param name="P" value="100.0"/>
+		<param name="B" value="26"/>
+		<param name="T" value="26"/>
+	</parameters>
+</rule>

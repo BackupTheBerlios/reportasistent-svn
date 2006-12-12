@@ -1,0 +1,1 @@
+<SOURCES_LIST><SOURCE PUBLIC_ID="LM_testovaci" PERZISTENT_ID="LMMetabase\LMEmpty2.mdb" PLUGIN_ID="LMplugin"/><SOURCE PUBLIC_ID="LM_AR2NL_testovaci" PERZISTENT_ID="LMMetabase\test_AR2NL.mdb" PLUGIN_ID="LMplugin"/><SOURCE PUBLIC_ID="FE_testovaci" PERZISTENT_ID="FEprojects\test_Stulong.xfp" PLUGIN_ID="FEplugin"/><DEFAULT_SOURCE PUBLIC_ID="LM_testovaci"/></SOURCES_LIST>

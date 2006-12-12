@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE rule PUBLIC "-//LISp-Miner//DTD Rule 1.0//EN"
+	"http://lispminer.vse.cz/dtd/rule-1.0.dtd">
+
+<rule id="3939" quantifier="AAI">
+	<cedent type="A">
+		<literal quantity="C01_discrimination" minlen="1" maxlen="1" coefftype="subset" attribute="C01_discrimination">
+			<coefficient>
+				<value category="&lt;0;0.3)">0..0.3</value>
+			</coefficient>
+		</literal>
+		<literal quantity="C02_sanction_penalties" minlen="1" maxlen="1" coefftype="subset" attribute="C02_sanction_penalties">
+			<coefficient>
+				<value category="&lt;0;0.5)">0..0.5</value>
+			</coefficient>
+		</literal>
+	</cedent>
+	<cedent type="S">
+		<literal quantity="V01_Anti_union_discrimination" minlen="1" maxlen="1" coefftype="subset" attribute="V01_Anti_union_discrimination">
+			<coefficient>
+				<value category="0">0</value>
+			</coefficient>
+		</literal>
+		<literal quantity="V02_Acts_of_interference" minlen="1" maxlen="1" coefftype="subset" attribute="V02_Acts_of_interference">
+			<coefficient>
+				<value category="0">0</value>
+			</coefficient>
+		</literal>
+	</cedent>
+	<cedent type="C">
+		<literal quantity="V09_Approval" minlen="1" maxlen="1" coefftype="subset" attribute="V09_Approval">
+			<coefficient>
+				<value category="1">1</value>
+			</coefficient>
+		</literal>
+	</cedent>
+	<parameters>
+		<param name="P" value="100.0"/>
+		<param name="B" value="8"/>
+		<param name="T" value="8"/>
+	</parameters>
+</rule>

@@ -1,0 +1,139 @@
+body {
+	background-color: #ffffff;
+	color: #000000;
+	font-family: Arial, sans-serif;
+	font-size: 98%;
+	margin: 1em;
+}
+
+img {
+	border: none;
+}
+
+p {
+  	text-align: justify;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  	font-family: Times, serif;
+	font-weight: bold;
+}
+
+h1 {
+	font-size: 200%;
+	margin-top: 1em;
+}
+
+h2 {
+	font-size: 170%;
+	margin-top: 1em;
+}
+
+h3 {
+	font-size: 140%;
+}
+
+h4 {
+  	font-size: 110%;
+}
+
+h5 {
+  	font-size: 90%;
+}
+
+h6 {
+  	font-size: 80%;
+}
+
+blockquote {
+  	text-align: justify;
+}
+
+strong {
+  	font-size: 95%;
+	font-weight: bold;
+}
+
+b {
+  	font-size: 95%;
+	font-weight: bold;
+}
+
+tt {
+	font-family: "Curier New", monospace;
+	font-size: 100%
+}
+
+sub {
+  	font-size: 75%;
+}
+
+sup {
+  	font-size: 75%;
+}
+
+dt {
+	font-weight: bold;
+	font-size: 95%;
+}
+
+dd {
+  	text-align: justify;
+	margin-bottom: 0.5em;
+}
+
+li {
+  	text-align: justify;
+}
+
+table caption {
+	text-align: left;
+	font-family: Times, serif;
+	padding-bottom: 0.3em;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0px 0px;
+	margin-bottom: 1em;
+	border: 1px solid #000000;
+}
+
+td, th {
+	font-family: Arial, sans-serif;
+	border: 1px solid #000000;
+	padding-left: 0.2em;
+	padding-right: 0.2em;
+}
+
+th {
+  	font-weight: bold;
+	font-size: 95%;
+}
+
+div.warning, div.important {
+	border: 1px solid #000000;
+	padding: 0 1em 0 1em;
+	margin-bottom: 1em;
+}
+
+
+div.calloutlist table,
+div.calloutlist table td,
+div.calloutlist table th {
+	border: none;
+}
+
+pre {
+	font-size: 90%;
+}
+
+div.note, div.warning, div.important {
+	border: 1px solid #808080;
+	padding: 0 0.4em;
+}
+
+p.title {
+	font-family: Times, serif;
+	font-weight: bold;
+}

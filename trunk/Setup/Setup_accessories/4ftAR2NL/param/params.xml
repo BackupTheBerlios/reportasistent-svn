@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <param name="fp" value="data/cs/fp.xml"/>
+  <param name="fpa" value="data/cs/fpa.xml"/>
+  <param name="entity" value="data/cs/patients/entitynames.xml"/>
+  <param name="elementary" value="data/cs/patients/stulong/elementary.xml"/>
+  <param name="mn" value="data/cs/mn.xml"/>
+  <param name="mv" value="data/cs/mv.xml"/>
+  <param name="langparam" value="data/cs/langparam.xml"/>
+  <param name="rule" value="rules/ar3.xml"/>
+  <param name="quantifier" value="AAI"/>
+  <param name="numofant" value="1"/>
+  <param name="numofsuc" value="1"/>
+  <param name="numofcon" value="1"/>
+  <param name="numofantcon" value="1#1+#"/>
+  <param name="numofsuccon" value="1#1+#"/>
+  <param name="numofconcon" value="1#1+#"/>
+</parameters>

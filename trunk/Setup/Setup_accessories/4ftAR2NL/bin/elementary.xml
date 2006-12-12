@@ -1,0 +1,1662 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE elementaryexpressions PUBLIC "-//LISp-Miner//DTD AR2NL 1.1//EN"
+	"http://lispminer.vse.cz/dtd/ar2nl-1.1.dtd">
+
+<elementaryexpressions>
+	<expression id="ex1">
+		<mbattribute>C01_discrimination</mbattribute>
+		<meaning>C01_discrimination</meaning>
+		<APinv></APinv>
+		<NPinv></NPinv>
+		<VPinv></VPinv>
+		<categories>
+			<category>
+				<value>0..0.3</value>
+				<meaning>&lt;0;0.3)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>0.3..0.6</value>
+				<meaning>&lt;0.3;0.6)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>0.6..0.9</value>
+				<meaning>&lt;0.6;0.9)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>0.9..1.2</value>
+				<meaning>&lt;0.9;1.2)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>1.2..1.5</value>
+				<meaning>&lt;1.2;1.5)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>1.5..1.8</value>
+				<meaning>&lt;1.5;1.8)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>1.8..2.1</value>
+				<meaning>&lt;1.8;2.1)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>3.3..3.6</value>
+				<meaning>&lt;3.3;3.6)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>3.6..3.9</value>
+				<meaning>&lt;3.6;3.9)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>4.8..5.1</value>
+				<meaning>&lt;4.8;5.1)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+		</categories>
+	</expression>
+	<expression id="ex2">
+		<mbattribute>C02_sanction_penalties</mbattribute>
+		<meaning>C02_sanction_penalties</meaning>
+		<APinv></APinv>
+		<NPinv></NPinv>
+		<VPinv></VPinv>
+		<categories>
+			<category>
+				<value>0..0.5</value>
+				<meaning>&lt;0;0.5)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>0.5..1</value>
+				<meaning>&lt;0.5;1)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>1..1.5</value>
+				<meaning>&lt;1;1.5)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+		</categories>
+	</expression>
+	<expression id="ex3">
+		<mbattribute>C03_interference</mbattribute>
+		<meaning>C03_interference</meaning>
+		<APinv></APinv>
+		<NPinv></NPinv>
+		<VPinv></VPinv>
+		<categories>
+			<category>
+				<value>0..0.3</value>
+				<meaning>&lt;0;0.3)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>0.3..0.6</value>
+				<meaning>&lt;0.3;0.6)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>0.6..0.9</value>
+				<meaning>&lt;0.6;0.9)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>0.9..1.2</value>
+				<meaning>&lt;0.9;1.2)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>1.5..1.8</value>
+				<meaning>&lt;1.5;1.8)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>1.8..2.1</value>
+				<meaning>&lt;1.8;2.1)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+		</categories>
+	</expression>
+	<expression id="ex4">
+		<mbattribute>C04_solidarist_association</mbattribute>
+		<meaning>C04_solidarist_association</meaning>
+		<APinv></APinv>
+		<NPinv></NPinv>
+		<VPinv></VPinv>
+		<categories>
+			<category>
+				<value>0..1</value>
+				<meaning>&lt;0;1)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>1..2</value>
+				<meaning>&lt;1;2)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>3..4</value>
+				<meaning>&lt;3;4)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>4..5</value>
+				<meaning>&lt;4;5)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>5..6</value>
+				<meaning>&lt;5;6)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+		</categories>
+	</expression>
+	<expression id="ex5">
+		<mbattribute>C05_collective_bargaining</mbattribute>
+		<meaning>C05_collective_bargaining</meaning>
+		<APinv></APinv>
+		<NPinv></NPinv>
+		<VPinv></VPinv>
+		<categories>
+			<category>
+				<value>0..0.03</value>
+				<meaning>&lt;0;0.03)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>0.03..0.06</value>
+				<meaning>&lt;0.03;0.06)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>0.06..0.09</value>
+				<meaning>&lt;0.06;0.09)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>0.09..0.12</value>
+				<meaning>&lt;0.09;0.12)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>0.12..0.15</value>
+				<meaning>&lt;0.12;0.15)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>0.15..0.18</value>
+				<meaning>&lt;0.15;0.18)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>0.18..0.21</value>
+				<meaning>&lt;0.18;0.21)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>0.24..0.27</value>
+				<meaning>&lt;0.24;0.27)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>0.27..0.3</value>
+				<meaning>&lt;0.27;0.3)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>0.3..0.33</value>
+				<meaning>&lt;0.3;0.33)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>0.33..0.36</value>
+				<meaning>&lt;0.33;0.36)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>0.36..0.39</value>
+				<meaning>&lt;0.36;0.39)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>0.45..0.48</value>
+				<meaning>&lt;0.45;0.48)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>0.51..0.54</value>
+				<meaning>&lt;0.51;0.54)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+		</categories>
+	</expression>
+	<expression id="ex6">
+		<mbattribute>C06_free_and_voluntary</mbattribute>
+		<meaning>C06_free_and_voluntary</meaning>
+		<APinv></APinv>
+		<NPinv></NPinv>
+		<VPinv></VPinv>
+		<categories>
+			<category>
+				<value>0..0.5</value>
+				<meaning>&lt;0;0.5)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>0.5..1</value>
+				<meaning>&lt;0.5;1)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>1..1.5</value>
+				<meaning>&lt;1;1.5)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>1.5..2</value>
+				<meaning>&lt;1.5;2)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>2..2.5</value>
+				<meaning>&lt;2;2.5)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>3..3.5</value>
+				<meaning>&lt;3;3.5)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+		</categories>
+	</expression>
+	<expression id="ex7">
+		<mbattribute>C07_specific_workers</mbattribute>
+		<meaning>C07_specific_workers</meaning>
+		<APinv></APinv>
+		<NPinv></NPinv>
+		<VPinv></VPinv>
+		<categories>
+			<category>
+				<value>0..0.2</value>
+				<meaning>&lt;0;0.2)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>0.2..0.4</value>
+				<meaning>&lt;0.2;0.4)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>0.4..0.6</value>
+				<meaning>&lt;0.4;0.6)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>0.6..0.8</value>
+				<meaning>&lt;0.6;0.8)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>0.8..1</value>
+				<meaning>&lt;0.8;1)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>1..1.2</value>
+				<meaning>&lt;1;1.2)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>1.2..1.4</value>
+				<meaning>&lt;1.2;1.4)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>1.4..1.6</value>
+				<meaning>&lt;1.4;1.6)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+		</categories>
+	</expression>
+	<expression id="ex8">
+		<mbattribute>C08_requirements</mbattribute>
+		<meaning>C08_requirements</meaning>
+		<APinv></APinv>
+		<NPinv></NPinv>
+		<VPinv></VPinv>
+		<categories>
+			<category>
+				<value>0..0.3</value>
+				<meaning>&lt;0;0.3)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>0.3..0.6</value>
+				<meaning>&lt;0.3;0.6)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>0.6..0.9</value>
+				<meaning>&lt;0.6;0.9)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>0.9..1.2</value>
+				<meaning>&lt;0.9;1.2)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>1.2..1.5</value>
+				<meaning>&lt;1.2;1.5)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>1.5..1.8</value>
+				<meaning>&lt;1.5;1.8)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>1.8..2.1</value>
+				<meaning>&lt;1.8;2.1)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>2.1..2.4</value>
+				<meaning>&lt;2.1;2.4)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+		</categories>
+	</expression>
+	<expression id="ex9">
+		<mbattribute>C09_registration</mbattribute>
+		<meaning>C09_registration</meaning>
+		<APinv></APinv>
+		<NPinv></NPinv>
+		<VPinv></VPinv>
+		<categories>
+			<category>
+				<value>0..0.5</value>
+				<meaning>&lt;0;0.5)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>0.5..1</value>
+				<meaning>&lt;0.5;1)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>1..1.5</value>
+				<meaning>&lt;1;1.5)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>1.5..2</value>
+				<meaning>&lt;1.5;2)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+		</categories>
+	</expression>
+	<expression id="ex10">
+		<mbattribute>C10_level</mbattribute>
+		<meaning>C10_level</meaning>
+		<APinv></APinv>
+		<NPinv></NPinv>
+		<VPinv></VPinv>
+		<categories>
+			<category>
+				<value>0..0.4</value>
+				<meaning>&lt;0;0.4)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>0.4..0.8</value>
+				<meaning>&lt;0.4;0.8)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>0.8..1.2</value>
+				<meaning>&lt;0.8;1.2)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>1.2..1.6</value>
+				<meaning>&lt;1.2;1.6)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>2.4..2.8</value>
+				<meaning>&lt;2.4;2.8)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>2.8..3.2</value>
+				<meaning>&lt;2.8;3.2)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>3.6..4</value>
+				<meaning>&lt;3.6;4)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>5.2..5.6</value>
+				<meaning>&lt;5.2;5.6)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+		</categories>
+	</expression>
+	<expression id="ex11">
+		<mbattribute>C11_approval_refusal</mbattribute>
+		<meaning>C11_approval_refusal</meaning>
+		<APinv></APinv>
+		<NPinv></NPinv>
+		<VPinv></VPinv>
+		<categories>
+			<category>
+				<value>0..0.4</value>
+				<meaning>&lt;0;0.4)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>0.4..0.8</value>
+				<meaning>&lt;0.4;0.8)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>0.8..1.2</value>
+				<meaning>&lt;0.8;1.2)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>1.2..1.6</value>
+				<meaning>&lt;1.2;1.6)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>1.6..2</value>
+				<meaning>&lt;1.6;2)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>2..2.4</value>
+				<meaning>&lt;2;2.4)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>2.4..2.8</value>
+				<meaning>&lt;2.4;2.8)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>2.8..3.2</value>
+				<meaning>&lt;2.8;3.2)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>3.2..3.6</value>
+				<meaning>&lt;3.2;3.6)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>6..6.4</value>
+				<meaning>&lt;6;6.4)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>8.8..9.2</value>
+				<meaning>&lt;8.8;9.2)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+		</categories>
+	</expression>
+	<expression id="ex12">
+		<mbattribute>C12_arbitration</mbattribute>
+		<meaning>C12_arbitration</meaning>
+		<APinv></APinv>
+		<NPinv></NPinv>
+		<VPinv></VPinv>
+		<categories>
+			<category>
+				<value>0..0.8</value>
+				<meaning>&lt;0;0.8)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>0.8..1.6</value>
+				<meaning>&lt;0.8;1.6)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>1.6..2.4</value>
+				<meaning>&lt;1.6;2.4)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>2.4..3.2</value>
+				<meaning>&lt;2.4;3.2)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>3.2..4</value>
+				<meaning>&lt;3.2;4)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+		</categories>
+	</expression>
+	<expression id="ex13">
+		<mbattribute>C13_decision_negociation_from_authorities</mbattribute>
+		<meaning>C13_decision_negociation_from_authorities</meaning>
+		<APinv></APinv>
+		<NPinv></NPinv>
+		<VPinv></VPinv>
+		<categories>
+			<category>
+				<value>0..0.3</value>
+				<meaning>&lt;0;0.3)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>0.3..0.6</value>
+				<meaning>&lt;0.3;0.6)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>0.6..0.9</value>
+				<meaning>&lt;0.6;0.9)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>0.9..1.2</value>
+				<meaning>&lt;0.9;1.2)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>1.2..1.5</value>
+				<meaning>&lt;1.2;1.5)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>1.5..1.8</value>
+				<meaning>&lt;1.5;1.8)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>1.8..2.1</value>
+				<meaning>&lt;1.8;2.1)</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+		</categories>
+	</expression>
+	<expression id="ex14">
+		<mbattribute>Country</mbattribute>
+		<meaning>Country</meaning>
+		<APinv></APinv>
+		<NPinv></NPinv>
+		<VPinv></VPinv>
+		<categories>
+			<category>
+				<value>Argentina1991</value>
+				<meaning>Argentina1991</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Argentina1994</value>
+				<meaning>Argentina1994</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Argentina1995</value>
+				<meaning>Argentina1995</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Argentina1997</value>
+				<meaning>Argentina1997</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Argentina1999</value>
+				<meaning>Argentina1999</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Argentina2001</value>
+				<meaning>Argentina2001</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Argentina2003</value>
+				<meaning>Argentina2003</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>bengladesh1991</value>
+				<meaning>bengladesh1991</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>bengladesh1994</value>
+				<meaning>bengladesh1994</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>bengladesh1995</value>
+				<meaning>bengladesh1995</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>bengladesh1997</value>
+				<meaning>bengladesh1997</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>bengladesh2000</value>
+				<meaning>bengladesh2000</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>bengladesh2001</value>
+				<meaning>bengladesh2001</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>bengladesh2003</value>
+				<meaning>bengladesh2003</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>costa rica1991</value>
+				<meaning>costa rica1991</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>costa rica1994</value>
+				<meaning>costa rica1994</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>costa rica1997</value>
+				<meaning>costa rica1997</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>costa rica1998</value>
+				<meaning>costa rica1998</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>costa rica1999</value>
+				<meaning>costa rica1999</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>costa rica2001</value>
+				<meaning>costa rica2001</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>costa rica2003</value>
+				<meaning>costa rica2003</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Egypt1991</value>
+				<meaning>Egypt1991</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Egypt1994</value>
+				<meaning>Egypt1994</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Egypt1995</value>
+				<meaning>Egypt1995</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Egypt1997</value>
+				<meaning>Egypt1997</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Egypt1999</value>
+				<meaning>Egypt1999</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Egypt2001</value>
+				<meaning>Egypt2001</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Egypt2003</value>
+				<meaning>Egypt2003</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Greece1991</value>
+				<meaning>Greece1991</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Greece1993</value>
+				<meaning>Greece1993</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Greece1994</value>
+				<meaning>Greece1994</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Greece1995</value>
+				<meaning>Greece1995</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Greece1998</value>
+				<meaning>Greece1998</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Greece1999</value>
+				<meaning>Greece1999</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Greece2000</value>
+				<meaning>Greece2000</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Greece2003</value>
+				<meaning>Greece2003</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Hungary1991</value>
+				<meaning>Hungary1991</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Hungary1994</value>
+				<meaning>Hungary1994</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Hungary1995</value>
+				<meaning>Hungary1995</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Hungary1997</value>
+				<meaning>Hungary1997</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Hungary1999</value>
+				<meaning>Hungary1999</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Hungary2003</value>
+				<meaning>Hungary2003</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Indonesia1991</value>
+				<meaning>Indonesia1991</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Indonesia1993</value>
+				<meaning>Indonesia1993</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Indonesia1995</value>
+				<meaning>Indonesia1995</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Indonesia1997</value>
+				<meaning>Indonesia1997</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Indonesia1999</value>
+				<meaning>Indonesia1999</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Indonesia2001</value>
+				<meaning>Indonesia2001</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Indonesia2003</value>
+				<meaning>Indonesia2003</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Nicaragua1992</value>
+				<meaning>Nicaragua1992</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Nicaragua1994</value>
+				<meaning>Nicaragua1994</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Nicaragua1995</value>
+				<meaning>Nicaragua1995</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Nicaragua1997</value>
+				<meaning>Nicaragua1997</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Nicaragua1999</value>
+				<meaning>Nicaragua1999</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Nicaragua2001</value>
+				<meaning>Nicaragua2001</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>poland1990</value>
+				<meaning>poland1990</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>poland1992</value>
+				<meaning>poland1992</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>poland1995</value>
+				<meaning>poland1995</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>poland1997</value>
+				<meaning>poland1997</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>poland1999</value>
+				<meaning>poland1999</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>poland2000</value>
+				<meaning>poland2000</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>russia1998</value>
+				<meaning>russia1998</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>russia2003</value>
+				<meaning>russia2003</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>South Africa1998</value>
+				<meaning>South Africa1998</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>South Africa1999</value>
+				<meaning>South Africa1999</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+		</categories>
+	</expression>
+	<expression id="ex15">
+		<mbattribute>V01_Anti_union_discrimination</mbattribute>
+		<meaning>V01_Anti_union_discrimination</meaning>
+		<APinv></APinv>
+		<NPinv></NPinv>
+		<VPinv></VPinv>
+		<categories>
+			<category>
+				<value>0</value>
+				<meaning>0</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>1</value>
+				<meaning>1</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+		</categories>
+	</expression>
+	<expression id="ex16">
+		<mbattribute>V02_Acts_of_interference</mbattribute>
+		<meaning>V02_Acts_of_interference</meaning>
+		<APinv></APinv>
+		<NPinv></NPinv>
+		<VPinv></VPinv>
+		<categories>
+			<category>
+				<value>0</value>
+				<meaning>0</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>1</value>
+				<meaning>1</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+		</categories>
+	</expression>
+	<expression id="ex17">
+		<mbattribute>V03_Solidarist_associations</mbattribute>
+		<meaning>V03_Solidarist_associations</meaning>
+		<APinv></APinv>
+		<NPinv></NPinv>
+		<VPinv></VPinv>
+		<categories>
+			<category>
+				<value>0</value>
+				<meaning>0</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>1</value>
+				<meaning>1</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+		</categories>
+	</expression>
+	<expression id="ex18">
+		<mbattribute>V04_Promotion_of_free</mbattribute>
+		<meaning>V04_Promotion_of_free</meaning>
+		<APinv></APinv>
+		<NPinv></NPinv>
+		<VPinv></VPinv>
+		<categories>
+			<category>
+				<value>0</value>
+				<meaning>0</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>1</value>
+				<meaning>1</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+		</categories>
+	</expression>
+	<expression id="ex19">
+		<mbattribute>V05_Right</mbattribute>
+		<meaning>V05_Right</meaning>
+		<APinv></APinv>
+		<NPinv></NPinv>
+		<VPinv></VPinv>
+		<categories>
+			<category>
+				<value>0</value>
+				<meaning>0</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>1</value>
+				<meaning>1</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+		</categories>
+	</expression>
+	<expression id="ex20">
+		<mbattribute>V06_Designation_</mbattribute>
+		<meaning>V06_Designation_</meaning>
+		<APinv></APinv>
+		<NPinv></NPinv>
+		<VPinv></VPinv>
+		<categories>
+			<category>
+				<value>0</value>
+				<meaning>0</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>1</value>
+				<meaning>1</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+		</categories>
+	</expression>
+	<expression id="ex21">
+		<mbattribute>V07_Level_and_scope</mbattribute>
+		<meaning>V07_Level_and_scope</meaning>
+		<APinv></APinv>
+		<NPinv></NPinv>
+		<VPinv></VPinv>
+		<categories>
+			<category>
+				<value>0</value>
+				<meaning>0</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>1</value>
+				<meaning>1</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+		</categories>
+	</expression>
+	<expression id="ex22">
+		<mbattribute>V08_Negotiable_issues</mbattribute>
+		<meaning>V08_Negotiable_issues</meaning>
+		<APinv></APinv>
+		<NPinv></NPinv>
+		<VPinv></VPinv>
+		<categories>
+			<category>
+				<value>0</value>
+				<meaning>0</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>1</value>
+				<meaning>1</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+		</categories>
+	</expression>
+	<expression id="ex23">
+		<mbattribute>V09_Approval</mbattribute>
+		<meaning>V09_Approval</meaning>
+		<APinv></APinv>
+		<NPinv></NPinv>
+		<VPinv></VPinv>
+		<categories>
+			<category>
+				<value>0</value>
+				<meaning>0</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>1</value>
+				<meaning>1</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+		</categories>
+	</expression>
+	<expression id="ex24">
+		<mbattribute>V10_Compulsory_arbitration</mbattribute>
+		<meaning>V10_Compulsory_arbitration</meaning>
+		<APinv></APinv>
+		<NPinv></NPinv>
+		<VPinv></VPinv>
+		<categories>
+			<category>
+				<value>0</value>
+				<meaning>0</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>1</value>
+				<meaning>1</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF></NAF>
+				<verbphrase></verbphrase>
+			</category>
+		</categories>
+	</expression>
+</elementaryexpressions>
