@@ -350,6 +350,8 @@ public:
 	CProperty * GetValueOfProperty(int index);
 
 
+public:
+	afx_msg void OnStnClickedErrorText();
 };
 
 //{{AFX_INSERT_LOCATION}}

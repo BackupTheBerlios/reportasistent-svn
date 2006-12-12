@@ -73,6 +73,7 @@ BEGIN_MESSAGE_MAP(CPropertyEditor, CDialog)
 	ON_WM_CTLCOLOR()
 	ON_WM_VSCROLL()
 	//}}AFX_MSG_MAP
+	ON_STN_CLICKED(IDC_ERROR_TEXT, &CPropertyEditor::OnStnClickedErrorText)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -516,3 +517,8 @@ int CPropertyEditor::AddProperty(CProperty * prop)
 	return 0;
 }
 
+
+void CPropertyEditor::OnStnClickedErrorText()
+{
+	// TODO: Add your control notification handler code here
+}
