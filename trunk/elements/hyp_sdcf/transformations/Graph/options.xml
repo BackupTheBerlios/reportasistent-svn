@@ -5,13 +5,13 @@
 
     
     <!--setting whether to show a table for First set-->
-    <enum_option variable_name="FirstSetShow" title="First set show">
+    <enum_option variable_name="FirstSetShow" title="Show first set">
        <enum_item value="true" label="yes"/>  
        <enum_item value="false" label="no"/>  
     </enum_option>
 
     <!--setting whether to show a table for Second set-->
-    <enum_option variable_name="SecondSetShow" title="Second set show">
+    <enum_option variable_name="SecondSetShow" title="Show second set">
        <enum_item value="true" label="yes"/>  
        <enum_item value="false" label="no"/>  
     </enum_option>

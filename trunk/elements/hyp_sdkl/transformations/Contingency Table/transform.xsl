@@ -412,7 +412,7 @@
 							<td id="{$id_base}r{$row_number}mezera"/>
 						</xsl:if>
 					  
-					  </xsl:if>  <!-- First set show-->
+					  </xsl:if>  <!-- Show first set-->
 					  
 					  <xsl:if test="$SecondSetShow='true'">
 					  
@@ -529,7 +529,7 @@
 								</xsl:element>
 						</xsl:if>
 						
-					  </xsl:if>  <!-- Second set show-->
+					  </xsl:if>  <!-- Show second set-->
 					  
 					  
 						
@@ -586,7 +586,7 @@
 							<td id="{$id_base}rsum_mezera_set1"/>
 						</xsl:if>
 					    
-					  </xsl:if> <!-- First set show-->
+					  </xsl:if> <!-- Show first set-->
 					  
 					  
 					  
