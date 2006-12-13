@@ -141,17 +141,14 @@ BOOL CReportAsistentApp::InitInstance()
 	//Iva: initialization of RichEditCtrl
 	AfxInitRichEdit();
 
-	//dedek
-	m_pGeneralManager = new CGeneralManager();
-	m_pGeneralManager->ElementManager.Init(m_pGeneralManager->DirectoriesManager);
-
-
-
-
 	// Change the registry key under which our settings are stored.
 	// TODO: You should modify this string to be something appropriate
 	// such as the name of your company or organization.
 	SetRegistryKey(_T("LISp-Miner"));
+
+	//dedek
+	m_pGeneralManager = new CGeneralManager();
+	m_pGeneralManager->ElementManager.Init(m_pGeneralManager->DirectoriesManager);
 
 	LoadStdProfileSettings();  // Load standard INI file options (including MRU)
 

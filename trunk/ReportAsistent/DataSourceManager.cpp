@@ -239,11 +239,11 @@ int COutputBuffer::insertNewAP(CString APName, BSTR Buffer)
 CDataSourcesManager::CDataSourcesManager(CDirectoriesManager & m)
 {
 	//Dedek: write to windows registry
-	WriteProfileString("Settings", "ApplicationRoot", m.getApplicationRoot());
+	AfxGetApp()->WriteProfileString("Settings", "ApplicationRoot", m.getApplicationRoot());
 
 	// inicializace tabulky zasuvek a tabulky zdroju
 //  AfxMessageBox("11");
-  initPlugsTab(m.getPluginsDirectory());
+	initPlugsTab(m.getPluginsDirectory());
 //  AfxMessageBox("22");
 	initSourcesTab(m.getSourcesConfigFilePath());
 //  AfxMessageBox("33");
