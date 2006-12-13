@@ -122,7 +122,7 @@ void CAElTransform::ProcessSimpleFlter(MSXML2::IXMLDOMNodePtr & destination_pare
 		
 		if (node_to_transform == NULL)
 		{
-			CString errs = "Warovani: Volba v simple filtru je neplatna.\n\nSelect string:\n";
+			CString errs = "Varování: Volba v simple filtru je neplatná.\n\nSelect string:\n";
 			errs += select;
 			AfxMessageBox(errs);
 		}
@@ -678,7 +678,7 @@ BOOL CAElTransform::ProcessSimpleFlter(CFilterProcessor & processor, LPARAM user
 		{
 
 #ifdef _DEBUG
-			CString errs = "Warovani: Volba v simple filtru je neplatna.\n\nSelect string:\n";
+			CString errs = "Varování: Volba v simple filtru je neplatná.\n\nSelect string:\n";
 			errs += select;
 			AfxMessageBox(errs);
 #endif

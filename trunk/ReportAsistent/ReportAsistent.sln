@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 9.00
 # Visual Studio 2005
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LMplugin", "..\LMPlugin\LMplugin.vcproj", "{52517A84-A3FC-4F96-9FDE-724D8DDF930C}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LMplugin", "..\LMPlugin\LMplugin.vcproj", "{D7CD65AF-4663-4827-B469-FB35ED73492B}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ReportAsistent", "ReportAsistent.vcproj", "{6C22899A-FE43-47A1-A2CE-6F8911E0C391}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ReportAsistent", "ReportAsistent.vcproj", "{0EBB996F-E9F6-4F54-87CD-B0EF083C4AB4}"
 	ProjectSection(ProjectDependencies) = postProject
-		{52517A84-A3FC-4F96-9FDE-724D8DDF930C} = {52517A84-A3FC-4F96-9FDE-724D8DDF930C}
+		{D7CD65AF-4663-4827-B469-FB35ED73492B} = {D7CD65AF-4663-4827-B469-FB35ED73492B}
 	EndProjectSection
 EndProject
 Global
@@ -14,14 +14,14 @@ Global
 		Release|Win32 = Release|Win32
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{52517A84-A3FC-4F96-9FDE-724D8DDF930C}.Debug|Win32.ActiveCfg = Debug|Win32
-		{52517A84-A3FC-4F96-9FDE-724D8DDF930C}.Debug|Win32.Build.0 = Debug|Win32
-		{52517A84-A3FC-4F96-9FDE-724D8DDF930C}.Release|Win32.ActiveCfg = Release|Win32
-		{52517A84-A3FC-4F96-9FDE-724D8DDF930C}.Release|Win32.Build.0 = Release|Win32
-		{6C22899A-FE43-47A1-A2CE-6F8911E0C391}.Debug|Win32.ActiveCfg = Debug|Win32
-		{6C22899A-FE43-47A1-A2CE-6F8911E0C391}.Debug|Win32.Build.0 = Debug|Win32
-		{6C22899A-FE43-47A1-A2CE-6F8911E0C391}.Release|Win32.ActiveCfg = Release|Win32
-		{6C22899A-FE43-47A1-A2CE-6F8911E0C391}.Release|Win32.Build.0 = Release|Win32
+		{D7CD65AF-4663-4827-B469-FB35ED73492B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{D7CD65AF-4663-4827-B469-FB35ED73492B}.Debug|Win32.Build.0 = Debug|Win32
+		{D7CD65AF-4663-4827-B469-FB35ED73492B}.Release|Win32.ActiveCfg = Release|Win32
+		{D7CD65AF-4663-4827-B469-FB35ED73492B}.Release|Win32.Build.0 = Release|Win32
+		{0EBB996F-E9F6-4F54-87CD-B0EF083C4AB4}.Debug|Win32.ActiveCfg = Debug|Win32
+		{0EBB996F-E9F6-4F54-87CD-B0EF083C4AB4}.Debug|Win32.Build.0 = Debug|Win32
+		{0EBB996F-E9F6-4F54-87CD-B0EF083C4AB4}.Release|Win32.ActiveCfg = Release|Win32
+		{0EBB996F-E9F6-4F54-87CD-B0EF083C4AB4}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

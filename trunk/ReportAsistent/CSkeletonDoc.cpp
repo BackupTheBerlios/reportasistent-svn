@@ -1403,3 +1403,25 @@ BOOL CSkeletonDoc::SetReportSettings(LPCTSTR attribute, LPCTSTR value)
 	return true;
 	
 }
+
+CString CSkeletonDoc::StrToHtml(CString sText)
+{
+	if (sText[0]==' ') 
+	{
+		sText.Delete(0);
+		sText="&nbsp;"+sText;
+	}
+	if (sText[sText.GetLength()-1]==' ') 
+	{
+		sText.Delete(sText.GetLength()-1);
+		sText=sText+"&nbsp;";
+	}
+
+	return sText;
+}
+
+CString CSkeletonDoc::HtmlToStr(CString sHtml)
+{
+	
+	return sHtml;
+}

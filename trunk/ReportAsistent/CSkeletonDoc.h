@@ -118,6 +118,10 @@ public:
 	BOOL SetReportSettings(LPCTSTR attribute, LPCTSTR value);
 	CString GetReportSettings(LPCTSTR attribute);
 	afx_msg void OnResetOrphans();
+public:
+	static CString StrToHtml(CString sText);
+public:
+	static CString HtmlToStr(CString sHtml);
 };
 
 /////////////////////////////////////////////////////////////////////////////

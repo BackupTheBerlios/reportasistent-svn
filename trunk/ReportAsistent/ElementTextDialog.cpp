@@ -173,9 +173,11 @@ void CElementTextDialog::OnOK()
 	}
 
 	//Text from Rich Edit is saved to the skeleton:
-	CString pom;
-	m_REdit.GetWindowText(pom);
-	m_SelXMLElm->text = (LPCTSTR)pom;
+	CString sText;
+	m_REdit.GetWindowText(sText);
+	//white spaces at the end and at the beginning of the text are replaced by nbsp;
+	sText = CSkeletonDoc::StrToHtml(sText);
+	m_SelXMLElm->text = (LPCTSTR)sText;
 
 	CDialog::OnOK();
 }
