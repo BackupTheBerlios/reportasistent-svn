@@ -265,9 +265,9 @@ public:
 */	
 	//a tady nebo v plugin mamageru budou funkce pro zavaloni perform na danem zdroji
 	//predbezne:
-	BSTR CallPerformProc(int source_index, LPCTSTR element_id); //vrati XML string
+	void CallPerformProc(int source_index, LPCTSTR element_id); //vrati XML string
 	BOOL GetPluginOutput(public_source_id_t source, LPCTSTR ap_name, MSXML2::IXMLDOMDocument ** xml_dom); //zavola CallPerformProc
-	void static PerformThreadFunction(LPARAM hPreformFn, LPARAM hSource, LPARAM element_id, LPARAM pResult);
+	void static PerformThreadFunction(LPARAM hPreformFn, LPARAM hSource, LPARAM element_id, LPARAM pOutputBuffer);
 
 
 /* kody - pro Dedu

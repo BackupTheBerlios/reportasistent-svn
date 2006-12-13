@@ -238,7 +238,7 @@ int COutputBuffer::insertNewAP(CString APName, BSTR Buffer)
 // konstruktor
 CDataSourcesManager::CDataSourcesManager(CDirectoriesManager & m)
 {
-	//Dedek: write to windows registry
+	//Dedek: write to windows registry, plugins can use this information in registry
 	AfxGetApp()->WriteProfileString("Settings", "ApplicationRoot", m.getApplicationRoot());
 
 	// inicializace tabulky zasuvek a tabulky zdroju
@@ -993,13 +993,12 @@ int CDataSourcesManager::AddSource(plugin_id_t plugin, persistent_id_t persisten
 //      - kdyztak to Dedo predelej, jestli potrebujes, zpatky a pridej konverzi
 // Kody - co se ma vratit, kdyz fce perform vrati chybu?
 // pro Dedu - alternativa ... viz niz a vyber si jednu z nich. Totez v headru
-BSTR CDataSourcesManager::CallPerformProc(int source_index, LPCTSTR element_id) //vrati XML string
+void CDataSourcesManager::CallPerformProc(int source_index, LPCTSTR element_id) //vrati XML string
 {
-	BSTR Result = NULL;	// bude vysledek
 	int SI = source_index;
 	
 	if(SourcesTab.GetUpperBound() < SI)   // kontrola indexu a odkazu na zasuvku
-		return Result;
+		return;
 
 	int j = SourcesTab[SI]->PluginIndex;  // nalezeni indexu zasuvky
 
@@ -1010,27 +1009,31 @@ BSTR CDataSourcesManager::CallPerformProc(int source_index, LPCTSTR element_id) 
 		// kody: vytvoreni WaitDialogu a volani jeho DoThreadFunction()
 		CString DlgText = "Loading data from source\n\n" + SourcesTab[SI]->PublicID;
 		CWaitDialog d((LPCTSTR) DlgText);
+		COutputBuffer * OB = SourcesTab[source_index]->Buffer;
 		d.DoThreadFunction(PerformThreadFunction,
 							(LPARAM) PlugsTab[j].SockInterface->hPerform,
 						    (LPARAM) SourcesTab[SI]->SourceHandle,
 							(LPARAM) element_id,
-							(LPARAM) &Result);
+							(LPARAM) OB);
 	}
-
-	return Result;
 }
 
 // 
-void CDataSourcesManager::PerformThreadFunction(LPARAM hPreformFn, LPARAM hSource, LPARAM element_id, LPARAM pResult)
+void CDataSourcesManager::PerformThreadFunction(LPARAM hPreformFn, LPARAM hSource, LPARAM element_id, LPARAM pOutputBuffer)
 {
+	BSTR result;
+	CString strElementID = (LPCTSTR) element_id;
 	try
 	{
-		((hPerform_t) hPreformFn) ((void*) hSource, (LPCTSTR) element_id, (BSTR*) pResult);
+		((hPerform_t) hPreformFn) ((void*) hSource, strElementID, & result);
 	}
 	catch (...)
 	{
-		* ((BSTR*) pResult) = NULL;
+		//* ((BSTR*) pResult) = NULL;
 	}
+
+	((COutputBuffer *) pOutputBuffer)->setBuffer(strElementID, result);
+
 	
 	return;
 }
@@ -1052,9 +1055,7 @@ BOOL CDataSourcesManager::GetPluginOutput(public_source_id_t source, LPCTSTR ap_
 	// vystup neni v bufferu - nacte se ze zasuvky, ulozi se do bufferu a vrati se
 	if(!OB->isAPBuffered(ap_name_CS))		// vystup jeste neni v bufferu
 	{
-		BSTR result = CallPerformProc(src_index, ap_name);		
-		
-		OB->setBuffer(ap_name_CS, result);
+		CallPerformProc(src_index, ap_name);				
 	}
 	
 	OB->getBuffer(ap_name_CS, xml_dom);
