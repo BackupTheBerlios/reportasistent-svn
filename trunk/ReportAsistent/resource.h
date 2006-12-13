@@ -43,6 +43,7 @@
 #define IDD_FILTER_AND_CONFIG_DIALOG    171
 #define IDD_AEL_CONFIG_DIALOG           172
 #define IDD_START_DIALOG                173
+#define IDI_ICON1                       174
 #define IDC_TREE1                       1000
 #define IDC_FILTER_LIST                 1000
 #define IDC_SCROLLBAR1                  1000
@@ -216,7 +217,7 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
-#define _APS_NEXT_RESOURCE_VALUE        174
+#define _APS_NEXT_RESOURCE_VALUE        175
 #define _APS_NEXT_COMMAND_VALUE         32802
 #define _APS_NEXT_CONTROL_VALUE         1078
 #define _APS_NEXT_SYMED_VALUE           102

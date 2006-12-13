@@ -195,12 +195,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_35CF3700E0E44B5DBD4E5A71D1D65E32"
-        "OwnerKey" = "8:_FB774EA1525C4333A11E634EE9AF1E52"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_3692EFAC64DE465A8B9244A48165B484"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -1005,6 +999,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_E0E3F274A57F413FBD7357BE795CC61E"
+        "OwnerKey" = "8:_4874139BC679491D921CF9D2AECCF741"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_E1DEF9FB54664432A17034A72F35588B"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -1113,12 +1113,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_F54341D3F98A47C998F2BBE934460FFC"
-        "OwnerKey" = "8:_4874139BC679491D921CF9D2AECCF741"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_F5C472E37B2C43D88EF1CE18043D0E3E"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -1151,6 +1145,12 @@
         {
         "MsmKey" = "8:_FBED2D7FF5F848ACB1646620A2BF6ADA"
         "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_FC558D76ED8547A58EAC06E08422F8D6"
+        "OwnerKey" = "8:_FB774EA1525C4333A11E634EE9AF1E52"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1350,6 +1350,11 @@
             "ComponentsUrl" = "8:"
                 "Items"
                 {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Net.Framework.2.0"
+                    {
+                    "Name" = "8:.NET Framework 2.0"
+                    "ProductCode" = "8:Microsoft.Net.Framework.2.0"
+                    }
                     "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Visual.C++.8.0.x86"
                     {
                     "Name" = "8:Visual C++ Runtime Libraries (x86)"
@@ -1452,7 +1457,7 @@
             "TargetName" = "8:element.xml"
             "Tag" = "8:"
             "Folder" = "8:_BD0D16E391734D0989C297E8177AEF86"
-            "Condition" = "8:INSTALL_AR2NL"
+            "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
             "ReadOnly" = "11:FALSE"
@@ -2189,7 +2194,7 @@
             "TargetName" = "8:LMplugin.dll"
             "Tag" = "8:"
             "Folder" = "8:_4D4F2F73B65647388EE03E8009557F53"
-            "Condition" = "8:INSTALL_LMPLUGIN"
+            "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
             "ReadOnly" = "11:FALSE"
@@ -3095,7 +3100,7 @@
             "TargetName" = "8:icon.bmp"
             "Tag" = "8:"
             "Folder" = "8:_BD0D16E391734D0989C297E8177AEF86"
-            "Condition" = "8:INSTALL_AR2NL"
+            "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
             "ReadOnly" = "11:FALSE"
@@ -3295,7 +3300,7 @@
             "TargetName" = "8:complex_filter.xsl"
             "Tag" = "8:"
             "Folder" = "8:_BD0D16E391734D0989C297E8177AEF86"
-            "Condition" = "8:INSTALL_AR2NL"
+            "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
             "ReadOnly" = "11:FALSE"
@@ -4328,7 +4333,7 @@
             "TargetName" = "8:fill_element_attributes.xsl"
             "Tag" = "8:"
             "Folder" = "8:_BD0D16E391734D0989C297E8177AEF86"
-            "Condition" = "8:INSTALL_AR2NL"
+            "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
             "ReadOnly" = "11:FALSE"
@@ -5356,7 +5361,7 @@
                             {
                             "Name" = "8:hyp_4ft_ar2nl"
                             "AlwaysCreate" = "11:FALSE"
-                            "Condition" = "8:INSTALL_AR2NL"
+                            "Condition" = "8:"
                             "Transitive" = "11:TRUE"
                             "Property" = "8:_8965D421CABC4F4D8F31A8A1994DB3BC"
                                 "Folders"
@@ -5638,9 +5643,9 @@
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:LM-Report Asistent"
+        "ProductName" = "8:LM-Report Asistent 1.0"
         "ProductCode" = "8:{0C4BBDF1-2CA5-4949-AE68-C7B1324C897E}"
-        "PackageCode" = "8:{7CEA8158-9D25-42E3-A7CC-B8105B305286}"
+        "PackageCode" = "8:{80E27F0B-18D0-4E12-88FA-1F843E35FB5E}"
         "UpgradeCode" = "8:{5E46F945-630F-48E7-AB16-80C39E568C5C}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:FALSE"
@@ -5650,12 +5655,12 @@
         "Manufacturer" = "8:LM-Report Asistent"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
-        "Title" = "8:LM-Report Asistent"
+        "Title" = "8:LM-Report Asistent 1.0"
         "Subject" = "8:"
         "ARPCONTACT" = "8:LM-Report Asistent team, MFF UK"
         "Keywords" = "8:"
         "ARPCOMMENTS" = "8:Helper tool for writing analytical reports (with help of Microsoft Word) about data mining analysis, notably for LISp-Miner and Ferda DataMiner users."
-        "ARPURLINFOABOUT" = "8:reportasistent.berlios.de"
+        "ARPURLINFOABOUT" = "8:http://reportasistent.berlios.de"
         "ARPPRODUCTICON" = "8:_9862EB860FCA48F5A6AA521EC4CF2781"
         "ARPIconIndex" = "3:128"
         "SearchPath" = "8:"
@@ -5787,6 +5792,20 @@
         }
         "Shortcut"
         {
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_093ADDEB82574DE5AC7E24AD45686023"
+            {
+            "Name" = "8:User Guide"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:174"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_BF8657DC339C4816BF7BDB478EDD8080"
+            "Folder" = "8:_8687036200824D38B401665F65AEC915"
+            "WorkingFolder" = "8:_BB8F79E3BB164EB1AD819A93F24B712C"
+            "Icon" = "8:_9862EB860FCA48F5A6AA521EC4CF2781"
+            "Feature" = "8:"
+            }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_C9A912A59AE84ACB814C5A6912803333"
             {
             "Name" = "8:LM-Report Asistent"
@@ -6099,7 +6118,7 @@
                             "ContextData" = "8:1;True=1;False=0"
                             "Attributes" = "3:0"
                             "Setting" = "3:0"
-                            "Value" = "3:1"
+                            "Value" = "3:0"
                             "DefaultValue" = "3:1"
                             "UsePlugInResources" = "11:TRUE"
                             }
@@ -6222,262 +6241,6 @@
                             }
                         }
                     }
-                    "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_E301CA7E52F74E0A81C1F7503A38252E"
-                    {
-                    "Sequence" = "3:300"
-                    "DisplayName" = "8:Checkboxes   (B)"
-                    "UseDynamicProperties" = "11:TRUE"
-                    "IsDependency" = "11:FALSE"
-                    "SourcePath" = "8:<VsdDialogDir>\\VsdCustomCheck2Dlg.wid"
-                        "Properties"
-                        {
-                            "BannerBitmap"
-                            {
-                            "Name" = "8:BannerBitmap"
-                            "DisplayName" = "8:#1001"
-                            "Description" = "8:#1101"
-                            "Type" = "3:8"
-                            "ContextData" = "8:Bitmap"
-                            "Attributes" = "3:4"
-                            "Setting" = "3:1"
-                            "UsePlugInResources" = "11:TRUE"
-                            }
-                            "BannerText"
-                            {
-                            "Name" = "8:BannerText"
-                            "DisplayName" = "8:#1014"
-                            "Description" = "8:#1114"
-                            "Type" = "3:3"
-                            "ContextData" = "8:"
-                            "Attributes" = "3:0"
-                            "Setting" = "3:2"
-                            "Value" = "8:Installation of program parts"
-                            "DefaultValue" = "8:#1214"
-                            "UsePlugInResources" = "11:TRUE"
-                            }
-                            "BodyText"
-                            {
-                            "Name" = "8:BodyText"
-                            "DisplayName" = "8:#1015"
-                            "Description" = "8:#1115"
-                            "Type" = "3:3"
-                            "ContextData" = "8:"
-                            "Attributes" = "3:0"
-                            "Setting" = "3:2"
-                            "Value" = "8:Please, choose a parts of the program you want to install."
-                            "DefaultValue" = "8:#1215"
-                            "UsePlugInResources" = "11:TRUE"
-                            }
-                            "Checkbox1Label"
-                            {
-                            "Name" = "8:Checkbox1Label"
-                            "DisplayName" = "8:#1034"
-                            "Description" = "8:#1134"
-                            "Type" = "3:3"
-                            "ContextData" = "8:"
-                            "Attributes" = "3:0"
-                            "Setting" = "3:2"
-                            "Value" = "8:Plugin for LISp-Miner (LMplugin)"
-                            "DefaultValue" = "8:#1234"
-                            "UsePlugInResources" = "11:TRUE"
-                            }
-                            "Checkbox1Property"
-                            {
-                            "Name" = "8:Checkbox1Property"
-                            "DisplayName" = "8:#1030"
-                            "Description" = "8:#1130"
-                            "Type" = "3:14"
-                            "ContextData" = "8:Public"
-                            "Attributes" = "3:2"
-                            "Setting" = "3:2"
-                            "Value" = "8:INSTALL_LMPLUGIN"
-                            "DefaultValue" = "8:CHECKBOXB1"
-                            "UsePlugInResources" = "11:TRUE"
-                            }
-                            "Checkbox1Value"
-                            {
-                            "Name" = "8:Checkbox1Value"
-                            "DisplayName" = "8:#1038"
-                            "Description" = "8:#1138"
-                            "Type" = "3:2"
-                            "ContextData" = "8:Unchecked=;Checked=1"
-                            "Attributes" = "3:0"
-                            "Setting" = "3:2"
-                            "Value" = "8:1"
-                            "DefaultValue" = "8:"
-                            "UsePlugInResources" = "11:TRUE"
-                            }
-                            "Checkbox1Visible"
-                            {
-                            "Name" = "8:Checkbox1Visible"
-                            "DisplayName" = "8:#1026"
-                            "Description" = "8:#1126"
-                            "Type" = "3:5"
-                            "ContextData" = "8:1;True=1;False=0"
-                            "Attributes" = "3:0"
-                            "Setting" = "3:0"
-                            "Value" = "3:1"
-                            "DefaultValue" = "3:1"
-                            "UsePlugInResources" = "11:TRUE"
-                            }
-                            "Checkbox2Label"
-                            {
-                            "Name" = "8:Checkbox2Label"
-                            "DisplayName" = "8:#1035"
-                            "Description" = "8:#1135"
-                            "Type" = "3:3"
-                            "ContextData" = "8:"
-                            "Attributes" = "3:0"
-                            "Setting" = "3:2"
-                            "Value" = "8:Plugin for Ferda Data Miner (FEplugin)"
-                            "DefaultValue" = "8:#1235"
-                            "UsePlugInResources" = "11:TRUE"
-                            }
-                            "Checkbox2Property"
-                            {
-                            "Name" = "8:Checkbox2Property"
-                            "DisplayName" = "8:#1031"
-                            "Description" = "8:#1131"
-                            "Type" = "3:14"
-                            "ContextData" = "8:Public"
-                            "Attributes" = "3:2"
-                            "Setting" = "3:2"
-                            "Value" = "8:INSTALL_FEPLUGIN"
-                            "DefaultValue" = "8:CHECKBOXB2"
-                            "UsePlugInResources" = "11:TRUE"
-                            }
-                            "Checkbox2Value"
-                            {
-                            "Name" = "8:Checkbox2Value"
-                            "DisplayName" = "8:#1039"
-                            "Description" = "8:#1139"
-                            "Type" = "3:2"
-                            "ContextData" = "8:Unchecked=;Checked=1"
-                            "Attributes" = "3:0"
-                            "Setting" = "3:2"
-                            "Value" = "8:1"
-                            "DefaultValue" = "8:"
-                            "UsePlugInResources" = "11:TRUE"
-                            }
-                            "Checkbox2Visible"
-                            {
-                            "Name" = "8:Checkbox2Visible"
-                            "DisplayName" = "8:#1027"
-                            "Description" = "8:#1127"
-                            "Type" = "3:5"
-                            "ContextData" = "8:1;True=1;False=0"
-                            "Attributes" = "3:0"
-                            "Setting" = "3:0"
-                            "Value" = "3:1"
-                            "DefaultValue" = "3:1"
-                            "UsePlugInResources" = "11:TRUE"
-                            }
-                            "Checkbox3Label"
-                            {
-                            "Name" = "8:Checkbox3Label"
-                            "DisplayName" = "8:#1036"
-                            "Description" = "8:#1136"
-                            "Type" = "3:3"
-                            "ContextData" = "8:"
-                            "Attributes" = "3:0"
-                            "Setting" = "3:2"
-                            "Value" = "8:AR2NL"
-                            "DefaultValue" = "8:#1236"
-                            "UsePlugInResources" = "11:TRUE"
-                            }
-                            "Checkbox3Property"
-                            {
-                            "Name" = "8:Checkbox3Property"
-                            "DisplayName" = "8:#1032"
-                            "Description" = "8:#1132"
-                            "Type" = "3:14"
-                            "ContextData" = "8:Public"
-                            "Attributes" = "3:2"
-                            "Setting" = "3:2"
-                            "Value" = "8:INSTALL_AR2NL"
-                            "DefaultValue" = "8:CHECKBOXB3"
-                            "UsePlugInResources" = "11:TRUE"
-                            }
-                            "Checkbox3Value"
-                            {
-                            "Name" = "8:Checkbox3Value"
-                            "DisplayName" = "8:#1040"
-                            "Description" = "8:#1140"
-                            "Type" = "3:2"
-                            "ContextData" = "8:Unchecked=;Checked=1"
-                            "Attributes" = "3:0"
-                            "Setting" = "3:2"
-                            "Value" = "8:1"
-                            "DefaultValue" = "8:"
-                            "UsePlugInResources" = "11:TRUE"
-                            }
-                            "Checkbox3Visible"
-                            {
-                            "Name" = "8:Checkbox3Visible"
-                            "DisplayName" = "8:#1028"
-                            "Description" = "8:#1128"
-                            "Type" = "3:5"
-                            "ContextData" = "8:1;True=1;False=0"
-                            "Attributes" = "3:0"
-                            "Setting" = "3:0"
-                            "Value" = "3:1"
-                            "DefaultValue" = "3:1"
-                            "UsePlugInResources" = "11:TRUE"
-                            }
-                            "Checkbox4Label"
-                            {
-                            "Name" = "8:Checkbox4Label"
-                            "DisplayName" = "8:#1037"
-                            "Description" = "8:#1137"
-                            "Type" = "3:3"
-                            "ContextData" = "8:"
-                            "Attributes" = "3:0"
-                            "Setting" = "3:1"
-                            "Value" = "8:#1237"
-                            "DefaultValue" = "8:#1237"
-                            "UsePlugInResources" = "11:TRUE"
-                            }
-                            "Checkbox4Property"
-                            {
-                            "Name" = "8:Checkbox4Property"
-                            "DisplayName" = "8:#1033"
-                            "Description" = "8:#1133"
-                            "Type" = "3:14"
-                            "ContextData" = "8:Public"
-                            "Attributes" = "3:2"
-                            "Setting" = "3:2"
-                            "Value" = "8:CHECKBOXB4"
-                            "DefaultValue" = "8:CHECKBOXB4"
-                            "UsePlugInResources" = "11:TRUE"
-                            }
-                            "Checkbox4Value"
-                            {
-                            "Name" = "8:Checkbox4Value"
-                            "DisplayName" = "8:#1041"
-                            "Description" = "8:#1141"
-                            "Type" = "3:2"
-                            "ContextData" = "8:Unchecked=;Checked=1"
-                            "Attributes" = "3:0"
-                            "Setting" = "3:2"
-                            "Value" = "8:"
-                            "DefaultValue" = "8:"
-                            "UsePlugInResources" = "11:TRUE"
-                            }
-                            "Checkbox4Visible"
-                            {
-                            "Name" = "8:Checkbox4Visible"
-                            "DisplayName" = "8:#1029"
-                            "Description" = "8:#1129"
-                            "Type" = "3:5"
-                            "ContextData" = "8:1;True=1;False=0"
-                            "Attributes" = "3:0"
-                            "Setting" = "3:0"
-                            "Value" = "3:0"
-                            "DefaultValue" = "3:1"
-                            "UsePlugInResources" = "11:TRUE"
-                            }
-                        }
-                    }
                 }
             }
             "{DF760B10-853B-4699-99F2-AFF7185B4A62}:_DF8A4D31905E405E98CB4DDF44A58D83"
@@ -6514,20 +6277,6 @@
         }
         "MergeModule"
         {
-            "{CEE29DC0-9FBA-4B99-8D47-5BC643D9B626}:_35CF3700E0E44B5DBD4E5A71D1D65E32"
-            {
-            "UseDynamicProperties" = "11:TRUE"
-            "IsDependency" = "11:TRUE"
-            "SourcePath" = "8:policy_8_0_microsoft_vc80_crt_x86_x64.msm"
-                "Properties"
-                {
-                }
-            "LanguageId" = "3:0"
-            "Exclude" = "11:FALSE"
-            "Folder" = "8:"
-            "Feature" = "8:"
-            "IsolateTo" = "8:"
-            }
             "{CEE29DC0-9FBA-4B99-8D47-5BC643D9B626}:_4874139BC679491D921CF9D2AECCF741"
             {
             "UseDynamicProperties" = "11:TRUE"
@@ -6567,7 +6316,7 @@
             "Feature" = "8:"
             "IsolateTo" = "8:"
             }
-            "{CEE29DC0-9FBA-4B99-8D47-5BC643D9B626}:_F54341D3F98A47C998F2BBE934460FFC"
+            "{CEE29DC0-9FBA-4B99-8D47-5BC643D9B626}:_E0E3F274A57F413FBD7357BE795CC61E"
             {
             "UseDynamicProperties" = "11:TRUE"
             "IsDependency" = "11:TRUE"
@@ -6586,6 +6335,20 @@
             "UseDynamicProperties" = "11:TRUE"
             "IsDependency" = "11:FALSE"
             "SourcePath" = "8:c:\\program files\\common files\\merge modules\\microsoft_vc80_crt_x86_x64.msm"
+                "Properties"
+                {
+                }
+            "LanguageId" = "3:0"
+            "Exclude" = "11:FALSE"
+            "Folder" = "8:"
+            "Feature" = "8:"
+            "IsolateTo" = "8:"
+            }
+            "{CEE29DC0-9FBA-4B99-8D47-5BC643D9B626}:_FC558D76ED8547A58EAC06E08422F8D6"
+            {
+            "UseDynamicProperties" = "11:TRUE"
+            "IsDependency" = "11:TRUE"
+            "SourcePath" = "8:policy_8_0_microsoft_vc80_crt_x86_x64.msm"
                 "Properties"
                 {
                 }

@@ -160,6 +160,9 @@ namespace FEplugin_cs
                 if (LMRA_dir == null)
                     LMRA_dir = "";
             }
+#if (DEBUG)
+            MessageBox.Show("LMRA Application root: " + LMRA_dir);
+#endif
 
             // searching the keys in registry -paths to FerdaFrontEnd and FerdaBoxes directories
             RegistryKey regkey2;

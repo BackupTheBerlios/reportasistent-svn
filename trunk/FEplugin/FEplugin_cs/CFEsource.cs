@@ -198,6 +198,9 @@ namespace FEplugin_cs
                 // controll if the file with FE project exists
                 if (!File.Exists(PersistID))
                 {
+#if (DEBUG)
+                    MessageBox.Show("aktualni adresar" + Directory.GetCurrentDirectory());
+#endif
                     throw new FE_error("FEP005", "Perzist ID: " + PersistID + "\n\nReason: project can't be loaded, file can't be found on given path");
                 }
                 

@@ -1145,6 +1145,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\res\help.ico"
+				>
+			</File>
+			<File
 				RelativePath="res\include.bmp"
 				>
 			</File>
