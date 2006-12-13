@@ -21,6 +21,12 @@
 
 // ---AP Quantifier
 
+/**
+ * fLMQuantifier:
+ *
+ * @param hSource Handle to the the source, from where the data are retrieved
+ * @return XML string containing all the quantifiers in the data source defined by @param
+ */
 CString fLMQuantifier (void* hSource);
 
 // ---AP Task

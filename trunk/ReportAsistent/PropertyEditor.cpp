@@ -73,7 +73,7 @@ BEGIN_MESSAGE_MAP(CPropertyEditor, CDialog)
 	ON_WM_CTLCOLOR()
 	ON_WM_VSCROLL()
 	//}}AFX_MSG_MAP
-	ON_STN_CLICKED(IDC_ERROR_TEXT, &CPropertyEditor::OnStnClickedErrorText)
+	ON_STN_CLICKED(IDC_ERROR_TEXT, OnStnClickedErrorText)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
