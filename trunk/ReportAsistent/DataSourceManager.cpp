@@ -238,6 +238,9 @@ int COutputBuffer::insertNewAP(CString APName, BSTR Buffer)
 // konstruktor
 CDataSourcesManager::CDataSourcesManager(CDirectoriesManager & m)
 {
+	//Dedek: write to windows registry
+	WriteProfileString("Settings", "ApplicationRoot", m.getApplicationRoot());
+
 	// inicializace tabulky zasuvek a tabulky zdroju
 //  AfxMessageBox("11");
   initPlugsTab(m.getPluginsDirectory());
@@ -780,6 +783,8 @@ BOOL CDataSourcesManager::isPluginValid(int plugin_index)
 
 void CDataSourcesManager::ConnectNewSourceThreadFunction(LPARAM hNewSourceFn, LPARAM NewSourcePerzistID, LPARAM h_hSource)
 {
+	* ((hSource_t *) h_hSource) = NULL;
+
 	* ((hSource_t *) h_hSource) = ((hNewSource_t) hNewSourceFn)  ((PersistID_t *) NewSourcePerzistID);
 	
 	return;
@@ -864,6 +869,8 @@ BOOL CDataSourcesManager::RemoveSource(int source_index)	//vyhodi zdroj z tabulk
 // 
 void CDataSourcesManager::ConnectSourceThreadFunction(LPARAM hOpenSourceFn, LPARAM PID, LPARAM h_hSource)
 {
+	* ((hSource_t *) h_hSource) = NULL;
+
 	* ((hSource_t *) h_hSource) = ((hOpenSource_t) hOpenSourceFn) (* ((PersistID_t *) PID));
 	
 	return;

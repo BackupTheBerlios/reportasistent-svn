@@ -155,9 +155,6 @@ BOOL CReportAsistentApp::InitInstance()
 
 	LoadStdProfileSettings();  // Load standard INI file options (including MRU)
 
-	//Dedek: write to windows registry
-	WriteProfileString("Settings", "ApplicationRoot", 
-		m_pGeneralManager->DirectoriesManager.getApplicationRoot());
 	//Iva: read from windows registry
 	 m_bIdInItemName = GetProfileInt("Settings", "bIdInItemName", 1);
 	 m_iTreeItemHeight = GetProfileInt("Settings", "TreeItemHeight",20);
