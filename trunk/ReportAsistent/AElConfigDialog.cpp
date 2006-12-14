@@ -260,10 +260,14 @@ BOOL CAElConfigDialog::OnSetActive()
 	//	AfxMessageBox(simple_f->xml);
 
 		tr.ApplyAllFilters(m_filter_DOM);
+
+		CFilterResultImpl::UpdateResult(m_filter_DOM);
 		
 		//obnova dat
 		m_filter_DOM->selectSingleNode("/dialog_data")->replaceChild(values_clone,
 			m_filter_DOM->selectSingleNode("/dialog_data/values"));
+	
+		return CPropertyPage::OnSetActive();
 	}
 
 	CFilterResultImpl::UpdateResult(m_filter_DOM);

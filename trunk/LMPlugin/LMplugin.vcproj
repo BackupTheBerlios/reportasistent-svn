@@ -255,6 +255,10 @@
 				</FileConfiguration>
 			</File>
 			<File
+				RelativePath=".\CTime_Utils.cpp"
+				>
+			</File>
+			<File
 				RelativePath="Equivalence_Lit_Rs.cpp"
 				>
 				<FileConfiguration
@@ -1149,6 +1153,10 @@
 			</File>
 			<File
 				RelativePath="CF_Cedent_Recordset.h"
+				>
+			</File>
+			<File
+				RelativePath=".\CTime_Utils.h"
 				>
 			</File>
 			<File
