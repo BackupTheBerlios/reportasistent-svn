@@ -47,7 +47,7 @@ Resource6=IDD_DIALOG_REPORT (English (U.S.))
 Resource7=IDD_INCLUDE_DIALOG (English (U.S.))
 Resource8=IDD_SIMPLE_FILTER_DIALOG (English (U.S.))
 Resource9=IDD_AEL_CONFIG_DIALOG (English (U.S.))
-Resource10=IDD_PROPERTY_EDITOR (English (U.S.))
+Resource10=IDR_MAINFRAME (English (U.S.))
 Resource11=IDD_DIALOG_PARAGRAPH (English (U.S.))
 Resource12=IDD_OPTIONS_DIALOG (English (U.S.))
 Resource13=IDD_ATTRIBUTE_LINK_DIALOG (English (U.S.))
@@ -60,7 +60,7 @@ Resource19=IDD_ABOUTBOX (English (U.S.))
 Resource20=IDD_SOURCES_DIALOG (English (U.S.))
 Resource21=IDD_ACTIVE_ELEMENT_DIALOG (English (U.S.))
 
-Resource22=IDR_MAINFRAME (English (U.S.))
+Resource22=IDD_PROPERTY_EDITOR (English (U.S.))
 
 [CLS:CActiveElementDialog]
 Type=0
