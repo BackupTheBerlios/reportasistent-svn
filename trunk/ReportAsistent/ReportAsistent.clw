@@ -38,29 +38,29 @@ Class26=CWaitDialog
 Class27=CWordEventHandler
 
 ResourceCount=22
-Resource1=IDD_FILTER_AND_CONFIG_DIALOG (English (U.S.))
+Resource1=IDD_ATTRIBUTE_LINK_DIALOG (English (U.S.))
 Resource2=IDD_AEL_CONFIG_DIALOG
-Resource3=IDD_ATTRIBUTE_LINK_TABLE_DIALOG (English (U.S.))
-Resource4=IDD_GENERATE_DIALOG (English (U.S.))
-Resource5=IDD_DIALOGTEXT (English (U.S.))
-Resource6=IDD_DIALOG_REPORT (English (U.S.))
-Resource7=IDD_INCLUDE_DIALOG (English (U.S.))
-Resource8=IDD_SIMPLE_FILTER_DIALOG (English (U.S.))
-Resource9=IDD_AEL_CONFIG_DIALOG (English (U.S.))
-Resource10=IDR_MAINFRAME (English (U.S.))
-Resource11=IDD_DIALOG_PARAGRAPH (English (U.S.))
-Resource12=IDD_OPTIONS_DIALOG (English (U.S.))
-Resource13=IDD_ATTRIBUTE_LINK_DIALOG (English (U.S.))
-Resource14=IDD_COMPLEX_FILTER_DIALOG (English (U.S.))
-Resource15=IDD_START_DIALOG (English (U.S.))
-Resource16=IDD_WAIT_DIALOG (English (U.S.))
-Resource17=IDD_DIALOG_CHAPTER (English (U.S.))
-Resource18=IDD_TRANSFORMATIONS_DIALOG (English (U.S.))
-Resource19=IDD_ABOUTBOX (English (U.S.))
-Resource20=IDD_SOURCES_DIALOG (English (U.S.))
+Resource3=IDD_COMPLEX_FILTER_DIALOG (English (U.S.))
+Resource4=IDD_INCLUDE_DIALOG (English (U.S.))
+Resource5=IDD_TRANSFORMATIONS_DIALOG (English (U.S.))
+Resource6=IDD_WAIT_DIALOG (English (U.S.))
+Resource7=IDD_DIALOGTEXT (English (U.S.))
+Resource8=IDD_ATTRIBUTE_LINK_TABLE_DIALOG (English (U.S.))
+Resource9=IDD_OPTIONS_DIALOG (English (U.S.))
+Resource10=IDD_DIALOG_CHAPTER (English (U.S.))
+Resource11=IDD_START_DIALOG (English (U.S.))
+Resource12=IDD_DIALOG_PARAGRAPH (English (U.S.))
+Resource13=IDD_AEL_CONFIG_DIALOG (English (U.S.))
+Resource14=IDD_DIALOG_REPORT (English (U.S.))
+Resource15=IDD_ABOUTBOX (English (U.S.))
+Resource16=IDD_SOURCES_DIALOG (English (U.S.))
+Resource17=IDD_FILTER_AND_CONFIG_DIALOG (English (U.S.))
+Resource18=IDD_PROPERTY_EDITOR (English (U.S.))
+Resource19=IDD_SIMPLE_FILTER_DIALOG (English (U.S.))
+Resource20=IDD_GENERATE_DIALOG (English (U.S.))
 Resource21=IDD_ACTIVE_ELEMENT_DIALOG (English (U.S.))
 
-Resource22=IDD_PROPERTY_EDITOR (English (U.S.))
+Resource22=IDR_MAINFRAME (English (U.S.))
 
 [CLS:CActiveElementDialog]
 Type=0
@@ -432,9 +432,10 @@ Control1=IDC_STATIC,static,1342308352
 [DLG:IDD_GENERATE_DIALOG (English (U.S.))]
 Type=1
 Class=?
-ControlCount=2
+ControlCount=3
 Control1=IDC_GENERATE_BUTTON,button,1342251009
 Control2=IDC_NEW_WORD_CHECK,button,1476460547
+Control3=ID_HELP,button,1342242816
 
 [DLG:IDD_ACTIVE_ELEMENT_DIALOG (English (U.S.))]
 Type=1
@@ -474,12 +475,13 @@ Control7=ID_HELP,button,1342242816
 [DLG:IDD_PROPERTY_EDITOR (English (U.S.))]
 Type=1
 Class=?
-ControlCount=5
+ControlCount=6
 Control1=IDOK,button,1342242817
 Control2=IDCANCEL,button,1342242816
 Control3=IDC_SCROLLBAR1,scrollbar,1342177281
 Control4=IDC_STATIC1,static,1342177287
 Control5=ID_HELP,button,1342242816
+Control6=IDC_ERROR_TEXT,static,1342308352
 
 [DLG:IDD_WAIT_DIALOG (English (U.S.))]
 Type=1

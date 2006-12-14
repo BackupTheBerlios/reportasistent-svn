@@ -2,6 +2,7 @@
 //
 
 #include "stdafx.h"
+#include "afxpriv.h"
 
 #include "ReportAsistent.h"
 
@@ -322,3 +323,86 @@ void CReportAsistentApp::OnHlpTopics()
 
 
 
+
+int CReportAsistentApp::DoMessageBox(LPCTSTR lpszPrompt, UINT nType, UINT nIDPrompt)
+{
+// disable windows for modal dialog
+	EnableModeless(FALSE);
+	HWND hWndTop;
+	HWND hWnd = CWnd::GetSafeOwner_(NULL, &hWndTop);
+
+	// set help context if possible
+	DWORD* pdwContext = NULL;
+	HWND hWnd2 = AfxGetMainWnd()->GetSafeHwnd();
+	if (hWnd2 != NULL)
+	{
+		// use app-level context or frame level context
+		LRESULT lResult = ::SendMessage(hWnd2, WM_HELPPROMPTADDR, 0, 0); // Use "MainWnd" HWND
+		if (lResult != 0)
+			pdwContext = (DWORD*)lResult;
+	}
+	// for backward compatibility use app context if possible
+	if (pdwContext == NULL && this != NULL)
+		pdwContext = &m_dwPromptContext;
+
+	DWORD dwOldPromptContext = 0;
+	if (pdwContext != NULL)
+	{
+		// save old prompt context for restoration later
+		dwOldPromptContext = *pdwContext;
+		if (nIDPrompt != 0)
+			*pdwContext = HID_BASE_PROMPT+nIDPrompt;
+	}
+
+	// determine icon based on type specified
+	if ((nType & MB_ICONMASK) == 0)
+	{
+		switch (nType & MB_TYPEMASK)
+		{
+		case MB_OK:
+		case MB_OKCANCEL:
+			nType |= MB_ICONEXCLAMATION;
+			break;
+
+		case MB_YESNO:
+		case MB_YESNOCANCEL:
+			nType |= MB_ICONEXCLAMATION;
+			break;
+
+		case MB_ABORTRETRYIGNORE:
+		case MB_RETRYCANCEL:
+			// No default icon for these types, since they are rarely used.
+			// The caller should specify the icon.
+			break;
+		}
+	}
+
+#ifdef _DEBUG
+	if ((nType & MB_ICONMASK) == 0)
+		TRACE0("Warning: no icon specified for message box.\n");
+#endif
+
+	TCHAR szAppName[_MAX_PATH];
+	LPCTSTR pszAppName;
+	if (this != NULL)
+		pszAppName = m_pszAppName;
+	else
+	{
+		pszAppName = szAppName;
+		GetModuleFileName(NULL, szAppName, _MAX_PATH);
+	}
+
+	int nResult =
+		::MessageBox(hWnd, lpszPrompt, pszAppName, nType);
+
+	// restore prompt context if possible
+	if (pdwContext != NULL)
+		*pdwContext = dwOldPromptContext;
+
+	// re-enable windows
+	if (hWndTop != NULL)
+		::EnableWindow(hWndTop, TRUE);
+	EnableModeless(TRUE);
+
+	return nResult;
+}

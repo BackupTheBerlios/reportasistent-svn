@@ -126,6 +126,8 @@ public:
 public:
 	int m_iTextEditSize;
 	int m_iTreeItemNameLength;
+public:
+	virtual int DoMessageBox(LPCTSTR lpszPrompt, UINT nType, UINT nIDPrompt);
 };
 
 

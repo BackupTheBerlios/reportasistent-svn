@@ -479,6 +479,7 @@ void CMainFrame::WinHelp(DWORD dwData, UINT nCmd)
 		if (dwData >=104537 && dwData <=104542) dwData = 104537;
 		//Active Element ID
 		if (dwData >=104546 && dwData <=104570) dwData = 104546;
+		if (dwData >= 666666) dwData=666666;
 	} 
 
 

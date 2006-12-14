@@ -148,7 +148,7 @@ to se deje vzdy, kdyz se cte plugin output, napr pri otevreni simple fiter -->
 			<text id="text7" style="Silné">Nìjaký text</text>
 			<attr_link id="attr_link1" target="" attr_name=""/>
 		</paragraph>
-		<active_element type="hyp_4ft" source="" id="hyp_4ft1" label="">
+		<active_element type="hyp_4ft" source="Barbora" id="hyp_4ft1" label="">
 			<attributes>
 				<element_attributes>
 				</element_attributes>
@@ -161,7 +161,7 @@ to se deje vzdy, kdyz se cte plugin output, napr pri otevreni simple fiter -->
 			<output>
 			</output>
 		</active_element>
-		<active_element type="category" source="" id="category1" label="">
+		<active_element type="category" source="Barbora" id="category1" label="">
 			<attributes>
 				<element_attributes>
 				</element_attributes>

@@ -3,7 +3,7 @@
 	ProjectType="Visual C++"
 	Version="8,00"
 	Name="LMplugin"
-	ProjectGUID="{D7CD65AF-4663-4827-B469-FB35ED73492B}"
+	ProjectGUID="{CD8D2174-3BF8-49E5-A859-47ED0325ED00}"
 	Keyword="MFCProj"
 	>
 	<Platforms>
@@ -255,8 +255,24 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\CTime_Utils.cpp"
+				RelativePath="CTime_Utils.cpp"
 				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="Equivalence_Lit_Rs.cpp"
@@ -1156,7 +1172,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\CTime_Utils.h"
+				RelativePath="CTime_Utils.h"
 				>
 			</File>
 			<File

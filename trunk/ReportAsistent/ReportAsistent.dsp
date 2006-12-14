@@ -425,6 +425,10 @@ SOURCE=.\res\CSkeletonDoc.ico
 # End Source File
 # Begin Source File
 
+SOURCE=.\res\help.ico
+# End Source File
+# Begin Source File
+
 SOURCE=.\res\include.bmp
 # End Source File
 # Begin Source File
