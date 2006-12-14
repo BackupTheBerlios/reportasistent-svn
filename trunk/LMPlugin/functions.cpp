@@ -47,6 +47,7 @@
 #include "math.h"
 #include "LMPlErrorMessages.h"
 #include "LMPlugin.h"
+#include "CTime_Utils.h"
 
 bool ar2nl_err = false;
 
@@ -1075,9 +1076,17 @@ CString fLMTask (void* hSource)
 		{
 			pttask = new (Task_Meta);
 			pttask->db_name = db_name;
-			pttask->gen_start_time = rs.m_GenerationStartTime.Format ("%c");
-			pttask->gen_start_time.Replace ("/", ".");
-
+			try
+			{
+				pttask->gen_start_time =
+					get_date_in_user_format (rs.m_GenerationStartTime) + " ";
+				pttask->gen_start_time += get_time_in_user_format (rs.m_GenerationStartTime);
+				pttask->gen_start_time.Replace ("/", ".");
+			}
+			catch (...)
+			{
+				pttask->gen_start_time = rs.m_GenerationStartTime.Format ("%c");
+			}
 			secf = rs.m_GenerationTotalTime / 1000;
 			up = (long) ceil (secf);
 			down = (long) floor (secf);
@@ -1088,6 +1097,7 @@ CString fLMTask (void* hSource)
 			minutes = (int) floor (float(seconds / 60));
 			seconds = seconds - minutes * 60;
 			hlp1.Format ("%d", hours);
+			if (hlp1.GetLength () == 1) hlp1 = "0" + hlp1;
 			hlp = hlp1 + ":";
 			hlp1.Format ("%d", minutes);
 			if (hlp1.GetLength () == 1) hlp1 = "0" + hlp1;
