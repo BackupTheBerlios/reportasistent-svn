@@ -516,7 +516,9 @@ void CSkeletonView::OnEditPaste()
 
 	if (NULL==pMemForXML) 
 	{
-		CReportAsistentApp::ReportError(IDS_NO_DATA_FROM_CLIPBOARD);
+		#ifdef _DEBUG
+			CReportAsistentApp::ReportError(IDS_NO_DATA_FROM_CLIPBOARD);
+		#endif
 		CloseClipboard();
 		return;
 	}
@@ -531,7 +533,9 @@ void CSkeletonView::OnEditPaste()
 	HRESULT hRes = pNewXMLDoc->loadXML(pMemForXML);
 	if (pNewXMLDoc->parseError->errorCode != S_OK)
 	{
+#ifdef _DEBUG
 		CReportAsistentApp::ReportError(IDS_PARSE_ERROR,pNewXMLDoc->parseError->reason);
+#endif
 	}
 
 //zavru clipboard

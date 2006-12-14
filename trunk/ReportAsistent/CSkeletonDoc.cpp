@@ -1406,7 +1406,7 @@ BOOL CSkeletonDoc::SetReportSettings(LPCTSTR attribute, LPCTSTR value)
 
 CString CSkeletonDoc::StrToHtml(CString sText)
 {
-
+	/*
 	if (sText[0]==' ') 
 	{
 		sText.Delete(0);
@@ -1417,12 +1417,13 @@ CString CSkeletonDoc::StrToHtml(CString sText)
 		sText.Delete(sText.GetLength()-1);
 		sText=sText+"&nbsp;";
 	}
-
+	*/
 	return sText;
 }
 
 CString CSkeletonDoc::HtmlToStr(CString sHtml)
 {
+	/*
 	if (sHtml.Left(6)=="&nbsp;")
 	{
 		sHtml.Delete(0,6);
@@ -1433,6 +1434,6 @@ CString CSkeletonDoc::HtmlToStr(CString sHtml)
 		sHtml.Delete(sHtml.GetLength()-6,6);
 		sHtml=sHtml+" ";
 	}
-		
+	*/	
 	return sHtml;
 }
