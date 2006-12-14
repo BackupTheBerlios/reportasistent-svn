@@ -1406,6 +1406,7 @@ BOOL CSkeletonDoc::SetReportSettings(LPCTSTR attribute, LPCTSTR value)
 
 CString CSkeletonDoc::StrToHtml(CString sText)
 {
+/*
 	if (sText[0]==' ') 
 	{
 		sText.Delete(0);
@@ -1416,7 +1417,7 @@ CString CSkeletonDoc::StrToHtml(CString sText)
 		sText.Delete(sText.GetLength()-1);
 		sText=sText+"&nbsp;";
 	}
-
+*/
 	return sText;
 }
 
