@@ -208,6 +208,8 @@ BOOL CElementTextDialog::OnInitDialog()
 	CString sText = CSkeletonDoc::HtmlToStr((LPCTSTR) (_bstr_t)  m_SelXMLElm->text);
 	m_REdit.SetWindowText(sText);
 
+	m_REdit.CanPaste(0);
+
 		
 	return TRUE;  // return TRUE unless you set the focus to a control
 	              // EXCEPTION: OCX Property Pages should return FALSE

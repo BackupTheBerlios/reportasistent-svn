@@ -918,13 +918,15 @@ void CSkeletonDoc::ChangeIDsInTree(MSXML2::IXMLDOMElementPtr pElm)
 	CElementManager & OElementManager = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;	
 	MSXML2::IXMLDOMNodeListPtr pChildren = pElm->childNodes;//ukazatel na potomky pElm
 	MSXML2::IXMLDOMNodePtr pChild = NULL;
-
+	CElementManager::elId_t idElm;
 	
 
 	while ((pChild = pChildren->nextNode()) != NULL)
 	{
-
-		ChangeIDsInTree(pChild);
+		idElm = OElementManager.IdentifyElement((MSXML2::IXMLDOMElementPtr) pChild);
+		if (idElm >=OElementManager.getFirstStaticElementID() && 
+			idElm<=OElementManager.getLastElementId())
+			ChangeIDsInTree(pChild);
 	}
 //zjistim soucasnou hodnotu atributu id. Pokud prvek takovy atribut nema, skoncim.
 	_variant_t varAtr = pElm->getAttribute("id");

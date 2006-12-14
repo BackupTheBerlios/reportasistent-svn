@@ -2,13 +2,13 @@
 
 [General Info]
 Version=1
-LastClass=COptionsDialog
+LastClass=CElementTextDialog
 LastTemplate=CListCtrl
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "reportasistent.h"
 LastPage=0
 
-ClassCount=28
+ClassCount=27
 Class1=CActiveElementDialog
 Class2=CAElFiltersConfigDialog
 Class3=CAttributeLinkDialog
@@ -40,24 +40,24 @@ Class27=CWordEventHandler
 ResourceCount=22
 Resource1=IDD_FILTER_AND_CONFIG_DIALOG (English (U.S.))
 Resource2=IDD_AEL_CONFIG_DIALOG
-Resource3=IDD_SOURCES_DIALOG (English (U.S.))
+Resource3=IDD_ATTRIBUTE_LINK_TABLE_DIALOG (English (U.S.))
 Resource4=IDD_GENERATE_DIALOG (English (U.S.))
-Resource5=IDD_SIMPLE_FILTER_DIALOG (English (U.S.))
+Resource5=IDD_DIALOGTEXT (English (U.S.))
 Resource6=IDD_DIALOG_REPORT (English (U.S.))
 Resource7=IDD_INCLUDE_DIALOG (English (U.S.))
-Resource8=IDD_ATTRIBUTE_LINK_DIALOG (English (U.S.))
+Resource8=IDD_SIMPLE_FILTER_DIALOG (English (U.S.))
 Resource9=IDD_AEL_CONFIG_DIALOG (English (U.S.))
 Resource10=IDD_PROPERTY_EDITOR (English (U.S.))
 Resource11=IDD_DIALOG_PARAGRAPH (English (U.S.))
 Resource12=IDD_OPTIONS_DIALOG (English (U.S.))
-Resource13=IDD_DIALOGTEXT (English (U.S.))
+Resource13=IDD_ATTRIBUTE_LINK_DIALOG (English (U.S.))
 Resource14=IDD_COMPLEX_FILTER_DIALOG (English (U.S.))
 Resource15=IDD_START_DIALOG (English (U.S.))
 Resource16=IDD_WAIT_DIALOG (English (U.S.))
 Resource17=IDD_DIALOG_CHAPTER (English (U.S.))
-Resource18=IDD_ATTRIBUTE_LINK_TABLE_DIALOG (English (U.S.))
-Resource19=IDD_TRANSFORMATIONS_DIALOG (English (U.S.))
-Resource20=IDD_ABOUTBOX (English (U.S.))
+Resource18=IDD_TRANSFORMATIONS_DIALOG (English (U.S.))
+Resource19=IDD_ABOUTBOX (English (U.S.))
+Resource20=IDD_SOURCES_DIALOG (English (U.S.))
 Resource21=IDD_ACTIVE_ELEMENT_DIALOG (English (U.S.))
 
 Resource22=IDR_MAINFRAME (English (U.S.))
@@ -128,7 +128,7 @@ Type=0
 BaseClass=CDialog
 HeaderFile=ElementTextDialog.h
 ImplementationFile=ElementTextDialog.cpp
-LastObject=CElementTextDialog
+LastObject=ID_HELP
 Filter=D
 VirtualFilter=dWC
 

@@ -436,7 +436,7 @@ void CSkeletonView::OnEditCopy()
 	
 //ziskam XML vybraneho prvku TreeCtrl
 	_bstr_t bstrSelElmXML= SelXMLDomElement->xml; 
-	//AfxMessageBox((LPTSTR)bstrSelElmXML,0,0);
+	AfxMessageBox((LPTSTR)bstrSelElmXML,0,0);
 
 //Alokuji globalni pamet a XML do ni zkopiruji
 	HGLOBAL hgMemForXML = GlobalAlloc(GMEM_MOVEABLE | GMEM_DDESHARE ,    // allocation attributes
@@ -547,7 +547,7 @@ void CSkeletonView::OnEditPaste()
 	MSXML2::IXMLDOMElementPtr pNewXMLElm = pNewXMLDoc->GetdocumentElement();
 
 	GetDocument()->ChangeIDsInTree(pNewXMLElm);
-	//AfxMessageBox(pNewXMLDoc->xml,0,0);
+	AfxMessageBox(pNewXMLDoc->xml,0,0);
 
 //zkusim vlozit DOVNITR do existujiciho
 	if (0!= OElementManager.CanInsertChildHere(pNewXMLElm,SelXMLDomElement))
