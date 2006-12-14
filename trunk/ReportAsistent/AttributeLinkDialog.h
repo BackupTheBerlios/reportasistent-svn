@@ -57,6 +57,8 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
 	afx_msg void OnLvnDeleteitemAttributesList(NMHDR *pNMHDR, LRESULT *pResult);
+	void SelectItemByNameString(LPCTSTR item_caption);
+	void SelectItemByString(LPCTSTR item_caption);
 };
 
 //{{AFX_INSERT_LOCATION}}

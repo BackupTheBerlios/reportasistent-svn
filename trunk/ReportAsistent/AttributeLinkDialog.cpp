@@ -79,22 +79,10 @@ BOOL CAttributeLinkDialog::OnInitDialog()
 		m_StylesCombo.SelectString(-1, (_bstr_t) style);
 	}
 
-	
-	
-	//najdi vybranou polozku
-
-	LVFINDINFO info;
-	ZeroMemory(& info, sizeof info);
-
 	CString attr_n = (LPCTSTR) (_bstr_t) m_SelXMLElm->getAttribute("attr_name");
 
-	info.flags = LVFI_STRING;
-	info.psz = attr_n;
-	int item = m_AttributesList.FindItem(& info);
+	SelectItemByNameString(attr_n);
 
-	//vyber vybranou
-	m_AttributesList.SetItemState(item, LVIS_SELECTED, LVIS_SELECTED);
-	
 	return TRUE;  // return TRUE unless you set the focus to a control
 	              // EXCEPTION: OCX Property Pages should return FALSE
 }
@@ -158,7 +146,20 @@ void CAttributeLinkDialog::OnRefreshButton()
 	CString s;
 	m_TargetCombo.GetWindowText(s);
 
-	OnRefresh(m_AttributesList, s);
+	POSITION pos = m_AttributesList.GetFirstSelectedItemPosition();
+
+	 
+	if (pos != NULL)
+	{
+		int nItem = m_AttributesList.GetNextSelectedItem(pos);
+		CString it_str = m_AttributesList.GetItemText(nItem, 0);
+		OnRefresh(m_AttributesList, s);
+		SelectItemByString(it_str);
+	}
+	else
+	{
+		OnRefresh(m_AttributesList, s);
+	}
 }
 
 void CAttributeLinkDialog::OnStylesRefreshButton() 
@@ -260,3 +261,34 @@ void CAttributeLinkDialog::DDV_NonDuplicateID(CDataExchange *pDX, int nId, CStri
 }
 
 
+
+
+void CAttributeLinkDialog::SelectItemByNameString(LPCTSTR item_caption)
+{
+	for (int a=0; a < m_AttributesList.GetItemCount(); a++)
+	{
+		CString * data = (CString *) m_AttributesList.GetItemData(a);
+
+		if (* data == item_caption)
+		{
+			m_AttributesList.SetItemState(a, LVIS_SELECTED, LVIS_SELECTED);
+		}
+
+	}
+
+}
+
+void CAttributeLinkDialog::SelectItemByString(LPCTSTR item_caption)
+{
+	//najdi vybranou polozku
+
+	LVFINDINFO info;
+	ZeroMemory(& info, sizeof info);
+
+	info.flags = LVFI_STRING;
+	info.psz = item_caption;
+	int item = m_AttributesList.FindItem(& info);
+
+	//vyber vybranou
+	m_AttributesList.SetItemState(item, LVIS_SELECTED, LVIS_SELECTED);
+}
