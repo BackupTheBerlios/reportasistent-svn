@@ -90,9 +90,13 @@ BOOL CAttributeLinkDialog::OnInitDialog()
 
 void CAttributeLinkDialog::OnSelchangeTargetCombo() 
 {
+	/*
 	CString target_id;
 	m_TargetCombo.GetWindowText(target_id);
 	FillAttributesList(m_AttributesList, target_id);
+	*/
+
+	OnRefreshButton();
 }
 
 void CAttributeLinkDialog::OnOK() 
@@ -152,9 +156,9 @@ void CAttributeLinkDialog::OnRefreshButton()
 	if (pos != NULL)
 	{
 		int nItem = m_AttributesList.GetNextSelectedItem(pos);
-		CString it_str = m_AttributesList.GetItemText(nItem, 0);
+		CString name_str = * ((CString *) m_AttributesList.GetItemData(nItem));
 		OnRefresh(m_AttributesList, s);
-		SelectItemByString(it_str);
+		SelectItemByNameString(name_str);
 	}
 	else
 	{

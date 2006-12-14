@@ -143,7 +143,7 @@ void CAttributeLinkDialogBase::FillAttributesList(CListCtrl & AttributesList, LP
 		
 		// atribut "name" uchovan do ItemData polozky
 		CString* pName = new CString();
-		*pName = (CString) (BSTR) (_bstr_t) el->getAttribute("name");
+		*pName =  (LPCTSTR) (_bstr_t) el->getAttribute("name");
 
 		// /kody - smaz
 
