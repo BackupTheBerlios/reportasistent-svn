@@ -931,10 +931,13 @@ void CSkeletonDoc::ChangeIDsInTree(MSXML2::IXMLDOMElementPtr pElm)
 //zjistim soucasnou hodnotu atributu id. Pokud prvek takovy atribut nema, skoncim.
 	_variant_t varAtr = pElm->getAttribute("id");
 	if (VT_NULL == varAtr.vt) return;
-
+	
+	CString new_ID;
 //zjistim id typu prvku a zmenim id prvku.
 	CElementManager::elId_t idTypeElm = OElementManager.IdentifyElement(pElm);
-	CString new_ID=(LPCTSTR)CreateNewIDFromOld((LPCTSTR) (_bstr_t)varAtr);
+	if (IsIDInTree((LPCTSTR) (_bstr_t)varAtr))
+		new_ID=(LPCTSTR)CreateNewIDFromOld((LPCTSTR) (_bstr_t)varAtr);
+	else new_ID=(LPCTSTR) (_bstr_t)varAtr;
 	//nyni by jeste mohla byt kontrola, neni-li new_ID nekde ve vkladanem podstromu...
 	//...to se ale diky tvorbe novych ID ze starych (ktera duplicitni urcite nebyla) nemuze stat.
 	pElm->setAttribute("id",(LPCTSTR) new_ID);	
