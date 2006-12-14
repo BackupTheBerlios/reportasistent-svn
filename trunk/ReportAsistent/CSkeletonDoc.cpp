@@ -1051,6 +1051,8 @@ BOOL CSkeletonDoc::InitAndClearXmlDom()
 	}
 
 	m_pXMLDom->async = VARIANT_FALSE; // default - true,
+	m_pXMLDom->preserveWhiteSpace = VARIANT_TRUE;
+
 
 
 	

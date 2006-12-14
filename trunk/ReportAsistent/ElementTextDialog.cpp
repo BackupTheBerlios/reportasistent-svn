@@ -205,7 +205,7 @@ BOOL CElementTextDialog::OnInitDialog()
 	cf.dwMask=CFM_SIZE;
 	cf.cbSize=sizeof(cf);
 	int Res = m_REdit.SetDefaultCharFormat(cf);	
-
+	
 	//Put text of the element into RichEditCtrl
 	CString sText = CSkeletonDoc::HtmlToStr((LPCTSTR) (_bstr_t)  m_SelXMLElm->text);
 	m_REdit.SetWindowText(sText);
