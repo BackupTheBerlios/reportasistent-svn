@@ -54,7 +54,6 @@ void CElementChapterDialog::DoDataExchange(CDataExchange* pDX)
 
 BEGIN_MESSAGE_MAP(CElementChapterDialog, CDialog)
 	//{{AFX_MSG_MAP(CElementChapterDialog)
-	ON_WM_HELPINFO()
 	//}}AFX_MSG_MAP
 
 
@@ -92,8 +91,7 @@ void CElementChapterDialog::DDV_NonDuplicateID(CDataExchange *pDX, int nId, CStr
 		if (""==csIDEditValue) //Iva: ID can't be empty string
 		{
 			SetDlgItemText(nId, m_OldID );
-			//dedek: ?CReportAsistentApp::ReportError?
-			AfxMessageBox(IDS_INVALID_ELEMENT_ID);
+			CReportAsistentApp::ReportError(IDS_INVALID_ELEMENT_ID);
 			pDX->Fail();
 		}
 
@@ -103,8 +101,7 @@ void CElementChapterDialog::DDV_NonDuplicateID(CDataExchange *pDX, int nId, CStr
 			if (Doc->IsIDInTree(csIDEditValue))
 			{
 				SetDlgItemText(nId, m_OldID ); //Iva: return old value to edit box
-				AfxMessageBox(IDS_DUPLICATE_ELEMENT_ID);
-				//dedek: ?CReportAsistentApp::ReportError(IDS_DUPLICATE_ELEMENT_ID);?
+				CReportAsistentApp::ReportError(IDS_DUPLICATE_ELEMENT_ID);
 				pDX->Fail();
 			}
 			else
@@ -133,37 +130,5 @@ void CElementChapterDialog::DDV_NonDuplicateID(CDataExchange *pDX, int nId, CStr
 }
 
 
-void CElementChapterDialog::WinHelp(DWORD dwData, UINT nCmd)
-{
-	if (nCmd == HELP_CONTEXT)
-	{
-		CString Pom;
-		Pom.Format("HELP_CONTEXT , %d", dwData) ;
-		AfxMessageBox( (LPCTSTR)Pom);
-	} 
 
-
-	CDialog::WinHelp(77001, nCmd);
-}
-
-
-
-
-BOOL CElementChapterDialog::OnHelpInfo(HELPINFO* pHelpInfo)
-{
-	BOOL Res=CDialog::OnHelpInfo(pHelpInfo);
-
-
-	CString Pom;
-	Pom.Format("dwContextId: %d \niContextType: %d\n iCtrlId:%d\n ",pHelpInfo->dwContextId,pHelpInfo->iContextType, pHelpInfo->iCtrlId);
-	AfxMessageBox(Pom);
-
-	return Res;
-}
-
-//DEL void CElementChapterDialog::OnHelp() 
-//DEL {
-//DEL 	WinHelp(77001 ,HELP_CONTEXT) ; 
-//DEL 	
-//DEL }
 

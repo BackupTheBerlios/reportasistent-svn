@@ -694,7 +694,9 @@ void CSkeletonView::OnLButtonUp(UINT nFlags, CPoint point)
 			//zkontroluji, neni-li Drop potomkem Dragu
 				if (GetDocument()->IsDescendantOfElement(pXMLElmDrop,pXMLElmDrag))
 				{
+#ifdef _DEBUG
 					AfxMessageBox("Nelze presunout prvek do jeho podstromu");
+#endif
 					goto end_place;
 				}
 	

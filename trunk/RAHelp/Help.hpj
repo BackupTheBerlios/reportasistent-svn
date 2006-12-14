@@ -6,7 +6,6 @@ REPORT=Yes
 HLP=ReportAsistent.hlp
 
 [FILES]
-Topics.rtf
 Error messages.rtf
 
 [MAP]
@@ -14,10 +13,18 @@ IDH_ATRLINKELM=131223             ; Page about static element attribute link
 IDH_ATRLINKTABLEELM=131224          ; Page about static element attribute link table
 IDH_CONNECTSOURCE=131217        ; Page about Connection of source metabase
 IDH_CONTENTS=77001          ; Top page of help
+IDH_ERRMSGS=66666          ; Beginning of error description
 IDH_CHAPTERELM=131226             ; Page about static element chapter
 IDH_INCLUDEELM=131242             ; Page about static element include
-IDH_INSTAL=77002        ; Page about instalation of Report Asistent
-IDH_MAINWIN=131200          ; Page describing the main window of Report Asistent
 IDH_PARAGRAPHELM=131225               ; Page about static element paragraph
 IDH_REPORTELM=131238            ; Page about static element report
 IDH_TEXTELM=131202          ; Page about static element text
+IDH_SKELETONEDITOR=131200
+IDH_MMSECFILE=123136
+IDH_MMSECEDIT=123170
+IDH_MMSECVIEW=124928
+IDH_MMSECDATASOURCES=98334
+IDH_MMSECHELP=98329
+IDH_STATICELMTOOLBAR=104537
+IDH_ACTIVEELMTOOLBAR=104546
+IDH_ACTIVEELEMENTS=131244

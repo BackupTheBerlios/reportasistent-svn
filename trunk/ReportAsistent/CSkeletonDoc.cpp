@@ -1408,6 +1408,10 @@ BOOL CSkeletonDoc::SetReportSettings(LPCTSTR attribute, LPCTSTR value)
 
 CString CSkeletonDoc::StrToHtml(CString sText)
 {
+	sText.Remove(10); //remove CR
+	sText.Replace(13,' '); //remove LF
+
+	sText.Replace("\t"," "); //remove tab
 	/*
 	if (sText[0]==' ') 
 	{

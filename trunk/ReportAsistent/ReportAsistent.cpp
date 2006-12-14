@@ -107,7 +107,7 @@ int CReportAsistentApp::ReportError(UINT nResourceErrorStringID, ...)
 	CString sOutputText;
 	sOutputText.Format("Program error: ERR%03d\n\n%s", nResourceErrorStringID-FIRST_ERR_STR_ID, (LPCTSTR) sMessgeText);
 
-	return AfxMessageBox(sOutputText, MB_OK | MB_HELP);
+	return AfxMessageBox(sOutputText, MB_OK | MB_HELP,66666);
 }
 
 BOOL CReportAsistentApp::InitInstance()
@@ -314,7 +314,6 @@ void CReportAsistentApp::OnOpenWordEditor()
 //Iva: If Help Topics in the menu is chosen, this is the handler
 void CReportAsistentApp::OnHlpTopics() 
 {
-
 	//WinHelp((unsigned long)"What", HELP_KEY);//Displays Help Topics dialog box, according to "key word"
 	WinHelp(IDH_CONTENTS, HELP_CONTEXT);//Displays Help Topics dialog box, according to "mapped ID"
 	

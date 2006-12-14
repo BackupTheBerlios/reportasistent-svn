@@ -451,12 +451,34 @@ void CMainFrame::OnUpdateViewActiveelementtoolbar(CCmdUI* pCmdUI)
 
 void CMainFrame::WinHelp(DWORD dwData, UINT nCmd) 
 {
-	//if (dwData > 0x20000) dwData -= 0x20000;
 	if (nCmd == HELP_CONTEXT)
 	{
 		CString Pom;
 		Pom.Format("HELP_CONTEXT , %d", dwData) ;
+#ifdef _DEBUG
 		AfxMessageBox( (LPCTSTR)Pom);
+#endif
+		//Translating table:
+		//Menu Sec File
+		if (dwData >=123136 && dwData <=123169) dwData = 123136;
+		if (dwData ==98307 || dwData ==98323 || dwData ==98324) dwData = 123136;
+		if (dwData >=123201 && dwData <=123201) dwData = 123136;
+		//Menu Sec Edit
+		if (dwData >=123170 && dwData <=123173) dwData = 123170;
+		if (dwData ==98318) dwData = 123170;
+		//Menu Sec View
+		if (dwData >=124928 && dwData <=124929) dwData = 124928;
+		if (dwData ==98328 ||dwData ==98326) dwData = 124928;
+		//Menu Sec Data source
+		if (dwData ==98334 ||dwData ==98336) dwData = 98334;
+		if (dwData ==98308) dwData = 98334;
+		//Menu Sec Help
+		if (dwData ==98329 ||dwData ==133200) dwData = 98329;
+
+		//Static Element ID
+		if (dwData >=104537 && dwData <=104542) dwData = 104537;
+		//Active Element ID
+		if (dwData >=104546 && dwData <=104570) dwData = 104546;
 	} 
 
 
