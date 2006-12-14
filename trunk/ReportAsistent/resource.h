@@ -151,6 +151,7 @@
 #define IDC_TEMPLATES_REFRESH_BUTTON    1072
 #define IDC_MARK_ORPHANS                1073
 #define IDC_TEMPLATE_BROWSE_BOTTON      1074
+#define IDC_ERR                         1078
 #define ID_MMGENREP                     32771
 #define ID_MMSOURCES                    32772
 #define ID_ELEMENT_EDIT                 32780
@@ -219,7 +220,7 @@
 #define _APS_3D_CONTROLS                     1
 #define _APS_NEXT_RESOURCE_VALUE        175
 #define _APS_NEXT_COMMAND_VALUE         32802
-#define _APS_NEXT_CONTROL_VALUE         1078
+#define _APS_NEXT_CONTROL_VALUE         1079
 #define _APS_NEXT_SYMED_VALUE           102
 #endif
 #endif
