@@ -207,7 +207,8 @@ BOOL CElementTextDialog::OnInitDialog()
 	int Res = m_REdit.SetDefaultCharFormat(cf);	
 
 	//Put text of the element into RichEditCtrl
-	m_REdit.SetWindowText((LPCTSTR) (_bstr_t)  m_SelXMLElm->text);
+	CString sText = CSkeletonDoc::HtmlToStr((LPCTSTR) (_bstr_t)  m_SelXMLElm->text);
+	m_REdit.SetWindowText(sText);
 
 		
 	return TRUE;  // return TRUE unless you set the focus to a control

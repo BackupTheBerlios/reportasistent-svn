@@ -395,6 +395,7 @@ CString CElementManager::CreateElementCaption(MSXML2::IXMLDOMElementPtr &pElemen
 	_bstr_t bsAttr;
 	_bstr_t bsTarget;
 	CString sRet;
+	CString sText;
 
 //	AfxMessageBox(pElement->xml);
 //	AfxMessageBox(getElementName(element_id));
@@ -432,22 +433,23 @@ CString CElementManager::CreateElementCaption(MSXML2::IXMLDOMElementPtr &pElemen
 
 	
 	case  ELID_TEXT:
+		sText=CSkeletonDoc::HtmlToStr((LPCTSTR) pElement->text);
 
-		if (pElement->text.length() == 0) 
+		if (sText.GetLength() == 0) 
 		{
 			sRet.Format("Empty");
 			break;
 		}
-		if ((pElement->text.length()+bsId.length()+2) <= App->m_iTreeItemNameLength) 					 
+		if ((sText.GetLength()+bsId.length()+2) <= App->m_iTreeItemNameLength) 					 
 		{
-			sRet.Format("%s",(LPCTSTR) pElement->text);
+			sRet.Format("%s",sText);
 			break;
 		}
 		else
 		{
-			CString Pom = (LPCTSTR) pElement->text;
+			CString Pom = sText;
 			Pom = Pom.Right((App->m_iTreeItemNameLength-5)/2);
-			sRet.Format("%.*s ... %.*s",(App->m_iTreeItemNameLength-5)/2, (LPCTSTR) pElement->text,(App->m_iTreeItemNameLength-5)/2, (LPCTSTR) Pom);
+			sRet.Format("%.*s ... %.*s",(App->m_iTreeItemNameLength-5)/2, (LPCTSTR)sText,(App->m_iTreeItemNameLength-5)/2, (LPCTSTR) Pom);
 			break;
 		}
 		break;
