@@ -94,6 +94,9 @@ LPCTSTR CElementManager::getElementLabel(elId_t elementID)
 
 CElementManager::elId_t CElementManager::IdentifyElement(MSXML2::IXMLDOMElementPtr & element)
 {
+	if (element == NULL) 
+		return ELID_UNKNOWN;
+
 	CString baseName = (BSTR) element->baseName;
 
 	//zkusime porovnat parametr type se jmeny aktivnich prvku
