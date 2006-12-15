@@ -105,6 +105,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_26CD3E96E60C48D9965EFAA503A64D0F"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_27FE109087A84777AFB327D9BB641437"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -154,6 +160,12 @@
         "Entry"
         {
         "MsmKey" = "8:_38E91BD583DC496591C005861FDA35DB"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_390EEFC3EB2C479E8BDE30DF6431096D"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -291,6 +303,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_59C41B47CBBA46BDBF05BE54C8003CD4"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_5B32DFEC6DC8464F862419CB7F538118"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -412,12 +430,6 @@
         "Entry"
         {
         "MsmKey" = "8:_794CD4FC6CD74D61BB4AFDFE855AAEAA"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_7AAA004131D94910AD4C3F7F990A210C"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -681,6 +693,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_D1882F8DF242427D965FD1942989C4A5"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_D1ED586F926E4320B546E68A2FEAF92C"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -718,6 +736,12 @@
         "Entry"
         {
         "MsmKey" = "8:_DB61D39A12F3480CA2A647AD4A76D04E"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_DB8C740A845C4E7796DF4B5593304D11"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -1266,6 +1290,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_26CD3E96E60C48D9965EFAA503A64D0F"
+            {
+            "SourcePath" = "8:..\\XML\\attr_link_table_styles\\Table (round numbers).xsl"
+            "TargetName" = "8:Table (round numbers).xsl"
+            "Tag" = "8:"
+            "Folder" = "8:_FAB89E18F8544B97889C15FA7E331BA6"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_27FE109087A84777AFB327D9BB641437"
             {
             "SourcePath" = "8:..\\elements\\quantifier\\element.xml"
@@ -1432,6 +1476,26 @@
             "TargetName" = "8:element.xml"
             "Tag" = "8:"
             "Folder" = "8:_1455FAE553074716A388C011BEB7BCD3"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_390EEFC3EB2C479E8BDE30DF6431096D"
+            {
+            "SourcePath" = "8:..\\XML\\attr_link_table_styles\\Values only.xsl"
+            "TargetName" = "8:Values only.xsl"
+            "Tag" = "8:"
+            "Folder" = "8:_FAB89E18F8544B97889C15FA7E331BA6"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1886,6 +1950,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_59C41B47CBBA46BDBF05BE54C8003CD4"
+            {
+            "SourcePath" = "8:..\\XML\\attr_link_table_styles\\List of values.xsl"
+            "TargetName" = "8:List of values.xsl"
+            "Tag" = "8:"
+            "Folder" = "8:_FAB89E18F8544B97889C15FA7E331BA6"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5B32DFEC6DC8464F862419CB7F538118"
             {
             "SourcePath" = "8:..\\elements\\task\\complex_filter.xsl"
@@ -2292,26 +2376,6 @@
             "TargetName" = "8:visualization_options_DTD.xml"
             "Tag" = "8:"
             "Folder" = "8:_7A069876A9D541FAAD6471ACC7B3CBC8"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7AAA004131D94910AD4C3F7F990A210C"
-            {
-            "SourcePath" = "8:Setup_accessories\\Install\\vcredist_x86.exe"
-            "TargetName" = "8:vcredist_x86.exe"
-            "Tag" = "8:"
-            "Folder" = "8:_78A66069E5BF49F3A3C8672766E4A39F"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -3186,6 +3250,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D1882F8DF242427D965FD1942989C4A5"
+            {
+            "SourcePath" = "8:..\\XML\\attr_link_table_styles\\Simple (round numbers).xsl"
+            "TargetName" = "8:Simple (round numbers).xsl"
+            "Tag" = "8:"
+            "Folder" = "8:_FAB89E18F8544B97889C15FA7E331BA6"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D1ED586F926E4320B546E68A2FEAF92C"
             {
             "SourcePath" = "8:..\\elements\\hyp_4ft\\icon.bmp"
@@ -3322,6 +3406,26 @@
             "SharedLegacy" = "11:FALSE"
             "PackageAs" = "3:1"
             "Register" = "3:4"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_DB8C740A845C4E7796DF4B5593304D11"
+            {
+            "SourcePath" = "8:..\\XML\\attr_link_table_styles\\Values only (round numbers).xsl"
+            "TargetName" = "8:Values only (round numbers).xsl"
+            "Tag" = "8:"
+            "Folder" = "8:_FAB89E18F8544B97889C15FA7E331BA6"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
@@ -3923,17 +4027,6 @@
                     "Condition" = "8:"
                     "Transitive" = "11:TRUE"
                     "Property" = "8:_3D37D84AF71541C695CBBE98F94817AC"
-                        "Folders"
-                        {
-                        }
-                    }
-                    "{9EF0B969-E518-4E46-987F-47570745A589}:_78A66069E5BF49F3A3C8672766E4A39F"
-                    {
-                    "Name" = "8:install"
-                    "AlwaysCreate" = "11:FALSE"
-                    "Condition" = "8:"
-                    "Transitive" = "11:TRUE"
-                    "Property" = "8:_286D88C50998474FACC455CD5FD1EC3E"
                         "Folders"
                         {
                         }
@@ -4620,7 +4713,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:LM-Report Asistent 1.0"
         "ProductCode" = "8:{0C4BBDF1-2CA5-4949-AE68-C7B1324C897E}"
-        "PackageCode" = "8:{9C79882D-5805-41B3-A847-19816A9C3BCE}"
+        "PackageCode" = "8:{66DCA0FA-02DC-4FDE-88B1-8E2893ACF0E2}"
         "UpgradeCode" = "8:{5E46F945-630F-48E7-AB16-80C39E568C5C}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:FALSE"
@@ -4737,7 +4830,7 @@
                     {
                     "Name" = "8:LMRA_WordLoader.LMRA_XML_WordLoader"
                     "Condition" = "8:"
-                    "AlwaysCreate" = "11:TRUE"
+                    "AlwaysCreate" = "11:FALSE"
                     "DeleteAtUninstall" = "11:TRUE"
                     "Transitive" = "11:TRUE"
                         "Keys"
@@ -5279,9 +5372,6 @@
             }
         }
         "ProjectOutput"
-        {
-        }
-        "VJSharpPlugin"
         {
         }
     }

@@ -626,6 +626,11 @@ void CSkeletonDoc::Generate(BOOL new_word)
 		if (solutin == "set_default")
 		{
 			changeOrphansDataSourceToDefault();
+
+			if (((CReportAsistentApp *)AfxGetApp())->m_bMarkOrphans)
+				GetFirstView()->ResolveOrphans(ORP_SIGN);
+			else
+				GetFirstView()->ResolveOrphans(ORP_UNSIGN);  
 		}
 	}
 	catch (...) {}
