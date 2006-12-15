@@ -1,0 +1,3017 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE elementaryexpressions PUBLIC "-//LISp-Miner//DTD AR2NL 1.1//EN"
+	"http://lispminer.vse.cz/dtd/ar2nl-1.1.dtd">
+	
+<elementaryexpressions>
+  
+  <expression id="ex200">
+    <mbattribute>AKTPOZAM</mbattribute>
+    <meaning>Activity After a Job</meaning>
+    <NPinv>activity after the job</NPinv>
+    <categories>
+      <category>
+        <value>1.0</value>
+        <meaning>he mainly sits</meaning>
+        <adjphrase relposition="R"></adjphrase>
+        <nounphrase></nounphrase>
+        <NAF></NAF>
+        <verbphrase>mainly <word class="verb" pattern="v1t">sits</word> after
+        the job</verbphrase>
+      </category>
+      <category>
+        <value>2.0</value>
+        <meaning>moderate activity</meaning>
+        <adjphrase relposition="R">moderately active after the job</adjphrase>
+        <nounphrase>moderate <NPinv>activity after the
+        job</NPinv></nounphrase>
+        <NAF>with <nounphrase></nounphrase></NAF>
+        <verbphrase></verbphrase>
+      </category>
+      <category>
+        <value>3.0</value>
+        <meaning>great activity</meaning>
+        <adjphrase relposition="R">highly active after the job</adjphrase>
+        <nounphrase>great <NPinv>activity after the job</NPinv></nounphrase>
+        <NAF>with <nounphrase></nounphrase></NAF>
+        <verbphrase><word class="verb" pattern="v2">makes</word> sports
+        intensively</verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex201">
+    <mbattribute>ALKOHOL</mbattribute>
+    <meaning>Alcohol</meaning>
+    <categories>
+      <category>
+        <value>1.0</value>
+        <meaning>no</meaning>
+        <adjphrase relposition="L"></adjphrase>
+        <nounphrase></nounphrase>
+        <NAF></NAF>
+        <verbphrase><word class="verb" pattern="v1">abstains</word> from
+        drinking</verbphrase>
+      </category>
+      <category>
+        <value>2.0</value>
+        <meaning>occasionally</meaning>
+        <adjphrase relposition="L"></adjphrase>
+        <nounphrase></nounphrase>
+        <NAF></NAF>
+        <verbphrase></verbphrase>
+      </category>
+      <category>
+        <value>3.0</value>
+        <meaning>regularly</meaning>
+        <adjphrase relposition="L"></adjphrase>
+        <nounphrase></nounphrase>
+        <NAF></NAF>
+        <verbphrase></verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex202">
+    <mbattribute>ARCUS</mbattribute>
+    <meaning>Arcus Senilis</meaning>
+    <categories>
+      <category>
+        <value>1.0</value>
+        <meaning>yes</meaning>
+        <adjphrase relposition="L"></adjphrase>
+        <nounphrase></nounphrase>
+        <NAF></NAF>
+        <verbphrase></verbphrase>
+      </category>
+      <category>
+        <value>2.0</value>
+        <meaning>no</meaning>
+        <adjphrase relposition="L"></adjphrase>
+        <nounphrase></nounphrase>
+        <NAF></NAF>
+        <verbphrase></verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex203">
+    <mbattribute>BMI</mbattribute>
+    <meaning>BMI</meaning>
+    <categories>
+      <category>
+        <value>25.0..30.0</value>
+        <meaning>Overweight &lt;25 ; 30)</meaning>
+        <adjphrase relposition="L"></adjphrase>
+        <nounphrase></nounphrase>
+        <NAF></NAF>
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>15.0..18.5</value>
+
+        <meaning>Underweight &lt;15 ; 18,5)</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>18.5..20.0</value>
+
+        <meaning>Normal &lt;18,5 ; 25)</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>30.0..35.0</value>
+
+        <meaning>Obese &lt;30 ; 45&gt;</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex204">
+    <mbattribute>BOLDK</mbattribute>
+
+    <meaning>Lower Limbs Pain</meaning>
+
+    <categories>
+      <category>
+        <value>2.0</value>
+
+        <meaning>non-ischaemic</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>3.0</value>
+
+        <meaning>claudication</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex205">
+    <mbattribute>BOLHR</mbattribute>
+
+    <meaning>Chest Pain</meaning>
+
+    <categories>
+      <category>
+        <value>2.0</value>
+
+        <meaning>non-ischaemic</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>3.0</value>
+
+        <meaning>positive questionnaire for angina pectoris</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>4.0</value>
+
+        <meaning>other pains</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>5.0</value>
+
+        <meaning>possible myocardical infarction</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex206">
+    <mbattribute>BYVKURAK</mbattribute>
+
+    <meaning>Ex-Smoker</meaning>
+
+    <categories>
+      <category>
+        <value>11</value>
+
+        <meaning>less than 1 year</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>12</value>
+
+        <meaning>more than 1 year</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex207">
+    <mbattribute>CAJ</mbattribute>
+
+    <meaning>Tea / Day</meaning>
+
+    <categories>
+      <category>
+        <value>4.0</value>
+
+        <meaning>he does not drink</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>5.0</value>
+
+        <meaning>1–2 cups</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>6.0</value>
+
+        <meaning>3 and more cups</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex208">
+    <mbattribute>CUKR</mbattribute>
+
+    <meaning>Sugar/Day</meaning>
+
+    <categories>
+      <category>
+        <value>1.0..4.0</value>
+
+        <meaning>&lt;1 ; 4)</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>4.0..7.0</value>
+
+        <meaning>&lt;4 ; 7)</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>7.0..10.0</value>
+
+        <meaning>&lt;7 ; 10)</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>10.0..13.0</value>
+
+        <meaning>&lt;10 ; 13)</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>0.0..0.0</value>
+
+        <meaning>0</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>13.0..16.0</value>
+
+        <meaning>&lt;13 ; 31)</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex209">
+    <mbattribute>DIAST1</mbattribute>
+
+    <meaning>Diastolic 1 (mmHg)</meaning>
+
+    <categories>
+      <category>
+        <value>70.0..80.0</value>
+
+        <meaning>&lt;70 ; 80)</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>80.0..90.0</value>
+
+        <meaning>&lt;80 ; 90)</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>90.0..100.0</value>
+
+        <meaning>&lt;90 ; 100)</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>100.0..110.0</value>
+
+        <meaning>&lt;100 ; 110)</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>50.0..60.0</value>
+
+        <meaning>&lt;50 ; 70)</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>110.0..120.0</value>
+
+        <meaning>&lt;110 ; 150)</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex210">
+    <mbattribute>DIAST2</mbattribute>
+
+    <meaning>Diastolic 2 (mmHg)</meaning>
+
+    <categories>
+      <category>
+        <value>70.0..80.0</value>
+
+        <meaning>&lt;70 ; 80)</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>80.0..90.0</value>
+
+        <meaning>&lt;80 ; 90)</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>90.0..100.0</value>
+
+        <meaning>&lt;90 ; 100)</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>100.0..110.0</value>
+
+        <meaning>&lt;100 ; 110)</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>50.0..60.0</value>
+
+        <meaning>&lt;50 ; 70)</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>110.0..120.0</value>
+
+        <meaning>&lt;110 ; 150)</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex211">
+    <mbattribute>DOBAKOUR</mbattribute>
+
+    <meaning>Duration Of Smoking</meaning>
+
+    <categories>
+      <category>
+        <value>7.0</value>
+
+        <meaning>up to 5 years</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>8.0</value>
+
+        <meaning>6–10 years</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>9.0</value>
+
+        <meaning>11–20 years</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>10.0</value>
+
+        <meaning>21 and more years</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex212">
+    <mbattribute>DOPRATRV</mbattribute>
+
+    <meaning>Duration Of the Way To Work</meaning>
+
+    <categories>
+      <category>
+        <value>5.0</value>
+
+        <meaning>app.½ an hour</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>6.0</value>
+
+        <meaning>app.1 hour</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>7.0</value>
+
+        <meaning>app. 2 hours</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>8.0</value>
+
+        <meaning>more than 2 hours</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex213">
+    <mbattribute>DOPRAVA</mbattribute>
+
+    <meaning>He gets to work</meaning>
+
+    <categories>
+      <category>
+        <value>1.0</value>
+
+        <meaning>on foot</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>2.0</value>
+
+        <meaning>by bike</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>3.0</value>
+
+        <meaning>by public transport</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>4.0</value>
+
+        <meaning>by car</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex214">
+    <mbattribute>DUSNOST</mbattribute>
+
+    <meaning>Asthma</meaning>
+
+    <categories>
+      <category>
+        <value>2.0</value>
+
+        <meaning>grade I</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>3.0</value>
+
+        <meaning>grade II</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>4.0</value>
+
+        <meaning>grade III</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>6.0</value>
+
+        <meaning>grade IV</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex215">
+    <mbattribute>FREKV</mbattribute>
+
+    <meaning>Alcohol Freqency</meaning>
+
+    <categories>
+      <category>
+        <value>4.0</value>
+
+        <meaning>once a month</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>5.0</value>
+
+        <meaning>once a week</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>6.0</value>
+
+        <meaning>few times a week</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>7.0</value>
+
+        <meaning>daily</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex216">
+    <mbattribute>CHLST</mbattribute>
+
+    <meaning>Cholesterol (mg%)</meaning>
+
+    <categories>
+      <category>
+        <value>112.0..199.0</value>
+
+        <meaning>&lt;112 , 200)</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>200.0..259.0</value>
+
+        <meaning>&lt;200 ; 260)</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>260.0..530.0</value>
+
+        <meaning>&lt;260 ; 530&gt;</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex217">
+    <mbattribute>KAVA</mbattribute>
+
+    <meaning>Coffee / Day</meaning>
+
+    <categories>
+      <category>
+        <value>1.0</value>
+
+        <meaning>he does not drink</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>2.0</value>
+
+        <meaning>1–2 cups</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>3.0</value>
+
+        <meaning>3 and more cups</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex218">
+    <mbattribute>KOURENI</mbattribute>
+
+    <meaning>Smoking</meaning>
+
+    <categories>
+      <category>
+        <value>1.0</value>
+
+        <meaning>non smoker</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>2.0</value>
+
+        <meaning>1–4 cigarettes/day</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>3.0</value>
+
+        <meaning>5–14 cigarettes/day</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>4.0</value>
+
+        <meaning>15–20 cigarettes/day</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>5.0</value>
+
+        <meaning>21+ cigarettes/day</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>6.0</value>
+
+        <meaning>cigars or pipes</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex219">
+    <mbattribute>LIHMN</mbattribute>
+
+    <meaning>Liquors / Day</meaning>
+
+    <categories>
+      <category>
+        <value>7.0</value>
+
+        <meaning>he does not drink</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>8.0</value>
+
+        <meaning>up to 100 cc</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>9.0</value>
+
+        <meaning>more than 100 cc</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex220">
+    <mbattribute>LIHOV</mbattribute>
+
+    <meaning>Liquors</meaning>
+
+    <categories>
+      <category>
+        <value>12.0</value>
+
+        <meaning>yes</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex221">
+    <mbattribute>MOC</mbattribute>
+
+    <meaning>Urine</meaning>
+
+    <categories>
+      <category>
+        <value>2.0</value>
+
+        <meaning>sugar positive</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>3.0</value>
+
+        <meaning>albumen positive</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex222">
+    <mbattribute>PIVO10</mbattribute>
+
+    <meaning>Beer 10°</meaning>
+
+    <categories>
+      <category>
+        <value>9.0</value>
+
+        <meaning>yes</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex223">
+    <mbattribute>PIVO12</mbattribute>
+
+    <meaning>Beer 12°</meaning>
+
+    <categories>
+      <category>
+        <value>10</value>
+
+        <meaning>yes</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex224">
+    <mbattribute>PIVO7</mbattribute>
+
+    <meaning>Beer 7°</meaning>
+
+    <categories>
+      <category>
+        <value>8</value>
+
+        <meaning>yes</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex225">
+    <mbattribute>PIVOMN</mbattribute>
+
+    <meaning>Beer / Day</meaning>
+
+    <categories>
+      <category>
+        <value>1.0</value>
+
+        <meaning>he does not drink</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>2.0</value>
+
+        <meaning>up to 1 litre</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>3.0</value>
+
+        <meaning>more than 1 litre</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex226">
+    <mbattribute>PUVSKUP</mbattribute>
+
+    <meaning>Group</meaning>
+
+    <categories>
+      <category>
+        <value>1.0</value>
+
+        <meaning>NG - Normal Group</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>2.0</value>
+
+        <meaning>NSG - Normal Studied Group</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>5.0</value>
+
+        <meaning>PG - Pathology Group</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>3.0</value>
+
+        <meaning>RGI - Risk Group Intervened</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>4.0</value>
+
+        <meaning>RGC - Risk Group Control</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>3.0..4.0</value>
+
+        <meaning>RG - Risk Group</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex227">
+    <mbattribute>PUVSKUP</mbattribute>
+
+    <meaning>Group</meaning>
+
+    <categories>
+      <category>
+        <value>1.0</value>
+
+        <meaning>NG - Normal Group</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>2.0</value>
+
+        <meaning>NSG - Normal Studied Group</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>5.0</value>
+
+        <meaning>PG - Pathology Group</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>3.0</value>
+
+        <meaning>RGI - Risk Group Intervened</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>4.0</value>
+
+        <meaning>RGC - Risk Group Control</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>3.0..4.0</value>
+
+        <meaning>RG - Risk Group</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex228">
+    <mbattribute>SOUCKUR</mbattribute>
+
+    <meaning>Souckur</meaning>
+
+    <categories>
+      <category>
+        <value>1</value>
+
+        <meaning>1</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>2</value>
+
+        <meaning>2</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>3</value>
+
+        <meaning>3</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>4</value>
+
+        <meaning>4</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>5</value>
+
+        <meaning>5</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>6</value>
+
+        <meaning>6</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>8</value>
+
+        <meaning>8</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>9</value>
+
+        <meaning>9</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex229">
+    <mbattribute>STAV</mbattribute>
+
+    <meaning>Marital Status</meaning>
+
+    <categories>
+      <category>
+        <value>2.0</value>
+
+        <meaning>divorced</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>3.0</value>
+
+        <meaning>single</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>4.0</value>
+
+        <meaning>widower</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex230">
+    <mbattribute>SUBSC</mbattribute>
+
+    <meaning>Skinfold Subscapularis (mm)</meaning>
+
+    <categories>
+      <category>
+        <value>10.0..15.0</value>
+
+        <meaning>&lt;10 ; 15)</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>15.0..20.0</value>
+
+        <meaning>&lt;15 ; 20)</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>20.0..25.0</value>
+
+        <meaning>&lt;20 ; 25)</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>25.0..30.0</value>
+
+        <meaning>&lt;25 ; 30)</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>30.0..35.0</value>
+
+        <meaning>&lt;30 ; 35)</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>0.0..5.0</value>
+
+        <meaning>&lt;0 ; 10)</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>35.0..40.0</value>
+
+        <meaning>&lt;35 ; 75)</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex231">
+    <mbattribute>SYST1</mbattribute>
+
+    <meaning>Systolic 1 (mmHg)</meaning>
+
+    <categories>
+      <category>
+        <value>110.0..120.0</value>
+
+        <meaning>&lt;110 ; 120)</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>120.0..130.0</value>
+
+        <meaning>&lt;120 ; 130)</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>130.0..140.0</value>
+
+        <meaning>&lt;130 ; 140)</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>140.0..150.0</value>
+
+        <meaning>&lt;140 ; 150)</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>150.0..160.0</value>
+
+        <meaning>&lt;150 ; 160)</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>160.0..170.0</value>
+
+        <meaning>&lt;160 ; 170)</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>170.0..180.0</value>
+
+        <meaning>&lt;170 ; 180)</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>90.0..100.0</value>
+
+        <meaning>&lt;90 ; 110)</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>180.0..190.0</value>
+
+        <meaning>&lt;180 ; 230)</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex232">
+    <mbattribute>SYST2</mbattribute>
+
+    <meaning>Systolic 2 (mmHg)</meaning>
+
+    <categories>
+      <category>
+        <value>110.0..120.0</value>
+
+        <meaning>&lt;110 ; 120)</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>120.0..130.0</value>
+
+        <meaning>&lt;120 ; 130)</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>130.0..140.0</value>
+
+        <meaning>&lt;130 ; 140)</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>140.0..150.0</value>
+
+        <meaning>&lt;140 ; 150)</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>150.0..160.0</value>
+
+        <meaning>&lt;150 ; 160)</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>160.0..170.0</value>
+
+        <meaning>&lt;160 ; 170)</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>170.0..180.0</value>
+
+        <meaning>&lt;170 ; 180)</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>70.0..80.0</value>
+
+        <meaning>&lt;70; 110)</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>180.0..190.0</value>
+
+        <meaning>&lt;180 ; 230)</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex233">
+    <mbattribute>TECHAST</mbattribute>
+
+    <meaning>Techast</meaning>
+
+    <categories>
+      <category>
+        <value>1.0</value>
+
+        <meaning>1.000</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>2.0</value>
+
+        <meaning>2.000</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>3.0</value>
+
+        <meaning>3.000</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>4.0</value>
+
+        <meaning>4.000</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>9.0</value>
+
+        <meaning>9.000</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex234">
+    <mbattribute>TELAKTZA</mbattribute>
+
+    <meaning>Activity In a Job</meaning>
+
+    <categories>
+      <category>
+        <value>1.0</value>
+
+        <meaning>he mainly sits</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>2.0</value>
+
+        <meaning>he mainly stands</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>3.0</value>
+
+        <meaning>he mainly walks</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>4.0</value>
+
+        <meaning>he carries heavy loads</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex235">
+    <mbattribute>TRIC</mbattribute>
+
+    <meaning>Skinfold Triceps (mm)</meaning>
+
+    <categories>
+      <category>
+        <value>0.0..5.0</value>
+
+        <meaning>&lt;0 ;5)</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>5.0..10.0</value>
+
+        <meaning>&lt;5 ; 10)</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>10.0..15.0</value>
+
+        <meaning>&lt;10 ; 15)</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>15.0..20.0</value>
+
+        <meaning>&lt;15 ; 20)</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>20.0..25.0</value>
+
+        <meaning>&lt;20 ; 40)</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex236">
+    <mbattribute>TRIGL</mbattribute>
+
+    <meaning>Triglycerides (mg%)</meaning>
+
+    <categories>
+      <category>
+        <value>28.0..159.0</value>
+
+        <meaning>&lt;28 ; 160)</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>160.0..194.0</value>
+
+        <meaning>&lt;160 ; 195)</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>195.0..1197.0</value>
+
+        <meaning>&lt;195 ; 1197&gt;</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex237">
+    <mbattribute>VAHA</mbattribute>
+
+    <meaning>Weight (kg)</meaning>
+
+    <categories>
+      <category>
+        <value>60.0..65.0</value>
+
+        <meaning>&lt;60 ; 65)</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>65.0..70.0</value>
+
+        <meaning>&lt;65 ; 70)</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>70.0..75.0</value>
+
+        <meaning>&lt;70 ; 75)</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>75.0..80.0</value>
+
+        <meaning>&lt;75 ; 80)</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>80.0..85.0</value>
+
+        <meaning>&lt;80 ; 85)</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>85.0..90.0</value>
+
+        <meaning>&lt;85 ; 90)</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>90.0..95.0</value>
+
+        <meaning>&lt;90 ; 95)</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>95.0..100.0</value>
+
+        <meaning>&lt;95 ; 100)</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>100.0..105.0</value>
+
+        <meaning>&lt;100 ; 105)</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>105.0..110.0</value>
+
+        <meaning>&lt;105 ; 110)</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>110.0..115.0</value>
+
+        <meaning>&lt;110 ; 115)</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>50.0..55.0</value>
+
+        <meaning>&lt;50 ; 60)</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>115.0..120.0</value>
+
+        <meaning>&lt;115 ; 135)</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex238">
+    <mbattribute>VEK</mbattribute>
+
+    <meaning>Age</meaning>
+
+    <categories>
+      <category>
+        <value>35.0..40.0</value>
+
+        <meaning>&lt;35 ; 40)</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>40.0..45.0</value>
+
+        <meaning>&lt;40 ; 45)</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>45.0..50.0</value>
+
+        <meaning>&lt;45 ; 50)</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>50.0..55.0</value>
+
+        <meaning>&lt;50 ; 55)</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>55.0..60.0</value>
+
+        <meaning>&lt;55 ; 60)</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex239">
+    <mbattribute>VINO</mbattribute>
+
+    <meaning>Vine</meaning>
+
+    <categories>
+      <category>
+        <value>11.0</value>
+
+        <meaning>yes</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex240">
+    <mbattribute>VINOMN</mbattribute>
+
+    <meaning>Vine / Day</meaning>
+
+    <categories>
+      <category>
+        <value>4.0</value>
+
+        <meaning>he does not drink</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>5.0</value>
+
+        <meaning>up to½ litre</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>6.0</value>
+
+        <meaning>more than½ litre</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex241">
+    <mbattribute>VYSKA</mbattribute>
+
+    <meaning>Height (cm)</meaning>
+
+    <categories>
+      <category>
+        <value>165.0..170.0</value>
+
+        <meaning>&lt;165 ; 170)</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>170.0..175.0</value>
+
+        <meaning>&lt;170 ; 175)</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>175.0..180.0</value>
+
+        <meaning>&lt;175 ; 180)</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>180.0..185.0</value>
+
+        <meaning>&lt;180 ; 185)</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>145.0..150.0</value>
+
+        <meaning>&lt;145 ; 165)</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>185.0..190.0</value>
+
+        <meaning>&lt;185 ; 190)</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>190.0..195.0</value>
+
+        <meaning>&lt;190 ; 200)</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex242">
+    <mbattribute>VZDELANI</mbattribute>
+
+    <meaning>Education</meaning>
+
+    <categories>
+      <category>
+        <value>1.0</value>
+
+        <meaning>basic school</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>2.0</value>
+
+        <meaning>apprentice school</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>3.0</value>
+
+        <meaning>secondary school</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>4.0</value>
+
+        <meaning>university</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex243">
+    <mbattribute>XANTH</mbattribute>
+
+    <meaning>Xanthelasma</meaning>
+
+    <categories>
+      <category>
+        <value>1.0</value>
+
+        <meaning>yes</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>2.0</value>
+
+        <meaning>no</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex244">
+    <mbattribute>XTEND</mbattribute>
+
+    <meaning>X Tendinosum</meaning>
+
+    <categories>
+      <category>
+        <value>2.0</value>
+
+        <meaning>no</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex245">
+    <mbattribute>XTUB</mbattribute>
+
+    <meaning>X Tuberosum</meaning>
+
+    <categories>
+      <category>
+        <value>2.0</value>
+
+        <meaning>no</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+    </categories>
+  </expression>
+
+  <expression id="ex246">
+    <mbattribute>ZODPOV</mbattribute>
+
+    <meaning>Responsibility In a Work</meaning>
+
+    <categories>
+      <category>
+        <value>1.0</value>
+
+        <meaning>managerial worker</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>2.0</value>
+
+        <meaning>partly independent worker</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>3.0</value>
+
+        <meaning>others</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>4.0</value>
+
+        <meaning>pensioner because of ICHS</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+
+      <category>
+        <value>5.0</value>
+
+        <meaning>pensioner - other reason</meaning>
+
+        <adjphrase relposition="L"></adjphrase>
+
+        <nounphrase></nounphrase>
+
+        <NAF></NAF>
+
+        <verbphrase></verbphrase>
+      </category>
+    </categories>
+  </expression>
+</elementaryexpressions>

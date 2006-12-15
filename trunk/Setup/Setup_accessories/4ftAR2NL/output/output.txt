@@ -1,0 +1,42 @@
+1. Pacient, který nepije èaj, nekouøí.  Toto tvrzení potvrzuje 73,1 % (konkrétnì 19) z celkového poètu 26 sledovaných pacientù.  Tvrzení platí za tìchto podmínek: pacient patøí do Normální skupiny pacientù a absolvoval vysokou školu.
+
+2. Pacient<literal>nekouøí.  Toto tvrzení potvrzuje 73,1 % (konkrétnì 19) z celkového poètu 26 sledovaných pacientù.  Tvrzení platí za tìchto podmínek: pacient patøí do Normální skupiny pacientù a absolvoval vysokou školu.
+
+3. Pacient nepijící èaj nekouøí.  Toto tvrzení potvrzuje 73,1 % (konkrétnì 19) z celkového poètu 26 sledovaných pacientù.  Tvrzení platí za tìchto podmínek: pacient patøí do Normální skupiny pacientù a absolvoval vysokou školu.
+
+4. <literal>pacient nekouøí.  Toto tvrzení potvrzuje 73,1 % (konkrétnì 19) z celkového poètu 26 sledovaných pacientù.  Tvrzení platí za tìchto podmínek: pacient patøí do Normální skupiny pacientù a absolvoval vysokou školu.
+
+5. Pacienti, kteøí nepijí èaj, nekouøí.  Toto tvrzení potvrzuje 73,1 % (konkrétnì 19) z celkového poètu 26 sledovaných pacientù.  Tvrzení platí za tìchto podmínek: pacient patøí do Normální skupiny pacientù a absolvoval vysokou školu.
+
+6. Pacienti<literal>nekouøí.  Toto tvrzení potvrzuje 73,1 % (konkrétnì 19) z celkového poètu 26 sledovaných pacientù.  Tvrzení platí za tìchto podmínek: pacient patøí do Normální skupiny pacientù a absolvoval vysokou školu.
+
+7. Pacienti nepijící èaj nekouøí.  Toto tvrzení potvrzuje 73,1 % (konkrétnì 19) z celkového poètu 26 sledovaných pacientù.  Tvrzení platí za tìchto podmínek: pacient patøí do Normální skupiny pacientù a absolvoval vysokou školu.
+
+8. <literal>pacienti nekouøí.  Toto tvrzení potvrzuje 73,1 % (konkrétnì 19) z celkového poètu 26 sledovaných pacientù.  Tvrzení platí za tìchto podmínek: pacient patøí do Normální skupiny pacientù a absolvoval vysokou školu.
+
+9. 73,1 % (konkrétnì 19) z celkového poètu 26 pacientù, kteøí nepijí èaj, nekouøí.  Tvrzení platí za tìchto podmínek: pacient patøí do Normální skupiny pacientù a absolvoval vysokou školu.
+
+10. 73,1 % (konkrétnì 19) z celkového poètu 26 pacientù<literal>nekouøí.  Tvrzení platí za tìchto podmínek: pacient patøí do Normální skupiny pacientù a absolvoval vysokou školu.
+
+11. 73,1 % (konkrétnì 19) z celkového poètu 26 pacientù nepijících èaj nekouøí.  Tvrzení platí za tìchto podmínek: pacient patøí do Normální skupiny pacientù a absolvoval vysokou školu.
+
+12. 73,1 % (konkrétnì 19) z celkového poètu 26<literal>pacientù nekouøí.  Tvrzení platí za tìchto podmínek: pacient patøí do Normální skupiny pacientù a absolvoval vysokou školu.
+
+13. 73,1 % (konkrétnì 19) z celkového poètu 26 pacientù, kteøí nepijí èaj, vykazuje<literal>. Tvrzení platí za tìchto podmínek: pacient patøí do Normální skupiny pacientù a absolvoval vysokou školu.
+
+14. 73,1 % (konkrétnì 19) z celkového poètu 26 pacientù<literal>vykazuje<literal>. Tvrzení platí za tìchto podmínek: pacient patøí do Normální skupiny pacientù a absolvoval vysokou školu.
+
+15. 73,1 % (konkrétnì 19) z celkového poètu 26 pacientù nepijících èaj vykazuje<literal>. Tvrzení platí za tìchto podmínek: pacient patøí do Normální skupiny pacientù a absolvoval vysokou školu.
+
+16. 73,1 % (konkrétnì 19) z celkového poètu 26<literal>pacientù vykazuje<literal>. Tvrzení platí za tìchto podmínek: pacient patøí do Normální skupiny pacientù a absolvoval vysokou školu.
+
+17. Pro pacienty, kteøí nepijí èaj, je charakteristické, že nekouøí. (Toto tvrzení potvrzuje 73,1 % (konkrétnì 19) z celkového poètu 26 sledovaných pacientù.) Tvrzení platí za tìchto podmínek: pacient patøí do Normální skupiny pacientù a absolvoval vysokou školu.
+
+18. Pro pacienty<literal>je charakteristické, že nekouøí. (Toto tvrzení potvrzuje 73,1 % (konkrétnì 19) z celkového poètu 26 sledovaných pacientù.) Tvrzení platí za tìchto podmínek: pacient patøí do Normální skupiny pacientù a absolvoval vysokou školu.
+
+19. Pro pacienty nepijící èaj je charakteristické, že nekouøí. (Toto tvrzení potvrzuje 73,1 % (konkrétnì 19) z celkového poètu 26 sledovaných pacientù.) Tvrzení platí za tìchto podmínek: pacient patøí do Normální skupiny pacientù a absolvoval vysokou školu.
+
+20. Pro<literal>pacienty je charakteristické, že nekouøí. (Toto tvrzení potvrzuje 73,1 % (konkrétnì 19) z celkového poètu 26 sledovaných pacientù.) Tvrzení platí za tìchto podmínek: pacient patøí do Normální skupiny pacientù a absolvoval vysokou školu.
+
+21. 73,1 % (konkrétnì 19) z celkového poètu 26 sledovaných pacientù potvrzuje tuto závislost: jestliže pacient nepije èaj, pak nekouøí.  Tvrzení platí za tìchto podmínek: pacient patøí do Normální skupiny pacientù a absolvoval vysokou školu.
+

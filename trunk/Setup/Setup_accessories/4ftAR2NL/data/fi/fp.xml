@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE formulationpatterns PUBLIC "-//LISp-Miner//DTD AR2NL 1.2//EN"
+	"http://lispminer.vse.cz/dtd/ar2nl-1.2.dtd">
+
+<formulationpatterns>
+
+<fp id="fp1" quantifier="FUI" numofant="1+" numofsuc="1+">
+  <fpa symbol="X"/> havainnoidusta <ename symbol="E" case="ela" number="sg"/>
+  toteuttaa seuraavan riippuvuuden: jos <ename symbol="E"/>
+  <literal role="A" typeofphrase="V"/>, <ename symbol="Epers"/>
+  <optionaltext></optionaltext>
+  <literal role="S" typeofphrase="V"/>.
+</fp>
+
+<fp id="fp2" quantifier="FUI" numofant="1+" numofsuc="1+">
+  <fpa symbol="Y" number="pl" />
+  <optionaltext></optionaltext>
+  <literal role="S" typeofphrase="V" number="pl"/>.
+  <fpa symbol="Z"/>
+</fp>
+
+<fp id="fp3" quantifier="FUI" numofant="1+" numofsuc="1+">
+  <fpa symbol="Y" number="pl"/> 
+  <optionaltext></optionaltext>
+  <literal role="S" typeofphrase="V" number="pl" />.
+  <fpa symbol="Z"/>
+</fp>
+
+<fp id="fp4" quantifier="FUI" numofant="1+" numofsuc="1+">
+  <fpa symbol="X"/> havainnoidusta 
+  <ename symbol="E" case="ela" number="sg"/> toteuttaa seuraavan riippuvuuden:
+  <fpa symbol="Y" number="pl"/>
+  <optionaltext>myös</optionaltext>
+  <literal role="S" typeofphrase="V" number="pl"/>.
+</fp>
+
+<fp id="fp5" quantifier="FUI" numofant="1+" numofsuc="1+">
+  <fpa symbol="Y" case="all" number="pl"/>
+  on ominaista, että he myös
+  <literal role="S" typeofphrase="V"  number="pl"/>.
+  (<fpa symbol="Z"/>)
+</fp>
+
+<fp id="fp6" quantifier="FUI" numofant="2+" numofsuc="1+">
+  Yhdistelmästä <literal role="A" typeofphrase="N"/> ja
+  <literal role="A" typeofphrase="N"/>  seuraa
+  <literal role="S" typeofphrase="N"/>.
+  <fpa symbol="Z"/>
+</fp>
+
+<!-- formulation patterns for Above Average -->
+
+<fp id="fp10" quantifier="AAI" numofant="1+" numofsuc="1+">
+  Potilaiden, joilla on ominaisuus <literal role="S" typeofphrase="N" case="gen"/>, 
+  suhteellinen osuus
+  on <param name="P"/> % korkeampi niiden <fpa symbol="Y" case="gen" number="pl"/>
+  joukossa kuin koko tarkasteltavassa ryhmässä. 
+  (Kaikki nämä ehdot toteuttaa  <param name="B"/> 
+  <ename symbol="E" case="par" number="sg"/>.)
+</fp>
+
+</formulationpatterns>

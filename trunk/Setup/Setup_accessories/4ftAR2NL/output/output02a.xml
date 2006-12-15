@@ -1,0 +1,959 @@
+<?xml version="1.0" encoding="utf-8"?>
+<sentences>
+  <sentence>
+  
+  <ename symbol="E"/>
+  ,
+  <ename symbol="Erel"/>
+  <floatslot id="1" role="A" occno="first"/>
+  <literal role="A" typeofphrase="V"/>
+  ,
+
+  <floatslot id="1" role="S" occno="first"/>
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal role="S" typeofphrase="V"/>
+  .
+  
+  <choosetext>
+    <variant>Tento fakt</variant>
+    <variant>Tuto hypotézu</variant>
+    <variant>Toto pravidlo</variant>
+    <variant>Toto tvrzení</variant>
+  </choosetext>
+  potvrzuje
+  
+  <param name="P"/>
+  % (konkrétně
+  <param name="B"/>
+  ) z celkového počtu
+  <param name="T"/>
+
+  <ename symbol="Eptc0" number="pl" case="2"/>
+  <ename symbol="E" number="pl" case="2"/>
+  .
+
+ 
+  <choosetext>
+    <variant>Tvrzení</variant>
+    <variant>Hypotéza</variant>
+    <variant>Tento fakt</variant>
+  </choosetext>
+  platí
+  <choosetext>
+    <variant>za těchto podmínek:</variant>
+    <variant>v případě, že</variant>
+    <variant>, když</variant>
+  </choosetext>
+  <ename symbol="E" number="sg" case="1"/>
+  <literal role="C" typeofphrase="V"/>.
+
+</sentence>
+  <sentence>
+  
+  <ename symbol="E"/>
+  <literal role="A" typeofphrase="NA"/>
+
+  <floatslot id="1" role="S" occno="first"/>
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal role="S" typeofphrase="V"/>
+  .
+  
+  <choosetext>
+    <variant>Tento fakt</variant>
+    <variant>Tuto hypotézu</variant>
+    <variant>Toto pravidlo</variant>
+    <variant>Toto tvrzení</variant>
+  </choosetext>
+  potvrzuje
+  
+  <param name="P"/>
+  % (konkrétně
+  <param name="B"/>
+  ) z celkového počtu
+  <param name="T"/>
+
+  <ename symbol="Eptc0" number="pl" case="2"/>
+  <ename symbol="E" number="pl" case="2"/>
+  .
+
+ 
+  <choosetext>
+    <variant>Tvrzení</variant>
+    <variant>Hypotéza</variant>
+    <variant>Tento fakt</variant>
+  </choosetext>
+  platí
+  <choosetext>
+    <variant>za těchto podmínek:</variant>
+    <variant>v případě, že</variant>
+    <variant>, když</variant>
+  </choosetext>
+  <ename symbol="E" number="sg" case="1"/>
+  <literal role="C" typeofphrase="V"/>.
+
+</sentence>
+  <sentence>
+  
+  <ename symbol="E"/>
+  <literal role="A" typeofphrase="R"/>
+
+  <floatslot id="1" role="S" occno="first"/>
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal role="S" typeofphrase="V"/>
+  .
+  
+  <choosetext>
+    <variant>Tento fakt</variant>
+    <variant>Tuto hypotézu</variant>
+    <variant>Toto pravidlo</variant>
+    <variant>Toto tvrzení</variant>
+  </choosetext>
+  potvrzuje
+  
+  <param name="P"/>
+  % (konkrétně
+  <param name="B"/>
+  ) z celkového počtu
+  <param name="T"/>
+
+  <ename symbol="Eptc0" number="pl" case="2"/>
+  <ename symbol="E" number="pl" case="2"/>
+  .
+
+ 
+  <choosetext>
+    <variant>Tvrzení</variant>
+    <variant>Hypotéza</variant>
+    <variant>Tento fakt</variant>
+  </choosetext>
+  platí
+  <choosetext>
+    <variant>za těchto podmínek:</variant>
+    <variant>v případě, že</variant>
+    <variant>, když</variant>
+  </choosetext>
+  <ename symbol="E" number="sg" case="1"/>
+  <literal role="C" typeofphrase="V"/>.
+
+</sentence>
+  <sentence>
+  
+  <literal role="A" typeofphrase="L"/>
+  <ename symbol="E"/>
+
+  <floatslot id="1" role="S" occno="first"/>
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal role="S" typeofphrase="V"/>
+  .
+  
+  <choosetext>
+    <variant>Tento fakt</variant>
+    <variant>Tuto hypotézu</variant>
+    <variant>Toto pravidlo</variant>
+    <variant>Toto tvrzení</variant>
+  </choosetext>
+  potvrzuje
+  
+  <param name="P"/>
+  % (konkrétně
+  <param name="B"/>
+  ) z celkového počtu
+  <param name="T"/>
+
+  <ename symbol="Eptc0" number="pl" case="2"/>
+  <ename symbol="E" number="pl" case="2"/>
+  .
+
+ 
+  <choosetext>
+    <variant>Tvrzení</variant>
+    <variant>Hypotéza</variant>
+    <variant>Tento fakt</variant>
+  </choosetext>
+  platí
+  <choosetext>
+    <variant>za těchto podmínek:</variant>
+    <variant>v případě, že</variant>
+    <variant>, když</variant>
+  </choosetext>
+  <ename symbol="E" number="sg" case="1"/>
+  <literal role="C" typeofphrase="V"/>.
+
+</sentence>
+  <sentence>
+  
+  <ename symbol="E" number="pl" case="1"/>
+  ,
+  <ename symbol="Erel" number="pl"/>
+  <floatslot id="1" role="A" occno="first"/>
+  <literal role="A" typeofphrase="V" number="pl"/>
+  ,
+
+  <floatslot id="1" role="S" occno="first"/>
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal role="S" typeofphrase="V" number="pl"/>
+  .
+  
+  <choosetext>
+    <variant>Tento fakt</variant>
+    <variant>Tuto hypotézu</variant>
+    <variant>Toto pravidlo</variant>
+    <variant>Toto tvrzení</variant>
+  </choosetext>
+  potvrzuje
+  
+  <param name="P"/>
+  % (konkrétně
+  <param name="B"/>
+  ) z celkového počtu
+  <param name="T"/>
+
+  <ename symbol="Eptc0" number="pl" case="2"/>
+  <ename symbol="E" number="pl" case="2"/>
+  .
+
+  
+  <choosetext>
+    <variant>Tvrzení</variant>
+    <variant>Hypotéza</variant>
+    <variant>Tento fakt</variant>
+  </choosetext>
+  platí
+  <choosetext>
+    <variant>za těchto podmínek:</variant>
+    <variant>v případě, že</variant>
+    <variant>, když</variant>
+  </choosetext>
+  <ename symbol="E" number="sg" case="1"/>
+  <literal role="C" typeofphrase="V"/>.
+
+</sentence>
+  <sentence>
+  
+  <ename symbol="E" number="pl" case="1"/>
+  <literal role="A" typeofphrase="NA"/>
+
+  <floatslot id="1" role="S" occno="first"/>
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal role="S" typeofphrase="V" number="pl"/>
+  .
+  
+  <choosetext>
+    <variant>Tento fakt</variant>
+    <variant>Tuto hypotézu</variant>
+    <variant>Toto pravidlo</variant>
+    <variant>Toto tvrzení</variant>
+  </choosetext>
+  potvrzuje
+  
+  <param name="P"/>
+  % (konkrétně
+  <param name="B"/>
+  ) z celkového počtu
+  <param name="T"/>
+
+  <ename symbol="Eptc0" number="pl" case="2"/>
+  <ename symbol="E" number="pl" case="2"/>
+  .
+
+  
+  <choosetext>
+    <variant>Tvrzení</variant>
+    <variant>Hypotéza</variant>
+    <variant>Tento fakt</variant>
+  </choosetext>
+  platí
+  <choosetext>
+    <variant>za těchto podmínek:</variant>
+    <variant>v případě, že</variant>
+    <variant>, když</variant>
+  </choosetext>
+  <ename symbol="E" number="sg" case="1"/>
+  <literal role="C" typeofphrase="V"/>.
+
+</sentence>
+  <sentence>
+  
+  <ename symbol="E" number="pl" case="1"/>
+  <literal role="A" typeofphrase="R" number="pl" case="1"/>
+
+  <floatslot id="1" role="S" occno="first"/>
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal role="S" typeofphrase="V" number="pl"/>
+  .
+  
+  <choosetext>
+    <variant>Tento fakt</variant>
+    <variant>Tuto hypotézu</variant>
+    <variant>Toto pravidlo</variant>
+    <variant>Toto tvrzení</variant>
+  </choosetext>
+  potvrzuje
+  
+  <param name="P"/>
+  % (konkrétně
+  <param name="B"/>
+  ) z celkového počtu
+  <param name="T"/>
+
+  <ename symbol="Eptc0" number="pl" case="2"/>
+  <ename symbol="E" number="pl" case="2"/>
+  .
+
+  
+  <choosetext>
+    <variant>Tvrzení</variant>
+    <variant>Hypotéza</variant>
+    <variant>Tento fakt</variant>
+  </choosetext>
+  platí
+  <choosetext>
+    <variant>za těchto podmínek:</variant>
+    <variant>v případě, že</variant>
+    <variant>, když</variant>
+  </choosetext>
+  <ename symbol="E" number="sg" case="1"/>
+  <literal role="C" typeofphrase="V"/>.
+
+</sentence>
+  <sentence>
+  
+  <literal role="A" typeofphrase="L" number="pl" case="1"/>
+  <ename symbol="E" number="pl" case="1"/>
+
+  <floatslot id="1" role="S" occno="first"/>
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal role="S" typeofphrase="V" number="pl"/>
+  .
+  
+  <choosetext>
+    <variant>Tento fakt</variant>
+    <variant>Tuto hypotézu</variant>
+    <variant>Toto pravidlo</variant>
+    <variant>Toto tvrzení</variant>
+  </choosetext>
+  potvrzuje
+  
+  <param name="P"/>
+  % (konkrétně
+  <param name="B"/>
+  ) z celkového počtu
+  <param name="T"/>
+
+  <ename symbol="Eptc0" number="pl" case="2"/>
+  <ename symbol="E" number="pl" case="2"/>
+  .
+
+  
+  <choosetext>
+    <variant>Tvrzení</variant>
+    <variant>Hypotéza</variant>
+    <variant>Tento fakt</variant>
+  </choosetext>
+  platí
+  <choosetext>
+    <variant>za těchto podmínek:</variant>
+    <variant>v případě, že</variant>
+    <variant>, když</variant>
+  </choosetext>
+  <ename symbol="E" number="sg" case="1"/>
+  <literal role="C" typeofphrase="V"/>.
+
+</sentence>
+  <sentence>
+  
+  <param name="P"/>
+  % (konkrétně
+  <param name="B"/>
+  ) z celkového počtu
+  <param name="T"/>
+
+  
+  <ename symbol="E" number="pl" case="2"/>
+  ,
+  <ename symbol="Erel" number="pl"/>
+  <floatslot id="1" role="A" occno="first"/>
+  <literal role="A" typeofphrase="V" number="pl"/>
+  ,
+
+  <floatslot id="1" role="S" occno="first"/>
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal role="S" typeofphrase="V" number="qpl"/>
+  .
+ 
+  <choosetext>
+    <variant>Tvrzení</variant>
+    <variant>Hypotéza</variant>
+    <variant>Tento fakt</variant>
+  </choosetext>
+  platí
+  <choosetext>
+    <variant>za těchto podmínek:</variant>
+    <variant>v případě, že</variant>
+    <variant>, když</variant>
+  </choosetext>
+  <ename symbol="E" number="sg" case="1"/>
+  <literal role="C" typeofphrase="V"/>.
+
+</sentence>
+  <sentence>
+  
+  <param name="P"/>
+  % (konkrétně
+  <param name="B"/>
+  ) z celkového počtu
+  <param name="T"/>
+
+  
+  <ename symbol="E" number="pl" case="2"/>
+  <literal role="A" typeofphrase="NA"/>
+
+  <floatslot id="1" role="S" occno="first"/>
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal role="S" typeofphrase="V" number="qpl"/>
+  .
+ 
+  <choosetext>
+    <variant>Tvrzení</variant>
+    <variant>Hypotéza</variant>
+    <variant>Tento fakt</variant>
+  </choosetext>
+  platí
+  <choosetext>
+    <variant>za těchto podmínek:</variant>
+    <variant>v případě, že</variant>
+    <variant>, když</variant>
+  </choosetext>
+  <ename symbol="E" number="sg" case="1"/>
+  <literal role="C" typeofphrase="V"/>.
+
+</sentence>
+  <sentence>
+  
+  <param name="P"/>
+  % (konkrétně
+  <param name="B"/>
+  ) z celkového počtu
+  <param name="T"/>
+
+  
+  <ename symbol="E" number="pl" case="2"/>
+  <literal role="A" typeofphrase="R" number="pl" case="2"/>
+
+  <floatslot id="1" role="S" occno="first"/>
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal role="S" typeofphrase="V" number="qpl"/>
+  .
+ 
+  <choosetext>
+    <variant>Tvrzení</variant>
+    <variant>Hypotéza</variant>
+    <variant>Tento fakt</variant>
+  </choosetext>
+  platí
+  <choosetext>
+    <variant>za těchto podmínek:</variant>
+    <variant>v případě, že</variant>
+    <variant>, když</variant>
+  </choosetext>
+  <ename symbol="E" number="sg" case="1"/>
+  <literal role="C" typeofphrase="V"/>.
+
+</sentence>
+  <sentence>
+  
+  <param name="P"/>
+  % (konkrétně
+  <param name="B"/>
+  ) z celkového počtu
+  <param name="T"/>
+
+  
+  <literal role="A" typeofphrase="L" number="pl" case="2"/>
+  <ename symbol="E" number="pl" case="2"/>
+
+  <floatslot id="1" role="S" occno="first"/>
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal role="S" typeofphrase="V" number="qpl"/>
+  .
+ 
+  <choosetext>
+    <variant>Tvrzení</variant>
+    <variant>Hypotéza</variant>
+    <variant>Tento fakt</variant>
+  </choosetext>
+  platí
+  <choosetext>
+    <variant>za těchto podmínek:</variant>
+    <variant>v případě, že</variant>
+    <variant>, když</variant>
+  </choosetext>
+  <ename symbol="E" number="sg" case="1"/>
+  <literal role="C" typeofphrase="V"/>.
+
+</sentence>
+  <sentence>
+  
+  <param name="P"/>
+  % (konkrétně
+  <param name="B"/>
+  ) z celkového počtu
+  <param name="T"/>
+
+  
+  <ename symbol="E" number="pl" case="2"/>
+  ,
+  <ename symbol="Erel" number="pl"/>
+  <floatslot id="1" role="A" occno="first"/>
+  <literal role="A" typeofphrase="V" number="pl"/>
+  ,
+
+  vykazuje
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal role="S" typeofphrase="N" case="4"/>
+  .
+ 
+  <choosetext>
+    <variant>Tvrzení</variant>
+    <variant>Hypotéza</variant>
+    <variant>Tento fakt</variant>
+  </choosetext>
+  platí
+  <choosetext>
+    <variant>za těchto podmínek:</variant>
+    <variant>v případě, že</variant>
+    <variant>, když</variant>
+  </choosetext>
+  <ename symbol="E" number="sg" case="1"/>
+  <literal role="C" typeofphrase="V"/>.
+
+</sentence>
+  <sentence>
+  
+  <param name="P"/>
+  % (konkrétně
+  <param name="B"/>
+  ) z celkového počtu
+  <param name="T"/>
+
+  
+  <ename symbol="E" number="pl" case="2"/>
+  <literal role="A" typeofphrase="NA"/>
+
+  vykazuje
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal role="S" typeofphrase="N" case="4"/>
+  .
+ 
+  <choosetext>
+    <variant>Tvrzení</variant>
+    <variant>Hypotéza</variant>
+    <variant>Tento fakt</variant>
+  </choosetext>
+  platí
+  <choosetext>
+    <variant>za těchto podmínek:</variant>
+    <variant>v případě, že</variant>
+    <variant>, když</variant>
+  </choosetext>
+  <ename symbol="E" number="sg" case="1"/>
+  <literal role="C" typeofphrase="V"/>.
+
+</sentence>
+  <sentence>
+  
+  <param name="P"/>
+  % (konkrétně
+  <param name="B"/>
+  ) z celkového počtu
+  <param name="T"/>
+
+  
+  <ename symbol="E" number="pl" case="2"/>
+  <literal role="A" typeofphrase="R" number="pl" case="2"/>
+
+  vykazuje
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal role="S" typeofphrase="N" case="4"/>
+  .
+ 
+  <choosetext>
+    <variant>Tvrzení</variant>
+    <variant>Hypotéza</variant>
+    <variant>Tento fakt</variant>
+  </choosetext>
+  platí
+  <choosetext>
+    <variant>za těchto podmínek:</variant>
+    <variant>v případě, že</variant>
+    <variant>, když</variant>
+  </choosetext>
+  <ename symbol="E" number="sg" case="1"/>
+  <literal role="C" typeofphrase="V"/>.
+
+</sentence>
+  <sentence>
+  
+  <param name="P"/>
+  % (konkrétně
+  <param name="B"/>
+  ) z celkového počtu
+  <param name="T"/>
+
+  
+  <literal role="A" typeofphrase="L" number="pl" case="2"/>
+  <ename symbol="E" number="pl" case="2"/>
+
+  vykazuje
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal role="S" typeofphrase="N" case="4"/>
+  .
+ 
+  <choosetext>
+    <variant>Tvrzení</variant>
+    <variant>Hypotéza</variant>
+    <variant>Tento fakt</variant>
+  </choosetext>
+  platí
+  <choosetext>
+    <variant>za těchto podmínek:</variant>
+    <variant>v případě, že</variant>
+    <variant>, když</variant>
+  </choosetext>
+  <ename symbol="E" number="sg" case="1"/>
+  <literal role="C" typeofphrase="V"/>.
+
+</sentence>
+  <sentence>
+  Pro
+  
+  <ename symbol="E" number="pl" case="4"/>
+  ,
+  <ename symbol="Erel" number="pl"/>
+  <floatslot id="1" role="A" occno="first"/>
+  <literal role="A" typeofphrase="V" number="pl"/>
+  ,
+
+  je charakteristické, že
+  <floatslot id="1" role="S" occno="first"/>
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal role="S" typeofphrase="V" number="pl"/>
+  .(
+  
+  <choosetext>
+    <variant>Tento fakt</variant>
+    <variant>Tuto hypotézu</variant>
+    <variant>Toto pravidlo</variant>
+    <variant>Toto tvrzení</variant>
+  </choosetext>
+  potvrzuje
+  
+  <param name="P"/>
+  % (konkrétně
+  <param name="B"/>
+  ) z celkového počtu
+  <param name="T"/>
+
+  <ename symbol="Eptc0" number="pl" case="2"/>
+  <ename symbol="E" number="pl" case="2"/>
+  .
+
+  )
+  
+  <choosetext>
+    <variant>Tvrzení</variant>
+    <variant>Hypotéza</variant>
+    <variant>Tento fakt</variant>
+  </choosetext>
+  platí
+  <choosetext>
+    <variant>za těchto podmínek:</variant>
+    <variant>v případě, že</variant>
+    <variant>, když</variant>
+  </choosetext>
+  <ename symbol="E" number="sg" case="1"/>
+  <literal role="C" typeofphrase="V"/>.
+
+</sentence>
+  <sentence>
+  Pro
+  
+  <ename symbol="E" number="pl" case="4"/>
+  <literal role="A" typeofphrase="NA"/>
+
+  je charakteristické, že
+  <floatslot id="1" role="S" occno="first"/>
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal role="S" typeofphrase="V" number="pl"/>
+  .(
+  
+  <choosetext>
+    <variant>Tento fakt</variant>
+    <variant>Tuto hypotézu</variant>
+    <variant>Toto pravidlo</variant>
+    <variant>Toto tvrzení</variant>
+  </choosetext>
+  potvrzuje
+  
+  <param name="P"/>
+  % (konkrétně
+  <param name="B"/>
+  ) z celkového počtu
+  <param name="T"/>
+
+  <ename symbol="Eptc0" number="pl" case="2"/>
+  <ename symbol="E" number="pl" case="2"/>
+  .
+
+  )
+  
+  <choosetext>
+    <variant>Tvrzení</variant>
+    <variant>Hypotéza</variant>
+    <variant>Tento fakt</variant>
+  </choosetext>
+  platí
+  <choosetext>
+    <variant>za těchto podmínek:</variant>
+    <variant>v případě, že</variant>
+    <variant>, když</variant>
+  </choosetext>
+  <ename symbol="E" number="sg" case="1"/>
+  <literal role="C" typeofphrase="V"/>.
+
+</sentence>
+  <sentence>
+  Pro
+  
+  <ename symbol="E" number="pl" case="4"/>
+  <literal role="A" typeofphrase="R" number="pl" case="4"/>
+
+  je charakteristické, že
+  <floatslot id="1" role="S" occno="first"/>
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal role="S" typeofphrase="V" number="pl"/>
+  .(
+  
+  <choosetext>
+    <variant>Tento fakt</variant>
+    <variant>Tuto hypotézu</variant>
+    <variant>Toto pravidlo</variant>
+    <variant>Toto tvrzení</variant>
+  </choosetext>
+  potvrzuje
+  
+  <param name="P"/>
+  % (konkrétně
+  <param name="B"/>
+  ) z celkového počtu
+  <param name="T"/>
+
+  <ename symbol="Eptc0" number="pl" case="2"/>
+  <ename symbol="E" number="pl" case="2"/>
+  .
+
+  )
+  
+  <choosetext>
+    <variant>Tvrzení</variant>
+    <variant>Hypotéza</variant>
+    <variant>Tento fakt</variant>
+  </choosetext>
+  platí
+  <choosetext>
+    <variant>za těchto podmínek:</variant>
+    <variant>v případě, že</variant>
+    <variant>, když</variant>
+  </choosetext>
+  <ename symbol="E" number="sg" case="1"/>
+  <literal role="C" typeofphrase="V"/>.
+
+</sentence>
+  <sentence>
+  Pro
+  
+  <literal role="A" typeofphrase="L" number="pl" case="4"/>
+  <ename symbol="E" number="pl" case="4"/>
+
+  je charakteristické, že
+  <floatslot id="1" role="S" occno="first"/>
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal role="S" typeofphrase="V" number="pl"/>
+  .(
+  
+  <choosetext>
+    <variant>Tento fakt</variant>
+    <variant>Tuto hypotézu</variant>
+    <variant>Toto pravidlo</variant>
+    <variant>Toto tvrzení</variant>
+  </choosetext>
+  potvrzuje
+  
+  <param name="P"/>
+  % (konkrétně
+  <param name="B"/>
+  ) z celkového počtu
+  <param name="T"/>
+
+  <ename symbol="Eptc0" number="pl" case="2"/>
+  <ename symbol="E" number="pl" case="2"/>
+  .
+
+  )
+  
+  <choosetext>
+    <variant>Tvrzení</variant>
+    <variant>Hypotéza</variant>
+    <variant>Tento fakt</variant>
+  </choosetext>
+  platí
+  <choosetext>
+    <variant>za těchto podmínek:</variant>
+    <variant>v případě, že</variant>
+    <variant>, když</variant>
+  </choosetext>
+  <ename symbol="E" number="sg" case="1"/>
+  <literal role="C" typeofphrase="V"/>.
+
+</sentence>
+  <sentence>
+  
+  <param name="P"/>
+  % (konkrétně
+  <param name="B"/>
+  ) z celkového počtu
+  <param name="T"/>
+
+  <ename symbol="Eptc0" number="pl" case="2"/>
+  <ename symbol="E" number="pl" case="2"/>
+  potvrzuje tuto závislost: jestliže
+  <floatslot id="1" role="A" occno="first"/>
+  <ename symbol="E"/>
+  <literal role="A" typeofphrase="V"/>
+  , pak
+  <floatslot id="1" role="S" occno="first"/>
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal role="S" typeofphrase="V"/>
+  .
+  
+  <choosetext>
+    <variant>Tvrzení</variant>
+    <variant>Hypotéza</variant>
+    <variant>Tento fakt</variant>
+  </choosetext>
+  platí
+  <choosetext>
+    <variant>za těchto podmínek:</variant>
+    <variant>v případě, že</variant>
+    <variant>, když</variant>
+  </choosetext>
+  <ename symbol="E" number="sg" case="1"/>
+  <literal role="C" typeofphrase="V"/>.
+
+</sentence>
+</sentences>

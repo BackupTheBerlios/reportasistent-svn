@@ -1,0 +1,1116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<sentences>
+  <sentence>
+  
+  
+  <word pattern="m1" class="nominal">pacient</word>
+
+  ,
+  
+  <word pattern="a1rma" class="nominal">který</word>
+
+  <floatslot id="1" role="A" occno="first"/>
+  <literal mbattribute="CAJ" value="4" role="A" typeofphrase="V"><word class="verb" pattern="v1">nepije</word>
+        čaj</literal>
+  ,
+
+  <floatslot id="1" role="S" occno="first"/>
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal mbattribute="KOURENI" value="1" role="S" typeofphrase="V"><word class="verb" pattern="v2">nekouří</word></literal>
+  .
+  
+  <choosetext>
+    <variant>Tento fakt</variant>
+    <variant>Tuto hypotézu</variant>
+    <variant>Toto pravidlo</variant>
+    <variant>Toto tvrzení</variant>
+  </choosetext>
+  potvrzuje
+  
+  <param name="P"/>
+  % (konkrétně
+  <param name="B"/>
+  ) z celkového počtu
+  <param name="T"/>
+
+  
+  <word pattern="a1ma" class="nominal" case="2" number="pl">sledovaný</word>
+
+  
+  <word pattern="m1" class="nominal" case="2" number="pl">pacient</word>
+
+  .
+
+ 
+  <choosetext>
+    <variant>Tvrzení</variant>
+    <variant>Hypotéza</variant>
+    <variant>Tento fakt</variant>
+  </choosetext>
+  platí
+  <choosetext>
+    <variant>za těchto podmínek:</variant>
+    <variant>v případě, že</variant>
+    <variant>, když</variant>
+  </choosetext>
+  
+  <word pattern="m1" class="nominal" case="1" number="sg">pacient</word>
+
+  <literal mbattribute="KONSKUP" value="1" role="C" typeofphrase="V"><word class="verb" pattern="v2">patří</word> do Normální skupiny pacientů</literal> a <literal mbattribute="VZDELANI" value="4" role="C" typeofphrase="V"><word class="verb" pattern="vp1">absolvoval</word> vysokou školu</literal>.
+
+</sentence>
+  <sentence>
+  
+  
+  <word pattern="m1" class="nominal">pacient</word>
+
+  <literal mbattribute="CAJ" value="4" role="A" typeofphrase="NA"/>
+
+  <floatslot id="1" role="S" occno="first"/>
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal mbattribute="KOURENI" value="1" role="S" typeofphrase="V"><word class="verb" pattern="v2">nekouří</word></literal>
+  .
+  
+  <choosetext>
+    <variant>Tento fakt</variant>
+    <variant>Tuto hypotézu</variant>
+    <variant>Toto pravidlo</variant>
+    <variant>Toto tvrzení</variant>
+  </choosetext>
+  potvrzuje
+  
+  <param name="P"/>
+  % (konkrétně
+  <param name="B"/>
+  ) z celkového počtu
+  <param name="T"/>
+
+  
+  <word pattern="a1ma" class="nominal" case="2" number="pl">sledovaný</word>
+
+  
+  <word pattern="m1" class="nominal" case="2" number="pl">pacient</word>
+
+  .
+
+ 
+  <choosetext>
+    <variant>Tvrzení</variant>
+    <variant>Hypotéza</variant>
+    <variant>Tento fakt</variant>
+  </choosetext>
+  platí
+  <choosetext>
+    <variant>za těchto podmínek:</variant>
+    <variant>v případě, že</variant>
+    <variant>, když</variant>
+  </choosetext>
+  
+  <word pattern="m1" class="nominal" case="1" number="sg">pacient</word>
+
+  <literal mbattribute="KONSKUP" value="1" role="C" typeofphrase="V"><word class="verb" pattern="v2">patří</word> do Normální skupiny pacientů</literal> a <literal mbattribute="VZDELANI" value="4" role="C" typeofphrase="V"><word class="verb" pattern="vp1">absolvoval</word> vysokou školu</literal>.
+
+</sentence>
+  <sentence>
+  
+  
+  <word pattern="m1" class="nominal">pacient</word>
+
+  <literal mbattribute="CAJ" value="4" role="A" typeofphrase="R" vderivation="ptc"><word class="verb" pattern="v1">nepije</word>
+        čaj</literal>
+
+  <floatslot id="1" role="S" occno="first"/>
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal mbattribute="KOURENI" value="1" role="S" typeofphrase="V"><word class="verb" pattern="v2">nekouří</word></literal>
+  .
+  
+  <choosetext>
+    <variant>Tento fakt</variant>
+    <variant>Tuto hypotézu</variant>
+    <variant>Toto pravidlo</variant>
+    <variant>Toto tvrzení</variant>
+  </choosetext>
+  potvrzuje
+  
+  <param name="P"/>
+  % (konkrétně
+  <param name="B"/>
+  ) z celkového počtu
+  <param name="T"/>
+
+  
+  <word pattern="a1ma" class="nominal" case="2" number="pl">sledovaný</word>
+
+  
+  <word pattern="m1" class="nominal" case="2" number="pl">pacient</word>
+
+  .
+
+ 
+  <choosetext>
+    <variant>Tvrzení</variant>
+    <variant>Hypotéza</variant>
+    <variant>Tento fakt</variant>
+  </choosetext>
+  platí
+  <choosetext>
+    <variant>za těchto podmínek:</variant>
+    <variant>v případě, že</variant>
+    <variant>, když</variant>
+  </choosetext>
+  
+  <word pattern="m1" class="nominal" case="1" number="sg">pacient</word>
+
+  <literal mbattribute="KONSKUP" value="1" role="C" typeofphrase="V"><word class="verb" pattern="v2">patří</word> do Normální skupiny pacientů</literal> a <literal mbattribute="VZDELANI" value="4" role="C" typeofphrase="V"><word class="verb" pattern="vp1">absolvoval</word> vysokou školu</literal>.
+
+</sentence>
+  <sentence>
+  
+  <literal mbattribute="CAJ" value="4" role="A" typeofphrase="L"/>
+  
+  <word pattern="m1" class="nominal">pacient</word>
+
+
+  <floatslot id="1" role="S" occno="first"/>
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal mbattribute="KOURENI" value="1" role="S" typeofphrase="V"><word class="verb" pattern="v2">nekouří</word></literal>
+  .
+  
+  <choosetext>
+    <variant>Tento fakt</variant>
+    <variant>Tuto hypotézu</variant>
+    <variant>Toto pravidlo</variant>
+    <variant>Toto tvrzení</variant>
+  </choosetext>
+  potvrzuje
+  
+  <param name="P"/>
+  % (konkrétně
+  <param name="B"/>
+  ) z celkového počtu
+  <param name="T"/>
+
+  
+  <word pattern="a1ma" class="nominal" case="2" number="pl">sledovaný</word>
+
+  
+  <word pattern="m1" class="nominal" case="2" number="pl">pacient</word>
+
+  .
+
+ 
+  <choosetext>
+    <variant>Tvrzení</variant>
+    <variant>Hypotéza</variant>
+    <variant>Tento fakt</variant>
+  </choosetext>
+  platí
+  <choosetext>
+    <variant>za těchto podmínek:</variant>
+    <variant>v případě, že</variant>
+    <variant>, když</variant>
+  </choosetext>
+  
+  <word pattern="m1" class="nominal" case="1" number="sg">pacient</word>
+
+  <literal mbattribute="KONSKUP" value="1" role="C" typeofphrase="V"><word class="verb" pattern="v2">patří</word> do Normální skupiny pacientů</literal> a <literal mbattribute="VZDELANI" value="4" role="C" typeofphrase="V"><word class="verb" pattern="vp1">absolvoval</word> vysokou školu</literal>.
+
+</sentence>
+  <sentence>
+  
+  
+  <word pattern="m1" class="nominal" case="1" number="pl">pacient</word>
+
+  ,
+  
+  <word pattern="a1rma" class="nominal" number="pl">který</word>
+
+  <floatslot id="1" role="A" occno="first"/>
+  <literal mbattribute="CAJ" value="4" role="A" typeofphrase="V" number="pl"><word class="verb" pattern="v1">nepije</word>
+        čaj</literal>
+  ,
+
+  <floatslot id="1" role="S" occno="first"/>
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal mbattribute="KOURENI" value="1" role="S" typeofphrase="V" number="pl"><word class="verb" pattern="v2">nekouří</word></literal>
+  .
+  
+  <choosetext>
+    <variant>Tento fakt</variant>
+    <variant>Tuto hypotézu</variant>
+    <variant>Toto pravidlo</variant>
+    <variant>Toto tvrzení</variant>
+  </choosetext>
+  potvrzuje
+  
+  <param name="P"/>
+  % (konkrétně
+  <param name="B"/>
+  ) z celkového počtu
+  <param name="T"/>
+
+  
+  <word pattern="a1ma" class="nominal" case="2" number="pl">sledovaný</word>
+
+  
+  <word pattern="m1" class="nominal" case="2" number="pl">pacient</word>
+
+  .
+
+  
+  <choosetext>
+    <variant>Tvrzení</variant>
+    <variant>Hypotéza</variant>
+    <variant>Tento fakt</variant>
+  </choosetext>
+  platí
+  <choosetext>
+    <variant>za těchto podmínek:</variant>
+    <variant>v případě, že</variant>
+    <variant>, když</variant>
+  </choosetext>
+  
+  <word pattern="m1" class="nominal" case="1" number="sg">pacient</word>
+
+  <literal mbattribute="KONSKUP" value="1" role="C" typeofphrase="V"><word class="verb" pattern="v2">patří</word> do Normální skupiny pacientů</literal> a <literal mbattribute="VZDELANI" value="4" role="C" typeofphrase="V"><word class="verb" pattern="vp1">absolvoval</word> vysokou školu</literal>.
+
+</sentence>
+  <sentence>
+  
+  
+  <word pattern="m1" class="nominal" case="1" number="pl">pacient</word>
+
+  <literal mbattribute="CAJ" value="4" role="A" typeofphrase="NA"/>
+
+  <floatslot id="1" role="S" occno="first"/>
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal mbattribute="KOURENI" value="1" role="S" typeofphrase="V" number="pl"><word class="verb" pattern="v2">nekouří</word></literal>
+  .
+  
+  <choosetext>
+    <variant>Tento fakt</variant>
+    <variant>Tuto hypotézu</variant>
+    <variant>Toto pravidlo</variant>
+    <variant>Toto tvrzení</variant>
+  </choosetext>
+  potvrzuje
+  
+  <param name="P"/>
+  % (konkrétně
+  <param name="B"/>
+  ) z celkového počtu
+  <param name="T"/>
+
+  
+  <word pattern="a1ma" class="nominal" case="2" number="pl">sledovaný</word>
+
+  
+  <word pattern="m1" class="nominal" case="2" number="pl">pacient</word>
+
+  .
+
+  
+  <choosetext>
+    <variant>Tvrzení</variant>
+    <variant>Hypotéza</variant>
+    <variant>Tento fakt</variant>
+  </choosetext>
+  platí
+  <choosetext>
+    <variant>za těchto podmínek:</variant>
+    <variant>v případě, že</variant>
+    <variant>, když</variant>
+  </choosetext>
+  
+  <word pattern="m1" class="nominal" case="1" number="sg">pacient</word>
+
+  <literal mbattribute="KONSKUP" value="1" role="C" typeofphrase="V"><word class="verb" pattern="v2">patří</word> do Normální skupiny pacientů</literal> a <literal mbattribute="VZDELANI" value="4" role="C" typeofphrase="V"><word class="verb" pattern="vp1">absolvoval</word> vysokou školu</literal>.
+
+</sentence>
+  <sentence>
+  
+  
+  <word pattern="m1" class="nominal" case="1" number="pl">pacient</word>
+
+  <literal mbattribute="CAJ" value="4" role="A" typeofphrase="R" number="pl" case="1" vderivation="ptc"><word class="verb" pattern="v1">nepije</word>
+        čaj</literal>
+
+  <floatslot id="1" role="S" occno="first"/>
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal mbattribute="KOURENI" value="1" role="S" typeofphrase="V" number="pl"><word class="verb" pattern="v2">nekouří</word></literal>
+  .
+  
+  <choosetext>
+    <variant>Tento fakt</variant>
+    <variant>Tuto hypotézu</variant>
+    <variant>Toto pravidlo</variant>
+    <variant>Toto tvrzení</variant>
+  </choosetext>
+  potvrzuje
+  
+  <param name="P"/>
+  % (konkrétně
+  <param name="B"/>
+  ) z celkového počtu
+  <param name="T"/>
+
+  
+  <word pattern="a1ma" class="nominal" case="2" number="pl">sledovaný</word>
+
+  
+  <word pattern="m1" class="nominal" case="2" number="pl">pacient</word>
+
+  .
+
+  
+  <choosetext>
+    <variant>Tvrzení</variant>
+    <variant>Hypotéza</variant>
+    <variant>Tento fakt</variant>
+  </choosetext>
+  platí
+  <choosetext>
+    <variant>za těchto podmínek:</variant>
+    <variant>v případě, že</variant>
+    <variant>, když</variant>
+  </choosetext>
+  
+  <word pattern="m1" class="nominal" case="1" number="sg">pacient</word>
+
+  <literal mbattribute="KONSKUP" value="1" role="C" typeofphrase="V"><word class="verb" pattern="v2">patří</word> do Normální skupiny pacientů</literal> a <literal mbattribute="VZDELANI" value="4" role="C" typeofphrase="V"><word class="verb" pattern="vp1">absolvoval</word> vysokou školu</literal>.
+
+</sentence>
+  <sentence>
+  
+  <literal mbattribute="CAJ" value="4" role="A" typeofphrase="L" number="pl" case="1"/>
+  
+  <word pattern="m1" class="nominal" case="1" number="pl">pacient</word>
+
+
+  <floatslot id="1" role="S" occno="first"/>
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal mbattribute="KOURENI" value="1" role="S" typeofphrase="V" number="pl"><word class="verb" pattern="v2">nekouří</word></literal>
+  .
+  
+  <choosetext>
+    <variant>Tento fakt</variant>
+    <variant>Tuto hypotézu</variant>
+    <variant>Toto pravidlo</variant>
+    <variant>Toto tvrzení</variant>
+  </choosetext>
+  potvrzuje
+  
+  <param name="P"/>
+  % (konkrétně
+  <param name="B"/>
+  ) z celkového počtu
+  <param name="T"/>
+
+  
+  <word pattern="a1ma" class="nominal" case="2" number="pl">sledovaný</word>
+
+  
+  <word pattern="m1" class="nominal" case="2" number="pl">pacient</word>
+
+  .
+
+  
+  <choosetext>
+    <variant>Tvrzení</variant>
+    <variant>Hypotéza</variant>
+    <variant>Tento fakt</variant>
+  </choosetext>
+  platí
+  <choosetext>
+    <variant>za těchto podmínek:</variant>
+    <variant>v případě, že</variant>
+    <variant>, když</variant>
+  </choosetext>
+  
+  <word pattern="m1" class="nominal" case="1" number="sg">pacient</word>
+
+  <literal mbattribute="KONSKUP" value="1" role="C" typeofphrase="V"><word class="verb" pattern="v2">patří</word> do Normální skupiny pacientů</literal> a <literal mbattribute="VZDELANI" value="4" role="C" typeofphrase="V"><word class="verb" pattern="vp1">absolvoval</word> vysokou školu</literal>.
+
+</sentence>
+  <sentence>
+  
+  <param name="P"/>
+  % (konkrétně
+  <param name="B"/>
+  ) z celkového počtu
+  <param name="T"/>
+
+  
+  
+  <word pattern="m1" class="nominal" case="2" number="pl">pacient</word>
+
+  ,
+  
+  <word pattern="a1rma" class="nominal" number="pl">který</word>
+
+  <floatslot id="1" role="A" occno="first"/>
+  <literal mbattribute="CAJ" value="4" role="A" typeofphrase="V" number="pl"><word class="verb" pattern="v1">nepije</word>
+        čaj</literal>
+  ,
+
+  <floatslot id="1" role="S" occno="first"/>
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal mbattribute="KOURENI" value="1" role="S" typeofphrase="V" number="qpl"><word class="verb" pattern="v2">nekouří</word></literal>
+  .
+ 
+  <choosetext>
+    <variant>Tvrzení</variant>
+    <variant>Hypotéza</variant>
+    <variant>Tento fakt</variant>
+  </choosetext>
+  platí
+  <choosetext>
+    <variant>za těchto podmínek:</variant>
+    <variant>v případě, že</variant>
+    <variant>, když</variant>
+  </choosetext>
+  
+  <word pattern="m1" class="nominal" case="1" number="sg">pacient</word>
+
+  <literal mbattribute="KONSKUP" value="1" role="C" typeofphrase="V"><word class="verb" pattern="v2">patří</word> do Normální skupiny pacientů</literal> a <literal mbattribute="VZDELANI" value="4" role="C" typeofphrase="V"><word class="verb" pattern="vp1">absolvoval</word> vysokou školu</literal>.
+
+</sentence>
+  <sentence>
+  
+  <param name="P"/>
+  % (konkrétně
+  <param name="B"/>
+  ) z celkového počtu
+  <param name="T"/>
+
+  
+  
+  <word pattern="m1" class="nominal" case="2" number="pl">pacient</word>
+
+  <literal mbattribute="CAJ" value="4" role="A" typeofphrase="NA"/>
+
+  <floatslot id="1" role="S" occno="first"/>
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal mbattribute="KOURENI" value="1" role="S" typeofphrase="V" number="qpl"><word class="verb" pattern="v2">nekouří</word></literal>
+  .
+ 
+  <choosetext>
+    <variant>Tvrzení</variant>
+    <variant>Hypotéza</variant>
+    <variant>Tento fakt</variant>
+  </choosetext>
+  platí
+  <choosetext>
+    <variant>za těchto podmínek:</variant>
+    <variant>v případě, že</variant>
+    <variant>, když</variant>
+  </choosetext>
+  
+  <word pattern="m1" class="nominal" case="1" number="sg">pacient</word>
+
+  <literal mbattribute="KONSKUP" value="1" role="C" typeofphrase="V"><word class="verb" pattern="v2">patří</word> do Normální skupiny pacientů</literal> a <literal mbattribute="VZDELANI" value="4" role="C" typeofphrase="V"><word class="verb" pattern="vp1">absolvoval</word> vysokou školu</literal>.
+
+</sentence>
+  <sentence>
+  
+  <param name="P"/>
+  % (konkrétně
+  <param name="B"/>
+  ) z celkového počtu
+  <param name="T"/>
+
+  
+  
+  <word pattern="m1" class="nominal" case="2" number="pl">pacient</word>
+
+  <literal mbattribute="CAJ" value="4" role="A" typeofphrase="R" number="pl" case="2" vderivation="ptc"><word class="verb" pattern="v1">nepije</word>
+        čaj</literal>
+
+  <floatslot id="1" role="S" occno="first"/>
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal mbattribute="KOURENI" value="1" role="S" typeofphrase="V" number="qpl"><word class="verb" pattern="v2">nekouří</word></literal>
+  .
+ 
+  <choosetext>
+    <variant>Tvrzení</variant>
+    <variant>Hypotéza</variant>
+    <variant>Tento fakt</variant>
+  </choosetext>
+  platí
+  <choosetext>
+    <variant>za těchto podmínek:</variant>
+    <variant>v případě, že</variant>
+    <variant>, když</variant>
+  </choosetext>
+  
+  <word pattern="m1" class="nominal" case="1" number="sg">pacient</word>
+
+  <literal mbattribute="KONSKUP" value="1" role="C" typeofphrase="V"><word class="verb" pattern="v2">patří</word> do Normální skupiny pacientů</literal> a <literal mbattribute="VZDELANI" value="4" role="C" typeofphrase="V"><word class="verb" pattern="vp1">absolvoval</word> vysokou školu</literal>.
+
+</sentence>
+  <sentence>
+  
+  <param name="P"/>
+  % (konkrétně
+  <param name="B"/>
+  ) z celkového počtu
+  <param name="T"/>
+
+  
+  <literal mbattribute="CAJ" value="4" role="A" typeofphrase="L" number="pl" case="2"/>
+  
+  <word pattern="m1" class="nominal" case="2" number="pl">pacient</word>
+
+
+  <floatslot id="1" role="S" occno="first"/>
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal mbattribute="KOURENI" value="1" role="S" typeofphrase="V" number="qpl"><word class="verb" pattern="v2">nekouří</word></literal>
+  .
+ 
+  <choosetext>
+    <variant>Tvrzení</variant>
+    <variant>Hypotéza</variant>
+    <variant>Tento fakt</variant>
+  </choosetext>
+  platí
+  <choosetext>
+    <variant>za těchto podmínek:</variant>
+    <variant>v případě, že</variant>
+    <variant>, když</variant>
+  </choosetext>
+  
+  <word pattern="m1" class="nominal" case="1" number="sg">pacient</word>
+
+  <literal mbattribute="KONSKUP" value="1" role="C" typeofphrase="V"><word class="verb" pattern="v2">patří</word> do Normální skupiny pacientů</literal> a <literal mbattribute="VZDELANI" value="4" role="C" typeofphrase="V"><word class="verb" pattern="vp1">absolvoval</word> vysokou školu</literal>.
+
+</sentence>
+  <sentence>
+  
+  <param name="P"/>
+  % (konkrétně
+  <param name="B"/>
+  ) z celkového počtu
+  <param name="T"/>
+
+  
+  
+  <word pattern="m1" class="nominal" case="2" number="pl">pacient</word>
+
+  ,
+  
+  <word pattern="a1rma" class="nominal" number="pl">který</word>
+
+  <floatslot id="1" role="A" occno="first"/>
+  <literal mbattribute="CAJ" value="4" role="A" typeofphrase="V" number="pl"><word class="verb" pattern="v1">nepije</word>
+        čaj</literal>
+  ,
+
+  vykazuje
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal mbattribute="KOURENI" value="1" role="S" typeofphrase="N" case="4"/>
+  .
+ 
+  <choosetext>
+    <variant>Tvrzení</variant>
+    <variant>Hypotéza</variant>
+    <variant>Tento fakt</variant>
+  </choosetext>
+  platí
+  <choosetext>
+    <variant>za těchto podmínek:</variant>
+    <variant>v případě, že</variant>
+    <variant>, když</variant>
+  </choosetext>
+  
+  <word pattern="m1" class="nominal" case="1" number="sg">pacient</word>
+
+  <literal mbattribute="KONSKUP" value="1" role="C" typeofphrase="V"><word class="verb" pattern="v2">patří</word> do Normální skupiny pacientů</literal> a <literal mbattribute="VZDELANI" value="4" role="C" typeofphrase="V"><word class="verb" pattern="vp1">absolvoval</word> vysokou školu</literal>.
+
+</sentence>
+  <sentence>
+  
+  <param name="P"/>
+  % (konkrétně
+  <param name="B"/>
+  ) z celkového počtu
+  <param name="T"/>
+
+  
+  
+  <word pattern="m1" class="nominal" case="2" number="pl">pacient</word>
+
+  <literal mbattribute="CAJ" value="4" role="A" typeofphrase="NA"/>
+
+  vykazuje
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal mbattribute="KOURENI" value="1" role="S" typeofphrase="N" case="4"/>
+  .
+ 
+  <choosetext>
+    <variant>Tvrzení</variant>
+    <variant>Hypotéza</variant>
+    <variant>Tento fakt</variant>
+  </choosetext>
+  platí
+  <choosetext>
+    <variant>za těchto podmínek:</variant>
+    <variant>v případě, že</variant>
+    <variant>, když</variant>
+  </choosetext>
+  
+  <word pattern="m1" class="nominal" case="1" number="sg">pacient</word>
+
+  <literal mbattribute="KONSKUP" value="1" role="C" typeofphrase="V"><word class="verb" pattern="v2">patří</word> do Normální skupiny pacientů</literal> a <literal mbattribute="VZDELANI" value="4" role="C" typeofphrase="V"><word class="verb" pattern="vp1">absolvoval</word> vysokou školu</literal>.
+
+</sentence>
+  <sentence>
+  
+  <param name="P"/>
+  % (konkrétně
+  <param name="B"/>
+  ) z celkového počtu
+  <param name="T"/>
+
+  
+  
+  <word pattern="m1" class="nominal" case="2" number="pl">pacient</word>
+
+  <literal mbattribute="CAJ" value="4" role="A" typeofphrase="R" number="pl" case="2" vderivation="ptc"><word class="verb" pattern="v1">nepije</word>
+        čaj</literal>
+
+  vykazuje
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal mbattribute="KOURENI" value="1" role="S" typeofphrase="N" case="4"/>
+  .
+ 
+  <choosetext>
+    <variant>Tvrzení</variant>
+    <variant>Hypotéza</variant>
+    <variant>Tento fakt</variant>
+  </choosetext>
+  platí
+  <choosetext>
+    <variant>za těchto podmínek:</variant>
+    <variant>v případě, že</variant>
+    <variant>, když</variant>
+  </choosetext>
+  
+  <word pattern="m1" class="nominal" case="1" number="sg">pacient</word>
+
+  <literal mbattribute="KONSKUP" value="1" role="C" typeofphrase="V"><word class="verb" pattern="v2">patří</word> do Normální skupiny pacientů</literal> a <literal mbattribute="VZDELANI" value="4" role="C" typeofphrase="V"><word class="verb" pattern="vp1">absolvoval</word> vysokou školu</literal>.
+
+</sentence>
+  <sentence>
+  
+  <param name="P"/>
+  % (konkrétně
+  <param name="B"/>
+  ) z celkového počtu
+  <param name="T"/>
+
+  
+  <literal mbattribute="CAJ" value="4" role="A" typeofphrase="L" number="pl" case="2"/>
+  
+  <word pattern="m1" class="nominal" case="2" number="pl">pacient</word>
+
+
+  vykazuje
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal mbattribute="KOURENI" value="1" role="S" typeofphrase="N" case="4"/>
+  .
+ 
+  <choosetext>
+    <variant>Tvrzení</variant>
+    <variant>Hypotéza</variant>
+    <variant>Tento fakt</variant>
+  </choosetext>
+  platí
+  <choosetext>
+    <variant>za těchto podmínek:</variant>
+    <variant>v případě, že</variant>
+    <variant>, když</variant>
+  </choosetext>
+  
+  <word pattern="m1" class="nominal" case="1" number="sg">pacient</word>
+
+  <literal mbattribute="KONSKUP" value="1" role="C" typeofphrase="V"><word class="verb" pattern="v2">patří</word> do Normální skupiny pacientů</literal> a <literal mbattribute="VZDELANI" value="4" role="C" typeofphrase="V"><word class="verb" pattern="vp1">absolvoval</word> vysokou školu</literal>.
+
+</sentence>
+  <sentence>
+  Pro
+  
+  
+  <word pattern="m1" class="nominal" case="4" number="pl">pacient</word>
+
+  ,
+  
+  <word pattern="a1rma" class="nominal" number="pl">který</word>
+
+  <floatslot id="1" role="A" occno="first"/>
+  <literal mbattribute="CAJ" value="4" role="A" typeofphrase="V" number="pl"><word class="verb" pattern="v1">nepije</word>
+        čaj</literal>
+  ,
+
+  je charakteristické, že
+  <floatslot id="1" role="S" occno="first"/>
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal mbattribute="KOURENI" value="1" role="S" typeofphrase="V" number="pl"><word class="verb" pattern="v2">nekouří</word></literal>
+  .(
+  
+  <choosetext>
+    <variant>Tento fakt</variant>
+    <variant>Tuto hypotézu</variant>
+    <variant>Toto pravidlo</variant>
+    <variant>Toto tvrzení</variant>
+  </choosetext>
+  potvrzuje
+  
+  <param name="P"/>
+  % (konkrétně
+  <param name="B"/>
+  ) z celkového počtu
+  <param name="T"/>
+
+  
+  <word pattern="a1ma" class="nominal" case="2" number="pl">sledovaný</word>
+
+  
+  <word pattern="m1" class="nominal" case="2" number="pl">pacient</word>
+
+  .
+
+  )
+  
+  <choosetext>
+    <variant>Tvrzení</variant>
+    <variant>Hypotéza</variant>
+    <variant>Tento fakt</variant>
+  </choosetext>
+  platí
+  <choosetext>
+    <variant>za těchto podmínek:</variant>
+    <variant>v případě, že</variant>
+    <variant>, když</variant>
+  </choosetext>
+  
+  <word pattern="m1" class="nominal" case="1" number="sg">pacient</word>
+
+  <literal mbattribute="KONSKUP" value="1" role="C" typeofphrase="V"><word class="verb" pattern="v2">patří</word> do Normální skupiny pacientů</literal> a <literal mbattribute="VZDELANI" value="4" role="C" typeofphrase="V"><word class="verb" pattern="vp1">absolvoval</word> vysokou školu</literal>.
+
+</sentence>
+  <sentence>
+  Pro
+  
+  
+  <word pattern="m1" class="nominal" case="4" number="pl">pacient</word>
+
+  <literal mbattribute="CAJ" value="4" role="A" typeofphrase="NA"/>
+
+  je charakteristické, že
+  <floatslot id="1" role="S" occno="first"/>
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal mbattribute="KOURENI" value="1" role="S" typeofphrase="V" number="pl"><word class="verb" pattern="v2">nekouří</word></literal>
+  .(
+  
+  <choosetext>
+    <variant>Tento fakt</variant>
+    <variant>Tuto hypotézu</variant>
+    <variant>Toto pravidlo</variant>
+    <variant>Toto tvrzení</variant>
+  </choosetext>
+  potvrzuje
+  
+  <param name="P"/>
+  % (konkrétně
+  <param name="B"/>
+  ) z celkového počtu
+  <param name="T"/>
+
+  
+  <word pattern="a1ma" class="nominal" case="2" number="pl">sledovaný</word>
+
+  
+  <word pattern="m1" class="nominal" case="2" number="pl">pacient</word>
+
+  .
+
+  )
+  
+  <choosetext>
+    <variant>Tvrzení</variant>
+    <variant>Hypotéza</variant>
+    <variant>Tento fakt</variant>
+  </choosetext>
+  platí
+  <choosetext>
+    <variant>za těchto podmínek:</variant>
+    <variant>v případě, že</variant>
+    <variant>, když</variant>
+  </choosetext>
+  
+  <word pattern="m1" class="nominal" case="1" number="sg">pacient</word>
+
+  <literal mbattribute="KONSKUP" value="1" role="C" typeofphrase="V"><word class="verb" pattern="v2">patří</word> do Normální skupiny pacientů</literal> a <literal mbattribute="VZDELANI" value="4" role="C" typeofphrase="V"><word class="verb" pattern="vp1">absolvoval</word> vysokou školu</literal>.
+
+</sentence>
+  <sentence>
+  Pro
+  
+  
+  <word pattern="m1" class="nominal" case="4" number="pl">pacient</word>
+
+  <literal mbattribute="CAJ" value="4" role="A" typeofphrase="R" number="pl" case="4" vderivation="ptc"><word class="verb" pattern="v1">nepije</word>
+        čaj</literal>
+
+  je charakteristické, že
+  <floatslot id="1" role="S" occno="first"/>
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal mbattribute="KOURENI" value="1" role="S" typeofphrase="V" number="pl"><word class="verb" pattern="v2">nekouří</word></literal>
+  .(
+  
+  <choosetext>
+    <variant>Tento fakt</variant>
+    <variant>Tuto hypotézu</variant>
+    <variant>Toto pravidlo</variant>
+    <variant>Toto tvrzení</variant>
+  </choosetext>
+  potvrzuje
+  
+  <param name="P"/>
+  % (konkrétně
+  <param name="B"/>
+  ) z celkového počtu
+  <param name="T"/>
+
+  
+  <word pattern="a1ma" class="nominal" case="2" number="pl">sledovaný</word>
+
+  
+  <word pattern="m1" class="nominal" case="2" number="pl">pacient</word>
+
+  .
+
+  )
+  
+  <choosetext>
+    <variant>Tvrzení</variant>
+    <variant>Hypotéza</variant>
+    <variant>Tento fakt</variant>
+  </choosetext>
+  platí
+  <choosetext>
+    <variant>za těchto podmínek:</variant>
+    <variant>v případě, že</variant>
+    <variant>, když</variant>
+  </choosetext>
+  
+  <word pattern="m1" class="nominal" case="1" number="sg">pacient</word>
+
+  <literal mbattribute="KONSKUP" value="1" role="C" typeofphrase="V"><word class="verb" pattern="v2">patří</word> do Normální skupiny pacientů</literal> a <literal mbattribute="VZDELANI" value="4" role="C" typeofphrase="V"><word class="verb" pattern="vp1">absolvoval</word> vysokou školu</literal>.
+
+</sentence>
+  <sentence>
+  Pro
+  
+  <literal mbattribute="CAJ" value="4" role="A" typeofphrase="L" number="pl" case="4"/>
+  
+  <word pattern="m1" class="nominal" case="4" number="pl">pacient</word>
+
+
+  je charakteristické, že
+  <floatslot id="1" role="S" occno="first"/>
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal mbattribute="KOURENI" value="1" role="S" typeofphrase="V" number="pl"><word class="verb" pattern="v2">nekouří</word></literal>
+  .(
+  
+  <choosetext>
+    <variant>Tento fakt</variant>
+    <variant>Tuto hypotézu</variant>
+    <variant>Toto pravidlo</variant>
+    <variant>Toto tvrzení</variant>
+  </choosetext>
+  potvrzuje
+  
+  <param name="P"/>
+  % (konkrétně
+  <param name="B"/>
+  ) z celkového počtu
+  <param name="T"/>
+
+  
+  <word pattern="a1ma" class="nominal" case="2" number="pl">sledovaný</word>
+
+  
+  <word pattern="m1" class="nominal" case="2" number="pl">pacient</word>
+
+  .
+
+  )
+  
+  <choosetext>
+    <variant>Tvrzení</variant>
+    <variant>Hypotéza</variant>
+    <variant>Tento fakt</variant>
+  </choosetext>
+  platí
+  <choosetext>
+    <variant>za těchto podmínek:</variant>
+    <variant>v případě, že</variant>
+    <variant>, když</variant>
+  </choosetext>
+  
+  <word pattern="m1" class="nominal" case="1" number="sg">pacient</word>
+
+  <literal mbattribute="KONSKUP" value="1" role="C" typeofphrase="V"><word class="verb" pattern="v2">patří</word> do Normální skupiny pacientů</literal> a <literal mbattribute="VZDELANI" value="4" role="C" typeofphrase="V"><word class="verb" pattern="vp1">absolvoval</word> vysokou školu</literal>.
+
+</sentence>
+  <sentence>
+  
+  <param name="P"/>
+  % (konkrétně
+  <param name="B"/>
+  ) z celkového počtu
+  <param name="T"/>
+
+  
+  <word pattern="a1ma" class="nominal" case="2" number="pl">sledovaný</word>
+
+  
+  <word pattern="m1" class="nominal" case="2" number="pl">pacient</word>
+
+  potvrzuje tuto závislost: jestliže
+  <floatslot id="1" role="A" occno="first"/>
+  
+  <word pattern="m1" class="nominal">pacient</word>
+
+  <literal mbattribute="CAJ" value="4" role="A" typeofphrase="V"><word class="verb" pattern="v1">nepije</word>
+        čaj</literal>
+  , pak
+  <floatslot id="1" role="S" occno="first"/>
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal mbattribute="KOURENI" value="1" role="S" typeofphrase="V"><word class="verb" pattern="v2">nekouří</word></literal>
+  .
+  
+  <choosetext>
+    <variant>Tvrzení</variant>
+    <variant>Hypotéza</variant>
+    <variant>Tento fakt</variant>
+  </choosetext>
+  platí
+  <choosetext>
+    <variant>za těchto podmínek:</variant>
+    <variant>v případě, že</variant>
+    <variant>, když</variant>
+  </choosetext>
+  
+  <word pattern="m1" class="nominal" case="1" number="sg">pacient</word>
+
+  <literal mbattribute="KONSKUP" value="1" role="C" typeofphrase="V"><word class="verb" pattern="v2">patří</word> do Normální skupiny pacientů</literal> a <literal mbattribute="VZDELANI" value="4" role="C" typeofphrase="V"><word class="verb" pattern="vp1">absolvoval</word> vysokou školu</literal>.
+
+</sentence>
+</sentences>

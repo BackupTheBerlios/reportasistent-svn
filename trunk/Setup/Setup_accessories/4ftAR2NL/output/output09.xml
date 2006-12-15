@@ -1,0 +1,783 @@
+<?xml version="1.0" encoding="utf-8"?>
+<sentences>
+  <sentence>
+  
+  
+  <word class="nominal" pattern="m1">pacient</word>
+
+  ,
+  
+  <word class="nominal" pattern="a1rma">který</word>
+
+  <floatslot id="1" role="A" occno="first"/>
+  <word class="verb" pattern="v1">nepije</word>
+        čaj
+  ,
+
+  <floatslot id="1" role="S" occno="first"/>
+  
+  <word class="verb" pattern="v2">nekouří</word>
+  .
+  
+  Toto tvrzení
+  potvrzuje
+  
+  73.1
+  % (konkrétně
+  19
+  ) z celkového počtu
+  26
+
+  
+  <word class="nominal" pattern="a1ma" case="2" number="pl">sledovaný</word>
+
+  
+  <word class="nominal" pattern="m1" case="2" number="pl">pacient</word>
+
+  .
+
+ 
+  Tvrzení
+  platí
+  za těchto podmínek:
+  
+  <word class="nominal" pattern="m1" case="1" number="sg">pacient</word>
+
+  <word class="verb" pattern="v2">patří</word> do Normální skupiny pacientů a <word class="verb" pattern="vp1">absolvoval</word> vysokou školu.
+
+</sentence>
+  <sentence>
+  
+  
+  <word class="nominal" pattern="m1">pacient</word>
+
+  <literal/>
+
+  <floatslot id="1" role="S" occno="first"/>
+  
+  <word class="verb" pattern="v2">nekouří</word>
+  .
+  
+  Toto tvrzení
+  potvrzuje
+  
+  73.1
+  % (konkrétně
+  19
+  ) z celkového počtu
+  26
+
+  
+  <word class="nominal" pattern="a1ma" case="2" number="pl">sledovaný</word>
+
+  
+  <word class="nominal" pattern="m1" case="2" number="pl">pacient</word>
+
+  .
+
+ 
+  Tvrzení
+  platí
+  za těchto podmínek:
+  
+  <word class="nominal" pattern="m1" case="1" number="sg">pacient</word>
+
+  <word class="verb" pattern="v2">patří</word> do Normální skupiny pacientů a <word class="verb" pattern="vp1">absolvoval</word> vysokou školu.
+
+</sentence>
+  <sentence>
+  
+  
+  <word class="nominal" pattern="m1">pacient</word>
+
+  <word class="verb" pattern="v1" vderivation="ptc">nepije</word>
+        čaj
+
+  <floatslot id="1" role="S" occno="first"/>
+  
+  <word class="verb" pattern="v2">nekouří</word>
+  .
+  
+  Toto tvrzení
+  potvrzuje
+  
+  73.1
+  % (konkrétně
+  19
+  ) z celkového počtu
+  26
+
+  
+  <word class="nominal" pattern="a1ma" case="2" number="pl">sledovaný</word>
+
+  
+  <word class="nominal" pattern="m1" case="2" number="pl">pacient</word>
+
+  .
+
+ 
+  Tvrzení
+  platí
+  za těchto podmínek:
+  
+  <word class="nominal" pattern="m1" case="1" number="sg">pacient</word>
+
+  <word class="verb" pattern="v2">patří</word> do Normální skupiny pacientů a <word class="verb" pattern="vp1">absolvoval</word> vysokou školu.
+
+</sentence>
+  <sentence>
+  
+  <literal/>
+  
+  <word class="nominal" pattern="m1">pacient</word>
+
+
+  <floatslot id="1" role="S" occno="first"/>
+  
+  <word class="verb" pattern="v2">nekouří</word>
+  .
+  
+  Toto tvrzení
+  potvrzuje
+  
+  73.1
+  % (konkrétně
+  19
+  ) z celkového počtu
+  26
+
+  
+  <word class="nominal" pattern="a1ma" case="2" number="pl">sledovaný</word>
+
+  
+  <word class="nominal" pattern="m1" case="2" number="pl">pacient</word>
+
+  .
+
+ 
+  Tvrzení
+  platí
+  za těchto podmínek:
+  
+  <word class="nominal" pattern="m1" case="1" number="sg">pacient</word>
+
+  <word class="verb" pattern="v2">patří</word> do Normální skupiny pacientů a <word class="verb" pattern="vp1">absolvoval</word> vysokou školu.
+
+</sentence>
+  <sentence>
+  
+  
+  <word class="nominal" pattern="m1" case="1" number="pl">pacient</word>
+
+  ,
+  
+  <word class="nominal" pattern="a1rma" number="pl">který</word>
+
+  <floatslot id="1" role="A" occno="first"/>
+  <word class="verb" pattern="v1" number="pl">nepije</word>
+        čaj
+  ,
+
+  <floatslot id="1" role="S" occno="first"/>
+  
+  <word class="verb" pattern="v2" number="pl">nekouří</word>
+  .
+  
+  Toto tvrzení
+  potvrzuje
+  
+  73.1
+  % (konkrétně
+  19
+  ) z celkového počtu
+  26
+
+  
+  <word class="nominal" pattern="a1ma" case="2" number="pl">sledovaný</word>
+
+  
+  <word class="nominal" pattern="m1" case="2" number="pl">pacient</word>
+
+  .
+
+  
+  Tvrzení
+  platí
+  za těchto podmínek:
+  
+  <word class="nominal" pattern="m1" case="1" number="sg">pacient</word>
+
+  <word class="verb" pattern="v2">patří</word> do Normální skupiny pacientů a <word class="verb" pattern="vp1">absolvoval</word> vysokou školu.
+
+</sentence>
+  <sentence>
+  
+  
+  <word class="nominal" pattern="m1" case="1" number="pl">pacient</word>
+
+  <literal/>
+
+  <floatslot id="1" role="S" occno="first"/>
+  
+  <word class="verb" pattern="v2" number="pl">nekouří</word>
+  .
+  
+  Toto tvrzení
+  potvrzuje
+  
+  73.1
+  % (konkrétně
+  19
+  ) z celkového počtu
+  26
+
+  
+  <word class="nominal" pattern="a1ma" case="2" number="pl">sledovaný</word>
+
+  
+  <word class="nominal" pattern="m1" case="2" number="pl">pacient</word>
+
+  .
+
+  
+  Tvrzení
+  platí
+  za těchto podmínek:
+  
+  <word class="nominal" pattern="m1" case="1" number="sg">pacient</word>
+
+  <word class="verb" pattern="v2">patří</word> do Normální skupiny pacientů a <word class="verb" pattern="vp1">absolvoval</word> vysokou školu.
+
+</sentence>
+  <sentence>
+  
+  
+  <word class="nominal" pattern="m1" case="1" number="pl">pacient</word>
+
+  <word class="verb" pattern="v1" vderivation="ptc" case="1" number="pl">nepije</word>
+        čaj
+
+  <floatslot id="1" role="S" occno="first"/>
+  
+  <word class="verb" pattern="v2" number="pl">nekouří</word>
+  .
+  
+  Toto tvrzení
+  potvrzuje
+  
+  73.1
+  % (konkrétně
+  19
+  ) z celkového počtu
+  26
+
+  
+  <word class="nominal" pattern="a1ma" case="2" number="pl">sledovaný</word>
+
+  
+  <word class="nominal" pattern="m1" case="2" number="pl">pacient</word>
+
+  .
+
+  
+  Tvrzení
+  platí
+  za těchto podmínek:
+  
+  <word class="nominal" pattern="m1" case="1" number="sg">pacient</word>
+
+  <word class="verb" pattern="v2">patří</word> do Normální skupiny pacientů a <word class="verb" pattern="vp1">absolvoval</word> vysokou školu.
+
+</sentence>
+  <sentence>
+  
+  <literal/>
+  
+  <word class="nominal" pattern="m1" case="1" number="pl">pacient</word>
+
+
+  <floatslot id="1" role="S" occno="first"/>
+  
+  <word class="verb" pattern="v2" number="pl">nekouří</word>
+  .
+  
+  Toto tvrzení
+  potvrzuje
+  
+  73.1
+  % (konkrétně
+  19
+  ) z celkového počtu
+  26
+
+  
+  <word class="nominal" pattern="a1ma" case="2" number="pl">sledovaný</word>
+
+  
+  <word class="nominal" pattern="m1" case="2" number="pl">pacient</word>
+
+  .
+
+  
+  Tvrzení
+  platí
+  za těchto podmínek:
+  
+  <word class="nominal" pattern="m1" case="1" number="sg">pacient</word>
+
+  <word class="verb" pattern="v2">patří</word> do Normální skupiny pacientů a <word class="verb" pattern="vp1">absolvoval</word> vysokou školu.
+
+</sentence>
+  <sentence>
+  
+  73.1
+  % (konkrétně
+  19
+  ) z celkového počtu
+  26
+
+  
+  
+  <word class="nominal" pattern="m1" case="2" number="pl">pacient</word>
+
+  ,
+  
+  <word class="nominal" pattern="a1rma" number="pl">který</word>
+
+  <floatslot id="1" role="A" occno="first"/>
+  <word class="verb" pattern="v1" number="pl">nepije</word>
+        čaj
+  ,
+
+  <floatslot id="1" role="S" occno="first"/>
+  
+  <word class="verb" pattern="v2" number="qpl">nekouří</word>
+  .
+ 
+  Tvrzení
+  platí
+  za těchto podmínek:
+  
+  <word class="nominal" pattern="m1" case="1" number="sg">pacient</word>
+
+  <word class="verb" pattern="v2">patří</word> do Normální skupiny pacientů a <word class="verb" pattern="vp1">absolvoval</word> vysokou školu.
+
+</sentence>
+  <sentence>
+  
+  73.1
+  % (konkrétně
+  19
+  ) z celkového počtu
+  26
+
+  
+  
+  <word class="nominal" pattern="m1" case="2" number="pl">pacient</word>
+
+  <literal/>
+
+  <floatslot id="1" role="S" occno="first"/>
+  
+  <word class="verb" pattern="v2" number="qpl">nekouří</word>
+  .
+ 
+  Tvrzení
+  platí
+  za těchto podmínek:
+  
+  <word class="nominal" pattern="m1" case="1" number="sg">pacient</word>
+
+  <word class="verb" pattern="v2">patří</word> do Normální skupiny pacientů a <word class="verb" pattern="vp1">absolvoval</word> vysokou školu.
+
+</sentence>
+  <sentence>
+  
+  73.1
+  % (konkrétně
+  19
+  ) z celkového počtu
+  26
+
+  
+  
+  <word class="nominal" pattern="m1" case="2" number="pl">pacient</word>
+
+  <word class="verb" pattern="v1" vderivation="ptc" case="2" number="pl">nepije</word>
+        čaj
+
+  <floatslot id="1" role="S" occno="first"/>
+  
+  <word class="verb" pattern="v2" number="qpl">nekouří</word>
+  .
+ 
+  Tvrzení
+  platí
+  za těchto podmínek:
+  
+  <word class="nominal" pattern="m1" case="1" number="sg">pacient</word>
+
+  <word class="verb" pattern="v2">patří</word> do Normální skupiny pacientů a <word class="verb" pattern="vp1">absolvoval</word> vysokou školu.
+
+</sentence>
+  <sentence>
+  
+  73.1
+  % (konkrétně
+  19
+  ) z celkového počtu
+  26
+
+  
+  <literal/>
+  
+  <word class="nominal" pattern="m1" case="2" number="pl">pacient</word>
+
+
+  <floatslot id="1" role="S" occno="first"/>
+  
+  <word class="verb" pattern="v2" number="qpl">nekouří</word>
+  .
+ 
+  Tvrzení
+  platí
+  za těchto podmínek:
+  
+  <word class="nominal" pattern="m1" case="1" number="sg">pacient</word>
+
+  <word class="verb" pattern="v2">patří</word> do Normální skupiny pacientů a <word class="verb" pattern="vp1">absolvoval</word> vysokou školu.
+
+</sentence>
+  <sentence>
+  
+  73.1
+  % (konkrétně
+  19
+  ) z celkového počtu
+  26
+
+  
+  
+  <word class="nominal" pattern="m1" case="2" number="pl">pacient</word>
+
+  ,
+  
+  <word class="nominal" pattern="a1rma" number="pl">který</word>
+
+  <floatslot id="1" role="A" occno="first"/>
+  <word class="verb" pattern="v1" number="pl">nepije</word>
+        čaj
+  ,
+
+  vykazuje
+  
+  <literal/>
+  .
+ 
+  Tvrzení
+  platí
+  za těchto podmínek:
+  
+  <word class="nominal" pattern="m1" case="1" number="sg">pacient</word>
+
+  <word class="verb" pattern="v2">patří</word> do Normální skupiny pacientů a <word class="verb" pattern="vp1">absolvoval</word> vysokou školu.
+
+</sentence>
+  <sentence>
+  
+  73.1
+  % (konkrétně
+  19
+  ) z celkového počtu
+  26
+
+  
+  
+  <word class="nominal" pattern="m1" case="2" number="pl">pacient</word>
+
+  <literal/>
+
+  vykazuje
+  
+  <literal/>
+  .
+ 
+  Tvrzení
+  platí
+  za těchto podmínek:
+  
+  <word class="nominal" pattern="m1" case="1" number="sg">pacient</word>
+
+  <word class="verb" pattern="v2">patří</word> do Normální skupiny pacientů a <word class="verb" pattern="vp1">absolvoval</word> vysokou školu.
+
+</sentence>
+  <sentence>
+  
+  73.1
+  % (konkrétně
+  19
+  ) z celkového počtu
+  26
+
+  
+  
+  <word class="nominal" pattern="m1" case="2" number="pl">pacient</word>
+
+  <word class="verb" pattern="v1" vderivation="ptc" case="2" number="pl">nepije</word>
+        čaj
+
+  vykazuje
+  
+  <literal/>
+  .
+ 
+  Tvrzení
+  platí
+  za těchto podmínek:
+  
+  <word class="nominal" pattern="m1" case="1" number="sg">pacient</word>
+
+  <word class="verb" pattern="v2">patří</word> do Normální skupiny pacientů a <word class="verb" pattern="vp1">absolvoval</word> vysokou školu.
+
+</sentence>
+  <sentence>
+  
+  73.1
+  % (konkrétně
+  19
+  ) z celkového počtu
+  26
+
+  
+  <literal/>
+  
+  <word class="nominal" pattern="m1" case="2" number="pl">pacient</word>
+
+
+  vykazuje
+  
+  <literal/>
+  .
+ 
+  Tvrzení
+  platí
+  za těchto podmínek:
+  
+  <word class="nominal" pattern="m1" case="1" number="sg">pacient</word>
+
+  <word class="verb" pattern="v2">patří</word> do Normální skupiny pacientů a <word class="verb" pattern="vp1">absolvoval</word> vysokou školu.
+
+</sentence>
+  <sentence>
+  Pro
+  
+  
+  <word class="nominal" pattern="m1" case="4" number="pl">pacient</word>
+
+  ,
+  
+  <word class="nominal" pattern="a1rma" number="pl">který</word>
+
+  <floatslot id="1" role="A" occno="first"/>
+  <word class="verb" pattern="v1" number="pl">nepije</word>
+        čaj
+  ,
+
+  je charakteristické, že
+  <floatslot id="1" role="S" occno="first"/>
+  
+  <word class="verb" pattern="v2" number="pl">nekouří</word>
+  .(
+  
+  Toto tvrzení
+  potvrzuje
+  
+  73.1
+  % (konkrétně
+  19
+  ) z celkového počtu
+  26
+
+  
+  <word class="nominal" pattern="a1ma" case="2" number="pl">sledovaný</word>
+
+  
+  <word class="nominal" pattern="m1" case="2" number="pl">pacient</word>
+
+  .
+
+  )
+  
+  Tvrzení
+  platí
+  za těchto podmínek:
+  
+  <word class="nominal" pattern="m1" case="1" number="sg">pacient</word>
+
+  <word class="verb" pattern="v2">patří</word> do Normální skupiny pacientů a <word class="verb" pattern="vp1">absolvoval</word> vysokou školu.
+
+</sentence>
+  <sentence>
+  Pro
+  
+  
+  <word class="nominal" pattern="m1" case="4" number="pl">pacient</word>
+
+  <literal/>
+
+  je charakteristické, že
+  <floatslot id="1" role="S" occno="first"/>
+  
+  <word class="verb" pattern="v2" number="pl">nekouří</word>
+  .(
+  
+  Toto tvrzení
+  potvrzuje
+  
+  73.1
+  % (konkrétně
+  19
+  ) z celkového počtu
+  26
+
+  
+  <word class="nominal" pattern="a1ma" case="2" number="pl">sledovaný</word>
+
+  
+  <word class="nominal" pattern="m1" case="2" number="pl">pacient</word>
+
+  .
+
+  )
+  
+  Tvrzení
+  platí
+  za těchto podmínek:
+  
+  <word class="nominal" pattern="m1" case="1" number="sg">pacient</word>
+
+  <word class="verb" pattern="v2">patří</word> do Normální skupiny pacientů a <word class="verb" pattern="vp1">absolvoval</word> vysokou školu.
+
+</sentence>
+  <sentence>
+  Pro
+  
+  
+  <word class="nominal" pattern="m1" case="4" number="pl">pacient</word>
+
+  <word class="verb" pattern="v1" vderivation="ptc" case="4" number="pl">nepije</word>
+        čaj
+
+  je charakteristické, že
+  <floatslot id="1" role="S" occno="first"/>
+  
+  <word class="verb" pattern="v2" number="pl">nekouří</word>
+  .(
+  
+  Toto tvrzení
+  potvrzuje
+  
+  73.1
+  % (konkrétně
+  19
+  ) z celkového počtu
+  26
+
+  
+  <word class="nominal" pattern="a1ma" case="2" number="pl">sledovaný</word>
+
+  
+  <word class="nominal" pattern="m1" case="2" number="pl">pacient</word>
+
+  .
+
+  )
+  
+  Tvrzení
+  platí
+  za těchto podmínek:
+  
+  <word class="nominal" pattern="m1" case="1" number="sg">pacient</word>
+
+  <word class="verb" pattern="v2">patří</word> do Normální skupiny pacientů a <word class="verb" pattern="vp1">absolvoval</word> vysokou školu.
+
+</sentence>
+  <sentence>
+  Pro
+  
+  <literal/>
+  
+  <word class="nominal" pattern="m1" case="4" number="pl">pacient</word>
+
+
+  je charakteristické, že
+  <floatslot id="1" role="S" occno="first"/>
+  
+  <word class="verb" pattern="v2" number="pl">nekouří</word>
+  .(
+  
+  Toto tvrzení
+  potvrzuje
+  
+  73.1
+  % (konkrétně
+  19
+  ) z celkového počtu
+  26
+
+  
+  <word class="nominal" pattern="a1ma" case="2" number="pl">sledovaný</word>
+
+  
+  <word class="nominal" pattern="m1" case="2" number="pl">pacient</word>
+
+  .
+
+  )
+  
+  Tvrzení
+  platí
+  za těchto podmínek:
+  
+  <word class="nominal" pattern="m1" case="1" number="sg">pacient</word>
+
+  <word class="verb" pattern="v2">patří</word> do Normální skupiny pacientů a <word class="verb" pattern="vp1">absolvoval</word> vysokou školu.
+
+</sentence>
+  <sentence>
+  
+  73.1
+  % (konkrétně
+  19
+  ) z celkového počtu
+  26
+
+  
+  <word class="nominal" pattern="a1ma" case="2" number="pl">sledovaný</word>
+
+  
+  <word class="nominal" pattern="m1" case="2" number="pl">pacient</word>
+
+  potvrzuje tuto závislost: jestliže
+  <floatslot id="1" role="A" occno="first"/>
+  
+  <word class="nominal" pattern="m1">pacient</word>
+
+  <word class="verb" pattern="v1">nepije</word>
+        čaj
+  , pak
+  <floatslot id="1" role="S" occno="first"/>
+  
+  <word class="verb" pattern="v2">nekouří</word>
+  .
+  
+  Tvrzení
+  platí
+  za těchto podmínek:
+  
+  <word class="nominal" pattern="m1" case="1" number="sg">pacient</word>
+
+  <word class="verb" pattern="v2">patří</word> do Normální skupiny pacientů a <word class="verb" pattern="vp1">absolvoval</word> vysokou školu.
+
+</sentence>
+</sentences>

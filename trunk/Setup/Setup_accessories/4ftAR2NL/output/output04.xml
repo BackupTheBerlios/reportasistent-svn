@@ -1,0 +1,1105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<sentences>
+  <sentence>
+  
+  
+  <word pattern="m1" class="nominal">pacient</word>
+
+  ,
+  
+  <word pattern="a1rma" class="nominal">který</word>
+
+  <floatslot id="1" role="A" occno="first"/>
+  <literal role="A" typeofphrase="V"/>
+  ,
+
+  <floatslot id="1" role="S" occno="first"/>
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal role="S" typeofphrase="V"/>
+  .
+  
+  <choosetext>
+    <variant>Tento fakt</variant>
+    <variant>Tuto hypotézu</variant>
+    <variant>Toto pravidlo</variant>
+    <variant>Toto tvrzení</variant>
+  </choosetext>
+  potvrzuje
+  
+  <param name="P"/>
+  % (konkrétně
+  <param name="B"/>
+  ) z celkového počtu
+  <param name="T"/>
+
+  
+  <word pattern="a1ma" class="nominal" case="2" number="pl">sledovaný</word>
+
+  
+  <word pattern="m1" class="nominal" case="2" number="pl">pacient</word>
+
+  .
+
+ 
+  <choosetext>
+    <variant>Tvrzení</variant>
+    <variant>Hypotéza</variant>
+    <variant>Tento fakt</variant>
+  </choosetext>
+  platí
+  <choosetext>
+    <variant>za těchto podmínek:</variant>
+    <variant>v případě, že</variant>
+    <variant>, když</variant>
+  </choosetext>
+  
+  <word pattern="m1" class="nominal" case="1" number="sg">pacient</word>
+
+  <literal role="C" typeofphrase="V"/> a <literal role="C" typeofphrase="V"/>.
+
+</sentence>
+  <sentence>
+  
+  
+  <word pattern="m1" class="nominal">pacient</word>
+
+  <literal role="A" typeofphrase="NA"/>
+
+  <floatslot id="1" role="S" occno="first"/>
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal role="S" typeofphrase="V"/>
+  .
+  
+  <choosetext>
+    <variant>Tento fakt</variant>
+    <variant>Tuto hypotézu</variant>
+    <variant>Toto pravidlo</variant>
+    <variant>Toto tvrzení</variant>
+  </choosetext>
+  potvrzuje
+  
+  <param name="P"/>
+  % (konkrétně
+  <param name="B"/>
+  ) z celkového počtu
+  <param name="T"/>
+
+  
+  <word pattern="a1ma" class="nominal" case="2" number="pl">sledovaný</word>
+
+  
+  <word pattern="m1" class="nominal" case="2" number="pl">pacient</word>
+
+  .
+
+ 
+  <choosetext>
+    <variant>Tvrzení</variant>
+    <variant>Hypotéza</variant>
+    <variant>Tento fakt</variant>
+  </choosetext>
+  platí
+  <choosetext>
+    <variant>za těchto podmínek:</variant>
+    <variant>v případě, že</variant>
+    <variant>, když</variant>
+  </choosetext>
+  
+  <word pattern="m1" class="nominal" case="1" number="sg">pacient</word>
+
+  <literal role="C" typeofphrase="V"/> a <literal role="C" typeofphrase="V"/>.
+
+</sentence>
+  <sentence>
+  
+  
+  <word pattern="m1" class="nominal">pacient</word>
+
+  <literal role="A" typeofphrase="R"/>
+
+  <floatslot id="1" role="S" occno="first"/>
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal role="S" typeofphrase="V"/>
+  .
+  
+  <choosetext>
+    <variant>Tento fakt</variant>
+    <variant>Tuto hypotézu</variant>
+    <variant>Toto pravidlo</variant>
+    <variant>Toto tvrzení</variant>
+  </choosetext>
+  potvrzuje
+  
+  <param name="P"/>
+  % (konkrétně
+  <param name="B"/>
+  ) z celkového počtu
+  <param name="T"/>
+
+  
+  <word pattern="a1ma" class="nominal" case="2" number="pl">sledovaný</word>
+
+  
+  <word pattern="m1" class="nominal" case="2" number="pl">pacient</word>
+
+  .
+
+ 
+  <choosetext>
+    <variant>Tvrzení</variant>
+    <variant>Hypotéza</variant>
+    <variant>Tento fakt</variant>
+  </choosetext>
+  platí
+  <choosetext>
+    <variant>za těchto podmínek:</variant>
+    <variant>v případě, že</variant>
+    <variant>, když</variant>
+  </choosetext>
+  
+  <word pattern="m1" class="nominal" case="1" number="sg">pacient</word>
+
+  <literal role="C" typeofphrase="V"/> a <literal role="C" typeofphrase="V"/>.
+
+</sentence>
+  <sentence>
+  
+  <literal role="A" typeofphrase="L"/>
+  
+  <word pattern="m1" class="nominal">pacient</word>
+
+
+  <floatslot id="1" role="S" occno="first"/>
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal role="S" typeofphrase="V"/>
+  .
+  
+  <choosetext>
+    <variant>Tento fakt</variant>
+    <variant>Tuto hypotézu</variant>
+    <variant>Toto pravidlo</variant>
+    <variant>Toto tvrzení</variant>
+  </choosetext>
+  potvrzuje
+  
+  <param name="P"/>
+  % (konkrétně
+  <param name="B"/>
+  ) z celkového počtu
+  <param name="T"/>
+
+  
+  <word pattern="a1ma" class="nominal" case="2" number="pl">sledovaný</word>
+
+  
+  <word pattern="m1" class="nominal" case="2" number="pl">pacient</word>
+
+  .
+
+ 
+  <choosetext>
+    <variant>Tvrzení</variant>
+    <variant>Hypotéza</variant>
+    <variant>Tento fakt</variant>
+  </choosetext>
+  platí
+  <choosetext>
+    <variant>za těchto podmínek:</variant>
+    <variant>v případě, že</variant>
+    <variant>, když</variant>
+  </choosetext>
+  
+  <word pattern="m1" class="nominal" case="1" number="sg">pacient</word>
+
+  <literal role="C" typeofphrase="V"/> a <literal role="C" typeofphrase="V"/>.
+
+</sentence>
+  <sentence>
+  
+  
+  <word pattern="m1" class="nominal" case="1" number="pl">pacient</word>
+
+  ,
+  
+  <word pattern="a1rma" class="nominal" number="pl">který</word>
+
+  <floatslot id="1" role="A" occno="first"/>
+  <literal role="A" typeofphrase="V" number="pl"/>
+  ,
+
+  <floatslot id="1" role="S" occno="first"/>
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal role="S" typeofphrase="V" number="pl"/>
+  .
+  
+  <choosetext>
+    <variant>Tento fakt</variant>
+    <variant>Tuto hypotézu</variant>
+    <variant>Toto pravidlo</variant>
+    <variant>Toto tvrzení</variant>
+  </choosetext>
+  potvrzuje
+  
+  <param name="P"/>
+  % (konkrétně
+  <param name="B"/>
+  ) z celkového počtu
+  <param name="T"/>
+
+  
+  <word pattern="a1ma" class="nominal" case="2" number="pl">sledovaný</word>
+
+  
+  <word pattern="m1" class="nominal" case="2" number="pl">pacient</word>
+
+  .
+
+  
+  <choosetext>
+    <variant>Tvrzení</variant>
+    <variant>Hypotéza</variant>
+    <variant>Tento fakt</variant>
+  </choosetext>
+  platí
+  <choosetext>
+    <variant>za těchto podmínek:</variant>
+    <variant>v případě, že</variant>
+    <variant>, když</variant>
+  </choosetext>
+  
+  <word pattern="m1" class="nominal" case="1" number="sg">pacient</word>
+
+  <literal role="C" typeofphrase="V"/> a <literal role="C" typeofphrase="V"/>.
+
+</sentence>
+  <sentence>
+  
+  
+  <word pattern="m1" class="nominal" case="1" number="pl">pacient</word>
+
+  <literal role="A" typeofphrase="NA"/>
+
+  <floatslot id="1" role="S" occno="first"/>
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal role="S" typeofphrase="V" number="pl"/>
+  .
+  
+  <choosetext>
+    <variant>Tento fakt</variant>
+    <variant>Tuto hypotézu</variant>
+    <variant>Toto pravidlo</variant>
+    <variant>Toto tvrzení</variant>
+  </choosetext>
+  potvrzuje
+  
+  <param name="P"/>
+  % (konkrétně
+  <param name="B"/>
+  ) z celkového počtu
+  <param name="T"/>
+
+  
+  <word pattern="a1ma" class="nominal" case="2" number="pl">sledovaný</word>
+
+  
+  <word pattern="m1" class="nominal" case="2" number="pl">pacient</word>
+
+  .
+
+  
+  <choosetext>
+    <variant>Tvrzení</variant>
+    <variant>Hypotéza</variant>
+    <variant>Tento fakt</variant>
+  </choosetext>
+  platí
+  <choosetext>
+    <variant>za těchto podmínek:</variant>
+    <variant>v případě, že</variant>
+    <variant>, když</variant>
+  </choosetext>
+  
+  <word pattern="m1" class="nominal" case="1" number="sg">pacient</word>
+
+  <literal role="C" typeofphrase="V"/> a <literal role="C" typeofphrase="V"/>.
+
+</sentence>
+  <sentence>
+  
+  
+  <word pattern="m1" class="nominal" case="1" number="pl">pacient</word>
+
+  <literal role="A" typeofphrase="R" case="1" number="pl"/>
+
+  <floatslot id="1" role="S" occno="first"/>
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal role="S" typeofphrase="V" number="pl"/>
+  .
+  
+  <choosetext>
+    <variant>Tento fakt</variant>
+    <variant>Tuto hypotézu</variant>
+    <variant>Toto pravidlo</variant>
+    <variant>Toto tvrzení</variant>
+  </choosetext>
+  potvrzuje
+  
+  <param name="P"/>
+  % (konkrétně
+  <param name="B"/>
+  ) z celkového počtu
+  <param name="T"/>
+
+  
+  <word pattern="a1ma" class="nominal" case="2" number="pl">sledovaný</word>
+
+  
+  <word pattern="m1" class="nominal" case="2" number="pl">pacient</word>
+
+  .
+
+  
+  <choosetext>
+    <variant>Tvrzení</variant>
+    <variant>Hypotéza</variant>
+    <variant>Tento fakt</variant>
+  </choosetext>
+  platí
+  <choosetext>
+    <variant>za těchto podmínek:</variant>
+    <variant>v případě, že</variant>
+    <variant>, když</variant>
+  </choosetext>
+  
+  <word pattern="m1" class="nominal" case="1" number="sg">pacient</word>
+
+  <literal role="C" typeofphrase="V"/> a <literal role="C" typeofphrase="V"/>.
+
+</sentence>
+  <sentence>
+  
+  <literal role="A" typeofphrase="L" case="1" number="pl"/>
+  
+  <word pattern="m1" class="nominal" case="1" number="pl">pacient</word>
+
+
+  <floatslot id="1" role="S" occno="first"/>
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal role="S" typeofphrase="V" number="pl"/>
+  .
+  
+  <choosetext>
+    <variant>Tento fakt</variant>
+    <variant>Tuto hypotézu</variant>
+    <variant>Toto pravidlo</variant>
+    <variant>Toto tvrzení</variant>
+  </choosetext>
+  potvrzuje
+  
+  <param name="P"/>
+  % (konkrétně
+  <param name="B"/>
+  ) z celkového počtu
+  <param name="T"/>
+
+  
+  <word pattern="a1ma" class="nominal" case="2" number="pl">sledovaný</word>
+
+  
+  <word pattern="m1" class="nominal" case="2" number="pl">pacient</word>
+
+  .
+
+  
+  <choosetext>
+    <variant>Tvrzení</variant>
+    <variant>Hypotéza</variant>
+    <variant>Tento fakt</variant>
+  </choosetext>
+  platí
+  <choosetext>
+    <variant>za těchto podmínek:</variant>
+    <variant>v případě, že</variant>
+    <variant>, když</variant>
+  </choosetext>
+  
+  <word pattern="m1" class="nominal" case="1" number="sg">pacient</word>
+
+  <literal role="C" typeofphrase="V"/> a <literal role="C" typeofphrase="V"/>.
+
+</sentence>
+  <sentence>
+  
+  <param name="P"/>
+  % (konkrétně
+  <param name="B"/>
+  ) z celkového počtu
+  <param name="T"/>
+
+  
+  
+  <word pattern="m1" class="nominal" case="2" number="pl">pacient</word>
+
+  ,
+  
+  <word pattern="a1rma" class="nominal" number="pl">který</word>
+
+  <floatslot id="1" role="A" occno="first"/>
+  <literal role="A" typeofphrase="V" number="pl"/>
+  ,
+
+  <floatslot id="1" role="S" occno="first"/>
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal role="S" typeofphrase="V" number="qpl"/>
+  .
+ 
+  <choosetext>
+    <variant>Tvrzení</variant>
+    <variant>Hypotéza</variant>
+    <variant>Tento fakt</variant>
+  </choosetext>
+  platí
+  <choosetext>
+    <variant>za těchto podmínek:</variant>
+    <variant>v případě, že</variant>
+    <variant>, když</variant>
+  </choosetext>
+  
+  <word pattern="m1" class="nominal" case="1" number="sg">pacient</word>
+
+  <literal role="C" typeofphrase="V"/> a <literal role="C" typeofphrase="V"/>.
+
+</sentence>
+  <sentence>
+  
+  <param name="P"/>
+  % (konkrétně
+  <param name="B"/>
+  ) z celkového počtu
+  <param name="T"/>
+
+  
+  
+  <word pattern="m1" class="nominal" case="2" number="pl">pacient</word>
+
+  <literal role="A" typeofphrase="NA"/>
+
+  <floatslot id="1" role="S" occno="first"/>
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal role="S" typeofphrase="V" number="qpl"/>
+  .
+ 
+  <choosetext>
+    <variant>Tvrzení</variant>
+    <variant>Hypotéza</variant>
+    <variant>Tento fakt</variant>
+  </choosetext>
+  platí
+  <choosetext>
+    <variant>za těchto podmínek:</variant>
+    <variant>v případě, že</variant>
+    <variant>, když</variant>
+  </choosetext>
+  
+  <word pattern="m1" class="nominal" case="1" number="sg">pacient</word>
+
+  <literal role="C" typeofphrase="V"/> a <literal role="C" typeofphrase="V"/>.
+
+</sentence>
+  <sentence>
+  
+  <param name="P"/>
+  % (konkrétně
+  <param name="B"/>
+  ) z celkového počtu
+  <param name="T"/>
+
+  
+  
+  <word pattern="m1" class="nominal" case="2" number="pl">pacient</word>
+
+  <literal role="A" typeofphrase="R" case="2" number="pl"/>
+
+  <floatslot id="1" role="S" occno="first"/>
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal role="S" typeofphrase="V" number="qpl"/>
+  .
+ 
+  <choosetext>
+    <variant>Tvrzení</variant>
+    <variant>Hypotéza</variant>
+    <variant>Tento fakt</variant>
+  </choosetext>
+  platí
+  <choosetext>
+    <variant>za těchto podmínek:</variant>
+    <variant>v případě, že</variant>
+    <variant>, když</variant>
+  </choosetext>
+  
+  <word pattern="m1" class="nominal" case="1" number="sg">pacient</word>
+
+  <literal role="C" typeofphrase="V"/> a <literal role="C" typeofphrase="V"/>.
+
+</sentence>
+  <sentence>
+  
+  <param name="P"/>
+  % (konkrétně
+  <param name="B"/>
+  ) z celkového počtu
+  <param name="T"/>
+
+  
+  <literal role="A" typeofphrase="L" case="2" number="pl"/>
+  
+  <word pattern="m1" class="nominal" case="2" number="pl">pacient</word>
+
+
+  <floatslot id="1" role="S" occno="first"/>
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal role="S" typeofphrase="V" number="qpl"/>
+  .
+ 
+  <choosetext>
+    <variant>Tvrzení</variant>
+    <variant>Hypotéza</variant>
+    <variant>Tento fakt</variant>
+  </choosetext>
+  platí
+  <choosetext>
+    <variant>za těchto podmínek:</variant>
+    <variant>v případě, že</variant>
+    <variant>, když</variant>
+  </choosetext>
+  
+  <word pattern="m1" class="nominal" case="1" number="sg">pacient</word>
+
+  <literal role="C" typeofphrase="V"/> a <literal role="C" typeofphrase="V"/>.
+
+</sentence>
+  <sentence>
+  
+  <param name="P"/>
+  % (konkrétně
+  <param name="B"/>
+  ) z celkového počtu
+  <param name="T"/>
+
+  
+  
+  <word pattern="m1" class="nominal" case="2" number="pl">pacient</word>
+
+  ,
+  
+  <word pattern="a1rma" class="nominal" number="pl">který</word>
+
+  <floatslot id="1" role="A" occno="first"/>
+  <literal role="A" typeofphrase="V" number="pl"/>
+  ,
+
+  vykazuje
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal role="S" typeofphrase="N" case="4"/>
+  .
+ 
+  <choosetext>
+    <variant>Tvrzení</variant>
+    <variant>Hypotéza</variant>
+    <variant>Tento fakt</variant>
+  </choosetext>
+  platí
+  <choosetext>
+    <variant>za těchto podmínek:</variant>
+    <variant>v případě, že</variant>
+    <variant>, když</variant>
+  </choosetext>
+  
+  <word pattern="m1" class="nominal" case="1" number="sg">pacient</word>
+
+  <literal role="C" typeofphrase="V"/> a <literal role="C" typeofphrase="V"/>.
+
+</sentence>
+  <sentence>
+  
+  <param name="P"/>
+  % (konkrétně
+  <param name="B"/>
+  ) z celkového počtu
+  <param name="T"/>
+
+  
+  
+  <word pattern="m1" class="nominal" case="2" number="pl">pacient</word>
+
+  <literal role="A" typeofphrase="NA"/>
+
+  vykazuje
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal role="S" typeofphrase="N" case="4"/>
+  .
+ 
+  <choosetext>
+    <variant>Tvrzení</variant>
+    <variant>Hypotéza</variant>
+    <variant>Tento fakt</variant>
+  </choosetext>
+  platí
+  <choosetext>
+    <variant>za těchto podmínek:</variant>
+    <variant>v případě, že</variant>
+    <variant>, když</variant>
+  </choosetext>
+  
+  <word pattern="m1" class="nominal" case="1" number="sg">pacient</word>
+
+  <literal role="C" typeofphrase="V"/> a <literal role="C" typeofphrase="V"/>.
+
+</sentence>
+  <sentence>
+  
+  <param name="P"/>
+  % (konkrétně
+  <param name="B"/>
+  ) z celkového počtu
+  <param name="T"/>
+
+  
+  
+  <word pattern="m1" class="nominal" case="2" number="pl">pacient</word>
+
+  <literal role="A" typeofphrase="R" case="2" number="pl"/>
+
+  vykazuje
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal role="S" typeofphrase="N" case="4"/>
+  .
+ 
+  <choosetext>
+    <variant>Tvrzení</variant>
+    <variant>Hypotéza</variant>
+    <variant>Tento fakt</variant>
+  </choosetext>
+  platí
+  <choosetext>
+    <variant>za těchto podmínek:</variant>
+    <variant>v případě, že</variant>
+    <variant>, když</variant>
+  </choosetext>
+  
+  <word pattern="m1" class="nominal" case="1" number="sg">pacient</word>
+
+  <literal role="C" typeofphrase="V"/> a <literal role="C" typeofphrase="V"/>.
+
+</sentence>
+  <sentence>
+  
+  <param name="P"/>
+  % (konkrétně
+  <param name="B"/>
+  ) z celkového počtu
+  <param name="T"/>
+
+  
+  <literal role="A" typeofphrase="L" case="2" number="pl"/>
+  
+  <word pattern="m1" class="nominal" case="2" number="pl">pacient</word>
+
+
+  vykazuje
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal role="S" typeofphrase="N" case="4"/>
+  .
+ 
+  <choosetext>
+    <variant>Tvrzení</variant>
+    <variant>Hypotéza</variant>
+    <variant>Tento fakt</variant>
+  </choosetext>
+  platí
+  <choosetext>
+    <variant>za těchto podmínek:</variant>
+    <variant>v případě, že</variant>
+    <variant>, když</variant>
+  </choosetext>
+  
+  <word pattern="m1" class="nominal" case="1" number="sg">pacient</word>
+
+  <literal role="C" typeofphrase="V"/> a <literal role="C" typeofphrase="V"/>.
+
+</sentence>
+  <sentence>
+  Pro
+  
+  
+  <word pattern="m1" class="nominal" case="4" number="pl">pacient</word>
+
+  ,
+  
+  <word pattern="a1rma" class="nominal" number="pl">který</word>
+
+  <floatslot id="1" role="A" occno="first"/>
+  <literal role="A" typeofphrase="V" number="pl"/>
+  ,
+
+  je charakteristické, že
+  <floatslot id="1" role="S" occno="first"/>
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal role="S" typeofphrase="V" number="pl"/>
+  .(
+  
+  <choosetext>
+    <variant>Tento fakt</variant>
+    <variant>Tuto hypotézu</variant>
+    <variant>Toto pravidlo</variant>
+    <variant>Toto tvrzení</variant>
+  </choosetext>
+  potvrzuje
+  
+  <param name="P"/>
+  % (konkrétně
+  <param name="B"/>
+  ) z celkového počtu
+  <param name="T"/>
+
+  
+  <word pattern="a1ma" class="nominal" case="2" number="pl">sledovaný</word>
+
+  
+  <word pattern="m1" class="nominal" case="2" number="pl">pacient</word>
+
+  .
+
+  )
+  
+  <choosetext>
+    <variant>Tvrzení</variant>
+    <variant>Hypotéza</variant>
+    <variant>Tento fakt</variant>
+  </choosetext>
+  platí
+  <choosetext>
+    <variant>za těchto podmínek:</variant>
+    <variant>v případě, že</variant>
+    <variant>, když</variant>
+  </choosetext>
+  
+  <word pattern="m1" class="nominal" case="1" number="sg">pacient</word>
+
+  <literal role="C" typeofphrase="V"/> a <literal role="C" typeofphrase="V"/>.
+
+</sentence>
+  <sentence>
+  Pro
+  
+  
+  <word pattern="m1" class="nominal" case="4" number="pl">pacient</word>
+
+  <literal role="A" typeofphrase="NA"/>
+
+  je charakteristické, že
+  <floatslot id="1" role="S" occno="first"/>
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal role="S" typeofphrase="V" number="pl"/>
+  .(
+  
+  <choosetext>
+    <variant>Tento fakt</variant>
+    <variant>Tuto hypotézu</variant>
+    <variant>Toto pravidlo</variant>
+    <variant>Toto tvrzení</variant>
+  </choosetext>
+  potvrzuje
+  
+  <param name="P"/>
+  % (konkrétně
+  <param name="B"/>
+  ) z celkového počtu
+  <param name="T"/>
+
+  
+  <word pattern="a1ma" class="nominal" case="2" number="pl">sledovaný</word>
+
+  
+  <word pattern="m1" class="nominal" case="2" number="pl">pacient</word>
+
+  .
+
+  )
+  
+  <choosetext>
+    <variant>Tvrzení</variant>
+    <variant>Hypotéza</variant>
+    <variant>Tento fakt</variant>
+  </choosetext>
+  platí
+  <choosetext>
+    <variant>za těchto podmínek:</variant>
+    <variant>v případě, že</variant>
+    <variant>, když</variant>
+  </choosetext>
+  
+  <word pattern="m1" class="nominal" case="1" number="sg">pacient</word>
+
+  <literal role="C" typeofphrase="V"/> a <literal role="C" typeofphrase="V"/>.
+
+</sentence>
+  <sentence>
+  Pro
+  
+  
+  <word pattern="m1" class="nominal" case="4" number="pl">pacient</word>
+
+  <literal role="A" typeofphrase="R" case="4" number="pl"/>
+
+  je charakteristické, že
+  <floatslot id="1" role="S" occno="first"/>
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal role="S" typeofphrase="V" number="pl"/>
+  .(
+  
+  <choosetext>
+    <variant>Tento fakt</variant>
+    <variant>Tuto hypotézu</variant>
+    <variant>Toto pravidlo</variant>
+    <variant>Toto tvrzení</variant>
+  </choosetext>
+  potvrzuje
+  
+  <param name="P"/>
+  % (konkrétně
+  <param name="B"/>
+  ) z celkového počtu
+  <param name="T"/>
+
+  
+  <word pattern="a1ma" class="nominal" case="2" number="pl">sledovaný</word>
+
+  
+  <word pattern="m1" class="nominal" case="2" number="pl">pacient</word>
+
+  .
+
+  )
+  
+  <choosetext>
+    <variant>Tvrzení</variant>
+    <variant>Hypotéza</variant>
+    <variant>Tento fakt</variant>
+  </choosetext>
+  platí
+  <choosetext>
+    <variant>za těchto podmínek:</variant>
+    <variant>v případě, že</variant>
+    <variant>, když</variant>
+  </choosetext>
+  
+  <word pattern="m1" class="nominal" case="1" number="sg">pacient</word>
+
+  <literal role="C" typeofphrase="V"/> a <literal role="C" typeofphrase="V"/>.
+
+</sentence>
+  <sentence>
+  Pro
+  
+  <literal role="A" typeofphrase="L" case="4" number="pl"/>
+  
+  <word pattern="m1" class="nominal" case="4" number="pl">pacient</word>
+
+
+  je charakteristické, že
+  <floatslot id="1" role="S" occno="first"/>
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal role="S" typeofphrase="V" number="pl"/>
+  .(
+  
+  <choosetext>
+    <variant>Tento fakt</variant>
+    <variant>Tuto hypotézu</variant>
+    <variant>Toto pravidlo</variant>
+    <variant>Toto tvrzení</variant>
+  </choosetext>
+  potvrzuje
+  
+  <param name="P"/>
+  % (konkrétně
+  <param name="B"/>
+  ) z celkového počtu
+  <param name="T"/>
+
+  
+  <word pattern="a1ma" class="nominal" case="2" number="pl">sledovaný</word>
+
+  
+  <word pattern="m1" class="nominal" case="2" number="pl">pacient</word>
+
+  .
+
+  )
+  
+  <choosetext>
+    <variant>Tvrzení</variant>
+    <variant>Hypotéza</variant>
+    <variant>Tento fakt</variant>
+  </choosetext>
+  platí
+  <choosetext>
+    <variant>za těchto podmínek:</variant>
+    <variant>v případě, že</variant>
+    <variant>, když</variant>
+  </choosetext>
+  
+  <word pattern="m1" class="nominal" case="1" number="sg">pacient</word>
+
+  <literal role="C" typeofphrase="V"/> a <literal role="C" typeofphrase="V"/>.
+
+</sentence>
+  <sentence>
+  
+  <param name="P"/>
+  % (konkrétně
+  <param name="B"/>
+  ) z celkového počtu
+  <param name="T"/>
+
+  
+  <word pattern="a1ma" class="nominal" case="2" number="pl">sledovaný</word>
+
+  
+  <word pattern="m1" class="nominal" case="2" number="pl">pacient</word>
+
+  potvrzuje tuto závislost: jestliže
+  <floatslot id="1" role="A" occno="first"/>
+  
+  <word pattern="m1" class="nominal">pacient</word>
+
+  <literal role="A" typeofphrase="V"/>
+  , pak
+  <floatslot id="1" role="S" occno="first"/>
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal role="S" typeofphrase="V"/>
+  .
+  
+  <choosetext>
+    <variant>Tvrzení</variant>
+    <variant>Hypotéza</variant>
+    <variant>Tento fakt</variant>
+  </choosetext>
+  platí
+  <choosetext>
+    <variant>za těchto podmínek:</variant>
+    <variant>v případě, že</variant>
+    <variant>, když</variant>
+  </choosetext>
+  
+  <word pattern="m1" class="nominal" case="1" number="sg">pacient</word>
+
+  <literal role="C" typeofphrase="V"/> a <literal role="C" typeofphrase="V"/>.
+
+</sentence>
+</sentences>

@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="utf-8"?>
+<sentences>
+  <sentence>
+  <fpa symbol="Y">
+  <ename symbol="E" case="_" number="_"/>
+  ,
+  <ename symbol="Erel" number="_"/>
+  <floatslot id="1" role="A" occno="first"/>
+  <literal role="A" typeofphrase="V" number="_"/>
+  ,
+</fpa>
+  <floatslot id="1" role="S" occno="first"/>
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal role="S" typeofphrase="V"/>
+  .
+  <fpa symbol="Z"/>
+ <fpa symbol="C"/>
+</sentence>
+  <sentence>
+  <fpa symbol="Y">
+  <ename symbol="E" case="_" number="_"/>
+  <literal role="A" typeofphrase="NA"/>
+</fpa>
+  <floatslot id="1" role="S" occno="first"/>
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal role="S" typeofphrase="V"/>
+  .
+  <fpa symbol="Z"/>
+ <fpa symbol="C"/>
+</sentence>
+  <sentence>
+  <fpa symbol="Y">
+  <ename symbol="E" case="_" number="_"/>
+  <literal role="A" typeofphrase="R" case="_" number="_"/>
+</fpa>
+  <floatslot id="1" role="S" occno="first"/>
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal role="S" typeofphrase="V"/>
+  .
+  <fpa symbol="Z"/>
+ <fpa symbol="C"/>
+</sentence>
+  <sentence>
+  <fpa symbol="Y">
+  <literal role="A" typeofphrase="L" case="_" number="_"/>
+  <ename symbol="E" case="_" number="_"/>
+</fpa>
+  <floatslot id="1" role="S" occno="first"/>
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal role="S" typeofphrase="V"/>
+  .
+  <fpa symbol="Z"/>
+ <fpa symbol="C"/>
+</sentence>
+  <sentence>
+  <fpa symbol="Y" case="1" number="pl">
+  <ename symbol="E" case="_" number="_"/>
+  ,
+  <ename symbol="Erel" number="_"/>
+  <floatslot id="1" role="A" occno="first"/>
+  <literal role="A" typeofphrase="V" number="_"/>
+  ,
+</fpa>
+  <floatslot id="1" role="S" occno="first"/>
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal role="S" typeofphrase="V" number="pl"/>
+  .
+  <fpa symbol="Z"/>
+  <fpa symbol="C"/>
+</sentence>
+  <sentence>
+  <fpa symbol="Y" case="1" number="pl">
+  <ename symbol="E" case="_" number="_"/>
+  <literal role="A" typeofphrase="NA"/>
+</fpa>
+  <floatslot id="1" role="S" occno="first"/>
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal role="S" typeofphrase="V" number="pl"/>
+  .
+  <fpa symbol="Z"/>
+  <fpa symbol="C"/>
+</sentence>
+  <sentence>
+  <fpa symbol="Y" case="1" number="pl">
+  <ename symbol="E" case="_" number="_"/>
+  <literal role="A" typeofphrase="R" case="_" number="_"/>
+</fpa>
+  <floatslot id="1" role="S" occno="first"/>
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal role="S" typeofphrase="V" number="pl"/>
+  .
+  <fpa symbol="Z"/>
+  <fpa symbol="C"/>
+</sentence>
+  <sentence>
+  <fpa symbol="Y" case="1" number="pl">
+  <literal role="A" typeofphrase="L" case="_" number="_"/>
+  <ename symbol="E" case="_" number="_"/>
+</fpa>
+  <floatslot id="1" role="S" occno="first"/>
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal role="S" typeofphrase="V" number="pl"/>
+  .
+  <fpa symbol="Z"/>
+  <fpa symbol="C"/>
+</sentence>
+  <sentence>
+  <fpa symbol="X"/>
+  <fpa symbol="Y" case="2" number="pl">
+  <ename symbol="E" case="_" number="_"/>
+  ,
+  <ename symbol="Erel" number="_"/>
+  <floatslot id="1" role="A" occno="first"/>
+  <literal role="A" typeofphrase="V" number="_"/>
+  ,
+</fpa>
+  <floatslot id="1" role="S" occno="first"/>
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal role="S" typeofphrase="V" number="qpl"/>
+  .
+ <fpa symbol="C"/>
+</sentence>
+  <sentence>
+  <fpa symbol="X"/>
+  <fpa symbol="Y" case="2" number="pl">
+  <ename symbol="E" case="_" number="_"/>
+  <literal role="A" typeofphrase="NA"/>
+</fpa>
+  <floatslot id="1" role="S" occno="first"/>
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal role="S" typeofphrase="V" number="qpl"/>
+  .
+ <fpa symbol="C"/>
+</sentence>
+  <sentence>
+  <fpa symbol="X"/>
+  <fpa symbol="Y" case="2" number="pl">
+  <ename symbol="E" case="_" number="_"/>
+  <literal role="A" typeofphrase="R" case="_" number="_"/>
+</fpa>
+  <floatslot id="1" role="S" occno="first"/>
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal role="S" typeofphrase="V" number="qpl"/>
+  .
+ <fpa symbol="C"/>
+</sentence>
+  <sentence>
+  <fpa symbol="X"/>
+  <fpa symbol="Y" case="2" number="pl">
+  <literal role="A" typeofphrase="L" case="_" number="_"/>
+  <ename symbol="E" case="_" number="_"/>
+</fpa>
+  <floatslot id="1" role="S" occno="first"/>
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal role="S" typeofphrase="V" number="qpl"/>
+  .
+ <fpa symbol="C"/>
+</sentence>
+  <sentence>
+  <fpa symbol="X"/>
+  <fpa symbol="Y" case="2" number="pl">
+  <ename symbol="E" case="_" number="_"/>
+  ,
+  <ename symbol="Erel" number="_"/>
+  <floatslot id="1" role="A" occno="first"/>
+  <literal role="A" typeofphrase="V" number="_"/>
+  ,
+</fpa>
+  vykazuje
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal role="S" typeofphrase="N" case="4"/>
+  .
+ <fpa symbol="C"/>
+</sentence>
+  <sentence>
+  <fpa symbol="X"/>
+  <fpa symbol="Y" case="2" number="pl">
+  <ename symbol="E" case="_" number="_"/>
+  <literal role="A" typeofphrase="NA"/>
+</fpa>
+  vykazuje
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal role="S" typeofphrase="N" case="4"/>
+  .
+ <fpa symbol="C"/>
+</sentence>
+  <sentence>
+  <fpa symbol="X"/>
+  <fpa symbol="Y" case="2" number="pl">
+  <ename symbol="E" case="_" number="_"/>
+  <literal role="A" typeofphrase="R" case="_" number="_"/>
+</fpa>
+  vykazuje
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal role="S" typeofphrase="N" case="4"/>
+  .
+ <fpa symbol="C"/>
+</sentence>
+  <sentence>
+  <fpa symbol="X"/>
+  <fpa symbol="Y" case="2" number="pl">
+  <literal role="A" typeofphrase="L" case="_" number="_"/>
+  <ename symbol="E" case="_" number="_"/>
+</fpa>
+  vykazuje
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal role="S" typeofphrase="N" case="4"/>
+  .
+ <fpa symbol="C"/>
+</sentence>
+  <sentence>
+  Pro
+  <fpa symbol="Y" case="4" number="pl">
+  <ename symbol="E" case="_" number="_"/>
+  ,
+  <ename symbol="Erel" number="_"/>
+  <floatslot id="1" role="A" occno="first"/>
+  <literal role="A" typeofphrase="V" number="_"/>
+  ,
+</fpa>
+  je charakteristické, že
+  <floatslot id="1" role="S" occno="first"/>
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal role="S" typeofphrase="V" number="pl"/>
+  .(
+  <fpa symbol="Z"/>
+  )
+  <fpa symbol="C"/>
+</sentence>
+  <sentence>
+  Pro
+  <fpa symbol="Y" case="4" number="pl">
+  <ename symbol="E" case="_" number="_"/>
+  <literal role="A" typeofphrase="NA"/>
+</fpa>
+  je charakteristické, že
+  <floatslot id="1" role="S" occno="first"/>
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal role="S" typeofphrase="V" number="pl"/>
+  .(
+  <fpa symbol="Z"/>
+  )
+  <fpa symbol="C"/>
+</sentence>
+  <sentence>
+  Pro
+  <fpa symbol="Y" case="4" number="pl">
+  <ename symbol="E" case="_" number="_"/>
+  <literal role="A" typeofphrase="R" case="_" number="_"/>
+</fpa>
+  je charakteristické, že
+  <floatslot id="1" role="S" occno="first"/>
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal role="S" typeofphrase="V" number="pl"/>
+  .(
+  <fpa symbol="Z"/>
+  )
+  <fpa symbol="C"/>
+</sentence>
+  <sentence>
+  Pro
+  <fpa symbol="Y" case="4" number="pl">
+  <literal role="A" typeofphrase="L" case="_" number="_"/>
+  <ename symbol="E" case="_" number="_"/>
+</fpa>
+  je charakteristické, že
+  <floatslot id="1" role="S" occno="first"/>
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal role="S" typeofphrase="V" number="pl"/>
+  .(
+  <fpa symbol="Z"/>
+  )
+  <fpa symbol="C"/>
+</sentence>
+  <sentence>
+  <fpa symbol="X"/>
+  <ename symbol="Eptc0" case="2" number="pl"/>
+  <ename symbol="E" case="2" number="pl"/>
+  potvrzuje tuto závislost: jestliže
+  <floatslot id="1" role="A" occno="first"/>
+  <ename symbol="E"/>
+  <literal role="A" typeofphrase="V"/>
+  , pak
+  <floatslot id="1" role="S" occno="first"/>
+  <optionaltext>
+    <choosetext>
+      <variant>také</variant>
+      <variant>rovněž</variant>
+    </choosetext>
+  </optionaltext>
+  <literal role="S" typeofphrase="V"/>
+  .
+  <fpa symbol="C"/>
+</sentence>
+</sentences>

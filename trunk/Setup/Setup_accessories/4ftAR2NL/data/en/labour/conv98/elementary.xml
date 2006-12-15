@@ -1,0 +1,1031 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE elementaryexpressions PUBLIC "-//LISp-Miner//DTD AR2NL 1.2//EN"
+	"http://lispminer.vse.cz/dtd/ar2nl-1.2.dtd">
+
+<elementaryexpressions>
+	<expression id="ex1">
+		<mbattribute>C01_discrimination</mbattribute>
+		<meaning>Discrimination</meaning>
+		<categories>					
+			<category>
+				<value>all</value>
+				<meaning>used for all values</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase>predictive rate of discrimination <param name="N"/></nounphrase>
+				<NAF>with <nounphrase/></NAF>
+				<verbphrase>
+					<word class="verb" pattern="v4">has</word>
+					predictive rate of discrimination <param name="N"/>
+				</verbphrase>
+			</category>
+		</categories>
+	</expression>
+
+	<expression id="ex2">
+		<mbattribute>C02_sanction_penalties</mbattribute>
+		<meaning>Sanction Penalties</meaning>
+		<categories>
+			<category>
+				<value>all</value>
+				<meaning>used for all values</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase>predictive rate of sanction penalties <param name="N"/></nounphrase>
+				<NAF>with <nounphrase/></NAF>
+				<verbphrase><word class="verb" pattern="v4">has</word>
+				predictive rate of sanction penalties <param name="N"/></verbphrase>
+			</category>
+		</categories>
+	</expression>
+
+	<expression id="ex3">
+		<mbattribute>C03_interference</mbattribute>
+		<meaning>Interference</meaning>
+		<categories>
+			<category>
+				<value>all</value>
+				<meaning>used for all values</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase>predictive rate of interference <param name="N"/></nounphrase>
+				<NAF>with <nounphrase/></NAF>
+				<verbphrase><word class="verb" pattern="v4">has</word>
+				predictive rate of interference <param name="N"/></verbphrase>
+			</category>
+		</categories>
+	</expression>
+
+	<expression id="ex4">
+		<mbattribute>C04_solidarist_association</mbattribute>
+		<meaning>Solidarist Association</meaning>
+		<categories>
+			<category>
+				<value>all</value>
+				<meaning>used for all values</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase>predictive rate of solidarist association <param name="N"/></nounphrase>
+				<NAF>with <nounphrase/></NAF>
+				<verbphrase><word class="verb" pattern="v4">has</word>
+				predictive rate of solidarist association <param name="N"/></verbphrase>
+			</category>
+		</categories>
+	</expression>
+
+	<expression id="ex5">
+		<mbattribute>C05_collective_bargaining</mbattribute>
+		<meaning>Collective Bargaining</meaning>		
+		<categories>
+			<category>
+				<value>all</value>
+				<meaning>used for all values</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase>predictive rate of collective bargaining <param name="N"/></nounphrase>
+				<NAF>with <nounphrase/></NAF>
+				<verbphrase><word class="verb" pattern="v4">has</word>
+				predictive rate of collective bargaining <param name="N"/></verbphrase>
+			</category>
+		</categories>
+	</expression>
+
+	<expression id="ex6">
+		<mbattribute>C06_free_and_voluntary</mbattribute>
+		<meaning>Free And Voluntary</meaning>
+		<categories>
+			<category>
+				<value>all</value>
+				<meaning>used for all values</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase>predictive rate of free and voluntary <param name="N"/></nounphrase>
+				<NAF>with <nounphrase/></NAF>
+				<verbphrase><word class="verb" pattern="v4">has</word>
+				predictive rate of free and voluntary <param name="N"/></verbphrase>
+			</category>
+		</categories>
+	</expression>
+
+	<expression id="ex7">
+		<mbattribute>C07_specific_workers</mbattribute>
+		<meaning>Specific Workers</meaning>		
+		<categories>
+			<category>
+				<value>all</value>
+				<meaning>used for all values</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase>predictive rate of specific workers <param name="N"/></nounphrase>
+				<NAF>with <nounphrase/></NAF>
+				<verbphrase><word class="verb" pattern="v4">has</word>
+				predictive rate of specific workers <param name="N"/></verbphrase>
+			</category>
+		</categories>
+	</expression>
+
+	<expression id="ex8">
+		<mbattribute>C08_requirements</mbattribute>
+		<meaning>Requirements</meaning>
+		<categories>
+			<category>
+				<value>all</value>
+				<meaning>used for all values</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase>predictive rate of requirements <param name="N"/></nounphrase>
+				<NAF>with <nounphrase/></NAF>
+				<verbphrase><word class="verb" pattern="v4">has</word>
+				predictive rate of requirements <param name="N"/></verbphrase>
+			</category>
+		</categories>
+	</expression>
+
+	<expression id="ex9">
+		<mbattribute>C09_registration</mbattribute>
+		<meaning>Registration</meaning>
+		<categories>
+			<category>
+				<value>all</value>
+				<meaning>used for all values</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase>predictive rate of registration <param name="N"/></nounphrase>
+				<NAF>with <nounphrase/></NAF>
+				<verbphrase><word class="verb" pattern="v4">has</word>
+				predictive rate of registration <param name="N"/></verbphrase>
+			</category>
+		</categories>
+	</expression>
+
+	<expression id="ex10">
+		<mbattribute>C10_level</mbattribute>
+		<meaning>Level</meaning>
+		<categories>
+			<category>
+				<value>all</value>
+				<meaning>used for all values</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase>predictive rate of level <param name="N"/></nounphrase>
+				<NAF>with <nounphrase/></NAF>
+				<verbphrase><word class="verb" pattern="v4">has</word>
+				predictive rate of level <param name="N"/></verbphrase>
+			</category>
+		</categories>
+	</expression>
+	<expression id="ex11">
+		<mbattribute>C11_approval_refusal</mbattribute>
+		<meaning>Approval Refusal</meaning>		
+		<categories>
+			<category>
+				<value>all</value>
+				<meaning>used for all values</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase>predictive rate of approval refusal <param name="N"/></nounphrase>
+				<NAF>with <nounphrase/></NAF>
+				<verbphrase><word class="verb" pattern="v4">has</word>
+				predictive rate of approval refusal <param name="N"/></verbphrase>
+			</category>
+		</categories>
+	</expression>
+
+	<expression id="ex12">
+		<mbattribute>C12_arbitration</mbattribute>
+		<meaning>Arbitration</meaning>
+		<categories>
+			<category>
+				<value>all</value>
+				<meaning>used for all values</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase>predictive rate of arbitration <param name="N"/></nounphrase>
+				<NAF>with <nounphrase/></NAF>
+				<verbphrase><word class="verb" pattern="v4">has</word>
+				predictive rate of arbitration <param name="N"/></verbphrase>
+			</category>
+		</categories>
+	</expression>
+
+	<expression id="ex13">
+		<mbattribute>C13_decision_negociation_from_authorities</mbattribute>
+		<meaning>Decision Negotiation From Authorities</meaning>		
+		<categories>
+			<category>
+				<value>all</value>
+				<meaning>used for all values</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase>predictive rate of decision negotiation from authorities <param name="N"/></nounphrase>
+				<NAF>with <nounphrase/></NAF>
+				<verbphrase><word class="verb" pattern="v4">has</word>
+				predictive rate of decision negotiation from authorities <param name="N"/></verbphrase>
+			</category>
+		</categories>
+	</expression>
+
+	<expression id="ex14">
+		<mbattribute>Country</mbattribute>
+		<meaning>Country</meaning>
+		
+		<categories>
+			<category>
+				<value>Argentina1991</value>
+				<meaning>Argentina1991</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF> </NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Argentina1994</value>
+				<meaning>Argentina1994</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF> </NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Argentina1995</value>
+				<meaning>Argentina1995</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF> </NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Argentina1997</value>
+				<meaning>Argentina1997</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF> </NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Argentina1999</value>
+				<meaning>Argentina1999</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF> </NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Argentina2001</value>
+				<meaning>Argentina2001</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF> </NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Argentina2003</value>
+				<meaning>Argentina2003</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF> </NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>bengladesh1991</value>
+				<meaning>bengladesh1991</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF> </NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>bengladesh1994</value>
+				<meaning>bengladesh1994</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF> </NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>bengladesh1995</value>
+				<meaning>bengladesh1995</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF> </NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>bengladesh1997</value>
+				<meaning>bengladesh1997</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF> </NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>bengladesh2000</value>
+				<meaning>bengladesh2000</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF> </NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>bengladesh2001</value>
+				<meaning>bengladesh2001</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF> </NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>bengladesh2003</value>
+				<meaning>bengladesh2003</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF> </NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>costa rica1991</value>
+				<meaning>costa rica1991</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF> </NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>costa rica1994</value>
+				<meaning>costa rica1994</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF> </NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>costa rica1997</value>
+				<meaning>costa rica1997</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF> </NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>costa rica1998</value>
+				<meaning>costa rica1998</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF> </NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>costa rica1999</value>
+				<meaning>costa rica1999</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF> </NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>costa rica2001</value>
+				<meaning>costa rica2001</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF> </NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>costa rica2003</value>
+				<meaning>costa rica2003</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF> </NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Egypt1991</value>
+				<meaning>Egypt1991</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF> </NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Egypt1994</value>
+				<meaning>Egypt1994</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF> </NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Egypt1995</value>
+				<meaning>Egypt1995</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF> </NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Egypt1997</value>
+				<meaning>Egypt1997</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF> </NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Egypt1999</value>
+				<meaning>Egypt1999</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF> </NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Egypt2001</value>
+				<meaning>Egypt2001</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF> </NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Egypt2003</value>
+				<meaning>Egypt2003</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF> </NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Greece1991</value>
+				<meaning>Greece1991</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF> </NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Greece1993</value>
+				<meaning>Greece1993</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF> </NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Greece1994</value>
+				<meaning>Greece1994</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF> </NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Greece1995</value>
+				<meaning>Greece1995</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF> </NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Greece1998</value>
+				<meaning>Greece1998</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF> </NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Greece1999</value>
+				<meaning>Greece1999</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF> </NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Greece2000</value>
+				<meaning>Greece2000</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF> </NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Greece2003</value>
+				<meaning>Greece2003</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF> </NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Hungary1991</value>
+				<meaning>Hungary1991</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF> </NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Hungary1994</value>
+				<meaning>Hungary1994</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF> </NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Hungary1995</value>
+				<meaning>Hungary1995</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF> </NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Hungary1997</value>
+				<meaning>Hungary1997</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF> </NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Hungary1999</value>
+				<meaning>Hungary1999</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF> </NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Hungary2003</value>
+				<meaning>Hungary2003</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF> </NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Indonesia1991</value>
+				<meaning>Indonesia1991</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF> </NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Indonesia1993</value>
+				<meaning>Indonesia1993</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF> </NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Indonesia1995</value>
+				<meaning>Indonesia1995</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF> </NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Indonesia1997</value>
+				<meaning>Indonesia1997</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF> </NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Indonesia1999</value>
+				<meaning>Indonesia1999</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF> </NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Indonesia2001</value>
+				<meaning>Indonesia2001</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF> </NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Indonesia2003</value>
+				<meaning>Indonesia2003</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF> </NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Nicaragua1992</value>
+				<meaning>Nicaragua1992</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF> </NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Nicaragua1994</value>
+				<meaning>Nicaragua1994</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF> </NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Nicaragua1995</value>
+				<meaning>Nicaragua1995</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF> </NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Nicaragua1997</value>
+				<meaning>Nicaragua1997</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF> </NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Nicaragua1999</value>
+				<meaning>Nicaragua1999</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF> </NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>Nicaragua2001</value>
+				<meaning>Nicaragua2001</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF> </NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>poland1990</value>
+				<meaning>poland1990</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF> </NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>poland1992</value>
+				<meaning>poland1992</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF> </NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>poland1995</value>
+				<meaning>poland1995</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF> </NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>poland1997</value>
+				<meaning>poland1997</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF> </NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>poland1999</value>
+				<meaning>poland1999</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF> </NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>poland2000</value>
+				<meaning>poland2000</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF> </NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>russia1998</value>
+				<meaning>russia1998</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF> </NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>russia2003</value>
+				<meaning>russia2003</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF> </NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>South Africa1998</value>
+				<meaning>South Africa1998</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF> </NAF>
+				<verbphrase></verbphrase>
+			</category>
+			<category>
+				<value>South Africa1999</value>
+				<meaning>South Africa1999</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase></nounphrase>
+				<NAF> </NAF>
+				<verbphrase></verbphrase>
+			</category>
+		</categories>
+	</expression>
+
+	<expression id="ex15">
+		<mbattribute>V01_Anti_union_discrimination</mbattribute>
+		<meaning>Antiunion Discrimination</meaning>
+		<NPinv>of antiunion discrimination</NPinv>
+		<VPinv>absent from antiunion discrimination</VPinv>
+		<categories>
+			<category>
+				<value>0</value>
+				<meaning>absence of antiunion discrimination</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase>absence <NPinv/></nounphrase>
+				<NAF>with <nounphrase/></NAF>
+				<verbphrase>
+					<word class="verb" pattern="v5">is</word> <VPinv/>
+				</verbphrase>
+			</category>
+			<category>
+				<value>1</value>
+				<meaning>presence of antiunion discrimination</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase>presence <NPinv/></nounphrase>
+				<NAF>without absence <NPinv/></NAF>
+				<verbphrase>
+					<word class="verb" pattern="v5">is</word> not <VPinv/>
+				</verbphrase>
+			</category>
+		</categories>
+	</expression>
+
+	<expression id="ex16">
+		<mbattribute>V02_Acts_of_interference</mbattribute>
+		<meaning>Acts Of Interference</meaning>
+		<NPinv>of acts of interference</NPinv>
+		<VPinv>absent from acts of interference</VPinv>
+		<categories>
+			<category>
+				<value>0</value>
+				<meaning>absence of acts of interference</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase>absence <NPinv/></nounphrase>
+				<NAF>with <nounphrase/></NAF>
+				<verbphrase>
+					<word class="verb" pattern="v5">is</word> <VPinv/>
+				</verbphrase>
+			</category>
+			<category>
+				<value>1</value>
+				<meaning>presence of acts of interference</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase>presence <NPinv/></nounphrase>
+				<NAF>without absence <NPinv/></NAF>
+				<verbphrase>
+					<word class="verb" pattern="v5">is</word> not <VPinv/>
+				</verbphrase>
+			</category>
+		</categories>
+	</expression>
+
+	<expression id="ex17">
+		<mbattribute>V03_Solidarist_associations</mbattribute>
+		<meaning>Solidarist Associations</meaning>
+		<NPinv>of solidarist associations</NPinv>
+		<VPinv>absent from solidarist associations</VPinv>
+		<categories>
+			<category>
+				<value>0</value>
+				<meaning>absence of solidarist associations</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase>absence <NPinv/></nounphrase>
+				<NAF>with <nounphrase/></NAF>
+				<verbphrase>
+					<word class="verb" pattern="v5">is</word> <VPinv/>
+				</verbphrase>
+			</category>
+			<category>
+				<value>1</value>
+				<meaning>presence of solidarist associations</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase>presence <NPinv/></nounphrase>
+				<NAF>without absence <NPinv/></NAF>
+				<verbphrase>
+					<word class="verb" pattern="v5">is</word> not <VPinv/>
+				</verbphrase>
+			</category>
+		</categories>
+	</expression>
+
+	<expression id="ex18">
+		<mbattribute>V04_Promotion_of_free</mbattribute>
+		<meaning>Promotion Of Free</meaning>
+		<NPinv>of promotion of free</NPinv>
+		<VPinv>absent from promotion of free</VPinv>
+		<categories>
+			<category>
+				<value>0</value>
+				<meaning>absence of promotion of free</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase>absence <NPinv/></nounphrase>
+				<NAF>with <nounphrase/></NAF>
+				<verbphrase>
+					<word class="verb" pattern="v5">is</word> <VPinv/>
+				</verbphrase>
+			</category>
+			<category>
+				<value>1</value>
+				<meaning>presence of promotion of free</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase>presence <NPinv/></nounphrase>
+				<NAF>without absence <NPinv/></NAF>
+				<verbphrase>
+					<word class="verb" pattern="v5">is</word> not <VPinv/>
+				</verbphrase>
+			</category>
+		</categories>
+	</expression>
+
+	<expression id="ex19">
+		<mbattribute>V05_Right</mbattribute>
+		<meaning>Right</meaning>
+		<NPinv>of right</NPinv>
+		<VPinv>absent from right</VPinv>
+		<categories>
+			<category>
+				<value>0</value>
+				<meaning>absence of right</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase>absence <NPinv/></nounphrase>
+				<NAF>with <nounphrase/></NAF>
+				<verbphrase>
+					<word class="verb" pattern="v5">is</word> <VPinv/>
+				</verbphrase>
+			</category>
+			<category>
+				<value>1</value>
+				<meaning>presence of right</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase>presence <NPinv/></nounphrase>
+				<NAF>without absence <NPinv/></NAF>
+				<verbphrase>
+					<word class="verb" pattern="v5">is</word> not <VPinv/>
+				</verbphrase>
+			</category>
+		</categories>
+	</expression>
+
+	<expression id="ex20">
+		<mbattribute>V06_Designation_</mbattribute>
+		<meaning>Designation</meaning>
+		<NPinv>of designation</NPinv>
+		<VPinv>absent from designation</VPinv>
+		<categories>
+			<category>
+				<value>0</value>
+				<meaning>absence of designation</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase>absence <NPinv/></nounphrase>
+				<NAF>with <nounphrase/></NAF>
+				<verbphrase>
+					<word class="verb" pattern="v5">is</word> <VPinv/>
+				</verbphrase>
+			</category>
+			<category>
+				<value>1</value>
+				<meaning>presence of designation</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase>presence <NPinv/></nounphrase>
+				<NAF>without absence <NPinv/></NAF>
+				<verbphrase>
+					<word class="verb" pattern="v5">is</word> not <VPinv/>
+				</verbphrase>
+			</category>
+		</categories>
+	</expression>
+
+	<expression id="ex21">
+		<mbattribute>V07_Level_and_scope</mbattribute>
+		<meaning>Level And Scope</meaning>
+		<NPinv>of level and scope</NPinv>
+		<VPinv>absent from level and scope</VPinv>
+		<categories>
+			<category>
+				<value>0</value>
+				<meaning>absence of level and scope</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase>absence <NPinv/></nounphrase>
+				<NAF>with <nounphrase/></NAF>
+				<verbphrase>
+					<word class="verb" pattern="v5">is</word> <VPinv/>
+				</verbphrase>
+			</category>
+			<category>
+				<value>1</value>
+				<meaning>presence of level and scope</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase>presence <NPinv/></nounphrase>
+				<NAF>without absence <NPinv/></NAF>
+				<verbphrase>
+					<word class="verb" pattern="v5">is</word> not <VPinv/>
+				</verbphrase>
+			</category>
+		</categories>
+	</expression>
+
+	<expression id="ex22">
+		<mbattribute>V08_Negotiable_issues</mbattribute>
+		<NPinv>of negotiable issues</NPinv>
+		<VPinv>absent from negotiable issues</VPinv>
+		<categories>
+			<category>
+				<value>0</value>
+				<meaning>absence of negotiable issues</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase>absence <NPinv/></nounphrase>
+				<NAF>with <nounphrase/></NAF>
+				<verbphrase>
+					<word class="verb" pattern="v5">is</word> <VPinv/>
+				</verbphrase>
+			</category>
+			<category>
+				<value>1</value>
+				<meaning>presence of negotiable issues</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase>presence <NPinv/></nounphrase>
+				<NAF>without absence <NPinv/></NAF>
+				<verbphrase>
+					<word class="verb" pattern="v5">is</word> not <VPinv/>
+				</verbphrase>
+			</category>
+		</categories>
+	</expression>
+
+	<expression id="ex23">
+		<mbattribute>V09_Approval</mbattribute>
+		<meaning>Approval</meaning>
+		<NPinv>of approval</NPinv>
+		<VPinv>absent from approval</VPinv>
+		<categories>
+			<category>
+				<value>0</value>
+				<meaning>absence of approval</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase>absence <NPinv/></nounphrase>
+				<NAF>with <nounphrase/></NAF>
+				<verbphrase>
+					<word class="verb" pattern="v5">is</word> <VPinv/>
+				</verbphrase>
+			</category>
+			<category>
+				<value>1</value>
+				<meaning>presence of approval</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase>presence <NPinv/></nounphrase>
+				<NAF>without absence <NPinv/></NAF>
+				<verbphrase>
+					<word class="verb" pattern="v5">is</word> not <VPinv/>
+				</verbphrase>
+			</category>
+		</categories>
+	</expression>
+
+	<expression id="ex24">
+		<mbattribute>V10_Compulsory_arbitration</mbattribute>
+		<meaning>Compulsory Arbitration</meaning>
+		<NPinv>of compulsory arbitration</NPinv>
+		<VPinv>absent from compulsory arbitration</VPinv>
+		<categories>
+			<category>
+				<value>0</value>
+				<meaning>absence of compulsory arbitration</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase>absence <NPinv/></nounphrase>
+				<NAF>with <nounphrase/></NAF>
+				<verbphrase>
+					<word class="verb" pattern="v5">is</word> <VPinv/>
+				</verbphrase>
+			</category>
+			<category>
+				<value>1</value>
+				<meaning>presence of compulsory arbitration</meaning>
+				<adjphrase relposition="R"></adjphrase>
+				<nounphrase>presence <NPinv/></nounphrase>
+				<NAF>without absence <NPinv/></NAF>
+				<verbphrase>
+					<word class="verb" pattern="v5">is</word> not <VPinv/>
+				</verbphrase>
+			</category>
+		</categories>
+	</expression>
+</elementaryexpressions>
