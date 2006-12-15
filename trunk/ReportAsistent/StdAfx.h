@@ -2,7 +2,25 @@
 //  or project specific include files that are used frequently, but
 //      are changed infrequently
 //
+/*
+This file is part of LM Report Asistent.
 
+Authors: Jan Dedek, Jan Kodym, Martin Chrz, Iva Bartunkova
+
+LM Report Asistent is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+Foobar is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with Foobar; if not, write to the Free Software
+Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+*/
 #if !defined(AFX_STDAFX_H__C54A2D30_CB5E_4C5E_92DA_96F4DB9D2EE4__INCLUDED_)
 #define AFX_STDAFX_H__C54A2D30_CB5E_4C5E_92DA_96F4DB9D2EE4__INCLUDED_
 

@@ -1,6 +1,24 @@
 // WaitDialog.cpp : implementation file
 //
+/*
+This file is part of LM Report Asistent.
 
+Authors: Jan Dedek, Jan Kodym, Martin Chrz, Iva Bartunkova
+
+LM Report Asistent is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+Foobar is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with Foobar; if not, write to the Free Software
+Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+*/
 
 
 
@@ -48,7 +66,7 @@ BEGIN_MESSAGE_MAP(CWaitDialog, CDialog)
 	ON_BN_CLICKED(IDC_RESUME_APP_BUTTON, OnResumeAppButton)
 	ON_WM_DESTROY()
 	//}}AFX_MSG_MAP
-	ON_STN_CLICKED(IDC_REASON_TEXT, &CWaitDialog::OnStnClickedReasonText)
+	ON_STN_CLICKED(IDC_REASON_TEXT, OnStnClickedReasonText)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////

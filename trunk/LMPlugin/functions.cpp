@@ -1,5 +1,24 @@
 // implementace funkci pro vyrizeni pozadavku na AP v zasuvce pro LM
-// functions.h
+// functions.cpp
+/*
+This file is part of LM Report Asistent.
+
+Authors: Jan Dedek, Jan Kodym, Martin Chrz, Iva Bartunkova
+
+LM Report Asistent is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+Foobar is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with Foobar; if not, write to the Free Software
+Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+*/
 #include "functions.h"
 #include "Hyp_4ft_Recordset.h"
 #include "TCategory_Recordset.h"
@@ -2529,7 +2548,14 @@ CString fLM4fthyp_hlp(void * hSource, bool ar2nl)
 				pthyp->chi_sq = pthyp->get_chi_sq ();
 
 				ar2nl_err = false;
-				if (ar2nl) pthyp->ar2nl_sentences = Get_4ftAR2NL (h_id, db_name);
+				try
+				{
+					if (ar2nl) pthyp->ar2nl_sentences = Get_4ftAR2NL (h_id, db_name);
+				}
+				catch (...)
+				{
+					ar2nl_err = true;
+				}
 				if (ar2nl_err)
 				{
 					CLMSock::ReportError (10, LMERR_AR2NL_ERR);
