@@ -44,6 +44,11 @@
 
 
 //Iva: Definition of class for OnUpdate(), its pHint parameter
+/**
+ * class CUT_Hint:
+ *
+ * @author 
+ */
 class CUT_Hint : public CObject
 {
 public:
@@ -53,6 +58,11 @@ public:
 	MSXML2::IXMLDOMElementPtr pElement;
 	HTREEITEM pInsertAfter;
 
+	/**
+	 * CUT_Hint:
+	 *
+	 * @return  
+	 */
 	CUT_Hint()
 	{
 		bNewItemTexts=false;
@@ -62,6 +72,14 @@ public:
 		pInsertAfter= TVI_LAST;
 	}
 
+	/**
+	 * CUT_Hint:
+	 *
+	 * @param a 
+	 * @param b 
+	 * @param c 
+	 * @return  
+	 */
 	CUT_Hint(HTREEITEM a, MSXML2::IXMLDOMElementPtr b, HTREEITEM c )
 	{
 		pTreeItem = a;
@@ -72,6 +90,11 @@ public:
 
 
 
+/**
+ * class CSkeletonView:
+ *
+ * @author 
+ */
 class CSkeletonView : public CTreeView
 {
 protected: // create from serialization only
@@ -80,6 +103,11 @@ protected: // create from serialization only
 
 // Attributes
 public:
+	/**
+	 * GetDocument:
+	 *
+	 * @return CSkeletonDoc* 
+	 */
 	CSkeletonDoc* GetDocument();
 
 // Operations
@@ -101,9 +129,20 @@ public:
 // Implementation
 	
 protected:
+	/**
+	 * DeleteItem:
+	 *
+	 * @param hSelTreeItem 
+	 * @return void 
+	 */
 	void DeleteItem(HTREEITEM hSelTreeItem);
 
 public:
+	/**
+	 * DeleteSelectedItem:
+	 *
+	 * @return void 
+	 */
 	void DeleteSelectedItem();
 	CImageList m_ImageList;
 	BOOL m_bDragging;
@@ -121,6 +160,12 @@ protected:
 
 // Generated message map functions
 protected:
+	/**
+	 * UpdateAllItemTexts:
+	 *
+	 * @param pItem 
+	 * @return void 
+	 */
 	void UpdateAllItemTexts(HTREEITEM pItem);
 	//{{AFX_MSG(CSkeletonView)
 	afx_msg void OnDeleteitem(NMHDR* pNMHDR, LRESULT* pResult);

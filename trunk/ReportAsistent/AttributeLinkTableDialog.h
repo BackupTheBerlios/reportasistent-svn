@@ -15,6 +15,11 @@
 /////////////////////////////////////////////////////////////////////////////
 // CAttributeLinkTableDialog dialog
 
+/**
+ * class CAttributeLinkTableDialog:
+ *
+ * @author 
+ */
 class CAttributeLinkTableDialog : public CDialog, CAttributeLinkDialogBase
 {
 // Construction

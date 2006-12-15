@@ -10,6 +10,11 @@
 /////////////////////////////////////////////////////////////////////////////
 // CEToolBar window
 
+/**
+ * class CEToolBar:
+ *
+ * @author 
+ */
 class CEToolBar : public CToolBar
 {
 // Construction

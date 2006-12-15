@@ -13,6 +13,11 @@
 /////////////////////////////////////////////////////////////////////////////
 // CComplexFilterDialog dialog
 
+/**
+ * class CAElDataShare:
+ *
+ * @author 
+ */
 class CAElDataShare
 {
 protected:
@@ -36,6 +41,11 @@ public:
    	MSXML2::IXMLDOMElementPtr & m_filter_DOM;
 };
 
+/**
+ * class CFilterResultImpl:
+ *
+ * @author 
+ */
 class CFilterResultImpl
 {
 protected:
@@ -55,6 +65,11 @@ protected:
 };
 
 
+/**
+ * class CComplexFilterDialog:
+ *
+ * @author 
+ */
 class CComplexFilterDialog : public CDialog, CFilterResultImpl
 {
 //	DECLARE_DYNCREATE(CComplexFilterDialog)

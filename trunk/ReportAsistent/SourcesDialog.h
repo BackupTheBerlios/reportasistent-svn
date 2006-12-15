@@ -10,6 +10,11 @@
 /////////////////////////////////////////////////////////////////////////////
 // CSourcesDialog dialog
 
+/**
+ * class CSourcesDialog:
+ *
+ * @author 
+ */
 class CSourcesDialog : public CDialog
 {
 
@@ -38,6 +43,11 @@ public:
 
 // Implementation
 protected:
+	/**
+	 * SetDefault:
+	 *
+	 * @return void 
+	 */
 	void SetDefault();
 
 	// Generated message map functions

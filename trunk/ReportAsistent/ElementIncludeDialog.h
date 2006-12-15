@@ -10,6 +10,11 @@
 /////////////////////////////////////////////////////////////////////////////
 // CElementIncludeDialog dialog
 
+/**
+ * class CElementIncludeDialog:
+ *
+ * @author 
+ */
 class CElementIncludeDialog : public CDialog
 {
 // Construction

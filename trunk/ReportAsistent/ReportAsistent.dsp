@@ -357,10 +357,6 @@ SOURCE=.\SimpleFilterDialog.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\SkeletonManager.h
-# End Source File
-# Begin Source File
-
 SOURCE=.\SkeletonView.h
 # End Source File
 # Begin Source File

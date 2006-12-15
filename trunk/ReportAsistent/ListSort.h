@@ -18,6 +18,11 @@
 ******************************************************************************/
 #if !defined(AFX_LISTSORT_H__3381E8C6_1360_11D3_97B9_005004055F30__INCLUDED_)
 #define AFX_LISTSORT_H__3381E8C6_1360_11D3_97B9_005004055F30__INCLUDED_
+/**
+ * class CListSort:
+ *
+ * @author 
+ */
 class CListSort  
 {
 
@@ -26,16 +31,43 @@ public:
     
     CListSort(CListCtrl * _pWnd, const int _iCol);
     virtual ~CListSort();
-    void Sort(bool _bAsc, EDataType _dtype);
+    /**
+    * Sort:
+    *
+    * @param _bAsc 
+    * @param _dtype 
+    * @return void 
+    */
+   void Sort(bool _bAsc, EDataType _dtype);
+	/**
+	 * GetItemPosition:
+	 *
+	 * @param pItem 
+	 * @param lParamSort 
+	 * @return int 
+	 */
 	int GetItemPosition(LVITEM *pItem, LONG lParamSort);
         
 protected:
     CListCtrl * m_pWnd;
     
+    /**
+     * Compare:
+     *
+     * @param lParam1 
+     * @param lParam2 
+     * @param lParamSort 
+     * @return static int CALLBACK 
+     */
     static int CALLBACK Compare(LPARAM lParam1, LPARAM lParam2, LPARAM 
             lParamSort);
    
 	// The CSortItem class is used to hold data while Sort is executing.
+    /**
+     * struct CSortItem:
+     *
+     * @author 
+     */
     struct CSortItem
     {
             CSortItem(const DWORD _dw, const CString &_txt);

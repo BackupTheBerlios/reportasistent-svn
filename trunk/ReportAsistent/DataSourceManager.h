@@ -45,30 +45,53 @@
 // ================= DATOVE TYPY =============================
 
 // typ ukazatel na funkci _SOCK_IFACE_FN_NAME
+/**
+ * pSockIfaceFn_t:
+ */
 typedef CSockInterface* (* pSockIfaceFn_t) ();
 
 
 // --- polozky tabulky zdroju
 
 //retezec pouzivany v kostre u AP jako identifikator zdroje
+	/**
+	 * public_source_id_t:
+	 */
 	typedef CString public_source_id_t;
 
 //perzistentni retezec (obshuje napr connection string, cestu k souboru)
-	typedef CString persistent_id_t;
+	/**
+ * persistent_id_t:
+ */
+typedef CString persistent_id_t;
 
 //identifikuje zasuvku
 //jmeno DLL souboru zasuvky v adresari Plugin
-	typedef CString plugin_id_t;
+	/**
+ * plugin_id_t:
+ */
+typedef CString plugin_id_t;
 
 //index zasuvky v tabulce zasuvek
-	typedef int plugin_index_t;
+	/**
+ * plugin_index_t:
+ */
+typedef int plugin_index_t;
 
 //ukazatel na otevreny zdroj
-	typedef void* source_handle_t;
+	/**
+ * source_handle_t:
+ */
+typedef void* source_handle_t;
 
 // ================== TRIDY ==================================
 
 // bufferovani vystupu
+/**
+ * class APBuf:
+ *
+ * @author 
+ */
 class APBuf
 {
 public:
@@ -79,27 +102,82 @@ public:
 	APBuf();
 	~APBuf();
 
-	BOOL isBufferInitialized();
+	/**
+ * isBufferInitialized:
+ *
+ * @return BOOL 
+ */
+BOOL isBufferInitialized();
 
 
-	static BOOL setBuffer(BSTR str, MSXML2::IXMLDOMDocumentPtr & xml);
+	/**
+ * setBuffer:
+ *
+ * @param str 
+ * @param xml 
+ * @return static BOOL 
+ */
+static BOOL setBuffer(BSTR str, MSXML2::IXMLDOMDocumentPtr & xml);
 };
 
 
+/**
+ * class COutputBuffer:
+ *
+ * @author 
+ */
 class COutputBuffer
 {
 	CArray<APBuf*,APBuf*> BufArray;	// pole bufferu
 
 public:
-	int getBuffersCount();  // ret. number of AP which are buffered for the current data source
+	/**
+ * getBuffersCount:
+ *
+ * @return int 
+ */
+int getBuffersCount();  // ret. number of AP which are buffered for the current data source
+	/**
+	 * getAPIndex:
+	 *
+	 * @param APName 
+	 * @return int 
+	 */
 	int getAPIndex(CString APName);
+	/**
+	 * isAPBuffered:
+	 *
+	 * @param APName 
+	 * @return BOOL 
+	 */
 	BOOL isAPBuffered(CString APName);
+	/**
+	 * getBuffer:
+	 *
+	 * @param APName 
+	 * @param xml_dom 
+	 * @return BOOL 
+	 */
 	BOOL getBuffer(CString APName, MSXML2::IXMLDOMDocument ** xml_dom); //returns buffer for given AP
+	/**
+	 * setBuffer:
+	 *
+	 * @param APName 
+	 * @param Buffer 
+	 * @return void 
+	 */
 	void setBuffer(CString APName, BSTR Buffer); // sets buffer -||-
 
 	COutputBuffer();
 	~COutputBuffer();
 private:
+	/**
+	 * insertNewAP:
+	 *
+	 * @param APName 
+	 * @param Buffer 
+	 * @return int 
+	 */
 	int insertNewAP(CString APName, BSTR Buffer);
 
 };
@@ -107,6 +185,11 @@ private:
 
 
 // --------- CPluginRec - polozka tabulky zasuvek
+/**
+ * class CPluginRec:
+ *
+ * @author 
+ */
 class CPluginRec 
 {
 public:
@@ -114,7 +197,12 @@ public:
 	HMODULE       hLib;			// handle na otevrenou DLL
 	CSockInterface* SockInterface;	// ukazatel na instanci CSockInterface (rozhrani zasuvky) ktera se v zasuvce
 									// vytvori po pripojeni. Tuto polozku vrati fce initSock() v zasuvce
-	BOOL Valid();						// priznak, zda je DLL platna (implementuje zasuvku) a byla vporadku pripojena
+	/**
+ * Valid:
+ *
+ * @return BOOL 
+ */
+BOOL Valid();						// priznak, zda je DLL platna (implementuje zasuvku) a byla vporadku pripojena
 
 	// konstruktor a destruktor
 	CPluginRec(plugin_id_t Name = "");
@@ -122,6 +210,11 @@ public:
 };
 
 // --------- CSourceRec - polozka tabulky zdroju
+/**
+ * class CSourceRec:
+ *
+ * @author 
+ */
 class CSourceRec
 {
 public:
@@ -136,6 +229,11 @@ public:
 					  // == -1 pokut takovy neexistuje	
 	
 	
+	/**
+	 * Valid:
+	 *
+	 * @return BOOL 
+	 */
 	BOOL Valid();					// priznak, zda je tento zaznam v poradku
 
 
@@ -150,6 +248,11 @@ public:
 //je to udelany jako indexovany pole, ale poradi se muze behem zivota menit
 //to jsem si kdysi neco dal na index 10 neznamena, ze to tam bude navzdy
 //ale poradi se meni asi jen funkci RemoveSource
+/**
+ * class CDataSourcesManager:
+ *
+ * @author 
+ */
 class CDataSourcesManager
 {
 private:
@@ -159,11 +262,48 @@ private:
 	CArray<CSourceRec *, CSourceRec *> SourcesTab;	// tabulka zdroju
 
 public:
+	/**
+	 * isElementSupportedByPlugin:
+	 *
+	 * @param plugin_index 
+	 * @param element_name 
+	 * @return BOOL 
+	 */
 	BOOL isElementSupportedByPlugin(int plugin_index, LPCTSTR element_name);
+	/**
+	 * isElementSupportedByPlugin:
+	 *
+	 * @param plugin_name 
+	 * @param element_name 
+	 * @return BOOL 
+	 */
 	BOOL isElementSupportedByPlugin(LPCTSTR plugin_name, LPCTSTR element_name);
+	/**
+	 * setDefaultSource:
+	 *
+	 * @param source 
+	 * @return void 
+	 */
 	void setDefaultSource(public_source_id_t source);
+	/**
+	 * getDefaultSource:
+	 *
+	 * @return public_source_id_t 
+	 */
 	public_source_id_t getDefaultSource();
+	/**
+	 * isPluginValid:
+	 *
+	 * @param plugin_index 
+	 * @return BOOL 
+	 */
 	BOOL isPluginValid(int plugin_index);
+	/**
+	 * isSourceValid:
+	 *
+	 * @param source_index 
+	 * @return BOOL 
+	 */
 	BOOL isSourceValid(int source_index);
 
 	
@@ -174,11 +314,28 @@ public:
 	~CDataSourcesManager();
 
 	// inicializuje tabulku zasuvek, vrati pocet zasuvek
+	/**
+	 * initPlugsTab:
+	 *
+	 * @param plugins_dir_path 
+	 * @return int 
+	 */
 	int initPlugsTab(LPCTSTR plugins_dir_path);
 
 	// inicializuje tabulku zdroju z konfiguracniho XML souboru
+	/**
+	 * initSourcesTab:
+	 *
+	 * @param config_file_path 
+	 * @return BOOL 
+	 */
 	BOOL initSourcesTab(LPCTSTR config_file_path);
 	// ulozi tabulku zdroju do konfiguracniho XML souboru
+	/**
+	 * saveSourcesTab:
+	 *
+	 * @return BOOL 
+	 */
 	BOOL saveSourcesTab();
 
 
@@ -186,13 +343,35 @@ public:
 	// --- pristupove metody do tabulky zasuvek (PlugsTab)
 	
 	// pocet pripojenych zasuvek (prvku PlugsTab) / pocet pripojenych platnych zasuvek
+	/**
+	 * getPlugsCount:
+	 *
+	 * @return int 
+	 */
 	int getPlugsCount();			
+	/**
+	 * getValidPlugsCount:
+	 *
+	 * @return int 
+	 */
 	int getValidPlugsCount();
 
 	// vrati PluginName zasuvky na dane pozici
+	/**
+	 * getPluginID:
+	 *
+	 * @param plugin_index 
+	 * @return plugin_id_t 
+	 */
 	plugin_id_t getPluginID(int plugin_index);
 
 	//  vrati index v PlugsTab, kdr je zasuvka s PluginName name nebo -1 (nenalezeno)
+	/**
+	 * FindPluginByPluginName:
+	 *
+	 * @param name 
+	 * @return int 
+	 */
 	int FindPluginByPluginName(plugin_id_t name);
 
 
@@ -200,49 +379,155 @@ public:
 	// --- pristupove a konfiguracni metody do tabulky zdroju (SourcesTab)
 
 	// vrati pocet zdroju (prvku v tabulce SourcesTab)
+	/**
+	 * getSourcesCount:
+	 *
+	 * @return int 
+	 */
 	int getSourcesCount();
+	/**
+	 * getValidSourcesCount:
+	 *
+	 * @return int 
+	 */
 	int getValidSourcesCount();
 
 	// vrati PublicID prvku na pozici source_index v tabulce zdroju
+	/**
+	 * getSourcePublicID:
+	 *
+	 * @param source_index 
+	 * @return public_source_id_t 
+	 */
 	public_source_id_t getSourcePublicID(int source_index);
 
 	// vrati PerzistentID prvku na pozici source_index v tabulce zdroju
+	/**
+	 * getSourcePersistentID:
+	 *
+	 * @param source_index 
+	 * @return persistent_id_t 
+	 */
 	persistent_id_t getSourcePersistentID(int source_index);
 
 	// vrati Plugin index (do tabulky zasuvek) prvku na pozici source_index v tabulce zdroju
+	/**
+	 * getSourcePluginIndex:
+	 *
+	 * @param source_index 
+	 * @return int 
+	 */
 	int getSourcePluginIndex(int source_index);
 
 	// vrati PluginID prvku na pozici source_index v tabulce zdroju
+	/**
+	 * getSourcePlugin:
+	 *
+	 * @param source_index 
+	 * @return plugin_id_t 
+	 */
 	plugin_id_t getSourcePlugin(int source_index);	
 	
 	// vrati handle na otevreny zdroj
+	/**
+	 * getSourceHandle:
+	 *
+	 * @param source_index 
+	 * @return source_handle_t 
+	 */
 	source_handle_t getSourceHandle(int source_index);	
 	
 
 	// prejmenovani zdroje
+	/**
+	 * setSourcePublicID:
+	 *
+	 * @param source_index 
+	 * @param source_id 
+	 * @return BOOL 
+	 */
 	BOOL setSourcePublicID(int source_index, public_source_id_t source_id); 
 
 	// test na duplicity v Public ID zdroju v SourcesTab (TRUE=bez duplicit)
+	/**
+	 * checkSourcePublicIDdupl:
+	 *
+	 * @param source_index 
+	 * @param source_id 
+	 * @return BOOL 
+	 */
 	BOOL checkSourcePublicIDdupl(int source_index, public_source_id_t source_id);
 	
 	// je zdroj pripojen?
+	/**
+	 * isSourceConnected:
+	 *
+	 * @param source_index 
+	 * @return BOOL 
+	 */
 	BOOL isSourceConnected(int source_index);
 	
 	//pres zasuvku pripoji novy zdroj
+	/**
+	 * ConnectNewSource:
+	 *
+	 * @param plugin 
+	 * @return int 
+	 */
 	int ConnectNewSource(plugin_id_t plugin);	//vrati index noveho zdroje, (-1 = chyba)
+	/**
+	 * ConnectNewSourceThreadFunction:
+	 *
+	 * @param hNewSourceFn 
+	 * @param NewSourcePerzistID 
+	 * @param h_hSource 
+	 * @return void static 
+	 */
 	void static ConnectNewSourceThreadFunction(LPARAM hNewSourceFn, LPARAM NewSourcePerzistID, LPARAM h_hSource);
 												
 	//vyhodi zdroj z tabulky zdroju
+	/**
+	 * RemoveSource:
+	 *
+	 * @param source_index 
+	 * @return BOOL 
+	 */
 	BOOL RemoveSource(int source_index);	
 
 	//pripoji jiz znamy zdroj pres zname persistnet_id na indexu source_index
+	/**
+	 * ConnectSource:
+	 *
+	 * @param source_index 
+	 * @return BOOL 
+	 */
 	BOOL ConnectSource(int source_index);
+	/**
+	 * ConnectSourceThreadFunction:
+	 *
+	 * @param hOpenSourceFn 
+	 * @param PID 
+	 * @param h_hSource 
+	 * @return void static 
+	 */
 	void static ConnectSourceThreadFunction(LPARAM hOpenSourceFn, LPARAM PID, LPARAM h_hSource);
 	
 	// uzavre zdroj
+	/**
+	 * CloseSource:
+	 *
+	 * @param source_index 
+	 * @return BOOL 
+	 */
 	BOOL CloseSource(int source_index);
 
 	// najde zdroj podle PublicID a vrati jeho index v tabulce
+	/**
+	 * FindSourceByPublicID:
+	 *
+	 * @param id 
+	 * @return int 
+	 */
 	int FindSourceByPublicID(public_source_id_t id); //vrati index odpovidajiciho zdroje
 
 
@@ -250,6 +535,14 @@ public:
 	//ktere treba nebyly vytvoreny pomoci tohoto SourcesManageru - tedy se sem bude muset nejak
 	//cast jejich source manageru pretahnout
 	//predbezne:
+	/**
+	 * AddSource:
+	 *
+	 * @param plugin 
+	 * @param persistent_id 
+	 * @param public_id 
+	 * @return int 
+	 */
 	int AddSource(plugin_id_t plugin, persistent_id_t persistent_id, public_source_id_t public_id);
 	// vrati index pridaneho prvku v tabulce zdroju
 
@@ -265,8 +558,32 @@ public:
 */	
 	//a tady nebo v plugin mamageru budou funkce pro zavaloni perform na danem zdroji
 	//predbezne:
+	/**
+	 * CallPerformProc:
+	 *
+	 * @param source_index 
+	 * @param element_id 
+	 * @return void 
+	 */
 	void CallPerformProc(int source_index, LPCTSTR element_id); //vrati XML string
+	/**
+	 * GetPluginOutput:
+	 *
+	 * @param source 
+	 * @param ap_name 
+	 * @param xml_dom 
+	 * @return BOOL 
+	 */
 	BOOL GetPluginOutput(public_source_id_t source, LPCTSTR ap_name, MSXML2::IXMLDOMDocument ** xml_dom); //zavola CallPerformProc
+	/**
+	 * PerformThreadFunction:
+	 *
+	 * @param hPreformFn 
+	 * @param hSource 
+	 * @param element_id 
+	 * @param pOutputBuffer 
+	 * @return void static 
+	 */
 	void static PerformThreadFunction(LPARAM hPreformFn, LPARAM hSource, LPARAM element_id, LPARAM pOutputBuffer);
 
 
@@ -275,6 +592,12 @@ public:
 	BOOL CallPerformProc(int source_index, char* element_id, BSTR* Result);
 */
 public:
+	/**
+	 * defaultSourceDefined:
+	 *
+	 * @param  
+	 * @return BOOL 
+	 */
 	BOOL defaultSourceDefined(void);
 };
 

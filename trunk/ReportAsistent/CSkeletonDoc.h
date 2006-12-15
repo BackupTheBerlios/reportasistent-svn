@@ -18,6 +18,11 @@ class CSkeletonView;
 #endif // _MSC_VER > 1000
 
 
+/**
+ * class CSkeletonDoc:
+ *
+ * @author 
+ */
 class CSkeletonDoc : public CDocument
 {
 protected: // create from serialization only

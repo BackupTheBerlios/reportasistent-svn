@@ -17,6 +17,9 @@
 
 // =========== TYPY ===============================
 
+/**
+ * pointer to the function, which resolve the kernel query of the certain type
+ */
 typedef CString (* pFn_t) (void*);
   // ukazatel na funkci, ktera vyridi pozadavek na AP urciteho typu
 
@@ -33,33 +36,52 @@ poskytuje:
 - funkci perform() : adresu funkce, ktera vyrizuje zadost o AP s danym ID
 */
 
+/**
+ * Creates and manages the table of the supported active elements and the functions,
+ * which evaluates the queries for this active elements.
+ *
+ * @author Jan Kodym
+ */
 class CLMSock {
 
 // TYPY
 
-  typedef struct Item_t {	// polozka tabulky nazvu podporovanych AP a ukazatelu na funkce, ktere je obslouzi
-	  CString AP_ID;	// ID aktivniho prvku
-	  pFn_t   pFn;		// uk. na funkci ktera ho obslouzi
+  /**
+ * the item of the table of supported active elements and associated functions
+ *
+ * @author Jan Kodym
+ */
+typedef struct Item_t {	// polozka tabulky nazvu podporovanych AP a ukazatelu na funkce, ktere je obslouzi
+	  CString AP_ID;	/// ID of the active element
+	  pFn_t   pFn;		/// pointer to the function for this active element
   };
 
 // DATA
 
-  int APCount;	// pocet AP, ktere zasuvka podporuje
+  int APCount;	/// number of active elements supported by the socket
 
-  Item_t APTable[_LM_AP_COUNT];	// tabulka AP a funkci
+  Item_t APTable[_LM_AP_COUNT];	/// table of active elements and functions
 
 // METODY
 
-  pFn_t getFnAddress(CString APName);	// vrati adresu funkce obsluhujici AP s AP_ID=APName nebo NULL (neexistuje-li)
+  pFn_t getFnAddress(CString APName);	/// returns the address of the function associated to the active element with the id AP_ID=APName or NULL (if it doesn't exists)
 
 public:
   
-  CLMSock();	// konstruktor
+  CLMSock();	/// constructor
   
-  CString getAPList();	// vrati seznam vsech identifikatoru AP, ktere zasuvka podporuje
+  CString getAPList();	/// return the list of all the IDs of the supported active elements
 
 // STATIC
-  static int ReportError(UINT nErrorID, const char* FormatString, ...);
+  /**
+ * Displays the error message on the screen.
+ *
+ * @param nErrorID ID of the error
+ * @param FormatString Error message (formated as e.g. C++ printf function)
+ * @param ... Additional error messages
+ * @return 0, if there is not enough memory to display the message
+ */
+static int ReportError(UINT nErrorID, const char* FormatString, ...);
 
 
 // FRIENDS

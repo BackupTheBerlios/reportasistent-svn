@@ -11,6 +11,11 @@
 /////////////////////////////////////////////////////////////////////////////
 // CElementParagraphDialog dialog
 
+/**
+ * class CElementParagraphDialog:
+ *
+ * @author 
+ */
 class CElementParagraphDialog : public CDialog
 {
 // Construction

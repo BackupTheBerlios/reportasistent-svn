@@ -13,6 +13,11 @@
 #define ATTRLIST_CL_VALUE	1
 
 
+/**
+ * class CAttributeLinkDialogBase:
+ *
+ * @author 
+ */
 class CAttributeLinkDialogBase  
 {
 protected:

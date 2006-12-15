@@ -15,6 +15,11 @@
 /////////////////////////////////////////////////////////////////////////////
 // Bool_Cedent_Recordset recordset
 
+/**
+ * This class was designed to retrieve all the boolean cedents from the given data source.
+ *
+ * @author : Generted by VS.
+ */
 class Bool_Cedent_Recordset : public CRecordset
 {
 public:

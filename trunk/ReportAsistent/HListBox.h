@@ -10,6 +10,11 @@
 /////////////////////////////////////////////////////////////////////////////
 // CHListBox window
 
+/**
+ * class CHListBox:
+ *
+ * @author 
+ */
 class CHListBox : public CListBox
 {
 // Construction

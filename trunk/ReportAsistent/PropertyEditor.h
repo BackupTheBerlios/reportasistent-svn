@@ -8,21 +8,89 @@
 //
 
 
+/**
+ * class CProperty:
+ *
+ * @author 
+ */
 class CProperty
 {
 private:
 	CString m_label;
 
 public:
+	/**
+	 * CProperty:
+	 *
+	 * @param label 
+	 * @return  
+	 */
 	CProperty(LPCTSTR label) : m_label(label) {};
+	/**
+	 * GetLabel:
+	 *
+	 * @return LPCTSTR virtual 
+	 */
 	LPCTSTR virtual GetLabel() {return m_label; };
+	/**
+	 * GetValue:
+	 *
+	 * @return LPCTSTR virtual 
+	 */
 	LPCTSTR virtual GetValue() = 0;
+	/**
+	 * SetValue:
+	 *
+	 * @param value 
+	 * @return void virtual 
+	 */
 	void virtual SetValue(LPCTSTR value) = 0;
+	/**
+	 * ValidateValue:
+	 *
+	 * @param value 
+	 * @param error_message 
+	 * @return BOOL virtual 
+	 */
 	BOOL virtual ValidateValue(CString & value, CString & error_message) = 0;
+	/**
+	 * GetComboStyle:
+	 *
+	 * @return DWORD virtual 
+	 */
 	DWORD virtual GetComboStyle() = 0;
+	/**
+	 * InitCombo:
+	 *
+	 * @param combo 
+	 * @return void virtual 
+	 */
 	void virtual InitCombo(CComboBox * combo) {};
+	/**
+	 * GetCustomControlWidth:
+	 *
+	 * @return int virtual 
+	 */
 	int virtual GetCustomControlWidth() {return 0; };
+	/**
+	 * CreateCustomControl:
+	 *
+	 * @param wstyle 
+	 * @param ctrlID 
+	 * @param pParentWnd 
+	 * @param custom_rect 
+	 * @return virtual CWnd* 
+	 */
 	virtual CWnd * CreateCustomControl(DWORD wstyle, UINT ctrlID, CWnd * pParentWnd, const CRect & custom_rect) {return NULL; };
+	/**
+	 * OnCustomCommand:
+	 *
+	 * @param nID 
+	 * @param nCode 
+	 * @param pExtra 
+	 * @param pHandlerInfo 
+	 * @return virtual BOOL 
+	 */
 	virtual BOOL OnCustomCommand(UINT nID, int nCode, void* pExtra, AFX_CMDHANDLERINFO* pHandlerInfo) {return FALSE; };
 	//vraci TRUE pokud se ma prekreslit hodnota 
 
@@ -30,6 +98,11 @@ public:
 
 };
 
+/**
+ * class CIntProperty:
+ *
+ * @author 
+ */
 class CIntProperty: public CProperty
 {
 private:
@@ -39,17 +112,62 @@ private:
 	CString m_str_val;
 
 public:
+	/**
+	 * CIntProperty:
+	 *
+	 * @param label 
+	 * @param default_value 
+	 * @param min 
+	 * @param max 
+	 * @return  
+	 */
 	CIntProperty(LPCTSTR label, int default_value, int min = 0x80000000, int max = 0x7FFFFFFF)
 		: CProperty(label), m_value(default_value), m_min(min), m_max(max) { ASSERT(min <= max); };
 	
+	/**
+	 * GetValue:
+	 *
+	 * @return LPCTSTR virtual 
+	 */
 	LPCTSTR virtual GetValue() {m_str_val.Format("%d", m_value); return m_str_val; };
+	/**
+	 * GetIntValue:
+	 *
+	 * @return int 
+	 */
 	int GetIntValue() {return m_value; };
 	
+	/**
+	 * SetValue:
+	 *
+	 * @param value 
+	 * @return void virtual 
+	 */
 	void virtual SetValue(LPCTSTR value) {m_value = (long) (_variant_t) value; };
+	/**
+	 * SetIntValue:
+	 *
+	 * @param value 
+	 * @return void 
+	 */
 	void SetIntValue(int value) {m_value = value; };
 
+	/**
+	 * GetCustomControlWidth:
+	 *
+	 * @return int virtual 
+	 */
 	int virtual GetCustomControlWidth() {return GetSystemMetrics(SM_CYCAPTION); };
 	
+	/**
+	 * CreateCustomControl:
+	 *
+	 * @param wstyle 
+	 * @param ctrlID 
+	 * @param pParentWnd 
+	 * @param custom_rect 
+	 * @return virtual CWnd* 
+	 */
 	virtual CWnd * CreateCustomControl(DWORD wstyle, UINT ctrlID, CWnd * pParentWnd, const CRect & custom_rect)
 	{
 		CSpinButtonCtrl * spin = new CSpinButtonCtrl();
@@ -58,6 +176,15 @@ public:
 		return spin;
 	};
 
+	/**
+	 * OnCustomCommand:
+	 *
+	 * @param nID 
+	 * @param nCode 
+	 * @param pExtra 
+	 * @param pHandlerInfo 
+	 * @return virtual BOOL 
+	 */
 	virtual BOOL OnCustomCommand(UINT nID, int nCode, void* pExtra, AFX_CMDHANDLERINFO* pHandlerInfo)
 	{
 		if (nCode == SB_THUMBPOSITION)
@@ -77,6 +204,13 @@ public:
 		return FALSE; 
 	};
 
+	/**
+	 * ValidateValue:
+	 *
+	 * @param value 
+	 * @param error_message 
+	 * @return BOOL virtual 
+	 */
 	BOOL virtual ValidateValue(CString & value, CString & error_message)
 	{
 		int try_convert=0;
@@ -109,11 +243,22 @@ public:
 		return TRUE;
 	};
 
+	/**
+	 * GetComboStyle:
+	 *
+	 * @return DWORD virtual 
+	 */
 	DWORD virtual GetComboStyle() {return CBS_DROPDOWN; };
 
 
 	
 	//nastavuje edit box tak, aby se do nej daly psat jen cislice (ani "-" (minus) nejde))
+	/**
+	 * InitCombo:
+	 *
+	 * @param combo 
+	 * @return void virtual 
+	 */
 	void virtual InitCombo(CComboBox * combo)
 	{
 		if (m_min < 0) return;
@@ -130,6 +275,11 @@ public:
 	};
 };
 
+/**
+ * class CDoubleProperty:
+ *
+ * @author 
+ */
 class CDoubleProperty: public CProperty
 {
 private:
@@ -139,15 +289,53 @@ private:
 	CString m_str_val;
 
 public:
+	/**
+	 * CDoubleProperty:
+	 *
+	 * @param label 
+	 * @param default_value 
+	 * @param min 
+	 * @param max 
+	 * @return  
+	 */
 	CDoubleProperty(LPCTSTR label, double default_value, double min = -1.7E+308 , double max = 1.7E+308 )
 		: CProperty(label), m_value(default_value), m_min(min), m_max(max) { ASSERT(min <= max); };
 
+	/**
+	 * GetValue:
+	 *
+	 * @return LPCTSTR virtual 
+	 */
 	LPCTSTR virtual GetValue() {m_str_val = (LPCTSTR) (_bstr_t) m_value; return m_str_val; };
+	/**
+	 * GetDoubleValue:
+	 *
+	 * @return double 
+	 */
 	double GetDoubleValue() {return m_value; };
 	
+	/**
+	 * SetValue:
+	 *
+	 * @param value 
+	 * @return void virtual 
+	 */
 	void virtual SetValue(LPCTSTR value) {m_value = (_variant_t) value; };
+	/**
+	 * SetDoubleValue:
+	 *
+	 * @param value 
+	 * @return void 
+	 */
 	void SetDoubleValue(double value) {m_value = value; };
 
+	/**
+	 * ValidateValue:
+	 *
+	 * @param value 
+	 * @param error_message 
+	 * @return BOOL virtual 
+	 */
 	BOOL virtual ValidateValue(CString & value, CString & error_message)
 	{
 		double try_convert=0;
@@ -180,25 +368,76 @@ public:
 		return TRUE;
 	};
 
+	/**
+	 * GetComboStyle:
+	 *
+	 * @return DWORD virtual 
+	 */
 	DWORD virtual GetComboStyle() {return CBS_DROPDOWN; };
 };
 
+/**
+ * class CStringProperty:
+ *
+ * @author 
+ */
 class CStringProperty: public CProperty
 {
 private:
 	CString m_value;
 
 public:
+	/**
+	 * CStringProperty:
+	 *
+	 * @param label 
+	 * @param default_value 
+	 * @return  
+	 */
 	CStringProperty(LPCTSTR label, LPCTSTR default_value): CProperty(label), m_value(default_value) {};
+	/**
+	 * GetValue:
+	 *
+	 * @return LPCTSTR virtual 
+	 */
 	LPCTSTR virtual GetValue() {return m_value; };
+	/**
+	 * SetValue:
+	 *
+	 * @param value 
+	 * @return void virtual 
+	 */
 	void virtual SetValue(LPCTSTR value) {m_value = value; };
+	/**
+	 * ValidateValue:
+	 *
+	 * @param value 
+	 * @param error_message 
+	 * @return BOOL virtual 
+	 */
 	BOOL virtual ValidateValue(CString & value, CString & error_message) {return TRUE; };
+	/**
+	 * GetComboStyle:
+	 *
+	 * @return DWORD virtual 
+	 */
 	DWORD virtual GetComboStyle() {return CBS_DROPDOWN; };
 };
 
+/**
+ * class CColorProperty:
+ *
+ * @author 
+ */
 class CColorProperty: public CStringProperty
 {
 private:
+	/**
+	 * switchRB:
+	 *
+	 * @param c 
+	 * @return static COLORREF 
+	 */
 	static COLORREF switchRB(COLORREF c)
 	{
 		BYTE r = GetRValue(c);
@@ -210,10 +449,31 @@ private:
 
 
 public:
+	/**
+	 * CColorProperty:
+	 *
+	 * @param label 
+	 * @param default_value 
+	 * @return  
+	 */
 	CColorProperty(LPCTSTR label, LPCTSTR default_value): CStringProperty(label, default_value) {};
 
+	/**
+	 * GetCustomControlWidth:
+	 *
+	 * @return int virtual 
+	 */
 	int virtual GetCustomControlWidth() {return 20; };
 
+	/**
+	 * OnCustomCommand:
+	 *
+	 * @param nID 
+	 * @param nCode 
+	 * @param pExtra 
+	 * @param pHandlerInfo 
+	 * @return virtual BOOL 
+	 */
 	virtual BOOL OnCustomCommand(UINT nID, int nCode, void* pExtra, AFX_CMDHANDLERINFO* pHandlerInfo)
 	{
 		long c = strtol(GetValue()+1, NULL, 16);
@@ -229,6 +489,15 @@ public:
 		return FALSE;
 	};
 
+	/**
+	 * CreateCustomControl:
+	 *
+	 * @param wstyle 
+	 * @param ctrlID 
+	 * @param pParentWnd 
+	 * @param custom_rect 
+	 * @return virtual CWnd* 
+	 */
 	virtual CWnd * CreateCustomControl(DWORD wstyle, UINT ctrlID, CWnd * pParentWnd, const CRect & custom_rect)
 	{
 		CButton * but = new CButton();
@@ -238,6 +507,13 @@ public:
 	};
 
 
+	/**
+	 * ValidateValue:
+	 *
+	 * @param value 
+	 * @param error_message 
+	 * @return BOOL virtual 
+	 */
 	BOOL virtual ValidateValue(CString & value, CString & error_message)
 	{
 		if (value == "") return TRUE;
@@ -268,15 +544,44 @@ public:
 	};
 };
 
+/**
+ * class CEnumProperty:
+ *
+ * @author 
+ */
 class CEnumProperty: public CStringProperty
 {
 private:
 	CArray<CString, CString> m_combo_strings;
 
 public:
+	/**
+	 * CEnumProperty:
+	 *
+	 * @param label 
+	 * @param default_value 
+	 * @return  
+	 */
 	CEnumProperty(LPCTSTR label, LPCTSTR default_value): CStringProperty(label, default_value) {};
+	/**
+	 * GetComboStyle:
+	 *
+	 * @return DWORD virtual 
+	 */
 	DWORD virtual GetComboStyle() {return CBS_DROPDOWNLIST; };
+	/**
+	 * AddCombostr:
+	 *
+	 * @param str 
+	 * @return void 
+	 */
 	void AddCombostr(LPCTSTR str) {m_combo_strings.Add(str); };
+	/**
+	 * InitCombo:
+	 *
+	 * @param combo 
+	 * @return void virtual 
+	 */
 	void virtual InitCombo(CComboBox * combo)
 	{
 		for(int a=0; a<m_combo_strings.GetSize(); a++)
@@ -288,11 +593,16 @@ public:
 /////////////////////////////////////////////////////////////////////////////
 // CPropertyEditor dialog
 
+/**
+ * class CPropertyEditor:
+ *
+ * @author 
+ */
 class CPropertyEditor : public CDialog
 {
 // Construction
 public:
-	CPropertyEditor(LPCTSTR caption, CWnd* pParent = NULL);   // standard constructor
+	CPropertyEditor(LPCTSTR caption, CWnd* pParent = NULL);   /// standard constructor
 	virtual ~CPropertyEditor();
 
 // Dialog Data

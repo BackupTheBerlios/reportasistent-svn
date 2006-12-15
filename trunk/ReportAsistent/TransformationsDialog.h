@@ -23,6 +23,11 @@
 /////////////////////////////////////////////////////////////////////////////
 // CTransformationsDialog dialog
 
+/**
+ * class CTransformationsDialog:
+ *
+ * @author 
+ */
 class CTransformationsDialog : public CPropertyPage, CAElDataShare
 {
 // Construction
@@ -47,12 +52,54 @@ public:
 
 // Implementation
 protected:
+	/**
+	 * RemoveTransf:
+	 *
+	 * @param selected_item 
+	 * @return void 
+	 */
 	void RemoveTransf(int selected_item);
+	/**
+	 * SelTransformConfigure:
+	 *
+	 * @param cur_sel 
+	 * @return void 
+	 */
 	void SelTransformConfigure(int cur_sel);
+	/**
+	 * AddTransformation:
+	 *
+	 * @param selected_item 
+	 * @return BOOL 
+	 */
 	BOOL AddTransformation(int selected_item);
+	/**
+	 * ConfigureTransformation:
+	 *
+	 * @param transform_index 
+	 * @return void 
+	 */
 	void ConfigureTransformation(int transform_index);
+	/**
+	 * IsSelectedTransformationWithOptions:
+	 *
+	 * @param transform_index 
+	 * @return BOOL 
+	 */
 	BOOL IsSelectedTransformationWithOptions(int transform_index);
+	/**
+	 * IsSelectedTransformationAttrLinkTable:
+	 *
+	 * @param transform_index 
+	 * @return BOOL 
+	 */
 	BOOL IsSelectedTransformationAttrLinkTable(int transform_index);
+	/**
+	 * ConfigureAttrLinkTable:
+	 *
+	 * @param attr_link_tbl_node 
+	 * @return void 
+	 */
 	void ConfigureAttrLinkTable(MSXML2::IXMLDOMNodePtr & attr_link_tbl_node);
 
 	// Generated message map functions
@@ -74,28 +121,73 @@ private:
 	//zmeny se provadeji v klonu, pokud uzivatel zmacken OK, puvodni element (m_active_element) se nahradi klonem
 
 private:
+	/**
+	 * FindOptionEnumItemLabelFromValue:
+	 *
+	 * @param options_node 
+	 * @param variable_name 
+	 * @param otion_value 
+	 * @return CString static 
+	 */
 	CString static FindOptionEnumItemLabelFromValue(
 							MSXML2::IXMLDOMNodePtr & options_node,
 							LPCTSTR variable_name,
 							LPCTSTR otion_value);
 
+	/**
+	 * FindOptionEnumItemValueFromLabel:
+	 *
+	 * @param options_node 
+	 * @param variable_name 
+	 * @param otion_value 
+	 * @return CString static 
+	 */
 	CString static FindOptionEnumItemValueFromLabel(
 							MSXML2::IXMLDOMNodePtr & options_node,
 							LPCTSTR variable_name,
 							LPCTSTR otion_value);
 
+	/**
+	 * CreateEnumProperty:
+	 *
+	 * @param option_element 
+	 * @param current_value 
+	 * @return static CProperty* 
+	 */
 	static CProperty * CreateEnumProperty(
 					MSXML2::IXMLDOMElementPtr & option_element,
 					LPCTSTR current_value);
 
+	/**
+	 * CreateDoubleProperty:
+	 *
+	 * @param option_element 
+	 * @param current_value 
+	 * @return static CProperty* 
+	 */
 	static CProperty * CreateDoubleProperty(
 					MSXML2::IXMLDOMElementPtr & option_element,
 					LPCTSTR current_value);
 
+	/**
+	 * CreateIntProperty:
+	 *
+	 * @param option_element 
+	 * @param current_value 
+	 * @return static CProperty* 
+	 */
 	static CProperty * CreateIntProperty(
 					MSXML2::IXMLDOMElementPtr & option_element,
 					LPCTSTR current_value);
 
+	/**
+	 * AddOptionToPropetryEditor:
+	 *
+	 * @param option_element 
+	 * @param transformation_element 
+	 * @param property_editor 
+	 * @return static void 
+	 */
 	static void AddOptionToPropetryEditor(
 			MSXML2::IXMLDOMElementPtr & option_element,
 			MSXML2::IXMLDOMElementPtr & transformation_element,
@@ -103,8 +195,23 @@ private:
 
 
 
+  /**
+   * OnApply:
+   *
+   * @return virtual BOOL 
+   */
   virtual BOOL OnApply();
+  /**
+   * OnKillActive:
+   *
+   * @return virtual BOOL 
+   */
   virtual BOOL OnKillActive();
+  /**
+   * OnSetActive:
+   *
+   * @return virtual BOOL 
+   */
   virtual BOOL OnSetActive();
 };
 

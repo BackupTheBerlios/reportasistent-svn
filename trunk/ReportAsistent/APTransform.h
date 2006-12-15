@@ -14,11 +14,25 @@
 
 
 //slouzi jako call back interface pro volani fitrovacich funkci - napr: ProcessSimpleFlter
+/**
+ * class CFilterProcessor:
+ *
+ * @author 
+ */
 class CFilterProcessor
 {
 public:
 	//vrati TRUE pokud funkce uspela
-	virtual BOOL ProcessFilteredOut(
+	/**
+ * ProcessFilteredOut:
+ *
+ * @param filtered_output_node 
+ * @param node_order 
+ * @param user1 
+ * @param user2 
+ * @return virtual BOOL 
+ */
+virtual BOOL ProcessFilteredOut(
 		MSXML2::IXMLDOMNodePtr filtered_output_node,	//XML uzel ktery z plugin output prosel fitrem
 		int node_order,							//poradi filtered_output_node uzlu mezi temi ktere prosly
 		LPARAM user1,							//uzivatelsky parametr, ktery byl predan filtrovaci funkci
@@ -30,6 +44,11 @@ public:
 
 //honza:
 //trida slouzici k vygenerovani jednoho aktivniho prvku
+/**
+ * class CAElTransform:
+ *
+ * @author 
+ */
 class CAElTransform: public CFilterProcessor
 {
 private:

@@ -12,6 +12,11 @@
 /////////////////////////////////////////////////////////////////////////////
 // CGenerateDialog dialog
 
+/**
+ * class CGenerateDialog:
+ *
+ * @author 
+ */
 class CGenerateDialog : public CDialog
 {
 // Construction

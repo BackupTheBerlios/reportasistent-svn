@@ -24,19 +24,34 @@
 
 // ----
 
+/**
+ * The helper class to determine the ODBC configuration of the PC.
+ *
+ * @author Jan Dedek
+ */
 class SQL_Pomocnik
 {
 protected:
 	SQLHANDLE h;
 
-	BOOL handle_ok()
+	/**
+ * checks the SQL handle
+ *
+ * @return TRUE, if the handle is valid, otherwise it returns false
+ */
+BOOL handle_ok()
 	{
 		return h != SQL_NULL_HANDLE;
 	}
 
 public:
 	
-	SQL_Pomocnik()
+	/**
+ * constructor
+ *
+ * @return  
+ */
+SQL_Pomocnik()
 	{
 		if (SQL_SUCCESS != SQLAllocHandle(SQL_HANDLE_ENV, SQL_NULL_HANDLE, & h))
 		{
@@ -49,7 +64,13 @@ public:
 	}
 
 
-	BOOL EnumODBCDrivers(CString & ret)
+	/**
+ * Returns all ODBC drivers found on PC.
+ *
+ * @param ret The list of ODBC drivers is stored there.
+ * @return TRUE, if successful, otherwise it returns FALSE.
+ */
+BOOL EnumODBCDrivers(CString & ret)
 	{
 		SQLRETURN r;
 		ret.Empty();
@@ -90,7 +111,14 @@ public:
 		return TRUE;
 	}
 
-	BOOL EnumODBCDataSources(CString & ret, SQLSMALLINT DataSources_enum_type = SQL_FETCH_FIRST /* SQL_FETCH_FIRST_USER, SQL_FETCH_FIRST_SYSTEM */)
+	/**
+ * Returns all ODBC data sources found on PC.
+ *
+ * @param ret The list of ODBC data sources is stored there.
+ * @param DataSources_enum_type Default value SQL_FETCH_FIRST.
+ * @return TRUE, if successful, otherwise it returns FALSE.
+ */
+BOOL EnumODBCDataSources(CString & ret, SQLSMALLINT DataSources_enum_type = SQL_FETCH_FIRST /* SQL_FETCH_FIRST_USER, SQL_FETCH_FIRST_SYSTEM */)
 	{
 		SQLRETURN r;
 		ret.Empty();
@@ -120,7 +148,13 @@ public:
 		return TRUE;
 	}
 
-	BOOL FindAccesDatasource(CString & ret)
+	/**
+ * Finds the MS Access data source.
+ *
+ * @param ret MS Access data source.
+ * @return TRUE, if successful, otherwise it returns FALSE.
+ */
+BOOL FindAccesDatasource(CString & ret)
 	{
 		SQLRETURN r;
 		ret.Empty();
@@ -156,7 +190,13 @@ public:
 	}
 
 	// finds the ODBC driver for Microsoft Access
-	BOOL FindAccesDriver(CString & ret)
+	/**
+ * Finds the ODBC driver for MS Access.
+ *
+ * @param ret MS Access driver.
+ * @return TRUE, if successful, otherwise it returns FALSE.
+ */
+BOOL FindAccesDriver(CString & ret)
 	{
 		SQLRETURN r;
 		ret.Empty();
@@ -188,7 +228,12 @@ public:
 	}
 
 		
-	~SQL_Pomocnik()
+	/**
+ * destructor
+ *
+ * @return  
+ */
+~SQL_Pomocnik()
 	{
 		if (handle_ok())
 			SQLFreeHandle(SQL_HANDLE_ENV, h);

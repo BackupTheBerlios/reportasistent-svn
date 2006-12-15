@@ -14,6 +14,11 @@
 /////////////////////////////////////////////////////////////////////////////
 // CAElFiltersConfigDialog dialog
 
+/**
+ * class CAElFiltersConfigDialog:
+ *
+ * @author 
+ */
 class CAElFiltersConfigDialog : public CPropertyPage, CFilterResultImpl, CAElDataShare
 {
 // Construction

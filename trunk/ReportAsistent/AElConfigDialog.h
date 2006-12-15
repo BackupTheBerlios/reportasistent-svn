@@ -5,6 +5,11 @@
 
 // CAElConfigDialog dialog
 
+/**
+ * class CAElConfigDialog:
+ *
+ * @author 
+ */
 class CAElConfigDialog : public CPropertyPage, CAElDataShare, CFilterResultImpl
 {
 	DECLARE_DYNAMIC(CAElConfigDialog)

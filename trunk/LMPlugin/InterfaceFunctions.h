@@ -37,6 +37,17 @@ parametry:  hSource - otevreny handle na zdroj
 navratova hodnota:	TRUE - do Result ulozen vystup,  FALSE - chyba (zasuvka nepodporuje tentu AP)
 */
 
+/**
+ * The main interface between the kernel and the LM socket. It handles all the queries,
+ * asked by the kernel, to retrieve all the active elements of the certain type from some
+ * source which is connected to this socket.
+ *
+ * @param hSource Opened data source.
+ * @param APName The ID of the active element, which occurences are retrieved from the given data source.
+ * @param Result The pointer to the string containing the output.
+ * @return Returns FALSE if some error occured during the processing or TRUE, if the
+ * function was successfuly evaluated.
+ */
 BOOL performLM (hSource_t hSource, const char* APName, BSTR* Result);
 
 
@@ -46,6 +57,11 @@ funkce vrati volajicimu XML string (stejny format jako CString CLMSock::getAPLis
 s identifikatory vsech AP, ktere tato zasuvka podporuje
 */
 
+/**
+ *
+ * @return Returns the XML string containing the identifiers of the all active elements supported
+ * by the socket.
+ */
 BSTR getAPListLM();
 
 
@@ -59,6 +75,12 @@ po navratu z dialogu do retezce pPerzistID ulozi connection string noveho zdroje
 novy zdroj otevre a vrati na nej handler nebo NULL (chyba)
 */
 
+/**
+ * Opens the dialog to choose the new data source and openes the created data source.
+ *
+ * @param pPerzistID Contains the connection string of the new data source.
+ * @return Handle to the new data source or NULL if unsuccessful.
+ */
 hSource_t fNewSourceLM (BSTR* pPerzistID);
 
 
@@ -67,6 +89,12 @@ hSource_t fNewSourceLM (BSTR* pPerzistID);
 dostane connection string (PerzistID)
 otevre zdroj a vrati na nej handle nebo NULL (chyba)
 */
+/**
+ * Opens the data source.
+ *
+ * @param PerzistID The connection string of the data source to be opened.
+ * @return Handle to the opened data source or NULL if unsucessfull.
+ */
 hSource_t fOpenSourceLM (BSTR PerzistID);
 
 
@@ -76,6 +104,12 @@ dostane otevreny handler na zdroj (hSource)
 uzavre handler a vrati TRUE (uspech) nebo FALSE (chyba)
 */
 
+/**
+ * Closes the opened data source.
+ *
+ * @param hSource Handle to the opened data source.
+ * @return TRUE if successful, else false.
+ */
 BOOL fCloseSourceLM (hSource_t hSource);
 
 

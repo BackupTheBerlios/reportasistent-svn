@@ -12,6 +12,11 @@
 /////////////////////////////////////////////////////////////////////////////
 // CWordEventHandler command target
 
+/**
+ * class CWordEventHandler:
+ *
+ * @author 
+ */
 class CWordEventHandler : public CCmdTarget
 {
 	DECLARE_DYNCREATE(CWordEventHandler)

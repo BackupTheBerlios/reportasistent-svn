@@ -10,6 +10,11 @@
 /////////////////////////////////////////////////////////////////////////////
 // CWaitAnimation window
 
+/**
+ * class CWaitAnimation:
+ *
+ * @author 
+ */
 class CWaitAnimation : public CStatic
 {
 // Construction
@@ -33,6 +38,13 @@ public:
 
 	// Generated message map functions
 protected:
+	/**
+	 * GetPixelColor:
+	 *
+	 * @param r 
+	 * @param alpha 
+	 * @return virtual COLORREF 
+	 */
 	virtual COLORREF GetPixelColor(double r, double alpha);
 	//{{AFX_MSG(CWaitAnimation)
 	afx_msg void OnPaint();
@@ -40,6 +52,13 @@ protected:
 
 	DECLARE_MESSAGE_MAP()
 private:
+	/**
+	 * count_angle:
+	 *
+	 * @param x 
+	 * @param y 
+	 * @return static double 
+	 */
 	static double count_angle(double x, double y);
 };
 

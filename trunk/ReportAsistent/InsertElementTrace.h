@@ -17,6 +17,11 @@
 /** Class CInsertElementTrace reprezents a route of enclosing elements that must be created to hold the target element, that a user wants to create.
 */
 
+/**
+ * class CInsertElementTrace:
+ *
+ * @author 
+ */
 class CInsertElementTrace  
 {
 public:

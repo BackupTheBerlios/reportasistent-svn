@@ -10,6 +10,11 @@
 /////////////////////////////////////////////////////////////////////////////
 // CElementChapterDialog dialog
 
+/**
+ * class CElementChapterDialog:
+ *
+ * @author 
+ */
 class CElementChapterDialog : public CDialog
 {
 // Construction

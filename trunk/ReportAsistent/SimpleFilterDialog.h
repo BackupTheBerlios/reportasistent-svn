@@ -26,10 +26,22 @@
 #include "complexfilterdialog.h"
 
 
+/**
+ * class CSimpleFilterDialog:
+ *
+ * @author 
+ */
 class CSimpleFilterDialog : public CPropertyPage, CAElDataShare, CFilterResultImpl
 {	
 	// Construction
 public:
+	/**
+	 * CSimpleFilterDialog:
+	 *
+	 * @param data_share 
+	 * @param pParent 
+	 * @return  
+	 */
 	CSimpleFilterDialog(CAElDataShare & data_share, CWnd* pParent = NULL);	// nestandard constructor :-)
 	~CSimpleFilterDialog();
 
@@ -49,6 +61,11 @@ public:
 // Implementation
 protected:
 
+	/**
+	 * UpdateSelection:
+	 *
+	 * @return void 
+	 */
 	void UpdateSelection();
 
 	// Generated message map functions
@@ -59,19 +76,70 @@ protected:
 	DECLARE_MESSAGE_MAP()
 
 private:
+  /**
+   * OnApply:
+   *
+   * @return virtual BOOL 
+   */
   virtual BOOL OnApply();
-  afx_msg void OnNMClickFilterList(NMHDR *pNMHDR, LRESULT *pResult);
+  /**
+  * OnNMClickFilterList:
+  *
+  * @param pNMHDR 
+  * @param pResult 
+  * @return afx_msg void 
+  */
+ afx_msg void OnNMClickFilterList(NMHDR *pNMHDR, LRESULT *pResult);
+  /**
+   * OnSetActive:
+   *
+   * @return virtual BOOL 
+   */
   virtual BOOL OnSetActive();
  
+  /**
+   * OnSimpleFilterDisabledCheck:
+   *
+   * @return afx_msg void 
+   */
   afx_msg void OnSimpleFilterDisabledCheck();
 protected:
+	/**
+	 * SetDisabledCheck:
+	 *
+	 * @param  
+	 * @return void 
+	 */
 	void SetDisabledCheck(void);
 public:
+	/**
+	 * OnKillActive:
+	 *
+	 * @return virtual BOOL 
+	 */
 	virtual BOOL OnKillActive();
 protected:
 
+	/**
+	 * SaveSelection:
+	 *
+	 * @param  
+	 * @return void 
+	 */
 	void SaveSelection(void);
+	/**
+	 * CheckSimpleFilterDisabled:
+	 *
+	 * @param  
+	 * @return void 
+	 */
 	void CheckSimpleFilterDisabled(void);
+	/**
+	 * UpdateSimpleView:
+	 *
+	 * @param  
+	 * @return void 
+	 */
 	void UpdateSimpleView(void);
 	BOOL m_bSimpleFilterDisabled;
 };

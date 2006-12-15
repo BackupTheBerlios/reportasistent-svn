@@ -16,6 +16,11 @@
 */
 
 
+/**
+ * class CStartDialog:
+ *
+ * @author 
+ */
 class CStartDialog : public CDialog
 {
 // Construction

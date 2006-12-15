@@ -76,38 +76,66 @@ Jadro pripojuje zasuvky tak, ze zavola funkci initSock()
 // ========== DATOVE TYPY =========
 
 
+/**
+ * handle to the open data source
+ */
 typedef void* hSource_t;	// handler na otevreny zdroj
+/**
+ * persist ID of the data source
+ */
 typedef BSTR PersistID_t;	// perzistentni ID zdroje
 
 // typy ukazatele na jednotlive funkce rozhranni
 
 // hPerform_t - typ "ukazatel na funkci perform()"
+/**
+ * pointer to the perform() function
+ */
 typedef BOOL (* hPerform_t) (hSource_t, const char*, BSTR*);
 
 // hGetAPList_t - typ "ukazatel na funkci getAPList()"
+/**
+ * pointer to the getAPList() function
+ */
 typedef BSTR (* hGetAPList_t) ();
 
 // hNewSource_t - typ "ukazatel na funkci fNewSource()"
+/**
+ * pointer to the fNewSource() function
+ */
 typedef hSource_t (* hNewSource_t) (PersistID_t *);
 
 // hOpenSource_t - typ "ukazatel na funkci (fOpenSource)"
+/**
+ * pointer to the fOpenSource() function
+ */
 typedef hSource_t (* hOpenSource_t) (PersistID_t);
 
 // hCloseSource_t - typ "ukazatel na funkci fCloseSource()"
+/**
+ * pointer to the fCloseSource() function
+ */
 typedef BOOL (* hCloseSource_t) (hSource_t);
 
 
 //////////////////////////////////
 //  definice rozhrani CSockInterface
 
+/**
+ * The structure creates the interface between the socket and the kernel.
+ * It contains the pointers to all of the funcions in the socket, which supply the services
+ * to the kernel. These services are queries and manipulation with the data sources.
+ *
+ * @author Jan Kodym
+ */
 struct CSockInterface {
 	// ukazatele na funkce
 
-	hPerform_t	 hPerform;
-	hGetAPList_t hGetAPList;
-	hNewSource_t hNewSource;
-	hOpenSource_t hOpenSource;
-	hCloseSource_t hCloseSource;	 
+	hPerform_t	 hPerform;/// pointer to the perform() function
+	hGetAPList_t hGetAPList;/// pointer to the getAPList() function
+	hNewSource_t hNewSource;/// pointer to the fNewSource() function
+	hOpenSource_t hOpenSource;/// pointer to the fOpenSource() function
+	hCloseSource_t hCloseSource;/// pointer to the fCloseSource() function
 };
 
 

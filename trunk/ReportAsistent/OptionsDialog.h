@@ -11,6 +11,11 @@
 /////////////////////////////////////////////////////////////////////////////
 // COptionsDialog dialog
 
+/**
+ * class COptionsDialog:
+ *
+ * @author 
+ */
 class COptionsDialog : public CDialog
 {
 // Construction

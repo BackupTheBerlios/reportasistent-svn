@@ -41,6 +41,11 @@
 
 //honza: sem vkaldejte vsechny globalni managery
 //konstruuje se v inti instance a nici v Exit instance
+/**
+ * struct CGeneralManager:
+ *
+ * @author 
+ */
 struct CGeneralManager
 {
 private:
@@ -67,11 +72,22 @@ public:
 	{};
 
 	// jazyk
+	/**
+	 * getLanguage:
+	 *
+	 * @return LPCTSTR 
+	 */
 	LPCTSTR getLanguage()  // vrati retezec s identifikatorem jazyka
 	{
 		return m_strLanguage;
 	};
 
+	/**
+	 * setLanguage:
+	 *
+	 * @param lng 
+	 * @return void 
+	 */
 	void setLanguage(LPCTSTR lng)
 	{
 		if((lng != CString("en")) && (lng != CString("cz"))) return;
@@ -85,15 +101,42 @@ public:
 // CReportAsistentApp:
 // See ReportAsistent.cpp for the implementation of this class
 //
+/**
+ * class CSkeletonDoc:
+ *
+ * @author 
+ */
 class CSkeletonDoc;
 
+/**
+ * class CReportAsistentApp:
+ *
+ * @author 
+ */
 class CReportAsistentApp : public CWinApp
 {
 public:
+	/**
+	 * ReportError:
+	 *
+	 * @param nResourceErrorStringID 
+	 * @param  
+	 * @return int static 
+	 */
 	int static ReportError(UINT nResourceErrorStringID, ...);
 	
+	/**
+	 * FirstDocumentInFirstTemplate:
+	 *
+	 * @return CSkeletonDoc* 
+	 */
 	CSkeletonDoc * FirstDocumentInFirstTemplate();
 	CGeneralManager * m_pGeneralManager;
+	/**
+	 * CReportAsistentApp:
+	 *
+	 * @return  
+	 */
 	CReportAsistentApp();
 
 // Overrides

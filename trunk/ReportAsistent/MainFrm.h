@@ -9,6 +9,11 @@
 #pragma once
 #endif // _MSC_VER > 1000
 
+/**
+ * class CMainFrame:
+ *
+ * @author 
+ */
 class CMainFrame : public CFrameWnd
 {
 	

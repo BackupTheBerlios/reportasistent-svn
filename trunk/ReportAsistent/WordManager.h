@@ -14,15 +14,48 @@
 #endif // _MSC_VER > 1000
 
 
+/**
+ * class CStringTable:
+ *
+ * @author 
+ */
 class CStringTable
 {
 public:
+	/**
+	 * FindStringNoCase:
+	 *
+	 * @param str 
+	 * @return int 
+	 */
 	int FindStringNoCase(LPCTSTR str);
+	/**
+	 * FindString:
+	 *
+	 * @param str 
+	 * @return int 
+	 */
 	int FindString(LPCTSTR str);
+	/**
+	 * getCount:
+	 *
+	 * @return int virtual 
+	 */
 	int virtual getCount() = NULL;
+	/**
+	 * getItem:
+	 *
+	 * @param index 
+	 * @return LPCTSTR virtual 
+	 */
 	LPCTSTR virtual getItem(int index) = NULL;
 };
 
+/**
+ * class CStringTableImpl:
+ *
+ * @author 
+ */
 class CStringTableImpl : public CStringTable
 {
 private:
@@ -30,10 +63,32 @@ private:
 	std::vector <CString *> data;
 
 public:
+	/**
+	 * Add:
+	 *
+	 * @param s 
+	 * @return void 
+	 */
 	void Add(LPCTSTR s);
+	/**
+	 * Clear:
+	 *
+	 * @return void 
+	 */
 	void Clear();
 
+	/**
+	 * getCount:
+	 *
+	 * @return int virtual 
+	 */
 	int virtual getCount();
+	/**
+	 * getItem:
+	 *
+	 * @param index 
+	 * @return LPCTSTR virtual 
+	 */
 	LPCTSTR virtual getItem(int index);
 
 	~CStringTableImpl();
@@ -46,63 +101,246 @@ private:
 	bool static CStringTableImpl::num_sort_asc(CString * s1,  CString * s2);
 */
 public:
+	/**
+	 * Sort:
+	 *
+	 * @param ascending 
+	 * @return void 
+	 */
 	void Sort(BOOL ascending = TRUE);
+	/**
+	 * SortNumeric:
+	 *
+	 * @param ascending 
+	 * @return void 
+	 */
 	void SortNumeric(BOOL ascending = TRUE);
 	// loads items (values) from XML DOM Node - elements with type <item value="(new item)">
+	/**
+	 * loadItemsFromXML:
+	 *
+	 * @param pNodeList 
+	 * @return BOOL 
+	 */
 	BOOL loadItemsFromXML(MSXML2::IXMLDOMNodeListPtr & pNodeList);
 public:
 	// returns a xml string with all items : <item value="(item)"/>
+	/**
+	 * getItemsInXML:
+	 *
+	 * @param  
+	 * @return CString 
+	 */
 	CString getItemsInXML(void);
 };
 
+/**
+ * class CStrCompare:
+ *
+ * @author 
+ */
 class CStrCompare
 {
 public:
+	/**
+	 * str_sort_desc:
+	 *
+	 * @param s1 
+	 * @param s2 
+	 * @return bool static 
+	 */
 	bool static str_sort_desc(CString * s1,  CString * s2);
+	/**
+	 * str_sort_asc:
+	 *
+	 * @param s1 
+	 * @param s2 
+	 * @return bool static 
+	 */
 	bool static str_sort_asc(CString * s1,  CString * s2);
 
+	/**
+	 * num_sort_desc:
+	 *
+	 * @param s1 
+	 * @param s2 
+	 * @return bool static 
+	 */
 	bool static num_sort_desc(CString * s1,  CString * s2);
+	/**
+	 * num_sort_asc:
+	 *
+	 * @param s1 
+	 * @param s2 
+	 * @return bool static 
+	 */
 	bool static num_sort_asc(CString * s1,  CString * s2);
 };
 
 
 
+/**
+ * class CWordManager:
+ *
+ * @author 
+ */
 class CWordManager  
 {
 public:
+	/**
+	 * getLastElementName:
+	 *
+	 * @return LPCTSTR 
+	 */
 	LPCTSTR getLastElementName();
 
+	/**
+	 * OpenWordEditor:
+	 *
+	 * @return void 
+	 */
 	void OpenWordEditor();
+	/**
+	 * GenerateXMLString:
+	 *
+	 * @param XML_str 
+	 * @return void 
+	 */
 	void GenerateXMLString(_bstr_t XML_str);
+	/**
+	 * InitWordLoader:
+	 *
+	 * @return BOOL 
+	 */
 	BOOL InitWordLoader();
+	/**
+	 * CWordManager:
+	 *
+	 * @param m 
+	 * @return  
+	 */
 	CWordManager(CDirectoriesManager & m);
 	virtual ~CWordManager();
 
+	/**
+	 * LoadWordStylesAndTempates:
+	 *
+	 * @param template_name 
+	 * @return void 
+	 */
 	void LoadWordStylesAndTempates(LPCTSTR template_name = NULL);
 protected:
+	/**
+	 * LoadWordTemplates:
+	 *
+	 * @return void 
+	 */
 	void LoadWordTemplates();
+	/**
+	 * LoadWordStyles:
+	 *
+	 * @param template_name 
+	 * @return void 
+	 */
 	void LoadWordStyles(LPCTSTR template_name);
 
 	// kody: funkce pro vlakno
+	/**
+	 * LoadWordStylesThreadFunction:
+	 *
+	 * @param template_name 
+	 * @param pWordManager 
+	 * @return void static 
+	 */
 	void static CWordManager::LoadWordStylesThreadFunction(LPARAM template_name, LPARAM pWordManager);
 	
 public:
+	/**
+	 * PrepareParentTaskActivation:
+	 *
+	 * @return void 
+	 */
 	void PrepareParentTaskActivation();
+	/**
+	 * WordEditShowMainWindow:
+	 *
+	 * @return void 
+	 */
 	void WordEditShowMainWindow();
+	/**
+	 * WordEditHideMainWindow:
+	 *
+	 * @return void 
+	 */
 	void WordEditHideMainWindow();
+	/**
+	 * isWordEditorActive:
+	 *
+	 * @return BOOL 
+	 */
 	BOOL CWordManager::isWordEditorActive();
+	/**
+	 * SetWordEditorParentTaskName:
+	 *
+	 * @return void 
+	 */
 	void SetWordEditorParentTaskName();
+	/**
+	 * GenerateXMLStringToWordEditor:
+	 *
+	 * @param XML_str 
+	 * @return void 
+	 */
 	void GenerateXMLStringToWordEditor(_bstr_t XML_str);
+	/**
+	 * getWordTemplates:
+	 *
+	 * @return CStringTable& 
+	 */
 	CStringTable & getWordTemplates() { return m_WordTemplates; };
+	/**
+	 * getWordParagraphStyles:
+	 *
+	 * @return CStringTable& 
+	 */
 	CStringTable & getWordParagraphStyles() { return m_WordParagraphStyles; };
+	/**
+	 * getWordCharacterStyles:
+	 *
+	 * @return CStringTable& 
+	 */
 	CStringTable & getWordCharacterStyles() { return m_WordCharacterStyles; };
 
+	/**
+	 * setWordTemplate:
+	 *
+	 * @param word_template 
+	 * @return void 
+	 */
 	void setWordTemplate(LPCTSTR word_template) {m_WordTemplate = word_template; };
+	/**
+	 * getWordTemplate:
+	 *
+	 * @return LPCTSTR 
+	 */
 	LPCTSTR getWordTemplate() {return m_WordTemplate; };
 
 private:
 	WINDOWPLACEMENT m_origWINDOWPLACEMENT;
+	/**
+	 * LoadSafeArrayToStringTable:
+	 *
+	 * @param sarray 
+	 * @param st 
+	 * @return static int 
+	 */
 	static int LoadSafeArrayToStringTable(SAFEARRAY * sarray, CStringTableImpl & st);
+	/**
+	 * CreateVBRAInstance:
+	 *
+	 * @param refLMRAInterface 
+	 * @return static BOOL 
+	 */
 	static BOOL CreateVBRAInstance(_LMRA_XML_WordLoaderPtr & refLMRAInterface);
 	DWORD m_dwEventHandlerCookie;
 	CWordEventHandler * m_pEventHandler;
@@ -114,22 +352,67 @@ private:
 
 	CString m_WordTemplate;
 protected:
+	/**
+	 * FillActiveElements:
+	 *
+	 * @return void 
+	 */
 	void FillActiveElements();
+	/**
+	 * DisconnectWordEventHandler:
+	 *
+	 * @return void 
+	 */
 	void DisconnectWordEventHandler();
+	/**
+	 * InitWordEventHandler:
+	 *
+	 * @return BOOL 
+	 */
 	BOOL InitWordEventHandler();
 	//void LoadParagraphStyles(LPCTSTR template_name);   //kody: presunuto do public
 	//void LoadCharacterStyles(LPCTSTR template_name);
 	BOOL isInit();
 public:
+  /**
+   * getLastProcessedId:
+   *
+   * @param  
+   * @return CString 
+   */
   CString getLastProcessedId(void);
+  /**
+   * getLastError:
+   *
+   * @param  
+   * @return CString 
+   */
   CString getLastError(void);
   
   // loads lists of Word styles from configuration XML file
+	/**
+	 * WordEditorInsertActiveElement:
+	 *
+	 * @param  
+	 * @return void 
+	 */
 	void WordEditorInsertActiveElement(void);
 
 private:
+	/**
+	 * loadStylesFromXML:
+	 *
+	 * @param XMLFilePath 
+	 * @return BOOL 
+	 */
 	BOOL loadStylesFromXML(LPCTSTR XMLFilePath);
 	// saves a list of Word styles to configutation XML file
+	/**
+	 * saveStylesToXML:
+	 *
+	 * @param file_path 
+	 * @return BOOL 
+	 */
 	BOOL saveStylesToXML(LPCTSTR file_path);
 };
 
