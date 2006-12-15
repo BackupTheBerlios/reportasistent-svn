@@ -891,7 +891,7 @@ END
 STRINGTABLE 
 BEGIN
     IDS_NO_DATA_FROM_CLIPBOARD "No data were obtained from clipboard."
-    IDS_PARSE_ERROR         "Parse error. The content in clipboard is is not a valid part of LM-RA skeleton."
+    IDS_PARSE_ERROR         "Parse error. The content in clipboard is is not a valid part of LM-RA skeleton.\nReason: %s"
     IDS_SETTINGS_ERR        "Applying of setting was not successful.\nReason: ""%s""."
     IDS_CLOSE_WORD_FIRST    "Please close the Word editor first."
 END

@@ -436,7 +436,10 @@ void CSkeletonView::OnEditCopy()
 	
 //ziskam XML vybraneho prvku TreeCtrl
 	_bstr_t bstrSelElmXML= SelXMLDomElement->xml; 
+	
+#ifdef _DEBUG	
 	AfxMessageBox((LPTSTR)bstrSelElmXML,0,0);
+#endif
 
 //Alokuji globalni pamet a XML do ni zkopiruji
 	HGLOBAL hgMemForXML = GlobalAlloc(GMEM_MOVEABLE | GMEM_DDESHARE ,    // allocation attributes
@@ -534,7 +537,7 @@ void CSkeletonView::OnEditPaste()
 	if (pNewXMLDoc->parseError->errorCode != S_OK)
 	{
 #ifdef _DEBUG
-		CReportAsistentApp::ReportError(IDS_PARSE_ERROR,pNewXMLDoc->parseError->reason);
+		CReportAsistentApp::ReportError(IDS_PARSE_ERROR, (LPCTSTR) pNewXMLDoc->parseError->reason);
 #endif
 	}
 
@@ -547,7 +550,10 @@ void CSkeletonView::OnEditPaste()
 	MSXML2::IXMLDOMElementPtr pNewXMLElm = pNewXMLDoc->GetdocumentElement();
 
 	GetDocument()->ChangeIDsInTree(pNewXMLElm);
+
+#ifdef _DEBUG	
 	AfxMessageBox(pNewXMLDoc->xml,0,0);
+#endif
 
 //zkusim vlozit DOVNITR do existujiciho
 	if (0!= OElementManager.CanInsertChildHere(pNewXMLElm,SelXMLDomElement))

@@ -11,6 +11,7 @@
 
     function round(val)
     {
+    if (val == 0 &amp;&amp; (val != parseInt(val))) return val;
     if (val == parseInt(val)) return val;
 
     var n = new Number(0.5);
