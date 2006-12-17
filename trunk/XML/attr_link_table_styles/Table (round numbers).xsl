@@ -45,19 +45,21 @@
     <output>
       <paragraph>
         <xsl:variable name="rows_count" select="count(link)"/>
-        <table id="tab{@id}" cols="2" rows="{$rows_count}">
-          <xsl:apply-templates select="link">
-            <xsl:with-param name="target_active_element">
-              <xsl:value-of select="@target"/>
-            </xsl:with-param>
-          </xsl:apply-templates>
+        <xsl:if test="$rows_count > 0">
+          <table id="tab{@id}" cols="2" rows="{$rows_count}">
+            <xsl:apply-templates select="link">
+              <xsl:with-param name="target_active_element">
+                <xsl:value-of select="@target"/>
+              </xsl:with-param>
+            </xsl:apply-templates>
 
 
 
-          <xsl:text disable-output-escaping="yes">
+            <xsl:text disable-output-escaping="yes">
 		
 		</xsl:text>
-        </table>
+          </table>
+        </xsl:if>
       </paragraph>
     </output>
   </xsl:template>
