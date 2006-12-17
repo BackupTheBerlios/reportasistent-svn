@@ -10,13 +10,13 @@ it under the terms of the GNU General Public License as published by
 the Free Software Foundation; either version 2 of the License, or
 (at your option) any later version.
 
-Foobar is distributed in the hope that it will be useful,
+LM Report Asistent is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
-along with Foobar; if not, write to the Free Software
+along with LM Report Asistent; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 #include "functions.h"
@@ -71,7 +71,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 bool ar2nl_err = false;
 
 //dedek: docasne
-/*****/
 //Deda: potreba pro MSXML - potreba pro muj testovci vystup jinak (az bude lesi vystup) mozno smazat
 #include <afxdb.h>
 #include <Shlwapi.h>
@@ -128,7 +127,6 @@ CString Get_4ftAR2NL (long hypno, CString db_name)
 
 	char * config;
 	config = new char [1024];
-
 	CString DSN = "LMxRepAssistxtempx" + hlp;
 
 //	CString source_db = "DBQ=" + db_name + " ";
@@ -160,7 +158,7 @@ CString Get_4ftAR2NL (long hypno, CString db_name)
 	strcpy (_db_name, (LPCSTR) (db_name + ".mdb"));
 
 	sprintf(config, "DSN=%s$ DESCRIPTION=Temporary ODBC$ DBQ=%s$ FIL=MicrosoftAccess$ DEFAULTDIR= ",
-		(LPCSTR) ("LMxRepAssistxtempx" + hlp), _db_name);
+		(LPCSTR) DSN, _db_name);
 
 	STARTUPINFO si;
 	ZeroMemory(& si, sizeof si);
