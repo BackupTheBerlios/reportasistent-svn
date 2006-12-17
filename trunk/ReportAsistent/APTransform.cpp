@@ -303,6 +303,10 @@ void CAElTransform::ProcessSingleTransformation(
 	transformation_node.Release();
 }
 
+/**
+ * CFilterSortItem: This class supplies sorting of items in dialog of a complex filter.
+ * @author
+ */
 class CFilterSortItem
 {
 private:

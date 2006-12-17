@@ -28,7 +28,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #endif // _MSC_VER >   1000
 
 /**
- * class CAElInfo:
+ * class CAElInfo: Encapsulated all the information about one active element which is being set in Active Element dialog.
  *
  * @author 
  */

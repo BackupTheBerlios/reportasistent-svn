@@ -28,7 +28,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #endif // _MSC_VER > 1000
 
 /**
- * class CDirectoriesManager:
+ * class CDirectoriesManager: Encapsulates all access to directories in LM-RA. Individual functions return paths to important directories for work of LM-RA.
  *
  * @author 
  */

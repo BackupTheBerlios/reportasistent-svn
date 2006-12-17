@@ -34,7 +34,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // CAttributeLinkTableDialog dialog
 
 /**
- * class CAttributeLinkTableDialog:
+ * class CAttributeLinkTableDialog: Class for dialog of static element Attribute Link Table and for visualisation of every active element "attr_link_table".
  *
  * @author 
  */

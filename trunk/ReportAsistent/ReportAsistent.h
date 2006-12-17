@@ -34,16 +34,12 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #include "resource.h"       // main symbols
 
-//Iva: konstanty
-//pocet obrazku pro ikony v TreeCtrl
+//Iva: constants
+//number of pictures for icons in treectrl
 #if !defined NUM_PICTURES_TREECTRL
 #define NUM_PICTURES_TREECTRL 6
 #endif
 
-// Delka nazvu prvku v TreeCtrl
-#if !defined LENGTH_TREE_ITEM_NAME
-#define LENGTH_TREE_ITEM_NAME 40	//dedek: prepsal z 10 na 15, 40
-#endif
 
 //IDs from Help file ReportAsistent.hlp
 #if !defined IDH_CONTENTS
@@ -60,7 +56,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 //honza: sem vkaldejte vsechny globalni managery
 //konstruuje se v inti instance a nici v Exit instance
 /**
- * struct CGeneralManager:
+ * struct CGeneralManager: This manager encapsulate all Manager classes in the LM-RA. It is constructed in InitInstance function and destructed in ExitInstance function.
  *
  * @author 
  */

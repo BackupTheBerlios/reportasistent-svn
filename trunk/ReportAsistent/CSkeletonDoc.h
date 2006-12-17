@@ -37,7 +37,7 @@ class CSkeletonView;
 
 
 /**
- * class CSkeletonDoc:
+ * class CSkeletonDoc: The class of every document of LM-RA application.
  *
  * @author 
  */

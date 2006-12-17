@@ -45,8 +45,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 
 /**
- * class CSimpleFilterDialog:
- *
+ * class CSimpleFilterDialog:The class of tab Simple Filter of Active Element dialog.
+ * 
  * @author 
  */
 class CSimpleFilterDialog : public CPropertyPage, CAElDataShare, CFilterResultImpl

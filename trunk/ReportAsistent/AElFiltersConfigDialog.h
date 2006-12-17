@@ -33,7 +33,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // CAElFiltersConfigDialog dialog
 
 /**
- * class CAElFiltersConfigDialog:
+ * class CAElFiltersConfigDialog:This class encapsulates Complex Filter tab of Active Element dialog with all its functionality.
+
  *
  * @author 
  */

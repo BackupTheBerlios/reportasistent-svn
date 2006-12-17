@@ -31,9 +31,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #pragma warning( disable : 4786 )
 
 
-//slouzi jako call back interface pro volani fitrovacich funkci - napr: ProcessSimpleFlter
 /**
- * class CFilterProcessor:
+ * class CFilterProcessor: This class serves as a callback interface for calling of filtering functions - e.g. ProcessSimpleFilter.
  *
  * @author 
  */
@@ -61,9 +60,8 @@ virtual BOOL ProcessFilteredOut(
 
 
 //honza:
-//trida slouzici k vygenerovani jednoho aktivniho prvku
 /**
- * class CAElTransform:
+ * class CAElTransform: This class serves for generation of one active element to a MS Word document.
  *
  * @author 
  */

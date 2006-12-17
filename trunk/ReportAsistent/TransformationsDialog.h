@@ -42,7 +42,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // CTransformationsDialog dialog
 
 /**
- * class CTransformationsDialog:
+ * class CTransformationsDialog: The class of the Visualizations tab of an Active Element dialog.
  *
  * @author 
  */

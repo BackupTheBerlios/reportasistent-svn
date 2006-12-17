@@ -62,7 +62,7 @@ public:
 // Implementation
 protected:
 	/**
-	 * SetDefault:
+	 * SetDefault: Sets the selected data source to be default.
 	 *
 	 * @return void 
 	 */

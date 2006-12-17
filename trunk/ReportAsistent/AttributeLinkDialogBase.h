@@ -32,7 +32,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 
 /**
- * class CAttributeLinkDialogBase:
+ * class CAttributeLinkDialogBase: Base class for dialogs of Attribute Link and Attribute Link Table static elements.
  *
  * @author 
  */

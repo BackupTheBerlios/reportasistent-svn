@@ -104,10 +104,9 @@ typedef void* source_handle_t;
 
 // ================== TRIDY ==================================
 
-// bufferovani vystupu
+
 /**
- * class APBuf:
- *
+ * class APBuf: Class for buffering of output of one active element. Array of öbjects of this class for every active element supported by a given datasource is then in COutputBuffer class. There is one such class for every connected data source.
  * @author 
  */
 class APBuf
@@ -227,9 +226,8 @@ BOOL Valid();						// priznak, zda je DLL platna (implementuje zasuvku) a byla v
 	~CPluginRec();
 };
 
-// --------- CSourceRec - polozka tabulky zdroju
 /**
- * class CSourceRec:
+ * class CSourceRec: One item of the table of data sources.
  *
  * @author 
  */
@@ -248,7 +246,7 @@ public:
 	
 	
 	/**
-	 * Valid:
+	 * Valid: Returns information whether is this record in order.
 	 *
 	 * @return BOOL 
 	 */
@@ -267,7 +265,7 @@ public:
 //to jsem si kdysi neco dal na index 10 neznamena, ze to tam bude navzdy
 //ale poradi se meni asi jen funkci RemoveSource
 /**
- * class CDataSourcesManager:
+ * class CDataSourcesManager: Class, that covers functions working with connected data sources. It encapsulated indexed array of connected data sources and functions working with them.
  *
  * @author 
  */

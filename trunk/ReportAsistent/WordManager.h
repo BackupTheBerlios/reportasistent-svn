@@ -33,7 +33,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 
 /**
- * class CStringTable:
+ * class CStringTable: An interface for CStringTableImpl class. It doesn't make it possible to change attributes of the CStringTableImpl class.
  *
  * @author 
  */
@@ -70,7 +70,7 @@ public:
 };
 
 /**
- * class CStringTableImpl:
+ * class CStringTableImpl: The class for storing strings. It is used for MS Word styles names and in Filter tabs of Active Element dialog.
  *
  * @author 
  */
@@ -153,7 +153,7 @@ public:
 };
 
 /**
- * class CStrCompare:
+ * class CStrCompare: This class encapsulates comparing function for sorting.
  *
  * @author 
  */
@@ -161,7 +161,7 @@ class CStrCompare
 {
 public:
 	/**
-	 * str_sort_desc:
+	 * str_sort_desc: Sorting of strings, descending.
 	 *
 	 * @param s1 
 	 * @param s2 
@@ -169,7 +169,7 @@ public:
 	 */
 	bool static str_sort_desc(CString * s1,  CString * s2);
 	/**
-	 * str_sort_asc:
+	 * str_sort_asc:Sorting of strings, ascending.
 	 *
 	 * @param s1 
 	 * @param s2 
@@ -178,7 +178,7 @@ public:
 	bool static str_sort_asc(CString * s1,  CString * s2);
 
 	/**
-	 * num_sort_desc:
+	 * num_sort_desc: Sorting of numbers, descending.
 	 *
 	 * @param s1 
 	 * @param s2 
@@ -186,7 +186,7 @@ public:
 	 */
 	bool static num_sort_desc(CString * s1,  CString * s2);
 	/**
-	 * num_sort_asc:
+	 * num_sort_asc: Sorting of numbers, ascending.
 	 *
 	 * @param s1 
 	 * @param s2 
@@ -198,7 +198,7 @@ public:
 
 
 /**
- * class CWordManager:
+ * class CWordManager: This class serves to control the WordLoader module of LM-RA, which serves to generate a skeleton to a MS Word document.
  *
  * @author 
  */

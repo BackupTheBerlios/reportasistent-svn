@@ -86,7 +86,7 @@ public:
 	 */
 	static void LoadXMLDOMFromResource(UINT nResourceID, MSXML2::IXMLDOMDocumentPtr &dom);
 	/**
-	 * LoadSkeletonDTD:
+	 * LoadSkeletonDTD: Loads DTD for validation of skeletons.
 	 *
 	 * @param dom 
 	 * @return static void 

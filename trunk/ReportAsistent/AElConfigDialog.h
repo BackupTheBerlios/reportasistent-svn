@@ -26,7 +26,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // CAElConfigDialog dialog
 
 /**
- * class CAElConfigDialog:
+ * class CAElConfigDialog:  This class encapsulates the Properties tab of Active Element dialog.
  *
  * @author 
  */

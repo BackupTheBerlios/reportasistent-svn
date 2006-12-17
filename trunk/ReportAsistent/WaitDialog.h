@@ -31,7 +31,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // CWaitDialog dialog
 
 /**
- * class CWaitDialog:
+ * class CWaitDialog: Class of Wait Dialog, used for long time operations of LM-RA.
  *
  * @author 
  */

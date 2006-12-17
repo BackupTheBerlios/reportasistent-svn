@@ -29,7 +29,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // CWaitAnimation window
 
 /**
- * class CWaitAnimation:
+ * class CWaitAnimation: Class of the animation, showing long, progressing work of LM-RA. It is used in CWaitDialog.
  *
  * @author 
  */

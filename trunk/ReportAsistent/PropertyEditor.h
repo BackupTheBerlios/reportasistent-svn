@@ -117,7 +117,7 @@ public:
 };
 
 /**
- * class CIntProperty:
+ * class CIntProperty:The class for an integer property in Visualization Properties dialog.
  *
  * @author 
  */
@@ -294,7 +294,7 @@ public:
 };
 
 /**
- * class CDoubleProperty:
+ * class CDoubleProperty:The class for a property of data type "double" in Visualization Properties dialog.
  *
  * @author 
  */
@@ -395,7 +395,7 @@ public:
 };
 
 /**
- * class CStringProperty:
+ * class CStringProperty:The class for a string property in Visualization Properties dialog.
  *
  * @author 
  */
@@ -443,7 +443,7 @@ public:
 };
 
 /**
- * class CColorProperty:
+ * class CColorProperty: The class for a color property in Visualization Properties dialog.
  *
  * @author 
  */
@@ -563,7 +563,7 @@ public:
 };
 
 /**
- * class CEnumProperty:
+ * class CEnumProperty:The class for a property of data type "enum" in Visualization Properties dialog.
  *
  * @author 
  */
@@ -612,7 +612,7 @@ public:
 // CPropertyEditor dialog
 
 /**
- * class CPropertyEditor:
+ * class CPropertyEditor: The class of the Visualization Properties dialog.
  *
  * @author 
  */

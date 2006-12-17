@@ -32,7 +32,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // CComplexFilterDialog dialog
 
 /**
- * class CAElDataShare:
+ * class CAElDataShare: A base class for every tab from Active Element dialog. It contains the old and modified version of the active element shared by all tabs. It also carries information about Apply button having been pressed.
  *
  * @author 
  */
@@ -60,7 +60,7 @@ public:
 };
 
 /**
- * class CFilterResultImpl:
+ * class CFilterResultImpl: Base class for three tabs of Active Element dialog. It supplies functionality for ListControl of Results present on Properties, Simple Filter and Complex Filter tab.
  *
  * @author 
  */
@@ -84,7 +84,7 @@ protected:
 
 
 /**
- * class CComplexFilterDialog:
+ * class CComplexFilterDialog: The class for settings dialog of every filter, added of edited in Complex Filter tab in Active Element dialog
  *
  * @author 
  */

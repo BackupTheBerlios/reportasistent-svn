@@ -31,7 +31,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // CGenerateDialog dialog
 
 /**
- * class CGenerateDialog:
+ * class CGenerateDialog: Class of the Generation dialog.
  *
  * @author 
  */

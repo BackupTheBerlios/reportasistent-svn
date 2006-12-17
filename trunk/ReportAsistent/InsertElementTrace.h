@@ -32,8 +32,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #define IET_UP 3
 #define IET_TOP 4
 
-/** Class CInsertElementTrace reprezents a route of enclosing elements that must be created to hold the target element, that a user wants to create.
-*/
 
 /**
  * class CInsertElementTrace:

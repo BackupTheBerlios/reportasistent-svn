@@ -103,6 +103,9 @@ CReportAsistentApp::CReportAsistentApp()
 /////////////////////////////////////////////////////////////////////////////
 // The one and only CReportAsistentApp object
 
+/**
+ * theApp: he one and only CReportAsistentApp object.
+ */
 CReportAsistentApp theApp;
 
 /////////////////////////////////////////////////////////////////////////////
@@ -160,9 +163,6 @@ BOOL CReportAsistentApp::InitInstance()
 	//Iva: initialization of RichEditCtrl
 	AfxInitRichEdit();
 
-	// Change the registry key under which our settings are stored.
-	// TODO: You should modify this string to be something appropriate
-	// such as the name of your company or organization.
 	SetRegistryKey(_T("LISp-Miner"));
 
 	//dedek
@@ -213,7 +213,6 @@ BOOL CReportAsistentApp::InitInstance()
 	if (!ProcessShellCommand(cmdInfo))
 		return FALSE;
 
-//  AfxMessageBox("3");
 	
 //	Sleep(5000);
 	s_dlg.ShowWindow(SW_HIDE);
@@ -225,8 +224,6 @@ BOOL CReportAsistentApp::InitInstance()
 	// Enable drag/drop open
 	m_pMainWnd->DragAcceptFiles();
 
-//  AfxMessageBox("4");
-	
 
 	return TRUE;
 }

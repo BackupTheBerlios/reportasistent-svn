@@ -979,9 +979,7 @@ void CSkeletonView::UpdateAllItemTexts(HTREEITEM pItem)
 }
 
 BOOL CSkeletonView::Create(LPCTSTR lpszClassName, LPCTSTR lpszWindowName, DWORD dwStyle, const RECT& rect, CWnd* pParentWnd, UINT nID, CCreateContext* pContext) 
-{
-	// TODO: Add your specialized code here and/or call the base class
-	
+{	
 	if (CWnd::Create(lpszClassName, lpszWindowName, dwStyle, rect, pParentWnd, nID, pContext))
 	{
 		//Iva: Natahnu obrazky pro TreeCtrl

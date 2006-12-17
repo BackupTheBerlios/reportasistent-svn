@@ -30,8 +30,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 /////////////////////////////////////////////////////////////////////////////
 // CWordEventHandler command target
 
-/**
- * class CWordEventHandler:
+/** 
+ * class CWordEventHandler: This class serves for handling of messages sent from WordLoader module of LM-RA to the LM-RA kernel.
  *
  * @author 
  */

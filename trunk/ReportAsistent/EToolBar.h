@@ -29,7 +29,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // CEToolBar window
 
 /**
- * class CEToolBar:
+ * class CEToolBar: This class enlarges functionality of standard CToolBar. The added ability is output of description of every button of a toolbar on Status bar, when the mouse moves over the button. This toolbar is used for toobar of active elements and toolbar of static elements.
  *
  * @author 
  */

@@ -61,9 +61,9 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #endif
 
 
-//Iva: Definition of class for OnUpdate(), its pHint parameter
+ 
 /**
- * class CUT_Hint:
+ * class CUT_Hint:Definition of class for OnUpdate(), its pHint parameter. It comprises information what is to be updated.
  *
  * @author 
  */
@@ -77,7 +77,7 @@ public:
 	HTREEITEM pInsertAfter;
 
 	/**
-	 * CUT_Hint:
+	 * CUT_Hint: standard constructor.
 	 *
 	 * @return  
 	 */
@@ -91,7 +91,7 @@ public:
 	}
 
 	/**
-	 * CUT_Hint:
+	 * CUT_Hint: copy constructor.
 	 *
 	 * @param a 
 	 * @param b 
@@ -109,7 +109,7 @@ public:
 
 
 /**
- * class CSkeletonView:
+ * class CSkeletonView:Class of the Tree View of the skeleton. The only type of view in LM-RA.
  *
  * @author 
  */
@@ -122,7 +122,7 @@ protected: // create from serialization only
 // Attributes
 public:
 	/**
-	 * GetDocument:
+	 * GetDocument: Returns the document underlying the view.
 	 *
 	 * @return CSkeletonDoc* 
 	 */
@@ -148,7 +148,7 @@ public:
 	
 protected:
 	/**
-	 * DeleteItem:
+	 * DeleteItem: Deletes an item from the TreeCtrl.
 	 *
 	 * @param hSelTreeItem 
 	 * @return void 
@@ -157,7 +157,7 @@ protected:
 
 public:
 	/**
-	 * DeleteSelectedItem:
+	 * DeleteSelectedItem: Deletes the item thas is currently selected from the TreeCtrl
 	 *
 	 * @return void 
 	 */
@@ -179,7 +179,7 @@ protected:
 // Generated message map functions
 protected:
 	/**
-	 * UpdateAllItemTexts:
+	 * UpdateAllItemTexts: Update all labels of all items in the TreeCtrl.
 	 *
 	 * @param pItem 
 	 * @return void 
