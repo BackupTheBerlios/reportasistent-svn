@@ -81,6 +81,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_1BF4530722EA43EC85028C4E3757914A"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_202D3E32F8174AA69CF79F09E8B52F3F"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -298,12 +304,6 @@
         "Entry"
         {
         "MsmKey" = "8:_597DDE176B7444F9B5C20973FA2487C5"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_59C41B47CBBA46BDBF05BE54C8003CD4"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -1210,6 +1210,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1BF4530722EA43EC85028C4E3757914A"
+            {
+            "SourcePath" = "8:..\\XML\\attr_link_table_styles\\The list of values.xsl"
+            "TargetName" = "8:The list of values.xsl"
+            "Tag" = "8:"
+            "Folder" = "8:_FAB89E18F8544B97889C15FA7E331BA6"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_202D3E32F8174AA69CF79F09E8B52F3F"
             {
             "SourcePath" = "8:..\\elements\\hyp_kl\\complex_filter.xsl"
@@ -1936,26 +1956,6 @@
             "TargetName" = "8:transform.xsl"
             "Tag" = "8:"
             "Folder" = "8:_DBD4EC964B004A1995B90B40A47747D8"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_59C41B47CBBA46BDBF05BE54C8003CD4"
-            {
-            "SourcePath" = "8:..\\XML\\attr_link_table_styles\\List of values.xsl"
-            "TargetName" = "8:List of values.xsl"
-            "Tag" = "8:"
-            "Folder" = "8:_FAB89E18F8544B97889C15FA7E331BA6"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -4713,7 +4713,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:LM-Report Asistent 1.0"
         "ProductCode" = "8:{0C4BBDF1-2CA5-4949-AE68-C7B1324C897E}"
-        "PackageCode" = "8:{66DCA0FA-02DC-4FDE-88B1-8E2893ACF0E2}"
+        "PackageCode" = "8:{6D57CEE9-104A-4FA3-82C5-1F04EEA9E56F}"
         "UpgradeCode" = "8:{5E46F945-630F-48E7-AB16-80C39E568C5C}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:FALSE"
@@ -5372,6 +5372,9 @@
             }
         }
         "ProjectOutput"
+        {
+        }
+        "VJSharpPlugin"
         {
         }
     }
