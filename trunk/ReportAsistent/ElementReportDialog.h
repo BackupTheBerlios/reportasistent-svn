@@ -29,8 +29,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // CElementReportDialog dialog
 
 /**
- * class CElementReportDialog:
- *
+ *The class CElementReportDialog contains dialog with features of the static element Report.
  * @author 
  */
 class CElementReportDialog : public CDialog

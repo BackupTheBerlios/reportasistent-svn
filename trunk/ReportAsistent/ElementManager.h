@@ -53,7 +53,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA*/
 #define	MAX_ELEMENT_COUNT		100
 
 /**
- * class CElementManager:
+ * Class CElementManager comprises functions operating on XML skeleton elements.
  *
  * @author 
  */
@@ -161,7 +161,7 @@ public:
 	 */
 	int getAttrLinkTableStylesCount();
 	/**
-	 * CanInsertBefore:
+	 * CanInsertBefore: Checks, whether it is possible to insert one XML Element before another one.
 	 *
 	 * @param pInserted 
 	 * @param pTarget 
@@ -169,33 +169,33 @@ public:
 	 */
 	BOOL CanInsertBefore(MSXML2::IXMLDOMElementPtr &pInserted, MSXML2::IXMLDOMElementPtr &pTarget);
 	/**
-	 * getFirstActiveElementID:
+	 * getFirstActiveElementID:Gets lowest ID of the type of an active element.
 	 *
 	 * @return elId_t 
 	 */
 	elId_t getFirstActiveElementID();
 	/**
-	 * getFirstStaticElementID:
+	 * getFirstStaticElementID: Gets lowest ID of the type of a static element.
 	 *
 	 * @return elId_t 
 	 */
 	elId_t getFirstStaticElementID();
 	/**
-	 * CreateElementCaption:
+	 * CreateElementCaption: Creates special elements' captions, which are used for item names in the TreeCtrl, representing the skeleton.
 	 *
 	 * @param element 
 	 * @return CString 
 	 */
 	CString CreateElementCaption(MSXML2::IXMLDOMElementPtr & element);
 	/**
-	 * FillImageList:
+	 * FillImageList: Using function LoadElementIcon loads all icons for all known elements to the image list.
 	 *
 	 * @param img_list 
 	 * @return BOOL 
 	 */
 	BOOL FillImageList(CImageList & img_list);
 	/**
-	 * LoadElementIcon:
+	 * LoadElementIcon: Loads element icon from given bitmap.
 	 *
 	 * @param element_id 
 	 * @param icon 
@@ -203,14 +203,14 @@ public:
 	 */
 	BOOL LoadElementIcon(elId_t element_id, CBitmap & icon);
 	/**
-	 * getActiveElementInfo:
+	 * getActiveElementInfo: Returns object of class CAElInfo, which encapsulates features of an active element. 
 	 *
 	 * @param id 
 	 * @return CAElInfo* 
 	 */
 	CAElInfo * getActiveElementInfo(elId_t id);
 	/**
-	 * isElementSupportedBySource:
+	 * isElementSupportedBySource: Decides, whether a type of an element is supported by source "source_index"
 	 *
 	 * @param element_id 
 	 * @param source_index 
@@ -218,7 +218,7 @@ public:
 	 */
 	BOOL isElementSupportedBySource(elId_t element_id, int source_index);
 	/**
-	 * CanInsertChildHere:
+	 * CanInsertChildHere: Decides, whether it is possible to insert the "child" into "parent" element.
 	 *
 	 * @param child 
 	 * @param parent 
@@ -226,21 +226,21 @@ public:
 	 */
 	BOOL CanInsertChildHere(MSXML2::IXMLDOMElementPtr & child, MSXML2::IXMLDOMElementPtr & parent);
 	/**
-	 * isActiveElementOrphan:
+	 * isActiveElementOrphan: Decides, whether the active element is an orphan or has a valid source assigned.
 	 *
 	 * @param element 
 	 * @return BOOL 
 	 */
 	BOOL isActiveElementOrphan(MSXML2::IXMLDOMElementPtr & element);
 	/**
-	 * isElementActive:
+	 * isElementActive: Decides, whether the given element is an active or a static element.
 	 *
 	 * @param elementId 
 	 * @return BOOL 
 	 */
 	BOOL isElementActive(elId_t elementId);
 	/**
-	 * CreateEmptyElement:
+	 * CreateEmptyElement: Creates an empty element of the given type
 	 *
 	 * @param id 
 	 * @return MSXML2::IXMLDOMElementPtr 
@@ -275,9 +275,6 @@ public:
 	 * @return void 
 	 */
 	void TransformAttrLink(MSXML2::IXMLDOMElementPtr & element);
-
-
-
 	/**
 	 * getElementName:
 	 *
@@ -286,21 +283,21 @@ public:
 	 */
 	LPCTSTR getElementName(elId_t elementID);	//vrati jemno elementu s id elementID
 	/**
-	 * getElementLabel:
+	 * getElementLabel: Returns label of the given element, which is the long_name of an element, as far as static elements are concerned and attribute "label", as far as active elements are concerned.
 	 *
 	 * @param elementID 
 	 * @return LPCTSTR 
 	 */
 	LPCTSTR getElementLabel(elId_t elementID);	//vrati label elementu s id elementID
 	/**
-	 * IdentifyElement:
+	 * IdentifyElement: Eeturns id of the type of the given element. 
 	 *
 	 * @param element 
 	 * @return elId_t 
 	 */
 	elId_t IdentifyElement(MSXML2::IXMLDOMElementPtr & element);	//identifikuje element - vrati id
 	/**
-	 * getLastElementId:
+	 * getLastElementId: Returns id of the type of the last element, which is equal to number of all known elements.
 	 *
 	 * @return elId_t 
 	 */
@@ -331,20 +328,19 @@ public:
 protected:
 	
 	/**
-	 * LoadAttrLinkTableStyles:
+	 * LoadAttrLinkTableStyles: Loads MS Word styles for Attribute Link Table from given directory.
 	 *
 	 * @param directory_path 
 	 * @return void 
 	 */
 	void LoadAttrLinkTableStyles(LPCTSTR directory_path);
 	/**
-	 * LoadActiveElements:
+	 * LoadActiveElements: Loads active elements from the given directory
 	 *
 	 * @param elements_directory_path 
 	 * @return void 
 	 */
 	void LoadActiveElements(LPCTSTR elements_directory_path);
-	// kody - setridi pole "active_elements" podle labelu
 	/**
 	 * sortActiveElementsByLabel:
 	 *

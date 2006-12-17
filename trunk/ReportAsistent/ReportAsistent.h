@@ -120,14 +120,14 @@ public:
 // See ReportAsistent.cpp for the implementation of this class
 //
 /**
- * class CSkeletonDoc:
+ * class CSkeletonDoc: Thr
  *
  * @author 
  */
 class CSkeletonDoc;
 
 /**
- * class CReportAsistentApp:
+ * class CReportAsistentApp: The class of all the LM-RA application.
  *
  * @author 
  */
@@ -135,7 +135,7 @@ class CReportAsistentApp : public CWinApp
 {
 public:
 	/**
-	 * ReportError:
+	 * ReportError: Function for standardized reporting of errors that can occur during work with LM-RA.
 	 *
 	 * @param nResourceErrorStringID 
 	 * @param  
@@ -144,14 +144,14 @@ public:
 	int static ReportError(UINT nResourceErrorStringID, ...);
 	
 	/**
-	 * FirstDocumentInFirstTemplate:
+	 * FirstDocumentInFirstTemplate: Returns the active document.
 	 *
 	 * @return CSkeletonDoc* 
 	 */
 	CSkeletonDoc * FirstDocumentInFirstTemplate();
 	CGeneralManager * m_pGeneralManager;
 	/**
-	 * CReportAsistentApp:
+	 * CReportAsistentApp: constructor.
 	 *
 	 * @return  
 	 */

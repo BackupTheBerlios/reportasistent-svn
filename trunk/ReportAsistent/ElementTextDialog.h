@@ -29,20 +29,22 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // CElementTextDialog dialog
 
 /**
- * class CElementTextDialog:
- *
- * @author 
+ *The class CElementTextDialog contains dialog with features of the static element Text.	
+ *	
+ * @author Iva Bartunkova
  */
 class CElementTextDialog : public CDialog
 {
 // Construction
 public:
+	/** The XML element that lies under the static element Text.*/
 	MSXML2::IXMLDOMElementPtr m_SelXMLElm;
 	CElementTextDialog(MSXML2::IXMLDOMElementPtr & SelXMLElm,CWnd* pParent = NULL);   // standard constructor
 
 // Dialog Data
 	//{{AFX_DATA(CElementTextDialog)
 	enum { IDD = IDD_DIALOGTEXT };
+/** The control of RichTextEditCtrl, that serves for inserting text into the element.*/
 	CRichEditCtrl	m_REdit;
 	CComboBox	m_StylesCombo;
 	CString	m_DialTextIDEditValue;

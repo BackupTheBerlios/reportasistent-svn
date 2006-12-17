@@ -66,7 +66,6 @@ BEGIN_MESSAGE_MAP(CWaitDialog, CDialog)
 	ON_BN_CLICKED(IDC_RESUME_APP_BUTTON, OnResumeAppButton)
 	ON_WM_DESTROY()
 	//}}AFX_MSG_MAP
-	ON_STN_CLICKED(IDC_REASON_TEXT, OnStnClickedReasonText)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -253,7 +252,7 @@ void CWaitDialog::OnDestroy()
 	CDialog::OnDestroy();
 }
 
-void CWaitDialog::OnStnClickedReasonText()
-{
-	// TODO: Add your control notification handler code here
-}
+//DEL void CWaitDialog::OnStnClickedReasonText()
+//DEL {
+//DEL 	// TODO: Add your control notification handler code here
+//DEL }

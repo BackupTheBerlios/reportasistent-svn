@@ -176,10 +176,6 @@ SOURCE=.\InsertElementTrace.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\ListSort.cpp
-# End Source File
-# Begin Source File
-
 SOURCE=.\MainFrm.cpp
 # End Source File
 # Begin Source File
@@ -326,10 +322,6 @@ SOURCE=.\HListBox.h
 # Begin Source File
 
 SOURCE=.\InsertElementTrace.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\ListSort.h
 # End Source File
 # Begin Source File
 

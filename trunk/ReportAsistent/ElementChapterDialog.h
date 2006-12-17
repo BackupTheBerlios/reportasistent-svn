@@ -29,7 +29,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // CElementChapterDialog dialog
 
 /**
- * class CElementChapterDialog:
+ * The class CElementChapterDialog contains dialog with features of the static element Chapter.
  *
  * @author 
  */

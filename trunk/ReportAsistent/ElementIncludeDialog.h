@@ -29,7 +29,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // CElementIncludeDialog dialog
 
 /**
- * class CElementIncludeDialog:
+ * The class CElementIncludeDialog contains dialog with features of the static element Include.
  *
  * @author 
  */

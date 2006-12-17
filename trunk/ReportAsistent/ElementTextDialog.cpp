@@ -218,7 +218,8 @@ BOOL CElementTextDialog::OnInitDialog()
 	CHARFORMAT  cf;
 	m_REdit.GetDefaultCharFormat(cf);
 	cf.yHeight =App->m_iTextEditSize;
-	cf.dwMask=CFM_SIZE;
+	cf.dwMask=CFM_SIZE|CFM_FACE;
+	strcpy (cf.szFaceName, "arial") ;
 	cf.cbSize=sizeof(cf);
 	int Res = m_REdit.SetDefaultCharFormat(cf);	
 	

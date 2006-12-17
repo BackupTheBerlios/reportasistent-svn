@@ -635,27 +635,7 @@
 						PreprocessorDefinitions=""
 					/>
 				</FileConfiguration>
-			</File>
-			<File
-				RelativePath="ListSort.cpp"
-				>
-				<FileConfiguration
-					Name="Debug|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						PreprocessorDefinitions=""
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Release|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						PreprocessorDefinitions=""
-					/>
-				</FileConfiguration>
-			</File>
+			</File>			
 			<File
 				RelativePath="MainFrm.cpp"
 				>
@@ -1045,10 +1025,6 @@
 			</File>
 			<File
 				RelativePath="InsertElementTrace.h"
-				>
-			</File>
-			<File
-				RelativePath="ListSort.h"
 				>
 			</File>
 			<File

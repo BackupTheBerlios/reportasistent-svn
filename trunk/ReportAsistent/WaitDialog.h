@@ -193,7 +193,6 @@ private:
 	static UINT ThreadControllingFunction( LPVOID pParam );
 	LPCTSTR m_strDlgText;
 	BOOL m_bEndDialog;
-	afx_msg void OnStnClickedReasonText();
 };
 
 //{{AFX_INSERT_LOCATION}}

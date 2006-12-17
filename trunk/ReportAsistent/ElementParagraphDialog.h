@@ -30,8 +30,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // CElementParagraphDialog dialog
 
 /**
- * class CElementParagraphDialog:
- *
+ *The class CElementParagraphDialog contains dialog with features of the static element Paragraph. 
  * @author 
  */
 class CElementParagraphDialog : public CDialog

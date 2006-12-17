@@ -29,7 +29,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // CHListBox window
 
 /**
- * class CHListBox:
+ * class CHListBox extends features of standard MFC class CListBox. It offers horizontal scrollbar.
  *
  * @author 
  */

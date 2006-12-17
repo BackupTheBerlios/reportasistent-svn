@@ -26,7 +26,6 @@ along with LM Report Asistent; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 #include "AttributeLinkDialogBase.h"
-#include "ListSort.h"	// Added by ClassView
 
 /////////////////////////////////////////////////////////////////////////////
 // CAttributeLinkDialog dialog
@@ -64,7 +63,6 @@ public:
 
 // Implementation
 protected:
-	//CListSort m_ListSort_AttrList(m_AttributesList,2);
 	void DDV_NonDuplicateID(CDataExchange *pDX, int nId, CString csIDEditValue);
 	CString m_OldID;
 	void FillStylesCombo();

@@ -140,21 +140,21 @@ static BOOL setBuffer(BSTR str, MSXML2::IXMLDOMDocumentPtr & xml);
 
 
 /**
- * class COutputBuffer:
+ * class COutputBuffer: Class that encapsulates buffers for each active element from one data source.
  *
  * @author 
  */
 class COutputBuffer
 {
-	CArray<APBuf*,APBuf*> BufArray;	// pole bufferu
+	CArray<APBuf*,APBuf*> BufArray;	
 
 public:
 	/**
- * getBuffersCount:
+ * getBuffersCount: returns number of active elements which are buffered for the current data source
  *
  * @return int 
  */
-int getBuffersCount();  // ret. number of AP which are buffered for the current data source
+int getBuffersCount();   
 	/**
 	 * getAPIndex:
 	 *
@@ -202,9 +202,9 @@ private:
 
 
 
-// --------- CPluginRec - polozka tabulky zasuvek
+ 
 /**
- * class CPluginRec:
+ * class CPluginRec:The Class that encapsulates one item in table of reachable plugins LM-RA
  *
  * @author 
  */
