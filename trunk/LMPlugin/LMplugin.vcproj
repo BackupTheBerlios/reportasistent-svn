@@ -1232,10 +1232,6 @@
 				>
 			</File>
 			<File
-				RelativePath="pomocny.h"
-				>
-			</File>
-			<File
 				RelativePath="SockInterface.h"
 				>
 			</File>
