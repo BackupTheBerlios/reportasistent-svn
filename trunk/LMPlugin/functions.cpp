@@ -141,6 +141,7 @@ public:
 		PathFindFileName(module_path)[-1] = 0;
 		PathFindFileName(module_path)[-1] = 0;
 		PathFindFileName(module_path)[-1] = 0;
+		
 		AR2NL_path.Format("%s\\4ftAR2NL", module_path);
 		AR2NL_exe_command.Format("4ftar2nl.exe -DSN=%s  -hypno=%d", (LPCTSTR) DSN, hypno);
 
@@ -198,7 +199,7 @@ CString Get_4ftAR2NL (long hypno, CString db_name)
 	//change the working directory
 	if (_chdir (AR2NLHlp.getEXEPath()) != 0)
 	{
-		CLMSock::ReportError(6, LMERR_CANNOT_FIND_AR2NL_EXE_PATH, AR2NLHlp.getEXEPath());
+		CLMSock::ReportError(6, LMERR_CANNOT_FIND_AR2NL_EXE_PATH, (LPCTSTR) AR2NLHlp.getEXEPath());
 		ar2nl_err = true;
 		return "";
 	}
@@ -241,7 +242,8 @@ CString Get_4ftAR2NL (long hypno, CString db_name)
 					NULL, NULL, FALSE, CREATE_NO_WINDOW, NULL, NULL, & si, & pi)) 
 		{
 			exe_cmd.ReleaseBuffer();
-			CLMSock::ReportError (7, LMERR_AR2NL_EXE_FAIL, AR2NLHlp.getEXECommand());
+			CLMSock::ReportError (7, LMERR_AR2NL_EXE_FAIL, 
+					(LPCTSTR) (AR2NLHlp.getEXEPath() + "\\" + AR2NLHlp.getEXECommand()));
 			ar2nl_err = true;
 			return "";
 		}
@@ -249,7 +251,8 @@ CString Get_4ftAR2NL (long hypno, CString db_name)
 	}
 	catch (...)
 	{
-		CLMSock::ReportError (7, LMERR_AR2NL_EXE_FAIL, AR2NLHlp.getEXECommand());
+		CLMSock::ReportError (7, LMERR_AR2NL_EXE_FAIL, 
+				(LPCTSTR) (AR2NLHlp.getEXEPath() + "\\" + AR2NLHlp.getEXECommand()));
 		ar2nl_err = true;
 		return "";
 	}
