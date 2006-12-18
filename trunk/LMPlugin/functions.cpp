@@ -79,28 +79,8 @@ bool ar2nl_err = false;
 using namespace MSXML2;
 //vlozi namespace MSXML2;
 
-CString Get_4ftar2nl_output ()
+CString Get_4ftar2nl_output (LPCTSTR file_path)
 {
-	TCHAR module_path[MAX_PATH];
-	GetModuleFileName(NULL, module_path, MAX_PATH);
-
-	//postupne odpare z module_path poslednni dve lomitka
-	PathFindFileName(module_path)[-1] = 0;
-	PathFindFileName(module_path)[-1] = 0;
-	PathFindFileName(module_path)[-1] = 0;
-
-	CString file_path = module_path;
-	file_path += "\\4ftar2nl\\output\\output12.xml";
-	
-	CString buf = "";
-	//CFile f(file_path, CFile::modeRead);
-	//int size = (int) f.GetLength();
-	//LPTSTR ps = buf.GetBuffer(size);
-	//f.Read(ps, size);
-	//f.Close();
-	//ps[size] = 0; //data nactena ze souboru se jete musi ukoncit nulou aby reprezentovala validni string
-	//buf.ReleaseBuffer(); //od teto chvile je ps neplatny a nemelo by se do nej zapisovat
-
 	// kody - nacitani a serializace vystupu AR2NL pres XML DOM
 	MSXML2::IXMLDOMDocumentPtr dom;
 	dom.CreateInstance(_T("Msxml2.DOMDocument"));
@@ -108,123 +88,130 @@ CString Get_4ftar2nl_output ()
 
 	if (dom->load((LPCTSTR) file_path)!=VARIANT_TRUE)
 	{
-		return buf;
+		return "";
 	}
 
 	MSXML2::IXMLDOMElementPtr el_hyp = dom->GetdocumentElement();
-	if (el_hyp != NULL)
-		buf = (CString) (LPCTSTR) el_hyp->Getxml();
 
 	dom.Release();
 
-	return buf;
+	if (el_hyp != NULL)
+	{
+		return (LPCTSTR) el_hyp->Getxml();
+	}
+	else
+	{
+		return "";
+	}
 }
+
+class CAR2NLHlp
+{
+	CString DSN;
+	CString AR2NL_exe_command;
+	CString AR2NL_path;
+	CString config;
+
+	BOOL source_is_set;
+
+	void ReplaceDollars(LPSTR str)
+	{
+		while (* str)
+		{
+			if (* str == '$') * str = '\0';
+			str++;
+		}
+	}
+
+public:
+	LPCTSTR getConfig() {return config;};
+	CString getEXEPath() {return AR2NL_path + "\\bin";};
+	LPCTSTR getEXECommand() {return AR2NL_exe_command;};
+	CString getOutput12Path() {return AR2NL_path + "\\output\\output12.xml";};
+
+	CAR2NLHlp (long hypno, CString db_name)
+	{
+		source_is_set = FALSE;
+
+		DSN.Format("LMxRepAssistxtempx%d", hypno);
+
+		TCHAR module_path[MAX_PATH];
+		GetModuleFileName(NULL, module_path, MAX_PATH);
+		//postupne odpare z module_path poslednni dve lomitka
+		PathFindFileName(module_path)[-1] = 0;
+		PathFindFileName(module_path)[-1] = 0;
+		PathFindFileName(module_path)[-1] = 0;
+		AR2NL_path.Format("%s\\4ftAR2NL", module_path);
+		AR2NL_exe_command.Format("4ftar2nl.exe -DSN=%s  -hypno=%d", (LPCTSTR) DSN, hypno);
+
+		config.Format("DSN=%s$ DESCRIPTION=Temporary ODBC$ DBQ=%s.mdb$ FIL=MicrosoftAccess$ DEFAULTDIR= $",
+			(LPCSTR) DSN, (LPCTSTR) db_name);
+	}
+
+	BOOL setODBCSource()
+	{
+		CString conf_str = getConfig();
+		LPSTR buf = conf_str.GetBuffer(0);
+
+		ReplaceDollars(buf);
+
+		source_is_set = SQLConfigDataSource (NULL, ODBC_ADD_DSN, "Microsoft Access Driver (*.mdb)\0", buf);
+
+		conf_str.ReleaseBuffer();
+
+		return source_is_set;
+	}
+		
+	~CAR2NLHlp()
+	{
+		if (source_is_set)
+		{
+			CString conf_str = "DSN=" + DSN + "$";
+			LPSTR buf = conf_str.GetBuffer(0);
+
+			ReplaceDollars(buf);
+
+			if (FALSE == SQLConfigDataSource (NULL, ODBC_REMOVE_DSN,
+						"Microsoft Access Driver (*.mdb)", buf))
+			{
+				conf_str.ReleaseBuffer();
+				CLMSock::ReportError (5, LMERR_CANNOT_REMOVE_ODBC);
+			}
+
+			conf_str.ReleaseBuffer();
+		}
+	}
+};
 
 CString Get_4ftAR2NL (long hypno, CString db_name)
 {
-	CString hlp;
-	hlp.Format ("%d", hypno);
-
-	char * config;
-	config = new char [1024];
-	CString DSN = "LMxRepAssistxtempx" + hlp;
-
-//	CString source_db = "DBQ=" + db_name + " ";
-
-//	CString config = "DSN=" + DSN + "\\0 " + source_db;
-
-	CString _4ftAR2NL_output;
-
-//	CString _4ftAR2NL_exe = "D:\\ar2nl\\LispMiner\\4ftAR2NL\\bin\\4ftAR2NL.exe";
-	TCHAR module_path[MAX_PATH];
-	GetModuleFileName(NULL, module_path, MAX_PATH);
-
-	//postupne odpare z module_path poslednni dve lomitka
-	PathFindFileName(module_path)[-1] = 0;
-	PathFindFileName(module_path)[-1] = 0;
-	PathFindFileName(module_path)[-1] = 0;
-
-//	CString _4ftAR2NL_exe_path = "C:\\skola\\sw projekt\\dev\\4ftAR2NL\\bin";
-	CString _4ftAR2NL_exe_path = module_path;
-	_4ftAR2NL_exe_path += "\\4ftAR2NL\\bin";
-	CString _4ftAR2NL_exe = "4ftar2nl.exe";
-	CString _4ftAR2NL_params = " -DSN=";
-	_4ftAR2NL_params += DSN;
-	_4ftAR2NL_params += " -hypno=";
-	_4ftAR2NL_params += hlp;
-
-	char * _db_name;
-	_db_name = new char [1024];
-	strcpy (_db_name, (LPCSTR) (db_name + ".mdb"));
-
-	sprintf(config, "DSN=%s$ DESCRIPTION=Temporary ODBC$ DBQ=%s$ FIL=MicrosoftAccess$ DEFAULTDIR= ",
-		(LPCSTR) DSN, _db_name);
-
-	STARTUPINFO si;
-	ZeroMemory(& si, sizeof si);
-	si.cb = sizeof si;
-	
-	PROCESS_INFORMATION pi;
-	ZeroMemory(& pi, sizeof pi);
-
-	DWORD exit_code = 1;//0 = successful
-
-	unsigned int len = strlen (config);
-
-	unsigned int i;//iteration variable
-
-	for (i = 0; i < len; i++)
-	{
-		if (config [i] == '$') config [i] = '\0';
-	}
+	CAR2NLHlp AR2NLHlp(hypno, db_name);
 
 	//create the temporary datasource
-	if (FALSE == SQLConfigDataSource (NULL, ODBC_ADD_DSN, "Microsoft Access Driver (*.mdb)\0", (LPCSTR) config))
+	if (FALSE == AR2NLHlp.setODBCSource())
 	{
-		delete [] config;
-		delete [] _db_name;
 		CLMSock::ReportError (4, LMERR_CANNOT_CREATE_ODBC);
 		ar2nl_err = true;
 		return "";
 	}
-	delete [] config;
-	delete [] _db_name;
 
 	//change the working directory
-	if (_chdir ((LPCSTR) _4ftAR2NL_exe_path) != 0)
+	if (_chdir (AR2NLHlp.getEXEPath()) != 0)
 	{
-		CLMSock::ReportError
-			(6, LMERR_CANNOT_FIND_AR2NL_EXE_PATH, (LPCSTR) _4ftAR2NL_exe_path);
-		SQLConfigDataSource (NULL, ODBC_REMOVE_DSN, "Microsoft Access Driver (*.mdb)\0",
-			"DSN=" + DSN + "\0\0");
+		CLMSock::ReportError(6, LMERR_CANNOT_FIND_AR2NL_EXE_PATH, AR2NLHlp.getEXEPath());
 		ar2nl_err = true;
 		return "";
 	}
 
-	char * process;
-	char * params;
-	process = new char [MAX_PATH];
-	params = new char [MAX_PATH];
-	strcpy (process, (LPCSTR) _4ftAR2NL_exe);
-	strcpy (params, (LPCSTR) _4ftAR2NL_params);
-
-
-/***************************************************************/
-//verze dedek
-//	CString p2 = "\"";
-	CString p2 = _4ftAR2NL_exe;
-//	p2 += "\" ";
-	p2 += " ";
-	p2 += _4ftAR2NL_params;
-
+	
 	CFileStatus status;
-	CString file_path = module_path;
-	file_path += "\\4ftar2nl\\output\\output12.xml";
-	CTime last_modif_time;
 	bool file_exists;
+	CTime last_modif_time;
+
+	
 	try
 	{
-		CFile f (file_path, CFile::modeRead);
+		CFile f (AR2NLHlp.getOutput12Path(), CFile::modeRead);
 		if(f.GetStatus (status))
 		{
 			file_exists = true;
@@ -237,69 +224,62 @@ CString Get_4ftAR2NL (long hypno, CString db_name)
 	{
 		file_exists = false;
 	}
-
+	
+	
+	STARTUPINFO si;
+	ZeroMemory(& si, sizeof si);
+	si.cb = sizeof si;
+	
+	PROCESS_INFORMATION pi;
+	ZeroMemory(& pi, sizeof pi);
+	
 	try
 	{
 		//run the 4ftAR2NL application
-		if (!CreateProcess(NULL, p2.GetBuffer(0),
-			NULL, NULL, FALSE, CREATE_NO_WINDOW, NULL, NULL, & si, & pi)) 
-	/***************************************************************
-
-		//run the 4ftAR2NL application
-		if (!CreateProcess(process, params,
-			NULL, NULL, FALSE, NORMAL_PRIORITY_CLASS, NULL, NULL, & si, & pi)) 
-	/***************************************************************/
+		CString exe_cmd = AR2NLHlp.getEXECommand();
+		if (!CreateProcess(NULL, exe_cmd.GetBuffer(0),
+					NULL, NULL, FALSE, CREATE_NO_WINDOW, NULL, NULL, & si, & pi)) 
 		{
-			//nahlas chybu
-			delete [] process;
-			delete [] params;
-			if (FALSE == SQLConfigDataSource (NULL, ODBC_REMOVE_DSN,
-				"Microsoft Access Driver (*.mdb)\0", "DSN=" + DSN + "\0\0"))
-				CLMSock::ReportError (7, LMERR_AR2NL_EXE_FAIL,
-					_4ftAR2NL_exe_path + "\\" + p2.GetBuffer(0));
-			SQLConfigDataSource (NULL, ODBC_REMOVE_DSN, "Microsoft Access Driver (*.mdb)\0",
-				"DSN=" + DSN + "\0\0");
+			exe_cmd.ReleaseBuffer();
+			CLMSock::ReportError (7, LMERR_AR2NL_EXE_FAIL, AR2NLHlp.getEXECommand());
 			ar2nl_err = true;
-			return "";//!!!!!pozor na to, co vracet
+			return "";
 		}
+		exe_cmd.ReleaseBuffer();
 	}
 	catch (...)
 	{
-		delete [] process;
-		delete [] params;
-		CLMSock::ReportError (7, LMERR_AR2NL_EXE_FAIL,
-			_4ftAR2NL_exe_path + "\\" + p2.GetBuffer(0));
-		SQLConfigDataSource (NULL, ODBC_REMOVE_DSN, "Microsoft Access Driver (*.mdb)\0",
-			"DSN=" + DSN + "\0\0");
+		CLMSock::ReportError (7, LMERR_AR2NL_EXE_FAIL, AR2NLHlp.getEXECommand());
 		ar2nl_err = true;
 		return "";
 	}
-	delete [] process;
-	delete [] params;
+
+	
+
 /*	if (WaitForSingleObject(pi.hProcess, 60000) != WAIT_OBJECT_0)
 	{
 		//nahlas chybu
 		return "";//!!!!!pozor na to, co vracet
 	}
 */	
-	int cnt = 0;
+
 	try
 	{
+		DWORD exit_code = 1;//0 = successful
+	
 		if (!GetExitCodeProcess (pi.hProcess, &exit_code))
 		{
 			CLMSock::ReportError (8, LMERR_AR2NL_EXIT_FAIL);
-			SQLConfigDataSource (NULL, ODBC_REMOVE_DSN, "Microsoft Access Driver (*.mdb)\0",
-				"DSN=" + DSN + "\0\0");
 			ar2nl_err = true;
 			return "";
 		}
+		
+		int cnt = 0;
 		while (exit_code == STILL_ACTIVE)
 		{
 			if (!GetExitCodeProcess (pi.hProcess, &exit_code))
 			{
 				CLMSock::ReportError (8, LMERR_AR2NL_EXIT_FAIL);
-				SQLConfigDataSource (NULL, ODBC_REMOVE_DSN, "Microsoft Access Driver (*.mdb)\0",
-					"DSN=" + DSN + "\0\0");
 				ar2nl_err = true;
 				return "";
 			}
@@ -307,12 +287,15 @@ CString Get_4ftAR2NL (long hypno, CString db_name)
 			cnt += 500;
 			if (cnt > 60000) exit_code = 0;
 		}
+
+		if (exit_code != 0)
+		{
+			return "";
+		}
 	}
 	catch (...)
 	{
 		CLMSock::ReportError (8, LMERR_AR2NL_EXIT_FAIL);
-		SQLConfigDataSource (NULL, ODBC_REMOVE_DSN, "Microsoft Access Driver (*.mdb)\0",
-			"DSN=" + DSN + "\0\0");
 		ar2nl_err = true;
 		return "";
 	}
@@ -321,79 +304,50 @@ CString Get_4ftAR2NL (long hypno, CString db_name)
 	{
 		if (!CloseHandle(pi.hProcess) || !CloseHandle(pi.hThread))
 		{
-			SQLConfigDataSource (NULL, ODBC_REMOVE_DSN, "Microsoft Access Driver (*.mdb)\0",
-			"DSN=" + DSN + "\0\0");
 			ar2nl_err = true;
 			return "";
 		}
 	}
 	catch (...)
 	{
-		SQLConfigDataSource (NULL, ODBC_REMOVE_DSN, "Microsoft Access Driver (*.mdb)\0",
-			"DSN=" + DSN + "\0\0");
 		ar2nl_err = true;
-		return "";
-	}
-
-	if (exit_code != 0)
-	{
-		SQLConfigDataSource (NULL, ODBC_REMOVE_DSN, "Microsoft Access Driver (*.mdb)\0",
-			"DSN=" + DSN + "\0\0");
 		return "";
 	}
 	
 	try
 	{
-		CFile f1 (file_path, CFile::modeRead);
+		CFile f1 (AR2NLHlp.getOutput12Path(), CFile::modeRead);
 		if (f1.GetStatus (status))
 		{
 			if (file_exists && status.m_mtime == last_modif_time)
 			{
-				SQLConfigDataSource (NULL, ODBC_REMOVE_DSN, "Microsoft Access Driver (*.mdb)\0",
-					"DSN=" + DSN + "\0\0");
 				return "";
 			}
 		}
 		else
 		{
 			f1.Close ();
-			SQLConfigDataSource (NULL, ODBC_REMOVE_DSN, "Microsoft Access Driver (*.mdb)\0",
-				"DSN=" + DSN + "\0\0");
 			return "";
 		}
 		f1.Close ();
 	}
 	catch (...)
 	{
-		SQLConfigDataSource (NULL, ODBC_REMOVE_DSN, "Microsoft Access Driver (*.mdb)\0",
-			"DSN=" + DSN + "\0\0");
 		return "";
 	}
 
 	try
 	{
-		_4ftAR2NL_output = Get_4ftar2nl_output ();
-		int pos = _4ftAR2NL_output.Find ("?>");
-		if (pos != -1)
-			_4ftAR2NL_output = _4ftAR2NL_output.Mid (pos + 3);
+		return Get_4ftar2nl_output (AR2NLHlp.getOutput12Path());
 	}
 	catch (...)
 	{
 		CLMSock::ReportError (9, LMERR_CANNOT_READ_AR2NL_OUTPUT);
-		SQLConfigDataSource (NULL, ODBC_REMOVE_DSN, "Microsoft Access Driver (*.mdb)\0",
-			"DSN=" + DSN + "\0\0");
 		ar2nl_err = true;
 		return "";
 	}
 
-	//remove the temporary datasource
-	if (FALSE == SQLConfigDataSource (NULL, ODBC_REMOVE_DSN, "Microsoft Access Driver (*.mdb)\0",
-					"DSN=" + DSN + "\0\0"))
-	{
-//		CLMSock::ReportError (5, LMERR_CANNOT_REMOVE_ODBC);
-	}
-
-	return _4ftAR2NL_output;
+	return "";
 }
 
 
