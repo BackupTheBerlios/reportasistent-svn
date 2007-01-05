@@ -635,7 +635,7 @@
 						PreprocessorDefinitions=""
 					/>
 				</FileConfiguration>
-			</File>			
+			</File>
 			<File
 				RelativePath="MainFrm.cpp"
 				>
@@ -1052,10 +1052,6 @@
 				>
 			</File>
 			<File
-				RelativePath="SkeletonManager.h"
-				>
-			</File>
-			<File
 				RelativePath="SkeletonView.h"
 				>
 			</File>
@@ -1097,19 +1093,11 @@
 			Filter="ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe"
 			>
 			<File
-				RelativePath="res\4ftHypoteza.bmp"
-				>
-			</File>
-			<File
 				RelativePath="res\attrLink.bmp"
 				>
 			</File>
 			<File
 				RelativePath="res\attrLinkTable.bmp"
-				>
-			</File>
-			<File
-				RelativePath="res\bmtreebi.bmp"
 				>
 			</File>
 			<File
@@ -1145,10 +1133,6 @@
 				>
 			</File>
 			<File
-				RelativePath="res\skeleton_DTD.xml"
-				>
-			</File>
-			<File
 				RelativePath="res\Table.bmp"
 				>
 			</File>
@@ -1168,10 +1152,6 @@
 				RelativePath="res\unknowni.bmp"
 				>
 			</File>
-			<File
-				RelativePath="res\visualization_options_DTD.xml"
-				>
-			</File>
 		</Filter>
 		<File
 			RelativePath="..\XML\complex_filter_DTD.xml"
@@ -1179,14 +1159,6 @@
 		</File>
 		<File
 			RelativePath="..\XML\fill_element_attributes_DTD.xml"
-			>
-		</File>
-		<File
-			RelativePath="IvaUzitKonstrukce.txt"
-			>
-		</File>
-		<File
-			RelativePath="ReadMe.txt"
 			>
 		</File>
 		<File
@@ -1203,10 +1175,6 @@
 		</File>
 		<File
 			RelativePath="..\XML\visualization_options_DTD.xml"
-			>
-		</File>
-		<File
-			RelativePath="zlepseni_ovladani.txt"
 			>
 		</File>
 	</Files>
