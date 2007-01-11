@@ -390,9 +390,6 @@ public:
 	CString		suc_id;/// succedent id
 	CString		con_id;/// condition id
 	CString		ar2nl_sentences;/// the formulation of the hypothese in the natural language
-//	bool		flag_a;
-//	bool		flag_s;
-//	bool		flag_c;
 
 	CString		xml_convert (bool ar2nl);/// Creates the XML representation of the 4ft hypothese.
 	CString		get_fisher ();/// computes the 4ft quantifier
@@ -460,7 +457,6 @@ public:
 	int				get_sum ();/// computes the CF quantifier
 	CString			get_min ();/// computes the CF quantifier
 	int				get_max ();/// computes the CF quantifier
-//	CString			get_v ();
 	CString			get_nom_var ();/// computes the CF quantifier
 	CString			get_dor_var ();/// computes the CF quantifier
 private:

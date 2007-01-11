@@ -357,10 +357,6 @@ SOURCE=.\LMplugin.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\pomocny.h
-# End Source File
-# Begin Source File
-
 SOURCE=.\SockInterface.h
 # End Source File
 # Begin Source File

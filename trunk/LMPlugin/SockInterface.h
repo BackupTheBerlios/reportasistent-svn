@@ -29,71 +29,72 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 /*
 struktura CSockInterface
 ------------------------
-struktura tvori interface mezi zasuvkou a jadrem. Obsahuje ukazatele na vsechny 
-funkce zasuvky, ktere poskytuji sluzby jadru. Jsou to:
+The structure creates the interface between the socket and the kernel.
+It contains the pointers to all the socket functions, which provides the services
+to the kernell. The servicess are following:
 
-  //typedef void* hSource_t   - handler na otevreny zdroj
+  //typedef void* hSource_t   - handle of the opened data source
 
-1) dotazy
-- provedeni dotazu na aktivni prvek (perform)
-- ziskani seznamu vsech AP podporovanych v zasuvce (getAPList)
+1) queries
+- performs the query to the active element (perform)
+- gets the list of all supported active elements in this socket (getAPList)
 
  - BOOL perform (hSource_t hSource, const char* APName, BSTR* Result); 
-		- dostane handle na zdroj (hSource) a ID Akt. prvku (APName)
-		- vrati (do Result) XML string se vsemi AP tohoto typu z tohoto zdroje
-		- navratova hodnota: FALSE pri neuspechu
+		- takes the handle to the source (hSource) and the active element (AE) ID (APName)
+		- returns (in Result) the XML string with all AEs of this type in this source
+		- return value: FALSE if unsuccessful
 	
 	  -> hPerform
 
  - BSTR getAPList();
-		- format vraceneho stringu:
+		- the formate of the returned string:
 
 	  -> hGetAPList
  
-2) manipulace se zdroji
-- vytvoreni a otevreni noveho zdroje (fNewSource)
-- otevreni znameho zdroje (fOpenSource)
-- zavreni otevreneho zdroje (fCloseSource)
+2) sources manipulation
+- creates and openes the new source (fNewSource)
+- openes the new source (fOpenSource)
+- closes the source (fCloseSource)
 
 
  - hSource_t fNewSource (PersistID_t * pPerzistID);
-		- otevre dialog pro vyber noveho zdroje
-		- po navratu z dialogu do retezce pPerzistID ulozi connection string noveho zdroje
-		- novy zdroj otevre a vrati na nej handler nebo NULL (chyba)
+		- opens the dialog to select the new source
+		- the connection string of the new source is stored to PerzistID variable
+		- opens the new source and returns its handle or NULL (error)
 
 	   -> hNewSource
 
  - hSource_t fOpenSource (PersistID_t PerzistID);
-		- dostane connection string (PerzistID)
-		- otevre zdroj a vrati na nej handle nebo NULL (chyba)
+		- gets the connection string (PerzistID)
+		- opens the new source and returns its handle or NULL (error)
 
        -> hOpenSource
 
  - BOOL fCloseSource (hSource_t hSource);
-		- dostane otevreny handler na zdroj (hSource)
-		- uzavre handler a vrati TRUE (uspech) nebo FALSE (chyba)
+		- gets the opened handle to the source (hSource)
+		- closes the handle and returns TRUE (success) or FALSE (error)
 
        -> hCloseSource
 
-konvence: konkretni implementace funkci v zasuvkach - na konec nazvu fce se prida
-"identifikator zasuvky"
-(tj. fNewSource() se bude v zasuvce pro LM jmenovat fNewSourceLM() atd...)
+convention: the implementation of the functions in the sockets - the socket identifier
+is added to the end of the name
+(ie. fNewSource() will have the name fNewSourceLM() in the LM socket)
 
 /////////////////////////////////////////////////////
 //////// initSock()
 
-Kazda zasuvka musi obsahovat funkci 
+every socket must contain the function
 
   CSockInterface* initSock()
 
-ktera vytvori a inicializuje strukturu CSockInterface a vrati jadru ukazatel na ni. 
-Jadro pripojuje zasuvky tak, ze zavola funkci initSock()
+which creates and initializes the structure CSockInterface and returns it pointer to the kernel. 
+The kernel connects the sockets by calling the initSock() function.
 
 
 */
 
 
-// ========== DATOVE TYPY =========
+// ========== DATA TYPES =========
 
 
 /**
@@ -103,9 +104,9 @@ typedef void* hSource_t;	// handler na otevreny zdroj
 /**
  * persist ID of the data source
  */
-typedef BSTR PersistID_t;	// perzistentni ID zdroje
+typedef BSTR PersistID_t;	// perzist ID of the source
 
-// typy ukazatele na jednotlive funkce rozhranni
+// types: pointers to the functions of the interface
 
 // hPerform_t - typ "ukazatel na funkci perform()"
 /**
@@ -139,7 +140,7 @@ typedef BOOL (* hCloseSource_t) (hSource_t);
 
 
 //////////////////////////////////
-//  definice rozhrani CSockInterface
+//  definition of the interface CSockInterface
 
 /**
  * The structure creates the interface between the socket and the kernel.
@@ -149,7 +150,7 @@ typedef BOOL (* hCloseSource_t) (hSource_t);
  * @author Jan Kodym
  */
 struct CSockInterface {
-	// ukazatele na funkce
+	//pointers to the functions
 
 	hPerform_t	 hPerform;/// pointer to the perform() function
 	hGetAPList_t hGetAPList;/// pointer to the getAPList() function

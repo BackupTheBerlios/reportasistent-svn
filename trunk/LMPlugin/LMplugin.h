@@ -30,30 +30,22 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "SockInterface.h"
 #include "functions.h"
 
-// !!! zde definujte pocet AP, ktere tato zasuvka podporuje
+// number of supported active elements
 #define _LM_AP_COUNT 16
 
 
-// =========== TYPY ===============================
+// =========== TYPES ===============================
 
 /**
  * pointer to the function, which resolve the kernel query of the certain type
  */
 typedef CString (* pFn_t) (void*);
-  // ukazatel na funkci, ktera vyridi pozadavek na AP urciteho typu
 
 
 
-// =========== TRIDY ==============================
+// =========== CLASSES ==============================
 
 // ------------ class CLMSock
-/*
-tato trida vytvori a spravuje v zasuvce pro LM tabulku podporovanych AP a funkci, ktere je vyrizuji
-poskytuje:
-- pocet AP, ktere zasuvka podporuje
-- seznam vsech AP, ktere zasuvka podporuje
-- funkci perform() : adresu funkce, ktera vyrizuje zadost o AP s danym ID
-*/
 
 /**
  * Creates and manages the table of the supported active elements and the functions,
@@ -70,7 +62,7 @@ class CLMSock {
  *
  * @author Jan Kodym
  */
-typedef struct Item_t {	// polozka tabulky nazvu podporovanych AP a ukazatelu na funkce, ktere je obslouzi
+typedef struct Item_t {
 	  CString AP_ID;	/// ID of the active element
 	  pFn_t   pFn;		/// pointer to the function for this active element
   };
@@ -109,7 +101,7 @@ static int ReportError(UINT nErrorID, const char* FormatString, ...);
 };
 
 
-// =========== GLOBALNI PROMENNE ==================
+// =========== GLOBAL VARIABLES ==================
 
 
 extern CLMSock LMSock;
@@ -121,7 +113,7 @@ extern CSockInterface SockInterfaceLM;  // rozhrani zasuvky
 
 /////////////////////////////////////////
 /////// initSock
-// inicializuje globalni instanci SockInterface a vrati volajicimu (jadru) pointer na ni
+// initializes the global instantion of SockInterface and returns its pointer to the object which called this method (kernel)
 
 CSockInterface* initSock();
 

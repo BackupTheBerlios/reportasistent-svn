@@ -103,10 +103,6 @@ BOOL EnumODBCDrivers(CString & ret)
 
 		r = SQLDrivers(h, SQL_FETCH_FIRST, desc, sizeof desc, & desc_len, attr, sizeof attr, & attr_len);
 
-//		vhodne pro odchytavani chyb
-//		SQLGetDiagRec(SQL_HANDLE_ENV, h, 1, desc, & nerr, attr, sizeof attr, & attr_len);
-
-
 		while ((r != SQL_NO_DATA) && (r != SQL_ERROR) && (r != SQL_INVALID_HANDLE))
 		{
 
@@ -189,11 +185,8 @@ BOOL FindAccesDatasource(CString & ret)
 
 		while ((r != SQL_NO_DATA) && (r != SQL_ERROR) && (r != SQL_INVALID_HANDLE))
 		{
-			//ten string "Microsoft Access Driver (*.mdb)" by se mel ulozit jinam (header nebo resources)..
-			//mozna pridat konfigurovatelnost
 			if (0 == strcmp((LPCTSTR) attr, "Microsoft Access Driver (*.mdb)"))
 			{
-				// kody - provizorni kvuli rozchozeni u Raucha
 				if ((0 == strcmp((LPCTSTR) desc, "MS Access Database")) || (0 == strcmp((LPCTSTR) desc, "Databáze MS Access")))
 				{
 					ret = desc;
@@ -231,8 +224,6 @@ BOOL FindAccesDriver(CString & ret)
 
 		while ((r != SQL_NO_DATA) && (r != SQL_ERROR) && (r != SQL_INVALID_HANDLE))
 		{
-			//ten string "Microsoft Access Driver (*.mdb)" by se mel ulozit jinam (header nebo resources)..
-			//mozna pridat konfigurovatelnost
 			if (0 == strcmp((LPCTSTR) attr, "Microsoft Access Driver (*.mdb)"))
 			{
 				ret = attr;

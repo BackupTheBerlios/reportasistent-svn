@@ -722,7 +722,7 @@ double Hyp_4ft_Meta::get_chi_sq ()
 	double dDelta = a * d - b * c;
 
 	return ((a + b + c + d) * dDelta * dDelta) / 
-		   ((a + c) * (b + d) * (a + b) * (c + d));//!!!!!!preteklo!!!!!
+		   ((a + c) * (b + d) * (a + b) * (c + d));
 }
 
 CString Hyp_4ft_Meta::get_fisher ()
@@ -1042,7 +1042,6 @@ double Hyp_SD4ft_Meta::get_chi_sq (long _a, long _b, long _c, long _d)
 
 	return ((_a + _b + _c + _d) * dDelta * dDelta) / 
 		   ((_a + _c) * (_b + _d) * (_a + _b) * (_c + _d));
-				// Pozor! Zde preteklo
 }
 
 CString Hyp_SD4ft_Meta::get_fisher (long _a, long _b, long _c, long _d)
@@ -1812,7 +1811,7 @@ CString Hyp_KL_Meta::get_fnc_r ()
 double Hyp_KL_Meta::get_h_c ()
 {
 	double dSum= get_sum ();
-	if ( dSum == 0) return 0.0;//to check
+	if ( dSum == 0) return 0.0;
 
 	double dLog2= log((double) 2);
 	int j;
@@ -1839,7 +1838,7 @@ double Hyp_KL_Meta::get_h_c ()
 double Hyp_KL_Meta::get_h_r ()
 {
 	double dSum= get_sum ();
-	if ( dSum == 0) return 0.0;//to check
+	if ( dSum == 0) return 0.0;
 
 	double dLog2= log((double) 2);
 	int i;
@@ -1866,7 +1865,7 @@ double Hyp_KL_Meta::get_h_r ()
 double Hyp_KL_Meta::get_h_c_r ()
 {
 	double dSum= get_sum ();
-	if ( dSum == 0) return 0.0;//to check
+	if ( dSum == 0) return 0.0;
 
 	double dLog2= log((double) 2);
 	int i;
@@ -2009,7 +2008,7 @@ CString Hyp_KL_Meta::get_kend ()
 
 	double dDelitel = sqrt( (dSum2 - dNk2) * (dSum2 - dNl2));
 
-	if (dDelitel == 0) return "";//to check
+	if (dDelitel == 0) return "";
 
 	double dP = 0;
 	double dQ = 0;
@@ -2272,7 +2271,7 @@ CString Hyp_SDKL_Meta::get_chi_sq1 ()
 CString Hyp_SDKL_Meta::get_fnc_s1 ()
 {
 	int nTotalSum = get_sum1 ();
-	if ( nTotalSum == 0) return "";//to check
+	if ( nTotalSum == 0) return "";
 
 	double dSum = 0;
 	int i;
@@ -2295,7 +2294,7 @@ CString Hyp_SDKL_Meta::get_fnc_s1 ()
 CString Hyp_SDKL_Meta::get_fnc_r1 ()
 {
 	int nTotalSum= get_sum1 ();
-	if ( nTotalSum == 0) return "";//to check
+	if ( nTotalSum == 0) return "";
 
 	double dSum= 0;
 	int i;
@@ -2318,7 +2317,7 @@ CString Hyp_SDKL_Meta::get_fnc_r1 ()
 double Hyp_SDKL_Meta::get_h_c1 ()
 {
 	double dSum= get_sum1 ();
-	if ( dSum == 0) return 0.0;//to check
+	if ( dSum == 0) return 0.0;
 
 	double dLog2= log((double) 2);
 	int j;
@@ -2345,7 +2344,7 @@ double Hyp_SDKL_Meta::get_h_c1 ()
 double Hyp_SDKL_Meta::get_h_r1 ()
 {
 	double dSum= get_sum1 ();
-	if ( dSum == 0) return 0.0;//to check
+	if ( dSum == 0) return 0.0;
 
 	double dLog2= log((double) 2);
 	int i;
@@ -2372,7 +2371,7 @@ double Hyp_SDKL_Meta::get_h_r1 ()
 double Hyp_SDKL_Meta::get_h_c_r1 ()
 {
 	double dSum= get_sum1 ();
-	if ( dSum == 0) return 0.0;//to check
+	if ( dSum == 0) return 0.0;
 
 	double dLog2= log((double) 2);
 	int i;
@@ -2414,16 +2413,13 @@ double Hyp_SDKL_Meta::get_h_c_r1 ()
 CString Hyp_SDKL_Meta::get_mi1 ()
 {
 	double dHC = get_h_c1 ();
-//	if ( _isnan( dHC)) return "";//to check
 
 	double dHR = get_h_r1 ();
-//	if ( _isnan( dHR)) return "";//to check
 
 	double dHCR = get_h_c_r1 ();
-//	if ( _isnan( dHCR)) "";//to check
 
 	double dMin = dHC < dHR ? dHC : dHR;
-	if (dMin == 0) return "";//to check
+	if (dMin == 0) return "";
 
 	double dICR = (dHC - dHCR)/dMin;
 
@@ -2433,7 +2429,7 @@ CString Hyp_SDKL_Meta::get_mi1 ()
 CString Hyp_SDKL_Meta::get_aic1 ()
 {
 	double dSum = get_sum1 ();
-	if ( dSum == 0) return "";//to check
+	if ( dSum == 0) return "";
 
 	double dNl= 0.0;
 	int j;
@@ -2454,7 +2450,7 @@ CString Hyp_SDKL_Meta::get_aic1 ()
 
 	double dDelitel = dSum * log( dSum) - dNl;
 
-	if (dDelitel == 0) return "";//to check
+	if (dDelitel == 0) return "";
 
 	double dNk = 0.0;
 	for (i= 0; i < table1.GetSize (); i++)
@@ -2492,7 +2488,7 @@ CString Hyp_SDKL_Meta::get_aic1 ()
 CString Hyp_SDKL_Meta::get_kend1 ()
 {
 	double dSum = get_sum1 ();
-	if (dSum == 0) return "";//to check
+	if (dSum == 0) return "";
 
 	double dNk2 = 0;
 	int i;
@@ -2517,7 +2513,7 @@ CString Hyp_SDKL_Meta::get_kend1 ()
 
 	double dDelitel = sqrt( (dSum2 - dNk2) * (dSum2 - dNl2));
 
-	if (dDelitel == 0) return "";//to check
+	if (dDelitel == 0) return "";
 
 	double dP = 0;
 	double dQ = 0;
@@ -2605,7 +2601,7 @@ CString Hyp_SDKL_Meta::get_chi_sq2 ()
 	int nRk;
 	int nSl;
 
-	if ( sum == 0) return "";//to check
+	if ( sum == 0) return "";
 
 	for (i = 0; i < table2.GetSize () ; i++)
 	{
@@ -2629,7 +2625,7 @@ CString Hyp_SDKL_Meta::get_chi_sq2 ()
 CString Hyp_SDKL_Meta::get_fnc_s2 ()
 {
 	int nTotalSum = get_sum2 ();
-	if ( nTotalSum == 0) return "";//to check
+	if ( nTotalSum == 0) return "";
 
 	double dSum = 0;
 	int i;
@@ -2652,7 +2648,7 @@ CString Hyp_SDKL_Meta::get_fnc_s2 ()
 CString Hyp_SDKL_Meta::get_fnc_r2 ()
 {
 	int nTotalSum= get_sum2 ();
-	if ( nTotalSum == 0) return "";//to check
+	if ( nTotalSum == 0) return "";
 
 	double dSum= 0;
 	int i;
@@ -2675,7 +2671,7 @@ CString Hyp_SDKL_Meta::get_fnc_r2 ()
 double Hyp_SDKL_Meta::get_h_c2 ()
 {
 	double dSum= get_sum2 ();
-	if ( dSum == 0) return 0.0;//to check
+	if ( dSum == 0) return 0.0;
 
 	double dLog2= log((double) 2);
 	int j;
@@ -2702,7 +2698,7 @@ double Hyp_SDKL_Meta::get_h_c2 ()
 double Hyp_SDKL_Meta::get_h_r2 ()
 {
 	double dSum= get_sum2 ();
-	if ( dSum == 0) return 0.0;//to check
+	if ( dSum == 0) return 0.0;
 
 	double dLog2= log((double) 2);
 	int i;
@@ -2729,7 +2725,7 @@ double Hyp_SDKL_Meta::get_h_r2 ()
 double Hyp_SDKL_Meta::get_h_c_r2 ()
 {
 	double dSum= get_sum2 ();
-	if ( dSum == 0) return 0.0;//to check
+	if ( dSum == 0) return 0.0;
 
 	double dLog2= log((double) 2);
 	int i;
@@ -2771,16 +2767,13 @@ double Hyp_SDKL_Meta::get_h_c_r2 ()
 CString Hyp_SDKL_Meta::get_mi2 ()
 {
 	double dHC = get_h_c2 ();
-//	if ( _isnan( dHC)) return "";//to check
 
 	double dHR = get_h_r2 ();
-//	if ( _isnan( dHR)) return "";//to check
 
 	double dHCR = get_h_c_r2 ();
-//	if ( _isnan( dHCR)) "";//to check
 
 	double dMin = dHC < dHR ? dHC : dHR;
-	if (dMin == 0) return "";//to check
+	if (dMin == 0) return "";
 
 	double dICR = (dHC - dHCR)/dMin;
 
@@ -2790,7 +2783,7 @@ CString Hyp_SDKL_Meta::get_mi2 ()
 CString Hyp_SDKL_Meta::get_aic2 ()
 {
 	double dSum = get_sum2 ();
-	if ( dSum == 0) return "";//to check
+	if ( dSum == 0) return "";
 
 	double dNl= 0.0;
 	int j;
@@ -2811,7 +2804,7 @@ CString Hyp_SDKL_Meta::get_aic2 ()
 
 	double dDelitel = dSum * log( dSum) - dNl;
 
-	if (dDelitel == 0) return "";//to check
+	if (dDelitel == 0) return "";
 
 	double dNk = 0.0;
 	for (i= 0; i < table2.GetSize (); i++)
@@ -2849,7 +2842,7 @@ CString Hyp_SDKL_Meta::get_aic2 ()
 CString Hyp_SDKL_Meta::get_kend2 ()
 {
 	double dSum = get_sum2 ();
-	if (dSum == 0) return "";//to check
+	if (dSum == 0) return "";
 
 	double dNk2 = 0;
 	int i;
@@ -2874,7 +2867,7 @@ CString Hyp_SDKL_Meta::get_kend2 ()
 
 	double dDelitel = sqrt( (dSum2 - dNk2) * (dSum2 - dNl2));
 
-	if (dDelitel == 0) return "";//to check
+	if (dDelitel == 0) return "";
 
 	double dP = 0;
 	double dQ = 0;

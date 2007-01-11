@@ -67,21 +67,18 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "LMPlErrorMessages.h"
 #include "LMPlugin.h"
 #include "CTime_Utils.h"
-
-bool ar2nl_err = false;
-
-//dedek: docasne
-//Deda: potreba pro MSXML - potreba pro muj testovci vystup jinak (az bude lesi vystup) mozno smazat
 #include <afxdb.h>
 #include <Shlwapi.h>
 
 #import <msxml3.dll>
 using namespace MSXML2;
-//vlozi namespace MSXML2;
+//pastes the namespace MSXML2;
+
+bool ar2nl_err = false;
 
 CString Get_4ftar2nl_output (LPCTSTR file_path)
 {
-	// kody - nacitani a serializace vystupu AR2NL pres XML DOM
+	// kody - reading and serialization of the outputof the AR2NL using XML DOM
 	MSXML2::IXMLDOMDocumentPtr dom;
 	dom.CreateInstance(_T("Msxml2.DOMDocument"));
 	dom->async = VARIANT_FALSE; // default - true,
@@ -137,7 +134,7 @@ public:
 
 		TCHAR module_path[MAX_PATH];
 		GetModuleFileName(NULL, module_path, MAX_PATH);
-		//postupne odpare z module_path poslednni dve lomitka
+		//deletes the last two levels from the path
 		PathFindFileName(module_path)[-1] = 0;
 		PathFindFileName(module_path)[-1] = 0;
 		PathFindFileName(module_path)[-1] = 0;
@@ -257,15 +254,6 @@ CString Get_4ftAR2NL (long hypno, CString db_name)
 		return "";
 	}
 
-	
-
-/*	if (WaitForSingleObject(pi.hProcess, 60000) != WAIT_OBJECT_0)
-	{
-		//nahlas chybu
-		return "";//!!!!!pozor na to, co vracet
-	}
-*/	
-
 	try
 	{
 		DWORD exit_code = 1;//0 = successful
@@ -359,7 +347,7 @@ CString Get_DTD ()
 	TCHAR module_path[MAX_PATH];
 	GetModuleFileName(NULL, module_path, MAX_PATH);
 
-	//postupne odpare z module_path poslednni dve lomitka
+	//deletes the last two levels from the path
 	PathFindFileName(module_path)[-1] = 0;
 	PathFindFileName(module_path)[-1] = 0;
 	PathFindFileName(module_path)[-1] = 0;
@@ -373,37 +361,10 @@ CString Get_DTD ()
 	LPTSTR ps = buf.GetBuffer(size);
 	f.Read(ps, size);
 	f.Close();
-	ps[size] = 0; //data nactena ze souboru se jete musi ukoncit nulou aby reprezentovala validni string
-	buf.ReleaseBuffer(); //od teto chvile je ps neplatny a nemelo by se do nej zapisovat
+	ps[size] = 0; //the data read from the output must be ended by zero to represent the valid string
+	buf.ReleaseBuffer(); //ps is not valid from now and no further actions are allowed
 	return buf;
 }
-
-
-//dedek: testovaci vystup neni to moc usetreny tak bacha :)
-BOOL dedek_performLM(void * hSource, const char* AP, BSTR* result)
-{
-	CDatabase * db = (CDatabase *) hSource;
-
-	CString ft = AP;
-
-	if (ft != "hyp_4ft") return FALSE;
-
-	MSXML2::IXMLDOMDocumentPtr dom;
-	dom.CreateInstance(_T("Msxml2.DOMDocument"));
-	dom->async = VARIANT_FALSE; // default - true,
-	
-	dom->load((LPCTSTR) _T("../XML/4ft_hyp.xml"));
-
-	MSXML2::IXMLDOMElementPtr el_hyp = dom->selectSingleNode("/active_list/hyp_4ft");
-
-	el_hyp->setAttribute("db_name", (LPCTSTR) db->GetDatabaseName());
-
-	* result = dom->xml;
-
-	return TRUE;
-}
-
-/****/
 
 // ---AP Quantifier
 
@@ -980,14 +941,7 @@ CString fLMQuantifier (void* hSource)
 		buf = buf + list.GetAt (i)->xml_convert ();
 	}
 	buf += " </active_list>";
-/*	//just for test - creates a xml file with all attributes
-	FILE * f = fopen ("test.xml", "w");
-	fprintf (f, "%s", buf);
-	fclose (f);
 
-/*
-	AfxMessageBox(buf);
-*/
 	for (i = 0; i < list.GetSize (); i++)
 	{
 		list.GetAt (i)->items.RemoveAll ();
@@ -1154,14 +1108,7 @@ CString fLMTask (void* hSource)
 		buf = buf + list.GetAt (i)->xml_convert ();
 	}
 	buf += " </active_list>";
-/*	//just for test - creates a xml file with all attributes
-	FILE * f = fopen ("test.xml", "w");
-	fprintf (f, "%s", buf);
-	fclose (f);
 
-
-	AfxMessageBox(buf);
-*/
 	for (i = 0; i < list.GetSize (); i++)
 		delete (list.GetAt (i));
 	list.RemoveAll ();
@@ -1356,14 +1303,7 @@ CString fLMKLCedent (void* hSource)
 		buf = buf + list.GetAt (i)->xml_convert ();
 	}
 	buf += " </active_list>";
-/*	//just for test - creates a xml file with all attributes
-	FILE * f = fopen ("test.xml", "w");
-	fprintf (f, "%s", buf);
-	fclose (f);
 
-
-	AfxMessageBox(buf);
-*/
 	for (i = 0; i < list.GetSize (); i++)
 	{
 		for (int j = 0; j < list.GetAt (i)->sub_cedents_list.GetSize (); j++)
@@ -1450,7 +1390,6 @@ CString fLMCFCedent (void* hSource)
 				ptcfcdnt->matrix_name = rs.m_Name3;
 				ptcfcdnt->task_name = rs.m_Name;
 				ptcfcdnt->task_type = rs.m_Name5;
-//				ptcfcdnt->cedent_type = rs.m_Name4;
 				ptcfcdnt->cedent_type = "Attributes";
 				list.Add (ptcfcdnt);
 			}
@@ -1562,14 +1501,7 @@ CString fLMCFCedent (void* hSource)
 		buf = buf + list.GetAt (i)->xml_convert ();
 	}
 	buf += " </active_list>";
-/*	//just for test - creates a xml file with all attributes
-	FILE * f = fopen ("test.xml", "w");
-	fprintf (f, "%s", buf);
-	fclose (f);
 
-
-	AfxMessageBox(buf);
-*/
 	for (i = 0; i < list.GetSize (); i++)
 	{
 		for (int j = 0; j < list.GetAt (i)->sub_cedents_list.GetSize (); j++)
@@ -1596,15 +1528,11 @@ CString fLMBoolCedent (void* hSource)
 	
 	long sub_cedent_cnt = 0;
 	long literal_cnt = 0;
-//	long ct_id;
-//	long ct_id_tst = 0;  //test, wheather the new cedent type appears
 	long c_id;
 	long c_id_tst = 0; //test, wheather the new sub cedent appears
 	long l_id;
 	long l_id_tst = 0; //test, wheather the new literal appears
 	long c = 0; //counter - help variable
-//	long indx; //help variable
-//	long y; //help variable
 
 	BOOL result;
 	bool exc = false;
@@ -1831,7 +1759,6 @@ CString fLMBoolCedent (void* hSource)
 			}
 			l_id_tst = l_id;
 			c_id_tst = c_id;
-//			ct_id_tst = ct_id;
 			rs.MoveNext();
 		}
 		rs.Close();
@@ -1882,21 +1809,7 @@ CString fLMBoolCedent (void* hSource)
 			else return "";
 			if (c == 0) //new empty subcedent
 			{
-				//find cedent for this subcedent, if not exists, create new cedent or subcedent
-/*				indx = -1;
-				for (y = 0; y < list.GetSize (); y++)
-				{
-					if ((list.GetAt (y)->task_name == rs_em.m_Name)
-						&&
-						(list.GetAt (y)->task_type == rs_em.m_Name5)
-						&&
-						(list.GetAt (y)->cedent_type == rs_em.m_Name4))
-					{
-						indx = y;
-						break;
-					}
-				}
-*/				ptboolcdnt = new (Bool_Cedent_Meta);
+				ptboolcdnt = new (Bool_Cedent_Meta);
 				ptboolcdnt->literal_cnt.Format ("%d", 0);
 				ptboolcdnt->name = rs_em.m_Name2;
 				hlp.Format ("%d", rs_em.m_MinLen);
@@ -1913,15 +1826,7 @@ CString fLMBoolCedent (void* hSource)
 				ptboolcdnt->task_type = rs_em.m_Name5;
 				ptboolcdnt->cedent_type = rs_em.m_Name4;
 				list.Add (ptboolcdnt);
-				
-/*				else //add subcedent to existing cedent
-				{
-					list.GetAt (indx)->sub_cedents_list.Add (ptsub_bool_cedent);
-					sub_cedent_cnt = atol (list.GetAt (indx)->sub_cedent_cnt);
-					sub_cedent_cnt++;
-					list.GetAt (indx)->sub_cedent_cnt.Format ("%d", sub_cedent_cnt);
-				}
-*/			}
+			}
 			rs_em.MoveNext ();
 		}
 		rs_em.Close ();
@@ -1947,14 +1852,7 @@ CString fLMBoolCedent (void* hSource)
 		buf = buf + list.GetAt (i)->xml_convert ();
 	}
 	buf += " </active_list>";
-	//just for test - creates a xml file with all attributes
-/*	FILE * f = fopen ("test.xml", "w");
-	fprintf (f, "%s", buf);
-	fclose (f);
 
-
-	AfxMessageBox(buf);
-*/
 	for (i = 0; i < list.GetSize (); i++)
 	{
 		delete (list.GetAt (i));
@@ -2014,8 +1912,7 @@ CString fLMAttribute(void* hSource)
 			ptatt->db_name = db_name;
 			ptatt->matrix_name = rs.m_Name2;
 			hlp.Format ("%d", rs.m_AttributeID);
-			ptatt->id = "attr" + hlp;
-//zkontrolovat typy atributu...!!!			
+			ptatt->id = "attr" + hlp;		
 			if (rs.m_Formula == "")
 				ptatt->creation = rs.m_Name;
 			else ptatt->creation = rs.m_Formula;
@@ -2086,14 +1983,7 @@ CString fLMAttribute(void* hSource)
 		buf = buf + list.GetAt (i)->xml_convert ();
 	}
 	buf += " </active_list>";
-	//just for test - creates a xml file with all attributes
-/*	FILE * f = fopen ("test.xml", "w");
-	fprintf (f, "%s", buf);
-	fclose (f);
 
-
-	AfxMessageBox(buf);
-*/
 	for (i = 0; i < list.GetSize (); i++)
 	{
 		delete (list.GetAt (i));
@@ -2115,8 +2005,6 @@ CString fLMCategory(void* hSource)
 	long cat_id;
 	int count = 0;
 	int ord = 0;
-
-//	BOOL end;
 
 	TCategory_Meta_Array list;
 	Category_Meta * ptcat;
@@ -2293,30 +2181,6 @@ CString fLMCategory(void* hSource)
 				else return "";
 			}
 			else return "";
-			//find the order of category according to its ID
-			//for category frequency matching
-/*			end = FALSE;
-			ord = 0;
-			qord =
-				"SELECT * \
-				 FROM tmAttribute, tmCategory, tmQuantity \
-				 WHERE tmAttribute.Name=" + rs.m_Name + " \
-					AND tmAttribute.AttributeID=tmQuantity.AttributeID \
-					AND tmQuantity.QuantityID=tmCategory.QuantityID \
-				 ORDER BY tmCategory.CategoryID";
-			if (rs_ord.Open(AFX_DB_USE_DEFAULT_TYPE, qord))
-			{
-				while ((!rs_ord.IsEOF ()) && !end)
-				{
-					if (rs_ord.m_CategoryID == rs.m_CategoryID) end = TRUE;
-					ord++;
-					rs_ord.MoveNext ();
-				}
-				rs_ord.Close ();
-			}
-			else return "";
-*/			//find the frequency of category, if exists
-			//todo
 			ptcat->ctgr_freq = "N/A";
 			list.Add (ptcat);
 			rs.MoveNext();
@@ -2344,14 +2208,7 @@ CString fLMCategory(void* hSource)
 		buf = buf + list.GetAt (i)->xml_convert ();
 	}
 	buf += " </active_list>";
-	//just for test - creates a xml file with all categories
-/*	FILE * f = fopen ("test.xml", "w");
-	fprintf (f, "%s", buf);
-	fclose (f);
 
-
-	AfxMessageBox(buf);
-*/
 	for (i = 0; i < list.GetSize (); i++)
 	{
 		delete (list.GetAt (i));
@@ -2425,8 +2282,6 @@ CString fLM4fthyp_hlp(void * hSource, bool ar2nl)
 		while (!rs.IsEOF())
 		{
 			h_id = rs.m_HypothesisID;
-//			m_id = rs.m_MatrixID2;
-//			t_id = rs.m_TaskID;
 			l_id = rs.m_LiteralIID2;
 			ld_id = rs.m_LiteralDID;
 			id_hlp.Format ("%d", ld_id);
@@ -2475,7 +2330,6 @@ CString fLM4fthyp_hlp(void * hSource, bool ar2nl)
 			if (h_id != h_id_tst)
 			{
 				pthyp = new (Hyp_4ft_Meta);
-//				pthyp->flag_a = pthyp->flag_s = pthyp->flag_c = FALSE;
 				pthyp->ar2nl_sentences = "";
 				id_hlp.Format ("%d", h_id);
 				if (!ar2nl) pthyp->id = "hyp4ft" + id_hlp;
@@ -2594,14 +2448,6 @@ CString fLM4fthyp_hlp(void * hSource, bool ar2nl)
 		buf = buf + list.GetAt (i)->xml_convert (ar2nl);
 	}
 	buf += " </active_list>";
-/*	int pos = buf.Find ("]>");
-	AfxMessageBox (buf.Mid (pos));
-	//just for test - creates a xml file with all hypothesis
-*-/	FILE * f = fopen ("test.rtf", "w");
-	fprintf (f, "%s", buf);
-	fclose (f);
-	fflush (f);
-*/
 	for (i = 0; i < list.GetSize (); i++)
 	{
 		delete (list.GetAt (i));
@@ -2677,7 +2523,6 @@ CString fLMCFhyp(void* hSource)
 		while (!rs.IsEOF())
 		{
 			h_id = rs.m_HypothesisCFID;
-//			l_id = rs.m_CFLiteralDID;
 			pthyp = new (Hyp_CF_Meta);
 			id_hlp.Format ("%d", h_id);
 			pthyp->id = "hypCF" + id_hlp;
@@ -2879,11 +2724,7 @@ next_attr_cf:
 		buf = buf + list.GetAt (i)->xml_convert ();
 	}
 	buf += " </active_list>";
-	//just for test - creates a xml file with all hypothesis
-/*	FILE * f = fopen ("test.xml", "w");
-	fprintf (f, "%s", buf);
-	fclose (f);
-*/
+
 	for (i = 0; i < list.GetSize (); i++)
 	{
 		list.GetAt (i)->attributes.RemoveAll ();
@@ -2908,13 +2749,10 @@ CString fLMSD4fthyp(void * hSource)
 	TCoef_type_Recordset rs_coef_type ((CDatabase *) hSource);
 	Hyp_SD4ft_Meta * pthyp;
 	long h_id;
-//	long m_id;
-//	long t_id;
 	long l_id;
 	long c_id;
 	long h_id_tst = 0;//test variable - values from previous iteration
 	long ld_id;//store the tdCedentDID
-//	long ld_id_tst = -1;//tests, whether the new tdCedentDID appears
 
 	BOOL result;
 	bool exc = false;
@@ -2959,8 +2797,6 @@ CString fLMSD4fthyp(void * hSource)
 		while (!rs.IsEOF())
 		{
 			h_id = rs.m_HypothesisDFID;
-//			m_id = rs.m_MatrixID2;
-//			t_id = rs.m_TaskID;
 			l_id = rs.m_LiteralIID2;
 			ld_id = rs.m_LiteralDID;
 			id_hlp.Format ("%d", ld_id);
@@ -3198,11 +3034,7 @@ CString fLMSD4fthyp(void * hSource)
 		buf = buf + list.GetAt (i)->xml_convert ();
 	}
 	buf += " </active_list>";
-	//just for test - creates a xml file with all hypothesis
-/*	FILE * f = fopen ("test.xml", "w");
-	fprintf (f, "%s", buf);
-	fclose (f);
-*/
+
 	for (i = 0; i < list.GetSize (); i++)
 	{
 		delete (list.GetAt (i));
@@ -3268,7 +3100,6 @@ CString fLMSDCFhyp(void * hSource)
 		while (!rs.IsEOF())
 		{
 			h_id = rs.m_HypothesisDCID;
-//			l_id = rs.m_CFLiteralDID;
 			pthyp = new (Hyp_SDCF_Meta);
 			id_hlp.Format ("%d", h_id);
 			pthyp->id = "hypDC" + id_hlp;
@@ -3628,7 +3459,6 @@ next_attr_sdcf:
 			}
 			else return "";
 
-			//todo kvantifikatory
 			pthyp->asym1 = "Unknown";
 			pthyp->avg_a1 = "Unknown";
 			pthyp->avg_g1 = "Unknown";
@@ -3694,11 +3524,7 @@ next_attr_sdcf:
 		buf = buf + list.GetAt (i)->xml_convert ();
 	}
 	buf += " </active_list>";
-	//just for test - creates a xml file with all hypothesis
-/*	FILE * f = fopen ("test.xml", "w");
-	fprintf (f, "%s", buf);
-	fclose (f);
-*/
+
 	for (i = 0; i < list.GetSize (); i++)
 	{
 		list.GetAt (i)->attributes.RemoveAll ();
@@ -4096,11 +3922,7 @@ next_row_kl:
 		buf = buf + list.GetAt (i)->xml_convert ();
 	}
 	buf += " </active_list>";
-	//just for test - creates a xml file with all hypothesis
-/*	FILE * f = fopen ("test.xml", "w");
-	fprintf (f, "%s", buf);
-	fclose (f);
-*/
+
 	for (i = 0; i < list.GetSize (); i++)
 	{
 		list.GetAt (i)->row_attributes.RemoveAll ();
@@ -4728,11 +4550,7 @@ next_row_sdkl:
 		buf = buf + list.GetAt (i)->xml_convert ();
 	}
 	buf += " </active_list>";
-	//just for test - creates a xml file with all hypothesis
-/*	FILE * f = fopen ("test.xml", "w");
-	fprintf (f, "%s", buf);
-	fclose (f);
-*/
+
 	for (i = 0; i < list.GetSize (); i++)
 	{
 		list.GetAt (i)->row_attributes.RemoveAll ();
@@ -4855,14 +4673,7 @@ CString fLMdata_matrix (void* hSource)
 		buf = buf + list.GetAt (i)->xml_convert ();
 	}
 	buf += " </active_list>";
-	//just for test - creates a xml file with all attributes
-/*	FILE * f = fopen ("test.xml", "w");
-	fprintf (f, "%s", buf);
-	fclose (f);
 
-
-	AfxMessageBox(buf);
-*/
 	for (i = 0; i < list.GetSize (); i++)
 	{
 		delete (list.GetAt (i));
@@ -4950,14 +4761,7 @@ CString fLMcolumn(void* hSource)
 		buf = buf + list.GetAt (i)->xml_convert ();
 	}
 	buf += " </active_list>";
-	//just for test - creates a xml file with all attributes
-/*	FILE * f = fopen ("test.xml", "w");
-	fprintf (f, "%s", buf);
-	fclose (f);
 
-
-	AfxMessageBox(buf);
-*/
 	for (i = 0; i < list.GetSize (); i++)
 	{
 		delete (list.GetAt (i));

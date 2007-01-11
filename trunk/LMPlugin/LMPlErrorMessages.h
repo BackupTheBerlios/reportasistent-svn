@@ -19,7 +19,7 @@ along with LM Report Asistent; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 /*
-V tomto souboru jsou jako makra vsechny chybove zpravy (formatovaci retezce) pro LMplugin
+All the error messages (formated) for LMplugin are in this file
 */
 
 #ifndef _LM_PLUGIN_ERR_MSG

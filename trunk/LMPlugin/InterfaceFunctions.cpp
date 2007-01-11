@@ -28,7 +28,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include <Shlwapi.h>
 
 #include "SockInterface.h"
-//#include "tiHypothesis_Recordset.h"
 #include "SQL_pomocnik.h"
 #include "InterfaceFunctions.h"
 #include "LMPlugin.h"
@@ -39,17 +38,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // ---------- performLM 
 
 BOOL performLM(hSource_t hSource, const char* APName, BSTR* Result)
-{
-
-  /****** dedek test2 *****
-
-  CString s = "<active_list><category id=\"cat1\" db_name=\"d:\\lmra\\ReportAsistent\\LMMetabase\\LMEmpty2\" matrix_name=\"Entry\" attr_name=\"BMI\" ctgr_name=\"podvaha\" ctgr_type=\"Interval\" ctgr_freq=\"N/A\" bool_type=\"No boolean\" def_length=\"1\"><ctgr_def definition=\"&lt;15;20)\"/></category></active_list>";
-
-  *Result = s.AllocSysString();
-  return TRUE;
-
-  /****/
-	
+{	
 	CString CStrResult; // mezivysledek CString
 	pFn_t pFn = LMSock.getFnAddress(APName);	// ukazatel na funkci, ktera vyridi pozadavek
 	if (pFn == NULL) // chyba - neexistuje funkce vyrizujici tento AP
@@ -58,13 +47,6 @@ BOOL performLM(hSource_t hSource, const char* APName, BSTR* Result)
 	*Result =  CStrResult.AllocSysString();
 	return TRUE;
 }
-/****/
-
-/*
-
-*/
-
-
 // ---------- getAPListLM
 
 BSTR getAPListLM()
@@ -94,18 +76,18 @@ hSource_t fNewSourceLM(PersistID_t * pPerzistID)
 	{
 		CLMSock::ReportError(1, LMERR_ACCESSDRV_NFOUND);
 
-		// kody - zalezi, zda povolime zkusit vybrat jiny driver. Je dale implementovano.
-		// pokud ano, return se musi smazat
+		// kody - it depend, if we allow to choose the different driver. This is implemented later.
+		// if yes, it is necessary to delete the return statement
 		return NULL;
 	}
 
-	//dedek: potreba pokud si chceme udrzet aktualni adresar
+	//dedek: necessary to store the actual directory
 	char buf[1001];
 	GetCurrentDirectory(1000, buf);
 
 #ifdef _DEBUG
 
-		// ulozeni seznamu vsech ODBC driveru a zdroju do souboru "drivers.txt"
+		// store the list of the ODBC drivers and sources to the file "drivers.txt"
 	CString drv_enum;
 	CString src_enum;
 	pom.EnumODBCDataSources(drv_enum);
@@ -118,7 +100,7 @@ hSource_t fNewSourceLM(PersistID_t * pPerzistID)
 	// -----------
 #endif
 
-	// vyber souboru s metabazi v OpenFileDialogu
+	// choose the file with the metabase in OpenFileDialog
 	CString filter = "LISp-Miner metabase (*.mdb)|*.mdb|All Files (*.*)|*.*||";
 	CFileDialog FD(TRUE,NULL,NULL,OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, filter);
 	if(FD.DoModal() != IDOK)
@@ -135,7 +117,7 @@ hSource_t fNewSourceLM(PersistID_t * pPerzistID)
 	conn_str = "ODBC;DRIVER=";
 	conn_str += d;
 	conn_str += ";DBQ=";
-	conn_str += new_pid; //obsahuje cestu k souboru
+	conn_str += new_pid; //path to the file
 	conn_str += ";";
 
 	db = new CDatabase();
@@ -201,8 +183,8 @@ hSource_t fOpenSourceLM(PersistID_t PerzistID)
 		
 		CLMSock::ReportError(1, LMERR_ACCESSDRV_NFOUND);
 
-		// kody - zalezi, zda povolime zkusit vybrat jiny driver. Je dale implementovano.
-		// pokud ano, return se musi smazat
+		// kody - it depend, if we allow to choose the different driver. This is implemented later.
+		// if yes, it is necessary to delete the return statement
 		return NULL;
 	}
 
@@ -219,12 +201,11 @@ hSource_t fOpenSourceLM(PersistID_t PerzistID)
 	}
 
 
-	//	db.Open(NULL, FALSE, TRUE, _T("ODBC;DSN=" + s + ";DBQ=C:\\skola\\sw projekt\\STULONG.mdb;"), TRUE))
 	CString conn_str;
 	conn_str = "ODBC;DRIVER=";
 	conn_str += d;
 	conn_str += ";DBQ=";
-	conn_str += file_path; //obsahuje cestu k souboru
+	conn_str += file_path; //path to the file
 	conn_str += ";";
 
 	CDatabase * db;

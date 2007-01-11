@@ -41,19 +41,10 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 // =========== FUNKCE =============================
 
-/////// funkce, ktere tvori rozhrani mezi zasuvkou a "spravcem zasuvek a zdroju"
+/////// the functions, which are used for interface between the socket and the "sockets and sources manager"
 /////// (odkaz na ne ze struktury CSockInterface)
 
 // ---------- performLM 
-/*
-hlavni rozhrani mezi jadrem a LM zasuvkou - vyrizuje vsechny pozadavky jadra na poskytnuti vsech 
-AP urciteho typu z nektereho zdroje  pripojeneho k teto zasuvce
-
-parametry:  hSource - otevreny handle na zdroj
-			APName  - ID aktivniho prvku, jehoz vsechny vyskyty ze zdroje hSource chci ziskat
-			Result  - ukazatel na retezec, kam se ulozi vystup (musi se ale naalokovat)
-navratova hodnota:	TRUE - do Result ulozen vystup,  FALSE - chyba (zasuvka nepodporuje tentu AP)
-*/
 
 /**
  * The main interface between the kernel and the LM socket. It handles all the queries,
@@ -70,10 +61,6 @@ BOOL performLM (hSource_t hSource, const char* APName, BSTR* Result);
 
 
 // ---------- getAPListLM
-/*
-funkce vrati volajicimu XML string (stejny format jako CString CLMSock::getAPList())
-s identifikatory vsech AP, ktere tato zasuvka podporuje
-*/
 
 /**
  *
@@ -87,11 +74,6 @@ BSTR getAPListLM();
 ///// funkce rozhrani pro praci se zdroji
 
 // --- fNewSourceLM
-/*
-otevre dialog pro vyber noveho zdroje
-po navratu z dialogu do retezce pPerzistID ulozi connection string noveho zdroje
-novy zdroj otevre a vrati na nej handler nebo NULL (chyba)
-*/
 
 /**
  * Opens the dialog to choose the new data source and openes the created data source.
@@ -103,10 +85,7 @@ hSource_t fNewSourceLM (BSTR* pPerzistID);
 
 
 // --- fOpenSourceLM
-/*
-dostane connection string (PerzistID)
-otevre zdroj a vrati na nej handle nebo NULL (chyba)
-*/
+
 /**
  * Opens the data source.
  *
@@ -117,10 +96,6 @@ hSource_t fOpenSourceLM (BSTR PerzistID);
 
 
 // --- fCloseSourceLM
-/*
-dostane otevreny handler na zdroj (hSource)
-uzavre handler a vrati TRUE (uspech) nebo FALSE (chyba)
-*/
 
 /**
  * Closes the opened data source.
