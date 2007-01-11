@@ -28,7 +28,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include <Shlwapi.h>
 
 #include "SockInterface.h"
-#include "SQL_pomocnik.h"
 #include "InterfaceFunctions.h"
 #include "LMPlugin.h"
 #include "LMPlErrorMessages.h"
@@ -57,6 +56,60 @@ BSTR getAPListLM()
 }
 
 
+
+
+
+
+// finds the ODBC driver for Microsoft Access
+/**
+ * Finds the ODBC driver for MS Access.
+ *
+ * @param ret MS Access driver.
+ * @return TRUE, if successful, otherwise it returns FALSE.
+ */
+BOOL FindAccesDriver(CString & ret)
+{
+	SQLRETURN r;
+	ret.Empty();
+
+	SQLHANDLE h;
+	if (SQL_SUCCESS != SQLAllocHandle(SQL_HANDLE_ENV, SQL_NULL_HANDLE, & h))
+	{
+		h = SQL_NULL_HANDLE;
+		return FALSE;
+	}
+	else
+	{
+		SQLSetEnvAttr(h, SQL_ATTR_ODBC_VERSION, (SQLPOINTER) SQL_OV_ODBC3, NULL);
+	}
+
+	SQLCHAR		desc[1000];
+	SQLCHAR		attr[1000];
+	SQLSMALLINT desc_len = sizeof desc;
+	SQLSMALLINT attr_len = sizeof attr;
+
+	r = SQLDrivers(h, SQL_FETCH_FIRST, desc, sizeof desc, & desc_len, attr, sizeof attr, & attr_len);
+
+	while ((r != SQL_NO_DATA) && (r != SQL_ERROR) && (r != SQL_INVALID_HANDLE))
+	{
+		if (0 == strcmp((LPCTSTR) attr, "Microsoft Access Driver (*.mdb)"))
+		{
+			ret = attr;
+			SQLFreeHandle(SQL_HANDLE_ENV, h);
+			return TRUE;
+		}
+
+		r = SQLDataSources(h, SQL_FETCH_NEXT, desc, sizeof desc, & desc_len, attr, sizeof attr, & attr_len);
+	}
+
+	
+	SQLFreeHandle(SQL_HANDLE_ENV, h);
+	return FALSE;
+}
+
+
+
+
 ///// funkce rozhrani pro praci se zdroji
 
 // ---------- fNewSourceLM
@@ -66,13 +119,12 @@ hSource_t fNewSourceLM(PersistID_t * pPerzistID)
 	 * pPerzistID = NULL;
 
 	CDatabase * db;
-	SQL_Pomocnik pom;
 
 //  Kody - misto "source" budeme radeji hledat Microsoft Access driver
 
 	CString d;
 
-	if (! pom.FindAccesDriver(d))
+	if (! FindAccesDriver(d))
 	{
 		CLMSock::ReportError(1, LMERR_ACCESSDRV_NFOUND);
 
@@ -90,8 +142,8 @@ hSource_t fNewSourceLM(PersistID_t * pPerzistID)
 		// store the list of the ODBC drivers and sources to the file "drivers.txt"
 	CString drv_enum;
 	CString src_enum;
-	pom.EnumODBCDataSources(drv_enum);
-	pom.EnumODBCDrivers(src_enum);
+//	SQL.EnumODBCDataSources(drv_enum);
+//	SQL.EnumODBCDrivers(src_enum);
 	CFile f;
 	f.Open((LPCTSTR) "drivers.txt", CFile::modeCreate | CFile::modeWrite);
 	f.Write(drv_enum, drv_enum.GetLength());
@@ -176,9 +228,8 @@ hSource_t fNewSourceLM(PersistID_t * pPerzistID)
 
 hSource_t fOpenSourceLM(PersistID_t PerzistID)
 {
-	SQL_Pomocnik pom;
 	CString d;
-	if (! pom.FindAccesDriver(d))
+	if (! FindAccesDriver(d))
 	{
 		
 		CLMSock::ReportError(1, LMERR_ACCESSDRV_NFOUND);
