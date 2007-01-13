@@ -210,10 +210,7 @@ BOOL COutputBuffer::getBuffer(CString APName, MSXML2::IXMLDOMDocument ** xml_dom
 	int i = getAPIndex(APName);
 	if(i != -1)
 	{
-		//xml_dom.CreateInstance(_T("Msxml2.DOMDocument"));
-		//xml_dom->async = VARIANT_FALSE; // default - true,
-		//xml_dom.
-		* xml_dom = BufArray[i]->buffer;//->cloneNode(TRUE);
+		* xml_dom = BufArray[i]->buffer;
 		
 		if (* xml_dom == NULL) return FALSE; 
 		
@@ -258,11 +255,8 @@ CDataSourcesManager::CDataSourcesManager(CDirectoriesManager & m)
 	AfxGetApp()->WriteProfileString("Settings", "ApplicationRoot", m.getApplicationRoot());
 
 	// inicializace tabulky zasuvek a tabulky zdroju
-//  AfxMessageBox("11");
 	initPlugsTab(m.getPluginsDirectory());
-//  AfxMessageBox("22");
 	initSourcesTab(m.getSourcesConfigFilePath());
-//  AfxMessageBox("33");
 }
 
 // destruktor
@@ -301,8 +295,6 @@ int CDataSourcesManager::initPlugsTab(LPCTSTR plugins_dir_path)
 	
 	// nalezeni vsech zasuvek a vyplneni jejich nazvu do pole PlugsTab
 
-	//CString Path = _PLUGIN_DIR_PATH;
-	//dedek:
 	CString Path = plugins_dir_path;
 	Path +=  "\\*.dll";
 	Found = FList.FindFile(Path);
@@ -310,7 +302,6 @@ int CDataSourcesManager::initPlugsTab(LPCTSTR plugins_dir_path)
 	while (Found)
 	{
 		Found = FList.FindNextFile();
-		//printf("%s\n", FList.GetFileName());
 		// kody - odstraneni ".dll" z nazvu pluginu
 		CString PluginName = FList.GetFileName();
 		PluginName.Replace(_T(".dll"), _T(""));
@@ -326,14 +317,13 @@ int CDataSourcesManager::initPlugsTab(LPCTSTR plugins_dir_path)
 	for(int j=0; j<=PlugsTab.GetUpperBound(); j++)
 	{
 		pInitFn = NULL;	// ukazatel na inicializacni funkci zasuvky	
-//		LibName = _PLUGIN_DIR_PATH + PlugsTab[j].PluginName;
-//dedek:
 		LibName.Format("%s\\%s", plugins_dir_path ,PlugsTab[j].PluginName);
 		try
 		{
 			HMODULE m;
 			PlugsTab[j].hLib = m = LoadLibrary(LibName);
 /********
+//vypis chybove hlasky
 			if (m== NULL)
 			{
 
@@ -374,9 +364,7 @@ int CDataSourcesManager::initPlugsTab(LPCTSTR plugins_dir_path)
 				// volani inicializacni funkce a nastaveni SockInterface
 				try
 				{
-//		AfxMessageBox(LibName);
 					PlugsTab[j].SockInterface = pInitFn();
-//		AfxMessageBox(LibName);
 				} 
 				catch (...)
 				{
@@ -400,8 +388,6 @@ int CDataSourcesManager::initPlugsTab(LPCTSTR plugins_dir_path)
 BOOL CDataSourcesManager::initSourcesTab(LPCTSTR config_file_path)
 {
 	CString FName;	// jmeno (cesta) ke konfig. souboru
-//	FName = _CONF_DIR_PATH;
-//	FName += _CONF_FILE_SOURCES;
 	FName = config_file_path;
 	BSTR FileName = FName.AllocSysString();
 
@@ -415,9 +401,6 @@ BOOL CDataSourcesManager::initSourcesTab(LPCTSTR config_file_path)
     int i = 0;	// indexova promenna
 	_variant_t  Atr_val;	// textova hodnota atributu
 	HRESULT hr;
-     //COM init
-    //CoInitialize(NULL);
-	//dedek: uz je zavolano
 	
       //Vytvori COM objekt (resp. instanci objektu)
     hr = pXMLDom.CreateInstance(_T("Msxml2.DOMDocument"));
@@ -426,7 +409,6 @@ BOOL CDataSourcesManager::initSourcesTab(LPCTSTR config_file_path)
     pXMLDom->async = VARIANT_FALSE;
    
        //nacti DOM ze souboru
-    //if ( pXMLDom->load((_bstr_t)FileName) != VARIANT_TRUE)
 	if ( pXMLDom->load((LPCTSTR) FName) == VARIANT_TRUE)
     {
 		pNode = pXMLDom->GetdocumentElement();
@@ -475,9 +457,6 @@ BOOL CDataSourcesManager::initSourcesTab(LPCTSTR config_file_path)
 
 	SysFreeString(FileName);
 	pXMLDom.Release();
-	//pNode.Release();
-	//pChildren.Release();
-	//pChild.Release();
 
 	// nastaveni odkazu na tabulku zasuvek prvkum z tabulky zdroju
 	
@@ -971,19 +950,6 @@ int CDataSourcesManager::FindSourceByPublicID(public_source_id_t id) //vrati ind
 
 	return Index;
 }
-/* honzova verze - nejak jsem to sem chtel dat :)
-int CDataSourcesManager::FindSourceByPublicID(public_source_id_t id) //vrati index odpovidajiciho zdroje
-{
-	CString sid = id;
-	for (int a=0; a<getSourcesCount(); a++)
-	{
-		if (sid == getSourcePublicID(a)) return a;
-	}
-
-	return -1;
-}
-*/
-
 
 // AddSource
 int CDataSourcesManager::AddSource(plugin_id_t plugin, persistent_id_t persistent_id, public_source_id_t public_id)
@@ -1005,10 +971,6 @@ int CDataSourcesManager::AddSource(plugin_id_t plugin, persistent_id_t persisten
 // --- volani funkce Perform ----------------------
 
 // CallPerformProc
-// Kody - upravil jsem typ u parametru  element_id z BSTR na char*, tak to chce jadro
-//      - kdyztak to Dedo predelej, jestli potrebujes, zpatky a pridej konverzi
-// Kody - co se ma vratit, kdyz fce perform vrati chybu?
-// pro Dedu - alternativa ... viz niz a vyber si jednu z nich. Totez v headru
 void CDataSourcesManager::CallPerformProc(int source_index, LPCTSTR element_id) //vrati XML string
 {
 	int SI = source_index;
@@ -1021,7 +983,6 @@ void CDataSourcesManager::CallPerformProc(int source_index, LPCTSTR element_id) 
 	if((j != -1) && (PlugsTab[j].Valid()) && (SourcesTab[SI]->SourceHandle != NULL)) // zasuvka je platna a zdroj otevreny
 	{
 		// zavolani  fce Perform zasuvky
-		//BOOL PerfRes = PlugsTab[j].SockInterface->hPerform(SourcesTab[SI].SourceHandle, element_id, &Result);
 		// kody: vytvoreni WaitDialogu a volani jeho DoThreadFunction()
 		CString DlgText = "Loading data from source\n\n" + SourcesTab[SI]->PublicID;
 		CWaitDialog d((LPCTSTR) DlgText);
@@ -1045,7 +1006,6 @@ void CDataSourcesManager::PerformThreadFunction(LPARAM hPreformFn, LPARAM hSourc
 	}
 	catch (...)
 	{
-		//* ((BSTR*) pResult) = NULL;
 	}
 
 	((COutputBuffer *) pOutputBuffer)->setBuffer(strElementID, result);
@@ -1064,7 +1024,6 @@ BOOL CDataSourcesManager::GetPluginOutput(public_source_id_t source, LPCTSTR ap_
 		if (! ConnectSource(src_index)) return FALSE;
 	}
 
-	/*return CallPerformProc(src_index, ap_name);*/
 
 	COutputBuffer * OB = SourcesTab[src_index]->Buffer;
 
@@ -1078,105 +1037,6 @@ BOOL CDataSourcesManager::GetPluginOutput(public_source_id_t source, LPCTSTR ap_
 
 	return (* xml_dom != NULL) && ((* xml_dom)->documentElement != NULL);
 }
-
-
-
-/*
-//alternativa:
-
-BOOL CDataSourcesManager::CallPerformProc(int source_index, char* element_id, BSTR* Result)
-{
-	int SI = source_index;
-	BOOL Ret = FALSE;  // navrat
-	
-	if(SourcesTab.GetUpperBound() < SI)   // kontrola indexu a odkazu na zasuvku
-		return Ret;
-	
-	int j = SourcesTab[SI].PluginIndex;  // nalezeni indexu zasuvky
-
-	if((j != -1) && (PlugsTab[j].Valid()) && (SourcesTab[SI].SourceHandle != NULL)) // zasuvka je platna a zdroj otevreny
-		Ret = PlugsTab[j].SockInterface->hPerform(SourcesTab[SI].SourceHandle, element_id, Result);
-
-	return Ret;
-}
-*/
-
-
-//////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////
-/////////////////////POMOCNA CAST - SMAZAT////////////////////////
-
-/*
-void vypisZasuvku(int i, CDataSourcesManager* SM)
-{
-	printf("zasuvka c. %d  PluginName: %s  Valid %d\n",i,SM->PlugsTab[i].PluginName,SM->PlugsTab[i].Valid());
-}
-
-void vypisZdroj(int i, CDataSourcesManager* SM)
-{
-	printf("zdroj c. %d  PerzistID: %s  PluginID: %s  PublicID: %s, PluginIndex: %d\n",i,SM->SourcesTab[i].PerzistID,SM->SourcesTab[i].PluginID,SM->SourcesTab[i].PublicID,SM->SourcesTab[i].PluginIndex);
-}
-
-
-
-int main(int argc, char** argv)
-{
-	// zkouska funkcnosti pripojovani zasuvek
-	CDataSourcesManager SM;
-	
-	int i;
-	printf("bylo pripojeno %d zasuvek:\n", SM.getPlugsCount());
-	printf("z nich %d platnych\n", SM.getValidPlugsCount());
-	CString Platnost;
-	for (i=0; i<SM.getPlugsCount(); i++)
-	{
-		if(SM.PlugsTab[i].Valid())
-			Platnost = "platna";
-		else
-			Platnost = "neplatna";
-		printf("%d)   %s   %s\n", i, SM.PlugsTab[i].PluginName, Platnost);
-	}
-
-
-	// zkouseni novych funkci
-	CString publ_id = "prvni zdroj";
-	int cislo = SM.FindSourceByPublicID(publ_id);
-	
-	CString str = SM.getSourcePublicID(-1);
-	str = SM.getSourcePersistentID(5);
-	str = SM.getSourcePlugin(-1);
-
-	BOOL bul;
-	
-	int q = SM.FindPluginByPluginName("LMplugin.dll");
-	int nzindex = SM.ConnectNewSource("LMplugin.dll");
-	bul = SM.isSourceConnected(nzindex);
-	bul = SM.isSourceConnected(0);
-	bul = SM.CloseSource(nzindex);
-	bul = SM.CloseSource(0);
-	bul = SM.isSourceConnected(nzindex);
-	bul = SM.ConnectSource(nzindex);
-	bul = SM.setSourcePublicID(nzindex, "slananynkadozeli");
-	bul = SM.setSourcePublicID(-200, "slananynkadozeli");
-	bul = SM.isSourceConnected(nzindex);
-	
-	// zkouska PERFORM
-	BSTR result = SM.CallPerformProc(nzindex,"4fthyp");
-	CString cres = result;
-
-
-	printf("\n\n");
-	printf("Zasuvky\n-------\n");
-	for(i=0; i<=SM.PlugsTab.GetUpperBound(); i++)
-		vypisZasuvku(i, &SM);
-	printf("\nZdroje\n-------\n");
-	for(i=0; i<=SM.SourcesTab.GetUpperBound(); i++)
-		vypisZdroj(i, &SM);
-
-	void* pt = SM.getSourceHandle(-1);
-	return 0;
-}
-*/
 
 
 //dedek:
@@ -1216,7 +1076,6 @@ BOOL CDataSourcesManager::isElementSupportedByPlugin(int plugin_index, LPCTSTR e
 	ASSERT(plugin_index >= 0);
 	ASSERT(plugin_index < PlugsTab.GetSize());
 	
-//	ASSERT(isPluginValid(plugin_index));
 	if (! isPluginValid(plugin_index)) return FALSE;
 	
 	MSXML2::IXMLDOMDocumentPtr ael_list;

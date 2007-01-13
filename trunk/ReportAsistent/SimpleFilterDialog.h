@@ -30,7 +30,6 @@ along with LM Report Asistent; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 #include "resource.h"
-//#include "DataSourceManager.h"
 
 /////////////////////////////////////////////////////////////////////////////
 // CSimpleFilterDialog dialog
@@ -38,8 +37,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 //univerzalni dialog, ktery implementuje simple filter
 //z vystupu ze savuvky si XSLT transformci vytvori data, podle kterych nastavi svuj vzhled
 //a naplni ovladaci prvky
-//v konstruktoru dostane odkaz na prvek kostry active_element
-//pri IDOK zmeni simple filter tag v tomto prvku podle volby uzivatele
 
 #include "complexfilterdialog.h"
 

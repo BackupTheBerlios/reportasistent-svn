@@ -87,25 +87,13 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 		return -1;      // fail to create
 	}
 
-/*	//vytvoreni dialogbaru - zatim nepotrebne
-	if (!m_wndDlgBar.Create(this, IDR_MAINFRAME, 
-		CBRS_ALIGN_TOP, AFX_IDW_DIALOGBAR))
-	{
-		TRACE0("Failed to create dialogbar\n");
-		return -1;		// fail to create
-	}
-*/
-
 	//Vytvorim ToolBary aktivnich a statickych prvku:
 	CreateSEToolBar();
 	CreateAEToolBar();
-	//CPoint point( 50, 50 );	
-	//this->FloatControlBar(&m_wndDlgBar, point,CBRS_ALIGN_TOP );
 
 	//vytvoreni rebaru
 	if (!m_wndReBar.Create(this) ||
 		!m_wndReBar.AddBar(&m_wndToolBar)|| 
-	//	!m_wndReBar.AddBar(&m_wndDlgBar)||
 		!m_wndReBar.AddBar(&m_wndSEToolBar)||
 		!m_wndReBar.AddBar(&m_wndAEToolBar))
 	{
@@ -123,11 +111,9 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	}
 
 //Iva: Dynamicky pridam do menu seznam prvku ke vlozeni do kostry
-	CMenu * hMainMenu = /*AfxGetApp()->GetMainWnd()->*/GetMenu();
+	CMenu * hMainMenu = GetMenu();
 	CMenu * hNewMenu = hMainMenu->GetSubMenu(1/*Edit*/)->GetSubMenu(5/*New*/);
 	char Textik [20]="";
-	/*	hNewMenu->GetMenuString(0,Textik,19,MF_BYPOSITION);
-		AfxMessageBox(Textik,0,0);*/
 
 	CElementManager & OElementManager = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
 
@@ -362,16 +348,6 @@ BOOL CMainFrame::CreateSEToolBar()
 
 	TBCtrl.SetToolTips(&m_SEToolTips);	//prirazeni jiz propojeneho tooltipu k toolbaru (propojenych tooltipu k memu toolbaru muze byt vic, timto urcim, ktery chci nyni pouzivat
 
-
-	//ladici diagnostika
-	//pom = TBCtrl.GetToolTips();
-	//cis = pom->GetToolCount();	
-	//pom->GetText(pomStr,&m_wndSEToolBar,0);
-	//pom->GetText(pomStr,&m_wndSEToolBar,1);
-
-	//TBCtrl.AddStrings("prvni\0druha\0treti\0\0");
-	
-
 	return TRUE;
 }
 
@@ -403,68 +379,6 @@ void CMainFrame::OnUpdateViewActiveelementtoolbar(CCmdUI* pCmdUI)
 	return;
 	
 }
-
-
-/*
-//	CRect rcBorders (0, 1, 1, 5);
-	m_wndAEToolBar.Create(this,//AfxGetApp()->GetMainWnd(), 
-							//TBSTYLE_FLAT, 
-							WS_CHILD | WS_VISIBLE | CBRS_ALIGN_BOTTOM|CBRS_TOOLTIPS|CBRS_FLYBY |CBRS_SIZE_DYNAMIC, 
-							//rcBorders, 
-							AFX_IDW_TOOLBAR);
-
-	CToolBarCtrl& TBCtrl = m_wndAEToolBar.GetToolBarCtrl();
-	
-	//nactu obrazky
-	mImageList.Create(16, 16, //rozmery obrazku k nacteni do ImageListu	
-						ILC_MASK, 
-						NUM_PICTURES_TREECTRL, //pocatecni pocet obrazku v ImageListu..viz Stdafx.h
-						MAX_ELEMENT_COUNT);//o kolik obrazku se ImageList muze zvetsit.. ??
-	OElementManager.FillImageList(mImageList);
-	mImageList.Remove(0);//odstranim obrazek prvku Unknown
-	mImageList.Remove(0);//odstranim obrazek prvku Report
-
-	int nBut=mImageList.GetImageCount( );
-	CPoint size(20,24);
-	TBCtrl.SetButtonSize(size);
-	TBCtrl.SetImageList(&mImageList);
-
-	TBBUTTON TBButtons[MAX_ELEMENT_COUNT];
-
-	
-	
-	//staticke
-	for(I=0; 
-		I<=(OElementManager.getFirstActiveElementID() - OElementManager.getFirstStaticElementID()-1);I++)
-	{
-		TBButtons[I].iBitmap=I;
-		TBButtons[I].idCommand=ID_MMNEWSTATICFIRST + I;
-		TBButtons[I].fsState=TBSTATE_ENABLED;
-		TBButtons[I].fsStyle=TBSTYLE_BUTTON;
-		TBButtons[I].dwData=NULL;
-	}
-	//separator
-	UINT J=I;
-/*	TBButtons[J].iBitmap=J;
-	TBButtons[J].idCommand=0;
-	TBButtons[J].fsState=TBSTATE_ENABLED;
-	TBButtons[J].fsStyle=TBSTYLE_SEP;
-	TBButtons[J].dwData=NULL;
-	J++;*/
-/*	//aktivni
-	for(I=0;I<=(OElementManager.getLastElementId() - OElementManager.getFirstActiveElementID());I++)
-	{
-		TBButtons[J+I].iBitmap=J+I;
-		TBButtons[J+I].idCommand=ID_MMNEWACTIVEFIRST + I;
-		TBButtons[J+I].fsState=TBSTATE_ENABLED;
-		TBButtons[J+I].fsStyle=TBSTYLE_BUTTON;
-		TBButtons[J+I].dwData=NULL;
-	}
-		
-	TBCtrl.AddButtons(nBut //+1
-						, TBButtons );
-*/
-
 
 void CMainFrame::WinHelp(DWORD dwData, UINT nCmd) 
 {
@@ -503,25 +417,6 @@ void CMainFrame::WinHelp(DWORD dwData, UINT nCmd)
 	CFrameWnd::WinHelp(dwData, nCmd);
 }
 
-
-//DEL BOOL CMainFrame::OnHelpInfo(HELPINFO* pHelpInfo)
-//DEL {
-//DEL 	CString Pom;
-//DEL 	Pom.Format("dwContextId: %d iContextType: %d iCtrlId %d ",pHelpInfo->dwContextId,pHelpInfo->iContextType, pHelpInfo->iCtrlId);
-//DEL 	AfxMessageBox(Pom);
-//DEL 
-//DEL 	return CFrameWnd::OnHelpInfo(pHelpInfo);
-//DEL }
-
-
-//DEL void CMainFrame::OnHelp() 
-//DEL {
-//DEL 	// TODO: Add your command handler code here
-//DEL 	
-//DEL }
-
-
-
 void CMainFrame::OnWordEditorEditActiveElement() 
 {
 	CWordManager & wm = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->WordManager;
@@ -535,7 +430,6 @@ void CMainFrame::OnClose()
 
 	if (m.isWordEditorActive())
 	{
-		//AfxMessageBox(IDS_CLOSE_WORD_FIRST, MB_ICONINFORMATION);
 		m.OpenWordEditor();
 	}
 	else

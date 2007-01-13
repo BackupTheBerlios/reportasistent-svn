@@ -136,7 +136,6 @@ void CInsertElementTrace::FindTrace(CElementManager::elId_t elm_what, CElementMa
 				case ELID_ATTR_LINK_TABLE:
 					break;
 				default: //aktivni prvky
-					//if (elm_what >= OElementManager.getFirstActiveElementID() ) ;
 					break;
 			}
 			break;			

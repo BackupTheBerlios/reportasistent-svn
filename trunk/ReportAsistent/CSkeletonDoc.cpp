@@ -22,7 +22,6 @@
 #include "ReportAsistent.h"
 
 #include "CSkeletonDoc.h"
-//#include "SkeletonManager.h" - uz je v headeru
 #include "SkeletonView.h"
 #include "GenerateDialog.h"
 #include "simplefilterdialog.h"
@@ -56,12 +55,12 @@ BEGIN_MESSAGE_MAP(CSkeletonDoc, CDocument)
 	//{{AFX_MSG_MAP(CSkeletonDoc)
 	ON_COMMAND(ID_ELEMENT_EDIT, OnElementEdit)
 	ON_COMMAND(ID_MMGENREP, OnMmgenrep)
-	//}}AFX_MSG_MAP
 	ON_COMMAND_RANGE(ID_MMNEWSTATICFIRST, ID_MMNEWSTATICLAST, OnMmnewelement)
 	ON_COMMAND_RANGE(ID_MMNEWACTIVEFIRST, ID_MMNEWACTIVELAST, OnMmnewelement)
 	ON_COMMAND(ID_SHOW_XML, OnShowXml)
 	ON_COMMAND(ID_RESET_ORPHANS, OnResetOrphans)
 	ON_COMMAND(ID_DELETE_ORPHANS, OnDelOrphans)
+	//}}AFX_MSG_MAP
 
 END_MESSAGE_MAP()
 
@@ -71,8 +70,6 @@ END_MESSAGE_MAP()
 CSkeletonDoc::CSkeletonDoc() /*: m_SkeletonManager(pXMLDom)*/
 {
 	// TODO: add one-time construction code here
-//	srand( (unsigned)time( NULL ) );
-
 }
 
 CSkeletonDoc::~CSkeletonDoc()
@@ -94,15 +91,6 @@ BOOL CSkeletonDoc::OnNewDocument()
 	}
 
 	return TRUE;
-/*
-	CDirectoriesManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->DirectoriesManager;
-
-#ifdef _DEBUG
-	return OpenSkeletonFile(m.getXMLFilesDirectory() + "/prazdny.xml");
-#else	
-	return OpenSkeletonFile(m.getXMLFilesDirectory() + "/reduk2.xml");
-#endif
-*/
 }
 
 
@@ -167,7 +155,6 @@ void CSkeletonDoc::FillTreeControl(CTreeCtrl  & tree_control)
 	if (pTopElement == NULL)
 	{
       AfxGetMainWnd()->MessageBox("Invalid top document node.","Invalid top document node.", MB_ICONERROR);
-	  //(LPCSTR)pXMLDom->parseError->Getreason()); - popis chyby, TODO: nejlepe do logu chyb
 	}
 	//a naplnim TreeCtrl
 	else
@@ -184,8 +171,6 @@ HTREEITEM CSkeletonDoc::InsertNodeToTreeCtrl(MSXML2::IXMLDOMElementPtr pElement,
 									   CTreeCtrl  & tree_control,
 									   HTREEITEM hInsertAfter) //v CSkeletonDoc.h je zadana defaultni hodnota: hInsertAfter = TVI_LAST(=0xffff0002)
 {
-//dedek:
-
 	if (pElement == NULL) return NULL;
 
 	HTREEITEM hTreeItem=NULL;
@@ -316,14 +301,8 @@ MSXML2::IXMLDOMElementPtr CSkeletonDoc::InsertNewElement(CElementManager::elId_t
 
 	if (m->ElementManager.CanInsertChildHere(new_example, parent_element))
 	{
-		//ladici
-		//AfxMessageBox(new_example->xml);	
-		//AfxMessageBox(parent_element->xml);	
 		
-		
-		//a tohle je sranda nejvetsi :-) hazi to chyby jak na bezicim pasu
-		//kontroluje to tozi DTD dokumentu tak bacha, nejde vsecko vsude vlozit
-		//az bude funkcni CanInsertChildHere tak by uz chyby nemely nastat
+		//kontroluje to DTD dokumentu, nejde vsecko vsude vlozit
 		try
 		{
 			parent_element->appendChild(new_example);
@@ -384,20 +363,10 @@ CString CSkeletonDoc::CreateNewID(CElementManager::elId_t element_type)
 //nenastuvuje ModifiedFlag, neprekresluje
 BOOL CSkeletonDoc::EditActiveElement(MSXML2::IXMLDOMElementPtr &element)
 {
-	//dedek: stara verze
-
-/*
-  CActiveElementDialog dlg(element, AfxGetMainWnd());
-	return IDOK == dlg.DoModal();
-*/
-
-	//dedek: nove verze pres property sheet
-
 	CElementManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
 
 	CPropertySheet sheet((LPCTSTR) (_bstr_t) element->getAttribute("id"), NULL);
 
-//	CComplexFilterDialog cmpl_filter(element);
 	MSXML2::IXMLDOMElementPtr a_el_clone;
 	MSXML2::IXMLDOMElementPtr filter_dom;
 
@@ -415,22 +384,6 @@ BOOL CSkeletonDoc::EditActiveElement(MSXML2::IXMLDOMElementPtr &element)
 	sheet.AddPage(& simple_filter);	
 	sheet.AddPage(& transforms);
 	
-/*	
-	if (NULL != m.getActiveElementInfo(m.IdentifyElement(element))->getComplexFilterTransformation())
-	{
-		sheet.AddPage(& filters);
-		sheet.AddPage(& transforms_complex);
-		bSimpleFilter=false;
-	}
-	else
-	{
-		sheet.AddPage(& simple_filter);
-		sheet.AddPage(& transforms_simple);
-		bSimpleFilter=true;
-	}
-*/
-
-
 	int Res = sheet.DoModal();
 
 	
@@ -438,9 +391,6 @@ BOOL CSkeletonDoc::EditActiveElement(MSXML2::IXMLDOMElementPtr &element)
 
 	if ((Res == IDOK) || bApplyButtonUsed)
 	{
-		//dedek: presunuto do CAElConfigDialog::OnApply
-		//element->setAttribute("id", (LPCTSTR)config.m_sIdEdit);        
-		
 		return TRUE;			
 
 	}
@@ -456,8 +406,6 @@ BOOL CSkeletonDoc::EditElement(MSXML2::IXMLDOMElementPtr & selected_element)
 
 	if (selected_element == NULL) return FALSE;
 
-	//ziskej element
-	//MSXML2::IXMLDOMElementPtr selected_element = ElementFromItemData(item_data);
 	//ziskej manager
 	CElementManager & OElementManager = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
 	//ziskej typ elementu
@@ -473,7 +421,6 @@ BOOL CSkeletonDoc::EditElement(MSXML2::IXMLDOMElementPtr & selected_element)
 	}
 
 
-	//dedek:
 	switch(selected_elementTypeId)
 	{
 	case  ELID_TEXT:
@@ -685,14 +632,11 @@ void CSkeletonDoc::Generate(BOOL new_word)
 }
 
 
-//tahle metoda asi prijde zrusit
 void CSkeletonDoc::GenerTransform1(MSXML2::IXMLDOMElementPtr & doc)
 {
 	TransformActiveElements(doc);
-//	AfxMessageBox(doc->xml);
 	
 	TransformAttrLinks(doc);
-//	AfxMessageBox(doc->xml);
 }
 
 
@@ -742,8 +686,6 @@ CElementManager::elId_t CSkeletonDoc::ElementIdFromCommandId(UINT nMessageID)
 }
 
 
-//dedek: prislo mi to neprehledny a navic divne funkcni/nefunkcni (nektere elemnty se obevovaly jinde jine zas vubec)
-//stara verze nize
 void CSkeletonDoc::OnMmnewelement(UINT nMessageID) 
 {
 	CTreeCtrl & hTreeCtrl = GetFirstView()->GetTreeCtrl();
@@ -774,11 +716,6 @@ void CSkeletonDoc::OnMmnewelement(UINT nMessageID)
 	HTREEITEM hInterItem1=NULL;
 	HTREEITEM hInterItem2=NULL;
 	
-	//ladici
-	//CString Pom;
-	//Pom.Format("Dir:%d I1:%d I2:%d", OTrace.Direction, OTrace.Inter1, OTrace.Inter2);
-	//AfxMessageBox(Pom);
-
 	switch (OTrace.Direction)
 	{
 		case IET_IN:
@@ -910,27 +847,6 @@ void CSkeletonDoc::OnMmnewelement(UINT nMessageID)
 			
 			break;
 	}
-/* Stara verze - ke smazani
-
-	MSXML2::IXMLDOMElementPtr new_element = InsertNewElement(el_what_id, selected_element);
-	if (new_element != NULL) //tj. pridani se zdarilo
-	{
-		if (EditElement(new_element))
-		{
-			bSuccess=true;
-			CUT_Hint oHint(hSelTreeItem,new_element,TVI_LAST);
-			SetModifiedFlag();
-			UpdateAllViews(NULL,UT_INS, &oHint);
-		}
-		else
-		{
-			//pokud editace neprobehla uspene, element se z kostry smaze
-			new_element->parentNode->removeChild(new_element);
-		}
-
-		new_element.Release();
-	}
-	selected_element.Release();*/
 }
 
 void CSkeletonDoc::ChangeIDsInTree(MSXML2::IXMLDOMElementPtr pElm)
@@ -1083,17 +999,7 @@ BOOL CSkeletonDoc::InitAndClearXmlDom()
 
 
 	
-	//nacti DTD
-	
-/***
-	CDirectoriesManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->DirectoriesManager;
-	m_pXMLDom->load((LPCTSTR) (m.getXMLFilesDirectory() + "/skeleton_DTD.xml"));
-	if (m_pXMLDom->parseError->errorCode != S_OK)
-	{
-		CReportAsistentApp::ReportError(IDS_CREATE_NEW_FILE_FAILED, (LPCTSTR) m_pXMLDom->parseError->reason);
-		return FALSE;
-	}
-/***/
+	//nacti DTD	
 	CElementManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
 	m.LoadSkeletonDTD(m_pXMLDom);
 
@@ -1126,19 +1032,6 @@ BOOL CSkeletonDoc::IsIDInTree(CString Id)
 {
 
 	return IsIDInTree(Id, m_pXMLDom->documentElement);
-		//podivame se jestli uz dane id v kostre existuje:
-		//zkusime prvek s takovym id najit moci XPath funkce id()
-/*		
-		CString query; 
-		query.Format("id(\"%s\")", (LPCTSTR) Id); //napr.: query = 'id("hyp_4ft15")'
-		MSXML2::IXMLDOMNodePtr select = m_pXMLDom->selectSingleNode((LPCTSTR) query);
-		if (select == NULL) return FALSE; //kdyz to zadny uzel nenaslo tak id neni pouzite..
-		else //Iva:Id is used in the tree
-		{
-			select.Release();
-			return TRUE;
-		}
-*/
 }
 
 BOOL CSkeletonDoc::IsIDInTree(CString Id, MSXML2::IXMLDOMElementPtr pTree)
@@ -1168,10 +1061,6 @@ BOOL CSkeletonDoc::InsertNewElementAndUpdateTreeCtrl( BOOL bEdit,CElementManager
 
 	CElementManager & OElementManager = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
 
-/*	CString Pom;
-	Pom.Format("Parent type: %d",OElementManager.IdentifyElement(parent_element));
-	AfxMessageBox(Pom);
-*/
 	if (hInsertBefore==TVI_LAST)
 	{
 		MSXML2::IXMLDOMElementPtr new_element = InsertNewElement(el_what_id, parent_element);
@@ -1211,7 +1100,7 @@ BOOL CSkeletonDoc::InsertNewElementAndUpdateTreeCtrl( BOOL bEdit,CElementManager
 					CUT_Hint oHint(hParentItem,new_element,hTreeCtrl.GetPrevSiblingItem(hInsertBefore));
 					SetModifiedFlag();
 					
-					//dedek: tady to pada :-)
+					//dedek: 
 					ASSERT(oHint.pElement->parentNode != NULL);
 
 					UpdateAllViews(NULL,UT_INS, &oHint);			
@@ -1439,34 +1328,11 @@ CString CSkeletonDoc::StrToHtml(CString sText)
 	sText.Replace(13,' '); //remove LF
 
 	sText.Replace("\t"," "); //remove tab
-	/*
-	if (sText[0]==' ') 
-	{
-		sText.Delete(0);
-		sText="&nbsp;"+sText;
-	}
-	if (sText[sText.GetLength()-1]==' ') 
-	{
-		sText.Delete(sText.GetLength()-1);
-		sText=sText+"&nbsp;";
-	}
-	*/
+
 	return sText;
 }
 
 CString CSkeletonDoc::HtmlToStr(CString sHtml)
 {
-	/*
-	if (sHtml.Left(6)=="&nbsp;")
-	{
-		sHtml.Delete(0,6);
-		sHtml=" "+sHtml;
-	}
-	if (sHtml.Right(6)=="&nbsp;")
-	{
-		sHtml.Delete(sHtml.GetLength()-6,6);
-		sHtml=sHtml+" ";
-	}
-	*/	
 	return sHtml;
 }

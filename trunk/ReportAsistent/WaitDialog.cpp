@@ -104,13 +104,10 @@ void CWaitDialog::OnExitButton()
 {
 	m_pThreadPramas = NULL;
 	m_bEndDialog = TRUE;
-	//EndDialog(IDOK);	
 }
 
 void CWaitDialog::OnCancel() 
 {
-	// TODO: Add extra cleanup here
-	
 	//dedek: cancel disabled
 	//CDialog::OnCancel();
 }
@@ -251,7 +248,3 @@ void CWaitDialog::OnDestroy()
 	CDialog::OnDestroy();
 }
 
-//DEL void CWaitDialog::OnStnClickedReasonText()
-//DEL {
-//DEL 	// TODO: Add your control notification handler code here
-//DEL }

@@ -110,14 +110,7 @@ public:
 	LPCTSTR virtual getItem(int index);
 
 	~CStringTableImpl();
-private:
-/*
-	bool static CStringTableImpl::str_sort_desc(CString * s1,  CString * s2);
-	bool static CStringTableImpl::str_sort_asc(CString * s1,  CString * s2);
 
-	bool static CStringTableImpl::num_sort_desc(CString * s1,  CString * s2);
-	bool static CStringTableImpl::num_sort_asc(CString * s1,  CString * s2);
-*/
 public:
 	/**
 	 * Sort:
@@ -388,8 +381,6 @@ protected:
 	 * @return BOOL 
 	 */
 	BOOL InitWordEventHandler();
-	//void LoadParagraphStyles(LPCTSTR template_name);   //kody: presunuto do public
-	//void LoadCharacterStyles(LPCTSTR template_name);
 	BOOL isInit();
 public:
   /**
@@ -409,7 +400,7 @@ public:
   
   // loads lists of Word styles from configuration XML file
 	/**
-	 * WordEditorInsertActiveElement:
+	 * WordEditorInsertActiveElement: loads lists of Word styles from configuration XML file
 	 *
 	 * @param  
 	 * @return void 
@@ -424,9 +415,8 @@ private:
 	 * @return BOOL 
 	 */
 	BOOL loadStylesFromXML(LPCTSTR XMLFilePath);
-	// saves a list of Word styles to configutation XML file
 	/**
-	 * saveStylesToXML:
+	 * saveStylesToXML: saves a list of Word styles to configutation XML file
 	 *
 	 * @param file_path 
 	 * @return BOOL 

@@ -59,7 +59,6 @@ virtual BOOL ProcessFilteredOut(
 };
 
 
-//honza:
 /**
  * class CAElTransform: This class serves for generation of one active element to a MS Word document.
  *
@@ -68,7 +67,6 @@ virtual BOOL ProcessFilteredOut(
 class CAElTransform: public CFilterProcessor
 {
 private:
-//	CSkeletonDoc & m_skel_document;
 	MSXML2::IXMLDOMElementPtr & m_active_element;
 	MSXML2::IXMLDOMDocumentPtr m_plug_out;
 

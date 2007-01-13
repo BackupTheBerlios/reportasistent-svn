@@ -118,7 +118,6 @@ void CElementIncludeDialog::DDV_NonDuplicateID(CDataExchange *pDX, int nId, CStr
 				{
 					SetDlgItemText(nId, m_OldID ); //Iva: return old value to edit box
 					m_SelXMLElm->setAttribute("id", (LPCTSTR)m_OldID);
-					//AfxMessageBox(e.Description());
 					CReportAsistentApp::ReportError(IDS_INVALID_ELEMENT_ID,e.Description() );
 					pDX->Fail();
 				}

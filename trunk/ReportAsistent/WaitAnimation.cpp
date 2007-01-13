@@ -82,7 +82,6 @@ void CWaitAnimation::OnPaint()
 		alpha = count_angle(x-sx, y-sy);
 
 		alpha += otoc; //pootoceni
-//		alpha = otoc; //pootoceni
 		int div = (int) (alpha/(2*PI)); 
 		alpha -= 2*PI*div;
 		
@@ -125,27 +124,4 @@ COLORREF CWaitAnimation::GetPixelColor(double r, double alpha)
 
 	return (COLORREF) (255* ABS(((r - (r_div + alpha/(2*PI))*DR))/DR));
 }
-
-
-/*
-
-void CWaitDlg::OnClose() 
-{
-	int ret = MessageBox("Do you really want to terminate the Application?", "Terminate?", MB_YESNO | MB_ICONSTOP);
-	if (ret == IDYES) OnTerminate();
-}
-
-void CWaitDlg::OnOK() 
-{}
-
-void CWaitDlg::OnCancel() 
-{}
-
-void CWaitDlg::OnTerminate() 
-{
- 	TerminateProcess(GetCurrentProcess(), 0);
-}
-
-*/
-
 

@@ -123,6 +123,7 @@ protected:
 
 public:
 	virtual BOOL OnInitDialog();
+
 private:
 	BOOL m_bNumericSort;
 	int m_nFilterTypeRadioGroup;
@@ -133,11 +134,6 @@ private:
  
 	MSXML2::IXMLDOMElementPtr m_currnet_attribute_filter;
 
-
-//	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
-//	afx_msg void OnSelchangeDataSourceCombo();
-//    BOOL LoadSource(public_source_id_t sId);
-
     void UpDateDialog();
 
 	CHListBox m_AttributesList;
@@ -147,20 +143,17 @@ private:
 	void ClearAttributesList(void);
 	afx_msg void OnBnClickedAscendingRadio();
 	afx_msg void OnBnClickedDescendingRadio();
+
 protected:
 	void SetSortButtons(MSXML2::IXMLDOMElementPtr & attr_elem);
 	void FillValuesList(LPCTSTR cur_attr_str = NULL);
+
 public:
 	afx_msg void OnBnClickedNumericSortCheck();
 	CEdit m_TresholdEdeit;
 	unsigned int m_nTopNValues;
-public:
-//	afx_msg void OnDeltaposTopnSpin(NMHDR *pNMHDR, LRESULT *pResult);
-public:
 	CSpinButtonCtrl m_TopNSpin;
-public:
 	afx_msg void OnBnClickedOk();
-public:
 	afx_msg void OnLbnSelchangeValuesList();
 	
 private:
@@ -171,9 +164,6 @@ private:
 	int m_nSlectedAttrIndex;
 	CString m_sTresholdOrFixedValue;
 	afx_msg void OnBnClickedRefreshResultsButton();
-private:
-//	void UpdateResult(MSXML2::IXMLDOMElementPtr & filter_dom);
-private:
 	afx_msg void OnBnClickedFilterTypeRadio();
 };
 

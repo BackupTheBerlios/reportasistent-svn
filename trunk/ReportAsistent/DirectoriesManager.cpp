@@ -35,14 +35,6 @@ static char THIS_FILE[]=__FILE__;
 
 CDirectoriesManager::CDirectoriesManager()
 {
-//	CString dbg = AfxGetApp()->getmo;
-
-//   AfxMessageBox("111dirctories");
-
-
-	//dedek: tohle chci zprovoznit
-	//GetModuleFileName
-
 	TCHAR module_path[MAX_PATH];
 
 
@@ -57,7 +49,6 @@ CDirectoriesManager::CDirectoriesManager()
 
 	application_root_path = module_path;
 
-//  AfxMessageBox("222");
 }
 
 CDirectoriesManager::~CDirectoriesManager()

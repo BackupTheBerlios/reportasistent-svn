@@ -37,17 +37,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 /// ================= MAKRA ===================================
 
-// --- cesty k adresarum
-
-// cesta do adresare Plugin k souborum typu .dll
-//#define _PLUGIN_DIR_PATH "Plugin\\"
-//dedek: presunuto do CDirectoriesManager
-
-// cesta do adresare Config ke konfiguracnim souborum (spravce zdroju atd.)
-//#define _CONF_DIR_PATH "Config\\"
-//dedek: presunuto do CDirectoriesManager
-
-
 // --- jmena konfiguracnich souboru
 
 // konf. XML soubor s datovymi zdroji
@@ -547,10 +536,6 @@ public:
 	int FindSourceByPublicID(public_source_id_t id); //vrati index odpovidajiciho zdroje
 
 
-	//dal tady budou muset byt metody na reseni sirotku a pretahovani AP z koster,
-	//ktere treba nebyly vytvoreny pomoci tohoto SourcesManageru - tedy se sem bude muset nejak
-	//cast jejich source manageru pretahnout
-	//predbezne:
 	/**
 	 * AddSource:
 	 *
@@ -563,17 +548,7 @@ public:
 	// vrati index pridaneho prvku v tabulce zdroju
 
 
-	//metody na ulozeni a nacteni SorcesManageru - potencialne ukladat primo do kostry..
-	//ty se pouziji v konstruktoru/destruktoru
-	//predbezne:
-/* kody - tohle asi stejne nebudes pouzivat, ne? To uz delaj jiny funkce
-
-	BOOL LoadFromXML(BSTR xml_string);
-	BSTR SaveToXML(); //vrati XML string
-
-*/	
-	//a tady nebo v plugin mamageru budou funkce pro zavaloni perform na danem zdroji
-	//predbezne:
+	//funkce pro zavaloni perform na danem zdroji
 	/**
 	 * CallPerformProc:
 	 *
@@ -602,11 +577,6 @@ public:
 	 */
 	void static PerformThreadFunction(LPARAM hPreformFn, LPARAM hSource, LPARAM element_id, LPARAM pOutputBuffer);
 
-
-/* kody - pro Dedu
-  // alternativa
-	BOOL CallPerformProc(int source_index, char* element_id, BSTR* Result);
-*/
 public:
 	/**
 	 * defaultSourceDefined:

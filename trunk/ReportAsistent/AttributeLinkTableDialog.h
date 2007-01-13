@@ -88,7 +88,6 @@ protected:
 private:
 	BOOL m_bShowTarget;
 	afx_msg void OnLvnDeleteitemAttributesList(NMHDR *pNMHDR, LRESULT *pResult);
-//	afx_msg void OnLvnItemchangedAttributesList(NMHDR *pNMHDR, LRESULT *pResult);
 };
 
 //{{AFX_INSERT_LOCATION}}

@@ -23,8 +23,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #if !defined(AFX_CSKELETONDOC_H__AF6E6924_ED51_4710_9D19_8B36BB8CCF94__INCLUDED_)
 #define AFX_CSKELETONDOC_H__AF6E6924_ED51_4710_9D19_8B36BB8CCF94__INCLUDED_
 
-//#include "SkeletonManager.h"	// Added by ClassView
-//#include "SkeletonView.h"		// nepridavat znamena cyklicky include -honza
 class CSkeletonView;
 
 
@@ -65,7 +63,6 @@ public:
 
 // Implementation
 public:
-//	CSkeletonManager m_SkeletonManager;
 	BOOL InsertNewElementAndUpdateTreeCtrl( BOOL bEdit,CElementManager::elId_t el_what_id, HTREEITEM hParentItem,HTREEITEM hInsertAfter); 
 	void FillTreeControl(CTreeCtrl & tree_control);
 	virtual ~CSkeletonDoc();
@@ -104,7 +101,6 @@ protected:
 	BOOL OpenSkeletonFile(LPCTSTR file_name);
 	void TransformAttrLinks(MSXML2::IXMLDOMElementPtr & element);
 	static CElementManager::elId_t ElementIdFromCommandId(UINT command);
-//	void ConfigureFilter(MSXML2::IXMLDOMElementPtr & active_element);
 	BOOL EditElement(MSXML2::IXMLDOMElementPtr & selected_element);
 	MSXML2::IXMLDOMElementPtr InsertNewElement(CElementManager::elId_t elementID, MSXML2::IXMLDOMElementPtr & parent_element);
 	MSXML2::IXMLDOMElementPtr InsertNewElement(LPCTSTR element_name, MSXML2::IXMLDOMElementPtr & parent_element);

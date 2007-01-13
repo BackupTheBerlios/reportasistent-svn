@@ -80,26 +80,6 @@ END_MESSAGE_MAP()
 // CElementChapterDialog message handlers
 
 
-
-/*BOOL CElementChapterDialog::OnInitDialog() 
-{
-	CDialog::OnInitDialog();
-
-//Inicializuji promenne dialogu		
- 	_variant_t varAtr=m_SelXMLElm->getAttribute("id");
- 	m_OldID=(LPCTSTR) (_bstr_t)  varAtr;
- 	m_DialChapterIDEditValue = m_OldID;
- 	varAtr=m_SelXMLElm->getAttribute("title");
- 	if (varAtr.vt!=VT_NULL)
- 		m_DialChapterTitleEditValue = (LPCTSTR) (_bstr_t)  varAtr;
- 	
- 	return TRUE;  // return TRUE unless you set the focus to a control
- 	              // EXCEPTION: OCX Property Pages should return FALSE
- }
-*/
-
-
-
 void CElementChapterDialog::DDV_NonDuplicateID(CDataExchange *pDX, int nId, CString csIDEditValue)
 {
 	if (0!=pDX->m_bSaveAndValidate) //Iva: if it's end of dialog, not beginning
@@ -132,7 +112,6 @@ void CElementChapterDialog::DDV_NonDuplicateID(CDataExchange *pDX, int nId, CStr
 				{
 					SetDlgItemText(nId, m_OldID ); //Iva: return old value to edit box
 					m_SelXMLElm->setAttribute("id", (LPCTSTR)m_OldID);
-					//AfxMessageBox(e.Description());
 					CReportAsistentApp::ReportError(IDS_INVALID_ELEMENT_ID,e.Description() );
 					pDX->Fail();
 				}

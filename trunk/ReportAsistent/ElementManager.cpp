@@ -82,7 +82,6 @@ CElementManager::elId_t CElementManager::FirstActiveElementID = 5;
 
 CElementManager::elId_t CElementManager::getLastElementId()
 {
-//	int pom = active_elements.GetUpperBound();
 	return LENGTH(static_elements_names) + active_elements.GetUpperBound();
 }
 
@@ -151,7 +150,6 @@ void CElementManager::Init(CDirectoriesManager & m)
 
 CElementManager::CElementManager(CDirectoriesManager & m)
 {
-//  AfxMessageBox(m.getElementsDirectory());
 }
 
 CElementManager::~CElementManager()
@@ -279,7 +277,6 @@ BOOL CElementManager::CanInsertChildHere(MSXML2::IXMLDOMElementPtr &child, MSXML
 	}
 	catch (_com_error e)
 	{
-		//AfxMessageBox(child->xml);
 #ifdef _DEBUG
 		AfxMessageBox(e.ErrorMessage());
 #endif
@@ -287,12 +284,6 @@ BOOL CElementManager::CanInsertChildHere(MSXML2::IXMLDOMElementPtr &child, MSXML
 	}
 
 	parent->removeChild(new_child_appended);
-
-	
-	/*****    //honza: ladici klidne zakomentujete
-	int a = err->errorCode;
-	if (a != S_OK) AfxMessageBox(err->reason);
-	/*****/
 
 	return 	err->errorCode == S_OK;	
 }
@@ -327,8 +318,6 @@ void CElementManager::LoadActiveElements(LPCTSTR elements_directory_path)
 		 if (finder.IsDirectory() && (! finder.IsDots()) && (! finder.IsHidden()))
 		 {
 			 CAElInfo * element_info = new CAElInfo();
-
-//			 AfxMessageBox(finder.GetFilePath());
        
        if (element_info->LoadFromDir(finder.GetFilePath()))
 			 {
@@ -363,9 +352,6 @@ CElementManager::elId_t CElementManager::getFirstStaticElementID()
 
 CElementManager::elId_t CElementManager::getFirstActiveElementID()
 {
-	//dedek: predelano takhle je to dobre
-	//return FirstActiveElementID;
-
 	return LENGTH(static_elements_names);
 }
 
@@ -416,9 +402,6 @@ CString CElementManager::CreateElementCaption(MSXML2::IXMLDOMElementPtr &pElemen
 	CString sRet;
 	CString sText;
 
-//	AfxMessageBox(pElement->xml);
-//	AfxMessageBox(getElementName(element_id));
-
 
 	if (element_id != ELID_UNKNOWN)
 		bsId = pElement->selectSingleNode("@id")->text;
@@ -438,7 +421,7 @@ CString CElementManager::CreateElementCaption(MSXML2::IXMLDOMElementPtr &pElemen
 			sRet.Format("No name");
 			break;
 		}
-		if ((bsValue.length()+bsId.length()+2) <=App->m_iTreeItemNameLength) 					 
+		if ((bsValue.length()+bsId.length()+2) <= (unsigned) App->m_iTreeItemNameLength) 					 
 		{
 			sRet.Format("%s",(LPCTSTR) bsValue);
 			break;
@@ -459,7 +442,7 @@ CString CElementManager::CreateElementCaption(MSXML2::IXMLDOMElementPtr &pElemen
 			sRet.Format("Empty");
 			break;
 		}
-		if ((sText.GetLength()+bsId.length()+2) <= App->m_iTreeItemNameLength) 					 
+		if ((sText.GetLength()+bsId.length()+2) <= (unsigned) App->m_iTreeItemNameLength) 					 
 		{
 			sRet.Format("%s",sText);
 			break;
@@ -561,21 +544,7 @@ BOOL CElementManager::CanInsertBefore(MSXML2::IXMLDOMElementPtr &pToInsert, MSXM
 		return FALSE;
 	}
 
-
 	pParent->removeChild(pInserted);
-
-	
-	/*****    //honza: ladici klidne zakomentujete
-	int a = err->errorCode;
-	if (a != S_OK)
-	{
-		AfxMessageBox(err->reason);
-		CString s;
-		s.Format("%d", err->filepos);
-		AfxMessageBox(s);
-		
-	}
-	/*****/
 
 	return 	err->errorCode == S_OK;	
 }
@@ -846,11 +815,6 @@ BOOL CElementManager::ValidateVisualizationOtions(MSXML2::IXMLDOMDocumentPtr &vo
 
   MSXML2::IXMLDOMNodePtr clone = vo_dom->documentElement->cloneNode(VARIANT_TRUE);
 
-/*
-  if (clone != NULL) AfxMessageBox("no problem");
-  AfxMessageBox(clone->xml);
-  AfxMessageBox(validator->xml);
-*/
 	try
 	{
 		validator->replaceChild(clone,	validator->documentElement);
@@ -917,7 +881,6 @@ void CElementManager::LoadSkeletonDTD(MSXML2::IXMLDOMDocumentPtr &dom)
 
 void CElementManager::sortActiveElementsByLabel()
 {
-	//CArray<CAElInfo *,CAElInfo *> active_elements;
 	int pozice,	min, i;
 	int	prvku = active_elements.GetSize();
 	CAElInfo *pom;

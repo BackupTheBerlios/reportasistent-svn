@@ -43,13 +43,6 @@ CTransformationsDialog::CTransformationsDialog(CAElDataShare & data_share, CWnd*
 	//}}AFX_DATA_INIT
 
 
-//	srand( (unsigned)time( NULL ) );
-
-/*
-	if (m_cloned_active_element == NULL)
-		m_cloned_active_element = m_active_element->cloneNode(VARIANT_TRUE);
-*/
-
 	ASSERT(m_cloned_active_element != NULL);
 
 	
@@ -113,7 +106,6 @@ BOOL CTransformationsDialog::OnInitDialog()
 	for (a = 0; a < info->getTranformationsCount(); a++)
 	{
 		int index = m_SupportedList.AddString(info->getTranformationName(a));
-		//m_SupportedList.SetItemData(index, a);
 	}
 
 
@@ -664,13 +656,6 @@ BOOL CTransformationsDialog::AddTransformation(int selected_item)
 		MSXML2::IXMLDOMElementPtr attr_lt;
 		attr_lt = m.CreateEmptyElement(ELID_ATTR_LINK_TABLE);
 
-/*
-		CString new_id;
-		CString old_id = (LPCTSTR) (_bstr_t) attr_lt->getAttribute("id");
-		new_id.Format("%s_trsnsform%d", (LPCTSTR) old_id, rand());
-		attr_lt->setAttribute("id", (LPCTSTR) new_id);
-*/
-
 		transf_elem->appendChild(attr_lt);
 		
 		//nastav id stejne jako m_active_element
@@ -706,7 +691,7 @@ BOOL CTransformationsDialog::AddTransformation(int selected_item)
 					"Tag visualization_values is missing");
 
 				m_SelectedList.DeleteString(inserted_item);
-				return false;
+				return FALSE;
 			}
 		}
 	}
@@ -717,7 +702,7 @@ BOOL CTransformationsDialog::AddTransformation(int selected_item)
 	transf_elem.Release();
 
   SetModified();
-  return true;
+  return TRUE;
 }
 
 void CTransformationsDialog::OnDblclkSelectedTransfsList() 
@@ -785,48 +770,30 @@ void CTransformationsDialog::RemoveTransf(int selected_item)
    SetModified();
 }
 
-//DEL void CTransformationsDialog::OnMmdelete() 
-//DEL {
-//DEL 	AfxMessageBox("Stisknuto Delete");
-//DEL 	
-//DEL }
-
-//DEL void CTransformationsDialog::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags) 
-//DEL {
-//DEL 	if (nChar == 83) AfxMessageBox("Stisknuto Delete");
-//DEL 
-//DEL 	AfxMessageBox("Stisknuto neco");
-//DEL 	CPropertyPage::OnKeyDown(nChar, nRepCnt, nFlags);
-//DEL }
 
 void CTransformationsDialog::OnSelchangeSelectedTransfsList() 
 {
-	//AfxMessageBox("SelChange");
 	m_ConfigureButton.EnableWindow(true);
-
-	// TODO: Add your control notification handler code here
 	
 }
 
 void CTransformationsDialog::OnSelcancelSelectedTransfsList() 
 {
-	//AfxMessageBox("SelCancel");
-	m_ConfigureButton.EnableWindow(false);
-	
+	m_ConfigureButton.EnableWindow(false);	
 }
 
 BOOL CTransformationsDialog::OnKillActive()
 {
 	m_cloned_active_element->replaceChild(
 		m_cloned_output_element,
-		m_cloned_active_element->selectSingleNode("output"));//->cloneNode(VARIANT_TRUE);
+		m_cloned_active_element->selectSingleNode("output"));
 
 	return CPropertyPage::OnKillActive();
 }
 
 BOOL CTransformationsDialog::OnSetActive()
 {
-	m_cloned_output_element = m_cloned_active_element->selectSingleNode("output");//->cloneNode(VARIANT_TRUE);
+	m_cloned_output_element = m_cloned_active_element->selectSingleNode("output");
 
 	return CPropertyPage::OnSetActive();
 }

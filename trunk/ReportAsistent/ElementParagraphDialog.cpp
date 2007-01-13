@@ -128,12 +128,7 @@ void CElementParagraphDialog::FillStylesCombo()
 	
 	//vymaze cele combo
 	m_StylesCombo.ResetContent();
-/*
-	for (int i=0; i < m_StylesCombo.GetCount(); i++)
-	{
-		m_StylesCombo.DeleteString(0);
-	}
-*/
+
 	//styl - neuveden
 	m_StylesCombo.AddString("");
 

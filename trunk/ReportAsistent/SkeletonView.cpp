@@ -51,9 +51,9 @@ BEGIN_MESSAGE_MAP(CSkeletonView, CTreeView)
 	ON_COMMAND(ID_EDIT_CUT, OnEditCut)
 	ON_COMMAND(ID_MMDELETE, OnMmdelete)
 	ON_WM_CAPTURECHANGED()
-	//}}AFX_MSG_MAP
 	ON_COMMAND(ID_SIGN_ORPHANS, OnSignOrphans)
 	ON_COMMAND(ID_DELETE_ORPHANS, OnDeleteOrphans)
+	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -145,7 +145,7 @@ CSkeletonDoc* CSkeletonView::GetDocument() // non-debug version is inline
 /////////////////////////////////////////////////////////////////////////////
 // CSkeletonView message handlers
 
-//honza treba delaokovat item data
+//honza: treba delaokovat item data
 void CSkeletonView::OnDeleteitem(NMHDR* pNMHDR, LRESULT* pResult) 
 {
 	NM_TREEVIEW* pNMTreeView = (NM_TREEVIEW*)pNMHDR;
@@ -176,7 +176,7 @@ void CSkeletonView::OnLButtonDblClk(UINT nFlags, CPoint point)
 }
 
 
-//pridal honza - zaradi novy element v lHint jako posledniho potomka selected item
+//honza: zaradi novy element v lHint jako posledniho potomka selected item
 void CSkeletonView::OnUpdate(CView* pSender, LPARAM lHint, CObject* pHint) 
 {
 	//duvod proc je zde toto: pri pouhem FillTreeCtrl by se strom zobrazil do nerozbalene podoby
@@ -191,7 +191,6 @@ void CSkeletonView::OnUpdate(CView* pSender, LPARAM lHint, CObject* pHint)
 
 	CTreeCtrl & pTreeCtrl = GetTreeCtrl();
 
-	//Iva: New version
 	switch (lHint)
 	{
 
@@ -211,7 +210,6 @@ void CSkeletonView::OnUpdate(CView* pSender, LPARAM lHint, CObject* pHint)
 		if (((CReportAsistentApp *)AfxGetApp())->m_bTreeHasLines) lStyleOld |= TVS_HASLINES;
 			else lStyleOld &= ~ TVS_HASLINES;
 
-		//lStyleOld |= TVS_LINESATROOT|TVS_SHOWSELALWAYS;
 
 		SetWindowLong(m_hWnd, GWL_STYLE, lStyleOld);
 		GetTreeCtrl().SetIndent(((CReportAsistentApp *)AfxGetApp())->m_iTreeItemIndent);//default: 19 
@@ -225,7 +223,6 @@ void CSkeletonView::OnUpdate(CView* pSender, LPARAM lHint, CObject* pHint)
 				ResolveOrphans(((CUT_Hint*)pHint)->iMarkOrphans);
 		}
 		
-	//	GetDocument()->FillTreeControl(GetTreeCtrl());
 
 		break;
 
@@ -264,7 +261,6 @@ void CSkeletonView::OnUpdate(CView* pSender, LPARAM lHint, CObject* pHint)
 					CSkeletonDoc::CreateItemData(((CUT_Hint*)pHint)->pElement));
 				//dedek: konec
 
-				//MSXML2::IXMLDOMElementPtr edited_element = GetDocument()->ElementFromItemData(pTreeCtrl.GetItemData(((CUT_Hint*)pHint)->pTreeItem));
 				MSXML2::IXMLDOMElementPtr edited_element = ((CUT_Hint*)pHint)->pElement;
 				
 				pTreeCtrl.SetItemText(((CUT_Hint*)pHint)->pTreeItem, OElementManager.CreateElementCaption( edited_element));
@@ -276,7 +272,6 @@ void CSkeletonView::OnUpdate(CView* pSender, LPARAM lHint, CObject* pHint)
 			else
 				ResolveOrphans(ORP_UNSIGN);
 
-				//Zde by mohlo byt InvalidateRect !!!
 		break;
 	default: //new creation of tree
 		ASSERT(FALSE); //Invalid update command
@@ -303,8 +298,6 @@ void CSkeletonView::OnContextMenu(CWnd* pWnd, CPoint pointWnd)
 	CElementManager::elId_t idTypeEl =
 	 OElementManager.IdentifyElement 
 		(
-		//dedek: spravne o radek nize
-		//(MSXML2::IXMLDOMElementPtr)(MSXML2::IXMLDOMElement *) rTreeCtrl.GetItemData( hTreeCtrlItem)
 			(MSXML2::IXMLDOMElementPtr) GetDocument()->ElementFromItemData(rTreeCtrl.GetItemData(hTreeCtrlItem))
 		);
 	
@@ -314,8 +307,6 @@ void CSkeletonView::OnContextMenu(CWnd* pWnd, CPoint pointWnd)
 
 		case ELID_REPORT: 
 		{
-			//AfxMessageBox("report",0,0);
-
 			//TODO: patricne menu - zatim pracovne mainmenu->edit
 			CMenu * hMainMenu = AfxGetApp()->GetMainWnd()->GetMenu();
 			CMenu * hEditMenu = hMainMenu->GetSubMenu(1/*Edit*/);
@@ -327,49 +318,9 @@ void CSkeletonView::OnContextMenu(CWnd* pWnd, CPoint pointWnd)
 
 		default:
 		{
-			
-			//dedek: nefungovalo pro posledni AP chyba nejspis v idTypeEl<OElementManager.getLastElementId())
-			/***********************
-			//Typ prvku: staticky
-			if (idTypeEl>=OElementManager.getFirstStaticElementID()
-				&&
-				idTypeEl<OElementManager.getFirstActiveElementID())
-			{
-				//AfxMessageBox("static",0,0);		
-
-				//TODO: patricne menu - zatim pracovne mainmenu->edit
-				CMenu * hMainMenu = AfxGetApp()->GetMainWnd()->GetMenu();
-				CMenu * hEditMenu = hMainMenu->GetSubMenu(1); //SubMenu 1 = Edit
-
-				hEditMenu->TrackPopupMenu(TPM_LEFTALIGN|TPM_RIGHTBUTTON,pointWnd.x,pointWnd.y,AfxGetMainWnd());
-
-				return;
-			}
-			//Typ prvku: aktivni
-			if (idTypeEl>=OElementManager.getFirstActiveElementID()
-				&&
-				idTypeEl<OElementManager.getLastElementId())
-			{
-				//AfxMessageBox("active",0,0);
-
-				//TODO: patricne menu - zatim pracovne mainmenu->edit
-				CMenu * hMainMenu = AfxGetApp()->GetMainWnd()->GetMenu();
-				CMenu * hEditMenu = hMainMenu->GetSubMenu(1); //SubMenu 1 = Edit
-
-				hEditMenu->TrackPopupMenu(TPM_LEFTALIGN|TPM_RIGHTBUTTON,pointWnd.x,pointWnd.y,AfxGetMainWnd());
-
-				return;//TODO: patricne menu
-			}
-
-			/***********************/
-			//dedek: nova verze
-
-			
 			if (OElementManager.isElementActive(idTypeEl))
 			{	
 				//aktivni
-
-				//AfxMessageBox("active",0,0);
 
 				//TODO: patricne menu - zatim pracovne mainmenu->edit
 				CMenu * hMainMenu = AfxGetApp()->GetMainWnd()->GetMenu();
@@ -383,8 +334,6 @@ void CSkeletonView::OnContextMenu(CWnd* pWnd, CPoint pointWnd)
 			{
 				//staticke
 
-				//AfxMessageBox("static",0,0);		
-
 				//TODO: patricne menu - zatim pracovne mainmenu->edit
 				CMenu * hMainMenu = AfxGetApp()->GetMainWnd()->GetMenu();
 				CMenu * hEditMenu = hMainMenu->GetSubMenu(1); //SubMenu 1 = Edit
@@ -392,9 +341,7 @@ void CSkeletonView::OnContextMenu(CWnd* pWnd, CPoint pointWnd)
 				hEditMenu->TrackPopupMenu(TPM_LEFTALIGN|TPM_RIGHTBUTTON,pointWnd.x,pointWnd.y,AfxGetMainWnd());
 
 				return;
-			}
-				
-			/***********************/
+			}				
 		}
 	}
 
@@ -412,42 +359,8 @@ void CSkeletonView::OnRButtonDown(UINT nFlags, CPoint point)
 }
 
 
-// Iva: Puvodni zamer: podle vybraneho prvku TreeCtrl disablovat polozky v Menu->Edit->InsertNew
-//Pozn:Pouziji!
-
-// void CSkeletonView::OnCaptureChanged(CWnd *pWnd) 
-// {
-// 	CElementManager & OElementManager = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
-// 	CTreeCtrl& rTreeCtrl = GetTreeCtrl() ;
-// 
-// 	CMenu * hMainMenu = AfxGetApp()->GetMainWnd()->GetMenu();
-// 	CMenu * hEditMenu = hMainMenu->GetSubMenu(1/*Edit*/)->GetSubMenu(7/*Insert New*/);
- 	
-// 	HTREEITEM hSelTreeCtrlItem = rTreeCtrl.GetSelectedItem();
- 
-// 	CElementManager::elId_t idTypeEl =
-// 	 OElementManager.IdentifyElement 
-// 		(
-// 		 (MSXML2::IXMLDOMElementPtr)(MSXML2::IXMLDOMElement *) rTreeCtrl.GetItemData( hTreeCtrlItem)
-// 		);
- 	
-// 	switch (idTypeEl)
-// 	{
- //		case ELID_UNKNOWN: break;
- 
- //		case ELID_REPORT: 
- //		{
-//			//disable:
-//			hEditMenu->EnableMenuItem(+ID_MMNEWSTATICFIRST/*ID*/,MF_GRAYED|MF_BYPOSITION)
- 	
- //	CTreeView::OnCaptureChanged(pWnd);
- //}
- 
 void CSkeletonView::OnEditCopy() 
 {
-	//AfxMessageBox("Bude se kopirovat.",0,0);
-
-
 	CTreeCtrl & rTreeCtrl = GetTreeCtrl();
 	MSXML2::IXMLDOMElementPtr SelXMLDomElement = GetDocument()->ElementFromItemData(rTreeCtrl.GetItemData(rTreeCtrl.GetSelectedItem()));
 	
@@ -465,15 +378,12 @@ void CSkeletonView::OnEditCopy()
 	if (0==hgMemForXML) 
 	{
 		CReportAsistentApp::ReportError(IDS_LACK_OF_GLOB_MEM_FOR_CLIPBOARD);
-		//CReportAsistentApp::ReportError();
 		return;
 	}
 
 	LPTSTR pMemForXML = (LPTSTR) GlobalLock(hgMemForXML);
-	strncpy(pMemForXML ,(LPTSTR) bstrSelElmXML,(DWORD)bstrSelElmXML.length() + 1);
-	//AfxMessageBox(pMemForXML,0,0);
+	strcpy_s(pMemForXML , (DWORD)bstrSelElmXML.length()+1, (LPTSTR) bstrSelElmXML);
 	
-
 	GlobalUnlock(hgMemForXML);
 	
 
@@ -493,7 +403,6 @@ void CSkeletonView::OnEditCopy()
 	}
 	hOwner = GetClipboardOwner();
 
-	//??Jaky mam dat format??
 	if(0== SetClipboardData(CF_TEXT, // clipboard format - pripadne:CF_TEXT
 							hgMemForXML))   // data handle
 	{
@@ -514,8 +423,6 @@ void CSkeletonView::OnEditCopy()
 
 void CSkeletonView::OnEditPaste() 
 {
-	//AfxMessageBox("Bude se paste-ovat.",0,0);	
-
 	CTreeCtrl & rTreeCtrl = GetTreeCtrl();
 	MSXML2::IXMLDOMElementPtr SelXMLDomElement = GetDocument()->ElementFromItemData(rTreeCtrl.GetItemData(rTreeCtrl.GetSelectedItem()));
 	
@@ -542,8 +449,6 @@ void CSkeletonView::OnEditPaste()
 		CloseClipboard();
 		return;
 	}
-
-	//AfxMessageBox(pMemForXML,0,0);
 
 //vytvorim novy MSXML2::IXMLDOMDoc
 	MSXML2::IXMLDOMDocumentPtr pNewXMLDoc;
@@ -594,7 +499,6 @@ void CSkeletonView::OnEditPaste()
 		catch (_com_error &e)
 		{
 			AfxMessageBox(e.Description());
-			//AfxMessageBox(IDS_INSERT_NEW_ELEMENT_WRONG_LOCATION);	
 		}
 	}
 //zkusim vlozit PRED existujici
@@ -709,9 +613,6 @@ void CSkeletonView::OnLButtonUp(UINT nFlags, CPoint point)
 		MSXML2::IXMLDOMElementPtr pParentDrop=NULL;
 		MSXML2::IXMLDOMElementPtr pRSiblingDrag=NULL;
 
-		//AfxMessageBox(pXMLElmDrag->xml);
-		//AfxMessageBox(pXMLElmDrop->xml);
-
 		if (m_hitemDrag != m_hitemDrop)
 		{
 			//zkontroluji, neni-li Drop potomkem Dragu
@@ -734,10 +635,6 @@ void CSkeletonView::OnLButtonUp(UINT nFlags, CPoint point)
 				{
 					AfxMessageBox(e.Description());
 				}
-
-				//AfxMessageBox("Odebran drag do:");
-
-				//AfxMessageBox(pNewXMLElm->xml);
 			
 			//otestuji, lze-li dat NewElm PRED Drop
 				if (0!= OElementManager.CanInsertBefore(pNewXMLElm,pXMLElmDrop))
@@ -751,9 +648,7 @@ void CSkeletonView::OnLButtonUp(UINT nFlags, CPoint point)
 							CUT_Hint oHint(GetTreeCtrl().GetParentItem(m_hitemDrop),pNewXMLElm,GetTreeCtrl().GetPrevSiblingItem(m_hitemDrop));
 							GetDocument()->SetModifiedFlag();
 							GetDocument()->UpdateAllViews(NULL,UT_INS, &oHint);
-							/*
-							GetDocument()->SetModifiedFlag();		
-							GetDocument()->UpdateAllViews(NULL, 0);*/
+
 							bDropped = TRUE;
 							goto end_place;	 //povedlo se prvek vlozit PRED
 						}
@@ -777,10 +672,8 @@ void CSkeletonView::OnLButtonUp(UINT nFlags, CPoint point)
 							CUT_Hint oHint(m_hitemDrop,pNewXMLElm,TVI_LAST);
 							GetDocument()->SetModifiedFlag();
 							GetDocument()->UpdateAllViews(NULL,UT_INS, &oHint);
-/*
-							GetDocument()->SetModifiedFlag();		
-							GetDocument()->UpdateAllViews(NULL, 0);
-*/							bDropped = TRUE;
+
+							bDropped = TRUE;
 							goto end_place; //povedlo se dat prvek DOVNITR 
 						}
 					}
@@ -802,7 +695,6 @@ void CSkeletonView::OnLButtonUp(UINT nFlags, CPoint point)
 				{
 					AfxMessageBox(e.Description());
 				}
-				//AfxMessageBox(IDS_INSERT_NEW_ELEMENT_WRONG_LOCATION,0,0);
 				CReportAsistentApp::ReportError(IDS_INSERT_NEW_ELEMENT_WRONG_LOCATION);
 
 				
@@ -894,14 +786,7 @@ void CSkeletonView::ResolveSingleOrphan(HTREEITEM item, LPARAM mode)
 			{
 			// deleting orphans
 			case ORP_DELETE:
-				//dedek:
 				DeleteItem(item);
-/*
-				tree_ctrl.DeleteItem(item);
-				pParent = elem->GetparentNode();
-				if(pParent != NULL)
-					pParent->removeChild(elem);
-*/
 				break;
 			
 				// signing orphans

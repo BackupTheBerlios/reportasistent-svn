@@ -150,9 +150,7 @@ BOOL CReportAsistentApp::InitInstance()
 #endif
 
 	//dedek
-//	CoInitialize(NULL);
 	CoInitializeEx(NULL, COINIT_MULTITHREADED);
-//  AfxMessageBox("2");
 
 	CStartDialog s_dlg;
 	s_dlg.Create(IDD_START_DIALOG);
@@ -179,10 +177,6 @@ BOOL CReportAsistentApp::InitInstance()
 	 m_bMarkOrphans = GetProfileInt("Settings","bMarkOrphans",0);
 	 m_iTreeItemNameLength = GetProfileInt("Settings","TreeItemNameLength",30);
 	 m_iTextEditSize = GetProfileInt("Settings","TextEditSize",165);
-
-	 //CString Pom;
-	 //Pom.Format("%d",m_iTreeItemNameLength);
-	 //AfxMessageBox(Pom);
 
 	 m_pGeneralManager->WordManager.setWordTemplate(
 		 GetProfileString("Settings", "WordTemplate", 
@@ -213,7 +207,6 @@ BOOL CReportAsistentApp::InitInstance()
 		return FALSE;
 
 	
-//	Sleep(5000);
 	s_dlg.ShowWindow(SW_HIDE);
 
   // The one and only window has been initialized, so show and update it.
@@ -261,9 +254,6 @@ void CReportAsistentApp::OnAppAbout()
 int CReportAsistentApp::ExitInstance() 
 {
 	//Iva: Save information to registry
-	/*int iIdInItemName = m_bIdInItemName;
-	int iTreeHasLines = m_bTreeHasLines
-	int iTreeHasLines = m_bTreeHasLines;*/
 	 WriteProfileInt("Settings", "bIdInItemName", m_bIdInItemName);
 	 WriteProfileInt("Settings", "TreeItemHeight",m_iTreeItemHeight);
 	 WriteProfileInt("Settings", "TreeItemIndent",m_iTreeItemIndent );
@@ -329,13 +319,8 @@ void CReportAsistentApp::OnOpenWordEditor()
 //Iva: If Help Topics in the menu is chosen, this is the handler
 void CReportAsistentApp::OnHlpTopics() 
 {
-	//WinHelp((unsigned long)"What", HELP_KEY);//Displays Help Topics dialog box, according to "key word"
-	WinHelp(IDH_CONTENTS, HELP_CONTEXT);//Displays Help Topics dialog box, according to "mapped ID"
-	
+	WinHelp(IDH_CONTENTS, HELP_CONTEXT);//Displays Help Topics dialog box, according to "mapped ID"	
 }
-
-
-
 
 
 int CReportAsistentApp::DoMessageBox(LPCTSTR lpszPrompt, UINT nType, UINT nIDPrompt)

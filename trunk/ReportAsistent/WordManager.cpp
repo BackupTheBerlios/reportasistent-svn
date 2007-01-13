@@ -24,6 +24,7 @@
 #include "WaitDialog.h"
 #include "CSkeletonDoc.h"
 #include "APTransform.h"
+
 //#define GETTIMELOAD
 
 #ifdef _DEBUG
@@ -47,7 +48,6 @@ void CStringTableImpl::Clear()
 		delete data[a];
 	}
 
-//	data.RemoveAll();
 	data.clear();
 }
 
@@ -55,7 +55,6 @@ void CStringTableImpl::Clear()
 void CStringTableImpl::Add(LPCTSTR s)
 {
 	data.push_back(new CString(s));
-//	int a = data.GetSize();
 }
 
 int CStringTableImpl::getCount()
@@ -81,8 +80,6 @@ CStringTableImpl::~CStringTableImpl()
 void CWordManager::LoadWordStylesThreadFunction(LPARAM template_name, LPARAM pWordManager)
 {	
 	CWordManager * m = (CWordManager *) pWordManager;
-
-//	m->LoadWordTemplates();
 	m->LoadWordStyles((LPCTSTR) template_name);
 }
 
@@ -117,9 +114,6 @@ void CWordManager::LoadWordTemplates()
 CWordManager::CWordManager(CDirectoriesManager & m)
 : m_pEventHandler(NULL)
 {
-	//ladici:
-	//LoadWordTemplates();
-	//LoadWordStyles("normal.dot");
 
 	ZeroMemory(& m_origWINDOWPLACEMENT, sizeof m_origWINDOWPLACEMENT);
 
@@ -214,18 +208,8 @@ BOOL CWordManager::isInit()
 
 void CWordManager::LoadWordStyles(LPCTSTR template_name)
 {
-/***
-
-	SAFEARRAYBOUND rgsabound[1];
-	rgsabound[0].lLbound = 0;
-	rgsabound[0].cElements = 0;
-
-	SAFEARRAY * char_s = SafeArrayCreate(VT_BSTR, 1, rgsabound);
-	SAFEARRAY * para_s = SafeArrayCreate(VT_BSTR, 1, rgsabound);
-/****/
 	SAFEARRAY * char_s = NULL;
 	SAFEARRAY * para_s = NULL;
-/***/	
 	
 	try
 	{
@@ -411,12 +395,6 @@ BOOL CWordManager::CreateVBRAInstance(_LMRA_XML_WordLoaderPtr & refLMRAInterface
 	
 	hr = refLMRAInterface.CreateInstance("LMRA_WordLoader.LMRA_XML_WordLoader");
 
-/*
-	if (hr == CO_E_NOTINITIALIZED)
-	{
-		CoInitializeEx()
-	}
-*/
 	if (S_OK != hr)
 	{
 				
@@ -450,14 +428,12 @@ BOOL CWordManager::CreateVBRAInstance(_LMRA_XML_WordLoaderPtr & refLMRAInterface
 		hr = refLMRAInterface.CreateInstance("LMRA_WordLoader.LMRA_XML_WordLoader");
 		if (S_OK != hr)
 		{
-//			DWORD n;
 			LPVOID lpMsgBuf;
 			FormatMessage( 
 				FORMAT_MESSAGE_ALLOCATE_BUFFER | 
 				FORMAT_MESSAGE_FROM_SYSTEM | 
 				FORMAT_MESSAGE_IGNORE_INSERTS,
 				NULL,
-//					n = GetLastError(),
 				hr,
 				MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), // Default language
 				(LPTSTR) &lpMsgBuf,
@@ -539,7 +515,7 @@ void CWordManager::WordEditHideMainWindow()
 	newpl.length = sizeof newpl;
 
 	newpl.flags = WPF_SETMINPOSITION;
-	newpl.showCmd = SW_MINIMIZE; //SW_SHOWMINIMIZED
+	newpl.showCmd = SW_MINIMIZE;
 
 	AfxGetApp()->GetMainWnd()->SetWindowPlacement(& newpl);
 
@@ -853,8 +829,6 @@ BOOL CWordManager::saveStylesToXML(LPCTSTR file_path)
 
 void CWordManager::WordEditorInsertActiveElement(void)
 {
-/****/
-	
 	CElementManager & em = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
 	LPCTSTR strElementName = getLastElementName();
 
@@ -900,5 +874,4 @@ void CWordManager::WordEditorInsertActiveElement(void)
 	
 	active_element.Release();
 	doc.Release();
-/****/	
 }

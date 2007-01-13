@@ -87,7 +87,6 @@ BOOL COptionsDialog::OnInitDialog()
 	CReportAsistentApp * App = ((CReportAsistentApp *) AfxGetApp());
 
 	//Set Language radio buttons
-	//CString lang = App->FirstDocumentInFirstTemplate()->GetReportSettings("language");
 	if (m->getLanguage() == CString("cz"))
 		CheckRadioButton(IDC_CZECH_RADIO, IDC_ENGLISH_RADIO, IDC_CZECH_RADIO);
 	else
@@ -161,7 +160,6 @@ void COptionsDialog::OnOK()
 	m->WordManager.setWordTemplate(m_strWordTemplate);
 
 	//Get Language radio buttons
-
 	if (GetCheckedRadioButton(IDC_CZECH_RADIO, IDC_ENGLISH_RADIO) == IDC_ENGLISH_RADIO)
 		m->setLanguage("en");
 	else

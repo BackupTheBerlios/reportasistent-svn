@@ -90,7 +90,6 @@ BEGIN_MESSAGE_MAP(CPropertyEditor, CDialog)
 	ON_WM_CTLCOLOR()
 	ON_WM_VSCROLL()
 	//}}AFX_MSG_MAP
-	ON_STN_CLICKED(IDC_ERROR_TEXT, OnStnClickedErrorText)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -305,10 +304,6 @@ BOOL CPropertyEditor::ValidateProp(int index)
 	if (m_properties[index].prop->ValidateValue(new_val, err))
 	{
 		//valid
-		/*
-		if (new_val != value)
-			m_properties[index].combo->SetWindowText(new_val);
-	*/
 		POSITION pos = m_err_props.Find(index);
 		if (pos != NULL)
 		{
@@ -402,7 +397,6 @@ void CPropertyEditor::CreateProperty(int index)
 		si.nMax = GetPropertiesCount() - GetMaxVisiblePropertiesCount();
 		si.nPage = 1;
 		m_scrollbar.SetScrollInfo(& si, FALSE);
-//		m_scrollbar.SetScrollRange(0, max +1);
 	}
 
 	if ((max - min) == 0)
@@ -513,8 +507,6 @@ BOOL CPropertyEditor::OnCmdMsg(UINT nID, int nCode, void* pExtra, AFX_CMDHANDLER
 
 int CPropertyEditor::AddProperty(CProperty * prop)
 {
-//	SProperty & sp = AddProperty(prop->GetLabel(), prop->GetComboStyle());
-
 	ASSERT(prop != NULL);
 	
 	SProperty sp;
@@ -532,10 +524,4 @@ int CPropertyEditor::AddProperty(CProperty * prop)
 	}
 
 	return 0;
-}
-
-
-void CPropertyEditor::OnStnClickedErrorText()
-{
-	// TODO: Add your control notification handler code here
 }

@@ -86,10 +86,6 @@ BOOL CSimpleFilterDialog::OnInitDialog()
 {
 	CPropertyPage::OnInitDialog();
 
-	 
-//	CheckSimpleFilterDisabled();
-
-
 	return TRUE;  // return TRUE unless you set the focus to a control
 	              // EXCEPTION: OCX Property Pages should return FALSE
 }
@@ -197,8 +193,6 @@ void CSimpleFilterDialog::SetDisabledCheck(void)
 	m_bSimpleFilterDisabled = 
 		(m_bSimpleFilterDisabled || (m_filter_DOM == NULL));
 
-	//AfxMessageBox(m_cloned_active_element->selectSingleNode("filter[@type=\"simple\"]")->xml);
-
 }
 
 
@@ -260,51 +254,4 @@ void CSimpleFilterDialog::UpdateSimpleView(void)
 	m_filter_DOM->selectSingleNode("/dialog_data")->replaceChild(values_clone,
 		m_filter_DOM->selectSingleNode("/dialog_data/values"));
 }
-
-//DEL void CSimpleFilterDialog::OnItemclickFilterList(NMHDR* pNMHDR, LRESULT* pResult) 
-//DEL {
-//DEL 	NMLISTVIEW *pLV = (NMLISTVIEW *) pNMHDR;
-//DEL 	AfxMessageBox("Pozor");
-//DEL 
-//DEL 	m_ResultList.SortItems((PFNLVCOMPARE)SortFunc, pLV->iItem);
-//DEL 	
-//DEL 	*pResult = 0;
-//DEL }
-
-
-//DEL int CALLBACK CSimpleFilterDialog::SortFunc(LPARAM lParam1, LPARAM lParam2, LPARAM lParamSort)
-//DEL {
-//DEL  
-//DEL  	int nRetVal=0;
-//DEL 
-//DEL 	if (!(lParam1 && lParam2)) return 1;
-//DEL 
-//DEL  	CString pData1 = ((LVITEM*)lParam1)->pszText;
-//DEL  	CString pData2 = ((LVITEM*)lParam2)->pszText;
-//DEL  
-//DEL 	AfxMessageBox(pData1);
-//DEL  /*
-//DEL  	switch(lParamSort)
-//DEL  	{
-//DEL  	case 0:	// Last Name
-//DEL  		nRetVal = strcmp(pData1->pszLastName,
-//DEL                                   pData2->pszLastName);
-//DEL  		break;
-//DEL  
-//DEL  	case 1:	// First Name
-//DEL  		nRetVal = strcmp(pData1->pszFirstName,
-//DEL                                   pData2->pszFirstName);
-//DEL  		break;
-//DEL  
-//DEL  	case 2: // Term
-//DEL  		nRetVal = strcmp(pData1->pszTerm, pData2->pszTerm);
-//DEL  		break;
-//DEL  
-//DEL  	default:
-//DEL  		break;
-//DEL  	}*/
-//DEL 
-//DEL  	return nRetVal;
-//DEL }
-
 

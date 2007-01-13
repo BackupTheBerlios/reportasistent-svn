@@ -38,10 +38,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA*/
 //trida urcena ke sprave vsech moznych typu prvku kostry
 
 
-
-
-
-
 #define ELID_UNKNOWN			0
 #define ELID_REPORT				1
 #define ELID_TEXT				2
@@ -123,8 +119,6 @@ public:
 	 * @return static BOOL 
 	 */
 	static BOOL ValidateComplexFilter(MSXML2::IXMLDOMDocumentPtr &vo_dom, CString & err_msg);
-
-
 
 	/**
 	 * TransformAttrLinkTableNoReplaceSource:

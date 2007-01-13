@@ -142,12 +142,7 @@ void CElementTextDialog::FillStylesCombo()
 	
 	//vymaze cele combo
 	m_StylesCombo.ResetContent();
-/*
-	for (int i=0; i < m_StylesCombo.GetCount(); i++)
-	{
-		m_StylesCombo.DeleteString(0);
-	}
-*/
+
 	//styl - neuveden
 	m_StylesCombo.AddString("");
 
@@ -218,7 +213,7 @@ BOOL CElementTextDialog::OnInitDialog()
 	m_REdit.GetDefaultCharFormat(cf);
 	cf.yHeight =App->m_iTextEditSize;
 	cf.dwMask=CFM_SIZE|CFM_FACE;
-	strcpy (cf.szFaceName, "arial") ;
+	strcpy_s (cf.szFaceName, "arial") ;
 	cf.cbSize=sizeof(cf);
 	int Res = m_REdit.SetDefaultCharFormat(cf);	
 	

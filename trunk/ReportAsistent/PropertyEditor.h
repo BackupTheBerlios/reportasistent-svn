@@ -382,7 +382,6 @@ public:
 			return FALSE;
 		}
 
-//		value.Format("%d", try_convert);
 		return TRUE;
 	};
 
@@ -677,9 +676,6 @@ public:
 	int AddProperty(CProperty * prop);
 	CProperty * GetValueOfProperty(int index);
 
-
-public:
-	afx_msg void OnStnClickedErrorText();
 };
 
 //{{AFX_INSERT_LOCATION}}

@@ -64,11 +64,6 @@ struct CGeneralManager
 {
 private:
 
-//dedek: sry ale kdyz to vidim..
-/*
-	enum Languages_enum {cz, en};  // moznosti jazyku
-	Languages_enum language;		// nastaveni jazyka
-*/
 	CString m_strLanguage;
 
 public:
@@ -85,7 +80,6 @@ public:
 		m_strLanguage("en")
 	{};
 
-	// jazyk
 	/**
 	 * getLanguage:
 	 *

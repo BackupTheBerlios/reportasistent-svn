@@ -37,7 +37,6 @@ class CSourcesDialog : public CDialog
 {
 
 private:
-	//pracovni asi tez nejak Resource.. jak?
 	static LPCTSTR header_captions [];
 // Construction
 public:
