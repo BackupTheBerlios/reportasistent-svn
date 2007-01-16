@@ -18,6 +18,7 @@
 // You should have received a copy of the GNU General Public License
 // along with LM Report Asistent; if not, write to the Free Software
 // Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
 #include "stdafx.h"
 #include "ReportAsistent.h"
 #include "AElFiltersConfigDialog.h"
@@ -61,15 +62,10 @@ void CAElFiltersConfigDialog::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CAElFiltersConfigDialog)
-//	DDX_Text(pDX, IDC_CF_ID_EDIT, m_CF_IdEdit);
-//	DDV_MaxChars(pDX, m_CF_IdEdit, 50);
 	//}}AFX_DATA_MAP
-//	DDX_Control(pDX, IDC_DATA_SOURCE_COMBO, m_SourcesCombo);
-//	DDV_NonDuplicateID(pDX,IDC_CF_ID_EDIT, m_CF_IdEdit);
 
 	DDX_Control(pDX, IDC_FILTERS_LIST, m_FiltersList);
 	DDX_Control(pDX, IDC_RESULT_LIST, m_ResultList);
-
 }
 
 
@@ -81,7 +77,6 @@ BEGIN_MESSAGE_MAP(CAElFiltersConfigDialog, CDialog)
 	ON_NOTIFY(NM_DBLCLK, IDC_FILTERS_LIST, OnDblclkFiltersList)
 	//}}AFX_MSG_MAP
 	ON_BN_CLICKED(IDC_ADD_FILTER_BUTTON, OnBnClickedAddFilterButton)
-//	ON_CBN_SELCHANGE(IDC_DATA_SOURCE_COMBO, OnCbnSelchangeDataSourceCombo)
 	ON_WM_CTLCOLOR()
 	ON_BN_CLICKED(IDC_CONFIGURE_FILTER_BUTTON, OnBnClickedConfigureFilterButton)
 END_MESSAGE_MAP()
@@ -109,56 +104,6 @@ BOOL CAElFiltersConfigDialog::OnInitDialog()
 	// EXCEPTION: OCX Property Pages should return FALSE
 }
 
-/*
-void CAElFiltersConfigDialog::DDV_NonDuplicateID(CDataExchange *pDX, int nId, CString csIDEditValue)
-{
-	if (0!=pDX->m_bSaveAndValidate) //Iva: if it's end of dialog, not beginning
-	{
-
-		if (""==csIDEditValue) //Iva: ID can't be empty string
-		{
-			SetDlgItemText(nId, m_OldID );
-			//dedek: ?CReportAsistentApp::ReportError?
-			AfxMessageBox(IDS_INVALID_ELEMENT_ID);
-			pDX->Fail();
-		}
-
-		CSkeletonDoc * Doc = ((CReportAsistentApp *) AfxGetApp())->FirstDocumentInFirstTemplate();
-		if (m_OldID!=csIDEditValue)  //Iva: if "==", then ID is in tree, but it's OK
-		{
-			if (Doc->IsIDInTree(csIDEditValue))
-			{
-				SetDlgItemText(nId, m_OldID ); //Iva: return old value to edit box
-				AfxMessageBox(IDS_DUPLICATE_ELEMENT_ID);
-				//dedek: ?CReportAsistentApp::ReportError(IDS_DUPLICATE_ELEMENT_ID);?
-				pDX->Fail();
-			}
-			else
-			{
-				//Iva: I try to set ID to new value
-				try
-				{
-					m_active_element->setAttribute("id", (LPCTSTR)csIDEditValue); 
-				}
-				catch(_com_error &e)
-				{
-					SetDlgItemText(nId, m_OldID ); //Iva: return old value to edit box
-					m_active_element->setAttribute("id", (LPCTSTR)m_OldID);
-					//AfxMessageBox(e.Description());
-					CReportAsistentApp::ReportError(IDS_INVALID_ELEMENT_ID,e.Description() );
-					pDX->Fail();
-				}
-				m_active_element->setAttribute("id", (LPCTSTR)m_OldID); 
-
-			}
-
-		}
-
-	}
-
-}
-*/
-
 void CAElFiltersConfigDialog::OnRemoveFilterButton() 
 {
 	int nItem = GetCurSelFiltersList();
@@ -173,8 +118,6 @@ void CAElFiltersConfigDialog::OnRemoveFilterButton()
 	UpdateFiltersList();
 	UpdateResult();
 	SetModified();
-	//if (nItem>=1)
-	//	m_FiltersList.setSetSelectionMark(nItem-1);
 }
 
 void CAElFiltersConfigDialog::OnMoveUpButton() 
@@ -203,7 +146,7 @@ void CAElFiltersConfigDialog::OnMoveDownButton()
 	
 	if (nItem == m_FiltersList.GetItemCount()-2)
 	{
-		//preposledni
+		//predposledni
 		filter->appendChild(
 			filter->removeChild(filter->childNodes->item[nItem]));
 	}
@@ -293,13 +236,15 @@ void CAElFiltersConfigDialog::UpdateResult(void)
 	//zaloha dat
 	MSXML2::IXMLDOMElementPtr values_clone = m_filter_DOM->selectSingleNode("/dialog_data/values")->cloneNode(VARIANT_TRUE);
 	
+
+
 	CAElTransform tr(m_cloned_active_element);
 	tr.ApplyAllAttributeFilters(m_filter_DOM);
 
-//	AfxMessageBox(m_filter_DOM->xml);
-
 	CFilterResultImpl::UpdateResult(m_filter_DOM);
 	
+
+
 	//obnova dat
 	m_filter_DOM->selectSingleNode("/dialog_data")->replaceChild(values_clone,
 		m_filter_DOM->selectSingleNode("/dialog_data/values"));

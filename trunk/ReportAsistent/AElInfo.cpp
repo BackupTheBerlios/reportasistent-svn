@@ -48,7 +48,6 @@ CAElInfo::CAElInfo()
 			FORMAT_MESSAGE_FROM_SYSTEM | 
 			FORMAT_MESSAGE_IGNORE_INSERTS,
 			NULL,
-//					n = GetLastError(),
 			hr,
 			MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), // Default language
 			(LPTSTR) &lpMsgBuf,
@@ -58,7 +57,6 @@ CAElInfo::CAElInfo()
 		// Process any inserts in lpMsgBuf.
 		// ...
 		// Display the string.			
-		// CReportAsistentApp::ReportError(IDS_WB_WORD_LOADER_NOT_REGISTRED, (LPCTSTR) lpMsgBuf);
 		CReportAsistentApp::ReportError(IDS_FAILED_CREATE_XML_DOM_INSTANCE, (LPCTSTR) lpMsgBuf);
 
 		// Free the buffer.
@@ -131,39 +129,7 @@ BOOL CAElInfo::LoadFromDir(LPCTSTR dir_path)
 	}
 
 
-
-/*	
-			 CFileFind options_find;
-			 //if file exists options.xml
-			 if (options_find.FindFile(finder.GetFilePath() + "\\options.xml"))
-			 {
-				 tr->options.CreateInstance(_T("Msxml2.DOMDocument"));
-				 tr->options->async = VARIANT_FALSE;
-				 tr->options->load((LPCTSTR) (finder.GetFilePath() + "\\options.xml"));
-				 options_error = tr->options->parseError->errorCode;
-			 }
-			 options_find.Close();
-*/	
 	CFileFind exists_file_find;
-
-	//nacteni pSimpleFilterDOM
-/*
-	if (exists_file_find.FindFile(src_dir_path + "\\simple_filter.xsl"))
-	{
-		pSimpleFilterDOM.CreateInstance("Msxml2.DOMDocument");
-		pSimpleFilterDOM->async = VARIANT_FALSE;
-
-		pSimpleFilterDOM->load((LPCTSTR) (src_dir_path + "\\simple_filter.xsl"));
-		if (pSimpleFilterDOM->parseError->errorCode  != S_OK)
-		{
-			CReportAsistentApp::ReportError(IDS_AEL_LOAD_FAILED, dir_path, "simple_filter.xsl",
-				(LPCTSTR) pSimpleFilterDOM->parseError->reason);
-
-			pSimpleFilterDOM.Release();
-		}
-	}
-	exists_file_find.Close();
-*/
 
 	//nacteni pComplexFilterDOM
 	if (exists_file_find.FindFile(src_dir_path + "\\complex_filter.xsl"))
@@ -278,7 +244,6 @@ MSXML2::IXMLDOMElementPtr CAElInfo::CreateEmptyElement()
 	ASSERT(pElementDefinitionDOM->documentElement != NULL);
 	
 	return pElementDefinitionDOM->documentElement->cloneNode(VARIANT_TRUE);
-
 }
 
 
@@ -289,8 +254,6 @@ void CAElInfo::LoadTransformations(LPCTSTR dir_path)
 
 	CElementManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
 
-
-	
 
 	BOOL bWorking = finder.FindFile((CString) dir_path + "\\*.*");
 	while (bWorking)

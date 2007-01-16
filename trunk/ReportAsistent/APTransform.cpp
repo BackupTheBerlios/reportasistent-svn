@@ -18,14 +18,15 @@
 // You should have received a copy of the GNU General Public License
 // along with LM Report Asistent; if not, write to the Free Software
 // Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-#pragma warning( disable : 4786 )
+
+
+#pragma warning( disable : 4786 ) //zrusi varovani o prilis dlouhem identifikatoru
+
 
 #include "stdafx.h"
 #include "ReportAsistent.h"
-//#include  "SkeletonManager.h"
 #include "CSkeletonDoc.h"
 #include "APTransform.h"
-#pragma warning( disable : 4786 )
 
 
 #ifdef _DEBUG
@@ -33,9 +34,6 @@
 static char THIS_FILE[]=__FILE__;
 #define new DEBUG_NEW
 #endif
-
-//zrusi varovani o prilis dlouhem identifikatoru
-
 
 
 //////////////////////////////////////////////////////////////////////
@@ -54,10 +52,6 @@ CAElTransform::CAElTransform(MSXML2::IXMLDOMElementPtr & active_element)
 {
 	//pouze nacteni pluginoutput
 	
-	//m_plug_out.CreateInstance(_T("Msxml2.DOMDocument"));
-	//m_plug_out->async = VARIANT_FALSE; // default - true,
-	
-
 	CDataSourcesManager & m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->DataSourcesManager;
 
 	
@@ -90,15 +84,6 @@ MSXML2::IXMLDOMDocumentFragmentPtr CAElTransform::DoAllTransnformations()
 	}
 
 	FillElementAttributes(0);
-
-
-/*****
-	//pokud ma aktivni prvek rodice, nahradime ho vysledkem transformaci
-	if (m_active_element->parentNode != NULL)
-	{
-		m_active_element->parentNode->replaceChild(parent_frag, m_active_element);
-	}
-/*****/
 	
 	//vysledek vsech transformaci ulozime na misto vtrku output elementu
 	MSXML2::IXMLDOMNodePtr out = m_active_element->selectSingleNode("output");
@@ -116,38 +101,7 @@ MSXML2::IXMLDOMDocumentFragmentPtr CAElTransform::DoAllTransnformations()
 //projde vsechny vybrane prvky ve filtru a pro kazdy provede vsechny transformace
 void CAElTransform::ProcessSimpleFlter(MSXML2::IXMLDOMNodePtr & destination_parent)
 {
-
 	ProcessSimpleFlter(* this, FILTER_ALL_TRANSFORMATINOS, (LPARAM) destination_parent.GetInterfacePtr());
-/*
-	
-	MSXML2::IXMLDOMNodeListPtr selected_items;
-	selected_items = m_active_element->selectNodes("filter[@type='simple']/selection");
-
-	for (int a=0; a < selected_items->length; a++)
-	{
-		MSXML2::IXMLDOMElementPtr item = selected_items->item[a];
-
-		CString select = "id('";
-		select += (_bstr_t) item->getAttribute("id");
-		select += "')";
-		//napriklad: select = "id('hyp1')"
-
-
-		
-		MSXML2::IXMLDOMNodePtr node_to_transform = m_plug_out->selectSingleNode((LPCTSTR) select);
-		
-		if (node_to_transform == NULL)
-		{
-			CString errs = "Varování: Volba v simple filtru je neplatná.\n\nSelect string:\n";
-			errs += select;
-			AfxMessageBox(errs);
-		}
-		else
-		{
-			ProcessAllTransformations(node_to_transform, destination_parent);
-		}
-	}
-*/
 }
 
 
@@ -320,7 +274,6 @@ private:
 
 public:
 	CFilterSortItem(MSXML2::IXMLDOMElementPtr d): data(d) {};
-	//	~CFilterSortItem() {};
 	MSXML2::IXMLDOMElementPtr GetData() {return data; };
 	void static PrepareRemoveIf(LPCTSTR _treshold_value) {treshold_value = _treshold_value;} ;
 
@@ -486,11 +439,6 @@ BOOL CAElTransform::LoadFilterDOM(public_source_id_t sId, MSXML2::IXMLDOMElement
 	catch (...) {}
 
 	
-    //ulozi element atributy
-//	CAElTransform tr(m_active_element, (MSXML2::IXMLDOMNodePtr) plugout_doc);
-//	FillElementAttributes(0);
-
-
     //transformace plugout na filter dom
     MSXML2::IXMLDOMDocumentPtr filter_doc;
     filter_doc.CreateInstance(_T("Msxml2.DOMDocument"));
@@ -566,16 +514,6 @@ void CAElTransform::TransformCmplexFilterToSimple()
 	}
 
 	ApplyAllAttributeFilters(filter_dom);
-
-	//vymaz vnitrek filtru
-/*
-	MSXML2::IXMLDOMNodePtr filter_node = m_active_element->selectSingleNode("filter");
-	while (filter_node->firstChild != NULL)
-	{
-		filter_node->removeChild(filter_node->firstChild);
-	}
-//	AfxMessageBox(filter_node->xml);
-*/
 	
 	//vloz obsah simple fitru
 	MSXML2::IXMLDOMElementPtr selection_el = m_active_element->ownerDocument->createElement("selection");
@@ -602,8 +540,6 @@ void CAElTransform::ApplyAllFilters(MSXML2::IXMLDOMElementPtr & filter_dom)
 	MSXML2::IXMLDOMNodePtr simple_filter = m_active_element->selectSingleNode("filter[@type='simple']");
 	MSXML2::IXMLDOMNodeListPtr simple_filter_ids = simple_filter->selectNodes("selection/@id");
 
-
-//	AfxMessageBox(simple_filter->xml);
 
 	for (int val = values_node->childNodes->length-1; val >= 0; val--)
 	{
@@ -706,7 +642,6 @@ BOOL CAElTransform::ProcessSimpleFlter(CFilterProcessor & processor, LPARAM user
 		}
 		else
 		{
-			//ProcessAllTransformations(node_to_transform, destination_parent);
 			ret |= processor.ProcessFilteredOut(node_to_transform, order++, user1, user2);
 		}
 	}
@@ -785,8 +720,6 @@ void CAElTransform::FillElementAttributes(MSXML2::IXMLDOMNodePtr &output_node)
 	
 	//provede tranformaci
 	attributes_DOM->loadXML(
-		//ladici
-		//bs = output_node->transformNode(
 		output_node->transformNode(
 			m.getActiveElementInfo(
 				m.IdentifyElement(m_active_element))->getFillElementAttributesTransformation()));
@@ -818,8 +751,6 @@ void CAElTransform::FillElementAttributes(MSXML2::IXMLDOMNodePtr &output_node)
 	}
 
 
-/*********/	
-	
 	//ulozi atributy do elementu se stejnym id jako m_active_element (nutne kvuli klonovani pri generovani)
 	CString query_str;
 	query_str.Format("id(\"%s\")/attributes", (LPCTSTR) (_bstr_t) m_active_element->getAttribute("id"));
@@ -830,11 +761,6 @@ void CAElTransform::FillElementAttributes(MSXML2::IXMLDOMNodePtr &output_node)
 		attributes_node->selectSingleNode("element_attributes"));
 	attributes_node.Release();
 
-/****
-	m_active_element->replaceChild(
-		attributes_DOM->documentElement,
-		m_active_element->selectSingleNode("attributes/element_attributes"));
-/*****/
 	
 	attributes_DOM.Release();
 }

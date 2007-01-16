@@ -18,6 +18,7 @@
 // You should have received a copy of the GNU General Public License
 // along with LM Report Asistent; if not, write to the Free Software
 // Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
 #include "stdafx.h"
 #include "ReportAsistent.h"
 #include "AttributeLinkTableDialog.h"
@@ -98,7 +99,7 @@ BOOL CAttributeLinkTableDialog::OnInitDialog()
 	InitBaseDialog(m_AttributesList, m_TargetCombo);
 
 
-	//dedek: inicialozuj CaptionsList
+	//dedek: inicializuj CaptionsList
 	CRect r;
 	m_CaptionsList.GetWindowRect(& r);
 	m_CaptionsList.InsertColumn(CAPTLIST_CL_CAPTION, "caption", LVCFMT_LEFT, r.Width()/3 -3);
@@ -382,18 +383,14 @@ void CAttributeLinkTableDialog::DDV_NonDuplicateID(CDataExchange *pDX, int nId, 
 				{
 					SetDlgItemText(nId, m_OldID ); //Iva: return old value to edit box
 					m_SelXMLElm->setAttribute("id", (LPCTSTR)m_OldID);
-					//AfxMessageBox(e.Description());
 					CReportAsistentApp::ReportError(IDS_INVALID_ELEMENT_ID,e.Description() );
 					pDX->Fail();
 				}
 				m_SelXMLElm->setAttribute("id", (LPCTSTR)m_OldID); 
 
 			}
-
 		}
-
 	}
-
 }
 
 BOOL CAttributeLinkTableDialog::AddAttribute(int selected_item)
@@ -404,12 +401,11 @@ BOOL CAttributeLinkTableDialog::AddAttribute(int selected_item)
 	{
 		Pom.Format("%d", MAX_CHOSEN_ATTRIBUTES_COUNT);
 		CReportAsistentApp::ReportError(IDS_TOO_MANY_SELECTED_ITEMS, Pom);
-		return false;
+		return FALSE;
 	}
 
 	CString label = m_AttributesList.GetItemText(selected_item, ATTRLIST_CL_NAME);
 	CString value = m_AttributesList.GetItemText(selected_item, ATTRLIST_CL_VALUE);
-	// kody
 	CString name = * (CString*) m_AttributesList.GetItemData(selected_item);
 
 
@@ -422,14 +418,12 @@ BOOL CAttributeLinkTableDialog::AddAttribute(int selected_item)
 	m_CaptionsList.SetFocus();
 	m_CaptionsList.EditLabel(item);	
 
-	return true;
-
-
+	return TRUE;
 }
 
 void CAttributeLinkTableDialog::RemoveAttribute(int selected_item)
 {
-		m_CaptionsList.DeleteItem(selected_item);
+	m_CaptionsList.DeleteItem(selected_item);
 }
 
 

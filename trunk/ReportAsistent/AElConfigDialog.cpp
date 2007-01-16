@@ -18,14 +18,13 @@
 // You should have received a copy of the GNU General Public License
 // along with LM Report Asistent; if not, write to the Free Software
 // Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
 #include "stdafx.h"
 #include "ReportAsistent.h"
 #include "AElConfigDialog.h"
 #include "APTransform.h"
 #include "CSkeletonDoc.h"
 
-
-// CAElConfigDialog dialog
 
 IMPLEMENT_DYNAMIC(CAElConfigDialog, CPropertyPage)
 
@@ -83,18 +82,14 @@ void CAElConfigDialog::DDV_NonDuplicateID(CDataExchange *pDX, int nId, CString c
 				{
 					SetDlgItemText(nId, m_OldID ); //Iva: return old value to edit box
 					m_active_element->setAttribute("id", (LPCTSTR)m_OldID);
-					//AfxMessageBox(e.Description());
 					CReportAsistentApp::ReportError(IDS_INVALID_ELEMENT_ID,e.Description() );
 					pDX->Fail();
 				}
 				m_active_element->setAttribute("id", (LPCTSTR)m_OldID); 
 
 			}
-
 		}
-
 	}
-
 }
 
 void CAElConfigDialog::DoDataExchange(CDataExchange* pDX)
@@ -104,7 +99,6 @@ void CAElConfigDialog::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_DATA_SOURCE_COMBO, m_SourcesCombo);
 	DDX_Text(pDX, IDC_ID_EDIT, m_sIdEdit);
 	DDV_NonDuplicateID(pDX, IDC_ID_EDIT, m_sIdEdit);
-
 }
 
 
@@ -113,10 +107,6 @@ BEGIN_MESSAGE_MAP(CAElConfigDialog, CPropertyPage)
 	ON_WM_CTLCOLOR()
 	ON_EN_CHANGE(IDC_ID_EDIT, OnEnChangeIdEdit)
 END_MESSAGE_MAP()
-
-
-// CAElConfigDialog message handlers
-
 
 
 BOOL CAElConfigDialog::LoadSource(public_source_id_t sId)
@@ -268,16 +258,14 @@ BOOL CAElConfigDialog::OnSetActive()
 		//zaloha dat
 		MSXML2::IXMLDOMElementPtr values_clone = m_filter_DOM->selectSingleNode("/dialog_data/values")->cloneNode(VARIANT_TRUE);
 		
-	//	simple_f = simple_f->cloneNode(VARIANT_TRUE);
+
 
 		CAElTransform tr(m_cloned_active_element);
-
-	//	AfxMessageBox(simple_f->xml);
-
 		tr.ApplyAllFilters(m_filter_DOM);
 
 		CFilterResultImpl::UpdateResult(m_filter_DOM);
 		
+	
 		//obnova dat
 		m_filter_DOM->selectSingleNode("/dialog_data")->replaceChild(values_clone,
 			m_filter_DOM->selectSingleNode("/dialog_data/values"));

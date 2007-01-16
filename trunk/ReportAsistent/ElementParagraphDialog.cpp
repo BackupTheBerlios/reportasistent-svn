@@ -103,7 +103,6 @@ CReportAsistentApp::ReportError(IDS_DUPLICATE_ELEMENT_ID);
 				{
 					SetDlgItemText(nId, m_OldID ); //Iva: return old value to edit box
 					m_SelXMLElm->setAttribute("id", (LPCTSTR)m_OldID);
-					//AfxMessageBox(e.Description());
 					CReportAsistentApp::ReportError(IDS_INVALID_ELEMENT_ID,e.Description() );
 					pDX->Fail();
 				}

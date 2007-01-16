@@ -18,6 +18,7 @@
 // You should have received a copy of the GNU General Public License
 // along with LM Report Asistent; if not, write to the Free Software
 // Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
 #include "stdafx.h"
 #include "ReportAsistent.h"
 #include "AttributeLinkDialogBase.h"
@@ -72,7 +73,6 @@ void CAttributeLinkDialogBase::FillTargets(CComboBox & TargetCombo)
 {
 
 	MSXML2::IXMLDOMNodeListPtr el_list = m_SelXMLElm->ownerDocument->selectNodes("//active_element/@id");
-//	MSXML2::IXMLDOMNodeListPtr el_list = m_SelXMLElm->selectNodes("//active_element/@id");
 
 	for (int a=0; a < el_list->length; a++)
 	{
@@ -119,18 +119,6 @@ void CAttributeLinkDialogBase::OnRefresh(CListCtrl & AttributesList, LPCTSTR tar
 void CAttributeLinkDialogBase::FillAttributesList(CListCtrl & AttributesList, LPCTSTR target_id)
 {
 	// smazani puvodniho obsahu
-		// kody
-
-//dedek: presunuto do OnLvnDeleteitemAttributesList	
-/*
-
-	for (int i=0; i<AttributesList.GetItemCount(); i++)
-	{
-		if (AttributesList.GetItemData(i) != NULL)
-			delete (CString*) AttributesList.GetItemData(i);
-	}
-*/
-	//  /kody
 	AttributesList.DeleteAllItems();
 	
 	CString query;
@@ -142,9 +130,6 @@ void CAttributeLinkDialogBase::FillAttributesList(CListCtrl & AttributesList, LP
 	{
 		MSXML2::IXMLDOMElementPtr el = sel->item[a];
 
-		// kody - pokus
-
-		
 		 _bstr_t Label;  // pokud je v XML definovan atribut "label", bude mit jeho hodnotu. jinak bude hodnota atributu "name"
 
 		
@@ -161,9 +146,6 @@ void CAttributeLinkDialogBase::FillAttributesList(CListCtrl & AttributesList, LP
 		CString* pName = new CString();
 		*pName =  (LPCTSTR) (_bstr_t) el->getAttribute("name");
 
-		// /kody - smaz
-
-		//int item = AttributesList.InsertItem(a, (_bstr_t) el->getAttribute("name"));
 		int item = AttributesList.InsertItem(a, Label);  
 
 		AttributesList.SetItemText(item, ATTRLIST_CL_VALUE, (_bstr_t) el->getAttribute("value"));
@@ -171,9 +153,7 @@ void CAttributeLinkDialogBase::FillAttributesList(CListCtrl & AttributesList, LP
 		AttributesList.SetItemData(item, (DWORD) pName);
 
 		el.Release();
-
 	}
-
 	sel.Release();
 }
 

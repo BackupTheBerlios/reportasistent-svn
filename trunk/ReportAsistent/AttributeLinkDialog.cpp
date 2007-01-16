@@ -18,6 +18,7 @@
 // You should have received a copy of the GNU General Public License
 // along with LM Report Asistent; if not, write to the Free Software
 // Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
 #include "stdafx.h"
 #include "ReportAsistent.h"
 #include "AttributeLinkDialog.h"
@@ -107,12 +108,6 @@ BOOL CAttributeLinkDialog::OnInitDialog()
 
 void CAttributeLinkDialog::OnSelchangeTargetCombo() 
 {
-	/*
-	CString target_id;
-	m_TargetCombo.GetWindowText(target_id);
-	FillAttributesList(m_AttributesList, target_id);
-	*/
-
 	OnRefreshButton();
 }
 
@@ -131,8 +126,6 @@ void CAttributeLinkDialog::OnOK()
 	if (pos != NULL)
 	{
 		int nItem = m_AttributesList.GetNextSelectedItem(pos);
-		// kody
-		//s = m_AttributesList.GetItemText(nItem, ATTRLIST_CL_NAME);
 		s = * (CString*) m_AttributesList.GetItemData(nItem);
 	}
 	m_SelXMLElm->setAttribute("attr_name", (LPCTSTR) s);
@@ -202,12 +195,7 @@ void CAttributeLinkDialog::FillStylesCombo()
 	
 	//vymaze cele combo
 	m_StylesCombo.ResetContent();
-/*
-	for (int i=0; i < m_StylesCombo.GetCount(); i++)
-	{
-		m_StylesCombo.DeleteString(0);
-	}
-*/
+
 	//styl - neuveden
 	m_StylesCombo.AddString("");
 
@@ -267,18 +255,14 @@ void CAttributeLinkDialog::DDV_NonDuplicateID(CDataExchange *pDX, int nId, CStri
 				{
 					SetDlgItemText(nId, m_OldID ); //Iva: return old value to edit box
 					m_SelXMLElm->setAttribute("id", (LPCTSTR)m_OldID);
-					//AfxMessageBox(e.Description());
 					CReportAsistentApp::ReportError(IDS_INVALID_ELEMENT_ID,e.Description() );
 					pDX->Fail();
 				}
 				m_SelXMLElm->setAttribute("id", (LPCTSTR)m_OldID); 
 
 			}
-
 		}
-
 	}
-
 }
 
 

@@ -48,14 +48,14 @@ CComplexFilterDialog::CComplexFilterDialog(
 {
 	//dedek: v tomhle kostruktoru se dialog inicilaizuje z currnet_attribute_filter elementu
 
-	//InitDialogFromXML(); vola se v init dialog
+	//InitDialogFromXML() - vola se v init dialog
 }
 
 
 CComplexFilterDialog::CComplexFilterDialog(
 		MSXML2::IXMLDOMElementPtr & active_element,
 		MSXML2::IXMLDOMElementPtr & filter_DOM,
-		CWnd* pParent)	// nestandard constructor :-)
+		CWnd* pParent)	
 : CDialog(CComplexFilterDialog::IDD, pParent)
 , CFilterResultImpl(filter_DOM)
 , m_active_element(active_element)
@@ -70,12 +70,10 @@ CComplexFilterDialog::CComplexFilterDialog(
 		// NOTE: the ClassWizard will add member initialization here
 	//}}AFX_DATA_INIT
 
-	//dedek: v tomhle kostruktoru se dialog nastavi na vychozi hodnoty a vytvori se prazdny currnet_attribute_filter element
+	//dedek: v tomhle kostruktoru se dialog nastavi na vychozi hodnoty a
+	//vytvori se prazdny currnet_attribute_filter element
 
 	AppendFilter();
-	
-	
-	//InitDialogFromXML();
 }
 
 CComplexFilterDialog::~CComplexFilterDialog()
@@ -110,8 +108,6 @@ BEGIN_MESSAGE_MAP(CComplexFilterDialog, CDialog)
 	//{{AFX_MSG_MAP(CComplexFilterDialog)
 		// NOTE: the ClassWizard will add message map macros here
 	//}}AFX_MSG_MAP
-//	ON_WM_CTLCOLOR()
-//	ON_CBN_SELCHANGE(IDC_DATA_SOURCE_COMBO, OnSelchangeDataSourceCombo)
 	ON_LBN_SELCHANGE(IDC_ATTRIBUTES_LIST, OnLbnSelchangeAttributesList)
 	ON_WM_DESTROY()
 	ON_BN_CLICKED(IDC_ASCENDING_RADIO, OnBnClickedAscendingRadio)
@@ -135,129 +131,20 @@ BOOL CComplexFilterDialog::OnInitDialog()
 
 
 	m_TopNSpin.SetRange(1, 100);
-//	m_TopNSpin.SetPos(5);
 	m_TopNSpin.SetBase(1);
 	m_TopNSpin.SetBuddy(GetDlgItem(IDC_TOPN_EDIT));
 
 	
-/*	
-	CDataSourcesManager & dm = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->DataSourcesManager;
-	CElementManager & em = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager->ElementManager;
-	
-	for (int a=0; a< dm.getSourcesCount(); a++)
-	{
-		if (em.isElementSupportedBySource(em.IdentifyElement(m_active_element), a))
-		{
-			m_SourcesCombo.AddString(dm.getSourcePublicID(a));
-		}
-	}
-
-	int sel = m_SourcesCombo.SelectString(-1, (_bstr_t) m_active_element->getAttribute("source"));
-	if (sel == CB_ERR) m_SourcesCombo.SelectString(-1, dm.getDefaultSource());
-*/	
 	InitResultView();
 	
 	UpDateDialog();
-	//InitDialogFromXML(); - vola se v update dialog
+	//InitDialogFromXML() - vola se v update dialog
 
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// EXCEPTION: OCX Property Pages should return FALSE
 }
 
-/*
-HBRUSH CComplexFilterDialog::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
-{
-	HBRUSH hbr = CDialog::OnCtlColor(pDC, pWnd, nCtlColor);
-
-	// TODO:  Change any attributes of the DC here
-
-	//dedek: tohle se tady vola kvuli inicializaci filtru - kdyz se to delalo uz v init_dialog tak to padalo!!
-	if (! m_bSourceIsInit)
-	{
-		m_bSourceIsInit = TRUE;
-		OnSelchangeDataSourceCombo();
-//		SetModified(FALSE);
-		Invalidate(FALSE);
-	}
-
-	// TODO:  Return a different brush if the default is not desired
-	return hbr;
-}
-
-void CComplexFilterDialog::OnSelchangeDataSourceCombo()
-{
-	CString text;
-	m_SourcesCombo.GetWindowText(text);
-
-	if (text.GetLength() == 0) return;
-
-	if (LoadSource(text))
-	{
-		UpDateDialog();
-	}
-	else
-	{
-		ClearAttributesList();
-	}
-
-
-//    SetModified();
-}
-
-BOOL CComplexFilterDialog::LoadSource(public_source_id_t sId)
-{
-	CGeneralManager * m = ((CReportAsistentApp *) AfxGetApp())->m_pGeneralManager;
-
-    CAElInfo * element_info = m->ElementManager.getActiveElementInfo(
-								m->ElementManager.IdentifyElement(m_active_element));
-
-   	
-    MSXML2::IXMLDOMDocumentPtr plugout_doc;
-
-	//nacte data z plugin output
-	if (! m->DataSourcesManager.GetPluginOutput(sId, element_info->getElementName(), & plugout_doc))
-	{
-		CReportAsistentApp::ReportError(IDS_SIMPLE_FILTER_FAILED_SOURCE_LOAD, "Plugin output is empty.");
-		return FALSE;	
-	}
-
-#ifdef _DEBUG	
-    plugout_doc->save((LPCTSTR) (m->DirectoriesManager.getXMLFilesDirectory() + "/plug_out_example.xml"));
-#endif
-
-	
-    //ulozi element atributy
-	CAElTransform tr(m_active_element, (MSXML2::IXMLDOMNodePtr) plugout_doc);
-	tr.FillElementAttributes(0);
-
-
-    //transformace plugout na filter dom
-    MSXML2::IXMLDOMDocumentPtr filter_doc;
-    filter_doc.CreateInstance(_T("Msxml2.DOMDocument"));
-	filter_doc->async = VARIANT_FALSE; // default - true,
-	filter_doc->loadXML(
-		plugout_doc->transformNode(element_info->getComplexFilterTransformation()));
-
-    plugout_doc.Release();
-
-    if (filter_doc->documentElement != NULL)
-	{
-    	//ok data nactena
-
-#ifdef _DEBUG	
-    	filter_doc->save((LPCTSTR) (m->DirectoriesManager.getXMLFilesDirectory() + "/complex_filter_example.xml"));
-#endif
-        m_filter_DOM = filter_doc->documentElement;
-		filter_doc.Release();
-		return TRUE;
-	}
-
-    //problem, zdroj neprosel    
-   	CReportAsistentApp::ReportError(IDS_SIMPLE_FILTER_FAILED_SOURCE_LOAD, "Plugin output - document element is empty.");
-    return FALSE;
-}
-*/
 
 void CComplexFilterDialog::UpDateDialog()
 {
@@ -265,22 +152,10 @@ void CComplexFilterDialog::UpDateDialog()
 
 	ClearAttributesList();
 	
-//	MSXML2::IXMLDOMNodeListPtr attributes = m_filter_DOM->selectNodes("/dialog_data/attributes/attribute");
-
 	for (int a = 0; a < getAttributesCount(); a++)
 	{
 		m_AttributesList.AddString(getAttributeLabel(a));
-/*
-
-		m_AttributesList.SetItemDataPtr(i, 
-			new CString((LPCTSTR) attributes->item[a]->selectSingleNode("@name")->text));
-*/
 	}
-
-//dedek:	pride pridat: m_AttributesList.SelectString
-
-
-//	attributes.Release();
 
 	InitDialogFromXML();
 }
@@ -313,11 +188,6 @@ void CComplexFilterDialog::OnDestroy()
 
 void CComplexFilterDialog::ClearAttributesList(void)
 {
-/*	for (int a = 0; a < m_AttributesList.GetCount(); a++)
-	{
-		delete (CString *) m_AttributesList.GetItemDataPtr(a);
-	}
-*/
 	m_AttributesList.ResetContent();
 }
 
@@ -482,9 +352,6 @@ void CComplexFilterDialog::InitDialogFromXML(void)
 	query.Format("/dialog_data/attributes/attribute[@name=\"%s\"]/@label", 
 		(LPCTSTR) (_bstr_t) m_currnet_attribute_filter->getAttribute("attr_name"));
 
-	//ladici
-//	query.Format("/dialog_data/attributes/attribute[@name=\"%s\"]/@label", "a");
-
 	try
 	{
 		m_nSlectedAttrIndex =
@@ -537,22 +404,12 @@ MSXML2::IXMLDOMElementPtr CComplexFilterDialog::CreateAttrFilterElement()
 {
 	MSXML2::IXMLDOMDocumentPtr doc = m_active_element->ownerDocument;
 
-/*	
-	//filter element
-	MSXML2::IXMLDOMElementPtr filter_element = doc->createElement("filter");
-	MSXML2::IXMLDOMAttributePtr type_attr = doc->createAttribute("type");
-	type_attr->value = "complex";
-	filter_element->setAttributeNode(type_attr);
-	type_attr.Release();
-*/
 	//attribute_filter element
 	MSXML2::IXMLDOMElementPtr attr_filter_element = doc->createElement("attribute_filter");
 	
 	//attr_name
 	MSXML2::IXMLDOMAttributePtr attr_name_attr = doc->createAttribute("attr_name");
-/*	m_AttributesList.GetText(sel, s);
-	attr_name_attr->value = (LPCTSTR) s;
-*/
+
 	if (m_nSlectedAttrIndex >= 0) 
 		attr_name_attr->value = (LPCTSTR) getAttributeName(m_nSlectedAttrIndex);
 	else
@@ -580,17 +437,15 @@ MSXML2::IXMLDOMElementPtr CComplexFilterDialog::CreateAttrFilterElement()
 	//filter_type & filter_data
 	MSXML2::IXMLDOMAttributePtr filter_type_attr = doc->createAttribute("filter_type");
 	MSXML2::IXMLDOMAttributePtr filter_data_attr = doc->createAttribute("filter_data");
-//	m_TresholdEdeit.GetWindowText(s);
+
 	switch (m_nFilterTypeRadioGroup + IDC_TRESHOLD_RADIO)
 	{
 	case IDC_TRESHOLD_RADIO:
 		filter_type_attr->value = "treshold";
-//		filter_data_attr->value = (LPCTSTR) s;
 		filter_data_attr->value = (LPCTSTR) m_sTresholdOrFixedValue;		
 		break;
 	case IDC_FIXED_VAL_RADIO:
 		filter_type_attr->value = "fixed";
-//		filter_data_attr->value = (LPCTSTR) s;
 		filter_data_attr->value = (LPCTSTR) m_sTresholdOrFixedValue;		
 		break;
 	case IDC_TOP_N_VAL_RADIO:
@@ -598,20 +453,10 @@ MSXML2::IXMLDOMElementPtr CComplexFilterDialog::CreateAttrFilterElement()
 		filter_data_attr->value = (long) m_nTopNValues;
 		break;
 	}
+
 	attr_filter_element->setAttributeNode(filter_type_attr);
 	attr_filter_element->setAttributeNode(filter_data_attr);
 
-	/*	filter_element->appendChild(attr_filter_element);
-
-	
-	//pracovni
-	m_active_element->replaceChild(
-		filter_element,
-		m_active_element->selectSingleNode("filter"));
-
-*/
-
-	
 	return attr_filter_element;
 }
 
@@ -628,23 +473,20 @@ void CComplexFilterDialog::OnBnClickedRefreshResultsButton()
 	//zaloha dat
 	MSXML2::IXMLDOMElementPtr values_clone = m_result_filter_DOM->selectSingleNode("/dialog_data/values")->cloneNode(VARIANT_TRUE);
 	
+
+
 	if (! UpdateData(TRUE)) return;
 	CAElTransform::ApplySingleAttributeFilter(m_result_filter_DOM, CreateAttrFilterElement());
 
-//	AfxMessageBox(m_filter_DOM->xml);
-
 	UpdateResult(m_result_filter_DOM);
 	
+
+
 	//obnova dat
 	m_result_filter_DOM->selectSingleNode("/dialog_data")->replaceChild(values_clone,
 		m_result_filter_DOM->selectSingleNode("/dialog_data/values"));
 		
 }
-
-
-
-//******************************************************************************
-
 
 int CFilterResultImpl::getAttributesCount()
 {
@@ -757,13 +599,8 @@ CAElDataShare::CAElDataShare(CAElDataShare & data_share)
 void CAElDataShare::ApplyChanges()
 {
 	ASSERT(m_active_element != NULL);
-	ASSERT(m_cloned_active_element != NULL);
-	
-	
-	//dedek: kvuli mnoha aply funkcim po sobe - padalo
+	ASSERT(m_cloned_active_element != NULL);	
 	ASSERT(m_active_element->parentNode != NULL);
-
-//	if(m_active_element->parentNode == NULL) return;
 
 	m_active_element->parentNode->replaceChild(m_cloned_active_element, m_active_element);
 
