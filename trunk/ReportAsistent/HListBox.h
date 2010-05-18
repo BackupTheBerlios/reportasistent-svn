@@ -1,3 +1,7 @@
+// Joseph M. Newcomers CHListbox class: http://www.flounder.com/hscroll.htm
+// Policy on use of this code: http://www.flounder.com/mvp_tips.htm 
+
+
 #if !defined(AFX_HLISTBOX_H__346C3917_14BC_11D5_A025_006067718D04__INCLUDED_)
 #define AFX_HLISTBOX_H__346C3917_14BC_11D5_A025_006067718D04__INCLUDED_
 

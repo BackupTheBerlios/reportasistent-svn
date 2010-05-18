@@ -1,3 +1,5 @@
+// Joseph M. Newcomers CHListbox class: http://www.flounder.com/hscroll.htm
+// Policy on use of this code: http://www.flounder.com/mvp_tips.htm 
 // HListBox.cpp : implementation file
 //
 
